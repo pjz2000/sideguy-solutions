@@ -542,17 +542,67 @@ body {
     color: var(--text-light);
 }
 
-/* Transportation Section */
+/* Transportation Section - Coastal Style */
 .transportation {
     padding: 100px 20px;
-    background: var(--bg-light);
+    background: linear-gradient(180deg, #f0f8ff 0%, #e6f3ff 50%, #d4edff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.transportation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00b4d8, #0077be, #00b4d8);
+    animation: wave 3s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
 }
 
 .transportation h2 {
     font-size: clamp(2rem, 4vw, 3rem);
     text-align: center;
     margin-bottom: 1rem;
-    color: var(--text-dark);
+    color: #003d5b;
+    font-weight: 700;
+}
+
+.coastal-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0 3rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    font-weight: 600;
+    color: #0077be;
+    box-shadow: 0 4px 15px rgba(0, 119, 190, 0.2);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wave-icon {
+    font-size: 1.5rem;
+    animation: float 2s ease-in-out infinite;
+}
+
+.wave-icon:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .transport-grid {
@@ -562,38 +612,54 @@ body {
     margin-top: 4rem;
 }
 
-.transport-card {
-    background: white;
+.coastal-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
     padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: 4px solid var(--purple-primary);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 119, 190, 0.15);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(0, 180, 216, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-.transport-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(106, 27, 154, 0.15);
+.coastal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00b4d8, #0077be);
+}
+
+.coastal-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 119, 190, 0.25);
+    border-color: #00b4d8;
 }
 
 .transport-icon {
-    font-size: 3rem;
+    font-size: 3.5rem;
     text-align: center;
     margin-bottom: 1.5rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 119, 190, 0.2));
 }
 
-.transport-card h3 {
+.coastal-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: var(--purple-primary);
+    color: #0077be;
     text-align: center;
+    font-weight: 700;
 }
 
-.transport-card p {
-    color: var(--text-light);
+.coastal-card p {
+    color: #003d5b;
     margin-bottom: 1.5rem;
     line-height: 1.7;
     text-align: center;
+    font-size: 0.95rem;
 }
 
 .transport-features {
@@ -604,10 +670,11 @@ body {
 
 .transport-features li {
     padding: 0.75rem 0;
-    border-bottom: 1px solid #eee;
-    color: var(--text-light);
+    border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+    color: #003d5b;
     position: relative;
     padding-left: 1.5rem;
+    font-size: 0.9rem;
 }
 
 .transport-features li:last-child {
@@ -615,32 +682,80 @@ body {
 }
 
 .transport-features li:before {
-    content: "✓";
+    content: "🌊";
     position: absolute;
     left: 0;
-    color: var(--purple-primary);
-    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.coastal-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.coastal-feature-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.coastal-feature-item h4 {
+    font-size: 1.1rem;
+    color: #0077be;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.coastal-feature-item p {
+    color: #003d5b;
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 .transport-cta {
     text-align: center;
     margin-top: 4rem;
     padding: 3rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.9));
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 119, 190, 0.2);
+    border: 2px solid rgba(0, 180, 216, 0.3);
 }
 
-.transport-cta p {
-    font-size: 1.2rem;
-    color: var(--text-dark);
+.coastal-cta-text {
+    font-size: 1.3rem;
+    color: #003d5b;
     margin-bottom: 2rem;
+    font-weight: 600;
 }
 
-.transport-cta .cta-btn {
-    display: inline-block;
-    width: auto;
-    padding: 16px 40px;
+.coastal-btn {
+    background: linear-gradient(135deg, #00b4d8, #0077be) !important;
+    color: white !important;
+    border: none;
+    padding: 18px 45px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
+    transition: all 0.3s ease;
+}
+
+.coastal-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 180, 216, 0.5);
+    background: linear-gradient(135deg, #0077be, #00b4d8) !important;
 }
 
 /* CTA Section */
@@ -759,8 +874,15 @@ body {
     .process-grid,
     .services-grid,
     .work-grid,
-    .transport-grid {
+    .transport-grid,
+    .coastal-features {
         grid-template-columns: 1fr;
+    }
+    
+    .coastal-badge {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
     }
 
     .footer-content {
