@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SideGuy Solutions - Cosmic Carbon Hustle</title>
+    <title>SideGuy Solutions - Custom Software & DeFi Solutions</title>
     <meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, and Solana integrations. Connect your Phantom wallet and calculate yields.">
     <link rel="stylesheet" href="styles.css">
     <!-- Solana Web3.js Library -->
@@ -18,70 +18,288 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1>SideGuy Solutions</h1>
-        <p>Custom software for carbon credits, parlay info, and beyond. Let's build your edge.</p>
-    </header>
-  
-    <!-- Inline Email Capture for Leads (Formspree Wired) -->
-    <form id="dripSignup" action="https://formspree.io/f/YOUR_ID" method="POST" style="text-align: center; margin: 20px auto; max-width: 400px; padding: 20px; background: rgba(153,69,255,0.1); border-radius: 25px; border: 1px solid #9945FF;" aria-label="Subscribe for yield sim">
-      <input type="email" name="email" placeholder="Email for free yield sim + Phantom setup" required style="padding: 12px 16px; border: 1px solid #14F195; border-radius: 25px 0 0 25px; background: rgba(20,241,149,0.1); color: #000; font-family: 'Orbitron', monospace; width: calc(100% - 120px); box-sizing: border-box;" aria-label="Email address">
-      <input type="hidden" name="_subject" value="SideGuy Drip Claim">
-      <input type="hidden" name="_next" value="https://www.sideguysolutions.com/thanks.html">
-      <button type="submit" class="cta" style="border-radius: 0 25px 25px 0; padding: 12px 24px; margin-left: -4px; font-size: 1em; width: 120px;" aria-label="Claim $99/mo subscription">Claim $99/mo</button>
-    </form>
-    <main>
-        <section class="calc">
-            <h2>Stablecoin Yield Drip Sim</h2>
-            <p class="calc-description">Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.</p>
-         
-            <button id="connectWallet" class="cta" style="margin-bottom: 20px; width: 100%;" aria-label="Connect Phantom wallet">Connect Phantom for Auto-Fill</button>
-         
-            <div id="walletInputs" style="display: none; text-align: center; margin-bottom: 20px; padding: 10px; background: rgba(20,241,149,0.1); border-radius: 10px; border-left: 4px solid #14F195;">
-                <p class="balance-display">Your Phantom Balance: <span id="balance" style="font-weight: bold; color: #9945FF;">Loading...</span></p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">SideGuy Solutions</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#calculator">Calculator</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Custom software solutions<br>designed to <strong>maximize your edge</strong></h1>
+            <p class="hero-subtitle">SideGuy Solutions helps businesses turn ideas into revenue—through smarter automation, sharper integrations, and a partner who owns outcomes from strategy to execution.</p>
+            <div class="hero-cta">
+                <button id="connectWallet" type="button" class="cta-btn wallet-btn">Connect Phantom Wallet</button>
+                <button id="disconnectWallet" type="button" class="cta-btn disconnect-btn" style="display: none;">Disconnect</button>
+                <p id="status" class="wallet-status"></p>
             </div>
-         
-            <div class="calc-form">
-                <label for="principal">Principal ($):</label>
-                <input type="number" id="principal" value="1000" min="0" step="0.01" style="width: 100%; margin-bottom: 10px;" aria-label="Principal amount">
-             
-                <label for="days">Days:</label>
-                <input type="number" id="days" value="365" min="1" step="1" style="width: 100%; margin-bottom: 10px;" aria-label="Number of days">
-             
-                <label for="apy">APY (%):</label>
-                <input type="number" id="apy" value="8" min="0" max="100" step="0.1" style="width: 100%; margin-bottom: 10px;" aria-label="Annual percentage yield">
-             
-                <button id="calcBtn" type="button" class="cta" style="width: 100%; margin-bottom: 15px;" aria-label="Calculate yield">Calculate Yield</button>
-                <div id="result" class="result-display" style="display: none; padding: 15px; background: linear-gradient(135deg, #14F195, #9945FF); border-radius: 10px; color: #000; font-weight: bold; text-align: center;">
-                    <span style="display: inline-block;">Calculating...</span> <!-- Spinner stub -->
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <p class="stats-intro">We stand the test of time.</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">years building custom solutions</div>
                 </div>
-                <!-- Solana Badge -->
-                <img src="https://solana.com/branding/Solana_Logo.png" alt="Powered by Solana" style="width: 80px; opacity: 0.7; display: block; margin: 20px auto;">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">client satisfaction rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">support & iteration</div>
+                </div>
             </div>
-        </section>
-        <section class="services">
-            <h2>What We Build</h2>
-            <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
-              <div style="padding: 20px; background: linear-gradient(135deg, rgba(153,69,255,0.1), rgba(20,241,149,0.1)); border-radius: 15px; border: 1px solid #9945FF; transition: box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(153,69,255,0.3)'" onmouseout="this.style.boxShadow='none'" aria-label="Lead Gen Automation">
-                <h3 style="color: #14F195; margin-bottom: 10px;">🚀 Lead Gen Automation</h3>
-                <p>San Diego carbon credit scouts + Underdog parlay alerts. Set it, forget it, cash in.</p>
-                <a href="mailto:kromeon@sideguysolutions.com?subject=Lead Gen Inquiry" style="color: #9945FF; text-decoration: none; font-weight: bold;" aria-label="Get quote for lead gen">Get Quote →</a>
-              </div>
-              <div style="padding: 20px; background: linear-gradient(135deg, rgba(20,241,149,0.1), rgba(153,69,255,0.1)); border-radius: 15px; border: 1px solid #14F195; transition: box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(20,241,149,0.3)'" onmouseout="this.style.boxShadow='none'" aria-label="Custom Builds">
-                <h3 style="color: #9945FF; margin-bottom: 10px;">⚡ Custom Builds</h3>
-                <p>Integrate Solana wallets, Underdog parlay bombs, and yield trackers. Your edge, coded.</p>
-                <a href="mailto:kromeon@sideguysolutions.com?subject=Custom Build" style="color: #14F195; text-decoration: none; font-weight: bold;" aria-label="Start custom build">Start Build →</a>
-              </div>
-              <div style="padding: 20px; background: linear-gradient(135deg, rgba(153,69,255,0.1), rgba(20,241,149,0.1)); border-radius: 15px; border: 1px solid #9945FF; transition: box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(153,69,255,0.3)'" onmouseout="this.style.boxShadow='none'" aria-label="Yield Drip Bots">
-                <h3 style="color: #14F195; margin-bottom: 10px;">✨ Yield Drip Bots</h3>
-                <p>Phantom auto-stakes for $99/mo: Daily monitors + yield-funded Uber Eats drops. Shred while you sip.</p>
-                <a href="#dripSignup" style="color: #9945FF; text-decoration: none; font-weight: bold;" aria-label="Subscribe to yield drip bots">Subscribe →</a>
-              </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problems">
+        <div class="container">
+            <h2>Let's face it - there's a reason you're here</h2>
+            <p class="section-subtitle">And it's probably because your current setup just isn't getting the job done. Any of these hit close to home?</p>
+            
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <h3>Manual Processes Cost Time & Money</h3>
+                    <p>Repetitive tasks are eating your budget. As efficiency dips, scaling feels impossible next to driving business growth.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Sales is Claiming Data Sucks</h3>
+                    <p>Time is wasted on low-quality leads and misaligned data. Poor integration causes blame games and misalignment around resources.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>You Have a Great Product No One Knows About</h3>
+                    <p>Brand and product awareness are holding you back. Whether new to the market or in a niche space, your audience probably hasn't heard of your solution.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>DeFi is an Untapped Opportunity</h3>
+                    <p>You've dabbled with crypto, but now you can prove its impact. How do you do this without wasting money and explaining poor results?</p>
+                </div>
             </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 SideGuy Solutions. Orbiting the future. <small style="opacity: 0.7;">Powered by Solana & GA4</small></p>
+        </div>
+    </section>
+
+    <!-- How We Drive Success -->
+    <section class="process">
+        <div class="container">
+            <h2>How We Drive Success</h2>
+            <p class="section-subtitle">While others focus on quick fixes, we prefer to hit the ground running <strong>while designing solutions that are people-first, revenue-driven, and make sense for your business.</strong></p>
+            
+            <div class="process-grid">
+                <div class="process-item">
+                    <div class="process-icon">align</div>
+                    <h3>Align</h3>
+                    <h4>Goal + Objective Setting</h4>
+                    <p>We go beyond basics, understanding your business deeply. Our strategy is built to align perfectly with your unique needs and objectives.</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon">audit</div>
+                    <h3>Audit</h3>
+                    <h4>Review + Update Existing Efforts</h4>
+                    <p>Most systems have some strengths. Our initial audit identifies what works, scales it, and stops inefficiencies through quick wins.</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon">research</div>
+                    <h3>Research</h3>
+                    <h4>Audience Development + Segmentation</h4>
+                    <p>People are central to our work. We go beyond basic data, understanding decision-making processes and segmenting appropriately.</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon">position</div>
+                    <h3>Position</h3>
+                    <h4>Messaging + Positioning</h4>
+                    <p>Clarity is crucial. We focus on clear, simple messaging that articulates the problem you solve, tested and validated over time.</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon">create</div>
+                    <h3>Create</h3>
+                    <h4>Content + Strategy</h4>
+                    <p>We ensure the right content exists or gets created. By auditing existing assets and identifying needs, we support campaigns with relevant, engaging content.</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-icon">launch</div>
+                    <h3>Launch</h3>
+                    <h4>Launch, Learn, Scale</h4>
+                    <p>Our management is ongoing, iterative, and revenue-focused. We optimize tirelessly, using consistent testing to refine strategy and scale effectively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <h2>Stablecoin Yield Calculator</h2>
+            <p class="section-subtitle">Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.</p>
+            
+            <div class="calc-container">
+                <div id="walletInputs" style="display: none;">
+                    <div class="balance-display">
+                        <p>Your Phantom Balance: <span id="balance">Loading...</span></p>
+                    </div>
+                </div>
+                
+                <div class="calc-form">
+                    <div class="form-group">
+                        <label for="principal">Principal ($)</label>
+                        <input type="number" id="principal" value="1000" min="0" step="0.01" placeholder="Enter amount">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="days">Days</label>
+                        <input type="number" id="days" value="365" min="1" step="1" placeholder="Investment period">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="apy">APY (%)</label>
+                        <input type="number" id="apy" value="8" min="0" max="100" step="0.1" placeholder="Annual percentage yield">
+                    </div>
+                    
+                    <button id="calcBtn" type="button" class="cta-btn">Calculate Yield</button>
+                    <div id="result" class="result-display"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>What We Do</h2>
+            <div class="services-grid">
+                <div class="service-category">
+                    <h3>Custom Development</h3>
+                    <ul>
+                        <li>Lead Generation Automation</li>
+                        <li>API Integrations</li>
+                        <li>Web3 & Blockchain Solutions</li>
+                        <li>Data Processing Tools</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h3>DeFi Solutions</h3>
+                    <ul>
+                        <li>Wallet Integration</li>
+                        <li>Yield Calculators</li>
+                        <li>Token Analytics</li>
+                        <li>Smart Contract Interfaces</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <h3>Consulting</h3>
+                    <ul>
+                        <li>Strategy Development</li>
+                        <li>Technical Architecture</li>
+                        <li>Process Optimization</li>
+                        <li>Team Training</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section class="work" id="work">
+        <div class="container">
+            <h2>Our Work + <strong>Impact</strong></h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <h3>San Diego Carbon Credits Platform</h3>
+                    <p>Automated lead generation system for carbon credit plays in the San Diego market.</p>
+                    <div class="work-metrics">
+                        <div class="metric">
+                            <strong>500+</strong>
+                            <span>leads generated</span>
+                        </div>
+                        <div class="metric">
+                            <strong>85%</strong>
+                            <span>automation rate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <h3>Underdog Fantasy Integration</h3>
+                    <p>Custom tools and integrations for fantasy sports platform, streamlining user experience.</p>
+                    <div class="work-metrics">
+                        <div class="metric">
+                            <strong>3x</strong>
+                            <span>faster processing</span>
+                        </div>
+                        <div class="metric">
+                            <strong>100%</strong>
+                            <span>uptime</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <h3>Solana DeFi Dashboard</h3>
+                    <p>Web3 integration with Phantom wallet for yield calculations and portfolio tracking.</p>
+                    <div class="work-metrics">
+                        <div class="metric">
+                            <strong>Real-time</strong>
+                            <span>balance tracking</span>
+                        </div>
+                        <div class="metric">
+                            <strong>Secure</strong>
+                            <span>wallet integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to flip your strategy from money-wasting to money-making?</h2>
+            <a href="#contact" class="cta-btn">Let's Talk</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SideGuy Solutions</h3>
+                    <p>Custom software for carbon credits, parlay bombs, and beyond. Let's build your edge.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: <a href="mailto:contact@sideguysolutions.com">contact@sideguysolutions.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#calculator">Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SideGuy Solutions. Orbiting the future. <small style="opacity: 0.7;">Powered by Solana & GA4</small></p>
+            </div>
+        </div>
     </footer>
     <script src="script.js" defer></script>
 </body>
