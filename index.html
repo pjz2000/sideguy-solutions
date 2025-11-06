@@ -4,34 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SideGuy Solutions - Cosmic Carbon Hustle</title>
+    <meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, and Solana integrations. Connect your Phantom wallet and calculate yields.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Solana Web3.js Library -->
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
 </head>
 <body>
     <header>
         <h1>SideGuy Solutions</h1>
         <p>Custom software for carbon credits, parlay bombs, and beyond. Let's build your edge.</p>
-        <button class="cta wallet-btn">Connect Solana Wallet</button>
+        <div class="wallet-section">
+            <button id="connectWallet" type="button" class="cta wallet-btn">Connect Phantom Wallet</button>
+            <button id="disconnectWallet" type="button" class="cta disconnect-btn" style="display: none;">Disconnect</button>
+            <p id="status" class="wallet-status"></p>
+        </div>
     </header>
 
     <main>
         <section class="calc">
-            <h2>Quick Carbon Calc</h2>
-            <input type="number" id="carbonInput" placeholder="Tons of CO2 offset?">
-            <button class="cta" onclick="calculate()">Crunch It</button>
-            <div id="result"></div>
+            <h2>Stablecoin Yield Calculator</h2>
+            <p class="calc-description">Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.</p>
+            
+            <div id="walletInputs" style="display: none;">
+                <p class="balance-display">Your Phantom Balance: <span id="balance">Loading...</span></p>
+            </div>
+            
+            <div class="calc-form">
+                <label for="principal">Principal ($):</label>
+                <input type="number" id="principal" value="1000" min="0" step="0.01">
+                
+                <label for="days">Days:</label>
+                <input type="number" id="days" value="365" min="1" step="1">
+                
+                <label for="apy">APY (%):</label>
+                <input type="number" id="apy" value="8" min="0" max="100" step="0.1">
+                
+                <button id="calcBtn" type="button" class="cta">Calculate Yield</button>
+                <div id="result" class="result-display"></div>
+            </div>
         </section>
 
-        <ul>
-            <li><strong>Lead Gen:</strong> San Diego carbon plays, automated.</li>
-            <li><strong>Custom Builds:</strong> Underdog Fantasy tools, Kromeon integrations.</li>
-            <li><strong>Vibe:</strong> Cosmic-purple, always.</li>
-        </ul>
+        <section class="services">
+            <h2>What We Build</h2>
+            <ul>
+                <li><strong>Lead Gen:</strong> San Diego carbon plays, automated.</li>
+                <li><strong>Custom Builds:</strong> Underdog Fantasy tools, Kromeon integrations.</li>
+                <li><strong>Vibe:</strong> Cosmic-purple, always.</li>
+            </ul>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 SideGuy Solutions. Orbiting the future.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

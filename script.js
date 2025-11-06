@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusEl) statusEl.textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}`;
                 document.getElementById('connectWallet').style.display = 'none';
                 document.getElementById('disconnectWallet').style.display = 'inline-block';
+                document.getElementById('walletInputs').style.display = 'block';
                 loadBalance();
             } catch (err) {
                 console.error('Connect failed:', err);
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (statusEl) statusEl.textContent = '';
         document.getElementById('connectWallet').style.display = 'inline-block';
         document.getElementById('disconnectWallet').style.display = 'none';
+        document.getElementById('walletInputs').style.display = 'none';
         document.getElementById('balance').textContent = '';
         document.getElementById('principal').value = '1000';
         calcYield();
@@ -94,7 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (el) el.addEventListener('input', calcYield);
     });
 
+    // Listen for wallet connection events
     if (window.solana && window.solana.isPhantom) {
-        // window.solana.connect({ onlyIfTrusted: true });
+        // Handle wallet disconnect event
+        window.solana.on('disconnect', () => {
+            disconnectWallet();
+        });
+        
+        // Check if already connected
+        if (window.solana.isConnected && window.solana.publicKey) {
+            publicKey = window.solana.publicKey.toString();
+            walletConnected = true;
+            const statusEl = document.getElementById('status');
+            if (statusEl) statusEl.textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}`;
+            document.getElementById('connectWallet').style.display = 'none';
+            document.getElementById('disconnectWallet').style.display = 'inline-block';
+            document.getElementById('walletInputs').style.display = 'block';
+            loadBalance();
+        }
     }
 });

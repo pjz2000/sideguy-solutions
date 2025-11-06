@@ -1,0 +1,106 @@
+# Cursor Rules for SideGuy Solutions
+
+## Project Overview
+This is a static website for SideGuy Solutions, featuring:
+- Phantom wallet integration for Solana
+- Yield calculator for stablecoin investments
+- Custom domain: www.sideguysolutions.com
+- Hosted on GitHub Pages
+
+## Code Style & Conventions
+
+### HTML
+- Use semantic HTML5 elements (`<header>`, `<main>`, `<section>`, `<footer>`)
+- Always include proper meta tags (viewport, description, charset)
+- Use `defer` attribute for non-critical scripts
+- Include ARIA labels for accessibility
+- Button elements should have `type="button"` to prevent form submission
+
+### CSS
+- Use kebab-case for class names (e.g., `wallet-section`, `calc-form`)
+- Follow BEM-like naming when appropriate
+- Use CSS variables for colors (cosmic-purple theme: #6a1b9a, #8e24aa, #9945FF)
+- Mobile-first responsive design
+- Include hover states and transitions for better UX
+
+### JavaScript
+- Use camelCase for variables and functions
+- Always check for element existence before accessing (e.g., `if (element)`)
+- Use async/await for asynchronous operations
+- Handle errors gracefully with user-friendly messages
+- Comment complex logic, especially Solana wallet interactions
+
+## File Structure
+```
+/
+├── index.html          # Main HTML file
+├── styles.css          # All styles
+├── script.js           # All JavaScript functionality
+├── CNAME              # Custom domain configuration
+├── README.md          # Project documentation
+└── .cursorrules       # This file
+```
+
+## Key Technologies
+- **Solana Web3.js**: For Phantom wallet integration
+- **Vanilla JavaScript**: No frameworks
+- **GitHub Pages**: Static hosting
+
+## Important Notes
+- The website uses Phantom wallet extension (must be installed in browser)
+- Solana Web3.js library is loaded from CDN (unpkg.com)
+- Custom domain is configured via CNAME file
+- All changes must be pushed to main branch for GitHub Pages deployment
+
+## When Making Changes
+1. Test wallet connection functionality locally
+2. Ensure all HTML elements referenced in JS exist
+3. Verify responsive design on mobile devices
+4. Check that Solana Web3.js library is loaded
+5. Test calculator with and without wallet connection
+6. Commit and push to main branch for auto-deployment
+
+## Common Patterns
+
+### Wallet Connection
+```javascript
+if (window.solana && window.solana.isPhantom) {
+    // Wallet available
+}
+```
+
+### Error Handling
+```javascript
+try {
+    // async operation
+} catch (err) {
+    console.error('Error:', err);
+    // User-friendly error message
+}
+```
+
+### Element Access
+```javascript
+const element = document.getElementById('id');
+if (element) {
+    // Safe to use element
+}
+```
+
+## Avoid
+- ❌ Inline styles (use CSS classes)
+- ❌ Hardcoded API keys or sensitive data
+- ❌ Breaking changes without testing
+- ❌ Removing CNAME file (breaks custom domain)
+- ❌ Using frameworks without necessity (keep it vanilla)
+
+## Testing Checklist
+- [ ] Wallet connects successfully
+- [ ] Balance loads correctly
+- [ ] Calculator works with manual input
+- [ ] Calculator works with wallet balance
+- [ ] Disconnect functionality works
+- [ ] Mobile responsive design
+- [ ] All buttons are clickable
+- [ ] No console errors
+
