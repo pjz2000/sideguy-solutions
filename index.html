@@ -84,3 +84,54 @@
     <script src="script.js" defer></script>
 </body>
 </html>
+document.addEventListener('DOMContentLoaded', () => {
+  // Calc Yield Button
+  const calcBtn = document.getElementById('calcBtn');
+  const resultDiv = document.getElementById('result');
+  const principal = document.getElementById('principal');
+  const days = document.getElementById('days');
+  const apy = document.getElementById('apy');
+
+  calcBtn.addEventListener('click', () => {
+    const p = parseFloat(principal.value) || 0;
+    const d = parseFloat(days.value) || 0;
+    const a = parseFloat(apy.value) / 100 || 0;
+
+    if (p <= 0 || d <= 0 || a <= 0) {
+      resultDiv.innerHTML = '<p style="color: #fff;">Enter valid numbers for the drip, surfer.</p>';
+      resultDiv.style.display = 'block';
+      return;
+    }
+
+    // Daily compound: P * (1 + r/365)^days
+    const dailyRate = a / 365;
+    const yieldEst = p * (Math.pow(1 + dailyRate, d) - 1);
+
+    resultDiv.innerHTML = `
+      <p>Est. Yield: $${yieldEst.toFixed(2)} (over ${d} days at ${apy.value}% APY)</p>
+      <p style="font-size: 0.9em; opacity: 0.8;">Daily Compound Magic—Upgrade to $99/mo for auto-stakes.</p>
+    `;
+    resultDiv.style.display = 'block';
+  });
+
+  // Email Form Submit (Lead Capture Alert)
+  const form = document.getElementById('dripSignup');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = form.querySelector('input[type="email"]').value;
+    if (email) {
+      alert(`Drip claimed for ${email}! Check inbox for Phantom setup + sim guide. (Zapier hook next.)`);
+      console.log('Lead:', email); // GA tracks this auto
+      form.reset(); // Clear for next
+    }
+  });
+
+  // Phantom Stub (Connect Button - Alert for Now)
+  const connectBtn = document.getElementById('connectWallet');
+  connectBtn.addEventListener('click', () => {
+    alert('Phantom connected (sim)—Balance loaded: $1,000 USDC. Tweak principal for your stack!');
+    document.getElementById('principal').value = 1000;
+    document.getElementById('walletInputs').style.display = 'block';
+    document.getElementById('balance').textContent = '$1,000 USDC';
+  });
+});
