@@ -3,154 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Side Guy Solutions | DeFi Yields & Stablecoin Guide for NCSD</title>
-    <meta name="description" content="Unlock stablecoin yields and DeFi tips for North County San Diego businesses. Calculate APYs, cut fees, and stack smarter with USDC/USDT.">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="nav-container">
-                <h2>Side Guy Solutions</h2>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#calc">Yield Calc</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>DeFi Your Future!</h1>
-            <p>Stablecoins: The future of money for NCSD businesses. Cut fees, speed payments, and earn 5-12% APY on USDC/USDT with zero volatility drama.</p>
-            <a href="#calc" class="cta-button">Launch Yield Calculator</a>
-        </div>
-    </section>
-
-    <section id="calc" class="calc-section">
-        <div class="container">
-            <h2>Stablecoin Yield Calculator</h2>
-            <div class="calc-form">
-                <label>Amount ($): <input type="number" id="principal" placeholder="e.g., 1000" min="1"></label>
-                <label>APY (%): 
-                    <select id="apy">
-                        <option value="5">5% (USDC Basic)</option>
-                        <option value="8">8% (USDT Stable)</option>
-                        <option value="12">12% (DeFi Boost)</option>
-                    </select>
-                </label>
-                <button onclick="calcYield()">Calculate Daily Yield</button>
-                <p id="result"></p>
-            </div>
-            <p class="note">Est. based on simple daily compounding. For NCSD locals: Pair with local meetups in Encinitas/Carlsbad.</p>
-        </div>
-    </section>
-
-    <section id="resources" class="resources">
-        <div class="container">
-            <h2>NCSD DeFi Resources</h2>
-            <ul>
-                <li><strong>Stablecoins for Businesses:</strong> Use USDC for instant payouts—save 3-5% on wires for Solana Beach shops.</li>
-                <li><strong>Future of Money:</strong> DeFi wallets like Phantom for seamless yields; no banks needed.</li>
-                <li><strong>Local Tips:</strong> Join Carlsbad Crypto Nights; stack sats while surfing.</li>
-                <li><a href="mailto:peter@sideguysolutions.com">Book a 30-min consult</a> for custom setups.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get in Touch</h2>
-            <p>Email: peter@sideguysolutions.com | Solana Beach, CA</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Side Guy Solutions. Built for NCSD yield chasers.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Side Guy Solutions | DeFi Yields & Stablecoin Guide for NCSD</title>
-    <meta name="description" content="Unlock stablecoin yields and DeFi tips for North County San Diego businesses. Calculate APYs, cut fees, and stack smarter with USDC/USDT.">
-    <link rel="stylesheet" href="styles.css">
+    <title>DeFi Your Future! | Side Guy Solutions</title>
+    <meta name="description" content="Connect Phantom for stablecoin yields tailored to your NCSD biz. Earn 5-12% APY on USDC/USDT, cut fees, speed payments.">
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline overrides for Phantom - add to your styles.css if preferred */
+        .wallet-btn { background: #9945FF !important; color: white; margin: 10px; }
+        #status { color: #28a745; font-weight: bold; }
+        #disconnectWallet { background: #dc3545 !important; display: none; }
+        .calc { background: #e9ecef; padding: 20px; border-radius: 8px; display: none; } /* Hidden till connect */
+        label { display: block; margin: 10px 0; }
+        input { margin-right: 10px; padding: 5px; }
+        button { cursor: pointer; padding: 10px 20px; border: none; border-radius: 5px; color: white; }
+        .cta { background: #007bff; text-decoration: none; }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="nav-container">
-                <h2>Side Guy Solutions</h2>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#calc">Yield Calc</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li id="wallet-connect" class="wallet-btn"><button onclick="connectWallet()">Connect Phantom Wallet</button></li>
-                </ul>
-            </div>
-        </nav>
+        <h1>DeFi Your Future!</h1>
+        <p>Stablecoins: The future of money for NCSD businesses. Cut fees, speed payments, and earn 5-12% APY on USDC/USDT with zero volatility drama.</p>
+        <button id="connectWallet" class="cta wallet-btn">Connect Phantom</button>
+        <p id="status"></p>
+        <button id="disconnectWallet" class="cta">Disconnect</button>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>DeFi Your Future!</h1>
-            <p>Stablecoins: The future of money for NCSD businesses. Cut fees, speed payments, and earn 5-12% APY on USDC/USDT with zero volatility drama.</p>
-            <a href="#calc" class="cta-button" onclick="connectWallet(); return false;">Connect & Launch Calc</a>
+    <section id="calc" class="calc">
+        <h2>Stablecoin Yield Calculator</h2>
+        <p>Est. based on simple daily compounding. For NCSD locals: Pair with meetups in Encinitas/Carlsbad. (Pro tip: Stack sats while surfing Solana Beach.)</p>
+        <div id="walletInputs">
+            <p>Your Phantom Balance: <span id="balance">Loading...</span> SOL (or bridge to USDC for yields)</p>
         </div>
+        <label>Principal ($): <input type="number" id="principal" value="1000"></label>
+        <label>Days: <input type="number" id="days" value="365"></label>
+        <label>APY (%): <input type="number" id="apy" value="8" min="5" max="12"></label>
+        <button id="calcBtn" class="cta">Calculate Yield</button>
+        <p id="result"></p>
     </section>
 
-    <section id="calc" class="calc-section">
-        <div class="container">
-            <h2>Stablecoin Yield Calculator</h2>
-            <div class="calc-form">
-                <label>Amount ($): <input type="number" id="principal" placeholder="e.g., 1000" min="1"></label>
-                <label>APY (%): 
-                    <select id="apy">
-                        <option value="5">5% (USDC Basic)</option>
-                        <option value="8">8% (USDT Stable)</option>
-                        <option value="12">12% (DeFi Boost)</option>
-                    </select>
-                </label>
-                <button onclick="calcYield()">Calculate Daily Yield</button>
-                <p id="result"></p>
-            </div>
-            <p class="note" id="wallet-note">Connect Phantom above for wallet-aware yields!</p>
-        </div>
-    </section>
-
-    <section id="resources" class="resources">
-        <div class="container">
-            <h2>NCSD DeFi Resources</h2>
-            <ul>
-                <li><strong>Stablecoins for Businesses:</strong> Use USDC for instant payouts—save 3-5% on wires for Solana Beach shops.</li>
-                <li><strong>Future of Money:</strong> DeFi wallets like Phantom for seamless yields; no banks needed.</li>
-                <li><strong>Local Tips:</strong> Join Carlsbad Crypto Nights; stack sats while surfing.</li>
-                <li><a href="mailto:peter@sideguysolutions.com">Book a 30-min consult</a> for custom setups.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get in Touch</h2>
-            <p>Email: peter@sideguysolutions.com | Solana Beach, CA</p>
-        </div>
+    <section>
+        <h2>NCSD DeFi Resources</h2>
+        <ul>
+            <li>Stablecoins for Businesses: Use USDC for instant payouts—save 3-5% on wires for Solana Beach shops.</li>
+            <li>Future of Money: DeFi wallets like Phantom for seamless yields; no banks needed.</li>
+            <li>Local Tips: Join Carlsbad Crypto Nights; stack sats while surfing.</li>
+            <li><a href="mailto:peter@sideguysolutions.com" class="cta">Book a 30-min consult</a> for custom setups (e.g., biz treasury on-chain).</li>
+        </ul>
     </section>
 
     <footer>
-        <p>&copy; 2025 Side Guy Solutions. Built for NCSD yield chasers.</p>
+        <p>Email: <a href="mailto:peter@sideguysolutions.com">peter@sideguysolutions.com</a> | Solana Beach, CA</p>
+        <p>Side Guy Solutions | DeFi Yields & Stablecoin Guide for NCSD</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
