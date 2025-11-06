@@ -1,86 +1,103 @@
-function calcYield() {
-    const principal = parseFloat(document.getElementById('principal').value) || 0;
-    const apy = parseFloat(document.getElementById('apy').value);
-    const dailyRate = apy / 100 / 365;
-    const dailyYield = principal * dailyRate;
-    const resultEl = document.getElementById('result');
-    if (principal > 0) {
-        resultEl.innerHTML = `Est. Daily Yield: $${dailyYield.toFixed(2)} (at ${apy}% APY)`;
-    } else {
-        resultEl.innerHTML = 'Enter an amount to calculate.';
-    } // Phantom Integration - Add to script.js
-let walletConnected = false;
-let publicKey = null;
-
-// Wait for DOM load
 document.addEventListener('DOMContentLoaded', () => {
-    // Existing calcYield here...
-    
+    let walletConnected = false;
+    let publicKey = null;
+
+    // Your Original calcYield - Enhanced
+    const calcYield = () => {
+        const principalEl = document.getElementById('principal');
+        const daysEl = document.getElementById('days');
+        const apyEl = document.getElementById('apy');
+        const resultEl = document.getElementById('result');
+
+        const p = parseFloat(principalEl.value);
+        const d = parseFloat(daysEl.value);
+        const r = parseFloat(apyEl.value) / 100;
+
+        if (isNaN(p) || p <= 0) {
+            resultEl.innerHTML = '<em>Enter a positive principal—start small, stack big!</em>';
+            return;
+        }
+        if (isNaN(d) || d <= 0) {
+            resultEl.innerHTML = '<em>Days must be positive—yields compound over time.</em>';
+            return;
+        }
+        if (isNaN(r) || r < 0 || r > 1) {
+            resultEl.innerHTML = '<em>APY 0-100%—5-12% is NCSD sweet spot.</em>';
+            return;
+        }
+
+        const yieldAmt = p * (Math.pow(1 + r / 365, d) - 1);
+        const total = p + yieldAmt;
+        resultEl.innerHTML = `Est. Yield: $${yieldAmt.toFixed(2)} (Total: $${total.toFixed(2)}) | <em>Yields vary—consult for live rates & setups.</em>`;
+    };
+
+    // Phantom Connect
     const connectWallet = async () => {
         if (window.solana && window.solana.isPhantom) {
             try {
                 const resp = await window.solana.connect();
                 publicKey = resp.publicKey.toString();
                 walletConnected = true;
-                document.getElementById('status') ? document.getElementById('status').textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}` : console.log('Connected!');
+                const statusEl = document.getElementById('status');
+                if (statusEl) statusEl.textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}`;
                 document.getElementById('connectWallet').style.display = 'none';
-                if (document.getElementById('disconnectWallet')) document.getElementById('disconnectWallet').style.display = 'inline-block';
+                document.getElementById('disconnectWallet').style.display = 'inline-block';
                 loadBalance();
             } catch (err) {
                 console.error('Phantom connect failed:', err);
-                alert('Connect canceled—yields still await manual mode!');
+                alert('Connect canceled—manual mode still rocks!');
             }
         } else {
-            alert('Phantom not found—grab it at phantom.app and refresh.');
+            alert('Phantom not detected—install from phantom.app & refresh.');
         }
     };
 
+    // Disconnect
     const disconnectWallet = async () => {
         if (window.solana) await window.solana.disconnect();
         walletConnected = false;
         publicKey = null;
-        document.getElementById('status') ? document.getElementById('status').textContent = '' : console.log('Disconnected');
+        const statusEl = document.getElementById('status');
+        if (statusEl) statusEl.textContent = '';
         document.getElementById('connectWallet').style.display = 'inline-block';
-        if (document.getElementById('disconnectWallet')) document.getElementById('disconnectWallet').style.display = 'none';
-        // Reset balance display
-        const balanceEl = document.getElementById('balance');
-        if (balanceEl) balanceEl.textContent = '';
+        document.getElementById('disconnectWallet').style.display = 'none';
+        document.getElementById('balance').textContent = '';
+        // Reset principal to default
+        document.getElementById('principal').value = '1000';
     };
 
+    // Load Balance & Auto-Fill
     const loadBalance = async () => {
         if (!publicKey) return;
         try {
-            // Need @solana/web3.js - add <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script> to index.html <head>
             const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
             const balance = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
             const solBalance = balance / solanaWeb3.LAMPORTS_PER_SOL;
             const balanceEl = document.getElementById('balance');
             if (balanceEl) {
-                balanceEl.textContent = `${solBalance.toFixed(4)} SOL (~$${Math.round(solBalance * 150)} USD)`;
-                // Auto-fill calc principal with USD equiv
-                const principalInput = document.getElementById('principal');
-                if (principalInput) principalInput.value = Math.round(solBalance * 150);
+                const usdEst = Math.round(solBalance * 150); // Rough SOL price
+                balanceEl.innerHTML = `${solBalance.toFixed(4)} SOL (~$${usdEst} USD) <br><small>Bridge to USDC for yields?</small>`;
+                document.getElementById('principal').value = usdEst;
             }
+            calcYield(); // Auto-recalc on balance load
         } catch (err) {
             console.error('Balance fetch failed:', err);
+            document.getElementById('balance').textContent = 'Fetch error—check net.';
         }
     };
 
-    // Tie to existing calcYield - enhance it to use wallet if connected
-    const originalCalcYield = calcYield; // Backup your func
-    calcYield = () => {
-        originalCalcYield(); // Run yours
-        if (walletConnected) loadBalance(); // Refresh on calc for fun
-    };
+    // Event Listeners
+    document.getElementById('connectWallet').addEventListener('click', connectWallet);
+    document.getElementById('disconnectWallet').addEventListener('click', disconnectWallet);
+    // Calc button (your original)
+    document.querySelector('button[onclick="calcYield()"]').addEventListener('click', calcYield);
+    // Live update on input change
+    ['principal', 'days', 'apy'].forEach(id => {
+        document.getElementById(id).addEventListener('input', calcYield);
+    });
 
-    // Event hooks (add these IDs to your HTML)
-    const connectBtn = document.getElementById('connectWallet');
-    if (connectBtn) connectBtn.addEventListener('click', connectWallet);
-    const disconnectBtn = document.getElementById('disconnectWallet');
-    if (disconnectBtn) disconnectBtn.addEventListener('click', disconnectWallet);
-
-    // Auto-detect on load
+    // Auto-detect Phantom on load
     if (window.solana && window.solana.isPhantom) {
-        // window.solana.connect({ onlyIfTrusted: true }); // Uncomment for seamless reconnect
+        // Optional seamless reconnect: window.solana.connect({ onlyIfTrusted: true });
     }
-});}
+});
