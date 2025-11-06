@@ -22,33 +22,35 @@
         <h1>SideGuy Solutions</h1>
         <p>Custom software for carbon credits, parlay info, and beyond. Let's build your edge.</p>
     </header>
-   
-    <!-- Inline Email Capture for Leads -->
-    <form id="dripSignup" style="text-align: center; margin: 20px auto; max-width: 400px; padding: 20px; background: rgba(153,69,255,0.1); border-radius: 25px; border: 1px solid #9945FF;">
-      <input type="email" placeholder="Email for free yield sim + Phantom setup" required style="padding: 12px 16px; border: 1px solid #14F195; border-radius: 25px 0 0 25px; background: rgba(20,241,149,0.1); color: #000; font-family: 'Orbitron', monospace; width: calc(100% - 120px); box-sizing: border-box;">
+  
+    <!-- Inline Email Capture for Leads (Formspree Wired) -->
+    <form id="dripSignup" action="https://formspree.io/f/YOUR_ID" method="POST" style="text-align: center; margin: 20px auto; max-width: 400px; padding: 20px; background: rgba(153,69,255,0.1); border-radius: 25px; border: 1px solid #9945FF;">
+      <input type="email" name="email" placeholder="Email for free yield sim + Phantom setup" required style="padding: 12px 16px; border: 1px solid #14F195; border-radius: 25px 0 0 25px; background: rgba(20,241,149,0.1); color: #000; font-family: 'Orbitron', monospace; width: calc(100% - 120px); box-sizing: border-box;">
+      <input type="hidden" name="_subject" value="SideGuy Drip Claim">
+      <input type="hidden" name="_next" value="https://www.sideguysolutions.com/thanks.html">
       <button type="submit" class="cta" style="border-radius: 0 25px 25px 0; padding: 12px 24px; margin-left: -4px; font-size: 1em; width: 120px;">Claim $99/mo</button>
     </form>
     <main>
         <section class="calc">
             <h2>Stablecoin Yield Drip Sim</h2>
             <p class="calc-description">Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.</p>
-          
+         
             <button id="connectWallet" class="cta" style="margin-bottom: 20px; width: 100%;">Connect Phantom for Auto-Fill</button>
-          
+         
             <div id="walletInputs" style="display: none; text-align: center; margin-bottom: 20px; padding: 10px; background: rgba(20,241,149,0.1); border-radius: 10px; border-left: 4px solid #14F195;">
                 <p class="balance-display">Your Phantom Balance: <span id="balance" style="font-weight: bold; color: #9945FF;">Loading...</span></p>
             </div>
-          
+         
             <div class="calc-form">
                 <label for="principal">Principal ($):</label>
                 <input type="number" id="principal" value="1000" min="0" step="0.01" style="width: 100%; margin-bottom: 10px;">
-              
+             
                 <label for="days">Days:</label>
                 <input type="number" id="days" value="365" min="1" step="1" style="width: 100%; margin-bottom: 10px;">
-              
+             
                 <label for="apy">APY (%):</label>
                 <input type="number" id="apy" value="8" min="0" max="100" step="0.1" style="width: 100%; margin-bottom: 10px;">
-              
+             
                 <button id="calcBtn" type="button" class="cta" style="width: 100%; margin-bottom: 15px;">Calculate Yield</button>
                 <div id="result" class="result-display" style="display: none; padding: 15px; background: linear-gradient(135deg, #14F195, #9945FF); border-radius: 10px; color: #000; font-weight: bold; text-align: center;">
                     <span style="display: inline-block;">Calculating...</span> <!-- Spinner stub -->
@@ -65,74 +67,4 @@
                 <p>San Diego carbon credit scouts + Underdog parlay alerts. Set it, forget it, cash in.</p>
                 <a href="mailto:kromeon@sideguysolutions.com?subject=Lead Gen Inquiry" style="color: #9945FF; text-decoration: none; font-weight: bold;">Get Quote →</a>
               </div>
-              <div style="padding: 20px; background: linear-gradient(135deg, rgba(20,241,149,0.1), rgba(153,69,255,0.1)); border-radius: 15px; border: 1px solid #14F195; transition: box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(20,241,149,0.3)'" onmouseout="this.style.boxShadow='none'">
-                <h3 style="color: #9945FF; margin-bottom: 10px;">⚡ Custom Builds</h3>
-                <p>Integrate Solana wallets, Underdog parlay bombs, and yield trackers. Your edge, coded.</p>
-                <a href="mailto:kromeon@sideguysolutions.com?subject=Custom Build" style="color: #14F195; text-decoration: none; font-weight: bold;">Start Build →</a>
-              </div>
-              <div style="padding: 20px; background: linear-gradient(135deg, rgba(153,69,255,0.1), rgba(20,241,149,0.1)); border-radius: 15px; border: 1px solid #9945FF; transition: box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.boxShadow='0 5px 15px rgba(153,69,255,0.3)'" onmouseout="this.style.boxShadow='none'">
-                <h3 style="color: #14F195; margin-bottom: 10px;">✨ Yield Drip Bots</h3>
-                <p>Phantom auto-stakes for $99/mo: Daily monitors + yield-funded Uber Eats drops. Shred while you sip.</p>
-                <a href="#dripSignup" style="color: #9945FF; text-decoration: none; font-weight: bold;">Subscribe →</a>
-              </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 SideGuy Solutions. Orbiting the future.</p>
-    </footer>
-    <script src="script.js" defer></script>
-</body>
-</html>
-document.addEventListener('DOMContentLoaded', () => {
-  // Calc Yield Button
-  const calcBtn = document.getElementById('calcBtn');
-  const resultDiv = document.getElementById('result');
-  const principal = document.getElementById('principal');
-  const days = document.getElementById('days');
-  const apy = document.getElementById('apy');
-
-  calcBtn.addEventListener('click', () => {
-    const p = parseFloat(principal.value) || 0;
-    const d = parseFloat(days.value) || 0;
-    const a = parseFloat(apy.value) / 100 || 0;
-
-    if (p <= 0 || d <= 0 || a <= 0) {
-      resultDiv.innerHTML = '<p style="color: #fff;">Enter valid numbers for the drip, surfer.</p>';
-      resultDiv.style.display = 'block';
-      return;
-    }
-
-    // Daily compound: P * (1 + r/365)^days
-    const dailyRate = a / 365;
-    const yieldEst = p * (Math.pow(1 + dailyRate, d) - 1);
-
-    resultDiv.innerHTML = `
-      <p>Est. Yield: $${yieldEst.toFixed(2)} (over ${d} days at ${apy.value}% APY)</p>
-      <p style="font-size: 0.9em; opacity: 0.8;">Daily Compound Magic—Upgrade to $99/mo for auto-stakes.</p>
-    `;
-    resultDiv.style.display = 'block';
-  });
-
-  // Email Form Submit (Lead Capture Alert)
-  const form = document.getElementById('dripSignup');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = form.querySelector('input[type="email"]').value;
-    if (email) {
-      alert(`Drip claimed for ${email}! Check inbox for Phantom setup + sim guide. (Zapier hook next.)`);
-      console.log('Lead:', email); // GA tracks this auto
-      form.reset(); // Clear for next
-    }
-  });
-
-  // Phantom Stub (Connect Button - Alert for Now)
-  const connectBtn = document.getElementById('connectWallet');
-  connectBtn.addEventListener('click', () => {
-    alert('Phantom connected (sim)—Balance loaded: $1,000 USDC. Tweak principal for your stack!');
-    document.getElementById('principal').value = 1000;
-    document.getElementById('walletInputs').style.display = 'block';
-    document.getElementById('balance').textContent = '$1,000 USDC';
-  });
-});
-<input type="hidden" name="_subject" value="SideGuy Drip Claim"> <input type="hidden" name="_next" value="https://www.sideguysolutions.com/thanks.html"
+              <div style="padding: 20px; background: linear-gradient(135deg, rgba(20,241,149,0.1), rgba(153,69,255,0.1)); border-radius: 15px; border: 1px solid #14F195; transition: box-shadow 0.3
