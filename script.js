@@ -229,6 +229,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize calculator
     calcYield();
 
+    // Email Form Submission (Formspree)
+    const dripForm = document.getElementById('dripSignup');
+    if (dripForm) {
+        dripForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = dripForm.querySelector('input[type="email"]').value;
+            if (email) {
+                // Track with GA if available
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'lead_submit', { 'email': email });
+                }
+                console.log('Lead captured:', email);
+                // Submit to Formspree
+                fetch(dripForm.action, {
+                    method: 'POST',
+                    body: new FormData(dripForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert(`Drip claimed for ${email}! Check inbox for Phantom setup + sim guide.`);
+                        dripForm.reset();
+                    } else {
+                        alert('Something went wrong. Please try again or email us directly.');
+                    }
+                }).catch(error => {
+                    console.error('Form submission error:', error);
+                    alert('Something went wrong. Please try again or email us directly.');
+                });
+            }
+        });
+    }
+
     // Mobile Navigation Toggle
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
