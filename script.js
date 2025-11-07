@@ -1,266 +1,210 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let walletConnected = false;
-    let publicKey = null;
-
-    // Wait for Solana Web3.js to load
-    const waitForSolanaWeb3 = () => {
-        return new Promise((resolve) => {
-            if (typeof solanaWeb3 !== 'undefined') {
-                resolve();
-            } else {
-                // Check every 100ms for the library
-                const checkInterval = setInterval(() => {
-                    if (typeof solanaWeb3 !== 'undefined') {
-                        clearInterval(checkInterval);
-                        resolve();
-                    }
-                }, 100);
-                // Timeout after 5 seconds
-                setTimeout(() => {
-                    clearInterval(checkInterval);
-                    console.warn('Solana Web3.js library not loaded');
-                    resolve(); // Continue anyway
-                }, 5000);
-            }
-        });
-    };
-
-    const calcYield = () => {
-        const principalEl = document.getElementById('principal');
-        const daysEl = document.getElementById('days');
-        const apyEl = document.getElementById('apy');
-        const resultEl = document.getElementById('result');
-
-        if (!principalEl || !daysEl || !apyEl || !resultEl) return;
-
-        const p = parseFloat(principalEl.value);
-        const d = parseFloat(daysEl.value);
-        const r = parseFloat(apyEl.value) / 100;
-
-        if (isNaN(p) || p <= 0) {
-            resultEl.innerHTML = '<em>Positive principal only—try $1000 for a Carlsbad coffee yield!</em>';
-            return;
-        }
-        if (isNaN(d) || d <= 0) {
-            resultEl.innerHTML = '<em>Days >0—compounds build over time, like Solana Beach waves.</em>';
-            return;
-        }
-        if (isNaN(r) || r < 0 || r > 1) {
-            resultEl.innerHTML = '<em>APY 0-100%—aim 5-12% for stablecoin stacks.</em>';
-            return;
-        }
-
-        const yieldAmt = p * (Math.pow(1 + r / 365, d) - 1);
-        const total = p + yieldAmt;
-        resultEl.innerHTML = `Est. Yield: $${yieldAmt.toFixed(2)} (Total: $${total.toFixed(2)}) | <em>Yields fluctuate—book a consult for locked rates.</em>`;
-    };
-
-    const connectWallet = async () => {
-        // Check if Phantom is installed
-        if (typeof window.solana === 'undefined') {
-            alert('Phantom wallet not found. Please install Phantom from https://phantom.app/ and reload the page.');
-            return;
-        }
-
-        if (!window.solana.isPhantom) {
-            alert('Phantom wallet not detected. Please make sure Phantom extension is installed and enabled.');
-            return;
-        }
-
-        try {
-            // Disable button during connection
-            const connectBtn = document.getElementById('connectWallet');
-            if (connectBtn) {
-                connectBtn.disabled = true;
-                connectBtn.textContent = 'Connecting...';
-            }
-
-            const resp = await window.solana.connect();
-            publicKey = resp.publicKey.toString();
-            walletConnected = true;
-
-            // Track with GA if available
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'phantom_connect', { 'method': 'real' });
-            }
-
-            // Update UI
-            const statusEl = document.getElementById('status');
-            if (statusEl) {
-                statusEl.textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}`;
-            }
-
-            const connectWalletEl = document.getElementById('connectWallet');
-            const disconnectWalletEl = document.getElementById('disconnectWallet');
-            const walletInputsEl = document.getElementById('walletInputs');
-
-            if (connectWalletEl) connectWalletEl.style.display = 'none';
-            if (disconnectWalletEl) disconnectWalletEl.style.display = 'inline-block';
-            if (walletInputsEl) walletInputsEl.style.display = 'block';
-
-            // Load balance
-            await loadBalance();
-        } catch (err) {
-            console.error('Connect failed:', err);
-            
-            // Re-enable button
-            const connectBtn = document.getElementById('connectWallet');
-            if (connectBtn) {
-                connectBtn.disabled = false;
-                connectBtn.textContent = 'Connect Phantom Wallet';
-            }
-
-            if (err.code === 4001) {
-                // User rejected the request
-                const statusEl = document.getElementById('status');
-                if (statusEl) {
-                    statusEl.textContent = 'Connection canceled. Click to try again.';
-                    statusEl.style.color = '#ffc107';
-                }
-            } else {
-                alert('Failed to connect wallet: ' + (err.message || 'Unknown error'));
-            }
-        }
-    };
-
-    const disconnectWallet = async () => {
-        try {
-            if (window.solana && window.solana.isConnected) {
-                await window.solana.disconnect();
-            }
-        } catch (err) {
-            console.error('Disconnect error:', err);
-        }
-
-        walletConnected = false;
-        publicKey = null;
-
-        const statusEl = document.getElementById('status');
-        if (statusEl) {
-            statusEl.textContent = '';
-        }
-
-        const connectWalletEl = document.getElementById('connectWallet');
-        const disconnectWalletEl = document.getElementById('disconnectWallet');
-        const walletInputsEl = document.getElementById('walletInputs');
-        const balanceEl = document.getElementById('balance');
-        const principalEl = document.getElementById('principal');
-
-        if (connectWalletEl) {
-            connectWalletEl.style.display = 'inline-block';
-            connectWalletEl.disabled = false;
-            connectWalletEl.textContent = 'Connect Phantom Wallet';
-        }
-        if (disconnectWalletEl) disconnectWalletEl.style.display = 'none';
-        if (walletInputsEl) walletInputsEl.style.display = 'none';
-        if (balanceEl) balanceEl.textContent = '';
-        if (principalEl) {
-            principalEl.value = '1000';
-            calcYield();
-        }
-    };
-
-    const loadBalance = async () => {
-        if (!publicKey) return;
-
-        // Wait for Solana Web3.js library
-        await waitForSolanaWeb3();
-
-        if (typeof solanaWeb3 === 'undefined') {
-            const balanceEl = document.getElementById('balance');
-            if (balanceEl) {
-                balanceEl.innerHTML = '<em>Library loading... Please refresh if this persists.</em>';
-            }
-            return;
-        }
-
-        try {
-            const connection = new solanaWeb3.Connection(
-                solanaWeb3.clusterApiUrl('mainnet-beta'),
-                'confirmed'
-            );
-            const balance = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
-            const solBalance = balance / solanaWeb3.LAMPORTS_PER_SOL;
-            
-            const balanceEl = document.getElementById('balance');
-            if (balanceEl) {
-                const usdEst = Math.round(solBalance * 150);
-                balanceEl.innerHTML = `${solBalance.toFixed(4)} SOL (~$${usdEst}) <br><small>Bridge to USDC? Yields await.</small>`;
-                
-                const principalEl = document.getElementById('principal');
-                if (principalEl) {
-                    principalEl.value = usdEst || '1000';
-                }
-            }
-            calcYield();
-        } catch (err) {
-            console.error('Balance error:', err);
-            const balanceEl = document.getElementById('balance');
-            if (balanceEl) {
-                balanceEl.innerHTML = '<em>Failed to load balance. Check your connection.</em>';
-            }
-        }
-    };
-
-    // Initialize event listeners
-    const connectBtn = document.getElementById('connectWallet');
-    if (connectBtn) {
-        connectBtn.addEventListener('click', connectWallet);
-    }
-
-    const disconnectBtn = document.getElementById('disconnectWallet');
-    if (disconnectBtn) {
-        disconnectBtn.addEventListener('click', disconnectWallet);
-    }
-
+    // Calc Yield Button
     const calcBtn = document.getElementById('calcBtn');
-    if (calcBtn) {
-        calcBtn.addEventListener('click', calcYield);
-    }
+    const resultDiv = document.getElementById('result');
+    const principal = document.getElementById('principal');
+    const days = document.getElementById('days');
+    const apy = document.getElementById('apy');
 
-    // Auto-calculate on input change
-    ['principal', 'days', 'apy'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', calcYield);
+    // Live preview on input change
+    const inputs = [principal, days, apy];
+    inputs.forEach(input => {
+        if (input) {
+            input.addEventListener('input', () => {
+                if (resultDiv && resultDiv.style.display === 'block') {
+                    calcBtn.click();
+                }
+            });
         }
     });
 
-    // Initialize calculator
-    calcYield();
+    if (calcBtn && resultDiv) {
+        calcBtn.addEventListener('click', () => {
+            resultDiv.innerHTML = '<span style="color: #fff;">Calculating...</span>';
+            resultDiv.style.display = 'block';
+            setTimeout(() => {
+                const p = parseFloat(principal.value) || 0;
+                const d = parseFloat(days.value) || 0;
+                const a = parseFloat(apy.value) / 100 || 0;
 
-    // Email Form Submission (Formspree)
-    const dripForm = document.getElementById('dripSignup');
-    if (dripForm) {
-        dripForm.addEventListener('submit', (e) => {
+                if (p <= 0 || d <= 0 || a <= 0) {
+                    resultDiv.innerHTML = '<p style="color: #14F195;">Enter valid numbers for the drip, surfer.</p>';
+                    return;
+                }
+
+                const dailyRate = a / 365;
+                const yieldEst = p * (Math.pow(1 + dailyRate, d) - 1);
+                const monthlyEst = p * (Math.pow(1 + dailyRate, 30) - 1);
+
+                resultDiv.innerHTML = `
+                    <p style="color: #000; font-size: 1.2em;">Est. Yield: $${yieldEst.toFixed(2)} (over ${d} days at ${apy.value}% APY)</p>
+                    <p style="color: #fff; opacity: 0.9;">Monthly Drip: ~$${monthlyEst.toFixed(2)} — Upgrade to $99/mo for auto-stakes.</p>
+                `;
+            }, 300);
+        });
+    }
+
+    // Email Form Submit
+    const form = document.getElementById('dripSignup');
+    if (form) {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = dripForm.querySelector('input[type="email"]').value;
+            const email = form.querySelector('input[type="email"]').value;
             if (email) {
-                // Track with GA if available
+                alert(`Drip claimed for ${email}! Check inbox for Phantom setup + sim guide.`);
+                console.log('Lead:', email);
                 if (typeof gtag !== 'undefined') {
                     gtag('event', 'lead_submit', { 'email': email });
                 }
-                console.log('Lead captured:', email);
-                // Submit to Formspree
-                fetch(dripForm.action, {
-                    method: 'POST',
-                    body: new FormData(dripForm),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        alert(`Drip claimed for ${email}! Check inbox for Phantom setup + sim guide.`);
-                        dripForm.reset();
-                    } else {
-                        alert('Something went wrong. Please try again or email us directly.');
-                    }
-                }).catch(error => {
-                    console.error('Form submission error:', error);
-                    alert('Something went wrong. Please try again or email us directly.');
-                });
+                form.reset();
             }
         });
+    }
+
+    // Phantom Wallet Connection
+    const connectBtn = document.getElementById('connectWallet');
+    const disconnectBtn = document.getElementById('disconnectWallet');
+    const walletInputs = document.getElementById('walletInputs');
+    const balance = document.getElementById('balance');
+    const status = document.getElementById('status');
+
+    // Check if real Phantom is available
+    if (window.solana && window.solana.isPhantom) {
+        // Real Phantom wallet integration
+        let walletConnected = false;
+        let publicKey = null;
+
+        const connectWallet = async () => {
+            try {
+                const resp = await window.solana.connect();
+                publicKey = resp.publicKey.toString();
+                walletConnected = true;
+                
+                if (status) {
+                    status.textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}`;
+                }
+                
+                if (connectBtn) connectBtn.style.display = 'none';
+                if (disconnectBtn) disconnectBtn.style.display = 'inline-block';
+                if (walletInputs) walletInputs.style.display = 'block';
+                
+                // Load balance
+                if (typeof solanaWeb3 !== 'undefined') {
+                    try {
+                        const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
+                        const balanceAmount = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
+                        const solBalance = balanceAmount / solanaWeb3.LAMPORTS_PER_SOL;
+                        const usdEst = Math.round(solBalance * 150);
+                        
+                        if (balance) {
+                            balance.innerHTML = `${solBalance.toFixed(4)} SOL (~$${usdEst}) <br><small>Bridge to USDC? Yields await.</small>`;
+                        }
+                        if (principal) {
+                            principal.value = usdEst || '1000';
+                        }
+                        if (calcBtn) calcBtn.click();
+                    } catch (err) {
+                        console.error('Balance error:', err);
+                        if (balance) balance.textContent = 'Load failed—net check?';
+                    }
+                }
+                
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'phantom_connect', { 'method': 'real' });
+                }
+            } catch (err) {
+                console.error('Connect failed:', err);
+                if (err.code === 4001) {
+                    if (status) {
+                        status.textContent = 'Connection canceled. Click to try again.';
+                        status.style.color = '#ffc107';
+                    }
+                } else {
+                    alert('Failed to connect wallet: ' + (err.message || 'Unknown error'));
+                }
+            }
+        };
+
+        const disconnectWallet = async () => {
+            try {
+                if (window.solana.isConnected) {
+                    await window.solana.disconnect();
+                }
+            } catch (err) {
+                console.error('Disconnect error:', err);
+            }
+
+            walletConnected = false;
+            publicKey = null;
+
+            if (status) status.textContent = '';
+            if (connectBtn) {
+                connectBtn.style.display = 'inline-block';
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Connect Phantom Wallet';
+            }
+            if (disconnectBtn) disconnectBtn.style.display = 'none';
+            if (walletInputs) walletInputs.style.display = 'none';
+            if (balance) balance.textContent = '';
+            if (principal) {
+                principal.value = '1000';
+                if (calcBtn) calcBtn.click();
+            }
+        };
+
+        if (connectBtn) {
+            connectBtn.addEventListener('click', connectWallet);
+        }
+        if (disconnectBtn) {
+            disconnectBtn.addEventListener('click', disconnectWallet);
+        }
+
+        // Handle wallet events
+        window.solana.on('disconnect', () => {
+            disconnectWallet();
+        });
+
+        window.solana.on('accountChanged', (publicKey) => {
+            if (publicKey) {
+                connectWallet();
+            } else {
+                disconnectWallet();
+            }
+        });
+
+        // Check if already connected
+        if (window.solana.isConnected && window.solana.publicKey) {
+            connectWallet();
+        }
+    } else {
+        // Phantom Stub (simulation mode)
+        if (connectBtn) {
+            connectBtn.addEventListener('click', () => {
+                alert('Phantom connected (sim)—Balance loaded: $1,000 USDC. Tweak principal for your stack!');
+                if (principal) principal.value = 1000;
+                if (walletInputs) walletInputs.style.display = 'block';
+                if (balance) balance.textContent = '$1,000 USDC';
+                if (connectBtn) connectBtn.style.display = 'none';
+                if (disconnectBtn) disconnectBtn.style.display = 'inline-block';
+                if (status) status.textContent = 'Connected (simulation mode)';
+                if (calcBtn) calcBtn.click();
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'phantom_connect', { 'method': 'sim' });
+                }
+            });
+        }
+        
+        if (disconnectBtn) {
+            disconnectBtn.addEventListener('click', () => {
+                if (connectBtn) connectBtn.style.display = 'inline-block';
+                if (disconnectBtn) disconnectBtn.style.display = 'none';
+                if (walletInputs) walletInputs.style.display = 'none';
+                if (balance) balance.textContent = '';
+                if (principal) principal.value = '1000';
+                if (status) status.textContent = '';
+                if (calcBtn) calcBtn.click();
+            });
+        }
     }
 
     // Mobile Navigation Toggle
@@ -279,51 +223,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 navMenu.classList.remove('active');
             });
         });
-    }
-
-    // Listen for wallet connection events
-    if (window.solana && window.solana.isPhantom) {
-        // Handle wallet disconnect event
-        window.solana.on('disconnect', () => {
-            disconnectWallet();
-        });
-
-        // Handle account change
-        window.solana.on('accountChanged', (publicKey) => {
-            if (publicKey) {
-                // User switched accounts
-                connectWallet();
-            } else {
-                // User disconnected
-                disconnectWallet();
-            }
-        });
-        
-        // Check if already connected on page load
-        if (window.solana.isConnected && window.solana.publicKey) {
-            publicKey = window.solana.publicKey.toString();
-            walletConnected = true;
-            
-            const statusEl = document.getElementById('status');
-            if (statusEl) {
-                statusEl.textContent = `Connected: ${publicKey.slice(0,4)}...${publicKey.slice(-4)}`;
-            }
-
-            const connectWalletEl = document.getElementById('connectWallet');
-            const disconnectWalletEl = document.getElementById('disconnectWallet');
-            const walletInputsEl = document.getElementById('walletInputs');
-
-            if (connectWalletEl) connectWalletEl.style.display = 'none';
-            if (disconnectWalletEl) disconnectWalletEl.style.display = 'inline-block';
-            if (walletInputsEl) walletInputsEl.style.display = 'block';
-            
-            loadBalance();
-        }
-    } else {
-        // Show helpful message if Phantom not detected
-        const statusEl = document.getElementById('status');
-        if (statusEl) {
-            statusEl.innerHTML = '<small style="color: #ffc107;">Install <a href="https://phantom.app/" target="_blank" style="color: #9945FF;">Phantom Wallet</a> to connect</small>';
-        }
     }
 });
