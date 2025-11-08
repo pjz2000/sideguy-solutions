@@ -3,142 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalUber - Request a Ride</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <title>SideGuy Solutions - Custom Software for Your Edge</title>
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; background-color: #f5f5f5; }
-        #app { height: 100vh; display: flex; flex-direction: column; }
-        #header { background-color: #000; color: #fff; padding: 10px; text-align: center; font-size: 24px; font-weight: bold; }
-        #map { flex: 1; height: 400px; }
-        #controls { padding: 20px; background-color: #fff; border-top: 1px solid #ddd; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select, button { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { background-color: #000; color: #fff; cursor: pointer; font-size: 16px; font-weight: bold; }
-        button:hover { background-color: #333; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
-        #ride-info { margin-top: 15px; padding: 15px; background-color: #f0f0f0; border-radius: 5px; display: none; }
-        .status { font-weight: bold; margin: 5px 0; }
-        .success { color: green; }
+        /* Your existing styles here - I'll assume they're inline or external, but for completeness, add if needed */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; }
+        .hero-cta { background: linear-gradient(#000, #333); color: white; padding: 20px; text-align: center; }
+        .hero-cta h2 { margin: 0 0 15px 0; }
+        .hero-cta a { background: #000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin: 0 10px; display: inline-block; }
+        .hero-cta a.quote { background: #333; }
+        /* Add more styles as per original if needed */
     </style>
 </head>
 <body>
-    <div id="app">
-        <div id="header">LocalUber 🚗 - Request a Ride</div>
-        <div id="map"></div>
-        <div id="controls">
-            <form id="ride-form">
-                <div class="input-group">
-                    <label for="pickup">Pickup Location</label>
-                    <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" value="Current Location" required>
-                </div>
-                <div class="input-group">
-                    <label for="dropoff">Dropoff Location</label>
-                    <input type="text" id="dropoff" name="dropoff" placeholder="Enter dropoff address" required>
-                </div>
-                <div class="input-group">
-                    <label for="ride-type">Ride Type</label>
-                    <select id="ride-type" name="ride_type">
-                        <option value="uberx">UberX ($1.5/km)</option>
-                        <option value="uberxl">UberXL ($2.5/km)</option>
-                        <option value="uberblack">Uber Black ($4/km)</option>
-                    </select>
-                </div>
-                <input type="hidden" name="_subject" value="New LocalUber Ride Request 🚗">
-                <input type="hidden" name="_next" value="https://pjz2000.github.io/sideguy-solutions/localuber.html?success=true">
-                <button type="submit" id="request-btn">Request Ride</button>
-            </form>
-            <div id="ride-info"></div>
-        </div>
+    <!-- Hero CTA Banner Added Here (Idea 1) -->
+    <div class="hero-cta">
+        <h2>Ready for On-Demand Rides or Custom AI? 🚀</h2>
+        <a href="localuber.html">Book a Test Ride</a>
+        <a href="mailto:peter.z@kromeon.com" class="quote">Get a Quote</a>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // Map setup
-        const map = L.map('map').setView([40.7128, -74.0060], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        L.marker([40.7128, -74.0060]).addTo(map).bindPopup('Your Location').openPopup();
+    # Custom software solutions
 
-        // Fake drivers
-        const drivers = [
-            { name: 'John D.', lat: 40.7150, lng: -74.0000, car: 'Toyota Prius' },
-            { name: 'Sarah K.', lat: 40.7100, lng: -74.0100, car: 'Honda Civic' },
-            { name: 'Mike R.', lat: 40.7200, lng: -74.0050, car: 'Tesla Model 3' }
-        ];
-        let markers = [];
+    designed to maximize your edge
 
-        // Formspree endpoint
-        const FORMSPREE_URL = 'https://formspree.io/f/xanawjvp';
+    SideGuy Solutions helps businesses turn ideas into revenue—through smarter automation, sharper integrations, and a partner who owns outcomes from strategy to execution.
 
-        const form = document.getElementById('ride-form');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const btn = document.getElementById('request-btn');
-            btn.disabled = true;
-            btn.textContent = 'Sending...';
+    We stand the test of time.
 
-            try {
-                const response = await fetch(FORMSPREE_URL, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    // Success - show sim
-                    document.getElementById('ride-info').style.display = 'block';
-                    document.getElementById('ride-info').innerHTML = '<div class="status success">Request sent to peter.z@kromeon.com! 🚀 Searching drivers...</div>';
+    5+
 
-                    // Add markers
-                    markers.forEach(m => map.removeLayer(m));
-                    markers = [];
-                    drivers.forEach(d => {
-                        const marker = L.marker([d.lat, d.lng]).addTo(map).bindPopup(`Driver: ${d.name}<br>Car: ${d.car}`);
-                        markers.push(marker);
-                    });
+    years building custom solutions
 
-                    // Fake assignment
-                    setTimeout(() => {
-                        const driver = drivers[Math.floor(Math.random() * drivers.length)];
-                        const distance = (Math.random() * 10 + 1).toFixed(1);
-                        const prices = { uberx: 1.5, uberxl: 2.5, uberblack: 4 };
-                        const price = (distance * prices[formData.get('ride_type')]).toFixed(2);
+    100%
 
-                        document.getElementById('ride-info').innerHTML = `
-                            <div class="status success">Ride matched! (Email sent—reply to confirm)</div>
-                            <div>Driver: ${driver.name} | ${driver.car}</div>
-                            <div>Distance: ${distance} km | $${price}</div>
-                            <div>ETA: 3-5 min</div>
-                            <button type="button" onclick="location.reload()">New Request</button>
-                        `;
-                    }, 2000);
-                } else {
-                    throw new Error('Send failed');
-                }
-            } catch (error) {
-                alert('Send issue—try again or email peter.z@kromeon.com!');
-                console.error(error);
-            }
+    client satisfaction rate
 
-            btn.disabled = false;
-            btn.textContent = 'Request Ride';
-        });
+    24/7
 
-        // Check for success param
-        if (location.search.includes('success')) {
-            document.getElementById('ride-info').innerHTML = '<div class="status success">Thanks! Email sent to SideGuy. Expect a reply soon.</div>';
-            document.getElementById('ride-info').style.display = 'block';
-        }
+    support & iteration
 
-        // Fake geocode
-        document.getElementById('dropoff').addEventListener('change', () => {
-            const lat = 40.7128 + (Math.random() - 0.5) * 0.02;
-            const lng = -74.0060 + (Math.random() - 0.5) * 0.02;
-            map.setView([lat, lng], 13);
-            L.marker([lat, lng]).addTo(map).bindPopup('Dropoff').openPopup();
-        });
-    </script>
+    ## Let's face it - there's a reason you're here
+
+    And it's probably because your current setup just isn't getting the job done. Any of these hit close to home?
+
+    ### Manual Processes Cost Time & Money
+
+    Repetitive tasks are eating your budget. As efficiency dips, scaling feels impossible next to driving business growth.
+
+    ### Sales is Claiming Data Sucks
+
+    Time is wasted on low-quality leads and misaligned data. Poor integration causes blame games and misalignment around resources.
+
+    ### You Have a Great Product No One Knows About
+
+    Brand and product awareness are holding you back. Whether new to the market or in a niche space, your audience probably hasn't heard of your solution.
+
+    ### DeFi is an Untapped Opportunity
+
+    You've dabbled with crypto, but now you can prove its impact. How do you do this without wasting money and explaining poor results?
+
+    ## How We Drive Success
+
+    While others focus on quick fixes, we prefer to hit the ground running while designing solutions that are people-first, revenue-driven, and make sense for your business.
+
+    align
+
+    ### Align
+
+    #### Goal + Objective Setting
+
+    We go beyond basics, understanding your business deeply. Our strategy is built to align perfectly with your unique needs and objectives.
+
+    audit
+
+    ### Audit
+
+    #### Review + Update Existing Efforts
+
+    Most systems have some strengths. Our initial audit identifies what works, scales it, and stops inefficiencies through quick wins.
+
+    research
+
+    ### Research
+
+    #### Audience Development + Segmentation
+
+    People are central to our work. We go beyond basic data, understanding decision-making processes and segmenting appropriately.
+
+    position
+
+    ### Position
+
+    #### Messaging + Positioning
+
+    Clarity is crucial. We focus on clear, simple messaging that articulates the problem you solve, tested and validated over time.
+
+    create
+
+    ### Create
+
+    #### Content + Strategy
+
+    We ensure the right content exists or gets created. By auditing existing assets and identifying needs, we support campaigns with relevant, engaging content.
+
+    launch
+
+    ### Launch
+
+    #### Launch, Learn, Scale
+
+    Our management is ongoing, iterative, and revenue-focused. We optimize tirelessly, using consistent testing to refine strategy and scale effectively.
+
+    ## Stablecoin Yield Drip Sim
+
+    Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.
+
+    ## Our Work + Impact
+
+    ### San Diego Carbon Credits Platform
+
+    Automated lead generation system for carbon credit plays in the San Diego market.
+
+     500+ leads generated
+
+     85% automation rate
+
+    ### Underdog Fantasy Integration
+
+    Custom tools and integrations for fantasy sports platform, streamlining user experience.
+
+     3x faster processing
+
+     100% uptime
+
+    ### Solana DeFi Dashboard
+
+    Web3 integration with Phantom wallet for yield calculations and portfolio tracking.
+
+     Real-time balance tracking
+
+     Secure wallet integration
+
+    ## Coastal On-Demand Delivery
+
+    Your personal delivery service for Encinitas, Solana Beach, Del Mar & Leucadia. Like Uber, but for your beach community—fast, local, and always chill.
+
+     🌊 Serving the 101 Corridor 🌊
+
+    🏄
+
+    ### Encinitas Delivery
+
+    From Moonlight Beach to the 101, we've got Encinitas covered. Same-day delivery for everything from surf gear to groceries.
+
+    * Real-time driver tracking
+    * 15-30 min delivery window
+    * Beach-friendly packaging
+
+    🏖️
+
+    ### Solana Beach
+
+    Delivering to Solana Beach homes, offices, and beach spots. Fast, reliable service that gets it done without the hassle.
+
+    * Flexible pickup/dropoff
+    * Local driver network
+    * Secure contactless delivery
+
+    🌅
+
+    ### Del Mar Service
+
+    Premium delivery service for Del Mar. Whether it's race day or beach day, we'll get your packages where they need to be.
+
+    - Priority scheduling
+    - Same-day guaranteed
+    - VIP handling available
+
+    🌴
+
+    ### Leucadia Runs
+
+    Leucadia's go-to delivery service. Supporting local businesses and residents with quick, friendly service you can count on.
+
+    * Local business support
+    * Flexible hours
+    * Community-focused
+
+    📱
+
+    #### App-Based Booking
+
+    Request delivery in seconds, track in real-time
+
+    ⏱️
+
+    #### Fast Response
+
+    Average pickup within 10 minutes
+
+    💰
+
+    #### Transparent Pricing
+
+    No hidden fees, pay what you see
+
+    🤝
+
+    #### Local Drivers
+
+    Neighbors serving neighbors
+
+    Ready to ride the wave? Get started with coastal delivery today.
+
+     [Request Delivery](mailto:peter.z@kromeon.com?subject=Coastal Delivery Inquiry)
+
+     🤖 Powered by Latest AI Technology ✨
+
+    ## AI-Powered Virtual Assistant
+
+    Leverage cutting-edge AI tools to automate tasks, boost productivity, and scale your business. Your intelligent assistant that works 24/7.
+
+    💬
+
+    ### AI Chat & Communication
+
+    Advanced conversational AI powered by GPT-4, Claude, and other leading models. Handle customer inquiries, schedule meetings, and manage communications.
+
+    - Multi-language support
+    - Context-aware responses
+    - Email & chat automation
+    - Sentiment analysis
+
+    📊
+
+    ### Data Analysis & Insights
+
+    AI-driven analytics that turn your data into actionable insights. Automated reporting, trend analysis, and predictive modeling.
+
+    + Automated data processing
+    + Predictive analytics
+    + Custom dashboards
+    + Real-time insights
+
+    ✍️
+
+    ### Content Creation & Writing
+
+    Generate high-quality content with AI assistance. Blog posts, emails, social media, documentation, and more—all tailored to your brand voice.
+
+    * Blog & article writing
+    * Email campaigns
+    * Social media content
+    * Technical documentation
+
+    🔍
+
+    ### Research & Information
+
+    AI-powered research assistant that gathers, synthesizes, and presents information. Market research, competitor analysis, and industry insights.
+
+    * Web research automation
+    * Competitor analysis
+    * Market intelligence
+    * Report generation
+
+    📅
+
+    ### Task & Project Management
+
+    Intelligent task management that prioritizes, schedules, and tracks your work. Automated workflows and smart reminders.
+
+    * Smart scheduling
+    * Priority optimization
+    * Workflow automation
+    * Progress tracking
+
+    🔐
+
+    ### Security & Monitoring
+
+    AI-powered security monitoring and threat detection. Protect your business with intelligent systems that learn and adapt.
+
+    * Anomaly detection
+    * Threat monitoring
+    * Automated alerts
+    * Compliance tracking
+
+    ### Built with Latest AI Technology
+
+     OpenAI GPT-4 Anthropic Claude Google Gemini LangChain Vector Databases RAG Systems AutoML Custom Models
+
+    ### Common Use Cases
+
+    📧
+
+    #### Email Management
+
+    Auto-respond, categorize, and prioritize emails
+
+    📝
+
+    #### Document Processing
+
+    Extract, summarize, and organize documents
+
+    💼
+
+    #### Lead Qualification
+
+    Automatically qualify and score leads
+
+    🎯
+
+    #### Customer Support
+
+    24/7 AI support with human escalation
+
+    📈
+
+    #### Sales Forecasting
+
+    Predict sales trends and opportunities
+
+    🔄
+
+    #### Process Automation
+
+    Automate repetitive business processes
+
+    ### Ready to Transform Your Business with AI?
+
+    Get a custom AI assistant tailored to your specific needs. We'll integrate the latest AI tools and train them on your business.
+
+     [Get Started with AI](mailto:peter.z@kromeon.com?subject=AI Virtual Assistant Inquiry)
+
+    ## Ready to flip your strategy from money-wasting to money-making?
+
+     [Let's Talk](mailto:peter.z@kromeon.com)
+
+     SideGuy Solutions - Cosmic Carbon Hustle
+
+    # SideGuy Solutions
+
+    Custom software for carbon credits, parlay info, and beyond. Let's build your edge.
+
+    ## Stablecoin Yield Drip Sim
+
+    Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.
+
+    Powered by Solana
+
+    ## What We Build
+
+    ### 🚀 Lead Gen Automation
+
+    San Diego carbon credit scouts + Underdog parlay alerts. Set it, forget it, cash in.
+
+    ### ⚡ Custom Builds
+
+    Integrate Solana wallets, Underdog parlay bombs, and yield trackers. Your edge, coded.
+
+    ### ✨ Yield Drip Bots
+
+    Phantom auto-stakes for $99/mo: Daily monitors + yield-funded Uber Eats drops. Shred while you sip.
+
+     LocalUber - Your Local Ride App
 </body>
 </html>
