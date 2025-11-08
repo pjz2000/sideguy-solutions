@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalUber - Your Local Ride App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+        #app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #map {
+            flex: 1;
+            height: 400px;
+        }
+        #controls {
+            padding: 20px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        #ride-info {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            display: none;
+        }
+        .status {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .driver {
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="header">LocalUber 🚗</div>
+        <div id="map"></div>
+        <div id="controls">
+            <div class="input-group">
+                <label for="pickup">Pickup Location</label>
+                <input type="text" id="pickup" placeholder="Enter pickup address" value="Current Location">
+            </div>
+            <div class="input-group">
+                <label for="dropoff">Dropoff Location</label>
+                <input type="text" id="dropoff" placeholder="Enter dropoff address">
+            </div>
+            <div class="input-group">
+                <label for="ride-type">Ride Type</label>
+                <select id="ride-type">
+                    <option value="uberx">UberX ($1.5/km)</option>
+                    <option value="uberxl">UberXL ($2.5/km)</option>
+                    <option value="uberblack">Uber Black ($4/km)</option>
+                </select>
+            </div>
+            <button onclick="requestRide()">Request Ride</button>
+            <div id="ride-info"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([40.7128, -74.0060], 13); // Default to NYC
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker for current location
+        const currentMarker = L.marker([40.7128, -74.0060]).addTo(map)
+            .bindPopup('Your Location').openPopup();
+
+        // Simulate drivers
+        const drivers = [
+            { id: 1, name: 'John D.', lat: 40.7150, lng: -74.0000, car: 'Toyota Prius' },
+            { id: 2, name: 'Sarah K.', lat: 40.7100, lng: -74.0100, car: 'Honda Civic' },
+            { id: 3, name: 'Mike R.', lat: 40.7200, lng: -74.0050, car: 'Tesla Model 3' }
+        ];
+
+        let markers = [];
+        let currentRide = null;
+
+        function requestRide() {
+            const pickup = document.getElementById('pickup').value;
+            const dropoff = document.getElementById('dropoff').value;
+            const rideType = document.getElementById('ride-type').value;
+
+            if (!dropoff) {
+                alert('Please enter a dropoff location!');
+                return;
+            }
+
+            // Simulate ride request
+            document.getElementById('ride-info').style.display = 'block';
+            document.getElementById('ride-info').innerHTML = `
+                <div class="status">Searching for drivers...</div>
+            `;
+
+            // Clear old markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            // Add driver markers
+            drivers.forEach(driver => {
+                const marker = L.marker([driver.lat, driver.lng]).addTo(map)
+                    .bindPopup(`Driver: ${driver.name}<br>Car: ${driver.car}`);
+                markers.push(marker);
+            });
+
+            // Simulate assigning a driver after 2 seconds
+            setTimeout(() => {
+                const assignedDriver = drivers[Math.floor(Math.random() * drivers.length)];
+                currentRide = assignedDriver;
+
+                // Calculate fake distance and price
+                const distance = Math.floor(Math.random() * 10) + 1; // 1-10 km
+                const pricePerKm = rideType === 'uberx' ? 1.5 : rideType === 'uberxl' ? 2.5 : 4;
+                const price = (distance * pricePerKm).toFixed(2);
+
+                document.getElementById('ride-info').innerHTML = `
+                    <div class="status">Ride Confirmed! 🚀</div>
+                    <div>Driver: ${assignedDriver.name}</div>
+                    <div>Car: ${assignedDriver.car}</div>
+                    <div>Distance: ${distance} km</div>
+                    <div>Estimated Price: $${price}</div>
+                    <div class="status">ETA: 3-5 minutes</div>
+                    <button onclick="startRide()">Start Ride</button>
+                    <button onclick="cancelRide()">Cancel</button>
+                `;
+
+                // Animate driver marker (simple pulse)
+                const driverMarker = markers.find(m => m.getPopup().getContent().includes(assignedDriver.name));
+                if (driverMarker) {
+                    driverMarker.setStyle({ color: '#000' });
+                }
+            }, 2000);
+        }
+
+        function startRide() {
+            if (!currentRide) return;
+            document.getElementById('ride-info').innerHTML = `
+                <div class="status">Ride in Progress! 📍</div>
+                <div>Following ${currentRide.name}</div>
+                <div class="status">Arriving at destination soon...</div>
+                <button onclick="endRide()">End Ride</button>
+            `;
+            // Simulate moving marker (basic)
+            setTimeout(() => {
+                endRide();
+            }, 5000);
+        }
+
+        function endRide() {
+            document.getElementById('ride-info').innerHTML = `
+                <div class="status">Ride Completed! 🎉</div>
+                <div>Thanks for riding with LocalUber!</div>
+                <button onclick="newRide()">New Ride</button>
+            `;
+            currentRide = null;
+            // Clear driver markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+        }
+
+        function cancelRide() {
+            document.getElementById('ride-info').style.display = 'none';
+            currentRide = null;
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+        }
+
+        function newRide() {
+            document.getElementById('ride-info').style.display = 'none';
+            document.getElementById('dropoff').value = '';
+        }
+
+        // Geocode simulation (for demo, use real API like Nominatim in production)
+        document.getElementById('dropoff').addEventListener('change', (e) => {
+            // Fake geocode: move map to a random nearby location
+            const newLat = 40.7128 + (Math.random() - 0.5) * 0.02;
+            const newLng = -74.0060 + (Math.random() - 0.5) * 0.02;
+            map.setView([newLat, newLng], 13);
+            L.marker([newLat, newLng]).addTo(map).bindPopup('Dropoff').openPopup();
+        });
+    </script>
+</body>
+</html>
