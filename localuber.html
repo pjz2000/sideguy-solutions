@@ -27,23 +27,27 @@
         <div id="header">LocalUber 🚗 - Request a Ride</div>
         <div id="map"></div>
         <div id="controls">
-            <div class="input-group">
-                <label for="pickup">Pickup Location</label>
-                <input type="text" id="pickup" placeholder="Enter pickup address" value="Current Location">
-            </div>
-            <div class="input-group">
-                <label for="dropoff">Dropoff Location</label>
-                <input type="text" id="dropoff" placeholder="Enter dropoff address" required>
-            </div>
-            <div class="input-group">
-                <label for="ride-type">Ride Type</label>
-                <select id="ride-type">
-                    <option value="uberx">UberX ($1.5/km)</option>
-                    <option value="uberxl">UberXL ($2.5/km)</option>
-                    <option value="uberblack">Uber Black ($4/km)</option>
-                </select>
-            </div>
-            <button id="request-btn" onclick="requestRide()">Request Ride</button>
+            <form id="ride-form">
+                <div class="input-group">
+                    <label for="pickup">Pickup Location</label>
+                    <input type="text" id="pickup" name="pickup" placeholder="Enter pickup address" value="Current Location" required>
+                </div>
+                <div class="input-group">
+                    <label for="dropoff">Dropoff Location</label>
+                    <input type="text" id="dropoff" name="dropoff" placeholder="Enter dropoff address" required>
+                </div>
+                <div class="input-group">
+                    <label for="ride-type">Ride Type</label>
+                    <select id="ride-type" name="ride_type">
+                        <option value="uberx">UberX ($1.5/km)</option>
+                        <option value="uberxl">UberXL ($2.5/km)</option>
+                        <option value="uberblack">Uber Black ($4/km)</option>
+                    </select>
+                </div>
+                <input type="hidden" name="_subject" value="New LocalUber Ride Request 🚗">
+                <input type="hidden" name="_next" value="https://pjz2000.github.io/sideguy-solutions/localuber.html?success=true">
+                <button type="submit" id="request-btn">Request Ride</button>
+            </form>
             <div id="ride-info"></div>
         </div>
     </div>
@@ -65,30 +69,16 @@
         ];
         let markers = [];
 
-        // Formspree endpoint - Using your hash!
+        // Formspree endpoint
         const FORMSPREE_URL = 'https://formspree.io/f/xanawjvp';
 
-        async function requestRide() {
-            const pickup = document.getElementById('pickup').value;
-            const dropoff = document.getElementById('dropoff').value;
-            const rideType = document.getElementById('ride-type').value;
-
-            if (!dropoff) {
-                alert('Please enter a dropoff location!');
-                return;
-            }
-
-            // Disable button during send
+        const form = document.getElementById('ride-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
             const btn = document.getElementById('request-btn');
             btn.disabled = true;
             btn.textContent = 'Sending...';
-
-            // Send to Formspree (emails peter.z@kromeon.com automatically)
-            const formData = new FormData();
-            formData.append('pickup', pickup);
-            formData.append('dropoff', dropoff);
-            formData.append('ride_type', rideType);
-            formData.append('_subject', 'New LocalUber Ride Request 🚗');
 
             try {
                 const response = await fetch(FORMSPREE_URL, {
@@ -97,49 +87,52 @@
                     headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
-                    console.log('Request sent to email!');
+                    // Success - show sim
+                    document.getElementById('ride-info').style.display = 'block';
+                    document.getElementById('ride-info').innerHTML = '<div class="status success">Request sent to peter.z@kromeon.com! 🚀 Searching drivers...</div>';
+
+                    // Add markers
+                    markers.forEach(m => map.removeLayer(m));
+                    markers = [];
+                    drivers.forEach(d => {
+                        const marker = L.marker([d.lat, d.lng]).addTo(map).bindPopup(`Driver: ${d.name}<br>Car: ${d.car}`);
+                        markers.push(marker);
+                    });
+
+                    // Fake assignment
+                    setTimeout(() => {
+                        const driver = drivers[Math.floor(Math.random() * drivers.length)];
+                        const distance = (Math.random() * 10 + 1).toFixed(1);
+                        const prices = { uberx: 1.5, uberxl: 2.5, uberblack: 4 };
+                        const price = (distance * prices[formData.get('ride_type')]).toFixed(2);
+
+                        document.getElementById('ride-info').innerHTML = `
+                            <div class="status success">Ride matched! (Email sent—reply to confirm)</div>
+                            <div>Driver: ${driver.name} | ${driver.car}</div>
+                            <div>Distance: ${distance} km | $${price}</div>
+                            <div>ETA: 3-5 min</div>
+                            <button type="button" onclick="location.reload()">New Request</button>
+                        `;
+                    }, 2000);
                 } else {
                     throw new Error('Send failed');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Oops—request didn\'t send. Try again or email peter.z@kromeon.com directly!');
+                alert('Send issue—try again or email peter.z@kromeon.com!');
+                console.error(error);
             }
 
-            // Re-enable button
             btn.disabled = false;
             btn.textContent = 'Request Ride';
+        });
 
-            // Show fun sim (keeps user happy)
+        // Check for success param
+        if (location.search.includes('success')) {
+            document.getElementById('ride-info').innerHTML = '<div class="status success">Thanks! Email sent to SideGuy. Expect a reply soon.</div>';
             document.getElementById('ride-info').style.display = 'block';
-            document.getElementById('ride-info').innerHTML = '<div class="status success">Request sent to SideGuy! 🚀 Searching drivers...</div>';
-
-            // Clear/add markers
-            markers.forEach(m => map.removeLayer(m));
-            markers = [];
-            drivers.forEach(d => {
-                const marker = L.marker([d.lat, d.lng]).addTo(map).bindPopup(`Driver: ${d.name}<br>Car: ${d.car}`);
-                markers.push(marker);
-            });
-
-            // Fake assignment
-            setTimeout(() => {
-                const driver = drivers[Math.random() * drivers.length | 0];
-                const distance = (Math.random() * 10 + 1).toFixed(1);
-                const prices = { uberx: 1.5, uberxl: 2.5, uberblack: 4 };
-                const price = (distance * prices[rideType]).toFixed(2);
-
-                document.getElementById('ride-info').innerHTML = `
-                    <div class="status success">Ride matched! (Check email for details)</div>
-                    <div>Driver: ${driver.name} | ${driver.car}</div>
-                    <div>Distance: ${distance} km | $${price}</div>
-                    <div>ETA: 3-5 min | Reply to email to confirm!</div>
-                    <button onclick="location.reload()">New Request</button>
-                `;
-            }, 2000);
         }
 
-        // Fake geocode on dropoff change
+        // Fake geocode
         document.getElementById('dropoff').addEventListener('change', () => {
             const lat = 40.7128 + (Math.random() - 0.5) * 0.02;
             const lng = -74.0060 + (Math.random() - 0.5) * 0.02;
