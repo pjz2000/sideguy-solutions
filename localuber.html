@@ -20,6 +20,7 @@
         #ride-info { margin-top: 15px; padding: 15px; background-color: #f0f0f0; border-radius: 5px; display: none; }
         .status { font-weight: bold; margin: 5px 0; }
         .success { color: green; }
+        .driver-contact { text-align: center; margin-top: 10px; font-weight: bold; color: #000; }
     </style>
 </head>
 <body>
@@ -44,27 +45,30 @@
                         <option value="uberblack">Uber Black ($4/km)</option>
                     </select>
                 </div>
-                <input type="hidden" name="_subject" value="New LocalUber Ride Request 🚗">
+                <input type="hidden" name="_subject" value="New LocalUber Ride Request 🚗 - Book with PJ the Driver">
                 <input type="hidden" name="_next" value="https://www.sideguysolutions.com/localuber.html?success=true">
                 <button type="submit" id="request-btn">Request Ride</button>
             </form>
+            <div class="driver-contact">
+                <p>Book with PJ the Driver: <a href="mailto:peter.z@kromeon.com?subject=LocalUber Booking Request">peter.z@kromeon.com</a></p>
+            </div>
             <div id="ride-info"></div>
         </div>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Map setup (NYC default; swap coords for SoCal if wanted)
-        const map = L.map('map').setView([32.8998, -117.2040], 13); // Solana Beach area
+        // Map setup (Solana Beach default for original coastal vibe)
+        const map = L.map('map').setView([32.8998, -117.2040], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
         L.marker([32.8998, -117.2040]).addTo(map).bindPopup('Your Location').openPopup();
 
-        // Fake local drivers
+        // Fake local drivers (PJ as one for flavor)
         const drivers = [
-            { name: 'John D.', lat: 32.9020, lng: -117.2010, car: 'Toyota Prius' },
+            { name: 'PJ the Driver', lat: 32.9020, lng: -117.2010, car: 'Tesla Model 3' },
             { name: 'Sarah K.', lat: 32.8970, lng: -117.2070, car: 'Honda Civic' },
-            { name: 'Mike R.', lat: 32.9050, lng: -117.2030, car: 'Tesla Model 3' }
+            { name: 'Mike R.', lat: 32.9050, lng: -117.2030, car: 'Toyota Prius' }
         ];
         let markers = [];
 
@@ -87,7 +91,7 @@
                 });
                 if (response.ok) {
                     document.getElementById('ride-info').style.display = 'block';
-                    document.getElementById('ride-info').innerHTML = '<div class="status success">Request sent to peter.z@kromeon.com! 🚀 Searching drivers...</div>';
+                    document.getElementById('ride-info').innerHTML = '<div class="status success">Request sent to PJ the Driver! 🚀 Searching...</div>';
 
                     // Add markers
                     markers.forEach(m => map.removeLayer(m));
@@ -97,18 +101,18 @@
                         markers.push(marker);
                     });
 
-                    // Fake assignment
+                    // Fake assignment (favor PJ)
                     setTimeout(() => {
-                        const driver = drivers[Math.floor(Math.random() * drivers.length)];
+                        const driver = drivers[0]; // PJ first
                         const distance = (Math.random() * 10 + 1).toFixed(1);
                         const prices = { uberx: 1.5, uberxl: 2.5, uberblack: 4 };
                         const price = (distance * prices[formData.get('ride_type')]).toFixed(2);
 
                         document.getElementById('ride-info').innerHTML = `
-                            <div class="status success">Ride matched! (Email sent—reply to confirm)</div>
-                            <div>Driver: ${driver.name} | ${driver.car}</div>
+                            <div class="status success">Matched with PJ the Driver! (Email sent)</div>
+                            <div>Car: ${driver.car}</div>
                             <div>Distance: ${distance} km | $${price}</div>
-                            <div>ETA: 3-5 min</div>
+                            <div>ETA: 3-5 min | Reply to email to confirm</div>
                             <button type="button" onclick="location.reload()">New Request</button>
                         `;
                     }, 2000);
@@ -116,7 +120,7 @@
                     throw new Error('Send failed');
                 }
             } catch (error) {
-                alert('Send issue—try again or email peter.z@kromeon.com!');
+                alert('Send issue—try emailing PJ directly at peter.z@kromeon.com!');
                 console.error(error);
             }
 
@@ -126,11 +130,11 @@
 
         // Success param check
         if (location.search.includes('success')) {
-            document.getElementById('ride-info').innerHTML = '<div class="status success">Thanks! Email sent to SideGuy. Expect a reply soon.</div>';
+            document.getElementById('ride-info').innerHTML = '<div class="status success">Thanks! Email sent to PJ the Driver. Expect a reply soon.</div>';
             document.getElementById('ride-info').style.display = 'block';
         }
 
-        // Fake geocode (pans map on dropoff input)
+        // Fake geocode
         document.getElementById('dropoff').addEventListener('change', () => {
             const lat = 32.8998 + (Math.random() - 0.5) * 0.02;
             const lng = -117.2040 + (Math.random() - 0.5) * 0.02;
