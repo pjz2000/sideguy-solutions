@@ -18,7 +18,7 @@
     </script>
 </head>
 <body>
-    <!-- Version 1.3 - Updated November 10, 2025: Added live top 10 yielding stablecoins/cryptos section with CoinGecko API for real-time data (prices, 24h change as yield proxy; refreshes on load). -->
+    <!-- Version 1.4 - Updated November 10, 2025: Upgraded live yields table with DeFiLlama API for real APY data (top 10 stablecoins/cryptos by APY; includes asset, APY, TVL, chain; refreshes every 60s). Added fallback for errors. -->
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -383,7 +383,7 @@
                     <ul class="crypto-feature-list">
                         <li>Accessibility: 300M+ users; DeFi TVL $200B+ with 24/7 access</li>
                         <li>Efficiency: Blockchains cut intermediaries, saving $120B/year in global finance (IMF)</li>
-                        <li>Innovation: Tokenized assets (RWA) grow 10x to $10T by 2031; programmable money for auto-payments</li>
+                        <li>Innovation: Tokenized assets (RWA) grow 10x to $10T by 2030; programmable money for auto-payments</li>
                         <li>Security: Immutable ledgers reduce fraud; AI+blockchain for real-time audits</li>
                         <li>Global inclusion: Remittances drop to $0.5% fees vs 6.5% traditional (World Bank)</li>
                     </ul>
@@ -408,54 +408,29 @@
         </div>
     </section>
 
-    <!-- Solana DeFi Section -->
-    <section class="solana-defi" id="solana">
+    <!-- Live Yields Section - Concise Table from DeFiLlama -->
+    <section class="live-yields" id="yields">
         <div class="container">
-            <h2>Solana DeFi Integrations</h2>
-            <p class="section-subtitle">Leverage Solana's high-speed blockchain for seamless DeFi tools. From wallet connections to yield optimizers, we build integrations that scale with your edge.</p>
-            <div class="solana-badge">
-                <span class="solana-icon">🔗</span>
-                <span>Powered by Solana - 65K TPS, Sub-Second Finality, $15B TVL</span>
-                <span class="solana-icon">🔗</span>
+            <h2>Top 10 Yielding Stablecoins & Cryptos</h2>
+            <p class="section-subtitle">Live APY from DeFiLlama—top stablecoins/cryptos by yield. Updated every 60s.</p>
+            <div class="yields-container">
+                <table id="yields-table" class="yields-table">
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>APY (%)</th>
+                            <th>TVL ($M)</th>
+                            <th>Chain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4">Loading...</td></tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="solana-features-grid">
-                <div class="solana-feature-card">
-                    <div class="solana-feature-icon">🚀</div>
-                    <h3>Why Solana?</h3>
-                    <p>Solana's 65,000 TPS and sub-second finality make it ideal for DeFi. Low fees (<$0.01/tx) and Rust-based smart contracts enable fast, secure apps. TVL hit $15B in 2025, with integrations like Jupiter and Raydium powering 80% of swaps.</p>
-                    <ul class="solana-feature-list">
-                        <li>High throughput: 65K TPS vs Ethereum's 15</li>
-                        <li>Low costs: $0.00025 average fee</li>
-                        <li>Composable: Build on SPL tokens and Anchor framework</li>
-                        <li>Future-proof: Firedancer upgrade for 1M TPS</li>
-                    </ul>
-                </div>
-                <div class="solana-feature-card">
-                    <div class="solana-feature-icon">🔄</div>
-                    <h3>Key Integrations</h3>
-                    <p>We specialize in Phantom wallet connects, Jupiter DEX routing, and Kamino lending. Example: Auto-swap SOL to USDC via Raydium, then stake in Jito for 10% APY with MEV rewards.</p>
-                    <ul class="solana-feature-list">
-                        <li>DEX: Jupiter (aggregator), Raydium (AMM), Orca (CLMM)</li>
-                        <li>Lending: Kamino (yield farming), Solend (flash loans)</li>
-                        <li>Staking: Jito (MEV rewards), Marinade (mSOL LSTs)</li>
-                        <li>Bridges: Wormhole (ETH-SOL), Allbridge (multi-chain)</li>
-                    </ul>
-                </div>
-                <div class="solana-feature-card">
-                    <div class="solana-feature-icon">📈</div>
-                    <h3>Benefits & Use Cases</h3>
-                    <p>Integrate for real ROI: Arbitrage bots (5-15% monthly), RWA tokenization (BlackRock funds on Solana), or payment rails (Solana Pay for coastal delivery). Risks mitigated with Pyth oracles and Firedancer upgrade.</p>
-                    <ul class="solana-feature-list">
-                        <li>DeFi Yield: 8-12% APY on stSOL with auto-compound</li>
-                        <li>Cross-Chain: Bridge ETH to SOL for 10x cheaper trades</li>
-                        <li>Custom Apps: Phantom + Anchor for NFT-gated DeFi access</li>
-                        <li>RWA: Tokenized treasuries with $5B+ TVL</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="solana-cta">
-                <p>Ready to integrate Solana DeFi? From wallet connects to full dashboards, we make it seamless for your carbon, parlay, or delivery needs.</p>
-                <a href="mailto:peter.z@kromeon.com?subject=Solana DeFi Integration Inquiry" class="cta-btn solana-btn">Start Your Integration</a>
+            <div class="yields-cta">
+                <p>Want a custom yield tracker? Integrate with your Phantom wallet for alerts.</p>
+                <a href="mailto:peter.z@kromeon.com?subject=Yield Tracker Inquiry" class="cta-btn yields-btn">Build Yours</a>
             </div>
         </div>
     </section>
@@ -631,6 +606,7 @@
                         <li><a href="#crypto-future">Crypto Future</a></li>
                         <li><a href="#solana">Solana DeFi</a></li>
                         <li><a href="#virtual-assistant">AI Assistant</a></li>
+                        <li><a href="#yields">Live Yields</a></li>
                         <li><a href="#calculator">Calculator</a></li>
                     </ul>
                 </div>
@@ -647,40 +623,12 @@
         </div>
     </footer>
 
-    <!-- Live Yields Section -->
-    <section class="live-yields" id="yields">
-        <div class="container">
-            <h2>Top 10 Yielding Stablecoins & Cryptos</h2>
-            <p class="section-subtitle">Live data from DeFiLlama—earn real-time APY on your assets. <em>Updated every 60s</em></p>
-            <div class="yields-container">
-                <table id="yields-table" class="yields-table">
-                    <thead>
-                        <tr>
-                            <th>Asset</th>
-                            <th>APY (%)</th>
-                            <th>TVL ($)</th>
-                            <th>Chain</th>
-                            <th>24h Change</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td colspan="5">Loading live data...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="yields-cta">
-                <p>Want a custom yield tracker? Integrate with your Phantom wallet for personalized alerts.</p>
-                <a href="mailto:peter.z@kromeon.com?subject=Yield Tracker Inquiry" class="cta-btn yields-btn">Build Yours</a>
-            </div>
-        </div>
-    </section>
-
     <script>
-        // Live Yields from DeFiLlama API
+        // Live Yields from DeFiLlama API - Top 10 Stablecoins/Cryptos by APY
         async function loadYields() {
             const table = document.getElementById('yields-table');
             try {
-                // Fetch top 10 pools (general cryptos/yields)
+                // Fetch top 10 pools (cryptos with high APY)
                 const poolsRes = await fetch('https://yields.llama.fi/pools?order=desc&limit=10');
                 const pools = await poolsRes.json();
                 // Fetch top 5 stablecoins
@@ -688,9 +636,35 @@
                 const stables = await stablesRes.json();
                 const allYields = [...pools, ...stables].slice(0, 10); // Top 10 combined
 
-                table.innerHTML = '<thead><tr><th>Asset</th><th>APY (%)</th><th>TVL ($)</th><th>Chain</th><th>24h Change</th></tr></thead><tbody></tbody>';
+                table.innerHTML = '<thead><tr><th>Asset</th><th>APY (%)</th><th>TVL ($M)</th><th>Chain</th></tr></thead><tbody></tbody>';
                 allYields.forEach(pool => {
                     const row = table.insertRow();
                     row.innerHTML = `
                         <td>${pool.name || 'Unknown'}</td>
-                        <td
+                        <td>${pool.apy ? pool.apy.toFixed(2) : 'N/A'}</td>
+                        <td>$${(pool.tvl / 1e6).toFixed(0)}</td>
+                        <td>${pool.chain || 'Multi'}</td>
+                    `;
+                });
+            } catch (error) {
+                table.innerHTML = '<tbody><tr><td colspan="4">Error loading data—try refreshing.</td></tr></tbody>';
+                console.error('Yields error:', error);
+            }
+        }
+        loadYields();
+        setInterval(loadYields, 60000); // Refresh every 60s
+
+        // Timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            const timestamp = document.getElementById('timestamp');
+            if (timestamp) {
+                timestamp.innerHTML = `<span>Updated: ${now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })} PST</span><br><span style="font-size: 10px;">Version 1.4</span>`;
+            }
+        }
+        updateTimestamp();
+        setInterval(updateTimestamp, 60000);
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
