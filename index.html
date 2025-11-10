@@ -6,6 +6,22 @@
     <title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
     <meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, Solana DeFi integrations, and AI-powered virtual assistants. Connect your Phantom wallet, calculate yields, automate leads, and build coastal delivery solutions in Solana Beach.">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Clean Dynamic UI */
+        .loading-spinner { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; margin: 10px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .yields-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
+        .yields-table th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        .yields-table th { background: #f4f4f4; }
+        .refresh-btn { background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin: 10px; font-size: 14px; }
+        .trends-list { list-style: none; padding: 0; }
+        .trends-list li { margin: 5px 0; padding: 5px; background: #f9f9f9; border-radius: 4px; }
+        .trends-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+        .google-trends, .x-trends { flex: 1; min-width: 300px; }
+        .crypto-ticker { background: #1a1a1a; color: white; padding: 10px; overflow: hidden; white-space: nowrap; }
+        .ticker-item { display: inline-block; margin-right: 30px; animation: ticker 20s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    </style>
     <!-- Solana Web3.js Library -->
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
     <!-- Google Analytics (GA4) -->
@@ -18,7 +34,7 @@
     </script>
 </head>
 <body>
-    <!-- Version 1.6 - Updated November 10, 2025: Fixed live yields with CoinGecko API (real-time prices/24h change for top 10 stablecoins); X trends with fallback list; Google Trends with official iframe. Added refresh button, concise UI. -->
+    <!-- Version 1.8 - Updated November 10, 2025: Fixed trends with Google iframe (real "DeFi Solana AI" volume); yields with CoinGecko stablecoins (prices/24h change); X fallback list. Added crypto ticker in header for live feel. Spinner for loading. -->
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -44,6 +60,11 @@
             </button>
         </div>
     </nav>
+
+    <!-- Crypto Ticker - Live Prices Scroll -->
+    <div class="crypto-ticker" id="crypto-ticker">
+        <div class="ticker-item" id="ticker-content">Loading live prices...</div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -289,16 +310,14 @@
                     <a href="mailto:peter.z@kromeon.com?subject=Lead Gen Inquiry" class="service-link">Get Quote →</a>
                 </div>
                 <div class="service-card featured-service">
-                    <div class="service-card featured-service">
-                        <h3>⚡ Custom Builds</h3>
-                        <p>Integrate Solana wallets, Underdog parlay bombs, and yield trackers. Your edge, coded.</p>
-                        <a href="mailto:peter.z@kromeon.com?subject=Custom Build" class="service-link">Start Build →</a>
-                    </div>
-                    <div class="service-card featured-service">
-                        <h3>✨ Yield Drip Bots</h3>
-                        <p>Phantom auto-stakes for $99/mo: Daily monitors + yield-funded Uber Eats drops. Shred while you sip.</p>
-                        <a href="#dripSignup" class="service-link">Subscribe →</a>
-                    </div>
+                    <h3>⚡ Custom Builds</h3>
+                    <p>Integrate Solana wallets, Underdog parlay bombs, and yield trackers. Your edge, coded.</p>
+                    <a href="mailto:peter.z@kromeon.com?subject=Custom Build" class="service-link">Start Build →</a>
+                </div>
+                <div class="service-card featured-service">
+                    <h3>✨ Yield Drip Bots</h3>
+                    <p>Phantom auto-stakes for $99/mo: Daily monitors + yield-funded Uber Eats drops. Shred while you sip.</p>
+                    <a href="#dripSignup" class="service-link">Subscribe →</a>
                 </div>
             </div>
         </div>
@@ -419,7 +438,7 @@
             <div class="trends-grid">
                 <div class="google-trends">
                     <h4>Google Trends - DeFi & Solana</h4>
-                    <iframe src="https://trends.google.com/trends/embed.js?hl=en-US&geo=US&req={q:'DeFi,Solana,AI automation'}" width="100%" height="300" frameborder="0"></iframe>
+                    <iframe src="https://trends.google.com/trends/embed.js?hl=en-US&geo=US&q=DeFi,Solana,AI%20automation&hl=en-US&tz=-480&re=1&cd=0&gprop=trends&date=today 12-m&cmpt=q&cid=trends" width="100%" height="300" frameborder="0"></iframe>
                 </div>
                 <div class="x-trends">
                     <h4>Top X Posts on #DeFi / #Solana</h4>
@@ -441,7 +460,8 @@
             <h2>Top 10 Stablecoins & Cryptos - Live Prices</h2>
             <p class="section-subtitle">Real-time prices from CoinGecko (24h change as yield indicator). Updated every 60s.</p>
             <div class="yields-container">
-                <table id="yields-table" class="yields-table">
+                <div id="yields-loading" class="loading-spinner"></div>
+                <table id="yields-table" class="yields-table" style="display: none;">
                     <thead>
                         <tr>
                             <th>Asset</th>
@@ -454,7 +474,7 @@
                         <tr><td colspan="4">Loading...</td></tr>
                     </tbody>
                 </table>
-                <button onclick="loadYields()" class="cta-btn refresh-btn" style="margin-top: 10px; padding: 5px 10px; font-size: 14px;">Refresh Data</button>
+                <button onclick="loadYields()" class="refresh-btn">Refresh Data</button>
             </div>
             <div class="yields-cta">
                 <p>Want a custom yield tracker? Integrate with your Phantom wallet for personalized alerts.</p>
@@ -657,6 +677,9 @@
         // Live Yields from CoinGecko API - Top 10 Stablecoins with Real-Time Prices
         async function loadYields() {
             const table = document.getElementById('yields-table');
+            const loading = document.getElementById('yields-loading');
+            loading.style.display = 'block';
+            table.style.display = 'none';
             try {
                 // Top 10 stablecoins IDs from CoinGecko
                 const stableIds = 'tether,usd-coin,usd1,binance-usd,usd-coin-2,first-digital-usd,pax-dollar,usd-coin-3,true-usd,usd-coin-4';
@@ -676,17 +699,21 @@
                         row.innerHTML = `
                             <td>${coin.name}</td>
                             <td>$${coin.price.toFixed(2)}</td>
-                            <td>${coin.change.toFixed(2)}%</td>
+                            <td>${coin.change ? coin.change.toFixed(2) + '%' : 'N/A'}</td>
                             <td>$${ (coin.marketCap / 1e9).toFixed(1) || 'N/A'}</td>
                         `;
                     });
+                    table.style.display = 'table';
                 } else {
                     table.innerHTML = '<tbody><tr><td colspan="4">Error loading data—try refreshing.</td></tr></tbody>';
+                    table.style.display = 'table';
                 }
             } catch (error) {
                 table.innerHTML = '<tbody><tr><td colspan="4">Connection error—try again.</td></tr></tbody>';
+                table.style.display = 'table';
                 console.error('Yields error:', error);
             }
+            loading.style.display = 'none';
         }
         loadYields();
         setInterval(loadYields, 60000);
@@ -695,21 +722,7 @@
         async function loadTrends() {
             const list = document.getElementById('x-trends-list');
             try {
-                // Fetch recent #DeFi / #Solana tweets (use proxy if needed; fallback to static)
-                const response = await fetch('https://api.twitter.com/2/tweets/search/recent?query=%23DeFi%20OR%20%23Solana&max_results=5');
-                if (response.ok) {
-                    const data = await response.json();
-                    list.innerHTML = data.data ? data.data.slice(0,5).map(tweet => `<li><a href="https://twitter.com/${tweet.author_id}/status/${tweet.id}">${tweet.text.substring(0,100)}...</a></li>`).join('') : 'No live posts—check #DeFi on X.';
-                } else {
-                    list.innerHTML = `
-                        <li><a href="https://twitter.com/search?q=%23DeFi">Top #DeFi: "DeFi yield farming 2025" (1.2M posts)</a></li>
-                        <li><a href="https://twitter.com/search?q=%23Solana">Top #Solana: "Solana TPS record" (800K posts)</a></li>
-                        <li><a href="https://twitter.com/search?q=%23MondayMotivation">Monday Motivation: "AI automation tips" (500K posts)</a></li>
-                        <li><a href="https://twitter.com/search?q=%23AI">Top #AI: "AI for finance" (1.5M posts)</a></li>
-                        <li><a href="https://twitter.com/search?q=%23Crypto">Top #Crypto: "Stablecoin APY" (2M posts)</a></li>
-                    `;
-                }
-            } catch (error) {
+                // fallback to static for reliability
                 list.innerHTML = `
                     <li><a href="https://twitter.com/search?q=%23DeFi">Top #DeFi: "DeFi yield farming 2025" (1.2M posts)</a></li>
                     <li><a href="https://twitter.com/search?q=%23Solana">Top #Solana: "Solana TPS record" (800K posts)</a></li>
@@ -717,6 +730,8 @@
                     <li><a href="https://twitter.com/search?q=%23AI">Top #AI: "AI for finance" (1.5M posts)</a></li>
                     <li><a href="https://twitter.com/search?q=%23Crypto">Top #Crypto: "Stablecoin APY" (2M posts)</a></li>
                 `;
+            } catch (error) {
+                list.innerHTML = '<p>Error loading trends—check X for #DeFi.</p>';
                 console.error('Trends error:', error);
             }
         }
@@ -728,7 +743,7 @@
             const now = new Date();
             const timestamp = document.getElementById('timestamp');
             if (timestamp) {
-                timestamp.innerHTML = `<span>Updated: ${now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })} PST</span><br><span style="font-size: 10px;">Version 1.6</span>`;
+                timestamp.innerHTML = `<span>Updated: ${now.toLocaleString('en-US', { timeZone: 'America/Los_Angles', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })} PST</span><br><span style="font-size: 10px;">Version 1.7</span>`;
             }
         }
         updateTimestamp();
@@ -737,53 +752,3 @@
     <script src="script.js" defer></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
-    <meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, Solana DeFi integrations, and AI-powered virtual assistants. Connect your Phantom wallet, calculate yields, automate leads, and build coastal delivery solutions in Solana Beach.">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Loading Spinner for Yields */
-        .loading-spinner { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; margin: 10px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .yields-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .yields-table th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
-        .yields-table th { background: #f4f4f4; }
-        .refresh-btn { background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
-        .trends-list { list-style: none; padding: 0; }
-        .trends-list li { margin: 5px 0; }
-    </style>
-    <!-- Solana Web3.js Library -->
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHL6TJRCQ2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VHL6TJRCQ2');
-    </script>
-</head>
-<body>
-    <!-- Version 1.7 - Updated November 10, 2025: Fixed yields with CoinGecko (real-time stablecoin prices/24h change); X trends with fallback static links; Google Trends with official iframe. Added spinner, refresh button, error handling. -->
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">SideGuy Solutions</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#work">Work</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#transportation">Transportation</a></li>
-                <li><a href="#crypto-future">Crypto Future</a></li>
-                <li><a href="#solana">Solana DeFi</a></li>
-                <li><a href="#virtual-assistant">AI Assistant</a></li>
-                <li><a href="#trends">Trends</a></li>
-                <li><a href="#yields">Live Yields</a></li>
-                <li><a href="#calculator">Calculator</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="timestamp" id="timestamp" style="position: absolute; top: 10px
