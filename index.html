@@ -1,107 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
-    <meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, Solana DeFi integrations, and AI-powered virtual assistants. Connect your Phantom wallet, calculate yields, automate leads, and build coastal delivery solutions in Solana Beach.">
-    <style>
-        /* Coastal Solana Beach & Ocean Vibe - v2.0 Blue & Readable */
-        :root {
-            --bg: #0a1122; /* Deep ocean night */
-            --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%); /* Coastal blue gradient */
-            --card: #121b30; /* Dark wave */
-            --muted: #a0aec0; /* High-contrast sandy gray */
-            --text: #f0f4f8; /* Bright foam for readability */
-            --brand1: #4da8ff; /* Solana coastal blue */
-            --brand2: #1cc8e5; /* Ocean aqua */
-            --brand3: #8b5cf6; /* Neon violet blockchain */
-            --accent: #2dd4bf; /* Teal mint glow */
-            --shadow: 0 8px 20px rgba(10,17,34,0.25);
-            --radius: 12px;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body {
-            background: var(--blue-bg); /* Blue background fix */
-            color: var(--text); /* Readable text */
-            font: 16px/1.6 "Inter", system-ui, -apple-system, Segoe UI, Roboto;
-        }
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-        a { color: var(--brand2); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        a:focus { outline: 2px solid var(--brand1); outline-offset: 2px; }
-        .btn {
-            cursor: pointer;
-            border: 0;
-            border-radius: var(--radius);
-            padding: 12px 18px;
-            background: linear-gradient(90deg, var(--brand1), var(--brand3));
-            color: white;
-            font-weight: 700;
-            box-shadow: var(--shadow), 0 0 10px rgba(77,168,255,0.3); /* Neon glow */
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s, height 0.4s;
-        }
-        .btn:hover::after { width: 200px; height: 200px; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(10,17,34,0.3); }
-        .btn:focus { outline: 2px solid var(--brand2); outline-offset: 2px; }
-        .nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10,17,34,0.6);
-            backdrop-filter: blur(10px);
-            z-index: 50;
-        }
-        .nav .inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-        }
-        .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 20px; color: var(--text); }
-        .menu { display: flex; gap: 18px; list-style: none; }
-        .menu a { color: var(--muted); font-size: 14px; font-weight: 600; }
-        .menu a:hover { color: var(--brand2); }
-        .nav-toggle { display: none; cursor: pointer; }
-        .nav-toggle span { display: block; width: 25px; height: 3px; background: var(--muted); margin: 5px 0; }
-        .timestamp { color: var(--muted); font-size: 12px; }
-        .crypto-ticker {
-            background: rgba(28,200,229,0.1);
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 10px;
-        }
-        .ticker-item {
-            display: inline-block;
-            margin-right: 30px;
-            color: var(--text);
-            font-size: 14px;
-            animation: ticker 20s linear infinite;
-        }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .hero {
-            padding: 64px 20px;
-            text-align: center;
-            background: var(--blue-bg);
-            color: var(--text); /* Readable on blue */
-        }
-        .hero h1 { font-size: clamp(32px, 5vw, 40px); line-height: 1.2; margin-bottom: 20px; }
-        .hero p { color: var(--muted); max-width: 700px; margin: 10px auto; }
-        .hero-cta { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; }
-        .wallet-status { margin: 10px 0; font-size: 14px; color: var(--muted); }
-        .section { padding: 40px 20px; }
-        .section-subtitle { font-size: 16px; max-width: 800px; margin: 0 auto 20px; text-align: center; color: var(--muted); }
-        .badge { display: flex; justify-content: center; gap: 10px; margin: 20px 0
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SideGuy Solutions — Software • AI • Coastal Delivery</title>
+<meta name="description" content="SideGuy Solutions builds AI assistants, Solana DeFi dashboards, and coastal delivery tech for Encinitas, Solana Beach & Del Mar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect rx='12' width='64' height='64' fill='%230ea5e9'/%3E%3Cpath d='M18 40c10 8 24 8 28-6-8 6-24 4-26-4-2-8 12-12 18-8' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<style>
+:root{
+  --bg:#E0F2FE;      /* coastal sky blue */
+  --text:#0F172A;    /* dark navy text */
+  --muted:#1E3A8A;   /* medium navy */
+  --line:#BAE6FD;    /* pale border blue */
+  --brand:#0284C7;   /* primary accent */
+  --accent:#0EA5E9;
+  --danger:#DC2626;
+}
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,Inter,Arial,sans-serif}
+.container{max-width:1100px;margin:auto;padding:0 18px}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{line-height:1.2;margin-bottom:10px}
+h1{font-size:40px}h2{font-size:28px}
+.section{padding:60px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05);padding:18px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;
+background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;font-weight:700;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.9}
+.btn.outline{background:transparent;color:var(--text);border:2px solid var(--brand)}
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:#E0F2FEF0;backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line)}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.brand-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent))}
+.menu{display:flex;gap:14px;flex-wrap:wrap}
+.menu a{color:var(--muted);font-weight:600}
+/* Ticker */
+.ticker{border-bottom:1px solid var(--line);background:#BAE6FD;overflow:hidden}
+.ticker-row{white-space:nowrap;animation:marquee 28s linear infinite;padding:8px 0;color:var(--text)}
+.ticker-row span{display:inline-block;margin-right:30px}
+@keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+/* Table */
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+.table th{background:#F0F9FF;color:var(--text)}
+.pos{color:#059669;font-weight:700}.neg{color:var(--danger);font-weight:700}
+.spinner{border:3px solid #BAE6FD;border-top-color:var(--brand);border-radius:50%;width:22px;height:22px;animation:spin 1s linear infinite;margin:12px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px;background:#E0F2FE}
+</style>
+</head>
+
+<body>
+<!-- Top ticker -->
+<div class="ticker"><div id="tickerRow" class="ticker-row"><span>Loading live data…</span></div></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="inner container">
+    <div class="brand"><div class="brand-badge"></div><span>SideGuy Solutions</span></div>
+    <div class="menu">
+      <a href="#services">Services</a>
+      <a href="#transportation">Transportation</a>
+      <a href="#trends">Trends</a>
+      <a href="#yields">Live Prices</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="section">
+  <div class="container" style="text-align:center">
+    <h1>Custom Software & AI that <strong>Maximize Your Edge</strong></h1>
+    <p style="max-width:700px;margin:10px auto;color:var(--muted)">
+      Smarter automation, Solana DeFi integration, and AI assistants — plus coastal delivery service for Encinitas, Solana Beach & Del Mar.
+    </p>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="mailto:peter.z@kromeon.com?subject=SideGuy%20Project" class="btn">Start a Project</a>
+      <a href="#yields" class="btn outline">See Live Prices</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="section">
+  <div class="container">
+    <h2>What We Build</h2>
+    <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:16px">
+      <div class="card"><h3>🚀 Lead Gen Automation</h3><p>AI outreach & alerts for carbon and sports data.</p></div>
+      <div class="card"><h3>⚡ Custom Builds</h3><p>Wallets, dashboards & yield apps built fast and clean.</p></div>
+      <div class="card"><h3>🤖 AI Assistants</h3><p>Email, research & workflow automation that learns your style.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Transportation -->
+<section id="transportation" class="section" style="background:#F0F9FF">
+  <div class="container">
+    <h2>Coastal On-Demand Delivery</h2>
+    <p style="color:var(--muted)">Encinitas • Solana Beach • Del Mar • Leucadia</p>
+    <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px">
+      <div class="card"><h3>Encinitas</h3><ul><li>15–30 min windows</li><li>Real-time tracking</li><li>Beach packaging</li></ul></div>
+      <div class="card"><h3>Solana Beach</h3><ul><li>Flexible pickup/drop-off</li><li>Local drivers</li><li>Contactless delivery</li></ul></div>
+      <div class="card"><h3>Del Mar & Leucadia</h3><ul><li>Priority scheduling</li><li>Same-day guarantee</li><li>VIP handling</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- Trends -->
+<section id="trends" class="section">
+  <div class="container">
+    <h2>Live Trends — Google & Crypto</h2>
+    <p style="color:var(--muted)">Loads automatically when visible to save speed.</p>
+    <div id="trendsMount" class="card" style="padding:0;overflow:hidden;min-height:320px;display:grid;place-items:center">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Live Prices -->
+<section id="yields" class="section" style="background:#F0F9FF">
+  <div class="container">
+    <h2>Top Cryptos — Live Prices</h2>
+    <p style="color:var(--muted)">Updates every minute • green = up, red = down.</p>
+    <div id="yieldsSpinner" class="spinner"></div>
+    <table class="table" id="yieldsTable" style="display:none;margin-top:10px">
+      <thead><tr><th>Asset</th><th>Price ($)</th><th>24h Change</th><th>Market Cap ($B)</th></tr></thead>
+      <tbody id="yieldsBody"><tr><td colspan="4">Loading…</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container card" style="text-align:center">
+    <h2>Let's Talk</h2>
+    <p>Email <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a> — response within 1 business day.</p>
+    <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a href="mailto:peter.z@kromeon.com" class="btn">Start Project</a>
+      <a href="#services" class="btn outline">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">© <span id="year"></span> SideGuy Solutions • Solana Beach CA • Coastal clarity & AI efficiency 🌊</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+$("#year").textContent=new Date().getFullYear();
+
+/* ----------  Ticker (crypto ↔ messages) ---------- */
+const COINS="bitcoin,ethereum,tether,usd-coin,solana";
+const COINGECKO="https://api.coingecko.com/api/v3/simple/price?ids="+COINS+"&vs_currencies=usd&include_24hr_change=true";
+const MSGS=[
+ "Now serving Encinitas & Solana Beach 🌊",
+ "AI assistants for business ops 🤖",
+ "Solana & DeFi tools live ⚡",
+ "Book coastal delivery in minutes 🚚",
+ "Email peter.z@kromeon.com to get started ✉️"
+];
+const ticker=$("#tickerRow");let mode="crypto";
+async function fetchJSON(url,ttl=60000){try{
+ const c=localStorage.getItem(url);
+ if(c){const{ts,data}=JSON.parse(c);if(Date.now()-ts<ttl)return data;}
+ const r=await fetch(url,{cache:"no-store"});const d=await r.json();
+ localStorage.setItem(url,JSON.stringify({ts:Date.now(),data:d}));return d;
+}catch(e){return null;}}
+async function cryptoTicker(){
+ const d=await fetchJSON(COINGECKO);
+ if(!d){ticker.innerHTML="<span>Live prices unavailable</span>";return;}
+ ticker.innerHTML=Object.entries(d).map(([k,v])=>{
+  const ch=(v.usd_24h_change||0).toFixed(2);
+  const cls=ch>=0?"pos":"neg";
+  return `<span><strong>${k.toUpperCase()}</strong> $${v.usd.toFixed(2)} <span class='${cls}'>${ch}%</span></span>`;
+ }).join("");
+}
+function msgTicker(){ticker.innerHTML=MSGS.map(m=>`<span>${m}</span>`).join("");}
+function cycle(){mode=mode==="crypto"?"msg":"crypto";mode==="crypto"?cryptoTicker():msgTicker();}
+cryptoTicker();setInterval(cycle,15000);
+
+/* ----------  Live Prices Table ---------- */
+const TABLE="https://api.coingecko.com/api/v3/simple/price?ids=tether,usd-coin,solana,bitcoin,ethereum,dai,usdd&vs_currencies=usd&include_24hr_change=true&include_market_cap=true";
+async function loadPrices(){
+ const d=await fetchJSON(TABLE);
+ const s=$("#yieldsSpinner"),t=$("#yieldsTable"),b=$("#yieldsBody");
+ s.style.display="block";t.style.display="none";
+ if(!d){b.innerHTML="<tr><td colspan='4'>Error loading</td></tr>";s.style.display="none";t.style.display="table";return;}
+ b.innerHTML=Object.entries(d).map(([id,v])=>{
+  const ch=(v.usd_24h_change??0);const cls=ch>=0?"pos":"neg";
+  return `<tr><td>${id.toUpperCase()}</td><td>$${v.usd.toFixed(2)}</td><td class='${cls}'>${ch.toFixed(2)}%</td><td>$${(v.usd_market_cap/1e9).toFixed(1)||"N/A"}B</td></tr>`;
+ }).join("");
+ s.style.display="none";t.style.display="table";
+}
+loadPrices();setInterval(loadPrices,60000);
+
+/* ----------  Lazy-load Google Trends ---------- */
+const mount=$("#trendsMount");
+const obs=new IntersectionObserver((e,o)=>{
+ if(e[0].isIntersecting){
+  const s=document.createElement("script");
+  s.src="https://ssl.gstatic.com/trends_nrtr/3351_RC01/embed_loader.js";
+  s.onload=()=>{try{
+   window.trends.embed.renderExploreWidget("TIMESERIES",
+    {comparisonItem:[
+      {keyword:"DeFi",geo:"US",time:"today 12-m"},
+      {keyword:"Solana",geo:"US",time:"today 12-m"},
+      {keyword:"AI automation",geo:"US",time:"today 12-m"}],
+     category:0,property:""},
+    {exploreQuery:"date=today%2012-m&geo=US&q=DeFi,Solana,AI%20automation",
+     guestPath:"https://trends.google.com:443/trends/embed/"},mount);
+  }catch{mount.innerHTML="<div style='padding:14px'>Google Trends unavailable.</div>";}};
+  document.body.appendChild(s);o.unobserve(mount);
+ }},{rootMargin:"150px"});
+obs.observe(mount);
+</script>
+</body>
+</html>
