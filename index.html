@@ -1,3 +1,10 @@
+<!--
+  SideGuy Solutions
+  Version: 1.0
+  Last Updated: November 11, 2025
+  Author: PJ + Kromeon Dev Team
+  Notes: Stable base file with fade-in animations, ticker, floating CTA, and auto-updating version footer
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,7 +147,7 @@ a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </nav>
 
-<div class="crypto-ticker"><span class="ticker-item" id="ticker-content">SOL: $250 | USDC: $1.00 | ETH: $3500</span></div>
+<div class="crypto-ticker"><span class="ticker-item" id="ticker-content">Loading prices...</span></div>
 
 <section class="hero fade-in">
   <div class="container">
@@ -187,6 +194,9 @@ a:hover{color:var(--accent);text-decoration:underline}
 
 <footer id="contact" class="footer fade-in">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
+  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">
+    Version 1.0 • Updated Nov 11, 2025
+  </p>
 </footer>
 
 <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
@@ -241,7 +251,7 @@ async function loadTicker() {
   }
 }
 
-/* Scroll Fade-in Observer */
+/* Scroll Fade-in Observer + Version Timestamp */
 document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -249,6 +259,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.1 });
   document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+  // Update version timestamp
+  const versionEl = document.getElementById("version-info");
+  if (versionEl) {
+    const now = new Date().toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    });
+    versionEl.textContent = `Version 1.0 • Updated ${now} PST`;
+  }
 
   loadYields();
   loadTicker();
