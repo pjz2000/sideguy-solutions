@@ -23,38 +23,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-<!-- Floating Book with PJ Button -->
-<style>
-  .floating-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 14px 24px;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    cursor: pointer;
-    z-index: 1000;
-    animation: pulse 2.5s infinite;
-    transition: transform 0.2s, box-shadow 0.3s;
-  }
-  .floating-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(59,130,246,0.5);
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(59,130,246, 0.6); }
-    70% { box-shadow: 0 0 0 12px rgba(59,130,246, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(59,130,246, 0); }
-  }
-</style>
 
-<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">
-  💬 Book with PJ
-</a>
     body {
       background: var(--blue-bg);
       color: var(--text);
@@ -192,163 +161,25 @@
       color: var(--muted);
     }
 
-    @media (max-width: 768px) {
-      .menu { flex-wrap: wrap; justify-content: center; }
-      .hero h1 { font-size: 28px; }
+    /* Floating Button */
+    .floating-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 24px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 1000;
+      animation: pulse 2.5s infinite;
+      transition: transform 0.2s, box-shadow 0.3s;
     }
-  </style>
-
-  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-</head>
-
-<body>
-  <nav class="nav">
-    <div class="inner">
-      <div class="brand">SideGuy Solutions</div>
-      <ul class="menu" id="navMenu">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#transportation">Transportation</a></li>
-        <li><a href="#yields">Yields</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="crypto-ticker">
-    <span class="ticker-item" id="ticker-content">Loading live prices...</span>
-  </div>
-
-  <section class="hero">
-    <div class="container">
-      <h1>Custom software solutions<br><strong>designed to maximize your edge</strong></h1>
-      <p>SideGuy Solutions helps people and businesses turn ideas into revenue — through smarter automation, sharper integrations, and a partner who owns outcomes from strategy to execution.<br>
-        <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
-      </p>
-      <div style="margin-top: 20px;">
-        <button id="connectWallet" class="btn">Connect Wallet</button>
-        <button id="disconnectWallet" class="btn" style="display:none;">Disconnect</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="transportation" class="section">
-    <div class="container">
-      <h2>Coastal On-Demand Delivery 🌊</h2>
-      <p class="section-subtitle">Encinitas, Solana Beach, Del Mar & Leucadia</p>
-      <div class="grid">
-        <div class="card"><h3>Encinitas Delivery</h3><p>Real-time tracking, 15-30 min delivery, beach-ready packaging.</p></div>
-        <div class="card"><h3>Solana Beach</h3><p>Flexible pickup/dropoff and local drivers with contactless delivery.</p></div>
-        <div class="card"><h3>Del Mar</h3><p>Priority scheduling and VIP handling for special events or packages.</p></div>
-      </div>
-      <div style="text-align:center;margin-top:20px;">
-        <a href="mailto:peter.z@kromeon.com?subject=Delivery Inquiry" class="btn">Request Delivery</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="services" class="section">
-    <div class="container">
-      <h2>What We Build</h2>
-      <div class="grid">
-        <div class="card"><h3>🚀 Lead Gen Automation</h3><p>Carbon credit scouts + fantasy parlay alerts.</p></div>
-        <div class="card"><h3>⚡ Custom Builds</h3><p>Wallets, dashboards, and yield trackers.</p></div>
-        <div class="card"><h3>🤖 AI Assistants</h3><p>Smart automation for teams and clients.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="yields" class="section">
-    <div class="container">
-      <h2>Live Yields</h2>
-      <div id="yields-loading">Loading...</div>
-      <table id="yields-table" class="yields-table" style="display:none;">
-        <thead><tr><th>Asset</th><th>Price ($)</th><th>24h</th><th>Cap ($B)</th></tr></thead>
-        <tbody><tr><td colspan="4">Loading...</td></tr></tbody>
-      </table>
-    </div>
-  </section>
-
-  <footer id="contact" class="footer">
-    <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  </footer>
-
-  <script>
-    async function fetchWithRetry(url, retries = 3, delay = 4000) {
-      for (let i = 0; i < retries; i++) {
-        try {
-          const res = await fetch(url);
-          if (res.ok) return res;
-          throw new Error("Fetch failed");
-        } catch (err) {
-          if (i === retries - 1) throw err;
-          await new Promise(r => setTimeout(r, delay));
-        }
-      }
+    .floating-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
     }
-
-    async function loadYields() {
-      const table = document.getElementById("yields-table");
-      const loading = document.getElementById("yields-loading");
-      loading.style.display = "block";
-      table.style.display = "none";
-      try {
-        const ids = "tether,usd-coin,solana,ethereum,bitcoin";
-        const res = await fetchWithRetry(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
-        const data = await res.json();
-        table.querySelector("tbody").innerHTML = Object.entries(data)
-          .map(([id, d]) => `
-            <tr>
-              <td>${id.toUpperCase()}</td>
-              <td>$${d.usd.toFixed(2)}</td>
-              <td class="${d.usd_24h_change >= 0 ? 'positive' : 'negative'}">
-                ${d.usd_24h_change.toFixed(2)}%
-              </td>
-              <td>$${(d.usd_market_cap / 1e9).toFixed(1)}</td>
-            </tr>`)
-          .join("");
-        loading.style.display = "none";
-        table.style.display = "table";
-      } catch (err) {
-        console.error(err);
-        loading.textContent = "Error loading data";
-      }
-    }
-
-    async function loadTicker() {
-      const el = document.getElementById("ticker-content");
-      try {
-        const res = await fetchWithRetry("https://api.coingecko.com/api/v3/simple/price?ids=solana,usd-coin,ethereum&vs_currencies=usd&include_24hr_change=true");
-        const data = await res.json();
-        el.innerHTML = [
-          { n: "SOL", d: data.solana },
-          { n: "USDC", d: data["usd-coin"] },
-          { n: "ETH", d: data.ethereum }
-        ].map(c => `${c.n}: $${c.d.usd.toFixed(2)} (${c.d.usd_24h_change.toFixed(2)}%)`).join(" | ");
-      } catch {
-        el.textContent = "SOL: $250 | USDC: $1.00 | ETH: $3500";
-      }
-    }
-
-    function initSmoothScroll() {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", e => {
-          e.preventDefault();
-          const target = document.querySelector(anchor.getAttribute("href"));
-          if (target) target.scrollIntoView({ behavior: "smooth" });
-        });
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      initSmoothScroll();
-      loadYields();
-      loadTicker();
-      setInterval(() => {
-        loadYields();
-        loadTicker();
-      }, 60000);
-    });
-  </script>
-</body>
-</html>
+    @keyframes pul
