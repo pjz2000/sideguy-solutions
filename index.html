@@ -9,65 +9,68 @@
 
 <style>
 :root{
-  --bg:#E0F2FE;      /* coastal sky blue */
-  --text:#0F172A;    /* dark navy text */
-  --muted:#1E3A8A;   /* medium navy */
-  --line:#BAE6FD;    /* pale border blue */
-  --brand:#0284C7;   /* primary accent */
+  --bg:#E0F2FE;
+  --text:#0F172A;
+  --muted:#1E3A8A;
+  --line:#BAE6FD;
+  --brand:#0284C7;
   --accent:#0EA5E9;
   --danger:#DC2626;
 }
-*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,Inter,Arial,sans-serif}
-.container{max-width:1100px;margin:auto;padding:0 18px}
-a{color:var(--brand);text-decoration:none}
-a:hover{text-decoration:underline}
-h1,h2,h3{line-height:1.2;margin-bottom:10px}
-h1{font-size:40px}h2{font-size:28px}
-.section{padding:60px 0}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05);padding:18px}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font:16px/1.6 system-ui,Inter,Arial,sans-serif;}
+.container{max-width:1100px;margin:auto;padding:0 18px;}
+a{color:var(--brand);text-decoration:none;}
+a:hover{text-decoration:underline;}
+h1,h2,h3{line-height:1.2;margin-bottom:10px;}
+h1{font-size:40px;}h2{font-size:28px;}
+.section{padding:60px 0;scroll-margin-top:100px;} /* offset for sticky nav */
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05);padding:18px;}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border:0;border-radius:999px;
-background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;font-weight:700;cursor:pointer;transition:opacity .2s}
-.btn:hover{opacity:.9}
-.btn.outline{background:transparent;color:var(--text);border:2px solid var(--brand)}
+background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;font-weight:700;cursor:pointer;transition:opacity .2s;}
+.btn:hover{opacity:.9;}
+.btn.outline{background:transparent;color:var(--text);border:2px solid var(--brand);}
 /* Nav */
 .nav{position:sticky;top:0;z-index:50;background:#E0F2FEF0;backdrop-filter:blur(8px);
-border-bottom:1px solid var(--line)}
-.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900}
-.brand-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent))}
-.menu{display:flex;gap:14px;flex-wrap:wrap}
-.menu a{color:var(--muted);font-weight:600}
+border-bottom:1px solid var(--line);}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;}
+.brand-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--accent));}
+.menu{display:flex;gap:14px;flex-wrap:wrap;}
+.menu a{color:var(--muted);font-weight:600;cursor:pointer;}
+.menu a:hover{color:var(--accent);}
 /* Ticker */
-.ticker{border-bottom:1px solid var(--line);background:#BAE6FD;overflow:hidden}
-.ticker-row{white-space:nowrap;animation:marquee 28s linear infinite;padding:8px 0;color:var(--text)}
-.ticker-row span{display:inline-block;margin-right:30px}
+.ticker{border-bottom:1px solid var(--line);background:#BAE6FD;overflow:hidden;}
+.ticker-row{white-space:nowrap;animation:marquee 28s linear infinite;padding:8px 0;color:var(--text);}
+.ticker-row span{display:inline-block;margin-right:30px;}
 @keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 /* Table */
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
-.table th{background:#F0F9FF;color:var(--text)}
-.pos{color:#059669;font-weight:700}.neg{color:var(--danger);font-weight:700}
-.spinner{border:3px solid #BAE6FD;border-top-color:var(--brand);border-radius:50%;width:22px;height:22px;animation:spin 1s linear infinite;margin:12px auto}
+.table{width:100%;border-collapse:collapse;}
+.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;}
+.table th{background:#F0F9FF;color:var(--text);}
+.pos{color:#059669;font-weight:700;}
+.neg{color:var(--danger);font-weight:700;}
+.spinner{border:3px solid #BAE6FD;border-top-color:var(--brand);border-radius:50%;width:22px;height:22px;animation:spin 1s linear infinite;margin:12px auto;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px;background:#E0F2FE}
+.footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px;background:#E0F2FE;}
 </style>
 </head>
 
 <body>
-<!-- Top ticker -->
+<!-- Ticker -->
 <div class="ticker"><div id="tickerRow" class="ticker-row"><span>Loading live data…</span></div></div>
 
-<!-- Navigation -->
+<!-- Nav -->
 <nav class="nav">
   <div class="inner container">
     <div class="brand"><div class="brand-badge"></div><span>SideGuy Solutions</span></div>
     <div class="menu">
-      <a href="#services">Services</a>
-      <a href="#transportation">Transportation</a>
-      <a href="#trends">Trends</a>
-      <a href="#yields">Live Prices</a>
-      <a href="#contact">Contact</a>
+      <a data-scroll="#services">Services</a>
+      <a data-scroll="#transportation">Transportation</a>
+      <a data-scroll="#trends">Trends</a>
+      <a data-scroll="#yields">Live Prices</a>
+      <a data-scroll="#contact">Contact</a>
     </div>
   </div>
 </nav>
@@ -77,11 +80,11 @@ border-bottom:1px solid var(--line)}
   <div class="container" style="text-align:center">
     <h1>Custom Software & AI that <strong>Maximize Your Edge</strong></h1>
     <p style="max-width:700px;margin:10px auto;color:var(--muted)">
-      Smarter automation, Solana DeFi integration, and AI assistants — plus coastal delivery service for Encinitas, Solana Beach & Del Mar.
+      Smarter automation, Solana DeFi integration, and AI assistants — plus coastal delivery for Encinitas, Solana Beach & Del Mar.
     </p>
     <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <a href="mailto:peter.z@kromeon.com?subject=SideGuy%20Project" class="btn">Start a Project</a>
-      <a href="#yields" class="btn outline">See Live Prices</a>
+      <a data-scroll="#yields" class="btn outline">See Live Prices</a>
     </div>
   </div>
 </section>
@@ -142,7 +145,7 @@ border-bottom:1px solid var(--line)}
     <p>Email <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a> — response within 1 business day.</p>
     <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <a href="mailto:peter.z@kromeon.com" class="btn">Start Project</a>
-      <a href="#services" class="btn outline">Explore Services</a>
+      <a data-scroll="#services" class="btn outline">Explore Services</a>
     </div>
   </div>
 </section>
@@ -150,40 +153,40 @@ border-bottom:1px solid var(--line)}
 <footer class="footer">© <span id="year"></span> SideGuy Solutions • Solana Beach CA • Coastal clarity & AI efficiency 🌊</footer>
 
 <script>
-const $=s=>document.querySelector(s);
-$("#year").textContent=new Date().getFullYear();
+const $=s=>document.querySelector(s);$("#year").textContent=new Date().getFullYear();
 
-/* ----------  Ticker (crypto ↔ messages) ---------- */
+/* Smooth scrolling fix for sticky nav */
+document.querySelectorAll('[data-scroll]').forEach(link=>{
+ link.addEventListener('click',e=>{
+  e.preventDefault();
+  const target=document.querySelector(link.getAttribute('data-scroll'));
+  if(target){
+   window.scrollTo({top:target.offsetTop-80,behavior:'smooth'});
+  }
+ });
+});
+
+/* ---------- Ticker ---------- */
 const COINS="bitcoin,ethereum,tether,usd-coin,solana";
 const COINGECKO="https://api.coingecko.com/api/v3/simple/price?ids="+COINS+"&vs_currencies=usd&include_24hr_change=true";
-const MSGS=[
- "Now serving Encinitas & Solana Beach 🌊",
- "AI assistants for business ops 🤖",
- "Solana & DeFi tools live ⚡",
- "Book coastal delivery in minutes 🚚",
- "Email peter.z@kromeon.com to get started ✉️"
-];
+const MSGS=["Now serving Encinitas & Solana Beach 🌊","AI assistants for business ops 🤖","Solana & DeFi tools live ⚡","Book coastal delivery in minutes 🚚","Email peter.z@kromeon.com to get started ✉️"];
 const ticker=$("#tickerRow");let mode="crypto";
-async function fetchJSON(url,ttl=60000){try{
- const c=localStorage.getItem(url);
+async function fetchJSON(url,ttl=60000){try{const c=localStorage.getItem(url);
  if(c){const{ts,data}=JSON.parse(c);if(Date.now()-ts<ttl)return data;}
  const r=await fetch(url,{cache:"no-store"});const d=await r.json();
- localStorage.setItem(url,JSON.stringify({ts:Date.now(),data:d}));return d;
-}catch(e){return null;}}
+ localStorage.setItem(url,JSON.stringify({ts:Date.now(),data:d}));return d;}catch(e){return null;}}
 async function cryptoTicker(){
  const d=await fetchJSON(COINGECKO);
  if(!d){ticker.innerHTML="<span>Live prices unavailable</span>";return;}
  ticker.innerHTML=Object.entries(d).map(([k,v])=>{
-  const ch=(v.usd_24h_change||0).toFixed(2);
-  const cls=ch>=0?"pos":"neg";
+  const ch=(v.usd_24h_change||0).toFixed(2);const cls=ch>=0?"pos":"neg";
   return `<span><strong>${k.toUpperCase()}</strong> $${v.usd.toFixed(2)} <span class='${cls}'>${ch}%</span></span>`;
- }).join("");
-}
+ }).join("");}
 function msgTicker(){ticker.innerHTML=MSGS.map(m=>`<span>${m}</span>`).join("");}
 function cycle(){mode=mode==="crypto"?"msg":"crypto";mode==="crypto"?cryptoTicker():msgTicker();}
 cryptoTicker();setInterval(cycle,15000);
 
-/* ----------  Live Prices Table ---------- */
+/* ---------- Live Prices Table ---------- */
 const TABLE="https://api.coingecko.com/api/v3/simple/price?ids=tether,usd-coin,solana,bitcoin,ethereum,dai,usdd&vs_currencies=usd&include_24hr_change=true&include_market_cap=true";
 async function loadPrices(){
  const d=await fetchJSON(TABLE);
@@ -198,7 +201,7 @@ async function loadPrices(){
 }
 loadPrices();setInterval(loadPrices,60000);
 
-/* ----------  Lazy-load Google Trends ---------- */
+/* ---------- Lazy-load Google Trends ---------- */
 const mount=$("#trendsMount");
 const obs=new IntersectionObserver((e,o)=>{
  if(e[0].isIntersecting){
