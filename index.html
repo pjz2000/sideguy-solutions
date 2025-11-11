@@ -1,822 +1,197 @@
+<!--
+  SideGuy Solutions
+  Version: 1.5-alpha
+  Author: PJ + Kromeon Dev Team
+  Description: Coastal tech, transport, and life assistance — powered by precision.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SideGuy Solutions | Tech, Transport & Automation in North County</title>
-    <meta name="description" content="SideGuy Solutions — where code meets the coastline. Custom tech, transport, and automation for Solana Beach, Encinitas, and North County. Smarter tools, seamless systems, and coastal precision.">
-    <style>
-        /* Coastal Solana Beach & Ocean Vibe - v2.0 Blue & Readable */
-        :root {
-            --bg: #0a1122; /* Deep ocean night */
-            --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%); /* Coastal blue gradient */
-            --card: #121b30; /* Dark wave */
-            --muted: #b4c3d8; /* Higher-contrast sandy gray */
-            --text: #f0f4f8; /* Bright foam for readability */
-            --brand1: #4da8ff; /* Solana coastal blue */
-            --brand2: #1cc8e5; /* Ocean aqua */
-            --brand3: #8b5cf6; /* Neon violet blockchain */
-            --accent: #2dd4bf; /* Teal mint glow */
-            --radius: 12px;
-            --shadow: 0 8px 20px rgba(10,17,34,0.25);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: var(--blue-bg);
-            color: var(--text);
-            font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
-            line-height: 1.6;
-            animation: fadeIn 0.8s ease-in;
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-        a { color: var(--brand2); text-decoration: none; transition: color 0.2s; }
-        a:hover { color: var(--accent); text-decoration: underline; }
-        a:focus { outline: 2px solid var(--brand1); outline-offset: 2px; }
-        /* Navbar */
-        .nav {
-            position: sticky;
-            top: 0;
-            background: rgba(10,17,34,0.7);
-            backdrop-filter: blur(10px);
-            z-index: 50;
-        }
-        .nav .inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 20px;
-        }
-        .brand { font-weight: 800; font-size: 20px; color: var(--text); }
-        .menu { display: flex; gap: 18px; list-style: none; }
-        .menu a { color: var(--muted); font-size: 14px; font-weight: 600; }
-        .menu a:hover { color: var(--brand2); }
-        .nav-toggle { display: none; cursor: pointer; }
-        .nav-toggle span { display: block; width: 25px; height: 3px; background: var(--muted); margin: 5px 0; }
-        .timestamp { color: var(--muted); font-size: 12px; }
-        /* Buttons */
-        .btn {
-            cursor: pointer;
-            border: none;
-            border-radius: var(--radius);
-            padding: 12px 18px;
-            background: linear-gradient(90deg, var(--brand1), var(--brand3));
-            color: white;
-            font-weight: 700;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(10,17,34,0.3); }
-        .btn:focus { outline: 2px solid var(--brand2); outline-offset: 2px; }
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background: var(--blue-bg);
-            color: var(--text);
-            scroll-margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: radial-gradient(circle, transparent 60%, var(--bg) 60%);
-            background-size: 40px 20px;
-            background-position: 0 20px;
-            animation: wave 10s linear infinite;
-        }
-        @keyframes wave { 0% { background-position: 0 20px; } 100% { background-position: 40px 20px; } }
-        .hero h1 {
-            font-size: clamp(30px, 5vw, 42px);
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-        .hero p {
-            color: var(--muted);
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .hero-cta { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; }
-        .wallet-status { margin: 10px 0; font-size: 14px; color: var(--muted); }
-        /* Sections */
-        .section { padding: 50px 20px; background: var(--card); scroll-margin-top: 80px; }
-        .section-subtitle {
-            font-size: 16px;
-            max-width: 800px;
-            margin: 0 auto 20px;
-            text-align: center;
-            color: var(--muted);
-        }
-        /* Trends */
-        .trend-list {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        .trend-list li {
-            background: rgba(255,255,255,0.06);
-            padding: 8px 14px;
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 14px;
-            box-shadow: var(--shadow);
-            transition: all 0.2s;
-        }
-        .trend-list li:hover { background: rgba(77,168,255,0.2); transform: scale(1.05); }
-        /* Odds / Sports */
-        .odds-card {
-            background: rgba(255,255,255,0.05);
-            margin: 10px auto;
-            padding: 12px;
-            border-radius: 8px;
-            max-width: 500px;
-            box-shadow: 0 0 10px rgba(28,200,229,0.2);
-        }
-        .odds-card strong { color: var(--brand1); }
-        /* Newsletter */
-        form.newsletter {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-width: 500px;
-            margin: auto;
-        }
-        form.newsletter input {
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            width: 70%;
-            max-width: 300px;
-            background: var(--card);
-            color: var(--text);
-        }
-        #success-message {
-            display: none;
-            color: var(--accent);
-            margin-top: 10px;
-            font-size: 14px;
-            animation: fadeIn 1s forwards;
-        }
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            background: var(--card);
-            color: var(--muted);
-        }
-        #version-info { font-size: 13px; color: #7dd3fc; margin-top: 8px; }
-        /* Floating Button */
-        .floating-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 14px 24px;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            z-index: 9999;
-            animation: pulse 2.5s infinite;
-            transition: transform 0.2s, box-shadow 0.3s;
-        }
-        .floating-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(59,130,246,0.5); }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.6); }
-            70% { box-shadow: 0 0 0 12px rgba(59,130,246,0); }
-            100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
-        }
-        /* Transportation & Other Sections */
-        .badge { display: flex; justify-content: center; gap: 10px; margin: 20px 0; font-size: 16px; color: var(--text); }
-        .icon { font-size: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card {
-            padding: 20px;
-            background: var(--card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--brand1), var(--brand2));
-        }
-        .card:hover { box-shadow: 0 0 15px rgba(28,200,229,0.3); }
-        .card h3 { margin-top: 0; color: var(--text); }
-        .features { list-style: none; padding: 0; }
-        .features li { margin: 5px 0; color: var(--muted); }
-        .coastal-features { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 20px 0; }
-        .coastal-feature-item { text-align: center; max-width: 200px; }
-        .coastal-feature-item .icon { font-size: 24px; }
-        .drip-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .drip-email {
-            padding: 10px;
-            border: 1px solid rgba(160,174,192,0.2);
-            border-radius: 4px;
-            background: var(--card);
-            color: var(--text);
-        }
-        .drip-submit {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .stats-intro { font-size: 18px; text-align: center; margin-bottom: 20px; color: var(--text); }
-        .stat-number { font-size: 24px; font-weight: bold; color: var(--brand2); }
-        .calc-container { max-width: 600px; margin: 0 auto; }
-        .calc-form { display: grid; gap: 20px; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group label { font-weight: bold; margin-bottom: 5px; color: var(--text); }
-        .form-group input {
-            padding: 10px;
-            border: 1px solid rgba(160,174,192,0.2);
-            border-radius: 4px;
-            background: var(--card);
-            color: var(--text);
-        }
-        .result-display { margin-top: 20px; font-size: 16px; text-align: center; color: var(--accent); }
-        .service-link { color: var(--brand2); font-weight: bold; }
-        .service-link:hover { text-decoration: underline; }
-        .work-metrics { display: flex; gap: 20px; margin: 10px 0; flex-wrap: wrap; }
-        .metric { text-align: center; color: var(--muted); }
-        .trends-grid { display: flex; gap: 20px; flex-wrap: wrap; }
-        .google-trends, .x-trends { flex: 1; min-width: 300px; }
-        .trends-list { list-style: none; padding: 0; }
-        .trends-list li {
-            margin: 5px 0;
-            padding: 5px;
-            background: rgba(160,174,192,0.06);
-            border-radius: 4px;
-            color: var(--text);
-        }
-        .yields-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
-        .yields-table th, td { padding: 10px; border-bottom: 1px solid rgba(160,174,192,0.15); color: var(--text); }
-        .yields-table th { background: rgba(160,174,192,0.06); }
-        .yields-table .positive { color: var(--accent); }
-        .yields-table .negative { color: #ef4444; }
-        .refresh-btn {
-            background: var(--brand1);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
-            font-size: 14px;
-        }
-        .yields-container { position: relative; }
-        .loading-spinner {
-            border: 4px solid rgba(160,174,192,0.2);
-            border-top-color: var(--brand1);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            margin: 10px auto;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .tech-badges { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .tech-badge {
-            background: rgba(160,174,192,0.06);
-            padding: 5px 10px;
-            border-radius: 4px;
-            color: var(--muted);
-        }
-        @media (max-width: 768px) {
-            .menu { display: none; }
-            .menu.active {
-                display: block;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                background: var(--card);
-                width: 100%;
-                padding: 20px;
-            }
-            .nav-toggle { display: block; }
-            .trends-grid { flex-direction: column; }
-            .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 28px; }
-            .drip-form { flex-direction: column; align-items: center; }
-            .floating-btn { padding: 12px 20px; font-size: 14px; }
-        }
-    </style>
-    <!-- Solana Web3.js Library -->
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHL6TJRCQ2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-VHL6TJRCQ2');
-    </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SideGuy Solutions — Where Code Meets the Coastline</title>
+<meta name="description" content="SideGuy Solutions — where code meets the coastline. Custom tech, transport, and automation for Solana Beach, Encinitas, and North County. Smarter tools, seamless systems, and coastal precision.">
+
+<style>
+:root {
+  --bg: #0a1122;
+  --blue-bg: linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
+  --card: #121b30;
+  --muted: #a0aec0;
+  --text: #f0f4f8;
+  --brand1: #4da8ff;
+  --brand2: #1cc8e5;
+  --brand3: #8b5cf6;
+  --accent: #2dd4bf;
+  --radius: 12px;
+  --shadow: 0 8px 20px rgba(10,17,34,0.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--blue-bg);
+  color:var(--text);
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
+  line-height:1.6;
+  animation:fadeIn 1s ease-in;
+}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.container{max-width:1100px;margin:auto;padding:0 20px}
+a{color:var(--brand2);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent);text-decoration:underline}
+.nav{position:sticky;top:0;background:rgba(10,17,34,.6);backdrop-filter:blur(10px);z-index:50}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.brand{font-weight:800;font-size:20px;color:var(--text)}
+.menu{display:flex;gap:18px;list-style:none}
+.menu a{color:var(--muted);font-size:14px;font-weight:600}
+.menu a:hover{color:var(--brand2)}
+.btn{cursor:pointer;border:none;border-radius:var(--radius);padding:12px 18px;background:linear-gradient(90deg,var(--brand1),var(--brand3));color:white;font-weight:700;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,17,34,.3)}
+.hero{text-align:center;padding:80px 20px;background:var(--blue-bg);color:var(--text);scroll-margin-top:80px}
+.hero h1{font-size:clamp(32px,5vw,42px);margin-bottom:20px}
+.hero p{color:var(--muted);max-width:700px;margin:10px auto;font-size:17px}
+.section{padding:40px 20px;background:var(--card);scroll-margin-top:80px}
+.section-subtitle{font-size:16px;max-width:800px;margin:0 auto 20px;text-align:center;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 0 20px rgba(28,200,229,.25)}
+.crypto-ticker{background:rgba(28,200,229,0.15);overflow:hidden;white-space:nowrap;padding:10px;text-align:center}
+.ticker-item{display:inline-block;margin-right:30px;color:var(--text);font-size:14px;font-variant-numeric:tabular-nums;animation:ticker 20s linear infinite}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.2);background:var(--card);color:var(--muted)}
+.floating-btn{position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,#3b82f6,#60a5fa);color:white;border:none;border-radius:50px;padding:14px 24px;font-weight:700;box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;z-index:9999;animation:pulse 2.5s infinite;transition:transform .2s,box-shadow .3s}
+.floating-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
+.trend-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.trend-list li{background:rgba(255,255,255,0.06);padding:8px 14px;border-radius:8px;color:var(--text);font-size:14px;box-shadow:var(--shadow);transition:all .2s}
+.trend-list li:hover{background:rgba(77,168,255,0.2);transform:scale(1.05)}
+.trend-title{text-align:center;margin-bottom:20px;color:var(--brand2)}
+#newsletter h3{font-size:22px;margin-bottom:8px}
+#success-message{display:none;color:var(--accent);margin-top:10px;font-size:14px;animation:fadeIn 1s forwards}
+@media(max-width:768px){.menu{flex-wrap:wrap;justify-content:center}.hero h1{font-size:30px}}
+</style>
 </head>
+
 <body>
-    <!-- Version 2.0 - 11.11.25: Added transportation section/link, smooth scroll, restored yields/calculator/trends/ticker, coastal vibe. -->
+<nav class="nav">
+  <div class="inner">
+    <div class="brand">SideGuy Solutions</div>
+    <ul class="menu">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#transportation">Transportation</a></li>
+      <li><a href="#trending">Trending</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="#sports-edge">Sports Edge</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="inner">
-            <div class="brand">SideGuy Solutions</div>
-            <ul class="menu" id="navMenu">
-                <li><a href="#trending">Trending</a></li>
-                <li><a href="#sports-edge">Sports Edge</a></li>
-                <li><a href="#transportation">Transportation</a></li>
-                <li><a href="#yields">Live Yields</a></li>
-                <li><a href="#calculator">Calculator</a></li>
-                <li><a href="#newsletter">Newsletter</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="timestamp" id="timestamp">Updated: Loading...</div>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+<div class="crypto-ticker"><span class="ticker-item" id="ticker-content">Loading prices...</span></div>
 
-    <!-- Crypto Ticker - Live Prices Scroll -->
-    <div class="crypto-ticker">
-        <span class="ticker-item" id="ticker-content">Loading live prices...</span>
+<section class="hero">
+  <div class="container">
+    <h1>Where code meets the coastline.</h1>
+    <p>
+      SideGuy Solutions blends technology, transportation, and real-life assistance — 
+      precision-built for North County. From Solana Beach to Encinitas, we automate 
+      the details so you can move, build, and live freely.
+    </p>
+  </div>
+</section>
+
+<section id="trending" class="section">
+  <div class="container">
+    <h2 class="trend-title">🔥 Trending Now</h2>
+    <p class="section-subtitle">Live topics from Google and X — stay ahead of what’s moving today.</p>
+    <ul id="trendList" class="trend-list"><li>Loading top trends...</li></ul>
+  </div>
+</section>
+
+<section id="newsletter" class="section">
+  <div class="container">
+    <h3>💌 Join PJ’s Daily Drop</h3>
+    <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
+    <form id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
+      <input type="email" name="email" placeholder="Your email address" required style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
+      <button type="submit" class="btn" style="padding:10px 18px;">Subscribe</button>
+    </form>
+    <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
+  </div>
+</section>
+
+<section id="sports-edge" class="section">
+  <div class="container">
+    <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge — Odds & Futures</h2>
+    <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing top edges and futures.</p>
+    <div id="odds-list" style="text-align:center;margin-top:20px;">
+      <p style="color:var(--muted);">Loading latest lines...</p>
     </div>
+  </div>
+</section>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <h1>Where code meets the coastline.</h1>
-            <p>SideGuy Solutions blends technology, transportation, and real-life assistance — precision-built for North County. From Solana Beach to Encinitas, we automate the details so you can move, build, and live freely.</p>
-            <div class="hero-cta">
-                <button id="connectWallet" class="btn">Connect Phantom Wallet</button>
-                <button id="disconnectWallet" class="btn" style="display: none;">Disconnect</button>
-                <p id="status" class="wallet-status"></p>
-            </div>
-        </div>
-    </section>
+<footer class="footer">
+  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
+  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.5-alpha</p>
+</footer>
 
-    <!-- Trending -->
-    <section id="trending" class="section">
-        <div class="container">
-            <h2 style="text-align:center;color:var(--brand2);">🔥 Trending Now</h2>
-            <p class="section-subtitle">Real-time buzz on DeFi, Solana, and AI—stay ahead with top searches and tweets.</p>
-            <div class="trends-grid">
-                <div class="google-trends">
-                    <h4>Google Trends - DeFi & Solana</h4>
-                    <iframe src="https://trends.google.com/trends/embed/explore/TIMESERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22DeFi%22%2C%22geo%22%3A%22US%22%2C%22time%22%3A%22today+12-m%22%7D%2C%7B%22keyword%22%3A%22Solana%22%2C%22geo%22%3A%22US%22%2C%22time%22%3A%22today+12-m%22%7D%2C%7B%22keyword%22%3A%22AI+automation%22%2C%22geo%22%3A%22US%22%2C%22time%22%3A%22today+12-m%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-480&hl=en-US" width="100%" height="300" frameborder="0"></iframe>
-                    <img src="https://via.placeholder.com/600x300?text=Google+Trends+Fallback" alt="Google Trends Fallback" style="display: none;" id="trends-fallback">
-                </div>
-                <div class="x-trends">
-                    <h4>Top X Posts on #DeFi / #Solana</h4>
-                    <ul id="x-trends-list" class="trends-list">
-                        <li>Loading live posts...</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
 
-    <!-- Sports Edge -->
-    <section id="sports-edge" class="section">
-        <div class="container">
-            <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge: Odds & Futures</h2>
-            <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing the top edges and futures that matter most.</p>
-            <div id="odds-list" style="text-align:center;margin-top:20px;">
-                <p style="color:var(--muted);">Loading latest lines...</p>
-            </div>
-            <div style="text-align:center;margin-top:20px;">
-                <a href="mailto:peter.z@kromeon.com?subject=Sports Edge Inquiry" class="btn">📊 Get Today’s DFS Promo Play</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Transportation & Delivery Section -->
-    <section id="transportation" class="section">
-        <div class="container">
-            <h2 style="text-align:center;color:var(--brand2);">Coastal <strong>On-Demand Delivery</strong></h2>
-            <p class="section-subtitle">Your personal delivery service for Encinitas, Solana Beach, Del Mar & Leucadia. Like Uber, but for your beach community—fast, local, and always chill.</p>
-            <div class="badge">
-                <span class="icon">🌊</span>
-                <span>Serving the 101 Corridor</span>
-                <span class="icon">🌊</span>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <div class="icon">🏄</div>
-                    <h3>Encinitas Delivery</h3>
-                    <p>From Moonlight Beach to the 101, we've got Encinitas covered. Same-day delivery for everything from surf gear to groceries.</p>
-                    <ul class="features">
-                        <li>Real-time driver tracking</li>
-                        <li>15-30 min delivery window</li>
-                        <li>Beach-friendly packaging</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="icon">🏖️</div>
-                    <h3>Solana Beach</h3>
-                    <p>Delivering to Solana Beach homes, offices, and beach spots. Fast, reliable service that gets it done without the hassle.</p>
-                    <ul class="features">
-                        <li>Flexible pickup/dropoff</li>
-                        <li>Local driver network</li>
-                        <li>Secure contactless delivery</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="icon">🌅</div>
-                    <h3>Del Mar Service</h3>
-                    <p>Premium delivery service for Del Mar. Whether it's race day or beach day, we'll get your packages where they need to be.</p>
-                    <ul class="features">
-                        <li>Priority scheduling</li>
-                        <li>Same-day guaranteed</li>
-                        <li>VIP handling available</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="icon">🌴</div>
-                    <h3>Leucadia Runs</h3>
-                    <p>Leucadia's go-to delivery service. Supporting local businesses and residents with quick, friendly service you can count on.</p>
-                    <ul class="features">
-                        <li>Local business support</li>
-                        <li>Flexible hours</li>
-                        <li>Community-focused</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="coastal-features">
-                <div class="coastal-feature-item">
-                    <div class="icon">📱</div>
-                    <h4>App-Based Booking</h4>
-                    <p>Request delivery in seconds, track in real-time</p>
-                </div>
-                <div class="coastal-feature-item">
-                    <div class="icon">⏱️</div>
-                    <h4>Fast Response</h4>
-                    <p>Average pickup within 10 minutes</p>
-                </div>
-                <div class="coastal-feature-item">
-                    <div class="icon">💰</div>
-                    <h4>Transparent Pricing</h4>
-                    <p>No hidden fees, pay what you see</p>
-                </div>
-                <div class="coastal-feature-item">
-                    <div class="icon">🤝</div>
-                    <h4>Local Drivers</h4>
-                    <p>Neighbors serving neighbors</p>
-                </div>
-            </div>
-            <div class="transport-cta">
-                <p class="section-subtitle">Ready to ride the wave? Get started with coastal delivery today.</p>
-                <div style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-                    <a href="mailto:peter.z@kromeon.com?subject=Coastal Delivery Inquiry" class="btn">Request Delivery</a>
-                    <p style="margin: 0; font-weight: bold; text-align: center;">Book with PJ your transportation and life assistance specialist (LAS): <a href="mailto:peter.z@kromeon.com?subject=LocalUber Booking with PJ" style="color: var(--brand2);">peter.z@kromeon.com</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live Yields Section -->
-    <section id="yields" class="section">
-        <div class="container">
-            <h2 style="text-align:center;color:var(--brand2);">Top 10 Stablecoins & Cryptos - Live Prices</h2>
-            <p class="section-subtitle">Real-time prices from CoinGecko (24h change as yield indicator). Updated every 60s.</p>
-            <div class="yields-container">
-                <div id="yields-loading" class="loading-spinner"></div>
-                <table id="yields-table" class="yields-table" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>Asset</th>
-                            <th>Price ($)</th>
-                            <th>24h Change (%)</th>
-                            <th>Market Cap ($B)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td colspan="4">Loading...</td></tr>
-                    </tbody>
-                </table>
-                <button onclick="loadYields()" class="refresh-btn">Refresh Data</button>
-            </div>
-            <div class="yields-cta">
-                <p>Want a custom yield tracker? Integrate with your Phantom wallet for personalized alerts.</p>
-                <a href="mailto:peter.z@kromeon.com?subject=Yield Tracker Inquiry" class="btn">Build Yours</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section id="calculator" class="section">
-        <div class="container">
-            <h2 style="text-align:center;color:var(--brand2);">Stablecoin Yield Drip Sim</h2>
-            <p class="section-subtitle">Est. based on simple daily compounding. Connect your Phantom wallet to auto-fill balance.</p>
-            <div class="calc-container">
-                <div id="walletInputs" style="display: none;">
-                    <div class="balance-display">
-                        <p>Your Phantom Balance: <span id="balance">Loading...</span></p>
-                    </div>
-                </div>
-                <div class="calc-form">
-                    <div class="form-group">
-                        <label for="principal">Principal ($)</label>
-                        <input type="number" id="principal" value="1000" min="0" step="0.01" placeholder="Enter amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="days">Days</label>
-                        <input type="number" id="days" value="365" min="1" step="1" placeholder="Investment period">
-                    </div>
-                    <div class="form-group">
-                        <label for="apy">APY (%)</label>
-                        <input type="number" id="apy" value="8" min="0" max="100" step="0.1" placeholder="Annual percentage yield">
-                    </div>
-                    <button id="calcBtn" class="btn">Calculate Yield</button>
-                    <div id="result" class="result-display"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section id="newsletter" class="section">
-        <div class="container">
-            <h2 style="text-align:center;color:var(--brand2);">💌 Join PJ’s Daily Drop</h2>
-            <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
-            <form id="newsletterForm" class="newsletter" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="email" name="email" placeholder="Your email address" required />
-                <button type="submit" class="btn">Subscribe</button>
-            </form>
-            <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-            <p id="version-info">Version 2.0</p>
-        </div>
-    </footer>
-
-    <!-- Floating Book Button -->
-    <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
-
-    <!-- Scripts -->
-    <script>
-        // Mock Odds Data
-        const mockOdds = [
-            { sport: "NFL", match: "49ers vs Chiefs", market: "Super Bowl Futures", odds: "+550" },
-            { sport: "NBA", match: "Celtics vs Nuggets", market: "Finals Winner", odds: "+420" },
-            { sport: "MLB", match: "Dodgers vs Yankees", market: "World Series", odds: "+700" },
-            { sport: "NHL", match: "Avalanche vs Rangers", market: "Stanley Cup", odds: "+950" }
-        ];
-
-        // Load Odds
-        function loadOdds() {
-            const container = document.getElementById("odds-list");
-            container.innerHTML = mockOdds.map(item => `
-                <div class="odds-card">
-                    <strong>${item.sport}</strong> — ${item.match}<br>
-                    <span style="color:var(--muted);font-size:14px;">${item.market}</span><br>
-                    <span style="color:var(--accent);font-weight:700;">Odds: ${item.odds}</span>
-                </div>
-            `).join("");
-        }
-
-        // Load Trends
-        async function loadTrends() {
-            const xList = document.getElementById("x-trends-list");
-            const xFooterList = document.getElementById("x-trends-list-footer");
-            const fallback = `
-                <li><a href="https://twitter.com/search?q=%23DeFi">Top #DeFi: "DeFi yield farming 2025" (1.2M posts)</a></li>
-                <li><a href="https://twitter.com/search?q=%23Solana">Top #Solana: "Solana TPS record" (800K posts)</a></li>
-                <li><a href="https://twitter.com/search?q=%23MondayMotivation">Monday Motivation: "AI automation tips" (500K posts)</a></li>
-                <li><a href="https://twitter.com/search?q=%23AI">Top #AI: "AI for finance" (1.5M posts)</a></li>
-                <li><a href="https://twitter.com/search?q=%23Crypto">Top #Crypto: "Stablecoin APY" (2M posts)</a></li>
-            `;
-            [xList, xFooterList].forEach(list => {
-                if (list) list.innerHTML = fallback;
-            });
-        }
-
-        // Load Yields from CoinGecko
-        async function loadYields() {
-            const table = document.getElementById('yields-table');
-            const loading = document.getElementById('yields-loading');
-            loading.style.display = 'block';
-            table.style.display = 'none';
-            try {
-                const stableIds = 'tether,usd-coin,usd1,binance-usd,usd-coin-2,first-digital-usd,pax-dollar,usd-coin-3,true-usd,usd-coin-4';
-                const response = await fetchWithRetry(`https://api.coingecko.com/api/v3/simple/price?ids=${stableIds}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
-                const data = await response.json();
-                const stables = Object.keys(data).slice(0, 10).map(id => ({
-                    name: id.replace('-', ' ').toUpperCase(),
-                    price: data[id].usd,
-                    change: data[id].usd_24h_change,
-                    marketCap: data[id].usd_market_cap
-                }));
-                table.innerHTML = '<thead><tr><th>Asset</th><th>Price ($)</th><th>24h Change (%)</th><th>Market Cap ($B)</th></tr></thead><tbody></tbody>';
-                stables.forEach(coin => {
-                    const row = table.insertRow();
-                    const changeClass = coin.change > 0 ? 'positive' : coin.change < 0 ? 'negative' : '';
-                    row.innerHTML = `
-                        <td>${coin.name}</td>
-                        <td>$${coin.price.toFixed(2)}</td>
-                        <td class="${changeClass}">${coin.change ? coin.change.toFixed(2) + '%' : 'N/A'}</td>
-                        <td>$${coin.marketCap ? (coin.marketCap / 1e9).toFixed(1) : 'N/A'}</td>
-                    `;
-                });
-                table.style.display = 'table';
-            } catch (error) {
-                table.innerHTML = '<tbody><tr><td colspan="4">Error loading data—try refreshing.</td></tr></tbody>';
-                table.style.display = 'table';
-                console.error('Yields error:', error);
-            }
-            loading.style.display = 'none';
-        }
-
-        // Crypto Ticker for SOL/USDC/ETH
-        async function loadTicker() {
-            const ticker = document.getElementById('ticker-content');
-            try {
-                const response = await fetchWithRetry('https://api.coingecko.com/api/v3/simple/price?ids=solana,usd-coin,ethereum&vs_currencies=usd&include_24hr_change=true');
-                const data = await response.json();
-                const coins = [
-                    { name: 'SOL', price: data.solana.usd, change: data.solana.usd_24h_change },
-                    { name: 'USDC', price: data['usd-coin'].usd, change: data['usd-coin'].usd_24h_change },
-                    { name: 'ETH', price: data.ethereum.usd, change: data.ethereum.usd_24h_change }
-                ];
-                ticker.innerHTML = coins.map(coin => `${coin.name}: $${coin.price.toFixed(2)} (${coin.change.toFixed(2)}%)`).join(' | ');
-            } catch (error) {
-                ticker.innerHTML = 'SOL: $250 (+2%) | USDC: $1.00 (+0%) | ETH: $3500 (+1%)';
-                console.error('Ticker error:', error);
-            }
-        }
-
-        // Retry Fetch with Delay
-        async function fetchWithRetry(url, retries = 3, delay = 5000) {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url);
-                    if (response.ok) return response;
-                    throw new Error('Fetch failed');
-                } catch (error) {
-                    if (i === retries - 1) throw error;
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-            }
-        }
-
-        // Smooth Scroll for Nav Links
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const target = document.getElementById(targetId);
-                    if (target) {
-                        const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80; // Offset for sticky nav
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Mobile Nav Toggle
-        function initMobileNav() {
-            const toggle = document.getElementById('navToggle');
-            const menu = document.getElementById('navMenu');
-            if (toggle && menu) {
-                toggle.addEventListener('click', () => {
-                    menu.classList.toggle('active');
-                });
-            }
-        }
-
-        // Timestamp
-        function updateTimestamp() {
-            const now = new Date();
-            const timestamp = document.getElementById('timestamp');
-            if (timestamp) {
-                timestamp.innerHTML = `<span>Updated: ${now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })} PST</span><br><span style="font-size: 10px;">Version 2.0</span>`;
-            }
-        }
-
-        // Wallet Connection
-        function initWallet() {
-            const connectBtn = document.getElementById('connectWallet');
-            const disconnectBtn = document.getElementById('disconnectWallet');
-            const status = document.getElementById('status');
-            if (connectBtn && disconnectBtn && status) {
-                connectBtn.addEventListener('click', async () => {
-                    try {
-                        if (window.solana && window.solana.isPhantom) {
-                            await window.solana.connect();
-                            status.textContent = 'Connected to Phantom Wallet';
-                            connectBtn.style.display = 'none';
-                            disconnectBtn.style.display = 'inline-block';
-                        } else {
-                            status.textContent = 'Phantom Wallet not detected';
-                        }
-                    } catch (error) {
-                        status.textContent = 'Error connecting wallet';
-                        console.error('Wallet error:', error);
-                    }
-                });
-                disconnectBtn.addEventListener('click', () => {
-                    if (window.solana) {
-                        window.solana.disconnect();
-                        status.textContent = 'Disconnected';
-                        connectBtn.style.display = 'inline-block';
-                        disconnectBtn.style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        // Yield Calculator
-        function initCalculator() {
-            const calcBtn = document.getElementById('calcBtn');
-            const result = document.getElementById('result');
-            if (calcBtn && result) {
-                calcBtn.addEventListener('click', () => {
-                    const principal = parseFloat(document.getElementById('principal').value) || 1000;
-                    const days = parseInt(document.getElementById('days').value) || 365;
-                    const apy = parseFloat(document.getElementById('apy').value) || 8;
-                    const dailyRate = apy / 365 / 100;
-                    const total = principal * Math.pow(1 + dailyRate, days);
-                    result.textContent = `Estimated Return: $${total.toFixed(2)} (Principal: $${principal}, Days: ${days}, APY: ${apy}%)`;
-                });
-            }
-        }
-
-        // Google Trends Fallback
-        function initTrendsFallback() {
-            const iframe = document.querySelector('.google-trends iframe');
-            const fallback = document.getElementById('trends-fallback');
-            if (iframe && fallback) {
-                iframe.addEventListener('error', () => {
-                    iframe.style.display = 'none';
-                    fallback.style.display = 'block';
-                });
-            }
-        }
-
-        // Newsletter Form
-        function initNewsletter() {
-            const form = document.getElementById('newsletterForm');
-            const success = document.getElementById('success-message');
-            if (form && success) {
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    success.style.display = 'block';
-                    form.reset();
-                    setTimeout(() => { success.style.display = 'none'; }, 4000);
-                });
-            }
-        }
-
-        // Initialize All
-        async function init() {
-            await Promise.all([loadOdds(), loadTrends(), loadYields(), loadTicker()]);
-            initSmoothScroll();
-            initMobileNav();
-            initWallet();
-            initCalculator();
-            initTrendsFallback();
-            initNewsletter();
-            updateTimestamp();
-            setInterval(() => {
-                loadYields();
-                loadTicker();
-                updateTimestamp();
-            }, 60000);
-        }
-
-        // Run on Load
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+<script>
+async function fetchWithRetry(url,retries=3,delay=4000){
+  for(let i=0;i<retries;i++){
+    try{const res=await fetch(url);if(res.ok)return res;throw new Error("Fetch failed")}
+    catch(err){if(i===retries-1)throw err;await new Promise(r=>setTimeout(r,delay));}
+  }
+}
+async function loadTicker(){
+  const el=document.getElementById("ticker-content");
+  try{
+    const res=await fetchWithRetry("https://api.coingecko.com/api/v3/simple/price?ids=solana,usd-coin,ethereum&vs_currencies=usd&include_24hr_change=true");
+    const d=await res.json();
+    el.innerHTML=[
+      {n:"SOL",d:d.solana},
+      {n:"USDC",d:d["usd-coin"]},
+      {n:"ETH",d:d.ethereum}
+    ].map(c=>`${c.n}: $${c.d.usd.toFixed(2)} (${c.d.usd_24h_change.toFixed(2)}%)`).join(" | ");
+  }catch{el.textContent="SOL $250 | USDC $1.00 | ETH $3500";}
+}
+const mockOdds=[
+  {sport:"NFL",match:"49ers vs Chiefs",market:"Super Bowl Futures",odds:"+550"},
+  {sport:"NBA",match:"Celtics vs Nuggets",market:"Finals Winner",odds:"+420"},
+  {sport:"MLB",match:"Dodgers vs Yankees",market:"World Series",odds:"+700"},
+  {sport:"NHL",match:"Avalanche vs Rangers",market:"Stanley Cup",odds:"+950"}
+];
+function loadOdds(){
+  const c=document.getElementById("odds-list");
+  c.innerHTML=mockOdds.map(o=>`
+    <div style="background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;border-radius:8px;max-width:500px;">
+      <strong style="color:var(--brand1);">${o.sport}</strong> — ${o.match}<br>
+      <span style="color:var(--muted);font-size:14px;">${o.market}</span><br>
+      <span style="color:var(--accent);font-weight:700;">Odds: ${o.odds}</span>
+    </div>`).join("");
+}
+async function loadTrends(){
+  const el=document.getElementById("trendList");
+  try{
+    const res=await fetch("https://trends.google.com/trends/hottrends/visualize/internal/data/en-us");
+    const data=await res.json();
+    const trends=data.slice(0,8).map(t=>t.title||t.name||t);
+    el.innerHTML=trends.map(t=>`<li>${t}</li>`).join("");
+  }catch{
+    el.innerHTML=`<li>AI Assistants</li><li>Solana Yield</li><li>DFS Promos</li><li>Carbon Credits</li><li>California Startups</li>`;
+  }
+}
+document.addEventListener("DOMContentLoaded",()=>{
+  loadTicker();loadOdds();loadTrends();
+  const ver=document.getElementById("version-info");
+  const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
+  ver.textContent=`Version 1.5-alpha • Updated ${now} PST`;
+  const form=document.getElementById("newsletterForm");
+  const msg=document.getElementById("success-message");
+  form.addEventListener("submit",e=>{
+    e.preventDefault();msg.style.display="block";form.reset();
+    setTimeout(()=>{msg.style.display="none";},4000);
+  });
+});
+</script>
 </body>
 </html>
