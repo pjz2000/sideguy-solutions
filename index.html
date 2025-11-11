@@ -1,204 +1,301 @@
 <!--
   SideGuy Solutions
-  Version: 1.3-prebuild
-  Added: Newsletter Signup (PJ's Daily Drop)
+  Version: 1.4-dev
+  Updated: Optimized + SEO + Accessibility
   Author: PJ + Kromeon Dev Team
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
-<meta name="description" content="SideGuy Solutions builds custom software for carbon credits, DeFi, AI automation, and DFS sports analytics in California.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
+  <meta name="description" content="SideGuy Solutions builds custom software for carbon credits, DeFi, AI automation, and DFS sports analytics in California." />
+  <meta name="keywords" content="Solana, AI, DeFi, DFS, Carbon Credits, Software Development, San Diego, Automation, Crypto Apps" />
+  <meta name="author" content="PJ, Kromeon Dev Team" />
 
-<style>
-:root {
-  --bg: #0a1122;
-  --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
-  --card: #121b30;
-  --muted: #a0aec0;
-  --text: #f0f4f8;
-  --brand1: #4da8ff;
-  --brand2: #1cc8e5;
-  --brand3: #8b5cf6;
-  --accent: #2dd4bf;
-  --radius: 12px;
-  --shadow: 0 8px 20px rgba(10, 17, 34, 0.25);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body {
-  background: var(--blue-bg);
-  color: var(--text);
-  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
-  line-height: 1.6;
-  animation: fadeIn 1s ease-in;
-}
-@keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
-.container{max-width:1100px;margin:auto;padding:0 20px}
-a{color:var(--brand2);text-decoration:none;transition:color .2s}
-a:hover{color:var(--accent);text-decoration:underline}
-.nav{position:sticky;top:0;background:rgba(10,17,34,.6);backdrop-filter:blur(10px);z-index:50}
-.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-.brand{font-weight:800;font-size:20px;color:var(--text)}
-.menu{display:flex;gap:18px;list-style:none}
-.menu a{color:var(--muted);font-size:14px;font-weight:600}
-.menu a:hover{color:var(--brand2)}
-.btn{cursor:pointer;border:none;border-radius:var(--radius);padding:12px 18px;background:linear-gradient(90deg,var(--brand1),var(--brand3));color:white;font-weight:700;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,17,34,.3)}
-.hero{text-align:center;padding:80px 20px;background:var(--blue-bg);background-attachment:fixed;background-size:cover;color:var(--text);scroll-margin-top:80px}
-.hero h1{font-size:clamp(32px,5vw,40px);margin-bottom:20px}
-.hero p{color:var(--muted);max-width:700px;margin:10px auto}
-.section{padding:40px 20px;background:var(--card);scroll-margin-top:80px}
-.section-subtitle{font-size:16px;max-width:800px;margin:0 auto 20px;text-align:center;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .2s, box-shadow .2s}
-.card:hover{transform:translateY(-4px);box-shadow:0 0 20px rgba(28,200,229,.25)}
-.card h3{color:var(--text)}
-.crypto-ticker{background:rgba(28,200,229,0.15);overflow:hidden;white-space:nowrap;padding:10px;text-align:center}
-.ticker-item{display:inline-block;margin-right:30px;color:var(--text);font-size:14px;font-variant-numeric:tabular-nums;animation:ticker 20s linear infinite}
-@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-.yields-table{width:100%;border-collapse:collapse;margin-top:10px;color:var(--text);}
-.yields-table th,.yields-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);font-variant-numeric:tabular-nums}
-.positive{color:var(--accent)}.negative{color:#ef4444}
-.footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.2);background:var(--card);color:var(--muted)}
-.floating-btn{position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,#3b82f6,#60a5fa);color:white;border:none;border-radius:50px;padding:14px 24px;font-weight:700;box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;z-index:9999;animation:pulse 2.5s infinite;transition:transform 0.2s,box-shadow 0.3s}
-.floating-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5)}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
-.trend-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.trend-list li{background:rgba(255,255,255,0.06);padding:8px 14px;border-radius:8px;color:var(--text);font-size:14px;box-shadow:var(--shadow);transition:all 0.2s}
-.trend-list li:hover{background:rgba(77,168,255,0.2);transform:scale(1.05)}
-.trend-title{text-align:center;margin-bottom:20px;color:var(--brand2)}
-#newsletter h3{font-size:22px;margin-bottom:8px}
-#success-message{display:none;color:var(--accent);margin-top:10px;font-size:14px;animation:fadeIn 1s forwards}
-</style>
+  <style>
+    :root {
+      --bg: #0a1122;
+      --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+      --card: #121b30;
+      --muted: #a0aec0;
+      --text: #f0f4f8;
+      --brand1: #4da8ff;
+      --brand2: #1cc8e5;
+      --brand3: #8b5cf6;
+      --accent: #2dd4bf;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(10, 17, 34, 0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--blue-bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+      line-height: 1.6;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+
+    a { color: var(--brand2); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* Navigation */
+    .nav {
+      position: sticky; top: 0;
+      background: rgba(10,17,34,.6);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+    }
+    .nav .inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px;
+    }
+    .brand { font-weight: 800; font-size: 20px; color: var(--text); }
+    .menu { display: flex; gap: 18px; list-style: none; flex-wrap: wrap; }
+    .menu a { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .menu a:hover { color: var(--brand2); }
+
+    /* Button */
+    .btn {
+      cursor: pointer; border: none; border-radius: var(--radius);
+      padding: 12px 18px;
+      background: linear-gradient(90deg, var(--brand1), var(--brand3));
+      color: white; font-weight: 700;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(10,17,34,.3);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: var(--blue-bg);
+      color: var(--text);
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 40px); margin-bottom: 20px; }
+    .hero p { color: var(--muted); max-width: 700px; margin: 10px auto; }
+
+    /* Section */
+    .section {
+      padding: 40px 20px;
+      background: var(--card);
+      scroll-margin-top: 80px;
+    }
+    .section-subtitle {
+      font-size: 16px;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Grid + Cards */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 20px; }
+    .card {
+      padding: 20px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(28,200,229,.25); }
+
+    /* Ticker */
+    .crypto-ticker {
+      background: rgba(28,200,229,0.15);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 10px;
+      text-align: center;
+    }
+    .ticker-item {
+      display: inline-block;
+      margin-right: 30px;
+      color: var(--text);
+      font-size: 14px;
+      animation: ticker 20s linear infinite;
+    }
+    @keyframes ticker { 0%{transform:translateX(100%)} 100%{transform:translateX(-100%)} }
+
+    /* Trend List */
+    .trend-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .trend-list li {
+      background: rgba(255,255,255,0.06);
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      box-shadow: var(--shadow);
+      transition: all 0.2s;
+    }
+    .trend-list li:hover {
+      background: rgba(77,168,255,0.2);
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      background: var(--card);
+      color: var(--muted);
+    }
+
+    /* Floating CTA */
+    .floating-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(90deg,#3b82f6,#60a5fa);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 24px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 9999;
+      animation: pulse 2.5s infinite;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .floating-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(59,130,246,0.5); }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)} 70%{box-shadow:0 0 0 12px rgba(59,130,246,0)} 100%{box-shadow:0 0 0 0 rgba(59,130,246,0)} }
+
+    @media (max-width:768px){ .hero h1{font-size:28px;} }
+  </style>
 </head>
 
 <body>
-<nav class="nav">
-  <div class="inner">
-    <div class="brand">SideGuy Solutions</div>
-    <ul class="menu">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#transportation">Transportation</a></li>
-      <li><a href="#trending">Trending</a></li>
-      <li><a href="#newsletter">Newsletter</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="crypto-ticker"><span class="ticker-item" id="ticker-content">Loading prices...</span></div>
-
-<section class="hero">
-  <div class="container">
-    <h1>Custom software solutions<br><strong>designed to maximize your edge</strong></h1>
-    <p>SideGuy Solutions helps people and businesses turn ideas into revenue — through smarter automation, sharper integrations, and coastal precision.<br>
-      <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
-    </p>
-  </div>
-</section>
-
-<section id="trending" class="section">
-  <div class="container">
-    <h2 class="trend-title">🔥 Trending Now</h2>
-    <p class="section-subtitle">Live topics from Google and X — stay ahead of what’s moving today.</p>
-    <ul id="trendList" class="trend-list">
-      <li>Loading top trends...</li>
-    </ul>
-    <div style="text-align:center;margin-top:20px;">
-      <a href="trending.html" class="btn">Explore Full Trends Hub</a>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="inner">
+      <div class="brand">SideGuy Solutions</div>
+      <ul class="menu">
+        <li><a href="#services" aria-label="View Services">Services</a></li>
+        <li><a href="#trending" aria-label="View Trending Topics">Trending</a></li>
+        <li><a href="#newsletter" aria-label="Join Newsletter">Newsletter</a></li>
+        <li><a href="#sports-edge" aria-label="Sports Edge Section">Sports Edge</a></li>
+        <li><a href="#contact" aria-label="Contact Info">Contact</a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- 💌 Newsletter Signup -->
-<section id="newsletter" class="section">
-  <div class="container">
-    <h3>💌 Join PJ’s Daily Drop</h3>
-    <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
-    <form id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
-      <input type="email" name="email" placeholder="Your email address" required
-        style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
-      <button type="submit" class="btn" style="padding:10px 18px;">Subscribe</button>
-    </form>
-    <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
-  </div>
-</section>
-<!-- 🏈 Sports Edge: Odds & Futures -->
-<section id="sports-edge" class="section">
-  <div class="container">
-    <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge: Odds & Futures</h2>
-    <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing the top edges and futures that matter most.</p>
-    
-    <div id="odds-list" style="text-align:center;margin-top:20px;">
-      <p style="color:var(--muted);">Loading latest lines...</p>
+  <div class="crypto-ticker"><span class="ticker-item" id="ticker-content">Loading prices...</span></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Custom software solutions<br><strong>designed to maximize your edge</strong></h1>
+      <p>SideGuy Solutions helps people and businesses turn ideas into revenue — through smarter automation, sharper integrations, and coastal precision.<br>
+        <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
+      </p>
     </div>
+  </section>
 
-    <div style="text-align:center;margin-top:20px;">
-      <a href="mailto:peter.z@kromeon.com?subject=Sports Edge Inquiry" class="btn">📊 Get Today’s DFS Promo Play</a>
+  <section id="trending" class="section">
+    <div class="container">
+      <h2 style="text-align:center;color:var(--brand2);">🔥 Trending Now</h2>
+      <p class="section-subtitle">Live topics from Google and X — stay ahead of what’s moving today.</p>
+      <ul id="trendList" class="trend-list"><li>Loading top trends...</li></ul>
     </div>
-  </div>
-</section>
+  </section>
 
-<script>
-  // Mock OddsJam data (replace with live API later)
-  const mockOdds = [
-    { sport: "NFL", match: "49ers vs Chiefs", market: "Super Bowl Futures", odds: "+550" },
-    { sport: "NBA", match: "Celtics vs Nuggets", market: "Finals Winner", odds: "+420" },
-    { sport: "MLB", match: "Dodgers vs Yankees", market: "World Series", odds: "+700" },
-    { sport: "NHL", match: "Avalanche vs Rangers", market: "Stanley Cup", odds: "+950" }
-  ];
+  <!-- Newsletter -->
+  <section id="newsletter" class="section">
+    <div class="container">
+      <h3 style="text-align:center;">💌 Join PJ’s Daily Drop</h3>
+      <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
+      <form id="newsletterForm" action="mailto:peter.z@kromeon.com" method="POST" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
+        <input type="email" name="email" placeholder="Your email address" required aria-label="Email Address" style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
+        <button type="submit" class="btn" aria-label="Subscribe to newsletter">Subscribe</button>
+      </form>
+      <div id="success-message" style="display:none;color:var(--accent);margin-top:10px;font-size:14px;">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
+    </div>
+  </section>
 
-  function loadOdds() {
-    const container = document.getElementById("odds-list");
-    container.innerHTML = mockOdds.map(item => `
-      <div style="background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;border-radius:8px;max-width:500px;box-shadow:0 0 10px rgba(28,200,229,0.2);">
-        <strong style="color:var(--brand1);">${item.sport}</strong> — ${item.match}<br>
-        <span style="color:var(--muted);font-size:14px;">${item.market}</span><br>
-        <span style="color:var(--accent);font-weight:700;">Odds: ${item.odds}</span>
+  <!-- Sports Edge -->
+  <section id="sports-edge" class="section">
+    <div class="container">
+      <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge: Odds & Futures</h2>
+      <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing the top edges and futures that matter most.</p>
+      <div id="odds-list" style="text-align:center;margin-top:20px;"><p style="color:var(--muted);">Loading latest lines...</p></div>
+      <div style="text-align:center;margin-top:20px;">
+        <a href="mailto:peter.z@kromeon.com?subject=Sports Edge Inquiry" class="btn">📊 Get Today’s DFS Promo Play</a>
       </div>
-    `).join("");
-  }
+    </div>
+  </section>
 
-  document.addEventListener("DOMContentLoaded", loadOdds);
-</script>
-<footer id="contact" class="footer">
-  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.3-prebuild</p>
-</footer>
+  <footer id="contact" class="footer">
+    <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
+    <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.4-dev</p>
+  </footer>
 
-<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
+  <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn" aria-label="Book with PJ">💬 Book with PJ</a>
 
-<script defer>
-async function loadTrends(){
-  const el=document.getElementById("trendList");
-  try{
-    const res=await fetch("https://trends.google.com/trends/hottrends/visualize/internal/data/en-us");
-    const data=await res.json();
-    const trends=data.slice(0,8).map(t=>t.title||t.name||t);
-    el.innerHTML=trends.map(t=>`<li>${t}</li>`).join("");
-  }catch{
-    el.innerHTML=`<li>AI Assistants</li><li>Solana Yield</li><li>DFS Promos</li><li>Carbon Credits</li><li>California Startups</li>`;
-  }
-}
+  <script>
+    // Mock Odds Data
+    const mockOdds = [
+      { sport: "NFL", match: "49ers vs Chiefs", market: "Super Bowl Futures", odds: "+550" },
+      { sport: "NBA", match: "Celtics vs Nuggets", market: "Finals Winner", odds: "+420" },
+      { sport: "MLB", match: "Dodgers vs Yankees", market: "World Series", odds: "+700" },
+      { sport: "NHL", match: "Avalanche vs Rangers", market: "Stanley Cup", odds: "+950" }
+    ];
+    function loadOdds() {
+      const container = document.getElementById("odds-list");
+      container.innerHTML = mockOdds.map(item => `
+        <div style="background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;border-radius:8px;max-width:500px;box-shadow:0 0 10px rgba(28,200,229,0.2);">
+          <strong style="color:var(--brand1);">${item.sport}</strong> — ${item.match}<br>
+          <span style="color:var(--muted);font-size:14px;">${item.market}</span><br>
+          <span style="color:var(--accent);font-weight:700;">Odds: ${item.odds}</span>
+        </div>
+      `).join("");
+    }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  loadTrends();
-  const versionEl=document.getElementById("version-info");
-  if(versionEl){
-    const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
-    versionEl.textContent=`Version 1.3-prebuild • Updated ${now} PST`;
-  }
-  const form=document.getElementById("newsletterForm");
-  const success=document.getElementById("success-message");
-  form.addEventListener("submit",(e)=>{
-    e.preventDefault();
-    success.style.display="block";
-    form.reset();
-    setTimeout(()=>{success.style.display="none";},4000);
-  });
-});
-</script>
+    // Mock Google Trends (fallback only)
+    async function loadTrends(){
+      const el=document.getElementById("trendList");
+      try{
+        const res=await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://trends.google.com/trends/hottrends/visualize/internal/data/en-us"));
+        const data=await res.json();
+        const parsed=JSON.parse(data.contents);
+        const trends=parsed.slice(0,8).map(t=>t.title||t.name||t);
+        el.innerHTML=trends.map(t=>`<li>${t}</li>`).join("");
+      }catch{
+        el.innerHTML=`<li>AI Assistants</li><li>Solana Yield</li><li>DFS Promos</li><li>Carbon Credits</li><li>California Startups</li>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded",()=>{
+      loadOdds();
+      loadTrends();
+      const versionEl=document.getElementById("version-info");
+      if(versionEl){
+        const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
+        versionEl.textContent=`Version 1.4-dev • Updated ${now} PST`;
+      }
+      const form=document.getElementById("newsletterForm");
+      const success=document.getElementById("success-message");
+      form.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        success.style.display="block";
+        form.reset();
+        setTimeout(()=>success.style.display="none",4000);
+      });
+    });
+  </script>
 </body>
 </html>
