@@ -1,9 +1,9 @@
 <!--
   SideGuy Solutions
-  Version: 1.0
+  Version: 1.1
   Last Updated: November 11, 2025
   Author: PJ + Kromeon Dev Team
-  Notes: Stable base file with fade-in animations, ticker, floating CTA, and auto-updating version footer
+  Notes: Scroll offset fix, parallax hero, ticker polish, and performance optimizations
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
-<meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, Solana DeFi integrations, and AI-powered virtual assistants. Connect your Phantom wallet, calculate yields, automate leads, and build coastal delivery solutions in Solana Beach.">
+<meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay tools, Solana DeFi integrations, and AI assistants for smart coastal business automation.">
 
 <style>
 :root {
@@ -62,37 +62,62 @@ a:hover{color:var(--accent);text-decoration:underline}
 }
 .btn:hover {transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,17,34,.3);}
 
-/* Hero */
-.hero{text-align:center;padding:64px 20px;background:var(--blue-bg)}
+/* Hero with Parallax */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--blue-bg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  color: var(--text);
+  scroll-margin-top: 80px;
+}
 .hero h1{font-size:clamp(32px,5vw,40px);margin-bottom:20px}
 .hero p{color:var(--muted);max-width:700px;margin:10px auto}
 
 /* Section */
-.section{padding:40px 20px;background:var(--card)}
+.section{
+  padding:40px 20px;
+  background:var(--card);
+  scroll-margin-top:80px;
+}
 .section-subtitle{font-size:16px;max-width:800px;margin:0 auto 20px;text-align:center;color:var(--muted)}
 
 /* Layout */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+.card{padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .2s, box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 0 20px rgba(28,200,229,.25)}
 .card h3{color:var(--text)}
 
 /* Ticker */
 .crypto-ticker {
   background: rgba(28,200,229,0.15);
-  overflow:hidden;white-space:nowrap;padding:10px;text-align:center;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:10px;
+  text-align:center;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
-.ticker-item{display:inline-block;margin-right:30px;color:var(--text);font-size:14px;animation:ticker 20s linear infinite;}
+.ticker-item{
+  display:inline-block;
+  margin-right:30px;
+  color:var(--text);
+  font-size:14px;
+  font-variant-numeric: tabular-nums;
+  animation:ticker 20s linear infinite;
+}
 @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
 /* Table */
 .yields-table{width:100%;border-collapse:collapse;margin-top:10px;color:var(--text);}
-.yields-table th, .yields-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.yields-table th,.yields-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);font-variant-numeric:tabular-nums}
 .positive{color:var(--accent)}.negative{color:#ef4444}
 
 /* Footer */
 .footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.2);background:var(--card);color:var(--muted)}
 
-/* Floating Button */
+/* Floating Book Button */
 .floating-btn {
   position: fixed;
   bottom: 24px;
@@ -103,29 +128,35 @@ a:hover{color:var(--accent);text-decoration:underline}
   border-radius: 50px;
   padding: 14px 24px;
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   cursor: pointer;
   z-index: 9999;
   animation: pulse 2.5s infinite;
   transition: transform 0.2s, box-shadow 0.3s;
 }
-.floating-btn:hover {transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5);}
-@keyframes pulse {
-  0%{box-shadow:0 0 0 0 rgba(59,130,246,.6);}
-  70%{box-shadow:0 0 0 12px rgba(59,130,246,0);}
-  100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}
-}
+.floating-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
 
 /* Scroll Fade Animations */
-.fade-in {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity .8s ease,transform .8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* Scroll-to-top */
+.scroll-top{
+  display:none;
+  position:fixed;
+  bottom:90px;
+  right:26px;
+  background:rgba(77,168,255,0.9);
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:50%;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
 }
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.scroll-top:hover{background:var(--brand2)}
 
 @media (max-width:768px){
   .menu{flex-wrap:wrap;justify-content:center}
@@ -138,7 +169,7 @@ a:hover{color:var(--accent);text-decoration:underline}
 <nav class="nav">
   <div class="inner">
     <div class="brand">SideGuy Solutions</div>
-    <ul class="menu" id="navMenu">
+    <ul class="menu">
       <li><a href="#services">Services</a></li>
       <li><a href="#transportation">Transportation</a></li>
       <li><a href="#yields">Yields</a></li>
@@ -195,13 +226,14 @@ a:hover{color:var(--accent);text-decoration:underline}
 <footer id="contact" class="footer fade-in">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
   <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">
-    Version 1.0 • Updated Nov 11, 2025
+    Version 1.1 • Updated Nov 11, 2025
   </p>
 </footer>
 
 <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 
-<script>
+<script defer>
 async function fetchWithRetry(url, retries = 3, delay = 4000) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -251,7 +283,7 @@ async function loadTicker() {
   }
 }
 
-/* Scroll Fade-in Observer + Version Timestamp */
+/* Fade-ins, Version Update, Scroll-to-top */
 document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -260,7 +292,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.1 });
   document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
 
-  // Update version timestamp
   const versionEl = document.getElementById("version-info");
   if (versionEl) {
     const now = new Date().toLocaleString("en-US", {
@@ -272,8 +303,14 @@ document.addEventListener("DOMContentLoaded", () => {
       minute: "2-digit",
       hour12: true
     });
-    versionEl.textContent = `Version 1.0 • Updated ${now} PST`;
+    versionEl.textContent = `Version 1.1 • Updated ${now} PST`;
   }
+
+  const topBtn = document.getElementById("scrollTopBtn");
+  window.addEventListener("scroll", () => {
+    topBtn.style.display = window.scrollY > 500 ? "block" : "none";
+  });
+  topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   loadYields();
   loadTicker();
