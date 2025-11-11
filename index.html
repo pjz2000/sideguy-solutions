@@ -1,194 +1,295 @@
 <!--
   SideGuy Solutions
   Version: 1.5-alpha
+  Hero: "Where code meets the coastline"
   Author: PJ + Kromeon Dev Team
-  Date: Auto-updates on load
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SideGuy Solutions – Tech, Transport & Life Automation | Solana Beach • Encinitas</title>
-<meta name="description" content="SideGuy Solutions connects tech, transport, and life assistance for North County, California — building smarter software, faster systems, and seamless automation for the coastal way of life.">
-<meta name="keywords" content="SideGuy Solutions, Solana Beach, Encinitas, North County, custom software, automation, transportation, AI, DeFi, coastal tech">
-<style>
-:root {
-  --bg:#0a1122;
-  --blue-bg:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
-  --card:#121b30;
-  --muted:#a0aec0;
-  --text:#f0f4f8;
-  --brand1:#4da8ff;
-  --brand2:#1cc8e5;
-  --brand3:#8b5cf6;
-  --accent:#2dd4bf;
-  --radius:12px;
-  --shadow:0 8px 20px rgba(10,17,34,0.25);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:var(--blue-bg);
-  color:var(--text);
-  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
-  line-height:1.6;
-  animation:fadeIn 1s ease-in;
-}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-.container{max-width:1100px;margin:auto;padding:0 20px}
-a{color:var(--brand2);text-decoration:none;transition:color .2s}
-a:hover{color:var(--accent);text-decoration:underline}
-.nav{position:sticky;top:0;background:rgba(10,17,34,.6);backdrop-filter:blur(10px);z-index:50}
-.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-.brand{font-weight:800;font-size:20px;color:var(--text)}
-.menu{display:flex;gap:18px;list-style:none}
-.menu a{color:var(--muted);font-size:14px;font-weight:600}
-.menu a:hover{color:var(--brand2)}
-.btn{
-  cursor:pointer;border:none;border-radius:var(--radius);
-  padding:12px 18px;
-  background:linear-gradient(90deg,var(--brand1),var(--brand3));
-  color:white;font-weight:700;box-shadow:var(--shadow);
-  transition:transform .2s,box-shadow .2s;
-}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,17,34,.3)}
-.hero{
-  text-align:center;padding:80px 20px;background:var(--blue-bg);
-  background-attachment:fixed;background-size:cover;scroll-margin-top:80px;
-}
-.hero h1{font-size:clamp(32px,5vw,40px);margin-bottom:20px}
-.hero p{color:var(--muted);max-width:700px;margin:10px auto}
-.section{padding:40px 20px;background:var(--card);scroll-margin-top:80px}
-.section-subtitle{font-size:16px;max-width:800px;margin:0 auto 20px;text-align:center;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-4px);box-shadow:0 0 20px rgba(28,200,229,.25)}
-.card h3{color:var(--text)}
-.crypto-ticker{background:rgba(28,200,229,0.15);overflow:hidden;white-space:nowrap;padding:10px;text-align:center}
-.ticker-item{display:inline-block;margin-right:30px;color:var(--text);font-size:14px;font-variant-numeric:tabular-nums;animation:ticker 20s linear infinite}
-@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-.yields-table{width:100%;border-collapse:collapse;margin-top:10px;color:var(--text)}
-.yields-table th,.yields-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);font-variant-numeric:tabular-nums}
-.positive{color:var(--accent)}.negative{color:#ef4444}
-.footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.2);background:var(--card);color:var(--muted)}
-.floating-btn{
-  position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,#3b82f6,#60a5fa);
-  color:white;border:none;border-radius:50px;padding:14px 24px;font-weight:700;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;z-index:9999;
-  animation:pulse 2.5s infinite;transition:transform .2s,box-shadow .3s;
-}
-.floating-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5)}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
-.trend-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.trend-list li{background:rgba(255,255,255,0.06);padding:8px 14px;border-radius:8px;color:var(--text);font-size:14px;box-shadow:var(--shadow);transition:all .2s}
-.trend-list li:hover{background:rgba(77,168,255,0.2);transform:scale(1.05)}
-.trend-title{text-align:center;margin-bottom:20px;color:var(--brand2)}
-#newsletter h3{font-size:22px;margin-bottom:8px}
-#success-message{display:none;color:var(--accent);margin-top:10px;font-size:14px;animation:fadeIn 1s forwards}
-@media(max-width:768px){.menu{flex-wrap:wrap;justify-content:center}.hero h1{font-size:28px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SideGuy Solutions | Tech, Transport & Automation in North County</title>
+  <meta name="description" content="SideGuy Solutions — where code meets the coastline. Custom tech, transport, and automation for Solana Beach, Encinitas, and North County. Smarter tools, seamless systems, and coastal precision.">
+
+  <style>
+    :root {
+      --bg: #0a1122;
+      --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+      --card: #121b30;
+      --muted: #a0aec0;
+      --text: #f0f4f8;
+      --brand1: #4da8ff;
+      --brand2: #1cc8e5;
+      --brand3: #8b5cf6;
+      --accent: #2dd4bf;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(10,17,34,0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--blue-bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+      line-height: 1.6;
+      animation: fadeIn 0.8s ease-in;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+    a { color: var(--brand2); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* Navbar */
+    .nav {
+      position: sticky; top: 0;
+      background: rgba(10,17,34,0.7);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+    }
+    .nav .inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px;
+    }
+    .brand { font-weight: 800; font-size: 20px; color: var(--text); }
+    .menu { display: flex; gap: 18px; list-style: none; }
+    .menu a { color: var(--muted); font-size: 14px; font-weight: 600; }
+    .menu a:hover { color: var(--brand2); }
+
+    /* Buttons */
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      background: linear-gradient(90deg, var(--brand1), var(--brand3));
+      color: white; font-weight: 700;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(10,17,34,.3); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: var(--blue-bg);
+      color: var(--text);
+      scroll-margin-top: 80px;
+    }
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 42px);
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Sections */
+    .section { padding: 50px 20px; background: var(--card); scroll-margin-top: 80px; }
+    .section-subtitle {
+      font-size: 16px; max-width: 800px; margin: 0 auto 20px; text-align: center; color: var(--muted);
+    }
+
+    /* Trends */
+    .trend-list {
+      list-style: none; padding: 0;
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    }
+    .trend-list li {
+      background: rgba(255,255,255,0.06);
+      padding: 8px 14px; border-radius: 8px;
+      color: var(--text); font-size: 14px;
+      box-shadow: var(--shadow); transition: all 0.2s;
+    }
+    .trend-list li:hover { background: rgba(77,168,255,0.2); transform: scale(1.05); }
+
+    /* Odds / Sports */
+    .odds-card {
+      background: rgba(255,255,255,0.05);
+      margin: 10px auto;
+      padding: 12px;
+      border-radius: 8px;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(28,200,229,0.2);
+    }
+    .odds-card strong { color: var(--brand1); }
+
+    /* Newsletter */
+    form.newsletter {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 10px; max-width: 500px; margin: auto;
+    }
+    form.newsletter input {
+      padding: 10px; border-radius: 8px; border: none;
+      width: 70%; max-width: 300px;
+    }
+    #success-message {
+      display: none; color: var(--accent);
+      margin-top: 10px; font-size: 14px;
+      animation: fadeIn 1s forwards;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      background: var(--card); color: var(--muted);
+    }
+    #version-info { font-size: 13px; color: #7dd3fc; margin-top: 8px; }
+
+    /* Floating Button */
+    .floating-btn {
+      position: fixed; bottom: 24px; right: 24px;
+      background: linear-gradient(90deg,#3b82f6,#60a5fa);
+      color: white; border: none; border-radius: 50px;
+      padding: 14px 24px; font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer; z-index: 9999;
+      animation: pulse 2.5s infinite;
+      transition: transform .2s, box-shadow .3s;
+    }
+    .floating-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(59,130,246,0.5); }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.6); }
+      70% { box-shadow: 0 0 0 12px rgba(59,130,246,0); }
+      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+    }
+
+    @media (max-width: 768px) {
+      .menu { flex-wrap: wrap; justify-content: center; }
+      .hero h1 { font-size: 28px; }
+    }
+  </style>
 </head>
+
 <body>
-<nav class="nav">
-  <div class="inner">
-    <div class="brand">SideGuy Solutions</div>
-    <ul class="menu">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#transportation">Transportation</a></li>
-      <li><a href="#trending">Trending</a></li>
-      <li><a href="#newsletter">Newsletter</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="crypto-ticker"><span class="ticker-item" id="ticker-content">Loading prices...</span></div>
-
-<section class="hero">
-  <div class="container">
-    <h1>Tech, transport, and life assistance — built for precision and flow.</h1>
-    <p>From Solana Beach to Encinitas, SideGuy Solutions bridges software, systems, and people. We design smarter tools, faster service, and seamless automation for the coastal way of life — where efficiency meets freedom.</p>
-  </div>
-</section>
-
-<section id="trending" class="section">
-  <div class="container">
-    <h2 class="trend-title">🔥 Trending Now</h2>
-    <p class="section-subtitle">Live topics from Google and X — stay ahead of what’s moving today.</p>
-    <ul id="trendList" class="trend-list"><li>Loading top trends...</li></ul>
-    <div style="text-align:center;margin-top:20px;">
-      <a href="trending.html" class="btn">Explore Full Trends Hub</a>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="inner">
+      <div class="brand">SideGuy Solutions</div>
+      <ul class="menu">
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#sports-edge">Sports Edge</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </nav>
 
-<section id="newsletter" class="section">
-  <div class="container">
-    <h3>💌 Join PJ’s Daily Drop</h3>
-    <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
-    <form id="newsletterForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
-      <input type="email" name="email" placeholder="Your email address" required style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
-      <button type="submit" class="btn" style="padding:10px 18px;">Subscribe</button>
-    </form>
-    <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
-  </div>
-</section>
-
-<section id="sports-edge" class="section">
-  <div class="container">
-    <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge: Odds & Futures</h2>
-    <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing the top edges and futures that matter most.</p>
-    <div id="odds-list" style="text-align:center;margin-top:20px;"><p style="color:var(--muted);">Loading latest lines...</p></div>
-    <div style="text-align:center;margin-top:20px;">
-      <a href="mailto:peter.z@kromeon.com?subject=Sports Edge Inquiry" class="btn">📊 Get Today’s DFS Promo Play</a>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Where code meets the coastline.</h1>
+      <p>
+        SideGuy Solutions blends technology, transportation, and real-life assistance —
+        precision-built for North County. From Solana Beach to Encinitas,
+        we automate the details so you can move, build, and live freely.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer id="contact" class="footer">
-  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.5-alpha</p>
-</footer>
+  <!-- Trending -->
+  <section id="trending" class="section">
+    <div class="container">
+      <h2 style="text-align:center;color:var(--brand2);">🔥 Trending Now</h2>
+      <p class="section-subtitle">Live topics from Google and X — stay ahead of what’s moving today.</p>
+      <ul id="trendList" class="trend-list"><li>Loading top trends...</li></ul>
+    </div>
+  </section>
 
-<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
+  <!-- Sports Edge -->
+  <section id="sports-edge" class="section">
+    <div class="container">
+      <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge: Odds & Futures</h2>
+      <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing the top edges and futures that matter most.</p>
+      <div id="odds-list" style="text-align:center;margin-top:20px;">
+        <p style="color:var(--muted);">Loading latest lines...</p>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <a href="mailto:peter.z@kromeon.com?subject=Sports Edge Inquiry" class="btn">📊 Get Today’s DFS Promo Play</a>
+      </div>
+    </div>
+  </section>
 
-<script>
-const mockOdds=[
-  {sport:"NFL",match:"49ers vs Chiefs",market:"Super Bowl Futures",odds:"+550"},
-  {sport:"NBA",match:"Celtics vs Nuggets",market:"Finals Winner",odds:"+420"},
-  {sport:"MLB",match:"Dodgers vs Yankees",market:"World Series",odds:"+700"},
-  {sport:"NHL",match:"Avalanche vs Rangers",market:"Stanley Cup",odds:"+950"}
-];
-function loadOdds(){
-  const c=document.getElementById("odds-list");
-  c.innerHTML=mockOdds.map(i=>`
-    <div style="background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;border-radius:8px;max-width:500px;box-shadow:0 0 10px rgba(28,200,229,0.2);">
-      <strong style="color:var(--brand1);">${i.sport}</strong> — ${i.match}<br>
-      <span style="color:var(--muted);font-size:14px;">${i.market}</span><br>
-      <span style="color:var(--accent);font-weight:700;">Odds: ${i.odds}</span>
-    </div>`).join("");
-}
-async function loadTrends(){
-  const el=document.getElementById("trendList");
-  try{
-    const res=await fetch("https://api.allorigins.win/raw?url=https://trends.google.com/trends/hottrends/visualize/internal/data/en-us");
-    const data=await res.json();
-    const trends=data.slice(0,8).map(t=>t.title||t.name||t);
-    el.innerHTML=trends.map(t=>`<li>${t}</li>`).join("");
-  }catch{
-    el.innerHTML=`<li>AI Assistants</li><li>Solana Yield</li><li>DFS Promos</li><li>Carbon Credits</li><li>California Startups</li>`;
-  }
-}
-document.addEventListener("DOMContentLoaded",()=>{
-  loadOdds();loadTrends();
-  const v=document.getElementById("version-info");
-  if(v){
-    const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
-    v.textContent=`Version 1.5-alpha • Updated ${now} PST`;
-  }
-  const f=document.getElementById("newsletterForm"),s=document.getElementById("success-message");
-  f.addEventListener("submit",e=>{e.preventDefault();s.style.display="block";f.reset();setTimeout(()=>s.style.display="none",4000);});
-});
-</script>
+  <!-- Newsletter -->
+  <section id="newsletter" class="section">
+    <div class="container">
+      <h2 style="text-align:center;color:var(--brand2);">💌 Join PJ’s Daily Drop</h2>
+      <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
+      <form id="newsletterForm" class="newsletter" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="email" name="email" placeholder="Your email address" required />
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+      <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
+    <p id="version-info">Version 1.5-alpha</p>
+  </footer>
+
+  <!-- Floating Book Button -->
+  <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
+
+  <!-- Scripts -->
+  <script>
+    const mockOdds = [
+      { sport: "NFL", match: "49ers vs Chiefs", market: "Super Bowl Futures", odds: "+550" },
+      { sport: "NBA", match: "Celtics vs Nuggets", market: "Finals Winner", odds: "+420" },
+      { sport: "MLB", match: "Dodgers vs Yankees", market: "World Series", odds: "+700" },
+      { sport: "NHL", match: "Avalanche vs Rangers", market: "Stanley Cup", odds: "+950" }
+    ];
+
+    function loadOdds() {
+      const container = document.getElementById("odds-list");
+      container.innerHTML = mockOdds.map(item => `
+        <div class="odds-card">
+          <strong>${item.sport}</strong> — ${item.match}<br>
+          <span style="color:var(--muted);font-size:14px;">${item.market}</span><br>
+          <span style="color:var(--accent);font-weight:700;">Odds: ${item.odds}</span>
+        </div>
+      `).join("");
+    }
+
+    async function loadTrends(){
+      const el=document.getElementById("trendList");
+      try{
+        const res=await fetch("https://trends.google.com/trends/hottrends/visualize/internal/data/en-us");
+        const data=await res.json();
+        const trends=data.slice(0,8).map(t=>t.title||t.name||t);
+        el.innerHTML=trends.map(t=>`<li>${t}</li>`).join("");
+      }catch{
+        el.innerHTML=`<li>AI Assistants</li><li>Solana Yield</li><li>DFS Promos</li><li>Carbon Credits</li><li>California Startups</li>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded",()=>{
+      loadOdds();
+      loadTrends();
+      const versionEl=document.getElementById("version-info");
+      if(versionEl){
+        const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
+        versionEl.textContent=`Version 1.5-alpha • Updated ${now} PST`;
+      }
+      const form=document.getElementById("newsletterForm");
+      const success=document.getElementById("success-message");
+      form.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        success.style.display="block";
+        form.reset();
+        setTimeout(()=>{success.style.display="none";},4000);
+      });
+    });
+  </script>
 </body>
 </html>
