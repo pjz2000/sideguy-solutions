@@ -1,355 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
-  <meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, Solana DeFi integrations, and AI-powered virtual assistants. Connect your Phantom wallet, calculate yields, automate leads, and build coastal delivery solutions in Solana Beach." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SideGuy Solutions - Custom Software & DeFi Solutions | AI Assistants, Solana Integrations, Carbon Credits</title>
+<meta name="description" content="SideGuy Solutions - Custom software for carbon credits, parlay bombs, Solana DeFi integrations, and AI-powered virtual assistants. Connect your Phantom wallet, calculate yields, automate leads, and build coastal delivery solutions in Solana Beach.">
 
-  <style>
-    /* --- SideGuy Coastal Theme v2.1 (Optimized & Readable) --- */
-    :root {
-      --bg: #0a1122;
-      --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
-      --card: #121b30;
-      --muted: #a0aec0;
-      --text: #f0f4f8;
-      --brand1: #4da8ff;
-      --brand2: #1cc8e5;
-      --brand3: #8b5cf6;
-      --accent: #2dd4bf;
-      --radius: 12px;
-      --shadow: 0 8px 20px rgba(10, 17, 34, 0.25);
-    }
+<style>
+:root {
+  --bg: #0a1122;
+  --blue-bg: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+  --card: #121b30;
+  --muted: #a0aec0;
+  --text: #f0f4f8;
+  --brand1: #4da8ff;
+  --brand2: #1cc8e5;
+  --brand3: #8b5cf6;
+  --accent: #2dd4bf;
+  --radius: 12px;
+  --shadow: 0 8px 20px rgba(10, 17, 34, 0.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body {
+  background: var(--blue-bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+  line-height: 1.6;
+  animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+.container{max-width:1100px;margin:auto;padding:0 20px}
+a{color:var(--brand2);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent);text-decoration:underline}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+/* Navbar */
+.nav{position:sticky;top:0;background:rgba(10,17,34,.6);backdrop-filter:blur(10px);z-index:50}
+.nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.brand{font-weight:800;font-size:20px;color:var(--text)}
+.menu{display:flex;gap:18px;list-style:none}
+.menu a{color:var(--muted);font-size:14px;font-weight:600}
+.menu a:hover{color:var(--brand2)}
 
-    body {
-      background: var(--blue-bg);
-      color: var(--text);
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
-      line-height: 1.6;
-    }
+/* Buttons */
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  background: linear-gradient(90deg, var(--brand1), var(--brand3));
+  color: white;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:hover {transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,17,34,.3);}
 
-    .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+/* Hero */
+.hero{text-align:center;padding:64px 20px;background:var(--blue-bg)}
+.hero h1{font-size:clamp(32px,5vw,40px);margin-bottom:20px}
+.hero p{color:var(--muted);max-width:700px;margin:10px auto}
 
-    a { color: var(--brand2); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--accent); text-decoration: underline; }
+/* Section */
+.section{padding:40px 20px;background:var(--card)}
+.section-subtitle{font-size:16px;max-width:800px;margin:0 auto 20px;text-align:center;color:var(--muted)}
 
-    /* Navbar */
-    .nav {
-      position: sticky;
-      top: 0;
-      background: rgba(10, 17, 34, 0.6);
-      backdrop-filter: blur(10px);
-      z-index: 50;
-    }
-    .nav .inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-    }
-    .brand { font-weight: 800; font-size: 20px; color: var(--text); }
-    .menu { display: flex; gap: 18px; list-style: none; }
-    .menu a { color: var(--muted); font-size: 14px; font-weight: 600; }
-    .menu a:hover { color: var(--brand2); }
+/* Layout */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{padding:20px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+.card h3{color:var(--text)}
 
-    /* Buttons */
-    .btn {
-      cursor: pointer;
-      border: none;
-      border-radius: var(--radius);
-      padding: 12px 18px;
-      background: linear-gradient(90deg, var(--brand1), var(--brand3));
-      color: white;
-      font-weight: 700;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(10, 17, 34, 0.3);
-    }
+/* Ticker */
+.crypto-ticker {
+  background: rgba(28,200,229,0.15);
+  overflow:hidden;white-space:nowrap;padding:10px;text-align:center;
+}
+.ticker-item{display:inline-block;margin-right:30px;color:var(--text);font-size:14px;animation:ticker 20s linear infinite;}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
-    /* Hero */
-    .hero {
-      padding: 64px 20px;
-      text-align: center;
-      background: var(--blue-bg);
-      color: var(--text);
-    }
-    .hero h1 {
-      font-size: clamp(32px, 5vw, 40px);
-      margin-bottom: 20px;
-    }
-    .hero p {
-      color: var(--muted);
-      max-width: 700px;
-      margin: 10px auto;
-    }
+/* Table */
+.yields-table{width:100%;border-collapse:collapse;margin-top:10px;color:var(--text);}
+.yields-table th, .yields-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.positive{color:var(--accent)}.negative{color:#ef4444}
 
-    /* Section */
-    .section {
-      padding: 40px 20px;
-      background: var(--card);
-    }
-    .section-subtitle {
-      font-size: 16px;
-      max-width: 800px;
-      margin: 0 auto 20px;
-      text-align: center;
-      color: var(--muted);
-    }
+/* Footer */
+.footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.2);background:var(--card);color:var(--muted)}
 
-    /* Layouts */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      padding: 20px;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .card h3 { color: var(--text); }
+/* Floating Button */
+.floating-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 24px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 9999;
+  animation: pulse 2.5s infinite;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+.floating-btn:hover {transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5);}
+@keyframes pulse {
+  0%{box-shadow:0 0 0 0 rgba(59,130,246,.6);}
+  70%{box-shadow:0 0 0 12px rgba(59,130,246,0);}
+  100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}
+}
 
-    /* Ticker */
-    .crypto-ticker {
-      background: rgba(28, 200, 229, 0.1);
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 10px;
-      text-align: center;
-    }
-    .ticker-item {
-      display: inline-block;
-      margin-right: 30px;
-      color: var(--text);
-      font-size: 14px;
-      animation: ticker 20s linear infinite;
-    }
-    @keyframes ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
+/* Scroll Fade Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    /* Table */
-    .yields-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      color: var(--text);
-    }
-    .yields-table th, .yields-table td {
-      padding: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .positive { color: var(--accent); }
-    .negative { color: #ef4444; }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      background: var(--card);
-      color: var(--muted);
-    }
-
-    /* Floating Button */
-    .floating-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: linear-gradient(90deg, #3b82f6, #60a5fa);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 14px 24px;
-      font-weight: 700;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      z-index: 1000;
-      animation: pulse 2.5s infinite;
-      transition: transform 0.2s, box-shadow 0.3s;
-    }
-    .floating-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
-      70% { box-shadow: 0 0 0 12px rgba(59, 130, 246, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-    }
-
-    @media (max-width: 768px) {
-      .menu { flex-wrap: wrap; justify-content: center; }
-      .hero h1 { font-size: 28px; }
-    }
-  </style>
-
-  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+@media (max-width:768px){
+  .menu{flex-wrap:wrap;justify-content:center}
+  .hero h1{font-size:28px}
+}
+</style>
 </head>
 
 <body>
-  <nav class="nav">
-    <div class="inner">
-      <div class="brand">SideGuy Solutions</div>
-      <ul class="menu" id="navMenu">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#transportation">Transportation</a></li>
-        <li><a href="#yields">Yields</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="crypto-ticker">
-    <span class="ticker-item" id="ticker-content">Loading live prices...</span>
+<nav class="nav">
+  <div class="inner">
+    <div class="brand">SideGuy Solutions</div>
+    <ul class="menu" id="navMenu">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#transportation">Transportation</a></li>
+      <li><a href="#yields">Yields</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </div>
+</nav>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Custom software solutions<br><strong>designed to maximize your edge</strong></h1>
-      <p>SideGuy Solutions helps people and businesses turn ideas into revenue — through smarter automation, sharper integrations, and a partner who owns outcomes from strategy to execution.<br>
-        <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
-      </p>
-      <div style="margin-top: 20px;">
-        <button id="connectWallet" class="btn">Connect Wallet</button>
-        <button id="disconnectWallet" class="btn" style="display:none;">Disconnect</button>
-      </div>
+<div class="crypto-ticker"><span class="ticker-item" id="ticker-content">SOL: $250 | USDC: $1.00 | ETH: $3500</span></div>
+
+<section class="hero fade-in">
+  <div class="container">
+    <h1>Custom software solutions<br><strong>designed to maximize your edge</strong></h1>
+    <p>SideGuy Solutions helps people and businesses turn ideas into revenue — through smarter automation, sharper integrations, and coastal precision.<br>
+      <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
+    </p>
+  </div>
+</section>
+
+<section id="transportation" class="section fade-in">
+  <div class="container">
+    <h2>Coastal On-Demand Delivery 🌊</h2>
+    <p class="section-subtitle">Encinitas, Solana Beach, Del Mar & Leucadia</p>
+    <div class="grid">
+      <div class="card fade-in"><h3>Encinitas Delivery</h3><p>Real-time tracking, 15–30 min delivery, beach-ready packaging.</p></div>
+      <div class="card fade-in"><h3>Solana Beach</h3><p>Flexible pickup/dropoff with local drivers and contactless delivery.</p></div>
+      <div class="card fade-in"><h3>Del Mar</h3><p>Priority scheduling and VIP handling for events or packages.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="transportation" class="section">
-    <div class="container">
-      <h2>Coastal On-Demand Delivery 🌊</h2>
-      <p class="section-subtitle">Encinitas, Solana Beach, Del Mar & Leucadia</p>
-      <div class="grid">
-        <div class="card"><h3>Encinitas Delivery</h3><p>Real-time tracking, 15-30 min delivery, beach-ready packaging.</p></div>
-        <div class="card"><h3>Solana Beach</h3><p>Flexible pickup/dropoff and local drivers with contactless delivery.</p></div>
-        <div class="card"><h3>Del Mar</h3><p>Priority scheduling and VIP handling for special events or packages.</p></div>
-      </div>
-      <div style="text-align:center;margin-top:20px;">
-        <a href="mailto:peter.z@kromeon.com?subject=Delivery Inquiry" class="btn">Request Delivery</a>
-      </div>
+<section id="services" class="section fade-in">
+  <div class="container">
+    <h2>What We Build</h2>
+    <div class="grid">
+      <div class="card fade-in"><h3>🚀 Lead Gen Automation</h3><p>Carbon credit scouts + fantasy parlay alerts.</p></div>
+      <div class="card fade-in"><h3>⚡ Custom Builds</h3><p>Wallets, dashboards, and yield trackers.</p></div>
+      <div class="card fade-in"><h3>🤖 AI Assistants</h3><p>Smart automation for teams and clients.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="services" class="section">
-    <div class="container">
-      <h2>What We Build</h2>
-      <div class="grid">
-        <div class="card"><h3>🚀 Lead Gen Automation</h3><p>Carbon credit scouts + fantasy parlay alerts.</p></div>
-        <div class="card"><h3>⚡ Custom Builds</h3><p>Wallets, dashboards, and yield trackers.</p></div>
-        <div class="card"><h3>🤖 AI Assistants</h3><p>Smart automation for teams and clients.</p></div>
-      </div>
-    </div>
-  </section>
+<section id="yields" class="section fade-in">
+  <div class="container">
+    <h2>Live Yields</h2>
+    <div id="yields-loading">Loading...</div>
+    <table id="yields-table" class="yields-table" style="display:none;">
+      <thead><tr><th>Asset</th><th>Price ($)</th><th>24h</th><th>Cap ($B)</th></tr></thead>
+      <tbody><tr><td colspan="4">Loading...</td></tr></tbody>
+    </table>
+  </div>
+</section>
 
-  <section id="yields" class="section">
-    <div class="container">
-      <h2>Live Yields</h2>
-      <div id="yields-loading">Loading...</div>
-      <table id="yields-table" class="yields-table" style="display:none;">
-        <thead><tr><th>Asset</th><th>Price ($)</th><th>24h</th><th>Cap ($B)</th></tr></thead>
-        <tbody><tr><td colspan="4">Loading...</td></tr></tbody>
-      </table>
-    </div>
-  </section>
+<footer id="contact" class="footer fade-in">
+  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
+</footer>
 
-  <footer id="contact" class="footer">
-    <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  </footer>
+<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
 
-  <!-- Floating Book with PJ Button -->
-  <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">
-    💬 Book with PJ
-  </a>
-
-  <script>
-    async function fetchWithRetry(url, retries = 3, delay = 4000) {
-      for (let i = 0; i < retries; i++) {
-        try {
-          const res = await fetch(url);
-          if (res.ok) return res;
-          throw new Error("Fetch failed");
-        } catch (err) {
-          if (i === retries - 1) throw err;
-          await new Promise(r => setTimeout(r, delay));
-        }
-      }
+<script>
+async function fetchWithRetry(url, retries = 3, delay = 4000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) return res;
+      throw new Error("Fetch failed");
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await new Promise(r => setTimeout(r, delay));
     }
+  }
+}
 
-    async function loadYields() {
-      const table = document.getElementById("yields-table");
-      const loading = document.getElementById("yields-loading");
-      loading.style.display = "block";
-      table.style.display = "none";
-      try {
-        const ids = "tether,usd-coin,solana,ethereum,bitcoin";
-        const res = await fetchWithRetry(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
-        const data = await res.json();
-        table.querySelector("tbody").innerHTML = Object.entries(data)
-          .map(([id, d]) => `
-            <tr>
-              <td>${id.toUpperCase()}</td>
-              <td>$${d.usd.toFixed(2)}</td>
-              <td class="${d.usd_24h_change >= 0 ? 'positive' : 'negative'}">
-                ${d.usd_24h_change.toFixed(2)}%
-              </td>
-              <td>$${(d.usd_market_cap / 1e9).toFixed(1)}</td>
-            </tr>`)
-          .join("");
-        loading.style.display = "none";
-        table.style.display = "table";
-      } catch (err) {
-        console.error(err);
-        loading.textContent = "Error loading data";
-      }
-    }
+async function loadYields() {
+  const table = document.getElementById("yields-table");
+  const loading = document.getElementById("yields-loading");
+  try {
+    const ids = "tether,usd-coin,solana,ethereum,bitcoin";
+    const res = await fetchWithRetry(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true&include_market_cap=true`);
+    const data = await res.json();
+    table.querySelector("tbody").innerHTML = Object.entries(data).map(([id, d]) => `
+      <tr>
+        <td>${id.toUpperCase()}</td>
+        <td>$${d.usd.toFixed(2)}</td>
+        <td class="${d.usd_24h_change >= 0 ? 'positive' : 'negative'}">${d.usd_24h_change.toFixed(2)}%</td>
+        <td>$${(d.usd_market_cap / 1e9).toFixed(1)}</td>
+      </tr>`).join("");
+    loading.style.display = "none";
+    table.style.display = "table";
+  } catch {
+    loading.textContent = "Error loading data.";
+  }
+}
 
-    async function loadTicker() {
-      const el = document.getElementById("ticker-content");
-      try {
-        const res = await fetchWithRetry("https://api.coingecko.com/api/v3/simple/price?ids=solana,usd-coin,ethereum&vs_currencies=usd&include_24hr_change=true");
-        const data = await res.json();
-        el.innerHTML = [
-          { n: "SOL", d: data.solana },
-          { n: "USDC", d: data["usd-coin"] },
-          { n: "ETH", d: data.ethereum }
-        ].map(c => `${c.n}: $${c.d.usd.toFixed(2)} (${c.d.usd_24h_change.toFixed(2)}%)`).join(" | ");
-      } catch {
-        el.textContent = "SOL: $250 | USDC: $1.00 | ETH: $3500";
-      }
-    }
+async function loadTicker() {
+  const el = document.getElementById("ticker-content");
+  try {
+    const res = await fetchWithRetry("https://api.coingecko.com/api/v3/simple/price?ids=solana,usd-coin,ethereum&vs_currencies=usd&include_24hr_change=true");
+    const data = await res.json();
+    el.innerHTML = [
+      { n: "SOL", d: data.solana },
+      { n: "USDC", d: data["usd-coin"] },
+      { n: "ETH", d: data.ethereum }
+    ].map(c => `${c.n}: $${c.d.usd.toFixed(2)} (${c.d.usd_24h_change.toFixed(2)}%)`).join(" | ");
+  } catch {
+    el.textContent = "SOL: $250 | USDC: $1.00 | ETH: $3500";
+  }
+}
 
-    function initSmoothScroll() {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", e => {
-          e.preventDefault();
-          const target = document.querySelector(anchor.getAttribute("href"));
-          if (target) target.scrollIntoView({ behavior: "smooth" });
-        });
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      initSmoothScroll();
-      loadYields();
-      loadTicker();
-      setInterval(() => {
-        loadYields();
-        loadTicker();
-      }, 60000);
+/* Scroll Fade-in Observer */
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
     });
-  </script>
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+  loadYields();
+  loadTicker();
+  setInterval(() => { loadYields(); loadTicker(); }, 60000);
+});
+</script>
 </body>
 </html>
