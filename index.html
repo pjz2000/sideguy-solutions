@@ -125,7 +125,44 @@ a:hover{color:var(--accent);text-decoration:underline}
     <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
   </div>
 </section>
+<!-- 🏈 Sports Edge: Odds & Futures -->
+<section id="sports-edge" class="section">
+  <div class="container">
+    <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge: Odds & Futures</h2>
+    <p class="section-subtitle">Real-time sports market data from OddsJam-style feeds — showing the top edges and futures that matter most.</p>
+    
+    <div id="odds-list" style="text-align:center;margin-top:20px;">
+      <p style="color:var(--muted);">Loading latest lines...</p>
+    </div>
 
+    <div style="text-align:center;margin-top:20px;">
+      <a href="mailto:peter.z@kromeon.com?subject=Sports Edge Inquiry" class="btn">📊 Get Today’s DFS Promo Play</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Mock OddsJam data (replace with live API later)
+  const mockOdds = [
+    { sport: "NFL", match: "49ers vs Chiefs", market: "Super Bowl Futures", odds: "+550" },
+    { sport: "NBA", match: "Celtics vs Nuggets", market: "Finals Winner", odds: "+420" },
+    { sport: "MLB", match: "Dodgers vs Yankees", market: "World Series", odds: "+700" },
+    { sport: "NHL", match: "Avalanche vs Rangers", market: "Stanley Cup", odds: "+950" }
+  ];
+
+  function loadOdds() {
+    const container = document.getElementById("odds-list");
+    container.innerHTML = mockOdds.map(item => `
+      <div style="background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;border-radius:8px;max-width:500px;box-shadow:0 0 10px rgba(28,200,229,0.2);">
+        <strong style="color:var(--brand1);">${item.sport}</strong> — ${item.match}<br>
+        <span style="color:var(--muted);font-size:14px;">${item.market}</span><br>
+        <span style="color:var(--accent);font-weight:700;">Odds: ${item.odds}</span>
+      </div>
+    `).join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", loadOdds);
+</script>
 <footer id="contact" class="footer">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
   <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.3-prebuild</p>
