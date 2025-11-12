@@ -1,6 +1,6 @@
 <!--
   SideGuy Solutions
-  Version: 1.5-alpha
+  Version: 1.5.1-alpha
   Author: PJ + Kromeon Dev Team
   Description: Coastal tech, transport, and life assistance — powered by precision.
 -->
@@ -66,7 +66,6 @@ a:hover{color:var(--accent);text-decoration:underline}
 .trend-list li:hover{background:rgba(77,168,255,0.2);transform:scale(1.05)}
 .trend-title{text-align:center;margin-bottom:20px;color:var(--brand2)}
 #newsletter h3{font-size:22px;margin-bottom:8px}
-#success-message{display:none;color:var(--accent);margin-top:10px;font-size:14px;animation:fadeIn 1s forwards}
 @media(max-width:768px){.menu{flex-wrap:wrap;justify-content:center}.hero h1{font-size:30px}}
 </style>
 </head>
@@ -106,16 +105,19 @@ a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </section>
 
+<!-- 💌 Newsletter: simple email compose to PJ -->
 <section id="newsletter" class="section">
   <div class="container">
     <h3>💌 Join PJ’s Daily Drop</h3>
-    <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and tech trends delivered daily.</p>
-    <!-- ✅ Fixed Form Action Quotes -->
-    <form id="newsletterForm" action="https://formspree.io/f/myzlzgnk" method="POST" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
-      <input type="email" name="email" placeholder="Your email address" required style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
-      <button type="submit" class="btn" style="padding:10px 18px;">Subscribe</button>
-    </form>
-    <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
+    <p class="section-subtitle">No forms. Just click the button and send me a “Subscribe” email.</p>
+    <div style="display:flex;justify-content:center;">
+      <a
+        class="btn"
+        href="mailto:peter.z@kromeon.com?subject=Subscribe%20me%20to%20PJ%E2%80%99s%20Daily%20Drop&body=Hi%20PJ%2C%0A%0APlease%20add%20me%20to%20the%20Daily%20Drop.%0A%0AName%3A%20%0ACity%3A%20%0A%0AThanks!">
+        ✉️ Email PJ to Subscribe
+      </a>
+    </div>
+    <p class="section-subtitle" style="margin-top:12px;">I’ll add you to the list manually and send the next update.</p>
   </div>
 </section>
 
@@ -131,7 +133,7 @@ a:hover{color:var(--accent);text-decoration:underline}
 
 <footer class="footer">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.5-alpha</p>
+  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.5.1-alpha</p>
 </footer>
 
 <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
@@ -185,13 +187,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   loadTicker();loadOdds();loadTrends();
   const ver=document.getElementById("version-info");
   const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
-  ver.textContent=`Version 1.5-alpha • Updated ${now} PST`;
-  const form=document.getElementById("newsletterForm");
-  const msg=document.getElementById("success-message");
-  form.addEventListener("submit",e=>{
-    e.preventDefault();msg.style.display="block";form.reset();
-    setTimeout(()=>{msg.style.display="none";},4000);
-  });
+  ver.textContent=`Version 1.5.1-alpha • Updated ${now} PST`;
 });
 </script>
 </body>
