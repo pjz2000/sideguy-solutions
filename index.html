@@ -1,9 +1,9 @@
 <!--
   SideGuy Solutions
-  Version: 1.7.1
+  Version: 1.7.2-prebuild
   Author: PJ + Kromeon Dev Team
   Description: Coastal tech, transport, and life assistance — powered by precision.
-  Includes: Ethereum Edge (auto APY + timestamp), Newsletter, and Hero refresh.
+  Includes: Auto-random Sports Edge + Ethereum Edge (live)
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,17 +15,17 @@
 
 <style>
 :root {
-  --bg: #0a1122;
-  --blue-bg: linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
-  --card: #121b30;
-  --muted: #a0aec0;
-  --text: #f0f4f8;
-  --brand1: #4da8ff;
-  --brand2: #1cc8e5;
-  --brand3: #8b5cf6;
-  --accent: #2dd4bf;
-  --radius: 12px;
-  --shadow: 0 8px 20px rgba(10,17,34,0.25);
+  --bg:#0a1122;
+  --blue-bg:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
+  --card:#121b30;
+  --muted:#a0aec0;
+  --text:#f0f4f8;
+  --brand1:#4da8ff;
+  --brand2:#1cc8e5;
+  --brand3:#8b5cf6;
+  --accent:#2dd4bf;
+  --radius:12px;
+  --shadow:0 8px 20px rgba(10,17,34,0.25);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -56,16 +56,11 @@ a:hover{color:var(--accent);text-decoration:underline}
 .floating-btn{position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,#3b82f6,#60a5fa);color:white;border:none;border-radius:50px;padding:14px 24px;font-weight:700;box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;z-index:9999;animation:pulse 2.5s infinite;transition:transform .2s,box-shadow .3s}
 .floating-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,0.5)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
-.trend-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.trend-list li{background:rgba(255,255,255,0.06);padding:8px 14px;border-radius:8px;color:var(--text);font-size:14px;box-shadow:var(--shadow);transition:all .2s}
-.trend-list li:hover{background:rgba(77,168,255,0.2);transform:scale(1.05)}
-.trend-title{text-align:center;margin-bottom:20px;color:var(--brand2)}
-#newsletter h3{font-size:22px;margin-bottom:8px}
-#success-message{display:none;color:var(--accent);margin-top:10px;font-size:14px;animation:fadeIn 1s forwards}
 .coastal-card{background:rgba(255,255,255,0.05);border-radius:10px;padding:16px;margin:12px auto;max-width:520px;box-shadow:0 0 15px rgba(45,212,191,.15);transition:transform .2s,box-shadow .3s}
 .coastal-card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(45,212,191,.3)}
 .apy-highlight{background:linear-gradient(90deg,#1cc8e5,#4da8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
 @media(max-width:768px){.menu{flex-wrap:wrap;justify-content:center}.hero h1{font-size:30px}}
+.fadeIn{animation:fadeIn .8s ease-in}
 </style>
 </head>
 
@@ -74,10 +69,9 @@ a:hover{color:var(--accent);text-decoration:underline}
   <div class="inner">
     <div class="brand">SideGuy Solutions</div>
     <ul class="menu">
+      <li><a href="#sports-edge">Today’s Edge</a></li>
       <li><a href="#ethereum-edge">Ethereum Edge</a></li>
-      <li><a href="#trending">Trending</a></li>
       <li><a href="#newsletter">Newsletter</a></li>
-      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -89,17 +83,27 @@ a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </section>
 
+<!-- 🏈 Today’s Edge -->
+<section id="sports-edge" class="section">
+  <div class="container">
+    <h2 style="text-align:center;color:#ff7849;">🏆 Today’s Edge</h2>
+    <p class="section-subtitle">PJ’s daily coastal pick — refreshed automatically.</p>
+    <div id="sports-card" class="coastal-card fadeIn">Loading latest edge...</div>
+    <div style="text-align:center;margin-top:12px;">
+      <a href="mailto:peter.z@kromeon.com?subject=Today’s Edge Inquiry" class="btn">📊 Get Today’s Play from PJ</a>
+    </div>
+  </div>
+</section>
+
+<!-- 🪙 Ethereum Edge -->
 <section id="ethereum-edge" class="section">
   <div class="container">
     <h2 style="text-align:center;color:var(--brand2);">🪙 Ethereum Edge — Where DeFi Meets the Coastline</h2>
     <p class="section-subtitle">Live insights from Ethereum and DeFi — auto-updated with coastal clarity.</p>
-
     <div id="eth-info" class="coastal-card">Loading ETH data...</div>
     <div id="best-apy" class="coastal-card">Loading today’s best APY...</div>
     <div id="defi-movers" class="coastal-card">Loading DeFi movers...</div>
-
     <p id="edge-time" style="text-align:center;color:#7dd3fc;margin-top:8px;font-size:14px;">⏱️ Last Updated: Loading...</p>
-
     <div style="text-align:center;margin-top:20px;">
       <a href="mailto:peter.z@kromeon.com?subject=Ethereum Edge Inquiry" class="btn">📩 Ask PJ About Ethereum Yields</a>
     </div>
@@ -118,9 +122,9 @@ a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </section>
 
-<footer id="contact" class="footer">
+<footer class="footer">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.7.1</p>
+  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.7.2-prebuild</p>
 </footer>
 
 <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
@@ -128,6 +132,23 @@ a:hover{color:var(--accent);text-decoration:underline}
 <script>
 async function fetchJSON(url){const res=await fetch(url);return res.json();}
 
+// 🏈 Auto-Random Sports Edge
+function loadSportsEdge(){
+  const edges=[
+    {emoji:"🏈",match:"49ers vs Chiefs",market:"McCaffrey TD Anytime",odds:"+105",conf:"⭐⭐⭐⭐☆"},
+    {emoji:"🏀",match:"Suns vs Mavericks",market:"Lively II Over 14.5 PRA",odds:"+136",conf:"⭐⭐⭐☆☆"},
+    {emoji:"⚾",match:"Padres vs Dodgers",market:"Machado Over 1.5 TB",odds:"+120",conf:"⭐⭐⭐⭐☆"},
+    {emoji:"🏒",match:"Sharks vs Rangers",market:"Under 5.5 Goals",odds:"+115",conf:"⭐⭐⭐☆☆"},
+    {emoji:"🏈",match:"Michigan vs Ohio State",market:"Alt Spread +4.5",odds:"+128",conf:"⭐⭐⭐⭐⭐"},
+    {emoji:"🏀",match:"Lakers vs Celtics",market:"Tatum Over 26.5 PTS",odds:"+110",conf:"⭐⭐⭐⭐☆"}
+  ];
+  const pick=edges[Math.floor(Math.random()*edges.length)];
+  const box=document.getElementById("sports-card");
+  box.classList.remove("fadeIn");void box.offsetWidth;box.classList.add("fadeIn");
+  box.innerHTML=`${pick.emoji} <b>${pick.match}</b><br>${pick.market}<br><span style="color:#7dd3fc;">Odds:</span> ${pick.odds}<br><span>${pick.conf}</span><br><i>Inquire for details — North County Peeps only!</i>`;
+}
+
+// 🪙 Ethereum Edge
 async function loadEthereumEdge(){
   const ethBox=document.getElementById("eth-info");
   const apyBox=document.getElementById("best-apy");
@@ -157,12 +178,15 @@ async function loadEthereumEdge(){
   }
 }
 
+// ⏱ Init
 document.addEventListener("DOMContentLoaded",()=>{
+  loadSportsEdge();
   loadEthereumEdge();
+  setInterval(loadSportsEdge,90000);
   setInterval(loadEthereumEdge,90000);
   const ver=document.getElementById("version-info");
   const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
-  ver.textContent=`Version 1.7.1 • Updated ${now} PST`;
+  ver.textContent=`Version 1.7.2-prebuild • Updated ${now} PST`;
   const form=document.getElementById("newsletterForm");
   const msg=document.getElementById("success-message");
   form.addEventListener("submit",e=>{
