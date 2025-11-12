@@ -1,9 +1,8 @@
 <!--
   SideGuy Solutions
-  Version: 1.7.2-prebuild
+  Version: 1.7.6-final
   Author: PJ + Kromeon Dev Team
-  Description: Coastal tech, transport, and life assistance — powered by precision.
-  Includes: Auto-random Sports Edge + Ethereum Edge (live)
+  Includes: Sports Edge + Ethereum Edge + Newsletter + SMS + Auto vCard Builder
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,29 +11,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>SideGuy Solutions — Where Code Meets the Coastline</title>
 <meta name="description" content="SideGuy Solutions blends technology, transportation, and lifestyle — precision-built for North County. Featuring live DeFi and sports insights.">
-
 <style>
-:root {
-  --bg:#0a1122;
-  --blue-bg:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
-  --card:#121b30;
-  --muted:#a0aec0;
-  --text:#f0f4f8;
-  --brand1:#4da8ff;
-  --brand2:#1cc8e5;
-  --brand3:#8b5cf6;
-  --accent:#2dd4bf;
-  --radius:12px;
-  --shadow:0 8px 20px rgba(10,17,34,0.25);
-}
+:root{--bg:#0a1122;--blue-bg:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);--card:#121b30;--muted:#a0aec0;--text:#f0f4f8;--brand1:#4da8ff;--brand2:#1cc8e5;--brand3:#8b5cf6;--accent:#2dd4bf;--radius:12px;--shadow:0 8px 20px rgba(10,17,34,0.25);}
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:var(--blue-bg);
-  color:var(--text);
-  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
-  line-height:1.6;
-  animation:fadeIn 1s ease-in;
-}
+body{background:var(--blue-bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;line-height:1.6;animation:fadeIn 1s ease-in;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .container{max-width:1100px;margin:auto;padding:0 20px}
 a{color:var(--brand2);text-decoration:none;transition:color .2s}
@@ -59,7 +39,6 @@ a:hover{color:var(--accent);text-decoration:underline}
 .coastal-card{background:rgba(255,255,255,0.05);border-radius:10px;padding:16px;margin:12px auto;max-width:520px;box-shadow:0 0 15px rgba(45,212,191,.15);transition:transform .2s,box-shadow .3s}
 .coastal-card:hover{transform:translateY(-3px);box-shadow:0 0 25px rgba(45,212,191,.3)}
 .apy-highlight{background:linear-gradient(90deg,#1cc8e5,#4da8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
-@media(max-width:768px){.menu{flex-wrap:wrap;justify-content:center}.hero h1{font-size:30px}}
 .fadeIn{animation:fadeIn .8s ease-in}
 </style>
 </head>
@@ -83,7 +62,6 @@ a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </section>
 
-<!-- 🏈 Today’s Edge -->
 <section id="sports-edge" class="section">
   <div class="container">
     <h2 style="text-align:center;color:#ff7849;">🏆 Today’s Edge</h2>
@@ -95,7 +73,6 @@ a:hover{color:var(--accent);text-decoration:underline}
   </div>
 </section>
 
-<!-- 🪙 Ethereum Edge -->
 <section id="ethereum-edge" class="section">
   <div class="container">
     <h2 style="text-align:center;color:var(--brand2);">🪙 Ethereum Edge — Where DeFi Meets the Coastline</h2>
@@ -104,9 +81,6 @@ a:hover{color:var(--accent);text-decoration:underline}
     <div id="best-apy" class="coastal-card">Loading today’s best APY...</div>
     <div id="defi-movers" class="coastal-card">Loading DeFi movers...</div>
     <p id="edge-time" style="text-align:center;color:#7dd3fc;margin-top:8px;font-size:14px;">⏱️ Last Updated: Loading...</p>
-    <div style="text-align:center;margin-top:20px;">
-      <a href="mailto:peter.z@kromeon.com?subject=Ethereum Edge Inquiry" class="btn">📩 Ask PJ About Ethereum Yields</a>
-    </div>
   </div>
 </section>
 
@@ -114,25 +88,57 @@ a:hover{color:var(--accent);text-decoration:underline}
   <div class="container">
     <h3>💌 Join PJ’s Daily Drop</h3>
     <p class="section-subtitle">Get the latest SideGuy updates, DFS promos, and DeFi trends — delivered daily.</p>
-    <form id="newsletterForm" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
-      <input type="email" name="email" placeholder="Your email address" required style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
+    <form onsubmit="sendEmail(event)" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:500px;margin:auto;">
+      <input id="emailInput" type="email" name="email" placeholder="Your email address" required style="padding:10px;border-radius:8px;border:none;width:70%;max-width:300px;">
       <button type="submit" class="btn" style="padding:10px 18px;">Subscribe</button>
     </form>
-    <div id="success-message">✅ Subscribed! You’ll get the next drop from PJ 🌴</div>
+    <div id="success-message" style="display:none;margin-top:10px;">✅ Thanks for connecting! You’ll get the next drop from PJ 🌴</div>
+    <p style="text-align:center;margin-top:12px;">
+      or <a href="sms:+17735441231?body=Hey%20PJ!%20I%20want%20to%20join%20your%20Daily%20Drop!" style="color:#1cc8e5;font-weight:600;">📱 Text PJ instead</a>
+    </p>
+    <div style="text-align:center;margin-top:15px;">
+      <button class="btn" onclick="downloadVCard()" style="font-size:14px;padding:10px 16px;">📇 Add PJ to Contacts</button>
+    </div>
   </div>
 </section>
 
 <footer class="footer">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.7.2-prebuild</p>
+  <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 1.7.6-final</p>
 </footer>
 
 <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
 
 <script>
+function sendEmail(e){
+  e.preventDefault();
+  const email=document.getElementById('emailInput').value;
+  const subject=encodeURIComponent("New Newsletter Subscription — SideGuy Solutions");
+  const body=encodeURIComponent(`Please add me to PJ's Daily Drop newsletter.\n\nSubscriber: ${email}`);
+  window.location.href=`mailto:peter.z@kromeon.com?subject=${subject}&body=${body}`;
+  document.getElementById('success-message').style.display='block';
+}
+function downloadVCard(){
+  const vcard=`BEGIN:VCARD
+VERSION:3.0
+N:Zonis;PJ;;;
+FN:PJ Zonis
+ORG:SideGuy Solutions
+TITLE:Transportation & Life Enhancement Specialist
+EMAIL;TYPE=INTERNET:peter.z@kromeon.com
+TEL;TYPE=CELL:+17735441231
+ADR;TYPE=WORK:;;Solana Beach;CA;;USA
+URL:https://www.sideguysolutions.com
+URL:https://www.linkedin.com/in/peterzonis/
+END:VCARD`;
+  const blob=new Blob([vcard],{type:"text/vcard"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="PJ-SideGuySolutions.vcf";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 async function fetchJSON(url){const res=await fetch(url);return res.json();}
-
-// 🏈 Auto-Random Sports Edge
 function loadSportsEdge(){
   const edges=[
     {emoji:"🏈",match:"49ers vs Chiefs",market:"McCaffrey TD Anytime",odds:"+105",conf:"⭐⭐⭐⭐☆"},
@@ -147,8 +153,6 @@ function loadSportsEdge(){
   box.classList.remove("fadeIn");void box.offsetWidth;box.classList.add("fadeIn");
   box.innerHTML=`${pick.emoji} <b>${pick.match}</b><br>${pick.market}<br><span style="color:#7dd3fc;">Odds:</span> ${pick.odds}<br><span>${pick.conf}</span><br><i>Inquire for details — North County Peeps only!</i>`;
 }
-
-// 🪙 Ethereum Edge
 async function loadEthereumEdge(){
   const ethBox=document.getElementById("eth-info");
   const apyBox=document.getElementById("best-apy");
@@ -159,15 +163,12 @@ async function loadEthereumEdge(){
     const price=eth.ethereum.usd.toFixed(2);
     const change=eth.ethereum.usd_24h_change.toFixed(2);
     ethBox.innerHTML=`<b>ETH Price:</b> $${price} <span style="color:${change>=0?'#2dd4bf':'#ef4444'}">(${change}%)</span><br>⛽ Avg Gas: ~35 Gwei<br>💎 Staking APY: 4.2%`;
-
     const yields=await fetchJSON("https://yields.llama.fi/pools");
     const top=yields.data.sort((a,b)=>b.apy-b.apy)[0];
-    apyBox.innerHTML=`<b>PJ’s Pick of the Day:</b> <span class="apy-highlight">${top.symbol}</span> — ${top.apy.toFixed(2)}% APY<br><i>${top.project}</i>: ${top.chain} • ${top.poolMeta||'DeFi opportunity'}`;
-
+    apyBox.innerHTML=`<b>PJ’s Pick of the Day:</b> <span class="apy-highlight">${top.symbol}</span> — ${top.apy.toFixed(2)}% APY<br><i>${top.project}</i>: ${top.chain}`;
     const defi=await fetchJSON("https://api.coingecko.com/api/v3/simple/price?ids=aave,uniswap,lido-dao&vs_currencies=usd&include_24hr_change=true");
     const items=Object.entries(defi).map(([id,d])=>`<div>${id.toUpperCase()}: $${d.usd.toFixed(2)} (<span style="color:${d.usd_24h_change>=0?'#2dd4bf':'#ef4444'}">${d.usd_24h_change.toFixed(2)}%</span>)</div>`).join("");
     defiBox.innerHTML=`<b>Top DeFi Movers:</b><br>${items}`;
-
     const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:true});
     timeBox.innerHTML=`⏱️ Last Updated: ${now} PST`;
   }catch(e){
@@ -177,22 +178,13 @@ async function loadEthereumEdge(){
     timeBox.textContent="Update failed — retrying...";
   }
 }
-
-// ⏱ Init
 document.addEventListener("DOMContentLoaded",()=>{
-  loadSportsEdge();
-  loadEthereumEdge();
+  loadSportsEdge();loadEthereumEdge();
   setInterval(loadSportsEdge,90000);
   setInterval(loadEthereumEdge,90000);
   const ver=document.getElementById("version-info");
   const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
-  ver.textContent=`Version 1.7.2-prebuild • Updated ${now} PST`;
-  const form=document.getElementById("newsletterForm");
-  const msg=document.getElementById("success-message");
-  form.addEventListener("submit",e=>{
-    e.preventDefault();msg.style.display="block";form.reset();
-    setTimeout(()=>{msg.style.display="none";},4000);
-  });
+  ver.textContent=`Version 1.7.6-final • Updated ${now} PST`;
 });
 </script>
 </body>
