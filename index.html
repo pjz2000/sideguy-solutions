@@ -1,78 +1,80 @@
 <!--
   SideGuy Solutions
-  Version: 2.1-ocean-beta
-  Features: Ocean hero, North County Shows (Venue Direct), Sports Edge, Newsletter, PJ Bubble
+  Version: 2.2-ocean-beta
   Author: PJ + Kromeon Dev Team
+  Notes: Ocean hero + Today’s Edge + Venue Direct Tickets (Beta)
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description" content="SideGuy Solutions — North County concierge for tech, life, and transport. From Solana Beach to Encinitas, we blend software, sports edges, and coastal logistics so you can move, build, and live freely.">
-
+  <title>SideGuy Solutions — Where Code Meets the Coastline</title>
+  <meta name="description" content="SideGuy Solutions — North County concierge for tech, transport, and life. Sports edges, ticket plays, and coastal automation from Solana Beach to Encinitas.">
   <style>
     :root {
       --bg: #020617;
-      --blue-bg: linear-gradient(135deg, #0f172a 0%, #1e40af 40%, #38bdf8 100%);
-      --card: #0b1220;
+      --blue-bg: linear-gradient(135deg,#0f172a 0%,#1e40af 40%,#38bdf8 100%);
+      --card: rgba(15,23,42,0.92);
       --muted: #a0aec0;
-      --text: #f9fafb;
-      --brand1: #38bdf8;
-      --brand2: #22d3ee;
+      --text: #e5f2ff;
+      --brand1: #4da8ff;
+      --brand2: #22c1c3;
       --brand3: #8b5cf6;
       --accent: #2dd4bf;
       --radius: 14px;
-      --shadow: 0 10px 30px rgba(15,23,42,0.6);
+      --shadow: 0 10px 30px rgba(15,23,42,0.55);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
       line-height: 1.6;
-      animation: fadeIn 0.8s ease-in;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      animation: fadeIn 0.9s ease-in;
     }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-
     a {
       color: var(--brand2);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s, opacity 0.2s;
     }
     a:hover { color: var(--accent); text-decoration: underline; }
-    a:focus { outline: 2px solid var(--brand1); outline-offset: 2px; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
     /* NAVBAR */
     .nav {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(2,6,23,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(148,163,184,0.25);
+      background: rgba(15,23,42,0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148,163,184,0.35);
     }
-    .nav .inner {
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
+      padding: 10px 20px;
     }
     .brand {
       font-weight: 800;
       font-size: 20px;
-      color: var(--text);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
+    }
+    .brand span {
+      color: var(--brand2);
     }
     .menu {
       display: flex;
-      gap: 18px;
+      gap: 16px;
       list-style: none;
       font-size: 14px;
     }
@@ -80,522 +82,634 @@
       color: var(--muted);
       font-weight: 600;
     }
-    .menu a:hover { color: var(--brand2); }
+    .menu a:hover {
+      color: var(--brand1);
+    }
+    .timestamp {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 2px;
+    }
 
-    /* HERO */
-    .hero {
+    /* CRYPTO TICKER */
+    .crypto-ticker {
+      background: radial-gradient(circle at 0 0, rgba(45,212,191,0.16), transparent 55%),
+                  radial-gradient(circle at 100% 0, rgba(56,189,248,0.16), transparent 55%),
+                  rgba(15,23,42,0.9);
+      border-bottom: 1px solid rgba(148,163,184,0.35);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 8px 0;
+    }
+    .ticker-inner {
+      display: inline-block;
+      padding-left: 100%;
+      animation: tickerMove 26s linear infinite;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+    }
+    @keyframes tickerMove {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* HERO WITH OCEAN VIDEO */
+    .hero-wrap {
       position: relative;
-      padding: 96px 20px 72px;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
       color: var(--text);
     }
-
-    /* Ocean background image + gradient overlay */
-    .hero::before {
-      content: "";
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.2) brightness(0.55);
+      transform: scale(1.03);
+    }
+    .hero-overlay {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top, rgba(56,189,248,0.45), transparent 55%),
-        linear-gradient(to bottom, rgba(15,23,42,0.2), rgba(15,23,42,0.85)),
-        url("https://images.pexels.com/photos/240526/pexels-photo-240526.jpeg?auto=compress&cs=tinysrgb&w=1600") center/cover no-repeat;
-      z-index: -2;
-      filter: saturate(1.2);
+        radial-gradient(circle at top, rgba(56,189,248,0.38), transparent 55%),
+        radial-gradient(circle at 10% 90%, rgba(45,212,191,0.35), transparent 60%),
+        linear-gradient(to bottom, rgba(15,23,42,0.80), rgba(15,23,42,0.95));
     }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at bottom, rgba(15,23,42,0.8), transparent 55%);
-      opacity: 0.9;
-      z-index: -1;
-    }
-
-    .hero-inner {
-      max-width: 720px;
-      margin: 0 auto;
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 64px 20px 80px;
       text-align: center;
     }
-
     .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(15,23,42,0.8);
-      border: 1px solid rgba(148,163,184,0.4);
-      margin-bottom: 16px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a5f3fc;
+      margin-bottom: 8px;
     }
-
     .hero h1 {
       font-size: clamp(32px, 5vw, 44px);
-      line-height: 1.1;
       font-weight: 800;
-      margin-bottom: 18px;
-      text-shadow: 0 8px 30px rgba(15,23,42,0.9);
+      margin-bottom: 14px;
     }
-
-    .hero p {
-      color: #e5e7eb;
-      font-size: 17px;
-      max-width: 720px;
-      margin: 0 auto 18px;
-      text-shadow: 0 4px 18px rgba(15,23,42,0.9);
+    .hero h1 span {
+      background: linear-gradient(120deg,#38bdf8,#a855f7,#22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
     }
-
-    .hero-subline {
+    .hero-lede {
+      max-width: 640px;
+      margin: 0 auto 20px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 16px;
+    }
+    .hero-lede strong {
+      color: #e0f2fe;
+      font-weight: 600;
+    }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 24px;
     }
+    .pill {
+      font-size: 12px;
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.7);
+      color: #e5f2ff;
+    }
 
+    .btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow);
+      background: linear-gradient(90deg,var(--brand1),var(--brand3));
+      color: white;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(15,23,42,0.7);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: none;
+      color: #e5f2ff;
+    }
+    .btn-outline:hover {
+      background: rgba(15,23,42,0.85);
+      box-shadow: 0 10px 18px rgba(15,23,42,0.7);
+    }
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-top: 8px;
+      margin-bottom: 10px;
     }
-
-    .pill-text {
+    .hero-subnote {
       font-size: 13px;
       color: var(--muted);
     }
 
-    /* BUTTONS */
-    .btn {
-      cursor: pointer;
-      border: none;
-      border-radius: var(--radius);
-      padding: 12px 18px;
-      background: linear-gradient(135deg, var(--brand1), var(--brand3));
-      color: white;
-      font-weight: 700;
-      box-shadow: var(--shadow);
-      transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 35px rgba(15,23,42,0.8);
-      filter: brightness(1.05);
-    }
-
-    /* CRYPTO TICKER */
-    .crypto-ticker {
-      background: radial-gradient(circle at top, rgba(34,211,238,0.18), rgba(15,23,42,0.95));
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 8px 10px;
-      text-align: center;
-      border-bottom: 1px solid rgba(148,163,184,0.25);
-      font-size: 13px;
-    }
-    .ticker-item {
-      display: inline-block;
-      margin-right: 30px;
-      color: var(--text);
-      font-variant-numeric: tabular-nums;
-      animation: ticker 22s linear infinite;
-    }
-    @keyframes ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    /* GENERIC SECTIONS */
+    /* SECTION BASE */
     .section {
-      padding: 48px 20px;
-      background: radial-gradient(circle at top, rgba(15,23,42,0.9), #020617);
-      scroll-margin-top: 80px;
+      padding: 40px 20px;
+      background: radial-gradient(circle at top, rgba(56,189,248,0.2), transparent 55%),
+                  radial-gradient(circle at bottom, rgba(15,23,42,1), rgba(15,23,42,1));
     }
-    .section-alt {
-      background: radial-gradient(circle at top, rgba(8,47,73,0.9), #020617);
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
     }
-
-    .section h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-      text-align: center;
+    .section-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+      text-align: left;
     }
-
+    .section-kicker {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #7dd3fc;
+      margin-bottom: 6px;
+    }
     .section-subtitle {
       font-size: 14px;
-      max-width: 800px;
-      margin: 0 auto 20px;
-      text-align: center;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* 2-COL GRID */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,0.9fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+    @media (max-width: 860px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+    .card-header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .chip {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
       color: var(--muted);
     }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      padding: 18px 18px 16px;
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.08), rgba(15,23,42,1));
-      border-radius: var(--radius);
-      border: 1px solid rgba(148,163,184,0.35);
-      box-shadow: var(--shadow);
-      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(15,23,42,0.9);
-      border-color: rgba(56,189,248,0.9);
-    }
-    .card h3 {
-      margin-bottom: 6px;
-      font-size: 16px;
-    }
-    .card p {
+    .card-body {
       font-size: 14px;
       color: var(--muted);
     }
 
-    /* TREND LIST */
-    .trend-list {
-      list-style: none;
-      padding: 0;
+    /* TODAY'S EDGE */
+    #edge-card-main {
+      font-size: 15px;
+      color: var(--text);
+    }
+    #edge-card-main strong {
+      font-weight: 700;
+    }
+    .edge-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: center;
-      margin-top: 14px;
-    }
-    .trend-list li {
-      background: rgba(15,23,42,0.9);
-      padding: 8px 12px;
-      border-radius: 999px;
-      color: var(--text);
-      font-size: 13px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(148,163,184,0.35);
-    }
-
-    /* ODDS CARDS */
-    .odds-card {
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.09), rgba(15,23,42,1));
-      margin: 10px auto;
-      padding: 12px 14px;
-      border-radius: 12px;
-      max-width: 520px;
-      box-shadow: 0 0 18px rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.4);
-      font-size: 14px;
-    }
-    .odds-card strong { color: var(--brand1); }
-
-    /* SHOWS SECTION */
-    .show-meta {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .show-cta {
       margin-top: 8px;
       font-size: 13px;
+      color: var(--muted);
+    }
+    .edge-meta span {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
     }
 
-    /* NEWSLETTER */
-    form.newsletter {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      max-width: 520px;
-      margin: 14px auto 0;
-    }
-    form.newsletter input {
-      padding: 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      width: 70%;
-      max-width: 320px;
-      background: rgba(15,23,42,0.9);
-      color: var(--text);
-      font-size: 14px;
-    }
-    #success-message {
-      display: none;
-      color: var(--accent);
-      margin-top: 10px;
+    /* TICKETS TABLE */
+    table.tickets {
+      width: 100%;
+      border-collapse: collapse;
       font-size: 13px;
-      text-align: center;
+      margin-top: 6px;
+      color: var(--text);
+    }
+    table.tickets th,
+    table.tickets td {
+      padding: 8px 6px;
+      border-bottom: 1px solid rgba(148,163,184,0.3);
+      text-align: left;
+    }
+    table.tickets th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #a5b4fc;
+    }
+    .status-pill {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .status-open {
+      background: rgba(22,163,74,0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(22,163,74,0.6);
+    }
+    .status-limited {
+      background: rgba(234,179,8,0.14);
+      color: #fef9c3;
+      border: 1px solid rgba(202,138,4,0.7);
+    }
+    .status-sold {
+      background: rgba(127,29,29,0.25);
+      color: #fecaca;
+      border: 1px solid rgba(239,68,68,0.7);
+    }
+
+    /* APY SNAPSHOT */
+    #apy-coin {
+      font-weight: 700;
+      color: #e0f2fe;
+    }
+    #apy-change {
+      font-weight: 600;
+      color: var(--accent);
+    }
+    #apy-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
     }
 
     /* FOOTER */
     .footer {
+      padding: 28px 20px 40px;
       text-align: center;
-      padding: 32px 20px 40px;
-      border-top: 1px solid rgba(148,163,184,0.3);
       background: #020617;
+      border-top: 1px solid rgba(30,64,175,0.7);
       color: var(--muted);
       font-size: 13px;
     }
-    #version-info { color: #7dd3fc; margin-top: 6px; }
 
-    /* FLOATING PJ BUTTON */
-    .floating-btn {
+    /* FLOATING PJ BUTTON + TAGLINE */
+    .pj-wrap {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #22c55e, #22d3ee);
+      right: 22px;
+      bottom: 22px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .pj-tagline {
+      max-width: 260px;
+      font-size: 12px;
+      background: rgba(15,23,42,0.94);
+      border-radius: 11px;
+      padding: 8px 10px;
+      color: #e0f2fe;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
+    }
+    .pj-tagline strong {
+      color: #22c1c3;
+    }
+    .pj-btn {
+      background: linear-gradient(90deg,#38bdf8,#8b5cf6);
       color: white;
       border: none;
       border-radius: 999px;
-      padding: 12px 18px;
+      padding: 11px 20px;
       font-weight: 700;
-      box-shadow: 0 18px 40px rgba(15,23,42,0.95);
+      box-shadow: 0 14px 30px rgba(15,23,42,0.9);
       cursor: pointer;
-      z-index: 9999;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-size: 14px;
-      animation: pulse 2.6s infinite;
-      transition: transform 0.18s, box-shadow 0.18s;
-      text-decoration: none;
+      animation: pjPulse 2.5s infinite;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .floating-btn:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 22px 55px rgba(15,23,42,1);
+    .pj-btn:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 18px 40px rgba(15,23,42,1);
     }
-    .floating-subline {
-      font-size: 11px;
-      color: #e5e7eb;
-      display: block;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(56,189,248,0.7); }
-      70% { box-shadow: 0 0 0 16px rgba(56,189,248,0); }
+    @keyframes pjPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(56,189,248,0.65); }
+      70%  { box-shadow: 0 0 0 13px rgba(56,189,248,0); }
       100% { box-shadow: 0 0 0 0 rgba(56,189,248,0); }
+    }
+    @media (max-width: 600px) {
+      .pj-wrap { right: 14px; bottom: 14px; }
+      .pj-tagline { max-width: 220px; font-size: 11px; }
+      .pj-btn { padding: 9px 16px; font-size: 13px; }
     }
 
     @media (max-width: 768px) {
-      .menu { flex-wrap: wrap; justify-content: center; }
-      .hero { padding: 80px 16px 64px; }
-      .hero h1 { font-size: 30px; }
-      .floating-btn {
-        bottom: 16px;
-        right: 16px;
-        padding: 10px 14px;
-        font-size: 13px;
-      }
+      .menu { display: none; }
     }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
-  <nav class="nav">
-    <div class="inner">
-      <div class="brand">SideGuy Solutions</div>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner container">
+      <div>
+        <div class="brand">SideGuy <span>Solutions</span></div>
+        <div class="timestamp" id="timestamp">Updated: —</div>
+      </div>
       <ul class="menu">
-        <li><a href="#trending">Trending</a></li>
-        <li><a href="#shows">North County Shows</a></li>
-        <li><a href="#sports-edge">Sports Edge</a></li>
+        <li><a href="#edge">Today’s Edge</a></li>
+        <li><a href="#tickets">Tickets (Beta)</a></li>
+        <li><a href="#apy">APY Snapshot</a></li>
         <li><a href="#newsletter">Daily Drop</a></li>
-        <li><a href="#contact">About / Contact</a></li>
       </ul>
     </div>
-  </nav>
+  </header>
 
   <!-- CRYPTO TICKER -->
   <div class="crypto-ticker">
-    <span class="ticker-item" id="ticker-content">Loading coastal chain prices…</span>
+    <div class="ticker-inner" id="ticker-content">
+      Loading SOL • ETH • USDC prices...
+    </div>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-kicker">
-        <span>🌊 North County Concierge</span>
-        <span>•</span>
-        <span>Tech • Transport • Life</span>
+  <!-- HERO WITH OCEAN -->
+  <section class="hero-wrap">
+    <!-- Replace ocean-loop.mp4 with your own file name when you have it -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="ocean-loop.mp4" type="video/mp4">
+      <!-- If video is missing, gradient background still looks good -->
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container hero">
+      <div class="hero-kicker">North County • Tech • Transport • Life</div>
+      <h1>Where <span>code</span> meets the coastline.</h1>
+      <p class="hero-lede">
+        SideGuy Solutions is your <strong>North County concierge for tech, transport, and life</strong>.  
+        From Solana Beach to Encinitas, we ship software, moves, and micro-ops that
+        help you live smoother, earn smarter, and save time.
+      </p>
+      <div class="hero-pills">
+        <div class="pill">🚙 Local rides & runs</div>
+        <div class="pill">📲 Coastal automation builds</div>
+        <div class="pill">🏀 Daily edges & ticket plays</div>
+        <div class="pill">🪙 Solana-friendly mindset</div>
       </div>
-      <h1>Where code meets the coastline.</h1>
-      <p>
-        SideGuy Solutions blends technology, transportation, and real-life assistance —
-        precision-built for North County. From Solana Beach to Encinitas, we automate
-        the details so you can move, build, and live freely.
-      </p>
-      <p class="hero-subline">
-        Based in Solana Beach • Serving North County for 6+ years • Slight Solana bias ⚡
-      </p>
       <div class="hero-cta">
-        <a href="sms:+17735441231?&body=Hey%20PJ%2C%20saw%20your%20site.%20I%27m%20interested%20in%20SideGuy%20help."
-           class="btn">
-          💬 Text PJ
+        <a class="btn" href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ%20—%20SideGuy%20Solutions">
+          💬 Book with PJ
         </a>
-        <a href="mailto:peter.z@kromeon.com?subject=SideGuy%20Solutions%20Inquiry"
-           class="btn" style="background:linear-gradient(135deg,#f97316,#ea580c);">
-          📩 Email PJ
+        <a class="btn btn-outline" href="sms:+17735441231?&body=Hey%20PJ%2C%20I%27m%20interested%20in%20SideGuy%20help.">
+          📱 Text PJ: (773) 544-1231
         </a>
       </div>
-      <p class="pill-text">
-        PJ — the assistant you never knew you needed.<br/>
-        Transportation, life enhancement, and smarter systems for the coastal lifestyle.
-      </p>
+      <div class="hero-subnote">
+        One person, one browser tab, one coastal operating system for your life.
+      </div>
     </div>
   </section>
 
-  <!-- TRENDING -->
-  <section id="trending" class="section">
-    <div class="container">
-      <h2>🔥 Trending Now</h2>
+  <!-- TODAY'S EDGE + EXPLAINER -->
+  <section id="edge" class="section">
+    <div class="section-inner">
+      <div class="section-kicker">⛹️‍♂️ Today’s Edge (Manual + Random Flavor)</div>
+      <h2 class="section-title">North County DFS & Futures Corner</h2>
       <p class="section-subtitle">
-        A quick pulse on what’s moving — AI, DeFi, and coastal life. Updated automatically when possible,
-        with a smart fallback when APIs get grumpy.
+        Each day, PJ tracks price action, promos, and realistic edges across DFS and regulated markets.
+        Below is an example play and how it’s framed — **North County only, always conversational, never financial advice.**
       </p>
-      <ul id="trendList" class="trend-list">
-        <li>Loading top trends…</li>
-      </ul>
+
+      <div class="two-col">
+        <!-- Randomized Edge Card -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">🎯 Today’s Featured Angle</div>
+            <span class="chip">Example • Rotates on refresh</span>
+          </div>
+          <div class="card-body" id="edge-card-main">
+            Loading edge…
+          </div>
+          <div class="edge-meta">
+            <span id="edge-sport">—</span>
+            <span id="edge-type">—</span>
+            <span>North County inquiries only</span>
+          </div>
+        </article>
+
+        <!-- How It Works -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">How this actually works</div>
+          </div>
+          <div class="card-body">
+            <ul style="padding-left:18px; margin: 0;">
+              <li>Everything is **conversation-first**: text or email PJ, no mass tout service.</li>
+              <li>Focus on **promotional money, edges, and lineup structure** — not wild parlays.</li>
+              <li>California-friendly: DFS, edges, and ideas that make sense for where you live.</li>
+              <li>Goal: long-term sustainability and quality of life, not “get rich tonight.”</li>
+            </ul>
+            <p style="margin-top:10px; font-size:12px;">
+              If you’re in North County and want help structuring promos or balancing risk vs. sweat,
+              just reply to the Daily Drop or hit the Book with PJ button.
+            </p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- NORTH COUNTY SHOWS — VENUE DIRECT BETA -->
-  <section id="shows" class="section section-alt">
-    <div class="container">
-      <h2>🎟️ North County Shows — Venue Direct (Beta)</h2>
+  <!-- TICKETS (VENUE DIRECT BETA) + APY SNAPSHOT -->
+  <section id="tickets" class="section">
+    <div class="section-inner">
+      <div class="section-kicker">🎟 Venue Direct (Beta)</div>
+      <h2 class="section-title">North County Tickets — Skip the Junk Fees</h2>
       <p class="section-subtitle">
-        Local shows, North County only. No junk fees, no drama. For now, text or email PJ and ask about
-        Solana / USDC options and venue-direct support.
+        SideGuy was born out of the ticket world. The long-term play: **connect locals directly with venues,
+        cut junk fees, and eventually settle in crypto**. For now, this is a simple beta board showing how it could look.
       </p>
 
-      <div class="grid">
-        <div class="card">
-          <h3>🎶 Belly Up • Solana Beach</h3>
-          <p class="show-meta">Sample: Coastal Jam Night • Fridays • 8:00 PM</p>
-          <p>Small-room energy, big-sound nights. Perfect test bed for venue-direct,
-             low-fee ticket flows and fast payout.</p>
-          <div class="show-cta">
-            Text <strong>“Belly Up”</strong> to  
-            <a href="sms:+17735441231?&body=Belly%20Up%20venue%20direct%20tickets%20question">
-              773-544-1231
-            </a><br/>
-            or email:
-            <a href="mailto:peter.z@kromeon.com?subject=Belly%20Up%20Venue%20Direct&body=Hey%20PJ%2C%20let%E2%80%99s%20talk%20about%20Solana%20tickets%20for%20Belly%20Up.">
-              Belly Up • Venue Direct
-            </a>
+      <div class="two-col">
+        <!-- Tickets Beta Table -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Tonight & Upcoming (Sample Data)</div>
+            <span class="chip">Beta • Not live inventory (yet)</span>
           </div>
-        </div>
-
-        <div class="card">
-          <h3>🎸 Moonlight Amphitheatre • Vista</h3>
-          <p class="show-meta">Sample: Summer Series • Weeknights • 7:30 PM</p>
-          <p>Outdoor, under-the-stars events with families, locals, and visitors. Ideal for
-             fast settlement, pre-paid concessions, and low-fee payment rails.</p>
-          <div class="show-cta">
-            Text <strong>“Moonlight”</strong> to  
-            <a href="sms:+17735441231?&body=Moonlight%20Amphitheatre%20ticket%20ideas">
-              773-544-1231
-            </a><br/>
-            or email:
-            <a href="mailto:peter.z@kromeon.com?subject=Moonlight%20Venue%20Direct&body=Hey%20PJ%2C%20curious%20about%20venue%20direct%20options%20for%20Moonlight.">
-              Moonlight • Venue Direct
-            </a>
+          <div class="card-body">
+            <table class="tickets">
+              <thead>
+                <tr>
+                  <th>Venue</th>
+                  <th>Show</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Est. Fee Savings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Belly Up, Solana Beach</td>
+                  <td>Indie Surf Night</td>
+                  <td>Fri • 8 PM</td>
+                  <td><span class="status-pill status-open">Open</span></td>
+                  <td>Up to ~12% vs major sites</td>
+                </tr>
+                <tr>
+                  <td>The Roxy, Encinitas</td>
+                  <td>Local Songwriter Showcase</td>
+                  <td>Sat • 7 PM</td>
+                  <td><span class="status-pill status-limited">Low Seats</span></td>
+                  <td>Up to ~9% saved in fees</td>
+                </tr>
+                <tr>
+                  <td>Petco Park, SD</td>
+                  <td>Summer Concert Series</td>
+                  <td>Next Month</td>
+                  <td><span class="status-pill status-sold">Sold Out*</span></td>
+                  <td>Venue-direct waitlist only</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size:12px;margin-top:8px;color:var(--muted);">
+              *Sold out = **no SideGuy flips**. When this is live, the goal is <em>fair, clean, local access</em> —
+              not gouging neighbors.
+            </p>
           </div>
-        </div>
+        </article>
 
-        <div class="card">
-          <h3>🥁 Local Bar & Club Circuit • Encinitas / Leucadia</h3>
-          <p class="show-meta">Rotating calendar • small rooms, big vibe</p>
-          <p>
-            From dive bars to hidden stages, SideGuy can help route locals, bands, and
-            owners into fast, lower-fee flows without scaring anyone with “crypto talk.”
+        <!-- APY Snapshot -->
+        <article id="apy" class="card">
+          <div class="card-header">
+            <div class="card-title">🪙 “Yield to Pay” Snapshot</div>
+            <span class="chip">Live 24h % move</span>
+          </div>
+          <div class="card-body">
+            <p id="apy-content">
+              Pulling a quick look at SOL, ETH, BTC, and a stable or two…
+            </p>
+            <p id="apy-note">
+              This is **not financial advice**. It’s a simple reminder: you can keep your
+              coins working while still planning to pay for real-world life — rides, tickets,
+              and everything in between.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY DROP / NEWSLETTER -->
+  <section id="newsletter" class="section">
+    <div class="section-inner">
+      <div class="section-kicker">💌 PJ’s Daily Drop</div>
+      <h2 class="section-title">One simple message with everything that matters</h2>
+      <p class="section-subtitle">
+        A short, human update for close friends and locals: one edge, one idea, one story.
+        No funnels. No spam. Just **coastal operating system notes** from PJ.
+      </p>
+
+      <article class="card">
+        <div class="card-body">
+          <p style="margin-bottom:10px;font-size:14px;">
+            To subscribe, just send an email with the subject line
+            <strong>“Daily Drop”</strong> — or text PJ directly:
           </p>
-          <div class="show-cta">
-            Text <strong>“Local Shows”</strong> to  
-            <a href="sms:+17735441231?&body=Let%27s%20chat%20about%20North%20County%20local%20shows%20and%20tickets.">
-              773-544-1231
-            </a><br/>
-            or email:
-            <a href="mailto:peter.z@kromeon.com?subject=North%20County%20Shows&body=Hey%20PJ%2C%20I%E2%80%99m%20interested%20in%20North%20County%20shows%20and%20venue%20direct%20flows.">
-              North County Shows
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
+            <a class="btn" href="mailto:peter.z@kromeon.com?subject=Daily%20Drop%20Signup&body=Hey%20PJ%2C%20please%20add%20me%20to%20your%20Daily%20Drop.">
+              ✉️ Email PJ to Join
+            </a>
+            <a class="btn btn-outline" href="sms:+17735441231?&body=Add%20me%20to%20your%20Daily%20Drop.">
+              📱 Text “Daily Drop”
             </a>
           </div>
+          <p style="font-size:12px;color:var(--muted);">
+            Expect: a single message most days — sports edges, APY snapshots, local tickets,
+            and little reminders that you can design your own life here.
+          </p>
         </div>
-      </div>
-
-      <p class="section-subtitle" style="margin-top: 18px;">
-        This is a working template. Over time, this section can pull live event data from APIs
-        (Ticketmaster, SeatGeek, etc.) and route into venue-direct flows with Solana payouts.
-      </p>
+      </article>
     </div>
   </section>
 
-  <!-- SPORTS EDGE -->
-  <section id="sports-edge" class="section">
-    <div class="container">
-      <h2>🏈 Sports Edge — DFS & Futures Vibes</h2>
-      <p class="section-subtitle">
-        A simple, rotating sports edge block. You can update this manually any day you want,
-        or just let the auto-randomizer keep it playful for visitors.
-      </p>
-      <div id="odds-list">
-        <p style="text-align:center;color:var(--muted);">Loading today's coastal edge…</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <section id="newsletter" class="section section-alt">
-    <div class="container">
-      <h2>💌 PJ’s Daily Drop</h2>
-      <p class="section-subtitle">
-        Occasional drops on North County life, sports edges, tech ideas, and real-world use cases
-        for Solana and automation — from a guy who actually lives here.
-      </p>
-      <form id="newsletterForm" class="newsletter">
-        <input type="email" name="email" id="email-input" placeholder="Your best email (manually collected for now)" required />
-        <button type="submit" class="btn">Get the Next Drop</button>
-      </form>
-      <div id="success-message">✅ Got it. PJ will see this and reach out when the next drop is ready.</div>
-      <p class="section-subtitle" style="margin-top:12px;font-size:12px;">
-        For now this just confirms on-site — all emails are handled manually by PJ.
-      </p>
-    </div>
-  </section>
-
-  <!-- FOOTER / CONTACT -->
+  <!-- FOOTER -->
   <footer id="contact" class="footer">
-    <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-    <p>North County concierge for tech, transport, and life — slight obsession with good edges.</p>
-    <p id="version-info">Version 2.1-ocean-beta</p>
+    <p>© <span id="year"></span> SideGuy Solutions • Solana Beach, CA • North County, San Diego</p>
+    <p id="version-info">Version 2.2-ocean-beta</p>
   </footer>
 
-  <!-- FLOATING PJ BUTTON -->
-  <a href="sms:+17735441231?&body=Hey%20PJ%2C%20I%20want%20help%20with%20North%20County%20life%2C%20tech%2C%20or%20transport."
-     class="floating-btn">
-    🚐 Book with PJ
-    <span class="floating-subline">Assistant you never knew you needed</span>
-  </a>
+  <!-- BOOK WITH PJ FLOATING BUBBLE -->
+  <div class="pj-wrap">
+    <div class="pj-tagline">
+      <strong>PJ — Your North County concierge.</strong><br>
+      Tech, transport, and life enhancement for the coastal lifestyle — built on precision,
+      powered by real relationships.
+    </div>
+    <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ%20—%20SideGuy%20Solutions"
+       class="pj-btn">
+      💬 Book with PJ
+    </a>
+  </div>
 
   <!-- SCRIPTS -->
   <script>
-    async function fetchWithRetry(url, retries = 3, delay = 4000) {
-      for (let i = 0; i < retries; i++) {
+    // Helper: fetch with simple retry
+    async function fetchWithRetry(url, retries = 2, delay = 3500) {
+      for (let i = 0; i <= retries; i++) {
         try {
           const res = await fetch(url);
-          if (res.ok) return res;
-          throw new Error("Fetch failed");
+          if (!res.ok) throw new Error("Bad status");
+          return res;
         } catch (err) {
-          if (i === retries - 1) throw err;
+          if (i === retries) throw err;
           await new Promise(r => setTimeout(r, delay));
         }
       }
     }
 
+    // 1) Crypto ticker (SOL / USDC / ETH)
     async function loadTicker() {
       const el = document.getElementById("ticker-content");
       try {
@@ -603,123 +717,72 @@
           "https://api.coingecko.com/api/v3/simple/price?ids=solana,usd-coin,ethereum&vs_currencies=usd&include_24hr_change=true"
         );
         const d = await res.json();
-        el.innerHTML = [
+        const coins = [
           { n: "SOL", d: d.solana },
           { n: "USDC", d: d["usd-coin"] },
           { n: "ETH", d: d.ethereum }
-        ]
-        .map(c => `${c.n}: $${c.d.usd.toFixed(2)} (${c.d.usd_24h_change.toFixed(2)}%)`)
-        .join("  •  ");
+        ];
+        el.textContent = coins
+          .map(c => `${c.n}: $${c.d.usd.toFixed(2)} (${c.d.usd_24h_change.toFixed(2)}%)`)
+          .join("  •  ");
       } catch (e) {
         console.error(e);
-        el.textContent = "SOL: $250 • USDC: $1.00 • ETH: $3500 (sample data)";
+        el.textContent = "SOL: $250.00 • USDC: $1.00 • ETH: $3,500.00 (sample data)";
       }
     }
 
-    const mockOdds = [
-      {
-        sport: "NBA",
-        match: "Suns vs Mavericks",
-        market: "Dereck Lively II PRA",
-        line: "Over 14.5",
-        priceA: "+112",
-        priceB: "+136",
-        note: "Inquire for details — North County only."
-      },
-      {
-        sport: "NFL",
-        match: "49ers vs Seahawks",
-        market: "Alt Spread",
-        line: "49ers -6.5",
-        priceA: "-105",
-        priceB: "+102",
-        note: "Promo hunting + edges, not degenerate vibes."
-      },
-      {
-        sport: "NHL",
-        match: "Kings vs Ducks",
-        market: "Total Goals",
-        line: "Over 5.5",
-        priceA: "-110",
-        priceB: "+100",
-        note: "Great example of line shopping & risk-managed entries."
+    // 2) Randomized example sports edge
+    function loadEdge() {
+      const edges = [
+        {
+          title: "Phoenix Suns vs Dallas Mavericks — Dereck Lively II PRA",
+          body: "NBA • Wed 5:30 PM\n\nPlayer Points + Rebounds + Assists\nDereck Lively II over 14.5.\n\nLocal angle: promo-protected two-leg build, anchored to a playable big who benefits from pace and usage spikes. Structure > sweat.",
+          sport: "🏀 NBA • Player Props",
+          type: "2-leg promo-friendly build"
+        },
+        {
+          title: "49ers futures with promo insulation",
+          body: "NFL • Season Futures\n\nInstead of blasting full-stake outrights, use promos to create small, protected positions on SF to win the NFC.\n\nLocal angle: model the sweat around Sundays without wrecking your week.",
+          sport: "🏈 NFL • Futures",
+          type: "Promo-backed futures ladder"
+        },
+        {
+          title: "Low-stress NHL SOG ladder",
+          body: "NHL • Shots on Goal\n\nPick a high-usage winger with consistent SOG volume, pair the over with a conservative same-game total.\n\nLocal angle: late-night ice sweat after a long North County day.",
+          sport: "🏒 NHL • Props",
+          type: "Volume-driven SOG ladder"
+        },
+        {
+          title: "College hoops pace spot",
+          body: "NCAAB • Weeknight slate\n\nLook for mismatched tempo: a fast team vs a slower opponent where the market underweights possessions.\n\nLocal angle: one edge, then shut the laptop and go touch the ocean.",
+          sport: "🏀 NCAAB • Totals",
+          type: "Pace-based total edge"
+        }
+      ];
+      const pick = edges[Math.floor(Math.random() * edges.length)];
+      const main = document.getElementById("edge-card-main");
+      const sport = document.getElementById("edge-sport");
+      const type = document.getElementById("edge-type");
+      if (main) {
+        main.innerHTML = `<strong>${pick.title}</strong><br><br>${pick.body.replace(/\n/g,"<br>")}`;
       }
-    ];
-
-    function loadOdds() {
-      const c = document.getElementById("odds-list");
-      const edge = mockOdds[Math.floor(Math.random() * mockOdds.length)];
-      c.innerHTML = `
-        <div class="odds-card">
-          <div><strong>${edge.sport}</strong> — ${edge.match}</div>
-          <div style="margin:4px 0;">
-            <span style="color:var(--muted);font-size:13px;">Market:</span>
-            <strong> ${edge.market}</strong><br/>
-            <span style="color:var(--muted);font-size:13px;">Line:</span>
-            <strong> ${edge.line}</strong>
-          </div>
-          <div style="margin:4px 0;font-size:13px;">
-            Sample pricing: <strong>${edge.priceA}</strong> / <strong>${edge.priceB}</strong><br/>
-            <span style="color:var(--muted);">${edge.note}</span>
-          </div>
-          <div style="margin-top:6px;font-size:13px;">
-            Text <strong>"Sports Edge"</strong> to
-            <a href="sms:+17735441231?&body=Hey%20PJ%2C%20tell%20me%20more%20about%20today%27s%20edge.">
-              773-544-1231
-            </a>
-            for context and risk-aware conversation.
-          </div>
-        </div>
-      `;
+      if (sport) sport.textContent = pick.sport;
+      if (type) type.textContent = pick.type;
     }
 
-    async function loadTrends() {
-      const el = document.getElementById("trendList");
+    // 3) APY snapshot (24h % move)
+    async function loadApy() {
+      const apyContent = document.getElementById("apy-content");
       try {
-        const res = await fetch("https://trends.google.com/trends/hottrends/visualize/internal/data/en-us");
+        const ids = "solana,ethereum,bitcoin,usd-coin,bonk";
+        const res = await fetchWithRetry(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
+        );
         const data = await res.json();
-        const trends = data.slice(0, 8).map(t => t.title || t.name || t);
-        el.innerHTML = trends.map(t => `<li>${t}</li>`).join("");
-      } catch (err) {
-        console.warn("Trends API blocked, using fallback.");
-        el.innerHTML = `
-          <li>AI Assistants</li>
-          <li>Solana Yield</li>
-          <li>DFS Promos</li>
-          <li>North County Nightlife</li>
-          <li>Coastal Crypto</li>
-        `;
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      loadTicker();
-      loadOdds();
-      loadTrends();
-
-      // Version timestamp
-      const ver = document.getElementById("version-info");
-      const now = new Date().toLocaleString("en-US", {
-        timeZone: "America/Los_Angeles",
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-      });
-      ver.textContent = `Version 2.1-ocean-beta • Updated ${now} PST`;
-
-      // Newsletter fake handling (no external provider yet)
-      const form = document.getElementById("newsletterForm");
-      const msg = document.getElementById("success-message");
-      form.addEventListener("submit", e => {
-        e.preventDefault();
-        msg.style.display = "block";
-        form.reset();
-        setTimeout(() => { msg.style.display = "none"; }, 4000);
-      });
-    });
-  </script>
-</body>
-</html>
+        const entries = Object.entries(data).map(([id, d]) => ({
+          id,
+          name: id.toUpperCase(),
+          change: d.usd_24h_change || 0
+        }));
+        entries.sort((a,b) => b.change - a.change);
+        const top = entries
