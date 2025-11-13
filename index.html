@@ -2,7 +2,6 @@
   SideGuy Solutions
   Version: 2.1
   Author: PJ + Kromeon Dev Team
-  Tagline: Where code meets the coastline.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -10,274 +9,226 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description" content="SideGuy Solutions blends tech, transport, sports insights, and life assistance for North County. From Solana Beach to Encinitas, PJ automates what matters so you can move, build, and live freely.">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="SideGuy Solutions — where code meets the coastline. Tech, transport, automation, and North County lifestyle assistance. Solana Beach based. Built for speed, precision, and coastal living.">
 
-  <!-- Scripts -->
-  <script src="script.js" defer></script>
+  <style>
+    :root {
+      --bg: #0a1122;
+      --blue-bg: linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
+      --card: #121b30;
+      --muted: #a0aec0;
+      --text: #f0f4f8;
+      --brand1: #4da8ff;
+      --brand2: #1cc8e5;
+      --brand3: #8b5cf6;
+      --accent: #2dd4bf;
+      --radius: 12px;
+      --shadow: 0 8px 20px rgba(10,17,34,0.25);
+    }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      background: var(--blue-bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+    a { color: var(--brand2); text-decoration: none; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0;
+      background: rgba(10,17,34,0.75);
+      backdrop-filter: blur(10px);
+      z-index: 99;
+    }
+    .nav .inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 20px;
+    }
+    .brand { font-weight: 900; font-size: 22px; }
+
+    .menu { list-style: none; display: flex; gap: 20px; }
+    .menu a { color: var(--muted); font-weight: 600; }
+    .menu a:hover { color: var(--brand2); }
+
+    /* HERO */
+    .hero {
+      text-align: center; padding: 80px 20px;
+      background: var(--blue-bg);
+    }
+    .hero h1 {
+      font-size: clamp(32px,5vw,44px);
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      max-width: 750px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* SECTION */
+    .section { padding: 50px 20px; background: var(--card); margin-top: 30px; }
+    .section-subtitle { color: var(--muted); text-align: center; margin-bottom: 20px; }
+
+    /* TREND LIST */
+    .trend-list {
+      list-style:none; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    }
+    .trend-list li {
+      background: rgba(255,255,255,0.08);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: .2s;
+    }
+    .trend-list li:hover { background: rgba(77,168,255,0.2); }
+
+    /* SPORTS EDGE */
+    .odds-card {
+      background: rgba(255,255,255,0.05);
+      padding: 16px;
+      max-width: 480px;
+      margin: 10px auto;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    /* NEWSLETTER */
+    .newsletter {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      max-width: 500px; margin: auto;
+    }
+    .newsletter input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      width: 70%; max-width: 300px;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 40px 20px;
+      text-align:center;
+      color: var(--muted);
+      background: var(--card);
+      margin-top: 40px;
+    }
+
+    #version-info { color:#7dd3fc; margin-top:8px; font-size:13px; }
+
+    /* FLOATING BUTTON */
+    .floating-btn {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: linear-gradient(90deg,#3b82f6,#60a5fa);
+      color: white; border: none;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 9999;
+      transition: .2s;
+    }
+    .floating-btn:hover { transform: scale(1.07); }
+  </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav class="nav">
   <div class="inner">
     <div class="brand">SideGuy Solutions</div>
     <ul class="menu">
-      <li><a href="#today-edge">Today's Edge</a></li>
-      <li><a href="#yields">Yield to Pay</a></li>
       <li><a href="#trending">Trending</a></li>
+      <li><a href="#sports-edge">Sports Edge</a></li>
       <li><a href="#newsletter">Newsletter</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="pay.html" class="pay-link">💸 Pay PJ</a></li>
+      <li><a href="pay.html">Payments</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- TICKER -->
-<div class="crypto-ticker">
-  <span class="ticker-item" id="ticker-content">Loading prices...</span>
-</div>
-
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="container hero-content">
+  <div class="container">
     <h1>Where code meets the coastline.</h1>
-    <p>
-      SideGuy Solutions blends technology, transportation, sports insights, and real-life assistance —
-      precision-built for North County. From Solana Beach to Encinitas, PJ helps you move, build,
-      and live freely while your Solana stack quietly works for you.
-    </p>
-
-    <div class="pj-tag">
-      <span>🌴 PJ — The Assistant You Never Knew You Needed</span>
-    </div>
-
-    <div class="hero-buttons">
-      <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="btn">💬 Book with PJ</a>
-      <a href="#yields" class="btn secondary">📈 Yield to Pay</a>
-    </div>
+    <p>SideGuy Solutions blends technology, transportation, and real-life assistance — precision-built for North County. From Solana Beach to Encinitas, we automate the details so you can move, build, and live freely.</p>
   </div>
 </section>
 
-<!-- TODAY'S EDGE -->
-<section id="today-edge" class="section">
-  <div class="container">
-    <h2>🏆 Today’s Edge</h2>
-    <p class="section-subtitle">Daily sports value — tailored for North County bettors.</p>
-
-    <div id="edge-card" class="edge-card">
-      Loading today’s edge...
-    </div>
-
-    <div class="center-btn">
-      <a href="mailto:peter.z@kromeon.com?subject=Today%27s%20Edge" class="btn">📊 Get Today’s Full Card</a>
-    </div>
-  </div>
-</section>
-
-<!-- YIELD TO PAY -->
-<section id="yields" class="section">
-  <div class="container">
-    <h2>💵 Yield to Pay</h2>
-    <p class="section-subtitle">
-      Earn passive yield on Solana — then pay PJ using profits.  
-      Local service meets next-generation finance.
-    </p>
-
-    <div id="apy-box" class="apy-box">
-      Fetching live APY...
-    </div>
-
-    <div class="yield-note">
-      🔔 *Don’t sell your bags. Let SOL work for you.*  
-    </div>
-
-    <div class="center-btn">
-      <a href="pay.html" class="btn">💸 Pay with Phantom / Coinbase</a>
-    </div>
-  </div>
-</section>
-
-<!-- TRENDING -->
 <section id="trending" class="section">
   <div class="container">
-    <h2>🔥 Trending Now</h2>
-    <p class="section-subtitle">What the world is searching, talking about, and moving toward.</p>
-
-    <ul id="trendList" class="trend-list">
-      <li>Loading trends...</li>
-    </ul>
+    <h2 style="text-align:center;color:var(--brand2);">🔥 Trending Now</h2>
+    <p class="section-subtitle">Top topics across Google, X, and crypto today.</p>
+    <ul id="trendList" class="trend-list"><li>Loading...</li></ul>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
+<section id="sports-edge" class="section">
+  <div class="container">
+    <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge — Today’s Pick</h2>
+    <div id="odds-list"></div>
+  </div>
+</section>
+
 <section id="newsletter" class="section">
   <div class="container">
-    <h2>💌 Join PJ’s Daily Drop</h2>
-    <p class="section-subtitle">Your morning hit of North County tech, DFS edges, and coastal living.</p>
+    <h3 style="text-align:center;">💌 Join PJ’s Daily Drop</h3>
+    <p class="section-subtitle">DFS promos, coastal intel, crypto yields & North County updates.</p>
 
-    <div class="newsletter-box">
-      <input type="email" id="newsletterEmail" placeholder="Your email">
-      <button id="newsletterButton" class="btn">Subscribe</button>
-    </div>
+    <form class="newsletter" id="newsletterForm">
+      <input type="email" placeholder="Your email..." required />
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
 
-    <p id="newsletter-status" class="newsletter-status"></p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contact" class="footer">
-  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA</p>
-  <p class="version">Version 2.1 • Updated <span id="timestamp"></span></p>
-</footer>
-
-<!-- FLOATING BUTTON -->
-<a href="pay.html" class="floating-btn">💸 Pay PJ</a>
-
-</body>
-</html>
-<!--
-  SideGuy Solutions
-  Payment Portal v1.0
-  Author: PJ + Kromeon Dev Team
-  URL: /pay.html
--->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pay PJ • SideGuy Solutions</title>
-
-<link rel="stylesheet" href="styles.css" />
-<script src="script.js" defer></script>
-
-<style>
-  .pay-section { padding: 60px 20px; text-align: center; }
-  .pay-box {
-    max-width: 600px;
-    margin: auto;
-    padding: 25px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.45);
-  }
-  .pay-methods { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
-  .qr-box { margin-top: 25px; }
-  .qr-box img { width: 180px; border-radius: 12px; box-shadow: 0 0 18px rgba(0,0,0,0.3); }
-  .pay-btn {
-    background: linear-gradient(90deg,#3b82f6,#60a5fa);
-    padding: 12px 20px;
-    border-radius: 999px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-  }
-</style>
-</head>
-
-<body>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="inner">
-    <div class="brand">SideGuy Solutions</div>
-    <ul class="menu">
-      <li><a href="index.html#today-edge">Today's Edge</a></li>
-      <li><a href="index.html#yields">Yield to Pay</a></li>
-      <li><a href="index.html#newsletter">Newsletter</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<section class="pay-section">
-  <div class="container">
-    <h1>💸 Pay PJ</h1>
-    <p style="color:var(--muted);max-width:550px;margin:10px auto 30px;">
-      Thank you for supporting SideGuy Solutions — your North County concierge for tech, 
-      transport, sports insights, and coastal life assistance.  
-      <br><br>
-      Choose any payment method below.
+    <p id="success-message" style="text-align:center;color:var(--accent);display:none;margin-top:10px;">
+      ✅ Subscribed!
     </p>
-
-    <!-- Main Payment Box -->
-    <div class="pay-box">
-
-      <h2>1. Pay with Solana (Phantom)</h2>
-      <p class="section-subtitle">Fastest way. Instant confirmation. Yield-friendly.</p>
-
-      <div class="qr-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=solana:peter.z%40kromeon.com" alt="SOL QR Code" />
-      </div>
-
-      <div class="center-btn" style="margin-top:20px;">
-        <a class="btn" href="solana:peter.z@kromeon.com?amount=1" target="_blank">🚀 Pay with Phantom</a>
-      </div>
-
-      <hr style="margin:30px 0;border-color:rgba(255,255,255,0.12);">
-
-      <h2>2. Pay with Coinbase</h2>
-      <p class="section-subtitle">Send any crypto — SOL, ETH, USDC, BTC, etc.</p>
-
-      <div class="qr-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=coinbase:peter.z%40kromeon.com" alt="Crypto QR Code" />
-      </div>
-
-      <div class="center-btn" style="margin-top:20px;">
-        <a class="btn secondary" href="coinbase:peter.z@kromeon.com" target="_blank">🌐 Pay with Coinbase Wallet</a>
-      </div>
-
-      <hr style="margin:30px 0;border-color:rgba(255,255,255,0.12);">
-
-      <h2>3. Yield-to-Pay</h2>
-      <p class="section-subtitle">
-        Let your SOL staking yield cover the cost.  
-        You keep your crypto. Your yield pays PJ.  
-      </p>
-
-      <div id="apy-box" class="apy-box">
-        Loading APY…
-      </div>
-
-      <p style="margin-top:12px;color:var(--brand2);">
-        Want to set this up?  
-        <a href="mailto:peter.z@kromeon.com?subject=Yield%20to%20Pay">Email PJ</a>.
-      </p>
-
-      <hr style="margin:30px 0;border-color:rgba(255,255,255,0.12);">
-
-      <h2>4. Pay Manually</h2>
-      <p class="section-subtitle">Everything else goes here.</p>
-
-      <div style="margin-top:18px;">
-        <a href="sms:+17735441231" class="pay-btn">📱 Text PJ</a>
-      </div>
-
-      <div style="margin-top:10px;">
-        <a href="mailto:peter.z@kromeon.com" class="pay-btn">📧 Email PJ</a>
-      </div>
-
-      <div style="margin-top:10px;margin-bottom:10px;">
-        <a href="https://venmo.com/" class="pay-btn" target="_blank">💙 Venmo (Optional)</a>
-      </div>
-
-    </div>
   </div>
 </section>
 
 <footer class="footer">
   <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA</p>
-  <p class="version">Updated <span id="timestamp"></span></p>
+  <p id="version-info"></p>
 </footer>
+
+<!-- BOOK WITH PJ BUTTON -->
+<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("version-info").textContent =
+    "Version 2.1 • Updated " + new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
+
+  // Fake trends for now
+  const t = ["Solana", "DFS Promos", "AI Tools", "North County", "Crypto Yield"];
+  document.getElementById("trendList").innerHTML = t.map(x=>`<li>${x}</li>`).join("");
+
+  // Fake sports edge
+  document.getElementById("odds-list").innerHTML = `
+    <div class="odds-card">
+      <strong>NBA</strong> — Suns vs Mavericks<br>
+      <span style="color:var(--muted);font-size:14px;">PRA Prop</span><br>
+      <span style="color:var(--accent);font-weight:700;">Dereck Lively II Over 14.5</span><br>
+      <span style="color:#7dd3fc;">+112 → +136</span>
+    </div>`;
+
+  // Newsletter
+  document.getElementById("newsletterForm").addEventListener("submit", e => {
+    e.preventDefault();
+    document.getElementById("success-message").style.display="block";
+    setTimeout(()=>{document.getElementById("success-message").style.display="none";},4000);
+  });
+});
+</script>
 
 </body>
 </html>
