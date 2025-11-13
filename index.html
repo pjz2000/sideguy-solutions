@@ -1,8 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 2.3 — Web3 Coastal Hero Edition (A1)
+  Version: 2.4 — Web3 Coastal Hero + Wave Animation
   Author: PJ + Kromeon Dev Team
-  Description: Web3 coastal concierge for tech, transport & lifestyle.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,137 +11,182 @@
 <title>SideGuy Solutions | Where Code Meets the Coastline</title>
 
 <style>
-/* --- Web3 Coastal Theme --- */
+/* ---------------- Web3 Coastal Theme ---------------- */
 :root {
   --bg: #0a1122;
-  --blue-bg: linear-gradient(135deg,#0a1122 0%,#0f1f4b 40%,#1e40af 70%,#3b82f6 100%);
-  --card: rgba(12,18,40,0.75);
+  --blue-1: #0a1122;
+  --blue-2: #0f1f4b;
+  --blue-3: #1e40af;
+  --blue-4: #3b82f6;
+  --card: rgba(12,18,40,0.72);
   --muted: #a0aec0;
   --text: #f0f4f8;
   --brand1: #4da8ff;
   --brand2: #1cc8e5;
-  --brand3: #8b5cf6;
   --accent: #2dd4bf;
   --radius: 14px;
   --shadow: 0 8px 30px rgba(0,0,0,0.3);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:var(--blue-bg);
-  color:var(--text);
-  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
-  line-height:1.6;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: linear-gradient(135deg, var(--blue-1), var(--blue-2), var(--blue-3), var(--blue-4));
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
 }
 
-/* NAV */
-.nav{
-  position:sticky;top:0;
-  background:rgba(10,17,34,0.65);
-  backdrop-filter:blur(10px);
-  z-index:50;
+/* ---------------- NAV ---------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(10,17,34,0.65);
+  backdrop-filter: blur(10px);
+  z-index: 50;
 }
-.nav .inner{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 20px;
+.nav .inner {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
 }
-.brand{font-weight:800;font-size:20px;color:var(--text);}
-.menu{display:flex;gap:18px;list-style:none;}
-.menu a{color:var(--muted);font-size:14px;font-weight:600;text-decoration:none;}
-.menu a:hover{color:var(--brand2);}
+.brand { font-weight: 800; font-size: 20px; }
+.menu { display: flex; gap: 20px; list-style: none; }
+.menu a { color: var(--muted); font-weight: 600; text-decoration: none; }
+.menu a:hover { color: var(--brand2); }
 
-/* HERO */
-.hero{
-  background: var(--blue-bg), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
-  background-size:cover;
-  background-position:center;
-  background-blend-mode:overlay;
-  padding:110px 20px;
-  text-align:center;
-  position:relative;
-  box-shadow:inset 0 -80px 120px rgba(10,10,30,0.7);
-}
-.hero h1{
-  font-size:clamp(34px,5vw,52px);
-  font-weight:900;
-  margin-bottom:18px;
-}
-.hero p{
-  max-width:720px;margin:auto;
-  font-size:18px;color:var(--muted);
+/* ---------------- HERO ---------------- */
+.hero {
+  position: relative;
+  padding: 130px 20px 150px;
+  text-align: center;
+  overflow: hidden;
+  background: #0a1122;
 }
 
-/* BOOK WITH PJ BUBBLE */
-.pj-tagline{
-  margin-top:22px;
-  background:rgba(255,255,255,0.07);
-  padding:14px 28px;
-  display:inline-block;
-  border-radius:40px;
-  font-size:15px;
-  backdrop-filter:blur(8px);
-  box-shadow:var(--shadow);
+/* OCEAN WAVE ANIMATION (subtle, classy, Web3) */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 70%, rgba(59,130,246,0.15), transparent 70%);
+  animation: waves 12s ease-in-out infinite alternate;
+  opacity: 0.6;
 }
-.floating-btn{
-  position:fixed;bottom:24px;right:24px;
-  background:linear-gradient(90deg,#3b82f6,#60a5fa);
-  color:white;
-  padding:16px 30px;
-  font-weight:700;
-  border-radius:50px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.4);
-  animation:pulse 2.8s infinite;
-  text-decoration:none;
-}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(59,130,246,0.6);}
-  70%{box-shadow:0 0 0 18px rgba(59,130,246,0);}
-  100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}
+@keyframes waves {
+  0% { transform: translate(-10%, -5%) scale(1.1); }
+  100% { transform: translate(5%, 10%) scale(1.12); }
 }
 
-/* SECTIONS */
-.section{
-  padding:60px 20px;
-  background:var(--card);
-  margin-top:0;
+/* Standing image layer (still ocean static) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2200&q=80') center/cover no-repeat;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
 }
-.section h2{text-align:center;color:var(--brand2);margin-bottom:10px;font-size:26px;}
-.section-subtitle{text-align:center;color:var(--muted);margin-bottom:25px;}
+
+/* HERO CONTENT */
+.hero h1 {
+  position: relative;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 900;
+  margin-bottom: 20px;
+  z-index: 3;
+}
+.hero p {
+  position: relative;
+  max-width: 760px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 18px;
+  z-index: 3;
+}
+
+/* ---------------- PJ BUBBLE (LONG + PULSE) ---------------- */
+.pj-tagline {
+  position: relative;
+  margin: 28px auto 0;
+  display: inline-block;
+  background: rgba(255,255,255,0.10);
+  padding: 18px 38px;
+  border-radius: 50px;
+  font-size: 15.8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(59,130,246,0.45);
+  animation: pjPulse 3s infinite;
+  z-index: 3;
+}
+@keyframes pjPulse {
+  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.55); }
+  70% { box-shadow: 0 0 0 20px rgba(59,130,246,0); }
+  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+}
+
+/* ---------------- SECTION ---------------- */
+.section {
+  background: var(--card);
+  padding: 60px 20px;
+  margin-top: 0;
+}
 
 /* TREND LIST */
-.trend-list{
-  list-style:none;
-  display:flex;flex-wrap:wrap;
-  gap:12px;justify-content:center;
+.trend-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
-.trend-list li{
-  background:rgba(255,255,255,0.06);
-  padding:10px 14px;
-  border-radius:10px;
-  font-size:14px;
+.trend-list li {
+  background: rgba(255,255,255,0.08);
+  padding: 10px 14px;
+  border-radius: 10px;
 }
 
-/* ODDS CARDS */
-.odds-card{
-  max-width:520px;margin:15px auto;
-  padding:14px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.05);
-  box-shadow:0 0 15px rgba(28,200,229,0.25);
-  text-align:center;
+/* SPORTS CARDS */
+.odds-card {
+  max-width: 520px;
+  margin: 12px auto;
+  padding: 14px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(28,200,229,0.25);
 }
-.odds-card strong{color:var(--brand1);}
+.odds-card strong { color: var(--brand1); }
 
 /* FOOTER */
-.footer{
-  text-align:center;
-  padding:40px 20px;
-  background:var(--card);
-  color:var(--muted);
-  margin-top:40px;
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--card);
+  color: var(--muted);
+}
+
+/* BOOK WITH PJ */
+.floating-btn {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  background: linear-gradient(90deg,#3b82f6,#60a5fa);
+  padding: 18px 34px;
+  border-radius: 50px;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  animation: pulseBtn 2.4s infinite;
+}
+@keyframes pulseBtn {
+  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(59,130,246,0); }
+  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
 }
 </style>
 </head>
+
 <body>
 
 <!-- NAV -->
@@ -162,51 +206,49 @@ body{
 <section class="hero">
   <h1>Where code meets the coastline.</h1>
   <p>
-    Technology, transportation, and lifestyle optimization — precision-built for
-    North County. From Solana Beach to Encinitas, SideGuy Solutions keeps your days
-    moving smoothly while your investments work smarter.
+    Technology, transportation, and lifestyle optimization — precision-built for North County.
+    From Solana Beach to Encinitas, SideGuy Solutions keeps your days moving while your
+    investments work smarter.
   </p>
 
   <div class="pj-tagline">
-    PJ — The Assistant You Never Knew You Needed.  
-    North County concierge for tech, life & transport.
+    PJ — The Assistant You Never Knew You Needed. North County concierge for tech, life & transport.
   </div>
 </section>
 
 <!-- TRENDING -->
 <section id="trending" class="section">
-  <h2>🔥 Trending Now</h2>
-  <p class="section-subtitle">Live buzz in DeFi, Solana, AI & sports.</p>
-  <ul id="trendList" class="trend-list"><li>Loading...</li></ul>
+  <h2 style="text-align:center;color:var(--brand2);">🔥 Trending Now</h2>
+  <p class="section-subtitle">Live buzz across AI, Solana, DeFi and sports.</p>
+  <ul id="trendList" class="trend-list"><li>Loading trends...</li></ul>
 </section>
 
 <!-- SPORTS EDGE -->
 <section id="sports-edge" class="section">
-  <h2>🏈 Daily Sports Edge</h2>
-  <p class="section-subtitle">A rotating, daily randomized play.</p>
+  <h2 style="text-align:center;color:var(--brand2);">🏈 Daily Sports Edge</h2>
+  <p class="section-subtitle">A randomized daily play — North County exclusive.</p>
   <div id="odds-list"></div>
 </section>
 
 <!-- NEWSLETTER -->
 <section id="newsletter" class="section">
   <h2>💌 Join PJ’s Daily Drop</h2>
-  <p class="section-subtitle">Edges, tech drops, coastal hacks.</p>
-
-  <form id="newsletterForm" 
-        action="mailto:peter.z@kromeon.com"
-        method="POST"
-        enctype="text/plain"
+  <p class="section-subtitle">Edges, tech insights, coastal hacks.</p>
+  <form action="mailto:peter.z@kromeon.com" method="POST" enctype="text/plain"
         style="text-align:center;">
-    <input type="email" required placeholder="Your email..." 
-      style="padding:10px;border-radius:8px;border:none;width:260px;">
-    <button class="btn" type="submit" style="margin-left:8px;">Subscribe</button>
+    <input required type="email" placeholder="Your email..." 
+      style="padding:10px;border-radius:8px;border:none;width:260px;background:rgba(255,255,255,0.08);color:white;">
+    <button class="floating-btn-small" type="submit"
+      style="padding:10px 16px;border:none;border-radius:8px;background:var(--brand2);color:white;cursor:pointer;">
+      Subscribe
+    </button>
   </form>
 </section>
 
 <!-- FOOTER -->
 <footer id="contact" class="footer">
   © 2025 SideGuy Solutions — Solana Beach, CA 🌊  
-  <br>Version 2.3 — Web3 Coastal Hero Edition
+  <br>Version 2.4 — Web3 Coastal Wave Edition
 </footer>
 
 <!-- BOOK WITH PJ -->
