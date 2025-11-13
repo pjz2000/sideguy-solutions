@@ -1,185 +1,158 @@
 <!--
   SideGuy Solutions
-  Version: Ocean-Web3-Aladeen-Build
-  Author: PJ + The Almighty GPT
-  Vibe: Cinematic Pacific Coast x Solana Tech
+  Version: 2.3 — Web3 Coastal Hero Edition (A1)
+  Author: PJ + Kromeon Dev Team
+  Description: Web3 coastal concierge for tech, transport & lifestyle.
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description" content="North County concierge for tech, life, transport, and Solana-powered innovation. Where code meets the coastline.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SideGuy Solutions | Where Code Meets the Coastline</title>
 
 <style>
-/* === GLOBAL RESET === */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto;
-  color: #f0f4f8;
-  overflow-x: hidden;
+/* --- Web3 Coastal Theme --- */
+:root {
+  --bg: #0a1122;
+  --blue-bg: linear-gradient(135deg,#0a1122 0%,#0f1f4b 40%,#1e40af 70%,#3b82f6 100%);
+  --card: rgba(12,18,40,0.75);
+  --muted: #a0aec0;
+  --text: #f0f4f8;
+  --brand1: #4da8ff;
+  --brand2: #1cc8e5;
+  --brand3: #8b5cf6;
+  --accent: #2dd4bf;
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.3);
 }
 
-/* === FULL-SCREEN OCEAN BACKGROUND === */
-#ocean-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: -20;
-  filter: brightness(0.65) saturate(1.3);
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--blue-bg);
+  color:var(--text);
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
+  line-height:1.6;
 }
 
-/* === OVERLAY GRADIENT TO HELP READABILITY === */
-#ocean-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(rgba(5,10,40,0.4), rgba(5,10,40,0.7));
-  z-index: -15;
+/* NAV */
+.nav{
+  position:sticky;top:0;
+  background:rgba(10,17,34,0.65);
+  backdrop-filter:blur(10px);
+  z-index:50;
+}
+.nav .inner{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;
+}
+.brand{font-weight:800;font-size:20px;color:var(--text);}
+.menu{display:flex;gap:18px;list-style:none;}
+.menu a{color:var(--muted);font-size:14px;font-weight:600;text-decoration:none;}
+.menu a:hover{color:var(--brand2);}
+
+/* HERO */
+.hero{
+  background: var(--blue-bg), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80');
+  background-size:cover;
+  background-position:center;
+  background-blend-mode:overlay;
+  padding:110px 20px;
+  text-align:center;
+  position:relative;
+  box-shadow:inset 0 -80px 120px rgba(10,10,30,0.7);
+}
+.hero h1{
+  font-size:clamp(34px,5vw,52px);
+  font-weight:900;
+  margin-bottom:18px;
+}
+.hero p{
+  max-width:720px;margin:auto;
+  font-size:18px;color:var(--muted);
 }
 
-/* === NAVBAR === */
-.nav {
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(12px);
-  background: rgba(10,17,34,0.45);
-  padding: 14px 20px;
-  z-index: 50;
+/* BOOK WITH PJ BUBBLE */
+.pj-tagline{
+  margin-top:22px;
+  background:rgba(255,255,255,0.07);
+  padding:14px 28px;
+  display:inline-block;
+  border-radius:40px;
+  font-size:15px;
+  backdrop-filter:blur(8px);
+  box-shadow:var(--shadow);
 }
-.nav .brand {
-  font-weight: 800;
-  font-size: 20px;
+.floating-btn{
+  position:fixed;bottom:24px;right:24px;
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  color:white;
+  padding:16px 30px;
+  font-weight:700;
+  border-radius:50px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+  animation:pulse 2.8s infinite;
+  text-decoration:none;
 }
-.nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  font-size: 15px;
-}
-.nav a {
-  color: #d0e7ff;
-  text-decoration: none;
-  font-weight: 600;
-}
-.nav a:hover {
-  color: #2dd4bf;
-  text-decoration: underline;
-}
-
-/* === HERO === */
-.hero {
-  text-align: center;
-  padding: 110px 20px 80px;
-}
-.hero h1 {
-  font-size: clamp(34px, 6vw, 54px);
-  font-weight: 900;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  margin-bottom: 18px;
-}
-.hero p {
-  max-width: 680px;
-  margin: 0 auto;
-  font-size: 20px;
-  line-height: 1.6;
-  color: #d8eaff;
-  text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(59,130,246,0.6);}
+  70%{box-shadow:0 0 0 18px rgba(59,130,246,0);}
+  100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}
 }
 
-/* === LONG PJ BUBBLE === */
-.pj-bubble {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  padding: 16px 22px;
-  max-width: 290px;
-  color: #dff8ff;
-  font-size: 15px;
-  line-height: 1.45;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-  z-index: 999;
+/* SECTIONS */
+.section{
+  padding:60px 20px;
+  background:var(--card);
+  margin-top:0;
 }
-.pj-bubble strong { color: #60f6ff; }
-.pj-bubble a {
-  color: #42d7ff;
-  font-weight: 700;
+.section h2{text-align:center;color:var(--brand2);margin-bottom:10px;font-size:26px;}
+.section-subtitle{text-align:center;color:var(--muted);margin-bottom:25px;}
+
+/* TREND LIST */
+.trend-list{
+  list-style:none;
+  display:flex;flex-wrap:wrap;
+  gap:12px;justify-content:center;
+}
+.trend-list li{
+  background:rgba(255,255,255,0.06);
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:14px;
 }
 
-/* === SECTIONS === */
-.section {
-  padding: 60px 20px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(8px);
-  margin: 40px auto;
-  border-radius: 18px;
-  width: 90%;
-  max-width: 1100px;
+/* ODDS CARDS */
+.odds-card{
+  max-width:520px;margin:15px auto;
+  padding:14px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 0 15px rgba(28,200,229,0.25);
+  text-align:center;
 }
-.section h2 {
-  text-align: center;
-  margin-bottom: 14px;
-  font-size: 28px;
-  font-weight: 800;
-}
-.section p.section-subtitle {
-  text-align: center;
-  color: #d0e7ff;
-  margin-bottom: 24px;
-  font-size: 15px;
-}
+.odds-card strong{color:var(--brand1);}
 
-/* === SPORTS EDGE CARDS === */
-.odds-card {
-  background: rgba(255,255,255,0.08);
-  padding: 12px 16px;
-  border-radius: 10px;
-  margin: 10px auto;
-  max-width: 500px;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.35);
-}
-.odds-card strong { color: #6cd4ff; }
-
-/* === FOOTER === */
-.footer {
-  text-align: center;
-  padding: 35px;
-  font-size: 14px;
-  color: #d0e7ff;
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:40px 20px;
+  background:var(--card);
+  color:var(--muted);
+  margin-top:40px;
 }
 </style>
 </head>
-
 <body>
 
-<!-- 🌊 OCEAN VIDEO BACKGROUND -->
-<video id="ocean-bg" autoplay muted loop playsinline>
-  <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-ocean-waves-6184/1080p.mp4" type="video/mp4">
-</video>
-<div id="ocean-overlay"></div>
-
-<!-- 💬 Long PJ Bubble -->
-<div class="pj-bubble">
-  <strong>PJ — The Assistant You Never Knew You Needed</strong><br>
-  North County concierge for tech, life, and transportation.<br>
-  Based in Solana Beach • Serving San Diego for 6+ years.<br>
-  <a href="mailto:peter.z@kromeon.com">Book with PJ →</a>
-</div>
-
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav class="nav">
-  <div style="display:flex;justify-content:space-between;align-items:center;">
+  <div class="inner">
     <div class="brand">SideGuy Solutions</div>
-    <ul>
+    <ul class="menu">
       <li><a href="#trending">Trending</a></li>
-      <li><a href="#sports">Sports Edge</a></li>
-      <li><a href="#transport">Transport</a></li>
+      <li><a href="#sports-edge">Sports Edge</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -189,45 +162,78 @@ body {
 <section class="hero">
   <h1>Where code meets the coastline.</h1>
   <p>
-    Tech, transport, and real-life assistance — precision-built for North County.
-    From Solana Beach to Encinitas, SideGuy Solutions automates the details so you can move, build, and live freely.
+    Technology, transportation, and lifestyle optimization — precision-built for
+    North County. From Solana Beach to Encinitas, SideGuy Solutions keeps your days
+    moving smoothly while your investments work smarter.
   </p>
+
+  <div class="pj-tagline">
+    PJ — The Assistant You Never Knew You Needed.  
+    North County concierge for tech, life & transport.
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section id="trending" class="section">
+  <h2>🔥 Trending Now</h2>
+  <p class="section-subtitle">Live buzz in DeFi, Solana, AI & sports.</p>
+  <ul id="trendList" class="trend-list"><li>Loading...</li></ul>
 </section>
 
 <!-- SPORTS EDGE -->
-<section id="sports" class="section">
-  <h2>🔥 Sports Edge — Daily Play</h2>
-  <p class="section-subtitle">Your North County plug for DFS insights and real edges.</p>
-
-  <div id="odds-container"></div>
+<section id="sports-edge" class="section">
+  <h2>🏈 Daily Sports Edge</h2>
+  <p class="section-subtitle">A rotating, daily randomized play.</p>
+  <div id="odds-list"></div>
 </section>
 
-<script>
-const plays = [
-  {sport:"🏀 NBA",match:"Suns vs Mavericks",prop:"Dereck Lively II — PRA Over 14.5",odds:"+136"},
-  {sport:"🏈 NFL",match:"49ers vs Chiefs",prop:"Kittle Anytime TD",odds:"+210"},
-  {sport:"⚾ MLB",match:"Dodgers vs Yankees",prop:"Judge Over 1.5 TB",odds:"+125"},
-  {sport:"🏒 NHL",match:"Rangers vs Avalanche",prop:"MacKinnon Over 3.5 Shots",odds:"+112"}
-];
-function loadPlay() {
-  const pick = plays[Math.floor(Math.random()*plays.length)];
-  document.getElementById("odds-container").innerHTML = `
-    <div class="odds-card">
-      <strong>${pick.sport}</strong><br>
-      ${pick.match}<br>
-      <span>${pick.prop}</span><br>
-      <span style="color:#2dd4bf;font-weight:700;">Edge: ${pick.odds}</span>
-    </div>
-  `;
-}
-loadPlay();
-</script>
+<!-- NEWSLETTER -->
+<section id="newsletter" class="section">
+  <h2>💌 Join PJ’s Daily Drop</h2>
+  <p class="section-subtitle">Edges, tech drops, coastal hacks.</p>
+
+  <form id="newsletterForm" 
+        action="mailto:peter.z@kromeon.com"
+        method="POST"
+        enctype="text/plain"
+        style="text-align:center;">
+    <input type="email" required placeholder="Your email..." 
+      style="padding:10px;border-radius:8px;border:none;width:260px;">
+    <button class="btn" type="submit" style="margin-left:8px;">Subscribe</button>
+  </form>
+</section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  © 2025 SideGuy Solutions • Solana Beach, CA 🌊<br>
-  Built with precision. Powered by the coastline.
+<footer id="contact" class="footer">
+  © 2025 SideGuy Solutions — Solana Beach, CA 🌊  
+  <br>Version 2.3 — Web3 Coastal Hero Edition
 </footer>
+
+<!-- BOOK WITH PJ -->
+<a href="mailto:peter.z@kromeon.com?subject=Book%20With%20PJ" class="floating-btn">
+  💬 Book With PJ
+</a>
+
+<script>
+// RANDOM SPORTS EDGE
+const plays=[
+  {sport:"NBA",match:"Lakers vs Suns",edge:"+112",pick:"LeBron Over 34.5 PRA"},
+  {sport:"NFL",match:"49ers vs Seahawks",edge:"+136",pick:"CMC Anytime TD"},
+  {sport:"NHL",match:"Kings vs Oilers",edge:"+128",pick:"McDavid Over 1.5 pts"},
+  {sport:"MLB",match:"Yankees vs Astros",edge:"+142",pick:"Judge HR Prop"}
+];
+function loadOdds(){
+  const p=plays[Math.floor(Math.random()*plays.length)];
+  document.getElementById("odds-list").innerHTML=`
+    <div class="odds-card">
+      <strong>${p.sport}</strong><br>
+      ${p.match}<br><br>
+      <span style="color:var(--accent);font-weight:700;">${p.pick}</span><br>
+      Edge: <b>${p.edge}</b>
+    </div>`;
+}
+document.addEventListener("DOMContentLoaded",loadOdds);
+</script>
 
 </body>
 </html>
