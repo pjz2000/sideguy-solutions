@@ -1,404 +1,142 @@
 <!--
   SideGuy Solutions
-  Version: 2.3-prebuild
-  Tagline: Where code meets the coastline.
+  Version: 2.1
   Author: PJ + Kromeon Dev Team
+  Tagline: Where code meets the coastline.
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Tech, Transport & Automation in North County</title>
-  <meta name="description" content="SideGuy Solutions — where code meets the coastline. Custom tech, transport, and automation for Solana Beach, Encinitas, and North County. Smarter tools, seamless systems, and coastal precision.">
+  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
+  <meta name="description" content="SideGuy Solutions blends tech, transport, sports insights, and life assistance for North County. From Solana Beach to Encinitas, PJ automates what matters so you can move, build, and live freely.">
 
-  <style>
-    :root{
-      --bg:#0a1122;
-      --blue-bg:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#60a5fa 100%);
-      --card:#121b30;
-      --muted:#a0aec0;
-      --text:#f0f4f8;
-      --brand1:#4da8ff;
-      --brand2:#1cc8e5;
-      --brand3:#8b5cf6;
-      --accent:#2dd4bf;
-      --radius:12px;
-      --shadow:0 8px 20px rgba(10,17,34,.25);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      background:var(--blue-bg);
-      color:var(--text);
-      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
-      line-height:1.6;
-      animation:fadeIn .8s ease-in;
-    }
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    .container{max-width:1100px;margin:auto;padding:0 20px}
-    a{color:var(--brand2);text-decoration:none;transition:color .2s}
-    a:hover{color:var(--accent);text-decoration:underline}
-    a:focus{outline:2px solid var(--brand1);outline-offset:2px}
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
 
-    /* Nav */
-    .nav{position:sticky;top:0;background:rgba(10,17,34,.7);backdrop-filter:blur(10px);z-index:50}
-    .nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-    .brand{font-weight:800;font-size:20px;color:var(--text)}
-    .menu{display:flex;gap:18px;list-style:none}
-    .menu a{color:var(--muted);font-size:14px;font-weight:600}
-    .menu a:hover{color:var(--brand2)}
-
-    /* Buttons */
-    .btn{
-      cursor:pointer;border:none;border-radius:var(--radius);
-      padding:12px 18px;background:linear-gradient(90deg,var(--brand1),var(--brand3));
-      color:#fff;font-weight:700;box-shadow:var(--shadow);
-      transition:transform .2s,box-shadow .2s
-    }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(10,17,34,.3)}
-
-    /* Hero */
-    .hero{position:relative;text-align:center;padding:80px 20px;background:var(--blue-bg);color:var(--text);scroll-margin-top:80px;overflow:hidden}
-    .hero::before{
-      content:'';position:absolute;bottom:-20px;left:0;width:100%;height:40px;
-      background:radial-gradient(circle,transparent 60%,var(--bg) 60%);
-      background-size:40px 20px;background-position:0 20px;animation:wave 10s linear infinite
-    }
-    @keyframes wave{0%{background-position:0 20px}100%{background-position:40px 20px}}
-    .hero h1{font-size:clamp(30px,5vw,42px);margin-bottom:16px;font-weight:800}
-    .hero p{color:var(--muted);max-width:740px;margin:0 auto 6px;font-size:18px}
-
-    /* Sections */
-    .section{padding:50px 20px;background:var(--card);scroll-margin-top:80px}
-    .section-subtitle{font-size:16px;max-width:800px;margin:0 auto 20px;text-align:center;color:var(--muted)}
-
-    /* Ticker */
-    .ticker{background:rgba(28,200,229,.15);overflow:hidden;white-space:nowrap;padding:10px;text-align:center}
-    .ticker span{display:inline-block;margin-right:30px;color:var(--text);font-size:14px;font-variant-numeric:tabular-nums;animation:ticker 22s linear infinite}
-    @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-
-    /* Trends list */
-    .trend-list{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .trend-list li{background:rgba(255,255,255,.06);padding:8px 14px;border-radius:8px;color:var(--text);font-size:14px;box-shadow:var(--shadow);transition:all .2s}
-    .trend-list li:hover{background:rgba(77,168,255,.2);transform:scale(1.05)}
-
-    /* Odds cards */
-    .odds-card{background:rgba(255,255,255,.05);margin:10px auto;padding:12px;border-radius:8px;max-width:560px;box-shadow:0 0 10px rgba(28,200,229,.2)}
-    .odds-card strong{color:var(--brand1)}
-
-    /* Yields table */
-    .yields-wrap{max-width:900px;margin:0 auto}
-    .yields-tools{display:flex;gap:10px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
-    .yields-table{width:100%;border-collapse:collapse;color:var(--text);font-size:14px}
-    .yields-table th,.yields-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,.1);font-variant-numeric:tabular-nums}
-    .yields-table th{background:rgba(255,255,255,.06)}
-    .positive{color:var(--accent)} .negative{color:#ef4444}
-    .pill{display:inline-block;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px}
-
-    /* Newsletter */
-    form.newsletter{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:520px;margin:auto}
-    form.newsletter input{padding:10px;border-radius:8px;border:none;width:70%;max-width:320px;background:var(--card);color:var(--text)}
-    #success-message{display:none;color:var(--accent);margin-top:10px;font-size:14px;animation:fadeIn 1s forwards}
-
-    /* Footer */
-    .footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,.2);background:var(--card);color:var(--muted)}
-    #version-info{font-size:13px;color:#7dd3fc;margin-top:8px}
-
-    /* Floating PJ bubble + mini card */
-    .floating-btn{
-      position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,#3b82f6,#60a5fa);
-      color:#fff;border:none;border-radius:50px;padding:14px 24px;font-weight:700;
-      box-shadow:0 4px 15px rgba(0,0,0,.3);cursor:pointer;z-index:9999;animation:pulse 2.5s infinite;transition:transform .2s,box-shadow .3s
-    }
-    .floating-btn:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(59,130,246,.5)}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.6)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
-
-    .pj-mini{
-      position:fixed;right:24px;bottom:82px; /* sits above the bubble */
-      width:290px;background:rgba(18,27,48,.96);border:1px solid rgba(255,255,255,.08);
-      padding:12px 14px;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.35);z-index:9998
-    }
-    .pj-mini h4{margin:0 0 6px 0;font-size:15px}
-    .pj-mini p{margin:0;color:var(--muted);font-size:13px}
-    .pj-mini .close{position:absolute;top:8px;right:10px;background:transparent;border:none;color:#9fb3c8;font-size:16px;cursor:pointer}
-
-    @media (max-width:768px){
-      .menu{flex-wrap:wrap;justify-content:center}
-      .hero h1{font-size:28px}
-      .floating-btn{padding:12px 20px;font-size:14px;bottom:20px}
-      .pj-mini{right:20px;bottom:76px;width:88%}
-    }
-  </style>
+  <!-- Scripts -->
+  <script src="script.js" defer></script>
 </head>
+
 <body>
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="inner">
-      <div class="brand">SideGuy Solutions</div>
-      <ul class="menu">
-        <li><a href="#trending">Trending</a></li>
-        <li><a href="#sports-edge">Sports Edge</a></li>
-        <li><a href="#yields">DeFi Yields</a></li>
-        <li><a href="#newsletter">Newsletter</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>Where code meets the coastline.</h1>
-      <p>SideGuy Solutions blends technology, transportation, and real-life assistance — precision-built for North County. From Solana Beach to Encinitas, we automate the details so you can move, build, and live freely.</p>
-    </div>
-  </section>
-
-  <!-- Daily Coastal Edge Ticker -->
-  <div class="ticker" aria-label="Daily Coastal Edge">
-    <span id="edge-line">Loading edge...</span>
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="inner">
+    <div class="brand">SideGuy Solutions</div>
+    <ul class="menu">
+      <li><a href="#today-edge">Today's Edge</a></li>
+      <li><a href="#yields">Yield to Pay</a></li>
+      <li><a href="#trending">Trending</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="pay.html" class="pay-link">💸 Pay PJ</a></li>
+    </ul>
   </div>
+</nav>
 
-  <!-- Trending -->
-  <section id="trending" class="section">
-    <div class="container">
-      <h2 style="text-align:center;color:var(--brand2);">🔥 Trending Now</h2>
-      <p class="section-subtitle">Live topics from Google & X — quick pulse on what’s moving.</p>
-      <ul id="trendList" class="trend-list"><li>Loading top trends...</li></ul>
+<!-- TICKER -->
+<div class="crypto-ticker">
+  <span class="ticker-item" id="ticker-content">Loading prices...</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h1>Where code meets the coastline.</h1>
+    <p>
+      SideGuy Solutions blends technology, transportation, sports insights, and real-life assistance —
+      precision-built for North County. From Solana Beach to Encinitas, PJ helps you move, build,
+      and live freely while your Solana stack quietly works for you.
+    </p>
+
+    <div class="pj-tag">
+      <span>🌴 PJ — The Assistant You Never Knew You Needed</span>
     </div>
-  </section>
 
-  <!-- Sports Edge -->
-  <section id="sports-edge" class="section">
-    <div class="container">
-      <h2 style="text-align:center;color:var(--brand2);">🏈 Sports Edge — Odds & Futures</h2>
-      <p class="section-subtitle">Rotating day-of edges. North County inquiries only.</p>
-      <div id="odds-list">
-        <div class="odds-card"><strong>NBA</strong> — Suns vs Mavericks<br><span class="pill">PRA</span> Dereck Lively II Over 14.5<br><span class="positive">+112 → +136</span> • Liq $27</div>
-      </div>
+    <div class="hero-buttons">
+      <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="btn">💬 Book with PJ</a>
+      <a href="#yields" class="btn secondary">📈 Yield to Pay</a>
     </div>
-  </section>
-
-  <!-- DeFi Yields (Multi-Chain) -->
-  <section id="yields" class="section">
-    <div class="container">
-      <h2 style="text-align:center;color:var(--brand2);">🪙 Top DeFi Yields — Multi-Chain (ETH • SOL • Base)</h2>
-      <p class="section-subtitle">Live APYs pulled from public DeFi data. Auto-refreshes every 5 minutes. (Fallbacks shown if APIs block in-browser.)</p>
-
-      <div class="yields-wrap">
-        <div class="yields-tools">
-          <button id="refreshYields" class="btn">Refresh Now</button>
-          <span id="yieldsUpdated" class="pill">Updating…</span>
-        </div>
-        <table class="yields-table" id="yieldsTable">
-          <thead>
-            <tr><th>Token</th><th>Chain</th><th>Platform</th><th>APY (%)</th><th>View</th></tr>
-          </thead>
-          <tbody>
-            <tr><td colspan="5">Loading top pools…</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter -->
-  <section id="newsletter" class="section">
-    <div class="container">
-      <h2 style="text-align:center;color:var(--brand2);">💌 Join PJ’s Daily Drop</h2>
-      <p class="section-subtitle">Get the latest coastal tech updates, DFS promos, and smart automations.</p>
-      <form id="newsletterForm" class="newsletter">
-        <input type="email" id="nlEmail" placeholder="Your email address" required />
-        <button type="submit" class="btn">Subscribe</button>
-      </form>
-      <div id="success-message">✅ Thanks! Your mail app will open — just hit send.</div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact" class="footer">
-    <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-    <p id="version-info">Version 2.3-prebuild</p>
-  </footer>
-
-  <!-- Floating Book with PJ -->
-  <button class="floating-btn" id="bookPJ">💬 Book with PJ</button>
-
-  <!-- PJ mini concierge card (sits above bubble) -->
-  <div class="pj-mini" id="pjMini">
-    <button class="close" id="closeMini" aria-label="Close">×</button>
-    <h4>PJ — The assistant you never knew you needed</h4>
-    <p>North County concierge for tech, life, and transport. Built on precision, powered by innovation. Based in Solana Beach • 6+ years.</p>
   </div>
+</section>
 
-  <script>
-    /* ========= UTIL ========= */
-    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-    async function fetchWithRetry(url, retries=2, delay=1500){
-      for(let i=0;i<=retries;i++){
-        try{
-          const res = await fetch(url);
-          if(!res.ok) throw new Error("Bad status");
-          return res;
-        }catch(e){
-          if(i===retries) throw e;
-          await sleep(delay);
-        }
-      }
-    }
+<!-- TODAY'S EDGE -->
+<section id="today-edge" class="section">
+  <div class="container">
+    <h2>🏆 Today’s Edge</h2>
+    <p class="section-subtitle">Daily sports value — tailored for North County bettors.</p>
 
-    /* ========= VERSION STAMP ========= */
-    (function stampVersion(){
-      const el = document.getElementById('version-info');
-      const now = new Date().toLocaleString('en-US', {
-        timeZone:'America/Los_Angeles', month:'short', day:'numeric', year:'numeric',
-        hour:'2-digit', minute:'2-digit', hour12:true
-      });
-      el.textContent = `Version 2.3-prebuild • Updated ${now} PST`;
-    })();
+    <div id="edge-card" class="edge-card">
+      Loading today’s edge...
+    </div>
 
-    /* ========= NEWSLETTER (mailto:) ========= */
-    (function initNewsletter(){
-      const form = document.getElementById('newsletterForm');
-      const email = document.getElementById('nlEmail');
-      const ok = document.getElementById('success-message');
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const val = (email.value || '').trim();
-        if(!val) return;
-        const subject = encodeURIComponent('Newsletter Signup — SideGuy Solutions');
-        const body = encodeURIComponent(`Please add me to the Daily Drop.\n\nEmail: ${val}\nSource: sideguysolutions.com`);
-        window.location.href = `mailto:peter.z@kromeon.com?subject=${subject}&body=${body}`;
-        ok.style.display = 'block';
-        setTimeout(()=> ok.style.display='none', 4000);
-        form.reset();
-      });
-    })();
+    <div class="center-btn">
+      <a href="mailto:peter.z@kromeon.com?subject=Today%27s%20Edge" class="btn">📊 Get Today’s Full Card</a>
+    </div>
+  </div>
+</section>
 
-    /* ========= PJ BUBBLE + MINI CARD ========= */
-    (function initPJ(){
-      const btn = document.getElementById('bookPJ');
-      const mini = document.getElementById('pjMini');
-      const close = document.getElementById('closeMini');
-      btn.addEventListener('click', ()=>{
-        window.location.href = 'mailto:peter.z@kromeon.com?subject=Book with PJ (North County Concierge)';
-      });
-      close.addEventListener('click', ()=> mini.style.display='none');
-      // auto-show mini after 3s on first visit only
-      if(!sessionStorage.getItem('pjMiniSeen')){
-        setTimeout(()=> { mini.style.display='block'; sessionStorage.setItem('pjMiniSeen','1'); }, 3000);
-      }
-    })();
+<!-- YIELD TO PAY -->
+<section id="yields" class="section">
+  <div class="container">
+    <h2>💵 Yield to Pay</h2>
+    <p class="section-subtitle">
+      Earn passive yield on Solana — then pay PJ using profits.  
+      Local service meets next-generation finance.
+    </p>
 
-    /* ========= TRENDS (Google public visualize endpoint; graceful fallback) ========= */
-    async function loadTrends(){
-      const el = document.getElementById('trendList');
-      try{
-        const res = await fetch('https://trends.google.com/trends/hottrends/visualize/internal/data/en-us');
-        const data = await res.json(); // array of strings/objects
-        const topics = (Array.isArray(data) ? data : []).slice(0,8).map(t => (t.title||t.name||t));
-        if(topics.length){
-          el.innerHTML = topics.map(t=>`<li>${t}</li>`).join('');
-          return;
-        }
-        throw new Error('empty trends');
-      }catch{
-        el.innerHTML = `<li>AI Assistants</li><li>Solana Yield</li><li>DFS Promos</li><li>Carbon Credits</li><li>California Startups</li><li>North County Events</li>`;
-      }
-    }
+    <div id="apy-box" class="apy-box">
+      Fetching live APY...
+    </div>
 
-    /* ========= SPORTS EDGE (randomized emoji + sample edges) ========= */
-    const sportEmojis = ['🏈','🏀','⚾️','🏒','🎾','⚽️','⛳️','🥊','🏎️','🏐'];
-    const sampleEdges = [
-      {league:'NBA', text:'PRA: Dereck Lively II Over 14.5', price:'+112 → +136', note:'Liq $27'},
-      {league:'NFL', text:'San Francisco alt +3.5 (live look)', price:'+105', note:'Model edge 3.2%'},
-      {league:'NHL', text:'Shots on Goal: Top line winger o2.5', price:'+118', note:'Book drift'},
-      {league:'MLB', text:'Total Bases: Power bat o1.5', price:'+135', note:'Park boost'},
-    ];
-    function rotateSportsEdge(){
-      const card = document.getElementById('odds-list');
-      const pick = sampleEdges[Math.floor(Math.random()*sampleEdges.length)];
-      const ball = sportEmojis[Math.floor(Math.random()*sportEmojis.length)];
-      card.innerHTML = `
-        <div class="odds-card">
-          <strong>${pick.league}</strong> — Daily Edge ${ball}<br>
-          <span class="pill">${pick.text}</span><br>
-          <span class="positive">${pick.price}</span> • <span>${pick.note}</span>
-        </div>`;
-    }
+    <div class="yield-note">
+      🔔 *Don’t sell your bags. Let SOL work for you.*  
+    </div>
 
-    /* ========= DAILY COASTAL EDGE TICKER (sports + crypto stat) ========= */
-    const cryptoQuick = [
-      'ETH gas ≈ 34 gwei','SOL finality ≈ ~0.4s','Base TPS ↑ steady','BTC dominance ~ 52%',
-      'USDC peg: $1.00','ETH staking yield ~3.5%','SOL mempool calm','DEX vol ↑ today'
-    ];
-    function setTickerLine(){
-      const el = document.getElementById('edge-line');
-      const sport = sampleEdges[Math.floor(Math.random()*sampleEdges.length)];
-      const stat = cryptoQuick[Math.floor(Math.random()*cryptoQuick.length)];
-      const ball = sportEmojis[Math.floor(Math.random()*sportEmojis.length)];
-      el.textContent = `${ball} ${sport.league} • ${sport.text} • ${sport.price}  |  ⛵ ${stat}`;
-    }
+    <div class="center-btn">
+      <a href="pay.html" class="btn">💸 Pay with Phantom / Coinbase</a>
+    </div>
+  </div>
+</section>
 
-    /* ========= DEFI YIELDS (DeFiLlama pools; filter ETH/SOL/Base; graceful fallback) ========= */
-    async function loadYields(){
-      const table = document.getElementById('yieldsTable').querySelector('tbody');
-      const updated = document.getElementById('yieldsUpdated');
-      updated.textContent = 'Updating…';
-      try{
-        const res = await fetchWithRetry('https://yields.llama.fi/pools'); // public endpoint; may block in some browsers
-        const json = await res.json();
-        const pools = (json.data || [])
-          .filter(p => ['Ethereum','Solana','Base'].includes(p.chain))
-          .filter(p => (p.apy || 0) > 0)
-          .sort((a,b)=> (b.apy||0) - (a.apy||0))
-          .slice(0, 8)
-          .map(p => ({
-            token: p.symbol || p.project || 'Token',
-            chain: p.chain,
-            project: p.project || '—',
-            apy: p.apy?.toFixed(2),
-            url: p.url || p.site || '#'
-          }));
+<!-- TRENDING -->
+<section id="trending" class="section">
+  <div class="container">
+    <h2>🔥 Trending Now</h2>
+    <p class="section-subtitle">What the world is searching, talking about, and moving toward.</p>
 
-        if(!pools.length) throw new Error('no pools');
+    <ul id="trendList" class="trend-list">
+      <li>Loading trends...</li>
+    </ul>
+  </div>
+</section>
 
-        table.innerHTML = pools.map(p => `
-          <tr>
-            <td>${p.token}</td>
-            <td>${p.chain}</td>
-            <td>${p.project}</td>
-            <td class="${p.apy >= 0 ? 'positive' : 'negative'}">${p.apy}</td>
-            <td><a href="${p.url}" target="_blank" rel="noopener">Open →</a></td>
-          </tr>
-        `).join('');
-      }catch(e){
-        // Fallback static examples
-        table.innerHTML = `
-          <tr><td>stETH</td><td>Ethereum</td><td>Lido</td><td class="positive">3.60</td><td><a href="https://lido.fi" target="_blank" rel="noopener">Open →</a></td></tr>
-          <tr><td>USDC</td><td>Base</td><td>Aave</td><td class="positive">4.20</td><td><a href="https://aave.com" target="_blank" rel="noopener">Open →</a></td></tr>
-          <tr><td>SOL</td><td>Solana</td><td>Jito LST</td><td class="positive">7.80</td><td><a href="https://jito.network" target="_blank" rel="noopener">Open →</a></td></tr>
-          <tr><td>USDC</td><td>Solana</td><td>Kamino</td><td class="positive">5.10</td><td><a href="https://app.kamino.finance" target="_blank" rel="noopener">Open →</a></td></tr>
-        `;
-      } finally {
-        const t = new Date().toLocaleTimeString('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit'});
-        updated.textContent = `Updated ${t} PST`;
-      }
-    }
+<!-- NEWSLETTER -->
+<section id="newsletter" class="section">
+  <div class="container">
+    <h2>💌 Join PJ’s Daily Drop</h2>
+    <p class="section-subtitle">Your morning hit of North County tech, DFS edges, and coastal living.</p>
 
-    /* ========= INIT ========= */
-    document.addEventListener('DOMContentLoaded', ()=>{
-      loadTrends();
-      rotateSportsEdge();
-      setTickerLine();
-      loadYields();
+    <div class="newsletter-box">
+      <input type="email" id="newsletterEmail" placeholder="Your email">
+      <button id="newsletterButton" class="btn">Subscribe</button>
+    </div>
 
-      // refresh loops
-      setInterval(rotateSportsEdge, 60 * 1000);
-      setInterval(setTickerLine, 45 * 1000);
-      setInterval(loadYields, 5 * 60 * 1000);
+    <p id="newsletter-status" class="newsletter-status"></p>
+  </div>
+</section>
 
-      document.getElementById('refreshYields').addEventListener('click', loadYields);
-    });
-  </script>
+<!-- FOOTER -->
+<footer id="contact" class="footer">
+  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA</p>
+  <p class="version">Version 2.1 • Updated <span id="timestamp"></span></p>
+</footer>
+
+<!-- FLOATING BUTTON -->
+<a href="pay.html" class="floating-btn">💸 Pay PJ</a>
+
 </body>
 </html>
