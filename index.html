@@ -1,723 +1,313 @@
+<!--
+  SideGuy Solutions
+  Version: 3.0-ocean-portal
+  Hero: "Where code meets the coastline."
+  Mode: Web3 Coastal + Summon PJ Orb
+  Author: PJ + Kromeon Dev Team (+ ChatGPT)
+-->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>SideGuy Solutions – Ocean Portal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
+  <meta
+    name="description"
+    content="SideGuy Solutions — Web3 coastal concierge for tech, transport, and smarter systems in North County. From Solana Beach to Encinitas, PJ helps you move, build, and live freely."
+  />
 
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-          "Segoe UI", sans-serif;
-        color: #e7f7ff;
-        background: #020816;
-      }
+  <style>
+    :root {
+      --bg: #020617;
+      --blue-bg: radial-gradient(circle at top, #38bdf8 0%, #0f172a 45%, #020617 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --muted: #a0aec0;
+      --text: #e5f2ff;
+      --brand1: #38bdf8;
+      --brand2: #22d3ee;
+      --brand3: #818cf8;
+      --accent: #2dd4bf;
+      --accent-soft: rgba(45, 212, 191, 0.15);
+      --radius: 14px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+    }
 
-      #ocean-container {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        background: radial-gradient(circle at top, #041b3b, #000814 60%, #000611);
-      }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-      .ocean-overlay-gradient {
-        position: fixed;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-        background:
-          radial-gradient(circle at 50% -20%, rgba(0, 180, 255, 0.25), transparent 60%),
-          radial-gradient(circle at 20% 120%, rgba(0, 255, 210, 0.18), transparent 60%),
-          radial-gradient(circle at 90% 110%, rgba(60, 140, 255, 0.16), transparent 55%);
-        mix-blend-mode: screen;
-        opacity: 0.95;
-      }
+    body {
+      min-height: 100vh;
+      background: var(--blue-bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+        "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      animation: fadeIn 0.9s ease-out;
+      position: relative;
+      z-index: 1;
+    }
 
-      .overlay {
-        position: relative;
-        z-index: 2;
-        pointer-events: none;
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1.5rem;
-        text-align: center;
-      }
-
-      .brand {
-        position: absolute;
-        top: 1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        letter-spacing: 0.18em;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        color: rgba(226, 244, 255, 0.7);
-        pointer-events: none;
-        text-shadow: 0 0 12px rgba(0, 255, 255, 0.16);
-      }
-
-      .brand span {
-        font-weight: 600;
-        color: #f5fbff;
-      }
-
-      .brand-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.35rem 0.9rem;
-        border-radius: 999px;
-        background: linear-gradient(
-          90deg,
-          rgba(0, 179, 255, 0.18),
-          rgba(0, 255, 200, 0.16)
-        );
-        border: 1px solid rgba(173, 252, 255, 0.28);
-        box-shadow:
-          0 0 15px rgba(0, 255, 255, 0.18),
-          0 0 35px rgba(0, 134, 255, 0.45);
-        backdrop-filter: blur(16px);
-      }
-
-      .brand-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 999px;
-        background: radial-gradient(circle, #00fff0, #008cff);
-        box-shadow: 0 0 10px rgba(0, 255, 240, 0.7);
-      }
-
-      .hero-copy {
-        margin-bottom: 2.25rem;
-        max-width: 540px;
-        pointer-events: none;
-      }
-
-      .hero-tagline {
-        font-size: 0.9rem;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        color: rgba(214, 237, 255, 0.75);
-        margin-bottom: 0.65rem;
-      }
-
-      .hero-title {
-        font-size: clamp(2.1rem, 5vw, 3.1rem);
-        font-weight: 600;
-        line-height: 1.08;
-        letter-spacing: 0.03em;
-        text-shadow:
-          0 0 20px rgba(0, 227, 255, 0.4),
-          0 0 50px rgba(0, 124, 255, 0.4);
-        margin-bottom: 0.75rem;
-      }
-
-      .hero-title span {
-        background: linear-gradient(120deg, #88f5ff, #e0fdff);
-        -webkit-background-clip: text;
-        color: transparent;
-      }
-
-      .hero-subtitle {
-        font-size: 0.98rem;
-        color: rgba(214, 235, 255, 0.85);
-        line-height: 1.5;
-        max-width: 440px;
-        margin: 0 auto;
-      }
-
-      .portal-orb-wrapper {
-        position: relative;
-        pointer-events: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .portal-orb {
-        position: relative;
-        width: 190px;
-        height: 190px;
-        border-radius: 999px;
-        background:
-          radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3), transparent 60%),
-          radial-gradient(circle at 50% 120%, rgba(0, 255, 210, 0.55), rgba(0, 112, 255, 0.9));
-        box-shadow:
-          0 0 40px rgba(0, 255, 245, 0.45),
-          0 0 90px rgba(0, 140, 255, 0.6);
-        border: 1px solid rgba(190, 248, 255, 0.75);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        overflow: hidden;
-        animation: orbFloat 5.5s ease-in-out infinite;
-      }
-
-      .portal-orb::before,
-      .portal-orb::after {
-        content: "";
-        position: absolute;
-        inset: -30%;
-        background: conic-gradient(
-          from 0deg,
-          rgba(0, 255, 255, 0.2),
-          transparent 40%,
-          rgba(255, 255, 255, 0.14),
-          transparent 75%,
-          rgba(0, 255, 210, 0.22)
-        );
-        mix-blend-mode: screen;
-        opacity: 0.75;
-        animation: orbSweep 9s linear infinite;
-      }
-
-      .portal-orb::after {
-        animation-duration: 13s;
-        opacity: 0.45;
-        transform: scale(1.1);
-      }
-
-      .portal-inner-ripple {
-        position: absolute;
-        inset: 18%;
-        border-radius: 999px;
-        border: 1px solid rgba(220, 252, 255, 0.7);
-        box-shadow:
-          0 0 25px rgba(197, 245, 255, 0.5),
-          0 0 50px rgba(0, 208, 255, 0.6);
-        opacity: 0.7;
-        animation: innerPulse 3.8s ease-out infinite;
-      }
-
-      .portal-label {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        padding: 0 1.25rem;
-      }
-
-      .portal-label-main {
-        font-size: 0.95rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        font-weight: 600;
-        margin-bottom: 0.35rem;
-        text-shadow: 0 0 15px rgba(5, 17, 30, 0.6);
-      }
-
-      .portal-label-sub {
-        font-size: 0.86rem;
-        opacity: 0.9;
-        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
-      }
-
-      .portal-ring {
-        position: absolute;
-        inset: -18%;
-        border-radius: inherit;
-        border: 1px solid rgba(116, 238, 255, 0.45);
-        box-shadow: 0 0 40px rgba(0, 255, 247, 0.35);
+    @keyframes fadeIn {
+      from {
         opacity: 0;
-        transform: scale(0.8);
-        pointer-events: none;
+        transform: translateY(4px);
       }
-
-      .portal-ring.active {
-        animation: rippleBurst 0.95s ease-out;
-      }
-
-      .portal-caption {
-        margin-top: 0.85rem;
-        font-size: 0.82rem;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: rgba(211, 235, 255, 0.8);
-      }
-
-      .portal-caption span {
-        font-weight: 600;
-        color: #f8fdff;
-      }
-
-      .aladeen-card {
-        margin-top: 2.25rem;
-        max-width: 440px;
-        padding: 1.2rem 1.3rem;
-        border-radius: 20px;
-        background: radial-gradient(circle at top, rgba(4, 40, 88, 0.9), rgba(1, 9, 25, 0.96));
-        border: 1px solid rgba(184, 228, 255, 0.32);
-        box-shadow:
-          0 18px 40px rgba(0, 0, 0, 0.7),
-          0 0 45px rgba(0, 185, 255, 0.35);
-        backdrop-filter: blur(18px);
-        text-align: left;
-        opacity: 0;
-        transform: translateY(18px);
-        pointer-events: none;
-        transition:
-          opacity 0.6s ease-out,
-          transform 0.6s ease-out;
-      }
-
-      .aladeen-card.visible {
+      to {
         opacity: 1;
         transform: translateY(0);
       }
-
-      .aladeen-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.25rem 0.8rem;
-        border-radius: 999px;
-        font-size: 0.68rem;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        background: linear-gradient(
-          120deg,
-          rgba(0, 252, 214, 0.26),
-          rgba(0, 122, 255, 0.42)
-        );
-        border: 1px solid rgba(188, 245, 255, 0.7);
-        margin-bottom: 0.75rem;
-      }
-
-      .aladeen-pill-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: radial-gradient(circle, #00fff0, #00a3ff);
-      }
-
-      .aladeen-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 0.45rem;
-      }
-
-      .aladeen-tier {
-        font-size: 0.9rem;
-        margin-top: 0.35rem;
-        color: rgba(216, 236, 255, 0.92);
-      }
-
-      .aladeen-tier span {
-        font-weight: 600;
-        color: #ffffff;
-      }
-
-      .aladeen-tagline {
-        font-size: 0.85rem;
-        margin-top: 0.75rem;
-        font-style: italic;
-        color: rgba(200, 230, 255, 0.9);
-      }
-
-      .footer-note {
-        position: absolute;
-        bottom: 1.3rem;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.75rem;
-        color: rgba(189, 219, 255, 0.8);
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        pointer-events: none;
-        opacity: 0.9;
-      }
-
-      .footer-note span {
-        color: #ffffff;
-        font-weight: 500;
-      }
-
-      @keyframes orbFloat {
-        0% {
-          transform: translateY(0px) scale(1);
-        }
-        50% {
-          transform: translateY(-10px) scale(1.02);
-        }
-        100% {
-          transform: translateY(0px) scale(1);
-        }
-      }
-
-      @keyframes orbSweep {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      @keyframes innerPulse {
-        0% {
-          opacity: 0.5;
-          transform: scale(0.96);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        100% {
-          opacity: 0.4;
-          transform: scale(0.98);
-        }
-      }
-
-      @keyframes rippleBurst {
-        0% {
-          opacity: 0.8;
-          transform: scale(0.7);
-          box-shadow: 0 0 20px rgba(166, 241, 255, 0.8);
-        }
-        60% {
-          opacity: 0.3;
-          transform: scale(1.25);
-          box-shadow: 0 0 45px rgba(166, 241, 255, 0.9);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(1.5);
-          box-shadow: 0 0 60px rgba(166, 241, 255, 0);
-        }
-      }
-
-      @media (max-width: 600px) {
-        .hero-copy {
-          margin-bottom: 1.7rem;
-        }
-
-        .hero-subtitle {
-          font-size: 0.9rem;
-        }
-
-        .portal-orb {
-          width: 165px;
-          height: 165px;
-        }
-
-        .brand {
-          top: 1rem;
-        }
-
-        .footer-note {
-          bottom: 0.9rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="ocean-container"></div>
-    <div class="ocean-overlay-gradient"></div>
-
-    <div class="overlay">
-      <div class="brand">
-        <div class="brand-pill">
-          <span class="brand-dot"></span>
-          <span>SIDEGUY SOLUTIONS</span>
-        </div>
-      </div>
-
-      <div class="hero-copy">
-        <div class="hero-tagline">Coastal Code Concierge</div>
-        <div class="hero-title">
-          A <span>living ocean portal</span> to your next build.
-        </div>
-        <div class="hero-subtitle">
-          Tap the portal, summon PJ, and get your SaaS, app, or wild Aladeen
-          idea pulled from the deep and shipped to shore.
-        </div>
-      </div>
-
-      <div class="portal-orb-wrapper">
-        <div class="portal-orb" id="portalOrb">
-          <div class="portal-inner-ripple"></div>
-          <div class="portal-ring" id="portalRing"></div>
-          <div class="portal-label">
-            <div class="portal-label-main">Tap to Summon PJ</div>
-            <div class="portal-label-sub">
-              Coastal concierge at your service.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="portal-caption">
-        Running in <span>Aladeen Mode++</span>
-      </div>
-
-      <div class="aladeen-card" id="aladeenCard">
-        <div class="aladeen-pill">
-          <span class="aladeen-pill-dot"></span>
-          <span>AladΞen Index</span>
-        </div>
-        <div class="aladeen-title">How “worth it” is your idea, really?</div>
-        <div class="aladeen-tier">
-          <span>Calm Seas (0–3)</span> – Cute. Ship it small, keep it simple,
-          see what bites.
-        </div>
-        <div class="aladeen-tier">
-          <span>Good Chaos (4–7)</span> – There’s a wave here. Tighten the
-          build and paddle in.
-        </div>
-        <div class="aladeen-tier">
-          <span>Full Aladeen (8–10)</span> – Drop everything. This one gets the
-          portal, the PJ treatment, and the big splash.
-        </div>
-        <div class="aladeen-tagline">
-          Because some ideas are “nice”&hellip; and some are Aladeen.
-        </div>
-      </div>
-
-      <div class="footer-note">
-        <span>Tap once</span> to disturb the ocean. Tap again to send PJ your
-        next build.
-      </div>
-    </div>
-
-    <!-- THREE.js from CDN -->
-    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-    <script>
-      // ------- OCEAN WEBGL SCENE (ALADΞEN MODE++ V2) -------
-      let renderer, scene, camera, oceanMesh, material, clock;
-      let targetWaveAmp = 1.0;
-
-      function initOcean() {
-        const container = document.getElementById("ocean-container");
-
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setPixelRatio(window.devicePixelRatio || 1);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000814, 1);
-        container.appendChild(renderer.domElement);
-
-        scene = new THREE.Scene();
-
-        const fov = 55;
-        const aspect = window.innerWidth / window.innerHeight;
-        const near = 0.1;
-        const far = 100;
-        camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        camera.position.set(0, 7.2, 11.5);
-        camera.lookAt(0, 0, 0);
-
-        clock = new THREE.Clock();
-
-        const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
-        geometry.rotateX(-Math.PI / 2);
-
-        const vertexShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-          uniform float uWaveAmp;
-
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-
-            vec2 u = f * f * (3.0 - 2.0 * f);
-
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
-
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-
-            float t = uTime * 0.5;
-
-            // Primary rolling swells
-            float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
-            float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
-            float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
-
-            // Higher-frequency surface ripples
-            float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
-            float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
-            float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
-
-            float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
-            height *= uWaveAmp;
-
-            pos.y += height;
-
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `;
-
-        const fragmentShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-
-            vec2 u = f * f * (3.0 - 2.0 * f);
-
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
-
-          void main() {
-            float t = uTime * 0.06;
-
-            // Layered noise for surface details
-            float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
-            float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
-            float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
-
-            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
-
-            vec3 deep = vec3(0.0, 0.06, 0.18);
-            vec3 mid = vec3(0.0, 0.3, 0.56);
-            vec3 surf = vec3(0.74, 0.96, 1.0);
-
-            // Base color blend by depth
-            vec3 col = mix(deep, mid, depth);
-            col = mix(col, surf, pow(1.0 - depth, 3.2));
-
-            // Horizon / top light glow
-            float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-            col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
-
-            // Fake god rays from above-right, sliding slowly
-            float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
-            float rays = smoothstep(0.72, 1.0, rayPattern);
-            col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
-
-            // Surface shimmer
-            float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
-            col += shimmer * 0.09;
-
-            // Caustic-like flickers
-            float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
-            caustic = smoothstep(0.65, 1.0, caustic);
-            col += caustic * 0.07;
-
-            // Tiny spec highlights
-            float spark = smoothstep(0.92, 1.0, nFine);
-            col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
-
-            // Radial vignette so center glows more
-            vec2 center = vUv - 0.5;
-            float dist = length(center);
-            float vignette = smoothstep(0.8, 0.25, dist);
-            col *= mix(0.72, 1.22, vignette);
-
-            gl_FragColor = vec4(col, 1.0);
-          }
-        `;
-
-        material = new THREE.ShaderMaterial({
-          uniforms: {
-            uTime: { value: 0 },
-            uWaveAmp: { value: 1.0 },
-          },
-          vertexShader,
-          fragmentShader,
-          side: THREE.DoubleSide,
-        });
-
-        oceanMesh = new THREE.Mesh(geometry, material);
-        scene.add(oceanMesh);
-
-        const fogColor = new THREE.Color(0x000817);
-        scene.fog = new THREE.Fog(fogColor, 12, 45);
-        renderer.setClearColor(fogColor, 1);
-
-        window.addEventListener("resize", onWindowResize, false);
-
-        animate();
-      }
-
-      function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      }
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        const elapsed = clock.getElapsedTime();
-        material.uniforms.uTime.value = elapsed;
-
-        // Smoothly ease wave amplitude toward target
-        const current = material.uniforms.uWaveAmp.value;
-        material.uniforms.uWaveAmp.value =
-          current + (targetWaveAmp - current) * 0.03;
-
-        // Subtle camera sway for more life
-        const sway = Math.sin(elapsed * 0.18) * 0.4;
-        camera.position.x = sway;
-        camera.lookAt(0, 0, 0);
-
-        renderer.render(scene, camera);
-      }
-
-      // ------- PORTAL INTERACTION (SUMMON PJ) -------
-      function summonPJ() {
-        const ring = document.getElementById("portalRing");
-        const card = document.getElementById("aladeenCard");
-
-        ring.classList.remove("active");
-        void ring.offsetWidth; // reflow to restart animation
-        ring.classList.add("active");
-
-        // Give the ocean a little "whoomp"
-        targetWaveAmp = 1.6;
-        setTimeout(() => {
-          targetWaveAmp = 1.05;
-        }, 550);
-
-        card.classList.add("visible");
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        initOcean();
-
-        const orb = document.getElementById("portalOrb");
-        orb.addEventListener("click", summonPJ);
-      });
-    </script>
-  </body>
-</html>
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    a {
+      color: var(--brand2);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    a:focus {
+      outline: 2px solid var(--brand2);
+      outline-offset: 2px;
+    }
+
+    /* OCEAN BACKGROUND (WEBGL) */
+    #ocean-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at top, #041b3b, #000814 60%, #000611);
+    }
+
+    .ocean-overlay-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(0, 180, 255, 0.25), transparent 60%),
+        radial-gradient(circle at 20% 120%, rgba(0, 255, 210, 0.18), transparent 60%),
+        radial-gradient(circle at 90% 110%, rgba(60, 140, 255, 0.16), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.95;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: radial-gradient(
+          circle at top,
+          rgba(56, 189, 248, 0.35),
+          transparent 60%
+        ),
+        rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand span.logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22d3ee, #0ea5e9);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .menu a {
+      color: var(--muted);
+      font-weight: 500;
+      padding: 4px 0;
+    }
+
+    .menu a:hover {
+      color: var(--brand2);
+    }
+
+    /* HERO WITH OCEAN PORTAL */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 20px 140px;
+      text-align: center;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.5),
+        rgba(2, 6, 23, 0.9)
+      );
+      box-shadow: inset 0 -40px 80px rgba(15, 23, 42, 0.9);
+      z-index: 1;
+    }
+
+    .hero::before {
+      /* subtle dark overlay over the ocean */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.4), transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-kicker span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 40px);
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      margin-bottom: 14px;
+      text-shadow: 0 16px 50px rgba(15, 23, 42, 0.85);
+    }
+
+    .hero h1 span.highlight {
+      background: linear-gradient(120deg, #22d3ee, #a855f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      color: #e2e8f0;
+      font-size: 15px;
+      opacity: 0.94;
+    }
+
+    .hero-pj-line {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .hero-pj-line strong {
+      color: #e0f2fe;
+    }
+
+    .hero-contacts {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-contacts a {
+      font-weight: 600;
+    }
+
+    /* PORTAL ORB */
+    .portal-orb-wrapper {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none; /* orb itself will re-enable */
+    }
+
+    .portal-orb {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3), transparent 60%),
+        radial-gradient(circle at 50% 120%, rgba(0, 255, 210, 0.55), rgba(0, 112, 255, 0.9));
+      box-shadow:
+        0 0 40px rgba(0, 255, 245, 0.45),
+        0 0 90px rgba(0, 140, 255, 0.6);
+      border: 1px solid rgba(190, 248, 255, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      animation: orbFloat 5.5s ease-in-out infinite;
+      pointer-events: auto;
+      z-index: 3;
+    }
+
+    .portal-orb::before,
+    .portal-orb::after {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(0, 255, 255, 0.2),
+        transparent 40%,
+        rgba(255, 255, 255, 0.14),
+        transparent 75%,
+        rgba(0, 255, 210, 0.22)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.75;
+      animation: orbSweep 9s linear infinite;
+    }
+
+    .portal-orb::after {
