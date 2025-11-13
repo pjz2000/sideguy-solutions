@@ -1,6 +1,6 @@
 <!--
   SideGuy Solutions
-  Version: 2.1-prebuild (Coastal Energy Edition)
+  Version: 2.2-prebuild (Interactive Coastal Market Edition)
   Author: PJ + Kromeon Dev Team
   Motto: "Where code meets the coastline."
 -->
@@ -12,7 +12,7 @@
 <title>SideGuy Solutions — Where Code Meets the Coastline</title>
 <meta name="description" content="North County’s concierge for tech, life, and transport. Smarter systems, sharper service, and a coastal lifestyle built on precision and innovation. Based in Solana Beach — serving North County for over 6 years.">
 <style>
-:root{
+:root {
   --bg:#0a1122;
   --blue1:#1e3a8a;
   --blue2:#2563eb;
@@ -29,7 +29,7 @@
 body{
   background:linear-gradient(270deg,var(--blue1),var(--blue2),var(--blue3),var(--violet));
   background-size:800% 800%;
-  animation:coastalEnergy 20s ease infinite;
+  animation:coastalEnergy 18s ease infinite;
   color:var(--text);
   font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto;
   line-height:1.6;
@@ -50,11 +50,8 @@ a:hover{text-decoration:underline;color:#7dd3fc}
 .menu{display:flex;gap:18px;list-style:none}
 .menu a{color:var(--muted);font-size:14px;font-weight:600}
 .menu a:hover{color:var(--accent)}
-.hero{
-  text-align:center;padding:100px 20px 80px;
-  color:var(--text);position:relative;overflow:hidden
-}
-.hero h1{font-size:clamp(32px,5vw,46px);margin-bottom:20px;font-weight:800;letter-spacing:1px}
+.hero{text-align:center;padding:100px 20px 80px;position:relative}
+.hero h1{text-shadow:0 3px 10px rgba(0,0,0,0.4);font-size:clamp(32px,5vw,46px);margin-bottom:20px;font-weight:800}
 .hero p{max-width:700px;margin:10px auto;color:var(--muted);font-size:18px}
 .section{padding:60px 20px;background:var(--card);scroll-margin-top:80px;animation:fadeUp 1s ease forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -68,18 +65,29 @@ a:hover{text-decoration:underline;color:#7dd3fc}
 .crypto-ticker{background:rgba(28,200,229,0.15);overflow:hidden;white-space:nowrap;padding:10px;text-align:center}
 .ticker-item{display:inline-block;margin-right:30px;font-size:14px;color:var(--text);animation:ticker 25s linear infinite}
 @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-.odds-card{
-  background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;
-  border-radius:8px;max-width:500px;box-shadow:0 0 10px rgba(28,200,229,0.2)
-}
+.odds-card{background:rgba(255,255,255,0.05);margin:10px auto;padding:12px;border-radius:8px;max-width:500px;box-shadow:0 0 10px rgba(28,200,229,0.2)}
 .odds-card strong{color:#4da8ff}
 .market-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px}
-.market-card{
-  background:rgba(255,255,255,0.06);padding:16px;border-radius:12px;text-align:center;
-  box-shadow:var(--shadow);transition:.2s
-}
+.market-card{background:rgba(255,255,255,0.06);padding:16px;border-radius:12px;text-align:center;box-shadow:var(--shadow);transition:.2s;cursor:pointer}
 .market-card:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(59,130,246,.3)}
+.modal{
+  display:none;position:fixed;z-index:10000;left:0;top:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);justify-content:center;align-items:center;
+}
+.modal-content{
+  background:rgba(18,27,48,0.95);padding:20px;border-radius:12px;max-width:420px;width:90%;
+  box-shadow:0 0 25px rgba(28,200,229,0.3);animation:fadeIn .4s ease;
+}
+.modal img{width:100%;border-radius:8px;margin-bottom:10px}
+.modal h3{color:var(--accent);margin-bottom:6px}
+.modal p{font-size:15px;color:var(--muted)}
+form.modal-form{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+form.modal-form input, form.modal-form textarea{
+  padding:10px;border:none;border-radius:8px;background:rgba(255,255,255,0.1);color:var(--text)
+}
+form.modal-form button{align-self:center;width:100%}
 .footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.2);background:var(--card);color:var(--muted)}
+#version-info{font-size:13px;color:#7dd3fc;margin-top:8px}
 .floating-btn{
   position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,#3b82f6,#60a5fa);
   color:white;border:none;border-radius:50px;padding:14px 24px;font-weight:700;
@@ -97,7 +105,6 @@ a:hover{text-decoration:underline;color:#7dd3fc}
     <div class="inner">
       <div class="brand">SideGuy Solutions</div>
       <ul class="menu">
-        <li><a href="#trending">Trending</a></li>
         <li><a href="#sports-edge">Sports Edge</a></li>
         <li><a href="#market">Coastal Market</a></li>
         <li><a href="#newsletter">Newsletter</a></li>
@@ -127,12 +134,10 @@ a:hover{text-decoration:underline;color:#7dd3fc}
     <div class="container">
       <h2 style="text-align:center;color:#1cc8e5;">🛍️ The Coastal Market — Handpicked in North County</h2>
       <div class="market-grid">
-        <div class="market-card"><h3>Cold Brew & Code</h3><p>Fuel your grind with local beans.</p><small>📦 Local Pickup via PJ 🚙</small></div>
-        <div class="market-card"><h3>Coastal Hoodie</h3><p>Stay warm during your seaside stand-ups.</p></div>
-        <div class="market-card"><h3>Solana Surf Wax</h3><p>Ride smoother, ship faster.</p></div>
-        <div class="market-card"><h3>AI Art Prints</h3><p>Handmade digital art from Encinitas creators.</p></div>
-        <div class="market-card"><h3>Carbon Credit Starter Pack</h3><p>Offset your ride, one click at a time.</p></div>
-        <div class="market-card"><h3>Tech Concierge Pass</h3><p>Access priority help & custom builds.</p><small>📦 Local Pickup via PJ 🚙</small></div>
+        <div class="market-card" data-item="coffee"><h3>Cold Brew & Code</h3><p>Fuel your grind with local beans.</p></div>
+        <div class="market-card" data-item="hoodie"><h3>Coastal Hoodie</h3><p>Stay warm during seaside stand-ups.</p></div>
+        <div class="market-card" data-item="wax"><h3>Solana Surf Wax</h3><p>Ride smoother, ship faster.</p></div>
+        <div class="market-card" data-item="art"><h3>AI Art Prints</h3><p>Digital art from Encinitas creators.</p></div>
       </div>
     </div>
   </section>
@@ -151,29 +156,40 @@ a:hover{text-decoration:underline;color:#7dd3fc}
 
   <footer class="footer">
     <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
-    <p id="version-info" style="font-size:13px;color:#7dd3fc;margin-top:8px;">Version 2.1-prebuild</p>
+    <p>☕ Better Buzz • 🏄 Seaside Market • 🌴 Solento Spirits • ⚡ Kromeon</p>
+    <p id="version-info">Version 2.2-prebuild</p>
   </footer>
 
   <a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
   <div id="pj-status">🚙 PJ Active in Solana Beach</div>
 
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="">
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+      <form class="modal-form" action="mailto:peter.z@kromeon.com" method="post" enctype="text/plain">
+        <input type="email" name="email" placeholder="Your email address" required>
+        <textarea name="message" placeholder="Your message..." rows="3" required></textarea>
+        <button type="submit" class="btn">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+
 <script>
 const cities=["Encinitas","Del Mar","Leucadia","Cardiff","Solana Beach"];
-function rotateCity(){
-  const el=document.getElementById("pj-status");
-  const city=cities[Math.floor(Math.random()*cities.length)];
-  el.textContent=`🚙 PJ Active in ${city}`;
-}
+function rotateCity(){document.getElementById("pj-status").textContent=`🚙 PJ Active in ${cities[Math.floor(Math.random()*cities.length)]}`;}
 setInterval(rotateCity,180000);
 
 const mockOdds=[
   {sport:"NBA",match:"Suns vs Mavericks",market:"Player Points + Rebounds + Assists",pick:"Dereck Lively II Over 14.5",odds:"+112"},
   {sport:"NFL",match:"49ers vs Chiefs",market:"Super Bowl Futures",pick:"49ers to Win",odds:"+550"},
-  {sport:"NHL",match:"Ducks vs Kings",market:"1st Period Over 1.5",pick:"Yes",odds:"+130"}
+  {sport:"MLB",match:"Dodgers vs Padres",market:"Total Runs Over 8.5",pick:"Yes",odds:"+130"}
 ];
 function loadOdds(){
   document.getElementById("odds-list").innerHTML=
-    mockOdds.map(o=>`
+    mockOdds.sort(()=>0.5-Math.random()).slice(0,2).map(o=>`
       <div class="odds-card">
         <strong>${o.sport}</strong> — ${o.match}<br>
         <span style="color:var(--muted);font-size:14px;">${o.market}</span><br>
@@ -184,7 +200,27 @@ function loadOdds(){
 document.addEventListener("DOMContentLoaded",()=>{
   loadOdds();
   const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles",month:"short",day:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit",hour12:true});
-  document.getElementById("version-info").textContent=`Version 2.1-prebuild • Updated ${now} PST`;
+  document.getElementById("version-info").textContent=`Version 2.2-prebuild • Updated ${now} PST`;
+});
+
+const products={
+  coffee:{img:"https://source.unsplash.com/400x250/?coffee,beach",desc:"Locally roasted energy from Encinitas. Perfect for coders, founders, and coastal mornings."},
+  hoodie:{img:"https://source.unsplash.com/400x250/?hoodie,coast",desc:"A warm, soft fit built for marine layer mornings and evening walks at Moonlight Beach."},
+  wax:{img:"https://source.unsplash.com/400x250/?surf,wax",desc:"Handmade surf wax from Solana Beach with a Solana blockchain twist."},
+  art:{img:"https://source.unsplash.com/400x250/?art,ai",desc:"AI-meets-art. Designed by Encinitas creatives inspired by neural waves and Pacific blues."}
+};
+document.querySelectorAll(".market-card").forEach(card=>{
+  card.addEventListener("click",()=>{
+    const key=card.dataset.item;
+    const p=products[key];
+    document.getElementById("modal-img").src=p.img;
+    document.getElementById("modal-title").textContent=card.querySelector("h3").textContent;
+    document.getElementById("modal-desc").textContent=p.desc;
+    document.getElementById("modal").style.display="flex";
+  });
+});
+document.getElementById("modal").addEventListener("click",e=>{
+  if(e.target.id==="modal")e.currentTarget.style.display="none";
 });
 </script>
 </body>
