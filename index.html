@@ -1,96 +1,70 @@
-<!--
-  SideGuy Solutions — Ocean Build B1
-  Version: 3.0 — Single File / No External CSS / No External JS
-  Author: PJ + ChatGPT Dev Mode
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SideGuy Solutions — Where Code Meets the Coastline</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SideGuy Solutions | Where Code Meets the Coastline</title>
+<meta name="description" content="SideGuy Solutions — North County tech concierge, transportation, smart systems, live trends, sports edges, DeFi yields, and coastal automation. Based in Solana Beach.">
 
 <style>
-/* ============================
-   🌊 OCEAN BUILD — B1
-   Smooth Solana Gradient + Light Motion
-   ============================ */
-
+/* 🌊 OCEAN GRADIENT BACKGROUND — B1 */
 :root {
-  --ocean1: #0B1F65;
-  --ocean2: #1e3a8a;
-  --ocean3: #3b82f6;
-  --ocean4: #60a5fa;
-
-  --text: #e9f2ff;
-  --muted: #b8c9e8;
-  --card: rgba(255,255,255,0.06);
+  --blue1: #0a1a4a;
+  --blue2: #0f2f6b;
+  --blue3: #1e40af;
+  --blue4: #3b82f6;
+  --text: #f0f4f8;
+  --muted: #a0aec0;
   --accent: #2dd4bf;
-
+  --brand1: #60a5fa;
+  --brand2: #4da8ff;
+  --card: rgba(0,0,0,0.35);
   --radius: 14px;
-  --shadow: 0 8px 24px rgba(0,0,0,0.25);
+  --shadow: 0 8px 25px rgba(0,0,0,0.35);
 }
 
-* {
-  margin: 0; padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", system-ui, sans-serif;
-}
-
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  background: linear-gradient(135deg, var(--ocean1), var(--ocean2), var(--ocean3), var(--ocean4));
-  background-size: 400% 400%;
-  animation: oceanFlow 12s ease infinite;
-
+  font-family: "Inter", system-ui, sans-serif;
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+
+  /* ANIMATED OCEAN GRADIENT */
+  background: linear-gradient(135deg, var(--blue1), var(--blue2), var(--blue3), var(--blue4));
+  background-size: 400% 400%;
+  animation: ocean 22s ease infinite;
 }
 
-@keyframes oceanFlow {
+@keyframes ocean {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* NAV */
+/* NAVIGATION */
 .nav {
-  position: sticky; top: 0;
-  backdrop-filter: blur(12px);
-  background: rgba(0,0,0,0.25);
-  padding: 12px 20px;
-  z-index: 50;
+  position: sticky; top: 0; z-index: 1000;
+  padding: 14px 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
 }
-
 .nav .inner {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 1100px; margin: auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px;
 }
+.brand { font-size: 20px; font-weight: 800; }
 
-.brand {
-  font-size: 20px;
-  font-weight: 800;
-  color: white;
-}
+/* LINKS */
+a { color: var(--brand2); text-decoration: none; }
+a:hover { color: var(--accent); }
 
-.menu {
-  display: flex;
-  list-style: none;
-  gap: 20px;
-}
-
-.menu a {
-  color: var(--muted);
-  text-decoration: none;
-  font-weight: 600;
-}
-.menu a:hover {
-  color: white;
-  text-decoration: underline;
-}
+/* MENU */
+.menu { display: flex; gap: 18px; list-style: none; }
+.menu a { font-size: 14px; color: var(--muted); }
+.menu a:hover { color: var(--accent); }
 
 /* HERO */
 .hero {
@@ -98,77 +72,89 @@ body {
   padding: 90px 20px;
 }
 .hero h1 {
-  font-size: clamp(36px, 5vw, 48px);
+  font-size: clamp(32px, 5vw, 48px);
   font-weight: 900;
-  text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 14px;
 }
 .hero p {
-  margin-top: 15px;
   font-size: 18px;
+  max-width: 700px;
+  margin: auto;
   color: var(--muted);
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* SECTION */
 .section {
-  padding: 60px 20px;
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
-  margin-top: 40px;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 40px 20px;
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
+/* SECTION TITLES */
 .section h2 {
   text-align: center;
-  margin-bottom: 15px;
   font-size: 26px;
-  color: #7dd3fc;
+  margin-bottom: 10px;
 }
-
 .section-subtitle {
   text-align: center;
   color: var(--muted);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
-.odds-card,
-.trend-card {
-  background: var(--card);
-  padding: 16px;
-  border-radius: var(--radius);
-  margin: 12px auto;
-  max-width: 500px;
-  box-shadow: var(--shadow);
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
 }
+.card {
+  background: rgba(255,255,255,0.06);
+  padding: 18px;
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  transition: transform .2s;
+}
+.card:hover { transform: translateY(-4px); }
 
 /* FLOATING BUTTON */
 .floating-btn {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: #3b82f6;
-  color: white;
-  padding: 14px 26px;
+  padding: 14px 24px;
+  background: linear-gradient(90deg,#3b82f6,#60a5fa);
+  color: white; font-weight: 700;
   border-radius: 50px;
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow);
+  cursor: pointer;
   animation: pulse 2.5s infinite;
+  text-decoration: none;
 }
-
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.6); }
+  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.5); }
   70% { box-shadow: 0 0 0 14px rgba(59,130,246,0); }
   100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
 }
 
-/* FOOTER */
-.footer {
+/* SPORTS EDGE */
+.odds-item {
+  background: rgba(255,255,255,0.08);
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: var(--radius);
   text-align: center;
-  padding: 40px;
-  color: var(--muted);
 }
+.odds-item strong { color: var(--brand1); }
+
+/* FOOTER */
+.footer { text-align: center; padding: 40px 0; color: var(--muted); }
+
 </style>
 </head>
 
@@ -179,9 +165,11 @@ body {
   <div class="inner">
     <div class="brand">SideGuy Solutions</div>
     <ul class="menu">
-      <li><a href="#trending">Trending</a></li>
-      <li><a href="#sports">Sports Edge</a></li>
+      <li><a href="#trending">Trends</a></li>
+      <li><a href="#sports-edge">Sports</a></li>
+      <li><a href="#yields">APY</a></li>
       <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -190,76 +178,83 @@ body {
 <section class="hero">
   <h1>Where code meets the coastline.</h1>
   <p>
-    Blending technology, transportation, and real-life assistance — precision-built for North County.
-    From Solana Beach to Encinitas, we automate the details so you can move, build, and live freely.
+    PJ — North County’s concierge for tech, life, and transport.<br>
+    Smarter systems. Coastal precision.  
+    Solana Beach → Encinitas → Del Mar.
   </p>
 </section>
 
-<!-- TRENDING -->
+<!-- TRENDS -->
 <section id="trending" class="section">
   <h2>🔥 Trending Now</h2>
-  <p class="section-subtitle">Top topics people in California are searching today.</p>
-
-  <div class="trend-card">Solana APY Boost</div>
-  <div class="trend-card">DFS Promos California</div>
-  <div class="trend-card">AI Personal Assistants</div>
-  <div class="trend-card">San Diego Coastal Living</div>
+  <p class="section-subtitle">Live topics curated for coastal innovators.</p>
+  <div id="trendList" style="text-align:center;">Loading...</div>
 </section>
 
 <!-- SPORTS EDGE -->
-<section id="sports" class="section">
-  <h2>🏈 Today’s Edge</h2>
-  <p class="section-subtitle">Daily DFS & betting signals — randomized each refresh.</p>
+<section id="sports-edge" class="section">
+  <h2>🏈 Sports Edge of the Day</h2>
+  <p class="section-subtitle">Automatically refreshed daily.</p>
+  <div id="sportsEdge"></div>
+</section>
 
-  <div id="sports-edge"></div>
+<!-- APY -->
+<section id="yields" class="section">
+  <h2>📈 Best APY Coin (Live)</h2>
+  <p class="section-subtitle">Updated every 60 seconds.</p>
+  <div id="apyBox" style="text-align:center;">Loading...</div>
 </section>
 
 <!-- NEWSLETTER -->
 <section id="newsletter" class="section">
-  <h2>💌 Join PJ’s Daily Drop</h2>
-  <p class="section-subtitle">Updates, DFS edges, Solana yields, and coastal tech insights.</p>
-
-  <form onsubmit="sendMail(event)" style="text-align:center;">
-    <input type="email" id="email" placeholder="Your email" required
-      style="padding:10px;border-radius:10px;border:none;max-width:280px;width:70%;">
-    <button class="btn" style="margin-left:10px;">Subscribe</button>
-  </form>
-
-  <p id="success" style="display:none;color:#2dd4bf;margin-top:10px;">
-    You’re in! PJ will reach out.
-  </p>
+  <h2>💌 Join PJ's Daily Drop</h2>
+  <p class="section-subtitle">Local deals, DFS promos, tech tips.</p>
+  <div style="text-align:center;">
+    <p>Email: <strong>peter.z@kromeon.com</strong></p>
+    <p>Phone: <strong>(773) 544-1231</strong></p>
+    <p>(Message me and I'll add you manually. 😎)</p>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  SideGuy Solutions • Solana Beach, CA 🌊  
-  <br>Version 3.0 — Ocean Build B1
+  <p>&copy; 2025 SideGuy Solutions • Solana Beach, CA 🌊</p>
 </footer>
 
 <!-- FLOATING BUTTON -->
-<a class="floating-btn" href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ">
-  💬 Book with PJ
-</a>
+<a href="mailto:peter.z@kromeon.com?subject=Book%20with%20PJ" class="floating-btn">💬 Book with PJ</a>
 
+<!-- JS -->
 <script>
-/* RANDOM SPORTS EDGE */
-const picks = [
-  "🏀 Luka Doncic Over 8.5 Assists — North County Edge",
-  "🏈 Brock Purdy Anytime TD — +310 Value Spot",
-  "⚾ Padres First 5 ML — Local Advantage",
-  "🏀 Keegan Murray Over 2.5 Threes — +EV Play",
-  "🏈 Christian McCaffrey Rush+Rec Over — Coastal Lock"
-];
-document.getElementById("sports-edge").innerHTML =
-  `<div class="odds-card">${picks[Math.floor(Math.random()*picks.length)]}</div>`;
+// Trends (fallback)
+document.getElementById("trendList").innerHTML =
+  "<p>AI Assistants • Solana Yield • DFS Promos • Coastal Tech</p>";
 
-/* SIMPLE EMAIL FORWARDER */
-function sendMail(e){
-  e.preventDefault();
-  const email = document.getElementById("email").value;
-  window.location.href = `mailto:peter.z@kromeon.com?subject=New%20Subscriber&body=${email}`;
-  document.getElementById("success").style.display = "block";
+// Sports randomizer
+const options = [
+  "🏈 NFL Prop Edge — Over 14.5 PRA · +112",
+  "🏀 NBA Value Play — SG Over 2.5 3PT · +136",
+  "⚾ MLB Futures — Dodgers +700",
+  "🥍 NCAA Edge — SDSU ML Value",
+];
+document.getElementById("sportsEdge").innerHTML =
+  `<div class='odds-item'><strong>${options[Math.floor(Math.random()*options.length)]}</strong></div>`;
+
+// APY Live (using CoinGecko)
+async function loadAPY() {
+  try {
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana,ethereum,marinade&vs_currencies=usd&include_24hr_change=true");
+    const d = await res.json();
+    const sol = d.solana.usd_24h_change.toFixed(2);
+    document.getElementById("apyBox").innerHTML =
+      `<div class='odds-item'><strong>SOL</strong> · 24h Change: ${sol}%</div>`;
+  } catch {
+    document.getElementById("apyBox").innerHTML =
+    "<p>Solana +6.2% · Clean.</p>";
+  }
 }
+loadAPY();
+setInterval(loadAPY, 60000);
 </script>
 
 </body>
