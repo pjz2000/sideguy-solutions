@@ -1,8 +1,14 @@
+<!--
+  SideGuy Solutions
+  Version: 3.6-ocean-wow-clean
+  Hero: "Where code meets the coastline."
+  Mode: Deep Pacific / Hawaiian Blue + Summon PJ Orb
+  Author: PJ + Kromeon Dev Team (+ ChatGPT)
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- 🌴 SideGuy Solutions · Metadata + GPT Indexing · v3.6-ocean-wow-clean -->
+  <!-- 🌴 SideGuy Solutions · Metadata + GPT Indexing · v3.6 -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -23,9 +29,24 @@
   </script>
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description" content="SideGuy Solutions — Web3 coastal concierge for tech, transport, tickets, and smarter systems in North County San Diego. PJ helps locals move, build, and live freely.">
+  <meta
+    name="description"
+    content="SideGuy Solutions — Web3 coastal concierge for tech, transport, tickets, and smarter systems in North County San Diego. PJ helps locals move, build, and live freely."
+  />
+  <meta name="ai-content" content="allow" />
+
+  <!-- OpenGraph / Social -->
+  <meta property="og:title" content="SideGuy Solutions — North County Coastal Concierge" />
+  <meta property="og:description" content="Tech, transport, tickets, and Web3 help from PJ — your North County concierge." />
+  <meta property="og:url" content="https://sideguysolutions.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://sideguysolutions.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SideGuy Solutions — Where Code Meets the Coastline" />
+  <meta name="twitter:description" content="Concierge help for tech, transport, tickets, and Web3 — built for North County locals." />
+  <meta name="twitter:image" content="https://sideguysolutions.com/og-image.jpg" />
 
   <style>
     :root {
@@ -49,7 +70,7 @@
       min-height: 100vh;
       background: var(--blue-bg);
       color: var(--text);
-      font-family: Inter, system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       animation: fadeIn 0.9s ease-out;
@@ -57,12 +78,21 @@
       z-index: 1;
     }
 
-    @keyframes fadeIn { 
+    @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* OCEAN BACKGROUND */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    a { color: var(--brand2); text-decoration: none; transition: color 0.18s ease; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* OCEAN BACKGROUND (THREE.js canvas behind everything) */
     #ocean-container {
       position: fixed;
       inset: 0;
@@ -110,7 +140,7 @@
       gap: 6px;
     }
 
-    .brand .logo-dot {
+    .logo-dot {
       width: 10px;
       height: 10px;
       border-radius: 999px;
@@ -122,7 +152,7 @@
     .menu a { color: var(--muted); font-weight: 500; }
     .menu a:hover { color: var(--brand2); }
 
-    /* HERO ORB SECTION */
+    /* HERO + ORB */
     .hero {
       position: relative;
       overflow: hidden;
@@ -137,44 +167,95 @@
       z-index: 2;
       max-width: 720px;
       margin: 0 auto;
-      padding: 18px 18px 26px;
+      padding: 18px 18px 24px;
       border-radius: 24px;
-      background: rgba(15,23,42,0.4);
-      backdrop-filter: blur(12px);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.48), rgba(15,23,42,0.24));
+      box-shadow: 0 0 60px rgba(15,23,42,0.9), 0 0 120px rgba(59,130,246,0.7);
+      backdrop-filter: blur(14px);
       border: 1px solid rgba(191,219,254,0.4);
-      box-shadow: 0 0 60px rgba(15,23,42,0.9);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.7);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 18px;
+      box-shadow: 0 0 20px rgba(15,23,42,0.9);
+    }
+
+    .hero-kicker .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.9);
     }
 
     .hero h1 {
-      font-size: clamp(34px, 5vw, 42px);
+      font-size: clamp(30px, 5vw, 40px);
       line-height: 1.1;
       font-weight: 900;
       letter-spacing: 0.01em;
       margin-bottom: 14px;
       text-shadow:
-        0 0 18px rgba(15,23,42,0.9),
-        0 0 36px rgba(15,23,42,0.95);
+        0 0 14px rgba(15,23,42,0.9),
+        0 0 28px rgba(15,23,42,0.95),
+        0 0 60px rgba(15,23,42,1);
     }
 
-    .hero h1 span.highlight {
+    .hero h1 .highlight {
       background: linear-gradient(130deg, #22d3ee, #38bdf8, #a855f7);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
       text-shadow:
-        0 0 24px rgba(59,130,246,0.8),
-        0 0 60px rgba(56,189,248,1);
+        0 0 20px rgba(59,130,246,0.8),
+        0 0 40px rgba(56,189,248,1);
     }
 
-    .hero p { color: #e2e8f0; font-size: 15px; opacity: 0.96; }
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      color: #e2e8f0;
+      font-size: 15px;
+      opacity: 0.96;
+      text-shadow:
+        0 0 12px rgba(15,23,42,0.9),
+        0 0 24px rgba(15,23,42,1);
+    }
 
-    /* ORB */
+    .hero-pj-line {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #e0f2fe;
+    }
+
+    .hero-pj-line strong { color: #f9fafb; }
+
+    .hero-contacts {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
     .portal-orb-wrapper {
       margin-top: 32px;
       display: flex;
+      align-items: center;
       justify-content: center;
+      pointer-events: none;
     }
 
     .portal-orb {
+      position: relative;
       width: 200px;
       height: 200px;
       border-radius: 999px;
@@ -183,21 +264,41 @@
         radial-gradient(circle at 50% 120%, rgba(56,189,248,0.9), rgba(37,99,235,1));
       box-shadow:
         0 0 40px rgba(56,189,248,0.9),
-        0 0 110px rgba(37,99,235,1);
+        0 0 110px rgba(37,99,235,1),
+        0 0 160px rgba(56,189,248,0.9);
       border: 1px solid rgba(224,242,254,0.9);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      overflow: hidden;
       animation: orbFloat 4.8s ease-in-out infinite;
-      position: relative;
+      pointer-events: auto;
       z-index: 3;
     }
 
-    @keyframes orbFloat {
-      0% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-12px) scale(1.03); }
-      100% { transform: translateY(0px) scale(1); }
+    .portal-orb::before,
+    .portal-orb::after {
+      content: "";
+      position: absolute;
+      inset: -25%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(56,189,248,0.35),
+        transparent 40%,
+        rgba(248,250,252,0.28),
+        transparent 75%,
+        rgba(56,189,248,0.4)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      animation: orbSweep 7.5s linear infinite;
+    }
+
+    .portal-orb::after {
+      animation-duration: 11s;
+      opacity: 0.55;
+      transform: scale(1.1);
     }
 
     .portal-inner-ripple {
@@ -205,27 +306,96 @@
       inset: 18%;
       border-radius: 999px;
       border: 1px solid rgba(224,242,254,0.9);
+      box-shadow:
+        0 0 30px rgba(191,219,254,0.9),
+        0 0 60px rgba(56,189,248,1);
+      opacity: 0.8;
       animation: innerPulse 3.2s ease-out infinite;
     }
 
-    @keyframes innerPulse {
-      0% { opacity: 0.6; transform: scale(0.92); }
-      50% { opacity: 1; transform: scale(1); }
-      100%{ opacity: 0.6; transform: scale(0.95); }
+    .portal-label {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 1.25rem;
     }
 
-    .portal-label {
-      z-index: 3;
-      text-align: center;
+    .portal-label-main {
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
       font-weight: 700;
+      margin-bottom: 0.35rem;
       text-shadow:
-        0 0 14px rgba(15,23,42,1),
-        0 0 22px rgba(15,23,42,1);
+        0 0 14px rgba(15,23,42,0.95),
+        0 0 32px rgba(15,23,42,0.95);
     }
-    /* SUMMON PJ BUTTON */
+
+    .portal-label-sub {
+      font-size: 0.86rem;
+      opacity: 0.96;
+      text-shadow:
+        0 0 12px rgba(15,23,42,1),
+        0 0 26px rgba(15,23,42,1);
+    }
+
+    .portal-ring {
+      position: absolute;
+      inset: -18%;
+      border-radius: inherit;
+      border: 1px solid rgba(224,242,254,0.95);
+      box-shadow:
+        0 0 50px rgba(191,219,254,1),
+        0 0 120px rgba(56,189,248,1);
+      opacity: 0;
+      transform: scale(0.7);
+      pointer-events: none;
+    }
+
+    .portal-ring.active {
+      animation: rippleBurst 0.95s ease-out;
+    }
+
+    @keyframes orbFloat {
+      0%   { transform: translateY(0px) scale(1); }
+      50%  { transform: translateY(-12px) scale(1.03); }
+      100% { transform: translateY(0px) scale(1); }
+    }
+
+    @keyframes orbSweep {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes innerPulse {
+      0%   { opacity: 0.6; transform: scale(0.94); }
+      50%  { opacity: 1;   transform: scale(1); }
+      100% { opacity: 0.5; transform: scale(0.98); }
+    }
+
+    @keyframes rippleBurst {
+      0% {
+        opacity: 0.9;
+        transform: scale(0.75);
+        box-shadow:
+          0 0 30px rgba(224,242,254,1),
+          0 0 80px rgba(56,189,248,1);
+      }
+      60% {
+        opacity: 0.4;
+        transform: scale(1.35);
+        box-shadow:
+          0 0 60px rgba(224,242,254,1),
+          0 0 140px rgba(56,189,248,1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.7);
+        box-shadow: 0 0 100px rgba(15,23,42,0);
+      }
+    }
+
+    /* SUMMON PJ FLOATING BUTTON */
     .summon-wrapper {
       position: fixed;
       right: 18px;
@@ -236,24 +406,44 @@
     .summon-btn {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
       padding: 10px 18px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.6);
-      background: radial-gradient(circle at 0 0, rgba(56,189,248,0.5), transparent 55%),
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,0.5), transparent 55%),
         radial-gradient(circle at 100% 100%, rgba(129,140,248,0.55), transparent 55%),
         rgba(15,23,42,0.96);
-      box-shadow: 0 0 0 1px rgba(15,23,42,0.9), var(--shadow-soft),
+      color: #e5f2ff;
+      box-shadow:
+        0 0 0 1px rgba(15,23,42,0.9),
+        var(--shadow-soft),
         0 0 25px rgba(56,189,248,0.9);
       text-decoration: none;
-      color: #e5f2ff;
+      cursor: pointer;
       min-width: 230px;
+      position: relative;
+      overflow: hidden;
       animation: summonPulse 2.7s infinite;
     }
 
     @keyframes summonPulse {
-      0% { box-shadow: 0 0 0 0 rgba(56,189,248,0.8), 0 18px 36px rgba(15,23,42,0.9); }
-      70% { box-shadow: 0 0 0 18px rgba(56,189,248,0), 0 18px 36px rgba(15,23,42,0.9); }
-      100%{ box-shadow: 0 0 0 0 rgba(56,189,248,0), 0 18px 36px rgba(15,23,42,0.9); }
+      0% {
+        box-shadow:
+          0 0 0 0 rgba(56,189,248,0.8),
+          0 20px 40px rgba(15,23,42,0.9);
+      }
+      70% {
+        box-shadow:
+          0 0 0 18px rgba(56,189,248,0),
+          0 18px 36px rgba(15,23,42,0.9);
+      }
+      100% {
+        box-shadow:
+          0 0 0 0 rgba(56,189,248,0),
+          0 20px 40px rgba(15,23,42,0.9);
+      }
     }
 
     .summon-btn-main {
@@ -268,21 +458,52 @@
 
     .summon-emoji {
       font-size: 18px;
+      transform-origin: center;
       animation: wag 1.8s ease-in-out infinite;
     }
 
     @keyframes wag {
-      0%, 100% { transform: rotate(0deg); }
-      25%      { transform: rotate(-8deg); }
-      50%      { transform: rotate(5deg); }
-      75%      { transform: rotate(-4deg); }
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(-8deg) translateY(-1px); }
+      50% { transform: rotate(5deg) translateY(0); }
+      75% { transform: rotate(-4deg) translateY(-1px); }
+    }
+
+    .summon-subtitle {
+      font-size: 11px;
+      color: #cbd5f5;
+      opacity: 0.95;
+    }
+
+    .summon-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 10% 0,
+        rgba(255,255,255,0.36),
+        transparent 60%
+      );
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .summon-btn:hover::after { opacity: 1; }
+    .summon-btn:hover { transform: translateY(-1px); }
+
+    .summon-caption {
+      margin-top: 4px;
+      font-size: 11px;
+      text-align: right;
+      color: rgba(226,232,240,0.9);
+      text-shadow: 0 0 10px rgba(15,23,42,0.9);
     }
 
     /* SECTION BASE */
     .section {
       padding: 40px 20px;
-      background: radial-gradient(circle at top, rgba(37,99,235,0.3), transparent 60%),
-        #020617;
+      background: radial-gradient(circle at top, rgba(37,99,235,0.3), transparent 60%), #020617;
     }
 
     .section-alt {
@@ -297,6 +518,14 @@
       border: 1px solid rgba(148,163,184,0.35);
     }
 
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
     .section-title-row {
       display: flex;
       align-items: center;
@@ -306,56 +535,208 @@
       color: #e5f2ff;
     }
 
-    .section-subtext {
+    .section-title-row .icon { font-size: 18px; }
+    .section-subtext { font-size: 13px; color: var(--muted); }
+
+    /* TRENDING */
+    .trend-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .trend-pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.35);
+      font-size: 12px;
+      color: #e5f2ff;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+      white-space: nowrap;
+    }
+
+    /* SPORTS EDGE */
+    .sports-edge-body {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1.1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .sports-main {
+      background:
+        radial-gradient(circle at top left, rgba(251,191,36,0.35), transparent 55%),
+        rgba(15,23,42,0.95);
+      border-radius: 14px;
+      padding: 14px 14px 14px 16px;
+      border: 1px solid rgba(245,158,11,0.4);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.9);
+      font-size: 13px;
+    }
+
+    .sports-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fed7aa;
+      margin-bottom: 4px;
+    }
+
+    .sports-matchup { font-weight: 700; font-size: 14px; }
+    .sports-meta { font-size: 11px; color: #e5e7eb; margin-bottom: 8px; }
+    .sports-line { margin: 4px 0; font-size: 13px; }
+
+    .sports-odds {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sports-odds span {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(251,191,36,0.5);
+    }
+
+    .sports-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #fef3c7;
+      opacity: 0.9;
+    }
+
+    .sports-side {
+      font-size: 12px;
+      color: var(--muted);
+      border-left: 1px dashed rgba(148,163,184,0.5);
+      padding-left: 14px;
+    }
+
+    .sports-side strong { color: #e5f2ff; }
+
+    /* LOCAL SHOWS / TICKETS */
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .tickets-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(24,24,27,0.9);
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    .tickets-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(22,163,74,0.5);
+    }
+
+    .tickets-savings {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #bbf7d0;
+    }
+
+    /* NEWSLETTER */
+    .newsletter-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       font-size: 13px;
       color: var(--muted);
     }
 
-    /* DISCOVERY FEED */
-    .discovery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 12px;
-    }
-
-    .discovery-card {
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(148,163,184,0.45);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+    .newsletter-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.96);
       color: #e5f2ff;
-      font-size: 13px;
-    }
-
-    .discovery-card .cat {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: #7dd3fc;
-      margin-bottom: 4px;
-    }
-
-    .discovery-card .title {
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .discovery-card .meta {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 6px;
-    }
-
-    .discovery-card .tagline {
       font-size: 12px;
-      color: #cbd5f5;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .newsletter-cta .icon { font-size: 16px; }
+
+    /* FOOTER */
+    .footer {
+      padding: 26px 20px 40px;
+      background: #020617;
+      border-top: 1px solid rgba(148,163,184,0.5);
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    #version-info { margin-top: 6px; color: #7dd3fc; font-size: 11px; }
+
+    @media (max-width: 768px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .menu {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .sports-edge-body,
+      .tickets-grid {
+        grid-template-columns: 1fr;
+      }
+      .sports-side {
+        border-left: none;
+        border-top: 1px dashed rgba(148,163,184,0.5);
+        padding-left: 0;
+        padding-top: 10px;
+        margin-top: 6px;
+      }
+      .summon-wrapper {
+        right: 10px;
+        bottom: 14px;
+      }
+      .summon-btn {
+        min-width: 210px;
+        padding: 9px 14px;
+      }
+      .portal-orb {
+        width: 175px;
+        height: 175px;
+      }
+      .hero-inner {
+        padding: 16px 14px 22px;
+      }
     }
   </style>
 </head>
-
 <body>
-  <!-- OCEAN -->
+  <!-- OCEAN WEBGL BACKGROUND -->
   <div id="ocean-container"></div>
   <div class="ocean-overlay-gradient"></div>
 
@@ -366,7 +747,6 @@
         <span class="logo-dot"></span> SideGuy Solutions
       </div>
       <ul class="menu">
-        <li><a href="#discovery">Discovery</a></li>
         <li><a href="#trending">Trending</a></li>
         <li><a href="#sports-edge">Sports Edge</a></li>
         <li><a href="#local-shows">Local Shows</a></li>
@@ -375,7 +755,7 @@
     </div>
   </nav>
 
-  <!-- HERO (ORB) -->
+  <!-- HERO OCEAN PORTAL -->
   <section class="hero">
     <div class="hero-inner container">
       <div class="hero-kicker">
@@ -383,25 +763,45 @@
         NORTH COUNTY COASTAL • WEB3 CONCIERGE
       </div>
       <h1>
-        Where <span class="highlight">code</span> meets<br />the coastline.
+        Where <span class="highlight">code</span> meets<br />
+        the coastline.
       </h1>
-      <p>SideGuy Solutions blends technology, transportation, and real-life assistance — precision-built for North County.</p>
+      <p>
+        SideGuy Solutions blends technology, transportation, tickets, and real-life
+        assistance — precision-built for North County. From Solana Beach to
+        Encinitas, PJ keeps your days moving, your ideas shipped, and your
+        systems smarter.
+      </p>
+      <p class="hero-pj-line">
+        <strong>PJ — your coastal concierge for tech, life, and transport.</strong>
+        Six years in North County, still just getting started.
+      </p>
+      <p class="hero-contacts">
+        Call / text:
+        <a href="tel:17735441231">(773) 544-1231</a> · Email:
+        <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
+      </p>
 
+      <!-- PORTAL ORB -->
       <div class="portal-orb-wrapper">
         <div class="portal-orb" id="portalOrb">
           <div class="portal-inner-ripple"></div>
-          <div class="portal-label">TAP TO SUMMON PJ</div>
+          <div class="portal-ring" id="portalRing"></div>
+          <div class="portal-label">
+            <div class="portal-label-main">TAP TO SUMMON PJ</div>
+            <div class="portal-label-sub">Coastal concierge at your service.</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SUMMON BUTTON -->
+  <!-- SUMMON PJ FLOATING BUTTON -->
   <div class="summon-wrapper">
     <a
       id="summonLink"
       class="summon-btn"
-      href=mailto:peter.z@kromeon.com?subject=Summon%20PJ&body=Hey%20PJ,%20I%20need%20help%20in%20North%20County.
+      href="mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Coastal%20Concierge)&body=Hey%20PJ%2C%0A%0ALet%E2%80%99s%20set%20up%20transport%2C%20tech%2C%20tickets%2C%20or%20life%20assistance%20in%20North%20County.%0A%0AYou%20can%20also%20call%2Ftext%20me%20back%20at%3A%20(773)%20544-1231.%0A%0A-%20"
     >
       <div class="summon-btn-main">
         <span class="summon-emoji">🏄‍♂️</span>
@@ -409,226 +809,262 @@
       </div>
       <div class="summon-subtitle">Coastal concierge at your service.</div>
     </a>
+    <div class="summon-caption">North County only — for now.</div>
   </div>
 
-  <!-- DISCOVERY FEED -->
-  <section id="discovery" class="section">
-    <div class="container">
-      <div class="section-card">
-        <div class="section-title-row"><span class="icon">🌊</span> SideGuy Discovery Feed</div>
-        <div class="section-subtext">What PJ is helping with across North County — tech, transport, tickets, and Web3.</div>
-
-        <div id="discovery-grid" class="discovery-grid"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRENDING -->
+  <!-- TRENDING SECTION -->
   <section id="trending" class="section">
     <div class="container">
       <div class="section-card">
-        <div class="section-title-row"><span class="icon">🔥</span> Trending Now</div>
-        <div class="section-subtext">A quick pulse across AI, DeFi, tickets, and coastal life.</div>
-        <ul id="trend-list" class="trend-list"></ul>
+        <div class="section-header">
+          <div class="section-title-row">
+            <span class="icon">🔥</span>
+            <span>Trending Now — What the feed is watching</span>
+          </div>
+          <div class="section-subtext">
+            A quick pulse of topics around AI, DeFi, Web3, and coastal life. Rotates on refresh.
+          </div>
+        </div>
+        <ul id="trend-list" class="trend-list">
+          <li class="trend-pill">Loading live vibes...</li>
+        </ul>
       </div>
     </div>
   </section>
-  <!-- SPORTS EDGE -->
+
+  <!-- SPORTS EDGE SECTION -->
   <section id="sports-edge" class="section section-alt">
     <div class="container">
       <div class="section-card">
-        <div class="section-title-row"><span class="icon">🏈</span> Sports Edge — DFS & Futures</div>
-        <div class="section-subtext">One angle per refresh. No picks sold — just thinking frameworks.</div>
+        <div class="section-header">
+          <div class="section-title-row">
+            <span class="icon">🏈</span>
+            <span>Sports Edge — DFS & Futures (California-friendly)</span>
+          </div>
+          <div class="section-subtext">
+            One daily-style highlight idea. No picks sold, no guarantees —
+            just edges and frameworks for North County friends who like to
+            think in probabilities and promo money.
+          </div>
+        </div>
 
-        <div id="sports-edge-body" class="sports-edge-body">
-          <!-- JS fills this -->
+        <div class="sports-edge-body" id="sports-edge-body">
+          <!-- Filled by JS -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LOCAL SHOWS -->
+  <!-- LOCAL SHOWS / DIRECT TICKETS SECTION -->
   <section id="local-shows" class="section">
     <div class="container">
       <div class="section-card">
-        <div class="section-title-row"><span class="icon">🎟️</span> Local Shows — Fast, Direct</div>
-        <div class="section-subtext">North County concerts, events, and rooms — without the giant ticket platforms.</div>
-
-        <div class="tickets-grid">
-          <div>
-            <p>SideGuy started in tickets — and the game has changed. We’re building direct venue connections with cleaner flows.</p>
-            <p class="tickets-savings">Today: simple intros.<br>Tomorrow: Web3 confirmations + yield-to-pay.</p>
+        <div class="section-header">
+          <div class="section-title-row">
+            <span class="icon">🎟️</span>
+            <span>Local Shows — Direct, Fast, Coastal</span>
           </div>
-
-          <div>
-            <div class="tickets-badge">⚗️ Early Prototype</div>
-            <p>If you run a venue in North County, PJ can help map faster, fairer flows.</p>
-            <p>Email: <a href=mailto:peter.z@kromeon.com?subject=Local%20Shows>Local Shows Inquiry</a></p>
+          <div class="section-subtext">
+            North County concert + comedy ideas, without fighting the giant
+            ticketing sites. Think: faster answers, cleaner checkout, and a
+            chance to route more value to the venue.
           </div>
         </div>
 
+        <div class="tickets-grid">
+          <div>
+            <div class="tickets-pill">
+              <span>🎸</span> Solana Beach • Encinitas • Cardiff • Del Mar
+            </div>
+            <p>
+              SideGuy started in tickets, and the game has changed. The dream:
+              match local fans with local venues, with lighter fees and faster
+              confirmations — eventually paid in Solana or stablecoins.
+            </p>
+            <p class="tickets-savings">
+              Today: simple intros and coordination.<br />
+              Tomorrow: instant Web3-powered confirmations and yield-to-pay
+              flows.
+            </p>
+          </div>
+
+          <div>
+            <div class="tickets-badge">
+              <span>⚗️</span> Early-stage portal — invite only
+            </div>
+            <p style="margin-top:6px;">
+              If you run a room, bar, or venue in North County and want to test
+              faster, fairer ticket flows, PJ can help map the system — and
+              build a lightweight prototype when it makes sense.
+            </p>
+            <p style="margin-top:8px;">
+              Email:
+              <a
+                href="mailto:peter.z@kromeon.com?subject=Local%20Shows%20%2F%20Ticket%20Flow"
+                >Local shows with SideGuy</a
+              >
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- DAILY DROP -->
+  <!-- NEWSLETTER / DAILY DROP -->
   <section id="newsletter" class="section section-alt">
     <div class="container">
       <div class="section-card">
-        <div class="section-title-row"><span class="icon">💌</span> PJ’s Daily Drop</div>
-        <div class="section-subtext">Occasional insights. No spam — ever.</div>
+        <div class="section-header">
+          <div class="section-title-row">
+            <span class="icon">💌</span>
+            <span>PJ’s Daily Drop — For the inner circle</span>
+          </div>
+          <div class="section-subtext">
+            Occasional messages from PJ — not spam. Coastal experiments,
+            DeFi-to-real-life ideas, DFS promo angles, and whatever’s actually
+            interesting that week.
+          </div>
+        </div>
 
-        <p>Ask PJ to join:  
-          <a class="newsletter-cta"
-            href=mailto:peter.z@kromeon.com?subject=Add%20me%20to%20Daily%20Drop>📨 Add me to the Daily Drop
+        <div class="newsletter-row">
+          <p>
+            Want in? Just send PJ a quick email with
+            <strong>“Add me to the Daily Drop”</strong> in the subject. No fancy
+            form, no robot drip — just a small, real list.
+          </p>
+          <a
+            class="newsletter-cta"
+            href="mailto:peter.z@kromeon.com?subject=Add%20me%20to%20the%20Daily%20Drop&body=Hey%20PJ%2C%0A%0APlease%20add%20me%20to%20your%20Daily%20Drop%20updates.%0A%0A-%20"
+          >
+            <span class="icon">📨</span>
+            <span>Email PJ to join the Daily Drop</span>
           </a>
-        </p>
+          <p style="font-size:11px;color:rgba(148,163,184,0.9);">
+            You can unsubscribe any time by emailing “Remove me” — no
+            hard feelings.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
-    <div>Coastal concierge for tech, transport, and smarter systems.</div>
-    <div id="version-info">Version 3.5-ocean-wow</div>
+    <div>Coastal concierge for tech, transport, tickets, and systems that actually fit your life.</div>
+    <div id="version-info">Version 3.6-ocean-wow-clean</div>
   </footer>
 
-  <!-- THREE.js -->
-  <script src=https://unpkg.com/three@0.160.0/build/three.min.js></script>
+  <!-- THREE.js from CDN -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
-    /* -------- DISCOVERY FEED DATA -------- */
-    const DISCOVERY = [
-      {
-        cat: "Tickets",
-        title: "Belly Up night out — no Ticketmaster stress",
-        meta: "Solana Beach • concierge sourcing",
-        tagline: "SideGuy handles tickets + confirmation in one clean thread (Solana coming)."
-      },
-      {
-        cat: "Transport",
-        title: "Airport run + show combo",
-        meta: "North County → SAN",
-        tagline: "One ping to PJ instead of juggling 3–6 apps."
-      },
-      {
-        cat: "DFS Promos",
-        title: "Turn promos into a repeatable system",
-        meta: "California-friendly DFS",
-        tagline: "SideGuy helps build frameworks — not impulse bets."
-      },
-      {
-        cat: "Web3 Bills",
-        title: "Pay life expenses using stablecoins",
-        meta: "Solana • USDC",
-        tagline: "Bridge yield to rides, tickets, events, and more."
-      },
-      {
-        cat: "Tech",
-        title: "Fixing small business chaos",
-        meta: "Local shops • North County",
-        tagline: "Websites, flows, payments — PJ + Kromeon clean it up."
-      }
-    ];
-
-    function renderDiscovery() {
-      const el = document.getElementById("discovery-grid");
-      if (!el) return;
-      el.innerHTML = DISCOVERY.map(item => `
-        <div class="discovery-card">
-          <div class="cat">${item.cat}</div>
-          <div class="title">${item.title}</div>
-          <div class="meta">${item.meta}</div>
-          <div class="tagline">${item.tagline}</div>
-        </div>
-      `).join("");
-    }
-
-    /* -------- TRENDING -------- */
+    // --------- TRENDING MOCK DATA ----------
     const TREND_TOPICS = [
-      "Solana yield-to-pay",
-      "DFS promo stacking",
-      "North County concierge",
-      "AI side hustles 2025",
-      "Stablecoin real-life spending",
-      "Encinitas sunsets",
-      "Local venues onchain",
-      "Web3 ticket flows",
-      "Small business tech cleanup",
-      "Automated transport flows",
+      "Solana yield to pay",
+      "North County coastal concierge",
+      "AI side hustles for 2025",
+      "DFS promos in California",
+      "Ethereum L2 gas savings",
+      "Encinitas sunset sessions",
+      "Stablecoin cash flow ideas",
+      "Web3 ticketing experiments",
       "Solana Beach remote work",
-      "DeFi for bills"
+      "Automating errands with AI",
+      "Pacific ocean live cams",
+      "Yield-backed subscriptions",
+      "Coastal delivery & transport",
+      "DeFi for real-world bills"
     ];
 
-    function pickRandom(arr, count) {
-      return [...arr].sort(() => 0.5 - Math.random()).slice(0, count);
+    function pickRandomUnique(arr, count) {
+      const copy = [...arr];
+      const picked = [];
+      while (copy.length && picked.length < count) {
+        const idx = Math.floor(Math.random() * copy.length);
+        picked.push(copy.splice(idx, 1)[0]);
+      }
+      return picked;
     }
 
     function renderTrends() {
       const list = document.getElementById("trend-list");
       if (!list) return;
-      list.innerHTML = pickRandom(TREND_TOPICS, 7)
-        .map(t => `<li class="trend-pill">#${t}</li>`)
+      const topics = pickRandomUnique(TREND_TOPICS, 7);
+      list.innerHTML = topics
+        .map((t) => `<li class="trend-pill">#${t}</li>`)
         .join("");
     }
 
-    /* -------- SPORTS EDGE -------- */
+    // --------- SPORTS EDGE MOCK DATA ----------
     const SPORTS_EDGES = [
       {
         league: "NBA",
-        matchup: "Suns vs Mavericks",
-        context: "Regular season • tempo edge",
-        market: "PRA Over",
-        pick: "Dereck Lively II Over 14.5 PRA",
+        matchup: "Phoenix Suns vs Dallas Mavericks",
+        context: "Regular Season • West Coast window",
+        market: "Player Points + Rebounds + Assists",
+        pick: "Dereck Lively II — Over 14.5 PRA",
         oddsMain: "+112",
         oddsAlt: "+136",
-        liq: "$27",
-        notes: "Role expanding + good pace."
+        liq: "$27 (example size)",
+        disclaimer:
+          "Educational only — not betting advice. Edges change fast and promos matter more than hot takes."
       },
       {
         league: "NFL",
-        matchup: "49ers vs Seahawks",
-        context: "Prime-time tilt",
-        market: "Combo yards",
-        pick: "RB Over rushing+receiving",
+        matchup: "San Francisco 49ers vs Seattle Seahawks",
+        context: "Divisional tilt • Prime-time style game",
+        market: "Rushing + Receiving Yards",
+        pick: "Versatile RB Over combo line",
         oddsMain: "+104",
         oddsAlt: "+128",
-        liq: "$31",
-        notes: "Usage-based angle."
+        liq: "$31 (example size)",
+        disclaimer:
+          "Promotional money and disciplined staking usually matter more than any one angle."
+      },
+      {
+        league: "MLB",
+        matchup: "Los Angeles Dodgers vs San Diego Padres",
+        context: "Night game • Pitcher-friendly park adjustment",
+        market: "Total Bases",
+        pick: "Contact hitter Over 1.5 TB",
+        oddsMain: "+120",
+        oddsAlt: "+148",
+        liq: "$24 (example size)",
+        disclaimer:
+          "Use as a framework for how to think about edges, not as a ticket to hammer blindly."
       }
     ];
 
     function renderSportsEdge() {
-      const wrap = document.getElementById("sports-edge-body");
-      if (!wrap) return;
-
-      const e = SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
-
-      wrap.innerHTML = `
+      const container = document.getElementById("sports-edge-body");
+      if (!container) return;
+      const edge = SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
+      container.innerHTML = `
         <div class="sports-main">
-          <div class="sports-label">${e.league} · Today’s Edge</div>
-          <div class="sports-matchup">${e.matchup}</div>
-          <div class="sports-meta">${e.context}</div>
-          <div class="sports-line"><strong>${e.market}</strong></div>
-          <div class="sports-line">${e.pick}</div>
+          <div class="sports-label">TODAY'S EDGE · ${edge.league}</div>
+          <div class="sports-matchup">${edge.matchup}</div>
+          <div class="sports-meta">${edge.context}</div>
+          <div class="sports-line"><strong>${edge.market}</strong></div>
+          <div class="sports-line">${edge.pick}</div>
           <div class="sports-odds">
-            <span>Odds: ${e.oddsMain}</span>
-            <span>Alt: ${e.oddsAlt}</span>
-            <span>Liq idea: ${e.liq}</span>
+            <span>Headline odds: ${edge.oddsMain}</span>
+            <span>Alt ladder: ${edge.oddsAlt}</span>
+            <span>Liq idea: ${edge.liq}</span>
           </div>
-          <div class="sports-note">${e.notes}</div>
+          <div class="sports-note">${edge.disclaimer}</div>
         </div>
-
         <div class="sports-side">
-          <strong>PJ’s note:</strong><br>
-          Build systems, not hot takes. Promos > predictions.<br><br>
-          If you're in North County and want a calm, disciplined way to use DFS, PJ can help sketch it out.
+          <strong>How PJ thinks about this stuff:</strong><br/>
+          Build around promos, edges, and your real life — not chasing every slate.<br/><br/>
+          If you're in North County and curious about turning DFS and promos into a
+          more disciplined system (instead of chaos), PJ can help you sketch it,
+          test it small, and keep it fun.
         </div>
       `;
     }
 
-    /* -------- VERSION STAMP -------- */
+    // --------- VERSION TIMESTAMP ----------
     function updateVersionStamp() {
       const el = document.getElementById("version-info");
       if (!el) return;
@@ -636,93 +1072,220 @@
         timeZone: "America/Los_Angeles",
         month: "short",
         day: "numeric",
+        year: "numeric",
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
+        hour12: true
       });
-      el.textContent = `Version 3.5-ocean-wow • Updated ${now} PST`;
+      el.textContent = `Version 3.6-ocean-wow-clean • Updated ${now} PST`;
     }
 
-    /* -------- OCEAN ENGINE -------- */
+    // --------- OCEAN WEBGL SCENE (Hawaiian wow mode) ---------
     let renderer, scene, camera, oceanMesh, material, clock;
-    let targetWaveAmp = 1.2;
+    let targetWaveAmp = 1.15;
 
     function initOcean() {
       const container = document.getElementById("ocean-container");
-      if (!container) return;
+      if (!container || !window.THREE) return;
 
       renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(window.devicePixelRatio || 1);
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0x001322, 1);
       container.appendChild(renderer.domElement);
 
       scene = new THREE.Scene();
-
-      camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.set(0, 7, 11);
+      const fov = 55;
+      const aspect = window.innerWidth / window.innerHeight;
+      const near = 0.1;
+      const far = 100;
+      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      camera.position.set(0, 7.0, 11.0);
+      camera.lookAt(0, 0, 0);
 
       clock = new THREE.Clock();
 
-      const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
+      const geometry = new THREE.PlaneGeometry(40, 40, 160, 160); // slightly reduced for perf
       geometry.rotateX(-Math.PI / 2);
 
+      const vertexShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uWaveAmp;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+          float t = uTime * 0.55;
+          float waveBig   = sin(pos.x * 0.15 + t * 0.7) * 0.9;
+          float waveCross = sin((pos.x + pos.z) * 0.13 - t * 0.9) * 0.75;
+          float waveLong  = sin(pos.z * 0.09 + t * 0.38) * 1.0;
+          float n  = noise(vec2(pos.x * 0.26 + t * 0.55, pos.z * 0.24 - t * 0.38));
+          float n2 = noise(vec2(pos.x * 0.6 - t * 0.9, pos.z * 0.64 + t * 0.7));
+          float choppy = (n - 0.5) * 1.5 + (n2 - 0.5) * 1.1;
+          float height = (waveBig + waveCross + waveLong) * 0.42 + choppy * 0.7;
+          height *= uWaveAmp;
+          pos.y += height;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `;
+
+      const fragmentShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        void main() {
+          float t = uTime * 0.07;
+          float n1 = noise(vUv * 8.5  + vec2(t * 2.3,  t * -1.7));
+          float n2 = noise(vUv * 15.5 + vec2(-t * 3.0, t *  2.4));
+          float nFine = noise(vUv * 34.0 + vec2(t * 4.4, -t * 3.8));
+          float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.13);
+
+          vec3 deep = vec3(0.0, 0.10, 0.30);
+          vec3 mid  = vec3(0.0, 0.45, 0.85);
+          vec3 surf = vec3(0.35, 0.98, 1.0);
+
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 3.0));
+
+          float glow = smoothstep(0.25, 0.0, vUv.y + n1 * 0.08);
+          col += vec3(0.02, 0.12, 0.18) * glow * 1.5;
+
+          float horizonGlow = smoothstep(0.35, 1.05, vUv.y + n1 * 0.07);
+          col += vec3(0.05, 0.15, 0.3) * horizonGlow * 1.8;
+
+          float rayPattern = sin((vUv.x * 3.8 + vUv.y * 1.6) - t * 4.3 + n2 * 3.3);
+          float rays = smoothstep(0.7, 1.0, rayPattern);
+          col += vec3(0.12, 0.22, 0.35) * rays * 1.1;
+
+          float shimmer = smoothstep(
+            0.82,
+            1.0,
+            sin((vUv.x + vUv.y + t * 4.4) * 20.0 + n2 * 7.0)
+          );
+          col += shimmer * 0.16;
+
+          float caustic = noise(vUv * 24.0 + vec2(t * 5.3, -t * 4.4));
+          caustic = smoothstep(0.63, 1.0, caustic);
+          col += caustic * 0.16;
+
+          float spark = smoothstep(0.9, 1.0, nFine);
+          col += vec3(0.18, 0.28, 0.36) * spark * 0.9;
+
+          vec2 center = vUv - 0.5;
+          float dist = length(center);
+          float vignette = smoothstep(0.78, 0.25, dist);
+          col *= mix(0.85, 1.28, vignette);
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
       material = new THREE.ShaderMaterial({
-        uniforms: { uTime: { value: 0 }, uWaveAmp: { value: 1.2 } },
-        vertexShader: ` 
-          varying vec2 vUv;
-          uniform float uTime;
-          uniform float uWaveAmp;
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-            float t = uTime * 0.55;
-            pos.y += sin(pos.x*0.15+t)*0.9 * uWaveAmp;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
-          }
-        `,
-        fragmentShader: `
-          varying vec2 vUv;
-          uniform float uTime;
-          void main() {
-            float b = smoothstep(0.0, 1.0, vUv.y);
-            vec3 deep = vec3(0.0,0.1,0.3);
-            vec3 mid  = vec3(0.0,0.45,0.85);
-            vec3 col = mix(deep, mid, b);
-            gl_FragColor = vec4(col, 1.0);
-          }
-        `,
-        side: THREE.DoubleSide
+        uniforms: {
+          uTime: { value: 0 },
+          uWaveAmp: { value: 1.15 },
+        },
+        vertexShader,
+        fragmentShader,
+        side: THREE.DoubleSide,
       });
 
       oceanMesh = new THREE.Mesh(geometry, material);
       scene.add(oceanMesh);
 
+      const fogColor = new THREE.Color(0x001322);
+      scene.fog = new THREE.Fog(fogColor, 14, 50);
+      renderer.setClearColor(fogColor, 1);
+
+      window.addEventListener("resize", onWindowResize, false);
       animate();
+    }
+
+    function onWindowResize() {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     function animate() {
       requestAnimationFrame(animate);
-      if (!material) return;
-
-      material.uniforms.uTime.value = clock.getElapsedTime();
+      if (!material || !clock || !camera || !renderer || !scene) return;
+      const elapsed = clock.getElapsedTime();
+      material.uniforms.uTime.value = elapsed;
+      const current = material.uniforms.uWaveAmp.value;
+      material.uniforms.uWaveAmp.value =
+        current + (targetWaveAmp - current) * 0.035;
+      const sway = Math.sin(elapsed * 0.18) * 0.55;
+      camera.position.x = sway;
+      camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
     }
 
-    /* -------- SUMMON PJ (ORB CLICK) -------- */
+    // ------- PORTAL INTERACTION (SUMMON PJ) -------
     function summonPJ() {
-      document.getElementById("summonLink").click();
+      const ring = document.getElementById("portalRing");
+      const summonLink = document.getElementById("summonLink");
+      if (ring) {
+        ring.classList.remove("active");
+        void ring.offsetWidth;
+        ring.classList.add("active");
+      }
+      targetWaveAmp = 1.7;
+      setTimeout(() => {
+        targetWaveAmp = 1.2;
+      }, 600);
+      if (summonLink) {
+        summonLink.click();
+      }
     }
 
-    /* -------- ON LOAD -------- */
+    // --------- INIT ----------
     document.addEventListener("DOMContentLoaded", () => {
-      renderDiscovery();
       renderTrends();
       renderSportsEdge();
       updateVersionStamp();
       initOcean();
-      document.getElementById("portalOrb").addEventListener("click", summonPJ);
+      const orb = document.getElementById("portalOrb");
+      if (orb) {
+        orb.addEventListener("click", summonPJ);
+      }
     });
   </script>
-
 </body>
 </html>
