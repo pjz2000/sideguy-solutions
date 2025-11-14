@@ -1,3 +1,10 @@
+<!--
+  SideGuy Solutions
+  Version: 2.2-ocean-events
+  Hero: "Where code meets the coastline."
+  Mode: Web3 Coastal + Summon PJ Bubble + North County Events
+  Author: PJ + Kromeon Dev Team (+ ChatGPT)
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,8 +50,6 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       animation: fadeIn 0.9s ease-out;
-      position: relative;
-      overflow-x: hidden;
     }
 
     @keyframes fadeIn {
@@ -62,8 +67,6 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 20px;
-      position: relative;
-      z-index: 5;
     }
 
     a {
@@ -80,28 +83,6 @@
     a:focus {
       outline: 2px solid var(--brand2);
       outline-offset: 2px;
-    }
-
-    /* --- THREE.JS OCEAN BACKGROUND LAYER (C1 MODE) --- */
-    #ocean-container {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: radial-gradient(circle at top, #041b3b, #000814 60%, #000611);
-      overflow: hidden;
-    }
-
-    .ocean-overlay-gradient {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% -20%, rgba(0, 180, 255, 0.25), transparent 60%),
-        radial-gradient(circle at 20% 120%, rgba(0, 255, 210, 0.18), transparent 60%),
-        radial-gradient(circle at 90% 110%, rgba(60, 140, 255, 0.16), transparent 55%);
-      mix-blend-mode: screen;
-      opacity: 0.95;
     }
 
     /* NAVBAR */
@@ -172,9 +153,8 @@
       overflow: hidden;
       padding: 72px 20px 120px;
       text-align: center;
-      background: radial-gradient(circle at top, rgba(14, 165, 233, 0.85) 0%, rgba(2, 6, 23, 0.95) 55%);
+      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 55%);
       box-shadow: inset 0 -40px 80px rgba(15, 23, 42, 0.9);
-      z-index: 5;
     }
 
     .hero-inner {
@@ -249,184 +229,12 @@
       font-weight: 600;
     }
 
-    /* O2 ORB HERO */
-    .portal-orb-wrapper {
-      position: relative;
-      margin-top: 2.4rem;
-      display: flex;
-      justify-content: center;
-      z-index: 5;
-    }
-
-    .portal-orb {
-      position: relative;
-      width: 190px;
-      height: 190px;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3), transparent 60%),
-        radial-gradient(circle at 50% 120%, rgba(0, 255, 210, 0.55), rgba(0, 112, 255, 0.9));
-      box-shadow:
-        0 0 40px rgba(0, 255, 245, 0.45),
-        0 0 90px rgba(0, 140, 255, 0.6);
-      border: 1px solid rgba(190, 248, 255, 0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      overflow: hidden;
-      animation: orbFloat 5.5s ease-in-out infinite;
-    }
-
-    .portal-orb::before,
-    .portal-orb::after {
-      content: "";
-      position: absolute;
-      inset: -30%;
-      background: conic-gradient(
-        from 0deg,
-        rgba(0, 255, 255, 0.2),
-        transparent 40%,
-        rgba(255, 255, 255, 0.14),
-        transparent 75%,
-        rgba(0, 255, 210, 0.22)
-      );
-      mix-blend-mode: screen;
-      opacity: 0.75;
-      animation: orbSweep 9s linear infinite;
-    }
-
-    .portal-orb::after {
-      animation-duration: 13s;
-      opacity: 0.45;
-      transform: scale(1.1);
-    }
-
-    .portal-inner-ripple {
-      position: absolute;
-      inset: 18%;
-      border-radius: 999px;
-      border: 1px solid rgba(220, 252, 255, 0.7);
-      box-shadow:
-        0 0 25px rgba(197, 245, 255, 0.5),
-        0 0 50px rgba(0, 208, 255, 0.6);
-      opacity: 0.7;
-      animation: innerPulse 3.8s ease-out infinite;
-    }
-
-    .portal-ring {
-      position: absolute;
-      inset: -18%;
-      border-radius: inherit;
-      border: 1px solid rgba(116, 238, 255, 0.45);
-      box-shadow: 0 0 40px rgba(0, 255, 247, 0.35);
-      opacity: 0;
-      transform: scale(0.8);
-      pointer-events: none;
-    }
-
-    .portal-ring.active {
-      animation: rippleBurst 0.95s ease-out;
-    }
-
-    .portal-label {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 0 1.25rem;
-    }
-
-    .portal-label-main {
-      font-size: 0.95rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-      text-shadow: 0 0 15px rgba(5, 17, 30, 0.6);
-    }
-
-    .portal-label-sub {
-      font-size: 0.86rem;
-      opacity: 0.9;
-      text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
-    }
-
-    .portal-caption {
-      margin-top: 0.85rem;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(211, 235, 255, 0.9);
-      z-index: 5;
-      position: relative;
-    }
-
-    .portal-caption span {
-      font-weight: 600;
-      color: #f8fdff;
-    }
-
-    @keyframes orbFloat {
-      0% {
-        transform: translateY(0px) scale(1);
-      }
-      50% {
-        transform: translateY(-10px) scale(1.02);
-      }
-      100% {
-        transform: translateY(0px) scale(1);
-      }
-    }
-
-    @keyframes orbSweep {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes innerPulse {
-      0% {
-        opacity: 0.5;
-        transform: scale(0.96);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 0.4;
-        transform: scale(0.98);
-      }
-    }
-
-    @keyframes rippleBurst {
-      0% {
-        opacity: 0.8;
-        transform: scale(0.7);
-        box-shadow: 0 0 20px rgba(166, 241, 255, 0.8);
-      }
-      60% {
-        opacity: 0.3;
-        transform: scale(1.25);
-        box-shadow: 0 0 45px rgba(166, 241, 255, 0.9);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.5);
-        box-shadow: 0 0 60px rgba(166, 241, 255, 0);
-      }
-    }
-
-    /* OCEAN WAVES PORTAL (CSS LAYERS ON TOP OF 3D) */
+    /* OCEAN WAVES PORTAL */
     .hero-waves {
       position: absolute;
       inset: 40% -10% -60px;
       pointer-events: none;
       overflow: hidden;
-      z-index: 4;
     }
 
     .wave {
@@ -486,23 +294,45 @@
     }
 
     @keyframes waveBack {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(40px); }
-      100% { transform: translateX(0); }
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(40px);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
 
     @keyframes waveMid {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-40px); }
-      100% { transform: translateX(0); }
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(-40px);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
 
     @keyframes waveFront {
-      0% { transform: translateX(0) translateY(0); }
-      25% { transform: translateX(16px) translateY(6px); }
-      50% { transform: translateX(0) translateY(10px); }
-      75% { transform: translateX(-16px) translateY(6px); }
-      100% { transform: translateX(0) translateY(0); }
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      25% {
+        transform: translateX(16px) translateY(6px);
+      }
+      50% {
+        transform: translateX(0) translateY(10px);
+      }
+      75% {
+        transform: translateX(-16px) translateY(6px);
+      }
+      100% {
+        transform: translateX(0) translateY(0);
+      }
     }
 
     /* MIST + PARTICLES */
@@ -521,7 +351,6 @@
       opacity: 0.4;
       filter: blur(8px);
       pointer-events: none;
-      z-index: 4;
     }
 
     .bubble {
@@ -533,19 +362,44 @@
       opacity: 0.7;
       pointer-events: none;
       animation: floatUp 10s linear infinite;
-      z-index: 4;
     }
 
-    .bubble.b1 { left: 18%; bottom: 0; animation-duration: 11s; }
-    .bubble.b2 { left: 38%; bottom: -10px; animation-duration: 13s; }
-    .bubble.b3 { left: 62%; bottom: -6px; animation-duration: 9s; }
-    .bubble.b4 { left: 82%; bottom: -14px; animation-duration: 15s; }
+    .bubble.b1 {
+      left: 18%;
+      bottom: 0;
+      animation-duration: 11s;
+    }
+    .bubble.b2 {
+      left: 38%;
+      bottom: -10px;
+      animation-duration: 13s;
+    }
+    .bubble.b3 {
+      left: 62%;
+      bottom: -6px;
+      animation-duration: 9s;
+    }
+    .bubble.b4 {
+      left: 82%;
+      bottom: -14px;
+      animation-duration: 15s;
+    }
 
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(0.9); opacity: 0; }
-      20% { opacity: 0.75; }
-      80% { opacity: 0.9; }
-      100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+      0% {
+        transform: translateY(0) scale(0.9);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.75;
+      }
+      80% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-120px) scale(1.2);
+        opacity: 0;
+      }
     }
 
     /* SUMMON PJ FLOATING BUTTON */
@@ -618,10 +472,19 @@
     }
 
     @keyframes wag {
-      0%, 100% { transform: rotate(0deg) translateY(0); }
-      25% { transform: rotate(-8deg) translateY(-1px); }
-      50% { transform: rotate(5deg) translateY(0); }
-      75% { transform: rotate(-4deg) translateY(-1px); }
+      0%,
+      100% {
+        transform: rotate(0deg) translateY(0);
+      }
+      25% {
+        transform: rotate(-8deg) translateY(-1px);
+      }
+      50% {
+        transform: rotate(5deg) translateY(0);
+      }
+      75% {
+        transform: rotate(-4deg) translateY(-1px);
+      }
     }
 
     .summon-subtitle {
@@ -668,16 +531,14 @@
           rgba(37, 99, 235, 0.22),
           transparent 60%
         ),
-        rgba(2, 6, 23, 0.96);
-      position: relative;
-      z-index: 5;
+        #020617;
     }
 
     .section-alt {
       background: radial-gradient(
           circle at top,
           rgba(8, 47, 73, 0.8),
-          rgba(2, 6, 23, 0.96) 55%
+          #020617 55%
         );
     }
 
@@ -813,7 +674,34 @@
       color: #e5f2ff;
     }
 
-    /* SOLANA TICKETS & PAYMENTS (ex-Local Shows) */
+    /* NEWSLETTER */
+    .newsletter-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .newsletter-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.96);
+      color: #e5f2ff;
+      font-size: 12px;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .newsletter-cta span.icon {
+      font-size: 16px;
+    }
+
+    /* LOCAL SHOWS / DIRECT TICKETS */
     .tickets-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -851,16 +739,29 @@
       color: #bbf7d0;
     }
 
+    /* EVENTS FILTER BUTTONS */
+    .event-filter {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.7);
+      color: #e8f7ff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .event-filter.active {
+      background: linear-gradient(120deg,#22d3ee,#3b82f6);
+      border-color: transparent;
+    }
+
     /* FOOTER */
     .footer {
       padding: 26px 20px 40px;
-      background: rgba(2, 6, 23, 0.96);
+      background: #020617;
       border-top: 1px solid rgba(148, 163, 184, 0.5);
       text-align: center;
       font-size: 12px;
       color: var(--muted);
-      position: relative;
-      z-index: 5;
     }
 
     #version-info {
@@ -904,19 +805,10 @@
         min-width: 210px;
         padding: 9px 14px;
       }
-
-      .portal-orb {
-        width: 165px;
-        height: 165px;
-      }
     }
   </style>
 </head>
 <body>
-  <!-- 3D OCEAN BACKGROUND (THREE.JS) -->
-  <div id="ocean-container"></div>
-  <div class="ocean-overlay-gradient"></div>
-
   <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner container">
@@ -925,8 +817,9 @@
       </div>
       <ul class="menu">
         <li><a href="#trending">Trending</a></li>
+        <li><a href="#nc-events">Events</a></li>
         <li><a href="#sports-edge">Sports Edge</a></li>
-        <li><a href="#payments">Solana Tickets</a></li>
+        <li><a href="#local-shows">Local Shows</a></li>
         <li><a href="#newsletter">Daily Drop</a></li>
       </ul>
     </div>
@@ -958,23 +851,6 @@
         <a href="tel:17735441231">(773) 544-1231</a> · Email:
         <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
       </p>
-
-      <!-- O2 ORB -->
-      <div class="portal-orb-wrapper">
-        <div class="portal-orb" id="portalOrb">
-          <div class="portal-inner-ripple"></div>
-          <div class="portal-ring" id="portalRing"></div>
-          <div class="portal-label">
-            <div class="portal-label-main">TAP TO SUMMON PJ</div>
-            <div class="portal-label-sub">
-              Coastal concierge at your service.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="portal-caption">
-        Running in <span>Aladeen Mode++</span>
-      </div>
     </div>
 
     <!-- Wave layers -->
@@ -993,7 +869,6 @@
   <!-- SUMMON PJ FLOATING BUTTON -->
   <div class="summon-wrapper">
     <a
-      id="summonPJBubble"
       class="summon-btn"
       href="mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Coastal%20Concierge)&body=Hey%20PJ%2C%0A%0ALet%E2%80%99s%20set%20up%20transport%2C%20tech%2C%20or%20life%20assistance%20in%20North%20County.%0A%0A-%20"
     >
@@ -1027,6 +902,43 @@
     </div>
   </section>
 
+  <!-- NORTH COUNTY EVENTS SECTION -->
+  <section id="nc-events" class="section section-alt">
+    <div class="container">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title-row">
+            <span class="icon">🌴</span>
+            <span>North County Coastal Events</span>
+          </div>
+          <div class="section-subtext">
+            What's happening this week in Solana Beach, Encinitas, Cardiff, Del Mar, Carlsbad, and Oceanside.
+          </div>
+        </div>
+
+        <!-- FEATURED EVENT -->
+        <div class="section-card" style="margin-bottom:20px;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.45);">
+          <h3 style="margin-top:0;font-size:18px;color:#7dd3fc;">⭐ SideGuy Pick of the Week</h3>
+          <p style="margin:6px 0 0 0;font-size:15px;font-weight:600;">Sunset Sessions: Oceanfront DJ Night</p>
+          <p style="margin:4px 0;font-size:13px;opacity:0.85;">📍 Fletcher Cove · Solana Beach</p>
+          <p style="margin:6px 0 0 0;font-size:13px;color:#7dd3fc;">Laid-back coastal set • Great crowd • Perfect pre-dinner vibe</p>
+        </div>
+
+        <!-- CATEGORY FILTERS -->
+        <div id="event-filters" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
+          <button class="event-filter" data-filter="all">All</button>
+          <button class="event-filter" data-filter="music">Music</button>
+          <button class="event-filter" data-filter="market">Markets</button>
+          <button class="event-filter" data-filter="comedy">Comedy</button>
+          <button class="event-filter" data-filter="wellness">Wellness</button>
+          <button class="event-filter" data-filter="sports">Surf & Sports</button>
+        </div>
+
+        <div id="event-list" style="display:grid;gap:14px;"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- SPORTS EDGE SECTION -->
   <section id="sports-edge" class="section section-alt">
     <div class="container">
@@ -1050,49 +962,54 @@
     </div>
   </section>
 
-  <!-- SOLANA TICKETS & PAYMENTS SECTION -->
-  <section id="payments" class="section">
+  <!-- LOCAL SHOWS / DIRECT TICKETS SECTION -->
+  <section id="local-shows" class="section">
     <div class="container">
       <div class="section-card">
         <div class="section-header">
           <div class="section-title-row">
             <span class="icon">🎟️</span>
-            <span>Solana-Powered Tickets & Payments</span>
+            <span>Local Shows — Direct, Fast, Coastal</span>
           </div>
           <div class="section-subtext">
-            You think in dollars. Under the surface, SideGuy can quietly run everything on Solana rails — for tickets, consulting, retainers, and more.
+            North County concert + comedy ideas, without fighting the giant
+            ticketing sites. Think: faster answers, cleaner checkout, and a
+            chance to route more value to the venue.
           </div>
         </div>
 
         <div class="tickets-grid">
           <div>
             <div class="tickets-pill">
-              <span>🌊</span> Local shows, bars, and coast-side venues
+              <span>🎸</span> Solana Beach • Encinitas • Cardiff • Del Mar
             </div>
             <p>
-              The dream: buy a $40 ticket like normal — card, Apple Pay, or bank — while the payment instantly settles on Solana as USDC behind the scenes. Faster confirmations, lower fees, cleaner splits between venue, artist, and promoter.
+              SideGuy started in tickets, and the game has changed. The dream:
+              match local fans with local venues, with lighter fees and faster
+              confirmations — eventually paid in Solana or stablecoins.
             </p>
             <p class="tickets-savings">
-              Today: mapping flows for North County rooms and events.<br />
-              Tomorrow: instant confirmations, QR entry, and Solana-backed payouts that feel as simple as “Pay now.”
+              Today: simple intros and coordination.<br />
+              Tomorrow: instant Web3-powered confirmations and yield-to-pay
+              flows.
             </p>
           </div>
 
           <div>
             <div class="tickets-badge">
-              <span>⚗️</span> Dollars on top. Solana underneath.
+              <span>⚗️</span> Early-stage portal — invite only
             </div>
             <p style="margin-top:6px;">
-              This isn’t just for tickets. The same rails can power dev retainers, concierge services, referral splits, and recurring systems — all tracked, settled, and automated using Solana as the engine, without forcing anyone to become “crypto people.”
-            </p>
-            <p style="margin-top:8px;">
-              If you run a venue, a coastal business, or want to test “dollars in, Solana under the hood” for your own thing, PJ can help sketch the flow and build a lightweight prototype when it makes sense.
+              If you run a room, bar, or venue in North County and want to test
+              faster, fairer ticket flows, PJ can help map the system — and
+              build a lightweight prototype when it makes sense.
             </p>
             <p style="margin-top:8px;">
               Email:
               <a
-                href="mailto:peter.z@kromeon.com?subject=Solana%20Tickets%20%26%20Payments"
-              >Solana tickets & payments with SideGuy</a>
+                href="mailto:peter.z@kromeon.com?subject=Local%20Shows%20%2F%20Ticket%20Flow"
+                >Local shows with SideGuy</a
+              >
             </p>
           </div>
         </div>
@@ -1142,11 +1059,8 @@
   <footer class="footer" id="contact">
     <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
     <div>Coastal concierge for tech, transport, and systems that actually fit your life.</div>
-    <div id="version-info">Version 2.3-ocean-portal-orb-solana</div>
+    <div id="version-info">Version 2.2-ocean-events</div>
   </footer>
-
-  <!-- THREE.js from CDN -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
     // --------- TRENDING MOCK DATA ----------
@@ -1263,6 +1177,44 @@
       `;
     }
 
+    // --------- EVENTS MOCK DATA ----------
+    const EVENTS = [
+      { category: "music", date: "Thu • This Week", title: "Live Music: Sunset Sessions at Belly Up", location: "Solana Beach", vibe: "Indie, surf rock, local scene" },
+      { category: "market", date: "Fri • This Week", title: "Encinitas Night Market", location: "Downtown Encinitas", vibe: "Food, crafts, DJs, local makers" },
+      { category: "market", date: "Sat Morning", title: "Cardiff Farmers Market", location: "Cardiff Seaside Market Lot", vibe: "Produce, coffee, surf families" },
+      { category: "comedy", date: "Sat Night", title: "Comedy Night @ The Crack Shack", location: "Encinitas", vibe: "Standup, casual drinks, locals" },
+      { category: "wellness", date: "Sun • Sunrise", title: "Del Mar Bluff Yoga", location: "Del Mar", vibe: "Wellness, ocean view, chill" },
+      { category: "sports", date: "Sun Afternoon", title: "Carlsbad Surf Classic (Amateur)", location: "Tamarack Beach", vibe: "Surf competition, food trucks" }
+    ];
+
+    function renderNCEvents(filter = "all"){
+      const list = document.getElementById("event-list");
+      if (!list) return;
+      const filtered = filter === "all" ? EVENTS : EVENTS.filter(e => e.category === filter);
+
+      list.innerHTML = filtered.map(e=>`
+        <div style="border:1px solid rgba(148,163,184,0.35);padding:14px;border-radius:12px;background:rgba(15,23,42,0.9);">
+          <div style="font-size:12px;opacity:0.8;">${e.date}</div>
+          <div style="font-size:15px;font-weight:600;margin-top:4px;">${e.title}</div>
+          <div style="font-size:12px;margin-top:4px;opacity:0.9;">📍 ${e.location}</div>
+          <div style="font-size:12px;margin-top:6px;color:#7dd3fc;">${e.vibe}</div>
+        </div>`).join("");
+    }
+
+    function initEventFilters(){
+      const buttons = document.querySelectorAll(".event-filter");
+      if (!buttons.length) return;
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          buttons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderNCEvents(btn.dataset.filter);
+        });
+      });
+      const allBtn = document.querySelector("[data-filter='all']");
+      if (allBtn) allBtn.classList.add("active");
+    }
+
     // --------- VERSION TIMESTAMP ----------
     function updateVersionStamp() {
       const el = document.getElementById("version-info");
@@ -1276,242 +1228,16 @@
         minute: "2-digit",
         hour12: true
       });
-      el.textContent = `Version 2.3-ocean-portal-orb-solana • Updated ${now} PST`;
-    }
-
-    // --------- THREE.JS OCEAN (FULL BACKGROUND) ----------
-    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
-    let targetWaveAmp = 1.0;
-
-    function initOcean() {
-      const container = document.getElementById("ocean-container");
-      if (!container || !window.THREE) return;
-
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio || 1);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x000814, 1);
-      container.appendChild(renderer.domElement);
-
-      scene = new THREE.Scene();
-
-      const fov = 55;
-      const aspect = window.innerWidth / window.innerHeight;
-      const near = 0.1;
-      const far = 100;
-      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-      camera.position.set(0, 7.2, 11.5);
-      camera.lookAt(0, 0, 0);
-
-      oceanClock = new THREE.Clock();
-
-      const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
-      geometry.rotateX(-Math.PI / 2);
-
-      const vertexShader = `
-        varying vec2 vUv;
-        uniform float uTime;
-        uniform float uWaveAmp;
-
-        float hash(vec2 p) {
-          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-        }
-
-        float noise(vec2 p) {
-          vec2 i = floor(p);
-          vec2 f = fract(p);
-
-          float a = hash(i);
-          float b = hash(i + vec2(1.0, 0.0));
-          float c = hash(i + vec2(0.0, 1.0));
-          float d = hash(i + vec2(1.0, 1.0));
-
-          vec2 u = f * f * (3.0 - 2.0 * f);
-
-          return mix(a, b, u.x) +
-                 (c - a) * u.y * (1.0 - u.x) +
-                 (d - b) * u.x * u.y;
-        }
-
-        void main() {
-          vUv = uv;
-          vec3 pos = position;
-
-          float t = uTime * 0.5;
-
-          float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
-          float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
-          float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
-
-          float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
-          float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
-          float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
-
-          float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
-          height *= uWaveAmp;
-
-          pos.y += height;
-
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        }
-      `;
-
-      const fragmentShader = `
-        varying vec2 vUv;
-        uniform float uTime;
-
-        float hash(vec2 p) {
-          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-        }
-
-        float noise(vec2 p) {
-          vec2 i = floor(p);
-          vec2 f = fract(p);
-
-          float a = hash(i);
-          float b = hash(i + vec2(1.0, 0.0));
-          float c = hash(i + vec2(0.0, 1.0));
-          float d = hash(i + vec2(1.0, 1.0));
-
-          vec2 u = f * f * (3.0 - 2.0 * f);
-
-          return mix(a, b, u.x) +
-                 (c - a) * u.y * (1.0 - u.x) +
-                 (d - b) * u.x * u.y;
-        }
-
-        void main() {
-          float t = uTime * 0.06;
-
-          float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
-          float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
-          float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
-
-          float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
-
-          vec3 deep = vec3(0.0, 0.06, 0.18);
-          vec3 mid = vec3(0.0, 0.3, 0.56);
-          vec3 surf = vec3(0.74, 0.96, 1.0);
-
-          vec3 col = mix(deep, mid, depth);
-          col = mix(col, surf, pow(1.0 - depth, 3.2));
-
-          float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-          col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
-
-          float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
-          float rays = smoothstep(0.72, 1.0, rayPattern);
-          col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
-
-          float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
-          col += shimmer * 0.09;
-
-          float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
-          caustic = smoothstep(0.65, 1.0, caustic);
-          col += caustic * 0.07;
-
-          float spark = smoothstep(0.92, 1.0, nFine);
-          col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
-
-          vec2 center = vUv - 0.5;
-          float dist = length(center);
-          float vignette = smoothstep(0.8, 0.25, dist);
-          col *= mix(0.72, 1.22, vignette);
-
-          gl_FragColor = vec4(col, 1.0);
-        }
-      `;
-
-      oceanMaterial = new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uWaveAmp: { value: 1.0 },
-        },
-        vertexShader,
-        fragmentShader,
-        side: THREE.DoubleSide,
-      });
-
-      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
-      scene.add(oceanMesh);
-
-      const fogColor = new THREE.Color(0x000817);
-      scene.fog = new THREE.Fog(fogColor, 12, 45);
-      renderer.setClearColor(fogColor, 1);
-
-      window.addEventListener("resize", onWindowResize, false);
-
-      animateOcean();
-    }
-
-    function onWindowResize() {
-      if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animateOcean() {
-      requestAnimationFrame(animateOcean);
-
-      if (!oceanClock || !oceanMaterial || !camera || !renderer || !scene) return;
-
-      const elapsed = oceanClock.getElapsedTime();
-      oceanMaterial.uniforms.uTime.value = elapsed;
-
-      const current = oceanMaterial.uniforms.uWaveAmp.value;
-      oceanMaterial.uniforms.uWaveAmp.value =
-        current + (targetWaveAmp - current) * 0.03;
-
-      const sway = Math.sin(elapsed * 0.18) * 0.4;
-      camera.position.x = sway;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-
-    function boostWaves() {
-      targetWaveAmp = 1.6;
-      setTimeout(() => {
-        targetWaveAmp = 1.05;
-      }, 550);
-    }
-
-    function triggerPortalRipple() {
-      const ring = document.getElementById("portalRing");
-      if (!ring) return;
-      ring.classList.remove("active");
-      // force reflow
-      void ring.offsetWidth;
-      ring.classList.add("active");
+      el.textContent = `Version 2.2-ocean-events • Updated ${now} PST`;
     }
 
     // --------- INIT ----------
     document.addEventListener("DOMContentLoaded", () => {
       renderTrends();
       renderSportsEdge();
+      initEventFilters();
+      renderNCEvents();
       updateVersionStamp();
-      initOcean();
-
-      const summonBtn = document.getElementById("summonPJBubble");
-      if (summonBtn) {
-        summonBtn.addEventListener("click", () => {
-          boostWaves();
-          triggerPortalRipple();
-          const target = document.getElementById("payments");
-          if (target) target.scrollIntoView({ behavior: "smooth" });
-        });
-      }
-
-      const portalOrb = document.getElementById("portalOrb");
-      if (portalOrb) {
-        portalOrb.addEventListener("click", () => {
-          boostWaves();
-          triggerPortalRipple();
-          const target = document.getElementById("payments");
-          if (target) target.scrollIntoView({ behavior: "smooth" });
-        });
-      }
     });
   </script>
 </body>
