@@ -249,6 +249,177 @@
       font-weight: 600;
     }
 
+    /* O2 ORB HERO */
+    .portal-orb-wrapper {
+      position: relative;
+      margin-top: 2.4rem;
+      display: flex;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .portal-orb {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3), transparent 60%),
+        radial-gradient(circle at 50% 120%, rgba(0, 255, 210, 0.55), rgba(0, 112, 255, 0.9));
+      box-shadow:
+        0 0 40px rgba(0, 255, 245, 0.45),
+        0 0 90px rgba(0, 140, 255, 0.6);
+      border: 1px solid rgba(190, 248, 255, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      animation: orbFloat 5.5s ease-in-out infinite;
+    }
+
+    .portal-orb::before,
+    .portal-orb::after {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(0, 255, 255, 0.2),
+        transparent 40%,
+        rgba(255, 255, 255, 0.14),
+        transparent 75%,
+        rgba(0, 255, 210, 0.22)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.75;
+      animation: orbSweep 9s linear infinite;
+    }
+
+    .portal-orb::after {
+      animation-duration: 13s;
+      opacity: 0.45;
+      transform: scale(1.1);
+    }
+
+    .portal-inner-ripple {
+      position: absolute;
+      inset: 18%;
+      border-radius: 999px;
+      border: 1px solid rgba(220, 252, 255, 0.7);
+      box-shadow:
+        0 0 25px rgba(197, 245, 255, 0.5),
+        0 0 50px rgba(0, 208, 255, 0.6);
+      opacity: 0.7;
+      animation: innerPulse 3.8s ease-out infinite;
+    }
+
+    .portal-ring {
+      position: absolute;
+      inset: -18%;
+      border-radius: inherit;
+      border: 1px solid rgba(116, 238, 255, 0.45);
+      box-shadow: 0 0 40px rgba(0, 255, 247, 0.35);
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
+    }
+
+    .portal-ring.active {
+      animation: rippleBurst 0.95s ease-out;
+    }
+
+    .portal-label {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 1.25rem;
+    }
+
+    .portal-label-main {
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      text-shadow: 0 0 15px rgba(5, 17, 30, 0.6);
+    }
+
+    .portal-label-sub {
+      font-size: 0.86rem;
+      opacity: 0.9;
+      text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    }
+
+    .portal-caption {
+      margin-top: 0.85rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(211, 235, 255, 0.9);
+      z-index: 5;
+      position: relative;
+    }
+
+    .portal-caption span {
+      font-weight: 600;
+      color: #f8fdff;
+    }
+
+    @keyframes orbFloat {
+      0% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-10px) scale(1.02);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    @keyframes orbSweep {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes innerPulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(0.96);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0.4;
+        transform: scale(0.98);
+      }
+    }
+
+    @keyframes rippleBurst {
+      0% {
+        opacity: 0.8;
+        transform: scale(0.7);
+        box-shadow: 0 0 20px rgba(166, 241, 255, 0.8);
+      }
+      60% {
+        opacity: 0.3;
+        transform: scale(1.25);
+        box-shadow: 0 0 45px rgba(166, 241, 255, 0.9);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
+        box-shadow: 0 0 60px rgba(166, 241, 255, 0);
+      }
+    }
+
     /* OCEAN WAVES PORTAL (CSS LAYERS ON TOP OF 3D) */
     .hero-waves {
       position: absolute;
@@ -642,34 +813,7 @@
       color: #e5f2ff;
     }
 
-    /* NEWSLETTER */
-    .newsletter-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .newsletter-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.96);
-      color: #e5f2ff;
-      font-size: 12px;
-      text-decoration: none;
-      width: fit-content;
-    }
-
-    .newsletter-cta span.icon {
-      font-size: 16px;
-    }
-
-    /* LOCAL SHOWS / TICKETS */
+    /* SOLANA TICKETS & PAYMENTS (ex-Local Shows) */
     .tickets-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -760,6 +904,11 @@
         min-width: 210px;
         padding: 9px 14px;
       }
+
+      .portal-orb {
+        width: 165px;
+        height: 165px;
+      }
     }
   </style>
 </head>
@@ -777,7 +926,7 @@
       <ul class="menu">
         <li><a href="#trending">Trending</a></li>
         <li><a href="#sports-edge">Sports Edge</a></li>
-        <li><a href="#local-shows">Local Shows</a></li>
+        <li><a href="#payments">Solana Tickets</a></li>
         <li><a href="#newsletter">Daily Drop</a></li>
       </ul>
     </div>
@@ -809,6 +958,23 @@
         <a href="tel:17735441231">(773) 544-1231</a> · Email:
         <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
       </p>
+
+      <!-- O2 ORB -->
+      <div class="portal-orb-wrapper">
+        <div class="portal-orb" id="portalOrb">
+          <div class="portal-inner-ripple"></div>
+          <div class="portal-ring" id="portalRing"></div>
+          <div class="portal-label">
+            <div class="portal-label-main">TAP TO SUMMON PJ</div>
+            <div class="portal-label-sub">
+              Coastal concierge at your service.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="portal-caption">
+        Running in <span>Aladeen Mode++</span>
+      </div>
     </div>
 
     <!-- Wave layers -->
@@ -884,54 +1050,49 @@
     </div>
   </section>
 
-  <!-- LOCAL SHOWS / DIRECT TICKETS SECTION -->
-  <section id="local-shows" class="section">
+  <!-- SOLANA TICKETS & PAYMENTS SECTION -->
+  <section id="payments" class="section">
     <div class="container">
       <div class="section-card">
         <div class="section-header">
           <div class="section-title-row">
             <span class="icon">🎟️</span>
-            <span>Local Shows — Direct, Fast, Coastal</span>
+            <span>Solana-Powered Tickets & Payments</span>
           </div>
           <div class="section-subtext">
-            North County concert + comedy ideas, without fighting the giant
-            ticketing sites. Think: faster answers, cleaner checkout, and a
-            chance to route more value to the venue.
+            You think in dollars. Under the surface, SideGuy can quietly run everything on Solana rails — for tickets, consulting, retainers, and more.
           </div>
         </div>
 
         <div class="tickets-grid">
           <div>
             <div class="tickets-pill">
-              <span>🎸</span> Solana Beach • Encinitas • Cardiff • Del Mar
+              <span>🌊</span> Local shows, bars, and coast-side venues
             </div>
             <p>
-              SideGuy started in tickets, and the game has changed. The dream:
-              match local fans with local venues, with lighter fees and faster
-              confirmations — eventually paid in Solana or stablecoins.
+              The dream: buy a $40 ticket like normal — card, Apple Pay, or bank — while the payment instantly settles on Solana as USDC behind the scenes. Faster confirmations, lower fees, cleaner splits between venue, artist, and promoter.
             </p>
             <p class="tickets-savings">
-              Today: simple intros and coordination.<br />
-              Tomorrow: instant Web3-powered confirmations and yield-to-pay
-              flows.
+              Today: mapping flows for North County rooms and events.<br />
+              Tomorrow: instant confirmations, QR entry, and Solana-backed payouts that feel as simple as “Pay now.”
             </p>
           </div>
 
           <div>
             <div class="tickets-badge">
-              <span>⚗️</span> Early-stage portal — invite only
+              <span>⚗️</span> Dollars on top. Solana underneath.
             </div>
             <p style="margin-top:6px;">
-              If you run a room, bar, or venue in North County and want to test
-              faster, fairer ticket flows, PJ can help map the system — and
-              build a lightweight prototype when it makes sense.
+              This isn’t just for tickets. The same rails can power dev retainers, concierge services, referral splits, and recurring systems — all tracked, settled, and automated using Solana as the engine, without forcing anyone to become “crypto people.”
+            </p>
+            <p style="margin-top:8px;">
+              If you run a venue, a coastal business, or want to test “dollars in, Solana under the hood” for your own thing, PJ can help sketch the flow and build a lightweight prototype when it makes sense.
             </p>
             <p style="margin-top:8px;">
               Email:
               <a
-                href="mailto:peter.z@kromeon.com?subject=Local%20Shows%20%2F%20Ticket%20Flow"
-                >Local shows with SideGuy</a
-              >
+                href="mailto:peter.z@kromeon.com?subject=Solana%20Tickets%20%26%20Payments"
+              >Solana tickets & payments with SideGuy</a>
             </p>
           </div>
         </div>
@@ -981,7 +1142,7 @@
   <footer class="footer" id="contact">
     <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
     <div>Coastal concierge for tech, transport, and systems that actually fit your life.</div>
-    <div id="version-info">Version 2.1-ocean-portal</div>
+    <div id="version-info">Version 2.3-ocean-portal-orb-solana</div>
   </footer>
 
   <!-- THREE.js from CDN -->
@@ -1115,7 +1276,7 @@
         minute: "2-digit",
         hour12: true
       });
-      el.textContent = `Version 2.1-ocean-portal • Updated ${now} PST`;
+      el.textContent = `Version 2.3-ocean-portal-orb-solana • Updated ${now} PST`;
     }
 
     // --------- THREE.JS OCEAN (FULL BACKGROUND) ----------
@@ -1316,6 +1477,15 @@
       }, 550);
     }
 
+    function triggerPortalRipple() {
+      const ring = document.getElementById("portalRing");
+      if (!ring) return;
+      ring.classList.remove("active");
+      // force reflow
+      void ring.offsetWidth;
+      ring.classList.add("active");
+    }
+
     // --------- INIT ----------
     document.addEventListener("DOMContentLoaded", () => {
       renderTrends();
@@ -1327,6 +1497,19 @@
       if (summonBtn) {
         summonBtn.addEventListener("click", () => {
           boostWaves();
+          triggerPortalRipple();
+          const target = document.getElementById("payments");
+          if (target) target.scrollIntoView({ behavior: "smooth" });
+        });
+      }
+
+      const portalOrb = document.getElementById("portalOrb");
+      if (portalOrb) {
+        portalOrb.addEventListener("click", () => {
+          boostWaves();
+          triggerPortalRipple();
+          const target = document.getElementById("payments");
+          if (target) target.scrollIntoView({ behavior: "smooth" });
         });
       }
     });
