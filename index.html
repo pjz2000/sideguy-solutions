@@ -1,8 +1,8 @@
 <!--
   SideGuy Solutions
-  Version: 2.2-ocean-events
+  Version: 2.3-ocean-real-events
   Hero: "Where code meets the coastline."
-  Mode: Web3 Coastal + Summon PJ Bubble + North County Events
+  Mode: Web3 Coastal + Summon PJ Bubble + North County Event Hub
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
@@ -139,12 +139,6 @@
 
     .menu a:hover {
       color: var(--brand2);
-    }
-
-    .timestamp {
-      display: none;
-      font-size: 11px;
-      color: var(--muted);
     }
 
     /* HERO WITH OCEAN PORTAL */
@@ -739,19 +733,55 @@
       color: #bbf7d0;
     }
 
-    /* EVENTS FILTER BUTTONS */
-    .event-filter {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      background: rgba(15,23,42,0.7);
-      color: #e8f7ff;
-      cursor: pointer;
-      font-size: 13px;
+    /* EVENT HUB GRID */
+    .event-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 6px;
     }
-    .event-filter.active {
-      background: linear-gradient(120deg,#22d3ee,#3b82f6);
-      border-color: transparent;
+
+    .event-hub-card {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 14px 14px 16px;
+      font-size: 13px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.85);
+    }
+
+    .event-hub-card h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .event-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(37, 99, 235, 0.18);
+      color: #bfdbfe;
+      border: 1px solid rgba(59, 130, 246, 0.6);
+      margin-top: 6px;
+    }
+
+    .event-hub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .event-hub-link span.arrow {
+      font-size: 12px;
     }
 
     /* FOOTER */
@@ -902,39 +932,149 @@
     </div>
   </section>
 
-  <!-- NORTH COUNTY EVENTS SECTION -->
+  <!-- NORTH COUNTY EVENT HUB (REAL LINKS) -->
   <section id="nc-events" class="section section-alt">
     <div class="container">
       <div class="section-card">
         <div class="section-header">
           <div class="section-title-row">
             <span class="icon">🌴</span>
-            <span>North County Coastal Events</span>
+            <span>North County Event Hub</span>
           </div>
           <div class="section-subtext">
-            What's happening this week in Solana Beach, Encinitas, Cardiff, Del Mar, Carlsbad, and Oceanside.
+            Real calendars for Solana Beach, Encinitas, Del Mar, and beyond. One place to jump into everything happening up and down the coast.
           </div>
         </div>
 
-        <!-- FEATURED EVENT -->
-        <div class="section-card" style="margin-bottom:20px;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.45);">
+        <!-- SideGuy Pick copy (no fake event) -->
+        <div class="section-card" style="margin-bottom:20px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.45);">
           <h3 style="margin-top:0;font-size:18px;color:#7dd3fc;">⭐ SideGuy Pick of the Week</h3>
-          <p style="margin:6px 0 0 0;font-size:15px;font-weight:600;">Sunset Sessions: Oceanfront DJ Night</p>
-          <p style="margin:4px 0;font-size:13px;opacity:0.85;">📍 Fletcher Cove · Solana Beach</p>
-          <p style="margin:6px 0 0 0;font-size:13px;color:#7dd3fc;">Laid-back coastal set • Great crowd • Perfect pre-dinner vibe</p>
+          <p style="margin:6px 0 0 0;font-size:14px;">
+            Each week PJ highlights one show, market, or coastal hang that’s actually worth rearranging a day for.
+          </p>
+          <p style="margin:6px 0 0 0;font-size:13px;opacity:0.9;">
+            Text or email PJ for the current pick and a quick plan around it (rides, pre-game, after spots).
+          </p>
+          <p style="margin:8px 0 0 0;font-size:12px;color:#bfdbfe;">
+            Call / text <strong>(773) 544-1231</strong> • Email <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
+          </p>
         </div>
 
-        <!-- CATEGORY FILTERS -->
-        <div id="event-filters" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
-          <button class="event-filter" data-filter="all">All</button>
-          <button class="event-filter" data-filter="music">Music</button>
-          <button class="event-filter" data-filter="market">Markets</button>
-          <button class="event-filter" data-filter="comedy">Comedy</button>
-          <button class="event-filter" data-filter="wellness">Wellness</button>
-          <button class="event-filter" data-filter="sports">Surf & Sports</button>
+        <div class="event-hub-grid">
+          <!-- Belly Up -->
+          <div class="event-hub-card">
+            <h3>🎸 Belly Up Tavern</h3>
+            <p>Live music in Solana Beach + shows Belly Up presents around the county.</p>
+            <div class="event-tag">Music • Nightlife</div>
+            <a class="event-hub-link" href="https://bellyup.com/calendar/" target="_blank" rel="noopener">
+              <span>View Belly Up calendar</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Encinitas 101 -->
+          <div class="event-hub-card">
+            <h3>🌊 Encinitas 101</h3>
+            <p>Downtown Encinitas: fairs, cruise nights, holiday events and more.</p>
+            <div class="event-tag">Community • Festivals</div>
+            <a class="event-hub-link" href="https://www.encinitas101.com/events" target="_blank" rel="noopener">
+              <span>Downtown event calendar</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Visit Encinitas -->
+          <div class="event-hub-card">
+            <h3>🏄 Visit Encinitas</h3>
+            <p>Tourism-style calendar with concerts, community events, and family-friendly days.</p>
+            <div class="event-tag">Family • Visitors</div>
+            <a class="event-hub-link" href="https://visitencinitasca.com/encinitas-events-calendar/" target="_blank" rel="noopener">
+              <span>Visit Encinitas events</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- City of Solana Beach -->
+          <div class="event-hub-card">
+            <h3>🏙 City of Solana Beach</h3>
+            <p>Official city events: game nights, holiday events, community gatherings, and more.</p>
+            <div class="event-tag">City • Community</div>
+            <a class="event-hub-link" href="https://www.cityofsolanabeach.org/en/events" target="_blank" rel="noopener">
+              <span>City events calendar</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Solana Beach Chamber / Tourism -->
+          <div class="event-hub-card">
+            <h3>☀️ Solana Beach Highlights</h3>
+            <p>Farmers markets, concerts at the Cove, movies on the beach, and seasonal events.</p>
+            <div class="event-tag">Food • Music • Seasonal</div>
+            <a class="event-hub-link" href="https://www.solanabeach.com/events/" target="_blank" rel="noopener">
+              <span>Solana Beach event guide</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Del Mar Fairgrounds -->
+          <div class="event-hub-card">
+            <h3>🎡 Del Mar Fairgrounds</h3>
+            <p>Races, expos, concerts, and of course the San Diego County Fair.</p>
+            <div class="event-tag">Big Shows • Fairgrounds</div>
+            <a class="event-hub-link" href="https://www.delmarfairgrounds.com/events" target="_blank" rel="noopener">
+              <span>Fairgrounds events calendar</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Coast News North County calendar -->
+          <div class="event-hub-card">
+            <h3>🗺 Coast News Calendar</h3>
+            <p>All of North County in one place: music, art, food, sports, family events, and more.</p>
+            <div class="event-tag">All Categories • North County</div>
+            <a class="event-hub-link" href="https://calendar.thecoastnews.com/" target="_blank" rel="noopener">
+              <span>Browse full North County calendar</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Eventbrite Solana Beach -->
+          <div class="event-hub-card">
+            <h3>🎟 Solana Beach on Eventbrite</h3>
+            <p>Workshops, special dinners, pop-ups, and ticketed experiences right in town.</p>
+            <div class="event-tag">Tickets • Pop-ups</div>
+            <a class="event-hub-link" href="https://www.eventbrite.com/d/ca--solana-beach/events/" target="_blank" rel="noopener">
+              <span>Eventbrite · Solana Beach</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Eventbrite Encinitas -->
+          <div class="event-hub-card">
+            <h3>🍹 Encinitas on Eventbrite</h3>
+            <p>Yoga, sound baths, business mixers, tastings, and more coastal experiments.</p>
+            <div class="event-tag">Wellness • Mixers</div>
+            <a class="event-hub-link" href="https://www.eventbrite.com/d/ca--encinitas/events/" target="_blank" rel="noopener">
+              <span>Eventbrite · Encinitas</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
+
+          <!-- Meetup Solana Beach -->
+          <div class="event-hub-card">
+            <h3>👥 Meetup · Solana Beach</h3>
+            <p>Hikes, game nights, social events, networking, and whatever the locals spin up.</p>
+            <div class="event-tag">Social • Outdoors</div>
+            <a class="event-hub-link" href="https://www.meetup.com/find/us--ca--solana-beach/" target="_blank" rel="noopener">
+              <span>See Meetup events</span>
+              <span class="arrow">↗</span>
+            </a>
+          </div>
         </div>
 
-        <div id="event-list" style="display:grid;gap:14px;"></div>
+        <p style="margin-top:16px;font-size:12px;color:rgba(148,163,184,0.9);">
+          All event details, times, and tickets live on the official sites above. SideGuy just gives you the coastal shortcuts.
+        </p>
       </div>
     </div>
   </section>
@@ -1059,7 +1199,7 @@
   <footer class="footer" id="contact">
     <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
     <div>Coastal concierge for tech, transport, and systems that actually fit your life.</div>
-    <div id="version-info">Version 2.2-ocean-events</div>
+    <div id="version-info">Version 2.3-ocean-real-events</div>
   </footer>
 
   <script>
@@ -1108,8 +1248,6 @@
         context: "Regular Season • West Coast window",
         market: "Player Points + Rebounds + Assists",
         pick: "Dereck Lively II — Over 14.5 PRA",
-        notes:
-          "Role expanding, minutes trending up, and fits well in uptempo game scripts.",
         oddsMain: "+112",
         oddsAlt: "+136",
         liq: "$27 (example size)",
@@ -1122,8 +1260,6 @@
         context: "Divisional tilt • Prime-time style game",
         market: "Rushing + Receiving Yards",
         pick: "Versatile RB Over combo line",
-        notes:
-          "Built around volume, checkdowns, and soft zone coverage. Think usage, not highlight plays.",
         oddsMain: "+104",
         oddsAlt: "+128",
         liq: "$31 (example size)",
@@ -1136,8 +1272,6 @@
         context: "Night game • Pitcher-friendly park adjustment",
         market: "Total Bases",
         pick: "Contact hitter Over 1.5 TB",
-        notes:
-          "Matchup-driven, not star-driven. Focus on splits, park factors, and lineup protection.",
         oddsMain: "+120",
         oddsAlt: "+148",
         liq: "$24 (example size)",
@@ -1177,44 +1311,6 @@
       `;
     }
 
-    // --------- EVENTS MOCK DATA ----------
-    const EVENTS = [
-      { category: "music", date: "Thu • This Week", title: "Live Music: Sunset Sessions at Belly Up", location: "Solana Beach", vibe: "Indie, surf rock, local scene" },
-      { category: "market", date: "Fri • This Week", title: "Encinitas Night Market", location: "Downtown Encinitas", vibe: "Food, crafts, DJs, local makers" },
-      { category: "market", date: "Sat Morning", title: "Cardiff Farmers Market", location: "Cardiff Seaside Market Lot", vibe: "Produce, coffee, surf families" },
-      { category: "comedy", date: "Sat Night", title: "Comedy Night @ The Crack Shack", location: "Encinitas", vibe: "Standup, casual drinks, locals" },
-      { category: "wellness", date: "Sun • Sunrise", title: "Del Mar Bluff Yoga", location: "Del Mar", vibe: "Wellness, ocean view, chill" },
-      { category: "sports", date: "Sun Afternoon", title: "Carlsbad Surf Classic (Amateur)", location: "Tamarack Beach", vibe: "Surf competition, food trucks" }
-    ];
-
-    function renderNCEvents(filter = "all"){
-      const list = document.getElementById("event-list");
-      if (!list) return;
-      const filtered = filter === "all" ? EVENTS : EVENTS.filter(e => e.category === filter);
-
-      list.innerHTML = filtered.map(e=>`
-        <div style="border:1px solid rgba(148,163,184,0.35);padding:14px;border-radius:12px;background:rgba(15,23,42,0.9);">
-          <div style="font-size:12px;opacity:0.8;">${e.date}</div>
-          <div style="font-size:15px;font-weight:600;margin-top:4px;">${e.title}</div>
-          <div style="font-size:12px;margin-top:4px;opacity:0.9;">📍 ${e.location}</div>
-          <div style="font-size:12px;margin-top:6px;color:#7dd3fc;">${e.vibe}</div>
-        </div>`).join("");
-    }
-
-    function initEventFilters(){
-      const buttons = document.querySelectorAll(".event-filter");
-      if (!buttons.length) return;
-      buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          buttons.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          renderNCEvents(btn.dataset.filter);
-        });
-      });
-      const allBtn = document.querySelector("[data-filter='all']");
-      if (allBtn) allBtn.classList.add("active");
-    }
-
     // --------- VERSION TIMESTAMP ----------
     function updateVersionStamp() {
       const el = document.getElementById("version-info");
@@ -1228,15 +1324,13 @@
         minute: "2-digit",
         hour12: true
       });
-      el.textContent = `Version 2.2-ocean-events • Updated ${now} PST`;
+      el.textContent = `Version 2.3-ocean-real-events • Updated ${now} PST`;
     }
 
     // --------- INIT ----------
     document.addEventListener("DOMContentLoaded", () => {
       renderTrends();
       renderSportsEdge();
-      initEventFilters();
-      renderNCEvents();
       updateVersionStamp();
     });
   </script>
