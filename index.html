@@ -1,8 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 4.7-verser-cinematic-ocean
-  Hero: "Where code meets the coastline."
-  Mode: Deep Pacific Anime Portal · Summon PJ Orb · Ticket & DFS Edge
+  Version: 4.8-verser-lite-ocean
+  Mode: Anime Ocean Lite · Fast & Cinematic · Summon PJ Portal
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
@@ -71,7 +70,6 @@
   <style>
     :root {
       --bg: #020617;
-      --bg-soft: #020617;
       --card: rgba(15, 23, 42, 0.96);
       --border-subtle: rgba(148, 163, 184, 0.22);
       --accent: #38bdf8;
@@ -82,10 +80,10 @@
       --text-soft: #6b7280;
       --success: #22c55e;
       --warn: #f97316;
-      --shadow-soft: 0 28px 90px rgba(2, 6, 23, 0.98);
+      --shadow-soft: 0 24px 80px rgba(2, 6, 23, 0.98);
       --radius-xl: 1.6rem;
       --radius-full: 999px;
-      --blur-strong: 26px;
+      --blur-strong: 22px;
       --transition-fast: 0.16s ease-out;
       --transition-med: 0.26s ease-out;
       --transition-slow: 0.5s ease-out;
@@ -121,51 +119,24 @@
       z-index: -3;
     }
 
-    /* Light rays + ocean glow overlay */
+    /* Lighter overlay: no crazy animations, just glow */
+
     .ocean-overlay {
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at top, rgba(56, 189, 248, 0.35), transparent 55%),
-        radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.22), transparent 60%),
-        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+        radial-gradient(circle at 10% -10%, rgba(59, 130, 246, 0.34), transparent 55%),
+        radial-gradient(circle at 80% 110%, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98));
       mix-blend-mode: screen;
-      opacity: 0.95;
+      opacity: 0.96;
       pointer-events: none;
       z-index: -2;
-      overflow: hidden;
-    }
-
-    .ocean-overlay::before,
-    .ocean-overlay::after {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        conic-gradient(from 220deg, rgba(56, 189, 248, 0.0), rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0.0));
-      opacity: 0.5;
-      filter: blur(18px);
-      mix-blend-mode: screen;
-      animation: godRays 22s linear infinite;
-      transform-origin: center;
-    }
-
-    .ocean-overlay::after {
-      opacity: 0.4;
-      animation-duration: 34s;
-      animation-direction: reverse;
-    }
-
-    @keyframes godRays {
-      0% { transform: rotate(0deg) translate3d(0, 0, 0); }
-      50% { transform: rotate(45deg) translate3d(0, 0, 0); }
-      100% { transform: rotate(360deg) translate3d(0, 0, 0); }
     }
 
     /* Portal flash + ripple (Verser hooks these) */
 
     .portal-flash .ocean-overlay {
-      animation: portalFlash 0.75s cubic-bezier(0.2, 0.8, 0.3, 1);
+      animation: portalFlash 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
     }
 
     .portal-ripple::before {
@@ -177,20 +148,20 @@
       opacity: 0;
       pointer-events: none;
       z-index: -1;
-      animation: portalRipple 1.4s ease-out;
+      animation: portalRipple 1.2s ease-out;
     }
 
     @keyframes portalFlash {
       0% {
-        opacity: 0.5;
+        opacity: 0.6;
         filter: brightness(1);
       }
       25% {
         opacity: 1;
-        filter: brightness(2.2);
+        filter: brightness(1.8);
       }
       100% {
-        opacity: 0.95;
+        opacity: 0.96;
         filter: brightness(1.05);
       }
     }
@@ -201,20 +172,16 @@
         transform: scale(0.9);
       }
       20% {
-        opacity: 0.55;
+        opacity: 0.5;
         transform: scale(1.05);
       }
       100% {
         opacity: 0;
-        transform: scale(1.25);
+        transform: scale(1.18);
       }
     }
 
-    /* Reduced motion: chill it out */
-
     @media (prefers-reduced-motion: reduce) {
-      .ocean-overlay::before,
-      .ocean-overlay::after,
       .portal-flash .ocean-overlay,
       .portal-ripple::before {
         animation: none !important;
@@ -231,8 +198,8 @@
       flex-direction: column;
       backdrop-filter: blur(var(--blur-strong));
       background:
-        radial-gradient(circle at 10% -10%, rgba(59, 130, 246, 0.32), transparent 55%),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98));
+        radial-gradient(circle at 10% -10%, rgba(37, 99, 235, 0.2), transparent 55%),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 0.98));
     }
 
     header {
@@ -269,10 +236,7 @@
       letter-spacing: 0.08em;
     }
 
-    .brand-meta {
-      display: flex;
-      flex-direction: column;
-    }
+    .brand-meta { display: flex; flex-direction: column; }
 
     .brand-title {
       font-size: 1.1rem;
@@ -328,17 +292,12 @@
       gap: clamp(1.75rem, 3.2vw, 2.8rem);
       align-items: center;
       padding-top: 1.25rem;
-      padding-bottom: 2.75rem;
+      padding-bottom: 2.5rem;
     }
 
     @media (max-width: 900px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      header { flex-direction: column; align-items: flex-start; }
+      .hero { grid-template-columns: minmax(0, 1fr); }
     }
 
     .hero-main {
@@ -385,8 +344,8 @@
     }
 
     .hero-title {
-      font-size: clamp(2.5rem, 3.6vw, 3.1rem);
-      line-height: 1.02;
+      font-size: clamp(2.4rem, 3.4vw, 3rem);
+      line-height: 1.03;
       letter-spacing: 0.03em;
       text-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
     }
@@ -440,7 +399,7 @@
     /* Summon PJ Orb */
 
     .hero-action {
-      margin-top: 1.35rem;
+      margin-top: 1.3rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -456,8 +415,8 @@
 
     .summon-orb {
       position: relative;
-      width: 118px;
-      height: 118px;
+      width: 112px;
+      height: 112px;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.6);
       background:
@@ -466,8 +425,8 @@
         radial-gradient(circle at 50% 55%, #0f172a, #020617 72%);
       box-shadow:
         0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 0 80px rgba(56, 189, 248, 0.98),
-        0 22px 55px rgba(15, 23, 42, 1);
+        0 0 80px rgba(56, 189, 248, 0.9),
+        0 20px 55px rgba(15, 23, 42, 1);
       color: #020617;
       cursor: pointer;
       display: flex;
@@ -499,43 +458,30 @@
       background:
         conic-gradient(from 0deg, rgba(56, 189, 248, 0.9), rgba(45, 212, 191, 0.3), rgba(56, 189, 248, 1));
       mix-blend-mode: screen;
-      opacity: 0.38;
+      opacity: 0.32;
       filter: blur(7px);
       pointer-events: none;
-      animation: orbPulse 6s ease-in-out infinite;
     }
 
     .summon-orb-ring {
       position: absolute;
-      inset: -16px;
+      inset: -14px;
       border-radius: inherit;
-      border: 1px dashed rgba(125, 211, 252, 0.7);
-      opacity: 0.95;
+      border: 1px dashed rgba(125, 211, 252, 0.6);
+      opacity: 0.9;
       filter: blur(0.3px);
       pointer-events: none;
-      animation: orbOrbit 10s linear infinite;
     }
 
     .summon-orb-wrap::before {
       content: "";
       position: absolute;
-      inset: -30px;
+      inset: -28px;
       border-radius: 999px;
-      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.42), transparent 65%);
+      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.4), transparent 65%);
       opacity: 0.8;
       filter: blur(9px);
       pointer-events: none;
-    }
-
-    @keyframes orbPulse {
-      0%, 100% { opacity: 0.28; transform: scale(1); }
-      40% { opacity: 0.5; transform: scale(1.06); }
-      60% { opacity: 0.34; transform: scale(0.98); }
-    }
-
-    @keyframes orbOrbit {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
 
     .summon-orb:hover,
@@ -543,14 +489,10 @@
       transform: translateY(-2px) scale(1.05);
       box-shadow:
         0 0 0 1px rgba(56, 189, 248, 1),
-        0 0 110px rgba(56, 189, 248, 1),
-        0 28px 80px rgba(15, 23, 42, 1);
+        0 0 100px rgba(56, 189, 248, 1),
+        0 26px 75px rgba(15, 23, 42, 1);
       border-color: rgba(56, 189, 248, 1);
       outline: none;
-      background:
-        radial-gradient(circle at 18% 0%, rgba(248, 250, 252, 1), transparent 60%),
-        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 1), transparent 60%),
-        radial-gradient(circle at 50% 60%, #020617, #020617 76%);
     }
 
     .summon-orb:active {
@@ -558,7 +500,7 @@
       box-shadow:
         0 0 0 1px rgba(56, 189, 248, 0.9),
         0 0 70px rgba(56, 189, 248, 0.9),
-        0 16px 45px rgba(15, 23, 42, 1);
+        0 14px 42px rgba(15, 23, 42, 1);
     }
 
     .summon-caption {
@@ -573,8 +515,6 @@
       color: var(--accent-strong);
       font-weight: 500;
     }
-
-    /* Secondary CTA */
 
     .hero-secondary {
       display: inline-flex;
@@ -618,28 +558,13 @@
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
       background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 60%),
         radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
       box-shadow: var(--shadow-soft);
       font-size: 0.83rem;
       color: var(--text-muted);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(18px);
       overflow: hidden;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 120% -20%, rgba(56, 189, 248, 0.22), transparent 60%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--transition-slow);
-    }
-
-    .card:hover::after {
-      opacity: 1;
     }
 
     .card-header {
@@ -716,8 +641,6 @@
       font-size: 0.78rem;
       color: var(--text-soft);
     }
-
-    /* Ticket card */
 
     .ticket-highlight {
       display: inline-flex;
@@ -858,8 +781,6 @@
       font-size: 0.8rem;
     }
 
-    /* DFS Lead Magnet */
-
     .lead-magnet {
       margin-top: 0.6rem;
       padding: 0.55rem 0.7rem;
@@ -914,8 +835,6 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
-
-    /* Newsletter / Portal Invites */
 
     .newsletter {
       margin-top: 0.55rem;
@@ -985,8 +904,6 @@
         0 12px 30px rgba(15, 23, 42, 1);
     }
 
-    /* Footer */
-
     footer {
       margin-top: 2.2rem;
       padding-top: 1.4rem;
@@ -1037,8 +954,6 @@
       font-size: 0.75rem;
       color: var(--text-soft);
     }
-
-    /* Global focus outline */
 
     :where(a, button, input, [tabindex]):focus-visible {
       outline: 2px solid rgba(56, 189, 248, 0.98);
@@ -1135,7 +1050,6 @@
         </div>
 
         <aside class="hero-right" aria-label="What PJ handles">
-          <!-- Core concierge card -->
           <div class="card">
             <div class="card-header">
               <div>
@@ -1165,7 +1079,6 @@
             </ul>
           </div>
 
-          <!-- Tickets card -->
           <div class="card" id="tickets">
             <div class="card-header">
               <div>
@@ -1204,7 +1117,6 @@
             </div>
           </div>
 
-          <!-- DFS Edge card -->
           <div class="card" id="dfs">
             <div class="card-header">
               <div>
@@ -1236,7 +1148,6 @@
         </aside>
       </section>
 
-      <!-- Services + DFS Lead Magnet -->
       <section class="sections" id="services" aria-label="Services and lead offers">
         <article class="section">
           <div class="section-header">
@@ -1357,7 +1268,7 @@
         <span>Best experienced with sound off, focus on.</span>
       </div>
       <div class="footer-links">
-        <span class="version-tag" data-version>v4.7-verser-cinematic-ocean</span>
+        <span class="version-tag" data-version>v4.8-verser-lite-ocean</span>
         <span aria-hidden="true">·</span>
         <a href="mailto:pj@sideguysolutions.com?subject=SideGuy%20Solutions%20Collab">
           Collabs & weird projects
@@ -1371,12 +1282,12 @@
 
   <script>
     // ============================
-    // Verser Ocean Engine · Cinematic Mode
+    // Verser Ocean Engine · Lite Anime
     // ============================
     const Verser = {
       time: 0,
-      waveAmp: 1.05,
-      targetWaveAmp: 1.05,
+      waveAmp: 1.0,
+      targetWaveAmp: 1.0,
       flashIntensity: 0.0,
       lastT: 0,
       update(tsMs) {
@@ -1384,42 +1295,30 @@
         const dt = this.lastT ? (t - this.lastT) : 0.016;
         this.lastT = t;
         this.time = t;
-
-        // Ease wave amplitude toward target
         this.waveAmp += (this.targetWaveAmp - this.waveAmp) * 0.08;
-
-        // Decay flash intensity
-        this.flashIntensity += (0 - this.flashIntensity) * 0.12;
-
+        this.flashIntensity += (0 - this.flashIntensity) * 0.15;
         return dt;
       },
       boost() {
-        this.targetWaveAmp = 2.15;
+        this.targetWaveAmp = 1.65;
         this.flashIntensity = 1.0;
-
         document.body.classList.add("portal-flash", "portal-ripple");
-
         setTimeout(() => {
-          this.targetWaveAmp = 1.05;
+          this.targetWaveAmp = 1.0;
           document.body.classList.remove("portal-flash");
-        }, 650);
-
+        }, 520);
         setTimeout(() => {
           document.body.classList.remove("portal-ripple");
-        }, 1500);
+        }, 1300);
       }
     };
 
-    // ============================
-    // Ocean / Three.js Scene
-    // ============================
     let scene, camera, renderer, oceanMesh, particleSystem, oceanUniforms;
+    let webglEnabled = true;
 
     const oceanVertexShader = `
       varying vec2 vUv;
-      varying vec3 vPos;
-      varying float vWaveHeight;
-
+      varying float vHeight;
       uniform float uTime;
       uniform float uWaveAmp;
 
@@ -1429,29 +1328,20 @@
 
         float t = uTime;
 
-        // Layer 1: deep swell (slow, broad)
-        float deep = (
-          sin(pos.x * 0.25 + t * 0.28) +
-          cos(pos.y * 0.18 - t * 0.22) +
-          sin((pos.x + pos.y) * 0.16 + t * 0.17)
+        // 2-layer waves (simpler than full cinematic)
+        float swell = (
+          sin(pos.x * 0.28 + t * 0.3) +
+          cos(pos.y * 0.24 - t * 0.25)
         ) * 0.22;
 
-        // Layer 2: surface waves (medium)
-        float surface = (
-          sin(pos.x * 0.9 + t * 0.9) +
-          cos(pos.y * 1.1 - t * 0.85)
-        ) * 0.085;
-
-        // Layer 3: micro ripples (fast detail)
         float ripples = (
-          sin(pos.x * 3.2 + t * 2.2) *
-          cos(pos.y * 3.7 - t * 2.0)
-        ) * 0.035;
+          sin(pos.x * 1.4 + t * 1.4) *
+          cos(pos.y * 1.6 - t * 1.3)
+        ) * 0.045;
 
-        float height = (deep + surface + ripples) * uWaveAmp;
-        pos.z += height;
-        vWaveHeight = height;
-        vPos = pos;
+        float h = (swell + ripples) * uWaveAmp;
+        pos.z += h;
+        vHeight = h;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
@@ -1461,53 +1351,33 @@
       precision highp float;
 
       varying vec2 vUv;
-      varying vec3 vPos;
-      varying float vWaveHeight;
+      varying float vHeight;
 
       uniform float uTime;
       uniform float uWaveAmp;
       uniform float uFlashIntensity;
       uniform vec3 uColorDeep;
-      uniform vec3 uColorMid;
       uniform vec3 uColorShallow;
 
       void main() {
-        float depth = clamp(vPos.z * 1.6 + 0.5, 0.0, 1.0);
+        float depth = clamp(vHeight * 1.5 + 0.5, 0.0, 1.0);
 
-        // Base gradient: deep -> mid -> shallow
-        vec3 base = mix(uColorDeep, uColorMid, depth);
-        base = mix(base, uColorShallow, smoothstep(0.6, 1.0, depth));
+        vec3 base = mix(uColorDeep, uColorShallow, depth);
 
-        // Vertical light shafts / god rays
-        float rays =
-          sin((vUv.y + uTime * 0.05) * 16.0) * 0.5 +
-          cos((vUv.y * 1.3 - uTime * 0.04) * 11.0) * 0.5;
-        rays = smoothstep(0.2, 0.9, rays);
+        float rays = sin((vUv.y + uTime * 0.04) * 12.0);
+        rays = smoothstep(-0.1, 0.6, rays);
+        vec3 rayColor = vec3(0.15, 0.45, 0.9) * rays * 0.35;
 
-        float centerDist = distance(vUv, vec2(0.5, 0.48));
-        float portalGlow = smoothstep(0.7, 0.0, centerDist);
+        float foam = smoothstep(0.18, 0.6, vHeight * uWaveAmp + 0.2);
+        foam *= (0.4 + 0.6 * sin(vUv.x * 10.0 + uTime * 1.6));
+        vec3 foamColor = vec3(0.8, 0.95, 1.0) * foam * 0.18;
 
-        vec3 lightColor = vec3(0.15, 0.45, 0.9);
-        vec3 raysColor = lightColor * (0.18 + 0.45 * rays) * (0.4 + 0.6 * portalGlow);
-
-        // Foam along peaks
-        float foam =
-          smoothstep(0.18, 0.62, vWaveHeight * uWaveAmp + 0.2) *
-          (0.5 + 0.5 * sin(vPos.x * 3.0 + uTime * 1.8)) *
-          (0.5 + 0.5 * cos(vPos.y * 4.0 - uTime * 1.9));
-        vec3 foamColor = vec3(0.8, 0.95, 1.0) * foam * 0.25;
-
-        // Flash boost for portal impact
         float flash = uFlashIntensity;
-        vec3 flashTint = vec3(0.35, 0.8, 1.0) * flash * 0.85;
+        vec3 flashTint = vec3(0.32, 0.8, 1.0) * flash * 0.7;
 
-        vec3 color = base;
-        color += raysColor * 0.9;
-        color += foamColor;
-        color += flashTint;
+        vec3 color = base + rayColor + foamColor + flashTint;
 
-        // Vignette
-        float vignette = smoothstep(1.0, 0.18, length(vUv - 0.5));
+        float vignette = smoothstep(1.0, 0.2, length(vUv - 0.5));
         color *= vignette;
 
         gl_FragColor = vec4(color, 1.0);
@@ -1515,54 +1385,40 @@
     `;
 
     function createParticles() {
-      const count = 1500;
+      const count = 320; // LIGHTER than previous builds
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(count * 3);
-      const speeds = new Float32Array(count);
 
       for (let i = 0; i < count; i++) {
-        positions[i * 3 + 0] = (Math.random() - 0.5) * 5.5;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 5.5;
+        positions[i * 3 + 0] = (Math.random() - 0.5) * 5.2;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 5.2;
         positions[i * 3 + 2] = -0.4 + Math.random() * 0.1;
-
-        speeds[i] = 0.2 + Math.random() * 0.8;
       }
 
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute("speed", new THREE.BufferAttribute(speeds, 1));
 
       const material = new THREE.PointsMaterial({
         color: 0x4adeff,
-        size: 0.03,
+        size: 0.035,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.85,
         depthWrite: false
       });
 
       particleSystem = new THREE.Points(geometry, material);
-      particleSystem.position.y = -0.5;
+      particleSystem.position.y = -0.55;
       scene.add(particleSystem);
     }
 
     function updateParticles(dt) {
       if (!particleSystem) return;
       const positions = particleSystem.geometry.attributes.position;
-      const speeds = particleSystem.geometry.attributes.speed;
 
       for (let i = 0; i < positions.count; i++) {
         let y = positions.getY(i);
-        let x = positions.getX(i);
-        const speed = speeds.getX(i);
-
-        y += dt * 0.08 * speed;
-        x += Math.sin(Verser.time * 0.3 + i * 0.4) * 0.002;
-
-        if (y > 2.5) {
-          y = -2.5;
-        }
-
+        y += dt * 0.08;
+        if (y > 2.6) y = -2.6;
         positions.setY(i, y);
-        positions.setX(i, x);
       }
 
       positions.needsUpdate = true;
@@ -1572,15 +1428,30 @@
       const canvas = document.getElementById("ocean-canvas");
       if (!canvas || !window.THREE) return;
 
+      // mobile / low-power fallback: skip WebGL
+      const lowPower =
+        window.matchMedia &&
+        window.matchMedia("(max-width: 640px)").matches;
+
+      const reduceMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (lowPower || reduceMotion) {
+        webglEnabled = false;
+        canvas.style.display = "none";
+        return;
+      }
+
       renderer = new THREE.WebGLRenderer({
         canvas,
         antialias: true
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.9));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
       renderer.setSize(window.innerWidth, window.innerHeight);
 
       scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x020617, 0.78);
+      scene.fog = new THREE.FogExp2(0x020617, 0.7);
 
       camera = new THREE.PerspectiveCamera(
         55,
@@ -1588,17 +1459,17 @@
         0.1,
         100
       );
-      camera.position.set(0, 1.0, 1.5);
+      camera.position.set(0, 1.0, 1.6);
       camera.lookAt(0, 0, 0);
 
-      const geometry = new THREE.PlaneGeometry(5.8, 5.8, 260, 260);
+      // LIGHTER geometry: 120x120 (instead of 260x260)
+      const geometry = new THREE.PlaneGeometry(5.6, 5.6, 120, 120);
 
       oceanUniforms = {
         uTime: { value: 0 },
         uWaveAmp: { value: Verser.waveAmp },
         uFlashIntensity: { value: Verser.flashIntensity },
         uColorDeep: { value: new THREE.Color(0x020617) },
-        uColorMid: { value: new THREE.Color(0x0369a1) },
         uColorShallow: { value: new THREE.Color(0x0ea5e9) }
       };
 
@@ -1620,7 +1491,7 @@
     }
 
     function onWindowResize() {
-      if (!renderer || !camera) return;
+      if (!renderer || !camera || !webglEnabled) return;
       const w = window.innerWidth;
       const h = window.innerHeight;
       camera.aspect = w / h;
@@ -1631,28 +1502,23 @@
     function renderLoop(ts) {
       requestAnimationFrame(renderLoop);
 
-      const dt = Verser.update(ts);
+      if (!webglEnabled || !renderer || !scene || !camera || !oceanUniforms) return;
 
-      if (!renderer || !scene || !camera || !oceanUniforms) return;
+      const dt = Verser.update(ts);
 
       oceanUniforms.uTime.value = Verser.time;
       oceanUniforms.uWaveAmp.value = Verser.waveAmp;
       oceanUniforms.uFlashIntensity.value = Verser.flashIntensity;
 
-      // Camera float + drift
       const t = Verser.time;
-      camera.position.x = Math.sin(t * 0.18) * 0.42;
-      camera.position.z = 1.5 + Math.sin(t * 0.12) * 0.06;
-      camera.position.y = 1.0 + Math.sin(t * 0.22) * 0.05;
+      camera.position.x = Math.sin(t * 0.18) * 0.38;
+      camera.position.z = 1.6 + Math.sin(t * 0.1) * 0.05;
+      camera.position.y = 1.0 + Math.sin(t * 0.18) * 0.04;
       camera.lookAt(0, 0, 0);
 
       updateParticles(dt);
       renderer.render(scene, camera);
     }
-
-    // ============================
-    // UI wiring (Summon PJ, tracking, version)
-    // ============================
 
     function trackEvent(name, payload) {
       window.dataLayer = window.dataLayer || [];
@@ -1666,7 +1532,7 @@
       const el = document.querySelector("[data-version]");
       if (!el) return;
       const year = new Date().getFullYear();
-      el.textContent = "v4.7-verser-cinematic-ocean · " + year;
+      el.textContent = "v4.8-verser-lite-ocean · " + year;
     }
 
     function wireSummonPJ() {
@@ -1675,17 +1541,12 @@
 
       summonBtn.addEventListener("click", (e) => {
         e.preventDefault();
-
-        // Ocean + portal impact
         Verser.boost();
-        trackEvent("pj_summon_tap", {
-          component: "hero_orb"
-        });
+        trackEvent("pj_summon_tap", { component: "hero_orb" });
 
         const mailto = summonBtn.getAttribute("data-mailto");
         if (!mailto) return;
 
-        // Tap → portal animation → THEN email
         setTimeout(() => {
           window.location.href = mailto;
         }, 420);
@@ -1707,11 +1568,12 @@
       wireSummonPJ();
       wireSimpleTracking();
 
-      // Init ocean a hair after content so it doesn't block first paint
       setTimeout(() => {
         initOcean();
-        requestAnimationFrame(renderLoop);
-      }, 150);
+        if (webglEnabled) {
+          requestAnimationFrame(renderLoop);
+        }
+      }, 140);
     });
   </script>
 </body>
