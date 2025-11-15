@@ -551,7 +551,83 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 6px;
-    }
+    }<!-- BLOCKCHAIN SAVINGS CALCULATOR -->
+<section class="section section-alt" id="blockchain-savings">
+  <div class="container">
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title-row">
+          <span class="icon">💸</span>
+          <span>Blockchain Savings Calculator</span>
+        </div>
+        <div class="section-subtext">
+          See how much you save using stablecoins or Solana instead of Stripe or credit cards.
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;color:#cbd5f5;">
+        
+        <label>Payment Amount ($)
+          <input id="payAmount" type="number" placeholder="5000" 
+            style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
+        </label>
+
+        <label>Traditional Processor (Stripe, CC)
+          <select id="fiatFee" 
+            style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
+            <option value="0.029">Stripe (2.9% + $0.30)</option>
+            <option value="0.035">Square (3.5% + $0.15)</option>
+            <option value="0.03">Generic Credit Card (3%)</option>
+          </select>
+        </label>
+
+        <label>Blockchain Network
+          <select id="chain" 
+            style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
+            <option value="0.00025">Solana (avg $0.00025)</option>
+            <option value="0.02">Polygon / L2 (avg $0.01–$0.02)</option>
+            <option value="0.15">Ethereum (avg $0.15 with L2 routing)</option>
+          </select>
+        </label>
+
+        <button onclick="calculateSavings()" 
+          style="padding:10px 16px;border-radius:999px;background:#22d3ee;border:none;color:#020617;font-weight:700;cursor:pointer;">
+          Calculate Savings
+        </button>
+
+        <div id="savingsResult" 
+          style="margin-top:12px;font-size:15px;color:#e0f2fe;font-weight:600;">
+          <!-- Results show here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function calculateSavings() {
+  const amount = parseFloat(document.getElementById("payAmount").value || 0);
+  const fiatPercent = parseFloat(document.getElementById("fiatFee").value);
+  const chainFee = parseFloat(document.getElementById("chain").value);
+
+  if (amount <= 0) {
+    document.getElementById("savingsResult").innerHTML =
+      "Enter a valid amount.";
+    return;
+  }
+
+  const fiatCost = amount * fiatPercent + 0.30;
+  const blockchainCost = chainFee;
+
+  const savings = fiatCost - blockchainCost;
+
+  document.getElementById("savingsResult").innerHTML = `
+    💡 <strong>Savings: $${savings.toFixed(2)}</strong><br>
+    Traditional cost: $${fiatCost.toFixed(2)}<br>
+    Blockchain cost: $${blockchainCost.toFixed(4)}
+  `;
+}
+</script>
  
     .trend-pill {
       padding: 8px 12px;
