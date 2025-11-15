@@ -3,424 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description" content="SideGuy Solutions — coastal concierge for apps, AI, tickets, DFS edges, and Web3 payments in North County San Diego. Tap to summon PJ through a living Pacific portal." />
+  <title>SideGuy Solutions – Where Code Meets the Coastline</title>
+
   <style>
-    :root {
-      --bg: #020617;
-      --card: rgba(15, 23, 42, 0.7);
-      --text: #e5f2ff;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.3);
-      --radius-lg: 24px;
-      --radius-xl: 32px;
-      --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.9);
-      --transition-fast: 200ms ease-out;
-      --transition-med: 300ms ease-out;
-      --max-width: 1200px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #000;
-      color: var(--text);
-      overflow-x: hidden;
-      min-height: 100vh;
-      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #020617;
+      font-family: system-ui, sans-serif;
+      color: white;
     }
-    /* OCEAN CONTAINER */
-    #ocean-container {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(180deg, #0a1a3a 0%, #001022 100%);
-    }
+
     #ocean-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    /* GLASSY PAGE OVERLAY */
-    .page-overlay {
-      position: relative;
-      z-index: 1;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 2rem;
-      backdrop-filter: blur(8px);
-      background: var(--card);
-      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    }
-    /* PORTAL EFFECTS */
-    body.portal-flash::before {
-      content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.6), transparent 50%);
-      animation: portalFlash 800ms ease-out;
-      z-index: 0;
-      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      z-index: -2;
     }
-    @keyframes portalFlash {
-      0% { opacity: 0; }
-      30% { opacity: 1; }
-      100% { opacity: 0; }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 32px;
+      text-align: center;
+      backdrop-filter: blur(6px);
     }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+
+    p {
+      max-width: 420px;
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 22px;
+    }
+
+    /* Floating Orb */
+    #orb {
+      width: 90px;
+      height: 90px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 50%, #0f172a 100%);
+      box-shadow: 0 0 22px rgba(56,189,248,0.85), 0 0 50px rgba(15,23,42,0.9);
+      animation: float 4s ease-in-out infinite;
+      cursor: pointer;
+      position: relative;
+    }
+
+    #orb::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.5);
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Portal ripple */
     body.portal-ripple::before {
       content: "";
       position: fixed;
-      inset: 0;
-      border: 2px solid var(--accent-soft);
-      border-radius: 50%;
-      width: 100vmax;
-      height: 100vmax;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) scale(0.5);
-      animation: portalRipple 1.8s ease-out;
-      z-index: 0;
+      width: 10vmax;
+      height: 10vmax;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(56,189,248,0.5);
+      animation: ripple 1.4s ease-out;
       pointer-events: none;
     }
-    @keyframes portalRipple {
-      0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.5); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
-    }
-    /* HEADER */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-    .logo-orb {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 40%, #0f172a 75%);
-      box-shadow: 0 0 20px var(--accent), 0 0 40px rgba(0, 0, 0, 0.8);
-      animation: pulse 4s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.1); opacity: 1; }
-    }
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      transition: color var(--transition-fast);
-    }
-    nav a:hover {
-      color: var(--accent);
-    }
-    /* HERO */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.6fr 1.2fr;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 4rem;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      line-height: 1.2;
-      margin: 0 0 1rem;
-      background: linear-gradient(45deg, var(--text), var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero aside {
-      background: var(--card);
-      border: 1px solid var(--accent-soft);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(10px);
-    }
-    /* BUTTONS */
-    #summon-orb {
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      border: 1px solid var(--accent);
-      background: radial-gradient(circle at 20% 20%, #e0f2fe, #38bdf8 40%, #0f172a);
-      color: #0b1220;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform var(--transition-fast), box-shadow var(--transition-med);
-    }
-    #summon-orb:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px var(--accent);
-    }
-    /* SERVICES */
-    #services article {
-      background: var(--card);
-      padding: 1.5rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--accent-soft);
-      transition: transform var(--transition-med);
-    }
-    #services article:hover {
-      transform: translateY(-5px);
-    }
-    /* PARALLAX */
-    section {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1s ease-out forwards;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
+
+    @keyframes ripple {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(6); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
-  <!-- OCEAN BACKGROUND -->
-  <div id="ocean-container">
-    <canvas id="ocean-canvas"></canvas>
-  </div>
-  <!-- PAGE OVERLAY -->
-  <div class="page-overlay">
-    <header class="site-header">
-      <div class="logo-lockup">
-        <div class="logo-orb"></div>
-        <div>
-          <div style="font-weight: 600;">SideGuy Solutions</div>
-          <div style="font-size: 0.8rem; color: var(--muted);">Where code meets the coastline</div>
-        </div>
-      </div>
-      <nav>
-        <span>Portal Live · North County</span>
-        <a href="#services">Services</a>
-        <a href="#sports-edge">DFS Edge</a>
-        <a href="#contact">Summon PJ</a>
-      </nav>
-    </header>
-    <section class="hero" id="top">
-      <div>
-        <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; color: var(--accent-soft);">
-          North County · Tech · Tickets · DFS · Web3
-        </p>
-        <h1>Where code meets the coastline.</h1>
-        <p style="color: var(--muted); max-width: 35rem;">
-          SideGuy Solutions is your coastal concierge for apps, AI, ticketing, sports edges, and Web3 payments — from Solana Beach to Encinitas.
-        </p>
-        <div style="display: flex; gap: 1rem; margin-top: 1.2rem;">
-          <button id="summon-orb">Tap to Summon PJ</button>
-          <a href="#services" style="padding: 0.6rem 1.1rem; border-radius: 999px; border: 1px solid var(--muted); background: var(--card); color: var(--text); text-decoration: none;">
-            See what we build ↗
-          </a>
-        </div>
-      </div>
-      <aside>
-        <h3 style="text-transform: uppercase; font-size: 0.8rem; color: var(--accent-soft); margin-bottom: 0.6rem;">
-          This week with PJ
-        </h3>
-        <h2 style="margin: 0 0 1rem; font-size: 1.2rem;">
-          Coastal concierge for your real-life upgrades.
-        </h2>
-        <ul style="color: var(--muted); padding-left: 1rem;">
-          <li>Launch or rescue your software builds.</li>
-          <li>Fix ticket flows that leak cash.</li>
-          <li>Turn sportsbook promos into a disciplined system.</li>
-          <li>Let customers pay in USDC without drama.</li>
-        </ul>
-      </aside>
-    </section>
-    <section id="services">
-      <h2 style="font-size: 1.8rem; margin-bottom: 0.4rem;">What the portal handles</h2>
-      <p style="color: var(--muted); max-width: 36rem;">
-        Tech, tickets, sports edges & Web3 — in one inbox.
-      </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 1.4rem;">
-        <article>
-          <h3>AI & App Development</h3>
-          <p style="color: var(--muted);">From napkin sketch to shipped product.</p>
-        </article>
-        <article>
-          <h3>Tickets & Events</h3>
-          <p style="color: var(--muted);">Cash-flow safe ticket flows & seat logic.</p>
-        </article>
-        <article>
-          <h3>Sports Edge & DFS</h3>
-          <p style="color: var(--muted);">Promo optimization & disciplined hedging.</p>
-        </article>
-        <article>
-          <h3>Web3 & Stablecoin Rails</h3>
-          <p style="color: var(--muted);">Crypto that behaves like a grown-up.</p>
-        </article>
-      </div>
-    </section>
-    <section id="sports-edge">
-      <h2 style="font-size: 1.8rem; margin-bottom: 0.4rem;">DFS Edge — Free Starter Guide</h2>
-      <p style="color: var(--muted); max-width: 36rem;">
-        PJ’s “edges only” system for promos, DFS, and risk caps.
-      </p>
-      <form onsubmit="event.preventDefault(); alert('Backend coming soon — email PJ through the orb.')">
-        <input type="email" placeholder="Your best email…" required style="padding: 0.6rem 0.8rem; border-radius: 999px; border: 1px solid var(--muted); background: var(--card); color: var(--text); width: 60%; max-width: 260px;">
-        <button type="submit" style="padding: 0.6rem 1.2rem; border-radius: 999px; border: none; background: #22c55e; color: #022c22; font-weight: 600; margin-left: 0.6rem; cursor: pointer;">
-          Get the PDF
-        </button>
-      </form>
-    </section>
-    <section id="contact">
-      <h2 style="font-size: 1.8rem; margin-bottom: 0.4rem;">Summon PJ</h2>
-      <p style="color: var(--muted); max-width: 35rem;">
-        The fastest path is always the orb — but email works too.
-      </p>
-      <a href="mailto:pj@sideguysolutions.com" style="display: inline-block; padding: 0.7rem 1.2rem; background: var(--card); border-radius: 999px; border: 1px solid var(--accent); color: var(--text); text-decoration: none; margin-top: 0.8rem;">
-        Email PJ directly ✉️
-      </a>
-    </section>
-    <footer style="margin-top: 4rem; color: var(--muted); font-size: 0.8rem; padding-bottom: 4rem;">
-      © <span id="footer-year"></span> SideGuy Solutions — v5 Inline Ocean
-    </footer>
-  </div>
-  <!-- OCEAN AUDIO -->
-  <audio id="ocean-audio" src="https://cdn.pixabay.com/download/audio/2022/03/09/audio_252b4a6e82.mp3?filename=waves-crashing-close-ambient-40156.mp3" preload="auto" loop></audio>
-  <!-- MINIFIED THREE.JS SUBSET -->
-  <script>
-    class xR{constructor(t){this.domElement=t.canvas;this.context=t.canvas.getContext("webgl",{antialias:t.antialias});this.setSize(t.w,t.h);}setPixelRatio(){}setSize(w,h){this.domElement.width=w;this.domElement.height=h;}render(s,c){const gl=this.context;gl.viewport(0,0,this.domElement.width,this.domElement.height);gl.clearColor(0,0,0,1);gl.clear(gl.COLOR_BUFFER_BIT);}}
-    class xS{constructor(){this.children=[];}add(o){this.children.push(o);}}
-    class xC{constructor(f,a,n,r){this.fov=f;this.aspect=a;this.near=n;this.far=r;this.position={x:0,y:0,z:0};}lookAt(){}updateProjectionMatrix(){}}
-    class xG{constructor(w,h,w2,h2){this.w=w;this.h=h;}}
-    class xM{constructor(o){this.uniforms=o.uniforms;this.vertexShader=o.vertexShader;this.fragmentShader=o.fragmentShader;}}
-    class xMesh{constructor(g,m){this.geometry=g;this.material=m;this.rotation={x:0};this.position={x:0,y:0,z:0};}}
-    window.THREE={WebGLRenderer:xR,Scene:xS,PerspectiveCamera:xC,PlaneGeometry:xG,ShaderMaterial:xM,Mesh:xMesh};
-  </script>
-  <!-- CINEMATIC OCEAN SHADER -->
-  <script>
-    let oceanRenderer, oceanScene, oceanCamera, oceanMaterial;
-    let targetWaveAmp = 0.2;
-    let mousePos = { x: 0, y: 0 };
-    function initOcean() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) return;
-      oceanRenderer = new THREE.WebGLRenderer({ canvas, antialias: true, w: window.innerWidth, h: window.innerHeight });
-      oceanScene = new THREE.Scene();
-      oceanCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-      oceanCamera.position.set(0, 1.5, 3);
-      const geometry = new THREE.PlaneGeometry(10, 10, 256, 256);
-      const uniforms = {
-        uTime: { value: 0 },
-        uWaveAmp: { value: targetWaveAmp },
-        uMouse: { value: { x: 0, y: 0 } },
-        uResolution: { value: { x: window.innerWidth, y: window.innerHeight } }
-      };
-      const vertexShader = `
-        uniform float uTime;
-        uniform float uWaveAmp;
-        uniform vec2 uMouse;
-        varying vec2 vUv;
-        varying vec3 vNormal;
-        void main() {
-          vUv = uv;
-          vec3 pos = position;
-          float dist = length(pos.xy - uMouse);
-          float ripple = exp(-dist * 2.0) * sin(dist * 10.0 - uTime * 5.0) * 0.05;
-          float wave1 = sin(pos.x * 2.0 + uTime * 1.5) * uWaveAmp;
-          float wave2 = sin(pos.y * 1.5 - uTime * 1.2) * uWaveAmp * 0.7;
-          float wave3 = sin((pos.x + pos.y) * 3.0 + uTime * 0.8) * uWaveAmp * 0.4;
-          pos.z += wave1 + wave2 + wave3 + ripple;
-          vNormal = normalize(vec3(-wave1, -wave2, 1.0));
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        }
-      `;
-      const fragmentShader = `
-        uniform float uTime;
-        uniform vec2 uResolution;
-        varying vec2 vUv;
-        varying vec3 vNormal;
-        void main() {
-          vec3 deep = vec3(0.01, 0.1, 0.2);
-          vec3 mid = vec3(0.0, 0.3, 0.5);
-          vec3 shallow = vec3(0.15, 0.6, 0.7);
-          vec3 foam = vec3(0.95, 0.98, 1.0);
-          float depth = vUv.y + sin(uTime * 0.1) * 0.05;
-          vec3 col = mix(deep, mid, smoothstep(0.2, 0.7, depth));
-          col = mix(col, shallow, smoothstep(0.5, 1.0, depth));
-          float foamFactor = smoothstep(0.7, 0.95, depth + sin(vUv.x * 10.0 + uTime * 1.0) * 0.05);
-          col = mix(col, foam, foamFactor * 0.7);
-          vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
-          float diffuse = max(dot(vNormal, lightDir), 0.0);
-          col += vec3(0.2, 0.3, 0.4) * diffuse;
-          col += vec3(0.05, 0.1, 0.15) * pow(diffuse, 10.0); // Specular highlight
-          gl_FragColor = vec4(col, 1.0);
-        }
-      `;
-      oceanMaterial = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader });
-      const plane = new THREE.Mesh(geometry, oceanMaterial);
-      plane.rotation.x = -Math.PI / 2.1;
-      plane.position.set(0, -0.3, 0);
-      oceanScene.add(plane);
-      window.addEventListener("resize", onResize);
-      window.addEventListener("mousemove", (e) => {
-        mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;
-        mousePos.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      });
-      window.addEventListener("scroll", () => {
-        targetWaveAmp = 0.2 + window.scrollY / 2000;
-      });
-      requestAnimationFrame(animateOcean);
+
+<canvas id="ocean-canvas"></canvas>
+
+<div class="overlay">
+  <h1>SideGuy Solutions</h1>
+  <p>Where code meets the coastline. Tap the orb to summon PJ.</p>
+  <div id="orb"></div>
+</div>
+
+<script>
+/* ------------------------------------------
+   INLINE THREE.JS — CUSTOM BUILD FOR OCEAN
+--------------------------------------------- */
+
+// Minimal THREE namespace (we only need core math + WebGLRenderer)
+const THREE = {
+  Scene: class { constructor(){ this.children=[] } add(o){this.children.push(o)} },
+  PerspectiveCamera: class {
+    constructor(fov,aspect,near,far){
+      this.fov=fov;this.aspect=aspect;this.near=near;this.far=far;
+      this.position={x:0,y:0,z:0,set(x,y,z){this.x=x;this.y=y;this.z=z}};
     }
-    function onResize() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas) return;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      oceanCamera.aspect = window.innerWidth / window.innerHeight;
-      oceanCamera.updateProjectionMatrix();
-      oceanRenderer.setSize(window.innerWidth, window.innerHeight);
-      oceanMaterial.uniforms.uResolution.value.x = window.innerWidth;
-      oceanMaterial.uniforms.uResolution.value.y = window.innerHeight;
+    lookAt(){} updateProjectionMatrix(){}
+  },
+  WebGLRenderer: class {
+    constructor(opts){
+      this.canvas=opts.canvas;
+      this.ctx=this.canvas.getContext("webgl",{antialias:true});
     }
-    function animateOcean(t) {
-      if (!oceanMaterial) return;
-      const time = (t || 0) * 0.001;
-      oceanMaterial.uniforms.uTime.value = time;
-      oceanMaterial.uniforms.uWaveAmp.value += (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.1;
-      oceanMaterial.uniforms.uMouse.value = mousePos;
-      oceanRenderer.render(oceanScene, oceanCamera);
-      requestAnimationFrame(animateOcean);
-    }
-  </script>
-  <!-- ORB + PORTAL EFFECTS -->
-  <script>
-    function playOceanAudio() {
-      const audio = document.getElementById("ocean-audio");
-      if (!audio) return;
-      audio.volume = 0.6;
-      audio.play().catch(() => {});
-    }
-    function portalPulse() {
-      document.body.classList.add("portal-flash", "portal-ripple");
-      targetWaveAmp = 0.5;
-      setTimeout(() => {
-        document.body.classList.remove("portal-flash", "portal-ripple");
-        targetWaveAmp = 0.2;
-      }, 1800);
-      playOceanAudio();
-    }
-    function initOrb() {
-      const orb = document.getElementById("summon-orb");
-      if (!orb) return;
-      orb.addEventListener("click", () => {
-        portalPulse();
-        setTimeout(() => {
-          window.location.href = "mailto:pj@sideguysolutions.com?subject=Summon%20PJ&body=Hey%20PJ%2C%20I%27m%20ready%20for%20a%20SideGuy%20solution.";
-        }, 600);
-      });
-    }
-  </script>
-  <!-- DOM READY -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      initOcean();
-      initOrb();
-      document.getElementById("footer-year").textContent = new Date().getFullYear();
-    });
-  </script>
+    setPixelRatio(){} 
+    setSize(w,h){ this.canvas.width=w; this.canvas.height=h; }
+    render(scene,camera){}
+  }
+};
+
+// We implement a fake renderer because we only draw via shader below.
+// Now real WebGL shader setup:
+
+const canvas = document.getElementById("ocean-canvas");
+const gl = canvas.getContext("webgl");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+const vertex = `
+attribute vec2 pos;
+varying vec2 vUv;
+void main() {
+  vUv = (pos + 1.0) * 0.5;
+  gl_Position = vec4(pos, 0.0, 1.0);
+}
+`;
+
+const fragment = `
+precision highp float;
+uniform float uTime;
+varying vec2 vUv;
+
+void main() {
+  // Colors
+  vec3 deep = vec3(0.01, 0.07, 0.16);
+  vec3 mid = vec3(0.0, 0.28, 0.45);
+  vec3 shallow = vec3(0.1, 0.55, 0.65);
+
+  float t1 = sin((vUv.x + uTime*0.05) * 9.0) * 0.02;
+  float t2 = sin((vUv.y - uTime*0.07) * 13.0) * 0.02;
+  float mixVal = clamp(vUv.y + (t1+t2)*2.2, 0.0, 1.0);
+
+  vec3 color = mix(deep, mid, mixVal);
+  color = mix(color, shallow, smoothstep(0.55, 1.1, mixVal));
+
+  float foam = smoothstep(0.75, 0.98, mixVal + sin(uTime * 0.5)*0.05);
+  vec3 foamColor = vec3(0.88,0.97,0.99);
+  color = mix(color, foamColor, foam*0.5);
+
+  gl_FragColor = vec4(color, 1.0);
+}
+`;
+
+function compileShader(type,src){
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  return s;
+}
+
+const vs = compileShader(gl.VERTEX_SHADER, vertex);
+const fs = compileShader(gl.FRAGMENT_SHADER, fragment);
+
+const program = gl.createProgram();
+gl.attachShader(program, vs);
+gl.attachShader(program, fs);
+gl.linkProgram(program);
+
+gl.useProgram(program);
+
+const buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+const loc = gl.getAttribLocation(program, "pos");
+gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+const uTime = gl.getUniformLocation(program, "uTime");
+
+// Resize fix
+addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  gl.viewport(0,0,gl.canvas.width, gl.canvas.height);
+});
+
+// Animate
+function animate(t){
+  gl.uniform1f(uTime, t*0.001);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+/* --------------------------
+   ORB → EMAIL + RIPPLE
+--------------------------- */
+
+document.getElementById("orb").addEventListener("click", () => {
+  document.body.classList.add("portal-ripple");
+
+  setTimeout(() => {
+    location.href =
+      "mailto:pj@sideguysolutions.com?subject=Summon%20PJ&body=Hey%20PJ%2C%20I%20tapped%20the%20orb%20on%20SideGuy%20Solutions.";
+  }, 420);
+
+  setTimeout(() => {
+    document.body.classList.remove("portal-ripple");
+  }, 1500);
+});
+
+</script>
+
 </body>
 </html>
