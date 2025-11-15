@@ -2,178 +2,666 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Pacific Portal</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>SideGuy Solutions | Pacific Storm Portal</title>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: system-ui, sans-serif;
-      color: white;
-      overflow: hidden;
-      background: black;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* VIDEO BACKGROUND */
-    .ocean-bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      filter: brightness(0.85) saturate(1.3);
-    }
-
-    /* Dark gradient overlay */
-    .ocean-overlay {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(180deg,
-        rgba(0,0,0,0.4),
-        rgba(0,0,0,0.7)
-      );
-      z-index: -1;
-    }
-
-    /* PAGE WRAPPER */
-    .page {
-      position: relative;
-      z-index: 10;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      text-shadow: 0 4px 16px rgba(0,0,0,0.6);
-    }
-
-    p.sub {
-      font-size: 1.05rem;
-      opacity: 0.9;
-      max-width: 520px;
-      margin: 0 auto 32px;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.7);
-    }
-
-    /* ORB WRAP */
-    .orb-wrap {
-      width: 240px;
-      height: 240px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    /* GLOW BEHIND ORB */
-    .orb-glow {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle,
-        rgba(0,188,255,0.6) 0%,
-        rgba(0,90,140,0.1) 60%,
-        transparent 100%
-      );
-      filter: blur(28px);
-      z-index: -1;
-    }
-
-    /* INTERACTIVE ORB */
-    .orb {
+    html, body {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%,
-        rgba(255,255,255,0.9),
-        rgba(0,150,255,0.6),
-        rgba(0,80,140,0.9)
-      );
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", "Segoe UI", sans-serif;
+      color: #f9fafb;
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000 100%);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* -----------------------------
+       BACKGROUND LAYERS
+    ------------------------------ */
+    .bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.78) saturate(1.35) contrast(1.1);
+      z-index: -3;
+    }
+
+    .bg-fallback {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, #1e3a8a 0%, #020617 55%, #000 100%);
+      z-index: -4;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.9)),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.9));
+      z-index: -2;
+    }
+
+    .bg-aurora {
+      position: fixed;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.35), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.22), transparent 65%),
+        radial-gradient(circle at 50% 120%, rgba(248, 250, 252, 0.15), transparent 70%);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      animation: auroraDrift 26s ease-in-out infinite alternate;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes auroraDrift {
+      0% {
+        transform: translate3d(-2%, 0, 0) scale(1.02);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate3d(1%, -1%, 0) scale(1.05);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate3d(3%, 2%, 0) scale(1.03);
+        opacity: 0.75;
+      }
+    }
+
+    /* -----------------------------
+       PAGE SHELL
+    ------------------------------ */
+    .page-shell {
+      min-height: 100vh;
+      padding: 24px 18px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 900px) {
+      .page-shell {
+        padding: 32px 42px 40px;
+      }
+    }
+
+    header.site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at 20% 0%, #38bdf8, #1d4ed8 36%, #020617 80%);
       box-shadow:
-        0 0 32px rgba(0,200,255,0.7),
-        0 0 80px rgba(0,100,200,0.8);
+        0 0 25px rgba(56, 189, 248, 0.7),
+        0 16px 40px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 35% 8% 8% 52%;
+      background: linear-gradient(
+        140deg,
+        rgba(15, 23, 42, 0),
+        rgba(15, 23, 42, 0.2) 35%,
+        rgba(15, 23, 42, 0.95) 100%
+      );
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 0.8rem;
+      color: #cbd5f5;
+      opacity: 0.86;
+      max-width: 260px;
+    }
+
+    .storm-chip {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
+      color: #e0f2fe;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .storm-chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px #22c55e;
+    }
+
+    /* -----------------------------
+       HERO LAYOUT
+    ------------------------------ */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr);
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      }
+    }
+
+    .hero-copy {
+      max-width: 620px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.86rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.3rem, 3vw + 1.4rem, 3.35rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      text-shadow:
+        0 22px 45px rgba(15, 23, 42, 1),
+        0 0 20px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-heading span {
+      background-image: linear-gradient(120deg, #38bdf8, #22d3ee, #f97316);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #e5e7eb;
+      max-width: 480px;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 14px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-sub strong {
+      font-weight: 600;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.8));
+      color: #e5e7eb;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      appearance: none;
+      border: none;
+      outline: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #0b1120;
+      background: radial-gradient(circle at top, #f97316, #fbbf24);
+      box-shadow:
+        0 0 25px rgba(249, 115, 22, 0.7),
+        0 16px 36px rgba(15, 23, 42, 0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 35px rgba(249, 115, 22, 0.9),
+        0 20px 40px rgba(15, 23, 42, 0.98);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1.1em;
+    }
+
+    .hero-footnote {
+      font-size: 0.8rem;
+      color: #d1d5db;
+      opacity: 0.9;
+    }
+
+    .hero-footnote strong {
+      font-weight: 600;
+    }
+
+    /* -----------------------------
+       ORB COLUMN
+    ------------------------------ */
+    .orb-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    @media (min-width: 960px) {
+      .orb-column {
+        justify-content: flex-end;
+      }
+    }
+
+    .orb-shell {
+      position: relative;
+      width: min(280px, 70vw);
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease;
     }
 
-    .orb:hover {
-      transform: scale(1.05);
-      box-shadow:
-        0 0 55px rgba(0,220,255,1),
-        0 0 110px rgba(0,120,255,0.8);
-    }
-
-    .orb-label {
-      font-size: 1rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      text-align: center;
-      font-weight: 600;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.8);
-    }
-
-    /* PAGE FOOTER */
-    footer {
+    .orb-ring {
       position: absolute;
-      bottom: 20px;
+      inset: -10%;
+      border-radius: 999px;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      box-shadow:
+        0 0 40px rgba(56, 189, 248, 0.7),
+        0 0 90px rgba(37, 99, 235, 0.7);
+      opacity: 0.8;
+      animation: ringPulse 4.6s ease-in-out infinite;
+    }
+
+    @keyframes ringPulse {
+      0%   { transform: scale(0.96); opacity: 0.6; }
+      40%  { transform: scale(1.02); opacity: 0.95; }
+      100% { transform: scale(0.98); opacity: 0.7; }
+    }
+
+    .orb-glow {
+      position: absolute;
+      inset: 8%;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(248, 250, 252, 0.8), transparent 45%),
+        radial-gradient(circle at 70% 120%, rgba(56, 189, 248, 0.6), transparent 70%);
+      filter: blur(12px);
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+
+    .summon-orb {
+      position: relative;
       width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(248, 250, 252, 0.95), rgba(191, 219, 254, 0.6), transparent 55%),
+        radial-gradient(circle at 70% 85%, rgba(56, 189, 248, 0.85), rgba(15, 23, 42, 1));
+      box-shadow:
+        0 0 55px rgba(56, 189, 248, 1),
+        0 26px 80px rgba(15, 23, 42, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      font-size: .8rem;
-      opacity: 0.75;
+      padding: 36px 20px;
+      cursor: pointer;
+      outline: none;
+      animation: orbBreathe 4s ease-in-out infinite;
+      transition: transform 200ms ease, box-shadow 220ms ease;
+    }
+
+    @keyframes orbBreathe {
+      0%   { transform: translateY(0) scale(1); }
+      50%  {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow:
+          0 0 70px rgba(59, 130, 246, 1),
+          0 30px 90px rgba(15, 23, 42, 0.98);
+      }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .summon-orb:hover,
+    .summon-orb:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        0 0 80px rgba(56, 189, 248, 1),
+        0 32px 95px rgba(15, 23, 42, 1);
+    }
+
+    .summon-orb-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+
+    .summon-orb-title {
+      font-size: 1.05rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .summon-orb-sub {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      max-width: 220px;
+      margin-bottom: 12px;
+    }
+
+    .summon-orb-note {
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+    }
+
+    .summon-orb-note span {
+      font-weight: 600;
+    }
+
+    .orb-hint {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #d1d5db;
+      opacity: 0.88;
+      text-align: center;
+      max-width: 260px;
+    }
+
+    .orb-hint strong {
+      font-weight: 600;
+    }
+
+    /* -----------------------------
+       FOOTER
+    ------------------------------ */
+    footer.site-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+    }
+
+    .version-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #e5e7eb;
+      text-decoration: none;
+      opacity: 0.9;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+
+    /* Body flash when portal fires */
+    body.portal-flash {
+      animation: portalFlash 550ms ease-out;
+    }
+
+    @keyframes portalFlash {
+      0% {
+        filter: brightness(1) saturate(1);
+      }
+      30% {
+        filter: brightness(1.35) saturate(1.35);
+      }
+      60% {
+        filter: brightness(1.1) saturate(1.15);
+      }
+      100% {
+        filter: brightness(1) saturate(1);
+      }
     }
   </style>
 </head>
 <body>
+  <!-- HARD FALLBACK (in case video fails) -->
+  <div class="bg-fallback"></div>
 
-  <!-- REAL PACIFIC WAVES VIDEO BACKGROUND -->
-  <video class="ocean-bg" autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-ocean-waves-at-sunset-8576/1080p.mp4" type="video/mp4">
+  <!-- PACIFIC STORM VIDEO (real ocean waves) -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-ocean-waves-at-sunset-8576/1080p.mp4" type="video/mp4" />
   </video>
 
-  <!-- Dark overlay for readability -->
-  <div class="ocean-overlay"></div>
+  <!-- Dark + aurora overlays -->
+  <div class="bg-overlay"></div>
+  <div class="bg-aurora"></div>
 
-  <!-- PAGE CONTENT -->
-  <div class="page">
-    <h1>Where Code Meets the Coastline</h1>
-    <p class="sub">Tap the Pacific portal to connect with PJ.  
-      Real ocean. Real movement. Real North County energy.
-    </p>
-
-    <div class="orb-wrap">
-      <div class="orb-glow"></div>
-
-      <div class="orb" id="summon-orb">
-        <div class="orb-label">
-          TAP TO<br>SUMMON PJ
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">SideGuy Solutions</div>
+          <div class="brand-tagline">
+            Pacific storm portal for tech builds, tickets, and DFS edges in North County.
+          </div>
         </div>
       </div>
+      <div class="storm-chip">
+        <span class="storm-chip-dot"></span>
+        <span>Live ocean · Tap to summon PJ</span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Solana Beach · Encinitas · Petco nights</p>
+        <h1 class="hero-heading">
+          Where <span>code meets the coastline</span> and the ocean answers on tap.
+        </h1>
+        <p class="hero-sub">
+          PJ is your coastal concierge for
+          <strong>apps, automations, tickets, and DFS edges</strong>.  
+          This isn’t a template. It’s a living Pacific portal into whatever you’re building next.
+        </p>
+
+        <div class="hero-pills">
+          <span class="pill">Custom dev without the agency circus</span>
+          <span class="pill">Tickets & access with OnlineSeats DNA</span>
+          <span class="pill">DFS edges · small edges, real money</span>
+        </div>
+
+        <div class="hero-cta-row">
+          <a
+            href="mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20Direct&body=Tech%2C%20tickets%2C%20DFS%2C%20or%20all%20three%3F%0A%0AQuick%20context%3A%0A"
+            class="btn-primary"
+          >
+            <span class="icon">⚡</span>
+            <span>Skip portal · email PJ</span>
+          </a>
+        </div>
+
+        <p class="hero-footnote">
+          <strong>Or tap the orb like a sane person.</strong> Let the storm roll, then the inbox opens.
+        </p>
+      </div>
+
+      <div class="orb-column">
+        <div class="orb-shell">
+          <div class="orb-ring" aria-hidden="true"></div>
+          <div class="orb-glow" aria-hidden="true"></div>
+
+          <div
+            id="summon-orb"
+            class="summon-orb"
+            role="button"
+            tabindex="0"
+            aria-label="Tap to summon PJ through the Pacific storm portal."
+          >
+            <div class="summon-orb-label">Tap to summon</div>
+            <div class="summon-orb-title">PJ</div>
+            <div class="summon-orb-sub">
+              The storm-glow Pacific portal into your next build, edge, or access play.
+            </div>
+            <div class="summon-orb-note">
+              <span>Tap once.</span> Ocean surges. Then your email app appears.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="orb-hint">
+      <strong>Pro tip:</strong> Try this at night with sound on. It feels like the Pacific is in your hand.
     </div>
 
+    <footer class="site-footer">
+      <div class="version-pill">
+        v6.0-pacific-storm-portal · Maximum Wow Edition
+      </div>
+      <div class="footer-links">
+        <span>© <span id="footer-year">2025</span> SideGuy Solutions · North County, CA</span>
+        <a href="mailto:pj@sideguysolutions.com">Email PJ</a>
+      </div>
+    </footer>
   </div>
-
-  <footer>
-    SideGuy Solutions · v5.1 Real Pacific Portal
-  </footer>
   <script>
     const orb = document.getElementById("summon-orb");
 
-    orb.addEventListener("click", () => {
-      orb.style.transform = "scale(1.1)";
-      orb.style.boxShadow =
-        "0 0 80px rgba(0,255,255,1), 0 0 150px rgba(0,150,255,1)";
+    function firePortal() {
+      if (!orb) return;
+
+      // boost animation
+      document.body.classList.add("portal-flash");
+      orb.style.animation = "none";
+      void orb.offsetWidth; // restart animation
+      orb.style.animation = "orbBreathe 0.8s ease-out 1";
 
       setTimeout(() => {
-        window.location.href =
-          "mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20Portal";
-      }, 380);
-    });
-  </script>
+        const mailHref =
+          "mailto:pj@sideguysolutions.com" +
+          "?subject=" +
+          encodeURIComponent("Summon PJ via Pacific Storm Portal") +
+          "&body=" +
+          encodeURIComponent(
+            "What are you trying to solve? (Tech, tickets, DFS, or combo)\n\n" +
+            "- Quick context:\n" +
+            "- Timing:\n" +
+            "- How you found the portal:\n"
+          );
 
+        window.location.href = mailHref;
+      }, 420);
+
+      setTimeout(() => {
+        document.body.classList.remove("portal-flash");
+        orb.style.animation = "orbBreathe 4s ease-in-out infinite";
+      }, 900);
+    }
+
+    if (orb) {
+      orb.addEventListener("click", firePortal);
+      orb.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          firePortal();
+        }
+      });
+    }
+
+    const yearEl = document.getElementById("footer-year");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear().toString();
+    }
+  </script>
 </body>
 </html>
