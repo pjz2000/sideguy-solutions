@@ -1,683 +1,127 @@
-<!--
-  SideGuy Solutions
-  Version: 4.9-verser-wavy-pacific
-  Mode: Real Pacific Swell + Portal Flash + Summon PJ Orb
-  Author: PJ + Kromeon Dev Team (+ ChatGPT)
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description" content="SideGuy Solutions — coastal concierge for tech builds, tickets, and DFS edges in North County San Diego. Tap to summon PJ through a living Pacific wave portal." />
-
-  <!-- SEO -->
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#020617" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta property="og:description" content="Summon PJ — your coastal concierge for tech, tickets, and DFS edges." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sideguysolutions.com/" />
-
-  <!-- Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "SideGuy Solutions",
-    "description": "Coastal concierge for tech builds, tickets, and DFS edges.",
-    "url": "https://sideguysolutions.com/",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Solana Beach",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    }
-  }
-  </script>
+  <title>Ocean Test</title>
 
   <style>
-    :root {
-      --bg: #020617;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.35);
-      --text-main: #e5f2ff;
-      --text-muted: #9ca3af;
-      --text-soft: #6b7280;
-      --card: rgba(15,23,42,0.92);
-      --border-subtle: rgba(148,163,184,0.22);
-      --radius-xl: 1.4rem;
-      --transition-med: 0.28s ease;
-      --shadow-soft: 0 24px 80px rgba(2,6,23,0.96);
-    }
-
-    * { box-sizing: border-box; }
-
     html, body {
       margin: 0;
       padding: 0;
-      background: var(--bg);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
+      background: #020617;
+      height: 100%;
     }
 
-    /* =============================================
-       OCEAN CANVAS + OVERLAY (WAVY PACIFIC MODE)
-       ============================================= */
-
-    #ocean-canvas {
+    #ocean {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -3;
       display: block;
+      z-index: 1;
     }
-
-    .ocean-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -2;
-      background:
-        radial-gradient(circle at 15% 0%, rgba(37,99,235,0.25), transparent 55%),
-        radial-gradient(circle at 80% 120%, rgba(15,23,42,0.85), rgba(2,6,23,0.98));
-    }
-
-    /* Portal Flash */
-    .portal-flash .ocean-overlay {
-      animation: portalFlash 0.6s ease;
-    }
-
-    @keyframes portalFlash {
-      0%   { filter: brightness(1); }
-      20%  { filter: brightness(1.9); }
-      100% { filter: brightness(1.1); }
-    }
-
-    /* =============================================
-       PAGE STRUCTURE
-       ============================================= */
-    .page {
-      position: relative;
-      padding: 1.4rem clamp(1rem, 4vw, 2.8rem) 3rem;
-      backdrop-filter: blur(18px);
-      background:
-        linear-gradient(to bottom, rgba(15,23,42,0.88), rgba(2,6,23,0.96)),
-        radial-gradient(circle at top left, rgba(37,99,235,0.18), transparent 65%);
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    /* Logo */
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .brand-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 1.3rem;
-      background:
-        radial-gradient(circle at 10% 0%, #fff, transparent 55%),
-        radial-gradient(circle at 80% 100%, #38bdf8, transparent 60%),
-        radial-gradient(circle at 50% 50%, #0f172a, #020617 70%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: #020617;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
-    }
-
-    .brand-title {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .brand-sub {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
-
-    /* Nav */
-    nav {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.82rem;
-      padding: 0.38rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.5);
-      border: 1px solid transparent;
-      transition: var(--transition-med);
-    }
-
-    nav a:hover {
-      color: var(--text-main);
-      border-color: var(--border-subtle);
-    }
-
-    /* END Part 1 — WAIT for Part 2 */
   </style>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 </head>
 
 <body>
-  <!-- Force WebGL ON for all devices -->
-  <script>
-    window._forceOceanDebug = true;
-  </script>
-
-  <!-- Ocean Layers -->
-  <canvas id="ocean-canvas" aria-hidden="true"></canvas>
-  <div class="ocean-overlay" aria-hidden="true"></div>
-
-  <div class="page">
-    <!-- ===========================
-         HERO
-    ============================ -->
-    <section class="hero">
-      <h1 class="hero-title">Where code meets the coastline.</h1>
-      <p class="hero-sub">
-        North County coastal concierge — tech builds, tickets, and DFS edges.
-      </p>
-
-      <button
-        id="summon-pj"
-        class="summon-btn"
-        data-mailto="mailto:pj@sideguysolutions.com?subject=Summon%20PJ"
-      >
-        TAP TO SUMMON PJ
-      </button>
-    </section>
-
-    <!-- ===========================
-         FEATURE GRID
-    ============================ -->
-    <section class="feature-grid">
-      <div class="feature-card">
-        <h3>Tech & Systems</h3>
-        <p>Apps, dashboards, automations — built with coastal precision.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>Real-world Leverage</h3>
-        <p>A deep Pacific portal for tools, deals, and real-world upgrades.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>DFS Edges</h3>
-        <p>Smarter 2-player plays and promo ecosystems built around you.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>Tickets & Access</h3>
-        <p>Sports, concerts, Padres — concierge access with zero hassle.</p>
-      </div>
-    </section>
-
-    <!-- ===========================
-         SERVICES
-    ============================ -->
-    <section class="services">
-      <h2 class="section-title">Coastal Services</h2>
-
-      <div class="service-card">
-        <h3>Custom Software</h3>
-        <p>
-          Web apps, mobile apps, dashboards, automation, AI agents — if you can
-          imagine it, we build it.
-        </p>
-      </div>
-
-      <div class="service-card">
-        <h3>DFS Coaching & Edges</h3>
-        <p>
-          Practical, simple, profitable — using promos, math, and real-world
-          ecosystem plays.
-        </p>
-      </div>
-
-      <div class="service-card">
-        <h3>Tickets & Events</h3>
-        <p>
-          Padres, concerts, VIP access — curated, fast, and stress-free.
-        </p>
-      </div>
-    </section>
-
-    <!-- ===========================
-         NEWSLETTER / LEAD MAGNET
-    ============================ -->
-    <section class="newsletter">
-      <h2>Limited Portal Invites</h2>
-      <p class="muted">
-        Be the first to get new builds, edges, concierge drops, and tools from
-        the Pacific.
-      </p>
-
-      <form
-        class="newsletter-form"
-        action="https://formspree.io/f/mnqkewrq"
-        method="POST"
-      >
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email"
-          required
-        />
-        <button type="submit">Join Portal</button>
-      </form>
-    </section>
-
-    <!-- ===========================
-         FOOTER
-    ============================ -->
-    <footer class="footer">
-      <p class="footer-line">
-        SideGuy Solutions · v4.9-verser-wavy-pacific
-      </p>
-      <p class="footer-sub">Solana Beach → Encinitas → Oceanside</p>
-    </footer>
-  </div> <!-- end .page -->
-  <!-- Extra layout styles for body sections -->
-  <style>
-    .hero {
-      padding: 2.2rem 0 1.5rem;
-      text-align: left;
-      max-width: 720px;
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3rem);
-      margin: 0 0 0.4rem;
-      letter-spacing: 0.04em;
-      text-shadow: 0 18px 42px rgba(0,0,0,0.9);
-    }
-
-    .hero-sub {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.98rem;
-      max-width: 28rem;
-    }
-
-    .summon-btn {
-      margin-top: 1.4rem;
-      padding: 0.9rem 1.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(56,189,248,0.9);
-      background:
-        radial-gradient(circle at 15% 0%, #f9fafb, transparent 60%),
-        radial-gradient(circle at 80% 120%, #38bdf8, #0f172a);
-      color: #020617;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow:
-        0 0 0 1px rgba(15,23,42,0.9),
-        0 22px 50px rgba(15,23,42,1);
-      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
-    }
-
-    .summon-btn:hover {
-      transform: translateY(-1px) scale(1.03);
-      filter: brightness(1.04);
-      box-shadow:
-        0 0 0 1px rgba(15,23,42,0.9),
-        0 26px 60px rgba(15,23,42,1);
-    }
-
-    .summon-btn:active {
-      transform: translateY(1px) scale(0.98);
-      box-shadow:
-        0 0 0 1px rgba(15,23,42,0.9),
-        0 14px 32px rgba(15,23,42,1);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0 2rem;
-    }
-
-    @media (max-width: 768px) {
-      .feature-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .feature-card,
-    .service-card {
-      background: var(--card);
-      border-radius: var(--radius-xl);
-      padding: 0.9rem 1rem;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
-    .feature-card h3,
-    .service-card h3 {
-      margin: 0 0 0.35rem;
-      font-size: 0.95rem;
-      color: var(--text-main);
-    }
-
-    .services {
-      margin-bottom: 2rem;
-    }
-
-    .section-title {
-      margin: 0 0 0.6rem;
-      font-size: 1rem;
-      color: var(--text-main);
-    }
-
-    .newsletter {
-      margin-bottom: 2rem;
-    }
-
-    .newsletter .muted {
-      margin: 0 0 0.8rem;
-      color: var(--text-soft);
-      font-size: 0.86rem;
-    }
-
-    .newsletter-form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .newsletter-form input {
-      flex: 1 1 180px;
-      min-width: 0;
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.98);
-      color: var(--text-main);
-      font-size: 0.82rem;
-    }
-
-    .newsletter-form input::placeholder {
-      color: var(--text-soft);
-    }
-
-    .newsletter-form button {
-      border-radius: 999px;
-      padding: 0.45rem 1.1rem;
-      border: 1px solid rgba(56,189,248,1);
-      background: linear-gradient(135deg, #0ea5e9, #22c55e);
-      color: #020617;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 16px 40px rgba(15,23,42,1);
-    }
-
-    .newsletter-form button:hover {
-      filter: brightness(1.05);
-      transform: translateY(-1px);
-    }
-
-    .footer {
-      border-top: 1px solid rgba(15,23,42,0.9);
-      padding-top: 1.2rem;
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .footer-line {
-      margin: 0 0 0.25rem;
-    }
-
-    .footer-sub {
-      margin: 0;
-      color: var(--text-muted);
-    }
-  </style>
-
-  <!-- Three.js CDN -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <canvas id="ocean"></canvas>
 
   <script>
-    // ============================
-    // Verser · Wavy Pacific Engine
-    // ============================
-    const Verser = {
-      time: 0,
-      waveAmp: 1.0,
-      targetWaveAmp: 1.0,
-      flashIntensity: 0.0,
-      lastT: 0,
-      update(tsMs) {
-        const t = tsMs * 0.001;
-        const dt = this.lastT ? t - this.lastT : 0.016;
-        this.lastT = t;
-        this.time = t;
+    // -------- Initialization --------
+    let scene, camera, renderer, mesh, uniforms;
 
-        this.waveAmp += (this.targetWaveAmp - this.waveAmp) * 0.06;
-        this.flashIntensity += (0 - this.flashIntensity) * 0.15;
-
-        return dt;
-      },
-      boost() {
-        this.targetWaveAmp = 1.7;
-        this.flashIntensity = 1.0;
-
-        document.body.classList.add("portal-flash");
-
-        setTimeout(() => {
-          this.targetWaveAmp = 1.0;
-          document.body.classList.remove("portal-flash");
-        }, 520);
-      }
-    };
-
-    let scene, camera, renderer, oceanMesh, oceanUniforms;
-    let webglReady = false;
-
-    const oceanVertexShader = `
+    const vertexShader = `
       varying vec2 vUv;
-      varying float vHeight;
-      uniform float uTime;
-      uniform float uWaveAmp;
+      uniform float time;
 
       void main() {
         vUv = uv;
         vec3 pos = position;
 
-        float t = uTime;
+        float wave1 = sin(pos.x * 0.4 + time * 0.4) * 0.15;
+        float wave2 = cos(pos.y * 0.3 + time * 0.3) * 0.1;
 
-        // Broad Pacific swell
-        float swell =
-          sin(pos.x * 0.35 + t * 0.32) * 0.22 +
-          cos(pos.y * 0.28 - t * 0.26) * 0.22;
-
-        // Mid-range chop
-        float mid =
-          sin(pos.x * 0.9 + t * 0.8) * 0.07 +
-          cos(pos.y * 1.1 - t * 0.9) * 0.07;
-
-        float h = (swell + mid) * uWaveAmp;
-        pos.z += h;
-        vHeight = h;
+        pos.z += wave1 + wave2;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
     `;
 
-    const oceanFragmentShader = `
+    const fragmentShader = `
       precision highp float;
       varying vec2 vUv;
-      varying float vHeight;
-
-      uniform float uTime;
-      uniform float uWaveAmp;
-      uniform float uFlashIntensity;
-      uniform vec3 uDeepColor;
-      uniform vec3 uShallowColor;
+      uniform float time;
 
       void main() {
-        float depth = clamp(vHeight * 1.6 + 0.5, 0.0, 1.0);
-        vec3 color = mix(uDeepColor, uShallowColor, depth);
-
-        // Soft vertical light streaks
-        float rays = sin((vUv.y + uTime * 0.04) * 10.0);
-        rays = smoothstep(-0.1, 0.6, rays);
-        vec3 rayColor = vec3(0.12, 0.4, 0.9) * rays * 0.35;
-        color += rayColor;
-
-        // Foam on peaks
-        float foam = smoothstep(0.2, 0.6, vHeight * uWaveAmp + 0.25);
-        foam *= (0.4 + 0.6 * sin(vUv.x * 10.0 + uTime * 1.6));
-        vec3 foamColor = vec3(0.85, 0.96, 1.0) * foam * 0.22;
-        color += foamColor;
-
-        // Flash from portal impact
-        float flash = uFlashIntensity;
-        vec3 flashTint = vec3(0.32, 0.82, 1.0) * flash * 0.8;
-        color += flashTint;
-
-        // Vignette
-        float vignette = smoothstep(1.0, 0.25, length(vUv - 0.5));
-        color *= vignette;
+        float shade = 0.5 + 0.5 * sin(vUv.y * 6.0 + time * 1.2);
+        vec3 deep = vec3(0.01, 0.08, 0.18);
+        vec3 shallow = vec3(0.0, 0.5, 1.0);
+        vec3 color = mix(deep, shallow, shade);
 
         gl_FragColor = vec4(color, 1.0);
       }
     `;
 
-    function initOcean() {
-      if (!window.THREE) return;
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas) return;
-
-      // We force debug-on, but you can later add fallbacks if needed
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
-      renderer.setSize(window.innerWidth, window.innerHeight);
+    function init() {
+      const canvas = document.getElementById("ocean");
 
       scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x020617, 0.7);
-
       camera = new THREE.PerspectiveCamera(
         55,
         window.innerWidth / window.innerHeight,
         0.1,
         100
       );
-      camera.position.set(0, 1.0, 1.7);
+      camera.position.set(0, 1.2, 2.2);
       camera.lookAt(0, 0, 0);
 
-      // Wavy Pacific: medium resolution grid
-      const geometry = new THREE.PlaneGeometry(6.0, 6.0, 120, 120);
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-      oceanUniforms = {
-        uTime: { value: 0 },
-        uWaveAmp: { value: Verser.waveAmp },
-        uFlashIntensity: { value: Verser.flashIntensity },
-        uDeepColor: { value: new THREE.Color(0x020617) },
-        uShallowColor: { value: new THREE.Color(0x0ea5e9) }
+      const geo = new THREE.PlaneGeometry(6, 6, 100, 100);
+
+      uniforms = {
+        time: { value: 0 }
       };
 
-      const material = new THREE.ShaderMaterial({
-        uniforms: oceanUniforms,
-        vertexShader: oceanVertexShader,
-        fragmentShader: oceanFragmentShader,
+      const mat = new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        uniforms,
         side: THREE.DoubleSide
       });
 
-      oceanMesh = new THREE.Mesh(geometry, material);
-      oceanMesh.rotation.x = -Math.PI / 2.3;
-      oceanMesh.position.y = -1.0;
+      mesh = new THREE.Mesh(geo, mat);
+      mesh.rotation.x = -Math.PI / 2.2;
+      mesh.position.y = -1;
+      scene.add(mesh);
 
-      scene.add(oceanMesh);
       window.addEventListener("resize", onResize);
-      webglReady = true;
     }
 
     function onResize() {
-      if (!webglReady || !camera || !renderer) return;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      camera.aspect = w / h;
+      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    function renderLoop(ts) {
-      requestAnimationFrame(renderLoop);
-      if (!webglReady || !renderer || !scene || !camera || !oceanUniforms) return;
+    function animate(t) {
+      requestAnimationFrame(animate);
+      uniforms.time.value = t * 0.001;
 
-      const dt = Verser.update(ts);
-      oceanUniforms.uTime.value = Verser.time;
-      oceanUniforms.uWaveAmp.value = Verser.waveAmp;
-      oceanUniforms.uFlashIntensity.value = Verser.flashIntensity;
-
-      const t = Verser.time;
-      camera.position.x = Math.sin(t * 0.16) * 0.42;
-      camera.position.z = 1.7 + Math.sin(t * 0.1) * 0.05;
-      camera.position.y = 1.0 + Math.sin(t * 0.18) * 0.04;
+      camera.position.x = Math.sin(t * 0.0003) * 0.3;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
     }
 
-    function wireSummonButton() {
-      const btn = document.getElementById("summon-pj");
-      if (!btn) return;
-
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        Verser.boost();
-
-        const mailto = btn.getAttribute("data-mailto");
-        if (!mailto) return;
-
-        setTimeout(() => {
-          window.location.href = mailto;
-        }, 420); // Tap → wave impact → THEN email
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      wireSummonButton();
-      initOcean();
-      requestAnimationFrame(renderLoop);
-    });
+    init();
+    animate();
   </script>
 </body>
 </html>
