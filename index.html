@@ -488,7 +488,6 @@
       color: rgba(226, 232, 240, 0.85);
       text-shadow: 0 0 10px rgba(15, 23, 42, 0.9);
     }
-
     /* SECTION BASE */
     .section {
       padding: 40px 20px;
@@ -636,6 +635,7 @@
       color: var(--muted);
       border-left: 1px dashed rgba(148, 163, 184, 0.5);
       padding-left: 14px;
+      margin-top: 8px;
     }
 
     .sports-side strong {
@@ -707,7 +707,7 @@
       font-size: 16px;
     }
 
-    /* MONEY & MOTION TOOLKIT (3 TOOLS) */
+    /* TOOLKIT GRID */
     .toolkit-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -872,7 +872,7 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner container">
       <div class="hero-kicker">
@@ -916,7 +916,7 @@
     <div class="bubble b4"></div>
   </section>
 
-  <!-- SUMMON PJ BUTTON -->
+  <!-- SUMMON PJ -->
   <div class="summon-wrapper">
     <a
       id="summonPJBubble"
@@ -931,8 +931,7 @@
     </a>
     <div class="summon-caption">North County only — for now.</div>
   </div>
-
-  <!-- TOOLKIT SECTION -->
+  <!-- TOOLKIT -->
   <section id="toolkit" class="section section-alt">
     <div class="container">
       <div class="section-card">
@@ -942,187 +941,147 @@
             <span>Money & Motion Toolkit — Built for North County</span>
           </div>
           <div class="section-subtext">
-            Three real tools that save money, save time, and show people what’s possible with
-            Web3, coastal logistics, and smart systems. Lightweight, fast, and useful.
+            Real tools that save money, time, and show what’s possible with Web3, coastal logistics, and smart systems.
           </div>
         </div>
 
-        <!-- TOOL GRID (Tools will appear here in Part 3) -->
         <div class="toolkit-grid">
-          <!-- TOOL 1 — BLOCKCHAIN SAVINGS CALCULATOR -->
+
+          <!-- TOOL 1 — BLOCKCHAIN SAVINGS -->
           <div class="tool-card">
             <div class="tool-title">💸 Blockchain Savings Calculator</div>
-            <div class="tool-subtext">Compare Stripe vs Solana vs Stablecoins.</div>
+            <div class="tool-sub">Compare Stripe vs Solana vs Stablecoins.</div>
 
-            <label>Payment Amount ($)
-              <input id="payAmount" type="number" placeholder="5000" class="tool-input">
-            </label>
+            <label class="tool-label">Payment Amount ($)</label>
+            <input id="payAmount" type="number" placeholder="5000" class="tool-input">
 
-            <label>Traditional Processor
-              <select id="fiatFee" class="tool-input">
-                <option value="0.029">Stripe (2.9% + $0.30)</option>
-                <option value="0.035">Square (3.5% + $0.15)</option>
-                <option value="0.03">Generic Credit Card (3%)</option>
-              </select>
-            </label>
+            <label class="tool-label">Traditional Processor</label>
+            <select id="fiatFee" class="tool-input">
+              <option value="0.029">Stripe (2.9% + $0.30)</option>
+              <option value="0.035">Square (3.5% + $0.15)</option>
+              <option value="0.03">Generic Credit Card (3%)</option>
+            </select>
 
-            <label>Blockchain Network
-              <select id="chain" class="tool-input">
-                <option value="0.00025">Solana ($0.00025 avg)</option>
-                <option value="0.02">Polygon / L2 ($0.01–$0.02)</option>
-                <option value="0.15">Ethereum ($0.15 w/ L2)</option>
-              </select>
-            </label>
+            <label class="tool-label">Blockchain Network</label>
+            <select id="chain" class="tool-input">
+              <option value="0.00025">Solana ($0.00025 avg)</option>
+              <option value="0.02">Polygon / L2 ($0.01–$0.02)</option>
+              <option value="0.15">Ethereum ($0.15 w/ L2)</option>
+            </select>
 
             <button onclick="calculateSavings()" class="tool-btn">Calculate Savings</button>
 
-            <div id="savingsResult" class="tool-output"></div>
+            <div id="savingsResult" class="tool-result"></div>
           </div>
-<!-- APY & Daily Income Calculator -->
-<section class="section" id="apy-tool">
-  <div class="container">
-    <div class="section-card">
-      
-      <div class="section-header">
-        <div class="section-title-row">
-          <span class="icon">💹</span>
-          <span>APY → Daily Income Calculator</span>
-        </div>
-        <div class="section-subtext">
-          See how much your stablecoins earn daily — or how much value you need locked to hit a daily goal.
-        </div>
-      </div>
 
-      <div style="display:flex;flex-direction:column;gap:14px;font-size:14px;color:#cbd5f5;">
-
-        <!-- Mode Toggle -->
-        <div style="display:flex;gap:12px;">
-          <button onclick="switchAPYMode('earn')" id="apyModeEarn"
-            style="flex:1;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;font-weight:600;">
-            💵 I want to see daily income
-          </button>
-
-          <button onclick="switchAPYMode('goal')" id="apyModeGoal"
-            style="flex:1;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;font-weight:600;">
-            🎯 I want $X per day
-          </button>
-        </div>
-
-        <!-- Earn Mode -->
-        <div id="apyEarnMode">
-          <label>Amount Locked ($)
-            <input id="apyAmount" type="number" placeholder="5000"
-              style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
-          </label>
-
-          <label>Yield Rate (APY %)
-            <input id="apyRate" type="number" placeholder="6"
-              style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
-          </label>
-        </div>
-
-        <!-- Goal Mode -->
-        <div id="apyGoalMode" style="display:none;">
-          <label>Daily Income Goal ($)
-            <input id="apyGoalDaily" type="number" placeholder="100"
-              style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
-          </label>
-
-          <label>Yield Rate (APY %)
-            <input id="apyGoalRate" type="number" placeholder="6"
-              style="width:100%;padding:10px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#e5e7eb;">
-          </label>
-        </div>
-
-        <button onclick="calculateAPY()"
-          style="padding:10px 16px;border-radius:999px;background:#22d3ee;border:none;color:#020617;font-weight:700;cursor:pointer;">
-          Calculate
-        </button>
-
-        <div id="apyResult"
-          style="margin-top:12px;font-size:15px;color:#e0f2fe;font-weight:600;">
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-          <!-- TOOL 2 — DFS PROMO VALUE CALCULATOR -->
+          <!-- TOOL 2 — DFS PROMO EV -->
           <div class="tool-card">
             <div class="tool-title">📊 DFS Promo Value Tool</div>
-            <div class="tool-subtext">Estimate EV on promo money (2–3 leg parlays).</div>
+            <div class="tool-sub">Estimate EV on promo money.</div>
 
-            <label>Promo Amount ($)
-              <input id="dfsPromo" type="number" placeholder="20" class="tool-input">
-            </label>
+            <label class="tool-label">Promo Amount ($)</label>
+            <input id="dfsPromo" type="number" placeholder="20" class="tool-input">
 
-            <label>Odds Leg 1
-              <input id="dfsLeg1" type="number" placeholder="+120" class="tool-input">
-            </label>
+            <label class="tool-label">Odds Leg 1</label>
+            <input id="dfsLeg1" type="number" placeholder="+120" class="tool-input">
 
-            <label>Odds Leg 2
-              <input id="dfsLeg2" type="number" placeholder="+140" class="tool-input">
-            </label>
+            <label class="tool-label">Odds Leg 2</label>
+            <input id="dfsLeg2" type="number" placeholder="+140" class="tool-input">
 
-            <label>Odds Leg 3 (optional)
-              <input id="dfsLeg3" type="number" placeholder="Leave empty for 2-leg" class="tool-input">
-            </label>
+            <label class="tool-label">Odds Leg 3 (optional)</label>
+            <input id="dfsLeg3" type="number" placeholder="Leave empty for 2-leg" class="tool-input">
 
-            <label>Win Probability per Leg (%)
-              <input id="dfsProb" type="number" placeholder="58" class="tool-input">
-            </label>
+            <label class="tool-label">Win Probability per Leg (%)</label>
+            <input id="dfsProb" type="number" placeholder="58" class="tool-input">
 
-            <button onclick="calcDFSValue()" class="tool-btn">Calculate Expected Value</button>
+            <button onclick="calcDFSValue()" class="tool-btn">Calculate EV</button>
 
-            <div id="dfsResult" class="tool-output"></div>
+            <div id="dfsResult" class="tool-result"></div>
           </div>
 
-          <!-- TOOL 3 — NORTH COUNTY RIDE ETA -->
+          <!-- TOOL 3 — NORTH COUNTY ETA -->
           <div class="tool-card">
-            <div class="tool-title">🚗 North County Ride ETA Tool</div>
-            <div class="tool-subtext">Simple local drive-time estimator.</div>
+            <div class="tool-title">🚗 North County Ride ETA</div>
+            <div class="tool-sub">Simple, local drive-time estimator.</div>
 
-            <label>Starting Point
-              <select id="etaStart" class="tool-input">
-                <option>Solana Beach</option>
-                <option>Encinitas</option>
-                <option>Cardiff</option>
-                <option>Del Mar</option>
-                <option>Carlsbad</option>
-                <option>Oceanside</option>
-              </select>
-            </label>
+            <label class="tool-label">Start</label>
+            <select id="etaStart" class="tool-input">
+              <option>Solana Beach</option>
+              <option>Encinitas</option>
+              <option>Cardiff</option>
+              <option>Del Mar</option>
+              <option>Carlsbad</option>
+              <option>Oceanside</option>
+            </select>
 
-            <label>Destination
-              <select id="etaEnd" class="tool-input">
-                <option>Solana Beach</option>
-                <option>Encinitas</option>
-                <option>Cardiff</option>
-                <option>Del Mar</option>
-                <option>Carlsbad</option>
-                <option>Oceanside</option>
-              </select>
-            </label>
+            <label class="tool-label">Destination</label>
+            <select id="etaEnd" class="tool-input">
+              <option>Solana Beach</option>
+              <option>Encinitas</option>
+              <option>Cardiff</option>
+              <option>Del Mar</option>
+              <option>Carlsbad</option>
+              <option>Oceanside</option>
+            </select>
 
-            <label>Time of Day
-              <select id="etaTime" class="tool-input">
-                <option value="normal">Normal Flow</option>
-                <option value="rush">Rush Hour</option>
-                <option value="late">Late Night</option>
-                <option value="weekend">Weekend Daytime</option>
-              </select>
-            </label>
+            <label class="tool-label">Time of Day</label>
+            <select id="etaTime" class="tool-input">
+              <option value="normal">Normal Flow</option>
+              <option value="rush">Rush Hour</option>
+              <option value="late">Late Night</option>
+              <option value="weekend">Weekend Daytime</option>
+            </select>
 
-            <button onclick="calcETA()" class="tool-btn">Estimate Ride Time</button>
+            <button onclick="calcETA()" class="tool-btn">Estimate Time</button>
 
-            <div id="etaResult" class="tool-output"></div>
+            <div id="etaResult" class="tool-result"></div>
           </div>
-        </div> <!-- end toolkit grid -->
-      </div>
-    </div>
-  </section>
 
-  <!-- TRENDING SECTION -->
+          <!-- TOOL 4 — APY DAILY INCOME CALCULATOR -->
+          <div class="tool-card">
+            <div class="tool-title">💹 APY → Daily Income Calculator</div>
+            <div class="tool-sub">Earn mode OR reverse-engineer $100/day.</div>
+
+            <!-- Mode Toggle -->
+            <div style="display:flex;gap:10px;margin-bottom:12px;">
+              <button id="apyModeEarn"
+                onclick="switchAPYMode('earn')"
+                style="flex:1;padding:8px;border-radius:10px;background:#22d3ee;color:#020617;border:none;font-weight:600;">
+                💵 Daily Income
+              </button>
+
+              <button id="apyModeGoal"
+                onclick="switchAPYMode('goal')"
+                style="flex:1;padding:8px;border-radius:10px;background:#0f172a;color:#e5e7eb;border:1px solid #334155;font-weight:600;">
+                🎯 Goal → Required $
+              </button>
+            </div>
+
+            <!-- Earn Mode -->
+            <div id="apyEarnMode">
+              <label class="tool-label">Amount Locked ($)</label>
+              <input id="apyAmount" type="number" placeholder="5000" class="tool-input">
+
+              <label class="tool-label">APY (%)</label>
+              <input id="apyRate" type="number" placeholder="6" class="tool-input">
+            </div>
+
+            <!-- Goal Mode -->
+            <div id="apyGoalMode" style="display:none;">
+              <label class="tool-label">Daily Income Goal ($)</label>
+              <input id="apyGoalDaily" type="number" placeholder="100" class="tool-input">
+
+              <label class="tool-label">APY (%)</label>
+              <input id="apyGoalRate" type="number" placeholder="6" class="tool-input">
+            </div>
+
+            <button onclick="calculateAPY()" class="tool-btn">Calculate</button>
+
+            <div id="apyResult" class="tool-result"></div>
+          </div>
+
+        </div> <!-- end grid -->
+  <!-- TRENDING -->
   <section id="trending" class="section">
     <div class="container">
       <div class="section-card">
@@ -1142,7 +1101,8 @@
       </div>
     </div>
   </section>
-  <!-- SPORTS EDGE SECTION -->
+
+  <!-- SPORTS EDGE -->
   <section id="sports-edge" class="section section-alt">
     <div class="container">
       <div class="section-card">
@@ -1154,14 +1114,12 @@
           <div class="section-subtext">One daily-style highlight idea. Educational only.</div>
         </div>
 
-        <div class="sports-edge-body" id="sports-edge-body">
-          <!-- Filled by JS -->
-        </div>
+        <div class="sports-edge-body" id="sports-edge-body"></div>
       </div>
     </div>
   </section>
 
-  <!-- LOCAL SHOWS / TICKETS -->
+  <!-- LOCAL SHOWS -->
   <section id="local-shows" class="section">
     <div class="container">
       <div class="section-card">
@@ -1172,7 +1130,7 @@
             <span>Local Shows — Direct, Fast, Coastal</span>
           </div>
           <div class="section-subtext">
-            North County concerts + comedy + pop-ups without fighting big ticketing sites.
+            North County concerts + comedy + pop-ups without big ticketing headaches.
           </div>
         </div>
 
@@ -1238,9 +1196,9 @@
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
-    /* -------------------------------
-       TOOL 1 — BLOCKCHAIN SAVINGS
-    --------------------------------*/
+    /* ---------------------------------------
+       TOOL 1 — BLOCKCHAIN SAVINGS CALCULATOR
+    --------------------------------------- */
     function calculateSavings() {
       const amount = parseFloat(document.getElementById("payAmount").value || 0);
       const fiatPercent = parseFloat(document.getElementById("fiatFee").value);
@@ -1262,12 +1220,12 @@
       `;
     }
 
-    /* -------------------------------
-       TOOL 2 — DFS PROMO VALUE
-    --------------------------------*/
+    /* ---------------------------------------
+       TOOL 2 — DFS PROMO EV TOOL
+    --------------------------------------- */
     function convertOdds(odds) {
       odds = Number(odds);
-      return odds > 0 ? odds/100 : 100/Math.abs(odds);
+      return odds > 0 ? odds / 100 : 100 / Math.abs(odds);
     }
 
     function calcDFSValue() {
@@ -1296,21 +1254,21 @@
       document.getElementById("dfsResult").innerHTML = `
         🎯 <strong>${legs}-Leg Parlay</strong><br>
         📈 Multiplier: ${payout.toFixed(2)}x<br>
-        🔮 Win Prob: ${(winProb*100).toFixed(1)}%<br>
+        🔮 Win Prob: ${(winProb * 100).toFixed(1)}%<br>
         💰 EV: $${EV.toFixed(2)}
       `;
     }
 
-    /* -------------------------------
-       TOOL 3 — NORTH COUNTY ETA
-    --------------------------------*/
+    /* ---------------------------------------
+       TOOL 3 — NORTH COUNTY ETA TOOL
+    --------------------------------------- */
     const BASE_TIMES = {
-      "Solana Beach":     { "Solana Beach":0,"Encinitas":8,"Cardiff":5,"Del Mar":6,"Carlsbad":15,"Oceanside":22 },
-      "Encinitas":        { "Solana Beach":8,"Encinitas":0,"Cardiff":4,"Del Mar":12,"Carlsbad":10,"Oceanside":18 },
-      "Cardiff":          { "Solana Beach":5,"Encinitas":4,"Cardiff":0,"Del Mar":9,"Carlsbad":12,"Oceanside":20 },
-      "Del Mar":          { "Solana Beach":6,"Encinitas":12,"Cardiff":9,"Del Mar":0,"Carlsbad":18,"Oceanside":25 },
-      "Carlsbad":         { "Solana Beach":15,"Encinitas":10,"Cardiff":12,"Del Mar":18,"Carlsbad":0,"Oceanside":10 },
-      "Oceanside":        { "Solana Beach":22,"Encinitas":18,"Cardiff":20,"Del Mar":25,"Carlsbad":10,"Oceanside":0 }
+      "Solana Beach":     {"Solana Beach":0,"Encinitas":8,"Cardiff":5,"Del Mar":6,"Carlsbad":15,"Oceanside":22},
+      "Encinitas":        {"Solana Beach":8,"Encinitas":0,"Cardiff":4,"Del Mar":12,"Carlsbad":10,"Oceanside":18},
+      "Cardiff":          {"Solana Beach":5,"Encinitas":4,"Cardiff":0,"Del Mar":9,"Carlsbad":12,"Oceanside":20},
+      "Del Mar":          {"Solana Beach":6,"Encinitas":12,"Cardiff":9,"Del Mar":0,"Carlsbad":18,"Oceanside":25},
+      "Carlsbad":         {"Solana Beach":15,"Encinitas":10,"Cardiff":12,"Del Mar":18,"Carlsbad":0,"Oceanside":10},
+      "Oceanside":        {"Solana Beach":22,"Encinitas":18,"Cardiff":20,"Del Mar":25,"Carlsbad":10,"Oceanside":0}
     };
 
     function calcETA() {
@@ -1320,9 +1278,9 @@
 
       let base = BASE_TIMES[s][e];
       let m = 1.0;
-      if (tod==="rush") m=1.45;
-      if (tod==="late") m=0.75;
-      if (tod==="weekend") m=0.95;
+      if (tod === "rush") m = 1.45;
+      if (tod === "late") m = 0.75;
+      if (tod === "weekend") m = 0.95;
 
       const eta = Math.round(base * m);
 
@@ -1330,40 +1288,113 @@
         `🕒 <strong>${eta} minutes</strong><br>${s} → ${e}<br>Traffic: ${tod}`;
     }
 
-    /* -------------------------------
-       TRENDING DATA
-    --------------------------------*/
+    /* ---------------------------------------
+       TOOL 4 — APY / DAILY INCOME CALCULATOR
+    --------------------------------------- */
+    let apyMode = "earn";
+
+    function switchAPYMode(mode) {
+      apyMode = mode;
+
+      const earnBtn = document.getElementById("apyModeEarn");
+      const goalBtn = document.getElementById("apyModeGoal");
+
+      const earnBox = document.getElementById("apyEarnMode");
+      const goalBox = document.getElementById("apyGoalMode");
+
+      if (mode === "earn") {
+        earnBtn.style.background = "#22d3ee";
+        earnBtn.style.color = "#020617";
+
+        goalBtn.style.background = "#0f172a";
+        goalBtn.style.color = "#e5e7eb";
+
+        earnBox.style.display = "block";
+        goalBox.style.display = "none";
+      } else {
+        goalBtn.style.background = "#22d3ee";
+        goalBtn.style.color = "#020617";
+
+        earnBtn.style.background = "#0f172a";
+        earnBtn.style.color = "#e5e7eb";
+
+        earnBox.style.display = "none";
+        goalBox.style.display = "block";
+      }
+    }
+
+    function calculateAPY() {
+      const result = document.getElementById("apyResult");
+
+      if (apyMode === "earn") {
+        const amount = parseFloat(document.getElementById("apyAmount").value || 0);
+        const rate = parseFloat(document.getElementById("apyRate").value || 0) / 100;
+
+        if (amount <= 0 || rate <= 0) {
+          result.innerHTML = "Enter valid values.";
+          return;
+        }
+
+        const yearly = amount * rate;
+        const daily = yearly / 365;
+
+        result.innerHTML = `
+          💰 <strong>Daily Income: $${daily.toFixed(2)}</strong><br>
+          Yearly Earnings: $${yearly.toFixed(2)}
+        `;
+
+      } else {
+        const goal = parseFloat(document.getElementById("apyGoalDaily").value || 0);
+        const rate = parseFloat(document.getElementById("apyGoalRate").value || 0) / 100;
+
+        if (goal <= 0 || rate <= 0) {
+          result.innerHTML = "Enter valid values.";
+          return;
+        }
+
+        const required = (goal * 365) / rate;
+
+        result.innerHTML = `
+          🎯 <strong>Required Value Locked: $${required.toFixed(2)}</strong><br>
+          To earn $${goal}/day at ${(rate * 100).toFixed(2)}% APY.
+        `;
+      }
+    }
+
+    /* ---------------------------------------
+       TRENDING FEED
+    --------------------------------------- */
     const TREND_TOPICS = [
       "Solana yield to pay","Coastal concierge","AI side hustles 2025",
       "DFS promos","L2 gas savings","Encinitas sunsets","Stablecoin billing",
-      "Web3 tickets","Remote work Solana Beach","AI errands",
-      "Yield-backed subscriptions","DeFi for real bills"
+      "Web3 tickets","AI errands","Carlsbad nights","Yield-backed utilities",
+      "Crypto escrow by Kromeon","DeFi for real bills"
     ];
 
-    function pickRandom(arr,c){
-      const t=[...arr],o=[];
-      while(t.length&&o.length<c) o.push(t.splice(Math.random()*t.length,1)[0]);
+    function pickRandom(arr, count) {
+      const t = [...arr], o = [];
+      while (t.length && o.length < count) o.push(t.splice(Math.random() * t.length, 1)[0]);
       return o;
     }
 
-    function renderTrends(){
-      const list=document.getElementById("trend-list");
-      const items=pickRandom(TREND_TOPICS,7)
-        .map(t=>`<li class="trend-pill">#${t}</li>`)
+    function renderTrends() {
+      const list = document.getElementById("trend-list");
+      const items = pickRandom(TREND_TOPICS, 7)
+        .map(t => `<li class="trend-pill">#${t}</li>`)
         .join("");
-      list.innerHTML=items;
+      list.innerHTML = items;
     }
 
-    /* -------------------------------
-       SPORTS EDGE
-    --------------------------------*/
+    /* ---------------------------------------
+       SPORTS EDGE AUTO-PICK
+    --------------------------------------- */
     const SPORTS_EDGES = [
       {
         league:"NBA",
         matchup:"Suns vs Mavericks",
         context:"West Coast window",
         market:"PRA Line",
-        pick:"Lively II Over 14.5",
+        pick:"Dereck Lively II Over 14.5",
         oddsMain:"+112",
         oddsAlt:"+136",
         liq:"$27"
@@ -1380,61 +1411,67 @@
       }
     ];
 
-    function renderSportsEdge(){
-      const c=document.getElementById("sports-edge-body");
-      const e=SPORTS_EDGES[Math.floor(Math.random()*SPORTS_EDGES.length)];
-      c.innerHTML=`
+    function renderSportsEdge() {
+      const c = document.getElementById("sports-edge-body");
+      const e = SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
+
+      c.innerHTML = `
         <div class="sports-main">
           <div class="sports-label">${e.league}</div>
           <div class="sports-matchup">${e.matchup}</div>
           <div class="sports-meta">${e.context}</div>
           <div class="sports-line"><strong>${e.market}</strong></div>
           <div class="sports-line">${e.pick}</div>
+
           <div class="sports-odds">
-            <span>${e.oddsMain}</span><span>${e.oddsAlt}</span><span>${e.liq}</span>
+            <span>${e.oddsMain}</span>
+            <span>${e.oddsAlt}</span>
+            <span>${e.liq}</span>
           </div>
         </div>
+
         <div class="sports-side">
-          Small, disciplined edges + promo money beats gambling.
-        </div>`;
+          Small, disciplined edges + promo money beats gambling.<br>
+          Scale smart. Daily wins stack fast.
+        </div>
+      `;
     }
 
-    /* -------------------------------
-       VERSION STAMP
-    --------------------------------*/
-    function updateVersionStamp(){
-      const el=document.getElementById("version-info");
-      const d=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
-      el.textContent="Updated "+d;
+    /* ---------------------------------------
+       STAMP VERSION
+    --------------------------------------- */
+    function updateVersionStamp() {
+      const el = document.getElementById("version-info");
+      const d = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+      el.textContent = "Updated " + d;
     }
 
-    /* -------------------------------
-       FULL 3D OCEAN SHADER ENGINE
-       (massive block — cinematic mode)
-    --------------------------------*/
+    /* ---------------------------------------
+       FULL 3D OCEAN (Three.js Shader)
+    --------------------------------------- */
     let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
     let targetWaveAmp = 1.0;
 
-    function initOcean(){
-      const container=document.getElementById("ocean-container");
-      if(!container||!window.THREE) return;
+    function initOcean() {
+      const container = document.getElementById("ocean-container");
+      if (!container || !window.THREE) return;
 
-      renderer=new THREE.WebGLRenderer({antialias:true});
-      renderer.setPixelRatio(window.devicePixelRatio||1);
-      renderer.setSize(window.innerWidth,window.innerHeight);
-      renderer.setClearColor(0x000814,1);
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio || 1);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000814, 1);
       container.appendChild(renderer.domElement);
 
-      scene=new THREE.Scene();
+      scene = new THREE.Scene();
 
-      camera=new THREE.PerspectiveCamera(55,window.innerWidth/window.innerHeight,0.1,100);
-      camera.position.set(0,7.2,11.5);
-      camera.lookAt(0,0,0);
+      camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 7.2, 11.5);
+      camera.lookAt(0, 0, 0);
 
-      oceanClock=new THREE.Clock();
+      oceanClock = new THREE.Clock();
 
-      const geometry=new THREE.PlaneGeometry(40,40,260,260);
-      geometry.rotateX(-Math.PI/2);
+      const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
+      geometry.rotateX(-Math.PI / 2);
 
       const vertexShader = `
         varying vec2 vUv;
@@ -1496,54 +1533,58 @@
         }
       `;
 
-      oceanMaterial=new THREE.ShaderMaterial({
-        uniforms:{uTime:{value:0},uWaveAmp:{value:1}},
-        vertexShader,fragmentShader,side:THREE.DoubleSide
+      oceanMaterial = new THREE.ShaderMaterial({
+        uniforms: { uTime: { value: 0 }, uWaveAmp: { value: 1 } },
+        vertexShader,
+        fragmentShader,
+        side: THREE.DoubleSide
       });
 
-      oceanMesh=new THREE.Mesh(geometry,oceanMaterial);
+      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
       scene.add(oceanMesh);
 
-      renderer.setClearColor(new THREE.Color(0x000817),1);
-      window.addEventListener("resize",onResize);
+      renderer.setClearColor(new THREE.Color(0x000817), 1);
+
+      window.addEventListener("resize", onResize);
       animateOcean();
     }
 
-    function onResize(){
-      camera.aspect=window.innerWidth/window.innerHeight;
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth,window.innerHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    function animateOcean(){
+    function animateOcean() {
       requestAnimationFrame(animateOcean);
-      const t=oceanClock.getElapsedTime();
-      oceanMaterial.uniforms.uTime.value=t;
-      const c=oceanMaterial.uniforms.uWaveAmp.value;
-      oceanMaterial.uniforms.uWaveAmp.value=c+(targetWaveAmp-c)*0.03;
-      camera.position.x=Math.sin(t*0.18)*0.4;
-      camera.lookAt(0,0,0);
-      renderer.render(scene,camera);
+      const t = oceanClock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value = t;
+      const c = oceanMaterial.uniforms.uWaveAmp.value;
+      oceanMaterial.uniforms.uWaveAmp.value = c + (targetWaveAmp - c) * 0.03;
+      camera.position.x = Math.sin(t * 0.18) * 0.4;
+      camera.lookAt(0, 0, 0);
+      renderer.render(scene, camera);
     }
 
-    function boostWaves(){
-      targetWaveAmp=1.6;
-      setTimeout(()=>targetWaveAmp=1.05,600);
+    function boostWaves() {
+      targetWaveAmp = 1.6;
+      setTimeout(() => targetWaveAmp = 1.05, 600);
     }
 
-    /* -------------------------------
-       INIT EVERYTHING ON LOAD
-    --------------------------------*/
-    document.addEventListener("DOMContentLoaded",()=>{
+    /* ---------------------------------------
+       INIT EVERYTHING
+    --------------------------------------- */
+    document.addEventListener("DOMContentLoaded", () => {
       renderTrends();
       renderSportsEdge();
       updateVersionStamp();
       initOcean();
 
-      const summon=document.getElementById("summonPJBubble");
-      if(summon) summon.addEventListener("click",boostWaves);
+      const summon = document.getElementById("summonPJBubble");
+      if (summon) summon.addEventListener("click", boostWaves);
     });
   </script>
 
 </body>
 </html>
+
