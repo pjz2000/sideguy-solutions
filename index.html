@@ -12,8 +12,1196 @@
     content="SideGuy Solutions — Web3 coastal concierge for tech, transport, and smarter systems in North County. From Solana Beach to Encinitas, PJ helps you move, build, and live freely."
   />
 
-  <!-- External styles -->
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --bg: #020617;
+      --blue-bg: radial-gradient(circle at top, #38bdf8 0%, #0f172a 45%, #020617 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --muted: #9ca3af;
+      --text: #e5f2ff;
+      --brand1: #38bdf8;
+      --brand2: #22d3ee;
+      --brand3: #818cf8;
+      --accent: #2dd4bf;
+      --accent-soft: rgba(45, 212, 191, 0.15);
+      --radius: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--blue-bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+        "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      animation: fadeIn 0.9s ease-out;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    a {
+      color: var(--brand2);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    a:focus {
+      outline: 2px solid var(--brand2);
+      outline-offset: 2px;
+    }
+
+    /* --- THREE.JS OCEAN BACKGROUND LAYER --- */
+    #ocean-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at top, #041b3b, #000814 60%, #000611);
+      overflow: hidden;
+    }
+
+    .ocean-overlay-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(0, 180, 255, 0.4), transparent 60%),
+        radial-gradient(circle at 15% 110%, rgba(0, 255, 210, 0.28), transparent 60%),
+        radial-gradient(circle at 90% 110%, rgba(60, 140, 255, 0.26), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.95;
+      transition: opacity 0.35s ease, filter 0.35s ease;
+    }
+
+    body.portal-flash .ocean-overlay-gradient {
+      opacity: 1;
+      filter: brightness(1.22) saturate(1.08);
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.35), transparent 60%),
+        rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand span.logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22d3ee, #0ea5e9);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .menu a {
+      color: var(--muted);
+      font-weight: 500;
+      padding: 4px 0;
+    }
+
+    .menu a:hover {
+      color: var(--brand2);
+    }
+
+    /* HERO WITH OCEAN PORTAL */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 70px 20px 120px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(14, 165, 233, 0.95) 0%, rgba(15, 23, 42, 0.98) 55%);
+      box-shadow: inset 0 -40px 80px rgba(15, 23, 42, 0.96);
+      z-index: 5;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .hero-glass {
+      max-width: 650px;
+      padding: 20px 24px 22px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at top left, rgba(148, 163, 184, 0.24), transparent 55%),
+        rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 60px rgba(15, 23, 42, 0.9),
+        0 0 55px rgba(56, 189, 248, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    body.portal-flash .hero-glass {
+      transform: translateY(-2px);
+      box-shadow:
+        0 22px 70px rgba(15, 23, 42, 0.98),
+        0 0 70px rgba(56, 189, 248, 0.45);
+    }
+
+    .hero-glass::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(148, 163, 184, 0.14) 45%,
+        rgba(248, 250, 252, 0.28) 50%,
+        rgba(148, 163, 184, 0.14) 55%,
+        transparent 100%
+      );
+      transform: translateX(-120%);
+      opacity: 0.85;
+      pointer-events: none;
+      animation: glassSweep 9s linear infinite;
+    }
+
+    body.portal-flash .hero-glass::after {
+      animation-duration: 4.5s;
+    }
+
+    @keyframes glassSweep {
+      0% { transform: translateX(-120%); }
+      40% { transform: translateX(120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-kicker span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 40px);
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      margin-bottom: 14px;
+      text-shadow: 0 16px 50px rgba(15, 23, 42, 0.9);
+      transition: transform 0.25s ease, text-shadow 0.25s ease, color 0.25s ease;
+    }
+
+    body.portal-flash .hero h1 {
+      text-shadow: 0 0 42px rgba(125, 211, 252, 0.98);
+      transform: translateY(-1px);
+      color: #f9fbff;
+    }
+
+    .hero h1 span.highlight {
+      background: linear-gradient(120deg, #22d3ee, #a855f7, #22d3ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% 200%;
+      animation: textShimmer 7s ease-in-out infinite;
+    }
+
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    body.portal-flash .hero h1 span.highlight {
+      animation-duration: 3.5s;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      color: #e2e8f0;
+      font-size: 15px;
+      opacity: 0.97;
+      transition: color 0.25s ease;
+    }
+
+    body.portal-flash .hero p {
+      color: #f1f5f9;
+    }
+
+    .hero-pj-line {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .hero-pj-line strong {
+      color: #e0f2fe;
+    }
+
+    .hero-contacts {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-contacts a {
+      font-weight: 600;
+    }
+
+    /* OCEAN WAVES PORTAL (CSS LAYERS ON TOP OF 3D) */
+    .hero-waves {
+      position: absolute;
+      inset: 46% -10% -60px;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 4;
+      transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    body.portal-flash .hero-waves {
+      filter: brightness(1.15) saturate(1.08);
+      opacity: 1;
+      transform: translateY(-6px);
+    }
+
+    .wave {
+      position: absolute;
+      left: -10%;
+      width: 120%;
+      border-radius: 50% 50% 0 0;
+      filter: blur(0.2px);
+    }
+
+    .wave-back {
+      height: 270px;
+      bottom: -155px;
+      background:
+        radial-gradient(
+          circle at 22% 0,
+          rgba(34, 211, 238, 0.5),
+          transparent 65%
+        ),
+        linear-gradient(
+          to top,
+          rgba(15, 23, 42, 1) 0%,
+          rgba(15, 23, 42, 0.96) 32%,
+          rgba(15, 23, 42, 0.85) 50%,
+          rgba(30, 64, 175, 0.8) 80%,
+          rgba(56, 189, 248, 0.48) 100%
+        );
+      opacity: 0.86;
+      animation: waveBack 25s linear infinite;
+    }
+
+    .wave-mid {
+      height: 230px;
+      bottom: -135px;
+      background:
+        linear-gradient(
+          to top,
+          rgba(15, 23, 42, 0.98) 12%,
+          rgba(17, 94, 163, 0.96) 48%,
+          rgba(45, 212, 191, 0.8) 88%,
+          rgba(224, 242, 254, 0.94) 100%
+        );
+      box-shadow: 0 -12px 55px rgba(15, 23, 42, 0.9);
+      opacity: 0.96;
+      animation: waveMid 16s linear infinite;
+    }
+
+    .wave-front {
+      height: 192px;
+      bottom: -122px;
+      background:
+        linear-gradient(
+          to top,
+          rgba(15, 23, 42, 1) 0%,
+          rgba(8, 47, 73, 0.95) 30%,
+          rgba(37, 99, 235, 0.95) 70%,
+          rgba(191, 219, 254, 0.97) 100%
+        );
+      box-shadow:
+        0 -8px 38px rgba(15, 23, 42, 0.95),
+        0 -14px 40px rgba(15, 23, 42, 0.9);
+      opacity: 0.96;
+      animation: waveFront 11s ease-in-out infinite;
+    }
+
+    body.portal-flash .wave-front {
+      transform: translateY(-6px) scaleY(1.06);
+      box-shadow:
+        0 -10px 48px rgba(15, 23, 42, 0.98),
+        0 -20px 60px rgba(15, 23, 42, 0.95);
+    }
+
+    /* Wave shimmer overlay */
+    .wave-shimmer {
+      position: absolute;
+      inset: 40% -26% -40px;
+      background-image: repeating-linear-gradient(
+        to right,
+        rgba(248, 250, 252, 0.0) 0px,
+        rgba(248, 250, 252, 0.18) 40px,
+        rgba(248, 250, 252, 0.0) 80px
+      );
+      mix-blend-mode: soft-light;
+      opacity: 0.16;
+      pointer-events: none;
+      animation: waveShimmer 18s linear infinite;
+      z-index: 4;
+      transition: opacity 0.3s ease;
+    }
+
+    body.portal-flash .wave-shimmer {
+      opacity: 0.4;
+      animation-duration: 10s;
+    }
+
+    @keyframes waveBack {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(32px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes waveMid {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-34px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes waveFront {
+      0% { transform: translateX(0) translateY(0); }
+      25% { transform: translateX(20px) translateY(7px); }
+      50% { transform: translateX(0) translateY(11px); }
+      75% { transform: translateX(-20px) translateY(7px); }
+      100% { transform: translateX(0) translateY(0); }
+    }
+
+    @keyframes waveShimmer {
+      0% { transform: translateX(-60px); }
+      100% { transform: translateX(60px); }
+    }
+
+    /* MIST + PARTICLES */
+    .hero-mist {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      width: 270px;
+      height: 95px;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        circle at 50% 0,
+        rgba(226, 232, 240, 0.8),
+        transparent 70%
+      );
+      opacity: 0.48;
+      filter: blur(11px);
+      pointer-events: none;
+      z-index: 4;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    body.portal-flash .hero-mist {
+      opacity: 0.85;
+      transform: translateX(-50%) translateY(-8px);
+    }
+
+    .bubble {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #e0f2fe 0%, #38bdf8 40%, transparent 70%);
+      opacity: 0.7;
+      pointer-events: none;
+      animation: floatUp 10s linear infinite;
+      z-index: 4;
+    }
+
+    .bubble.b1 { left: 18%; bottom: 0; animation-duration: 11s; }
+    .bubble.b2 { left: 38%; bottom: -10px; animation-duration: 13s; }
+    .bubble.b3 { left: 62%; bottom: -6px; animation-duration: 9s; }
+    .bubble.b4 { left: 82%; bottom: -14px; animation-duration: 15s; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.9); opacity: 0; }
+      20% { opacity: 0.75; }
+      80% { opacity: 0.9; }
+      100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+    }
+
+    /* CENTER OCEAN PORTAL ORB */
+    .portal-orb-wrapper {
+      position: relative;
+      margin-top: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 6;
+      pointer-events: auto;
+    }
+
+    .portal-orb {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 18%, rgba(255, 255, 255, 0.4), transparent 60%),
+        radial-gradient(circle at 70% 82%, rgba(56, 189, 248, 0.8), transparent 75%),
+        radial-gradient(circle at 50% 50%, #020617 0%, #020617 70%);
+      box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.7),
+        0 0 40px rgba(56, 189, 248, 0.9),
+        0 28px 65px rgba(15, 23, 42, 0.98);
+      overflow: hidden;
+      animation: orbFloat 7.4s ease-in-out infinite;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    body.portal-flash .portal-orb {
+      transform: translateY(-8px) scale(1.07);
+      box-shadow:
+        0 0 0 1px rgba(191, 219, 254, 1),
+        0 0 60px rgba(191, 219, 254, 1),
+        0 34px 85px rgba(15, 23, 42, 1);
+    }
+
+    .portal-orb::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          from 220deg,
+          rgba(45, 212, 191, 0.2),
+          rgba(56, 189, 248, 0.8),
+          rgba(129, 140, 248, 0.9),
+          rgba(45, 212, 191, 0.2)
+        );
+      mix-blend-mode: screen;
+      filter: blur(1px);
+      animation: orbSwirl 16s linear infinite;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    body.portal-flash .portal-orb::before {
+      animation-duration: 7s;
+    }
+
+    .portal-orb::after {
+      content: "";
+      position: absolute;
+      inset: 22%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 8%, rgba(255, 255, 255, 0.98), transparent 60%),
+        radial-gradient(circle at 70% 92%, rgba(59, 130, 246, 0.96), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.98;
+      pointer-events: none;
+    }
+
+    .portal-orb-core {
+      position: absolute;
+      inset: 34%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 1), transparent 55%),
+        radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.98), rgba(15, 23, 42, 0.25));
+      box-shadow:
+        0 0 38px rgba(191, 219, 254, 1),
+        0 0 90px rgba(56, 189, 248, 0.9);
+      animation: corePulse 3.4s ease-in-out infinite;
+      pointer-events: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    body.portal-flash .portal-orb-core {
+      transform: scale(1.15);
+      box-shadow:
+        0 0 60px rgba(224, 242, 254, 1),
+        0 0 120px rgba(56, 189, 248, 1);
+      filter: brightness(1.2);
+    }
+
+    .portal-orb-ring {
+      position: absolute;
+      inset: 3%;
+      border-radius: 50%;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      box-shadow:
+        0 0 16px rgba(148, 163, 184, 0.9),
+        0 0 36px rgba(56, 189, 248, 0.8);
+      mix-blend-mode: screen;
+      opacity: 0.96;
+      pointer-events: none;
+    }
+
+    .portal-orb-beam {
+      position: absolute;
+      left: 50%;
+      top: -60%;
+      width: 3px;
+      height: 0;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(
+        to top,
+        rgba(125, 211, 252, 0.0),
+        rgba(191, 219, 254, 0.8),
+        rgba(255, 255, 255, 1)
+      );
+      box-shadow: 0 0 24px rgba(191, 219, 254, 1);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    body.portal-flash .portal-orb-beam {
+      animation: beamFlash 0.65s ease-out forwards;
+    }
+
+    .orb-shimmer-line {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      border-top: 1px solid rgba(248, 250, 252, 0.75);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.0);
+      border-left: 0;
+      border-right: 0;
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      animation: orbLine 8s linear infinite;
+      pointer-events: none;
+    }
+
+    .orb-ripple {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(191, 219, 254, 0.0);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    body.portal-ripple .orb-ripple {
+      animation: orbRipple 1.5s ease-out forwards;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-11px); }
+    }
+
+    @keyframes orbSwirl {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes corePulse {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      40% { transform: scale(1.08); filter: brightness(1.2); }
+      60% { transform: scale(0.98); filter: brightness(0.98); }
+    }
+
+    @keyframes beamFlash {
+      0% {
+        height: 0;
+        opacity: 0;
+        transform: translateX(-50%) translateY(12px);
+      }
+      25% {
+        height: 130%;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      100% {
+        height: 160%;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-18px);
+      }
+    }
+
+    @keyframes orbLine {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.45; }
+      50% { transform: rotate(180deg) scale(1.03); opacity: 0.9; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.45; }
+    }
+
+    @keyframes orbRipple {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+        border-color: rgba(191, 219, 254, 0.9);
+      }
+      60% {
+        transform: scale(1.4);
+        opacity: 0.4;
+        border-color: rgba(125, 211, 252, 0.7);
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+        border-color: rgba(191, 219, 254, 0.0);
+      }
+    }
+
+    .portal-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(226, 232, 240, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 999px;
+      padding: 4px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.95);
+    }
+
+    .portal-label span {
+      color: #7dd3fc;
+      font-weight: 600;
+    }
+
+    /* SUMMON PJ FLOATING BUTTON */
+    .summon-wrapper {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 60;
+      pointer-events: auto;
+    }
+
+    .summon-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.4), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.5), transparent 55%),
+        rgba(15, 23, 42, 0.98);
+      color: #e5f2ff;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        var(--shadow-soft),
+        0 0 25px rgba(56, 189, 248, 0.8);
+      text-decoration: none;
+      cursor: pointer;
+      min-width: 230px;
+      position: relative;
+      overflow: hidden;
+      animation: summonPulse 2.7s infinite;
+    }
+
+    @keyframes summonPulse {
+      0% {
+        box-shadow:
+          0 0 0 0 rgba(56, 189, 248, 0.82),
+          0 20px 40px rgba(15, 23, 42, 0.95);
+      }
+      70% {
+        box-shadow:
+          0 0 0 16px rgba(56, 189, 248, 0),
+          0 18px 36px rgba(15, 23, 42, 0.95);
+      }
+      100% {
+        box-shadow:
+          0 0 0 0 rgba(56, 189, 248, 0),
+          0 20px 40px rgba(15, 23, 42, 0.95);
+      }
+    }
+
+    .summon-btn-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .summon-emoji {
+      font-size: 18px;
+      transform-origin: center;
+      animation: wag 1.8s ease-in-out infinite;
+    }
+
+    @keyframes wag {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(-8deg) translateY(-1px); }
+      50% { transform: rotate(5deg) translateY(0); }
+      75% { transform: rotate(-4deg) translateY(-1px); }
+    }
+
+    .summon-subtitle {
+      font-size: 11px;
+      color: #cbd5f5;
+      opacity: 0.95;
+    }
+
+    .summon-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at 10% 0,
+        rgba(255, 255, 255, 0.3),
+        transparent 60%
+      );
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .summon-btn:hover::after {
+      opacity: 1;
+    }
+
+    .summon-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .summon-caption {
+      margin-top: 4px;
+      font-size: 11px;
+      text-align: right;
+      color: rgba(226, 232, 240, 0.9);
+      text-shadow: 0 0 10px rgba(15, 23, 42, 0.95);
+    }
+
+    /* SECTION BASE */
+    .section {
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at top, rgba(37, 99, 235, 0.26), transparent 60%),
+        rgba(2, 6, 23, 0.97);
+      position: relative;
+      z-index: 5;
+    }
+
+    .section-alt {
+      background:
+        radial-gradient(circle at top, rgba(8, 47, 73, 0.9), rgba(2, 6, 23, 0.98) 55%);
+    }
+
+    .section-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(148, 163, 184, 0.14) 45%,
+        rgba(248, 250, 252, 0.26) 50%,
+        rgba(148, 163, 184, 0.14) 55%,
+        transparent 100%
+      );
+      transform: translateX(-140%);
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      animation: cardSweep 14s linear infinite;
+    }
+
+    @keyframes cardSweep {
+      0% { transform: translateX(-140%); }
+      40% { transform: translateX(140%); }
+      100% { transform: translateX(140%); }
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #e5f2ff;
+    }
+
+    .section-title-row span.icon {
+      font-size: 18px;
+    }
+
+    .section-subtext {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* TRENDING */
+    .trend-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .trend-pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      font-size: 12px;
+      color: #e5f2ff;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.98);
+      white-space: nowrap;
+    }
+
+    /* SPORTS EDGE */
+    .sports-edge-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.05fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .sports-main {
+      background:
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.35), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border-radius: 16px;
+      padding: 14px 14px 14px 16px;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.96);
+      font-size: 13px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sports-main::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(251, 191, 36, 0.18) 45%,
+        rgba(253, 230, 138, 0.32) 50%,
+        rgba(251, 191, 36, 0.18) 55%,
+        transparent 100%
+      );
+      opacity: 0.8;
+      transform: translateX(-130%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      animation: sportsSweep 12s linear infinite;
+    }
+
+    @keyframes sportsSweep {
+      0% { transform: translateX(-130%); }
+      40% { transform: translateX(130%); }
+      100% { transform: translateX(130%); }
+    }
+
+    .sports-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fed7aa;
+      margin-bottom: 4px;
+    }
+
+    .sports-matchup {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .sports-meta {
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+
+    .sports-line {
+      margin: 4px 0;
+      font-size: 13px;
+    }
+
+    .sports-odds {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sports-odds span {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(251, 191, 36, 0.55);
+    }
+
+    .sports-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #fef3c7;
+      opacity: 0.9;
+    }
+
+    .sports-side {
+      font-size: 12px;
+      color: var(--muted);
+      border-left: 1px dashed rgba(148, 163, 184, 0.6);
+      padding-left: 14px;
+    }
+
+    .sports-side strong {
+      color: #e5f2ff;
+    }
+
+    /* NEWSLETTER */
+    .newsletter-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .newsletter-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.98);
+      color: #e5f2ff;
+      font-size: 12px;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .newsletter-cta span.icon {
+      font-size: 16px;
+    }
+
+    /* LOCAL SHOWS / TICKETS */
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .tickets-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(24, 24, 27, 0.96);
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    .tickets-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(22, 163, 74, 0.6);
+    }
+
+    .tickets-savings {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #bbf7d0;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 26px 20px 40px;
+      background: rgba(2, 6, 23, 0.98);
+      border-top: 1px solid rgba(148, 163, 184, 0.6);
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      position: relative;
+      z-index: 5;
+    }
+
+    #version-info {
+      margin-top: 6px;
+      color: #7dd3fc;
+      font-size: 11px;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .wave,
+      .wave-shimmer,
+      .hero-mist,
+      .bubble,
+      .portal-orb,
+      .portal-orb::before,
+      .portal-orb-core,
+      .summon-btn,
+      .summon-emoji {
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .menu {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+
+      .sports-edge-body,
+      .tickets-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sports-side {
+        border-left: none;
+        border-top: 1px dashed rgba(148, 163, 184, 0.6);
+        padding-left: 0;
+        padding-top: 10px;
+        margin-top: 6px;
+      }
+
+      .summon-wrapper {
+        right: 10px;
+        bottom: 14px;
+      }
+
+      .summon-btn {
+        min-width: 210px;
+        padding: 9px 14px;
+      }
+
+      .portal-orb {
+        width: 165px;
+        height: 165px;
+      }
+
+      .hero-waves {
+        inset: 52% -10% -60px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- 3D OCEAN BACKGROUND (THREE.JS) -->
@@ -66,7 +1254,7 @@
 
       <!-- Center Orb Portal -->
       <div class="portal-orb-wrapper">
-        <div id="portalOrb" class="portal-orb">
+        <div id="portalOrb" class="portal-orb" aria-label="OceanOS Portal" role="button" tabindex="0">
           <div class="portal-orb-core"></div>
           <div class="portal-orb-ring"></div>
           <div class="portal-orb-beam"></div>
@@ -250,12 +1438,388 @@
   <footer class="footer" id="contact">
     <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
     <div>Coastal concierge for tech, transport, and systems that actually fit your life.</div>
-    <div id="version-info">Version 4.5-oceanos-reactor</div>
+    <div id="version-info">Version 4.6-oceanos-optimized</div>
   </footer>
 
-  <!-- THREE.js from CDN + modular scripts -->
+  <!-- THREE.js from CDN -->
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="ocean.js"></script>
-  <script src="scripts.js"></script>
+
+  <script>
+    // --------- TRENDING MOCK DATA ----------
+    const TREND_TOPICS = [
+      "Solana yield to pay",
+      "North County coastal concierge",
+      "AI side hustles for 2025",
+      "DFS promos in California",
+      "Ethereum L2 gas savings",
+      "Encinitas sunset sessions",
+      "Stablecoin cash flow ideas",
+      "Web3 ticketing experiments",
+      "Solana Beach remote work",
+      "Automating errands with AI",
+      "Pacific ocean live cams",
+      "Yield-backed subscriptions",
+      "Coastal delivery & transport",
+      "DeFi for real-world bills"
+    ];
+
+    function pickRandomUnique(arr, count) {
+      const copy = [...arr];
+      const picked = [];
+      while (copy.length && picked.length < count) {
+        const idx = Math.floor(Math.random() * copy.length);
+        picked.push(copy.splice(idx, 1)[0]);
+      }
+      return picked;
+    }
+
+    function renderTrends() {
+      const list = document.getElementById("trend-list");
+      if (!list) return;
+      const topics = pickRandomUnique(TREND_TOPICS, 7);
+      list.innerHTML = topics
+        .map((t) => `<li class="trend-pill">#${t}</li>`)
+        .join("");
+    }
+
+    // --------- SPORTS EDGE MOCK DATA ----------
+    const SPORTS_EDGES = [
+      {
+        league: "NBA",
+        matchup: "Phoenix Suns vs Dallas Mavericks",
+        context: "Regular Season • West Coast window",
+        market: "Player Points + Rebounds + Assists",
+        pick: "Dereck Lively II — Over 14.5 PRA",
+        oddsMain: "+112",
+        oddsAlt: "+136",
+        liq: "$27 (example size)",
+        disclaimer:
+          "Educational only — not betting advice. Edges change fast and promos matter more than hot takes."
+      },
+      {
+        league: "NFL",
+        matchup: "San Francisco 49ers vs Seattle Seahawks",
+        context: "Divisional tilt • Prime-time style game",
+        market: "Rushing + Receiving Yards",
+        pick: "Versatile RB Over combo line",
+        oddsMain: "+104",
+        oddsAlt: "+128",
+        liq: "$31 (example size)",
+        disclaimer:
+          "Promotional money and disciplined staking usually matter more than any one angle."
+      },
+      {
+        league: "MLB",
+        matchup: "Los Angeles Dodgers vs San Diego Padres",
+        context: "Night game • Pitcher-friendly park adjustment",
+        market: "Total Bases",
+        pick: "Contact hitter Over 1.5 TB",
+        oddsMain: "+120",
+        oddsAlt: "+148",
+        liq: "$24 (example size)",
+        disclaimer:
+          "Use as a framework for how to think about edges, not as a ticket to hammer blindly."
+      }
+    ];
+
+    function renderSportsEdge() {
+      const container = document.getElementById("sports-edge-body");
+      if (!container) return;
+
+      const edge = SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
+
+      container.innerHTML = `
+        <div class="sports-main">
+          <div class="sports-label">TODAY'S EDGE · ${edge.league}</div>
+          <div class="sports-matchup">${edge.matchup}</div>
+          <div class="sports-meta">${edge.context}</div>
+          <div class="sports-line"><strong>${edge.market}</strong></div>
+          <div class="sports-line">${edge.pick}</div>
+          <div class="sports-odds">
+            <span>Headline odds: ${edge.oddsMain}</span>
+            <span>Alt ladder: ${edge.oddsAlt}</span>
+            <span>Liq idea: ${edge.liq}</span>
+          </div>
+          <div class="sports-note">${edge.disclaimer}</div>
+        </div>
+        <div class="sports-side">
+          <strong>How PJ thinks about this stuff:</strong><br/>
+          Build around promos, edges, and your real life — not chasing every slate.<br/><br/>
+          If you're in North County and curious about turning DFS and promos into a
+          more disciplined system (instead of chaos), PJ can help you sketch it,
+          test it small, and keep it fun.
+        </div>
+      `;
+    }
+
+    // --------- VERSION TIMESTAMP ----------
+    function updateVersionStamp() {
+      const el = document.getElementById("version-info");
+      if (!el) return;
+      const now = new Date().toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      });
+      el.textContent = `Version 4.6-oceanos-optimized • Updated ${now} PST`;
+    }
+
+    // --------- THREE.JS OCEAN (FULL BACKGROUND) ----------
+    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
+    let targetWaveAmp = 1.0;
+
+    function initOcean() {
+      const container = document.getElementById("ocean-container");
+      if (!container || !window.THREE) return;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+
+      // Smart pixel ratio: lighter on mobile, clamped on desktop
+      if (window.innerWidth < 800) {
+        renderer.setPixelRatio(1.2);
+      } else {
+        const dpr = window.devicePixelRatio || 1;
+        renderer.setPixelRatio(Math.min(dpr, 1.8));
+      }
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000814, 1);
+      container.appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+
+      const fov = 55;
+      const aspect = window.innerWidth / window.innerHeight;
+      const near = 0.1;
+      const far = 100;
+      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      camera.position.set(0, 7.2, 11.5);
+      camera.lookAt(0, 0, 0);
+
+      oceanClock = new THREE.Clock();
+
+      // Lower mesh resolution on mobile
+      const segments = window.innerWidth < 800 ? 160 : 260;
+      const geometry = new THREE.PlaneGeometry(40, 40, segments, segments);
+      geometry.rotateX(-Math.PI / 2);
+
+      const vertexShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uWaveAmp;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+
+          vec2 u = f * f * (3.0 - 2.0 * f);
+
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+
+          float t = uTime * 0.5;
+
+          float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
+          float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
+          float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
+
+          float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
+          float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
+          float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
+
+          float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
+          height *= uWaveAmp;
+
+          pos.y += height;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `;
+
+      const fragmentShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+
+          vec2 u = f * f * (3.0 - 2.0 * f);
+
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        void main() {
+          float t = uTime * 0.06;
+
+          float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
+          float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
+          // Slightly reduced fine noise cost
+          float nFine = noise(vUv * 20.0 + vec2(t * 3.2, -t * 2.8));
+
+          float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
+
+          vec3 deep = vec3(0.0, 0.10, 0.22);
+          vec3 mid = vec3(0.02, 0.45, 0.78);
+          vec3 surf = vec3(0.78, 0.97, 1.0);
+
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 3.0));
+
+          float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
+          col += vec3(0.03, 0.07, 0.13) * horizonGlow * 1.8;
+
+          float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
+          float rays = smoothstep(0.72, 1.0, rayPattern);
+          col += vec3(0.08, 0.13, 0.18) * rays * 0.9;
+
+          float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
+          col += shimmer * 0.1;
+
+          float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
+          caustic = smoothstep(0.65, 1.0, caustic);
+          col += caustic * 0.09;
+
+          float spark = smoothstep(0.92, 1.0, nFine);
+          col += vec3(0.14, 0.2, 0.24) * spark * 0.65;
+
+          vec2 center = vUv - 0.5;
+          float dist = length(center);
+          float vignette = smoothstep(0.8, 0.25, dist);
+          col *= mix(0.74, 1.24, vignette);
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      oceanMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 },
+          uWaveAmp: { value: 1.0 },
+        },
+        vertexShader,
+        fragmentShader,
+        side: THREE.DoubleSide,
+      });
+
+      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
+      scene.add(oceanMesh);
+
+      const fogColor = new THREE.Color(0x000817);
+      scene.fog = new THREE.Fog(fogColor, 12, 45);
+      renderer.setClearColor(fogColor, 1);
+
+      window.addEventListener("resize", onWindowResize, false);
+
+      animateOcean();
+    }
+
+    function onWindowResize() {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animateOcean() {
+      requestAnimationFrame(animateOcean);
+
+      if (!oceanClock || !oceanMaterial || !camera || !renderer || !scene) return;
+
+      const elapsed = oceanClock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value = elapsed;
+
+      const current = oceanMaterial.uniforms.uWaveAmp.value;
+      oceanMaterial.uniforms.uWaveAmp.value =
+        current + (targetWaveAmp - current) * 0.03;
+
+      const sway = Math.sin(elapsed * 0.18) * 0.4;
+      camera.position.x = sway;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    function triggerPortalReactor() {
+      // Big surge
+      targetWaveAmp = 1.7;
+      document.body.classList.add("portal-flash", "portal-ripple");
+
+      // Remove flags after animation
+      setTimeout(() => {
+        targetWaveAmp = 1.05;
+        document.body.classList.remove("portal-flash");
+      }, 620);
+
+      setTimeout(() => {
+        document.body.classList.remove("portal-ripple");
+      }, 1500);
+    }
+
+    function boostWaves() {
+      triggerPortalReactor();
+    }
+
+    // --------- INIT ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      // Slightly defer non-critical work for better perf metrics
+      setTimeout(renderTrends, 50);
+      setTimeout(renderSportsEdge, 80);
+      updateVersionStamp();
+      setTimeout(initOcean, 180);
+
+      const summonBtn = document.getElementById("summonPJBubble");
+      if (summonBtn) {
+        summonBtn.addEventListener("click", () => {
+          boostWaves();
+          // mailto still fires naturally
+        });
+      }
+
+      const portalOrb = document.getElementById("portalOrb");
+      if (portalOrb) {
+        const handleOrbActivate = (e) => {
+          e.preventDefault();
+          boostWaves();
+        };
+        portalOrb.addEventListener("click", handleOrbActivate);
+        portalOrb.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            handleOrbActivate(e);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
