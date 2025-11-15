@@ -1,63 +1,63 @@
 <!--
   SideGuy Solutions
-  Version: 5.1-full-ocean-hero
-  Mode: Full-Screen Pacific · Tap to Summon PJ
+  Version: 5.0-ocean-storm-glow
+  Mode: Storm Glow Pacific Portal + Summon PJ Orb
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- META -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>SideGuy Solutions | Coastal Concierge for Code, Tickets, and DFS Edges</title>
   <meta
     name="description"
-    content="SideGuy Solutions — coastal concierge for custom apps, ticketing systems, automations, and DFS edges in North County San Diego. Tap to summon PJ through a living Pacific backdrop."
+    content="SideGuy Solutions — coastal concierge for tech builds, tickets, and DFS edges in North County San Diego. Tap to summon PJ through a storm-glow Pacific portal."
   />
+  <link rel="canonical" href="https://sideguysolutions.com/" />
 
   <!-- Basic Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta
-    property="og:description"
-    content="Coastal concierge for tech builds, tickets, automations, and DFS edges. Built from Solana Beach and Encinitas, for people who actually ship."
-  />
   <meta property="og:type" content="website" />
+  <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
+  <meta property="og:description" content="Tap to summon PJ through a living Pacific portal for tech builds, tickets, and DFS edges." />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
-  <!-- LocalBusiness Schema (lite) -->
+  <!-- Local Business Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "SideGuy Solutions",
-    "description": "Coastal concierge for apps, automations, ticketing, and DFS edges in North County San Diego.",
+    "description": "Coastal concierge for tech builds, tickets, and DFS edges in North County San Diego.",
     "url": "https://sideguysolutions.com/",
-    "areaServed": {
-      "@type": "Place",
-      "name": "North County San Diego"
-    }
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Solana Beach",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-773-544-1234"
   }
   </script>
 
-  <!-- STYLES -->
   <style>
     :root {
-      --bg: #020617;
+      --bg: #020617; /* slate-950 */
+      --bg-alt: #020617;
+      --blue-deep: #0b1120;
+      --blue-mid: #0369a1;
+      --blue-glow: #22d3ee;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
       --text-main: #e5f2ff;
       --text-soft: #9ca3af;
-      --accent: #38bdf8;
-      --accent-strong: #0ea5e9;
-      --card-bg: rgba(15, 23, 42, 0.82);
-      --card-bg-strong: rgba(15, 23, 42, 0.94);
-      --border-soft: rgba(148, 163, 184, 0.55);
-      --border-strong: rgba(191, 219, 254, 0.85);
-      --radius-xl: 26px;
-      --radius-lg: 18px;
-      --shadow-deep: 0 28px 80px rgba(15, 23, 42, 0.9);
-      --shadow-soft: 0 14px 45px rgba(15, 23, 42, 0.85);
-      --transition-fast: 160ms ease-out;
-      --transition-med: 240ms ease;
+      --card: rgba(15, 23, 42, 0.92);
+      --border-subtle: rgba(148, 163, 184, 0.28);
+      --radius-xl: 20px;
+      --shadow-soft: 0 26px 80px rgba(15, 23, 42, 0.85);
     }
 
     * {
@@ -69,384 +69,497 @@
     html, body {
       width: 100%;
       height: 100%;
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #0f172a 0%, #020617 60%, #000 100%);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", "Segoe UI", sans-serif;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", sans-serif;
-      background: #020617;
-      color: var(--text-main);
       overflow-x: hidden;
       position: relative;
     }
 
-    /* FULL-SCREEN OCEAN CANVAS */
-    #oceanCanvas {
+    .ocean-wrap {
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
+      z-index: -2;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #082f49 0%, #020617 60%, #000 100%);
+    }
+
+    #ocean-canvas {
+      width: 100%;
+      height: 100%;
       display: block;
-      z-index: 0;
     }
 
-    /* Atmospheric overlay on top of the ocean */
-    .ocean-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(59, 130, 246, 0.38), transparent 55%),
-        radial-gradient(circle at 85% 120%, rgba(8, 47, 73, 0.85), transparent 65%),
-        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.78), rgba(0, 0, 0, 0.92));
-      mix-blend-mode: soft-light;
-    }
-
-    .ocean-glass-top {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.24), transparent 60%),
-        radial-gradient(circle at 50% 100%, rgba(15, 23, 42, 0.7), transparent 64%);
-      mix-blend-mode: screen;
-    }
-
-    /* MAIN CONTENT WRAPPER */
-    .site-shell {
+    .page-shell {
       position: relative;
-      z-index: 3;
       min-height: 100vh;
+      padding: 18px 16px 40px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-    }
-
-    .site-inner {
-      width: 100%;
-      max-width: 1160px;
-      padding: 22px 18px 26px;
-      margin-inline: auto;
+      isolation: isolate;
+      z-index: 1;
     }
 
     @media (min-width: 900px) {
-      .site-inner {
-        padding: 26px 22px 32px;
+      .page-shell {
+        padding: 24px 48px 48px;
       }
     }
 
-    /* TOP NAV / BRAND BAR */
-    .nav-row {
+    header.site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
       gap: 12px;
-      margin-bottom: 18px;
     }
 
     .brand-mark {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-logo {
       width: 34px;
       height: 34px;
       border-radius: 999px;
-      background:
-        radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 60%, #0369a1 100%);
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .brand-text-main {
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-    }
-
-    .brand-text-sub {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(148, 163, 184, 0.95);
-    }
-
-    .nav-chip {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.86);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: rgba(191, 219, 254, 0.9);
-      backdrop-filter: blur(18px);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-chip span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.85);
-    }
-
-    /* HERO */
-    .hero-grid {
-      margin-top: 8px;
-      margin-bottom: 22px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
-      gap: 22px;
-      align-items: center;
-    }
-
-    @media (max-width: 880px) {
-      .hero-grid {
-        grid-template-columns: minmax(0, 1fr);
-        margin-top: 14px;
-      }
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.42), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(8, 47, 73, 0.85), transparent 65%),
-        var(--card-bg);
-      border-radius: 24px;
-      padding: 16px 18px 18px;
-      border: 1px solid rgba(191, 219, 254, 0.55);
-      box-shadow: var(--shadow-deep);
-      backdrop-filter: blur(22px);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: radial-gradient(
+        circle at 30% 0%,
+        rgba(56, 189, 248, 0.95),
+        rgba(30, 64, 175, 0.2) 40%,
+        rgba(15, 23, 42, 0.96) 75%
+      );
+      box-shadow:
+        0 0 25px rgba(34, 211, 238, 0.55),
+        0 14px 40px rgba(15, 23, 42, 0.9);
       position: relative;
       overflow: hidden;
     }
 
-    .hero-pill {
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 35% 10% 10% 55%;
+      background: linear-gradient(
+        130deg,
+        rgba(15, 23, 42, 0) 0%,
+        rgba(15, 23, 42, 0.1) 30%,
+        rgba(15, 23, 42, 0.85) 100%
+      );
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      max-width: 260px;
+    }
+
+    nav.header-nav {
+      display: none;
+      gap: 14px;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    nav.header-nav a {
+      text-decoration: none;
+      color: inherit;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    nav.header-nav a:hover {
+      border-color: rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.2), transparent 70%);
+    }
+
+    @media (min-width: 900px) {
+      nav.header-nav {
+        display: flex;
+      }
+    }
+
+    .orb-cta-chip {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 12px 6px 6px;
+      font-size: 0.76rem;
+      padding: 4px 10px 4px 5px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(18px);
-      margin-bottom: 12px;
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.28), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 26px rgba(8, 47, 73, 0.8);
+      white-space: nowrap;
     }
 
-    .hero-pill-badge {
-      width: 22px;
-      height: 22px;
+    .orb-cta-chip-dot {
+      width: 16px;
+      height: 16px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 55%, #0369a1);
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
+      background: radial-gradient(circle at 30% 0%, #f97316 0%, #be123c 40%, #020617 100%);
+      box-shadow:
+        0 0 18px rgba(248, 250, 252, 0.8),
+        0 0 40px rgba(249, 115, 22, 0.8);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-pill-label {
-      font-size: 0.72rem;
+    .orb-cta-chip-dot::after {
+      content: "";
+      position: absolute;
+      inset: 45% 15% 10% 50%;
+      background: linear-gradient(
+        140deg,
+        rgba(15, 23, 42, 0) 0%,
+        rgba(15, 23, 42, 0.18) 25%,
+        rgba(15, 23, 42, 0.95) 100%
+      );
+    }
+
+    main.site-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr);
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    @media (min-width: 960px) {
+      main.site-main {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.95fr);
+        gap: 32px;
+      }
+    }
+
+    .hero-copy {
+      position: relative;
+      max-width: 640px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #bfdbfe;
+      color: var(--text-soft);
+      margin-bottom: 10px;
     }
 
-    h1 {
-      font-size: clamp(2.15rem, 2.6vw + 1rem, 3.1rem);
-      line-height: 1.04;
-      letter-spacing: 0.03em;
-      margin-bottom: 8px;
+    .hero-headline {
+      font-size: clamp(2rem, 3vw + 1.2rem, 3.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      text-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.9),
+        0 0 24px rgba(8, 47, 73, 0.8);
     }
 
-    .hero-sub {
+    .hero-headline span.highlight {
+      background-image: linear-gradient(120deg, #22d3ee, #38bdf8, #f97316);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subcopy {
       font-size: 0.98rem;
       color: var(--text-soft);
-      max-width: 36rem;
-      line-height: 1.55;
-      margin-bottom: 16px;
+      max-width: 440px;
+      margin-bottom: 18px;
     }
 
-    .hero-sub strong {
-      color: #e0f2fe;
-      font-weight: 600;
+    .hero-subcopy strong {
+      color: #e5e7eb;
+      font-weight: 500;
     }
 
-    .hero-tags {
+    .hero-pills-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
-    .hero-tag {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      padding: 4px 10px;
+    .pill-tag {
+      font-size: 0.8rem;
+      padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #cbd5f5;
-      background: radial-gradient(circle at 0% 0%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+      color: #e5e7eb;
+      opacity: 0.9;
     }
 
     .hero-cta-row {
       display: flex;
       flex-wrap: wrap;
+      gap: 10px;
       align-items: center;
-      gap: 10px 12px;
-      margin-bottom: 4px;
+      margin-bottom: 18px;
     }
 
     .btn-primary {
+      appearance: none;
       border: none;
-      cursor: pointer;
+      outline: none;
+      padding: 10px 18px;
       border-radius: 999px;
-      padding: 9px 20px 10px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: radial-gradient(circle at 0% 0%, #e0f2fe, #0ea5e9 40%, #0369a1 100%);
-      color: #020617;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #0b1120;
+      background: radial-gradient(circle at top, #f97316, #fbbf24);
       box-shadow:
-        0 14px 35px rgba(15, 23, 42, 0.9),
-        0 0 32px rgba(59, 130, 246, 0.95);
+        0 0 24px rgba(249, 115, 22, 0.7),
+        0 12px 32px rgba(15, 23, 42, 0.95);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: transform var(--transition-fast),
-        box-shadow var(--transition-fast), filter var(--transition-fast);
+      text-decoration: none;
       white-space: nowrap;
     }
 
-    .btn-primary span.arrow {
-      font-size: 16px;
-      transform: translateY(1px);
+    .btn-primary span.icon {
+      font-size: 1.1em;
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px) scale(1.02);
+      transform: translateY(-1px);
       box-shadow:
-        0 20px 42px rgba(15, 23, 42, 0.98),
-        0 0 44px rgba(59, 130, 246, 0.98);
-      filter: brightness(1.04);
+        0 0 32px rgba(249, 115, 22, 0.8),
+        0 18px 40px rgba(15, 23, 42, 0.98);
     }
 
-    .btn-primary:active {
-      transform: translateY(0) scale(0.99);
-      box-shadow:
-        0 10px 26px rgba(15, 23, 42, 0.9);
-      filter: brightness(0.97);
+    .btn-ghost {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6));
+      font-size: 0.84rem;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      cursor: pointer;
     }
 
-    .hero-note {
-      font-size: 0.8rem;
-      color: rgba(148, 163, 184, 0.96);
-      max-width: 18rem;
+    .btn-ghost span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px #22c55e;
     }
 
     .hero-footnote {
-      font-size: 0.75rem;
-      color: rgba(148, 163, 184, 0.9);
-      margin-top: 8px;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      opacity: 0.9;
     }
 
-    /* HERO RIGHT: QUICK STACK CARD */
-    .stack-card {
-      background: var(--card-bg-strong);
-      border-radius: 22px;
-      padding: 14px 16px 14px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(20px);
-      display: grid;
-      grid-template-rows: auto auto auto;
-      gap: 12px;
+    .hero-footnote strong {
+      color: #e5e7eb;
+      font-weight: 500;
     }
 
-    .stack-header {
+    .orb-column {
+      position: relative;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      color: rgba(191, 219, 254, 0.98);
+      margin-top: 4px;
     }
 
-    .stack-header-pill {
-      padding: 4px 10px;
+    @media (min-width: 960px) {
+      .orb-column {
+        justify-content: flex-end;
+        margin-top: 0;
+      }
+    }
+
+    .orb-shell {
+      position: relative;
+      width: min(280px, 70vw);
+      aspect-ratio: 1 / 1;
       border-radius: 999px;
-      border: 1px solid rgba(59, 130, 246, 0.8);
-      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(34, 211, 238, 0.2), transparent 60%),
+        radial-gradient(circle at 80% 120%, rgba(249, 115, 22, 0.18), transparent 65%);
+    }
+
+    .orb-shell::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: inherit;
+      background:
+        conic-gradient(
+          from 210deg,
+          rgba(8, 47, 73, 0.2),
+          rgba(34, 211, 238, 0.24),
+          rgba(249, 115, 22, 0.32),
+          rgba(8, 47, 73, 0.4),
+          rgba(30, 64, 175, 0.6),
+          rgba(8, 47, 73, 0.2)
+        );
+      opacity: 0.4;
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .summon-orb {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(248, 250, 252, 0.8), rgba(148, 163, 184, 0.1) 40%, rgba(15, 23, 42, 0.95) 80%),
+        radial-gradient(circle at 50% 120%, rgba(59, 130, 246, 0.7), rgba(15, 23, 42, 1));
+      box-shadow:
+        0 0 45px rgba(34, 211, 238, 0.85),
+        0 28px 70px rgba(15, 23, 42, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 34px 22px;
+      cursor: pointer;
+      outline: none;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .summon-orb:hover,
+    .summon-orb:focus-visible {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow:
+        0 0 62px rgba(56, 189, 248, 0.95),
+        0 32px 80px rgba(15, 23, 42, 0.98);
+    }
+
+    .summon-orb::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: inherit;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at 70% 0%, rgba(248, 250, 252, 0.22), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .summon-orb-label {
+      font-size: 0.8rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 6px;
     }
 
-    .stack-items {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      font-size: 0.8rem;
-    }
-
-    .stack-item {
-      border-radius: 14px;
-      padding: 8px 10px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.7));
-    }
-
-    .stack-label {
-      font-size: 0.7rem;
+    .summon-orb-title {
+      font-size: 1.05rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: rgba(148, 163, 184, 0.96);
-      margin-bottom: 3px;
+      letter-spacing: 0.25em;
+      margin-bottom: 4px;
     }
 
-    .stack-value {
-      font-size: 0.84rem;
+    .summon-orb-sub {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+      max-width: 240px;
+    }
+
+    .summon-orb-prompt {
+      font-size: 0.76rem;
       color: #e5e7eb;
+      opacity: 0.96;
     }
 
-    .stack-footer {
-      font-size: 0.75rem;
-      color: rgba(148, 163, 184, 0.96);
+    .summon-orb-prompt span {
+      font-weight: 500;
+      color: #f9fafb;
     }
 
-    /* SECTIONS */
-    .sections {
+    .orb-hint {
       margin-top: 10px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
-      gap: 18px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-soft);
     }
 
-    @media (max-width: 900px) {
-      .sections {
-        grid-template-columns: minmax(0, 1fr);
+    .orb-hint strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .grid-sections {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr);
+      gap: 16px;
+    }
+
+    @media (min-width: 880px) {
+      .grid-sections {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.05fr);
       }
     }
 
     .card {
+      position: relative;
+      padding: 16px 16px 14px;
       border-radius: var(--radius-xl);
-      padding: 14px 16px 16px;
-      border: 1px solid var(--border-soft);
-      background: var(--card-bg);
-      backdrop-filter: blur(18px);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.96));
+      border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(14px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.2), transparent 55%),
+        radial-gradient(circle at 100% 120%, rgba(249, 115, 22, 0.16), transparent 60%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .card-title-row {
@@ -458,441 +571,529 @@
     }
 
     .card-title {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: rgba(191, 219, 254, 0.96);
     }
 
-    .card-pill {
+    .card-chip {
       font-size: 0.7rem;
-      padding: 4px 9px;
+      padding: 3px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: rgba(148, 163, 184, 0.96);
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      color: #e5e7eb;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+      white-space: nowrap;
     }
 
     .card-body {
       font-size: 0.86rem;
-      color: rgba(209, 213, 219, 0.96);
-      line-height: 1.55;
+      color: var(--text-soft);
+      margin-bottom: 8px;
     }
 
     .card-list {
-      margin-top: 8px;
-      padding-left: 14px;
+      list-style: none;
+      font-size: 0.85rem;
+      color: #e5e7eb;
+      display: grid;
+      gap: 4px;
+      margin-bottom: 6px;
     }
 
     .card-list li {
-      margin-bottom: 4px;
-      color: rgba(209, 213, 219, 0.94);
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
     }
 
-    .pill-row {
-      margin-top: 6px;
+    .card-list li span.bullet {
+      margin-top: 2px;
+      font-size: 0.9em;
+    }
+
+    .card-footnote {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .lead-magnet-card {
+      border-color: rgba(249, 115, 22, 0.55);
+      background:
+        radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98)),
+        radial-gradient(circle at 120% 100%, rgba(249, 115, 22, 0.24), rgba(15, 23, 42, 0.96));
+    }
+
+    .lead-magnet-chip {
+      border-color: rgba(249, 115, 22, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: #fed7aa;
+    }
+
+    .lead-magnet-cta-row {
+      margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
+      align-items: center;
     }
 
-    .mini-pill {
-      font-size: 0.7rem;
-      padding: 3px 8px;
+    .pill-soft {
+      font-size: 0.75rem;
+      padding: 4px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      color: rgba(191, 219, 254, 0.96);
+      border: 1px dashed rgba(249, 115, 22, 0.6);
+      background-color: rgba(15, 23, 42, 0.9);
+      color: #fed7aa;
     }
 
-    .faq-item {
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px dashed rgba(55, 65, 81, 0.85);
-      font-size: 0.8rem;
-    }
-
-    .faq-q {
-      font-weight: 600;
-      color: #e5e7eb;
-      margin-bottom: 1px;
-    }
-
-    .faq-a {
-      color: rgba(156, 163, 175, 0.95);
-    }
-
-    /* FOOTER */
-    .footer-row {
-      width: 100%;
-      max-width: 1160px;
-      margin: 18px auto 10px;
-      padding: 8px 18px 10px;
-      border-top: 1px solid rgba(30, 64, 175, 0.7);
+    footer.site-footer {
+      margin-top: 26px;
+      font-size: 0.75rem;
+      color: var(--text-soft);
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.76rem;
-      color: rgba(148, 163, 184, 0.98);
-      gap: 10px;
-      z-index: 3;
-      position: relative;
+      gap: 8px;
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+      padding-top: 12px;
     }
 
     .version-pill {
-      padding: 4px 9px;
+      font-size: 0.74rem;
+      padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: rgba(226, 232, 240, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
     }
 
-    .footer-row a {
-      color: #bfdbfe;
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: inherit;
       text-decoration: none;
+      opacity: 0.9;
     }
 
-    .footer-row a:hover {
+    .footer-links a:hover {
       text-decoration: underline;
     }
 
-    /* SUMMON FLASH */
-    body.summon-flash::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 40%, rgba(129, 230, 217, 0.6), transparent 65%);
-      pointer-events: none;
-      mix-blend-mode: screen;
-      animation: summonFlash 0.6s ease-out forwards;
-      z-index: 999;
+    body.portal-flash {
+      animation: portalFlash 620ms ease-out;
     }
 
-    @keyframes summonFlash {
-      from { opacity: 1; }
-      to { opacity: 0; }
+    @keyframes portalFlash {
+      0% {
+        filter: brightness(1) saturate(1);
+      }
+      30% {
+        filter: brightness(1.25) saturate(1.25);
+      }
+      60% {
+        filter: brightness(1.1) saturate(1.15);
+      }
+      100% {
+        filter: brightness(1) saturate(1);
+      }
+    }
+
+    body.portal-ripple .summon-orb {
+      animation: portalPulse 950ms ease-out;
+    }
+
+    @keyframes portalPulse {
+      0% {
+        transform: translateY(0) scale(1);
+        box-shadow:
+          0 0 45px rgba(34, 211, 238, 0.85),
+          0 28px 70px rgba(15, 23, 42, 0.98);
+      }
+      35% {
+        transform: translateY(-3px) scale(1.04);
+        box-shadow:
+          0 0 75px rgba(56, 189, 248, 0.95),
+          0 32px 85px rgba(15, 23, 42, 0.98);
+      }
+      100% {
+        transform: translateY(-1px) scale(1.01);
+        box-shadow:
+          0 0 60px rgba(56, 189, 248, 0.9),
+          0 30px 80px rgba(15, 23, 42, 0.98);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
     }
   </style>
 </head>
-
 <body>
-  <!-- FULL-SCREEN OCEAN -->
-  <canvas id="oceanCanvas"></canvas>
-  <div class="ocean-overlay"></div>
-  <div class="ocean-glass-top"></div>
-
-  <!-- CONTENT -->
-  <div class="site-shell">
-    <div class="site-inner">
-      <!-- TOP NAV / BRAND -->
-      <header class="nav-row">
-        <div class="brand-mark">
-          <div class="brand-logo">SJ</div>
-          <div>
-            <div class="brand-text-main">SideGuy Solutions</div>
-            <div class="brand-text-sub">Where code meets the coastline</div>
-          </div>
-        </div>
-        <div class="nav-chip">
-          <span class="dot"></span>
-          Live from North County · CA
-        </div>
-      </header>
-
-      <!-- HERO -->
-      <section class="hero-grid">
-        <div class="hero-card">
-          <div class="hero-pill">
-            <div class="hero-pill-badge">🌊</div>
-            <span class="hero-pill-label">Coastal Concierge for Builds That Ship</span>
-          </div>
-
-          <h1>Tech that feels like oceanfront service.</h1>
-
-          <p class="hero-sub">
-            From <strong>apps and automations</strong> to
-            <strong>ticketing systems</strong> and
-            <strong>DFS edges</strong>, SideGuy Solutions is your
-            <strong>North County fixer</strong> for builds that actually launch —
-            and don’t vanish into backlog hell.
-          </p>
-
-          <div class="hero-tags">
-            <span class="hero-tag">Custom Apps &amp; APIs</span>
-            <span class="hero-tag">Ticketing &amp; Events</span>
-            <span class="hero-tag">DFS &amp; Sports Edge</span>
-            <span class="hero-tag">Automation &amp; Web3</span>
-          </div>
-
-          <div class="hero-cta-row">
-            <button class="btn-primary" id="summonBtn">
-              TAP TO SUMMON PJ
-              <span class="arrow">☝️</span>
-            </button>
-            <p class="hero-note">
-              One line into the oceanfront guy who actually calls you back, sends loom vids, and ships on schedule.
-            </p>
-          </div>
-
-          <p class="hero-footnote">
-            🧾 Not sure what you need? Pitch the chaos. PJ will translate it into a build plan, backlog, and budget.
-          </p>
-        </div>
-
-        <!-- STACK CARD -->
-        <aside class="stack-card" aria-label="SideGuy snapshot">
-          <div class="stack-header">
-            <span class="stack-header-pill">Current Stack</span>
-            <span>North County · Remote-friendly · Fast-moving</span>
-          </div>
-
-          <div class="stack-items">
-            <div class="stack-item">
-              <div class="stack-label">Builds</div>
-              <div class="stack-value">
-                Apps, portals, internal tools,<br />ticketing flows, sports models.
-              </div>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">Modes</div>
-              <div class="stack-value">
-                Fixed scopes, retainers,<br />rev-share if the upside is real.
-              </div>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">Who</div>
-              <div class="stack-value">
-                Founders, operators, GMs,<br />“get it done” people.
-              </div>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">Vibes</div>
-              <div class="stack-value">
-                Oceanfront, straight talk,<br />screenshots instead of excuses.
-              </div>
-            </div>
-          </div>
-
-          <div class="stack-footer">
-            ⚙️ Backbone powered by Kromeon &amp; friends — quiet dev killers behind the scenes.
-          </div>
-        </aside>
-      </section>
-
-      <!-- SECTIONS -->
-      <section class="sections">
-        <!-- LEFT: WHAT SIDEGUY SOLVES -->
-        <article class="card">
-          <div class="card-title-row">
-            <h2 class="card-title">What SideGuy Solves</h2>
-            <span class="card-pill">Pick your wave</span>
-          </div>
-          <div class="card-body">
-            <ul class="card-list">
-              <li><strong>Apps &amp; internal tools</strong> — client portals, ops dashboards, workflows that finally match how your team actually works.</li>
-              <li><strong>Ticketing &amp; live events</strong> — flows, seating logic, payment rails, and back-office views that don’t make your staff cry.</li>
-              <li><strong>DFS &amp; sports edge</strong> — props tooling, slip helpers, and automation around lines, promos, and exposure.</li>
-              <li><strong>Automation &amp; Web3</strong> — zaps, bots, and on-chain / off-chain glue when Stripe and spreadsheets aren’t enough.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">“We’ve outgrown spreadsheets.”</span>
-              <span class="mini-pill">“Our dev vanished.”</span>
-              <span class="mini-pill">“We know there’s an edge.”</span>
-              <span class="mini-pill">“We just need a SideGuy.”</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- RIGHT: HOW IT WORKS / CONTACT -->
-        <article class="card">
-          <div class="card-title-row">
-            <h2 class="card-title">How It Works</h2>
-            <span class="card-pill">Keep it simple</span>
-          </div>
-          <div class="card-body">
-            <ol class="card-list">
-              <li><strong>Summon PJ</strong> — tap the button or email and brain-dump your idea, mess, or play.</li>
-              <li><strong>Get a quick loom + plan</strong> — rough scope, ballpark timeline, and “this is how we ship it.”</li>
-              <li><strong>Lock a lane</strong> — fixed scope, retainer, or rev-share if the upside makes sense.</li>
-              <li><strong>Ship, iterate, repeat</strong> — screenshots, check-ins, and real progress — not vaporware.</li>
-            </ol>
-
-            <div class="faq-item">
-              <div class="faq-q">What’s the best first message?</div>
-              <div class="faq-a">
-                Tell PJ who you are, what you’re trying to do, and what’s currently blocking you. Links, screenshots, and chaos all welcome.
-              </div>
-            </div>
-
-            <div class="faq-item">
-              <div class="faq-q">Where does this all happen?</div>
-              <div class="faq-a">
-                Mostly from Solana Beach / Encinitas, occasionally from a random airport, but always wired into your stack.
-              </div>
-            </div>
-
-            <div style="margin-top:8px;">
-              📧 Or skip the button:
-              <a href="mailto:pj@sideguysolutions.com">pj@sideguysolutions.com</a>
-            </div>
-          </div>
-        </article>
-      </section>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="footer-row">
-      <span class="version-pill">v5.1 · full-ocean-hero</span>
-      <span>
-        SideGuy Solutions · Somewhere near the 101 ·
-        <a href="mailto:pj@sideguysolutions.com">pj@sideguysolutions.com</a>
-      </span>
-    </footer>
+  <div class="ocean-wrap" aria-hidden="true">
+    <canvas id="ocean-canvas"></canvas>
   </div>
 
-  <!-- JS: FULL-SCREEN OCEAN + SUMMON BTN -->
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">SideGuy Solutions</div>
+          <div class="brand-tagline">
+            Coastal concierge for tech builds, tickets, and DFS edges.
+          </div>
+        </div>
+      </div>
+      <div class="orb-cta-chip" aria-hidden="true">
+        <div class="orb-cta-chip-dot"></div>
+        <span>Tap portal · Summon PJ</span>
+      </div>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#edges">Edges</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#summon">Summon PJ</a>
+      </nav>
+    </header>
+
+    <main class="site-main">
+      <section class="hero-copy" aria-labelledby="hero-heading">
+        <p class="hero-eyebrow">North County · Solana Beach → Encinitas</p>
+        <h1 id="hero-heading" class="hero-headline">
+          Where <span class="highlight">code meets the coastline</span> and the portal opens on tap.
+        </h1>
+        <p class="hero-subcopy">
+          PJ helps you turn <strong>ideas, tickets, and edges</strong> into
+          something real — from <strong>apps and automations</strong> to
+          <strong>DFS angles and access plays</strong> that fit your actual life in North County.
+        </p>
+
+        <div class="hero-pills-row">
+          <span class="pill-tag">Custom dev without the agency drama</span>
+          <span class="pill-tag">Tickets & access with a local brain</span>
+          <span class="pill-tag">DFS edges · small edges, real money</span>
+        </div>
+
+        <div class="hero-cta-row">
+          <a
+            href="mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20Portal&body=Tell%20me%20what%20you%27re%20trying%20to%20solve%20%28tech%2C%20tickets%2C%20DFS%2C%20or%20all%20of%20the%20above%29."
+            class="btn-primary"
+          >
+            <span class="icon">⚡</span>
+            <span>Link up with PJ</span>
+          </a>
+          <button type="button" class="btn-ghost" id="ghost-orb-trigger">
+            <span class="dot"></span>
+            Or tap the portal instead
+          </button>
+        </div>
+
+        <p class="hero-footnote">
+          <strong>One text away.</strong> If you know what’s good for you.
+        </p>
+      </section>
+
+      <section class="orb-column" id="summon">
+        <div class="orb-shell">
+          <div
+            id="summon-orb"
+            class="summon-orb"
+            role="button"
+            tabindex="0"
+            aria-label="Tap to open the storm-glow Pacific portal and summon PJ."
+          >
+            <div class="summon-orb-label">Tap to summon</div>
+            <div class="summon-orb-title">PJ</div>
+            <div class="summon-orb-sub">
+              Coastal concierge for code, tickets, and edges. Storm-glow Pacific portal included.
+            </div>
+            <div class="summon-orb-prompt">
+              <span>Tap once.</span> Watch the portal breathe, then your email app opens.
+            </div>
+          </div>
+        </div>
+        <p class="orb-hint">
+          <strong>Pro tip:</strong> Best enjoyed in the dark with sound on and your next move in mind.
+        </p>
+      </section>
+    </main>
+
+    <section id="services" class="grid-sections" aria-label="SideGuy Solutions services and edges">
+      <article class="card" aria-labelledby="card-dev-title">
+        <div class="card-inner">
+          <div class="card-title-row">
+            <h2 id="card-dev-title" class="card-title">Tech builds & smarter systems</h2>
+            <span class="card-chip">Kromeon-backed</span>
+          </div>
+          <p class="card-body">
+            You don’t need a 40-page scope or a 12-person agency. You need one
+            <strong>SideGuy</strong> who knows how to take you from “messy notes” to
+            <strong>live product</strong>.
+          </p>
+          <ul class="card-list">
+            <li>
+              <span class="bullet">▹</span>
+              <span>Apps & portals that actually ship (iOS, web, internal tools).</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Automations that delete busywork instead of adding dashboards.</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Stablecoin / crypto payments and <strong>crypto escrow for dev projects</strong>.</span>
+            </li>
+          </ul>
+          <p class="card-footnote">
+            Perfect for founders, operators, and “my dev ghosted me” survivors.
+          </p>
+        </div>
+      </article>
+
+      <article id="edges" class="card" aria-labelledby="card-edges-title">
+        <div class="card-inner">
+          <div class="card-title-row">
+            <h2 id="card-edges-title" class="card-title">DFS edges & small edges compounding</h2>
+            <span class="card-chip">+EV, not degen</span>
+          </div>
+          <p class="card-body">
+            This isn’t “bet your rent” energy. It’s about finding
+            <strong>structural edges</strong> — promos, misprices, and DFS builds you can
+            repeat without nuking your life.
+          </p>
+          <ul class="card-list">
+            <li>
+              <span class="bullet">▹</span>
+              <span>Promo hunting and DFS structures that make sense in English.</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Simple tracking so you know if you’re actually up.</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Edges that fit <strong>your risk tolerance</strong>, not someone else’s screenshot.</span>
+            </li>
+          </ul>
+          <p class="card-footnote">
+            You bring the bankroll and the rules. PJ brings the filters, guards, and edges.
+          </p>
+        </div>
+      </article>
+
+      <article id="tickets" class="card" aria-labelledby="card-tickets-title">
+        <div class="card-inner">
+          <div class="card-title-row">
+            <h2 id="card-tickets-title" class="card-title">Tickets, access & real-world leverage</h2>
+            <span class="card-chip">OnlineSeats DNA</span>
+          </div>
+          <p class="card-body">
+            From <strong>Padres nights</strong> to last-minute events, PJ has years of
+            ticketing and access baked in. The goal isn’t flex — it’s leverage.
+          </p>
+          <ul class="card-list">
+            <li>
+              <span class="bullet">▹</span>
+              <span>Smart seats for clients, friends, and family that don’t wreck your month.</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Strategies for using tickets as a <strong>relationship and deal tool</strong>.</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Local plays around North County, Petco, and beyond.</span>
+            </li>
+          </ul>
+          <p class="card-footnote">
+            Access is only useful if it feeds the life you’re actually building.
+          </p>
+        </div>
+      </article>
+
+      <article class="card lead-magnet-card" aria-labelledby="card-lead-title">
+        <div class="card-inner">
+          <div class="card-title-row">
+            <h2 id="card-lead-title" class="card-title">Free 10-minute portal call</h2>
+            <span class="card-chip lead-magnet-chip">Lead magnet</span>
+          </div>
+          <p class="card-body">
+            One short call to decide if you should <strong>build, bet, or pass</strong> on
+            the thing in your head right now. No pitch deck. No pressure. Just signal.
+          </p>
+          <ul class="card-list">
+            <li>
+              <span class="bullet">▹</span>
+              <span>Pick one lane: <strong>tech</strong>, <strong>tickets</strong>, or <strong>DFS edges</strong>.</span>
+            </li>
+            <li>
+              <span class="bullet">▹</span>
+              <span>Walk away with one concrete next step you can take this week.</span>
+            </li>
+          </ul>
+          <div class="lead-magnet-cta-row">
+            <a
+              href="mailto:pj@sideguysolutions.com?subject=Portal%20Call%20Request&body=Quick%20context%3A%0A%0ALane%20%28tech%2C%20tickets%2C%20DFS%29%3A%20%0AWhat%27s%20on%20your%20mind%3A%20%0APreferred%20days%2Ftimes%20%28PT%29%3A%20"
+              class="btn-primary"
+            >
+              <span class="icon">🌊</span>
+              <span>Claim the portal call</span>
+            </a>
+            <span class="pill-soft">Limited portal invites · keep it tight</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="site-footer" aria-label="Site footer">
+      <div class="version-pill">
+        v5.0-ocean-storm-glow · Pacific Portal Edition
+      </div>
+      <div class="footer-links">
+        <span>© <span id="footer-year">2025</span> SideGuy Solutions · North County, CA</span>
+        <a href="mailto:pj@sideguysolutions.com">Email PJ</a>
+      </div>
+    </footer>
+  </div>
+  <!-- Three.js + Storm Glow Pacific Shader -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
   <script>
-    (function () {
-      const canvas = document.getElementById("oceanCanvas");
-      if (!canvas || !canvas.getContext) return;
-      const ctx = canvas.getContext("2d");
+    let scene, camera, renderer, oceanMesh, oceanMaterial;
+    let targetWaveAmp = 0.75;
+    let targetGlow = 0.85;
+    let clock;
 
-      let viewW = window.innerWidth;
-      let viewH = window.innerHeight;
-      let t = 0;
-      let boost = 0;
+    function initOcean() {
+      const canvas = document.getElementById("ocean-canvas");
+      if (!canvas || !window.THREE) return;
 
-      function resizeCanvas() {
-        const dpr = window.devicePixelRatio || 1;
-        viewW = window.innerWidth;
-        viewH = window.innerHeight;
-        canvas.width = viewW * dpr;
-        canvas.height = viewH * dpr;
-        canvas.style.width = viewW + "px";
-        canvas.style.height = viewH + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // logical coords = CSS pixels
-      }
+      scene = new THREE.Scene();
 
-      window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
+      const aspect = window.innerWidth / window.innerHeight;
+      camera = new THREE.PerspectiveCamera(55, aspect, 0.1, 50);
+      camera.position.set(0, 2.2, 4.8);
+      camera.lookAt(0, 0, 0);
 
-      function draw() {
-        const w = viewW;
-        const h = viewH;
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x020617, 1);
 
-        // Deep ocean base gradient
-        const g = ctx.createRadialGradient(
-          w * 0.5,
-          h * 0.2,
-          Math.min(w, h) * 0.08,
-          w * 0.5,
-          h * 0.95,
-          Math.max(w, h) * 1.1
-        );
-        g.addColorStop(0, "#3b82f6");
-        g.addColorStop(0.25, "#0ea5e9");
-        g.addColorStop(0.55, "#0369a1");
-        g.addColorStop(0.85, "#020617");
-        g.addColorStop(1, "#000000");
+      const geometry = new THREE.PlaneGeometry(16, 16, 240, 240);
 
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, w, h);
+      const uniforms = {
+        uTime: { value: 0 },
+        uWaveAmp: { value: 0.75 },
+        uGlowIntensity: { value: 0.85 },
+        uBaseColorDeep: { value: new THREE.Color(0x020617) },
+        uBaseColorMid: { value: new THREE.Color(0x0f172a) },
+        uHighlightColor: { value: new THREE.Color(0x22d3ee) },
+        uStormGlowColor: { value: new THREE.Color(0xf97316) },
+        uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+      };
 
-        // Multi-layer waves
-        const baseAmp = 10 + boost * 7;
-        const layerCount = 6;
-        const baseSpeed = 0.0024;
-        const baseFreq = 0.016;
+      const vertexShader = `
+        uniform float uTime;
+        uniform float uWaveAmp;
 
-        for (let layer = 0; layer < layerCount; layer++) {
-          const depth = layer / layerCount;
-          const amp = baseAmp * (1 - depth * 0.6);
-          const speed = baseSpeed * (1 + depth * 3.2);
-          const freq = baseFreq * (1 + depth * 1.5);
-          const yBase = h * 0.45 + depth * h * 0.45;
+        varying vec3 vPos;
+        varying float vWaveMix;
 
-          const hue = 195 + depth * 20;
-          const lightness = 40 - depth * 18;
-          const alpha = 0.7 - depth * 0.45;
-
-          ctx.beginPath();
-          for (let x = -10; x <= w + 10; x += 4) {
-            const phase = t * speed * 1000 + layer * 24;
-            const y =
-              yBase +
-              Math.sin(x * freq + phase) * amp +
-              Math.sin(x * freq * 0.5 + phase * 0.55) * amp * 0.4;
-            if (x === -10) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-          }
-          ctx.lineTo(w + 20, h + 40);
-          ctx.lineTo(-20, h + 40);
-          ctx.closePath();
-          ctx.fillStyle = `hsla(${hue}, 85%, ${lightness}%, ${alpha})`;
-          ctx.fill();
+        // Cheap 3D noise-ish function
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
         }
 
-        // Caustic light streaks
-        const streakCount = 22;
-        for (let i = 0; i < streakCount; i++) {
-          const phase = t * 0.55 + i * 0.45;
-          const cx = (Math.sin(phase) * 0.5 + 0.5) * w;
-          const cy = (Math.cos(phase * 1.3) * 0.2 + 0.45) * h;
-          const radius = Math.min(w, h) * (0.12 + (Math.sin(phase * 1.4) + 1) * 0.05);
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
 
-          const lg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-          lg.addColorStop(0, "rgba(240, 249, 255, 0.30)");
-          lg.addColorStop(0.4, "rgba(191, 219, 254, 0.12)");
-          lg.addColorStop(1, "rgba(15, 23, 42, 0)");
-          ctx.fillStyle = lg;
-          ctx.beginPath();
-          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-          ctx.fill();
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+
+          vec2 u = f * f * (3.0 - 2.0 * f);
+
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
         }
 
-        // Soft vignette around edges
-        const vignette = ctx.createRadialGradient(
-          w * 0.5,
-          h * 0.4,
-          Math.min(w, h) * 0.15,
-          w * 0.5,
-          h * 0.5,
-          Math.max(w, h) * 0.9
-        );
-        vignette.addColorStop(0, "rgba(0,0,0,0)");
-        vignette.addColorStop(1, "rgba(0,0,0,0.48)");
-        ctx.fillStyle = vignette;
-        ctx.fillRect(0, 0, w, h);
+        void main() {
+          vec3 pos = position;
 
-        // Decay boost gradually
-        boost *= 0.96;
+          float t = uTime * 0.24;
 
-        t += 0.008;
-        requestAnimationFrame(draw);
-      }
+          float n1 = noise(pos.xz * 0.35 + vec2(t * 0.45, -t * 0.2));
+          float n2 = noise(pos.xz * 0.18 + vec2(-t * 0.15, t * 0.3));
+          float ridge = abs(n1 * 2.0 - 1.0);
 
-      requestAnimationFrame(draw);
+          float waveMix = mix(n1, ridge, 0.55) + n2 * 0.4;
 
-      // SUMMON PJ
-      const summonBtn = document.getElementById("summonBtn");
+          float elevation = sin(pos.x * 0.75 + t * 1.6) * 0.25 +
+                            cos(pos.z * 0.55 - t * 1.1) * 0.18;
 
-      function summonPJ() {
-        boost = 1.7;
-        document.body.classList.add("summon-flash");
-        setTimeout(() => {
-          document.body.classList.remove("summon-flash");
-        }, 700);
+          elevation += waveMix * 1.2;
+          elevation *= uWaveAmp;
 
-        setTimeout(() => {
-          window.location.href =
-            "mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20-%20SideGuy%20Solutions&body=Hey%20PJ,%0D%0A%0D%0AI%20came%20through%20the%20water%20portal.%20Here%E2%80%99s%20what%20I%E2%80%99m%20trying%20to%20build%20or%20fix:%0D%0A%0D%0A";
-        }, 420);
-      }
+          pos.y += elevation;
 
-      if (summonBtn) {
-        summonBtn.addEventListener("click", summonPJ);
-      }
-    })();
-  </script>
-</body>
-</html>
+          vPos = pos;
+          vWaveMix = waveMix;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `;
+
+      const fragmentShader = `
+        precision highp float;
+
+        uniform float uTime;
+        uniform float uWaveAmp;
+        uniform float uGlowIntensity;
+        uniform vec3 uBaseColorDeep;
+        uniform vec3 uBaseColorMid;
+        uniform vec3 uHighlightColor;
+        uniform vec3 uStormGlowColor;
+        uniform vec2 uResolution;
+
+        varying vec3 vPos;
+        varying float vWaveMix;
+
+        void main() {
+          float t = uTime * 0.25;
+
+          float depth = clamp((vPos.y + 3.0) / 6.2, 0.0, 1.0);
+          vec3 base = mix(uBaseColorDeep, uBaseColorMid, depth);
+
+          float swirl = sin(vPos.x * 0.9 + t * 1.4) * cos(vPos.z * 0.7 - t * 1.1);
+          swirl *= 0.6;
+          float highlightMask = smoothstep(0.2, 0.75, vWaveMix + swirl);
+
+          float storm = sin(vPos.x * 1.6 - t * 2.1) * sin(vPos.z * 1.9 + t * 1.7);
+          storm = abs(storm) * 0.9;
+
+          float glowAmp = uGlowIntensity * (0.7 + uWaveAmp * 0.4);
+          float rim = smoothstep(0.4, 1.0, length(vPos.xz) / 8.0);
+          rim = 1.0 - rim;
+
+          vec3 color = base;
+          color = mix(color, uHighlightColor, highlightMask * 0.9 * glowAmp);
+          color += uStormGlowColor * (storm * glowAmp * rim * 0.4);
+
+          color += vec3(0.02, 0.03, 0.06) * (1.0 - depth);
+
+          float vignette = smoothstep(1
