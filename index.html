@@ -1,16 +1,16 @@
 <!--
   SideGuy Solutions
-  Version: 5.0-ocean-orb-fullsite
+  Version: 5.1-ocean-orb-fullsite
   Hero: "Where code meets the coastline."
   Mode: Real Ocean Shader + Floating Orb + Summon PJ Portal
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="origin-trial" content="WebGLAllow">
 <head>
   <!-- Basic Meta -->
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -163,7 +163,7 @@
         opacity: 1;
       }
       100% {
-        opacity: 0;
+      opacity: 0;
       }
     }
 
@@ -229,6 +229,7 @@
       gap: 1.25rem;
       margin-bottom: clamp(2rem, 3vw, 2.6rem);
     }
+
     .logo-lockup {
       display: flex;
       align-items: center;
@@ -323,7 +324,7 @@
     }
 
     /* ------------------------------
-       HERO SECTION
+       HERO
     ------------------------------ */
 
     .hero {
@@ -444,7 +445,6 @@
       filter: blur(0.5px);
     }
 
-
     /* ------------------------------
        SUMMON PJ ORB BUTTON
     ------------------------------ */
@@ -542,30 +542,669 @@
       border: 1px solid rgba(56, 189, 248, 0.5);
     }
 
+    .orb-button:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 28px rgba(56, 189, 248, 0.9),
+        0 26px 70px rgba(15, 23, 42, 0.96);
+      border-color: rgba(56, 189, 248, 1);
+    }
+
     body.portal-open .orb-button {
       transform: translateY(-1px) scale(1.03);
       background: radial-gradient(circle at 20% 20%, #e0f2fe, #38bdf8 50%, #075985);
     }
 
+    /* Secondary button */
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.7);
+      font-size: 0.86rem;
+      color: var(--text);
+      gap: 0.4rem;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast),
+        color var(--transition-fast);
+    }
+
+    .ghost-btn span {
+      font-size: 1rem;
+    }
+
+    .ghost-btn:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(148, 163, 184, 0.9);
+      transform: translateY(-1px);
+    }
+
     /* ------------------------------
-       SERVICES, DFS, ABOUT, FOOTER
-       (UNCHANGED — CONTINUES CLEANLY)
+       SECTIONS + CARDS
     ------------------------------ */
-</style>
+
+    .section-heading {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #bae6fd;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .section-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin: 0 0 1.4rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border-radius: 1.25rem;
+      padding: 1rem 1.1rem;
+      background: var(--card-soft);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.8);
+      font-size: 0.86rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a5b4fc;
+      margin-bottom: 0.4rem;
+    }
+
+    .card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 0.98rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.6rem 0 0;
+      color: var(--muted);
+    }
+
+    .card-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-list li::before {
+      content: "•";
+      font-size: 0.8rem;
+      color: var(--accent-strong);
+      margin-top: 0.14rem;
+    }
+
+    /* DFS / Lead magnet section */
+
+    .dfs-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .dfs-highlight {
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.2rem;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.3), transparent 55%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dfs-highlight::after {
+      content: "";
+      position: absolute;
+      inset: auto -40%;
+      height: 1px;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.85), transparent 70%);
+      opacity: 0.7;
+    }
+
+    .dfs-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #bbf7d0;
+      margin-bottom: 0.4rem;
+    }
+
+    .dfs-title {
+      margin: 0 0 0.4rem;
+      font-size: 1.1rem;
+    }
+
+    .dfs-copy {
+      margin: 0 0 0.8rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .dfs-note {
+      margin: 0.4rem 0 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .dfs-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .dfs-form input[type="email"] {
+      flex: 1 1 180px;
+      min-width: 0;
+      padding: 0.55rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text);
+      font-size: 0.84rem;
+      outline: none;
+    }
+
+    .dfs-form input[type="email"]::placeholder {
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .dfs-form button {
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+      color: #022c22;
+      cursor: pointer;
+      box-shadow: 0 14px 35px rgba(6, 95, 70, 0.8);
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        filter var(--transition-fast);
+    }
+
+    .dfs-form button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 20px 45px rgba(6, 95, 70, 0.9);
+    }
+
+    .dfs-side {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .dfs-side strong {
+      color: #e5f2ff;
+    }
+
+    /* About + Contact cards */
+
+    .split-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.4rem;
+      align-items: flex-start;
+    }
+
+    .about-card,
+    .contact-card {
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 55px rgba(15, 23, 42, 0.9);
+      font-size: 0.9rem;
+    }
+
+    .about-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.65rem;
+    }
+
+    .about-pill {
+      padding: 0.16rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--muted);
+    }
+
+    .contact-card a.mailto-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.86rem;
+      color: #e0f2fe;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+      transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+    }
+
+    .contact-card a.mailto-link span {
+      font-size: 1rem;
+    }
+
+    .contact-card a.mailto-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(56, 189, 248, 0.95);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.28), rgba(15, 23, 42, 1));
+      box-shadow:
+        0 0 28px rgba(56, 189, 248, 0.8),
+        0 26px 70px rgba(15, 23, 42, 0.96);
+    }
+
+    .contact-note {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-top: 2.2rem;
+      padding-top: 1.1rem;
+      border-top: 1px dashed rgba(148, 163, 184, 0.45);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      opacity: 0.9;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .version-pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+    }
+
+    /* ------------------------------
+       RESPONSIVE
+    ------------------------------ */
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1.5fr);
+      }
+
+      .hero-card {
+        margin-top: 1.4rem;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .dfs-section,
+      .split-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding: 1.4rem 1.1rem;
+        border-radius: 24px;
+      }
+
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        gap: 1.4rem;
+      }
+
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .orb-label {
+        font-size: 0.84rem;
+      }
+
+      .mini-nav {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
 <body>
-
   <!-- Real ocean background -->
   <div id="ocean-container">
     <canvas id="ocean-canvas" aria-hidden="true"></canvas>
   </div>
 
-  <!-- Glass shell -->
+  <!-- Glass shell over the water -->
   <div class="page-overlay">
     <div class="shell">
+      <header class="site-header">
+        <div class="logo-lockup">
+          <div class="logo-orb" aria-hidden="true"></div>
+          <div>
+            <div class="logo-text-main">SideGuy Solutions</div>
+            <div class="logo-text-sub">Where code meets the coastline</div>
+          </div>
+        </div>
 
-      <!-- HEADER + MAIN CONTENT (unchanged) -->
-      <!-- ... your services, DFS, about, contact, footer ... -->
+        <div class="mini-nav" aria-label="Quick navigation">
+          <div class="pill-live">
+            <span class="pill-live-dot" aria-hidden="true"></span>
+            <span>Portal live · North County</span>
+          </div>
+          <a href="#services">Services</a>
+          <a href="#sports-edge">DFS Edge</a>
+          <a href="#contact">Summon PJ</a>
+        </div>
+      </header>
+
+      <main>
+        <!-- HERO -->
+        <section class="hero" id="top" aria-labelledby="hero-title">
+          <div>
+            <p class="eyebrow">North County · Tech · Tickets · DFS · Web3</p>
+            <h1 id="hero-title">Where code meets the coastline.</h1>
+            <p class="hero-sub">
+              SideGuy Solutions is your coastal concierge for apps, AI, ticketing, sports edges,
+              and Web3 payments — from Solana Beach to Encinitas and beyond.
+            </p>
+
+            <div class="hero-ctas">
+              <button
+                class="orb-button"
+                id="summon-orb"
+                type="button"
+                aria-label="Tap to summon PJ by email"
+              >
+                <span class="orb-core" aria-hidden="true"></span>
+                <span class="orb-ring" aria-hidden="true"></span>
+                <span class="orb-label">Tap to Summon PJ</span>
+                <span class="orb-button-badge" aria-hidden="true">Fast lane</span>
+              </button>
+
+              <a class="ghost-btn" href="#services">
+                See what we build
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <p class="microcopy">
+              Tap the orb to wake the portal. Waves spike, the glass glows, and PJ appears in your inbox
+              in one quick email.
+            </p>
+          </div>
+
+          <aside class="hero-card" aria-label="Current SideGuy focus">
+            <div class="hero-card-title">This week with PJ</div>
+            <h2>Coastal concierge for your real-life upgrades.</h2>
+            <ul>
+              <li>Launch or rescue your SaaS, app, or internal tool with a small, sharp dev squad.</li>
+              <li>Lock in better ticket flows for sports, concerts, or membership plays.</li>
+              <li>Turn sportsbooks & DFS promos into a disciplined side strategy — not a gamble.</li>
+              <li>Offer stablecoin / USDC payments & crypto escrow without scaring your CFO.</li>
+            </ul>
+            <div class="hero-card-tagline">
+              If it touches code, cash flow, or coastlines in North County, PJ probably has a play.
+            </div>
+            <div class="hero-card-orb-ghost" aria-hidden="true"></div>
+          </aside>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" aria-labelledby="services-heading">
+          <div class="section-heading" id="services-heading">What the portal handles</div>
+          <h2 class="section-title">Tech, tickets, sports edges & Web3 — in one inbox.</h2>
+          <p class="section-sub">
+            SideGuy Solutions started as “that one guy who makes things happen” and evolved into
+            a small, dangerous network of builders, operators, and deal people. You tap PJ, he
+            routes you to the right solution — or tells you straight if it’s not a fit.
+          </p>
+
+          <div class="card-grid" role="list">
+            <article class="card" role="listitem">
+              <div class="card-tag">Tech & Apps</div>
+              <h3>AI-powered builds & clean UX.</h3>
+              <p>
+                From “idea on a napkin” to shipped product. Kromeon-grade design, real PM, and
+                devs that actually ship.
+              </p>
+              <ul class="card-list">
+                <li>iOS / Android apps & responsive web apps.</li>
+                <li>AI assistants, internal tools, dashboards.</li>
+                <li>Clean UX for non-technical users.</li>
+              </ul>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="card-tag">Tickets & Events</div>
+              <h3>Ticket flows that don’t leak money.</h3>
+              <p>
+                Built on decades of ticketing scars — pricing, seat maps, flows, and KPIs that
+                actually match reality.
+              </p>
+              <ul class="card-list">
+                <li>Custom ticketing & membership portals.</li>
+                <li>Upsells, bundles, and affiliate plays.</li>
+                <li>Reporting that your finance team trusts.</li>
+              </ul>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="card-tag">Sports Edge & DFS</div>
+              <h3>Edges, not “locks.”</h3>
+              <p>
+                Use promos, lines, and DFS rules like a system — not a feeling. No touting. No
+                screenshots of fake yachts.
+              </p>
+              <ul class="card-list">
+                <li>Promo & bonus optimization flows.</li>
+                <li>Simple hedging & risk frameworks.</li>
+                <li>Bankroll & tracking tools you’ll use.</li>
+              </ul>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="card-tag">Web3 & Stablecoin</div>
+              <h3>Crypto that behaves like a grown-up.</h3>
+              <p>
+                Let customers pay in USDC or other stablecoins while you stay compliant and sane.
+              </p>
+              <ul class="card-list">
+                <li>Crypto escrow flows for dev work & deals.</li>
+                <li>Simple invoicing with stablecoin rails.</li>
+                <li>Education for teams that “don’t speak chain.”</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- DFS EDGE / LEAD MAGNET -->
+        <section id="sports-edge" aria-labelledby="sports-edge-heading">
+          <div class="dfs-section">
+            <div class="dfs-highlight">
+              <div class="dfs-label" id="sports-edge-heading">DFS Edge · Free Starter Guide</div>
+              <h2 class="dfs-title">Turn promos into a side strategy, not a hobby.</h2>
+              <p class="dfs-copy">
+                PJ is actively building a disciplined “edges only” playbook — using sportsbook promos,
+                DFS rules, and line shopping to get an actual edge instead of gambling vibes.
+                No guarantees, no moon math — just frameworks.
+              </p>
+
+              <form
+                class="dfs-form"
+                aria-label="Get the DFS Edge starter PDF via email"
+                onsubmit="event.preventDefault(); alert('Drop-in backend or email service here. For now, just email PJ via the orb or contact section.');"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  aria-label="Your best email"
+                  placeholder="Drop your best email for the PDF…"
+                  required
+                />
+                <button type="submit">
+                  Get the free PDF
+                </button>
+              </form>
+
+              <p class="dfs-note">
+                PJ’s rule: treat this like a business, not a casino. The guide walks through
+                basic rules, risk caps, and how to avoid doing anything dumb.
+              </p>
+            </div>
+
+            <div class="dfs-side">
+              <p>
+                <strong>Want this baked into software?</strong>
+                SideGuy can help you build tracking tools, promo dashboards, and risk limits right
+                into your stack — for you, your group chat, or your customer base.
+              </p>
+              <p>
+                There are also plays around
+                <strong>peer-to-peer, on-chain data feeds, and structured pools</strong>. If you’re
+                already thinking there, PJ will happily nerd out with you.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT + CONTACT -->
+        <section id="about" aria-labelledby="about-heading">
+          <div class="split-2">
+            <article class="about-card">
+              <div class="section-heading" id="about-heading">About SideGuy</div>
+              <h2 class="section-title">PJ is your “one text away” operator.</h2>
+              <p>
+                SideGuy Solutions sits between dev shops, founders, sports books, and real people
+                who just want things to work. PJ has lived all those worlds — ticketing,
+                restaurants, SaaS, crypto, and now coastal concierge.
+              </p>
+              <p>
+                You don’t need a 40-slide deck. You need a smart human who can say:
+                “Here’s the move. Here’s the risk. Here’s what it costs.”
+              </p>
+
+              <div class="about-pill-row" aria-label="What PJ handles in a week">
+                <span class="about-pill">App triage & rebuilds</span>
+                <span class="about-pill">Ticket & membership flows</span>
+                <span class="about-pill">DFS & promo frameworks</span>
+                <span class="about-pill">Stablecoin & escrow rails</span>
+                <span class="about-pill">Local North County plays</span>
+              </div>
+            </article>
+
+            <article id="contact" class="contact-card" aria-labelledby="contact-heading">
+              <div class="section-heading" id="contact-heading">Summon PJ</div>
+              <h2 class="section-title">Tap the orb or send the email.</h2>
+              <p>
+                The fastest path is always the orb — but if you’re old school, email works too.
+                Send a couple lines on what you’re trying to do, and PJ will reply with one of:
+              </p>
+              <ul class="card-list">
+                <li>“Here’s the move and the rough cost.”</li>
+                <li>“Here’s the intro you actually need.”</li>
+                <li>“This isn’t a fit, but here’s what to try.”</li>
+              </ul>
+
+              <a
+                class="mailto-link"
+                href="mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20via%20SideGuy%20portal&body=Hey%20PJ%2C%20I%27m%20ready%20for%20a%20SideGuy%20solution%20for%3A%20%5Bdescribe%20your%20project%5D."
+              >
+                <span aria-hidden="true">✉️</span>
+                Email PJ directly
+              </a>
+
+              <p class="contact-note">
+                Want something more structured? We can drop a Calendly or booking link here later,
+                once the portal has done its thing.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
 
       <footer class="site-footer">
         <div class="footer-links">
@@ -575,20 +1214,18 @@
           <a href="#sports-edge">DFS Edge</a>
         </div>
         <div class="version-pill" id="version-stamp">
-          v5.0 · Real Ocean Orb
+          v5.1 · Real Ocean Orb
         </div>
       </footer>
-
     </div>
   </div>
 
-  <!-- Ocean audio -->
+  <!-- Ocean audio (replace src with your actual .mp3) -->
   <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
 
-  <!-- Three.js (FIXED CDN VERSION HERE 🔥) -->
+  <!-- Three.js for real ocean movement (stable CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
-  <!-- Ocean + Orb Logic -->
   <script>
     // ------------------------------
     // REAL OCEAN SHADER BACKGROUND
@@ -645,9 +1282,10 @@
         varying vec2 vUv;
 
         void main() {
-          vec3 deep = vec3(0.01, 0.07, 0.16);
-          vec3 mid = vec3(0.0, 0.28, 0.45);
-          vec3 shallow = vec3(0.1, 0.55, 0.65);
+          // Deep to shallow gradient
+          vec3 deep = vec3(0.01, 0.07, 0.16);   // deep pacific
+          vec3 mid = vec3(0.0, 0.28, 0.45);     // mid blue
+          vec3 shallow = vec3(0.1, 0.55, 0.65); // near shore
 
           float t1 = sin((vUv.x + uTime * 0.05) * 9.0) * 0.02;
           float t2 = sin((vUv.y - uTime * 0.07) * 13.0) * 0.02;
@@ -656,6 +1294,7 @@
           vec3 color = mix(deep, mid, mixVal);
           color = mix(color, shallow, smoothstep(0.55, 1.1, mixVal));
 
+          // Soft foam ridges toward "shore"
           float foam = smoothstep(0.7, 0.98, mixVal + sin(uTime * 0.4) * 0.05);
           foam += smoothstep(0.78, 0.98, mixVal + sin((vUv.x * 6.0) + uTime * 0.6) * 0.04);
           foam = clamp(foam, 0.0, 1.0);
@@ -663,6 +1302,7 @@
           vec3 foamColor = vec3(0.88, 0.97, 0.99);
           color = mix(color, foamColor, foam * 0.7);
 
+          // Subtle blue glow
           color += vec3(0.02, 0.05, 0.08) * (1.0 - vUv.y);
 
           gl_FragColor = vec4(color, 1.0);
@@ -702,6 +1342,7 @@
       oceanMaterial.uniforms.uWaveAmp.value +=
         (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.05;
 
+      // Slow camera drift so it feels like you're floating
       const driftRadius = 0.25;
       oceanCamera.position.x = Math.sin(t * 0.18) * driftRadius;
       oceanCamera.position.z = 1.6 + Math.cos(t * 0.14) * 0.12;
@@ -725,12 +1366,19 @@
       }, 1500);
     }
 
+    // ------------------------------
+    // ORB BEHAVIOR + EMAIL + AUDIO
+    // ------------------------------
     function playOceanAudio() {
       const audio = document.getElementById("ocean-audio");
       if (!audio) return;
       audio.volume = 0.55;
       const p = audio.play();
-      if (p && p.catch) p.catch(() => {});
+      if (p && typeof p.catch === "function") {
+        p.catch(() => {
+          // ignore autoplay blocks silently
+        });
+      }
     }
 
     function initOrb() {
@@ -741,6 +1389,7 @@
         boostWaves();
         playOceanAudio();
 
+        // Delay email so user sees / feels the portal
         setTimeout(() => {
           window.location.href =
             "mailto:pj@sideguysolutions.com" +
@@ -760,20 +1409,37 @@
       });
     }
 
+    // ------------------------------
+    // VERSION STAMP + FOOTER YEAR
+    // ------------------------------
     function updateVersionStamp() {
       const el = document.getElementById("version-stamp");
       const yearEl = document.getElementById("footer-year");
       const year = new Date().getFullYear();
-      if (el) el.textContent = "v5.0 · Real Ocean Orb · " + year;
-      if (yearEl) yearEl.textContent = year;
+      if (el) {
+        el.textContent = "v5.1 · Real Ocean Orb · " + year;
+      }
+      if (yearEl) {
+        yearEl.textContent = year;
+      }
     }
 
+    // ------------------------------
+    // DOM READY
+    // ------------------------------
     document.addEventListener("DOMContentLoaded", () => {
+      // Give the DOM a beat to settle before kicking on WebGL
       setTimeout(initOcean, 140);
       initOrb();
       updateVersionStamp();
     });
-  </script>
 
+    // ------------------------------
+    // ANALYTICS PLACEHOLDER
+    // ------------------------------
+    // Drop your analytics snippet here (Plausible, GA4, etc.)
+    // Example:
+    // (function() { ... })();
+  </script>
 </body>
 </html>
