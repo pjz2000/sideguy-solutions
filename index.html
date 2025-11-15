@@ -1,8 +1,8 @@
 <!--
   SideGuy Solutions
-  Version: 4.0-verser-ocean-engine
+  Version: 4.7-verser-cinematic-ocean
   Hero: "Where code meets the coastline."
-  Mode: Deep Pacific + Summon PJ Orb + Ticket & DFS Edge
+  Mode: Deep Pacific Anime Portal · Summon PJ Orb · Ticket & DFS Edge
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
   <meta
     name="description"
-    content="SideGuy Solutions — coastal concierge for tech, transport, tickets, and DFS edges in North County San Diego. Tap to summon PJ and unlock smarter systems, better seats, and real-world leverage."
+    content="SideGuy Solutions — coastal concierge for tech builds, tickets, and DFS edges in North County San Diego. Tap to summon PJ through a living Pacific portal."
   />
 
   <!-- Basic SEO -->
@@ -25,17 +25,17 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta property="og:description" content="Tap to summon PJ — your coastal concierge for tech builds, ticket access, and DFS edges in North County." />
+  <meta property="og:description" content="Tap to summon PJ — your coastal concierge for tech, tickets, and DFS edges in North County." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
-  <!-- Schema.org: LocalBusiness + Service -->
+  <!-- Schema.org: LocalBusiness + Offers -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "SideGuy Solutions",
-    "description": "Coastal concierge for tech builds, transport, ticket access, and DFS edges in North County San Diego.",
+    "description": "Coastal concierge for tech builds, ticket access, and DFS edges in North County San Diego.",
     "url": "https://sideguysolutions.com/",
     "telephone": "+1-773-544-1234",
     "address": {
@@ -44,25 +44,10 @@
       "addressRegion": "CA",
       "addressCountry": "US"
     },
-    "areaServed": [
-      {
-        "@type": "AdministrativeArea",
-        "name": "North County San Diego"
-      }
-    ],
-    "serviceArea": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": 32.991,
-        "longitude": -117.271
-      },
-      "geoRadius": 25000
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "North County San Diego"
     },
-    "sameAs": [
-      "https://www.instagram.com/",
-      "https://www.linkedin.com/"
-    ],
     "makesOffer": [
       {
         "@type": "Offer",
@@ -76,7 +61,7 @@
       },
       {
         "@type": "Offer",
-        "name": "DFS strategy and promo optimization advisory",
+        "name": "DFS strategy and promo optimization",
         "category": "Consulting"
       }
     ]
@@ -87,26 +72,23 @@
     :root {
       --bg: #020617;
       --bg-soft: #020617;
-      --ocean-overlay: rgba(15, 23, 42, 0.86);
       --card: rgba(15, 23, 42, 0.96);
-      --card-soft: rgba(15, 23, 42, 0.75);
-      --border-subtle: rgba(148, 163, 184, 0.2);
+      --border-subtle: rgba(148, 163, 184, 0.22);
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.25);
+      --accent-soft: rgba(56, 189, 248, 0.3);
       --accent-strong: #0ea5e9;
       --text-main: #e5f2ff;
       --text-muted: #9ca3af;
       --text-soft: #6b7280;
       --success: #22c55e;
       --warn: #f97316;
-      --danger: #ef4444;
-      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.9);
+      --shadow-soft: 0 28px 90px rgba(2, 6, 23, 0.98);
       --radius-xl: 1.6rem;
       --radius-full: 999px;
-      --blur-strong: 24px;
+      --blur-strong: 26px;
       --transition-fast: 0.16s ease-out;
       --transition-med: 0.26s ease-out;
-      --transition-slow: 0.45s ease-out;
+      --transition-slow: 0.5s ease-out;
     }
 
     * {
@@ -136,25 +118,54 @@
       width: 100%;
       height: 100%;
       display: block;
-      z-index: -2;
+      z-index: -3;
     }
 
+    /* Light rays + ocean glow overlay */
     .ocean-overlay {
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at top, rgba(56, 189, 248, 0.28), transparent 60%),
-        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98));
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.35), transparent 55%),
+        radial-gradient(circle at 20% 0%, rgba(59, 130, 246, 0.22), transparent 60%),
+        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
       mix-blend-mode: screen;
-      opacity: 0.9;
+      opacity: 0.95;
       pointer-events: none;
-      z-index: -1;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .ocean-overlay::before,
+    .ocean-overlay::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        conic-gradient(from 220deg, rgba(56, 189, 248, 0.0), rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0.0));
+      opacity: 0.5;
+      filter: blur(18px);
+      mix-blend-mode: screen;
+      animation: godRays 22s linear infinite;
+      transform-origin: center;
+    }
+
+    .ocean-overlay::after {
+      opacity: 0.4;
+      animation-duration: 34s;
+      animation-direction: reverse;
+    }
+
+    @keyframes godRays {
+      0% { transform: rotate(0deg) translate3d(0, 0, 0); }
+      50% { transform: rotate(45deg) translate3d(0, 0, 0); }
+      100% { transform: rotate(360deg) translate3d(0, 0, 0); }
     }
 
     /* Portal flash + ripple (Verser hooks these) */
 
     .portal-flash .ocean-overlay {
-      animation: portalFlash 0.65s cubic-bezier(0.22, 0.99, 0.58, 1);
+      animation: portalFlash 0.75s cubic-bezier(0.2, 0.8, 0.3, 1);
     }
 
     .portal-ripple::before {
@@ -162,7 +173,7 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at center, rgba(56, 189, 248, 0.35), transparent 55%);
+        radial-gradient(circle at center, rgba(56, 189, 248, 0.5), transparent 60%);
       opacity: 0;
       pointer-events: none;
       z-index: -1;
@@ -171,37 +182,39 @@
 
     @keyframes portalFlash {
       0% {
-        opacity: 0.3;
+        opacity: 0.5;
         filter: brightness(1);
       }
-      40% {
+      25% {
         opacity: 1;
-        filter: brightness(1.9);
+        filter: brightness(2.2);
       }
       100% {
-        opacity: 0.9;
-        filter: brightness(1);
+        opacity: 0.95;
+        filter: brightness(1.05);
       }
     }
 
     @keyframes portalRipple {
       0% {
-        opacity: 0.2;
-        transform: scale(0.96);
+        opacity: 0.0;
+        transform: scale(0.9);
       }
-      40% {
-        opacity: 0.45;
-        transform: scale(1.08);
+      20% {
+        opacity: 0.55;
+        transform: scale(1.05);
       }
       100% {
         opacity: 0;
-        transform: scale(1.18);
+        transform: scale(1.25);
       }
     }
 
-    /* Reduced motion: kill flashy stuff */
+    /* Reduced motion: chill it out */
 
     @media (prefers-reduced-motion: reduce) {
+      .ocean-overlay::before,
+      .ocean-overlay::after,
       .portal-flash .ocean-overlay,
       .portal-ripple::before {
         animation: none !important;
@@ -217,11 +230,9 @@
       display: flex;
       flex-direction: column;
       backdrop-filter: blur(var(--blur-strong));
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0.84),
-        rgba(2, 6, 23, 0.98)
-      );
+      background:
+        radial-gradient(circle at 10% -10%, rgba(59, 130, 246, 0.32), transparent 55%),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98));
     }
 
     header {
@@ -239,22 +250,23 @@
     }
 
     .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 1.35rem;
       background:
-        radial-gradient(circle at 20% 0%, #38bdf8, transparent 55%),
-        radial-gradient(circle at 80% 100%, #22c55e, transparent 55%),
+        radial-gradient(circle at 18% 0%, #e5f2ff, transparent 55%),
+        radial-gradient(circle at 80% 100%, #38bdf8, transparent 60%),
         radial-gradient(circle at 50% 40%, #0f172a, #020617 70%);
       box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.2),
-        0 12px 35px rgba(15, 23, 42, 0.9);
+        0 0 0 1px rgba(148, 163, 184, 0.3),
+        0 14px 36px rgba(15, 23, 42, 0.95);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.1rem;
-      color: var(--text-main);
+      color: #0b1120;
+      letter-spacing: 0.08em;
     }
 
     .brand-meta {
@@ -265,7 +277,7 @@
     .brand-title {
       font-size: 1.1rem;
       font-weight: 600;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
@@ -279,17 +291,19 @@
       gap: 0.75rem;
       align-items: center;
       font-size: 0.85rem;
+      flex-wrap: wrap;
     }
 
     nav a {
       color: var(--text-muted);
-      padding: 0.4rem 0.75rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 999px;
       text-decoration: none;
       border: 1px solid transparent;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
+      background: rgba(15, 23, 42, 0.5);
     }
 
     nav a span.dot {
@@ -304,31 +318,26 @@
     nav a:focus-visible {
       color: var(--text-main);
       border-color: var(--border-subtle);
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.9);
       outline: none;
     }
 
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
-      gap: clamp(1.75rem, 3vw, 2.6rem);
+      gap: clamp(1.75rem, 3.2vw, 2.8rem);
       align-items: center;
       padding-top: 1.25rem;
       padding-bottom: 2.75rem;
     }
 
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
       header {
         flex-direction: column;
         align-items: flex-start;
       }
-      nav {
-        align-self: stretch;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -342,15 +351,12 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.2rem 0.7rem;
+      padding: 0.22rem 0.75rem;
       border-radius: 999px;
       font-size: 0.75rem;
       border: 1px solid rgba(148, 163, 184, 0.35);
-      background: linear-gradient(
-        to right,
-        rgba(15, 23, 42, 0.9),
-        rgba(15, 23, 42, 0.6)
-      );
+      background:
+        linear-gradient(to right, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.65));
       color: var(--text-muted);
     }
 
@@ -358,12 +364,14 @@
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
-      padding: 0.15rem 0.55rem;
+      padding: 0.16rem 0.6rem;
       border-radius: var(--radius-full);
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: rgba(8, 47, 73, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.7);
       font-size: 0.7rem;
       color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
     .eyebrow-dot {
@@ -377,14 +385,18 @@
     }
 
     .hero-title {
-      font-size: clamp(2.25rem, 3vw, 2.8rem);
-      line-height: 1.05;
-      letter-spacing: 0.02em;
+      font-size: clamp(2.5rem, 3.6vw, 3.1rem);
+      line-height: 1.02;
+      letter-spacing: 0.03em;
+      text-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
     }
 
     .hero-title span.light {
+      display: block;
+      margin-top: 0.3rem;
       font-weight: 300;
       color: var(--text-muted);
+      font-size: 0.92em;
     }
 
     .hero-lead {
@@ -411,10 +423,10 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.25rem 0.6rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.9);
     }
 
     .meta-pill span.dot {
@@ -422,13 +434,13 @@
       height: 7px;
       border-radius: 999px;
       background: var(--success);
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.26);
     }
 
     /* Summon PJ Orb */
 
     .hero-action {
-      margin-top: 1.2rem;
+      margin-top: 1.35rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -444,91 +456,109 @@
 
     .summon-orb {
       position: relative;
-      width: 110px;
-      height: 110px;
+      width: 118px;
+      height: 118px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.6);
       background:
-        radial-gradient(circle at 18% 0%, rgba(248, 250, 252, 0.95), transparent 55%),
-        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 0.85), transparent 55%),
-        radial-gradient(circle at 50% 50%, #0f172a, #020617 70%);
+        radial-gradient(circle at 18% 0%, rgba(248, 250, 252, 0.96), transparent 55%),
+        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 0.9), transparent 55%),
+        radial-gradient(circle at 50% 55%, #0f172a, #020617 72%);
       box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.6),
-        0 0 65px rgba(56, 189, 248, 0.8),
-        0 20px 55px rgba(15, 23, 42, 1);
-      color: #0b1120;
+        0 0 0 1px rgba(56, 189, 248, 0.9),
+        0 0 80px rgba(56, 189, 248, 0.98),
+        0 22px 55px rgba(15, 23, 42, 1);
+      color: #020617;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       padding: 0.8rem;
       isolation: isolate;
       transition:
         transform var(--transition-med),
         box-shadow var(--transition-med),
-        border-color var(--transition-med);
+        border-color var(--transition-med),
+        background var(--transition-med);
     }
 
     .summon-orb-text {
       position: relative;
       z-index: 1;
+      line-height: 1.4;
     }
 
     .summon-orb-glow {
-      content: "";
       position: absolute;
-      inset: 12%;
+      inset: 14%;
       border-radius: inherit;
       background:
-        conic-gradient(from 0deg, rgba(56, 189, 248, 0.8), rgba(45, 212, 191, 0.2), rgba(56, 189, 248, 0.9));
+        conic-gradient(from 0deg, rgba(56, 189, 248, 0.9), rgba(45, 212, 191, 0.3), rgba(56, 189, 248, 1));
       mix-blend-mode: screen;
-      opacity: 0.3;
-      filter: blur(6px);
+      opacity: 0.38;
+      filter: blur(7px);
       pointer-events: none;
+      animation: orbPulse 6s ease-in-out infinite;
     }
 
     .summon-orb-ring {
       position: absolute;
-      inset: -14px;
+      inset: -16px;
       border-radius: inherit;
-      border: 1px dashed rgba(125, 211, 252, 0.55);
-      opacity: 0.9;
-      filter: blur(0.2px);
+      border: 1px dashed rgba(125, 211, 252, 0.7);
+      opacity: 0.95;
+      filter: blur(0.3px);
       pointer-events: none;
+      animation: orbOrbit 10s linear infinite;
     }
 
     .summon-orb-wrap::before {
       content: "";
       position: absolute;
-      inset: -28px;
+      inset: -30px;
       border-radius: 999px;
-      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.32), transparent 65%);
-      opacity: 0.75;
-      filter: blur(8px);
+      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.42), transparent 65%);
+      opacity: 0.8;
+      filter: blur(9px);
       pointer-events: none;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% { opacity: 0.28; transform: scale(1); }
+      40% { opacity: 0.5; transform: scale(1.06); }
+      60% { opacity: 0.34; transform: scale(0.98); }
+    }
+
+    @keyframes orbOrbit {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .summon-orb:hover,
     .summon-orb:focus-visible {
-      transform: translateY(-2px) scale(1.03);
+      transform: translateY(-2px) scale(1.05);
       box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.95),
-        0 0 90px rgba(56, 189, 248, 0.95),
-        0 26px 70px rgba(15, 23, 42, 1);
-      border-color: rgba(56, 189, 248, 0.95);
+        0 0 0 1px rgba(56, 189, 248, 1),
+        0 0 110px rgba(56, 189, 248, 1),
+        0 28px 80px rgba(15, 23, 42, 1);
+      border-color: rgba(56, 189, 248, 1);
       outline: none;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(248, 250, 252, 1), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 1), transparent 60%),
+        radial-gradient(circle at 50% 60%, #020617, #020617 76%);
     }
 
     .summon-orb:active {
-      transform: translateY(1px) scale(0.99);
+      transform: translateY(1px) scale(0.98);
       box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.85),
-        0 0 60px rgba(56, 189, 248, 0.85),
-        0 16px 42px rgba(15, 23, 42, 1);
+        0 0 0 1px rgba(56, 189, 248, 0.9),
+        0 0 70px rgba(56, 189, 248, 0.9),
+        0 16px 45px rgba(15, 23, 42, 1);
     }
 
     .summon-caption {
@@ -536,6 +566,7 @@
       color: var(--text-soft);
       max-width: 12rem;
       line-height: 1.4;
+      text-shadow: 0 10px 28px rgba(15, 23, 42, 0.9);
     }
 
     .summon-caption strong {
@@ -573,33 +604,49 @@
       outline: none;
     }
 
-    /* Right side: Cards */
+    /* Right side cards */
 
     .hero-right {
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 1rem;
     }
 
     .card {
       position: relative;
-      padding: 0.85rem 0.95rem;
+      padding: 0.9rem 1rem;
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
       background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 52%),
-        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
       box-shadow: var(--shadow-soft);
       font-size: 0.83rem;
       color: var(--text-muted);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 120% -20%, rgba(56, 189, 248, 0.22), transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-slow);
+    }
+
+    .card:hover::after {
+      opacity: 1;
     }
 
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
       gap: 0.75rem;
     }
 
@@ -615,8 +662,8 @@
       gap: 0.35rem;
       padding: 0.15rem 0.55rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.96);
       font-size: 0.7rem;
       color: var(--text-soft);
     }
@@ -630,21 +677,21 @@
     }
 
     .pill-success {
-      border-color: rgba(34, 197, 94, 0.7);
+      border-color: rgba(34, 197, 94, 0.8);
       color: var(--success);
     }
 
     .pill-success .pill-dot {
       background: var(--success);
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.28);
     }
 
     .card-list {
       list-style: none;
       padding: 0;
-      margin: 0.1rem 0 0;
+      margin: 0.15rem 0 0;
       display: grid;
-      gap: 0.25rem;
+      gap: 0.3rem;
     }
 
     .card-list li {
@@ -670,7 +717,7 @@
       color: var(--text-soft);
     }
 
-    /* Ticket card special */
+    /* Ticket card */
 
     .ticket-highlight {
       display: inline-flex;
@@ -683,9 +730,9 @@
     .ticket-highlight span.badge {
       padding: 0.1rem 0.4rem;
       border-radius: 999px;
-      border: 1px solid rgba(234, 179, 8, 0.65);
+      border: 1px solid rgba(234, 179, 8, 0.7);
       color: #eab308;
-      background: rgba(23, 23, 23, 0.9);
+      background: rgba(23, 23, 23, 0.96);
       font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -699,7 +746,7 @@
     .ticket-link a {
       color: var(--accent-strong);
       text-decoration: none;
-      border-bottom: 1px dashed rgba(56, 189, 248, 0.6);
+      border-bottom: 1px dashed rgba(56, 189, 248, 0.7);
     }
 
     .ticket-link a:hover,
@@ -727,10 +774,11 @@
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
       background:
-        linear-gradient(to bottom right, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
+        linear-gradient(to bottom right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
       box-shadow: var(--shadow-soft);
       font-size: 0.9rem;
       color: var(--text-muted);
+      backdrop-filter: blur(18px);
     }
 
     .section-header {
@@ -778,13 +826,13 @@
       border: 1px solid rgba(148, 163, 184, 0.5);
       font-size: 0.75rem;
       color: var(--text-soft);
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(15, 23, 42, 0.98);
     }
 
     .chip.hot {
-      border-color: rgba(56, 189, 248, 0.8);
+      border-color: rgba(56, 189, 248, 0.85);
       color: var(--accent-strong);
-      background: rgba(8, 47, 73, 0.9);
+      background: rgba(8, 47, 73, 0.95);
     }
 
     .bullet-list {
@@ -816,8 +864,8 @@
       margin-top: 0.6rem;
       padding: 0.55rem 0.7rem;
       border-radius: 0.9rem;
-      background: radial-gradient(circle at left, rgba(56, 189, 248, 0.12), transparent 60%);
-      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at left, rgba(56, 189, 248, 0.14), transparent 60%);
+      border: 1px dashed rgba(148, 163, 184, 0.75);
       font-size: 0.82rem;
       display: flex;
       flex-direction: column;
@@ -840,22 +888,23 @@
 
     .btn-ghost {
       border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.8);
-      padding: 0.22rem 0.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.9);
+      padding: 0.26rem 0.85rem;
       font-size: 0.78rem;
-      background: rgba(8, 47, 73, 0.9);
+      background: rgba(8, 47, 73, 0.98);
       color: var(--accent-strong);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
       cursor: pointer;
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.95);
     }
 
     .btn-ghost:hover,
     .btn-ghost:focus-visible {
-      border-color: rgba(56, 189, 248, 0.95);
-      box-shadow: 0 0 32px rgba(8, 47, 73, 0.9);
+      border-color: rgba(56, 189, 248, 1);
+      box-shadow: 0 0 40px rgba(8, 47, 73, 1);
       outline: none;
     }
 
@@ -866,7 +915,7 @@
       letter-spacing: 0.08em;
     }
 
-    /* Newsletter / Invite */
+    /* Newsletter / Portal Invites */
 
     .newsletter {
       margin-top: 0.55rem;
@@ -887,7 +936,7 @@
       flex: 1 1 140px;
       padding: 0.4rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.8);
       background: rgba(15, 23, 42, 0.98);
       color: var(--text-main);
       font-size: 0.8rem;
@@ -898,15 +947,15 @@
     }
 
     .newsletter-input:focus-visible {
-      outline: 1px solid rgba(56, 189, 248, 0.9);
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.9);
+      outline: 1px solid rgba(56, 189, 248, 0.98);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.98);
     }
 
     .btn-primary {
       border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.9);
+      border: 1px solid rgba(56, 189, 248, 1);
       background: linear-gradient(135deg, #0ea5e9, #22c55e);
-      padding: 0.4rem 0.85rem;
+      padding: 0.42rem 0.9rem;
       font-size: 0.8rem;
       color: #0b1120;
       font-weight: 600;
@@ -916,16 +965,16 @@
       gap: 0.35rem;
       box-shadow:
         0 0 0 1px rgba(15, 23, 42, 0.9),
-        0 16px 35px rgba(15, 23, 42, 1);
+        0 18px 40px rgba(15, 23, 42, 1);
     }
 
     .btn-primary:hover,
     .btn-primary:focus-visible {
-      filter: brightness(1.03);
+      filter: brightness(1.04);
       transform: translateY(-1px);
       box-shadow:
         0 0 0 1px rgba(15, 23, 42, 0.9),
-        0 20px 45px rgba(15, 23, 42, 1);
+        0 22px 52px rgba(15, 23, 42, 1);
       outline: none;
     }
 
@@ -933,7 +982,7 @@
       transform: translateY(1px);
       box-shadow:
         0 0 0 1px rgba(15, 23, 42, 0.9),
-        0 12px 28px rgba(15, 23, 42, 1);
+        0 12px 30px rgba(15, 23, 42, 1);
     }
 
     /* Footer */
@@ -989,10 +1038,10 @@
       color: var(--text-soft);
     }
 
-    /* Accessible focus outline globally */
+    /* Global focus outline */
 
-    :where(a, button, input, [tabindex]) :focus-visible {
-      outline: 2px solid rgba(56, 189, 248, 0.9);
+    :where(a, button, input, [tabindex]):focus-visible {
+      outline: 2px solid rgba(56, 189, 248, 0.98);
       outline-offset: 2px;
     }
   </style>
@@ -1035,25 +1084,24 @@
             <span>North County · Solana Beach → Encinitas</span>
             <span class="eyebrow-pill">
               <span class="eyebrow-dot"></span>
-              On-call coastal concierge
+              Portal-only access
             </span>
           </div>
           <h1 class="hero-title">
-            Where code meets the coastline.<br />
-            <span class="light">Summon PJ when you know what’s good for you.</span>
+            Where code meets the coastline.
+            <span class="light">Tap the orb when you know what’s good for you.</span>
           </h1>
           <p class="hero-lead">
-            From <strong>apps and automations</strong> to <strong>ticket access</strong> and
-            <strong>DFS edges</strong>, SideGuy Solutions is your
-            <strong>coastal control center</strong> for getting unstuck — tech, transport, or
-            “how do I even pull this off?”
+            From <strong>apps and automations</strong> to <strong>ticket plays</strong> and
+            <strong>DFS edges</strong>, SideGuy Solutions is your <strong>coastal control room</strong> for
+            “I should probably call PJ before I mess this up.”
           </p>
           <div class="hero-meta-row">
             <span class="meta-pill">
               <span class="dot" aria-hidden="true"></span>
               Live in North County. Think globally.
             </span>
-            <span>Tap the orb. Watch the portal. Email opens like you meant it.</span>
+            <span>Portal built on Pacific wave physics and a Chicago ticket brain.</span>
           </div>
 
           <div class="hero-action" aria-label="Primary call to action">
@@ -1073,12 +1121,12 @@
               </button>
             </div>
             <p class="summon-caption">
-              <strong>Tap → Portal animation → then email.</strong><br />
-              A small delay. A big flex. No spammy pop-ups.
+              <strong>Tap → portal impact → then email.</strong><br />
+              420ms of ocean drama before your message launches.
             </p>
 
             <div class="hero-secondary">
-              <span>Prefer to type it out first?</span>
+              <span>More of a “type it all out” operator?</span>
               <a href="mailto:pj@sideguysolutions.com?subject=SideGuy%20Solutions%20Inquiry">
                 Send PJ a rundown
               </a>
@@ -1091,9 +1139,9 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <div class="card-title">Coastal concierge for the real-life stuff</div>
+                <div class="card-title">Coastal concierge for the real-life boss fights.</div>
                 <div class="card-tagline">
-                  When your to-do list feels like a boss fight, PJ is the NPC with the cheat codes.
+                  When “I’ll figure it out later” becomes “this needs to not implode,” PJ picks up.
                 </div>
               </div>
               <div class="pill">
@@ -1104,15 +1152,15 @@
             <ul class="card-list">
               <li>
                 <span class="bullet">➤</span>
-                <span><strong>Tech builds</strong> — apps, sites, systems that actually launch.</span>
+                <span><strong>Tech builds</strong> — apps, sites, and systems that actually launch.</span>
               </li>
               <li>
                 <span class="bullet">➤</span>
-                <span><strong>Transport & logistics</strong> — moves, trips, upgrades, “make this easy.”</span>
+                <span><strong>Automations</strong> — kill the busywork so the real work shows up.</span>
               </li>
               <li>
                 <span class="bullet">➤</span>
-                <span><strong>Operators</strong> — designers, devs, closers, and grown-ups on call.</span>
+                <span><strong>Operator brain</strong> — one point of contact, a roster of grown-ups.</span>
               </li>
             </ul>
           </div>
@@ -1121,67 +1169,67 @@
           <div class="card" id="tickets">
             <div class="card-header">
               <div>
-                <div class="card-title">Ticket plug-in, dialed to eleven.</div>
+                <div class="card-title">Ticket plug-in, still very much online.</div>
                 <div class="card-tagline">
-                  From Padres to arena tours — the OG ticket brain is still very much online.
+                  From Petco to playoff runs — the OG ticket brain didn’t just log off.
                 </div>
               </div>
               <div class="pill pill-success">
                 <span class="pill-dot"></span>
-                Live inventory brain
+                Live inventory instincts
               </div>
             </div>
             <ul class="card-list">
               <li>
                 <span class="bullet">🎟️</span>
-                <span><strong>Sports</strong> — Padres, NFL, NBA, college slates, and sneaky value angles.</span>
+                <span><strong>Sports</strong> — Padres, NFL, NBA, college slates, sneaky value angles.</span>
               </li>
               <li>
                 <span class="bullet">🎶</span>
-                <span><strong>Concerts & shows</strong> — better sections, smarter timing, less chaos.</span>
+                <span><strong>Concerts & shows</strong> — “how did you even get these?” sections.</span>
               </li>
               <li>
                 <span class="bullet">🛫</span>
-                <span><strong>Trips & experiences</strong> — combine seats, stays, and “we’re really doing this.”</span>
+                <span><strong>Trips & experiences</strong> — seats, stays, and “we’re really doing this.”</span>
               </li>
             </ul>
             <div class="ticket-highlight">
               <span class="badge">Legacy edge</span>
-              <span>Built on decades of “how did you even get these?” moments.</span>
+              <span>Built on years of Chicago grind, redeployed to the coastline.</span>
             </div>
             <div class="ticket-link">
               <a href="mailto:pj@sideguysolutions.com?subject=Ticket%20Concierge%20Request" data-track="ticket_click">
-                Tell PJ what game, show, or trip you’re trying to level up.
+                Tell PJ what game, show, or trip you’re plotting.
               </a>
             </div>
           </div>
 
-          <!-- DFS Edge teaser -->
+          <!-- DFS Edge card -->
           <div class="card" id="dfs">
             <div class="card-header">
               <div>
                 <div class="card-title">DFS edges from a promo-max brain.</div>
                 <div class="card-tagline">
-                  Where “free bets” meet actual bankroll discipline.
+                  Run it like a bankroll, not a highlight reel.
                 </div>
               </div>
               <div class="pill">
                 <span class="pill-dot"></span>
-                DFS · Novig · Props
+                DFS · Books · P2P
               </div>
             </div>
             <ul class="card-list">
               <li>
                 <span class="bullet">📊</span>
-                <span><strong>Promo-first strategy</strong> — squeeze the edges, not the sweat.</span>
+                <span><strong>Promo-first strategy</strong> — use the boosts as ammo, not vibes.</span>
               </li>
               <li>
                 <span class="bullet">🧮</span>
-                <span><strong>Portfolio view</strong> — DFS, books, and P2P all in one mental dashboard.</span>
+                <span><strong>Portfolio view</strong> — books, DFS, and peer-to-peer in one mental dashboard.</span>
               </li>
               <li>
                 <span class="bullet">🧠</span>
-                <span><strong>Reality checks</strong> — “should I even fire this?” baked in.</span>
+                <span><strong>Reality checks</strong> — embedded “should I even fire this?” filter.</span>
               </li>
             </ul>
           </div>
@@ -1195,7 +1243,7 @@
             <div>
               <div class="section-title">What SideGuy actually does (in plain English).</div>
               <div class="section-sub">
-                North County first. But the internet doesn’t really care where you live.
+                North County first. But if the internet touches it, PJ can probably help.
               </div>
             </div>
             <div class="pill">
@@ -1212,7 +1260,7 @@
               <ul class="bullet-list">
                 <li>Custom <strong>websites and apps</strong> that feel like products, not templates.</li>
                 <li><strong>Automations</strong> that kill busywork — zaps, bots, and glue code.</li>
-                <li><strong>Payment and crypto rails</strong> when “wire me later” is not the vibe.</li>
+                <li><strong>Payment and crypto rails</strong> when “just Venmo me later” isn’t it.</li>
               </ul>
               <div class="chip-list">
                 <span class="chip hot">Coastal Web3 concierge</span>
@@ -1226,7 +1274,7 @@
                 Real-world leverage
               </h3>
               <ul class="bullet-list">
-                <li><strong>Local ops</strong> — moves, rehabs, and “help me not botch this deal.”</li>
+                <li><strong>Local ops</strong> — moves, rehabs, and “I need this to not blow up.”</li>
                 <li><strong>Ticket & travel combos</strong> with an actual human brain behind it.</li>
                 <li><strong>Personal board of advisors</strong> energy without the calendar overhead.</li>
               </ul>
@@ -1240,11 +1288,11 @@
 
           <div class="lead-magnet">
             <div class="lead-magnet-title">
-              Free 2025 DFS Edge Guide — straight from the coastal war room.
+              Free 2025 DFS Edge Guide — from the coastal war room, not a Discord thread.
             </div>
             <p style="margin: 0; color: var(--text-soft);">
               Learn how to treat promos, boosts, and peer-to-peer markets like
-              <strong>ammo</strong>, not lottery tickets. Zero fake “locks.” Real knobs you can pull.
+              <strong>knobs you can turn</strong>, not “locks.” No picks sold. Just frameworks.
             </p>
             <div class="lead-magnet-cta">
               <a
@@ -1309,7 +1357,7 @@
         <span>Best experienced with sound off, focus on.</span>
       </div>
       <div class="footer-links">
-        <span class="version-tag" data-version>v4.0-verser-ocean-engine</span>
+        <span class="version-tag" data-version>v4.7-verser-cinematic-ocean</span>
         <span aria-hidden="true">·</span>
         <a href="mailto:pj@sideguysolutions.com?subject=SideGuy%20Solutions%20Collab">
           Collabs & weird projects
@@ -1323,30 +1371,38 @@
 
   <script>
     // ============================
-    // Verser Ocean Engine
+    // Verser Ocean Engine · Cinematic Mode
     // ============================
     const Verser = {
       time: 0,
       waveAmp: 1.05,
       targetWaveAmp: 1.05,
+      flashIntensity: 0.0,
       lastT: 0,
       update(tsMs) {
         const t = tsMs * 0.001;
         const dt = this.lastT ? (t - this.lastT) : 0.016;
         this.lastT = t;
         this.time = t;
-        // Smoothly ease wave amplitude toward target
-        this.waveAmp += (this.targetWaveAmp - this.waveAmp) * 0.06;
+
+        // Ease wave amplitude toward target
+        this.waveAmp += (this.targetWaveAmp - this.waveAmp) * 0.08;
+
+        // Decay flash intensity
+        this.flashIntensity += (0 - this.flashIntensity) * 0.12;
+
         return dt;
       },
       boost() {
-        this.targetWaveAmp = 1.7;
+        this.targetWaveAmp = 2.15;
+        this.flashIntensity = 1.0;
+
         document.body.classList.add("portal-flash", "portal-ripple");
 
         setTimeout(() => {
           this.targetWaveAmp = 1.05;
           document.body.classList.remove("portal-flash");
-        }, 620);
+        }, 650);
 
         setTimeout(() => {
           document.body.classList.remove("portal-ripple");
@@ -1357,32 +1413,44 @@
     // ============================
     // Ocean / Three.js Scene
     // ============================
-    let scene, camera, renderer, oceanMesh, oceanUniforms;
+    let scene, camera, renderer, oceanMesh, particleSystem, oceanUniforms;
 
     const oceanVertexShader = `
       varying vec2 vUv;
       varying vec3 vPos;
+      varying float vWaveHeight;
 
       uniform float uTime;
       uniform float uWaveAmp;
 
       void main() {
         vUv = uv;
-
         vec3 pos = position;
 
-        float t = uTime * 0.4;
-        float bigWaves =
-          sin(pos.x * 0.35 + t * 0.9) * 0.18 +
-          cos(pos.y * 0.42 - t * 0.7) * 0.12;
+        float t = uTime;
 
-        float ripples =
-          sin(pos.x * 2.4 + t * 1.8) * 0.025 *
-          cos(pos.y * 2.0 - t * 1.7);
+        // Layer 1: deep swell (slow, broad)
+        float deep = (
+          sin(pos.x * 0.25 + t * 0.28) +
+          cos(pos.y * 0.18 - t * 0.22) +
+          sin((pos.x + pos.y) * 0.16 + t * 0.17)
+        ) * 0.22;
 
-        float combined = (bigWaves + ripples) * uWaveAmp;
+        // Layer 2: surface waves (medium)
+        float surface = (
+          sin(pos.x * 0.9 + t * 0.9) +
+          cos(pos.y * 1.1 - t * 0.85)
+        ) * 0.085;
 
-        pos.z += combined;
+        // Layer 3: micro ripples (fast detail)
+        float ripples = (
+          sin(pos.x * 3.2 + t * 2.2) *
+          cos(pos.y * 3.7 - t * 2.0)
+        ) * 0.035;
+
+        float height = (deep + surface + ripples) * uWaveAmp;
+        pos.z += height;
+        vWaveHeight = height;
         vPos = pos;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
@@ -1394,36 +1462,111 @@
 
       varying vec2 vUv;
       varying vec3 vPos;
+      varying float vWaveHeight;
 
       uniform float uTime;
       uniform float uWaveAmp;
+      uniform float uFlashIntensity;
       uniform vec3 uColorDeep;
+      uniform vec3 uColorMid;
       uniform vec3 uColorShallow;
 
       void main() {
-        float depth = clamp(vPos.z * 1.8 + 0.4, 0.0, 1.0);
+        float depth = clamp(vPos.z * 1.6 + 0.5, 0.0, 1.0);
 
-        vec3 base = mix(uColorDeep, uColorShallow, depth);
+        // Base gradient: deep -> mid -> shallow
+        vec3 base = mix(uColorDeep, uColorMid, depth);
+        base = mix(base, uColorShallow, smoothstep(0.6, 1.0, depth));
 
-        float glow = smoothstep(0.3, 0.85, vUv.y)
-          * (0.55 + 0.45 * sin(uTime * 0.4));
+        // Vertical light shafts / god rays
+        float rays =
+          sin((vUv.y + uTime * 0.05) * 16.0) * 0.5 +
+          cos((vUv.y * 1.3 - uTime * 0.04) * 11.0) * 0.5;
+        rays = smoothstep(0.2, 0.9, rays);
+
+        float centerDist = distance(vUv, vec2(0.5, 0.48));
+        float portalGlow = smoothstep(0.7, 0.0, centerDist);
+
+        vec3 lightColor = vec3(0.15, 0.45, 0.9);
+        vec3 raysColor = lightColor * (0.18 + 0.45 * rays) * (0.4 + 0.6 * portalGlow);
+
+        // Foam along peaks
+        float foam =
+          smoothstep(0.18, 0.62, vWaveHeight * uWaveAmp + 0.2) *
+          (0.5 + 0.5 * sin(vPos.x * 3.0 + uTime * 1.8)) *
+          (0.5 + 0.5 * cos(vPos.y * 4.0 - uTime * 1.9));
+        vec3 foamColor = vec3(0.8, 0.95, 1.0) * foam * 0.25;
+
+        // Flash boost for portal impact
+        float flash = uFlashIntensity;
+        vec3 flashTint = vec3(0.35, 0.8, 1.0) * flash * 0.85;
 
         vec3 color = base;
-        color += vec3(0.18, 0.4, 0.75) * glow * 0.7;
+        color += raysColor * 0.9;
+        color += foamColor;
+        color += flashTint;
 
-        float foam =
-          smoothstep(0.8, 1.0, depth) *
-          (0.5 + 0.5 * sin(vPos.x * 2.4 + uTime * 1.3)) *
-          (0.5 + 0.5 * cos(vPos.y * 3.0 - uTime * 1.7));
-
-        color += vec3(0.7, 0.9, 1.0) * foam * 0.16 * uWaveAmp;
-
-        float vignette = smoothstep(1.0, 0.2, length(vUv - 0.5));
+        // Vignette
+        float vignette = smoothstep(1.0, 0.18, length(vUv - 0.5));
         color *= vignette;
 
         gl_FragColor = vec4(color, 1.0);
       }
     `;
+
+    function createParticles() {
+      const count = 1500;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(count * 3);
+      const speeds = new Float32Array(count);
+
+      for (let i = 0; i < count; i++) {
+        positions[i * 3 + 0] = (Math.random() - 0.5) * 5.5;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 5.5;
+        positions[i * 3 + 2] = -0.4 + Math.random() * 0.1;
+
+        speeds[i] = 0.2 + Math.random() * 0.8;
+      }
+
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute("speed", new THREE.BufferAttribute(speeds, 1));
+
+      const material = new THREE.PointsMaterial({
+        color: 0x4adeff,
+        size: 0.03,
+        transparent: true,
+        opacity: 0.9,
+        depthWrite: false
+      });
+
+      particleSystem = new THREE.Points(geometry, material);
+      particleSystem.position.y = -0.5;
+      scene.add(particleSystem);
+    }
+
+    function updateParticles(dt) {
+      if (!particleSystem) return;
+      const positions = particleSystem.geometry.attributes.position;
+      const speeds = particleSystem.geometry.attributes.speed;
+
+      for (let i = 0; i < positions.count; i++) {
+        let y = positions.getY(i);
+        let x = positions.getX(i);
+        const speed = speeds.getX(i);
+
+        y += dt * 0.08 * speed;
+        x += Math.sin(Verser.time * 0.3 + i * 0.4) * 0.002;
+
+        if (y > 2.5) {
+          y = -2.5;
+        }
+
+        positions.setY(i, y);
+        positions.setX(i, x);
+      }
+
+      positions.needsUpdate = true;
+    }
 
     function initOcean() {
       const canvas = document.getElementById("ocean-canvas");
@@ -1433,11 +1576,11 @@
         canvas,
         antialias: true
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.9));
       renderer.setSize(window.innerWidth, window.innerHeight);
 
       scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x020617, 0.75);
+      scene.fog = new THREE.FogExp2(0x020617, 0.78);
 
       camera = new THREE.PerspectiveCamera(
         55,
@@ -1445,15 +1588,17 @@
         0.1,
         100
       );
-      camera.position.set(0, 0.9, 1.4);
+      camera.position.set(0, 1.0, 1.5);
       camera.lookAt(0, 0, 0);
 
-      const geometry = new THREE.PlaneGeometry(5.5, 5.5, 220, 220);
+      const geometry = new THREE.PlaneGeometry(5.8, 5.8, 260, 260);
 
       oceanUniforms = {
         uTime: { value: 0 },
         uWaveAmp: { value: Verser.waveAmp },
+        uFlashIntensity: { value: Verser.flashIntensity },
         uColorDeep: { value: new THREE.Color(0x020617) },
+        uColorMid: { value: new THREE.Color(0x0369a1) },
         uColorShallow: { value: new THREE.Color(0x0ea5e9) }
       };
 
@@ -1465,10 +1610,11 @@
       });
 
       oceanMesh = new THREE.Mesh(geometry, material);
-      oceanMesh.rotation.x = -Math.PI / 2.3;
-      oceanMesh.position.y = -0.9;
+      oceanMesh.rotation.x = -Math.PI / 2.35;
+      oceanMesh.position.y = -1.0;
 
       scene.add(oceanMesh);
+      createParticles();
 
       window.addEventListener("resize", onWindowResize, false);
     }
@@ -1485,18 +1631,22 @@
     function renderLoop(ts) {
       requestAnimationFrame(renderLoop);
 
-      Verser.update(ts);
+      const dt = Verser.update(ts);
 
       if (!renderer || !scene || !camera || !oceanUniforms) return;
 
       oceanUniforms.uTime.value = Verser.time;
       oceanUniforms.uWaveAmp.value = Verser.waveAmp;
+      oceanUniforms.uFlashIntensity.value = Verser.flashIntensity;
 
-      // Gentle camera sway
-      camera.position.x = Math.sin(Verser.time * 0.18) * 0.4;
-      camera.position.z = 1.4 + Math.sin(Verser.time * 0.08) * 0.05;
+      // Camera float + drift
+      const t = Verser.time;
+      camera.position.x = Math.sin(t * 0.18) * 0.42;
+      camera.position.z = 1.5 + Math.sin(t * 0.12) * 0.06;
+      camera.position.y = 1.0 + Math.sin(t * 0.22) * 0.05;
       camera.lookAt(0, 0, 0);
 
+      updateParticles(dt);
       renderer.render(scene, camera);
     }
 
@@ -1516,7 +1666,7 @@
       const el = document.querySelector("[data-version]");
       if (!el) return;
       const year = new Date().getFullYear();
-      el.textContent = "v4.0-verser-ocean-engine · " + year;
+      el.textContent = "v4.7-verser-cinematic-ocean · " + year;
     }
 
     function wireSummonPJ() {
@@ -1526,7 +1676,7 @@
       summonBtn.addEventListener("click", (e) => {
         e.preventDefault();
 
-        // Wave + portal boost
+        // Ocean + portal impact
         Verser.boost();
         trackEvent("pj_summon_tap", {
           component: "hero_orb"
@@ -1561,7 +1711,7 @@
       setTimeout(() => {
         initOcean();
         requestAnimationFrame(renderLoop);
-      }, 160);
+      }, 150);
     });
   </script>
 </body>
