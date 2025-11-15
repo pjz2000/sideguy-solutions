@@ -3,167 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cinematic Ocean Test</title>
-
+  <title>Real Pacific Ocean Test</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: #01050f;
+      background: #020617;
       height: 100%;
     }
-
-    #ocean {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+    canvas {
       display: block;
     }
   </style>
-
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 </head>
-
 <body>
-  <canvas id="ocean"></canvas>
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+    import { Water } from "https://unpkg.com/three@0.160.0/examples/jsm/objects/Water.js";
+    import { Sky } from "https://unpkg.com/three@0.160.0/examples/jsm/objects/Sky.js";
 
-  <script>
-    let scene, camera, renderer, mesh, uniforms;
+    let camera, scene, renderer;
+    let water, sun, sky;
 
-    // ============ CINEMATIC OCEAN SHADERS ============
-
-    const vtx = `
-      varying vec2 vUv;
-      varying float vHeight;
-      uniform float time;
-
-      // Multi-layer wave function
-      float wave(vec2 pos, float scale, float speed, float height) {
-        return sin(pos.x * scale + time * speed) * height +
-               cos(pos.y * scale * 0.7 + time * speed * 1.2) * height * 0.7;
-      }
-
-      void main() {
-        vUv = uv;
-        vec3 p = position;
-
-        float w1 = wave(uv * 8.0, 0.8, 0.45, 0.22);
-        float w2 = wave(uv * 12.0, 1.2, 0.8, 0.10);
-        float w3 = wave(uv * 25.0, 2.4, 1.6, 0.04); // micro ripples
-
-        float h = w1 + w2 + w3;
-        p.z += h;
-        vHeight = h;
-
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-      }
-    `;
-
-    const fgm = `
-      precision highp float;
-      varying vec2 vUv;
-      varying float vHeight;
-
-      uniform float time;
-
-      void main() {
-
-        // Base colors
-        vec3 deep = vec3(0.01, 0.05, 0.14);
-        vec3 mid = vec3(0.02, 0.25, 0.50);
-        vec3 shallow = vec3(0.1, 0.6, 1.0);
-
-        float depth = smoothstep(-0.4, 0.5, vHeight);
-
-        vec3 color = mix(deep, mid, depth);
-        color = mix(color, shallow, depth * 0.55);
-
-        // Light rays
-        float rays = sin(vUv.y * 20.0 + time * 0.6) * 0.5 + 0.5;
-        rays *= smoothstep(0.2, 0.8, vUv.y);
-        color += vec3(0.05, 0.2, 0.5) * rays * 0.2;
-
-        // Foam on peaks
-        float foam = smoothstep(0.15, 0.42, vHeight + 0.22);
-        foam *= sin(vUv.x * 50.0 + time * 3.0) * 0.5 + 0.5;
-        color += vec3(0.9, 0.95, 1.0) * foam * 0.25;
-
-        // Specular shine
-        float spec = pow(max(0.0, sin(vUv.x * 8.0 + time) * 0.5 + 0.5), 12.0);
-        color += vec3(0.6, 0.8, 1.0) * spec * 0.15;
-
-        // Slight vignette for cinematic depth
-        float d = distance(vUv, vec2(0.5));
-        float vign = smoothstep(0.95, 0.4, d);
-        color *= vign;
-
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `;
-
-    // ============ SETUP ============
+    init();
+    animate();
 
     function init() {
-      const canvas = document.getElementById("ocean");
+      // Renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
 
+      // Scene
       scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x020617, 0.18);
+
+      // Camera
       camera = new THREE.PerspectiveCamera(
         60,
         window.innerWidth / window.innerHeight,
-        0.1,
-        80
+        1,
+        20000
       );
-      camera.position.set(0, 1.2, 2.4);
-      camera.lookAt(0, 0, 0);
+      camera.position.set(0, 35, 95);
 
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true
+      // Sun (for reflections + sky)
+      sun = new THREE.Vector3();
+
+      // Sky
+      sky = new Sky();
+      sky.scale.setScalar(10000);
+      scene.add(sky);
+
+      const skyUniforms = sky.material.uniforms;
+      skyUniforms["turbidity"].value = 10;
+      skyUniforms["rayleigh"].value = 2;
+      skyUniforms["mieCoefficient"].value = 0.005;
+      skyUniforms["mieDirectionalG"].value = 0.8;
+
+      // Sun position: SoCal late afternoon vibe
+      const phi = THREE.MathUtils.degToRad(88);  // elevation
+      const theta = THREE.MathUtils.degToRad(180); // azimuth (over ocean)
+
+      sun.setFromSphericalCoords(1, phi, theta);
+      sky.material.uniforms["sunPosition"].value.copy(sun);
+
+      // Env for reflections
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+      const renderTarget = pmremGenerator.fromScene(sky);
+      const envMap = renderTarget.texture;
+
+      // Water geometry
+      const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+
+      water = new Water(waterGeometry, {
+        textureWidth: 1024,
+        textureHeight: 1024,
+        waterNormals: new THREE.TextureLoader().load(
+          "https://threejs.org/examples/textures/waternormals.jpg",
+          (texture) => {
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+          }
+        ),
+        sunDirection: sun.clone().normalize(),
+        sunColor: 0xffffff,
+        waterColor: 0x0a274a, // Deep Pacific blue
+        distortionScale: 3.7,
+        fog: scene.fog !== undefined
       });
-      renderer.setPixelRatio(Math.min(1.8, window.devicePixelRatio));
-      renderer.setSize(window.innerWidth, window.innerHeight);
 
-      const geo = new THREE.PlaneGeometry(6, 6, 200, 200);
+      water.rotation.x = -Math.PI / 2;
+      scene.add(water);
 
-      uniforms = { time: { value: 0 } };
+      scene.environment = envMap;
 
-      const mat = new THREE.ShaderMaterial({
-        uniforms,
-        vertexShader: vtx,
-        fragmentShader: fgm,
-        side: THREE.DoubleSide
-      });
+      // Slight camera tilt downward
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-      mesh = new THREE.Mesh(geo, mat);
-      mesh.rotation.x = -Math.PI / 2.15;
-      mesh.position.y = -1;
-      scene.add(mesh);
-
-      window.addEventListener("resize", onResize);
+      window.addEventListener("resize", onWindowResize);
     }
 
-    function onResize() {
+    function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    function animate(t) {
+    function animate(time) {
       requestAnimationFrame(animate);
-      uniforms.time.value = t * 0.001;
 
-      // Slow cinematic camera drift
-      camera.position.x = Math.sin(t * 0.00025) * 0.35;
-      camera.position.z = 2.4 + Math.sin(t * 0.00015) * 0.08;
+      if (water && water.material && water.material.uniforms) {
+        water.material.uniforms["time"].value += 0.02;
+      }
+
+      // Slow cinematic orbit over ocean
+      const t = time * 0.00008;
+      const radius = 95;
+      camera.position.x = Math.sin(t) * radius;
+      camera.position.z = Math.cos(t) * radius;
+      camera.position.y = 32 + Math.sin(t * 0.5) * 4;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
     }
-
-    init();
-    animate();
   </script>
 </body>
 </html>
