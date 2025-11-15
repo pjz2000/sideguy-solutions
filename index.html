@@ -17,16 +17,15 @@
       --bg: #020617;
       --blue-bg: radial-gradient(circle at top, #38bdf8 0%, #0f172a 45%, #020617 100%);
       --card: rgba(15, 23, 42, 0.9);
-      --muted: #a0aec0;
+      --muted: #9ca3af;
       --text: #e5f2ff;
       --brand1: #38bdf8;
       --brand2: #22d3ee;
       --brand3: #818cf8;
       --accent: #2dd4bf;
       --accent-soft: rgba(45, 212, 191, 0.15);
-      --radius: 14px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
-      --sway-x: 0px; /* hero parallax from 3D ocean */
+      --radius: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.8);
     }
 
     * {
@@ -83,7 +82,7 @@
       outline-offset: 2px;
     }
 
-    /* --- THREE.JS OCEAN BACKGROUND LAYER (C1 MODE) --- */
+    /* --- THREE.JS OCEAN BACKGROUND LAYER --- */
     #ocean-container {
       position: fixed;
       inset: 0;
@@ -98,11 +97,17 @@
       z-index: 1;
       pointer-events: none;
       background:
-        radial-gradient(circle at 50% -20%, rgba(0, 180, 255, 0.25), transparent 60%),
-        radial-gradient(circle at 20% 120%, rgba(0, 255, 210, 0.18), transparent 60%),
-        radial-gradient(circle at 90% 110%, rgba(60, 140, 255, 0.16), transparent 55%);
+        radial-gradient(circle at 50% -20%, rgba(0, 180, 255, 0.35), transparent 60%),
+        radial-gradient(circle at 15% 110%, rgba(0, 255, 210, 0.24), transparent 60%),
+        radial-gradient(circle at 90% 110%, rgba(60, 140, 255, 0.22), transparent 55%);
       mix-blend-mode: screen;
-      opacity: 0.95;
+      opacity: 0.92;
+      transition: opacity 0.35s ease, filter 0.35s ease;
+    }
+
+    body.portal-flash .ocean-overlay-gradient {
+      opacity: 1;
+      filter: brightness(1.15);
     }
 
     /* NAVBAR */
@@ -110,16 +115,11 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: radial-gradient(
-          circle at top,
-          rgba(56, 189, 248, 0.35),
-          transparent 60%
-        ),
-        rgba(15, 23, 42, 0.85);
+      background:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.35), transparent 60%),
+        rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      transform: translateX(var(--sway-x));
-      transition: transform 0.1s linear;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
     }
 
     .nav-inner {
@@ -163,28 +163,65 @@
       color: var(--brand2);
     }
 
-    .timestamp {
-      display: none;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
     /* HERO WITH OCEAN PORTAL */
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 72px 20px 120px;
+      padding: 70px 20px 120px;
       text-align: center;
-      background: radial-gradient(circle at top, rgba(14, 165, 233, 0.9) 0%, rgba(2, 6, 23, 0.96) 55%);
-      box-shadow: inset 0 -40px 80px rgba(15, 23, 42, 0.9);
+      background:
+        radial-gradient(circle at top, rgba(14, 165, 233, 0.9) 0%, rgba(15, 23, 42, 0.98) 55%);
+      box-shadow: inset 0 -40px 80px rgba(15, 23, 42, 0.96);
       z-index: 5;
     }
 
     .hero-inner {
       position: relative;
       z-index: 5;
-      transform: translateX(var(--sway-x));
-      transition: transform 0.1s linear;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .hero-glass {
+      max-width: 650px;
+      padding: 20px 24px 22px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at top left, rgba(148, 163, 184, 0.26), transparent 55%),
+        rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 60px rgba(15, 23, 42, 0.9),
+        0 0 55px rgba(56, 189, 248, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glass::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(148, 163, 184, 0.13) 45%,
+        rgba(248, 250, 252, 0.26) 50%,
+        rgba(148, 163, 184, 0.13) 55%,
+        transparent 100%
+      );
+      transform: translateX(-120%);
+      opacity: 0.8;
+      pointer-events: none;
+      animation: glassSweep 9s linear infinite;
+    }
+
+    @keyframes glassSweep {
+      0% { transform: translateX(-120%); }
+      40% { transform: translateX(120%); }
+      100% { transform: translateX(120%); }
     }
 
     .hero-kicker {
@@ -193,13 +230,13 @@
       gap: 8px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.55);
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--muted);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .hero-kicker span.dot {
@@ -216,14 +253,27 @@
       font-weight: 900;
       letter-spacing: 0.01em;
       margin-bottom: 14px;
-      text-shadow: 0 16px 50px rgba(15, 23, 42, 0.85);
+      text-shadow: 0 16px 50px rgba(15, 23, 42, 0.9);
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    body.portal-flash .hero h1 {
+      text-shadow: 0 0 32px rgba(125, 211, 252, 0.9);
+      transform: translateY(-1px);
     }
 
     .hero h1 span.highlight {
-      background: linear-gradient(120deg, #e0f2fe, #22d3ee, #a855f7);
+      background: linear-gradient(120deg, #22d3ee, #a855f7, #22d3ee);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      background-size: 200% 200%;
+      animation: textShimmer 7s ease-in-out infinite;
+    }
+
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .hero p {
@@ -231,7 +281,7 @@
       margin: 0 auto;
       color: #e2e8f0;
       font-size: 15px;
-      opacity: 0.94;
+      opacity: 0.96;
     }
 
     .hero-pj-line {
@@ -254,232 +304,19 @@
       font-weight: 600;
     }
 
-    /* HYBRID ORB (AI CORE + WATER RING + PARTICLES) */
-    .hero-orb-wrapper {
-      margin-top: 32px;
-      display: flex;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .orb-shell {
-      position: relative;
-      width: min(260px, 70vw);
-      aspect-ratio: 1 / 1;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      isolation: isolate;
-      pointer-events: auto;
-    }
-
-    .orb-backglow {
-      position: absolute;
-      inset: -12%;
-      border-radius: inherit;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(125, 211, 252, 0.9), transparent 60%),
-        radial-gradient(circle at 70% 80%, rgba(45, 212, 191, 0.8), transparent 60%);
-      opacity: 0.45;
-      filter: blur(18px);
-      mix-blend-mode: screen;
-      animation: orbBackGlow 16s ease-in-out infinite alternate;
-    }
-
-    .orb-water-ring {
-      position: absolute;
-      inset: 4%;
-      border-radius: inherit;
-      border: 2px solid rgba(191, 219, 254, 0.7);
-      box-shadow:
-        0 0 20px rgba(191, 219, 254, 0.9),
-        0 0 50px rgba(56, 189, 248, 0.7);
-      background:
-        radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.65), transparent 60%),
-        radial-gradient(circle at 10% 90%, rgba(56, 189, 248, 0.4), transparent 70%);
-      opacity: 0.9;
-    }
-
-    .orb-core {
-      position: relative;
-      width: 75%;
-      height: 75%;
-      border-radius: inherit;
-      background:
-        radial-gradient(circle at 30% 15%, #f9fafb 0, #e0f2fe 22%, transparent 55%),
-        radial-gradient(circle at 80% 88%, rgba(125, 211, 252, 0.95) 0, transparent 55%),
-        radial-gradient(circle at 15% 85%, rgba(15, 23, 42, 0.98) 0, #020617 55%);
-      box-shadow:
-        0 24px 70px rgba(3, 7, 18, 0.98),
-        0 0 0 1px rgba(148, 163, 184, 0.5),
-        0 0 120px rgba(56, 189, 248, 0.9);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.26s ease-out, box-shadow 0.26s ease-out, filter 0.26s ease-out;
-    }
-
-    .orb-core:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow:
-        0 32px 90px rgba(3, 7, 18, 0.98),
-        0 0 0 1px rgba(248, 250, 252, 0.08),
-        0 0 160px rgba(56, 189, 248, 0.95);
-      filter: saturate(1.08);
-    }
-
-    .orb-rings {
-      position: absolute;
-      inset: 12%;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      mix-blend-mode: soft-light;
-    }
-
-    .orb-rings::before,
-    .orb-rings::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      transform-origin: center;
-    }
-
-    .orb-rings::before {
-      transform: scale(1.12) rotate(16deg);
-      border-style: dashed;
-      opacity: 0.6;
-    }
-
-    .orb-rings::after {
-      transform: scale(1.2) rotate(-18deg);
-      opacity: 0.3;
-    }
-
-    .orb-pulse {
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(56, 189, 248, 0.5);
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.16), transparent 70%);
-      animation: orbPulse 3.4s ease-out infinite;
-      pointer-events: none;
-    }
-
-    .orb-particles {
-      position: absolute;
-      inset: 14%;
-      border-radius: inherit;
-      overflow: hidden;
-      pointer-events: none;
-      opacity: 0.95;
-    }
-
-    .orb-particles span {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(224, 242, 254, 0.95);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.95);
-      animation: particleOrbit 14s linear infinite;
-    }
-
-    .orb-particles span:nth-child(1) { top: 16%; left: 20%; animation-duration: 12s; }
-    .orb-particles span:nth-child(2) { top: 32%; right: 18%; animation-duration: 14s; }
-    .orb-particles span:nth-child(3) { bottom: 20%; left: 28%; animation-duration: 16s; }
-    .orb-particles span:nth-child(4) { bottom: 26%; right: 22%; animation-duration: 18s; }
-
-    .orb-label {
-      position: relative;
-      text-align: center;
-      padding: 0.9rem 1.2rem;
-      z-index: 1;
-    }
-
-    .orb-label-main {
-      font-size: 0.82rem;
-      letter-spacing: 0.19em;
-      text-transform: uppercase;
-      color: #ecfeff;
-      margin-bottom: 0.25rem;
-    }
-
-    .orb-label-main span {
-      font-weight: 600;
-    }
-
-    .orb-label-sub {
-      font-size: 0.78rem;
-      color: #bae6fd;
-      opacity: 0.9;
-    }
-
-    .orb-badge {
-      position: absolute;
-      right: -8px;
-      bottom: 22%;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(56, 189, 248, 0.7);
-      font-size: 0.72rem;
-      color: #e0f2fe;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      white-space: nowrap;
-      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.95);
-      z-index: 2;
-    }
-
-    .orb-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #22c55e, #16a34a);
-      box-shadow: 0 0 14px rgba(34, 197, 94, 0.7);
-    }
-
-    .orb-hint {
-      margin-top: 0.6rem;
-      font-size: 0.75rem;
-      text-align: center;
-      color: rgba(226, 232, 240, 0.9);
-    }
-
-    .orb-hint span {
-      color: #bae6fd;
-    }
-
-    @keyframes orbBackGlow {
-      0% { transform: translateY(3px) scale(0.96); opacity: 0.36; }
-      50% { transform: translateY(0px) scale(1.02); opacity: 0.48; }
-      100% { transform: translateY(-3px) scale(1.06); opacity: 0.4; }
-    }
-
-    @keyframes orbPulse {
-      0% { transform: scale(0.96); opacity: 0.08; }
-      40% { transform: scale(1.05); opacity: 0.4; }
-      100% { transform: scale(1.14); opacity: 0.02; }
-    }
-
-    @keyframes particleOrbit {
-      0% { transform: translate3d(0, 0, 0); opacity: 0.8; }
-      50% { transform: translate3d(10px, -8px, 0); opacity: 1; }
-      100% { transform: translate3d(-4px, -4px, 0); opacity: 0.75; }
-    }
-
     /* OCEAN WAVES PORTAL (CSS LAYERS ON TOP OF 3D) */
     .hero-waves {
       position: absolute;
-      inset: 40% -10% -60px;
+      inset: 46% -10% -60px;
       pointer-events: none;
       overflow: hidden;
       z-index: 4;
+      transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+
+    body.portal-flash .hero-waves {
+      filter: brightness(1.08);
+      opacity: 1;
     }
 
     .wave {
@@ -495,17 +332,17 @@
       bottom: -150px;
       background: radial-gradient(
           circle at 20% 0,
-          rgba(34, 211, 238, 0.4),
+          rgba(34, 211, 238, 0.5),
           transparent 60%
         ),
         linear-gradient(
           to top,
           rgba(15, 23, 42, 1) 0%,
-          rgba(15, 23, 42, 0.9) 30%,
+          rgba(15, 23, 42, 0.95) 30%,
           rgba(37, 99, 235, 0.7) 90%,
-          rgba(56, 189, 248, 0.4) 100%
+          rgba(56, 189, 248, 0.5) 100%
         );
-      opacity: 0.78;
+      opacity: 0.82;
       animation: waveBack 26s linear infinite;
     }
 
@@ -514,28 +351,45 @@
       bottom: -130px;
       background: linear-gradient(
         to top,
-        rgba(15, 23, 42, 0.95) 10%,
-        rgba(37, 99, 235, 0.85) 65%,
-        rgba(45, 212, 191, 0.6) 100%
+        rgba(15, 23, 42, 0.98) 10%,
+        rgba(37, 99, 235, 0.9) 65%,
+        rgba(45, 212, 191, 0.72) 100%
       );
-      box-shadow: 0 -10px 50px rgba(15, 23, 42, 0.8);
-      opacity: 0.86;
+      box-shadow: 0 -10px 50px rgba(15, 23, 42, 0.85);
+      opacity: 0.94;
       animation: waveMid 18s linear infinite;
     }
 
     .wave-front {
       height: 180px;
-      bottom: -115px;
+      bottom: -120px;
       background: linear-gradient(
         to top,
         rgba(15, 23, 42, 1) 0%,
-        rgba(8, 47, 73, 0.9) 30%,
-        rgba(59, 130, 246, 0.95) 70%,
-        rgba(191, 219, 254, 0.9) 100%
+        rgba(8, 47, 73, 0.92) 30%,
+        rgba(59, 130, 246, 0.98) 70%,
+        rgba(191, 219, 254, 0.93) 100%
       );
-      box-shadow: 0 -8px 40px rgba(15, 23, 42, 0.8);
-      opacity: 0.94;
+      box-shadow: 0 -8px 40px rgba(15, 23, 42, 0.9);
+      opacity: 0.9;
       animation: waveFront 12s ease-in-out infinite;
+    }
+
+    /* Wave shimmer overlay */
+    .wave-shimmer {
+      position: absolute;
+      inset: 40% -20% -40px;
+      background-image: repeating-linear-gradient(
+        to right,
+        rgba(248, 250, 252, 0.0) 0px,
+        rgba(248, 250, 252, 0.12) 40px,
+        rgba(248, 250, 252, 0.0) 80px
+      );
+      mix-blend-mode: soft-light;
+      opacity: 0.18;
+      pointer-events: none;
+      animation: waveShimmer 18s linear infinite;
+      z-index: 4;
     }
 
     @keyframes waveBack {
@@ -558,23 +412,33 @@
       100% { transform: translateX(0) translateY(0); }
     }
 
+    @keyframes waveShimmer {
+      0% { transform: translateX(-40px); }
+      100% { transform: translateX(40px); }
+    }
+
     /* MIST + PARTICLES */
     .hero-mist {
       position: absolute;
       left: 50%;
-      bottom: 10px;
-      width: 220px;
-      height: 80px;
+      bottom: 18px;
+      width: 260px;
+      height: 90px;
       transform: translateX(-50%);
       background: radial-gradient(
         circle at 50% 0,
-        rgba(226, 232, 240, 0.7),
+        rgba(226, 232, 240, 0.8),
         transparent 70%
       );
-      opacity: 0.4;
-      filter: blur(8px);
+      opacity: 0.45;
+      filter: blur(11px);
       pointer-events: none;
       z-index: 4;
+      transition: opacity 0.3s ease;
+    }
+
+    body.portal-flash .hero-mist {
+      opacity: 0.7;
     }
 
     .bubble {
@@ -601,210 +465,186 @@
       100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
     }
 
-    /* FULLSCREEN GLASS PORTAL (SUMMON PJ) */
-    .portal-overlay {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(34, 211, 238, 0.25), transparent 60%),
-        radial-gradient(circle at bottom, rgba(15, 23, 42, 0.98), rgba(3, 7, 18, 1));
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+    /* CENTER OCEAN PORTAL ORB */
+    .portal-orb-wrapper {
+      position: relative;
+      margin-top: 2px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 10px;
+      z-index: 6;
+      pointer-events: auto;
+    }
+
+    .portal-orb {
+      position: relative;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 18%, rgba(255, 255, 255, 0.38), transparent 58%),
+        radial-gradient(circle at 70% 82%, rgba(56, 189, 248, 0.78), transparent 72%),
+        radial-gradient(circle at 50% 50%, #020617 0%, #020617 70%);
+      box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.6),
+        0 0 40px rgba(56, 189, 248, 0.8),
+        0 26px 60px rgba(15, 23, 42, 0.95);
+      overflow: hidden;
+      animation: orbFloat 7.4s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .portal-orb::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          from 220deg,
+          rgba(45, 212, 191, 0.18),
+          rgba(56, 189, 248, 0.7),
+          rgba(129, 140, 248, 0.75),
+          rgba(45, 212, 191, 0.18)
+        );
+      mix-blend-mode: screen;
+      filter: blur(1px);
+      animation: orbSwirl 16s linear infinite;
+      opacity: 0.9;
+    }
+
+    .portal-orb::after {
+      content: "";
+      position: absolute;
+      inset: 25%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 10%, rgba(255, 255, 255, 0.9), transparent 60%),
+        radial-gradient(circle at 70% 90%, rgba(59, 130, 246, 0.9), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.97;
+    }
+
+    .portal-orb-core {
+      position: absolute;
+      inset: 36%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.98), transparent 55%),
+        radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.95), rgba(15, 23, 42, 0.2));
+      box-shadow:
+        0 0 34px rgba(191, 219, 254, 0.95),
+        0 0 85px rgba(56, 189, 248, 0.85);
+      animation: corePulse 3.4s ease-in-out infinite;
+    }
+
+    .portal-orb-ring {
+      position: absolute;
+      inset: 3.5%;
+      border-radius: 50%;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      box-shadow:
+        0 0 12px rgba(148, 163, 184, 0.8),
+        0 0 30px rgba(56, 189, 248, 0.7);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .portal-orb-beam {
+      position: absolute;
+      left: 50%;
+      top: -60%;
+      width: 3px;
+      height: 0;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(
+        to top,
+        rgba(125, 211, 252, 0.0),
+        rgba(191, 219, 254, 0.7),
+        rgba(255, 255, 255, 0.97)
+      );
+      box-shadow: 0 0 22px rgba(191, 219, 254, 0.9);
       opacity: 0;
       pointer-events: none;
-      transform: translateY(8px) scale(1.02);
-      transition: opacity 260ms ease-out, transform 260ms ease-out;
-      z-index: 50;
     }
 
-    .portal-overlay--open {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0) scale(1);
+    body.portal-flash .portal-orb-beam {
+      animation: beamFlash 0.6s ease-out forwards;
     }
 
-    .portal-shell {
-      position: relative;
-      width: min(960px, 94vw);
-      max-height: min(620px, 88vh);
-      border-radius: 26px;
-      padding: 18px 18px 20px;
-      background:
-        radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      box-shadow:
-        0 24px 80px rgba(3, 7, 18, 0.96),
-        0 0 0 1px rgba(15, 23, 42, 0.98);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      overflow: hidden;
+    /* small shimmer line around orb */
+    .orb-shimmer-line {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      border-top: 1px solid rgba(248, 250, 252, 0.65);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.0);
+      border-left: 0;
+      border-right: 0;
+      opacity: 0.6;
+      mix-blend-mode: screen;
+      animation: orbLine 8s linear infinite;
+      pointer-events: none;
     }
 
-    @media (min-width: 900px) {
-      .portal-shell {
-        padding: 20px 22px 22px;
-        border-radius: 28px;
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-11px); }
+    }
+
+    @keyframes orbSwirl {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes corePulse {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      40% { transform: scale(1.06); filter: brightness(1.18); }
+      60% { transform: scale(0.98); filter: brightness(0.98); }
+    }
+
+    @keyframes beamFlash {
+      0% {
+        height: 0;
+        opacity: 0;
+        transform: translateX(-50%) translateY(12px);
+      }
+      25% {
+        height: 120%;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      100% {
+        height: 150%;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-18px);
       }
     }
 
-    .portal-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 4px;
+    @keyframes orbLine {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
+      50% { transform: rotate(180deg) scale(1.02); opacity: 0.8; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
     }
 
-    .portal-dot {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8);
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
-    }
-
-    .portal-title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .portal-title {
-      font-size: 14px;
-      letter-spacing: 0.22em;
+    .portal-label {
+      font-size: 11px;
       text-transform: uppercase;
-      color: #e5e7eb;
-    }
-
-    .portal-subtitle {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .portal-close {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      background: rgba(15, 23, 42, 0.96);
-      cursor: pointer;
-      font-size: 14px;
-      color: var(--muted);
-      transition: background 0.16s ease, transform 0.16s ease;
-    }
-
-    .portal-close:hover {
-      background: rgba(15, 23, 42, 1);
-      transform: translateY(-1px);
-    }
-
-    .portal-main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: stretch;
-      flex: 1;
-    }
-
-    @media (max-width: 880px) {
-      .portal-main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .portal-copy {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      padding-right: 4px;
-    }
-
-    .portal-copy strong {
-      color: #e5e7eb;
-    }
-
-    .portal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      align-self: stretch;
-    }
-
-    @media (max-width: 600px) {
-      .portal-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .portal-card {
-      position: relative;
-      border-radius: 14px;
-      padding: 10px 10px 11px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
-      cursor: pointer;
-      transition:
-        transform 0.16s ease-out,
-        border-color 0.16s ease-out,
-        box-shadow 0.16s ease-out,
-        background 0.16s ease-out;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .portal-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(56, 189, 248, 0.8);
-      background: rgba(15, 23, 42, 0.98);
-      box-shadow:
-        0 20px 55px rgba(15, 23, 42, 0.98),
-        0 0 0 1px rgba(15, 23, 42, 0.98);
-    }
-
-    .portal-card-label {
-      font-size: 10px;
       letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(226, 232, 240, 0.9);
+      background: rgba(15, 23, 42, 0.86);
+      border-radius: 999px;
+      padding: 4px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.95);
     }
 
-    .portal-card-title {
-      font-size: 13px;
-      color: #e5e7eb;
-    }
-
-    .portal-card-desc {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .portal-card-tag {
-      margin-top: 2px;
-      font-size: 11px;
-      color: #bae6fd;
-    }
-
-    .portal-footer {
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .portal-footer span {
-      opacity: 0.95;
+    .portal-label span {
+      color: #7dd3fc;
+      font-weight: 600;
     }
 
     /* SUMMON PJ FLOATING BUTTON */
@@ -822,21 +662,16 @@
       gap: 4px;
       padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: radial-gradient(
-          circle at 0 0,
-          rgba(56, 189, 248, 0.4),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at 100% 100%,
-          rgba(129, 140, 248, 0.45),
-          transparent 55%
-        ),
-        rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.4), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.5), transparent 55%),
+        rgba(15, 23, 42, 0.98);
       color: #e5f2ff;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9), var(--shadow-soft),
-        0 0 25px rgba(56, 189, 248, 0.7);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.95),
+        var(--shadow-soft),
+        0 0 25px rgba(56, 189, 248, 0.8);
       text-decoration: none;
       cursor: pointer;
       min-width: 230px;
@@ -847,16 +682,19 @@
 
     @keyframes summonPulse {
       0% {
-        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.8),
-          0 20px 40px rgba(15, 23, 42, 0.9);
+        box-shadow:
+          0 0 0 0 rgba(56, 189, 248, 0.82),
+          0 20px 40px rgba(15, 23, 42, 0.95);
       }
       70% {
-        box-shadow: 0 0 0 16px rgba(56, 189, 248, 0),
-          0 18px 36px rgba(15, 23, 42, 0.9);
+        box-shadow:
+          0 0 0 16px rgba(56, 189, 248, 0),
+          0 18px 36px rgba(15, 23, 42, 0.95);
       }
       100% {
-        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0),
-          0 20px 40px rgba(15, 23, 42, 0.9);
+        box-shadow:
+          0 0 0 0 rgba(56, 189, 248, 0),
+          0 20px 40px rgba(15, 23, 42, 0.95);
       }
     }
 
@@ -915,37 +753,58 @@
       margin-top: 4px;
       font-size: 11px;
       text-align: right;
-      color: rgba(226, 232, 240, 0.85);
-      text-shadow: 0 0 10px rgba(15, 23, 42, 0.9);
+      color: rgba(226, 232, 240, 0.9);
+      text-shadow: 0 0 10px rgba(15, 23, 42, 0.95);
     }
 
     /* SECTION BASE */
     .section {
       padding: 40px 20px;
-      background: radial-gradient(
-          circle at top,
-          rgba(37, 99, 235, 0.22),
-          transparent 60%
-        ),
-        rgba(2, 6, 23, 0.96);
+      background:
+        radial-gradient(circle at top, rgba(37, 99, 235, 0.26), transparent 60%),
+        rgba(2, 6, 23, 0.97);
       position: relative;
       z-index: 5;
     }
 
     .section-alt {
-      background: radial-gradient(
-          circle at top,
-          rgba(8, 47, 73, 0.8),
-          rgba(2, 6, 23, 0.96) 55%
-        );
+      background:
+        radial-gradient(circle at top, rgba(8, 47, 73, 0.9), rgba(2, 6, 23, 0.98) 55%);
     }
 
     .section-card {
       background: var(--card);
-      border-radius: 18px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow-soft);
       padding: 22px 20px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(148, 163, 184, 0.14) 45%,
+        rgba(248, 250, 252, 0.26) 50%,
+        rgba(148, 163, 184, 0.14) 55%,
+        transparent 100%
+      );
+      transform: translateX(-140%);
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      animation: cardSweep 14s linear infinite;
+    }
+
+    @keyframes cardSweep {
+      0% { transform: translateX(-140%); }
+      40% { transform: translateX(140%); }
+      100% { transform: translateX(140%); }
     }
 
     .section-header {
@@ -986,34 +845,58 @@
     .trend-pill {
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.45);
       font-size: 12px;
       color: #e5f2ff;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.98);
       white-space: nowrap;
     }
 
     /* SPORTS EDGE */
     .sports-edge-body {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.05fr);
       gap: 18px;
       align-items: flex-start;
     }
 
     .sports-main {
-      background: radial-gradient(
-          circle at top left,
-          rgba(251, 191, 36, 0.35),
-          transparent 55%
-        ),
-        rgba(15, 23, 42, 0.95);
-      border-radius: 14px;
+      background:
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.35), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border-radius: 16px;
       padding: 14px 14px 14px 16px;
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.96);
       font-size: 13px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sports-main::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        rgba(251, 191, 36, 0.18) 45%,
+        rgba(253, 230, 138, 0.32) 50%,
+        rgba(251, 191, 36, 0.18) 55%,
+        transparent 100%
+      );
+      opacity: 0.8;
+      transform: translateX(-130%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      animation: sportsSweep 12s linear infinite;
+    }
+
+    @keyframes sportsSweep {
+      0% { transform: translateX(-130%); }
+      40% { transform: translateX(130%); }
+      100% { transform: translateX(130%); }
     }
 
     .sports-label {
@@ -1045,13 +928,14 @@
       display: flex;
       gap: 8px;
       font-size: 12px;
+      flex-wrap: wrap;
     }
 
     .sports-odds span {
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(251, 191, 36, 0.5);
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(251, 191, 36, 0.55);
     }
 
     .sports-note {
@@ -1064,7 +948,7 @@
     .sports-side {
       font-size: 12px;
       color: var(--muted);
-      border-left: 1px dashed rgba(148, 163, 184, 0.5);
+      border-left: 1px dashed rgba(148, 163, 184, 0.6);
       padding-left: 14px;
     }
 
@@ -1087,8 +971,8 @@
       gap: 8px;
       padding: 9px 12px;
       border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.96);
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.98);
       color: #e5f2ff;
       font-size: 12px;
       text-decoration: none;
@@ -1113,7 +997,7 @@
       gap: 6px;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(24, 24, 27, 0.9);
+      background: rgba(24, 24, 27, 0.96);
       font-size: 11px;
       color: #e5e7eb;
       margin-bottom: 6px;
@@ -1126,9 +1010,9 @@
       padding: 4px 9px;
       font-size: 11px;
       border-radius: 999px;
-      background: rgba(22, 163, 74, 0.12);
+      background: rgba(22, 163, 74, 0.16);
       color: #bbf7d0;
-      border: 1px solid rgba(22, 163, 74, 0.5);
+      border: 1px solid rgba(22, 163, 74, 0.6);
     }
 
     .tickets-savings {
@@ -1140,8 +1024,8 @@
     /* FOOTER */
     .footer {
       padding: 26px 20px 40px;
-      background: rgba(2, 6, 23, 0.96);
-      border-top: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(2, 6, 23, 0.98);
+      border-top: 1px solid rgba(148, 163, 184, 0.6);
       text-align: center;
       font-size: 12px;
       color: var(--muted);
@@ -1175,7 +1059,7 @@
 
       .sports-side {
         border-left: none;
-        border-top: 1px dashed rgba(148, 163, 184, 0.5);
+        border-top: 1px dashed rgba(148, 163, 184, 0.6);
         padding-left: 0;
         padding-top: 10px;
         margin-top: 6px;
@@ -1190,6 +1074,15 @@
         min-width: 210px;
         padding: 9px 14px;
       }
+
+      .portal-orb {
+        width: 165px;
+        height: 165px;
+      }
+
+      .hero-waves {
+        inset: 52% -10% -60px;
+      }
     }
   </style>
 </head>
@@ -1197,79 +1090,6 @@
   <!-- 3D OCEAN BACKGROUND (THREE.JS) -->
   <div id="ocean-container"></div>
   <div class="ocean-overlay-gradient"></div>
-
-  <!-- FULLSCREEN OCEANOS PORTAL -->
-  <div class="portal-overlay" id="portalOverlay" aria-hidden="true">
-    <div class="portal-shell">
-      <div class="portal-header">
-        <div class="portal-dot"></div>
-        <div class="portal-title-group">
-          <div class="portal-title">Summon PJ</div>
-          <div class="portal-subtitle">Pick your lane. PJ handles the rest.</div>
-        </div>
-        <button class="portal-close" id="portalClose" aria-label="Close portal">✕</button>
-      </div>
-
-      <div class="portal-main">
-        <div class="portal-copy" id="portalCopy">
-          <p>
-            You tapped into the glass. This is your
-            <strong>OceanOS-style control room</strong> for North County life — tech, transport,
-            tickets, and Web3 in one place.
-          </p>
-          <br />
-          <p>
-            Pick the lane that matches what you need <strong>right now</strong>. When you’re ready,
-            hit email or text and send PJ the short version: who you are, what you’re building, and
-            how fast you want to move.
-          </p>
-        </div>
-
-        <div class="portal-grid">
-          <div class="portal-card" data-portal-lane="tech">
-            <div class="portal-card-label">Lane 01 · Tech & Systems</div>
-            <div class="portal-card-title">“My systems are chaos. Fix it.”</div>
-            <div class="portal-card-desc">
-              Custom tools, automations, and flows to stop the busywork — from lead capture to invoice.
-            </div>
-            <div class="portal-card-tag">Good for: founders, operators, service businesses.</div>
-          </div>
-
-          <div class="portal-card" data-portal-lane="transport">
-            <div class="portal-card-label">Lane 02 · Transport</div>
-            <div class="portal-card-title">“I need to get from A to beach.”</div>
-            <div class="portal-card-desc">
-              Rides, routes, and coastal logistics — from Solana Beach to Encinitas and beyond.
-            </div>
-            <div class="portal-card-tag">Good for: airport runs, nights out, daily loops.</div>
-          </div>
-
-          <div class="portal-card" data-portal-lane="tickets">
-            <div class="portal-card-label">Lane 03 · Tickets</div>
-            <div class="portal-card-title">“What’s good tonight?”</div>
-            <div class="portal-card-desc">
-              Belly Up, Padres, Rady Shell, and hidden gems — matched to budget and vibe.
-            </div>
-            <div class="portal-card-tag">Good for: 2–6 people, any night.</div>
-          </div>
-
-          <div class="portal-card" data-portal-lane="web3">
-            <div class="portal-card-label">Lane 04 · Web3 & Solana</div>
-            <div class="portal-card-title">“Pay me in stablecoins, clean and simple.”</div>
-            <div class="portal-card-desc">
-              Solana + Crypto Escro rails for dev projects and retainers — so AR stops being a fight.
-            </div>
-            <div class="portal-card-tag">Good for: agencies, studios, dev shops, retainers.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="portal-footer">
-        <span id="portalHint">Tap a lane to pre-fill your message to PJ.</span>
-        <span>Calm luxury. Aladeen under the hood.</span>
-      </div>
-    </div>
-  </div>
 
   <!-- NAV -->
   <nav class="nav">
@@ -1289,59 +1109,43 @@
   <!-- HERO OCEAN PORTAL -->
   <section class="hero">
     <div class="hero-inner container">
-      <div class="hero-kicker">
-        <span class="dot"></span>
-        NORTH COUNTY COASTAL • WEB3 CONCIERGE
-      </div>
-      <h1>
-        Where <span class="highlight">code</span> meets<br />
-        the coastline.
-      </h1>
-      <p>
-        SideGuy Solutions blends technology, transportation, and real-life
-        assistance — precision-built for North County. From Solana Beach to
-        Encinitas, PJ keeps your days moving, your ideas shipped, and your
-        systems smarter.
-      </p>
-      <p class="hero-pj-line">
-        <strong>PJ — your coastal concierge for tech, life, and transport.</strong>
-        Six years in North County, still just getting started.
-      </p>
-      <p class="hero-contacts">
-        Call / text:
-        <a href="tel:17735441231">(773) 544-1231</a> · Email:
-        <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
-      </p>
-
-      <!-- HYBRID ORB CENTER HERO -->
-      <div class="hero-orb-wrapper">
-        <div class="orb-shell">
-          <div class="orb-backglow"></div>
-          <div class="orb-water-ring"></div>
-          <div class="orb-core" id="heroOrb">
-            <div class="orb-rings"></div>
-            <div class="orb-pulse"></div>
-            <div class="orb-particles">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="orb-label">
-              <div class="orb-label-main">
-                TAP TO <span>SUMMON&nbsp;PJ</span>
-              </div>
-              <div class="orb-label-sub">
-                OceanOS-style portal. One tap, one plan.
-              </div>
-            </div>
-            <div class="orb-badge">
-              <div class="orb-badge-dot"></div>
-              <span>Aladeen Mode++</span>
-            </div>
-          </div>
+      <div class="hero-glass">
+        <div class="hero-kicker">
+          <span class="dot"></span>
+          NORTH COUNTY COASTAL • WEB3 CONCIERGE
         </div>
+        <h1>
+          Where <span class="highlight">code</span> meets<br />
+          the coastline.
+        </h1>
+        <p>
+          SideGuy Solutions blends technology, transportation, and real-life
+          assistance — precision-built for North County. From Solana Beach to
+          Encinitas, PJ keeps your days moving, your ideas shipped, and your
+          systems smarter.
+        </p>
+        <p class="hero-pj-line">
+          <strong>PJ — your coastal concierge for tech, life, and transport.</strong>
+          Six years in North County, still just getting started.
+        </p>
+        <p class="hero-contacts">
+          Call / text:
+          <a href="tel:17735441231">(773) 544-1231</a> · Email:
+          <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
+        </p>
       </div>
-      <div class="orb-hint">
-        Tap the orb to open the glass portal.<br />
-        <span>Pick your lane: tech, tickets, transport, or Web3.</span>
+
+      <!-- Center Orb Portal -->
+      <div class="portal-orb-wrapper">
+        <div id="portalOrb" class="portal-orb">
+          <div class="portal-orb-core"></div>
+          <div class="portal-orb-ring"></div>
+          <div class="portal-orb-beam"></div>
+          <div class="orb-shimmer-line"></div>
+        </div>
+        <div class="portal-label">
+          OceanOS Portal • <span>Tap to open</span>
+        </div>
       </div>
     </div>
 
@@ -1351,6 +1155,7 @@
       <div class="wave wave-mid"></div>
       <div class="wave wave-front"></div>
     </div>
+    <div class="wave-shimmer"></div>
     <div class="hero-mist"></div>
     <div class="bubble b1"></div>
     <div class="bubble b2"></div>
@@ -1358,7 +1163,7 @@
     <div class="bubble b4"></div>
   </section>
 
-  <!-- SUMMON PJ FLOATING BUTTON (MAIL) -->
+  <!-- SUMMON PJ FLOATING BUTTON -->
   <div class="summon-wrapper">
     <a
       id="summonPJBubble"
@@ -1515,7 +1320,7 @@
   <footer class="footer" id="contact">
     <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
     <div>Coastal concierge for tech, transport, and systems that actually fit your life.</div>
-    <div id="version-info">Version 4.2-oceanos-orb</div>
+    <div id="version-info">Version 4.3-oceanos-final</div>
   </footer>
 
   <!-- THREE.js from CDN -->
@@ -1567,8 +1372,6 @@
         context: "Regular Season • West Coast window",
         market: "Player Points + Rebounds + Assists",
         pick: "Dereck Lively II — Over 14.5 PRA",
-        notes:
-          "Role expanding, minutes trending up, and fits well in uptempo game scripts.",
         oddsMain: "+112",
         oddsAlt: "+136",
         liq: "$27 (example size)",
@@ -1581,8 +1384,6 @@
         context: "Divisional tilt • Prime-time style game",
         market: "Rushing + Receiving Yards",
         pick: "Versatile RB Over combo line",
-        notes:
-          "Built around volume, checkdowns, and soft zone coverage. Think usage, not highlight plays.",
         oddsMain: "+104",
         oddsAlt: "+128",
         liq: "$31 (example size)",
@@ -1595,8 +1396,6 @@
         context: "Night game • Pitcher-friendly park adjustment",
         market: "Total Bases",
         pick: "Contact hitter Over 1.5 TB",
-        notes:
-          "Matchup-driven, not star-driven. Focus on splits, park factors, and lineup protection.",
         oddsMain: "+120",
         oddsAlt: "+148",
         liq: "$24 (example size)",
@@ -1609,8 +1408,7 @@
       const container = document.getElementById("sports-edge-body");
       if (!container) return;
 
-      const edge =
-        SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
+      const edge = SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
 
       container.innerHTML = `
         <div class="sports-main">
@@ -1649,124 +1447,8 @@
         minute: "2-digit",
         hour12: true
       });
-      el.textContent = `Version 4.2-oceanos-orb • Updated ${now} PST`;
+      el.textContent = `Version 4.3-oceanos-final • Updated ${now} PST`;
     }
-
-    // --------- FULLSCREEN PORTAL LOGIC ----------
-    const portal = document.getElementById("portalOverlay");
-    const portalClose = document.getElementById("portalClose");
-    const portalCopy = document.getElementById("portalCopy");
-    const portalHint = document.getElementById("portalHint");
-    const heroOrb = document.getElementById("heroOrb");
-
-    function openPortal(lane) {
-      if (!portal) return;
-      portal.classList.add("portal-overlay--open");
-      portal.setAttribute("aria-hidden", "false");
-      updatePortalLane(lane || "default");
-      boostWaves();
-    }
-
-    function closePortal() {
-      if (!portal) return;
-      portal.classList.remove("portal-overlay--open");
-      portal.setAttribute("aria-hidden", "true");
-      updatePortalLane("default");
-    }
-
-    function updatePortalLane(lane) {
-      if (!portalCopy || !portalHint) return;
-
-      if (lane === "tech") {
-        portalCopy.innerHTML = `
-          <p>
-            Tech lane selected. You’re asking PJ to be your
-            <strong>systems and automation brain</strong>.
-          </p>
-          <br />
-          <p>
-            When you email or text, start with: who you are, what tools you’re using now, and what
-            feels broken. PJ will come back with a short plan and a few options — no fluff.
-          </p>
-        `;
-        portalHint.textContent = 'Next step: hit "Email PJ" or "Call / text PJ" and send 3 bullet points.';
-      } else if (lane === "transport") {
-        portalCopy.innerHTML = `
-          <p>
-            Transport lane selected. You’re asking PJ to smooth out the
-            <strong>getting-there part of your life</strong>.
-          </p>
-          <br />
-          <p>
-            When you reach out, share where you are, where you need to go, and how often. PJ can
-            help design everything from airport runs to weekly loops.
-          </p>
-        `;
-        portalHint.textContent = "Next step: tell PJ your start point, end point, and timing.";
-      } else if (lane === "tickets") {
-        portalCopy.innerHTML = `
-          <p>
-            Tickets lane selected. You’re asking PJ to be your
-            <strong>personal ticket brain</strong>.
-          </p>
-          <br />
-          <p>
-            When you message PJ, include: how many people, rough budget per ticket, and vibes
-            (chill, loud, date night, squad night). PJ brings back options.
-          </p>
-        `;
-        portalHint.textContent = "Next step: send PJ your group size, vibe, and budget.";
-      } else if (lane === "web3") {
-        portalCopy.innerHTML = `
-          <p>
-            Web3 & Solana lane selected. You’re asking PJ for
-            <strong>clean stablecoin rails</strong> with Crypto Escro.
-          </p>
-          <br />
-          <p>
-            When you reach out, share: your business, average project size, and how you’d like
-            funds to flow. PJ will sketch an escrow flow that actually keeps your CEO calm.
-          </p>
-        `;
-        portalHint.textContent = "Next step: tell PJ how you charge today and what you’d fix first.";
-      } else {
-        portalCopy.innerHTML = `
-          <p>
-            You tapped into the glass. This is your
-            <strong>OceanOS-style control room</strong> for North County life — tech, transport,
-            tickets, and Web3 in one place.
-          </p>
-          <br />
-          <p>
-            Pick the lane that matches what you need <strong>right now</strong>. When you’re ready,
-            hit email or text and send PJ the short version: who you are, what you’re building, and
-            how fast you want to move.
-          </p>
-        `;
-        portalHint.textContent = "Tap a lane to pre-fill your message to PJ.";
-      }
-    }
-
-    if (heroOrb) {
-      heroOrb.addEventListener("click", () => openPortal("default"));
-    }
-
-    if (portalClose) {
-      portalClose.addEventListener("click", closePortal);
-    }
-
-    portal?.addEventListener("click", (e) => {
-      if (e.target === portal) {
-        closePortal();
-      }
-    });
-
-    document.querySelectorAll("[data-portal-lane]").forEach((card) => {
-      card.addEventListener("click", () => {
-        const lane = card.getAttribute("data-portal-lane");
-        updatePortalLane(lane);
-      });
-    });
 
     // --------- THREE.JS OCEAN (FULL BACKGROUND) ----------
     let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
@@ -1886,11 +1568,11 @@
           col = mix(col, surf, pow(1.0 - depth, 3.2));
 
           float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-          col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
+          col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.7;
 
           float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
           float rays = smoothstep(0.72, 1.0, rayPattern);
-          col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
+          col += vec3(0.07, 0.11, 0.16) * rays * 0.85;
 
           float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
           col += shimmer * 0.09;
@@ -1956,17 +1638,16 @@
       camera.position.x = sway;
       camera.lookAt(0, 0, 0);
 
-      // push sway into CSS variable for parallax
-      document.documentElement.style.setProperty('--sway-x', (sway * 4).toFixed(2) + 'px');
-
       renderer.render(scene, camera);
     }
 
     function boostWaves() {
       targetWaveAmp = 1.6;
+      document.body.classList.add("portal-flash");
       setTimeout(() => {
         targetWaveAmp = 1.05;
-      }, 550);
+        document.body.classList.remove("portal-flash");
+      }, 600);
     }
 
     // --------- INIT ----------
@@ -1980,7 +1661,13 @@
       if (summonBtn) {
         summonBtn.addEventListener("click", () => {
           boostWaves();
-          // mailto handles the rest
+        });
+      }
+
+      const portalOrb = document.getElementById("portalOrb");
+      if (portalOrb) {
+        portalOrb.addEventListener("click", () => {
+          boostWaves();
         });
       }
     });
