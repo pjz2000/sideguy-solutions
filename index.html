@@ -1,133 +1,640 @@
+<!--
+  SideGuy Solutions
+  Version: 5.0-water-portal-lite
+  Mode: Realistic Water Window + Tap to Summon PJ
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- PART 1 — HEAD / META / TITLE -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Real Pacific Ocean Test</title>
+  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
+  <meta
+    name="description"
+    content="SideGuy Solutions — coastal concierge for tech, tickets, and DFS edges in North County San Diego. Tap to summon PJ through a living Pacific portal."
+  />
+
+  <!-- PART 2 — STYLES (CSS) -->
   <style>
-    html, body {
+    :root {
+      --bg: #020617;
+      --bg-accent: #02101f;
+      --ocean-deep: #02091a;
+      --ocean-mid: #0f6ba8;
+      --ocean-light: #4fd1ff;
+      --sand: #fbbf24;
+      --text-main: #e5f2ff;
+      --text-soft: #9ca3af;
+      --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --card: rgba(15, 23, 42, 0.92);
+      --border-subtle: rgba(148, 163, 184, 0.4);
+      --radius-xl: 28px;
+      --shadow-soft: 0 18px 65px rgba(15, 23, 42, 0.9);
+      --shadow-glow: 0 0 45px rgba(56, 189, 248, 0.75);
+      --transition-fast: 180ms ease-out;
+      --transition-med: 260ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      overflow: hidden;
-      background: #020617;
-      height: 100%;
     }
-    canvas {
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%),
+        radial-gradient(circle at bottom, #0f172a 0, #020617 60%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .page-shell {
+      width: 100%;
+      max-width: 1100px;
+      background: radial-gradient(circle at top, #020617 0, #000814 55%);
+      border-radius: 32px;
+      padding: 26px 22px 26px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle top glow */
+    .page-shell::before {
+      content: "";
+      position: absolute;
+      inset: -25% -40%;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(56, 189, 248, 0.35), transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(37, 99, 235, 0.3), transparent 60%);
+      opacity: 0.95;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .page-shell {
+        padding: 18px 16px 22px;
+        border-radius: 22px;
+      }
+      .content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* LEFT: HEADLINE / COPY / CTA */
+    .hero-text {
+      padding: 12px 8px 12px 14px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px 6px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      margin-bottom: 14px;
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-pill-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 55%, #0369a1);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .hero-pill-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #bfdbfe;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 2.6vw + 1rem, 3rem);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      max-width: 34rem;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub strong {
+      color: #e0f2fe;
+      font-weight: 600;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #cbd5f5;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.6)
+      );
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 12px;
+    }
+
+    .btn-primary {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 9px 20px 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      background: radial-gradient(circle at 0% 0%, #e0f2fe, #0ea5e9 40%, #0369a1 100%);
+      color: #0b1120;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.9), 0 0 28px rgba(59, 130, 246, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary span.arrow {
+      font-size: 16px;
+      transform: translateY(1px);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95), 0 0 40px rgba(59, 130, 246, 0.95);
+      filter: brightness(1.05);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.99);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+      filter: brightness(0.97);
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    /* RIGHT: WATER PORTAL */
+    .portal-shell {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .portal-card {
+      width: min(380px, 100%);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      padding: 12px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(148, 163, 255, 0.45), transparent 60%),
+        radial-gradient(circle at 80% 120%, rgba(56, 189, 248, 0.45), transparent 65%),
+        radial-gradient(circle at 50% 50%, #020617 0%, #000 80%);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 18px 70px rgba(15, 23, 42, 0.95);
+      position: relative;
+      overflow: visible;
+    }
+
+    .portal-ring {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      padding: 10px;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(248, 250, 252, 0.28), transparent 70%),
+        conic-gradient(
+          from 200deg,
+          rgba(56, 189, 248, 0.1),
+          rgba(37, 99, 235, 0.65),
+          rgba(15, 118, 110, 0.65),
+          rgba(30, 64, 175, 0.7),
+          rgba(15, 23, 42, 0.3),
+          rgba(56, 189, 248, 0.9),
+          rgba(59, 130, 246, 0.8),
+          rgba(15, 23, 42, 0.3)
+        );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(191, 219, 254, 0.8);
+      box-shadow:
+        0 0 50px rgba(56, 189, 248, 0.65),
+        inset 0 0 40px rgba(15, 23, 42, 0.8);
+      overflow: hidden;
+      transition: box-shadow var(--transition-med), transform var(--transition-med);
+    }
+
+    .portal-ring::before {
+      content: "";
+      position: absolute;
+      inset: 6%;
+      border-radius: 999px;
+      border: 1px solid rgba(219, 234, 254, 0.4);
+      box-shadow: inset 0 0 35px rgba(15, 23, 42, 0.9);
+      pointer-events: none;
+    }
+
+    .portal-core {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 55px rgba(15, 23, 42, 0.9),
+        0 0 30px rgba(56, 189, 248, 0.4);
+      transform: translateZ(0);
+    }
+
+    /* The actual water canvas */
+    #portalCanvas {
+      width: 100%;
+      height: 100%;
       display: block;
+    }
+
+    /* Atmospheric overlay inside portal */
+    .portal-glass {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.3), transparent 55%),
+        radial-gradient(circle at 50% 80%, rgba(15, 23, 42, 0.35), transparent 65%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .portal-shell-text {
+      text-align: center;
+      font-size: 0.86rem;
+      color: rgba(191, 219, 254, 0.93);
+    }
+
+    .portal-shell-text span {
+      display: block;
+      font-size: 0.78rem;
+      color: rgba(148, 163, 184, 0.96);
+      margin-top: 3px;
+    }
+
+    /* Tap state */
+    .portal-shell.tapping .portal-ring {
+      box-shadow:
+        0 0 75px rgba(59, 130, 246, 1),
+        0 0 130px rgba(59, 130, 246, 0.9),
+        inset 0 0 40px rgba(15, 23, 42, 0.9);
+      transform: scale(1.03);
+      animation: ringPulse 0.7s ease-out;
+    }
+
+    .portal-shell.tapping .portal-glass {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.6), transparent 58%),
+        radial-gradient(circle at 50% 80%, rgba(15, 23, 42, 0.65), transparent 65%);
+    }
+
+    @keyframes ringPulse {
+      0% {
+        transform: scale(1.02);
+      }
+      40% {
+        transform: scale(1.08);
+      }
+      100% {
+        transform: scale(1.03);
+      }
+    }
+
+    /* A subtle whole-page flash on summon */
+    body.portal-flash::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(129, 230, 217, 0.5), transparent 65%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      animation: flashFade 0.6s ease-out forwards;
+      z-index: 999;
+    }
+
+    @keyframes flashFade {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    /* FOOTER / VERSION */
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding: 10px 4px 2px;
+      border-top: 1px solid rgba(30, 64, 175, 0.55);
+      font-size: 0.76rem;
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    .footer-row span.version-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: rgba(203, 213, 225, 0.98);
+    }
+
+    .footer-row a {
+      color: #bfdbfe;
+      text-decoration: none;
+    }
+
+    .footer-row a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
-  <script type="module">
-    import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-    import { Water } from "https://unpkg.com/three@0.160.0/examples/jsm/objects/Water.js";
-    import { Sky } from "https://unpkg.com/three@0.160.0/examples/jsm/objects/Sky.js";
+  <div class="page-shell">
+    <div class="content">
+      <!-- PART 1A — LEFT: TEXT + CTA -->
+      <section class="hero-text">
+        <div class="hero-pill">
+          <div class="hero-pill-badge">🌊</div>
+          <span class="hero-pill-label">SideGuy Solutions · Coastal Concierge</span>
+        </div>
 
-    let camera, scene, renderer;
-    let water, sun, sky;
+        <h1>Where code meets the coastline.</h1>
 
-    init();
-    animate();
+        <p class="hero-sub">
+          From <strong>apps and automations</strong> to <strong>tickets and DFS edges</strong>,
+          SideGuy Solutions is your <strong>North County oceanfront wizard</strong> for
+          tech that actually ships — and ships fast.
+        </p>
 
-    function init() {
-      // Renderer
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
+        <div class="hero-tags">
+          <span class="hero-tag">Custom Apps &amp; APIs</span>
+          <span class="hero-tag">Ticketing Systems</span>
+          <span class="hero-tag">DFS &amp; Sports Edge</span>
+          <span class="hero-tag">Web3 &amp; Automation</span>
+        </div>
 
-      // Scene
-      scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x020617, 0.18);
+        <div class="hero-cta-row">
+          <button class="btn-primary" id="summonBtn">
+            TAP TO SUMMON PJ
+            <span class="arrow">☝️</span>
+          </button>
+          <span class="hero-note">
+            Coastal concierge at your service — usually somewhere between Solana Beach and Encinitas.
+          </span>
+        </div>
+      </section>
 
-      // Camera
-      camera = new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        1,
-        20000
-      );
-      camera.position.set(0, 35, 95);
+      <!-- PART 1B — RIGHT: WATER PORTAL -->
+      <section class="portal-shell" id="portalShell">
+        <div class="portal-card">
+          <div class="portal-ring">
+            <div class="portal-core">
+              <canvas id="portalCanvas"></canvas>
+              <div class="portal-glass"></div>
+            </div>
+          </div>
+        </div>
 
-      // Sun (for reflections + sky)
-      sun = new THREE.Vector3();
+        <p class="portal-shell-text">
+          Pacific Access Node · PJ-01
+          <span>Tap the button to spike the swell &amp; open a line to SideGuy.</span>
+        </p>
+      </section>
+    </div>
 
-      // Sky
-      sky = new Sky();
-      sky.scale.setScalar(10000);
-      scene.add(sky);
+    <div class="footer-row">
+      <span class="version-pill">v5.0 · water-portal-lite</span>
+      <span>Made with ☕ somewhere near the 101 · <a href="mailto:pj@sideguysolutions.com">pj@sideguysolutions.com</a></span>
+    </div>
+  </div>
 
-      const skyUniforms = sky.material.uniforms;
-      skyUniforms["turbidity"].value = 10;
-      skyUniforms["rayleigh"].value = 2;
-      skyUniforms["mieCoefficient"].value = 0.005;
-      skyUniforms["mieDirectionalG"].value = 0.8;
+  <!-- PART 3 — JS: WATER PORTAL + SUMMON PJ -->
+  <script>
+    (function () {
+      const canvas = document.getElementById("portalCanvas");
+      const portalShell = document.getElementById("portalShell");
+      const summonBtn = document.getElementById("summonBtn");
 
-      // Sun position: SoCal late afternoon vibe
-      const phi = THREE.MathUtils.degToRad(88);  // elevation
-      const theta = THREE.MathUtils.degToRad(180); // azimuth (over ocean)
+      if (!canvas || !canvas.getContext) return;
+      const ctx = canvas.getContext("2d");
 
-      sun.setFromSphericalCoords(1, phi, theta);
-      sky.material.uniforms["sunPosition"].value.copy(sun);
-
-      // Env for reflections
-      const pmremGenerator = new THREE.PMREMGenerator(renderer);
-      const renderTarget = pmremGenerator.fromScene(sky);
-      const envMap = renderTarget.texture;
-
-      // Water geometry
-      const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
-
-      water = new Water(waterGeometry, {
-        textureWidth: 1024,
-        textureHeight: 1024,
-        waterNormals: new THREE.TextureLoader().load(
-          "https://threejs.org/examples/textures/waternormals.jpg",
-          (texture) => {
-            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-          }
-        ),
-        sunDirection: sun.clone().normalize(),
-        sunColor: 0xffffff,
-        waterColor: 0x0a274a, // Deep Pacific blue
-        distortionScale: 3.7,
-        fog: scene.fog !== undefined
-      });
-
-      water.rotation.x = -Math.PI / 2;
-      scene.add(water);
-
-      scene.environment = envMap;
-
-      // Slight camera tilt downward
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-      window.addEventListener("resize", onWindowResize);
-    }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animate(time) {
-      requestAnimationFrame(animate);
-
-      if (water && water.material && water.material.uniforms) {
-        water.material.uniforms["time"].value += 0.02;
+      // Handle high DPI & resize
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // reset transform
       }
 
-      // Slow cinematic orbit over ocean
-      const t = time * 0.00008;
-      const radius = 95;
-      camera.position.x = Math.sin(t) * radius;
-      camera.position.z = Math.cos(t) * radius;
-      camera.position.y = 32 + Math.sin(t * 0.5) * 4;
-      camera.lookAt(0, 0, 0);
+      window.addEventListener("resize", resizeCanvas);
 
-      renderer.render(scene, camera);
-    }
+      resizeCanvas();
+
+      let t = 0;
+      let boost = 0; // tap boost to temporarily spike the waves
+
+      function draw() {
+        const rect = canvas.getBoundingClientRect();
+        const w = rect.width;
+        const h = rect.height;
+
+        // Clear
+        ctx.clearRect(0, 0, w, h);
+
+        // Background gradient: deep ocean
+        const g = ctx.createRadialGradient(
+          w * 0.5,
+          h * 0.2,
+          Math.min(w, h) * 0.05,
+          w * 0.5,
+          h * 0.8,
+          Math.max(w, h) * 0.9
+        );
+        g.addColorStop(0, "#3b82f6");
+        g.addColorStop(0.25, "#0ea5e9");
+        g.addColorStop(0.55, "#0369a1");
+        g.addColorStop(0.85, "#020617");
+        g.addColorStop(1, "#000000");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+
+        // Parameters
+        const baseAmp = 10 + boost * 6; // wave height
+        const layerCount = 5;
+        const baseSpeed = 0.0028;
+        const baseFreq = 0.016;
+
+        for (let layer = 0; layer < layerCount; layer++) {
+          const depth = layer / layerCount;
+          const amp = baseAmp * (1 - depth * 0.55);
+          const speed = baseSpeed * (1 + depth * 3);
+          const freq = baseFreq * (1 + depth * 1.5);
+          const yBase = h * 0.5 + depth * h * 0.4;
+
+          // Color shifts with depth
+          const hue = 195 + depth * 20;
+          const alpha = 0.72 - depth * 0.5;
+          ctx.beginPath();
+
+          for (let x = 0; x <= w + 10; x += 4) {
+            const phase = t * speed * 1000 + layer * 20;
+            const y =
+              yBase +
+              Math.sin(x * freq + phase) * amp +
+              Math.sin(x * freq * 0.5 + phase * 0.55) * amp * 0.4;
+
+            if (x === 0) {
+              ctx.moveTo(x, y);
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+          ctx.lineTo(w + 20, h + 20);
+          ctx.lineTo(-20, h + 20);
+          ctx.closePath();
+          ctx.fillStyle = `hsla(${hue}, 85%, ${35 - depth * 20}%, ${alpha})`;
+          ctx.fill();
+        }
+
+        // Caustic light streaks
+        const streakCount = 18;
+        for (let i = 0; i < streakCount; i++) {
+          const phase = t * 0.7 + i * 0.4;
+          const cx = (Math.sin(phase) * 0.4 + 0.5) * w;
+          const cy = (Math.cos(phase * 1.4) * 0.15 + 0.4) * h;
+          const radius = Math.min(w, h) * (0.12 + (Math.sin(phase * 1.3) + 1) * 0.05);
+
+          const lg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+          lg.addColorStop(0, "rgba(240, 249, 255, 0.33)");
+          lg.addColorStop(0.4, "rgba(191, 219, 254, 0.12)");
+          lg.addColorStop(1, "rgba(15, 23, 42, 0)");
+          ctx.fillStyle = lg;
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Gentle vignette around edges of the circle (extra depth)
+        const vignette = ctx.createRadialGradient(
+          w * 0.5,
+          h * 0.45,
+          Math.min(w, h) * 0.1,
+          w * 0.5,
+          h * 0.5,
+          Math.max(w, h) * 0.7
+        );
+        vignette.addColorStop(0, "rgba(0,0,0,0)");
+        vignette.addColorStop(1, "rgba(0,0,0,0.45)");
+        ctx.fillStyle = vignette;
+        ctx.fillRect(0, 0, w, h);
+
+        // Decay boost
+        boost *= 0.96;
+
+        t += 0.008;
+        requestAnimationFrame(draw);
+      }
+
+      requestAnimationFrame(draw);
+
+      // Tap to Summon PJ
+      function tapPortal() {
+        if (!portalShell) return;
+        boost = 1.5; // spike waves
+        portalShell.classList.add("tapping");
+        document.body.classList.add("portal-flash");
+
+        // Remove visual state after animation
+        setTimeout(() => {
+          portalShell.classList.remove("tapping");
+          document.body.classList.remove("portal-flash");
+        }, 750);
+
+        // Slight delay so the user sees the ocean react before email opens
+        setTimeout(() => {
+          window.location.href = "mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20-%20SideGuy%20Solutions&body=Hey%20PJ,%0D%0A%0D%0AThe%20water%20portal%20sent%20me.%20Let's%20build%20something.%0D%0A";
+        }, 420);
+      }
+
+      summonBtn.addEventListener("click", tapPortal);
+      portalShell.addEventListener("click", (e) => {
+        // Only trigger if click is inside the portal area, not on text
+        if (e.target === portalShell || e.target.closest(".portal-card")) {
+          tapPortal();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
