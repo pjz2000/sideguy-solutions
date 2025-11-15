@@ -4,110 +4,312 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Pacific Storm Portal</title>
-
-  <!-- META -->
   <meta name="description" content="SideGuy Solutions — cinematic Pacific storm portal for tech, tickets, DFS edges, and coastal systems in North County. Built by PJ in Solana Beach." />
 
   <style>
-    /* BASES */
     :root {
+      --bg: #020617;
+      --card: rgba(15, 23, 42, 0.9);
+      --muted: #94a3b8;
+      --text: #e5f2ff;
       --brand1: #38bdf8;
       --brand2: #22d3ee;
       --brand3: #818cf8;
       --accent: #2dd4bf;
-      --text: #e5f2ff;
-      --muted: #94a3b8;
-      --dark: #020617;
-      --shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { width:100%; height:100%; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { width: 100%; height: 100%; }
+
     body {
-      background: radial-gradient(circle at top, #0a1630, #020617 60%);
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0b1220 0%, #020617 55%, #000 100%);
       color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      font-family: system-ui, "Inter", sans-serif;
       overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* CONTAINERS */
-    .container { max-width:1100px; margin:0 auto; padding:0 20px; position:relative; z-index:5; }
+    a {
+      color: var(--brand2);
+      text-decoration: none;
+      transition: 0.18s;
+    }
+    a:hover { color: var(--accent); text-decoration: underline; }
 
-    /* NAV */
-    .nav {
-      position:sticky; top:0; z-index:50;
-      background:rgba(2,6,23,0.7);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(255,255,255,0.08);
-    }
-    .nav-inner {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:12px 20px;
-    }
-    .brand { font-size:18px; font-weight:800; display:flex; gap:6px; align-items:center; }
-    .logo-dot {
-      width:10px; height:10px; border-radius:999px;
-      background:radial-gradient(circle, var(--brand2), var(--brand1));
-      box-shadow:0 0 10px var(--brand1);
-    }
-    .menu { display:flex; list-style:none; gap:16px; font-size:13px; }
-    .menu a { color:var(--muted); text-decoration:none; }
-    .menu a:hover { color:var(--brand2); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 5; }
 
-    /* OCEAN BACKGROUND */
+    /* ---- OCEAN BG ---- */
     #ocean-container {
-      position:fixed; inset:0; z-index:0;
-      background: radial-gradient(circle at 30% 20%, #041b3b, #000814 65%, #000 100%);
-      overflow:hidden;
-    }
-    .ocean-overlay-gradient {
-      position:fixed; inset:0; pointer-events:none; z-index:1;
-      background:
-        radial-gradient(circle at 50% -10%, rgba(56,189,248,0.25), transparent 60%),
-        radial-gradient(circle at 20% 120%, rgba(129,140,248,0.22), transparent 65%),
-        radial-gradient(circle at 90% 110%, rgba(45,212,191,0.18), transparent 65%);
-      mix-blend-mode:screen;
-      animation:glowDrift 24s ease-in-out infinite alternate;
-    }
-    @keyframes glowDrift {
-      0% { transform:translate(0,0) scale(1); opacity:0.8; }
-      50% { transform:translate(20px, -12px) scale(1.05); opacity:1; }
-      100% { transform:translate(-10px, 8px) scale(1); opacity:0.85; }
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 30% 20%, #041b3b, #000814 60%, #000 100%);
+      overflow: hidden;
     }
 
-    /* HERO GLOW AURA */
-    .hero-glow {
-      position:absolute;
-      top:-70px; left:50%; transform:translateX(-50%);
-      width:450px; height:450px;
+    .ocean-overlay-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      animation: glowDrift 26s ease-in-out infinite alternate;
       background:
-        radial-gradient(circle at 40% 30%, rgba(56,189,248,0.8), transparent 60%),
-        radial-gradient(circle at 60% 70%, rgba(129,140,248,0.55), transparent 75%),
-        radial-gradient(circle at 50% 90%, rgba(45,212,191,0.55), transparent 75%);
-      filter: blur(70px);
-      opacity:0.5;
+        radial-gradient(circle at 50% -10%, rgba(56,189,248,.25), transparent 60%),
+        radial-gradient(circle at 20% 120%, rgba(129,140,248,.22), transparent 65%),
+        radial-gradient(circle at 90% 110%, rgba(45,212,191,.18), transparent 60%);
+    }
+
+    @keyframes glowDrift {
+      0% { transform: translate3d(0,0,0) scale(1); opacity: .8; }
+      50% { transform: translate3d(18px,-12px,0) scale(1.06); opacity: 1; }
+      100% { transform: translate3d(-10px,8px,0) scale(1); opacity: .85; }
+    }
+
+    /* ---- HORIZON FLASH ---- */
+    .horizon-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      opacity: 0;
+      pointer-events: none;
+      background: linear-gradient(to top,
+        transparent 0%,
+        rgba(248,250,252,.1) 40%,
+        rgba(248,250,252,.75) 55%,
+        rgba(248,250,252,.05) 75%,
+        transparent 100%);
+      mix-blend-mode: screen;
+    }
+    .horizon-flash.active { animation: horizonFlash .4s ease-out; }
+
+    @keyframes horizonFlash {
+      0% { opacity: 0; }
+      40% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* ---- PORTAL CRACK ---- */
+    .portal-crack {
+      position: fixed;
+      width: 280px; height: 280px;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) scale(.25);
+      border-radius: 50%;
+      z-index: 4;
+      opacity: 0;
+      pointer-events: none;
+      filter: blur(10px);
+      background:
+        radial-gradient(circle, rgba(248,250,252,.95), transparent 55%),
+        radial-gradient(circle at 30% 40%, rgba(56,189,248,.4), transparent 70%),
+        radial-gradient(circle at 70% 65%, rgba(59,130,246,.6), transparent 70%);
+      mix-blend-mode: screen;
+    }
+    .portal-crack.active { animation: portalCrack .55s ease-out; }
+
+    @keyframes portalCrack {
+      0% { opacity: 0; transform: translate(-50%,-50%) scale(.25); }
+      35% { opacity: 1; transform: translate(-50%,-50%) scale(1.05); }
+      100% { opacity: 0; transform: translate(-50%,-50%) scale(.9); }
+    }
+
+    /* ---- EMBERS ---- */
+    .ember {
+      position: fixed;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle,#e0f2fe 0%,#38bdf8 40%,transparent 70%);
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+      animation: emberFloat 12s linear infinite;
+    }
+
+    @keyframes emberFloat {
+      0% { transform: translate3d(0,60px,0) scale(.5); opacity:0; }
+      15% { opacity:.8; }
+      70% { opacity:.9; }
+      100% { transform: translate3d(0,-80px,0) scale(1); opacity:0; }
+    }
+
+    /* ---- PARALLAX ---- */
+    .parallax-layer { will-change: transform; }
+
+    /* ---- NAV ---- */
+    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); background: rgba(2,6,23,.8); }
+    .nav-inner { display:flex; justify-content:space-between; padding:10px 20px; }
+    .brand { display:flex; align-items:center; gap:6px; font-weight:800; font-size:18px; }
+    .logo-dot { width:10px; height:10px; border-radius:50%; background: radial-gradient(circle,var(--brand2),var(--brand1)); box-shadow:0 0 12px var(--brand1); }
+
+    .menu { list-style:none; display:flex; gap:16px; }
+    .menu a { color:var(--muted); }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      padding: 80px 20px 140px;
+      text-align: center;
+      z-index: 5;
+      overflow: hidden;
+      background: radial-gradient(circle at top,rgba(14,165,233,.85),rgba(2,6,23,.96));
+    }
+
+    .hero-inner { position:relative; z-index:5; }
+
+    .hero-glow {
+      position: absolute;
+      top: -80px; left: 50%;
+      width: 460px; height: 460px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      opacity: .55;
       pointer-events:none;
-      mix-blend-mode:screen;
-      animation:heroGlow 28s ease-in-out infinite alternate;
       z-index:0;
+      mix-blend-mode:screen;
+      filter:blur(70px);
+      animation: heroGlow 26s ease-in-out infinite alternate;
+      background:
+        radial-gradient(circle at 40% 30%, rgba(56,189,248,.9), transparent 60%),
+        radial-gradient(circle at 60% 70%, rgba(129,140,248,.6), transparent 75%),
+        radial-gradient(circle at 50% 95%, rgba(45,212,191,.55), transparent 80%);
     }
+
     @keyframes heroGlow {
-      0% { transform:translate(-50%, -8px) scale(1); opacity:0.45; }
-      50% { transform:translate(-50%, 10px) scale(1.08); opacity:0.58; }
-      100% { transform:translate(-50%, -14px) scale(0.95); opacity:0.42; }
+      0% { transform:translate(-50%,-10px) scale(1); opacity:.5; }
+      50% { transform:translate(-50%,10px) scale(1.08); opacity:.65; }
+      100% { transform:translate(-50%,-16px) scale(.95); opacity:.48; }
     }
+
+    .hero h1 {
+      font-size: clamp(30px,5vw,44px);
+      font-weight:900;
+      text-shadow: 0 18px 60px rgba(0,0,0,.7);
+    }
+    .highlight { background:linear-gradient(120deg,var(--brand2),var(--brand3)); -webkit-background-clip:text; color:transparent; }
+
+    .hero-heat {
+      position:absolute;
+      width:420px; height:120px;
+      top:40%; left:50%;
+      transform:translateX(-50%);
+      filter:blur(18px);
+      mix-blend-mode:soft-light;
+      opacity:.4;
+      animation:heatWaver 14s ease-in-out infinite alternate;
+      pointer-events:none;
+      background:radial-gradient(circle at 50% 0,rgba(255,255,255,.16),transparent 70%);
+    }
+
+    @keyframes heatWaver {
+      0% { transform:translate(-50%,0) scale(1); opacity:.35; }
+      50% { transform:translate(-50%,4px) scale(1.04); opacity:.5; }
+      100% { transform:translate(-50%,-3px) scale(.97); opacity:.32; }
+    }
+
+    /* ---- WAVES (3-LAYER) ---- */
+    .hero-waves { position:absolute; inset:40% -10% -60px; overflow:hidden; pointer-events:none; z-index:4; }
+
+    .wave { position:absolute; left:-10%; width:120%; border-radius:50% 50% 0 0; }
+
+    .wave-back {
+      height:260px; bottom:-160px;
+      background:linear-gradient(to top,rgba(15,23,42,1),rgba(37,99,235,.7),rgba(56,189,248,.4));
+      opacity:.85;
+      animation:waveBack 26s linear infinite;
+    }
+
+    .wave-mid {
+      height:220px; bottom:-135px;
+      background:linear-gradient(to top,rgba(15,23,42,.96),rgba(37,99,235,.85),rgba(45,212,191,.6));
+      opacity:.94;
+      animation:waveMid 18s linear infinite;
+    }
+
+    .wave-front {
+      height:180px; bottom:-120px;
+      background:linear-gradient(to top,rgba(15,23,42,1),rgba(8,47,73,.92),rgba(59,130,246,.98),rgba(191,219,254,.94));
+      opacity:.99;
+      animation:waveFront 12s ease-in-out infinite;
+    }
+
+    @keyframes waveBack {
+      0% { transform:translateX(0); }
+      50% { transform:translateX(40px); }
+      100% { transform:translateX(0); }
+    }
+    @keyframes waveMid {
+      0% { transform:translateX(0); }
+      50% { transform:translateX(-40px); }
+      100% { transform:translateX(0); }
+    }
+    @keyframes waveFront {
+      0% { transform:translateX(0) translateY(0); }
+      50% { transform:translateX(0) translateY(10px); }
+      100% { transform:translateX(0) translateY(0); }
+    }
+
+    /* ---- SUMMON PORTAL BUTTON ---- */
+    .summon-wrapper {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 60;
+    }
+
+    .summon-btn {
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:230px;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(15,23,42,.97);
+      border:1px solid rgba(148,163,184,.55);
+      color:var(--text);
+      cursor:pointer;
+      box-shadow:0 0 0 1px rgba(15,23,42,.9),var(--shadow-soft),0 0 25px rgba(56,189,248,.7);
+      animation:summonPulse 2.7s infinite;
+    }
+
+    @keyframes summonPulse {
+      0% { box-shadow:0 0 0 0 rgba(56,189,248,.8),0 20px 40px rgba(0,0,0,.9); }
+      70% { box-shadow:0 0 0 18px rgba(56,189,248,0),0 18px 36px rgba(0,0,0,.9); }
+      100% { box-shadow:0 0 0 0 rgba(56,189,248,0),0 20px 40px rgba(0,0,0,.9); }
+    }
+
+    /* ---- SECTIONS ---- */
+    .section { padding:40px 20px; z-index:5; background:rgba(2,6,23,.95); }
+    .section-card { background:var(--card); padding:22px; border-radius:18px; border:1px solid rgba(148,163,184,.35); }
+
+    /* ---- FOOTER ---- */
+    .footer { text-align:center; padding:30px; background:rgba(2,6,23,.97); color:var(--muted); }
+
   </style>
 </head>
 <body>
+  <div id="ocean-container" class="parallax-layer"></div>
+  <div class="ocean-overlay-gradient parallax-layer"></div>
 
-  <!-- OCEAN LAYERS -->
-  <div id="ocean-container"></div>
-  <div class="ocean-overlay-gradient"></div>
+  <div class="horizon-flash" id="horizonFlash"></div>
+  <div class="portal-crack" id="portalCrack"></div>
+
+  <!-- Embers -->
+  <div class="ember" style="left:18%; bottom:12%; animation-delay:0s;"></div>
+  <div class="ember" style="left:32%; bottom:8%; animation-delay:3s;"></div>
+  <div class="ember" style="left:58%; bottom:10%; animation-delay:1.6s;"></div>
+  <div class="ember" style="left:76%; bottom:6%; animation-delay:4.2s;"></div>
 
   <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner container">
-      <div class="brand"><span class="logo-dot"></span>SideGuy Solutions</div>
+      <div class="brand">
+        <span class="logo-dot"></span> SideGuy Solutions
+      </div>
       <ul class="menu">
         <li><a href="#trending">Trending</a></li>
         <li><a href="#sports-edge">Sports Edge</a></li>
@@ -118,294 +320,271 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero" style="position:relative; padding:90px 20px 150px; text-align:center; z-index:5;">
-    <div class="hero-inner container" style="position:relative; z-index:5;">
+  <section class="hero parallax-layer">
+    <div class="hero-inner container">
       <div class="hero-glow"></div>
+      <div class="hero-heat"></div>
 
-      <div class="hero-kicker" style="
-        display:inline-flex; align-items:center; gap:8px;
-        padding:4px 10px; border-radius:999px;
-        background:rgba(15,23,42,0.7);
-        border:1px solid rgba(148,163,184,0.4);
-        font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted);
-        margin-bottom:20px;
-      ">
-        <span class="dot" style="
-          width:6px; height:6px; border-radius:999px;
-          background:#22c55e; box-shadow:0 0 10px #22c55e;
-        "></span>
-        NORTH COUNTY COASTAL • WEB3 CONCIERGE
+      <div class="hero-kicker">
+        <span class="dot"></span>
+        PACIFIC STORM PORTAL • NORTH COUNTY
       </div>
 
-      <h1 style="
-        font-size:clamp(32px, 6vw, 48px);
-        line-height:1.1;
-        font-weight:900;
-        margin-bottom:14px;
-        text-shadow:0 18px 60px rgba(0,0,0,0.9);
-      ">
-        Where <span style="
-          background:linear-gradient(120deg, var(--brand2), var(--brand3));
-          -webkit-background-clip:text;
-          background-clip:text;
-          color:transparent;
-        ">code</span> meets the coastline.
-      </h1>
-
-      <p style="max-width:640px; margin:0 auto; opacity:0.96;">
-        Fully cinematic Pacific storm portal.  
-        Real ocean. Real movement. Real North County energy.
+      <h1>Where <span class="highlight">code</span> meets<br />the coastline.</h1>
+      <p>
+        SideGuy Solutions is your cinematic coastal portal for tech builds,
+        tickets, DFS edges, and real-world systems — tuned for North County.
+      </p>
+      <p class="hero-pj-line">
+        <strong>PJ — coastal concierge for systems, sports, and smooth life flows.</strong>
+      </p>
+      <p class="hero-contacts">
+        Call / text: <a href="tel:17735441231">(773) 544-1231</a> &nbsp;·&nbsp;
+        Email: <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
       </p>
     </div>
 
-    <!-- WAVES -->
-    <div class="hero-waves" style="position:absolute; inset:40% -10% -60px; overflow:hidden; pointer-events:none; z-index:4;">
-      <div class="wave wave-back"></div>
-      <div class="wave wave-mid"></div>
-      <div class="wave wave-front"></div>
+    <!-- Waves -->
+    <div class="hero-waves">
+      <div class="wave wave-back parallax-layer"></div>
+      <div class="wave wave-mid parallax-layer"></div>
+      <div class="wave wave-front parallax-layer"></div>
     </div>
 
-    <div class="hero-mist"></div>
     <div class="bubble b1"></div>
     <div class="bubble b2"></div>
     <div class="bubble b3"></div>
     <div class="bubble b4"></div>
-
   </section>
 
-
-  <!-- SUMMON PJ -->
-  <div class="summon-wrapper" style="position:fixed; right:18px; bottom:20px; z-index:60;">
-    <a id="summonPJBubble" class="summon-btn" href="mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Portal)&body=Hey PJ,%0A%0AI'm coming through the portal.%0A">
+  <!-- SUMMON PJ BUTTON -->
+  <div class="summon-wrapper">
+    <a id="summonPJBubble" class="summon-btn"
+       href="mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Coastal%20Portal)&body=Hey%20PJ%2C%0A%0AComing%20through%20the%20Pacific%20storm%20portal.%0A%0A-%20">
       <div class="summon-btn-main">
         <span class="summon-emoji">⚡</span>
         <span>TAP TO SUMMON PJ</span>
       </div>
-      <div class="summon-subtitle">The portal opens…</div>
+      <div class="summon-subtitle">A small storm opens the portal. Then email.</div>
     </a>
     <div class="summon-caption">North County only — for now.</div>
   </div>
   <!-- TRENDING -->
-  <section id="trending" class="section container" style="padding:60px 20px;">
-    <div class="section-card" style="background:rgba(15,23,42,0.9); padding:22px; border-radius:16px;">
-      <h2 style="margin-bottom:10px;">🔥 Trending in the Portal</h2>
-      <p style="color:var(--muted); margin-bottom:14px;">Live topics from PJ’s coastal feed.</p>
-      <ul id="trend-list" class="trend-list"></ul>
+  <section id="trending" class="section">
+    <div class="container">
+      <div class="section-card">
+        <h3>Trending Now</h3>
+        <p class="section-subtext">A pulse of AI, DeFi, DFS, and coastal life.</p>
+        <ul id="trend-list" class="trend-list">
+          <li class="trend-pill">Loading...</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- SPORTS EDGE -->
-  <section id="sports-edge" class="section container" style="padding:60px 20px;">
-    <div class="section-card">
-      <h2>🏈 Sports Edge (DFS & Futures)</h2>
-      <p style="color:var(--muted); margin-bottom:16px;">Promo hunting. Edges. California-friendly angles.</p>
-      <div id="sports-edge-body"></div>
+  <section id="sports-edge" class="section section-alt">
+    <div class="container">
+      <div class="section-card">
+        <h3>Sports Edge — DFS & Futures</h3>
+        <p class="section-subtext">One highlight idea per day.</p>
+        <div id="sports-edge-body" class="sports-edge-body"></div>
+      </div>
     </div>
   </section>
 
   <!-- LOCAL SHOWS -->
-  <section id="local-shows" class="section container" style="padding:60px 20px;">
-    <div class="section-card">
-      <h2>🎟️ Local Shows — North County</h2>
-      <p style="color:var(--muted); margin-bottom:16px;">Solana Beach • Encinitas • Cardiff</p>
-      <div class="tickets-grid">
-        <p>Local ticket routing, faster confirmations, low friction.</p>
-        <p>Email PJ for direct access.</p>
+  <section id="local-shows" class="section">
+    <div class="container">
+      <div class="section-card">
+        <h3>Local Shows — Direct, Fast, Coastal</h3>
+        <p class="section-subtext">Cleaner, faster ticket flows.</p>
+
+        <div class="tickets-grid">
+          <div>
+            <div class="tickets-pill"><span>🎸</span> Solana Beach • Encinitas • Cardiff</div>
+            <p>SideGuy started in tickets. The mission: match local fans with local venues, lighter fees, faster confirmations — eventually powered by Solana or stablecoins.</p>
+            <p class="tickets-savings">Today: intros + coordination.<br>Tomorrow: instant confirmations.</p>
+          </div>
+
+          <div>
+            <div class="tickets-badge"><span>⚗️</span> Invite Only</div>
+            <p>Email <a href="mailto:peter.z@kromeon.com?subject=Local%20Shows">Local shows with SideGuy</a>.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- NEWSLETTER -->
-  <section id="newsletter" class="section container" style="padding:60px 20px;">
-    <div class="section-card">
-      <h2>💌 PJ’s Daily Drop</h2>
-      <p style="color:var(--muted); margin-bottom:16px;">Coastal edges, tech angles, DFS frameworks.</p>
-      <a class="newsletter-cta" href="mailto:peter.z@kromeon.com?subject=Daily%20Drop">Email PJ to join</a>
+  <section id="newsletter" class="section section-alt">
+    <div class="container">
+      <div class="section-card">
+        <h3>PJ’s Daily Drop — Inner Circle</h3>
+        <p class="section-subtext">Coastal experiments, DeFi, DFS promos.</p>
+
+        <a class="newsletter-cta"
+           href="mailto:peter.z@kromeon.com?subject=Add%20me%20to%20Daily%20Drop&body=Hey%20PJ%2C%0A%0AAdd me to Daily Drop.%0A%0A-%20">
+          <span>📨</span> Join the Daily Drop
+        </a>
+
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer style="text-align:center; padding:40px 20px; color:var(--muted); font-size:12px;">
-    © 2025 SideGuy Solutions — Solana Beach, CA 🌊  
-    <div id="version-info" style="margin-top:8px;">v7.0-pacific-storm-portal</div>
+  <footer class="footer">
+    © 2025 SideGuy Solutions • Solana Beach, CA 🌊  
+    <div id="version-info">v8.0-pacific-storm-god-mode</div>
   </footer>
   <!-- THREE.js -->
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
-    /* ---------------------------
-       TRENDING
-    --------------------------- */
+    /* ---- TRENDING ---- */
     const TREND_TOPICS = [
       "Pacific storm shaders",
       "Solana yield-to-pay",
       "AI coastal workflows",
-      "DFS promos in Cali",
-      "Encinitas tech scene",
-      "Stablecoin automations",
+      "DFS promos",
+      "Encinitas sunsets",
       "OnlineSeats DNA",
-      "Web3 ticketing flow"
+      "Stablecoin cash flow",
+      "Web3 ticket flows",
+      "Coastal concierge tech"
     ];
 
-    function renderTrends() {
-      const list = document.getElementById("trend-list");
-      list.innerHTML = TREND_TOPICS
-        .slice(0, 7)
-        .map(t => `<li class="trend-pill">#${t}</li>`)
-        .join("");
+    function pickRandom(arr,n){return arr.sort(()=>0.5-Math.random()).slice(0,n);}
+    function renderTrends(){
+      document.getElementById("trend-list").innerHTML =
+        pickRandom(TREND_TOPICS,7).map(t=>`<li class="trend-pill">#${t}</li>`).join("");
     }
 
-    /* ---------------------------
-       SPORTS EDGE MOCK
-    --------------------------- */
-    function renderSportsEdge() {
-      document.getElementById("sports-edge-body").innerHTML = `
-        <div style="background:rgba(0,0,0,0.2); padding:14px; border-radius:12px;">
-          <strong>NBA • Phoenix vs Dallas</strong><br>
-          PRA Edge: Lively O 14.5<br>
-          Odds: +112 · Promo dependent<br>
+    /* ---- SPORTS EDGE ---- */
+    const SPORTS_EDGES=[
+      {league:"NBA",matchup:"Suns vs Mavs",context:"West Coast window",
+       market:"PRA",pick:"Lively II Over 14.5 PRA",oddsMain:"+112"},
+      {league:"NFL",matchup:"49ers vs Seahawks",context:"Prime-time",
+       market:"Rush + Rec",pick:"RB Over combo line",oddsMain:"+104"}
+    ];
+
+    function renderSportsEdge(){
+      const e=SPORTS_EDGES[Math.floor(Math.random()*SPORTS_EDGES.length)];
+      document.getElementById("sports-edge-body").innerHTML=`
+        <div class="sports-main">
+          <div class="sports-label">${e.league} • TODAY</div>
+          <div class="sports-matchup">${e.matchup}</div>
+          <div class="sports-meta">${e.context}</div>
+          <div class="sports-line"><strong>${e.market}</strong></div>
+          <div class="sports-line">${e.pick}</div>
+          <div class="sports-odds"><span>${e.oddsMain}</span></div>
         </div>
-      `;
+        <div class="sports-side">
+          <strong>PJ’s angle:</strong><br>
+          Promos + discipline > hot takes. North County style.
+        </div>`;
     }
 
-    /* ---------------------------
-       VERSION STAMP
-    --------------------------- */
-    function updateVersionStamp() {
-      document.getElementById("version-info").innerText =
-        "v7.0-pacific-storm-portal • Updated " +
-        new Date().toLocaleString();
+    /* ---- VERSION ---- */
+    function updateVersionStamp(){
+      const now=new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
+      document.getElementById("version-info").textContent=`v8.0 • Updated ${now}`;
     }
 
-    /* ---------------------------
-       THREE.js OCEAN SHADER
-    --------------------------- */
+    /* ---- THREE.JS OCEAN ---- */
+    let renderer,scene,camera,oceanMesh,oceanMaterial,oceanClock;
+    let targetWaveAmp=1.05;
 
-    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
-    let targetWaveAmp = 1.0;
-
-    function initOcean() {
-      const container = document.getElementById("ocean-container");
-      if (!container || !window.THREE) return;
-
-      renderer = new THREE.WebGLRenderer({ antialias:true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x000814, 1);
+    function initOcean(){
+      const container=document.getElementById("ocean-container");
+      renderer=new THREE.WebGLRenderer({antialias:true});
+      renderer.setPixelRatio(devicePixelRatio||1);
+      renderer.setSize(innerWidth,innerHeight);
+      renderer.setClearColor(0x000814,1);
       container.appendChild(renderer.domElement);
 
-      scene = new THREE.Scene();
+      scene=new THREE.Scene();
+      camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,80);
+      camera.position.set(0,7.2,11.5);
 
-      camera = new THREE.PerspectiveCamera(
-        55, window.innerWidth/window.innerHeight, 0.1, 100
-      );
-      camera.position.set(0, 7, 12);
+      oceanClock=new THREE.Clock();
+      const geo=new THREE.PlaneGeometry(42,42,200,200);
+      geo.rotateX(-Math.PI/2);
 
-      oceanClock = new THREE.Clock();
+      const vShader=`varying vec2 vUv;uniform float uTime;uniform float uWaveAmp;
+        void main(){vUv=uv;vec3 p=position;float t=uTime*.45;
+        float h=(sin(p.x*.16+t*.9)*.7+sin((p.x+p.z)*.14-t*1.3)*.6+sin(p.z*.09+t*.6)*.9)*.32;
+        p.y+=h*uWaveAmp;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}`;
 
-      const geometry = new THREE.PlaneGeometry(40,40,200,200);
-      geometry.rotateX(-Math.PI/2);
+      const fShader=`varying vec2 vUv;uniform float uTime;
+        void main(){float t=uTime*.08;
+        vec3 deep=vec3(0.0,0.05,0.17),mid=vec3(0.0,0.28,0.56),surf=vec3(0.76,0.96,1.0);
+        float d=smoothstep(0.,1.,vUv.y+sin(vUv.x*4.+t)*.05);
+        vec3 col=mix(deep,mid,d);col=mix(col,surf,pow(1.-d,3.));
+        col+=vec3(.1,.16,.22)*smoothstep(.65,.98,sin(vUv.x*3.-t*4.));
+        col+=smoothstep(.82,1.,sin((vUv.x+vUv.y+t*3.5)*10.))*.1;
+        gl_FragColor=vec4(col,1.0);} `;
 
-      const vertexShader = `
-        varying vec2 vUv;
-        uniform float uTime;
-        uniform float uWaveAmp;
-
-        void main() {
-          vUv = uv;
-          vec3 pos = position;
-
-          float t = uTime * 0.4;
-
-          float wave1 = sin(pos.x * 0.15 + t);
-          float wave2 = sin(pos.z * 0.1 + t * 1.4);
-          float wave3 = sin((pos.x + pos.z) * 0.12 - t * 1.8);
-
-          float height = (wave1 + wave2 + wave3) * 0.35 * uWaveAmp;
-          pos.y += height;
-
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
-        }
-      `;
-
-      const fragmentShader = `
-        varying vec2 vUv;
-        uniform float uTime;
-
-        void main() {
-          float t = uTime * 0.1;
-
-          vec3 deep = vec3(0.0,0.05,0.18);
-          vec3 mid = vec3(0.0,0.25,0.55);
-          vec3 surf = vec3(0.7,0.95,1.0);
-
-          float mixv = smoothstep(0.0, 1.0, vUv.y + sin(vUv.x*4.0+t)*0.05);
-          vec3 col = mix(deep, mid, mixv);
-          col = mix(col, surf, pow(1.0-mixv,3.0));
-
-          float glow = smoothstep(0.7,1.0,sin(vUv.x*3.0 - t*4.0));
-          col += vec3(0.1,0.16,0.22) * glow;
-
-          gl_FragColor = vec4(col,1.0);
-        }
-      `;
-
-      oceanMaterial = new THREE.ShaderMaterial({
-        uniforms:{
-          uTime:{value:0},
-          uWaveAmp:{value:1.0},
-        },
-        vertexShader,
-        fragmentShader,
-        side:THREE.DoubleSide
+      oceanMaterial=new THREE.ShaderMaterial({
+        uniforms:{uTime:{value:0},uWaveAmp:{value:1.05}},
+        vertexShader:vShader,fragmentShader:fShader
       });
-
-      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
+      oceanMesh=new THREE.Mesh(geo,oceanMaterial);
       scene.add(oceanMesh);
 
       animateOcean();
-      window.addEventListener("resize", onResize);
+      addEventListener("resize",()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
     }
 
-    function onResize() {
-      camera.aspect = window.innerWidth/window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animateOcean() {
+    function animateOcean(){
       requestAnimationFrame(animateOcean);
-
-      const t = oceanClock.getElapsedTime();
-      oceanMaterial.uniforms.uTime.value = t;
-
-      oceanMaterial.uniforms.uWaveAmp.value +=
-        (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.03;
-
-      camera.position.x = Math.sin(t * 0.2) * 0.3;
+      const t=oceanClock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value=t;
+      oceanMaterial.uniforms.uWaveAmp.value+= (targetWaveAmp-oceanMaterial.uniforms.uWaveAmp.value)*0.03;
+      camera.position.x=Math.sin(t*.18)*.45;
+      camera.position.z=11.5+Math.sin(t*.06)*.3;
       camera.lookAt(0,0,0);
-
       renderer.render(scene,camera);
     }
 
-    function boostWaves() {
-      targetWaveAmp = 1.6;
-      setTimeout(() => targetWaveAmp = 1.05, 650);
+    function boostWaves(){
+      targetWaveAmp=1.7;
+      setTimeout(()=>{targetWaveAmp=1.05;},650);
     }
 
-    /* PORTAL */
-    document.addEventListener("DOMContentLoaded", () => {
+    /* ---- PORTAL FX ---- */
+    function firePortalFX(){
+      const crack=document.getElementById("portalCrack");
+      const flash=document.getElementById("horizonFlash");
+      crack.classList.remove("active");
+      flash.classList.remove("active");
+      void crack.offsetWidth;
+      void flash.offsetWidth;
+      crack.classList.add("active");
+      flash.classList.add("active");
+      boostWaves();
+    }
+
+    /* ---- PARALLAX ---- */
+    function initParallax(){
+      const layers=document.querySelectorAll(".parallax-layer");
+      addEventListener("pointermove",(e)=>{
+        const x=(e.clientX/innerWidth-.5)*-1, y=(e.clientY/innerHeight-.5)*-1;
+        layers.forEach((l,i)=>l.style.transform=`translate3d(${x*(i+1)*4}px,${y*(i+1)*3}px,0)`);
+      });
+    }
+
+    /* ---- INIT ---- */
+    document.addEventListener("DOMContentLoaded",()=>{
       renderTrends();
       renderSportsEdge();
       updateVersionStamp();
       initOcean();
+      initParallax();
 
-      const btn = document.getElementById("summonPJBubble");
-      if (btn) {
-        btn.addEventListener("click", boostWaves);
-      }
+      document.getElementById("summonPJBubble").addEventListener("click",firePortalFX);
     });
   </script>
-
 </body>
 </html>
