@@ -2,666 +2,410 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Pacific Storm Portal</title>
 
+  <!-- META -->
+  <meta name="description" content="SideGuy Solutions — cinematic Pacific storm portal for tech, tickets, DFS edges, and coastal systems in North County. Built by PJ in Solana Beach." />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* BASES */
+    :root {
+      --brand1: #38bdf8;
+      --brand2: #22d3ee;
+      --brand3: #818cf8;
+      --accent: #2dd4bf;
+      --text: #e5f2ff;
+      --muted: #94a3b8;
+      --dark: #020617;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
     }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; height:100%; }
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", "Segoe UI", sans-serif;
-      color: #f9fafb;
-      background: radial-gradient(circle at top, #0f172a 0%, #020617 55%, #000 100%);
+      background: radial-gradient(circle at top, #0a1630, #020617 60%);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
       overflow-x: hidden;
-      overflow-y: auto;
     }
 
-    /* -----------------------------
-       BACKGROUND LAYERS
-    ------------------------------ */
-    .bg-video {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.78) saturate(1.35) contrast(1.1);
-      z-index: -3;
-    }
+    /* CONTAINERS */
+    .container { max-width:1100px; margin:0 auto; padding:0 20px; position:relative; z-index:5; }
 
-    .bg-fallback {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 20% 0%, #1e3a8a 0%, #020617 55%, #000 100%);
-      z-index: -4;
+    /* NAV */
+    .nav {
+      position:sticky; top:0; z-index:50;
+      background:rgba(2,6,23,0.7);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
     }
+    .nav-inner {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 20px;
+    }
+    .brand { font-size:18px; font-weight:800; display:flex; gap:6px; align-items:center; }
+    .logo-dot {
+      width:10px; height:10px; border-radius:999px;
+      background:radial-gradient(circle, var(--brand2), var(--brand1));
+      box-shadow:0 0 10px var(--brand1);
+    }
+    .menu { display:flex; list-style:none; gap:16px; font-size:13px; }
+    .menu a { color:var(--muted); text-decoration:none; }
+    .menu a:hover { color:var(--brand2); }
 
-    .bg-overlay {
-      position: fixed;
-      inset: 0;
+    /* OCEAN BACKGROUND */
+    #ocean-container {
+      position:fixed; inset:0; z-index:0;
+      background: radial-gradient(circle at 30% 20%, #041b3b, #000814 65%, #000 100%);
+      overflow:hidden;
+    }
+    .ocean-overlay-gradient {
+      position:fixed; inset:0; pointer-events:none; z-index:1;
       background:
-        radial-gradient(circle at top, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.9)),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.9));
-      z-index: -2;
+        radial-gradient(circle at 50% -10%, rgba(56,189,248,0.25), transparent 60%),
+        radial-gradient(circle at 20% 120%, rgba(129,140,248,0.22), transparent 65%),
+        radial-gradient(circle at 90% 110%, rgba(45,212,191,0.18), transparent 65%);
+      mix-blend-mode:screen;
+      animation:glowDrift 24s ease-in-out infinite alternate;
+    }
+    @keyframes glowDrift {
+      0% { transform:translate(0,0) scale(1); opacity:0.8; }
+      50% { transform:translate(20px, -12px) scale(1.05); opacity:1; }
+      100% { transform:translate(-10px, 8px) scale(1); opacity:0.85; }
     }
 
-    .bg-aurora {
-      position: fixed;
-      inset: -20%;
+    /* HERO GLOW AURA */
+    .hero-glow {
+      position:absolute;
+      top:-70px; left:50%; transform:translateX(-50%);
+      width:450px; height:450px;
       background:
-        radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.35), transparent 60%),
-        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.22), transparent 65%),
-        radial-gradient(circle at 50% 120%, rgba(248, 250, 252, 0.15), transparent 70%);
-      mix-blend-mode: screen;
-      opacity: 0.8;
-      animation: auroraDrift 26s ease-in-out infinite alternate;
-      z-index: -1;
-      pointer-events: none;
+        radial-gradient(circle at 40% 30%, rgba(56,189,248,0.8), transparent 60%),
+        radial-gradient(circle at 60% 70%, rgba(129,140,248,0.55), transparent 75%),
+        radial-gradient(circle at 50% 90%, rgba(45,212,191,0.55), transparent 75%);
+      filter: blur(70px);
+      opacity:0.5;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      animation:heroGlow 28s ease-in-out infinite alternate;
+      z-index:0;
     }
-
-    @keyframes auroraDrift {
-      0% {
-        transform: translate3d(-2%, 0, 0) scale(1.02);
-        opacity: 0.7;
-      }
-      50% {
-        transform: translate3d(1%, -1%, 0) scale(1.05);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translate3d(3%, 2%, 0) scale(1.03);
-        opacity: 0.75;
-      }
-    }
-
-    /* -----------------------------
-       PAGE SHELL
-    ------------------------------ */
-    .page-shell {
-      min-height: 100vh;
-      padding: 24px 18px 32px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    @media (min-width: 900px) {
-      .page-shell {
-        padding: 32px 42px 40px;
-      }
-    }
-
-    header.site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-
-    .brand-lockup {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: radial-gradient(circle at 20% 0%, #38bdf8, #1d4ed8 36%, #020617 80%);
-      box-shadow:
-        0 0 25px rgba(56, 189, 248, 0.7),
-        0 16px 40px rgba(15, 23, 42, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 35% 8% 8% 52%;
-      background: linear-gradient(
-        140deg,
-        rgba(15, 23, 42, 0),
-        rgba(15, 23, 42, 0.2) 35%,
-        rgba(15, 23, 42, 0.95) 100%
-      );
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-title {
-      font-size: 1.02rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .brand-tagline {
-      font-size: 0.8rem;
-      color: #cbd5f5;
-      opacity: 0.86;
-      max-width: 260px;
-    }
-
-    .storm-chip {
-      font-size: 0.78rem;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.7);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95));
-      color: #e0f2fe;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-
-    .storm-chip-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 12px #22c55e;
-    }
-
-    /* -----------------------------
-       HERO LAYOUT
-    ------------------------------ */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr);
-      gap: 28px;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    @media (min-width: 960px) {
-      .hero {
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
-      }
-    }
-
-    .hero-copy {
-      max-width: 620px;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.86rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9ca3af;
-      margin-bottom: 10px;
-    }
-
-    .hero-heading {
-      font-size: clamp(2.3rem, 3vw + 1.4rem, 3.35rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 14px;
-      text-shadow:
-        0 22px 45px rgba(15, 23, 42, 1),
-        0 0 20px rgba(15, 23, 42, 0.9);
-    }
-
-    .hero-heading span {
-      background-image: linear-gradient(120deg, #38bdf8, #22d3ee, #f97316);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: #e5e7eb;
-      max-width: 480px;
-      margin-bottom: 18px;
-      text-shadow: 0 4px 14px rgba(15, 23, 42, 0.9);
-    }
-
-    .hero-sub strong {
-      font-weight: 600;
-    }
-
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .pill {
-      font-size: 0.8rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.8));
-      color: #e5e7eb;
-    }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .btn-primary {
-      appearance: none;
-      border: none;
-      outline: none;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 0.94rem;
-      font-weight: 500;
-      cursor: pointer;
-      color: #0b1120;
-      background: radial-gradient(circle at top, #f97316, #fbbf24);
-      box-shadow:
-        0 0 25px rgba(249, 115, 22, 0.7),
-        0 16px 36px rgba(15, 23, 42, 0.95);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 0 35px rgba(249, 115, 22, 0.9),
-        0 20px 40px rgba(15, 23, 42, 0.98);
-    }
-
-    .btn-primary span.icon {
-      font-size: 1.1em;
-    }
-
-    .hero-footnote {
-      font-size: 0.8rem;
-      color: #d1d5db;
-      opacity: 0.9;
-    }
-
-    .hero-footnote strong {
-      font-weight: 600;
-    }
-
-    /* -----------------------------
-       ORB COLUMN
-    ------------------------------ */
-    .orb-column {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 0;
-    }
-
-    @media (min-width: 960px) {
-      .orb-column {
-        justify-content: flex-end;
-      }
-    }
-
-    .orb-shell {
-      position: relative;
-      width: min(280px, 70vw);
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .orb-ring {
-      position: absolute;
-      inset: -10%;
-      border-radius: 999px;
-      border: 2px solid rgba(56, 189, 248, 0.5);
-      box-shadow:
-        0 0 40px rgba(56, 189, 248, 0.7),
-        0 0 90px rgba(37, 99, 235, 0.7);
-      opacity: 0.8;
-      animation: ringPulse 4.6s ease-in-out infinite;
-    }
-
-    @keyframes ringPulse {
-      0%   { transform: scale(0.96); opacity: 0.6; }
-      40%  { transform: scale(1.02); opacity: 0.95; }
-      100% { transform: scale(0.98); opacity: 0.7; }
-    }
-
-    .orb-glow {
-      position: absolute;
-      inset: 8%;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 30% 0%, rgba(248, 250, 252, 0.8), transparent 45%),
-        radial-gradient(circle at 70% 120%, rgba(56, 189, 248, 0.6), transparent 70%);
-      filter: blur(12px);
-      mix-blend-mode: screen;
-      opacity: 0.85;
-    }
-
-    .summon-orb {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 25% 20%, rgba(248, 250, 252, 0.95), rgba(191, 219, 254, 0.6), transparent 55%),
-        radial-gradient(circle at 70% 85%, rgba(56, 189, 248, 0.85), rgba(15, 23, 42, 1));
-      box-shadow:
-        0 0 55px rgba(56, 189, 248, 1),
-        0 26px 80px rgba(15, 23, 42, 0.98);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 36px 20px;
-      cursor: pointer;
-      outline: none;
-      animation: orbBreathe 4s ease-in-out infinite;
-      transition: transform 200ms ease, box-shadow 220ms ease;
-    }
-
-    @keyframes orbBreathe {
-      0%   { transform: translateY(0) scale(1); }
-      50%  {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow:
-          0 0 70px rgba(59, 130, 246, 1),
-          0 30px 90px rgba(15, 23, 42, 0.98);
-      }
-      100% { transform: translateY(0) scale(1); }
-    }
-
-    .summon-orb:hover,
-    .summon-orb:focus-visible {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow:
-        0 0 80px rgba(56, 189, 248, 1),
-        0 32px 95px rgba(15, 23, 42, 1);
-    }
-
-    .summon-orb-label {
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-      opacity: 0.85;
-      margin-bottom: 8px;
-    }
-
-    .summon-orb-title {
-      font-size: 1.05rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .summon-orb-sub {
-      font-size: 0.9rem;
-      color: #e5e7eb;
-      opacity: 0.9;
-      max-width: 220px;
-      margin-bottom: 12px;
-    }
-
-    .summon-orb-note {
-      font-size: 0.78rem;
-      color: #e5e7eb;
-      opacity: 0.9;
-    }
-
-    .summon-orb-note span {
-      font-weight: 600;
-    }
-
-    .orb-hint {
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: #d1d5db;
-      opacity: 0.88;
-      text-align: center;
-      max-width: 260px;
-    }
-
-    .orb-hint strong {
-      font-weight: 600;
-    }
-
-    /* -----------------------------
-       FOOTER
-    ------------------------------ */
-    footer.site-footer {
-      margin-top: auto;
-      padding-top: 20px;
-      font-size: 0.78rem;
-      color: #9ca3af;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-      border-top: 1px solid rgba(30, 64, 175, 0.7);
-    }
-
-    .version-pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: #e5e7eb;
-      text-decoration: none;
-      opacity: 0.9;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-      opacity: 1;
-    }
-
-    /* Body flash when portal fires */
-    body.portal-flash {
-      animation: portalFlash 550ms ease-out;
-    }
-
-    @keyframes portalFlash {
-      0% {
-        filter: brightness(1) saturate(1);
-      }
-      30% {
-        filter: brightness(1.35) saturate(1.35);
-      }
-      60% {
-        filter: brightness(1.1) saturate(1.15);
-      }
-      100% {
-        filter: brightness(1) saturate(1);
-      }
+    @keyframes heroGlow {
+      0% { transform:translate(-50%, -8px) scale(1); opacity:0.45; }
+      50% { transform:translate(-50%, 10px) scale(1.08); opacity:0.58; }
+      100% { transform:translate(-50%, -14px) scale(0.95); opacity:0.42; }
     }
   </style>
 </head>
 <body>
-  <!-- HARD FALLBACK (in case video fails) -->
-  <div class="bg-fallback"></div>
 
-  <!-- PACIFIC STORM VIDEO (real ocean waves) -->
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-ocean-waves-at-sunset-8576/1080p.mp4" type="video/mp4" />
-  </video>
+  <!-- OCEAN LAYERS -->
+  <div id="ocean-container"></div>
+  <div class="ocean-overlay-gradient"></div>
 
-  <!-- Dark + aurora overlays -->
-  <div class="bg-overlay"></div>
-  <div class="bg-aurora"></div>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner container">
+      <div class="brand"><span class="logo-dot"></span>SideGuy Solutions</div>
+      <ul class="menu">
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#sports-edge">Sports Edge</a></li>
+        <li><a href="#local-shows">Local Shows</a></li>
+        <li><a href="#newsletter">Daily Drop</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <div class="page-shell">
-    <header class="site-header">
-      <div class="brand-lockup">
-        <div class="brand-mark" aria-hidden="true"></div>
-        <div class="brand-text">
-          <div class="brand-title">SideGuy Solutions</div>
-          <div class="brand-tagline">
-            Pacific storm portal for tech builds, tickets, and DFS edges in North County.
-          </div>
-        </div>
-      </div>
-      <div class="storm-chip">
-        <span class="storm-chip-dot"></span>
-        <span>Live ocean · Tap to summon PJ</span>
-      </div>
-    </header>
+  <!-- HERO -->
+  <section class="hero" style="position:relative; padding:90px 20px 150px; text-align:center; z-index:5;">
+    <div class="hero-inner container" style="position:relative; z-index:5;">
+      <div class="hero-glow"></div>
 
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="hero-eyebrow">Solana Beach · Encinitas · Petco nights</p>
-        <h1 class="hero-heading">
-          Where <span>code meets the coastline</span> and the ocean answers on tap.
-        </h1>
-        <p class="hero-sub">
-          PJ is your coastal concierge for
-          <strong>apps, automations, tickets, and DFS edges</strong>.  
-          This isn’t a template. It’s a living Pacific portal into whatever you’re building next.
-        </p>
-
-        <div class="hero-pills">
-          <span class="pill">Custom dev without the agency circus</span>
-          <span class="pill">Tickets & access with OnlineSeats DNA</span>
-          <span class="pill">DFS edges · small edges, real money</span>
-        </div>
-
-        <div class="hero-cta-row">
-          <a
-            href="mailto:pj@sideguysolutions.com?subject=Summon%20PJ%20Direct&body=Tech%2C%20tickets%2C%20DFS%2C%20or%20all%20three%3F%0A%0AQuick%20context%3A%0A"
-            class="btn-primary"
-          >
-            <span class="icon">⚡</span>
-            <span>Skip portal · email PJ</span>
-          </a>
-        </div>
-
-        <p class="hero-footnote">
-          <strong>Or tap the orb like a sane person.</strong> Let the storm roll, then the inbox opens.
-        </p>
+      <div class="hero-kicker" style="
+        display:inline-flex; align-items:center; gap:8px;
+        padding:4px 10px; border-radius:999px;
+        background:rgba(15,23,42,0.7);
+        border:1px solid rgba(148,163,184,0.4);
+        font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted);
+        margin-bottom:20px;
+      ">
+        <span class="dot" style="
+          width:6px; height:6px; border-radius:999px;
+          background:#22c55e; box-shadow:0 0 10px #22c55e;
+        "></span>
+        NORTH COUNTY COASTAL • WEB3 CONCIERGE
       </div>
 
-      <div class="orb-column">
-        <div class="orb-shell">
-          <div class="orb-ring" aria-hidden="true"></div>
-          <div class="orb-glow" aria-hidden="true"></div>
+      <h1 style="
+        font-size:clamp(32px, 6vw, 48px);
+        line-height:1.1;
+        font-weight:900;
+        margin-bottom:14px;
+        text-shadow:0 18px 60px rgba(0,0,0,0.9);
+      ">
+        Where <span style="
+          background:linear-gradient(120deg, var(--brand2), var(--brand3));
+          -webkit-background-clip:text;
+          background-clip:text;
+          color:transparent;
+        ">code</span> meets the coastline.
+      </h1>
 
-          <div
-            id="summon-orb"
-            class="summon-orb"
-            role="button"
-            tabindex="0"
-            aria-label="Tap to summon PJ through the Pacific storm portal."
-          >
-            <div class="summon-orb-label">Tap to summon</div>
-            <div class="summon-orb-title">PJ</div>
-            <div class="summon-orb-sub">
-              The storm-glow Pacific portal into your next build, edge, or access play.
-            </div>
-            <div class="summon-orb-note">
-              <span>Tap once.</span> Ocean surges. Then your email app appears.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="orb-hint">
-      <strong>Pro tip:</strong> Try this at night with sound on. It feels like the Pacific is in your hand.
+      <p style="max-width:640px; margin:0 auto; opacity:0.96;">
+        Fully cinematic Pacific storm portal.  
+        Real ocean. Real movement. Real North County energy.
+      </p>
     </div>
 
-    <footer class="site-footer">
-      <div class="version-pill">
-        v6.0-pacific-storm-portal · Maximum Wow Edition
+    <!-- WAVES -->
+    <div class="hero-waves" style="position:absolute; inset:40% -10% -60px; overflow:hidden; pointer-events:none; z-index:4;">
+      <div class="wave wave-back"></div>
+      <div class="wave wave-mid"></div>
+      <div class="wave wave-front"></div>
+    </div>
+
+    <div class="hero-mist"></div>
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
+
+  </section>
+
+
+  <!-- SUMMON PJ -->
+  <div class="summon-wrapper" style="position:fixed; right:18px; bottom:20px; z-index:60;">
+    <a id="summonPJBubble" class="summon-btn" href="mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Portal)&body=Hey PJ,%0A%0AI'm coming through the portal.%0A">
+      <div class="summon-btn-main">
+        <span class="summon-emoji">⚡</span>
+        <span>TAP TO SUMMON PJ</span>
       </div>
-      <div class="footer-links">
-        <span>© <span id="footer-year">2025</span> SideGuy Solutions · North County, CA</span>
-        <a href="mailto:pj@sideguysolutions.com">Email PJ</a>
-      </div>
-    </footer>
+      <div class="summon-subtitle">The portal opens…</div>
+    </a>
+    <div class="summon-caption">North County only — for now.</div>
   </div>
+  <!-- TRENDING -->
+  <section id="trending" class="section container" style="padding:60px 20px;">
+    <div class="section-card" style="background:rgba(15,23,42,0.9); padding:22px; border-radius:16px;">
+      <h2 style="margin-bottom:10px;">🔥 Trending in the Portal</h2>
+      <p style="color:var(--muted); margin-bottom:14px;">Live topics from PJ’s coastal feed.</p>
+      <ul id="trend-list" class="trend-list"></ul>
+    </div>
+  </section>
+
+  <!-- SPORTS EDGE -->
+  <section id="sports-edge" class="section container" style="padding:60px 20px;">
+    <div class="section-card">
+      <h2>🏈 Sports Edge (DFS & Futures)</h2>
+      <p style="color:var(--muted); margin-bottom:16px;">Promo hunting. Edges. California-friendly angles.</p>
+      <div id="sports-edge-body"></div>
+    </div>
+  </section>
+
+  <!-- LOCAL SHOWS -->
+  <section id="local-shows" class="section container" style="padding:60px 20px;">
+    <div class="section-card">
+      <h2>🎟️ Local Shows — North County</h2>
+      <p style="color:var(--muted); margin-bottom:16px;">Solana Beach • Encinitas • Cardiff</p>
+      <div class="tickets-grid">
+        <p>Local ticket routing, faster confirmations, low friction.</p>
+        <p>Email PJ for direct access.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" class="section container" style="padding:60px 20px;">
+    <div class="section-card">
+      <h2>💌 PJ’s Daily Drop</h2>
+      <p style="color:var(--muted); margin-bottom:16px;">Coastal edges, tech angles, DFS frameworks.</p>
+      <a class="newsletter-cta" href="mailto:peter.z@kromeon.com?subject=Daily%20Drop">Email PJ to join</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="text-align:center; padding:40px 20px; color:var(--muted); font-size:12px;">
+    © 2025 SideGuy Solutions — Solana Beach, CA 🌊  
+    <div id="version-info" style="margin-top:8px;">v7.0-pacific-storm-portal</div>
+  </footer>
+  <!-- THREE.js -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
   <script>
-    const orb = document.getElementById("summon-orb");
+    /* ---------------------------
+       TRENDING
+    --------------------------- */
+    const TREND_TOPICS = [
+      "Pacific storm shaders",
+      "Solana yield-to-pay",
+      "AI coastal workflows",
+      "DFS promos in Cali",
+      "Encinitas tech scene",
+      "Stablecoin automations",
+      "OnlineSeats DNA",
+      "Web3 ticketing flow"
+    ];
 
-    function firePortal() {
-      if (!orb) return;
-
-      // boost animation
-      document.body.classList.add("portal-flash");
-      orb.style.animation = "none";
-      void orb.offsetWidth; // restart animation
-      orb.style.animation = "orbBreathe 0.8s ease-out 1";
-
-      setTimeout(() => {
-        const mailHref =
-          "mailto:pj@sideguysolutions.com" +
-          "?subject=" +
-          encodeURIComponent("Summon PJ via Pacific Storm Portal") +
-          "&body=" +
-          encodeURIComponent(
-            "What are you trying to solve? (Tech, tickets, DFS, or combo)\n\n" +
-            "- Quick context:\n" +
-            "- Timing:\n" +
-            "- How you found the portal:\n"
-          );
-
-        window.location.href = mailHref;
-      }, 420);
-
-      setTimeout(() => {
-        document.body.classList.remove("portal-flash");
-        orb.style.animation = "orbBreathe 4s ease-in-out infinite";
-      }, 900);
+    function renderTrends() {
+      const list = document.getElementById("trend-list");
+      list.innerHTML = TREND_TOPICS
+        .slice(0, 7)
+        .map(t => `<li class="trend-pill">#${t}</li>`)
+        .join("");
     }
 
-    if (orb) {
-      orb.addEventListener("click", firePortal);
-      orb.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          firePortal();
+    /* ---------------------------
+       SPORTS EDGE MOCK
+    --------------------------- */
+    function renderSportsEdge() {
+      document.getElementById("sports-edge-body").innerHTML = `
+        <div style="background:rgba(0,0,0,0.2); padding:14px; border-radius:12px;">
+          <strong>NBA • Phoenix vs Dallas</strong><br>
+          PRA Edge: Lively O 14.5<br>
+          Odds: +112 · Promo dependent<br>
+        </div>
+      `;
+    }
+
+    /* ---------------------------
+       VERSION STAMP
+    --------------------------- */
+    function updateVersionStamp() {
+      document.getElementById("version-info").innerText =
+        "v7.0-pacific-storm-portal • Updated " +
+        new Date().toLocaleString();
+    }
+
+    /* ---------------------------
+       THREE.js OCEAN SHADER
+    --------------------------- */
+
+    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
+    let targetWaveAmp = 1.0;
+
+    function initOcean() {
+      const container = document.getElementById("ocean-container");
+      if (!container || !window.THREE) return;
+
+      renderer = new THREE.WebGLRenderer({ antialias:true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000814, 1);
+      container.appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(
+        55, window.innerWidth/window.innerHeight, 0.1, 100
+      );
+      camera.position.set(0, 7, 12);
+
+      oceanClock = new THREE.Clock();
+
+      const geometry = new THREE.PlaneGeometry(40,40,200,200);
+      geometry.rotateX(-Math.PI/2);
+
+      const vertexShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uWaveAmp;
+
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+
+          float t = uTime * 0.4;
+
+          float wave1 = sin(pos.x * 0.15 + t);
+          float wave2 = sin(pos.z * 0.1 + t * 1.4);
+          float wave3 = sin((pos.x + pos.z) * 0.12 - t * 1.8);
+
+          float height = (wave1 + wave2 + wave3) * 0.35 * uWaveAmp;
+          pos.y += height;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
         }
+      `;
+
+      const fragmentShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+
+        void main() {
+          float t = uTime * 0.1;
+
+          vec3 deep = vec3(0.0,0.05,0.18);
+          vec3 mid = vec3(0.0,0.25,0.55);
+          vec3 surf = vec3(0.7,0.95,1.0);
+
+          float mixv = smoothstep(0.0, 1.0, vUv.y + sin(vUv.x*4.0+t)*0.05);
+          vec3 col = mix(deep, mid, mixv);
+          col = mix(col, surf, pow(1.0-mixv,3.0));
+
+          float glow = smoothstep(0.7,1.0,sin(vUv.x*3.0 - t*4.0));
+          col += vec3(0.1,0.16,0.22) * glow;
+
+          gl_FragColor = vec4(col,1.0);
+        }
+      `;
+
+      oceanMaterial = new THREE.ShaderMaterial({
+        uniforms:{
+          uTime:{value:0},
+          uWaveAmp:{value:1.0},
+        },
+        vertexShader,
+        fragmentShader,
+        side:THREE.DoubleSide
       });
+
+      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
+      scene.add(oceanMesh);
+
+      animateOcean();
+      window.addEventListener("resize", onResize);
     }
 
-    const yearEl = document.getElementById("footer-year");
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear().toString();
+    function onResize() {
+      camera.aspect = window.innerWidth/window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
     }
+
+    function animateOcean() {
+      requestAnimationFrame(animateOcean);
+
+      const t = oceanClock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value = t;
+
+      oceanMaterial.uniforms.uWaveAmp.value +=
+        (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.03;
+
+      camera.position.x = Math.sin(t * 0.2) * 0.3;
+      camera.lookAt(0,0,0);
+
+      renderer.render(scene,camera);
+    }
+
+    function boostWaves() {
+      targetWaveAmp = 1.6;
+      setTimeout(() => targetWaveAmp = 1.05, 650);
+    }
+
+    /* PORTAL */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTrends();
+      renderSportsEdge();
+      updateVersionStamp();
+      initOcean();
+
+      const btn = document.getElementById("summonPJBubble");
+      if (btn) {
+        btn.addEventListener("click", boostWaves);
+      }
+    });
   </script>
+
 </body>
 </html>
