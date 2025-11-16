@@ -1,8 +1,8 @@
 <!--
   SideGuy Solutions
-  Version: 6.2-modal-ocean
+  Version: 7.0-legendary-ocean
   Hero: "Where code meets the coastline."
-  Mode: Full-Screen Ocean + Floating Orb + Modal Toolkit + Summon PJ Portal
+  Mode: Full-Screen Ocean + Floating Orb + Modal Toolkit + Legendary Extras
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta property="og:description" content="Coastal toolkit for apps, tickets, DFS, Solana payments, and crypto escrow. Tap to summon PJ." />
+  <meta property="og:description" content="Coastal toolkit for apps, tickets, DFS, Solana payments, crypto escrow, and yield-powered rails. Tap to summon PJ." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
@@ -39,6 +39,9 @@
     }
   }
   </script>
+
+  <!-- Plausible Analytics (privacy-friendly) -->
+  <script defer data-domain="sideguysolutions.com" src="https://plausible.io/js/script.js"></script>
 
   <style>
     :root {
@@ -72,25 +75,48 @@
       overflow-x: hidden;
     }
 
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
     /* OCEAN BACKGROUND */
     #ocean-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: -3;
       background: radial-gradient(circle at top, #0ea5e9 0%, #020617 55%);
     }
 
     .ocean-overlay {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       pointer-events: none;
       background:
         radial-gradient(circle at 10% -10%, rgba(56, 189, 248, 0.4), transparent 55%),
         radial-gradient(circle at 100% 110%, rgba(14, 165, 233, 0.4), transparent 55%),
         linear-gradient(to bottom, rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.97));
+    }
+
+    /* Parallax surface waves layer */
+    #surface-waves {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 65%),
+        radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.15), transparent 70%),
+        radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.12), transparent 70%);
+      opacity: 0.65;
+      mix-blend-mode: screen;
     }
 
     .page-shell {
@@ -104,10 +130,10 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
       backdrop-filter: blur(16px);
       background:
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.78), transparent);
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.8), transparent);
       border-bottom: 1px solid rgba(148, 163, 184, 0.4);
     }
 
@@ -393,7 +419,7 @@
       letter-spacing: 0.09em;
     }
 
-    /* ORB SIDE */
+    /* ORB SIDE (FLOAT ABOVE EVERYTHING) */
     .hero-orb-shell {
       position: relative;
       display: flex;
@@ -401,6 +427,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 10px;
+      z-index: 100;
     }
 
     .orb-glow {
@@ -448,6 +475,7 @@
         box-shadow 0.18s ease-out,
         filter 0.18s ease-out;
       animation: orbPulse 2.6s ease-in-out infinite;
+      z-index: 101;
     }
 
     #summon-orb::after {
@@ -519,7 +547,7 @@
       text-align: center;
     }
 
-    /* TOOLKIT */
+    /* TOOLKIT SECTION */
     .section-shell {
       max-width: 1120px;
       margin: 0 auto;
@@ -673,12 +701,77 @@
       cursor: pointer;
     }
 
-    /* MODAL (GLOBAL TOOL MODAL) */
+    /* WHY SOLANA SECTION */
+    .why-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 880px) {
+      .why-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .why-card {
+      border-radius: var(--radius);
+      padding: 14px 14px 16px;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.94),
+        rgba(15, 23, 42, 0.9)
+      );
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.22), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.18), transparent 60%);
+      opacity: 0.45;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .why-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .why-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .why-body {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    /* GLOBAL TOOL MODAL */
     #tool-modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 50;
+      z-index: 80;
       background: rgba(15, 23, 42, 0.78);
       backdrop-filter: blur(10px);
       align-items: center;
@@ -739,13 +832,19 @@
     }
 
     .modal-input-group input,
-    .modal-input-group select {
+    .modal-input-group select,
+    .modal-input-group textarea {
       padding: 7px 9px;
       border-radius: 10px;
       border: 1px solid rgba(148, 163, 184, 0.6);
       background: #020617;
       color: var(--text-main);
       font-size: 0.8rem;
+    }
+
+    .modal-input-group textarea {
+      resize: vertical;
+      min-height: 70px;
     }
 
     #tool-modal-result {
@@ -797,7 +896,7 @@
     }
 
     footer {
-      padding: 18px 20px 22px;
+      padding: 18px 20px 32px;
       font-size: 0.74rem;
       color: var(--muted);
       text-align: center;
@@ -805,7 +904,78 @@
       background: linear-gradient(to top, rgba(15, 23, 42, 0.96), transparent);
     }
 
-    /* Responsive tweaks */
+    /* FLOATING CHAT BUBBLE */
+    #chat-bubble {
+      position: fixed;
+      left: 18px;
+      bottom: 82px;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    #chat-bubble button {
+      border-radius: 999px;
+      padding: 8px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.3), rgba(15, 23, 42, 0.96));
+      color: var(--text-main);
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    #chat-bubble button span.icon {
+      font-size: 1rem;
+    }
+
+    #chat-bubble small {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-shadow: 0 0 10px rgba(15, 23, 42, 0.9);
+    }
+
+    /* MOBILE NAV BAR */
+    #mobile-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 95;
+      background: rgba(15, 23, 42, 0.97);
+      border-top: 1px solid rgba(148, 163, 184, 0.45);
+      backdrop-filter: blur(12px);
+      display: none;
+    }
+
+    #mobile-nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 6px 20px 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .mobile-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      cursor: pointer;
+    }
+
+    .mobile-nav-item span.icon {
+      font-size: 1.1rem;
+    }
+
     @media (max-width: 720px) {
       .nav-inner {
         flex-direction: column;
@@ -820,15 +990,30 @@
       .hero-shell {
         padding-inline: 16px;
       }
-      .section-shell {
+      .section-shell,
+      .why-shell {
         padding-inline: 16px;
+      }
+      #mobile-nav {
+        display: block;
+      }
+      #chat-bubble {
+        left: 12px;
+        bottom: 70px;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Audio (add your own files or keep muted by default) -->
+  <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
+  <audio id="portal-sfx" src="portal-whoomp.mp3" preload="auto"></audio>
+  <audio id="summon-sfx" src="summon-chime.mp3" preload="auto"></audio>
+  <audio id="tool-sfx" src="tool-open.mp3" preload="auto"></audio>
+
   <canvas id="ocean-canvas"></canvas>
   <div class="ocean-overlay"></div>
+  <div id="surface-waves"></div>
 
   <div class="page-shell">
     <!-- HEADER -->
@@ -845,13 +1030,14 @@
           <nav class="nav-links">
             <a class="nav-link" href="#hero">Hero</a>
             <a class="nav-link" href="#toolkit">Toolkit</a>
+            <a class="nav-link" href="#why-solana">Why Solana</a>
           </nav>
           <div class="nav-pill">
             <span class="nav-dot"></span>
             <span>TAP TO SUMMON PJ</span>
           </div>
           <div class="version">
-            v<span id="version-label">6.2</span>
+            v<span id="version-label">7.0</span>
           </div>
         </div>
       </div>
@@ -922,13 +1108,16 @@
             <div class="section-title">SideGuy Toolkit</div>
             <div class="section-subtitle">
               Working tools for <strong>money flows</strong>,
-              <strong>processing costs</strong>, and <strong>yield on rails</strong>.
+              <strong>processing costs</strong> and <strong>yield on rails</strong>.
             </div>
           </div>
           <div class="toolkit-nav">
             <button type="button" data-tool="solana-savings">Solana savings</button>
             <button type="button" data-tool="stablecoin-fees">Stablecoin fees</button>
             <button type="button" data-tool="solana-yield">Solana yield</button>
+            <button type="button" data-tool="escrow-roi">Crypto escrow ROI</button>
+            <button type="button" data-tool="ticket-sellout">Ticket sellout</button>
+            <button type="button" data-tool="dfs-promo">DFS promo EV</button>
           </div>
         </div>
 
@@ -953,7 +1142,7 @@
             </div>
           </article>
 
-          <!-- 2. Stablecoin Fee Comparison -->
+          <!-- 2. Stablecoin Payment Fee Comparison -->
           <article class="card">
             <div class="card-kicker">Crypto · Stablecoins</div>
             <h3 class="card-title">Stablecoin Payment Fee Comparison</h3>
@@ -993,46 +1182,103 @@
             </div>
           </article>
 
-          <!-- 4. Tech Builds (static) -->
+          <!-- 4. Crypto Escrow ROI -->
           <article class="card">
-            <div class="card-kicker">Tech & Product</div>
-            <h3 class="card-title">Custom Apps, Sites & Systems</h3>
+            <div class="card-kicker">Crypto Escrow</div>
+            <h3 class="card-title">“Crypto Escrow” ROI Tool</h3>
             <p class="card-body">
-              MVPs, landing pages, internal tools, and weird idea machines.
-              Designed, built, and tuned for the actual humans using them.
+              Model the impact of escrow on late payments, churn, and stress.
+              See what happens when dev work is always funded and on-chain.
             </p>
             <div class="card-meta-row">
-              <span class="card-chip">Ship fast</span>
-              <a href="#hero" class="card-link-btn">Start a build ↗</a>
+              <span class="card-chip">Lock in cash flow</span>
+              <button
+                type="button"
+                class="card-link-btn"
+                data-tool-open="escrow-roi"
+              >
+                Model escrow ROI ↗
+              </button>
             </div>
           </article>
 
-          <!-- 5. Tickets (static) -->
+          <!-- 5. Ticket Sellout Predictor -->
           <article class="card">
             <div class="card-kicker">Tickets & Events</div>
-            <h3 class="card-title">Ticket Flows & Seat Maps</h3>
+            <h3 class="card-title">Ticket Sellout Predictor</h3>
             <p class="card-body">
-              Flows for presales, drops, VIP, and hospitality. Built on years
-              in the ticket trenches so you don’t repeat bad patterns.
+              Rough-cut sellout timing based on venue size, followers, ad budget,
+              ticket price, and hype. Not gospel — a planning compass.
             </p>
             <div class="card-meta-row">
               <span class="card-chip">Fill the room</span>
-              <a href="#hero" class="card-link-btn">Tune my funnel ↗</a>
+              <button
+                type="button"
+                class="card-link-btn"
+                data-tool-open="ticket-sellout"
+              >
+                Predict sellout ↗
+              </button>
             </div>
           </article>
 
-          <!-- 6. Coastal Concierge (static) -->
+          <!-- 6. DFS Promo EV Tool -->
           <article class="card">
-            <div class="card-kicker">Coastal Concierge</div>
-            <h3 class="card-title">The “SideGuy” Fixer Lane</h3>
+            <div class="card-kicker">DFS & Promos</div>
+            <h3 class="card-title">DFS Promo Multiplier Tool</h3>
             <p class="card-body">
-              Moves, intros, weird problems, and “I don’t even know what I need”
-              situations. PJ pulls from the full playbook.
+              Plug in promo size, rollover, and your edge to see how much
+              you can realistically push without turning sweat into chaos.
             </p>
             <div class="card-meta-row">
-              <span class="card-chip">Summon PJ</span>
-              <a href="#hero" class="card-link-btn">Drop me a line ↗</a>
+              <span class="card-chip">Smarter sweat</span>
+              <button
+                type="button"
+                class="card-link-btn"
+                data-tool-open="dfs-promo"
+              >
+                Map my EV ↗
+              </button>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- WHY SOLANA / RAILS EXPLAINER -->
+      <section class="why-shell" id="why-solana">
+        <div class="section-header-row">
+          <div>
+            <div class="section-title">Why Solana & Stablecoins</div>
+            <div class="section-subtitle">
+              The short version: <strong>faster rails</strong>,
+              <strong>lower drag</strong> and <strong>better cash flow</strong>.
+            </div>
+          </div>
+        </div>
+        <div class="why-grid">
+          <article class="why-card">
+            <div class="why-kicker">Speed</div>
+            <h3 class="why-title">Near-instant settlement</h3>
+            <p class="why-body">
+              Funds can clear in seconds, not days. That means less time waiting
+              for payouts and more time moving, building, and re-deploying cash.
+            </p>
+          </article>
+          <article class="why-card">
+            <div class="why-kicker">Cost</div>
+            <h3 class="why-title">Fees that don’t sting</h3>
+            <p class="why-body">
+              Instead of ~3% + 30¢ per card swipe, Solana fees are closer to a
+              rounding error. The toolkit shows you the gap in plain numbers.
+            </p>
+          </article>
+          <article class="why-card">
+            <div class="why-kicker">Control</div>
+            <h3 class="why-title">Yield & programmable flows</h3>
+            <p class="why-body">
+              Get paid in stablecoins, earn yield on float, and route money in
+              ways your old payment processor never dreamed of.
+            </p>
           </article>
         </div>
       </section>
@@ -1054,22 +1300,58 @@
 
       <!-- SEO helper text (hidden from UI, visible to crawlers) -->
       <div style="display:none;">
-        <h2>Solana and Stablecoin Tools for North County Businesses</h2>
+        <h2>Solana, Stablecoin and DFS Tools for North County Businesses</h2>
         <p>
-          SideGuy Solutions helps businesses compare Stripe and PayPal fees to Solana
-          and stablecoin payment rails, estimate processing savings, and calculate
-          yield on revenue float using on-chain tools.
+          SideGuy Solutions helps businesses compare card processing fees to Solana
+          and stablecoin payment rails, estimate yield on revenue float, model
+          crypto escrow ROI, plan ticket sellouts, and approach DFS promos with
+          a system instead of chaos.
         </p>
       </div>
     </main>
 
     <footer>
-      SideGuy Solutions · v<span id="footer-version">6.2-modal-ocean</span> · Built from Solana Beach
+      SideGuy Solutions · v<span id="footer-version">7.0-legendary-ocean</span> · Built from Solana Beach, CA
     </footer>
   </div>
-  <!-- TOOLKIT MODAL LOGIC + CALCULATORS -->
+
+  <!-- FLOATING CHAT BUBBLE -->
+  <div id="chat-bubble">
+    <button type="button" id="chat-bubble-btn">
+      <span class="icon">💬</span>
+      <span>Chat with PJ</span>
+    </button>
+    <small>Quick intake → lands in PJ’s inbox.</small>
+  </div>
+
+  <!-- MOBILE NAV BAR -->
+  <div id="mobile-nav">
+    <div id="mobile-nav-inner">
+      <div class="mobile-nav-item" data-nav-target="hero">
+        <span class="icon">🌊</span>
+        <span>Home</span>
+      </div>
+      <div class="mobile-nav-item" data-nav-target="toolkit">
+        <span class="icon">🧰</span>
+        <span>Toolkit</span>
+      </div>
+      <div class="mobile-nav-item" data-nav-action="orb">
+        <span class="icon">🌀</span>
+        <span>Summon</span>
+      </div>
+      <div class="mobile-nav-item" data-nav-target="why-solana">
+        <span class="icon">⚡️</span>
+        <span>Why</span>
+      </div>
+      <div class="mobile-nav-item" data-nav-action="chat">
+        <span class="icon">💬</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </div>
+  <!-- TOOLKIT MODAL LOGIC + CALCULATORS + INTAKE -->
   <script>
-    // Global modal state
+    // Global modal config
     const TOOL_CONFIG = {
       "solana-savings": {
         title: "Solana Processing Savings Calculator",
@@ -1077,13 +1359,38 @@
       },
       "stablecoin-fees": {
         title: "Stablecoin Payment Fee Comparison",
-        desc: "See the fee difference between traditional processors and taking payments in stablecoins."
+        desc: "See the fee difference between card processors and taking payments in stablecoins."
       },
       "solana-yield": {
         title: "Solana Pay Revenue Yield Estimator",
         desc: "Estimate how much yield you can earn on payment float when funds land on Solana first."
+      },
+      "escrow-roi": {
+        title: "Crypto Escrow ROI Tool",
+        desc: "Model what happens when client funds are locked in escrow before dev work starts."
+      },
+      "ticket-sellout": {
+        title: "Ticket Sellout Predictor",
+        desc: "Rough-cut estimate for when your event is likely to sell out based on reach and budget."
+      },
+      "dfs-promo": {
+        title: "DFS Promo Multiplier Tool",
+        desc: "Plug in promo size, rollover, and your edge to see how much EV you can reasonably attack."
+      },
+      "intake": {
+        title: "Chat with PJ · Quick Intake",
+        desc: "Drop a quick note and it’ll land directly in PJ’s inbox. Keep it simple — we can refine later."
       }
     };
+
+    function playSfx(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      try {
+        el.currentTime = 0;
+        el.play().catch(() => {});
+      } catch (_) {}
+    }
 
     function openToolModal(toolKey) {
       const config = TOOL_CONFIG[toolKey];
@@ -1099,6 +1406,7 @@
       descEl.textContent = config.desc;
       resultEl.innerHTML = "";
 
+      // Inject different forms based on tool
       if (toolKey === "solana-savings") {
         formEl.innerHTML = `
           <div class="modal-input-group">
@@ -1159,9 +1467,82 @@
           </div>
           <button class="modal-action" type="button" onclick="calcSolanaYield()">Estimate yield</button>
         `;
+      } else if (toolKey === "escrow-roi") {
+        formEl.innerHTML = `
+          <div class="modal-input-group">
+            <label for="er-monthly-billings">Monthly billings ($)</label>
+            <input id="er-monthly-billings" type="number" min="0" placeholder="e.g. 80000" />
+          </div>
+          <div class="modal-input-group">
+            <label for="er-late-rate">Percent of invoices that go late (%)</label>
+            <input id="er-late-rate" type="number" step="0.1" placeholder="e.g. 20" />
+          </div>
+          <div class="modal-input-group">
+            <label for="er-bad-debt">Percent that never pay at all (%)</label>
+            <input id="er-bad-debt" type="number" step="0.1" placeholder="e.g. 3" />
+          </div>
+          <div class="modal-input-group">
+            <label for="er-escrow-fee">Escrow fee as % of volume (e.g. 1)</label>
+            <input id="er-escrow-fee" type="number" step="0.1" placeholder="e.g. 1" />
+          </div>
+          <button class="modal-action" type="button" onclick="calcEscrowRoi()">Model escrow ROI</button>
+        `;
+      } else if (toolKey === "ticket-sellout") {
+        formEl.innerHTML = `
+          <div class="modal-input-group">
+            <label for="ts-capacity">Venue capacity (seats)</label>
+            <input id="ts-capacity" type="number" min="0" placeholder="e.g. 500" />
+          </div>
+          <div class="modal-input-group">
+            <label for="ts-followers">Total reachable followers</label>
+            <input id="ts-followers" type="number" min="0" placeholder="e.g. 20000" />
+          </div>
+          <div class="modal-input-group">
+            <label for="ts-budget">Ad budget ($)</label>
+            <input id="ts-budget" type="number" min="0" placeholder="e.g. 1500" />
+          </div>
+          <div class="modal-input-group">
+            <label for="ts-hype">Hype multiplier (1–3)</label>
+            <input id="ts-hype" type="number" step="0.1" placeholder="e.g. 1.6" />
+          </div>
+          <button class="modal-action" type="button" onclick="calcTicketSellout()">Predict sellout</button>
+        `;
+      } else if (toolKey === "dfs-promo") {
+        formEl.innerHTML = `
+          <div class="modal-input-group">
+            <label for="dp-promo-size">Promo size / bonus ($)</label>
+            <input id="dp-promo-size" type="number" min="0" placeholder="e.g. 200" />
+          </div>
+          <div class="modal-input-group">
+            <label for="dp-rollover">Rollover multiple (e.g. 5x)</label>
+            <input id="dp-rollover" type="number" step="0.1" placeholder="e.g. 5" />
+          </div>
+          <div class="modal-input-group">
+            <label for="dp-edge">Your average edge per dollar bet (%)</label>
+            <input id="dp-edge" type="number" step="0.1" placeholder="e.g. 6" />
+          </div>
+          <button class="modal-action" type="button" onclick="calcDfsPromo()">Map promo EV</button>
+        `;
+      } else if (toolKey === "intake") {
+        formEl.innerHTML = `
+          <div class="modal-input-group">
+            <label for="in-name">Your name</label>
+            <input id="in-name" type="text" placeholder="e.g. Alex from Encinitas" />
+          </div>
+          <div class="modal-input-group">
+            <label for="in-need">What are you trying to do?</label>
+            <textarea id="in-need" placeholder="A few lines is plenty."></textarea>
+          </div>
+          <div class="modal-input-group">
+            <label for="in-contact">Best way to reach you (optional)</label>
+            <input id="in-contact" type="text" placeholder="Phone, email, or handle" />
+          </div>
+          <button class="modal-action" type="button" onclick="sendIntake()">Send to PJ</button>
+        `;
       }
 
       backdrop.style.display = "flex";
+      playSfx("tool-sfx");
     }
 
     function closeToolModal() {
@@ -1198,7 +1579,6 @@
 
       const currentFees = volume * pct + txCount * fixed;
 
-      // Assume Solana cost ~ $0.00025 per tx (can tweak later)
       const solanaCostPerTx = 0.00025;
       const solanaFees = txCount * solanaCostPerTx;
 
@@ -1266,6 +1646,117 @@
       `;
     }
 
+    function calcEscrowRoi() {
+      const monthly = parseFloat(document.getElementById("er-monthly-billings").value || "0");
+      const lateRate = parseFloat(document.getElementById("er-late-rate").value || "0");
+      const badDebt = parseFloat(document.getElementById("er-bad-debt").value || "0");
+      const escrowFee = parseFloat(document.getElementById("er-escrow-fee").value || "0");
+      const resultEl = document.getElementById("tool-modal-result");
+
+      if (monthly <= 0) {
+        resultEl.innerHTML = "<span style='color:#fb7185;'>Enter your monthly billings.</span>";
+        return;
+      }
+
+      const lateAmount = monthly * (lateRate / 100);
+      const badDebtAmount = monthly * (badDebt / 100);
+      const escrowCost = monthly * (escrowFee / 100);
+
+      // Assume escrow cuts late in half and bad debt by 70%
+      const newLate = lateAmount * 0.5;
+      const newBadDebt = badDebtAmount * 0.3;
+
+      const oldPain = lateAmount + badDebtAmount;
+      const newPain = newLate + newBadDebt + escrowCost;
+      const monthlyDelta = oldPain - newPain;
+      const yearlyDelta = monthlyDelta * 12;
+
+      resultEl.innerHTML = `
+        <strong>Results:</strong><br/>
+        Late + never-paid (today): ~$${oldPain.toFixed(2)} / month<br/>
+        With escrow (est.): ~$${newPain.toFixed(2)} / month (including escrow fees)<br/><br/>
+        <strong>Net change: ~$${monthlyDelta.toFixed(2)} per month</strong><br/>
+        That’s about <strong>$${yearlyDelta.toFixed(2)} per year</strong> better or worse<br/>
+        depending on your starting point and client mix.
+      `;
+    }
+
+    function calcTicketSellout() {
+      const capacity = parseFloat(document.getElementById("ts-capacity").value || "0");
+      const followers = parseFloat(document.getElementById("ts-followers").value || "0");
+      const budget = parseFloat(document.getElementById("ts-budget").value || "0");
+      const hype = parseFloat(document.getElementById("ts-hype").value || "0");
+      const resultEl = document.getElementById("tool-modal-result");
+
+      if (capacity <= 0 || followers <= 0) {
+        resultEl.innerHTML = "<span style='color:#fb7185;'>Enter capacity and reachable followers.</span>";
+        return;
+      }
+
+      const baseRate = followers / 5000; // rough: every 5k followers = 1x baseline demand
+      const budgetBoost = Math.sqrt(budget / 500 || 0); // diminishing returns
+      const hypeBoost = hype > 0 ? hype : 1;
+
+      const demandScore = baseRate * (1 + budgetBoost) * hypeBoost;
+      const daysToSellout = Math.max(1, (capacity / (demandScore * 25)));
+
+      resultEl.innerHTML = `
+        <strong>Rough estimate:</strong><br/>
+        At this mix of reach, budget and hype, you could sell out a<br/>
+        <strong>${capacity}-cap room in about ${daysToSellout.toFixed(1)} days</strong><br/>
+        if things break your way.<br/><br/>
+        Use it as a planning compass, not a promise.
+      `;
+    }
+
+    function calcDfsPromo() {
+      const promo = parseFloat(document.getElementById("dp-promo-size").value || "0");
+      const rollover = parseFloat(document.getElementById("dp-rollover").value || "0");
+      const edgePct = parseFloat(document.getElementById("dp-edge").value || "0");
+      const resultEl = document.getElementById("tool-modal-result");
+
+      if (promo <= 0 || rollover <= 0 || edgePct <= 0) {
+        resultEl.innerHTML = "<span style='color:#fb7185;'>Enter promo size, rollover and your edge.</span>";
+        return;
+      }
+
+      const totalHandle = promo * rollover;
+      const edge = edgePct / 100;
+      const ev = totalHandle * edge;
+
+      resultEl.innerHTML = `
+        <strong>Promo profile:</strong><br/>
+        Total handle needed: ~$${totalHandle.toFixed(2)}<br/>
+        At an edge of ${edgePct.toFixed(1)}%, your expected value is:<br/><br/>
+        <strong>~$${ev.toFixed(2)}</strong> over the rollover window.<br/><br/>
+        The job is to keep stakes sane so real life still feels good.
+      `;
+    }
+
+    function sendIntake() {
+      const name = document.getElementById("in-name").value.trim();
+      const need = document.getElementById("in-need").value.trim();
+      const contact = document.getElementById("in-contact").value.trim();
+
+      const pieces = [];
+      if (name) pieces.push("Name: " + name);
+      if (contact) pieces.push("Best contact: " + contact);
+      if (need) pieces.push("\nWhat I need:\n" + need);
+
+      const body = pieces.length
+        ? pieces.join("\n")
+        : "I just tapped the intake modal — let’s talk.";
+
+      const mailto =
+        "mailto:pj@sideguysolutions.com" +
+        "?subject=" +
+        encodeURIComponent("SideGuy Intake · New Request") +
+        "&body=" +
+        encodeURIComponent(body);
+
+      window.location.href = mailto;
+    }
+
     function wireToolkitCards() {
       const navButtons = document.querySelectorAll("[data-tool]");
       navButtons.forEach(btn => {
@@ -1293,6 +1784,40 @@
           if (e.target === backdrop) closeToolModal();
         });
       }
+
+      // Chat bubble opens intake modal
+      const chatBubbleBtn = document.getElementById("chat-bubble-btn");
+      if (chatBubbleBtn) {
+        chatBubbleBtn.addEventListener("click", () => openToolModal("intake"));
+      }
+
+      // Mobile nav
+      const mobileItems = document.querySelectorAll(".mobile-nav-item");
+      mobileItems.forEach(item => {
+        const targetId = item.getAttribute("data-nav-target");
+        const action = item.getAttribute("data-nav-action");
+        if (targetId) {
+          item.addEventListener("click", () => {
+            const el = document.getElementById(targetId);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        } else if (action === "orb") {
+          item.addEventListener("click", () => {
+            const orb = document.getElementById("summon-orb");
+            if (orb) orb.click();
+          });
+        } else if (action === "chat") {
+          item.addEventListener("click", () => openToolModal("intake"));
+        }
+      });
+
+      // Parallax surface waves
+      window.addEventListener("scroll", () => {
+        const waves = document.getElementById("surface-waves");
+        if (!waves) return;
+        const y = window.scrollY * 0.05;
+        waves.style.transform = `translateY(${y}px)`;
+      });
     }
   </script>
   <!-- THREE.js + OCEAN + SUMMON FLOW -->
@@ -1338,172 +1863,4 @@
 
       vec3 oceanBase(vec2 uv) {
         vec3 deep = vec3(0.01, 0.06, 0.13);
-        vec3 mid  = vec3(0.02, 0.22, 0.38);
-        vec3 top  = vec3(0.14, 0.56, 0.90);
-
-        float depth = smoothstep(0.1, 0.8, uv.y);
-        return mix(deep, mix(mid, top, depth), 0.95);
-      }
-
-      void main() {
-        vec2 uv = vUv;
-        vec3 base = oceanBase(uv);
-
-        float t = uTime * 0.35;
-
-        float c1 = sin((uv.x * 20.0) + t) * cos((uv.y * 14.0) - t * 1.3);
-        float c2 = sin((uv.x * 32.0) - t * 0.7) * cos((uv.y * 18.0) + t * 1.1);
-        float caustics = (c1 + c2) * 0.10;
-
-        vec3 foam = vec3(0.9, 0.96, 1.0) * caustics;
-
-        float swell = sin(uv.y * 12.0 - t * 1.0) * 0.05;
-        vec3 swellTint = vec3(0.28, 0.65, 1.0) * swell;
-
-        float fresnel = pow(1.0 - clamp(uv.y + 0.1, 0.0, 1.0), 2.0);
-        vec3 horizon = vec3(0.56, 0.84, 1.0) * 1.3 * fresnel;
-
-        vec3 color = base + foam + swellTint + horizon;
-
-        float vignette = smoothstep(0.0, 0.8, uv.y) * 0.12;
-        color *= (1.0 - vignette);
-
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `;
-
-    function initOcean() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) return;
-
-      scene = new THREE.Scene();
-
-      camera = new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        100
-      );
-      camera.position.set(0, 1.25, 2.6);
-      camera.lookAt(0, 0, 0);
-
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true,
-      });
-
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x020617, 1);
-
-      const geometry = new THREE.PlaneGeometry(10, 7, 240, 180);
-
-      oceanMaterial = new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          uTime: { value: 0 },
-          uWaveAmp: { value: 1.05 },
-        },
-      });
-
-      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
-      oceanMesh.rotation.x = -Math.PI / 2.05;
-      oceanMesh.position.y = -0.55;
-      scene.add(oceanMesh);
-
-      window.addEventListener("resize", onResize);
-
-      animate();
-    }
-
-    function onResize() {
-      if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      if (!oceanMaterial) return;
-
-      const t = performance.now() * 0.0015;
-      oceanMaterial.uniforms.uTime.value = t;
-
-      oceanMaterial.uniforms.uWaveAmp.value +=
-        (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.045;
-
-      if (camera && renderer && scene) {
-        camera.position.x = Math.sin(t * 0.2) * 0.42;
-        camera.lookAt(0, 0, 0);
-        renderer.render(scene, camera);
-      }
-    }
-
-    function boostWaves() {
-      targetWaveAmp = 1.8;
-
-      document.body.classList.add("portal-flash");
-      setTimeout(() => document.body.classList.remove("portal-flash"), 550);
-
-      document.body.classList.add("portal-ripple");
-      setTimeout(() => document.body.classList.remove("portal-ripple"), 1500);
-    }
-
-    function openPjEmail() {
-      const mailto =
-        "mailto:pj@sideguysolutions.com" +
-        "?subject=" +
-        encodeURIComponent("Summon PJ · SideGuy Solutions") +
-        "&body=" +
-        encodeURIComponent(
-          "Hey PJ,\n\nI just tapped the coastal portal.\n\nHere’s what I’m trying to do:\n- Tech build / app / site\n- Tickets / events\n- DFS tools / edges\n- Solana payments / crypto escrow\n- Something else entirely\n\nDrop me a line back and let’s spin this up.\n\n— Sent from the SideGuy portal 🌊"
-        );
-
-      window.location.href = mailto;
-    }
-
-    function wireSummonFlow() {
-      const orb = document.getElementById("summon-orb");
-      const summonBtn = document.getElementById("summon-btn");
-      const summonLite = document.getElementById("summon-lite");
-      const toolkit = document.getElementById("toolkit");
-
-      function triggerPortalAndEmail() {
-        boostWaves();
-        setTimeout(openPjEmail, 420);
-      }
-
-      if (orb) {
-        orb.addEventListener("click", triggerPortalAndEmail);
-      }
-
-      if (summonBtn) {
-        summonBtn.addEventListener("click", triggerPortalAndEmail);
-      }
-
-      if (summonLite && toolkit) {
-        summonLite.addEventListener("click", () => {
-          toolkit.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
-    }
-
-    function updateVersionStamp() {
-      const label = document.getElementById("version-label");
-      const footer = document.getElementById("footer-version");
-      if (label) label.textContent = "6.2";
-      if (footer) footer.textContent = "6.2-modal-ocean";
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      updateVersionStamp();
-      setTimeout(initOcean, 180);
-      wireSummonFlow();
-      wireToolkitCards();
-    });
-  </script>
-</body>
-</html>
+        vec
