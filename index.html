@@ -3,22 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
 
-  <meta name="description" content="SideGuy Solutions — Tap the ocean portal to summon PJ. Apps, tickets, DFS edges, and North County tech magic." />
-  <meta property="og:title" content="SideGuy Solutions — Coastal Concierge" />
-  <meta property="og:description" content="Tap the ocean portal to summon PJ. Apps, automation, tickets, DFS edges, and Solana payment flows." />
+  <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
+
+  <!-- Core SEO -->
+  <meta
+    name="description"
+    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Web3, Solana payments, tickets, and DFS tools from Solana Beach to Encinitas."
+  />
+  <meta
+    name="keywords"
+    content="San Diego software development, San Diego app development, San Diego mobile app development, San Diego AI development, AI automation San Diego, San Diego tech concierge, North County San Diego startups, Encinitas developers, Solana Beach tech, custom software agency San Diego, Web3 development San Diego, blockchain developers San Diego, Solana developers San Diego, San Diego custom web apps, coastal concierge tech"
+  />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
+  <meta property="og:description" content="Tap the ocean portal to summon PJ. San Diego custom apps, AI automation, Web3 & Solana payments, DFS and ticket flows." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
+  <!-- Simple LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "SideGuy Solutions",
+    "description": "Coastal tech concierge for San Diego and North County — custom apps, AI, Web3 and Solana payment flows.",
+    "url": "https://sideguysolutions.com/",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "name": "San Diego & North County",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.991,
+        "longitude": -117.271
+      }
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Solana Beach",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-773-544-1231"
+  }
+  </script>
+
   <style>
     /* ================================================
-       ROOT VARIABLES — With Day/Night Tint Support
+       ROOT VARIABLES — Day/Night aware
     ================================================= */
     :root {
       --bg: #020617;
-      --bg-night: #010914;
       --bg-day: #031223;
+      --bg-night: #010914;
 
       --text: #e5f2ff;
       --soft: #94a3b8;
@@ -32,12 +70,8 @@
 
       --radius: 18px;
       --pill: 999px;
-    }
 
-    /* Day/Night Mood Applied Immediately */
-    body {
-      background: var(--bg);
-      transition: background 0.6s ease;
+      --shadow-deep: 0 22px 70px rgba(15,23,42,0.96);
     }
 
     * {
@@ -46,11 +80,27 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
       color: var(--text);
+      background: var(--bg);
       overflow-x: hidden;
       min-height: 100vh;
+      transition: background 0.6s ease;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     /* ================================================
@@ -62,6 +112,8 @@
       width: 100%;
       height: 100%;
       z-index: -1;
+      display: block;
+      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
     }
 
     /* ================================================
@@ -71,10 +123,15 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      padding: 12px 20px;
+      padding: 10px 20px;
       backdrop-filter: blur(16px);
-      background: rgba(2,6,23,0.75);
-      border-bottom: 1px solid rgba(56,189,248,0.25);
+      background: linear-gradient(
+        to bottom,
+        rgba(2,6,23,0.95),
+        rgba(2,6,23,0.82),
+        transparent
+      );
+      border-bottom: 1px solid rgba(56,189,248,0.28);
     }
 
     .nav-inner {
@@ -83,86 +140,292 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .brand-pill {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 45%, #0f172a 100%);
+      box-shadow:
+        0 0 0 1px rgba(148,163,184,0.5),
+        0 0 26px rgba(56,189,248,0.9);
+    }
+
+    .version-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
     }
 
     /* ================================================
-       HERO + ORB
+       HERO LAYOUT
     ================================================= */
     .hero {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 50px 20px 70px;
+      padding: 40px 20px 64px;
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 30px;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      gap: 32px;
       align-items: center;
     }
 
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 28px;
+      }
+    }
+
     .hero-title {
-      font-size: 2.9rem;
-      font-weight: 800;
-      line-height: 1.05;
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      font-weight: 850;
+      line-height: 1.04;
       margin-bottom: 12px;
+      text-shadow: 0 18px 55px rgba(15,23,42,0.95);
     }
 
     .hero-title span {
-      background: linear-gradient(to right, #38bdf8, #a5f3fc);
+      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero-sub {
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: var(--soft);
-      max-width: 32rem;
-      margin-bottom: 24px;
+      max-width: 34rem;
       line-height: 1.6;
+      margin-bottom: 20px;
     }
 
-    /* ORB */
+    .hero-sub strong {
+      color: #e5f2ff;
+      font-weight: 600;
+    }
+
+    .hero-contacts {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ================================================
+       BUTTONS — Glow Mode
+    ================================================= */
+    button {
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    .btn-primary {
+      position: relative;
+      padding: 11px 18px;
+      border-radius: var(--pill);
+      background: radial-gradient(circle at 0 0, #e0f2fe, #38bdf8);
+      color: #020617;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow:
+        0 0 0 1px rgba(15,23,42,0.85),
+        0 14px 36px rgba(8,47,73,0.95),
+        0 0 40px rgba(56,189,248,0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0, rgba(255,255,255,0.45), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: saturate(1.25);
+      box-shadow:
+        0 0 0 1px rgba(56,189,248,0.9),
+        0 18px 40px rgba(8,47,73,1),
+        0 0 70px rgba(56,189,248,1);
+    }
+
+    .btn-primary:hover::after {
+      opacity: 1;
+    }
+
+    /* secondary style for toolkit button */
+    .btn-secondary {
+      background: radial-gradient(circle at 0 0, #0ea5e9, #0369a1);
+      color: #e0f2fe;
+    }
+
+    /* ================================================
+       ORB — Glow Mode v10.3
+    ================================================= */
+    .hero-orb-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .orb-glow-ring {
+      position: absolute;
+      inset: -14%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 0, rgba(224,242,254,0.4), transparent 60%),
+        radial-gradient(circle at 80% 90%, rgba(56,189,248,0.55), transparent 65%);
+      opacity: 0.8;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
     #summon-orb {
+      position: relative;
       width: 210px;
       height: 210px;
       border-radius: 50%;
-      background: radial-gradient(circle at 25% 25%, #e0f2fe 0%, #38bdf8 40%, #0ea5e9 65%, #020617 100%);
+      border: 1px solid rgba(248,250,252,0.55);
+      background:
+        radial-gradient(circle at 25% 20%, #f9fafb 0%, #bae6fd 30%, #38bdf8 55%, #0f172a 100%);
       box-shadow:
-        0 0 45px rgba(56,189,248,0.6),
-        0 0 140px rgba(56,189,248,0.9);
+        0 0 45px rgba(56,189,248,0.7),
+        0 0 120px rgba(56,189,248,0.95);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.18s ease, filter 0.18s ease;
-      position: relative;
       overflow: hidden;
+      transition:
+        transform 0.18s ease,
+        filter 0.18s ease,
+        box-shadow 0.18s ease;
+      animation: orbPulseGlow 2.6s ease-in-out infinite;
+    }
+
+    #summon-orb::after {
+      content: "";
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      border: 1px solid rgba(248,250,252,0.6);
+      box-shadow: 0 0 35px rgba(248,250,252,0.9);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
     #summon-orb:hover {
-      transform: scale(1.06);
-      filter: brightness(1.18);
+      transform: translateY(-2px) scale(1.05);
+      filter: saturate(1.25);
+      box-shadow:
+        0 0 55px rgba(56,189,248,0.9),
+        0 0 160px rgba(56,189,248,1);
     }
 
     #summon-orb-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
       text-align: center;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
       color: #020617;
-      letter-spacing: 0.16em;
-      text-shadow: 0 0 10px rgba(255,255,255,0.85);
+      font-weight: 800;
+      text-shadow:
+        0 0 12px rgba(248,250,252,0.9),
+        0 0 28px rgba(14,165,233,0.95);
+      animation: labelGlow 2s ease-in-out infinite;
+    }
+
+    #summon-orb-label span {
+      display: block;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      opacity: 0.9;
+    }
+
+    @keyframes orbPulseGlow {
+      0% {
+        transform: scale(1);
+        box-shadow:
+          0 0 38px rgba(56,189,248,0.7),
+          0 0 100px rgba(56,189,248,0.8);
+      }
+      50% {
+        transform: scale(1.03);
+        box-shadow:
+          0 0 60px rgba(56,189,248,1),
+          0 0 150px rgba(56,189,248,1);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow:
+          0 0 38px rgba(56,189,248,0.7),
+          0 0 100px rgba(56,189,248,0.8);
+      }
+    }
+
+    @keyframes labelGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 10px rgba(248,250,252,0.9),
+          0 0 20px rgba(59,130,246,0.8);
+      }
+      50% {
+        text-shadow:
+          0 0 16px rgba(248,250,252,1),
+          0 0 30px rgba(56,189,248,1);
+      }
+    }
+
+    .orb-caption {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
     }
 
     /* ================================================
-       PORTAL BURST FX (v10.1)
+       PORTAL BURST FX (v10.2 Glow Burst)
     ================================================= */
     .portal-burst-flash {
       animation: burstFlash 0.45s ease-out;
@@ -170,7 +433,7 @@
 
     @keyframes burstFlash {
       0% { background: rgba(255,255,255,0); }
-      25% { background: rgba(255,255,255,0.45); }
+      20% { background: rgba(255,255,255,0.45); }
       100% { background: rgba(255,255,255,0); }
     }
 
@@ -180,90 +443,127 @@
       pointer-events: none;
       animation: burstRing 0.9s ease-out;
       z-index: 9998;
+      border-radius: 50%;
+      border: 2px solid rgba(56,189,248,1);
     }
 
     @keyframes burstRing {
       0% {
         transform: scale(0.2);
-        border: 2px solid rgba(56,189,248,1);
         opacity: 1;
       }
       100% {
-        transform: scale(3.8);
-        border: 1px solid rgba(56,189,248,0);
+        transform: scale(3.6);
         opacity: 0;
       }
     }
 
     /* ================================================
-       BUTTONS
-    ================================================= */
-    .btn-primary {
-      padding: 12px 18px;
-      border-radius: var(--pill);
-      background: radial-gradient(circle at 0 0, #e0f2fe, #38bdf8);
-      color: #020617;
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-      border: none;
-      letter-spacing: 0.12em;
-      transition: transform 0.15s;
-    }
-
-    .btn-primary:hover {
-      filter: brightness(1.15) saturate(1.2);
-      transform: translateY(-2px);
-    }
-
-    /* ================================================
-       TOOLKIT SECTIONS
+       TOOLKIT SECTION
     ================================================= */
     .section {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 32px 20px 40px;
     }
 
     .section-title {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--soft);
-      text-transform: uppercase;
       letter-spacing: 0.18em;
-      margin-bottom: 20px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
     }
 
     .grid {
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .card {
+      position: relative;
       background: var(--card);
       border-radius: var(--radius);
-      padding: 18px;
-      border: 1px solid rgba(56,189,248,0.25);
-      box-shadow: 0 12px 45px rgba(0,0,0,0.55);
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(56,189,248,0.3);
+      box-shadow: var(--shadow-deep);
+      overflow: hidden;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56,189,248,0.12), transparent 55%);
+      opacity: 0;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      transition: opacity 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56,189,248,0.75);
+      box-shadow:
+        0 18px 55px rgba(15,23,42,0.98),
+        0 0 40px rgba(56,189,248,0.6);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card h3 {
+      font-size: 1rem;
       margin-bottom: 6px;
     }
 
+    .card p {
+      font-size: 0.86rem;
+      color: var(--soft);
+      margin-bottom: 10px;
+    }
+
     /* ================================================
-       FOOTER
+       FOOTER (base, finalized in Part 4)
     ================================================= */
     footer {
       text-align: center;
-      padding: 30px 20px;
+      padding: 26px 20px 32px;
       font-size: 0.75rem;
       color: var(--muted);
       border-top: 1px solid rgba(56,189,248,0.25);
       margin-top: 30px;
+      background: linear-gradient(to top, rgba(2,6,23,0.96), transparent);
     }
 
+    @media (max-width: 640px) {
+      .hero {
+        padding-inline: 16px;
+      }
+      .section {
+        padding-inline: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -272,97 +572,97 @@
   <canvas id="ocean-canvas"></canvas>
 
   <!-- ============================= -->
-  <!--          HEADER              -->
+  <!-- HEADER                        -->
   <!-- ============================= -->
   <header>
     <div class="nav-inner">
       <div class="brand">
-        🌊 SideGuy Solutions
+        <div class="brand-pill"></div>
+        SideGuy Solutions
       </div>
-      <div style="font-size:0.8rem;color:var(--soft);letter-spacing:0.18em;">
-        v10.1 • GOD MODE+++
-      </div>
+      <div class="version-tag">v10.3 · GOD MODE · SD TRAFFIC BOOST</div>
     </div>
   </header>
 
   <!-- ============================= -->
-  <!--            HERO               -->
+  <!-- HERO SECTION                  -->
   <!-- ============================= -->
   <section class="hero">
 
-    <!-- LEFT SIDE: TEXT + CTAS -->
+    <!-- LEFT SIDE: TEXT + BUTTONS -->
     <div>
       <h1 class="hero-title">
-        Where <span>code meets the coastline</span>.
+        Where <span>San Diego</span> builds, codes, and scales.
       </h1>
 
       <p class="hero-sub">
-        Tap the ocean portal. Summon PJ.  
-        Build apps, fix systems, optimize tickets,  
-        get DFS edges, or spin up weird ideas — instantly handled.
+        Coastal concierge tech for the 2025 era — apps, AI automation,
+        Web3/Solana payments, ticketing flows, and DFS tools.
         <br><br>
-        Text or email anytime:<br>
-        <strong>773-544-1231</strong> · <strong>peter.z@kromeon.com</strong>
+        Tap the Ocean Portal or text/email directly:
       </p>
+
+      <div class="hero-contacts">
+        <strong>773-544-1231</strong> · <strong>peter.z@kromeon.com</strong>
+      </div>
 
       <div class="hero-ctas">
         <button id="summon-btn" class="btn-primary">
-          Tap to Summon PJ
+          TAP TO SUMMON PJ
         </button>
 
-        <button id="show-toolkit" class="btn-primary" style="background:#0ea5e9;color:white;">
-          Open Toolkit
+        <button id="show-toolkit" class="btn-primary btn-secondary">
+          OPEN TOOLKIT
         </button>
       </div>
     </div>
 
     <!-- RIGHT SIDE: ORB -->
-    <div style="display:flex;flex-direction:column;align-items:center;">
+    <div class="hero-orb-wrap">
+      <div class="orb-glow-ring"></div>
       <button id="summon-orb">
         <div id="summon-orb-label">
           TAP TO<br>SUMMON PJ
+          <span>Coastal Portal</span>
         </div>
       </button>
-      <div style="margin-top:10px;font-size:0.75rem;color:var(--soft);letter-spacing:0.18em;">
-        Portal Online
-      </div>
+      <div class="orb-caption">Portal Online</div>
     </div>
 
   </section>
 
   <!-- ============================= -->
-  <!--         TOOLKIT SECTION       -->
+  <!-- TOOLKIT SECTION               -->
   <!-- ============================= -->
-
   <section class="section" id="toolkit">
     <div class="section-title">SideGuy Toolkit</div>
 
     <div class="grid">
 
-      <!-- SOLANA SAVINGS -->
+      <!-- SOLANA CALC -->
       <div class="card">
-        <h3>Solana Processing Savings Calculator</h3>
-        <p>Estimate how much you save switching your payment flows to Solana rails.</p>
-        <button class="btn-primary" style="margin-top:10px;" onclick="openSavingsCalc()">
-          Open Calculator
+        <h3>Solana Processing Savings</h3>
+        <p>See how much you save running payments on Solana rails.</p>
+        <button class="btn-primary" onclick="openSavingsCalc()">
+          OPEN CALCULATOR
         </button>
       </div>
 
       <!-- DFS MULTIPLIER -->
       <div class="card">
-        <h3>DFS Promo Multiplier Tool</h3>
-        <p>Run 2-leg, 3-leg, and promo-boost stacks to find EV edges.</p>
+        <h3>DFS Promo Multiplier</h3>
+        <p>Find EV on 2-leg and boosted parlays instantly.</p>
         <button class="btn-primary" onclick="openDFS()">
-          Open DFS Tool
+          DFS TOOL
         </button>
       </div>
 
       <!-- TICKET OPTIMIZER -->
       <div class="card">
         <h3>Ticket Flow Optimizer</h3>
-        <p>Analyze fees, flows, checkout friction, and event capacity.</p>
+        <p>Analyze ticket fees, checkout flow, and profit drops.</p>
         <button class="btn-primary" onclick="openTickets()">
-          Optimize Tickets
+          OPTIMIZE
         </button>
       </div>
 
@@ -375,11 +675,11 @@
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(14px);
       display: none;
       align-items: center;
       justify-content: center;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(14px);
       z-index: 9999;
     }
 
@@ -389,12 +689,12 @@
       border-radius: 20px;
       width: min(90%, 440px);
       border: 1px solid rgba(56,189,248,0.4);
-      box-shadow: 0 0 50px rgba(56,189,248,0.4);
+      box-shadow: 0 0 50px rgba(56,189,248,0.5);
     }
 
     .modal h2 {
-      margin-bottom: 12px;
       font-size: 1.3rem;
+      margin-bottom: 12px;
     }
 
     .modal label {
@@ -419,21 +719,21 @@
       padding: 10px 14px;
       cursor: pointer;
       border: none;
-      margin-bottom: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
     }
 
     .close-btn {
       background: #ef4444;
-      color: white;
+      color: #fff;
       border-radius: var(--pill);
-      padding: 8px 14px;
-      margin-top: 8px;
+      padding: 9px 14px;
       cursor: pointer;
       border: none;
       font-weight: 700;
+      margin-top: 10px;
     }
 
     .result-box {
@@ -448,7 +748,6 @@
     }
   </style>
 
-
   <!-- ============================= -->
   <!--   SOLANA PROCESSING MODAL    -->
   <!-- ============================= -->
@@ -457,21 +756,18 @@
       <h2>Solana Processing Savings</h2>
 
       <label>Monthly Volume ($)</label>
-      <input id="solana-volume" type="number" placeholder="e.g. 50,000" />
+      <input id="solana-volume" type="number" placeholder="e.g. 25,000" />
 
-      <label>Current Processor Fee %</label>
+      <label>Your Current Fee %</label>
       <input id="solana-fee" type="number" step="0.01" placeholder="e.g. 2.9" />
 
-      <button class="calc-btn" onclick="runSolanaCalc()">
-        Calculate Savings
-      </button>
+      <button class="calc-btn" onclick="runSolanaCalc()">Calculate</button>
 
       <div id="solana-result" class="result-box"></div>
 
       <button class="close-btn" onclick="closeSolana()">Close</button>
     </div>
   </div>
-
 
   <!-- ============================= -->
   <!--     DFS MULTIPLIER MODAL      -->
@@ -480,7 +776,7 @@
     <div class="modal-content">
       <h2>DFS Promo Multiplier</h2>
 
-      <label>Leg 1 Odds (e.g. -110 or +120)</label>
+      <label>Leg 1 Odds (e.g. -110)</label>
       <input id="dfs-leg1" type="text" />
 
       <label>Leg 2 Odds</label>
@@ -489,16 +785,13 @@
       <label>Boost % (optional)</label>
       <input id="dfs-boost" type="number" placeholder="e.g. 20" />
 
-      <button class="calc-btn" onclick="runDFScalc()">
-        Calculate EV
-      </button>
+      <button class="calc-btn" onclick="runDFScalc()">Calculate EV</button>
 
       <div id="dfs-result" class="result-box"></div>
 
       <button class="close-btn" onclick="closeDFS()">Close</button>
     </div>
   </div>
-
 
   <!-- ============================= -->
   <!--     TICKET OPTIMIZER MODAL    -->
@@ -516,533 +809,13 @@
       <label>Venue Capacity</label>
       <input id="ticket-cap" type="number" />
 
-      <button class="calc-btn" onclick="runTicketCalc()">
-        Optimize Tickets
-      </button>
+      <button class="calc-btn" onclick="runTicketCalc()">Optimize</button>
 
       <div id="ticket-result" class="result-box"></div>
 
       <button class="close-btn" onclick="closeTickets()">Close</button>
     </div>
   </div>
-  <!-- ============================= -->
-  <!--        SCRIPTS + LOGIC        -->
-  <!-- ============================= -->
-
-  <!-- THREE.js CDN -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
-  <script>
-    // =========================
-    // DAY / NIGHT MOOD TINT
-    // =========================
-    (function setMoodTint() {
-      try {
-        const hour = new Date().getHours();
-        const root = document.documentElement;
-
-        if (hour >= 6 && hour < 18) {
-          // Daytime
-          root.style.setProperty("--bg", "#031223");
-          root.style.setProperty("--accent", "#38bdf8");
-        } else {
-          // Night
-          root.style.setProperty("--bg", "#010914");
-          root.style.setProperty("--accent", "#4cc9ff");
-        }
-      } catch (e) {
-        console.warn("Mood tint error:", e);
-      }
-    })();
-
-
-    // =========================
-    // CONTACT HELPERS
-    // =========================
-    function openContactPortal() {
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href =
-          "sms:+17735441231?&body=" +
-          encodeURIComponent(
-            "Hey PJ, just summoned the portal from SideGuy Solutions. Let's build something."
-          );
-      } else {
-        window.location.href =
-          "mailto:peter.z@kromeon.com" +
-          "?subject=" +
-          encodeURIComponent("Summon PJ · SideGuy Solutions") +
-          "&body=" +
-          encodeURIComponent(
-            "Hey PJ,\n\nI just tapped the coastal portal.\n\nHere’s what I’m trying to do:\n- Tech build / app / site\n- Tickets / events\n- DFS edges\n- Solana / crypto payments\n- Something else entirely\n\nDrop me a line back and let’s spin this up.\n\n— Sent from the SideGuy portal 🌊"
-          );
-      }
-    }
-
-    // PORTAL BURST CINEMATIC
-    function triggerPortal() {
-      // Flash
-      document.body.classList.add("portal-burst-flash");
-      setTimeout(() => document.body.classList.remove("portal-burst-flash"), 500);
-
-      // Expanding ring
-      const ring = document.createElement("div");
-      ring.classList.add("portal-burst-ring");
-      document.body.appendChild(ring);
-      setTimeout(() => ring.remove(), 900);
-
-      // After effect → contact
-      setTimeout(openContactPortal, 480);
-    }
-
-
-    // =========================
-    // TOOLKIT MODALS OPEN/CLOSE
-    // =========================
-    function openSavingsCalc() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "flex";
-    }
-    function closeSolana() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "none";
-    }
-
-    function openDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "flex";
-    }
-    function closeDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "none";
-    }
-
-    function openTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "flex";
-    }
-    function closeTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "none";
-    }
-
-
-    // =========================
-    // SOLANA SAVINGS CALCULATOR
-    // =========================
-    function runSolanaCalc() {
-      const volEl = document.getElementById("solana-volume");
-      const feeEl = document.getElementById("solana-fee");
-      const outEl = document.getElementById("solana-result");
-      if (!volEl || !feeEl || !outEl) return;
-
-      const vol = parseFloat(volEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-
-      outEl.style.display = "block";
-
-      if (!vol || !feePct) {
-        outEl.textContent =
-          "Add both volume and your current fee % to see the savings.";
-        return;
-      }
-
-      const currentRate = feePct / 100;
-      const solanaRate = 0.003; // 0.3% example
-
-      if (currentRate <= solanaRate) {
-        outEl.textContent =
-          "You’re already near Solana-level fees. DM PJ if you want to layer yield or auto-pay flows on top.";
-        return;
-      }
-
-      const currentMonthlyFees = vol * currentRate;
-      const solanaMonthlyFees = vol * solanaRate;
-      const monthlySavings = currentMonthlyFees - solanaMonthlyFees;
-      const yearlySavings = monthlySavings * 12;
-
-      outEl.innerHTML =
-        "At $" +
-        vol.toLocaleString() +
-        " in monthly volume and " +
-        feePct.toFixed(2) +
-        "% fees, you’re paying about <strong>$" +
-        currentMonthlyFees.toFixed(0) +
-        "/month</strong> in fees.<br><br>" +
-        "Routing through Solana rails (~0.3%) would drop that to about <strong>$" +
-        solanaMonthlyFees.toFixed(0) +
-        "/month</strong>, saving roughly <strong>$" +
-        monthlySavings.toFixed(0) +
-        "/month</strong> — or about <strong>$" +
-        yearlySavings.toFixed(0) +
-        "/year</strong>.<br><br>" +
-        "Tap the portal and PJ can map this into a real flow (stablecoins, on/off ramps, and reporting that doesn’t suck).";
-    }
-
-
-    // =========================
-    // DFS PROMO MULTIPLIER
-    // =========================
-    function americanToDecimal(oddsStr) {
-      const odds = parseFloat(oddsStr);
-      if (!odds) return null;
-      if (odds > 0) return odds / 100 + 1;
-      return 100 / Math.abs(odds) + 1;
-    }
-
-    function runDFScalc() {
-      const leg1El = document.getElementById("dfs-leg1");
-      const leg2El = document.getElementById("dfs-leg2");
-      const boostEl = document.getElementById("dfs-boost");
-      const outEl = document.getElementById("dfs-result");
-      if (!leg1El || !leg2El || !outEl) return;
-
-      const leg1 = americanToDecimal(leg1El.value);
-      const leg2 = americanToDecimal(leg2El.value);
-      const boostPct = parseFloat(boostEl.value || "0");
-
-      outEl.style.display = "block";
-
-      if (!leg1 || !leg2) {
-        outEl.textContent = "Use standard American odds (like -110, +120).";
-        return;
-      }
-
-      const comboDec = leg1 * leg2;
-      const comboDecBoosted = comboDec * (1 + boostPct / 100);
-
-      function decToAmerican(dec) {
-        if (dec <= 1) return 0;
-        const imp = dec - 1;
-        if (imp >= 1) {
-          return "+" + Math.round(imp * 100);
-        } else {
-          return "-" + Math.round(100 / imp);
-        }
-      }
-
-      const comboAm = decToAmerican(comboDec);
-      const comboBoostAm = decToAmerican(comboDecBoosted);
-
-      outEl.innerHTML =
-        "Raw 2-leg combo is about <strong>" +
-        comboDec.toFixed(2) +
-        "x</strong> (≈ " +
-        comboAm +
-        ").<br>" +
-        "With a <strong>" +
-        (boostPct || 0).toFixed(0) +
-        "% boost</strong>, it jumps to ~<strong>" +
-        comboDecBoosted.toFixed(2) +
-        "x</strong> (≈ " +
-        comboBoostAm +
-        ").<br><br>" +
-        "Next layer is promos, risk size, and slate selection — that’s what PJ helps you systemize so it feels like a calm side business, not chaos.";
-    }
-
-
-    // =========================
-    // TICKET FLOW OPTIMIZER
-    // =========================
-    function runTicketCalc() {
-      const priceEl = document.getElementById("ticket-price");
-      const feeEl = document.getElementById("ticket-fee");
-      const capEl = document.getElementById("ticket-cap");
-      const outEl = document.getElementById("ticket-result");
-      if (!priceEl || !feeEl || !capEl || !outEl) return;
-
-      const price = parseFloat(priceEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      const cap = parseInt(capEl.value || "0", 10);
-
-      outEl.style.display = "block";
-
-      if (!price || !feePct || !cap) {
-        outEl.textContent =
-          "Add price, fee %, and capacity to see how the room pencils out.";
-        return;
-      }
-
-      const feePerTicket = price * (feePct / 100);
-      const grossPerTicket = price + feePerTicket;
-      const grossIfFull = cap * grossPerTicket;
-      const totalFees = cap * feePerTicket;
-
-      const feePctBetter = Math.max(feePct - 2, 0); // example: 2% shaved
-      const newFeePerTicket = price * (feePctBetter / 100);
-      const newTotalFees = cap * newFeePerTicket;
-      const savings = totalFees - newTotalFees;
-
-      outEl.innerHTML =
-        "At $" +
-        price.toFixed(2) +
-        " + " +
-        feePct.toFixed(1) +
-        "% fees, full capacity (" +
-        cap +
-        " tickets) means roughly <strong>$" +
-        totalFees.toFixed(0) +
-        "</strong> in platform fees and about <strong>$" +
-        grossIfFull.toFixed(0) +
-        "</strong> gross volume.<br><br>" +
-        "If you shaved ~2% off fees with a better flow, that’s around <strong>$" +
-        savings.toFixed(0) +
-        "</strong> that could stay with the room, talent, or bar instead of a random platform.<br><br>" +
-        "PJ’s lane is designing that checkout and routing more of the value back to North County.";
-    }
-
-
-    // =========================
-    // THREE.JS OCEAN (SAFE)
-    // =========================
-    let uniforms; // global for reactive waves
-
-    (function initOceanSafe() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) {
-        console.warn("Three.js or canvas missing — using static background.");
-        return;
-      }
-
-      try {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-          55,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          100
-        );
-        camera.position.set(0, 6, 10);
-        camera.lookAt(0, 0, 0);
-
-        const renderer = new THREE.WebGLRenderer({
-          canvas: canvas,
-          antialias: true
-        });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x020617, 1);
-
-        const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
-        geometry.rotateX(-Math.PI / 2);
-
-        uniforms = {
-          uTime: { value: 0 },
-          uWaveAmp: { value: 1.0 }
-        };
-
-        const vertexShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-          uniform float uWaveAmp;
-
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
-
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-            float t = uTime * 0.6;
-
-            float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
-            float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
-            float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
-
-            float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
-            float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
-            float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
-
-            float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
-            height *= uWaveAmp;
-
-            pos.y += height;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `;
-
-        const fragmentShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
-
-          void main() {
-            float t = uTime * 0.05;
-            float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
-            float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
-            float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
-
-            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
-
-            vec3 deep = vec3(0.0, 0.06, 0.18);
-            vec3 mid = vec3(0.0, 0.3, 0.56);
-            vec3 surf = vec3(0.74, 0.96, 1.0);
-
-            vec3 col = mix(deep, mid, depth);
-            col = mix(col, surf, pow(1.0 - depth, 3.2));
-
-            float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-            col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
-
-            float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
-            float rays = smoothstep(0.72, 1.0, rayPattern);
-            col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
-
-            float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
-            col += shimmer * 0.09;
-
-            float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
-            caustic = smoothstep(0.65, 1.0, caustic);
-            col += caustic * 0.07;
-
-            float spark = smoothstep(0.92, 1.0, nFine);
-            col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
-
-            vec2 center = vUv - 0.5;
-            float dist = length(center);
-            float vignette = smoothstep(0.8, 0.25, dist);
-            col *= mix(0.72, 1.22, vignette);
-
-            gl_FragColor = vec4(col, 1.0);
-          }
-        `;
-
-        const material = new THREE.ShaderMaterial({
-          uniforms: uniforms,
-          vertexShader: vertexShader,
-          fragmentShader: fragmentShader,
-          side: THREE.DoubleSide
-        });
-
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-
-        const fogColor = new THREE.Color(0x000818);
-        scene.fog = new THREE.Fog(fogColor, 12, 45);
-        renderer.setClearColor(fogColor, 1);
-
-        const clock = new THREE.Clock();
-        function animate() {
-          requestAnimationFrame(animate);
-          const elapsed = clock.getElapsedTime();
-          uniforms.uTime.value = elapsed;
-
-          const sway = Math.sin(elapsed * 0.18) * 0.4;
-          camera.position.x = sway;
-          camera.lookAt(0, 0, 0);
-
-          renderer.render(scene, camera);
-        }
-
-        window.addEventListener("resize", function () {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        animate();
-      } catch (e) {
-        console.warn("Ocean init failed, falling back:", e);
-      }
-    })();
-
-
-    // =========================
-    // REACTIVE OCEAN (MOUSE/TOUCH)
-    // =========================
-    let waveBoostTimeout;
-    window.addEventListener("mousemove", () => {
-      if (uniforms && uniforms.uWaveAmp) {
-        uniforms.uWaveAmp.value = 1.55;
-        clearTimeout(waveBoostTimeout);
-        waveBoostTimeout = setTimeout(() => {
-          uniforms.uWaveAmp.value = 1.0;
-        }, 1000);
-      }
-    });
-
-    window.addEventListener("touchstart", () => {
-      if (uniforms && uniforms.uWaveAmp) {
-        uniforms.uWaveAmp.value = 1.75;
-        clearTimeout(waveBoostTimeout);
-        waveBoostTimeout = setTimeout(() => {
-          uniforms.uWaveAmp.value = 1.0;
-        }, 1100);
-      }
-    });
-
-
-    // =========================
-    // DOM WIRING
-    // =========================
-    document.addEventListener("DOMContentLoaded", function () {
-      const summonBtn = document.getElementById("summon-btn");
-      const orb = document.getElementById("summon-orb");
-      const toolkitBtn = document.getElementById("show-toolkit");
-
-      if (summonBtn) {
-        summonBtn.addEventListener("click", triggerPortal);
-      }
-      if (orb) {
-        orb.addEventListener("click", triggerPortal);
-      }
-      if (toolkitBtn) {
-        toolkitBtn.addEventListener("click", function () {
-          const tk = document.getElementById("toolkit");
-          if (tk) tk.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
-
-      // Click outside modal to close
-      ["modal-solana", "modal-dfs", "modal-tickets"].forEach(function (id) {
-        const m = document.getElementById(id);
-        if (!m) return;
-        m.addEventListener("click", function (e) {
-          if (e.target === m) {
-            m.style.display = "none";
-          }
-        });
-      });
-    });
-  </script>
-
-  <!-- ============================= -->
-  <!--            FOOTER             -->
-  <!-- ============================= -->
-  <footer>
-    SideGuy Solutions · Solana Beach → Encinitas · Tap the portal if you know what’s good for you.
-  </footer>
-</body>
-</html>
   <!-- ============================= -->
   <!--        SCRIPTS + LOGIC        -->
   <!-- ============================= -->
