@@ -234,12 +234,40 @@
       line-height: 1.04;
       margin-bottom: 12px;
       text-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+      position: relative;
     }
 
     .hero-title span {
-      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
+      background: linear-gradient(
+        90deg,
+        #e0f2fe,
+        #38bdf8,
+        #a5f3fc,
+        #38bdf8,
+        #e0f2fe
+      );
       -webkit-background-clip: text;
       color: transparent;
+      background-size: 220% 100%;
+      animation: heroGradient 10s ease-in-out infinite;
+    }
+
+    @keyframes heroGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 34%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(56,189,248,0.0), rgba(56,189,248,0.85), rgba(56,189,248,0.0));
+      opacity: 0.6;
+      filter: blur(0.5px);
     }
 
     .hero-sub {
@@ -369,9 +397,16 @@
       background:
         radial-gradient(circle at 50% 0, rgba(224, 242, 254, 0.4), transparent 60%),
         radial-gradient(circle at 80% 90%, rgba(56, 189, 248, 0.55), transparent 65%);
-      opacity: 0.8;
+      opacity: 0.9;
       mix-blend-mode: screen;
       pointer-events: none;
+      animation: orbAuraPulse 9s ease-in-out infinite;
+    }
+
+    @keyframes orbAuraPulse {
+      0% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.06); }
+      100% { opacity: 0.7; transform: scale(1); }
     }
 
     #summon-orb {
@@ -456,6 +491,7 @@
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.18em;
+      animation: orbCaptionPulse 6s ease-in-out infinite;
     }
 
     @keyframes labelGlow {
@@ -469,6 +505,11 @@
           0 0 16px rgba(248, 250, 252, 1),
           0 0 30px rgba(56, 189, 248, 1);
       }
+    }
+
+    @keyframes orbCaptionPulse {
+      0%, 100% { opacity: 0.7; letter-spacing: 0.18em; }
+      50% { opacity: 1; letter-spacing: 0.22em; }
     }
 
     /* PORTAL FX */
@@ -625,7 +666,8 @@
       color: var(--muted);
     }
 
-    /* INTAKE + BLOG + FOOTER + MODALS */
+    /* INTAKE / BLOG / DOWNLOADS / FOOTER / MODALS */
+
     .intake-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
@@ -699,6 +741,38 @@
       font-size: 0.72rem;
       color: var(--muted);
       margin-bottom: 6px;
+    }
+
+    .downloads-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 880px) {
+      .downloads-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .download-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      font-size: 0.72rem;
+      color: #e0f2fe;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .download-pill span {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--soft);
     }
 
     footer {
@@ -816,9 +890,10 @@
           <a href="#tickets">Tickets</a>
           <a href="#dfs">DFS</a>
           <a href="#intake">Intake</a>
+          <a href="#downloads">Downloads</a>
           <a href="#blog">Blog</a>
         </nav>
-        <div class="version-tag">v14.2 · ALADEEN OCEAN · SAN DIEGO</div>
+        <div class="version-tag">v15.0 · ALADEEN OCEAN EXPERIENCE · SAN DIEGO</div>
       </div>
     </div>
   </header>
@@ -1118,6 +1193,47 @@
     </div>
   </section>
 
+  <!-- DOWNLOADS / LEAD MAGNETS -->
+  <section class="section" id="downloads">
+    <div class="section-title">SideGuy Downloads · Lead Magnets</div>
+    <p class="section-lead">
+      A few free flows and templates PJ uses in the wild — built for San Diego operators,
+      venues, and founders who want less chaos and more signal.
+    </p>
+    <div class="downloads-grid">
+      <div class="card">
+        <h3>2025 San Diego Tech Flow Guide</h3>
+        <p class="card-small">
+          Short playbook on how local businesses can stitch together apps, AI, and payments
+          without hiring a full in-house team.
+        </p>
+        <div class="download-pill">
+          <strong>PDF</strong><span>Coming soon · Ask PJ</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>DFS Promo Ladder Template</h3>
+        <p class="card-small">
+          A calm, spreadsheet-friendly way to structure promos, boosts, and withdrawals
+          so it feels like a system, not a roulette wheel.
+        </p>
+        <div class="download-pill">
+          <strong>Template</strong><span>Educational use only</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Solana Processing Savings One-Pager</h3>
+        <p class="card-small">
+          A one-page breakdown of traditional card fees vs. Solana rails, tuned for San Diego agencies,
+          venues, and dev shops.
+        </p>
+        <div class="download-pill">
+          <strong>PDF</strong><span>Ask PJ for a copy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- BLOG -->
   <section class="section" id="blog">
     <div class="section-title">Blog · Experiments · Coastal Dispatches</div>
@@ -1199,527 +1315,392 @@
     </div>
   </div>
 
-  <!-- THREE.JS CDN -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
-  <script>
-    // Day / night background tint
-    (function setDayNight() {
-      try {
-        const hour = new Date().getHours();
-        const root = document.documentElement;
-        if (hour >= 6 && hour < 18) {
-          root.style.setProperty("--bg", "var(--bg-day)");
-          root.style.setProperty("--accent", "#38bdf8");
-        } else {
-          root.style.setProperty("--bg", "var(--bg-night)");
-          root.style.setProperty("--accent", "var(--accent-night)");
-        }
-      } catch (err) {
-        console.warn("Day/night tint issue:", err);
-      }
-    })();
-
-    // CONTACT PORTAL
-    function openContactPortal() {
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href =
-          "sms:+17735441231?&body=" +
-          encodeURIComponent(
-            "Hey PJ, I just summoned the coastal portal from SideGuySolutions.com — let’s build something."
-          );
-      } else {
-        const subject = encodeURIComponent("Summon PJ · SideGuy Solutions (San Diego)");
-        const body = encodeURIComponent(
-          "Hey PJ,\n\n" +
-          "I just tapped the coastal portal on SideGuySolutions.com.\n\n" +
-          "Here’s what I’m looking at:\n" +
-          "- Tech build / app / site\n" +
-          "- Tickets / live events\n" +
-          "- DFS promos / systems\n" +
-          "- Solana / crypto payments\n" +
-          "- AI automation\n" +
-          "- Something else entirely\n\n" +
-          "Reply when you’re free and let’s spin this up.\n\n" +
-          "— Sent from the coastal portal 🌊"
-        );
-        const mailto = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-        window.location.href = mailto;
-      }
-    }
-
-    function triggerPortal() {
-      document.body.classList.add("portal-burst-flash");
-      setTimeout(() => {
-        document.body.classList.remove("portal-burst-flash");
-      }, 450);
-
-      const ring = document.createElement("div");
-      ring.className = "portal-burst-ring";
-      document.body.appendChild(ring);
-      setTimeout(() => {
-        ring.remove();
-      }, 900);
-
-      setTimeout(openContactPortal, 480);
-    }
-
-    function scrollToIntake(prefillLane) {
-      const select = document.getElementById("intake-type");
-      if (select && prefillLane) {
-        [...select.options].forEach((opt) => {
-          if (opt.value === prefillLane) select.value = opt.value;
-        });
-      }
-      const el = document.getElementById("intake");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-
-    // TOOL MODALS
-    function openSavingsCalc() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "flex";
-    }
-    function closeSolana() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "none";
-    }
-    function openDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "flex";
-    }
-    function closeDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "none";
-    }
-    function openTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "flex";
-    }
-    function closeTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "none";
-    }
-
-    function runSolanaCalc() {
-      const volEl = document.getElementById("solana-volume");
-      const feeEl = document.getElementById("solana-fee");
-      const outEl = document.getElementById("solana-result");
-      if (!volEl || !feeEl || !outEl) return;
-
-      const vol = parseFloat(volEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      outEl.style.display = "block";
-
-      if (!vol || !feePct) {
-        outEl.textContent = "Add both your monthly volume and current fee % to see the savings.";
-        return;
-      }
-
-      const currentRate = feePct / 100;
-      const solanaRate = 0.003;
-
-      const currentMonthlyFees = vol * currentRate;
-      const solanaMonthlyFees = vol * solanaRate;
-      const monthlySavings = currentMonthlyFees - solanaMonthlyFees;
-      const yearlySavings = monthlySavings * 12;
-
-      outEl.innerHTML =
-        "At $" +
-        vol.toLocaleString() +
-        " in monthly volume and " +
-        feePct.toFixed(2) +
-        "% fees, you’re paying about <strong>$" +
-        currentMonthlyFees.toFixed(0) +
-        "/month</strong> in fees.<br><br>" +
-        "Routing through Solana rails (~0.3%) drops that to roughly <strong>$" +
-        solanaMonthlyFees.toFixed(0) +
-        "/month</strong>, saving about <strong>$" +
-        monthlySavings.toFixed(0) +
-        "/month</strong> — or around <strong>$" +
-        yearlySavings.toFixed(0) +
-        "/year</strong>.<br><br>" +
-        "Tap the portal and PJ can map this into a real San Diego-friendly flow.";
-    }
-
-    function americanToDecimal(oddsStr) {
-      const cleaned = (oddsStr || "").toString().trim().replace(/[^\d+-]/g, "");
-      const odds = parseFloat(cleaned);
-      if (!odds || odds === 0) return null;
-      if (odds > 0) return odds / 100 + 1;
-      return 100 / Math.abs(odds) + 1;
-    }
-
-    function runDFScalc() {
-      const leg1El = document.getElementById("dfs-leg1");
-      const leg2El = document.getElementById("dfs-leg2");
-      const boostEl = document.getElementById("dfs-boost");
-      const outEl = document.getElementById("dfs-result");
-      if (!leg1El || !leg2El || !outEl) return;
-
-      const leg1 = americanToDecimal(leg1El.value);
-      const leg2 = americanToDecimal(leg2El.value);
-      const boostPct = parseFloat(boostEl.value || "0");
-
-      outEl.style.display = "block";
-
-      if (!leg1 || !leg2) {
-        outEl.textContent = "Use American odds like -110 or +120 for each leg.";
-        return;
-      }
-
-      const comboDec = leg1 * leg2;
-      const boostedDec = comboDec * (1 + boostPct / 100);
-
-      function decToAmerican(dec) {
-        if (dec <= 1) return 0;
-        const imp = dec - 1;
-        if (imp >= 1) {
-          return "+" + Math.round(imp * 100);
-        } else {
-          return "-" + Math.round(100 / imp);
-        }
-      }
-
-      const comboAm = decToAmerican(comboDec);
-      const comboBoostAm = decToAmerican(boostedDec);
-
-      outEl.innerHTML =
-        "Raw 2-leg combo ≈ <strong>" +
-        comboDec.toFixed(2) +
-        "x</strong> (about " +
-        comboAm +
-        ").<br>" +
-        "With a <strong>" +
-        (boostPct || 0).toFixed(0) +
-        "% boost</strong>, you’re around <strong>" +
-        boostedDec.toFixed(2) +
-        "x</strong> (≈ " +
-        comboBoostAm +
-        ").<br><br>" +
-        "Next step is stake sizing, promo sequencing, and slate selection — PJ helps turn it into a calm system, not chaos.";
-    }
-
-    function runTicketCalc() {
-      const priceEl = document.getElementById("ticket-price");
-      const feeEl = document.getElementById("ticket-fee");
-      const capEl = document.getElementById("ticket-cap");
-      const outEl = document.getElementById("ticket-result");
-      if (!priceEl || !feeEl || !capEl || !outEl) return;
-
-      const price = parseFloat(priceEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      const cap = parseInt(capEl.value || "0", 10);
-
-      outEl.style.display = "block";
-
-      if (!price || !feePct || !cap) {
-        outEl.textContent =
-          "Add price, platform fee %, and venue capacity to see how the room pencils out.";
-        return;
-      }
-
-      const feePerTicket = price * (feePct / 100);
-      const totalFees = cap * feePerTicket;
-      const grossPerTicket = price + feePerTicket;
-      const grossIfFull = cap * grossPerTicket;
-
-      const improvedFeePct = Math.max(feePct - 2, 0);
-      const newFeePerTicket = price * (improvedFeePct / 100);
-      const newTotalFees = cap * newFeePerTicket;
-      const savings = totalFees - newTotalFees;
-
-      outEl.innerHTML =
-        "Full room at $" +
-        price.toFixed(2) +
-        " + " +
-        feePct.toFixed(1) +
-        "% fees (" +
-        cap +
-        " tickets) means roughly <strong>$" +
-        totalFees.toFixed(0) +
-        "</strong> in platform fees and about <strong>$" +
-        grossIfFull.toFixed(0) +
-        "</strong> in gross volume.<br><br>" +
-        "If you shave ~2% off fees with a cleaner SideGuy flow, that’s around <strong>$" +
-        savings.toFixed(0) +
-        "</strong> that could stay with the venue, talent, or bar — not the platform.<br><br>" +
-        "That’s the North County ticketing experiment PJ wants to build with you.";
-    }
-
-    // OCEAN (Aladeen-mode style, but robust)
-    let oceanUniforms = null;
-
-    function initOceanSafe() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) {
-        console.warn("Three.js or canvas missing — static gradient only.");
-        return;
-      }
-
-      try {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-          55,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          100
-        );
-        camera.position.set(0, 6, 10);
-        camera.lookAt(0, 0, 0);
-
-        const renderer = new THREE.WebGLRenderer({
-          canvas,
-          antialias: true
-        });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x020617, 1);
-
-        const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
-        geometry.rotateX(-Math.PI / 2);
-
-        oceanUniforms = {
-          uTime: { value: 0 },
-          uWaveAmp: { value: 1.0 }
-        };
-
-        const vertexShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-          uniform float uWaveAmp;
-
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
-
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-            float t = uTime * 0.6;
-
-            float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
-            float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
-            float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
-
-            float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
-            float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
-            float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
-
-            float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
-            height *= uWaveAmp;
-
-            pos.y += height;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `;
-
-        const fragmentShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
-
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
-
-          void main() {
-            float t = uTime * 0.05;
-            float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
-            float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
-            float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
-
-            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
-
-            vec3 deep = vec3(0.0, 0.06, 0.18);
-            vec3 mid = vec3(0.0, 0.3, 0.56);
-            vec3 surf = vec3(0.74, 0.96, 1.0);
-
-            vec3 col = mix(deep, mid, depth);
-            col = mix(col, surf, pow(1.0 - depth, 3.2));
-
-            float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-            col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
-
-            float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
-            float rays = smoothstep(0.72, 1.0, rayPattern);
-            col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
-
-            float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
-            col += shimmer * 0.09;
-
-            float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
-            caustic = smoothstep(0.65, 1.0, caustic);
-            col += caustic * 0.07;
-
-            float spark = smoothstep(0.92, 1.0, nFine);
-            col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
-
-            vec2 center = vUv - 0.5;
-            float dist = length(center);
-            float vignette = smoothstep(0.8, 0.25, dist);
-            col *= mix(0.72, 1.22, vignette);
-
-            gl_FragColor = vec4(col, 1.0);
-          }
-        `;
-
-        const material = new THREE.ShaderMaterial({
-          uniforms: oceanUniforms,
-          vertexShader,
-          fragmentShader,
-          side: THREE.DoubleSide
-        });
-
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-
-        const fogColor = new THREE.Color(0x000818);
-        scene.fog = new THREE.Fog(fogColor, 12, 45);
-        renderer.setClearColor(fogColor, 1);
-
-        const clock = new THREE.Clock();
-
-        function animate() {
-          requestAnimationFrame(animate);
-          const elapsed = clock.getElapsedTime();
-          oceanUniforms.uTime.value = elapsed;
-
-          const sway = Math.sin(elapsed * 0.18) * 0.4;
-          camera.position.x = sway;
-          camera.lookAt(0, 0, 0);
-
-          renderer.render(scene, camera);
-        }
-
-        window.addEventListener("resize", function () {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        animate();
-      } catch (err) {
-        console.warn("Ocean init failed, staying on gradient:", err);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const summonBtn = document.getElementById("summon-btn");
-      const orb = document.getElementById("summon-orb");
-      const toolkitBtn = document.getElementById("show-toolkit");
-      const intakeForm = document.getElementById("intake-form");
-
-      if (summonBtn) {
-        summonBtn.addEventListener("click", function () {
-          triggerPortal();
-        });
-      }
-
-      if (orb) {
-        orb.addEventListener("click", function () {
-          triggerPortal();
-        });
-      }
-
-      if (toolkitBtn) {
-        toolkitBtn.addEventListener("click", function () {
-          const tk = document.getElementById("toolkit");
-          if (tk) tk.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
-
-      const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
-      navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-          const targetId = this.getAttribute("href");
-          if (!targetId || !targetId.startsWith("#")) return;
-          e.preventDefault();
-          const target = document.querySelector(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-      });
-
-      if (intakeForm) {
-        intakeForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const name = (document.getElementById("intake-name") || {}).value || "";
-          const email = (document.getElementById("intake-email") || {}).value || "";
-          const biz = (document.getElementById("intake-biz") || {}).value || "";
-          const type = (document.getElementById("intake-type") || {}).value || "Project";
-          const budget = (document.getElementById("intake-budget") || {}).value || "";
-          const notes = (document.getElementById("intake-notes") || {}).value || "";
-
-          const subject = encodeURIComponent("New Project Intake · " + type);
-          const bodyLines = [
-            "Hey PJ,",
-            "",
-            "You’ve got a new intake from SideGuySolutions.com:",
-            "",
-            "Name: " + name,
-            "Email: " + email,
-            "Business / Project: " + biz,
-            "Lane: " + type,
-            "Budget: " + budget,
-            "",
-            "Notes:",
-            notes,
-            "",
-            "Sent from the v14.2 Aladeen Ocean portal 🌊"
-          ];
-          const body = encodeURIComponent(bodyLines.join("\n"));
-          const mailto = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-
-          window.location.href = mailto;
-        });
-      }
-
-      ["modal-solana", "modal-dfs", "modal-tickets"].forEach((id) => {
-        const m = document.getElementById(id);
-        if (!m) return;
-        m.addEventListener("click", function (e) {
-          if (e.target === m) {
-            m.style.display = "none";
-          }
-        });
-      });
-
-      initOceanSafe();
-    });
-  </script>
-
+  <!-- FOOTER -->
   <footer>
-    SideGuy Solutions · San Diego &amp; North County · v14.2 Aladeen Ocean · Tap the portal if you know what’s good for you.
+    SideGuy Solutions · San Diego &amp; North County · v15.0 Aladeen Ocean Experience · Tap the portal if you know what’s good for you.
   </footer>
+
+  <!-- JS + OCEAN SHADER WILL BE ADDED IN PART 2 -->
+<!-- =============================================== -->
+<!-- ==========  V15 ALADDEEN OCEAN JS   =========== -->
+<!-- =============================================== -->
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
+
+let scene, camera, renderer, oceanMesh, clock;
+let uniforms;
+
+initOceanSafe();
+
+function initOceanSafe() {
+  try {
+    initOcean();
+  } catch (err) {
+    console.error("Ocean shader failed:", err);
+    fallbackOcean();
+  }
+}
+
+function initOcean() {
+  clock = new THREE.Clock();
+
+  // Scene
+  scene = new THREE.Scene();
+
+  // Camera
+  camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    200
+  );
+  camera.position.set(0, 2.2, 3.4);
+
+  // Renderer
+  renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById("ocean-canvas"),
+    antialias: true,
+  });
+  renderer.setPixelRatio(Math.min(1.6, window.devicePixelRatio));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Shader uniforms
+  uniforms = {
+    uTime: { value: 0 },
+
+    // Big waves
+    uBigWaveElevation: { value: 0.42 },
+    uBigWaveFrequency: { value: new THREE.Vector2(0.28, 0.38) },
+    uBigWaveSpeed: { value: 0.13 },
+
+    // Small waves
+    uSmallWaveElevation: { value: 0.22 },
+    uSmallWaveFrequency: { value: 2.6 },
+    uSmallWaveSpeed: { value: 0.22 },
+
+    // Colors
+    uDepthColor: { value: new THREE.Color("#001020") },
+    uSurfaceColor: { value: new THREE.Color("#38bdf8") },
+    uHighlightColor: { value: new THREE.Color("#5ee7ff") },
+
+    uColorOffset: { value: 0.08 },
+    uColorMultiplier: { value: 2.4 },
+
+    // Fresnel
+    uFresnelPower: { value: 3.6 },
+    uFresnelIntensity: { value: 1.3 },
+    uFresnelBias: { value: 0.18 },
+  };
+
+  const geometry = new THREE.PlaneGeometry(16, 16, 512, 512);
+
+  const material = new THREE.ShaderMaterial({
+    vertexShader: `
+      uniform float uTime;
+      uniform float uBigWaveElevation;
+      uniform vec2 uBigWaveFrequency;
+      uniform float uBigWaveSpeed;
+
+      uniform float uSmallWaveElevation;
+      uniform float uSmallWaveFrequency;
+      uniform float uSmallWaveSpeed;
+
+      varying float vElevation;
+      varying vec2 vUv;
+
+      float wave(vec2 p, float freq, float speed, float amp) {
+        return sin(p.x * freq + uTime * speed)
+             * sin(p.y * freq + uTime * speed)
+             * amp;
+      }
+
+      void main() {
+        vUv = uv;
+        vec3 p = position;
+
+        float big =
+          sin(p.x * uBigWaveFrequency.x + uTime * uBigWaveSpeed) *
+          sin(p.y * uBigWaveFrequency.y + uTime * uBigWaveSpeed) *
+          uBigWaveElevation;
+
+        float small = wave(p.xz, uSmallWaveFrequency, uSmallWaveSpeed, uSmallWaveElevation);
+
+        vElevation = big + small;
+        p.z += vElevation;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying float vElevation;
+      varying vec2 vUv;
+
+      uniform vec3 uDepthColor;
+      uniform vec3 uSurfaceColor;
+      uniform vec3 uHighlightColor;
+
+      uniform float uColorOffset;
+      uniform float uColorMultiplier;
+      uniform float uFresnelPower;
+      uniform float uFresnelIntensity;
+      uniform float uFresnelBias;
+
+      void main() {
+        float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;
+        vec3 water = mix(uDepthColor, uSurfaceColor, mixStrength);
+
+        float fres =
+          pow(1.0 - vUv.y, uFresnelPower) * uFresnelIntensity + uFresnelBias;
+
+        vec3 highlight = uHighlightColor * fres;
+
+        gl_FragColor = vec4(water + highlight, 1.0);
+      }
+    `,
+    uniforms,
+    side: THREE.DoubleSide,
+  });
+
+  oceanMesh = new THREE.Mesh(geometry, material);
+  oceanMesh.rotation.x = -Math.PI / 2;
+  scene.add(oceanMesh);
+
+  renderer.setClearColor("#020617");
+  animate();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  const t = clock.getElapsedTime();
+  uniforms.uTime.value = t;
+
+  // Soft camera drift
+  camera.position.x = Math.sin(t * 0.12) * 0.25;
+  camera.position.z = 3.4 + Math.sin(t * 0.08) * 0.15;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+
+function fallbackOcean() {
+  document.getElementById("ocean-canvas").style.background =
+    "radial-gradient(circle at top, #0ea5e9, #020617 70%)";
+}
+
+// Resize
+window.addEventListener("resize", () => {
+  if (!camera || !renderer) return;
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+<!-- =============================================== -->
+<!-- =============== PORTAL LOGIC ================== -->
+<!-- =============================================== -->
+<script>
+function triggerPortal() {
+  document.body.classList.add("portal-burst-flash");
+  setTimeout(() => document.body.classList.remove("portal-burst-flash"), 450);
+
+  const ring = document.createElement("div");
+  ring.className = "portal-burst-ring";
+  document.body.appendChild(ring);
+  setTimeout(() => ring.remove(), 900);
+
+  setTimeout(openPortalRoute, 480);
+}
+
+function openPortalRoute() {
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    window.location.href =
+      "sms:+17735441231?&body=" +
+      encodeURIComponent("Hey PJ — summoned the ocean portal 🌊 Let's build.");
+  } else {
+    const subject = encodeURIComponent("Summon PJ · Coastal Portal");
+    const body = encodeURIComponent(
+      "Hey PJ,\n\n" +
+      "I just tapped the ocean portal on SideGuySolutions.com.\n\n" +
+      "Here's what I'm exploring:\n" +
+      "- App or system\n" +
+      "- AI automation\n" +
+      "- Web3/Solana payments\n" +
+      "- Ticketing flows\n" +
+      "- DFS tools\n\n" +
+      "Send a plan when you're free.\n"
+    );
+    window.location.href =
+      "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+  }
+}
+</script>
+
+<!-- =============================================== -->
+<!-- ========== CALCULATORS + MODALS JS ============ -->
+<!-- =============================================== -->
+<script>
+// Smooth scroll for nav
+document.querySelectorAll(".nav-links a").forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = a.getAttribute("href");
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// Toolkit openers
+function openSavingsCalc() {
+  document.getElementById("modal-solana").style.display = "flex";
+}
+function closeSolana() {
+  document.getElementById("modal-solana").style.display = "none";
+}
+
+function openDFS() {
+  document.getElementById("modal-dfs").style.display = "flex";
+}
+function closeDFS() {
+  document.getElementById("modal-dfs").style.display = "none";
+}
+
+function openTickets() {
+  document.getElementById("modal-tickets").style.display = "flex";
+}
+function closeTickets() {
+  document.getElementById("modal-tickets").style.display = "none";
+}
+
+// Calculator helpers
+function americanToDecimal(odds) {
+  odds = parseFloat(odds);
+  if (!odds) return null;
+  return odds > 0 ? odds / 100 + 1 : 100 / Math.abs(odds) + 1;
+}
+
+// Solana calc
+function runSolanaCalc() {
+  const vol = parseFloat(document.getElementById("solana-volume").value);
+  const fee = parseFloat(document.getElementById("solana-fee").value);
+
+  const out = document.getElementById("solana-result");
+  out.style.display = "block";
+
+  if (!vol || !fee) {
+    out.textContent = "Enter both volume and fee %.";
+    return;
+  }
+
+  const current = (fee / 100) * vol;
+  const solana = vol * 0.003;
+  const savings = current - solana;
+
+  out.innerHTML =
+    "Current fees: <strong>$" + current.toFixed(0) + "</strong><br>" +
+    "On Solana: <strong>$" + solana.toFixed(0) + "</strong><br>" +
+    "Savings: <strong>$" + savings.toFixed(0) + "</strong> / month";
+}
+
+// DFS calc
+function runDFScalc() {
+  const leg1 = americanToDecimal(document.getElementById("dfs-leg1").value);
+  const leg2 = americanToDecimal(document.getElementById("dfs-leg2").value);
+  const boost = parseFloat(document.getElementById("dfs-boost").value || 0);
+
+  const out = document.getElementById("dfs-result");
+  out.style.display = "block";
+
+  if (!leg1 || !leg2) {
+    out.textContent = "Enter valid American odds.";
+    return;
+  }
+
+  const combo = leg1 * leg2;
+  const boosted = combo * (1 + boost / 100);
+
+  function decToAmerican(d) {
+    const x = d - 1;
+    return x >= 1 ? "+" + Math.round(x * 100) : "-" + Math.round(100 / x);
+  }
+
+  out.innerHTML =
+    "Parlay: <strong>" +
+    combo.toFixed(2) +
+    "x</strong> (" +
+    decToAmerican(combo) +
+    ")<br>" +
+    (boost
+      ? "Boosted: <strong>" +
+        boosted.toFixed(2) +
+        "x</strong> (" +
+        decToAmerican(boosted) +
+        ")"
+      : "");
+}
+
+// Ticket calc
+function runTicketCalc() {
+  const price = parseFloat(document.getElementById("ticket-price").value);
+  const fee = parseFloat(document.getElementById("ticket-fee").value);
+  const cap = parseFloat(document.getElementById("ticket-cap").value);
+
+  const out = document.getElementById("ticket-result");
+  out.style.display = "block";
+
+  if (!price || !fee || !cap) {
+    out.textContent = "Add price, fee %, and capacity.";
+    return;
+  }
+
+  const perFee = (fee / 100) * price;
+  const total = perFee * cap;
+
+  out.innerHTML =
+    "Platform skims: <strong>$" + total.toFixed(0) + "</strong> at full room.";
+}
+
+// Portal click listeners
+document.getElementById("summon-btn").onclick = triggerPortal;
+document.getElementById("summon-orb").onclick = triggerPortal;
+
+// Toolkit button
+const tkBtn = document.getElementById("show-toolkit");
+if (tkBtn)
+  tkBtn.onclick = () =>
+    document.getElementById("toolkit").scrollIntoView({ behavior: "smooth" });
+
+// Close modals by clicking backdrop
+["modal-solana", "modal-dfs", "modal-tickets"].forEach((id) => {
+  const m = document.getElementById(id);
+  m.addEventListener("click", (e) => {
+    if (e.target === m) m.style.display = "none";
+  });
+});
+
+// Intake → email
+document.getElementById("intake-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const subject = encodeURIComponent("New Intake · SideGuy Solutions");
+  const body = encodeURIComponent(
+    "Name: " + document.getElementById("intake-name").value + "\n" +
+    "Email: " + document.getElementById("intake-email").value + "\n" +
+    "Business: " + document.getElementById("intake-biz").value + "\n" +
+    "Lane: " + document.getElementById("intake-type").value + "\n" +
+    "Budget: " + document.getElementById("intake-budget").value + "\n\n" +
+    "Notes:\n" + document.getElementById("intake-notes").value + "\n\n" +
+    "Sent from SideGuySolutions.com · v15 Ocean Mode"
+  );
+
+  window.location.href =
+    "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+});
+</script>
+
 </body>
 </html>
