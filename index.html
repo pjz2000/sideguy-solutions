@@ -1150,3 +1150,294 @@
         });
       });
     </script>
+  </div> <!-- /page-shell -->
+
+  <!-- Optional ocean audio (drop ocean-waves.mp3 in the same folder if you want sound) -->
+  <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
+
+  <!-- THREE.js for cinematic ocean (hybrid performance mode) -->
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+
+  <script>
+    // ===== HYBRID OCEAN ENGINE (DEEP PACIFIC + LITE MODE) =====
+    let sgScene, sgCamera, sgRenderer;
+    let sgOceanMesh, sgOceanMaterial;
+    let sgTargetWaveAmp = 1.05;
+    let sgClock;
+    let sgLiteMode = false;
+
+    function detectHybridMode() {
+      try {
+        const dpr = window.devicePixelRatio || 1;
+        const cores = navigator.hardwareConcurrency || 4;
+        const smallScreen = window.innerWidth < 900;
+
+        // Lite if: small screen, super high DPI, or low cores
+        sgLiteMode = smallScreen || dpr > 2.5 || cores <= 4;
+      } catch (e) {
+        sgLiteMode = false;
+      }
+    }
+
+    const sgVertexShader = `
+      varying vec2 vUv;
+      uniform float uTime;
+      uniform float uWaveAmp;
+      uniform float uDetail; // 0 = lite, 1 = full
+
+      float hash(vec2 p) {
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+      }
+
+      float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+
+        vec2 u = f * f * (3.0 - 2.0 * f);
+
+        return mix(a, b, u.x) +
+               (c - a) * u.y * (1.0 - u.x) +
+               (d - b) * u.x * u.y;
+      }
+
+      void main() {
+        vUv = uv;
+        vec3 pos = position;
+
+        float t = uTime * 0.5;
+
+        float longSwell = sin(pos.x * 0.16 + t * 0.7) * 0.6;
+        float crossSwell = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
+        float frontSwell = sin(pos.z * 0.1 + t * 0.35) * 0.75;
+
+        // Lite vs full micro detail
+        float detailFactor = mix(0.5, 1.0, uDetail);
+
+        float n1 = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
+        float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
+        float micro = (n1 - 0.5) * 1.2 * detailFactor + (n2 - 0.5) * 0.9 * detailFactor;
+
+        float height = (longSwell + crossSwell + frontSwell) * 0.33 + micro * 0.55;
+        height *= uWaveAmp;
+
+        pos.y += height;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+    `;
+
+    const sgFragmentShader = `
+      varying vec2 vUv;
+      uniform float uTime;
+      uniform float uDetail; // 0 = lite, 1 = full
+
+      float hash(vec2 p) {
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+      }
+
+      float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+
+        vec2 u = f * f * (3.0 - 2.0 * f);
+
+        return mix(a, b, u.x) +
+               (c - a) * u.y * (1.0 - u.x) +
+               (d - b) * u.x * u.y;
+      }
+
+      void main() {
+        vec2 uv = vUv;
+        float t = uTime * 0.06;
+
+        float detailFactor = mix(0.55, 1.0, uDetail);
+
+        float n1 = noise(uv * 8.0 + vec2(t * 2.0, t * -1.5));
+        float n2 = noise(uv * 14.0 * detailFactor + vec2(-t * 2.7, t * 2.2));
+        float nFine = noise(uv * (22.0 + 10.0 * detailFactor) + vec2(t * 4.0, -t * 3.5));
+
+        float depth = smoothstep(0.0, 1.0, uv.y + n1 * 0.12 * detailFactor);
+
+        vec3 deep = vec3(0.0, 0.06, 0.18);
+        vec3 mid = vec3(0.0, 0.3, 0.56);
+        vec3 surf = vec3(0.74, 0.96, 1.0);
+
+        vec3 col = mix(deep, mid, depth);
+        col = mix(col, surf, pow(1.0 - depth, 3.0));
+
+        float horizonGlow = smoothstep(0.45, 1.05, uv.y + n1 * 0.08 * detailFactor);
+        col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.7;
+
+        float rayPattern = sin((uv.x * 3.4 + uv.y * 1.35) - t * 4.0 + n2 * 3.0);
+        float rays = smoothstep(0.78 - 0.1 * detailFactor, 1.0, rayPattern);
+        col += vec3(0.07, 0.11, 0.16) * rays * (0.5 + 0.4 * detailFactor);
+
+        float shimmer = smoothstep(0.82, 1.0, sin((uv.x + uv.y + t * 4.0) * 18.0 + n2 * 6.0));
+        col += shimmer * (0.06 + 0.05 * detailFactor);
+
+        float caustic = noise(uv * (18.0 + 6.0 * detailFactor) + vec2(t * 5.0, -t * 4.0));
+        caustic = smoothstep(0.65, 1.0, caustic);
+        col += caustic * (0.05 + 0.03 * detailFactor);
+
+        float spark = smoothstep(0.92, 1.0, nFine);
+        col += vec3(0.12, 0.18, 0.22) * spark * (0.4 + 0.3 * detailFactor);
+
+        vec2 center = uv - 0.5;
+        float dist = length(center);
+        float vignette = smoothstep(0.8, 0.25, dist);
+        col *= mix(0.7, 1.22, vignette);
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    function initOceanHybrid() {
+      const canvas = document.getElementById("ocean-canvas");
+      if (!canvas || !window.THREE) return;
+
+      detectHybridMode();
+
+      sgScene = new THREE.Scene();
+
+      const fov = 55;
+      const aspect = window.innerWidth / window.innerHeight;
+      const near = 0.1;
+      const far = 80;
+      sgCamera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      sgCamera.position.set(0, 7.2, 11.5);
+      sgCamera.lookAt(0, 0, 0);
+
+      sgRenderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: !sgLiteMode
+      });
+      const dpr = window.devicePixelRatio || 1;
+      sgRenderer.setPixelRatio(Math.min(dpr, sgLiteMode ? 1.5 : 2));
+      sgRenderer.setSize(window.innerWidth, window.innerHeight);
+      sgRenderer.setClearColor(0x000814, 1);
+
+      sgClock = new THREE.Clock();
+
+      const segments = sgLiteMode ? 120 : 220;
+      const geometry = new THREE.PlaneGeometry(40, 40, segments, segments);
+      geometry.rotateX(-Math.PI / 2);
+
+      const detailUniform = sgLiteMode ? 0.0 : 1.0;
+
+      sgOceanMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 },
+          uWaveAmp: { value: sgLiteMode ? 0.95 : 1.05 },
+          uDetail: { value: detailUniform }
+        },
+        vertexShader: sgVertexShader,
+        fragmentShader: sgFragmentShader,
+        side: THREE.DoubleSide
+      });
+
+      sgOceanMesh = new THREE.Mesh(geometry, sgOceanMaterial);
+      sgScene.add(sgOceanMesh);
+
+      const fogColor = new THREE.Color(0x000817);
+      sgScene.fog = new THREE.Fog(fogColor, sgLiteMode ? 16 : 14, sgLiteMode ? 38 : 42);
+      sgRenderer.setClearColor(fogColor, 1);
+
+      window.addEventListener("resize", onOceanResize, false);
+
+      animateOceanHybrid();
+    }
+
+    function onOceanResize() {
+      if (!sgCamera || !sgRenderer) return;
+      sgCamera.aspect = window.innerWidth / window.innerHeight;
+      sgCamera.updateProjectionMatrix();
+      sgRenderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animateOceanHybrid() {
+      requestAnimationFrame(animateOceanHybrid);
+      if (!sgClock || !sgOceanMaterial || !sgCamera || !sgRenderer || !sgScene) return;
+
+      const elapsed = sgClock.getElapsedTime();
+      sgOceanMaterial.uniforms.uTime.value = elapsed;
+
+      const current = sgOceanMaterial.uniforms.uWaveAmp.value;
+      sgOceanMaterial.uniforms.uWaveAmp.value =
+        current + (sgTargetWaveAmp - current) * 0.03;
+
+      const sway = Math.sin(elapsed * 0.18) * (sgLiteMode ? 0.3 : 0.38);
+      sgCamera.position.x = sway;
+      sgCamera.lookAt(0, 0, 0);
+
+      sgRenderer.render(sgScene, sgCamera);
+    }
+
+    // ===== PORTAL BOOST (ORB / HERO BUTTON) =====
+    function boostWaves() {
+      sgTargetWaveAmp = sgLiteMode ? 1.3 : 1.7;
+
+      document.body.classList.add("portal-flash", "portal-ripple");
+
+      setTimeout(() => {
+        sgTargetWaveAmp = sgLiteMode ? 0.95 : 1.05;
+        document.body.classList.remove("portal-flash");
+      }, 620);
+
+      setTimeout(() => {
+        document.body.classList.remove("portal-ripple");
+      }, 1500);
+
+      const audio = document.getElementById("ocean-audio");
+      if (audio && audio.paused) {
+        audio.play().catch(() => {
+          // ignore autoplay block
+        });
+      }
+    }
+
+    // ===== WIRE ORB + HERO BUTTON INTO EXISTING SUMMON LOGIC =====
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        if (window.THREE) {
+          initOceanHybrid();
+        }
+
+        const summonOrb = document.getElementById("summon-orb");
+        const summonBtn = document.getElementById("summon-btn");
+
+        if (summonOrb) {
+          summonOrb.addEventListener("click", () => {
+            boostWaves();
+            setTimeout(() => {
+              // Prefer email from orb, feels “portal”
+              if (typeof openEmailPJ === "function") {
+                openEmailPJ();
+              }
+            }, 420);
+          });
+        }
+
+        if (summonBtn) {
+          // Enhance existing click with waves — Part 4 already attaches routing
+          summonBtn.addEventListener("click", () => {
+            boostWaves();
+          });
+        }
+      } catch (e) {
+        // If anything fails, we silently fall back to static gradient
+        console.warn("Hybrid ocean fallback:", e);
+      }
+    });
+  </script>
+</body>
+</html>
