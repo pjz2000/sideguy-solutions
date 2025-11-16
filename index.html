@@ -1,262 +1,163 @@
-<!--
-  SideGuy Solutions
-  Version: 8.0-legendary-max
-  Hero: "Where code meets the coastline."
-  Mode: Full-Screen Ocean + Floating Orb + Legendary Toolkit
-  Author: PJ + Kromeon Dev Team (+ ChatGPT)
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
+  <!-- ===============================
+       SideGuy Solutions v8.1 — Text First
+       Coastal Tech + Solana Tools + Portal UI
+  ================================ -->
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta
-    name="description"
-    content="SideGuy Solutions — coastal concierge for apps, tickets, DFS tools, Solana payments, crypto escrow, and smarter systems in North County San Diego. Tap the portal to summon PJ."
-  />
-  <meta
-    name="keywords"
-    content="SideGuy Solutions, Solana payments, crypto escrow, DFS tools, ticketing, web3 coastal concierge, North County San Diego developer"
-  />
+  <meta name="description" content="Coastal tech, Solana payments, ticket tools, DFS EV multipliers, crypto escrow, and real concierge—tap to summon PJ from Solana Beach." />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta property="og:description" content="Coastal toolkit for apps, tickets, DFS, Solana rails, crypto escrow, and real-world automations. Tap to summon PJ." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sideguysolutions.com/" />
-
-  <!-- JSON-LD for LocalBusiness -->
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "SideGuy Solutions",
-    "description": "Coastal concierge for tech builds, tickets, DFS systems, Solana payments, and crypto escrow in North County San Diego.",
-    "url": "https://sideguysolutions.com/",
+    "description": "Coastal tech & Solana concierge.",
+    "url": "https://sideguysolutions.com",
+    "email": "peter.z@kromeon.com",
+    "telephone": "+1-773-544-1231",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Solana Beach",
       "addressRegion": "CA",
       "addressCountry": "US"
-    },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "name": "North County San Diego"
     }
   }
   </script>
 
-  <!-- Plausible Analytics (privacy-friendly) -->
-  <script defer data-domain="sideguysolutions.com" src="https://plausible.io/js/script.js"></script>
-
+  <!-- Core Styling -->
   <style>
     :root {
       --bg: #020617;
-      --text-main: #e5f2ff;
-      --text-soft: #9ca3af;
-      --muted: #6b7280;
+      --deep: #000814;
+      --surface: #0d1b2a;
+      --glass: rgba(255,255,255,0.04);
+      --white: #f8fafc;
+      --sub: #94a3b8;
       --accent: #38bdf8;
-      --accent-strong: #0ea5e9;
-      --accent-soft: rgba(56, 189, 248, 0.12);
-      --card: rgba(15, 23, 42, 0.96);
-      --border: rgba(148, 163, 184, 0.55);
-      --radius: 18px;
-      --pill: 999px;
+      --accent2: #60a5fa;
+      --card: rgba(15, 23, 42, 0.88);
+      --blur: blur(18px);
+      --br: 18px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.28);
+      --ocean-top: rgba(56,189,248,0.12);
+      --modal-bg: rgba(0,0,0,0.55);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
+      box-sizing: border-box;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
       background: var(--bg);
-      color: var(--text-main);
+      color: var(--white);
       overflow-x: hidden;
+      position: relative;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* OCEAN BACKGROUND */
+    /* ===============================
+       OCEAN CANVAS + FX
+    =============================== */
     #ocean-canvas {
       position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -3;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 55%);
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
     }
 
     .ocean-overlay {
       position: fixed;
-      inset: 0;
-      z-index: -2;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(circle at 50% 18%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 70%);
       pointer-events: none;
-      background:
-        radial-gradient(circle at 10% -10%, rgba(56, 189, 248, 0.4), transparent 55%),
-        radial-gradient(circle at 100% 110%, rgba(14, 165, 233, 0.4), transparent 55%),
-        linear-gradient(to bottom, rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.97));
+      z-index: 1;
     }
 
-    /* Surface waves overlay (parallax feel) */
     .surface-waves {
       position: fixed;
-      inset: 0;
+      top: 0;
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.125), rgba(255,255,255,0));
+      opacity: 0.15;
       pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-      opacity: 0.7;
-    }
-
-    .surface-waves::before,
-    .surface-waves::after {
-      content: "";
-      position: absolute;
-      left: -20%;
-      width: 140%;
-      height: 120px;
-      border-radius: 50% 50% 0 0;
-      background:
-        linear-gradient(
-          to top,
-          rgba(15, 23, 42, 0.0) 0%,
-          rgba(59, 130, 246, 0.7) 50%,
-          rgba(191, 219, 254, 1) 100%
-        );
-      top: 14%;
-      mix-blend-mode: screen;
-      filter: blur(1.3px);
-      animation: surfaceWave 20s ease-in-out infinite;
-    }
-
-    .surface-waves::after {
-      top: 11%;
-      opacity: 0.5;
-      animation-duration: 28s;
-      animation-direction: reverse;
-    }
-
-    @keyframes surfaceWave {
-      0% { transform: translateX(0) translateY(0); }
-      25% { transform: translateX(26px) translateY(6px); }
-      50% { transform: translateX(0) translateY(10px); }
-      75% { transform: translateX(-26px) translateY(4px); }
-      100% { transform: translateX(0) translateY(0); }
+      z-index: 2;
     }
 
     .page-shell {
       position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      z-index: 0;
+      z-index: 3;
+      padding-bottom: 180px;
     }
 
-    /* HEADER / NAV */
+    /* ===============================
+       HEADER / NAV
+    =============================== */
     header {
-      position: sticky;
+      width: 100%;
+      padding: 16px 5vw;
+      position: fixed;
       top: 0;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      background:
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.82), transparent);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 10px 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      align-items: center;
     }
 
     .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .brand-mark {
-      width: 30px;
-      height: 30px;
-      border-radius: 40%;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 55%, #022c43 100%);
-      box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.4),
-        0 10px 25px rgba(15, 23, 42, 0.9),
-        0 0 45px rgba(56, 189, 248, 0.75);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 250, 252, 0.35);
-      box-shadow: 0 0 30px rgba(248, 250, 252, 0.6);
-      opacity: 0.7;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 22px rgba(56,189,248,0.55);
     }
 
     .brand-name {
-      font-size: 0.95rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-size: 1.15rem;
+      font-weight: 600;
     }
 
     .brand-sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
+      color: var(--sub);
+      margin-top: -4px;
     }
 
     .nav-links {
       display: flex;
-      gap: 10px;
+      gap: 24px;
+      margin-right: 18px;
     }
 
     .nav-link {
-      color: var(--text-soft);
       text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .nav-link span.icon {
-      font-size: 0.9rem;
+      color: var(--sub);
+      font-size: 0.95rem;
+      transition: 0.2s;
     }
 
     .nav-link:hover {
@@ -264,811 +165,414 @@
     }
 
     .nav-pill {
-      border-radius: var(--pill);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 4px 10px;
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.4), rgba(15, 23, 42, 0.96));
       display: flex;
       align-items: center;
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-right: 16px;
       gap: 6px;
-      white-space: nowrap;
-      color: var(--text-soft);
     }
 
     .nav-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px; height: 8px;
       border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+      background: #4ade80;
+      box-shadow: 0 0 12px #4ade80;
     }
 
     .version {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+      font-size: 0.8rem;
+      color: var(--sub);
     }
 
-    .version span {
-      color: var(--accent);
-    }
-
-    main {
-      flex: 1;
-    }
-
-    /* HERO */
+    /* ===============================
+       HERO
+    =============================== */
     .hero-shell {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 30px 20px 34px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.48fr) minmax(0, 1.05fr);
-      gap: 28px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      padding: 30vh 5vw 22vh;
+      position: relative;
     }
 
-    @media (max-width: 880px) {
-      .hero-shell {
-        grid-template-columns: minmax(0, 1fr);
-        padding-inline: 16px;
-        padding-top: 24px;
-      }
+    .hero-left {
+      max-width: 520px;
     }
 
     .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 11px;
-      border-radius: var(--pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), rgba(15, 23, 42, 0.98));
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-    }
-
-    .hero-kicker span.icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(8, 47, 73, 0.9);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.9);
-      font-size: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
     }
 
     .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3rem);
-      line-height: 1.05;
-      margin-bottom: 12px;
-      text-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
 
     .hero-title span {
-      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: var(--accent);
     }
 
     .hero-sub {
-      font-size: 0.98rem;
-      line-height: 1.6;
-      color: var(--text-soft);
-      margin-bottom: 18px;
-      max-width: 34rem;
-    }
-
-    .hero-sub strong {
-      color: var(--text-main);
-      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--sub);
+      margin-bottom: 22px;
     }
 
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .hero-tag-pill {
-      border-radius: var(--pill);
-      padding: 4px 9px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      backdrop-filter: blur(14px);
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 40px;
+      font-size: 0.85rem;
     }
 
     .hero-ctas {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    button {
-      font-family: inherit;
-      border: none;
-      cursor: pointer;
+      gap: 14px;
+      margin-bottom: 18px;
     }
 
     .btn-primary {
-      border-radius: var(--pill);
-      padding: 10px 18px;
-      font-size: 0.9rem;
+      padding: 14px 22px;
+      font-size: 1rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #0b1120;
-      background: radial-gradient(circle at 0 0, #e0f2fe, #0ea5e9);
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.8),
-        0 18px 35px rgba(8, 47, 73, 0.95),
-        0 0 60px rgba(56, 189, 248, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transform-origin: center;
-      transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        filter 0.18s ease-out;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 4px 18px rgba(56,189,248,0.45);
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px) scale(1.02);
-      filter: saturate(1.2);
-      box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 20px 40px rgba(8, 47, 73, 1),
-        0 0 90px rgba(56, 189, 248, 1);
+      transform: translateY(-2px);
     }
 
     .btn-ghost {
-      border-radius: var(--pill);
-      padding: 9px 14px;
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      background: radial-gradient(circle at 0 0, rgba(30, 64, 175, 0.8), rgba(15, 23, 42, 0.98));
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s;
     }
 
-    .hero-meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    .hero-meta span.badge {
-      border-radius: var(--pill);
-      padding: 3px 9px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-    }
-
-    /* ORB SIDE (floating above everything) */
+    /* ===============================
+       FLOATING ORB
+    =============================== */
     .hero-orb-shell {
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 80;
-    }
-
-    .orb-glow {
-      position: absolute;
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 10%, rgba(248, 250, 252, 0.9), transparent 55%),
-        radial-gradient(circle at 70% 80%, rgba(56, 189, 248, 0.95), transparent 55%);
-      filter: blur(3px);
-      opacity: 0.35;
-    }
-
-    .orb-ring {
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      box-shadow: 0 0 55px rgba(15, 23, 42, 0.95);
-      opacity: 0.75;
+      width: 320px;
+      height: 320px;
+      margin-right: 4vw;
     }
 
     #summon-orb {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.45);
-      background:
-        radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.9), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(14, 165, 233, 0.95), transparent 60%),
-        radial-gradient(circle at 50% 120%, rgba(8, 47, 73, 0.9), #020617);
-      box-shadow:
-        0 0 40px rgba(15, 23, 42, 0.9),
-        0 0 95px rgba(56, 189, 248, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      cursor: pointer;
-      transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        filter 0.18s ease-out;
-      animation: orbPulse 2.6s ease-in-out infinite;
-      z-index: 9999;
-    }
-
-    #summon-orb::after {
-      content: "";
       position: absolute;
-      inset: 18%;
+      top: 50%; left: 50%;
+      width: 200px; height: 200px;
+      transform: translate(-50%, -50%);
       border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.45);
-      box-shadow: 0 0 30px rgba(248, 250, 252, 0.75);
-      opacity: 0.75;
+      background: radial-gradient(circle, rgba(56,189,248,0.55), rgba(0,0,0,0.7));
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(56,189,248,0.75);
+      transition: 0.3s;
     }
 
     #summon-orb:hover {
-      transform: translateY(-2px) scale(1.03);
-      filter: saturate(1.2);
-      box-shadow:
-        0 0 40px rgba(56, 189, 248, 0.9),
-        0 0 120px rgba(56, 189, 248, 1);
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 60px rgba(56,189,248,0.95);
     }
 
     #summon-orb-label {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      color: #020617;
-      font-weight: 700;
-      text-shadow:
-        0 0 10px rgba(248, 250, 252, 0.9),
-        0 0 24px rgba(14, 165, 233, 0.95);
+      font-size: 1.1rem;
+      line-height: 1.2;
+      letter-spacing: 1px;
     }
 
     #summon-orb-label span {
-      display: block;
-      margin-top: 4px;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      opacity: 0.85;
-    }
-
-    @keyframes orbPulse {
-      0% {
-        transform: scale(1);
-        box-shadow:
-          0 0 40px rgba(56, 189, 248, 0.8),
-          0 0 80px rgba(56, 189, 248, 0.8);
-      }
-      50% {
-        transform: scale(1.035);
-        box-shadow:
-          0 0 55px rgba(56, 189, 248, 1),
-          0 0 130px rgba(56, 189, 248, 1);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 40px rgba(56, 189, 248, 0.8),
-          0 0 80px rgba(56, 189, 248, 0.8);
-      }
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
     }
 
     .orb-caption {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
       text-align: center;
+      margin-top: 10px;
+      color: var(--sub);
+      font-size: 0.85rem;
     }
 
-    /* TOOLKIT SECTION */
+    /* ===============================
+       TOOLKIT SECTION + NAV
+    =============================== */
     .section-shell {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 6px 20px 40px;
+      padding: 8vh 5vw;
     }
 
     .section-header-row {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
-      gap: 10px;
-      align-items: baseline;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
+      align-items: flex-end;
     }
 
     .section-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
     .section-subtitle {
-      font-size: 0.92rem;
-      color: var(--text-soft);
-    }
-
-    .section-subtitle strong {
-      color: var(--text-main);
+      color: var(--sub);
+      font-size: 1rem;
     }
 
     .toolkit-nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.72rem;
+      gap: 10px;
     }
 
     .toolkit-nav button {
-      border-radius: var(--pill);
-      padding: 4px 9px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .toolkit-nav button span.icon {
-      font-size: 0.9rem;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
     }
 
     .toolkit-nav button:hover {
-      color: var(--accent);
       border-color: var(--accent);
+      color: var(--accent);
     }
 
     .toolkit-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    @media (max-width: 880px) {
-      .toolkit-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .toolkit-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
     }
 
     .card {
-      position: relative;
-      border-radius: var(--radius);
-      padding: 12px 12px 13px;
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.97),
-        rgba(15, 23, 42, 0.94),
-        rgba(15, 23, 42, 0.9)
-      );
-      border: 1px solid var(--border);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(16px);
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.12), transparent 50%);
-      opacity: 0.7;
-      pointer-events: none;
-      mix-blend-mode: screen;
+      background: var(--card);
+      padding: 20px;
+      border-radius: var(--br);
+      backdrop-filter: var(--blur);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
     }
 
     .card-kicker {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
     }
 
     .card-title {
-      font-size: 0.96rem;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
       font-weight: 600;
-      margin-bottom: 4px;
-      color: var(--text-main);
     }
 
     .card-body {
-      font-size: 0.82rem;
-      line-height: 1.5;
-      color: var(--text-soft);
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--sub);
+      margin-bottom: 12px;
     }
 
     .card-meta-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      color: var(--muted);
     }
 
     .card-chip {
-      border-radius: var(--pill);
-      padding: 3px 8px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.9);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      padding: 4px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.12);
+      font-size: 0.8rem;
     }
 
     .card-link-btn {
-      background: none;
-      border: none;
-      padding: 0;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.76rem;
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
       cursor: pointer;
+      border: none;
+      color: var(--accent);
     }
 
-    /* WHY SOLANA SECTION */
+    /* ===============================
+       WHY SOLANA
+    =============================== */
     .why-solana {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px 40px;
+      padding: 10vh 5vw;
     }
 
     .why-header {
-      margin-bottom: 14px;
+      margin-bottom: 28px;
     }
 
     .why-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
     .why-sub {
-      font-size: 0.92rem;
-      color: var(--text-soft);
+      color: var(--sub);
+      font-size: 1rem;
     }
 
     .why-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    @media (max-width: 880px) {
-      .why-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 640px) {
-      .why-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
     .why-card {
-      border-radius: 16px;
-      padding: 12px 12px 14px;
-      background: rgba(15, 23, 42, 0.97);
-      border: 1px solid rgba(37, 99, 235, 0.6);
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
-      font-size: 0.82rem;
-      color: var(--text-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .why-card::after {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.3), transparent 55%);
-      opacity: 0.4;
-      mix-blend-mode: screen;
+      background: var(--card);
+      padding: 20px;
+      border-radius: var(--br);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
     }
 
     .why-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #bfdbfe;
+      color: var(--accent);
+      font-size: 0.85rem;
       margin-bottom: 4px;
     }
 
     .why-headline {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* ===============================
+       FOOTER
+    =============================== */
+    footer {
+      text-align: center;
+      padding: 40px 5vw 80px;
+      color: var(--sub);
       font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: #e0f2fe;
     }
 
-    /* GLOBAL TOOL MODAL + INTAKE MODAL */
-    #tool-modal-backdrop,
-    #intake-modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      background: rgba(15, 23, 42, 0.78);
-      backdrop-filter: blur(10px);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    #tool-modal,
-    #intake-modal {
-      max-width: 420px;
-      width: 100%;
-      background: rgba(15, 23, 42, 0.97);
-      border-radius: 20px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      box-shadow:
-        0 24px 80px rgba(15, 23, 42, 0.95),
-        0 0 40px rgba(56, 189, 248, 0.4);
-      padding: 18px 18px 16px;
-      position: relative;
-      color: var(--text-main);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-soft);
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    .modal-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .modal-desc {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .modal-input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-
-    .modal-input-group label {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .modal-input-group input,
-    .modal-input-group select,
-    .modal-input-group textarea {
-      padding: 7px 9px;
-      border-radius: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: #020617;
-      color: var(--text-main);
-      font-size: 0.8rem;
-      resize: vertical;
-    }
-
-    #tool-modal-result,
-    #intake-modal-result {
-      font-size: 0.82rem;
-      color: var(--text-soft);
-      margin-top: 8px;
-      line-height: 1.5;
-    }
-
-    .modal-action {
-      width: 100%;
-      margin-top: 4px;
-      border-radius: 12px;
-      padding: 9px 10px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      background: radial-gradient(circle at 0 0, #e0f2fe, #0ea5e9);
-      color: #020617;
-      box-shadow: 0 14px 30px rgba(8, 47, 73, 0.9);
-      cursor: pointer;
-    }
-
-    /* FLOATING CHAT BUBBLE */
+    /* ===============================
+       FLOATING CHAT BUBBLE (3-option)
+    =============================== */
     .chat-bubble-floating {
       position: fixed;
-      left: 18px;
-      bottom: 78px;
-      z-index: 95;
+      bottom: 110px;
+      right: 30px;
+      z-index: 100;
     }
 
     .chat-bubble-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.4), rgba(15, 23, 42, 0.96));
-      color: #e5f2ff;
-      font-size: 0.8rem;
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.9),
-        0 16px 32px rgba(15, 23, 42, 0.9),
-        0 0 24px rgba(56, 189, 248, 0.7);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      padding: 14px 20px;
+      border-radius: 40px;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      box-shadow: 0 8px 24px rgba(56,189,248,0.45);
       cursor: pointer;
     }
 
-    .chat-bubble-emoji {
-      font-size: 1.1rem;
-      animation: wag 1.8s ease-in-out infinite;
-      transform-origin: center;
+    /* Mini-menu */
+    #chat-mini-menu {
+      display: none;
+      position: absolute;
+      bottom: 60px;
+      right: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(16px);
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      width: 160px;
     }
 
-    @keyframes wag {
-      0%, 100% { transform: rotate(0deg) translateY(0); }
-      25% { transform: rotate(-8deg) translateY(-1px); }
-      50% { transform: rotate(5deg) translateY(0); }
-      75% { transform: rotate(-4deg) translateY(-1px); }
+    #chat-mini-menu button {
+      width: 100%;
+      padding: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 6px;
     }
 
-    /* MOBILE BOTTOM NAV */
+    #chat-mini-menu button:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ===============================
+       MOBILE NAV
+    =============================== */
     .mobile-nav {
       position: fixed;
-      inset-inline: 0;
       bottom: 0;
-      z-index: 70;
-      background: rgba(15, 23, 42, 0.98);
-      border-top: 1px solid rgba(30, 64, 175, 0.7);
-      backdrop-filter: blur(14px);
-      display: none;
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 98;
     }
 
     .mobile-nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 6px 16px 8px;
       display: flex;
-      justify-content: space-between;
-      gap: 6px;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px 0;
     }
 
     .mobile-nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      font-size: 0.65rem;
-      color: var(--muted);
+      text-align: center;
+      font-size: 0.8rem;
+      color: #fff;
       cursor: pointer;
     }
 
-    .mobile-nav-item span.icon {
-      font-size: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .mobile-nav {
-        display: block;
-      }
-    }
-
-    /* PORTAL FX */
-    .portal-flash {
-      animation: portalFlash 0.6s ease-out;
-    }
-
-    @keyframes portalFlash {
-      0% { filter: brightness(1); }
-      35% { filter: brightness(1.4) saturate(1.2); }
-      100% { filter: brightness(1); }
-    }
-
-    .portal-ripple::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.2), transparent 60%);
-      animation: portalRipple 1.4s ease-out;
-      z-index: 2;
-    }
-
-    @keyframes portalRipple {
-      0% { opacity: 0.4; }
-      100% { opacity: 0; }
-    }
-
-    footer {
-      padding: 18px 20px 26px;
-      font-size: 0.74rem;
-      color: var(--muted);
-      text-align: center;
-      border-top: 1px solid rgba(30, 64, 175, 0.5);
-      background: linear-gradient(to top, rgba(15, 23, 42, 0.96), transparent);
-    }
-
-    @media (max-width: 720px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      .section-shell,
-      .why-solana {
-        padding-inline: 16px;
-      }
-    }
-  </style>
-</head>
+    /* ===============================
+       GLOBAL TOOL MODAL
+    =============================== */
+    #tool-modal-backdrop,
+    #intake-modal-backdrop
 <body>
   <!-- OCEAN CANVAS + OVERLAYS -->
   <canvas id="ocean-canvas"></canvas>
@@ -1104,7 +608,7 @@
           </div>
 
           <div class="version">
-            Version <span id="version-label">8.0</span>
+            Version <span id="version-label">8.1</span>
           </div>
 
         </div>
@@ -1121,7 +625,6 @@
       ================================= -->
       <section class="hero-shell">
 
-        <!-- HERO TEXT -->
         <div class="hero-left">
 
           <div class="hero-kicker">
@@ -1148,25 +651,19 @@
           </div>
 
           <div class="hero-ctas">
-            <button id="summon-btn" class="btn-primary">
-              TAP TO SUMMON PJ
-            </button>
-            <button id="open-intake-modal" class="btn-ghost">
-              Get Help
-            </button>
+            <button id="summon-btn" class="btn-primary">TAP TO SUMMON PJ</button>
+            <button id="open-intake-modal" class="btn-ghost">Get Help</button>
           </div>
 
-          <div class="hero-meta">
-            <span class="badge">North County</span>
-            <span class="badge">Fast</span>
-            <span class="badge">Private</span>
-            <span class="badge">Solana-Powered</span>
-          </div>
+          <!-- Direct Text Option (optional subtle CTA) -->
+          <p style="margin-top: 6px; font-size: 0.9rem; color: var(--sub);">
+            Or <a href="sms:7735441231?&body=Hey%20PJ!%20I%E2%80%99m%20on%20SideGuySolutions.com%20%E2%80%94%20can%20I%20get%20some%20help%3F" style="color: var(--accent); text-decoration:none;">text PJ</a> anytime.
+          </p>
 
         </div>
 
         <!-- ================================
-             THE FLOATING ORB (PORTAL)
+             FLOATING ORB (CLICK TO SUMMON)
         ================================= -->
         <div class="hero-orb-shell">
           <div class="orb-glow"></div>
@@ -1317,48 +814,55 @@
          FOOTER
     ================================= -->
     <footer>
-      SideGuy Solutions · v<span id="version-label-footer">8.0</span><br />
-      Built from Solana Beach with ocean energy 🌊
+      SideGuy Solutions · v<span id="version-label-footer">8.1</span><br />
+      Built from Solana Beach with ocean energy 🌊<br />
+      <a href="sms:7735441231?&body=Hey%20PJ!%20I%E2%80%99m%20on%20SideGuySolutions.com%20%E2%80%94%20can%20I%20get%20some%20help%3F" style="color:var(--accent);text-decoration:none;">Text PJ</a> · 
+      <a href="mailto:peter.z@kromeon.com" style="color:var(--accent);text-decoration:none;">Email PJ</a>
     </footer>
 
   </div> <!-- END page-shell -->
 
   <!-- ================================
-       FLOATING CHAT BUBBLE
-  ================================= -->
+       FLOATING CHAT BUBBLE — 3-option
+    ================================= -->
   <div class="chat-bubble-floating">
-    <button class="chat-bubble-btn" onclick="openIntakeModal()">
-      <span class="chat-bubble-emoji">🤙</span>
-      Chat With PJ
+    <button class="chat-bubble-btn" onclick="toggleChatMenu()">
+      🤙 Chat With PJ
     </button>
+
+    <div id="chat-mini-menu">
+      <button onclick="textPJ()">📱 Text PJ</button>
+      <button onclick="emailPJ()">✉️ Email PJ</button>
+      <button onclick="openSummonChoice()">🌀 Summon PJ</button>
+    </div>
   </div>
 
   <!-- ================================
        MOBILE NAV
-  ================================= -->
+    ================================= -->
   <div class="mobile-nav">
     <div class="mobile-nav-inner">
       <div class="mobile-nav-item" onclick="scrollToTop()">
-        <span class="icon">🏝️</span> Home
+        🏝️ Home
       </div>
       <div class="mobile-nav-item" onclick="openTool('solanaSavings')">
-        <span class="icon">⚡</span> Tools
+        ⚡ Tools
       </div>
-      <div class="mobile-nav-item" onclick="triggerPortal()">
-        <span class="icon">🌀</span> PJ
+      <div class="mobile-nav-item" onclick="openSummonChoice()">
+        🌀 PJ
       </div>
-      <div class="mobile-nav-item" onclick="openIntakeModal()">
-        <span class="icon">💬</span> Chat
+      <div class="mobile-nav-item" onclick="textPJ()">
+        📱 Text
       </div>
       <div class="mobile-nav-item" onclick="scrollToWhy()">
-        <span class="icon">💠</span> Solana
+        💠 Solana
       </div>
     </div>
   </div>
 
   <!-- ================================
        GLOBAL TOOL MODAL
-  ================================= -->
+    ================================= -->
   <div id="tool-modal-backdrop">
     <div id="tool-modal">
       <button class="modal-close" onclick="closeToolModal()">✕</button>
@@ -1369,12 +873,12 @@
 
   <!-- ================================
        INTAKE MODAL
-  ================================= -->
+    ================================= -->
   <div id="intake-modal-backdrop">
     <div id="intake-modal">
       <button class="modal-close" onclick="closeIntakeModal()">✕</button>
       <h3 class="modal-title">Get Help</h3>
-      <p class="modal-desc">What can PJ help you with?</p>
+      <p class="modal-desc">What do you need from PJ?</p>
 
       <div class="modal-input-group">
         <label>Your Name</label>
@@ -1389,613 +893,571 @@
       <div id="intake-modal-result"></div>
 
       <button class="modal-action" onclick="submitIntakeModal()">Send</button>
+
+      <!-- Text PJ Option -->
+      <p style="color:var(--sub); font-size:0.9rem; margin-top:10px;">
+        Or <a style="color:var(--accent);text-decoration:none;"
+        href="sms:7735441231?&body=Hey%20PJ!%20I%E2%80%99m%20on%20SideGuySolutions.com%20%E2%80%94%20can%20I%20get%20some%20help%3F">
+        text PJ</a> anytime.
+      </p>
     </div>
   </div>
-<!-- ============================
-     PART 3 — LEGENDARY JS ENGINE
-============================= -->
+
+  <!-- ================================
+       SUMMON PJ CHOICE MODAL
+    ================================= -->
+  <div id="summon-choice-backdrop">
+    <div id="summon-choice-modal">
+      <button class="modal-close" onclick="closeSummonChoice()">✕</button>
+
+      <h3 class="modal-title">Summon PJ</h3>
+      <p class="modal-desc">How would you like to reach PJ?</p>
+
+      <!-- TEXT FIRST -->
+      <button class="modal-action" onclick="textPJ()">📱 Text PJ</button>
+
+      <button class="modal-action" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.12);"
+        onclick="emailPJ()">✉️ Email PJ</button>
+    </div>
+  </div>
 <script>
+/* ======================================================
+      GLOBAL CONTACT FUNCTIONS
+====================================================== */
 
-  /* ============================
-       SMOOTH SCROLL HELPERS
-  ============================= */
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+function textPJ() {
+  window.location.href =
+    "sms:7735441231?&body=" +
+    encodeURIComponent("Hey PJ! I’m on SideGuySolutions.com — can I get some help?");
+}
+
+function emailPJ() {
+  window.location.href =
+    "mailto:peter.z@kromeon.com?subject=" +
+    encodeURIComponent("SideGuy Solutions • Summon PJ") +
+    "&body=" +
+    encodeURIComponent(
+      "Hey PJ,\n\nI’m reaching out from SideGuySolutions.com.\n\nHere’s what I need:\n\n- \n\nTalk soon!"
+    );
+}
+
+/* ======================================================
+      SUMMON PJ (ORB + BUTTON) → CHOICE MODAL
+====================================================== */
+
+function openSummonChoice() {
+  document.getElementById("summon-choice-backdrop").classList.add("show");
+}
+
+function closeSummonChoice() {
+  document.getElementById("summon-choice-backdrop").classList.remove("show");
+}
+
+/* Orb click */
+document.addEventListener("DOMContentLoaded", () => {
+  const orb = document.getElementById("summon-orb");
+  const summonBtn = document.getElementById("summon-btn");
+
+  if (orb) orb.addEventListener("click", openSummonChoice);
+  if (summonBtn) summonBtn.addEventListener("click", openSummonChoice);
+});
+
+/* ======================================================
+      MOBILE NAV HELPERS
+====================================================== */
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function scrollToWhy() {
+  document.getElementById("why-solana")?.scrollIntoView({ behavior: "smooth" });
+}
+
+/* ======================================================
+      CHAT BUBBLE MINI-MENU
+====================================================== */
+
+function toggleChatMenu() {
+  document.getElementById("chat-mini-menu").classList.toggle("show");
+}
+
+/* Close mini-menu if clicking outside */
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("chat-mini-menu");
+  const btn = document.querySelector(".chat-bubble-btn");
+
+  if (!menu) return;
+
+  if (
+    !menu.contains(e.target) &&
+    !btn.contains(e.target)
+  ) {
+    menu.classList.remove("show");
   }
+});
 
-  function scrollToWhy() {
-    document.getElementById("why-solana").scrollIntoView({
-      behavior: "smooth",
-    });
-  }
+/* ======================================================
+      INTAKE MODAL
+====================================================== */
 
-  /* ============================
-       GLOBAL MODAL SYSTEM
-  ============================= */
-  function openToolModal(contentHTML) {
-    document.getElementById("tool-modal-content").innerHTML = contentHTML;
-    document.getElementById("tool-modal-result").innerHTML = "";
-    document.getElementById("tool-modal-backdrop").style.display = "flex";
-  }
+function openIntakeModal() {
+  document.getElementById("intake-modal-backdrop").classList.add("show");
+}
 
-  function closeToolModal() {
-    document.getElementById("tool-modal-backdrop").style.display = "none";
-  }
+function closeIntakeModal() {
+  document.getElementById("intake-modal-backdrop").classList.remove("show");
+}
 
-  /* ============================
-       TOOL UI TEMPLATES
-  ============================= */
-  const TOOL_UI = {
+document.getElementById("open-intake-modal")?.addEventListener("click", openIntakeModal);
 
-    /* 1 — SOLANA SAVINGS */
-    solanaSavings: `
-      <h3 class="modal-title">Solana Processing Savings</h3>
-      <p class="modal-desc">Compare Stripe/PayPal to Solana rails.</p>
+function submitIntakeModal() {
+  const name = document.getElementById("intake-name").value.trim();
+  const need = document.getElementById("intake-need").value.trim();
 
-      <div class="modal-input-group">
-        <label>Monthly Revenue ($)</label>
-        <input id="ss-rev" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Avg Ticket Size ($)</label>
-        <input id="ss-ticket" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Processor</label>
-        <select id="ss-proc">
-          <option value="stripe">Stripe (2.9% + 0.30)</option>
-          <option value="paypal">PayPal (3.5% + 0.30)</option>
-        </select>
-      </div>
-
-      <button class="modal-action" onclick="runSolanaSavings()">Calculate</button>
-    `,
-
-    /* 2 — STABLECOIN COMPARE */
-    stablecoinCompare: `
-      <h3 class="modal-title">Stablecoin Fee Comparison</h3>
-      <p class="modal-desc">Legacy rails vs crypto rails.</p>
-
-      <div class="modal-input-group">
-        <label>Invoice Amount ($)</label>
-        <input id="sc-amt" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Processor</label>
-        <select id="sc-proc">
-          <option value="stripe">Stripe (2.9% + 0.30)</option>
-          <option value="paypal">PayPal (3.5% + 0.30)</option>
-        </select>
-      </div>
-
-      <button class="modal-action" onclick="runStablecoinCompare()">Compare</button>
-    `,
-
-    /* 3 — SOLANA YIELD */
-    yield: `
-      <h3 class="modal-title">Solana Pay Yield Estimator</h3>
-      <p class="modal-desc">Yield from instant settlement.</p>
-
-      <div class="modal-input-group">
-        <label>Annual Processing Volume ($)</label>
-        <input id="y-vol" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Avg Settlement Delay (days)</label>
-        <input id="y-days" type="number" value="2">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Yield %</label>
-        <input id="y-yield" type="number" value="8">
-      </div>
-
-      <button class="modal-action" onclick="runYieldCalc()">Calculate</button>
-    `,
-
-    /* 4 — CRYPTO ESCROW */
-    escrow: `
-      <h3 class="modal-title">Crypto Escrow ROI</h3>
-      <p class="modal-desc">Eliminate late payments + protect work.</p>
-
-      <div class="modal-input-group">
-        <label>Avg Project Value ($)</label>
-        <input id="e-value" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Late Payment Probability (%)</label>
-        <input id="e-late" type="number" value="40">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Cost of Delay ($/day)</label>
-        <input id="e-delay" type="number" value="50">
-      </div>
-
-      <button class="modal-action" onclick="runEscrowCalc()">Calculate</button>
-    `,
-
-    /* 5 — TICKET SELLOUT PREDICTOR */
-    tickets: `
-      <h3 class="modal-title">Ticket Sellout Predictor</h3>
-      <p class="modal-desc">Predict demand + sellout window.</p>
-
-      <div class="modal-input-group">
-        <label>Venue Capacity</label>
-        <input id="t-cap" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Artist Followers</label>
-        <input id="t-follow" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Ad Budget ($)</label>
-        <input id="t-budget" type="number">
-      </div>
-
-      <button class="modal-action" onclick="runTicketPredict()">Predict</button>
-    `,
-
-    /* 6 — DFS MULTIPLIER */
-    dfs: `
-      <h3 class="modal-title">DFS Promo Multiplier</h3>
-      <p class="modal-desc">Turn bonuses into expected value.</p>
-
-      <div class="modal-input-group">
-        <label>Bonus Amount ($)</label>
-        <input id="d-bonus" type="number">
-      </div>
-
-      <div class="modal-input-group">
-        <label>Multiplier Odds</label>
-        <input id="d-odds" type="number" placeholder="+100">
-      </div>
-
-      <button class="modal-action" onclick="runDFS()">Calculate</button>
-    `,
-  };
-
-  /* ============================
-       OPENING A TOOL
-  ============================= */
-  function openTool(name) {
-    openToolModal(TOOL_UI[name]);
-  }
-
-  /* ============================
-       TOOL CALCULATORS
-  ============================= */
-
-  /* 1 — SOLANA SAVINGS */
-  function runSolanaSavings() {
-    let rev = parseFloat(document.getElementById("ss-rev").value);
-    let ticket = parseFloat(document.getElementById("ss-ticket").value);
-    let proc = document.getElementById("ss-proc").value;
-
-    if (!rev || !ticket) {
-      document.getElementById("tool-modal-result").innerHTML =
-        "<span style='color:#fb7185;'>Enter valid numbers.</span>";
-      return;
-    }
-
-    let tx = rev / ticket;
-    let fee = proc === "stripe" ? 0.029 : 0.035;
-    let fixed = 0.30;
-
-    let oldFees = rev * fee + tx * fixed;
-    let solFees = tx * 0.00025;
-    let save = oldFees - solFees;
-
-    document.getElementById("tool-modal-result").innerHTML = `
-      Current Fees: $${oldFees.toFixed(2)}<br>
-      On Solana: $${solFees.toFixed(4)}<br><br>
-      <strong>You Save: $${save.toFixed(2)} / month</strong>
-    `;
-  }
-
-  /* 2 — STABLECOIN COMPARE */
-  function runStablecoinCompare() {
-    let amt = parseFloat(document.getElementById("sc-amt").value);
-    let proc = document.getElementById("sc-proc").value;
-
-    if (!amt) return;
-
-    let fee = proc === "stripe" ? 0.029 : 0.035;
-    let oldCost = amt * fee + 0.30;
-    let newCost = 0.00025;
-
-    document.getElementById("tool-modal-result").innerHTML = `
-      Old Rails: $${oldCost.toFixed(2)}<br>
-      Stablecoin: $${newCost.toFixed(4)}<br><br>
-      <strong>Savings: $${(oldCost - newCost).toFixed(2)}</strong>
-    `;
-  }
-
-  /* 3 — SOLANA YIELD */
-  function runYieldCalc() {
-    let vol = parseFloat(document.getElementById("y-vol").value);
-    let days = parseFloat(document.getElementById("y-days").value);
-    let rate = parseFloat(document.getElementById("y-yield").value);
-
-    if (!vol || !days || !rate) return;
-
-    let float = (vol * days) / 365;
-    let earned = float * (rate / 100);
-
-    document.getElementById("tool-modal-result").innerHTML = `
-      Float Value: $${float.toFixed(2)}<br>
-      Annual Yield: $${earned.toFixed(2)}<br>
-      <strong>Processing Offset: ${(earned / vol * 100).toFixed(3)}%</strong>
-    `;
-  }
-
-  /* 4 — ESCROW ROI */
-  function runEscrowCalc() {
-    let value = parseFloat(document.getElementById("e-value").value);
-    let prob = parseFloat(document.getElementById("e-late").value) / 100;
-    let delay = parseFloat(document.getElementById("e-delay").value);
-
-    if (!value || !delay) return;
-
-    let loss = prob * (delay * 50);
-
-    document.getElementById("tool-modal-result").innerHTML = `
-      Current Late Payment Cost: $${loss.toFixed(2)}<br>
-      <strong>Escrow Savings: $${(loss * 0.9).toFixed(2)}</strong>
-    `;
-  }
-
-  /* 5 — TICKET PREDICTOR */
-  function runTicketPredict() {
-    let cap = parseFloat(document.getElementById("t-cap").value);
-    let follow = parseFloat(document.getElementById("t-follow").value);
-    let budget = parseFloat(document.getElementById("t-budget").value);
-
-    if (!cap || !follow) return;
-
-    let hype = follow / 1000 + budget / 500;
-    let days = Math.max(0.8, cap / hype / 50);
-
-    document.getElementById("tool-modal-result").innerHTML = `
-      Projected Sellout: <strong>${days.toFixed(1)} days</strong><br>
-      Hype Index: ${hype.toFixed(2)}
-    `;
-  }
-
-  /* 6 — DFS PROMO MULTIPLIER */
-  function runDFS() {
-    let bonus = parseFloat(document.getElementById("d-bonus").value);
-    let odds = parseFloat(document.getElementById("d-odds").value);
-
-    if (!bonus || !odds) return;
-
-    let implied = odds > 0
-      ? 100 / (odds + 100)
-      : Math.abs(odds) / (Math.abs(odds) + 100);
-
-    let ev = bonus * (1 - implied);
-
-    document.getElementById("tool-modal-result").innerHTML = `
-      Implied Win Probability: ${(implied * 100).toFixed(2)}%<br>
-      <strong>Expected Value: $${ev.toFixed(2)}</strong>
-    `;
-  }
-
-  /* ============================
-       INTAKE MODAL
-  ============================= */
-  function openIntakeModal() {
-    document.getElementById("intake-modal-backdrop").style.display = "flex";
-  }
-
-  function closeIntakeModal() {
-    document.getElementById("intake-modal-backdrop").style.display = "none";
-  }
-
-  function submitIntakeModal() {
-    let name = document.getElementById("intake-name").value;
-    let need = document.getElementById("intake-need").value;
-
-    if (!name || !need) {
-      document.getElementById("intake-modal-result").innerHTML =
-        "<span style='color:#fb7185;'>Please fill everything.</span>";
-      return;
-    }
-
-    let mailto =
-      "mailto:pj@sideguysolutions.com" +
-      "?subject=" + encodeURIComponent("SideGuy Intake from " + name) +
-      "&body=" + encodeURIComponent(need);
-
-    window.location.href = mailto;
-
+  if (!name || !need) {
     document.getElementById("intake-modal-result").innerHTML =
-      "<span style='color:#4ade80;'>Opening email…</span>";
+      "<div class='error'>Please fill out all fields.</div>";
+    return;
   }
 
-  /* ============================
-       PORTAL SUMMON
-  ============================= */
-  function triggerPortal() {
-    boostWaves();
-    setTimeout(() => {
-      window.location.href =
-        "mailto:pj@sideguysolutions.com?subject=Summon PJ";
-    }, 420);
+  const body =
+    "Name: " + name +
+    "\nNeed:\n" + need +
+    "\n\nSent from SideGuySolutions.com";
+
+  window.location.href =
+    "mailto:peter.z@kromeon.com?subject=" +
+    encodeURIComponent("SideGuy Intake Form") +
+    "&body=" +
+    encodeURIComponent(body);
+
+  closeIntakeModal();
+}
+
+/* ======================================================
+      TOOL MODAL SYSTEM
+====================================================== */
+
+function openTool(tool) {
+  const modal = document.getElementById("tool-modal-backdrop");
+  const content = document.getElementById("tool-modal-content");
+  const result = document.getElementById("tool-modal-result");
+
+  modal.classList.add("show");
+  result.innerHTML = "";
+
+  switch (tool) {
+    /* ====================================
+          TOOL 1 — SOLANA SAVINGS
+    ===================================== */
+    case "solanaSavings":
+      content.innerHTML = `
+        <h3 class="modal-title">Solana Processing Savings</h3>
+        <p class="modal-desc">Compare Stripe/PayPal fees vs Solana fees.</p>
+
+        <div class="modal-input-group">
+          <label>Monthly Volume ($)</label>
+          <input id="sol-volume" type="number" placeholder="10000" />
+        </div>
+
+        <div class="modal-input-group">
+          <label>Processor Fee (%)</label>
+          <input id="sol-fee" type="number" value="2.9" />
+        </div>
+
+        <button class="modal-action" onclick="calcSolanaSavings()">Calculate</button>
+      `;
+      break;
+
+    /* ====================================
+          TOOL 2 — STABLECOIN FEES
+    ===================================== */
+    case "stablecoinCompare":
+      content.innerHTML = `
+        <h3 class="modal-title">Stablecoin Fee Comparison</h3>
+        <p class="modal-desc">Legacy rails vs crypto rails.</p>
+
+        <div class="modal-input-group">
+          <label>Amount ($)</label>
+          <input id="sc-amount" type="number" placeholder="500" />
+        </div>
+
+        <button class="modal-action" onclick="calcStablecoinFees()">Compare</button>
+      `;
+      break;
+
+    /* ====================================
+          TOOL 3 — SOLANA YIELD
+    ===================================== */
+    case "yield":
+      content.innerHTML = `
+        <h3 class="modal-title">Yield Estimator</h3>
+        <p class="modal-desc">Estimate yield on settlement float.</p>
+
+        <div class="modal-input-group">
+          <label>Monthly Revenue ($)</label>
+          <input id="yield-revenue" type="number" placeholder="20000" />
+        </div>
+
+        <div class="modal-input-group">
+          <label>Yield Rate (%)</label>
+          <input id="yield-rate" type="number" value="4.8" />
+        </div>
+
+        <button class="modal-action" onclick="calcYield()">Estimate</button>
+      `;
+      break;
+
+    /* ====================================
+          TOOL 4 — ESCROW ROI
+    ===================================== */
+    case "escrow":
+      content.innerHTML = `
+        <h3 class="modal-title">Crypto Escrow ROI</h3>
+        <p class="modal-desc">Late payments → solved.</p>
+
+        <div class="modal-input-group">
+          <label>Average Late Fees / Month ($)</label>
+          <input id="escrow-late" type="number" placeholder="800" />
+        </div>
+
+        <button class="modal-action" onclick="calcEscrow()">Calculate</button>
+      `;
+      break;
+
+    /* ====================================
+          TOOL 5 — TICKETS
+    ===================================== */
+    case "tickets":
+      content.innerHTML = `
+        <h3 class="modal-title">Sellout Predictor</h3>
+        <p class="modal-desc">Predict event speed.</p>
+
+        <div class="modal-input-group">
+          <label>Hype Score (1–10)</label>
+          <input id="tix-hype" type="number" placeholder="7" />
+        </div>
+
+        <div class="modal-input-group">
+          <label>Capacity</label>
+          <input id="tix-cap" type="number" placeholder="350" />
+        </div>
+
+        <button class="modal-action" onclick="calcTickets()">Predict</button>
+      `;
+      break;
+
+    /* ====================================
+          TOOL 6 — DFS PROMO MULTIPLIER
+    ===================================== */
+    case "dfs":
+      content.innerHTML = `
+        <h3 class="modal-title">DFS Promo Multiplier</h3>
+        <p class="modal-desc">Turn promos into EV.</p>
+
+        <div class="modal-input-group">
+          <label>Promo Credit ($)</label>
+          <input id="dfs-credit" type="number" placeholder="20" />
+        </div>
+
+        <div class="modal-input-group">
+          <label>EV Multiplier</label>
+          <input id="dfs-mult" type="number" value="1.35" />
+        </div>
+
+        <button class="modal-action" onclick="calcDFS()">Calculate</button>
+      `;
+      break;
   }
+}
 
-  document.getElementById("summon-btn").addEventListener("click", triggerPortal);
-  document.getElementById("summon-orb").addEventListener("click", triggerPortal);
+function closeToolModal() {
+  document.getElementById("tool-modal-backdrop").classList.remove("show");
+}
 
-  /* ============================
-       VERSION LABELS
-  ============================= */
-  function updateVersionLabels() {
-    const v = "8.0";
-    const a = document.getElementById("version-label");
-    const b = document.getElementById("version-label-footer");
-    if (a) a.textContent = v;
-    if (b) b.textContent = v;
+/* ======================================================
+      CALC LOGIC
+====================================================== */
+
+function calcSolanaSavings() {
+  const vol = parseFloat(document.getElementById("sol-volume").value || 0);
+  const fee = parseFloat(document.getElementById("sol-fee").value || 0) / 100;
+
+  const legacy = vol * fee + 0.30;
+  const solana = vol * 0.00025;
+
+  document.getElementById("tool-modal-result").innerHTML = `
+    <div class="result-line">Legacy Fees: $${legacy.toFixed(2)}</div>
+    <div class="result-line">Solana Fees: $${solana.toFixed(4)}</div>
+    <div class="result-big">You Save: $${(legacy - solana).toFixed(2)}</div>
+  `;
+}
+
+function calcStablecoinFees() {
+  const amt = parseFloat(document.getElementById("sc-amount").value || 0);
+
+  const legacy = amt * 0.029 + 0.30;
+  const usdc = amt * 0.00025;
+
+  document.getElementById("tool-modal-result").innerHTML = `
+    <div class="result-line">Legacy processor: $${legacy.toFixed(2)}</div>
+    <div class="result-line">USDC/Solana: $${usdc.toFixed(4)}</div>
+    <div class="result-big">Savings: $${(legacy - usdc).toFixed(2)}</div>
+  `;
+}
+
+function calcYield() {
+  const rev = parseFloat(document.getElementById("yield-revenue").value || 0);
+  const rate = parseFloat(document.getElementById("yield-rate").value || 0) / 100;
+
+  const monthly = (rev * rate) / 12;
+
+  document.getElementById("tool-modal-result").innerHTML = `
+    <div class="result-line">Monthly Yield: $${monthly.toFixed(2)}</div>
+  `;
+}
+
+function calcEscrow() {
+  const late = parseFloat(document.getElementById("escrow-late").value || 0);
+
+  document.getElementById("tool-modal-result").innerHTML = `
+    <div class="result-big">Recovered Value: $${late.toFixed(2)}</div>
+  `;
+}
+
+function calcTickets() {
+  const hype = parseFloat(document.getElementById("tix-hype").value || 0);
+  const cap = parseFloat(document.getElementById("tix-cap").value || 0);
+
+  const speed = Math.max(1, 11 - hype);
+  const estimate = Math.round(cap / speed);
+
+  document.getElementById("tool-modal-result").innerHTML = `
+    <div class="result-big">Est. Sellout: ${estimate} tickets/day</div>
+  `;
+}
+
+function calcDFS() {
+  const credit = parseFloat(document.getElementById("dfs-credit").value || 0);
+  const mult = parseFloat(document.getElementById("dfs-mult").value || 0);
+
+  const ev = credit * mult;
+
+  document.getElementById("tool-modal-result").innerHTML = `
+    <div class="result-big">Expected Value: $${ev.toFixed(2)}</div>
+  `;
+}
+
+/* ======================================================
+      OCEAN ANIMATION
+====================================================== */
+
+let oceanRenderer, oceanScene, oceanCamera, oceanMesh, oceanMat;
+
+function initOcean() {
+  const canvas = document.getElementById("ocean-canvas");
+  if (!canvas) return;
+
+  oceanRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  oceanRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  oceanRenderer.setSize(window.innerWidth, window.innerHeight);
+  oceanRenderer.setClearColor(0x020617, 1);
+
+  oceanScene = new THREE.Scene();
+
+  oceanCamera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  oceanCamera.position.set(0, 1.5, 2.4);
+  oceanCamera.lookAt(0, 0, 0);
+
+  const geometry = new THREE.PlaneGeometry(8, 6, 200, 160);
+
+  oceanMat = new THREE.ShaderMaterial({
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
+    uniforms: {
+      uTime: { value: 0 },
+    },
+  });
+
+  oceanMesh = new THREE.Mesh(geometry, oceanMat);
+  oceanMesh.rotation.x = -Math.PI / 2.2;
+  oceanMesh.position.y = -0.5;
+  oceanScene.add(oceanMesh);
+
+  animateOcean();
+}
+
+function animateOcean() {
+  requestAnimationFrame(animateOcean);
+
+  const t = performance.now() * 0.0015;
+  if (oceanMat) oceanMat.uniforms.uTime.value = t;
+
+  if (oceanRenderer && oceanScene && oceanCamera) {
+    oceanRenderer.render(oceanScene, oceanCamera);
   }
+}
 
-  document.addEventListener("DOMContentLoaded", updateVersionLabels);
+window.addEventListener("resize", () => {
+  if (!oceanRenderer || !oceanCamera) return;
+  oceanCamera.aspect = window.innerWidth / window.innerHeight;
+  oceanCamera.updateProjectionMatrix();
+  oceanRenderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  initOcean();
+});
+
+/* ======================================================
+      VERSION STAMP
+====================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const v = "8.1";
+  document.getElementById("version-label").textContent = v;
+  document.getElementById("version-label-footer").textContent = v;
+});
 </script>
-  <!-- ============================
-       PART 4 — OCEAN + AUDIO ENGINE
-  ============================= -->
+  <!-- ================================
+       PART 4 — Helpers + Ocean Shaders
+  ================================= -->
 
-  <!-- Optional audio (put these mp3 files in your project root) -->
-  <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
-  <audio id="portal-audio" src="portal-whoosh.mp3" preload="auto"></audio>
+  <!-- Small extra CSS for modals, orb glow, and results -->
+  <style>
+    /* Show/hide for modals + mini menu */
+    #tool-modal-backdrop,
+    #intake-modal-backdrop,
+    #summon-choice-backdrop {
+      display: none;
+    }
 
-  <!-- THREE.js -->
+    #tool-modal-backdrop.show,
+    #intake-modal-backdrop.show,
+    #summon-choice-backdrop.show {
+      display: flex;
+    }
+
+    #chat-mini-menu {
+      display: none;
+    }
+
+    #chat-mini-menu.show {
+      display: block;
+    }
+
+    /* Result text styles */
+    .result-line {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: var(--sub);
+    }
+
+    .result-big {
+      font-size: 1.05rem;
+      margin-top: 6px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .error {
+      color: #fecaca;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* Orb glow + ring */
+    .orb-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 30% 20%,
+        rgba(148, 233, 255, 0.8),
+        transparent 60%
+      );
+      filter: blur(18px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .orb-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid rgba(148, 233, 255, 0.5);
+      box-shadow: 0 0 34px rgba(56, 189, 248, 0.7);
+      pointer-events: none;
+    }
+  </style>
+
+  <!-- THREE.js core -->
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
+  <!-- Ocean Shaders used by initOcean() in Part 3 -->
   <script>
-    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
-    let targetWaveAmp = 1.05;
-
-    /* ============================
-         OCEAN SHADERS
-    ============================= */
-    const oceanVertexShader = `
+    const vertexShader = `
       varying vec2 vUv;
       uniform float uTime;
-      uniform float uWaveAmp;
-
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-      }
-
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-
-        float a = hash(i);
-        float b = hash(i + vec2(1.0, 0.0));
-        float c = hash(i + vec2(0.0, 1.0));
-        float d = hash(i + vec2(1.0, 1.0));
-
-        vec2 u = f * f * (3.0 - 2.0 * f);
-
-        return mix(a, b, u.x) +
-               (c - a) * u.y * (1.0 - u.x) +
-               (d - b) * u.x * u.y;
-      }
 
       void main() {
         vUv = uv;
         vec3 pos = position;
 
-        float t = uTime * 0.5;
+        float t = uTime * 0.7;
 
-        float waveBig   = sin(pos.x * 0.16 + t * 0.7) * 0.6;
-        float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
-        float waveLong  = sin(pos.z * 0.10 + t * 0.35) * 0.75;
+        // Layered waves for a more real ocean feel
+        float wave1 = sin(pos.x * 0.8 + t) * 0.10;
+        float wave2 = sin((pos.x + pos.z) * 0.6 - t * 1.4) * 0.08;
+        float wave3 = sin(pos.z * 1.1 - t * 0.9) * 0.10;
 
-        float n  = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
-        float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.60 + t * 0.65));
-        float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
-
-        float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
-        height *= uWaveAmp;
-
+        float height = wave1 + wave2 + wave3;
         pos.y += height;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
     `;
 
-    const oceanFragmentShader = `
+    const fragmentShader = `
       varying vec2 vUv;
       uniform float uTime;
 
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-      }
-
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-
-        float a = hash(i);
-        float b = hash(i + vec2(1.0, 0.0));
-        float c = hash(i + vec2(0.0, 1.0));
-        float d = hash(i + vec2(1.0, 1.0));
-
-        vec2 u = f * f * (3.0 - 2.0 * f);
-
-        return mix(a, b, u.x) +
-               (c - a) * u.y * (1.0 - u.x) +
-               (d - b) * u.x * u.y;
-      }
-
       void main() {
-        float t = uTime * 0.06;
+        vec2 uv = vUv;
 
-        float n1 = noise(vUv * 8.0  + vec2(t * 2.0,   t * -1.5));
-        float n2 = noise(vUv * 14.0 + vec2(-t * 2.7,  t * 2.2));
-        float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
-
-        float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
-
-        vec3 deep = vec3(0.0, 0.06, 0.18);
-        vec3 mid  = vec3(0.0, 0.30, 0.56);
-        vec3 surf = vec3(0.74, 0.96, 1.0);
+        // Base depth gradient
+        float depth = smoothstep(0.0, 1.0, uv.y);
+        vec3 deep = vec3(0.01, 0.06, 0.13);
+        vec3 mid  = vec3(0.03, 0.24, 0.42);
+        vec3 top  = vec3(0.24, 0.70, 0.96);
 
         vec3 col = mix(deep, mid, depth);
-        col = mix(col, surf, pow(1.0 - depth, 3.2));
+        col = mix(col, top, pow(1.0 - depth, 3.0));
 
-        float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-        col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
+        // Soft horizon glow
+        float t = uTime * 0.35;
+        float glowBand = smoothstep(0.15, 0.55, uv.y + sin(uv.x * 3.0 + t) * 0.03);
+        vec3 glow = vec3(0.32, 0.65, 1.0) * glowBand * 0.35;
+        col += glow;
 
-        float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
-        float rays = smoothstep(0.72, 1.0, rayPattern);
-        col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
+        // Tiny foam shimmer
+        float foam = sin(uv.x * 28.0 + t * 1.6) * cos(uv.y * 40.0 - t * 1.3);
+        foam = smoothstep(0.4, 0.85, foam);
+        col += vec3(0.75, 0.93, 1.0) * foam * 0.25;
 
-        float shimmer = smoothstep(0.78, 1.0,
-          sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0)
-        );
-        col += shimmer * 0.09;
-
-        float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
-        caustic = smoothstep(0.65, 1.0, caustic);
-        col += caustic * 0.07;
-
-        float spark = smoothstep(0.92, 1.0, nFine);
-        col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
-
-        vec2 center = vUv - 0.5;
-        float dist = length(center);
-        float vignette = smoothstep(0.8, 0.25, dist);
-        col *= mix(0.72, 1.22, vignette);
+        // Vignette for depth
+        float vignette = smoothstep(0.85, 0.25, length(uv - 0.5));
+        col *= mix(0.72, 1.18, vignette);
 
         gl_FragColor = vec4(col, 1.0);
       }
     `;
-
-    /* ============================
-         OCEAN INIT
-    ============================= */
-    function initOcean() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) return;
-
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true,
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x000814, 1);
-
-      scene = new THREE.Scene();
-
-      const fov = 55;
-      const aspect = window.innerWidth / window.innerHeight;
-      const near = 0.1;
-      const far = 100;
-      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-      camera.position.set(0, 7.2, 11.5);
-      camera.lookAt(0, 0, 0);
-
-      oceanClock = new THREE.Clock();
-
-      const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
-      geometry.rotateX(-Math.PI / 2);
-
-      oceanMaterial = new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0 },
-          uWaveAmp: { value: targetWaveAmp },
-        },
-        vertexShader: oceanVertexShader,
-        fragmentShader: oceanFragmentShader,
-        side: THREE.DoubleSide,
-      });
-
-      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
-      scene.add(oceanMesh);
-
-      const fogColor = new THREE.Color(0x000817);
-      scene.fog = new THREE.Fog(fogColor, 12, 45);
-      renderer.setClearColor(fogColor, 1);
-
-      window.addEventListener("resize", onWindowResize);
-      animateOcean();
-    }
-
-    function onWindowResize() {
-      if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animateOcean() {
-      requestAnimationFrame(animateOcean);
-
-      if (!oceanClock || !oceanMaterial || !camera || !renderer || !scene) return;
-
-      const elapsed = oceanClock.getElapsedTime();
-      oceanMaterial.uniforms.uTime.value = elapsed;
-
-      const current = oceanMaterial.uniforms.uWaveAmp.value;
-      oceanMaterial.uniforms.uWaveAmp.value =
-        current + (targetWaveAmp - current) * 0.035;
-
-      const sway = Math.sin(elapsed * 0.18) * 0.4;
-      camera.position.x = sway;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-
-    /* ============================
-         PORTAL WAVE / AUDIO BOOST
-         (used by triggerPortal in Part 3)
-    ============================= */
-    function boostWaves() {
-      targetWaveAmp = 1.7;
-      document.body.classList.add("portal-flash", "portal-ripple");
-
-      // Ocean ambience
-      const oceanAudio = document.getElementById("ocean-audio");
-      if (oceanAudio && oceanAudio.paused) {
-        oceanAudio.volume = 0.45;
-        oceanAudio.play().catch(() => {});
-      }
-
-      // Portal whoosh
-      const portalAudio = document.getElementById("portal-audio");
-      if (portalAudio) {
-        portalAudio.currentTime = 0;
-        portalAudio.play().catch(() => {});
-      }
-
-      setTimeout(() => {
-        targetWaveAmp = 1.05;
-        document.body.classList.remove("portal-flash");
-      }, 620);
-
-      setTimeout(() => {
-        document.body.classList.remove("portal-ripple");
-      }, 1500);
-    }
-
-    /* ============================
-         DOM READY
-    ============================= */
-    document.addEventListener("DOMContentLoaded", () => {
-      initOcean();
-    });
   </script>
 </body>
 </html>
