@@ -1,7 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 12.0-coastal-intel
-  Mode: Full-Screen Ocean Portal + Multi-Section Toolkit
+  Version: 12.5-godmode-hybrid
+  Mode: Deep Pacific Cinematic Ocean + Summon PJ Orb + Coastal Toolkit
   Tagline: San Diego Apps, Built Fast. No Ego, No Nonsense.
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
@@ -52,9 +52,9 @@
       "Solana Beach",
       "Encinitas",
       "Cardiff-by-the-Sea",
-      "Del Mar"
-    ],
-    "sameAs": []
+      "Del Mar",
+      "Carlsbad"
+    ]
   }
   </script>
 
@@ -95,7 +95,7 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        "Inter", "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text-main);
       overflow-x: hidden;
@@ -113,7 +113,7 @@
       text-decoration: underline;
     }
 
-    /* Full-screen ocean canvas background */
+    /* Full-screen ocean canvas background (shader in Part 5) */
     #ocean-canvas {
       position: fixed;
       inset: 0;
@@ -172,6 +172,9 @@
     }
 
     .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-inline: 20px;
       height: var(--nav-h);
       display: flex;
       align-items: center;
@@ -326,6 +329,17 @@
       filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.9));
     }
 
+    .version-stamp {
+      font-size: 0.68rem;
+      color: #6b7280;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .version-stamp span {
+      color: #38bdf8;
+    }
+
     @media (max-width: 900px) {
       .nav-inner {
         gap: 10px;
@@ -371,10 +385,9 @@
     }
 
     .hero-shell {
-      padding: 28px 0 40px;
-    }
-
-    .hero-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
       display: grid;
       grid-template-columns: minmax(0, 1.55fr) minmax(0, 1.05fr);
       gap: 28px;
@@ -382,7 +395,7 @@
     }
 
     @media (max-width: 880px) {
-      .hero-grid {
+      .hero-shell {
         grid-template-columns: minmax(0, 1fr);
         gap: 24px;
       }
@@ -440,25 +453,6 @@
     .hero-sub strong {
       color: #e5f0ff;
       font-weight: 600;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .hero-tag-pill {
-      border-radius: var(--radius-pill);
-      padding: 4px 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      backdrop-filter: blur(14px);
     }
 
     .hero-ctas {
@@ -530,20 +524,6 @@
     .hero-meta {
       font-size: 0.78rem;
       color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .badge {
-      border-radius: var(--radius-pill);
-      padding: 3px 9px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
     }
 
     /* Hero right: Orb */
@@ -675,9 +655,11 @@
       letter-spacing: 0.18em;
     }
 
-    /* Section shells */
+    /* Toolkit & sections – structure (content added in later parts) */
     .section-shell {
-      padding: 10px 0 40px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 20px 40px;
     }
 
     .section-header-row {
@@ -689,23 +671,10 @@
       align-items: baseline;
     }
 
-    .section-kicker {
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
     .section-title {
       font-size: 1.3rem;
       font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .section-title span.highlight {
-      background: linear-gradient(to right, #38bdf8, #a855f7);
-      -webkit-background-clip: text;
-      color: transparent;
+      margin-bottom: 4px;
     }
 
     .section-subtitle {
@@ -714,45 +683,20 @@
       max-width: 30rem;
     }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-    }
-
-    .pill {
-      border-radius: var(--radius-pill);
-      padding: 4px 9px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-    }
-
-    /* Cards */
-    .grid-3 {
+    .toolkit-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
     @media (max-width: 920px) {
-      .grid-3 {
+      .toolkit-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     @media (max-width: 640px) {
-      .grid-3,
-      .grid-2 {
+      .toolkit-grid {
         grid-template-columns: minmax(0, 1fr);
       }
     }
@@ -838,7 +782,7 @@
       text-decoration: underline;
     }
 
-    /* Portal flash for transitions */
+    /* Portal flash + ripple (used on clicks) */
     .portal-flash {
       animation: portalFlash 0.6s ease-out;
     }
@@ -880,33 +824,17 @@
       background: linear-gradient(to top, rgba(15, 23, 42, 0.96), transparent);
       margin-top: 18px;
     }
-
-    .version-stamp {
-      font-size: 0.68rem;
-      color: #6b7280;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-top: 6px;
-    }
-
-    .version-stamp span {
-      color: #38bdf8;
-    }
-
-    /* Utility */
-    .mt-4 { margin-top: 1rem; }
-    .mt-2 { margin-top: 0.5rem; }
-    .text-soft { color: var(--text-soft); }
   </style>
 </head>
 <body>
+  <!-- CINEMATIC OCEAN BACKGROUND -->
   <canvas id="ocean-canvas"></canvas>
   <div class="ocean-overlay"></div>
 
-  <!-- PAGE SHELL -->
+  <!-- PAGE CONTAINER -->
   <div class="page-shell">
 
-    <!-- HEADER / NAV -->
+    <!-- HEADER -->
     <header>
       <div class="nav-inner">
         <div class="brand">
@@ -922,48 +850,49 @@
           <a href="#ai">AI</a>
           <a href="#web3">Web3</a>
           <a href="#dfs">DFS</a>
-          <a href="#blog">Blog</a>
-          <a href="#contact" class="nav-cta">Summon PJ</a>
+          <a href="#contact">Contact</a>
         </nav>
 
-        <div class="version-stamp">v12 · PACIFIC ENGINE</div>
+        <div class="version-stamp">v12.5 · GOD MODE</div>
       </div>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section class="hero-shell">
-      <div class="hero-left">
+      <!-- LEFT TEXT CONTENT -->
+      <div>
         <div class="hero-kicker">
           <span>🌊</span> COASTAL INTELLIGENCE
         </div>
 
         <h1 class="hero-title">
           San Diego Apps, Built Fast.<br />
-          <span>No ego. No nonsense.</span>
+          <span class="highlight">No ego. No nonsense.</span>
         </h1>
 
         <p class="hero-sub">
           PJ builds <strong>real technology</strong> for real businesses —
-          apps, automations, AI workflows, Solana payments, DFS tools, and systems
-          that make your days smoother instead of louder.
+          apps, AI workflows, Solana payments, and DFS tools
+          for humans who want things done clean, calm, and fast.
         </p>
 
+        <!-- HERO BUTTONS -->
         <div class="hero-ctas">
           <button id="summon-btn" class="btn-primary">
-            <span class="emoji">🌀</span> TAP TO SUMMON PJ
+            <span class="emoji">🌀</span> Tap To Summon PJ
           </button>
 
-          <button class="btn-ghost" id="toolkit-scroll">
+          <button id="toolkit-scroll" class="btn-ghost">
             Toolkit
           </button>
         </div>
 
-        <p class="hero-meta">
+        <div class="hero-meta">
           Solana Beach · Encinitas · Carlsbad · San Diego Tech
-        </p>
+        </div>
       </div>
 
-      <!-- ORB AREA -->
+      <!-- RIGHT: SUMMON PJ ORB -->
       <div class="hero-orb-shell">
         <div class="orb-glow"></div>
         <div class="orb-ring"></div>
@@ -980,383 +909,164 @@
         </div>
       </div>
     </section>
-    <!-- TOOLKIT SECTION -->
-    <section id="toolkit" class="section-shell">
-      <div class="section-header-row">
-        <div>
-          <div class="section-title">SideGuy Toolkit</div>
-          <div class="section-subtitle">
-            Fast builds, smarter workflows, and coastal-calm execution.
+<body>
+  <!-- CINEMATIC OCEAN BACKGROUND -->
+  <canvas id="ocean-canvas"></canvas>
+  <div class="ocean-overlay"></div>
+
+  <!-- PAGE CONTAINER -->
+  <div class="page-shell">
+
+    <!-- HEADER -->
+    <header>
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="brand-mark"></div>
+          <div>
+            <div class="brand-text-main">SideGuy Solutions</div>
+            <div class="brand-text-sub">Coastal Intelligence · San Diego</div>
           </div>
         </div>
 
-        <div class="section-subtitle">
-          Choose a lane — or let PJ map the whole system.
+        <nav class="nav-links">
+          <a href="#apps">Apps</a>
+          <a href="#ai">AI</a>
+          <a href="#web3">Web3</a>
+          <a href="#dfs">DFS</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="version-stamp">v12.5 · GOD MODE</div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-shell">
+      <!-- LEFT TEXT CONTENT -->
+      <div>
+        <div class="hero-kicker">
+          <span>🌊</span> COASTAL INTELLIGENCE
+        </div>
+
+        <h1 class="hero-title">
+          San Diego Apps, Built Fast.<br />
+          <span class="highlight">No ego. No nonsense.</span>
+        </h1>
+
+        <p class="hero-sub">
+          PJ builds <strong>real technology</strong> for real businesses —
+          apps, AI workflows, Solana payments, and DFS tools
+          for humans who want things done clean, calm, and fast.
+        </p>
+
+        <!-- HERO BUTTONS -->
+        <div class="hero-ctas">
+          <button id="summon-btn" class="btn-primary">
+            <span class="emoji">🌀</span> Tap To Summon PJ
+          </button>
+
+          <button id="toolkit-scroll" class="btn-ghost">
+            Toolkit
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          Solana Beach · Encinitas · Carlsbad · San Diego Tech
         </div>
       </div>
 
-      <div class="toolkit-grid">
+      <!-- RIGHT: SUMMON PJ ORB -->
+      <div class="hero-orb-shell">
+        <div class="orb-glow"></div>
+        <div class="orb-ring"></div>
 
-        <!-- APPS -->
-        <article class="card" id="apps">
-          <div class="card-kicker">Apps & Systems</div>
-          <h3 class="card-title">Custom Apps Without the SF Drama</h3>
-          <p class="card-body">
-            Modern apps, internal tools, client portals, and workflows that
-            actually make sense. Designed for operators, not VCs.
-          </p>
-          <div class="card-meta-row">
-            <span class="card-chip">Ship fast</span>
-            <a class="card-link" href="#contact">Build my app ↗</a>
+        <button id="summon-orb" class="pulse" aria-label="Summon PJ">
+          <div id="summon-orb-label">
+            SUMMON<br />PJ
+            <span>Concierge Online</span>
           </div>
-        </article>
+        </button>
 
-        <!-- AI -->
-        <article class="card" id="ai">
-          <div class="card-kicker">AI Automation</div>
-          <h3 class="card-title">AI Automation for Real Businesses</h3>
-          <p class="card-body">
-            Replace repetitive work with AI workflows that run 24/7. No
-            buzzwords — just clean, practical automations that save time.
-          </p>
-          <div class="card-meta-row">
-            <span class="card-chip">Save hours</span>
-            <a class="card-link" href="#contact">Automate me ↗</a>
-          </div>
-        </article>
-
-        <!-- WEB3 -->
-        <article class="card" id="web3">
-          <div class="card-kicker">Web3 / Solana</div>
-          <h3 class="card-title">Solana Payments for San Diego</h3>
-          <p class="card-body">
-            Smart, instant, low-fee payments — stablecoins or SOL. No hype, no
-            jargon. Just clean rails and better margins.
-          </p>
-          <div class="card-meta-row">
-            <span class="card-chip">USDC ready</span>
-            <a class="card-link" href="#contact">Set up Solana ↗</a>
-          </div>
-        </article>
-
-        <!-- DFS -->
-        <article class="card" id="dfs">
-          <div class="card-kicker">DFS / Promo Edges</div>
-          <h3 class="card-title">Promo Edges for Real Humans</h3>
-          <p class="card-body">
-            Tools and flows for disciplined DFS — not chaos. Focused on promos,
-            correlation, and sustainable edges.
-          </p>
-          <div class="card-meta-row">
-            <span class="card-chip">Smarter sweat</span>
-            <a class="card-link" href="#contact">Build my edge ↗</a>
-          </div>
-        </article>
-
-        <!-- BLOG -->
-        <article class="card" id="blog">
-          <div class="card-kicker">Blog & SEO</div>
-          <h3 class="card-title">San Diego Tech Insights</h3>
-          <p class="card-body">
-            Local tech breakdowns, ocean-brain frameworks, and Coastal
-            Intelligence notes for founders, operators, and creators.
-          </p>
-          <div class="card-meta-row">
-            <span class="card-chip">Local SEO</span>
-            <a class="card-link" href="#contact">Add me to updates ↗</a>
-          </div>
-        </article>
-
-        <!-- SUMMON -->
-        <article class="card" id="contact">
-          <div class="card-kicker">Concierge</div>
-          <h3 class="card-title">Summon PJ</h3>
-          <p class="card-body">
-            Text or email PJ directly. Quick, simple, calm. Tell him what you
-            need — he’ll take it from there.
-          </p>
-          <div class="card-meta-row">
-            <span class="card-chip">Instant</span>
-            <a class="card-link" href="mailto:peter.z@kromeon.com">Text / Email ↗</a>
-          </div>
-        </article>
-
+        <div class="orb-caption">
+          The Coastal Portal → Text or Email PJ instantly.
+        </div>
       </div>
     </section>
     <!-- FOOTER -->
-    <footer>
-      <div>© 2025 SideGuy Solutions · Solana Beach, CA 🌊</div>
-      <div>Coastal tech concierge for San Diego — apps, AI, Web3, and DFS tools.</div>
-      <div class="version-stamp">v12.0 · COASTAL INTELLIGENCE ENGINE</div>
+    <footer class="footer">
+      <div>© 2025 SideGuy Solutions • North County, San Diego 🌊</div>
+      <div>Smarter builds • Real AI • Solana Payments • Coastal calm execution.</div>
+      <div id="version-info">v12.5 · GOD MODE HYBRID</div>
     </footer>
 
-  </div> <!-- /page-shell -->
+    <!-- SUMMON PJ BUTTON -->
+    <div class="summon-wrapper">
+      <button id="summonPJBubble" class="summon-btn">
+        <div class="summon-btn-main">
+          <span class="summon-emoji">🌀</span>
+          <span>TAP TO SUMMON PJ</span>
+        </div>
+        <div class="summon-subtitle">Text or email — instantly.</div>
+      </button>
+      <div class="summon-caption">Coastal concierge at your service.</div>
+    </div>
 
-  <!-- Optional: ocean audio (add ocean-waves.mp3 to root if you want sound) -->
-  <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
+    <!-- SUMMON LOGIC (NO OCEAN CODE YET) -->
+    <script>
 
-  <!-- THREE.js -->
-  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
-
-  <script>
-    // Ensure toolkit cards line up in a grid
-    (function ensureToolkitGrid() {
-      const style = document.createElement("style");
-      style.textContent = `
-        .toolkit-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 14px;
-        }
-        @media (max-width: 920px) {
-          .toolkit-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-        }
-        @media (max-width: 640px) {
-          .toolkit-grid {
-            grid-template-columns: minmax(0, 1fr);
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    })();
-
-    // ----- OCEAN BACKGROUND -----
-    let scene, camera, renderer;
-    let oceanMesh, oceanMaterial;
-    let targetWaveAmp = 1.05;
-
-    const vertexShader = `
-      varying vec2 vUv;
-      uniform float uTime;
-      uniform float uWaveAmp;
-
-      float waveLayer(vec2 p, float speed, float scale, float offset) {
-        float t = uTime * speed + offset;
-        p *= scale;
-        float w = sin(p.x + t) * 0.3 +
-                  sin(p.y * 1.4 - t * 1.2) * 0.25 +
-                  sin((p.x + p.y) * 0.7 + t * 0.8) * 0.2;
-        return w * uWaveAmp;
+      // --- Scroll helper ---
+      function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      void main() {
-        vUv = uv;
-        vec3 pos = position;
-
-        float layer1 = waveLayer(pos.xz, 0.2, 0.6, 0.0);
-        float layer2 = waveLayer(pos.xz + 13.7, 0.32, 1.1, 1.3);
-        float layer3 = waveLayer(pos.xz - 7.9, 0.16, 2.1, 2.7);
-
-        float h = layer1 + layer2 * 0.7 + layer3 * 0.4;
-        pos.y += h;
-
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-      }
-    `;
-
-    const fragmentShader = `
-      varying vec2 vUv;
-      uniform float uTime;
-
-      vec3 deepOceanColor(vec2 uv) {
-        float depth = smoothstep(0.1, 0.7, uv.y);
-        vec3 deep = vec3(0.01, 0.06, 0.13);
-        vec3 mid = vec3(0.02, 0.21, 0.36);
-        vec3 top = vec3(0.18, 0.58, 0.82);
-        return mix(deep, mix(mid, top, depth), 0.95);
-      }
-
-      void main() {
-        vec2 uv = vUv;
-        vec3 base = deepOceanColor(uv);
-
-        // Fresnel-style highlight near top
-        float fresnel = pow(1.0 - clamp(uv.y + 0.05, 0.0, 1.0), 2.0);
-        vec3 horizonGlow = vec3(0.56, 0.84, 1.0) * 1.6 * fresnel;
-
-        // Subtle scrolling caustics
-        float t = uTime * 0.35;
-        float c1 = sin((uv.x * 18.0) + t) * cos((uv.y * 12.0) - t * 1.4);
-        float c2 = sin((uv.x * 28.0) - t * 0.7) * cos((uv.y * 18.0) + t * 1.1);
-        float caustics = (c1 + c2) * 0.085;
-        vec3 foam = vec3(0.85, 0.96, 1.0) * caustics;
-
-        // Subtle swell band
-        float swell = sin(uv.y * 10.0 - t * 0.9) * 0.05;
-        vec3 swellTint = vec3(0.3, 0.7, 1.0) * swell;
-
-        vec3 color = base + horizonGlow + foam + swellTint;
-
-        // Slight vignette
-        float vignette = smoothstep(0.0, 0.8, uv.y) * 0.15;
-        color *= (1.0 - vignette);
-
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `;
-
-    function initOcean() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) return;
-
-      scene = new THREE.Scene();
-      const fov = 60;
-      const aspect = window.innerWidth / window.innerHeight;
-      const near = 0.1;
-      const far = 100;
-      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-      camera.position.set(0, 1.4, 2.4);
-      camera.lookAt(0, 0, 0);
-
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true,
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x020617, 1);
-
-      const geometry = new THREE.PlaneGeometry(8, 6, 160, 120);
-
-      oceanMaterial = new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          uTime: { value: 0 },
-          uWaveAmp: { value: 1.05 },
-        },
-        wireframe: false,
-      });
-
-      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
-      oceanMesh.rotation.x = -Math.PI / 2.1;
-      oceanMesh.position.y = -0.6;
-      scene.add(oceanMesh);
-
-      window.addEventListener("resize", onWindowResize);
-      animate();
-    }
-
-    function onWindowResize() {
-      if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      if (!oceanMaterial || !camera || !renderer) return;
-
-      const t = performance.now() * 0.0015;
-      oceanMaterial.uniforms.uTime.value = t;
-
-      oceanMaterial.uniforms.uWaveAmp.value +=
-        (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.04;
-
-      camera.position.x = Math.sin(t * 0.18) * 0.35;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-
-    function boostWaves() {
-      targetWaveAmp = 1.7;
-      document.body.classList.add("portal-flash", "portal-ripple");
-
-      setTimeout(() => {
-        targetWaveAmp = 1.05;
-        document.body.classList.remove("portal-flash");
-      }, 620);
-
-      setTimeout(() => {
-        document.body.classList.remove("portal-ripple");
-      }, 1500);
-
-      const audio = document.getElementById("ocean-audio");
-      if (audio && audio.paused) {
-        audio.play().catch(() => {
-          // ignore autoplay block
-        });
-      }
-    }
-
-    function openEmailPortal() {
-      const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
-      const body = encodeURIComponent(
-        "Hey PJ,\n\nI just tapped the coastal portal.\n\nHere’s what I’m trying to do:\n- Tech build / app / site\n- AI automation / workflows\n- Solana payments / Web3\n- DFS tools / promo edges\n- Something else entirely\n\nDrop me a line back and let’s spin this up.\n\n— Sent from the SideGuy portal 🌊"
-      );
-      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-    }
-
-    function smoothScrollTo(targetId) {
-      const el = document.querySelector(targetId);
-      if (!el) return;
-      boostWaves();
-      setTimeout(() => {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 180);
-    }
-
-    function wireSummonFlow() {
-      const orb = document.getElementById("summon-orb");
-      const summonBtn = document.getElementById("summon-btn");
-      const toolkitScroll = document.getElementById("toolkit-scroll");
-
-      const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
-
-      function triggerPortalEmail() {
-        boostWaves();
-        setTimeout(openEmailPortal, 420);
-      }
-
-      if (orb) {
-        orb.addEventListener("click", triggerPortalEmail);
-      }
-
-      if (summonBtn) {
-        summonBtn.addEventListener("click", triggerPortalEmail);
-      }
-
-      if (toolkitScroll) {
-        toolkitScroll.addEventListener("click", () => {
-          smoothScrollTo("#toolkit");
-        });
-      }
-
-      navLinks.forEach((link) => {
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) return;
-
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          smoothScrollTo(href);
-        });
-      });
-
-      // Upgrade contact card link to choose text or email
-      const contactCardLink = document.querySelector("#contact .card-link");
-      if (contactCardLink) {
-        contactCardLink.addEventListener("click", function (e) {
-          e.preventDefault();
-          const preferText = confirm(
-            "Text PJ instead of email?\n\nOK = Text PJ\nCancel = Email PJ"
+      // --- Summon PJ Actions ---
+      function openEmailPJ() {
+        window.location.href =
+          "mailto:peter.z@kromeon.com"
+          + "?subject=" + encodeURIComponent("Summon PJ — SideGuy Solutions")
+          + "&body=" + encodeURIComponent(
+            "Hey PJ,\n\nI tapped the portal.\nHere’s what I need help with:\n- Custom app / AI workflow\n- Solana payments\n- DFS tools\n- Something else\n\n— Sent from SideGuy Solutions 🌊"
           );
-          if (preferText) {
-            window.location.href = "sms:+17735441231";
-          } else {
-            openEmailPortal();
-          }
-        });
       }
-    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      initOcean();
-      wireSummonFlow();
-    });
-  </script>
-</body>
-</html>
+      function openTextPJ() {
+        window.location.href = "sms:17735441231?body=Hey%20PJ%2C%20need%20your%20help!";
+      }
+
+      // --- Wire Buttons ---
+      document.addEventListener("DOMContentLoaded", () => {
+        
+        // Summon Button (floating)
+        const bubble = document.getElementById("summonPJBubble");
+        if (bubble) {
+          bubble.addEventListener("click", () => {
+            // 50% chance: text or email
+            const roll = Math.random();
+            if (roll < 0.5) openTextPJ();
+            else openEmailPJ();
+          });
+        }
+
+        // Contact link inside Toolkit
+        const contactLink = document.getElementById("contact-link");
+        if (contactLink) {
+          contactLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            openTextPJ();
+          });
+        }
+
+        // Smooth anchor navigation for #apps, #ai, #web3, #dfs
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+          link.addEventListener("click", (e) => {
+            const id = link.getAttribute("href").replace("#", "");
+            if (id && document.getElementById(id)) {
+              e.preventDefault();
+              scrollToSection(id);
+            }
+          });
+        });
+      });
+
+    </script>
