@@ -24,7 +24,7 @@
 
   <link rel="canonical" href="https://sideguysolutions.com/" />
 
-  <!-- LocalBusiness Schema -->
+  <!-- LocalBusiness Schema v2 -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,6 +46,52 @@
       "Encinitas",
       "Del Mar",
       "Carlsbad"
+    ],
+    "priceRange": "$$",
+    "sameAs": [
+      "https://www.kromeon.com"
+    ]
+  }
+  </script>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you only work with San Diego and North County businesses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SideGuy Solutions is optimized for San Diego and North County operators, but can support remote projects if the fit is right."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of projects are a good fit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Custom apps, internal tools, AI automation, ticketing, payment flows on Solana, and DFS tooling — especially when there is a clear operator and real-world constraints."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a big agency with layers of account managers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. SideGuy Solutions is a lean coastal concierge model — you work directly with PJ and a small dev pod rather than a large agency hierarchy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything gambling advice or pick-selling?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. DFS and promo tooling here is strictly educational, focused on systems, risk, and process — never picks or guarantees."
+        }
+      }
     ]
   }
   </script>
@@ -397,16 +443,9 @@
       background:
         radial-gradient(circle at 50% 0, rgba(224, 242, 254, 0.4), transparent 60%),
         radial-gradient(circle at 80% 90%, rgba(56, 189, 248, 0.55), transparent 65%);
-      opacity: 0.9;
+      opacity: 0.85;
       mix-blend-mode: screen;
       pointer-events: none;
-      animation: orbAuraPulse 9s ease-in-out infinite;
-    }
-
-    @keyframes orbAuraPulse {
-      0% { opacity: 0.7; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.06); }
-      100% { opacity: 0.7; transform: scale(1); }
     }
 
     #summon-orb {
@@ -426,42 +465,16 @@
       cursor: pointer;
       overflow: hidden;
       transition:
-        transform 0.18s ease,
-        filter 0.18s ease,
-        box-shadow 0.18s ease;
-      animation: orbPulseGlow 2.6s ease-in-out infinite;
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        filter 0.16s ease;
     }
 
-    #summon-orb::after {
-      content: "";
-      position: absolute;
-      inset: 16%;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.6);
-      box-shadow: 0 0 35px rgba(248, 250, 252, 0.9);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    @keyframes orbPulseGlow {
-      0% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
-      50% {
-        transform: scale(1.03);
-        box-shadow:
-          0 0 60px rgba(56, 189, 248, 1),
-          0 0 150px rgba(56, 189, 248, 1);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
+    #summon-orb.orb-pulse-sync {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 70px rgba(56, 189, 248, 0.95),
+        0 0 160px rgba(56, 189, 248, 1);
     }
 
     #summon-orb-label {
@@ -491,7 +504,6 @@
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      animation: orbCaptionPulse 6s ease-in-out infinite;
     }
 
     @keyframes labelGlow {
@@ -505,11 +517,6 @@
           0 0 16px rgba(248, 250, 252, 1),
           0 0 30px rgba(56, 189, 248, 1);
       }
-    }
-
-    @keyframes orbCaptionPulse {
-      0%, 100% { opacity: 0.7; letter-spacing: 0.18em; }
-      50% { opacity: 1; letter-spacing: 0.22em; }
     }
 
     /* PORTAL FX */
@@ -666,7 +673,7 @@
       color: var(--muted);
     }
 
-    /* INTAKE / BLOG / DOWNLOADS / FOOTER / MODALS */
+    /* INTAKE / BLOG / DOWNLOADS / FAQ / CTA / FOOTER / MODALS */
 
     .intake-grid {
       display: grid;
@@ -743,6 +750,19 @@
       margin-bottom: 6px;
     }
 
+    .blog-mini-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .blog-mini-item strong {
+      color: #e5f2ff;
+      font-weight: 500;
+    }
+
     .downloads-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -775,13 +795,60 @@
       color: var(--soft);
     }
 
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 880px) {
+      .faq-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .faq-q {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      font-size: 0.82rem;
+      color: var(--soft);
+    }
+
+    .bottom-cta {
+      max-width: 1120px;
+      margin: 0 auto 12px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.28), rgba(15, 23, 42, 0.96));
+      box-shadow:
+        0 18px 55px rgba(15, 23, 42, 0.96),
+        0 0 60px rgba(56, 189, 248, 0.35);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .bottom-cta-main {
+      max-width: 520px;
+    }
+
+    .bottom-cta-main strong {
+      font-weight: 650;
+    }
+
     footer {
       text-align: center;
-      padding: 26px 20px 32px;
+      padding: 16px 20px 26px;
       font-size: 0.75rem;
       color: var(--muted);
       border-top: 1px solid rgba(56, 189, 248, 0.25);
-      margin-top: 30px;
       background: linear-gradient(to top, rgba(2, 6, 23, 0.96), transparent);
     }
 
@@ -790,6 +857,9 @@
         padding-inline: 16px;
       }
       .section {
+        padding-inline: 16px;
+      }
+      .bottom-cta {
         padding-inline: 16px;
       }
     }
@@ -891,9 +961,10 @@
           <a href="#dfs">DFS</a>
           <a href="#intake">Intake</a>
           <a href="#downloads">Downloads</a>
+          <a href="#faq">FAQ</a>
           <a href="#blog">Blog</a>
         </nav>
-        <div class="version-tag">v15.0 · ALADEEN OCEAN EXPERIENCE · SAN DIEGO</div>
+        <div class="version-tag">v16.0 · ALADEEN OCEAN ULTRA · SAN DIEGO</div>
       </div>
     </div>
   </header>
@@ -945,7 +1016,7 @@
     <div class="section-title">SideGuy Toolkit</div>
     <div class="grid">
       <div class="card">
-        <h3>Solana Processing Savings</h3>
+        <h3>🟣 Solana Processing Savings</h3>
         <p>See how much you save running payments on Solana rails versus old-school processors.</p>
         <button class="btn-primary btn-secondary" onclick="openSavingsCalc()">
           OPEN CALCULATOR
@@ -953,7 +1024,7 @@
         <div class="card-small">Built for San Diego agencies, venues, and startups.</div>
       </div>
       <div class="card">
-        <h3>DFS Promo Multiplier</h3>
+        <h3>🎲 DFS Promo Multiplier</h3>
         <p>Quick EV snapshots on 2-leg and boosted parlays. Educational only, zero pick-selling.</p>
         <button class="btn-primary btn-secondary" onclick="openDFS()">
           DFS TOOL
@@ -961,7 +1032,7 @@
         <div class="card-small">Helps structure promos and slates without going full degenerate.</div>
       </div>
       <div class="card">
-        <h3>Ticket Flow Optimizer</h3>
+        <h3>🎟️ Ticket Flow Optimizer</h3>
         <p>Model ticket price, fees, and capacity to see where big platforms are skimming.</p>
         <button class="btn-primary btn-secondary" onclick="openTickets()">
           OPTIMIZE
@@ -1207,9 +1278,12 @@
           Short playbook on how local businesses can stitch together apps, AI, and payments
           without hiring a full in-house team.
         </p>
-        <div class="download-pill">
-          <strong>PDF</strong><span>Coming soon · Ask PJ</span>
-        </div>
+        <a
+          class="download-pill"
+          href="mailto:peter.z@kromeon.com?subject=2025%20San%20Diego%20Tech%20Flow%20Guide%20Request&body=Hey%20PJ%2C%0A%0ASend%20over%20the%202025%20San%20Diego%20Tech%20Flow%20Guide%20from%20SideGuySolutions.com.%0A"
+        >
+          <strong>PDF</strong><span>Request from PJ</span>
+        </a>
       </div>
       <div class="card">
         <h3>DFS Promo Ladder Template</h3>
@@ -1217,9 +1291,12 @@
           A calm, spreadsheet-friendly way to structure promos, boosts, and withdrawals
           so it feels like a system, not a roulette wheel.
         </p>
-        <div class="download-pill">
-          <strong>Template</strong><span>Educational use only</span>
-        </div>
+        <a
+          class="download-pill"
+          href="mailto:peter.z@kromeon.com?subject=DFS%20Promo%20Ladder%20Template%20Request&body=Hey%20PJ%2C%0A%0AHit%20me%20with%20the%20DFS%20Promo%20Ladder%20Template%20from%20SideGuySolutions.com.%20Educational%20use%20only.%0A"
+        >
+          <strong>Template</strong><span>Educational only</span>
+        </a>
       </div>
       <div class="card">
         <h3>Solana Processing Savings One-Pager</h3>
@@ -1227,8 +1304,46 @@
           A one-page breakdown of traditional card fees vs. Solana rails, tuned for San Diego agencies,
           venues, and dev shops.
         </p>
-        <div class="download-pill">
-          <strong>PDF</strong><span>Ask PJ for a copy</span>
+        <a
+          class="download-pill"
+          href="mailto:peter.z@kromeon.com?subject=Solana%20Processing%20Savings%20One-Pager&body=Hey%20PJ%2C%0A%0ASend%20over%20the%20Solana%20Processing%20Savings%20One-Pager%20from%20SideGuySolutions.com.%0A"
+        >
+          <strong>PDF</strong><span>Ask PJ for it</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-title">FAQ · San Diego &amp; Beyond</div>
+    <div class="faq-grid">
+      <div class="card">
+        <div class="faq-q">Do you only work with San Diego clients?</div>
+        <div class="faq-a">
+          No. San Diego and North County are home base, but SideGuy can support remote projects
+          when the operator, lane, and timeline are a good fit.
+        </div>
+      </div>
+      <div class="card">
+        <div class="faq-q">What’s a strong “SideGuy fit” project?</div>
+        <div class="faq-a">
+          Clear owner, real-world constraints, and a lane in apps, AI, payments, ticketing,
+          or DFS tooling. Chaos is fine — as long as someone really cares about the outcome.
+        </div>
+      </div>
+      <div class="card">
+        <div class="faq-q">Is this a big agency with layers of people?</div>
+        <div class="faq-a">
+          Nope. You work directly with PJ and a small dev pod instead of swimming through account
+          managers and endless decks.
+        </div>
+      </div>
+      <div class="card">
+        <div class="faq-q">Is any of this gambling advice?</div>
+        <div class="faq-a">
+          No. DFS tools here are strictly educational and focused on structure and risk.
+          No picks, no guarantees, no “locks” — just systems thinking.
         </div>
       </div>
     </div>
@@ -1264,6 +1379,23 @@
       </div>
     </div>
 
+    <!-- Micro-posts -->
+    <div class="blog-mini-list">
+      <div class="blog-mini-item">
+        <strong>Micro dispatch · Intake latency</strong> — Most local businesses still let leads sit for
+        hours. A single smart auto-reply flow can plug thousands in dropped intent per year.
+      </div>
+      <div class="blog-mini-item">
+        <strong>Micro dispatch · Solana rails</strong> — For the right flows, 2–3% fees is the
+        “invisible rent” nobody questions. SideGuy’s goal is to make that number feel negotiable.
+      </div>
+      <div class="blog-mini-item">
+        <strong>Micro dispatch · DFS calm mode</strong> — You’re not chasing one hit. You’re building
+        a system that still makes sense when you’re tired, busy, or tilted.
+      </div>
+    </div>
+
+    <!-- Subtle SEO helper copy -->
     <p class="section-lead" style="margin-top:18px; font-size:0.8rem; color:var(--muted);">
       SideGuy Solutions operates as a San Diego software development and AI automation partner for
       North County businesses — from Encinitas and Solana Beach to Del Mar and Carlsbad — building
@@ -1315,392 +1447,483 @@
     </div>
   </div>
 
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <div class="bottom-cta-main">
+      <strong>Text PJ for a real plan.</strong><br />
+      One message can turn “I should really fix this system” into a concrete next step for your app, ticketing,
+      AI, or payment flows.
+    </div>
+    <button
+      class="btn-primary btn-secondary"
+      onclick="window.location.href='sms:+17735441231?&body=' + encodeURIComponent('Hey PJ, saw the coastal portal. Can you help me map my next build?');"
+    >
+      TEXT PJ FROM THE PORTAL
+    </button>
+  </div>
+
   <!-- FOOTER -->
   <footer>
-    SideGuy Solutions · San Diego &amp; North County · v15.0 Aladeen Ocean Experience · Tap the portal if you know what’s good for you.
+    SideGuy Solutions · San Diego &amp; North County · v16.0 Aladeen Ocean Ultra · Tap the portal if you know what’s good for you.
   </footer>
 
-  <!-- JS + OCEAN SHADER WILL BE ADDED IN PART 2 -->
-<!-- =============================================== -->
-<!-- ==========  V15 ALADDEEN OCEAN JS   =========== -->
-<!-- =============================================== -->
+  <!-- =============================================== -->
+  <!-- ==========  V16 ALADDEEN OCEAN JS  ============ -->
+  <!-- =============================================== -->
 
-<script type="module">
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
+  <script type="module">
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js";
 
-let scene, camera, renderer, oceanMesh, clock;
-let uniforms;
+    let scene, camera, renderer, oceanMesh, clock;
+    let uniforms;
+    const orb = document.getElementById("summon-orb");
 
-initOceanSafe();
+    let lastPhase = 0;
 
-function initOceanSafe() {
-  try {
-    initOcean();
-  } catch (err) {
-    console.error("Ocean shader failed:", err);
-    fallbackOcean();
-  }
-}
+    initOceanSafe();
 
-function initOcean() {
-  clock = new THREE.Clock();
+    function initOceanSafe() {
+      try {
+        initOcean();
+      } catch (err) {
+        console.error("Ocean shader failed:", err);
+        fallbackOcean();
+      }
+    }
 
-  // Scene
-  scene = new THREE.Scene();
+    function initOcean() {
+      clock = new THREE.Clock();
+      scene = new THREE.Scene();
 
-  // Camera
-  camera = new THREE.PerspectiveCamera(
-    60,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    200
-  );
-  camera.position.set(0, 2.2, 3.4);
+      camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 2.2, 3.4);
 
-  // Renderer
-  renderer = new THREE.WebGLRenderer({
-    canvas: document.getElementById("ocean-canvas"),
-    antialias: true,
-  });
-  renderer.setPixelRatio(Math.min(1.6, window.devicePixelRatio));
-  renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById("ocean-canvas"),
+        antialias: true
+      });
+      renderer.setPixelRatio(Math.min(1.8, window.devicePixelRatio || 1));
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-  // Shader uniforms
-  uniforms = {
-    uTime: { value: 0 },
+      uniforms = {
+        uTime: { value: 0.0 },
 
-    // Big waves
-    uBigWaveElevation: { value: 0.42 },
-    uBigWaveFrequency: { value: new THREE.Vector2(0.28, 0.38) },
-    uBigWaveSpeed: { value: 0.13 },
+        // Big waves
+        uBigWaveElevation: { value: 0.42 },
+        uBigWaveFrequency: { value: new THREE.Vector2(0.28, 0.38) },
+        uBigWaveSpeed: { value: 0.13 },
 
-    // Small waves
-    uSmallWaveElevation: { value: 0.22 },
-    uSmallWaveFrequency: { value: 2.6 },
-    uSmallWaveSpeed: { value: 0.22 },
+        // Small waves
+        uSmallWaveElevation: { value: 0.22 },
+        uSmallWaveFrequency: { value: 2.6 },
+        uSmallWaveSpeed: { value: 0.22 },
 
-    // Colors
-    uDepthColor: { value: new THREE.Color("#001020") },
-    uSurfaceColor: { value: new THREE.Color("#38bdf8") },
-    uHighlightColor: { value: new THREE.Color("#5ee7ff") },
+        // Colors
+        uDepthColor: { value: new THREE.Color("#001020") },
+        uSurfaceColor: { value: new THREE.Color("#38bdf8") },
+        uHighlightColor: { value: new THREE.Color("#5ee7ff") },
 
-    uColorOffset: { value: 0.08 },
-    uColorMultiplier: { value: 2.4 },
+        uColorOffset: { value: 0.08 },
+        uColorMultiplier: { value: 2.4 },
 
-    // Fresnel
-    uFresnelPower: { value: 3.6 },
-    uFresnelIntensity: { value: 1.3 },
-    uFresnelBias: { value: 0.18 },
-  };
+        // Fresnel / rim lighting
+        uFresnelPower: { value: 3.6 },
+        uFresnelIntensity: { value: 1.3 },
+        uFresnelBias: { value: 0.18 }
+      };
 
-  const geometry = new THREE.PlaneGeometry(16, 16, 512, 512);
+      const geometry = new THREE.PlaneGeometry(16, 16, 512, 512);
 
-  const material = new THREE.ShaderMaterial({
-    vertexShader: `
-      uniform float uTime;
-      uniform float uBigWaveElevation;
-      uniform vec2 uBigWaveFrequency;
-      uniform float uBigWaveSpeed;
+      const material = new THREE.ShaderMaterial({
+        vertexShader: `
+          uniform float uTime;
+          uniform float uBigWaveElevation;
+          uniform vec2 uBigWaveFrequency;
+          uniform float uBigWaveSpeed;
 
-      uniform float uSmallWaveElevation;
-      uniform float uSmallWaveFrequency;
-      uniform float uSmallWaveSpeed;
+          uniform float uSmallWaveElevation;
+          uniform float uSmallWaveFrequency;
+          uniform float uSmallWaveSpeed;
 
-      varying float vElevation;
-      varying vec2 vUv;
+          varying float vElevation;
+          varying vec2 vUv;
 
-      float wave(vec2 p, float freq, float speed, float amp) {
-        return sin(p.x * freq + uTime * speed)
-             * sin(p.y * freq + uTime * speed)
-             * amp;
+          float wave(vec2 p, float freq, float speed, float amp) {
+            return sin(p.x * freq + uTime * speed)
+                 * sin(p.y * freq + uTime * speed)
+                 * amp;
+          }
+
+          void main() {
+            vUv = uv;
+            vec3 p = position;
+
+            float big =
+              sin(p.x * uBigWaveFrequency.x + uTime * uBigWaveSpeed) *
+              sin(p.y * uBigWaveFrequency.y + uTime * uBigWaveSpeed) *
+              uBigWaveElevation;
+
+            float small = wave(p.xz, uSmallWaveFrequency, uSmallWaveSpeed, uSmallWaveElevation);
+
+            vElevation = big + small;
+            p.z += vElevation;
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform float uTime;
+
+          uniform vec3 uDepthColor;
+          uniform vec3 uSurfaceColor;
+          uniform vec3 uHighlightColor;
+
+          uniform float uColorOffset;
+          uniform float uColorMultiplier;
+          uniform float uFresnelPower;
+          uniform float uFresnelIntensity;
+          uniform float uFresnelBias;
+
+          varying float vElevation;
+          varying vec2 vUv;
+
+          void main() {
+            float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;
+            vec3 water = mix(uDepthColor, uSurfaceColor, mixStrength);
+
+            // Fresnel-like rim near the "camera-facing" side
+            float fres = pow(1.0 - vUv.y, uFresnelPower) * uFresnelIntensity + uFresnelBias;
+            vec3 highlight = uHighlightColor * fres;
+            water += highlight * 0.6;
+
+            // God-ray / sunset shimmer band
+            float band = smoothstep(0.25, 0.7, vUv.y);
+            float shimmer = sin(vUv.x * 22.0 + uTime * 2.0);
+            shimmer = 0.5 + 0.5 * shimmer;
+            shimmer = pow(shimmer, 4.0);
+            float rays = band * shimmer;
+
+            vec3 sunColor = vec3(1.0, 0.93, 0.78);
+            water += sunColor * rays * 0.35;
+
+            gl_FragColor = vec4(water, 1.0);
+          }
+        `,
+        uniforms,
+        side: THREE.DoubleSide
+      });
+
+      oceanMesh = new THREE.Mesh(geometry, material);
+      oceanMesh.rotation.x = -Math.PI / 2;
+      scene.add(oceanMesh);
+
+      renderer.setClearColor("#020617");
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const t = clock.getElapsedTime();
+      uniforms.uTime.value = t;
+
+      // Subtle breathing of big wave elevation
+      const wavePulse = 0.5 + 0.5 * Math.sin(t * 0.6);
+      uniforms.uBigWaveElevation.value = 0.35 + wavePulse * 0.16;
+
+      // Soft camera drift
+      camera.position.x = Math.sin(t * 0.12) * 0.25;
+      camera.position.z = 3.4 + Math.sin(t * 0.08) * 0.15;
+      camera.lookAt(0, 0, 0);
+
+      // Orb sync pulse on wave crest
+      const phase = wavePulse; // 0–1
+      if (orb) {
+        if (phase > 0.9 && lastPhase <= 0.9) {
+          orb.classList.add("orb-pulse-sync");
+          setTimeout(() => {
+            orb.classList.remove("orb-pulse-sync");
+          }, 260);
+        }
+      }
+      lastPhase = phase;
+
+      renderer.render(scene, camera);
+    }
+
+    function fallbackOcean() {
+      const canvas = document.getElementById("ocean-canvas");
+      if (canvas) {
+        canvas.style.background =
+          "radial-gradient(circle at top, #0ea5e9, #020617 70%)";
+      }
+    }
+
+    window.addEventListener("resize", () => {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+
+  <!-- PORTAL + CALCULATORS + NAV -->
+  <script>
+    // Smooth scroll for nav
+    document.querySelectorAll(".nav-links a").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = a.getAttribute("href");
+        const el = document.querySelector(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // Scroll helper for CTAs
+    function scrollToIntake(prefillLane) {
+      const select = document.getElementById("intake-type");
+      if (select && prefillLane) {
+        [...select.options].forEach((opt) => {
+          if (opt.value === prefillLane) select.value = opt.value;
+        });
+      }
+      const el = document.getElementById("intake");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Portal logic
+    function triggerPortal() {
+      document.body.classList.add("portal-burst-flash");
+      setTimeout(() => document.body.classList.remove("portal-burst-flash"), 450);
+
+      const ring = document.createElement("div");
+      ring.className = "portal-burst-ring";
+      document.body.appendChild(ring);
+      setTimeout(() => ring.remove(), 900);
+
+      setTimeout(openPortalRoute, 480);
+    }
+
+    function openPortalRoute() {
+      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        window.location.href =
+          "sms:+17735441231?&body=" +
+          encodeURIComponent(
+            "Hey PJ, I just summoned the ocean portal on SideGuySolutions.com — let’s build something."
+          );
+      } else {
+        const subject = encodeURIComponent("Summon PJ · Coastal Portal");
+        const body = encodeURIComponent(
+          "Hey PJ,\n\n" +
+          "I just tapped the ocean portal on SideGuySolutions.com.\n\n" +
+          "Here’s what I’m looking at:\n" +
+          "- Apps / internal tools\n" +
+          "- AI automation\n" +
+          "- Web3 / Solana payments\n" +
+          "- Ticketing flows\n" +
+          "- DFS systems (educational)\n\n" +
+          "Shoot me a plan when you’re free.\n"
+        );
+        window.location.href =
+          "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+      }
+    }
+
+    // Toolkit modals
+    function openSavingsCalc() {
+      document.getElementById("modal-solana").style.display = "flex";
+    }
+    function closeSolana() {
+      document.getElementById("modal-solana").style.display = "none";
+    }
+
+    function openDFS() {
+      document.getElementById("modal-dfs").style.display = "flex";
+    }
+    function closeDFS() {
+      document.getElementById("modal-dfs").style.display = "none";
+    }
+
+    function openTickets() {
+      document.getElementById("modal-tickets").style.display = "flex";
+    }
+    function closeTickets() {
+      document.getElementById("modal-tickets").style.display = "none";
+    }
+
+    // Odds helper
+    function americanToDecimal(val) {
+      const odds = parseFloat((val || "").toString().replace(/[^\d+-]/g, ""));
+      if (!odds || odds === 0) return null;
+      return odds > 0 ? odds / 100 + 1 : 100 / Math.abs(odds) + 1;
+    }
+
+    // Solana calc
+    function runSolanaCalc() {
+      const vol = parseFloat(document.getElementById("solana-volume").value);
+      const fee = parseFloat(document.getElementById("solana-fee").value);
+      const out = document.getElementById("solana-result");
+      out.style.display = "block";
+
+      if (!vol || !fee) {
+        out.textContent = "Enter both your monthly volume and fee %.";
+        return;
       }
 
-      void main() {
-        vUv = uv;
-        vec3 p = position;
+      const current = (fee / 100) * vol;
+      const solana = vol * 0.003;
+      const savings = current - solana;
 
-        float big =
-          sin(p.x * uBigWaveFrequency.x + uTime * uBigWaveSpeed) *
-          sin(p.y * uBigWaveFrequency.y + uTime * uBigWaveSpeed) *
-          uBigWaveElevation;
+      out.innerHTML =
+        "At $" +
+        vol.toLocaleString() +
+        " in monthly volume and " +
+        fee.toFixed(2) +
+        "% fees, you’re paying about <strong>$" +
+        current.toFixed(0) +
+        "/month</strong> in card fees.<br><br>" +
+        "Routing through Solana rails (~0.3%) drops that to roughly <strong>$" +
+        solana.toFixed(0) +
+        "/month</strong>, saving about <strong>$" +
+        savings.toFixed(0) +
+        "/month</strong> — or around <strong>$" +
+        (savings * 12).toFixed(0) +
+        "/year</strong>.";
+    }
 
-        float small = wave(p.xz, uSmallWaveFrequency, uSmallWaveSpeed, uSmallWaveElevation);
+    // DFS calc
+    function runDFScalc() {
+      const leg1 = americanToDecimal(document.getElementById("dfs-leg1").value);
+      const leg2 = americanToDecimal(document.getElementById("dfs-leg2").value);
+      const boost = parseFloat(document.getElementById("dfs-boost").value || "0");
+      const out = document.getElementById("dfs-result");
+      out.style.display = "block";
 
-        vElevation = big + small;
-        p.z += vElevation;
-
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      if (!leg1 || !leg2) {
+        out.textContent = "Use American odds like -110 or +120 for each leg.";
+        return;
       }
-    `,
-    fragmentShader: `
-      varying float vElevation;
-      varying vec2 vUv;
 
-      uniform vec3 uDepthColor;
-      uniform vec3 uSurfaceColor;
-      uniform vec3 uHighlightColor;
+      const combo = leg1 * leg2;
+      const boosted = combo * (1 + boost / 100);
 
-      uniform float uColorOffset;
-      uniform float uColorMultiplier;
-      uniform float uFresnelPower;
-      uniform float uFresnelIntensity;
-      uniform float uFresnelBias;
-
-      void main() {
-        float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;
-        vec3 water = mix(uDepthColor, uSurfaceColor, mixStrength);
-
-        float fres =
-          pow(1.0 - vUv.y, uFresnelPower) * uFresnelIntensity + uFresnelBias;
-
-        vec3 highlight = uHighlightColor * fres;
-
-        gl_FragColor = vec4(water + highlight, 1.0);
+      function decToAmerican(d) {
+        if (d <= 1) return 0;
+        const x = d - 1;
+        return x >= 1 ? "+" + Math.round(x * 100) : "-" + Math.round(100 / x);
       }
-    `,
-    uniforms,
-    side: THREE.DoubleSide,
-  });
 
-  oceanMesh = new THREE.Mesh(geometry, material);
-  oceanMesh.rotation.x = -Math.PI / 2;
-  scene.add(oceanMesh);
-
-  renderer.setClearColor("#020617");
-  animate();
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  const t = clock.getElapsedTime();
-  uniforms.uTime.value = t;
-
-  // Soft camera drift
-  camera.position.x = Math.sin(t * 0.12) * 0.25;
-  camera.position.z = 3.4 + Math.sin(t * 0.08) * 0.15;
-  camera.lookAt(0, 0, 0);
-
-  renderer.render(scene, camera);
-}
-
-function fallbackOcean() {
-  document.getElementById("ocean-canvas").style.background =
-    "radial-gradient(circle at top, #0ea5e9, #020617 70%)";
-}
-
-// Resize
-window.addEventListener("resize", () => {
-  if (!camera || !renderer) return;
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
-</script>
-
-<!-- =============================================== -->
-<!-- =============== PORTAL LOGIC ================== -->
-<!-- =============================================== -->
-<script>
-function triggerPortal() {
-  document.body.classList.add("portal-burst-flash");
-  setTimeout(() => document.body.classList.remove("portal-burst-flash"), 450);
-
-  const ring = document.createElement("div");
-  ring.className = "portal-burst-ring";
-  document.body.appendChild(ring);
-  setTimeout(() => ring.remove(), 900);
-
-  setTimeout(openPortalRoute, 480);
-}
-
-function openPortalRoute() {
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-
-  if (isMobile) {
-    window.location.href =
-      "sms:+17735441231?&body=" +
-      encodeURIComponent("Hey PJ — summoned the ocean portal 🌊 Let's build.");
-  } else {
-    const subject = encodeURIComponent("Summon PJ · Coastal Portal");
-    const body = encodeURIComponent(
-      "Hey PJ,\n\n" +
-      "I just tapped the ocean portal on SideGuySolutions.com.\n\n" +
-      "Here's what I'm exploring:\n" +
-      "- App or system\n" +
-      "- AI automation\n" +
-      "- Web3/Solana payments\n" +
-      "- Ticketing flows\n" +
-      "- DFS tools\n\n" +
-      "Send a plan when you're free.\n"
-    );
-    window.location.href =
-      "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-  }
-}
-</script>
-
-<!-- =============================================== -->
-<!-- ========== CALCULATORS + MODALS JS ============ -->
-<!-- =============================================== -->
-<script>
-// Smooth scroll for nav
-document.querySelectorAll(".nav-links a").forEach((a) => {
-  a.addEventListener("click", (e) => {
-    e.preventDefault();
-    const id = a.getAttribute("href");
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  });
-});
-
-// Toolkit openers
-function openSavingsCalc() {
-  document.getElementById("modal-solana").style.display = "flex";
-}
-function closeSolana() {
-  document.getElementById("modal-solana").style.display = "none";
-}
-
-function openDFS() {
-  document.getElementById("modal-dfs").style.display = "flex";
-}
-function closeDFS() {
-  document.getElementById("modal-dfs").style.display = "none";
-}
-
-function openTickets() {
-  document.getElementById("modal-tickets").style.display = "flex";
-}
-function closeTickets() {
-  document.getElementById("modal-tickets").style.display = "none";
-}
-
-// Calculator helpers
-function americanToDecimal(odds) {
-  odds = parseFloat(odds);
-  if (!odds) return null;
-  return odds > 0 ? odds / 100 + 1 : 100 / Math.abs(odds) + 1;
-}
-
-// Solana calc
-function runSolanaCalc() {
-  const vol = parseFloat(document.getElementById("solana-volume").value);
-  const fee = parseFloat(document.getElementById("solana-fee").value);
-
-  const out = document.getElementById("solana-result");
-  out.style.display = "block";
-
-  if (!vol || !fee) {
-    out.textContent = "Enter both volume and fee %.";
-    return;
-  }
-
-  const current = (fee / 100) * vol;
-  const solana = vol * 0.003;
-  const savings = current - solana;
-
-  out.innerHTML =
-    "Current fees: <strong>$" + current.toFixed(0) + "</strong><br>" +
-    "On Solana: <strong>$" + solana.toFixed(0) + "</strong><br>" +
-    "Savings: <strong>$" + savings.toFixed(0) + "</strong> / month";
-}
-
-// DFS calc
-function runDFScalc() {
-  const leg1 = americanToDecimal(document.getElementById("dfs-leg1").value);
-  const leg2 = americanToDecimal(document.getElementById("dfs-leg2").value);
-  const boost = parseFloat(document.getElementById("dfs-boost").value || 0);
-
-  const out = document.getElementById("dfs-result");
-  out.style.display = "block";
-
-  if (!leg1 || !leg2) {
-    out.textContent = "Enter valid American odds.";
-    return;
-  }
-
-  const combo = leg1 * leg2;
-  const boosted = combo * (1 + boost / 100);
-
-  function decToAmerican(d) {
-    const x = d - 1;
-    return x >= 1 ? "+" + Math.round(x * 100) : "-" + Math.round(100 / x);
-  }
-
-  out.innerHTML =
-    "Parlay: <strong>" +
-    combo.toFixed(2) +
-    "x</strong> (" +
-    decToAmerican(combo) +
-    ")<br>" +
-    (boost
-      ? "Boosted: <strong>" +
+      out.innerHTML =
+        "Raw 2-leg combo ≈ <strong>" +
+        combo.toFixed(2) +
+        "x</strong> (about " +
+        decToAmerican(combo) +
+        ").<br>" +
+        "With a <strong>" +
+        (boost || 0).toFixed(0) +
+        "% boost</strong>, you’re around <strong>" +
         boosted.toFixed(2) +
-        "x</strong> (" +
+        "x</strong> (≈ " +
         decToAmerican(boosted) +
-        ")"
-      : "");
-}
+        ").";
+    }
 
-// Ticket calc
-function runTicketCalc() {
-  const price = parseFloat(document.getElementById("ticket-price").value);
-  const fee = parseFloat(document.getElementById("ticket-fee").value);
-  const cap = parseFloat(document.getElementById("ticket-cap").value);
+    // Ticket calc
+    function runTicketCalc() {
+      const price = parseFloat(document.getElementById("ticket-price").value);
+      const fee = parseFloat(document.getElementById("ticket-fee").value);
+      const cap = parseFloat(document.getElementById("ticket-cap").value);
+      const out = document.getElementById("ticket-result");
+      out.style.display = "block";
 
-  const out = document.getElementById("ticket-result");
-  out.style.display = "block";
+      if (!price || !fee || !cap) {
+        out.textContent = "Add price, platform fee %, and capacity.";
+        return;
+      }
 
-  if (!price || !fee || !cap) {
-    out.textContent = "Add price, fee %, and capacity.";
-    return;
-  }
+      const perFee = (fee / 100) * price;
+      const total = perFee * cap;
+      const gross = price * cap + total;
 
-  const perFee = (fee / 100) * price;
-  const total = perFee * cap;
+      const improvedFee = Math.max(fee - 2, 0);
+      const improvedPer = (improvedFee / 100) * price;
+      const improvedTotal = improvedPer * cap;
+      const savings = total - improvedTotal;
 
-  out.innerHTML =
-    "Platform skims: <strong>$" + total.toFixed(0) + "</strong> at full room.";
-}
+      out.innerHTML =
+        "At $" +
+        price.toFixed(2) +
+        " + " +
+        fee.toFixed(1) +
+        "% fees on " +
+        cap +
+        " tickets, the platform skims about <strong>$" +
+        total.toFixed(0) +
+        "</strong>, on roughly <strong>$" +
+        gross.toFixed(0) +
+        "</strong> in gross volume.<br><br>" +
+        "Shaving ~2% off fees in a SideGuy flow could keep around <strong>$" +
+        savings.toFixed(0) +
+        "</strong> closer to the venue, talent, or bar.";
+    }
 
-// Portal click listeners
-document.getElementById("summon-btn").onclick = triggerPortal;
-document.getElementById("summon-orb").onclick = triggerPortal;
+    // Portal listeners
+    document.getElementById("summon-btn").addEventListener("click", triggerPortal);
+    document.getElementById("summon-orb").addEventListener("click", triggerPortal);
 
-// Toolkit button
-const tkBtn = document.getElementById("show-toolkit");
-if (tkBtn)
-  tkBtn.onclick = () =>
-    document.getElementById("toolkit").scrollIntoView({ behavior: "smooth" });
+    // Toolkit button scroll
+    const toolkitBtn = document.getElementById("show-toolkit");
+    if (toolkitBtn) {
+      toolkitBtn.addEventListener("click", () => {
+        const tk = document.getElementById("toolkit");
+        if (tk) tk.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
 
-// Close modals by clicking backdrop
-["modal-solana", "modal-dfs", "modal-tickets"].forEach((id) => {
-  const m = document.getElementById(id);
-  m.addEventListener("click", (e) => {
-    if (e.target === m) m.style.display = "none";
-  });
-});
+    // Close modals by clicking backdrop
+    ["modal-solana", "modal-dfs", "modal-tickets"].forEach((id) => {
+      const m = document.getElementById(id);
+      if (!m) return;
+      m.addEventListener("click", (e) => {
+        if (e.target === m) m.style.display = "none";
+      });
+    });
 
-// Intake → email
-document.getElementById("intake-form").addEventListener("submit", (e) => {
-  e.preventDefault();
+    // Intake → email
+    const intakeForm = document.getElementById("intake-form");
+    if (intakeForm) {
+      intakeForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("intake-name").value || "";
+        const email = document.getElementById("intake-email").value || "";
+        const biz = document.getElementById("intake-biz").value || "";
+        const lane = document.getElementById("intake-type").value || "";
+        const budget = document.getElementById("intake-budget").value || "";
+        const notes = document.getElementById("intake-notes").value || "";
 
-  const subject = encodeURIComponent("New Intake · SideGuy Solutions");
-  const body = encodeURIComponent(
-    "Name: " + document.getElementById("intake-name").value + "\n" +
-    "Email: " + document.getElementById("intake-email").value + "\n" +
-    "Business: " + document.getElementById("intake-biz").value + "\n" +
-    "Lane: " + document.getElementById("intake-type").value + "\n" +
-    "Budget: " + document.getElementById("intake-budget").value + "\n\n" +
-    "Notes:\n" + document.getElementById("intake-notes").value + "\n\n" +
-    "Sent from SideGuySolutions.com · v15 Ocean Mode"
-  );
+        const subject = encodeURIComponent("New Project Intake · " + lane);
+        const body = encodeURIComponent(
+          "Hey PJ,\n\n" +
+          "You’ve got a new intake from SideGuySolutions.com:\n\n" +
+          "Name: " + name + "\n" +
+          "Email: " + email + "\n" +
+          "Business / Project: " + biz + "\n" +
+          "Lane: " + lane + "\n" +
+          "Budget: " + budget + "\n\n" +
+          "Notes:\n" + notes + "\n\n" +
+          "Sent from the v16 Aladeen Ocean Ultra portal 🌊"
+        );
 
-  window.location.href =
-    "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-});
-</script>
-
+        window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+      });
+    }
+  </script>
 </body>
 </html>
