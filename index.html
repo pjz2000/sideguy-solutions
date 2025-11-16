@@ -1455,3 +1455,841 @@
       </form>
     </div>
   </section>
+  <!-- ===============================
+       WEB3 / SOLANA RAILS
+  ================================ -->
+  <section class="section" id="solana">
+    <div class="section-title">Web3 · Solana · Stablecoin Rails</div>
+
+    <div class="two-col">
+      <div>
+        <h2 class="section-subheading">Solana-grade payments for real SD operators.</h2>
+
+        <p class="section-lead">
+          SideGuy helps San Diego and North County businesses tap Solana, USDC,
+          and low-fee processing without needing to pretend you love Discord or
+          crypto drama. Just cleaner margins and faster settlement.
+        </p>
+
+        <div class="pill-row">
+          <span class="pill-tag">Solana Payments</span>
+          <span class="pill-tag">Stablecoin Invoicing</span>
+          <span class="pill-tag">Crypto Escrow</span>
+          <span class="pill-tag">On / Off Ramps</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Good fits</h3>
+        <ul class="card-small" style="list-style: disc; padding-left: 20px;">
+          <li>High-volume businesses frustrated with processing fees</li>
+          <li>Project-based work needing trust & escrow</li>
+          <li>Venues & ticketing with lots of micro-transactions</li>
+        </ul>
+
+        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Web3 / Solana Rails')">
+          Explore Solana Rails
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===============================
+       BLOG / SEO HELPER
+  ================================ -->
+  <section class="section" id="blog">
+    <div class="section-title">Coastal Dispatches · Ideas for SD Operators</div>
+
+    <div class="blog-list">
+      <div class="card">
+        <div class="blog-card-title">AI Flows That Actually Help San Diego Small Businesses</div>
+        <div class="blog-card-meta">AI · Automation · Local Ops</div>
+        <p class="card-small">
+          A simple way to use AI for intake, follow-up, and internal updates
+          without turning your business into a full-time tool-testing lab.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="blog-card-title">When Solana Payments Make Sense for Your Business</div>
+        <div class="blog-card-meta">Web3 · Solana · Payments</div>
+        <p class="card-small">
+          How lower processing fees and faster settlement can change ticketing,
+          project invoices, and retainers in San Diego & North County.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="blog-card-title">Ticketing Experiments for North County Venues</div>
+        <div class="blog-card-meta">Tickets · Venues · Live Rooms</div>
+        <p class="card-small">
+          Light experiments that help small rooms keep more from each night
+          without burning bridges to big platforms.
+        </p>
+      </div>
+    </div>
+
+    <p class="section-lead" style="margin-top: 18px; font-size: 0.8rem; color: var(--muted);">
+      SideGuy Solutions acts as a coastal tech concierge for San Diego, Solana Beach,
+      Encinitas, Del Mar, Cardiff, Carlsbad and the rest of North County — building
+      apps, AI flows, ticket systems, Solana rails, and coastal automations for real
+      operators, not tech tourists.
+    </p>
+  </section>
+
+
+  <!-- ===============================
+       FOOTER
+  ================================ -->
+  <footer>
+    SideGuy Solutions · San Diego &amp; North County · V19 Vibe Coder Fullsend ·
+    Tap the portal if you know what’s good for you.
+  </footer>
+
+  <!-- ===============================
+       AUDIO TOGGLE + AUDIO ELEMENT
+  ================================ -->
+  <div class="audio-toggle">
+    <button id="audio-toggle-btn" onclick="toggleOceanAudio()">Ocean Audio: Off</button>
+  </div>
+
+  <!-- NOTE: update the src to your hosted ocean loop if you want -->
+  <audio id="ocean-audio" loop preload="none">
+    <source src="/audio/ocean-loop.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ===============================
+       MODALS (CALCS + ESTIMATOR + AUDIO)
+  ================================ -->
+  <!-- Solana Processing Modal -->
+  <div id="modal-solana" class="modal">
+    <div class="modal-content">
+      <h2>Solana Processing Saver</h2>
+
+      <label>Monthly Volume ($)</label>
+      <input id="solana-volume" type="number" placeholder="e.g. 25,000" />
+
+      <label>Your Current Fee %</label>
+      <input id="solana-fee" type="number" step="0.01" placeholder="e.g. 2.9" />
+
+      <button class="calc-btn" onclick="runSolanaCalc()">Calculate</button>
+      <div id="solana-result" class="result-box"></div>
+
+      <button class="close-btn" onclick="closeCalc('solana')">Close</button>
+    </div>
+  </div>
+
+  <!-- Ticket Flow Modal -->
+  <div id="modal-ticket" class="modal">
+    <div class="modal-content">
+      <h2>Ticket Flow Optimizer</h2>
+
+      <label>Ticket Price ($)</label>
+      <input id="ticket-price" type="number" placeholder="e.g. 35" />
+
+      <label>Platform Fee %</label>
+      <input id="ticket-fee" type="number" step="0.1" placeholder="e.g. 12" />
+
+      <label>Venue Capacity</label>
+      <input id="ticket-cap" type="number" placeholder="e.g. 450" />
+
+      <button class="calc-btn" onclick="runTicketCalc()">Optimize</button>
+      <div id="ticket-result" class="result-box"></div>
+
+      <button class="close-btn" onclick="closeCalc('ticket')">Close</button>
+    </div>
+  </div>
+
+  <!-- DFS Modal -->
+  <div id="modal-dfs" class="modal">
+    <div class="modal-content">
+      <h2>DFS Promo + EV Tool</h2>
+
+      <label>Leg 1 Odds (American)</label>
+      <input id="dfs-leg1" type="text" placeholder="-110" />
+
+      <label>Leg 2 Odds (American)</label>
+      <input id="dfs-leg2" type="text" placeholder="-110" />
+
+      <label>Boost % (optional)</label>
+      <input id="dfs-boost" type="number" placeholder="e.g. 25" />
+
+      <button class="calc-btn" onclick="runDFScalc()">Calculate</button>
+      <div id="dfs-result" class="result-box"></div>
+
+      <button class="close-btn" onclick="closeCalc('dfs')">Close</button>
+    </div>
+  </div>
+
+  <!-- Project Estimator Modal -->
+  <div id="modal-estimator" class="modal">
+    <div class="modal-content">
+      <h2>Mini Project Estimator</h2>
+
+      <label>Lane</label>
+      <select id="est-lane">
+        <option value="Apps & Custom Builds">Apps & Custom Builds</option>
+        <option value="AI Automation & Workflows">AI Automation & Workflows</option>
+        <option value="Ticketing & Venue Systems">Ticketing & Venue Systems</option>
+        <option value="Web3 / Solana Rails">Web3 / Solana Rails</option>
+        <option value="DFS Tools & Promo Systems">DFS Tools & Promo Systems</option>
+      </select>
+
+      <label>Size</label>
+      <select id="est-size">
+        <option value="Small">Small (1–2 weeks)</option>
+        <option value="Medium">Medium (3–6 weeks)</option>
+        <option value="Large">Large (6–12 weeks)</option>
+      </select>
+
+      <label>Urgency</label>
+      <select id="est-urgency">
+        <option value="Chill">Chill</option>
+        <option value="Standard">Standard</option>
+        <option value="Rush">Rush</option>
+      </select>
+
+      <label>Industry (optional)</label>
+      <input id="est-industry" type="text" placeholder="Venue, agency, gym, etc." />
+
+      <button class="calc-btn" onclick="runEstimator()">Estimate</button>
+      <div id="est-result" class="result-box"></div>
+
+      <button class="close-btn" onclick="closeEstimator()">Close</button>
+    </div>
+  </div>
+
+  <!-- Audio Consent Modal -->
+  <div id="modal-audio" class="modal">
+    <div class="modal-content">
+      <h2>Activate Ocean Audio?</h2>
+      <p class="card-small" style="margin-bottom: 14px;">
+        Subtle coastal swell under the portal. No music, no distractions — just vibes.
+      </p>
+      <button class="calc-btn" onclick="enableOceanAudio()">Enable Ocean Audio</button>
+      <button class="close-btn" onclick="dismissAudioModal()">Maybe Later</button>
+    </div>
+  </div>
+
+  <!-- ===============================
+       THREE.JS + MAIN SCRIPT
+  ================================ -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
+  <script>
+    // ============================
+    // Day/Night Tint
+    // ============================
+    (function setDayNight() {
+      try {
+        const hour = new Date().getHours();
+        const root = document.documentElement;
+        if (hour >= 6 && hour < 18) {
+          root.style.setProperty("--bg", "var(--bg-day)");
+          root.style.setProperty("--accent", "#38bdf8");
+        } else {
+          root.style.setProperty("--bg", "var(--bg-night)");
+          root.style.setProperty("--accent", "var(--accent-night)");
+        }
+      } catch (err) {
+        console.warn("Day/night tint issue:", err);
+      }
+    })();
+
+    // ============================
+    // Scroll Helpers
+    // ============================
+    function scrollToIntake(prefillLane) {
+      const select = document.getElementById("intake-type");
+      if (select && prefillLane) {
+        Array.from(select.options).forEach((opt) => {
+          if (opt.text === prefillLane || opt.value === prefillLane) {
+            select.value = opt.value;
+          }
+        });
+      }
+      const el = document.getElementById("intake");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function scrollToLane(lane) {
+      const map = {
+        apps: "apps",
+        ai: "ai",
+        ticketing: "ticketing",
+        dfs: "dfs",
+        solana: "solana"
+      };
+      const id = map[lane] || lane;
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // Smooth scroll for any hash link
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          const targetId = anchor.getAttribute("href");
+          if (!targetId || !targetId.startsWith("#")) return;
+          e.preventDefault();
+          const target = document.querySelector(targetId);
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    });
+
+    // ============================
+    // Contact / Summon PJ
+    // ============================
+    function openContactPortal() {
+      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        const smsBody =
+          "Hey PJ, I just summoned the coastal portal from SideGuySolutions.com — let’s build something.";
+        window.location.href =
+          "sms:+17735441231?&body=" + encodeURIComponent(smsBody);
+      } else {
+        const subject = encodeURIComponent("Summon PJ · SideGuy Solutions (San Diego)");
+        const body = encodeURIComponent(
+          "Hey PJ,\n\n" +
+          "I just tapped the coastal portal on SideGuySolutions.com.\n\n" +
+          "Here’s what I’m looking at:\n" +
+          "- Tech build / app / site\n" +
+          "- Tickets / live events\n" +
+          "- DFS promos / systems\n" +
+          "- Solana / crypto payments\n" +
+          "- AI automation\n" +
+          "- Something else entirely\n\n" +
+          "Reply when you’re free and let’s spin this up.\n\n" +
+          "— Sent from the coastal portal 🌊"
+        );
+        const mailto =
+          "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+        window.location.href = mailto;
+      }
+    }
+
+    function triggerPortalFX() {
+      document.body.classList.add("portal-burst-flash");
+      setTimeout(() => {
+        document.body.classList.remove("portal-burst-flash");
+      }, 450);
+
+      const ring = document.createElement("div");
+      ring.className = "portal-burst-ring";
+      document.body.appendChild(ring);
+      setTimeout(() => ring.remove(), 900);
+    }
+
+    function summonPJ() {
+      boostWavesOnce(2.0, 1300);
+      triggerPortalFX();
+      setTimeout(openContactPortal, 500);
+    }
+
+    // ============================
+    // Toolkit Modal Controls
+    // ============================
+    function openCalc(type) {
+      const id = "modal-" + type;
+      const m = document.getElementById(id);
+      if (m) m.style.display = "flex";
+    }
+
+    function closeCalc(type) {
+      const id = "modal-" + type;
+      const m = document.getElementById(id);
+      if (m) m.style.display = "none";
+    }
+
+    function openEstimator() {
+      const m = document.getElementById("modal-estimator");
+      if (m) m.style.display = "flex";
+    }
+
+    function closeEstimator() {
+      const m = document.getElementById("modal-estimator");
+      if (m) m.style.display = "none";
+    }
+
+    // Backdrop close for all modals
+    document.addEventListener("click", (e) => {
+      const modals = document.querySelectorAll(".modal");
+      modals.forEach((m) => {
+        if (e.target === m) {
+          m.style.display = "none";
+        }
+      });
+    });
+
+    // ============================
+    // Calculators
+    // ============================
+    function runSolanaCalc() {
+      const volEl = document.getElementById("solana-volume");
+      const feeEl = document.getElementById("solana-fee");
+      const outEl = document.getElementById("solana-result");
+      if (!volEl || !feeEl || !outEl) return;
+
+      const vol = parseFloat(volEl.value || "0");
+      const feePct = parseFloat(feeEl.value || "0");
+      outEl.style.display = "block";
+
+      if (!vol || !feePct) {
+        outEl.textContent = "Add your monthly volume and current fee % to see the savings.";
+        return;
+      }
+
+      const currentRate = feePct / 100;
+      const solanaRate = 0.003; // 0.3%
+
+      if (currentRate <= solanaRate) {
+        outEl.textContent =
+          "You’re already at low fees. Next step is stablecoin rails, yield, or escrow — that’s PJ’s lane.";
+        return;
+      }
+
+      const currMonthly = vol * currentRate;
+      const solMonthly = vol * solanaRate;
+      const monthlySavings = currMonthly - solMonthly;
+      const yearlySavings = monthlySavings * 12;
+
+      outEl.innerHTML =
+        "At $" + vol.toLocaleString() + "/month and " + feePct.toFixed(2) +
+        "% fees, you’re paying about <strong>$" + currMonthly.toFixed(0) +
+        "/month</strong> in processing.<br><br>" +
+        "Solana rails (~0.3%) drop that to about <strong>$" + solMonthly.toFixed(0) +
+        "/month</strong> — saving roughly <strong>$" + monthlySavings.toFixed(0) +
+        "/month</strong> or ~<strong>$" + yearlySavings.toFixed(0) +
+        "/year</strong>.";
+    }
+
+    function americanToDecimal(oddsStr) {
+      const cleaned = (oddsStr || "").toString().trim().replace(/[^\d+-]/g, "");
+      const odds = parseFloat(cleaned);
+      if (!odds || odds === 0) return null;
+      if (odds > 0) return odds / 100 + 1;
+      return 100 / Math.abs(odds) + 1;
+    }
+
+    function runDFScalc() {
+      const leg1El = document.getElementById("dfs-leg1");
+      const leg2El = document.getElementById("dfs-leg2");
+      const boostEl = document.getElementById("dfs-boost");
+      const outEl = document.getElementById("dfs-result");
+      if (!leg1El || !leg2El || !outEl) return;
+
+      const leg1 = americanToDecimal(leg1El.value);
+      const leg2 = americanToDecimal(leg2El.value);
+      const boostPct = parseFloat(boostEl.value || "0");
+
+      outEl.style.display = "block";
+
+      if (!leg1 || !leg2) {
+        outEl.textContent = "Use American odds like -110 or +120 for each leg.";
+        return;
+      }
+
+      const comboDec = leg1 * leg2;
+      const boostedDec = comboDec * (1 + boostPct / 100);
+
+      function decToAmerican(dec) {
+        if (dec <= 1) return 0;
+        const imp = dec - 1;
+        if (imp >= 1) {
+          return "+" + Math.round(imp * 100);
+        } else {
+          return "-" + Math.round(100 / imp);
+        }
+      }
+
+      const comboAm = decToAmerican(comboDec);
+      const comboBoostAm = decToAmerican(boostedDec);
+
+      outEl.innerHTML =
+        "Raw 2-leg combo ≈ <strong>" + comboDec.toFixed(2) +
+        "x</strong> (about " + comboAm + ").<br>" +
+        "With a <strong>" + (boostPct || 0).toFixed(0) +
+        "% boost</strong>, that’s around <strong>" +
+        boostedDec.toFixed(2) + "x</strong> (≈ " + comboBoostAm + ").<br><br>" +
+        "Next step is sizing and promo sequencing — PJ helps keep it calm and system-based.";
+    }
+
+    function runTicketCalc() {
+      const priceEl = document.getElementById("ticket-price");
+      const feeEl = document.getElementById("ticket-fee");
+      const capEl = document.getElementById("ticket-cap");
+      const outEl = document.getElementById("ticket-result");
+      if (!priceEl || !feeEl || !capEl || !outEl) return;
+
+      const price = parseFloat(priceEl.value || "0");
+      const feePct = parseFloat(feeEl.value || "0");
+      const cap = parseInt(capEl.value || "0", 10);
+
+      outEl.style.display = "block";
+
+      if (!price || !feePct || !cap) {
+        outEl.textContent = "Add price, platform fee %, and capacity to see the room math.";
+        return;
+      }
+
+      const feePer = price * (feePct / 100);
+      const grossPer = price + feePer;
+      const grossIfFull = cap * grossPer;
+      const totalFees = cap * feePer;
+
+      const improvedPct = Math.max(feePct - 2, 0);
+      const newFeePer = price * (improvedPct / 100);
+      const newTotalFees = cap * newFeePer;
+      const savings = totalFees - newTotalFees;
+
+      outEl.innerHTML =
+        "Full room at $" + price.toFixed(2) + " + " + feePct.toFixed(1) +
+        "% fees (" + cap + " tickets) means about <strong>$" +
+        totalFees.toFixed(0) + "</strong> in platform fees and <strong>$" +
+        grossIfFull.toFixed(0) + "</strong> in gross volume.<br><br>" +
+        "Cutting ~2% in fees could redirect roughly <strong>$" +
+        savings.toFixed(0) +
+        "</strong> back to the venue, talent, or bar.";
+    }
+
+    function runEstimator() {
+      const lane = (document.getElementById("est-lane") || {}).value || "";
+      const size = (document.getElementById("est-size") || {}).value || "";
+      const urgency = (document.getElementById("est-urgency") || {}).value || "";
+      const industry = (document.getElementById("est-industry") || {}).value || "";
+      const out = document.getElementById("est-result");
+      if (!out) return;
+
+      out.style.display = "block";
+
+      let weeks = "3–6 weeks";
+      let budget = "$5k–$25k";
+      if (size === "Small") {
+        weeks = "1–2 weeks";
+        budget = "$2k–$8k";
+      } else if (size === "Large") {
+        weeks = "6–12 weeks";
+        budget = "$20k–$60k+";
+      }
+
+      if (urgency === "Rush") {
+        weeks += " (compressed)";
+      }
+
+      out.innerHTML =
+        "For a <strong>" + size + "</strong> project in <strong>" + lane +
+        "</strong>, typical SideGuy builds land around <strong>" + weeks +
+        "</strong> with a rough range of <strong>" + budget +
+        "</strong> depending on scope.<br><br>" +
+        "Drop this into the intake form and PJ can tighten it based on your actual constraints" +
+        (industry ? " in <strong>" + industry + "</strong>." : ".");
+    }
+
+    // ============================
+    // Intake form → mailto
+    // ============================
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("intake-form");
+      if (!form) return;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = (document.getElementById("intake-name") || {}).value || "";
+        const email = (document.getElementById("intake-email") || {}).value || "";
+        const biz = (document.getElementById("intake-biz") || {}).value || "";
+        const type = (document.getElementById("intake-type") || {}).value || "";
+        const budget = (document.getElementById("intake-budget") || {}).value || "";
+        const notes = (document.getElementById("intake-notes") || {}).value || "";
+
+        const subject = encodeURIComponent("New Project Intake · " + (type || "Project"));
+        const bodyLines = [
+          "Hey PJ,",
+          "",
+          "You’ve got a new intake from SideGuySolutions.com:",
+          "",
+          "Name: " + name,
+          "Email: " + email,
+          "Business / Project: " + biz,
+          "Lane: " + type,
+          "Budget: " + budget,
+          "",
+          "Notes:",
+          notes,
+          "",
+          "Sent from the V19 Vibe Coder Fullsend portal 🌊"
+        ];
+        const body = encodeURIComponent(bodyLines.join("\n"));
+        const mailto =
+          "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+        window.location.href = mailto;
+      });
+    });
+
+    // ============================
+    // Ocean Shader (V19)
+    // ============================
+    let oceanUniforms = null;
+
+    (function initOceanSafe() {
+      const canvas = document.getElementById("ocean-canvas");
+      if (!canvas || !window.THREE) {
+        console.warn("Three.js or canvas missing — static gradient only.");
+        return;
+      }
+
+      try {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          55,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          100
+        );
+        camera.position.set(0, 6, 10);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: true
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x020617, 1);
+
+        const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
+        geometry.rotateX(-Math.PI / 2);
+
+        oceanUniforms = {
+          uTime: { value: 0 },
+          uWaveAmp: { value: 1.0 }
+        };
+
+        const vertexShader = `
+          varying vec2 vUv;
+          uniform float uTime;
+          uniform float uWaveAmp;
+
+          float hash(vec2 p) {
+            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+          }
+
+          float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            float a = hash(i);
+            float b = hash(i + vec2(1.0, 0.0));
+            float c = hash(i + vec2(0.0, 1.0));
+            float d = hash(i + vec2(1.0, 1.0));
+            vec2 u = f * f * (3.0 - 2.0 * f);
+            return mix(a, b, u.x) +
+                   (c - a) * u.y * (1.0 - u.x) +
+                   (d - b) * u.x * u.y;
+          }
+
+          void main() {
+            vUv = uv;
+            vec3 pos = position;
+            float t = uTime * 0.6;
+
+            float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
+            float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
+            float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
+
+            float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
+            float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
+            float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
+
+            float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
+            height *= uWaveAmp;
+
+            pos.y += height;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          }
+        `;
+
+        const fragmentShader = `
+          varying vec2 vUv;
+          uniform float uTime;
+
+          float hash(vec2 p) {
+            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+          }
+
+          float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            float a = hash(i);
+            float b = hash(i + vec2(1.0, 0.0));
+            float c = hash(i + vec2(0.0, 1.0));
+            float d = hash(i + vecvec2(1.0, 1.0));
+            vec2 u = f * f * (3.0 - 2.0 * f);
+            return mix(a, b, u.x) +
+                   (c - a) * u.y * (1.0 - u.x) +
+                   (d - b) * u.x * u.y;
+          }
+
+          void main() {
+            float t = uTime * 0.05;
+            float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
+            float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
+            float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
+
+            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
+
+            vec3 deep = vec3(0.0, 0.06, 0.18);
+            vec3 mid = vec3(0.0, 0.3, 0.56);
+            vec3 surf = vec3(0.74, 0.96, 1.0);
+
+            vec3 col = mix(deep, mid, depth);
+            col = mix(col, surf, pow(1.0 - depth, 3.2));
+
+            float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
+            col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
+
+            float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
+            float rays = smoothstep(0.72, 1.0, rayPattern);
+            col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
+
+            float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
+            col += shimmer * 0.09;
+
+            float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
+            caustic = smoothstep(0.65, 1.0, caustic);
+            col += caustic * 0.07;
+
+            float spark = smoothstep(0.92, 1.0, nFine);
+            col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
+
+            vec2 center = vUv - 0.5;
+            float dist = length(center);
+            float vignette = smoothstep(0.8, 0.25, dist);
+            col *= mix(0.72, 1.22, vignette);
+
+            gl_FragColor = vec4(col, 1.0);
+          }
+        `;
+
+        const material = new THREE.ShaderMaterial({
+          uniforms: oceanUniforms,
+          vertexShader,
+          fragmentShader,
+          side: THREE.DoubleSide
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        const fogColor = new THREE.Color(0x000818);
+        scene.fog = new THREE.Fog(fogColor, 12, 45);
+        renderer.setClearColor(fogColor, 1);
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+          requestAnimationFrame(animate);
+          const elapsed = clock.getElapsedTime();
+          oceanUniforms.uTime.value = elapsed;
+
+          const sway = Math.sin(elapsed * 0.18) * 0.4;
+          camera.position.x = sway;
+          camera.lookAt(0, 0, 0);
+
+          renderer.render(scene, camera);
+        }
+
+        window.addEventListener("resize", () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+      } catch (err) {
+        console.warn("Ocean init failed, staying on gradient:", err);
+      }
+    })();
+
+    // ============================
+    // Reactive Waves
+    // ============================
+    let waveBoostTimeout;
+    function boostWavesOnce(strength, duration) {
+      if (!oceanUniforms || !oceanUniforms.uWaveAmp) return;
+      oceanUniforms.uWaveAmp.value = strength;
+      clearTimeout(waveBoostTimeout);
+      waveBoostTimeout = setTimeout(() => {
+        if (oceanUniforms) oceanUniforms.uWaveAmp.value = 1.0;
+      }, duration);
+    }
+
+    window.addEventListener("mousemove", () => {
+      boostWavesOnce(1.4, 900);
+    });
+
+    window.addEventListener("touchstart", () => {
+      boostWavesOnce(1.6, 1100);
+    });
+
+    // ============================
+    // Audio Logic
+    // ============================
+    let audioEnabled = false;
+    let audioModalShown = false;
+
+    function showAudioModal() {
+      if (audioModalShown) return;
+      audioModalShown = true;
+      const m = document.getElementById("modal-audio");
+      if (m) m.style.display = "flex";
+    }
+
+    function enableOceanAudio() {
+      const audio = document.getElementById("ocean-audio");
+      const btn = document.getElementById("audio-toggle-btn");
+      const m = document.getElementById("modal-audio");
+      if (!audio || !btn) return;
+
+      audio.play().then(() => {
+        audioEnabled = true;
+        btn.classList.add("active");
+        btn.textContent = "Ocean Audio: On";
+        if (m) m.style.display = "none";
+      }).catch((err) => {
+        console.warn("Audio play blocked:", err);
+      });
+    }
+
+    function dismissAudioModal() {
+      const m = document.getElementById("modal-audio");
+      if (m) m.style.display = "none";
+    }
+
+    function toggleOceanAudio() {
+      const audio = document.getElementById("ocean-audio");
+      const btn = document.getElementById("audio-toggle-btn");
+      if (!audio || !btn) return;
+
+      if (!audioEnabled) {
+        enableOceanAudio();
+        return;
+      }
+
+      if (!audio.paused) {
+        audio.pause();
+        btn.classList.remove("active");
+        btn.textContent = "Ocean Audio: Off";
+      } else {
+        audio.play().catch((err) => console.warn("Audio play blocked:", err));
+        btn.classList.add("active");
+        btn.textContent = "Ocean Audio: On";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(showAudioModal, 1800);
+    });
+  </script>
+</body>
+</html>
