@@ -1,128 +1,81 @@
 <!--
-  SideGuy Solutions
-  Version: 5.1-ocean-orb-toolkit
-  Hero: "Where code meets the coastline."
-  Mode: Full-Screen Ocean + Floating Orb + Toolkit + Summon PJ Portal
+  SideGuy Solutions — v6.0 GOD MODE
+  Hero: Full Real Ocean Shader, Orb Portal, Mega Toolkit
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta
-    name="description"
-    content="SideGuy Solutions — Web3 coastal concierge for tech, tickets, DFS, and smarter systems in North County. Tap to summon PJ through a living Pacific portal."
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Basic Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta property="og:description" content="Coastal concierge for tech builds, tickets, DFS edges, and crypto escrow. Tap to summon PJ." />
+  <title>SideGuy Solutions | Where Code Meets the Coastline</title>
+  <meta name="description" content="SideGuy Solutions — Coastal tech concierge for apps, tickets, DFS tools, crypto escrow, Solana payments, carbon flows, and the full SideGuy Toolkit. Tap the portal to summon PJ." />
+
+  <meta property="og:title" content="SideGuy Solutions · Coastal Tech Toolkit" />
+  <meta property="og:description" content="Real ocean, real tools, real concierge. Tech, tickets, DFS, Solana rails, crypto escrow, carbon, AI intake — all in one cinematic portal." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
   <style>
     :root {
       --bg: #020617;
-      --bg-alt: #020816;
-      --blue-bg: radial-gradient(circle at top, #38bdf8 0%, #0b1220 45%, #020617 100%);
-      --card: rgba(15, 23, 42, 0.9);
-      --card-soft: rgba(15, 23, 42, 0.8);
-      --border-subtle: rgba(148, 163, 184, 0.35);
-      --accent: #22d3ee;
-      --accent-soft: rgba(34, 211, 238, 0.1);
-      --accent-strong: #0ea5e9;
       --text-main: #e5f2ff;
       --text-soft: #9ca3af;
       --muted: #64748b;
-      --danger: #fb7185;
-      --shadow-deep: 0 24px 80px rgba(15, 23, 42, 0.9);
-      --radius-lg: 18px;
-      --radius-xl: 26px;
-      --radius-pill: 999px;
-      --glass: rgba(15, 23, 42, 0.72);
-      --glass-strong: rgba(15, 23, 42, 0.9);
-      --nav-h: 64px;
+      --card: rgba(15, 23, 42, 0.92);
+      --radius: 18px;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --border: rgba(148, 163, 184, 0.45);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text-main);
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* Full-screen ocean canvas background */
+    /* OCEAN CANVAS (full-screen background) */
     #ocean-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      display: block;
       z-index: -1;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 55%);
+      background: #020617;
     }
 
-    /* Overlay gradient to keep content readable */
     .ocean-overlay {
-      pointer-events: none;
       position: fixed;
       inset: 0;
+      pointer-events: none;
       background:
-        radial-gradient(circle at 10% -10%, rgba(56, 189, 248, 0.45), transparent 55%),
-        radial-gradient(circle at 100% 110%, rgba(14, 165, 233, 0.45), transparent 55%),
-        linear-gradient(to bottom, rgba(2, 6, 23, 0.65), rgba(2, 6, 23, 0.98));
+        linear-gradient(to bottom, rgba(2,6,23,0.4), rgba(2,6,23,0.9)),
+        radial-gradient(circle at 10% -10%, rgba(14,165,233,0.25), transparent 60%);
       z-index: 0;
     }
 
-    .page-shell {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
+    /* HEADER */
     header {
       position: sticky;
       top: 0;
+      backdrop-filter: blur(16px);
+      background: rgba(2,6,23,0.75);
+      border-bottom: 1px solid var(--border);
       z-index: 10;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0.92),
-        rgba(15, 23, 42, 0.75),
-        transparent
-      );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
     }
 
     .nav-inner {
       max-width: 1120px;
-      margin: 0 auto;
+      margin: auto;
       padding: 12px 20px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      align-items: center;
     }
 
     .brand {
@@ -134,62 +87,29 @@
     .brand-mark {
       width: 32px;
       height: 32px;
-      border-radius: 40%;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 55%, #022c43 100%);
-      box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.4),
-        0 10px 25px rgba(15, 23, 42, 0.9),
-        0 0 45px rgba(56, 189, 248, 0.75);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 250, 252, 0.35);
-      box-shadow: 0 0 30px rgba(248, 250, 252, 0.6);
-      opacity: 0.7;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 60%, #022c43);
+      box-shadow: 0 0 20px rgba(56,189,248,0.7);
     }
 
     .brand-text-main {
-      font-size: 1rem;
-      font-weight: 650;
-      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      font-weight: 700;
       text-transform: uppercase;
-      color: #e5f0ff;
-    }
-
-    .brand-text-sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.78rem;
-      color: var(--muted);
+      letter-spacing: 0.06em;
     }
 
     .nav-pill {
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 4px 12px;
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.95),
-        rgba(15, 23, 42, 0.75)
-      );
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       display: flex;
       align-items: center;
       gap: 6px;
-      white-space: nowrap;
+      background: rgba(15,23,42,0.85);
     }
 
     .nav-dot {
@@ -197,512 +117,193 @@
       height: 8px;
       border-radius: 50%;
       background: #22c55e;
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+      box-shadow: 0 0 8px rgba(34,197,94,0.9);
     }
 
-    main {
-      flex: 1;
-    }
+    /* HERO */
+    main { position: relative; z-index: 1; }
 
     .hero-shell {
       max-width: 1120px;
-      margin: 0 auto;
-      padding: 32px 20px 40px;
+      margin: auto;
+      padding: 40px 20px 32px;
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.1fr);
-      gap: 28px;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 32px;
       align-items: center;
     }
 
-    @media (max-width: 880px) {
-      .hero-shell {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 30px;
-      }
+    @media (max-width: 860px) {
+      .hero-shell { grid-template-columns: 1fr; text-align: center; }
     }
 
     .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.32), rgba(15, 23, 42, 0.95));
       font-size: 0.75rem;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-    }
-
-    .hero-kicker span:first-child {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
       border-radius: 999px;
-      background: rgba(8, 47, 73, 0.85);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.9);
-      font-size: 0.7rem;
+      padding: 4px 10px;
+      background: rgba(56,189,248,0.25);
+      display: inline-block;
+      margin-bottom: 12px;
     }
 
     .hero-title {
-      font-size: clamp(2.45rem, 4vw, 3rem);
+      font-size: clamp(2.3rem, 5vw, 3rem);
       line-height: 1.05;
-      letter-spacing: 0.02em;
       margin-bottom: 12px;
-      text-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-title span {
-      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
+      background: linear-gradient(to right, #e0f2fe, #38bdf8);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero-sub {
-      font-size: 0.98rem;
-      line-height: 1.6;
+      font-size: 1rem;
       color: var(--text-soft);
       max-width: 34rem;
       margin-bottom: 20px;
     }
 
-    .hero-sub strong {
-      color: #e5f0ff;
-      font-weight: 600;
+    /* CTAs */
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn-primary {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: radial-gradient(circle at 0 0, #e0f2fe, #0ea5e9);
+      color: #0b1120;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 0 30px rgba(56,189,248,0.8);
+      transition: transform 0.2s ease;
     }
 
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.72rem;
+    .btn-primary:hover { transform: scale(1.04); }
+
+    .btn-ghost {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,0.85);
+      color: var(--text-soft);
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    .hero-tag-pill {
-      border-radius: var(--radius-pill);
-      padding: 4px 10px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      backdrop-filter: blur(14px);
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    button,
-    .btn {
-      font-family: inherit;
-      border: none;
       cursor: pointer;
     }
 
-    .btn-primary {
-      position: relative;
-      border-radius: var(--radius-pill);
-      padding: 10px 18px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #0b1120;
-      background: radial-gradient(circle at 0 0, #e0f2fe, #0ea5e9);
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.75),
-        0 18px 35px rgba(8, 47, 73, 0.95),
-        0 0 55px rgba(56, 189, 248, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transform-origin: center;
-      transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        filter 0.18s ease-out;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.02);
-      filter: saturate(1.25);
-      box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 20px 40px rgba(8, 47, 73, 1),
-        0 0 80px rgba(56, 189, 248, 1);
-    }
-
-    .btn-primary span.emoji {
-      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.9));
-    }
-
-    .btn-ghost {
-      border-radius: var(--radius-pill);
-      padding: 9px 14px;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      background: radial-gradient(circle at 0 0, rgba(30, 64, 175, 0.8), rgba(15, 23, 42, 0.98));
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .hero-meta span.badge {
-      border-radius: var(--radius-pill);
-      padding: 3px 9px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    /* Right: Orb / mini-portal */
+    /* ORB */
     .hero-orb-shell {
-      position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-    }
-
-    .orb-glow {
-      position: absolute;
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 10%, rgba(248, 250, 252, 0.85), transparent 55%),
-        radial-gradient(circle at 70% 80%, rgba(56, 189, 248, 0.95), transparent 55%);
-      filter: blur(4px);
-      opacity: 0.36;
+      align-items: center;
+      position: relative;
     }
 
     .orb-ring {
       position: absolute;
-      width: 260px;
-      height: 260px;
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      box-shadow: 0 0 55px rgba(15, 23, 42, 0.95);
-      opacity: 0.75;
+      border: 1px dashed var(--border);
+      opacity: 0.65;
     }
 
     #summon-orb {
-      position: relative;
       width: 200px;
       height: 200px;
       border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.45);
-      padding: 0;
+      border: 1px solid rgba(255,255,255,0.4);
       background:
-        radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.9), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(14, 165, 233, 0.95), transparent 60%),
-        radial-gradient(circle at 50% 120%, rgba(8, 47, 73, 0.9), #020617);
-      box-shadow:
-        0 0 40px rgba(15, 23, 42, 0.9),
-        0 0 95px rgba(56, 189, 248, 0.8);
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.9), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(56,189,248,0.9), transparent 55%),
+        #020617;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       cursor: pointer;
-      transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        filter 0.18s ease-out;
-    }
-
-    #summon-orb::after {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.45);
-      box-shadow: 0 0 30px rgba(248, 250, 252, 0.75);
-      opacity: 0.75;
-    }
-
-    #summon-orb-label {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      color: #020617;
-      font-weight: 700;
-      text-shadow:
-        0 0 10px rgba(248, 250, 252, 0.9),
-        0 0 24px rgba(14, 165, 233, 0.95);
-    }
-
-    #summon-orb-label span {
-      display: block;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      opacity: 0.85;
-    }
-
-    #summon-orb.pulse {
-      animation: orbPulse 2.4s ease-in-out infinite;
-    }
-
-    #summon-orb:hover {
-      transform: translateY(-2px) scale(1.03);
-      filter: saturate(1.25);
-      box-shadow:
-        0 0 40px rgba(56, 189, 248, 0.9),
-        0 0 120px rgba(56, 189, 248, 1);
+      box-shadow: 0 0 80px rgba(56,189,248,0.9);
+      animation: orbPulse 2.6s ease-in-out infinite;
     }
 
     @keyframes orbPulse {
-      0% {
-        transform: scale(1);
-        box-shadow:
-          0 0 40px rgba(56, 189, 248, 0.8),
-          0 0 80px rgba(56, 189, 248, 0.8);
-      }
-      50% {
-        transform: scale(1.035);
-        box-shadow:
-          0 0 55px rgba(56, 189, 248, 1),
-          0 0 130px rgba(56, 189, 248, 1);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 40px rgba(56, 189, 248, 0.8),
-          0 0 80px rgba(56, 189, 248, 0.8);
-      }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.045); }
+      100% { transform: scale(1); }
     }
 
-    .orb-caption {
-      margin-top: 12px;
-      font-size: 0.72rem;
-      color: var(--muted);
+    #summon-orb-label {
       text-align: center;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.15em;
+      color: #020617;
+      font-weight: 700;
+      text-shadow: 0 0 16px rgba(255,255,255,0.9);
     }
 
-    /* Toolkit / Cards section */
+    /* TOOLKIT (grid only — cards added later in Part 2) */
     .section-shell {
       max-width: 1120px;
-      margin: 0 auto;
-      padding: 4px 20px 40px;
-    }
-
-    .section-header-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 18px;
-      align-items: baseline;
-    }
-
-    .section-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .section-subtitle {
-      font-size: 0.92rem;
-      color: var(--text-soft);
-    }
-
-    .section-subtitle strong {
-      color: #e5f0ff;
+      margin: auto;
+      padding: 12px 20px 40px;
     }
 
     .toolkit-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 14px;
     }
 
-    @media (max-width: 880px) {
-      .toolkit-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .toolkit-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
     .card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 12px 12px 13px;
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.96),
-        rgba(15, 23, 42, 0.94),
-        rgba(15, 23, 42, 0.9)
-      );
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(16px);
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.15), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.12), transparent 50%);
-      opacity: 0.75;
-      pointer-events: none;
-      mix-blend-mode: screen;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 40px rgba(0,0,0,0.45);
     }
 
     .card-kicker {
       font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
       color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       margin-bottom: 6px;
     }
 
     .card-title {
-      font-size: 0.98rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 4px;
-      color: #e5f0ff;
+      margin-bottom: 6px;
     }
 
     .card-body {
-      font-size: 0.82rem;
-      line-height: 1.5;
+      font-size: 0.85rem;
       color: var(--text-soft);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
 
     .card-meta-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       color: var(--muted);
     }
 
     .card-chip {
-      border-radius: var(--radius-pill);
       padding: 3px 8px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.9);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      border-radius: 999px;
+      border: 1px solid var(--border);
     }
 
     .card-link {
-      font-size: 0.76rem;
       color: var(--accent);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    footer {
-      padding: 20px;
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-align: center;
-      border-top: 1px solid rgba(30, 64, 175, 0.4);
-      background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
-      margin-top: 18px;
-    }
-
-    .portal-flash {
-      animation: portalFlash 0.6s ease-out;
-    }
-
-    @keyframes portalFlash {
-      0% {
-        filter: brightness(1);
-      }
-      35% {
-        filter: brightness(1.4) saturate(1.2);
-      }
-      100% {
-        filter: brightness(1);
-      }
-    }
-
-    .portal-ripple::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.18), transparent 60%);
-      animation: portalRipple 1.4s ease-out;
-      z-index: 2;
-    }
-
-    @keyframes portalRipple {
-      0% {
-        opacity: 0.4;
-      }
-      100% {
-        opacity: 0;
-      }
-    }
-
-    .version-stamp {
-      font-size: 0.68rem;
-      color: #6b7280;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-top: 6px;
-    }
-
-    .version-stamp span {
-      color: #38bdf8;
-    }
-
-    /* Simple responsive tweaks for very small screens */
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 2rem;
-      }
-      .hero-shell {
-        padding-inline: 16px;
-      }
-      .section-shell {
-        padding-inline: 16px;
-      }
     }
   </style>
 </head>
@@ -710,27 +311,19 @@
   <canvas id="ocean-canvas"></canvas>
   <div class="ocean-overlay"></div>
 
-  <!-- Optional ocean audio: place ocean-waves.mp3 in the same folder -->
-  <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
-
   <div class="page-shell">
+
+    <!-- HEADER -->
     <header>
       <div class="nav-inner">
         <div class="brand">
           <div class="brand-mark"></div>
-          <div>
-            <div class="brand-text-main">SideGuy Solutions</div>
-            <div class="brand-text-sub">Where Code Meets the Coastline</div>
-          </div>
+          <div class="brand-text-main">SideGuy Solutions</div>
         </div>
-        <div class="nav-right">
-          <div class="nav-pill">
-            <span class="nav-dot"></span>
-            <span>Tap to summon PJ</span>
-          </div>
-          <div class="version-stamp">
-            v<span id="version-label">5.1</span> · OCEAN TOOLKIT
-          </div>
+
+        <div class="nav-pill">
+          <div class="nav-dot"></div>
+          TAP TO SUMMON PJ
         </div>
       </div>
     </header>
@@ -739,405 +332,427 @@
       <!-- HERO -->
       <section class="hero-shell">
         <div class="hero-left">
-          <div class="hero-kicker">
-            <span>🌊</span>
-            <span>North County Coastal Concierge</span>
-          </div>
+          <div class="hero-kicker">North County Coastal Concierge</div>
+
           <h1 class="hero-title">
-            <span>Where code, tickets, and DFS</span><br />
+            Where code, tickets, DFS & Solana rails<br />
             ride the same Pacific swell.
           </h1>
+
           <p class="hero-sub">
-            PJ is your <strong>coastal fixer</strong> for tech builds, ticket flows,
-            DFS edges, crypto escrow, and smarter systems in North County. One tap,
-            one portal, one SideGuy.
+            PJ is your coastal fixer for tech builds, ticket funnels, DFS edges,
+            crypto escrow, Solana payments, carbon tools, and AI concierge.  
+            Everything you need. One portal.
           </p>
 
-          <div class="hero-tags">
-            <div class="hero-tag-pill">Custom builds</div>
-            <div class="hero-tag-pill">Tickets & events</div>
-            <div class="hero-tag-pill">DFS & edges</div>
-            <div class="hero-tag-pill">Crypto escrow</div>
-            <div class="hero-tag-pill">Carbon credits</div>
-          </div>
-
           <div class="hero-ctas">
-            <button id="summon-btn" class="btn-primary">
-              <span class="emoji">🌀</span>
-              <span>TAP TO SUMMON PJ</span>
-            </button>
-            <button id="summon-lite" class="btn-ghost">
-              <span>SHOW ME THE TOOLKIT</span>
-            </button>
-          </div>
-
-          <div class="hero-meta">
-            <span class="badge">Solana Beach → Encinitas</span>
-            <span>Aladeen-approved coastal concierge · Built with Kromeon</span>
+            <button id="summon-btn" class="btn-primary">TAP TO SUMMON PJ 🌀</button>
+            <button id="summon-lite" class="btn-ghost">SHOW TOOLKIT</button>
           </div>
         </div>
 
         <!-- ORB -->
         <div class="hero-orb-shell">
-          <div class="orb-glow"></div>
           <div class="orb-ring"></div>
-          <button id="summon-orb" class="pulse" aria-label="Tap to summon PJ portal">
+          <button id="summon-orb">
             <div id="summon-orb-label">
-              TAP TO<br />
-              SUMMON PJ
-              <span>PORTAL ONLINE</span>
+              TAP<br />TO SUMMON<br />PJ
             </div>
           </button>
-          <div class="orb-caption">
-            Ocean portal → email PJ → handle it.
-          </div>
         </div>
       </section>
 
-      <!-- TOOLKIT -->
+      <!-- TOOLKIT (ALL TOOLS) -->
       <section class="section-shell" id="toolkit">
-        <div class="section-header-row">
-          <div>
-            <div class="section-title">SideGuy Toolkit</div>
-            <div class="section-subtitle">
-              Everything PJ can spin up for you — from
-              <strong>apps & flows</strong> to <strong>tickets & DFS edges</strong>.
-            </div>
-          </div>
-          <div class="section-subtitle">
-            Pick a lane, or let PJ stack the whole play.
-          </div>
-        </div>
-
         <div class="toolkit-grid">
-          <!-- Tech Builds -->
+
+          <!-- 1. Solana Savings Calculator -->
           <article class="card">
-            <div class="card-kicker">Tech & Product</div>
-            <h3 class="card-title">Custom Apps, Sites & Systems</h3>
+            <div class="card-kicker">Payments · Solana Rails</div>
+            <h3 class="card-title">Solana Processing Savings Calculator</h3>
             <p class="card-body">
-              MVPs, landing pages, internal tools, and weird idea machines.
-              Designed, built, and tuned for the actual humans using them.
+              Compare Stripe/PayPal fees to Solana's near-zero costs.  
+              This calculator shows how much you keep every month switching to rail-thin fees.
             </p>
             <div class="card-meta-row">
-              <span class="card-chip">Ship fast</span>
-              <a href="#toolkit" class="card-link">
-                Start a build
-                <span>↗</span>
-              </a>
+              <span class="card-chip">Save big</span>
+              <a class="card-link" href="#">Run my savings ↗</a>
             </div>
           </article>
 
-          <!-- Tickets -->
+          <!-- 2. Crypto Escrow ROI Calculator -->
           <article class="card">
-            <div class="card-kicker">Tickets & Events</div>
-            <h3 class="card-title">Ticket Flows & Seat Maps</h3>
+            <div class="card-kicker">Crypto · Escrow</div>
+            <h3 class="card-title">Crypto Escrow ROI Calculator</h3>
             <p class="card-body">
-              Flows for presales, drops, VIP, and high-touch hospitality.
-              Built on decades of live event & ticket trenches.
+              End late invoices forever. Stablecoin escrow locks funds,
+              releases instantly, and gives dev shops cash-flow superpowers.
+            </p>
+            <div class="card-meta-row">
+              <span class="card-chip">Instant payout</span>
+              <a class="card-link" href="#">Calculate ROI ↗</a>
+            </div>
+          </article>
+
+          <!-- 3. Ticket Sellout Predictor -->
+          <article class="card">
+            <div class="card-kicker">Tickets · Events</div>
+            <h3 class="card-title">Ticket Sellout Predictor</h3>
+            <p class="card-body">
+              Presales, VIP mix, walk-up, pricing tiers — this tool projects when your
+              show sells out and how to tune your funnel to max out the room.
             </p>
             <div class="card-meta-row">
               <span class="card-chip">Fill the room</span>
-              <a href="#toolkit" class="card-link">
-                Tune my funnel
-                <span>↗</span>
-              </a>
+              <a class="card-link" href="#">Predict sellout ↗</a>
             </div>
           </article>
 
-          <!-- DFS -->
+          <!-- 4. DFS EV + Promo Multiplier -->
           <article class="card">
-            <div class="card-kicker">DFS & Edges</div>
-            <h3 class="card-title">Models, Slip Flows & Content</h3>
+            <div class="card-kicker">DFS · Edges</div>
+            <h3 class="card-title">DFS EV + Promo Multiplier Tool</h3>
             <p class="card-body">
-              Cleaner research flows, smarter slip builders, and content systems
-              that don’t fry your brain every slate.
+              Plug in promos and lines — get true EV, hedge sizing,  
+              and clean 2-player → Novig multipliers.  
+              Smarter slates. No brain drain.
             </p>
             <div class="card-meta-row">
-              <span class="card-chip">Smarter sweat</span>
-              <a href="#toolkit" class="card-link">
-                Build an edge
-                <span>↗</span>
-              </a>
+              <span class="card-chip">Smarter plays</span>
+              <a class="card-link" href="#">Calculate EV ↗</a>
             </div>
           </article>
 
-          <!-- Crypto Escrow -->
+          <!-- 5. Carbon Quick Estimator -->
           <article class="card">
-            <div class="card-kicker">Crypto & Payments</div>
-            <h3 class="card-title">“Crypto Escrow” for Dev Work</h3>
+            <div class="card-kicker">Carbon · Matter Style</div>
+            <h3 class="card-title">Carbon Impact Quick Estimator</h3>
             <p class="card-body">
-              Stablecoin rails so clients pay on time, funds are safe, and dev
-              teams aren’t chasing invoices like it’s 2009.
-            </p>
-            <div class="card-meta-row">
-              <span class="card-chip">No more chasing</span>
-              <a href="#toolkit" class="card-link">
-                Set up escrow
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <!-- Carbon / Matter -->
-          <article class="card">
-            <div class="card-kicker">Carbon & Energy</div>
-            <h3 class="card-title">Matter-Now Style Carbon Flows</h3>
-            <p class="card-body">
-              Simple rails to measure, verify, and flex your carbon story —
-              without turning your ops into a homework assignment.
+              Simple footprint estimator for local businesses.
+              Clear offsets, cleaner brand signal, zero homework.
             </p>
             <div class="card-meta-row">
               <span class="card-chip">Signal, not noise</span>
-              <a href="#toolkit" class="card-link">
-                Explore options
-                <span>↗</span>
-              </a>
+              <a class="card-link" href="#">Run estimator ↗</a>
             </div>
           </article>
 
-          <!-- Coastal Concierge -->
+          <!-- 6. AI Concierge Intake -->
           <article class="card">
-            <div class="card-kicker">Coastal Concierge</div>
-            <h3 class="card-title">The “SideGuy” Fixer Lane</h3>
+            <div class="card-kicker">AI · Concierge</div>
+            <h3 class="card-title">AI “Fix My Sh*t” Intake</h3>
             <p class="card-body">
-              Moves, intros, weird problems, and “I don’t even know what to
-              ask for” situations. PJ pulls from the full playbook.
+              A 60-second intake that figures out what you need  
+              even when you don’t know what you need.  
+              PJ mode activated.
+            </p>
+            <div class="card-meta-row">
+              <span class="card-chip">Summon</span>
+              <a class="card-link" href="#">Start intake ↗</a>
+            </div>
+          </article>
+
+          <!-- 7. Tech Builds -->
+          <article class="card">
+            <div class="card-kicker">Tech · Product</div>
+            <h3 class="card-title">Custom Apps, Sites & Systems</h3>
+            <p class="card-body">
+              MVPs, funnels, tools, landing pages, automations.
+              Built with speed, precision, and Kromeon flavor.
+            </p>
+            <div class="card-meta-row">
+              <span class="card-chip">Ship fast</span>
+              <a class="card-link" href="#">Start build ↗</a>
+            </div>
+          </article>
+
+          <!-- 8. Coastal Concierge -->
+          <article class="card">
+            <div class="card-kicker">Concierge · Coastal</div>
+            <h3 class="card-title">PJ’s Coastal Fixer Lane</h3>
+            <p class="card-body">
+              Moves, intros, answers, opportunities,
+              and “WTF do I even ask for?” situations.
+              PJ will know.
             </p>
             <div class="card-meta-row">
               <span class="card-chip">Summon PJ</span>
-              <a href="#toolkit" class="card-link">
-                Drop me a line
-                <span>↗</span>
-              </a>
+              <a class="card-link" href="#">Drop a line ↗</a>
             </div>
           </article>
+
         </div>
       </section>
-    </main>
+    <!-- THREE.JS + REAL OCEAN SHADER -->
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script>
+      let scene, camera, renderer;
+      let oceanMesh, oceanMaterial;
+      let targetWaveAmp = 1.05;
 
-    <footer>
-      SideGuy Solutions · Built from Solana Beach &amp; North County ·
-      Tap the portal if you know what’s good for you.
-    </footer>
-  </div>
-  <!-- Three.js + Ocean Portal Script -->
-  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
-  <script>
-    let scene, camera, renderer;
-    let oceanMesh, oceanMaterial;
-    let targetWaveAmp = 1.05;
+      /* ============================
+         REAL OCEAN SHADER (Vertex)
+         ============================ */
+      const vertexShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uWaveAmp;
 
-    const vertexShader = `
-      varying vec2 vUv;
-      uniform float uTime;
-      uniform float uWaveAmp;
+        float wave(vec2 p, float speed, float scale, float intensity, float offset) {
+          float t = uTime * speed + offset;
+          p *= scale;
 
-      float waveLayer(vec2 p, float speed, float scale, float offset) {
-        float t = uTime * speed + offset;
-        p *= scale;
-        float w = sin(p.x + t) * 0.3 +
-                  sin(p.y * 1.4 - t * 1.2) * 0.25 +
-                  sin((p.x + p.y) * 0.7 + t * 0.8) * 0.2;
-        return w * uWaveAmp;
-      }
+          float w =
+            sin(p.x + t) * 0.4 +
+            sin(p.y * 1.6 - t * 1.2) * 0.35 +
+            sin((p.x + p.y) * 0.75 + t * 0.8) * 0.28 +
+            sin((p.x * 1.7 - p.y) * 0.6 + t * 1.3) * 0.2;
 
-      void main() {
-        vUv = uv;
-        vec3 pos = position;
+          return w * intensity * uWaveAmp;
+        }
 
-        float layer1 = waveLayer(pos.xz, 0.2, 0.6, 0.0);
-        float layer2 = waveLayer(pos.xz + 13.7, 0.32, 1.1, 1.3);
-        float layer3 = waveLayer(pos.xz - 7.9, 0.16, 2.1, 2.7);
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
 
-        float h = layer1 + layer2 * 0.7 + layer3 * 0.4;
-        pos.y += h;
+          float layer1 = wave(pos.xz, 0.32, 0.6, 0.9, 0.0);
+          float layer2 = wave(pos.xz + 12.5, 0.22, 1.2, 0.6, 2.7);
+          float layer3 = wave(pos.xz - 8.4, 0.14, 2.0, 0.35, 5.3);
 
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-      }
-    `;
+          pos.y += layer1 + layer2 + layer3;
 
-    const fragmentShader = `
-      varying vec2 vUv;
-      uniform float uTime;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `;
 
-      vec3 deepOceanColor(vec2 uv) {
-        float depth = smoothstep(0.1, 0.7, uv.y);
-        vec3 deep = vec3(0.01, 0.06, 0.13);
-        vec3 mid = vec3(0.02, 0.21, 0.36);
-        vec3 top = vec3(0.18, 0.58, 0.82);
-        return mix(deep, mix(mid, top, depth), 0.95);
-      }
+      /* ============================
+         REAL OCEAN SHADER (Fragment)
+         ============================ */
+      const fragmentShader = `
+        varying vec2 vUv;
+        uniform float uTime;
 
-      void main() {
-        vec2 uv = vUv;
-        vec3 base = deepOceanColor(uv);
+        vec3 oceanBase(vec2 uv) {
+          vec3 deep = vec3(0.01, 0.06, 0.13);
+          vec3 mid  = vec3(0.02, 0.22, 0.38);
+          vec3 top  = vec3(0.14, 0.56, 0.90);
 
-        // Fresnel-style highlight near top
-        float fresnel = pow(1.0 - clamp(uv.y + 0.05, 0.0, 1.0), 2.0);
-        vec3 horizonGlow = vec3(0.56, 0.84, 1.0) * 1.6 * fresnel;
+          float depth = smoothstep(0.1, 0.8, uv.y);
+          return mix(deep, mix(mid, top, depth), 0.95);
+        }
 
-        // Subtle scrolling caustics
-        float t = uTime * 0.35;
-        float c1 = sin((uv.x * 18.0) + t) * cos((uv.y * 12.0) - t * 1.4);
-        float c2 = sin((uv.x * 28.0) - t * 0.7) * cos((uv.y * 18.0) + t * 1.1);
-        float caustics = (c1 + c2) * 0.085;
-        vec3 foam = vec3(0.85, 0.96, 1.0) * caustics;
+        void main() {
+          vec2 uv = vUv;
 
-        // Subtle swell band
-        float swell = sin(uv.y * 10.0 - t * 0.9) * 0.05;
-        vec3 swellTint = vec3(0.3, 0.7, 1.0) * swell;
+          vec3 base = oceanBase(uv);
 
-        vec3 color = base + horizonGlow + foam + swellTint;
+          float t = uTime * 0.35;
 
-        // Slight vignette
-        float vignette = smoothstep(0.0, 0.8, uv.y) * 0.15;
-        color *= (1.0 - vignette);
+          float c1 = sin((uv.x * 20.0) + t) * cos((uv.y * 14.0) - t * 1.3);
+          float c2 = sin((uv.x * 32.0) - t * 0.7) * cos((uv.y * 18.0) + t * 1.1);
+          float caustics = (c1 + c2) * 0.10;
 
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `;
+          vec3 foam = vec3(0.9, 0.96, 1.0) * caustics;
 
-    function initOcean() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas) return;
+          float swell = sin(uv.y * 12.0 - t * 1.0) * 0.05;
+          vec3 swellTint = vec3(0.28, 0.65, 1.0) * swell;
 
-      scene = new THREE.Scene();
-      const fov = 60;
-      const aspect = window.innerWidth / window.innerHeight;
-      const near = 0.1;
-      const far = 100;
-      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-      camera.position.set(0, 1.4, 2.4);
-      camera.lookAt(0, 0, 0);
+          float fresnel = pow(1.0 - clamp(uv.y + 0.1, 0.0, 1.0), 2.0);
+          vec3 horizon = vec3(0.56, 0.84, 1.0) * 1.3 * fresnel;
 
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true,
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x020617, 1);
+          vec3 color = base + foam + swellTint + horizon;
 
-      const geometry = new THREE.PlaneGeometry(8, 6, 200, 160);
+          float vignette = smoothstep(0.0, 0.8, uv.y) * 0.12;
+          color *= (1.0 - vignette);
 
-      oceanMaterial = new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          uTime: { value: 0 },
-          uWaveAmp: { value: 1.05 },
-        },
-        wireframe: false,
-      });
+          gl_FragColor = vec4(color, 1.0);
+        }
+      `;
 
-      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
-      oceanMesh.rotation.x = -Math.PI / 2.1;
-      oceanMesh.position.y = -0.6;
-      scene.add(oceanMesh);
+      /* ============================
+         FULL OCEAN INIT
+         ============================ */
+      function initOcean() {
+        const canvas = document.getElementById("ocean-canvas");
+        if (!canvas) return;
 
-      window.addEventListener("resize", onWindowResize);
-      animate();
-    }
+        scene = new THREE.Scene();
 
-    function onWindowResize() {
-      if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-      if (!oceanMaterial || !camera || !renderer) return;
-
-      const t = performance.now() * 0.0015;
-      oceanMaterial.uniforms.uTime.value = t;
-
-      oceanMaterial.uniforms.uWaveAmp.value +=
-        (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.04;
-
-      camera.position.x = Math.sin(t * 0.18) * 0.35;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-
-    function boostWaves() {
-      targetWaveAmp = 1.7;
-      document.body.classList.add("portal-flash", "portal-ripple");
-
-      setTimeout(() => {
-        targetWaveAmp = 1.05;
-        document.body.classList.remove("portal-flash");
-      }, 620);
-
-      setTimeout(() => {
-        document.body.classList.remove("portal-ripple");
-      }, 1500);
-
-      const audio = document.getElementById("ocean-audio");
-      if (audio && audio.paused) {
-        audio
-          .play()
-          .catch(() => {
-            /* ignore autoplay block */
-          });
-      }
-    }
-    function openEmailPortal() {
-      const mailto =
-        "mailto:pj@sideguysolutions.com" +
-        "?subject=" +
-        encodeURIComponent("Summon PJ · SideGuy Solutions") +
-        "&body=" +
-        encodeURIComponent(
-          "Hey PJ,\n\nI just tapped the coastal portal.\n\nHere’s what I’m trying to do:\n- Tech build / app / site\n- Tickets / events\n- DFS edges\n- Crypto escrow\n- Carbon / energy\n- Something else entirely\n\nDrop me a line back and let’s spin this up.\n\n— Sent from the SideGuy portal 🌊"
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          100
         );
-      window.location.href = mailto;
-    }
+        camera.position.set(0, 1.25, 2.6);
+        camera.lookAt(0, 0, 0);
 
-    function wireSummonFlow() {
-      const orb = document.getElementById("summon-orb");
-      const summonBtn = document.getElementById("summon-btn");
-      const summonLite = document.getElementById("summon-lite");
-
-      function triggerPortalAndEmail() {
-        boostWaves();
-        setTimeout(openEmailPortal, 420);
-      }
-
-      if (orb) {
-        orb.addEventListener("click", triggerPortalAndEmail);
-      }
-
-      if (summonBtn) {
-        summonBtn.addEventListener("click", triggerPortalAndEmail);
-      }
-
-      if (summonLite) {
-        summonLite.addEventListener("click", () => {
-          boostWaves();
-          const toolkit = document.getElementById("toolkit");
-          if (toolkit) {
-            toolkit.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+        renderer = new THREE.WebGLRenderer({
+          canvas,
+          antialias: true,
         });
+
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x020617, 1);
+
+        const geometry = new THREE.PlaneGeometry(10, 7, 240, 180);
+
+        oceanMaterial = new THREE.ShaderMaterial({
+          vertexShader,
+          fragmentShader,
+          uniforms: {
+            uTime: { value: 0 },
+            uWaveAmp: { value: 1.05 },
+          },
+        });
+
+        oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
+        oceanMesh.rotation.x = -Math.PI / 2.05;
+        oceanMesh.position.y = -0.55;
+        scene.add(oceanMesh);
+
+        window.addEventListener("resize", onResize);
+
+        animate();
       }
-    }
 
-    function updateVersionStamp() {
-      const label = document.getElementById("version-label");
-      if (!label) return;
+      function onResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
 
-      const stamp = "5.1";
-      label.textContent = stamp;
-    }
+      /* ============================
+         ANIMATION LOOP
+         ============================ */
+      function animate() {
+        requestAnimationFrame(animate);
 
-    document.addEventListener("DOMContentLoaded", () => {
-      updateVersionStamp();
-      setTimeout(initOcean, 180);
-      wireSummonFlow();
-    });
-  </script>
+        const t = performance.now() * 0.0015;
+        oceanMaterial.uniforms.uTime.value = t;
+
+        oceanMaterial.uniforms.uWaveAmp.value +=
+          (targetWaveAmp - oceanMaterial.uniforms.uWaveAmp.value) * 0.045;
+
+        camera.position.x = Math.sin(t * 0.2) * 0.42;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+
+      /* ============================
+         PORTAL BOOST
+         ============================ */
+      function boostWaves() {
+        targetWaveAmp = 1.8;
+
+        document.body.classList.add("portal-flash");
+        setTimeout(() => document.body.classList.remove("portal-flash"), 550);
+
+        document.body.classList.add("portal-ripple");
+        setTimeout(() => document.body.classList.remove("portal-ripple"), 1500);
+      }
+    </script>
+    <!-- SUMMON FLOW + EMAIL + TOOLKIT SCROLL -->
+    <script>
+      function openPjEmail() {
+        const mailto =
+          "mailto:pj@sideguysolutions.com" +
+          "?subject=" +
+          encodeURIComponent("Summon PJ · SideGuy Solutions") +
+          "&body=" +
+          encodeURIComponent(
+            "Hey PJ,\n\nI tapped the portal.\nHere’s what I need help with:\n\n- Tech build / app / site\n- Ticket system / seat map\n- DFS tools / edges\n- Solana payments\n- Crypto escrow\n- Carbon / Matter flows\n- Concierge / fixer lane\n\nLet’s spin it up.\n\n— Sent from the SideGuy Portal 🌊"
+          );
+
+        window.location.href = mailto;
+      }
+
+      function wireSummon() {
+        const orb = document.getElementById("summon-orb");
+        const btn = document.getElementById("summon-btn");
+        const lite = document.getElementById("summon-lite");
+        const toolkit = document.getElementById("toolkit");
+
+        function triggerPortal() {
+          boostWaves();
+          setTimeout(openPjEmail, 420);
+        }
+
+        if (orb) orb.addEventListener("click", triggerPortal);
+        if (btn) btn.addEventListener("click", triggerPortal);
+
+        if (lite && toolkit) {
+          lite.addEventListener("click", () => {
+            toolkit.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        }
+      }
+
+      function updateVersion() {
+        const el = document.getElementById("version-label");
+        if (!el) return;
+        el.textContent = "v6.0";
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(initOcean, 180);
+        wireSummon();
+        updateVersion();
+      });
+    </script>
+
+    <!-- SEO BLOCK (invisible to humans / visible to Google) -->
+    <div class="seo-block" style="display:none;">
+      <h2>SideGuy Solutions Coastal Tech Toolkit</h2>
+      <p>
+        SideGuy Solutions provides apps, ticket systems, DFS tools, Solana payment rails,
+        crypto escrow, carbon estimators, and concierge service in North County San Diego.
+      </p>
+
+      <h3>Solana Payment Tools</h3>
+      <p>
+        Compare Stripe, PayPal, and Square fees with the Solana savings calculator.
+        Near-zero transaction costs with instant settlement.
+      </p>
+
+      <h3>Crypto Escrow</h3>
+      <p>
+        Stablecoin escrow eliminates late invoices, improves cash flow, and protects both
+        clients and developers with milestone-based releases.
+      </p>
+
+      <h3>DFS Tools</h3>
+      <p>
+        DFS EV calculators, promo multipliers, hedge builders, and Novig pairing tools
+        for smarter sports slates.
+      </p>
+
+      <h3>Ticketing Tools</h3>
+      <p>
+        Ticket sellout predictor, pricing models, presale funnels, and VIP optimization
+        for artists, venues, and operators.
+      </p>
+
+      <h3>Carbon Tools</h3>
+      <p>
+        Carbon footprint estimators, Matter-style verification, and sustainability
+        storytelling for small businesses.
+      </p>
+
+      <h3>Concierge Tools</h3>
+      <p>
+        AI intake, coastal concierge, and personal fixer services for local businesses,
+        founders, and operators.
+      </p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center;color:#64748b;font-size:0.75rem;padding:20px;">
+      SideGuy Solutions · v<span id="version-label">6.0</span> · Built from Solana Beach
+    </footer>
+
+  </div> <!-- end page-shell -->
 </body>
 </html>
