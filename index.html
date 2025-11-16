@@ -5,37 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
 
-  <meta name="description" content="SideGuy Solutions — Tech, tickets, DFS, concierge. Tap the ocean portal to summon PJ." />
-
-  <!-- SEO -->
+  <meta name="description" content="SideGuy Solutions — Tap the ocean portal to summon PJ. Apps, tickets, DFS edges, and North County tech magic." />
   <meta property="og:title" content="SideGuy Solutions — Coastal Concierge" />
-  <meta property="og:description" content="Tap the portal. Summon PJ. Tech, tickets, DFS, concierge." />
+  <meta property="og:description" content="Tap the ocean portal to summon PJ. Apps, automation, tickets, DFS edges, and Solana payment flows." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
   <style>
+    /* ================================================
+       ROOT VARIABLES — With Day/Night Tint Support
+    ================================================= */
     :root {
       --bg: #020617;
+      --bg-night: #010914;
+      --bg-day: #031223;
+
       --text: #e5f2ff;
-      --soft: #9ca3af;
+      --soft: #94a3b8;
       --muted: #64748b;
+
       --accent: #38bdf8;
-      --accent2: #0ea5e9;
-      --card: rgba(15, 23, 42, 0.92);
+      --accent-night: #4cc9ff;
+
+      --card: rgba(15,23,42,0.92);
       --glass: rgba(15,23,42,0.72);
+
       --radius: 18px;
       --pill: 999px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    /* Day/Night Mood Applied Immediately */
     body {
       background: var(--bg);
+      transition: background 0.6s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
       color: var(--text);
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
+    /* ================================================
+       OCEAN CANVAS — Three.js Background
+    ================================================= */
     #ocean-canvas {
       position: fixed;
       inset: 0;
@@ -44,13 +64,16 @@
       z-index: -1;
     }
 
+    /* ================================================
+       HEADER + NAV
+    ================================================= */
     header {
       position: sticky;
       top: 0;
       z-index: 10;
-      padding: 10px 20px;
-      backdrop-filter: blur(14px);
-      background: rgba(2, 6, 23, 0.7);
+      padding: 12px 20px;
+      backdrop-filter: blur(16px);
+      background: rgba(2,6,23,0.75);
       border-bottom: 1px solid rgba(56,189,248,0.25);
     }
 
@@ -71,43 +94,13 @@
       letter-spacing: 0.08em;
     }
 
-    /* ORB */
-    #summon-orb {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: radial-gradient(circle at 20% 20%, #e0f2fe, #38bdf8, #0ea5e9, #020617);
-      box-shadow:
-        0 0 40px rgba(56,189,248,0.6),
-        0 0 120px rgba(56,189,248,0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
-
-    #summon-orb:hover {
-      transform: scale(1.03);
-      filter: brightness(1.15);
-    }
-
-    #summon-orb-label {
-      text-transform: uppercase;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #020617;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-shadow: 0 0 10px rgba(255,255,255,0.9);
-    }
-
-    /* HERO */
+    /* ================================================
+       HERO + ORB
+    ================================================= */
     .hero {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 40px 20px 60px;
+      padding: 50px 20px 70px;
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 30px;
@@ -115,7 +108,7 @@
     }
 
     .hero-title {
-      font-size: 2.8rem;
+      font-size: 2.9rem;
       font-weight: 800;
       line-height: 1.05;
       margin-bottom: 12px;
@@ -131,16 +124,80 @@
       font-size: 1rem;
       color: var(--soft);
       max-width: 32rem;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       line-height: 1.6;
     }
 
-    .hero-ctas {
+    /* ORB */
+    #summon-orb {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 25% 25%, #e0f2fe 0%, #38bdf8 40%, #0ea5e9 65%, #020617 100%);
+      box-shadow:
+        0 0 45px rgba(56,189,248,0.6),
+        0 0 140px rgba(56,189,248,0.9);
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.18s ease, filter 0.18s ease;
+      position: relative;
+      overflow: hidden;
     }
 
+    #summon-orb:hover {
+      transform: scale(1.06);
+      filter: brightness(1.18);
+    }
+
+    #summon-orb-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      color: #020617;
+      letter-spacing: 0.16em;
+      text-shadow: 0 0 10px rgba(255,255,255,0.85);
+    }
+
+    /* ================================================
+       PORTAL BURST FX (v10.1)
+    ================================================= */
+    .portal-burst-flash {
+      animation: burstFlash 0.45s ease-out;
+    }
+
+    @keyframes burstFlash {
+      0% { background: rgba(255,255,255,0); }
+      25% { background: rgba(255,255,255,0.45); }
+      100% { background: rgba(255,255,255,0); }
+    }
+
+    .portal-burst-ring {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      animation: burstRing 0.9s ease-out;
+      z-index: 9998;
+    }
+
+    @keyframes burstRing {
+      0% {
+        transform: scale(0.2);
+        border: 2px solid rgba(56,189,248,1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3.8);
+        border: 1px solid rgba(56,189,248,0);
+        opacity: 0;
+      }
+    }
+
+    /* ================================================
+       BUTTONS
+    ================================================= */
     .btn-primary {
       padding: 12px 18px;
       border-radius: var(--pill);
@@ -152,6 +209,7 @@
       cursor: pointer;
       border: none;
       letter-spacing: 0.12em;
+      transition: transform 0.15s;
     }
 
     .btn-primary:hover {
@@ -159,6 +217,9 @@
       transform: translateY(-2px);
     }
 
+    /* ================================================
+       TOOLKIT SECTIONS
+    ================================================= */
     .section {
       max-width: 1120px;
       margin: 0 auto;
@@ -191,6 +252,9 @@
       margin-bottom: 6px;
     }
 
+    /* ================================================
+       FOOTER
+    ================================================= */
     footer {
       text-align: center;
       padding: 30px 20px;
@@ -202,44 +266,57 @@
 
   </style>
 </head>
- <body>
+<body>
 
-  <!-- REAL THREE.JS OCEAN -->
+  <!-- REAL THREE.JS OCEAN BACKGROUND -->
   <canvas id="ocean-canvas"></canvas>
 
+  <!-- ============================= -->
+  <!--          HEADER              -->
+  <!-- ============================= -->
   <header>
     <div class="nav-inner">
       <div class="brand">
-        <span>🌊</span> SideGuy Solutions
+        🌊 SideGuy Solutions
       </div>
       <div style="font-size:0.8rem;color:var(--soft);letter-spacing:0.18em;">
-        v10.0 • GOD MODE++
+        v10.1 • GOD MODE+++
       </div>
     </div>
   </header>
 
+  <!-- ============================= -->
+  <!--            HERO               -->
+  <!-- ============================= -->
   <section class="hero">
+
+    <!-- LEFT SIDE: TEXT + CTAS -->
     <div>
       <h1 class="hero-title">
         Where <span>code meets the coastline</span>.
       </h1>
 
       <p class="hero-sub">
-        Tap the ocean portal. Summon PJ. Build apps, fix systems, spin up
-        ticket flows, DFS edges, or weird ideas — instantly handled.
+        Tap the ocean portal. Summon PJ.  
+        Build apps, fix systems, optimize tickets,  
+        get DFS edges, or spin up weird ideas — instantly handled.
         <br><br>
         Text or email anytime:<br>
         <strong>773-544-1231</strong> · <strong>peter.z@kromeon.com</strong>
       </p>
 
       <div class="hero-ctas">
-        <button id="summon-btn" class="btn-primary">Tap to Summon PJ</button>
+        <button id="summon-btn" class="btn-primary">
+          Tap to Summon PJ
+        </button>
+
         <button id="show-toolkit" class="btn-primary" style="background:#0ea5e9;color:white;">
           Open Toolkit
         </button>
       </div>
     </div>
 
+    <!-- RIGHT SIDE: ORB -->
     <div style="display:flex;flex-direction:column;align-items:center;">
       <button id="summon-orb">
         <div id="summon-orb-label">
@@ -250,195 +327,246 @@
         Portal Online
       </div>
     </div>
+
   </section>
+
+  <!-- ============================= -->
+  <!--         TOOLKIT SECTION       -->
+  <!-- ============================= -->
 
   <section class="section" id="toolkit">
     <div class="section-title">SideGuy Toolkit</div>
 
     <div class="grid">
 
+      <!-- SOLANA SAVINGS -->
       <div class="card">
         <h3>Solana Processing Savings Calculator</h3>
         <p>Estimate how much you save switching your payment flows to Solana rails.</p>
-        <button onclick="openSavingsCalc()" class="btn-primary" style="margin-top:10px;">Open Calculator</button>
+        <button class="btn-primary" style="margin-top:10px;" onclick="openSavingsCalc()">
+          Open Calculator
+        </button>
       </div>
 
+      <!-- DFS MULTIPLIER -->
       <div class="card">
         <h3>DFS Promo Multiplier Tool</h3>
         <p>Run 2-leg, 3-leg, and promo-boost stacks to find EV edges.</p>
-        <button class="btn-primary" onclick="openDFS()">Open DFS Tool</button>
+        <button class="btn-primary" onclick="openDFS()">
+          Open DFS Tool
+        </button>
       </div>
 
+      <!-- TICKET OPTIMIZER -->
       <div class="card">
         <h3>Ticket Flow Optimizer</h3>
         <p>Analyze fees, flows, checkout friction, and event capacity.</p>
-        <button class="btn-primary" onclick="openTickets()">Optimize Tickets</button>
+        <button class="btn-primary" onclick="openTickets()">
+          Optimize Tickets
+        </button>
       </div>
 
     </div>
   </section>
-<!-- ============================= -->
-<!--      TOOLKIT MODALS          -->
-<!-- ============================= -->
+  <!-- ============================= -->
+  <!--         MODAL STYLES          -->
+  <!-- ============================= -->
+  <style>
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
 
-<style>
-  .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(10px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
+    .modal-content {
+      background: var(--card);
+      padding: 26px;
+      border-radius: 20px;
+      width: min(90%, 440px);
+      border: 1px solid rgba(56,189,248,0.4);
+      box-shadow: 0 0 50px rgba(56,189,248,0.4);
+    }
 
-  .modal-content {
-    background: var(--card);
-    padding: 24px;
-    border-radius: 20px;
-    width: min(90%, 440px);
-    border: 1px solid rgba(56,189,248,0.4);
-    box-shadow: 0 0 50px rgba(56,189,248,0.4);
-  }
+    .modal h2 {
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
 
-  .modal h2 {
-    margin-bottom: 12px;
-    font-size: 1.3rem;
-  }
+    .modal label {
+      font-size: 0.9rem;
+      color: var(--soft);
+    }
 
-  .modal label {
-    font-size: 0.9rem;
-    color: var(--soft);
-  }
+    .modal input {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(56,189,248,0.35);
+      background: rgba(15,23,42,0.7);
+      color: var(--text);
+    }
 
-  .modal input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    border-radius: 10px;
-    border: 1px solid rgba(56,189,248,0.35);
-    background: rgba(15,23,42,0.7);
-    color: var(--text);
-  }
+    .calc-btn {
+      background: #38bdf8;
+      color: #020617;
+      border-radius: var(--pill);
+      padding: 10px 14px;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
 
-  .close-btn {
-    background: #ef4444;
-    color: white;
-    border-radius: var(--pill);
-    padding: 8px 14px;
-    margin-top: 8px;
-    cursor: pointer;
-    border: none;
-  }
+    .close-btn {
+      background: #ef4444;
+      color: white;
+      border-radius: var(--pill);
+      padding: 8px 14px;
+      margin-top: 8px;
+      cursor: pointer;
+      border: none;
+      font-weight: 700;
+    }
 
-  .calc-btn {
-    background: #38bdf8;
-    color: #020617;
-    border-radius: var(--pill);
-    padding: 10px 14px;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 10px;
-  }
-
-  .result-box {
-    margin-top: 12px;
-    background: rgba(56,189,248,0.15);
-    padding: 12px;
-    border-radius: 12px;
-    color: #a5f3fc;
-    font-size: 0.95rem;
-    border: 1px solid rgba(56,189,248,0.35);
-  }
-</style>
+    .result-box {
+      margin-top: 12px;
+      background: rgba(56,189,248,0.15);
+      padding: 12px;
+      border-radius: 12px;
+      color: #a5f3fc;
+      font-size: 0.95rem;
+      border: 1px solid rgba(56,189,248,0.35);
+      display: none;
+    }
+  </style>
 
 
-<!-- ============================= -->
-<!--  SOLANA PROCESSING CALCULATOR -->
-<!-- ============================= -->
-<div id="modal-solana" class="modal">
-  <div class="modal-content">
-    <h2>Solana Processing Savings</h2>
+  <!-- ============================= -->
+  <!--   SOLANA PROCESSING MODAL    -->
+  <!-- ============================= -->
+  <div id="modal-solana" class="modal">
+    <div class="modal-content">
+      <h2>Solana Processing Savings</h2>
 
-    <label>Monthly Volume ($)</label>
-    <input id="solana-volume" type="number" placeholder="e.g. 50,000" />
+      <label>Monthly Volume ($)</label>
+      <input id="solana-volume" type="number" placeholder="e.g. 50,000" />
 
-    <label>Current Processor Fee %</label>
-    <input id="solana-fee" type="number" step="0.01" placeholder="e.g. 2.9" />
+      <label>Current Processor Fee %</label>
+      <input id="solana-fee" type="number" step="0.01" placeholder="e.g. 2.9" />
 
-    <button class="calc-btn" onclick="runSolanaCalc()">Calculate Savings</button>
+      <button class="calc-btn" onclick="runSolanaCalc()">
+        Calculate Savings
+      </button>
 
-    <div id="solana-result" class="result-box" style="display:none;"></div>
+      <div id="solana-result" class="result-box"></div>
 
-    <button class="close-btn" onclick="closeSolana()">Close</button>
+      <button class="close-btn" onclick="closeSolana()">Close</button>
+    </div>
   </div>
-</div>
 
 
-<!-- ============================= -->
-<!--       DFS MULTIPLIER TOOL     -->
-<!-- ============================= -->
-<div id="modal-dfs" class="modal">
-  <div class="modal-content">
-    <h2>DFS Promo Multiplier</h2>
+  <!-- ============================= -->
+  <!--     DFS MULTIPLIER MODAL      -->
+  <!-- ============================= -->
+  <div id="modal-dfs" class="modal">
+    <div class="modal-content">
+      <h2>DFS Promo Multiplier</h2>
 
-    <label>Leg 1 Odds (e.g. -110 or +120)</label>
-    <input id="dfs-leg1" type="text" />
+      <label>Leg 1 Odds (e.g. -110 or +120)</label>
+      <input id="dfs-leg1" type="text" />
 
-    <label>Leg 2 Odds</label>
-    <input id="dfs-leg2" type="text" />
+      <label>Leg 2 Odds</label>
+      <input id="dfs-leg2" type="text" />
 
-    <label>Boost % (optional)</label>
-    <input id="dfs-boost" type="number" placeholder="e.g. 20" />
+      <label>Boost % (optional)</label>
+      <input id="dfs-boost" type="number" placeholder="e.g. 20" />
 
-    <button class="calc-btn" onclick="runDFScalc()">Calculate EV</button>
+      <button class="calc-btn" onclick="runDFScalc()">
+        Calculate EV
+      </button>
 
-    <div id="dfs-result" class="result-box" style="display:none;"></div>
+      <div id="dfs-result" class="result-box"></div>
 
-    <button class="close-btn" onclick="closeDFS()">Close</button>
+      <button class="close-btn" onclick="closeDFS()">Close</button>
+    </div>
   </div>
-</div>
 
 
-<!-- ============================= -->
-<!--      TICKET FLOW OPTIMIZER    -->
-<!-- ============================= -->
-<div id="modal-tickets" class="modal">
-  <div class="modal-content">
-    <h2>Ticket Flow Optimizer</h2>
+  <!-- ============================= -->
+  <!--     TICKET OPTIMIZER MODAL    -->
+  <!-- ============================= -->
+  <div id="modal-tickets" class="modal">
+    <div class="modal-content">
+      <h2>Ticket Flow Optimizer</h2>
 
-    <label>Ticket Price ($)</label>
-    <input id="ticket-price" type="number" />
+      <label>Ticket Price ($)</label>
+      <input id="ticket-price" type="number" />
 
-    <label>Platform Fee %</label>
-    <input id="ticket-fee" type="number" step="0.1" />
+      <label>Platform Fee %</label>
+      <input id="ticket-fee" type="number" step="0.1" />
 
-    <label>Venue Capacity</label>
-    <input id="ticket-cap" type="number" />
+      <label>Venue Capacity</label>
+      <input id="ticket-cap" type="number" />
 
-    <button class="calc-btn" onclick="runTicketCalc()">Optimize</button>
+      <button class="calc-btn" onclick="runTicketCalc()">
+        Optimize Tickets
+      </button>
 
-    <div id="ticket-result" class="result-box" style="display:none;"></div>
+      <div id="ticket-result" class="result-box"></div>
 
-    <button class="close-btn" onclick="closeTickets()">Close</button>
+      <button class="close-btn" onclick="closeTickets()">Close</button>
+    </div>
   </div>
-</div>
+  <!-- ============================= -->
+  <!--        SCRIPTS + LOGIC        -->
+  <!-- ============================= -->
+
   <!-- THREE.js CDN -->
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
     // =========================
+    // DAY / NIGHT MOOD TINT
+    // =========================
+    (function setMoodTint() {
+      try {
+        const hour = new Date().getHours();
+        const root = document.documentElement;
+
+        if (hour >= 6 && hour < 18) {
+          // Daytime
+          root.style.setProperty("--bg", "#031223");
+          root.style.setProperty("--accent", "#38bdf8");
+        } else {
+          // Night
+          root.style.setProperty("--bg", "#010914");
+          root.style.setProperty("--accent", "#4cc9ff");
+        }
+      } catch (e) {
+        console.warn("Mood tint error:", e);
+      }
+    })();
+
+
+    // =========================
     // CONTACT HELPERS
     // =========================
     function openContactPortal() {
-      // Mobile → SMS, Desktop → Email
-      var isMobile = /Mobi|Android/i.test(navigator.userAgent);
+      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
       if (isMobile) {
         window.location.href =
           "sms:+17735441231?&body=" +
-          encodeURIComponent("Hey PJ, just summoned the portal from SideGuy Solutions. Let's build something.");
+          encodeURIComponent(
+            "Hey PJ, just summoned the portal from SideGuy Solutions. Let's build something."
+          );
       } else {
         window.location.href =
           "mailto:peter.z@kromeon.com" +
@@ -451,81 +579,88 @@
       }
     }
 
+    // PORTAL BURST CINEMATIC
     function triggerPortal() {
-      document.body.classList.add("portal-flash", "portal-ripple");
-      setTimeout(function () {
-        document.body.classList.remove("portal-flash");
-      }, 600);
-      setTimeout(function () {
-        document.body.classList.remove("portal-ripple");
-      }, 1500);
-      setTimeout(openContactPortal, 420);
+      // Flash
+      document.body.classList.add("portal-burst-flash");
+      setTimeout(() => document.body.classList.remove("portal-burst-flash"), 500);
+
+      // Expanding ring
+      const ring = document.createElement("div");
+      ring.classList.add("portal-burst-ring");
+      document.body.appendChild(ring);
+      setTimeout(() => ring.remove(), 900);
+
+      // After effect → contact
+      setTimeout(openContactPortal, 480);
     }
 
+
     // =========================
-    // TOOLKIT MODAL OPEN/CLOSE
+    // TOOLKIT MODALS OPEN/CLOSE
     // =========================
     function openSavingsCalc() {
-      var m = document.getElementById("modal-solana");
+      const m = document.getElementById("modal-solana");
       if (m) m.style.display = "flex";
     }
     function closeSolana() {
-      var m = document.getElementById("modal-solana");
+      const m = document.getElementById("modal-solana");
       if (m) m.style.display = "none";
     }
 
     function openDFS() {
-      var m = document.getElementById("modal-dfs");
+      const m = document.getElementById("modal-dfs");
       if (m) m.style.display = "flex";
     }
     function closeDFS() {
-      var m = document.getElementById("modal-dfs");
+      const m = document.getElementById("modal-dfs");
       if (m) m.style.display = "none";
     }
 
     function openTickets() {
-      var m = document.getElementById("modal-tickets");
+      const m = document.getElementById("modal-tickets");
       if (m) m.style.display = "flex";
     }
     function closeTickets() {
-      var m = document.getElementById("modal-tickets");
+      const m = document.getElementById("modal-tickets");
       if (m) m.style.display = "none";
     }
 
+
     // =========================
-    // SOLANA SAVINGS CALC
+    // SOLANA SAVINGS CALCULATOR
     // =========================
     function runSolanaCalc() {
-      var volEl = document.getElementById("solana-volume");
-      var feeEl = document.getElementById("solana-fee");
-      var outEl = document.getElementById("solana-result");
+      const volEl = document.getElementById("solana-volume");
+      const feeEl = document.getElementById("solana-fee");
+      const outEl = document.getElementById("solana-result");
       if (!volEl || !feeEl || !outEl) return;
 
-      var vol = parseFloat(volEl.value || "0");
-      var feePct = parseFloat(feeEl.value || "0");
+      const vol = parseFloat(volEl.value || "0");
+      const feePct = parseFloat(feeEl.value || "0");
+
+      outEl.style.display = "block";
 
       if (!vol || !feePct) {
-        outEl.style.display = "block";
-        outEl.textContent = "Add both volume and your current fee % to see the savings.";
+        outEl.textContent =
+          "Add both volume and your current fee % to see the savings.";
         return;
       }
 
-      var currentRate = feePct / 100;
-      var solanaRate = 0.003; // 0.3% example
+      const currentRate = feePct / 100;
+      const solanaRate = 0.003; // 0.3% example
 
       if (currentRate <= solanaRate) {
-        outEl.style.display = "block";
         outEl.textContent =
           "You’re already near Solana-level fees. DM PJ if you want to layer yield or auto-pay flows on top.";
         return;
       }
 
-      var currentMonthlyFees = vol * currentRate;
-      var solanaMonthlyFees = vol * solanaRate;
-      var monthlySavings = currentMonthlyFees - solanaMonthlyFees;
-      var yearlySavings = monthlySavings * 12;
+      const currentMonthlyFees = vol * currentRate;
+      const solanaMonthlyFees = vol * solanaRate;
+      const monthlySavings = currentMonthlyFees - solanaMonthlyFees;
+      const yearlySavings = monthlySavings * 12;
 
-      outEl.style.display = "block";
       outEl.innerHTML =
         "At $" +
         vol.toLocaleString() +
@@ -544,39 +679,41 @@
         "Tap the portal and PJ can map this into a real flow (stablecoins, on/off ramps, and reporting that doesn’t suck).";
     }
 
+
     // =========================
-    // DFS PROMO MULTIPLIER CALC
+    // DFS PROMO MULTIPLIER
     // =========================
-    function americanToDecimal(odds) {
-      odds = parseFloat(odds);
+    function americanToDecimal(oddsStr) {
+      const odds = parseFloat(oddsStr);
       if (!odds) return null;
       if (odds > 0) return odds / 100 + 1;
       return 100 / Math.abs(odds) + 1;
     }
 
     function runDFScalc() {
-      var leg1El = document.getElementById("dfs-leg1");
-      var leg2El = document.getElementById("dfs-leg2");
-      var boostEl = document.getElementById("dfs-boost");
-      var outEl = document.getElementById("dfs-result");
+      const leg1El = document.getElementById("dfs-leg1");
+      const leg2El = document.getElementById("dfs-leg2");
+      const boostEl = document.getElementById("dfs-boost");
+      const outEl = document.getElementById("dfs-result");
       if (!leg1El || !leg2El || !outEl) return;
 
-      var leg1 = americanToDecimal(leg1El.value);
-      var leg2 = americanToDecimal(leg2El.value);
-      var boostPct = parseFloat(boostEl.value || "0");
+      const leg1 = americanToDecimal(leg1El.value);
+      const leg2 = americanToDecimal(leg2El.value);
+      const boostPct = parseFloat(boostEl.value || "0");
+
+      outEl.style.display = "block";
 
       if (!leg1 || !leg2) {
-        outEl.style.display = "block";
         outEl.textContent = "Use standard American odds (like -110, +120).";
         return;
       }
 
-      var comboDec = leg1 * leg2;
-      var comboDecBoosted = comboDec * (1 + boostPct / 100);
+      const comboDec = leg1 * leg2;
+      const comboDecBoosted = comboDec * (1 + boostPct / 100);
 
       function decToAmerican(dec) {
         if (dec <= 1) return 0;
-        var imp = dec - 1;
+        const imp = dec - 1;
         if (imp >= 1) {
           return "+" + Math.round(imp * 100);
         } else {
@@ -584,10 +721,9 @@
         }
       }
 
-      var comboAm = decToAmerican(comboDec);
-      var comboBoostAm = decToAmerican(comboDecBoosted);
+      const comboAm = decToAmerican(comboDec);
+      const comboBoostAm = decToAmerican(comboDecBoosted);
 
-      outEl.style.display = "block";
       outEl.innerHTML =
         "Raw 2-leg combo is about <strong>" +
         comboDec.toFixed(2) +
@@ -604,37 +740,39 @@
         "Next layer is promos, risk size, and slate selection — that’s what PJ helps you systemize so it feels like a calm side business, not chaos.";
     }
 
+
     // =========================
-    // TICKET FLOW CALC
+    // TICKET FLOW OPTIMIZER
     // =========================
     function runTicketCalc() {
-      var priceEl = document.getElementById("ticket-price");
-      var feeEl = document.getElementById("ticket-fee");
-      var capEl = document.getElementById("ticket-cap");
-      var outEl = document.getElementById("ticket-result");
+      const priceEl = document.getElementById("ticket-price");
+      const feeEl = document.getElementById("ticket-fee");
+      const capEl = document.getElementById("ticket-cap");
+      const outEl = document.getElementById("ticket-result");
       if (!priceEl || !feeEl || !capEl || !outEl) return;
 
-      var price = parseFloat(priceEl.value || "0");
-      var feePct = parseFloat(feeEl.value || "0");
-      var cap = parseInt(capEl.value || "0", 10);
+      const price = parseFloat(priceEl.value || "0");
+      const feePct = parseFloat(feeEl.value || "0");
+      const cap = parseInt(capEl.value || "0", 10);
+
+      outEl.style.display = "block";
 
       if (!price || !feePct || !cap) {
-        outEl.style.display = "block";
-        outEl.textContent = "Add price, fee %, and capacity to see how the room pencils out.";
+        outEl.textContent =
+          "Add price, fee %, and capacity to see how the room pencils out.";
         return;
       }
 
-      var feePerTicket = price * (feePct / 100);
-      var grossPerTicket = price + feePerTicket;
-      var grossIfFull = cap * grossPerTicket;
-      var totalFees = cap * feePerTicket;
+      const feePerTicket = price * (feePct / 100);
+      const grossPerTicket = price + feePerTicket;
+      const grossIfFull = cap * grossPerTicket;
+      const totalFees = cap * feePerTicket;
 
-      var feePctBetter = Math.max(feePct - 2, 0); // example 2% shaved
-      var newFeePerTicket = price * (feePctBetter / 100);
-      var newTotalFees = cap * newFeePerTicket;
-      var savings = totalFees - newTotalFees;
+      const feePctBetter = Math.max(feePct - 2, 0); // example: 2% shaved
+      const newFeePerTicket = price * (feePctBetter / 100);
+      const newTotalFees = cap * newFeePerTicket;
+      const savings = totalFees - newTotalFees;
 
-      outEl.style.display = "block";
       outEl.innerHTML =
         "At $" +
         price.toFixed(2) +
@@ -653,19 +791,22 @@
         "PJ’s lane is designing that checkout and routing more of the value back to North County.";
     }
 
+
     // =========================
     // THREE.JS OCEAN (SAFE)
     // =========================
+    let uniforms; // global for reactive waves
+
     (function initOceanSafe() {
-      var canvas = document.getElementById("ocean-canvas");
+      const canvas = document.getElementById("ocean-canvas");
       if (!canvas || !window.THREE) {
-        // Fallback: just leave gradient background
+        console.warn("Three.js or canvas missing — using static background.");
         return;
       }
 
       try {
-        var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
           55,
           window.innerWidth / window.innerHeight,
           0.1,
@@ -674,7 +815,7 @@
         camera.position.set(0, 6, 10);
         camera.lookAt(0, 0, 0);
 
-        var renderer = new THREE.WebGLRenderer({
+        const renderer = new THREE.WebGLRenderer({
           canvas: canvas,
           antialias: true
         });
@@ -682,15 +823,15 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(0x020617, 1);
 
-        var geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
+        const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
         geometry.rotateX(-Math.PI / 2);
 
-        var uniforms = {
+        uniforms = {
           uTime: { value: 0 },
           uWaveAmp: { value: 1.0 }
         };
 
-        var vertexShader = `
+        const vertexShader = `
           varying vec2 vUv;
           uniform float uTime;
           uniform float uWaveAmp;
@@ -733,7 +874,7 @@
           }
         `;
 
-        var fragmentShader = `
+        const fragmentShader = `
           varying vec2 vUv;
           uniform float uTime;
 
@@ -795,27 +936,27 @@
           }
         `;
 
-        var material = new THREE.ShaderMaterial({
+        const material = new THREE.ShaderMaterial({
           uniforms: uniforms,
           vertexShader: vertexShader,
           fragmentShader: fragmentShader,
           side: THREE.DoubleSide
         });
 
-        var mesh = new THREE.Mesh(geometry, material);
+        const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
 
-        var fogColor = new THREE.Color(0x000818);
+        const fogColor = new THREE.Color(0x000818);
         scene.fog = new THREE.Fog(fogColor, 12, 45);
         renderer.setClearColor(fogColor, 1);
 
-        var clock = new THREE.Clock();
+        const clock = new THREE.Clock();
         function animate() {
           requestAnimationFrame(animate);
-          var elapsed = clock.getElapsedTime();
+          const elapsed = clock.getElapsedTime();
           uniforms.uTime.value = elapsed;
 
-          var sway = Math.sin(elapsed * 0.18) * 0.4;
+          const sway = Math.sin(elapsed * 0.18) * 0.4;
           camera.position.x = sway;
           camera.lookAt(0, 0, 0);
 
@@ -830,39 +971,60 @@
 
         animate();
       } catch (e) {
-        // If anything dies, silently fall back to static gradient
         console.warn("Ocean init failed, falling back:", e);
       }
     })();
+
+
+    // =========================
+    // REACTIVE OCEAN (MOUSE/TOUCH)
+    // =========================
+    let waveBoostTimeout;
+    window.addEventListener("mousemove", () => {
+      if (uniforms && uniforms.uWaveAmp) {
+        uniforms.uWaveAmp.value = 1.55;
+        clearTimeout(waveBoostTimeout);
+        waveBoostTimeout = setTimeout(() => {
+          uniforms.uWaveAmp.value = 1.0;
+        }, 1000);
+      }
+    });
+
+    window.addEventListener("touchstart", () => {
+      if (uniforms && uniforms.uWaveAmp) {
+        uniforms.uWaveAmp.value = 1.75;
+        clearTimeout(waveBoostTimeout);
+        waveBoostTimeout = setTimeout(() => {
+          uniforms.uWaveAmp.value = 1.0;
+        }, 1100);
+      }
+    });
+
 
     // =========================
     // DOM WIRING
     // =========================
     document.addEventListener("DOMContentLoaded", function () {
-      var summonBtn = document.getElementById("summon-btn");
-      var orb = document.getElementById("summon-orb");
-      var toolkitBtn = document.getElementById("show-toolkit");
+      const summonBtn = document.getElementById("summon-btn");
+      const orb = document.getElementById("summon-orb");
+      const toolkitBtn = document.getElementById("show-toolkit");
 
       if (summonBtn) {
-        summonBtn.addEventListener("click", function () {
-          triggerPortal();
-        });
+        summonBtn.addEventListener("click", triggerPortal);
       }
       if (orb) {
-        orb.addEventListener("click", function () {
-          triggerPortal();
-        });
+        orb.addEventListener("click", triggerPortal);
       }
       if (toolkitBtn) {
         toolkitBtn.addEventListener("click", function () {
-          var tk = document.getElementById("toolkit");
+          const tk = document.getElementById("toolkit");
           if (tk) tk.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       }
 
-      // Close modals on backdrop click
+      // Click outside modal to close
       ["modal-solana", "modal-dfs", "modal-tickets"].forEach(function (id) {
-        var m = document.getElementById(id);
+        const m = document.getElementById(id);
         if (!m) return;
         m.addEventListener("click", function (e) {
           if (e.target === m) {
@@ -873,6 +1035,9 @@
     });
   </script>
 
+  <!-- ============================= -->
+  <!--            FOOTER             -->
+  <!-- ============================= -->
   <footer>
     SideGuy Solutions · Solana Beach → Encinitas · Tap the portal if you know what’s good for you.
   </footer>
