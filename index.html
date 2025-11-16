@@ -1,840 +1,1045 @@
-
+<!--
+  SideGuy Solutions
+  Version: 7.0-legendary-ocean
+  Hero: "Where code meets the coastline."
+  Mode: Full-Screen Ocean + Floating Orb + Modal Toolkit + Legendary Extras
+  Author: PJ + Kromeon Dev Team (+ ChatGPT)
+-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-
+  <meta
+    name="description"
+    content="SideGuy Solutions — coastal concierge for tech builds, tickets, DFS tools, Solana rails, crypto escrow, and smarter systems in North County. Tap the portal to summon PJ."
+  />
+ 
+  <!-- Open Graph -->
+  <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
+  <meta property="og:description" content="Coastal toolkit for apps, tickets, DFS, Solana payments, crypto escrow, and yield-powered rails. Tap to summon PJ." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content=https://sideguysolutions.com/ />
+ 
+  <!-- Simple JSON-LD for LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": https://schema.org,
+    "@type": "LocalBusiness",
+    "name": "SideGuy Solutions",
+    "description": "Coastal concierge for tech builds, tickets, DFS tools, crypto escrow, and Solana payments in North County San Diego.",
+    "url": https://sideguysolutions.com/,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Solana Beach",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+ 
+  <!-- Plausible Analytics (privacy-friendly) -->
+  <script defer data-domain="sideguysolutions.com" src=https://plausible.io/js/script.js></script>
+ 
   <style>
     :root {
       --bg: #020617;
+      --text-main: #e5f2ff;
+      --text-soft: #9ca3af;
+      --muted: #6b7280;
       --accent: #38bdf8;
-      --text: #e2e8f0;
-      --sub: #94a3b8;
-      --card: rgba(15, 23, 42, 0.82);
+      --accent-strong: #0ea5e9;
+      --card: rgba(15, 23, 42, 0.94);
+      --border: rgba(148, 163, 184, 0.55);
+      --radius: 18px;
+      --pill: 999px;
     }
-
-    body {
+ 
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: system-ui, sans-serif;
-      color: var(--text);
+      padding: 0;
+    }
+ 
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+ 
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
       background: var(--bg);
+      color: var(--text-main);
       overflow-x: hidden;
     }
-
+ 
     a {
       color: var(--accent);
       text-decoration: none;
     }
-
-    /* =====================================================
-         v9.1 UPGRADED OCEAN (visible + animated)
-    ===================================================== */
-    .ocean-layer {
+ 
+    a:hover {
+      text-decoration: underline;
+    }
+ 
+    /* OCEAN BACKGROUND */
+    #ocean-canvas {
       position: fixed;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
-      height: 260px;
-      pointer-events: none;
-      z-index: 0;
+      height: 100%;
+      z-index: -3;
+      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 55%);
     }
-
-    .ocean-wave {
+ 
+    .ocean-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(56, 189, 248, 0.4), transparent 55%),
+        radial-gradient(circle at 100% 110%, rgba(14, 165, 233, 0.4), transparent 55%),
+        linear-gradient(to bottom, rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.97));
+    }
+ 
+    /* Parallax surface waves layer */
+    #surface-waves {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 65%),
+        radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.15), transparent 70%),
+        radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.12), transparent 70%);
+      opacity: 0.65;
+      mix-blend-mode: screen;
+    }
+ 
+    .page-shell {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    /* HEADER / NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background:
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.8), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+    }
+ 
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+ 
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+ 
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 40%;
+      background: radial-gradient(circle at 30% 20%, #e0f2fe, #0ea5e9 55%, #022c43 100%);
+      box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.4),
+        0 10px 25px rgba(15, 23, 42, 0.9),
+        0 0 45px rgba(56, 189, 248, 0.75);
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .brand-mark::after {
+      content: "";
       position: absolute;
-      width: 200%;
+      inset: 18%;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.35);
+      box-shadow: 0 0 30px rgba(248, 250, 252, 0.6);
+      opacity: 0.7;
+    }
+ 
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+ 
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+ 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+    }
+ 
+    .nav-links {
+      display: flex;
+      gap: 12px;
+    }
+ 
+    .nav-link {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+ 
+    .nav-link:hover {
+      color: var(--accent);
+    }
+ 
+    .nav-pill {
+      border-radius: var(--pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 4px 10px;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.4), rgba(15, 23, 42, 0.96));
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      color: var(--text-soft);
+    }
+ 
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+ 
+    .version {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+ 
+    .version span {
+      color: var(--accent);
+    }
+ 
+    main {
+      flex: 1;
+    }
+ 
+    /* HERO */
+    .hero-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.05fr);
+      gap: 28px;
+      align-items: center;
+    }
+ 
+    @media (max-width: 880px) {
+      .hero-shell {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 26px;
+      }
+    }
+ 
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 11px;
+      border-radius: var(--pill);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), rgba(15, 23, 42, 0.98));
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+ 
+    .hero-kicker span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(8, 47, 73, 0.9);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.9);
+      font-size: 0.75rem;
+    }
+ 
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+      text-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
+    }
+ 
+    .hero-title span {
+      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+ 
+    .hero-sub {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+      max-width: 34rem;
+    }
+ 
+    .hero-sub strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+ 
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+ 
+    .hero-tag-pill {
+      border-radius: var(--pill);
+      padding: 4px 9px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      backdrop-filter: blur(14px);
+    }
+ 
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+ 
+    button {
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+    }
+ 
+    .btn-primary {
+      border-radius: var(--pill);
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #0b1120;
+      background: radial-gradient(circle at 0 0, #e0f2fe, #0ea5e9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.8),
+        0 18px 35px rgba(8, 47, 73, 0.95),
+        0 0 60px rgba(56, 189, 248, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transform-origin: center;
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        filter 0.18s ease-out;
+    }
+ 
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.02);
+      filter: saturate(1.2);
+      box-shadow:
+        0 0 0 1px rgba(56, 189, 248, 0.9),
+        0 20px 40px rgba(8, 47, 73, 1),
+        0 0 90px rgba(56, 189, 248, 1);
+    }
+ 
+    .btn-ghost {
+      border-radius: var(--pill);
+      padding: 9px 14px;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at 0 0, rgba(30, 64, 175, 0.8), rgba(15, 23, 42, 0.98));
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+ 
+    .hero-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+ 
+    .hero-meta span.badge {
+      border-radius: var(--pill);
+      padding: 3px 9px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+ 
+    /* ORB SIDE (FLOAT ABOVE EVERYTHING) */
+    .hero-orb-shell {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+ 
+    .orb-glow {
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 10%, rgba(248, 250, 252, 0.9), transparent 55%),
+        radial-gradient(circle at 70% 80%, rgba(56, 189, 248, 0.95), transparent 55%);
+      filter: blur(3px);
+      opacity: 0.35;
+    }
+ 
+    .orb-ring {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      box-shadow: 0 0 55px rgba(15, 23, 42, 0.95);
+      opacity: 0.75;
+    }
+ 
+    #summon-orb {
+      position: relative;
+      width: 200px;
       height: 200px;
-      background: rgba(56, 189, 248, 0.15);
-      backdrop-filter: blur(4px);
+      border-radius: 50%;
+      border: 1px solid rgba(248, 250, 252, 0.45);
+      background:
+        radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.9), transparent 60%),
+        radial-gradient(circle at 80% 90%, rgba(14, 165, 233, 0.95), transparent 60%),
+        radial-gradient(circle at 50% 120%, rgba(8, 47, 73, 0.9), #020617);
+      box-shadow:
+        0 0 40px rgba(15, 23, 42, 0.9),
+        0 0 95px rgba(56, 189, 248, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        filter 0.18s ease-out;
+      animation: orbPulse 2.6s ease-in-out infinite;
+      z-index: 101;
+    }
+ 
+    #summon-orb::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      border: 1px solid rgba(248, 250, 252, 0.45);
+      box-shadow: 0 0 30px rgba(248, 250, 252, 0.75);
+      opacity: 0.75;
+    }
+ 
+    #summon-orb:hover {
+      transform: translateY(-2px) scale(1.03);
+      filter: saturate(1.2);
+      box-shadow:
+        0 0 40px rgba(56, 189, 248, 0.9),
+        0 0 120px rgba(56, 189, 248, 1);
+    }
+ 
+    #summon-orb-label {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      color: #020617;
+      font-weight: 700;
+      text-shadow:
+        0 0 10px rgba(248, 250, 252, 0.9),
+        0 0 24px rgba(14, 165, 233, 0.95);
+    }
+ 
+    #summon-orb-label span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      opacity: 0.85;
+    }
+ 
+    @keyframes orbPulse {
+      0% {
+        transform: scale(1);
+        box-shadow:
+          0 0 40px rgba(56, 189, 248, 0.8),
+          0 0 80px rgba(56, 189, 248, 0.8);
+      }
+      50% {
+        transform: scale(1.035);
+        box-shadow:
+          0 0 55px rgba(56, 189, 248, 1),
+          0 0 130px rgba(56, 189, 248, 1);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow:
+          0 0 40px rgba(56, 189, 248, 0.8),
+          0 0 80px rgba(56, 189, 248, 0.8);
+      }
+    }
+ 
+    .orb-caption {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      text-align: center;
+    }
+ 
+    /* TOOLKIT SECTION */
+    .section-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 6px 20px 40px;
+    }
+ 
+    .section-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+ 
+    .section-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+ 
+    .section-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+    }
+ 
+    .section-subtitle strong {
+      color: var(--text-main);
+    }
+ 
+    .toolkit-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.72rem;
+    }
+ 
+    .toolkit-nav button {
+      border-radius: var(--pill);
+      padding: 4px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+    }
+ 
+    .toolkit-nav button:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+ 
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+ 
+    @media (max-width: 880px) {
+      .toolkit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+ 
+    @media (max-width: 640px) {
+      .toolkit-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+ 
+    .card {
+      position: relative;
+      border-radius: var(--radius);
+      padding: 12px 12px 13px;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.97),
+        rgba(15, 23, 42, 0.94),
+        rgba(15, 23, 42, 0.9)
+      );
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+    }
+ 
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.12), transparent 50%);
+      opacity: 0.7;
       pointer-events: none;
+      mix-blend-mode: screen;
     }
-
-    .ocean-wave.back {
-      bottom: -140px;
-      animation: waveBack 14s linear infinite;
+ 
+    .card-kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
     }
-
-    .ocean-wave.mid {
-      bottom: -125px;
-      background: rgba(56, 189, 248, 0.18);
-      animation: waveMid 10s ease-in-out infinite;
+ 
+    .card-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
     }
-
-    .ocean-wave.front {
-      bottom: -110px;
-      background: rgba(56, 189, 248, 0.22);
-      animation: waveFront 7s ease-in-out infinite;
+ 
+    .card-body {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--text-soft);
+      margin-bottom: 8px;
     }
-
-    @keyframes waveBack {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(60px); }
-      100% { transform: translateX(0); }
+ 
+    .card-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      color: var(--muted);
     }
-
-    @keyframes waveMid {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-50px); }
-      100% { transform: translateX(0); }
+ 
+    .card-chip {
+      border-radius: var(--pill);
+      padding: 3px 8px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
-
-    @keyframes waveFront {
-      0% { transform: translateX(0) translateY(0); }
-      25% { transform: translateX(24px) translateY(8px); }
-      50% { transform: translateX(0) translateY(14px); }
-      75% { transform: translateX(-24px) translateY(8px); }
-      100% { transform: translateX(0) translateY(0); }
+ 
+    .card-link-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.76rem;
+      cursor: pointer;
     }
-
-    /* =====================================================
-         SUMMON + CHAT FIXES (v9.1)
-    ===================================================== */
-    .modal-backdrop {
+ 
+    /* WHY SOLANA SECTION */
+    .why-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+ 
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+ 
+    @media (max-width: 880px) {
+      .why-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+ 
+    .why-card {
+      border-radius: var(--radius);
+      padding: 14px 14px 16px;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.94),
+        rgba(15, 23, 42, 0.9)
+      );
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .why-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.22), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.18), transparent 60%);
+      opacity: 0.45;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+ 
+    .why-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+ 
+    .why-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+ 
+    .why-body {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+ 
+    /* GLOBAL TOOL MODAL */
+    #tool-modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(2, 6, 23, 0.8);
-      backdrop-filter: blur(4px);
+      z-index: 80;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(10px);
       align-items: center;
       justify-content: center;
-      z-index: 9999;
+      padding: 20px;
     }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    #chat-mini-menu {
-      display: none;
-      position: absolute;
-      right: 0;
-      bottom: 60px;
-      padding: 12px;
-      border-radius: 12px;
-      background: var(--card);
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      z-index: 9999;
-    }
-
-    #chat-mini-menu.open {
-      display: block;
-    }
-
-    /* Orb pulse upgrade */
-    #summon-orb.pulse {
-      transform: scale(1.04);
+ 
+    #tool-modal {
+      max-width: 420px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.97);
+      border-radius: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
       box-shadow:
-        0 0 50px rgba(56,189,248,0.9),
-        0 0 130px rgba(56,189,248,1);
+        0 24px 80px rgba(15, 23, 42, 0.95),
+        0 0 40px rgba(56, 189, 248, 0.4);
+      padding: 18px 18px 16px;
+      position: relative;
+      color: var(--text-main);
+    }
+ 
+    #tool-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+ 
+    #tool-modal-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+ 
+    #tool-modal-desc {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+ 
+    .modal-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+ 
+    .modal-input-group label {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+ 
+    .modal-input-group input,
+    .modal-input-group select,
+    .modal-input-group textarea {
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: #020617;
+      color: var(--text-main);
+      font-size: 0.8rem;
+    }
+ 
+    .modal-input-group textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+ 
+    #tool-modal-result {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+ 
+    .modal-action {
+      width: 100%;
+      margin-top: 4px;
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: radial-gradient(circle at 0 0, #e0f2fe, #0ea5e9);
+      color: #020617;
+      box-shadow: 0 14px 30px rgba(8, 47, 73, 0.9);
+      cursor: pointer;
+    }
+ 
+    /* PORTAL FX */
+    .portal-flash {
+      animation: portalFlash 0.6s ease-out;
+    }
+ 
+    @keyframes portalFlash {
+      0% { filter: brightness(1); }
+      35% { filter: brightness(1.4) saturate(1.2); }
+      100% { filter: brightness(1); }
+    }
+ 
+    .portal-ripple::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.2), transparent 60%);
+      animation: portalRipple 1.4s ease-out;
+      z-index: 2;
+    }
+ 
+    @keyframes portalRipple {
+      0% { opacity: 0.4; }
+      100% { opacity: 0; }
+    }
+ 
+    footer {
+      padding: 18px 20px 32px;
+      font-size: 0.74rem;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(30, 64, 175, 0.5);
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.96), transparent);
+    }
+ 
+    /* FLOATING CHAT BUBBLE */
+    #chat-bubble {
+      position: fixed;
+      left: 18px;
+      bottom: 82px;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+ 
+    #chat-bubble button {
+      border-radius: 999px;
+      padding: 8px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.3), rgba(15, 23, 42, 0.96));
+      color: var(--text-main);
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    }
+ 
+    #chat-bubble button span.icon {
+      font-size: 1rem;
+    }
+ 
+    #chat-bubble small {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-shadow: 0 0 10px rgba(15, 23, 42, 0.9);
+    }
+ 
+    /* MOBILE NAV BAR */
+    #mobile-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 95;
+      background: rgba(15, 23, 42, 0.97);
+      border-top: 1px solid rgba(148, 163, 184, 0.45);
+      backdrop-filter: blur(12px);
+      display: none;
+    }
+ 
+    #mobile-nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 6px 20px 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+ 
+    .mobile-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      cursor: pointer;
+    }
+ 
+    .mobile-nav-item span.icon {
+      font-size: 1.1rem;
+    }
+ 
+    @media (max-width: 720px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .hero-shell {
+        padding-inline: 16px;
+      }
+      .section-shell,
+      .why-shell {
+        padding-inline: 16px;
+      }
+      #mobile-nav {
+        display: block;
+      }
+      #chat-bubble {
+        left: 12px;
+        bottom: 70px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- 🌊 OCEAN BACKGROUND — v9.1 Waves -->
-  <div class="ocean-layer">
-    <div class="ocean-wave back"></div>
-    <div class="ocean-wave mid"></div>
-    <div class="ocean-wave front"></div>
-  </div>
-
+  <!-- Audio (add your own files or keep muted by default) -->
+  <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
+  <audio id="portal-sfx" src="portal-whoomp.mp3" preload="auto"></audio>
+  <audio id="summon-sfx" src="summon-chime.mp3" preload="auto"></audio>
+  <audio id="tool-sfx" src="tool-open.mp3" preload="auto"></audio>
+ 
+  <canvas id="ocean-canvas"></canvas>
+  <div class="ocean-overlay"></div>
+  <div id="surface-waves"></div>
+ 
   <div class="page-shell">
-
-    <!-- ======================================================
-         HEADER
-    ====================================================== -->
+    <!-- HEADER -->
     <header>
       <div class="nav-inner">
-
         <div class="brand-wrap">
           <div class="brand-mark"></div>
           <div>
             <div class="brand-name">SideGuy Solutions</div>
-            <div class="brand-sub">Solana Beach</div>
+            <div class="brand-sub">Where Code Meets the Coastline</div>
           </div>
         </div>
-
         <div class="nav-right">
-          <div class="nav-links">
-            <a href="#toolkit" class="nav-link">Toolkit</a>
-            <a href="#why-solana" class="nav-link">Why Solana</a>
-          </div>
-
+          <nav class="nav-links">
+            <a class="nav-link" href="#hero">Hero</a>
+            <a class="nav-link" href="#toolkit">Toolkit</a>
+            <a class="nav-link" href="#why-solana">Why Solana</a>
+          </nav>
           <div class="nav-pill">
-            <div class="nav-dot"></div>
-            Live
+            <span class="nav-dot"></span>
+            <span>TAP TO SUMMON PJ</span>
           </div>
-
-          <div class="version-label">
-            v9.1
+          <div class="version">
+            v<span id="version-label">7.0</span>
           </div>
         </div>
-
       </div>
     </header>
-
-
-    <!-- ======================================================
-         HERO SECTION
-    ====================================================== -->
-    <section class="hero-shell">
-
-      <div class="hero-left">
-
-        <div class="hero-kicker">
-          <div class="dot"></div> Coastal Tech Concierge
-        </div>
-
-        <h1 class="hero-title">
-          Where Code <span>Meets the Coastline</span>.
-        </h1>
-
-        <p class="hero-sub">
-          Apps, tickets, systems, crypto escrow, DFS tools, Solana payments —
-          and real concierge support. Tap the portal and PJ takes care of the rest.
-        </p>
-
-        <div class="hero-tags">
-          <span class="hero-tag-pill">Apps</span>
-          <span class="hero-tag-pill">Tickets</span>
-          <span class="hero-tag-pill">DFS</span>
-          <span class="hero-tag-pill">Solana</span>
-          <span class="hero-tag-pill">Escrow</span>
-          <span class="hero-tag-pill">Concierge</span>
-        </div>
-
-        <div class="hero-ctas">
-          <button id="summon-btn" class="btn-primary">Tap to Summon PJ</button>
-          <button class="btn-ghost" id="open-intake-modal">Get Help</button>
-        </div>
-
-        <p class="hero-text-note">
-          Prefer fast?  
-          <a href="sms:7735441231?&body=Hey%20PJ!%20I’m%20on%20SideGuySolutions.com%20—%20can%20I%20get%20some%20help%3F">
-            Text PJ
-          </a>
-        </p>
-
-      </div>
-
-
-      <!-- ORB -->
-      <div class="hero-orb-shell">
-        <div class="orb-glow"></div>
-        <div class="orb-ring"></div>
-
-        <div id="summon-orb">
-          <div id="summon-orb-label">SUMMON<br /><span>PJ</span></div>
-        </div>
-
-        <div class="orb-caption">Coastal Portal</div>
-      </div>
-
-    </section>
-
-
-    <!-- ======================================================
-         TOOLKIT
-    ====================================================== -->
-    <section id="toolkit" class="section-shell">
-      <div class="section-header-row">
-
-        <div>
-          <div class="section-title">Toolkit</div>
-          <div class="section-subtitle">Your coastal digital stack — fast, secure, ready.</div>
-        </div>
-
-        <div class="toolkit-nav">
-          <button onclick="openTool('solanaSavings')">Solana Savings</button>
-          <button onclick="openTool('stablecoinCompare')">Stablecoin Fees</button>
-          <button onclick="openTool('yield')">Yield</button>
-          <button onclick="openTool('escrow')">Escrow</button>
-          <button onclick="openTool('tickets')">Tickets</button>
-          <button onclick="openTool('dfs')">DFS</button>
-        </div>
-
-      </div>
-
-
-      <div class="toolkit-grid">
-
-        <div class="card">
-          <div class="card-kicker">Solana Rails</div>
-          <div class="card-title">Processing Savings Calculator</div>
-          <div class="card-body">See how much you save ditching Stripe & PayPal.</div>
-          <div class="card-meta-row">
-            <span class="card-chip">Instant</span>
-            <button class="card-link-btn" onclick="openTool('solanaSavings')">Open →</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-kicker">Stablecoins</div>
-          <div class="card-title">Payment Fee Comparison</div>
-          <div class="card-body">Compare legacy rails with crypto rails.</div>
-          <div class="card-meta-row">
-            <span class="card-chip">Savings</span>
-            <button class="card-link-btn" onclick="openTool('stablecoinCompare')">Open →</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-kicker">Solana Pay</div>
-          <div class="card-title">Revenue Yield Estimator</div>
-          <div class="card-body">See yield earned from instant settlement.</div>
-          <div class="card-meta-row">
-            <span class="card-chip">Float</span>
-            <button class="card-link-btn" onclick="openTool('yield')">Open →</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-kicker">Crypto Escrow</div>
-          <div class="card-title">ROI Calculator</div>
-          <div class="card-body">Late payments destroy cashflow — fix it.</div>
-          <div class="card-meta-row">
-            <span class="card-chip">Trust</span>
-            <button class="card-link-btn" onclick="openTool('escrow')">Open →</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-kicker">Tickets</div>
-          <div class="card-title">Sellout Predictor</div>
-          <div class="card-body">Predict venue sellout speed from hype.</div>
-          <div class="card-meta-row">
-            <span class="card-chip">Crowds</span>
-            <button class="card-link-btn" onclick="openTool('tickets')">Open →</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-kicker">DFS Tools</div>
-          <div class="card-title">Promo Multiplier</div>
-          <div class="card-body">Turn bonuses into real EV.</div>
-          <div class="card-meta-row">
-            <span class="card-chip">EV</span>
-            <button class="card-link-btn" onclick="openTool('dfs')">Open →</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ======================================================
-         WHY SOLANA
-    ====================================================== -->
-    <section id="why-solana" class="why-shell">
-      <div class="why-header">
-        <div class="why-title">Why Solana</div>
-        <div class="why-sub">Fastest, cheapest, most scalable rails in the world.</div>
-      </div>
-
-      <div class="why-grid">
-
-        <div class="why-card">
-          <div class="why-label">Speed</div>
-          <div class="why-headline">Instant Settlement</div>
-          <div class="why-body">Solana settles in ~400ms. Processors take 2–3 days.</div>
-        </div>
-
-        <div class="why-card">
-          <div class="why-label">Cost</div>
-          <div class="why-headline">Under a Penny</div>
-          <div class="why-body">Most transactions cost fractions of a cent.</div>
-        </div>
-
-        <div class="why-card">
-          <div class="why-label">Scale</div>
-          <div class="why-headline">Millions TPS</div>
-          <div class="why-body">Built for global volume without congestion.</div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ======================================================
-         FOOTER
-    ====================================================== -->
-    <footer>
-      SideGuy Solutions · v9.1<br />
-      Built from Solana Beach 🌊<br />
-      <a href="sms:7735441231?&body=Hey%20PJ!%20I’m%20on%20SideGuySolutions.com%20—%20can%20I%20get%20some%20help%3F">Text PJ</a> ·
-      <a href="mailto:peter.z@kromeon.com">Email PJ</a>
-    </footer>
-
-  </div> <!-- END page-shell -->
-
-
-  <!-- ======================================================
-         FLOATING CHAT BUBBLE
-    ====================================================== -->
-  <div class="chat-bubble-floating">
-    <button class="chat-bubble-btn" onclick="toggleChatMenu()">🤙 Chat With PJ</button>
-
-    <div id="chat-mini-menu">
-      <button onclick="textPJ()">📱 Text PJ</button>
-      <button onclick="emailPJ()">✉️ Email PJ</button>
-      <button onclick="openSummonChoice()">🌀 Summon PJ</button>
-    </div>
-  </div>
-
-
-  <!-- ======================================================
-         MOBILE NAV
-    ====================================================== -->
-  <div class="mobile-nav">
-    <div class="mobile-nav-inner">
-      <div class="mobile-nav-item" onclick="scrollToTop()">🏝️ Home</div>
-      <div class="mobile-nav-item" onclick="openTool('solanaSavings')">⚡ Tools</div>
-      <div class="mobile-nav-item" onclick="openSummonChoice()">🌀 PJ</div>
-      <div class="mobile-nav-item" onclick="textPJ()">📱 Text</div>
-      <div class="mobile-nav-item" onclick="scrollToWhy()">💠 Solana</div>
-    </div>
-  </div>
-
-
-  <!-- ======================================================
-         TOOL MODAL
-    ====================================================== -->
-  <div id="tool-modal-backdrop" class="modal-backdrop">
-    <div id="tool-modal" class="modal">
-      <button class="modal-close" onclick="closeToolModal()">✕</button>
-      <div id="tool-modal-content"></div>
-      <div id="tool-modal-result" class="modal-result"></div>
-    </div>
-  </div>
-
-
-  <!-- ======================================================
-         INTAKE MODAL
-    ====================================================== -->
-  <div id="intake-modal-backdrop" class="modal-backdrop">
-    <div id="intake-modal" class="modal">
-      <button class="modal-close" onclick="closeIntakeModal()">✕</button>
-
-      <h3 class="modal-title">Get Help</h3>
-      <p class="modal-desc">Tell PJ what you need.</p>
-
-      <label>Your Name</label>
-      <input id="intake-name" />
-
-      <label>What You Need</label>
-      <textarea id="intake-need"></textarea>
-
-      <div id="intake-modal-result" class="modal-result"></div>
-
-      <button class="modal-action" onclick="submitIntakeModal()">Send</button>
-      <button class="modal-action secondary" onclick="textPJ()">📱 Text PJ Instead</button>
-    </div>
-  </div>
-
-
-  <!-- ======================================================
-         SUMMON PJ CHOICE MODAL
-    ====================================================== -->
-  <div id="summon-choice-backdrop" class="modal-backdrop">
-    <div id="summon-choice-modal" class="modal">
-      <button class="modal-close" onclick="closeSummonChoice()">✕</button>
-
-      <h3 class="modal-title">Summon PJ</h3>
-      <p class="modal-desc">Choose how you want to reach PJ.</p>
-
-      <button class="modal-action" onclick="textPJ()">📱 Text PJ</button>
-      <button class="modal-action secondary" onclick="emailPJ()">✉️ Email PJ</button>
-    </div>
-  </div>
-<script>
-/* ============================================================
-   GLOBAL CONTACT ACTIONS
-============================================================ */
-function textPJ() {
-  window.location.href =
-    "sms:7735441231?&body=" +
-    encodeURIComponent("Hey PJ! I’m on SideGuySolutions.com — can I get some help?");
-}
-
-function emailPJ() {
-  window.location.href =
-    "mailto:peter.z@kromeon.com?subject=" +
-    encodeURIComponent("SideGuy Solutions Inquiry") +
-    "&body=" +
-    encodeURIComponent(
-      "Hey PJ,\n\nI’m on your website — can you help me with something?\n\n— Sent from SideGuySolutions.com 🌊"
-    );
-}
-
-
-/* ============================================================
-   SUMMON PJ CHOICE MODAL
-============================================================ */
-function openSummonChoice() {
-  const backdrop = document.getElementById("summon-choice-backdrop");
-  if (backdrop) backdrop.classList.add("open");
-}
-
-function closeSummonChoice() {
-  const backdrop = document.getElementById("summon-choice-backdrop");
-  if (backdrop) backdrop.classList.remove("open");
-}
-
-
-/* ============================================================
-   INTAKE MODAL
-============================================================ */
-function openIntakeModal() {
-  const backdrop = document.getElementById("intake-modal-backdrop");
-  if (backdrop) backdrop.classList.add("open");
-}
-
-function closeIntakeModal() {
-  const backdrop = document.getElementById("intake-modal-backdrop");
-  if (backdrop) backdrop.classList.remove("open");
-}
-
-function submitIntakeModal() {
-  const nameEl = document.getElementById("intake-name");
-  const needEl = document.getElementById("intake-need");
-  const result = document.getElementById("intake-modal-result");
-
-  if (!nameEl || !needEl || !result) return;
-
-  const name = nameEl.value.trim();
-  const need = needEl.value.trim();
-
-  if (!name || !need) {
-    result.textContent = "Please fill out both fields.";
-    result.style.color = "#f87171";
-    return;
-  }
-
-  result.textContent = "Sending...";
-  result.style.color = "#34d399";
-
-  const body =
-    "Name: " +
-    name +
-    "\nNeed:\n" +
-    need +
-    "\n\nSent from SideGuySolutions.com";
-
-  window.location.href =
-    "mailto:peter.z@kromeon.com?subject=" +
-    encodeURIComponent("New Request from " + name) +
-    "&body=" +
-    encodeURIComponent(body);
-
-  setTimeout(() => {
-    closeIntakeModal();
-    result.textContent = "";
-    nameEl.value = "";
-    needEl.value = "";
-  }, 700);
-}
-
-
-/* ============================================================
-   CHAT BUBBLE MENU
-============================================================ */
-function toggleChatMenu() {
-  const menu = document.getElementById("chat-mini-menu");
-  if (!menu) return;
-  menu.classList.toggle("open");
-}
-
-
-/* ============================================================
-   HERO ORB & BUTTON
-============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  const orb = document.getElementById("summon-orb");
-  const summonBtn = document.getElementById("summon-btn");
-  const intakeBtn = document.getElementById("open-intake-modal");
-
-  if (orb) {
-    orb.addEventListener("click", openSummonChoice);
-  }
-
-  if (summonBtn) {
-    summonBtn.addEventListener("click", openSummonChoice);
-  }
-
-  if (intakeBtn) {
-    intakeBtn.addEventListener("click", openIntakeModal);
-  }
-});
-
-
-/* ============================================================
-   SMOOTH SCROLL HELPERS
-============================================================ */
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function scrollToWhy() {
-  const el = document.getElementById("why-solana");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
-
-/* ============================================================
-   TOOL MODAL ENGINE
-============================================================ */
-function closeToolModal() {
-  const backdrop = document.getElementById("tool-modal-backdrop");
-  if (backdrop) backdrop.classList.remove("open");
-}
-
-function openTool(id) {
-  const modalBackdrop = document.getElementById("tool-modal-backdrop");
-  const content = document.getElementById("tool-modal-content");
-  const resultBox = document.getElementById("tool-modal-result");
-
-  if (!modalBackdrop || !content || !resultBox) return;
-
-  resultBox.textContent = "";
-  resultBox.innerHTML = "";
-  modalBackdrop.classList.add("open");
-
-  if (id === "solanaSavings") {
-    content.innerHTML = `
-      <h3 class="modal-title">Solana Processing Savings</h3>
-      <p class="modal-desc">Calculate how much cheaper Solana is than Stripe/PayPal.</p>
-      <label>Monthly Volume ($)</label>
-      <input id="solana-vol" type="number" placeholder="50000" />
-      <label>Stripe/PayPal Fee (%)</label>
-      <input id="solana-fee" type="number" placeholder="2.9" />
-      <button class="modal-action" onclick="runSolanaSavings()">Calculate</button>
-    `;
-  }
-
-  if (id === "stablecoinCompare") {
-    content.innerHTML = `
-      <h3 class="modal-title">Stablecoin Payment Fee Comparison</h3>
-      <p class="modal-desc">See how stablecoin rails reduce payment friction.</p>
-      <label>Monthly Payment Volume ($)</label>
-      <input id="sc-vol" type="number" placeholder="25000" />
-      <label>Traditional Fee (%)</label>
-      <input id="sc-fee" type="number" placeholder="3.0" />
-      <button class="modal-action" onclick="runStablecoinCompare()">Compare</button>
-    `;
-  }
-
-  if (id === "yield") {
-    content.innerHTML = `
-      <h3 class="modal-title">Solana Settlement Yield</h3>
-      <p class="modal-desc">Estimate yield earned from instant settlement float.</p>
-      <label>Avg Balance Held ($)</label>
-      <input id="yield-bal" type="number" placeholder="10000" />
-      <label>APY (%)</label>
-      <input id="yield-apy" type="number" placeholder="7" />
-      <button class="modal-action" onclick="runYield()">Estimate</button>
-    `;
-  }
-
-  if (id === "escrow") {
-    content.innerHTML = `
-      <h3 class="modal-title">Crypto Escrow ROI</h3>
-      <p class="modal-desc">Late payments destroy runway — see the fix.</p>
-      <label>Avg Monthly Dev Costs ($)</label>
-      <input id="escrow-dev" type="number" placeholder="20000" />
-      <label>Days Paid Late</label>
-      <input id="escrow-days" type="number" placeholder="20" />
-      <button class="modal-action" onclick="runEscrow()">Calculate</button>
-    `;
-  }
-
-  if (id === "tickets") {
-    content.innerHTML = `
-      <h3 class="modal-title">Sellout Predictor</h3>
-      <p class="modal-desc">Predict venue sellout speed from hype + capacity.</p>
-      <label>Venue Capacity</label>
-      <input id="tick-cap" type="number" placeholder="800" />
-      <label>Hype Score (1–10)</label>
-      <input id="tick-hype" type="number" placeholder="7" />
-      <button class="modal-action" onclick="runTickets()">Predict</button>
-    `;
-  }
-
-  if (id === "dfs") {
-    content.innerHTML = `
-      <h3 class="modal-title">DFS Promo Multiplier</h3>
-      <p class="modal-desc">Turn promos into real expected value.</p>
-      <label>Promo Amount ($)</label>
-      <input id="dfs-promo" type="number" placeholder="20" />
-      <label>Edge (%)</label>
-      <input id="dfs-edge" type="number" placeholder="15" />
-      <button class="modal-action" onclick="runDFS()">Calculate</button>
-    `;
-  }
-}
-
-
-/* ============================================================
-   TOOL LOGIC — 6 CALCULATORS
-============================================================ */
-function runSolanaSavings() {
-  const volEl = document.getElementById("solana-vol");
-  const feeEl = document.getElementById("solana-fee");
-  const out = document.getElementById("tool-modal-result");
-  if (!volEl || !feeEl || !out) return;
-
-  const vol = parseFloat(volEl.value);
-  const feePct = parseFloat(feeEl.value);
-
-  if (isNaN(vol) || isNaN(feePct)) {
-    out.textContent = "Please enter valid numbers.";
-    return;
-  }
-
-  const fee = feePct / 100;
-  const legacy = vol * fee + vol * 0.30;   // rough Stripe + per-transaction
-  const solana = vol * 0.0005;             // tiny Solana fee assumption
-  const save = legacy - solana;
-
-  out.innerHTML = `You save <strong>$${save.toFixed(2)}</strong> per month switching to Solana.`;
-}
-
-function runStablecoinCompare() {
-  const volEl = document.getElementById("sc-vol");
-  const feeEl = document.getElementById("sc-fee");
-  const out = document.getElementById("tool-modal-result");
-  if (!volEl || !feeEl || !out) return;
-
-  const vol = parseFloat(volEl.value);
-  const feePct = parseFloat(feeEl.value);
-
-  if (isNaN(vol) || isNaN(feePct)) {
-    out.textContent = "Please enter valid numbers.";
-    return;
-  }
-
-  const fee = feePct / 100;
-  const trad = vol * fee;
-  const stable = vol * 0.0005;
-  const save = trad - stable;
-
-  out.innerHTML = `Stablecoins save <strong>$${save.toFixed(2)}</strong> each month.`;
-}
-
-function runYield() {
-  const balEl = document.getElementById("yield-bal");
-  const apyEl = document.getElementById("yield-apy");
-  const out = document.getElementById("tool-modal-result");
-  if (!balEl || !apyEl || !out) return;
-
-  const bal = parseFloat(balEl.value);
-  const apyPct = parseFloat(apyEl.value);
-
-  if (isNaN(bal) || isNaN(apyPct)) {
-    out.textContent = "Please enter valid numbers.";
-    return;
-  }
-
-  const apy = apyPct / 100;
-  const earned = bal * apy;
-
-  out.innerHTML = `Estimated yearly yield: <strong>$${earned.toFixed(2)}</strong>.`;
-}
-
-function runEscrow() {
-  const devEl = document.getElementById("escrow-dev");
-  const daysEl = document.getElementById("escrow-days");
-  const out = document.getElementById("tool-modal-result");
-  if (!devEl || !daysEl || !out) return;
-
-  const dev = parseFloat(devEl.value);
-  const days = parseFloat(daysEl.value);
-
-  if (isNaN(dev) || isNaN(days)) {
-    out.textContent = "Please enter valid numbers.";
-    return;
-  }
-
-  const cost = (dev / 30) * days * 0.12;
-
-  out.innerHTML = `Late payments cost you ~<strong>$${cost.toFixed(2)}</strong> monthly.`;
-}
-
-function runTickets() {
-  const capEl = document.getElementById("tick-cap");
-  const hypeEl = document.getElementById("tick-hype");
-  const out = document.getElementById("tool-modal-result");
-  if (!capEl || !hypeEl || !out) return;
-
-  const cap = parseFloat(capEl.value);
-  const hype = parseFloat(hypeEl.value);
-
-  if (isNaN(cap) || isNaN(hype)) {
-    out.textContent = "Please enter valid numbers.";
-    return;
-  }
-
-  const score = (hype / 10) * cap;
-  let speed = "Unknown";
-
-  if (score > 700) speed = "Very Fast";
-  else if (score > 400) speed = "Medium";
-  else speed = "Slow";
-
-  out.innerHTML = `Projected sellout speed: <strong>${speed}</strong>.`;
-}
-
-function runDFS() {
-  const promoEl = document.getElementById("dfs-promo");
-  const edgeEl = document.getElementById("dfs-edge");
-  const out = document.getElementById("tool-modal-result");
-  if (!promoEl || !edgeEl || !out) return;
-
-  const promo = parseFloat(promoEl.value);
-  const edgePct = parseFloat(edgeEl.value);
-
-  if (isNaN(promo) || isNaN(edgePct)) {
-    out.textContent = "Please enter valid numbers.";
-    return;
-  }
-
-  const edge = edgePct / 100;
-  const value = promo * edge;
-
-  out.innerHTML = `Edge value: <strong>$${value.toFixed(2)}</strong>.`;
-}
-</script>
-<!-- ============================================================
-     v9.1 — FINAL SAFETY + CLOSE
-============================================================ -->
-
-<script>
-// Close modals when clicking outside
-document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
-  backdrop.addEventListener("click", e => {
-    if (e.target === backdrop) {
-      backdrop.classList.remove("open");
-    }
-  });
-});
-
-// Hide mobile nav when typing on mobile
-document.body.addEventListener("focusin", () => {
-  const nav = document.querySelector(".mobile-nav");
-  if (nav) nav.classList.add("hide");
-});
-
-document.body.addEventListener("focusout", () => {
-  const nav = document.querySelector(".mobile-nav");
-  if (nav) nav.classList.remove("hide");
-});
-
-// Orb pulse visual loop
-setInterval(() => {
-  const orb = document.getElementById("summon-orb");
-  if (orb) orb.classList.toggle("pulse");
-}, 2600);
-</script>
-
-</body>
-</html>
+ 
