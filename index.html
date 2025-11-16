@@ -3,1825 +3,1386 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- 
-  <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
- 
-  <!-- Core SEO -->
-  <meta
-    name="description"
-    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Web3 & Solana payments, ticketing flows, and DFS tools for North County and beyond."
-  />
-  <meta
-    name="keywords"
-    content="San Diego software development, San Diego app development, San Diego mobile app development, San Diego AI development, AI automation San Diego, San Diego tech concierge, North County San Diego startups, Encinitas developers, Solana Beach tech, custom software agency San Diego, Web3 development San Diego, blockchain developers San Diego, Solana developers San Diego, DFS tools, ticketing software San Diego, coastal concierge tech"
-  />
- 
-  <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Tap the ocean portal to summon PJ. Custom apps, AI automation, Web3 & Solana payments, ticket flows, and DFS tools built from Solana Beach and North County San Diego." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content=https://sideguysolutions.com/ />
- 
-  <!-- LocalBusiness Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": https://schema.org,
-    "@type": "LocalBusiness",
-    "name": "SideGuy Solutions",
-    "description": "Coastal tech concierge for San Diego and North County — custom apps, AI automation, Web3 and Solana payment flows, ticketing systems, and DFS tools.",
-    "url": https://sideguysolutions.com/,
-    "telephone": "+1-773-544-1231",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Solana Beach",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    },
-    "areaServed": [
-      "San Diego",
-      "North County",
-      "Solana Beach",
-      "Encinitas",
-      "Del Mar",
-      "Carlsbad"
-    ]
-  }
-  </script>
- 
+  <title>SideGuy Solutions | Pacific Storm Portal</title>
+  <meta name="description" content="SideGuy Solutions — cinematic Pacific storm portal for tech, tickets, DFS edges, and coastal systems in North County. Built by PJ in Solana Beach." />
+
   <style>
-    /* ================================================
-       ROOT THEME
-    ================================================= */
     :root {
       --bg: #020617;
-      --bg-day: #031223;
-      --bg-night: #000814;
- 
+      --card: rgba(15, 23, 42, 0.9);
+      --muted: #94a3b8;
       --text: #e5f2ff;
-      --soft: #94a3b8;
-      --muted: #64748b;
- 
-      --accent: #38bdf8;
-      --accent-night: #4cc9ff;
- 
-      --card: rgba(15, 23, 42, 0.94);
-      --glass: rgba(15, 23, 42, 0.78);
- 
-      --radius: 18px;
-      --pill: 999px;
- 
-      --shadow-deep: 0 22px 70px rgba(15, 23, 42, 0.96);
+      --brand1: #38bdf8;
+      --brand2: #22d3ee;
+      --brand3: #818cf8;
+      --accent: #2dd4bf;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
     }
- 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
- 
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
- 
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      overflow-x: hidden;
       min-height: 100vh;
-      transition: background 0.5s ease;
+      background: radial-gradient(circle at top, #0b1220 0%, #020617 55%, #000 100%);
+      color: var(--text);
+      font-family: system-ui, "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
     }
- 
+
     a {
-      color: var(--accent);
+      color: var(--brand2);
       text-decoration: none;
+      transition: color 0.18s ease;
     }
- 
-    a:hover {
-      text-decoration: underline;
+    a:hover { color: var(--accent); text-decoration: underline; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 5;
     }
- 
-    /* ================================================
-       OCEAN CANVAS
-    ================================================= */
-    #ocean-canvas {
+
+    /* ------------ LOADER ------------ */
+
+    .loader-overlay {
       position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      display: block;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
-    }
- 
-    /* ================================================
-       HEADER / NAV
-    ================================================= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 10px 20px;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(2, 6, 23, 0.96),
-        rgba(2, 6, 23, 0.85),
-        transparent
-      );
-      border-bottom: 1px solid rgba(56, 189, 248, 0.28);
-    }
- 
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
- 
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
- 
-    .brand-pill {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 45%, #0f172a 100%);
-      box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.5),
-        0 0 26px rgba(56, 189, 248, 0.9);
-    }
- 
-    .brand-text {
-      font-size: 0.95rem;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
- 
-    .version-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
-    }
- 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
- 
-    .nav-links {
-      display: flex;
-      gap: 12px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
- 
-    .nav-links a {
-      color: var(--soft);
-      padding-bottom: 2px;
-      border-bottom: 1px solid transparent;
-      cursor: pointer;
-    }
- 
-    .nav-links a:hover {
-      color: #e5f2ff;
-      border-bottom-color: rgba(56, 189, 248, 0.7);
-    }
- 
-    @media (max-width: 880px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-      }
-    }
- 
-    /* ================================================
-       HERO
-    ================================================= */
-    .hero {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 40px 20px 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
- 
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 28px;
-      }
-    }
- 
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.1rem);
-      font-weight: 850;
-      line-height: 1.04;
-      margin-bottom: 12px;
-      text-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
-    }
- 
-    .hero-title span {
-      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
- 
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--soft);
-      max-width: 34rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
- 
-    .hero-sub strong {
-      color: #e5f2ff;
-      font-weight: 600;
-    }
- 
-    .hero-contacts {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
- 
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
- 
-    /* ================================================
-       BUTTONS
-    ================================================= */
-    button {
-      font-family: inherit;
-      border: none;
-      cursor: pointer;
-      background: none;
-    }
- 
-    .btn-primary {
-      position: relative;
-      padding: 11px 18px;
-      border-radius: var(--pill);
-      background: radial-gradient(circle at 0 0, #e0f2fe, #38bdf8);
-      color: #020617;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.85),
-        0 14px 36px rgba(8, 47, 73, 0.95),
-        0 0 40px rgba(56, 189, 248, 0.85);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        filter 0.15s ease;
-      overflow: hidden;
-      white-space: nowrap;
-    }
- 
-    .btn-primary::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.45), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
- 
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: saturate(1.25);
-      box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 18px 40px rgba(8, 47, 73, 1),
-        0 0 70px rgba(56, 189, 248, 1);
-    }
- 
-    .btn-primary:hover::after {
-      opacity: 1;
-    }
- 
-    .btn-secondary {
-      background: radial-gradient(circle at 0 0, #0ea5e9, #0369a1);
-      color: #e0f2fe;
-    }
- 
-    /* ================================================
-       ORB GLOW
-    ================================================= */
-    .hero-orb-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-    }
- 
-    .orb-glow-ring {
-      position: absolute;
-      inset: -14%;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 0, rgba(224, 242, 254, 0.4), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(56, 189, 248, 0.55), transparent 65%);
-      opacity: 0.8;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
- 
-    #summon-orb {
-      position: relative;
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.55);
-      background:
-        radial-gradient(circle at 25% 20%, #f9fafb 0%, #bae6fd 30%, #38bdf8 55%, #0f172a 100%);
-      box-shadow:
-        0 0 45px rgba(56, 189, 248, 0.7),
-        0 0 120px rgba(56, 189, 248, 0.95);
+      z-index: 80;
+      background: radial-gradient(circle at top, #020617, #000814 60%, #000 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        filter 0.18s ease,
-        box-shadow 0.18s ease;
-      animation: orbPulseGlow 2.6s ease-in-out infinite;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--text);
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
- 
-    #summon-orb::after {
-      content: "";
-      position: absolute;
-      inset: 16%;
+
+    .loader-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-orb {
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.6);
-      box-shadow: 0 0 35px rgba(248, 250, 252, 0.9);
-      opacity: 0.9;
-      pointer-events: none;
-    }
- 
-    #summon-orb:hover {
-      transform: translateY(-2px) scale(1.05);
-      filter: saturate(1.25);
+      background:
+        radial-gradient(circle at 30% 20%, #ffffff, rgba(255,255,255,0.2)),
+        radial-gradient(circle at 70% 80%, rgba(56,189,248,0.8), transparent 65%),
+        radial-gradient(circle at 40% 90%, rgba(59,130,246,0.7), transparent 70%);
       box-shadow:
-        0 0 55px rgba(56, 189, 248, 0.9),
-        0 0 160px rgba(56, 189, 248, 1);
+        0 0 35px rgba(56,189,248,0.9),
+        0 0 80px rgba(37,99,235,0.85);
+      animation: loaderFloat 2.6s ease-in-out infinite, loaderPulse 3.2s ease-in-out infinite;
     }
- 
-    #summon-orb-label {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
-      color: #020617;
-      font-weight: 800;
-      text-shadow:
-        0 0 12px rgba(248, 250, 252, 0.9),
-        0 0 28px rgba(14, 165, 233, 0.95);
-      animation: labelGlow 2s ease-in-out infinite;
-    }
- 
-    #summon-orb-label span {
-      display: block;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      opacity: 0.9;
-    }
- 
-    .orb-caption {
-      font-size: 0.72rem;
+
+    .loader-text {
+      font-size: 13px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
     }
- 
-    @keyframes orbPulseGlow {
-      0% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
-      50% {
-        transform: scale(1.03);
-        box-shadow:
-          0 0 60px rgba(56, 189, 248, 1),
-          0 0 150px rgba(56, 189, 248, 1);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
+
+    @keyframes loaderFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
- 
-    @keyframes labelGlow {
-      0%, 100% {
-        text-shadow:
-          0 0 10px rgba(248, 250, 252, 0.9),
-          0 0 20px rgba(59, 130, 246, 0.8);
-      }
-      50% {
-        text-shadow:
-          0 0 16px rgba(248, 250, 252, 1),
-          0 0 30px rgba(56, 189, 248, 1);
-      }
+
+    @keyframes loaderPulse {
+      0%, 100% { box-shadow: 0 0 35px rgba(56,189,248,0.9), 0 0 80px rgba(37,99,235,0.85); }
+      50% { box-shadow: 0 0 60px rgba(56,189,248,1), 0 0 120px rgba(37,99,235,1); }
     }
- 
-    /* ================================================
-       PORTAL BURST FX
-    ================================================= */
-    .portal-burst-flash {
-      animation: burstFlash 0.45s ease-out;
-    }
- 
-    @keyframes burstFlash {
-      0% { background: rgba(255, 255, 255, 0); }
-      20% { background: rgba(255, 255, 255, 0.35); }
-      100% { background: rgba(255, 255, 255, 0); }
-    }
- 
-    .portal-burst-ring {
+
+    /* ------------ OCEAN BG / FX ------------ */
+
+    #ocean-container {
       position: fixed;
       inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 30% 20%, #041b3b, #000814 60%, #000 100%);
+      overflow: hidden;
+    }
+
+    .ocean-overlay-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
       pointer-events: none;
-      animation: burstRing 0.9s ease-out;
-      z-index: 9998;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(56,189,248,.25), transparent 60%),
+        radial-gradient(circle at 20% 120%, rgba(129,140,248,.22), transparent 65%),
+        radial-gradient(circle at 90% 110%, rgba(45,212,191,.18), transparent 60%);
+      mix-blend-mode: screen;
+      animation: glowDrift 26s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowDrift {
+      0% { transform: translate3d(0,0,0) scale(1); opacity:.8; }
+      50% { transform: translate3d(18px,-12px,0) scale(1.06); opacity:1; }
+      100% { transform: translate3d(-10px,8px,0) scale(1); opacity:.85; }
+    }
+
+    .horizon-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      opacity: 0;
+      pointer-events: none;
+      background: linear-gradient(to top,
+        transparent 0%,
+        rgba(248,250,252,.1) 40%,
+        rgba(248,250,252,.75) 55%,
+        rgba(248,250,252,.05) 75%,
+        transparent 100%);
+      mix-blend-mode: screen;
+    }
+
+    .horizon-flash.active { animation: horizonFlash 0.45s ease-out; }
+
+    @keyframes horizonFlash {
+      0% { opacity: 0; }
+      35% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .portal-crack {
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%) scale(.25);
       border-radius: 50%;
-      border: 2px solid rgba(56, 189, 248, 1);
+      z-index: 4;
+      opacity: 0;
+      pointer-events: none;
+      filter: blur(10px);
+      background:
+        radial-gradient(circle, rgba(248,250,252,.95), transparent 55%),
+        radial-gradient(circle at 30% 40%, rgba(56,189,248,.4), transparent 70%),
+        radial-gradient(circle at 70% 65%, rgba(59,130,246,.6), transparent 70%);
+      mix-blend-mode: screen;
     }
- 
-    @keyframes burstRing {
-      0% {
-        transform: scale(0.2);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(3.6);
-        opacity: 0;
-      }
+
+    .portal-crack.active { animation: portalCrack 0.55s ease-out; }
+
+    @keyframes portalCrack {
+      0% { opacity:0; transform:translate(-50%,-50%) scale(.25); }
+      35% { opacity:1; transform:translate(-50%,-50%) scale(1.05); }
+      100% { opacity:0; transform:translate(-50%,-50%) scale(.9); }
     }
- 
-    /* ================================================
-       SECTIONS / GRID / CARDS
-    ================================================= */
-    .section {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 32px 20px 40px;
+
+    .ember {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle,#e0f2fe 0%,#38bdf8 40%,transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      animation: emberFloat 12s linear infinite;
     }
- 
-    .section-title {
-      font-size: 0.85rem;
-      color: var(--soft);
-      letter-spacing: 0.18em;
+
+    @keyframes emberFloat {
+      0% { transform: translate3d(0,60px,0) scale(.5); opacity:0; }
+      15% { opacity:.8; }
+      70% { opacity:.9; }
+      100% { transform: translate3d(0,-80px,0) scale(1); opacity:0; }
+    }
+
+    .parallax-layer { will-change: transform; }
+
+    /* ------------ NAV ------------ */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(2,6,23,0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(148,163,184,0.35);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.03em;
+    }
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--brand2), var(--brand1));
+      box-shadow: 0 0 12px var(--brand1);
+    }
+    .menu { list-style: none; display: flex; gap: 16px; font-size: 13px; }
+    .menu a { color: var(--muted); }
+    .menu a:hover { color: var(--brand2); }
+
+    /* ------------ HERO + WAVES + ORB ------------ */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 20px 150px;
+      text-align: center;
+      z-index: 5;
+      background: radial-gradient(circle at top, rgba(14, 165, 233, 0.85), rgba(2, 6, 23, 0.97));
+      box-shadow: inset 0 -50px 80px rgba(15, 23, 42, 0.96);
+    }
+
+    .hero-inner { position: relative; z-index: 5; }
+
+    .hero-glow {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      width: 460px;
+      height: 460px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      opacity: 0.55;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      filter: blur(70px);
+      animation: heroGlow 26s ease-in-out infinite alternate;
+      background:
+        radial-gradient(circle at 40% 30%, rgba(56,189,248,.9), transparent 60%),
+        radial-gradient(circle at 60% 70%, rgba(129,140,248,.6), transparent 75%),
+        radial-gradient(circle at 50% 95%, rgba(45,212,191,.55), transparent 80%);
+    }
+
+    @keyframes heroGlow {
+      0% { transform:translate(-50%,-10px) scale(1); opacity:.5; }
+      50% { transform:translate(-50%,10px) scale(1.08); opacity:.65; }
+      100% { transform:translate(-50%,-16px) scale(.95); opacity:.48; }
+    }
+
+    .hero-heat {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      width: 420px;
+      height: 120px;
+      transform: translateX(-50%);
+      background: radial-gradient(circle at 50% 0, rgba(255,255,255,0.12), transparent 70%);
+      filter: blur(18px);
+      mix-blend-mode: soft-light;
+      opacity: 0.4;
+      pointer-events: none;
+      animation: heatWaver 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes heatWaver {
+      0% { transform:translate(-50%,0) scale(1); opacity:.35; }
+      50% { transform:translate(-50%,4px) scale(1.04); opacity:.5; }
+      100% { transform:translate(-50%,-3px) scale(.97); opacity:.3; }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 11px;
       text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
       margin-bottom: 18px;
     }
- 
-    .section-subheading {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
+
+    .hero-kicker .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
     }
- 
-    .section-lead {
-      font-size: 0.92rem;
-      color: var(--soft);
-      margin-bottom: 12px;
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      margin-bottom: 14px;
+      text-shadow: 0 18px 60px rgba(0,0,0,0.85);
     }
- 
-    .pill-row {
+
+    .hero h1 .highlight {
+      background: linear-gradient(120deg, var(--brand2), var(--brand3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 15px;
+      color: #e2e8f0;
+      opacity: 0.98;
+    }
+
+    .hero-pj-line {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #cbd5f5;
+    }
+
+    .hero-contacts {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Floating Orb (center hero) */
+    .hero-orb-wrapper {
+      margin-top: 26px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
+      justify-content: center;
     }
- 
-    .pill-tag {
-      border-radius: var(--pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 4px 10px;
-      font-size: 0.72rem;
-      color: var(--soft);
-      background: rgba(15, 23, 42, 0.9);
-    }
- 
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
- 
-    @media (max-width: 880px) {
-      .two-col {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
- 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
- 
-    @media (max-width: 880px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
- 
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
- 
-    .card {
+
+    .hero-orb {
       position: relative;
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      box-shadow: var(--shadow-deep);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, #ffffff, rgba(255,255,255,0.15)),
+        radial-gradient(circle at 75% 80%, rgba(56,189,248,0.9), transparent 65%),
+        radial-gradient(circle at 40% 90%, rgba(59,130,246,0.8), transparent 70%);
+      box-shadow:
+        0 0 45px rgba(56,189,248,0.9),
+        0 0 95px rgba(37,99,235,0.95);
+      cursor: pointer;
+      animation: orbFloat 3.5s ease-in-out infinite, orbBreath 5.2s ease-in-out infinite;
       overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
     }
- 
-    .card::before {
+
+    .hero-orb::after {
       content: "";
       position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.12), transparent 55%);
-      opacity: 0;
+      inset: -30%;
+      background: radial-gradient(circle at 50% 10%, rgba(255,255,255,0.18), transparent 65%);
       mix-blend-mode: screen;
+      opacity: 0.7;
+    }
+
+    .hero-orb-rings {
+      position: absolute;
+      inset: 12%;
+      border-radius: inherit;
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: 0 0 22px rgba(148,163,184,0.35);
+      animation: orbRings 7s linear infinite;
+      mix-blend-mode: screen;
+    }
+
+    .hero-orb-caption {
+      margin-top: 8px;
+      font-size: 11px;
+      color: rgba(226,232,240,0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    @keyframes orbFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes orbBreath {
+      0%,100% { box-shadow: 0 0 45px rgba(56,189,248,0.9), 0 0 95px rgba(37,99,235,0.95); }
+      50% { box-shadow: 0 0 80px rgba(56,189,248,1), 0 0 140px rgba(37,99,235,1); }
+    }
+
+    @keyframes orbRings {
+      0% { transform: rotate(0deg); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: rotate(360deg); opacity: 0.75; }
+    }
+
+    /* WAVES */
+    .hero-waves {
+      position: absolute;
+      inset: 40% -10% -60px;
       pointer-events: none;
-      transition: opacity 0.18s ease;
+      overflow: hidden;
+      z-index: 4;
     }
- 
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.75);
-      box-shadow:
-        0 18px 55px rgba(15, 23, 42, 0.98),
-        0 0 40px rgba(56, 189, 248, 0.6);
+
+    .wave {
+      position: absolute;
+      left: -10%;
+      width: 120%;
+      border-radius: 50% 50% 0 0;
     }
- 
-    .card:hover::before {
-      opacity: 1;
+
+    .wave-back {
+      height: 260px;
+      bottom: -160px;
+      background: linear-gradient(to top, rgba(15,23,42,1), rgba(37,99,235,0.7), rgba(56,189,248,0.4));
+      opacity: 0.85;
+      animation: waveBack 26s linear infinite;
     }
- 
-    .card h3 {
-      font-size: 1rem;
-      margin-bottom: 6px;
+
+    .wave-mid {
+      height: 220px;
+      bottom: -135px;
+      background: linear-gradient(to top, rgba(15,23,42,0.96), rgba(37,99,235,0.85), rgba(45,212,191,0.6));
+      opacity: 0.94;
+      animation: waveMid 18s linear infinite;
     }
- 
-    .card p {
-      font-size: 0.86rem;
-      color: var(--soft);
-      margin-bottom: 10px;
+
+    .wave-front {
+      height: 180px;
+      bottom: -120px;
+      background: linear-gradient(to top, rgba(15,23,42,1), rgba(8,47,73,0.92), rgba(59,130,246,0.98), rgba(191,219,254,0.94));
+      opacity: 0.99;
+      animation: waveFront 12s ease-in-out infinite;
+      box-shadow: 0 -8px 40px rgba(15,23,42,0.9);
     }
- 
-    .card-small {
-      font-size: 0.8rem;
-      color: var(--muted);
+
+    @keyframes waveBack {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(40px); }
+      100% { transform: translateX(0); }
     }
- 
-    /* ================================================
-       INTAKE FORM / BLOG
-    ================================================= */
-    .intake-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: flex-start;
+
+    @keyframes waveMid {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-40px); }
+      100% { transform: translateX(0); }
     }
- 
-    @media (max-width: 880px) {
-      .intake-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+
+    @keyframes waveFront {
+      0% { transform: translateX(0) translateY(0); }
+      25% { transform: translateX(16px) translateY(6px); }
+      50% { transform: translateX(0) translateY(10px); }
+      75% { transform: translateX(-16px) translateY(6px); }
+      100% { transform: translateX(0) translateY(0); }
     }
- 
-    .intake-form {
-      background: var(--glass);
+
+    .bubble {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle,#e0f2fe 0%,#38bdf8 40%,transparent 70%);
+      opacity: .7;
+      pointer-events:none;
+      animation: floatUp 10s linear infinite;
+      z-index: 4;
+    }
+    .bubble.b1 { left:18%; bottom:0; animation-duration:11s; }
+    .bubble.b2 { left:38%; bottom:-10px; animation-duration:13s; }
+    .bubble.b3 { left:62%; bottom:-6px; animation-duration:9s; }
+    .bubble.b4 { left:82%; bottom:-14px; animation-duration:15s; }
+
+    @keyframes floatUp {
+      0% { transform:translateY(0) scale(.9); opacity:0; }
+      20% { opacity:.75; }
+      80% { opacity:.9; }
+      100% { transform:translateY(-120px) scale(1.2); opacity:0; }
+    }
+
+    /* ------------ SUMMON BUTTON ------------ */
+
+    .summon-wrapper {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 60;
+    }
+
+    .summon-btn {
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:230px;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.55);
+      background:rgba(15,23,42,.97);
+      box-shadow:0 0 0 1px rgba(15,23,42,.9),var(--shadow-soft),0 0 25px rgba(56,189,248,.7);
+      color:var(--text);
+      cursor:pointer;
+      text-decoration:none;
+      animation:summonPulse 2.7s infinite;
+    }
+
+    .summon-btn-main {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+      font-size:13px;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+    }
+
+    .summon-emoji {
+      font-size:18px;
+      animation: wag 1.8s ease-in-out infinite;
+      transform-origin:center;
+    }
+
+    .summon-subtitle {
+      font-size:11px;
+      color:#cbd5f5;
+    }
+
+    .summon-caption {
+      margin-top:4px;
+      font-size:11px;
+      text-align:right;
+      color:rgba(226,232,240,.9);
+    }
+
+    @keyframes summonPulse {
+      0% { box-shadow:0 0 0 0 rgba(56,189,248,.8),0 20px 40px rgba(0,0,0,.9); }
+      70% { box-shadow:0 0 0 18px rgba(56,189,248,0),0 18px 36px rgba(0,0,0,.9); }
+      100% { box-shadow:0 0 0 0 rgba(56,189,248,0),0 20px 40px rgba(0,0,0,.9); }
+    }
+
+    @keyframes wag {
+      0%,100% { transform:rotate(0deg) translateY(0); }
+      25% { transform:rotate(-8deg) translateY(-1px); }
+      50% { transform:rotate(5deg) translateY(0); }
+      75% { transform:rotate(-4deg) translateY(-1px); }
+    }
+
+    /* ------------ SECTIONS / CTA ------------ */
+
+    .section {
+      padding: 40px 20px;
+      background: rgba(2,6,23,0.96);
+      position: relative;
+      z-index: 5;
+    }
+
+    .section-alt {
+      background: radial-gradient(circle at top, rgba(8,47,73,0.8), rgba(2,6,23,0.96));
+    }
+
+    .section-card {
+      background: var(--card);
       border-radius: 18px;
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: var(--shadow-deep);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
     }
- 
-    .intake-form label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--soft);
+
+    .section-header {
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      font-size: 16px;
       margin-bottom: 4px;
     }
- 
-    .intake-form input,
-    .intake-form select,
-    .intake-form textarea {
-      width: 100%;
-      padding: 9px 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text);
-      font-size: 0.85rem;
-    }
- 
-    .intake-form textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
- 
-    .intake-note {
-      font-size: 0.75rem;
+
+    .section-subtext {
+      font-size: 13px;
       color: var(--muted);
-      margin-top: 6px;
     }
- 
-    .blog-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+
+    .trend-list {
+      list-style:none;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
     }
- 
-    @media (max-width: 880px) {
-      .blog-list {
-        grid-template-columns: minmax(0, 1fr);
-      }
+
+    .trend-pill {
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(15,23,42,.9);
+      border:1px solid rgba(148,163,184,.35);
+      font-size:12px;
+      color:#e5f2ff;
+      box-shadow:0 10px 25px rgba(15,23,42,.9);
+      white-space:nowrap;
     }
- 
-    .blog-card-title {
-      font-size: 0.98rem;
-      margin-bottom: 4px;
+
+    .sports-edge-body {
+      display:grid;
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1.1fr);
+      gap:18px;
     }
- 
-    .blog-card-meta {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 6px;
+
+    .sports-main {
+      background: radial-gradient(circle at top left, rgba(251,191,36,.35), transparent 55%), rgba(15,23,42,.95);
+      border-radius:14px;
+      padding:14px 16px;
+      border:1px solid rgba(245,158,11,.4);
+      font-size:13px;
     }
- 
-    /* ================================================
-       FOOTER
-    ================================================= */
-    footer {
+
+    .sports-side {
+      font-size:12px;
+      color:var(--muted);
+      border-left:1px dashed rgba(148,163,184,.5);
+      padding-left:14px;
+    }
+
+    .tickets-grid {
+      display:grid;
+      grid-template-columns:1.1fr 1.1fr;
+      gap:16px;
+      font-size:13px;
+    }
+
+    .tickets-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(24,24,27,.9);
+      font-size:11px;
+      color:#e5e7eb;
+      margin-bottom:6px;
+    }
+
+    .tickets-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 9px;
+      border-radius:999px;
+      background:rgba(22,163,74,.12);
+      color:#bbf7d0;
+      border:1px solid rgba(22,163,74,.5);
+      font-size:11px;
+    }
+
+    .newsletter-cta {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px dashed rgba(148,163,184,.7);
+      background:rgba(15,23,42,.96);
+      font-size:12px;
+      color:#e5f2ff;
+      width:fit-content;
+      margin-top:10px;
+    }
+
+    /* Monetization / CTA card */
+    .cta-grid {
+      display:grid;
+      grid-template-columns:1.3fr 1fr;
+      gap:18px;
+      font-size:13px;
+    }
+
+    .cta-highlight {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 11px;
+      border-radius:999px;
+      background:rgba(56,189,248,.12);
+      border:1px solid rgba(56,189,248,.7);
+      color:#e0f2fe;
+      font-size:11px;
+    }
+
+    .cta-book-btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 14px;
+      border-radius:999px;
+      background:linear-gradient(120deg,var(--brand2),var(--brand3));
+      color:#0b1120;
+      font-size:12px;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow:0 16px 30px rgba(15,23,42,.9);
+      margin-top:10px;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 26px 20px 40px;
+      background: rgba(2,6,23,0.97);
+      border-top: 1px solid rgba(148,163,184,0.5);
       text-align: center;
-      padding: 26px 20px 32px;
-      font-size: 0.75rem;
+      font-size: 12px;
       color: var(--muted);
-      border-top: 1px solid rgba(56, 189, 248, 0.25);
-      margin-top: 30px;
-      background: linear-gradient(to top, rgba(2, 6, 23, 0.96), transparent);
+      position: relative;
+      z-index: 5;
     }
- 
-    @media (max-width: 640px) {
-      .hero {
-        padding-inline: 16px;
-      }
-      .section {
-        padding-inline: 16px;
-      }
+
+    #version-info {
+      margin-top:6px;
+      font-size:11px;
+      color:#7dd3fc;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-inner { flex-direction:column; gap:6px; align-items:flex-start; }
+      .sports-edge-body, .tickets-grid, .cta-grid { grid-template-columns:1fr; }
+      .summon-wrapper { right:10px; bottom:14px; }
+      .hero { padding-bottom:130px; }
+      .hero-glow { width:360px; height:360px; }
     }
   </style>
 </head>
 <body>
- 
-  <!-- REAL THREE.JS OCEAN BACKGROUND -->
-  <canvas id="ocean-canvas"></canvas>
- 
-  <!-- ============================= -->
-  <!-- HEADER                        -->
-  <!-- ============================= -->
-  <header>
-    <div class="nav-inner">
-      <div class="brand-block">
-        <div class="brand-pill"></div>
-        <div class="brand-text">SideGuy Solutions</div>
+  <!-- LOADER -->
+  <div id="portalLoader" class="loader-overlay">
+    <div class="loader-orb"></div>
+    <div class="loader-text">SPINNING UP THE STORM PORTAL</div>
+  </div>
+
+  <!-- OCEAN BACKGROUND -->
+  <div id="ocean-container" class="parallax-layer"></div>
+  <div class="ocean-overlay-gradient parallax-layer"></div>
+  <div class="horizon-flash" id="horizonFlash"></div>
+  <div class="portal-crack" id="portalCrack"></div>
+
+  <!-- Embers -->
+  <div class="ember" style="left:18%; bottom:12%; animation-delay:0s;"></div>
+  <div class="ember" style="left:32%; bottom:8%; animation-delay:3s;"></div>
+  <div class="ember" style="left:58%; bottom:10%; animation-delay:1.6s;"></div>
+  <div class="ember" style="left:76%; bottom:6%; animation-delay:4.2s;"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner container">
+      <div class="brand">
+        <span class="logo-dot"></span> SideGuy Solutions
       </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#apps">Apps</a>
-          <a href="#ai">AI</a>
-          <a href="#web3">Web3</a>
-          <a href="#tickets">Tickets</a>
-          <a href="#dfs">DFS</a>
-          <a href="#intake">Intake</a>
-          <a href="#blog">Blog</a>
-        </nav>
-        <div class="version-tag">v11.0 · LEGENDARY HYBRID · SD</div>
-      </div>
+      <ul class="menu">
+        <li><a href="#cta">Work with PJ</a></li>
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#sports-edge">Sports Edge</a></li>
+        <li><a href="#local-shows">Local Shows</a></li>
+        <li><a href="#newsletter">Daily Drop</a></li>
+      </ul>
     </div>
-  </header>
- 
-  <!-- ============================= -->
-  <!-- HERO SECTION                  -->
-  <!-- ============================= -->
-  <section class="hero">
- 
-    <!-- LEFT SIDE: TEXT + BUTTONS -->
-    <div>
-      <h1 class="hero-title">
-        Where <span>San Diego</span> builds, codes, and scales.
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero parallax-layer">
+    <div class="hero-inner container">
+      <div class="hero-glow"></div>
+      <div class="hero-heat"></div>
+
+      <div class="hero-kicker">
+        <span class="dot"></span>
+        PACIFIC STORM PORTAL • NORTH COUNTY
+      </div>
+
+      <h1>
+        Where <span class="highlight">code</span> meets<br />the coastline.
       </h1>
- 
-      <p class="hero-sub">
-        Coastal concierge tech for the 2025 era — <strong>custom apps</strong>,
-        <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>,
-        <strong>ticketing flows</strong>, and <strong>DFS tools</strong> tuned for
-        North County and beyond.
+      <p>
+        SideGuy Solutions is your cinematic coastal portal for tech builds, tickets, DFS edges,
+        and systems that actually fit your days in North County.
       </p>
- 
-      <div class="hero-contacts">
-        Text / call: <strong>773-544-1231</strong><br />
-        Email: <strong>peter.z@kromeon.com</strong>
-      </div>
- 
-      <div class="hero-ctas">
-        <button id="summon-btn" class="btn-primary">
-          TAP TO SUMMON PJ
-        </button>
-        <button id="show-toolkit" class="btn-primary btn-secondary">
-          OPEN TOOLKIT
-        </button>
-      </div>
-    </div>
- 
-    <!-- RIGHT SIDE: ORB -->
-    <div class="hero-orb-wrap">
-      <div class="orb-glow-ring"></div>
-      <button id="summon-orb" aria-label="Summon PJ coastal portal">
-        <div id="summon-orb-label">
-          TAP TO<br>SUMMON PJ
-          <span>Coastal Portal</span>
-        </div>
-      </button>
-      <div class="orb-caption">Portal Online · North County</div>
-    </div>
- 
-  </section>
- 
-  <!-- ============================= -->
-  <!-- TOOLKIT SECTION               -->
-  <!-- ============================= -->
-  <section class="section" id="toolkit">
-    <div class="section-title">SideGuy Toolkit</div>
- 
-    <div class="grid">
-      <!-- SOLANA CALC -->
-      <div class="card">
-        <h3>Solana Processing Savings</h3>
-        <p>See how much you save running payments on Solana rails versus old-school processors.</p>
-        <button class="btn-primary" onclick="openSavingsCalc()">
-          OPEN CALCULATOR
-        </button>
-        <div class="card-small">Built for San Diego agencies, venues, and startups.</div>
-      </div>
- 
-      <!-- DFS MULTIPLIER -->
-      <div class="card">
-        <h3>DFS Promo Multiplier</h3>
-        <p>Quick EV snapshots on 2-leg and boosted parlays. Educational only, zero pick-selling.</p>
-        <button class="btn-primary" onclick="openDFS()">
-          DFS TOOL
-        </button>
-        <div class="card-small">Helps structure promos and slates without going full degenerate.</div>
-      </div>
- 
-      <!-- TICKET OPTIMIZER -->
-      <div class="card">
-        <h3>Ticket Flow Optimizer</h3>
-        <p>Model ticket price, fees, and capacity to see where big platforms are skimming.</p>
-        <button class="btn-primary" onclick="openTickets()">
-          OPTIMIZE
-        </button>
-        <div class="card-small">Perfect for North County venues, bars, and live rooms.</div>
-      </div>
-    </div>
-  </section>
- 
-  <!-- ============================= -->
-  <!-- APPS PAGE SECTION             -->
-  <!-- ============================= -->
-  <section class="section" id="apps">
-    <div class="section-title">Apps · Web · Internal Tools</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Custom apps and systems — without SF drama.</h2>
-        <p class="section-lead">
-          From MVPs and landing pages to internal dashboards, SideGuy builds
-          <strong>lean, fast, and actually-finished</strong> products for San Diego and North County.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">San Diego app development</span>
-          <span class="pill-tag">Internal tools</span>
-          <span class="pill-tag">Client portals</span>
-          <span class="pill-tag">Mobile-first flows</span>
-        </div>
-        <p class="section-lead">
-          PJ works with founders, GMs, and operators — not just “product people.”
-          You bring the story and constraints, SideGuy translates it into something shippable.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Good fits for this lane</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Service businesses that need smoother onboarding or quoting</li>
-          <li>Local brands turning spreadsheets into real tools</li>
-          <li>Founders testing a v1 without burning a full raise</li>
-          <li>San Diego teams that want a dev you can text</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Apps & Custom Builds')">
-          START AN APP PROJECT
-        </button>
-      </div>
-    </div>
-  </section>
- 
-  <!-- ============================= -->
-  <!-- AI PAGE SECTION               -->
-  <!-- ============================= -->
-  <section class="section" id="ai">
-    <div class="section-title">AI Automation · Workflows</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">AI that quietly handles the boring stuff.</h2>
-        <p class="section-lead">
-          No “AI guru” nonsense — just practical flows that move leads, data,
-          and messages around so your team can breathe.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">Inbound & lead routing</span>
-          <span class="pill-tag">Follow-up sequences</span>
-          <span class="pill-tag">Internal Q&A</span>
-          <span class="pill-tag">San Diego small biz AI</span>
+      <p class="hero-pj-line">
+        <strong>PJ — your coastal concierge for systems, sports, and smooth life flows.</strong>
+      </p>
+      <p class="hero-contacts">
+        Call / text:
+        <a href="tel:17735441231">(773) 544-1231</a> · Email:
+        <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
+      </p>
+
+      <!-- FLOATING ORB -->
+      <div class="hero-orb-wrapper">
+        <div id="portalOrb" class="hero-orb">
+          <div class="hero-orb-rings"></div>
         </div>
       </div>
-      <div class="card">
-        <h3>Examples for North County</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Auto-replies that feel human when someone texts the business</li>
-          <li>Syncing forms, calendars, and CRMs without 20 tools</li>
-          <li>“What’s going on with this client?” one-click summaries</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('AI Automation & Workflows')">
-          MAP AN AI FLOW
-        </button>
-      </div>
+      <div class="hero-orb-caption">TAP THE ORB TO OPEN THE PORTAL</div>
     </div>
+
+    <!-- WAVES -->
+    <div class="hero-waves">
+      <div class="wave wave-back parallax-layer"></div>
+      <div class="wave wave-mid parallax-layer"></div>
+      <div class="wave wave-front parallax-layer"></div>
+    </div>
+
+    <div class="bubble b1"></div>
+    <div class="bubble b2"></div>
+    <div class="bubble b3"></div>
+    <div class="bubble b4"></div>
   </section>
- 
-  <!-- ============================= -->
-  <!-- WEB3 / SOLANA PAGE SECTION    -->
-  <!-- ============================= -->
-  <section class="section" id="web3">
-    <div class="section-title">Web3 · Solana · Stablecoin Flows</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Solana-grade payments for real-world businesses.</h2>
-        <p class="section-lead">
-          SideGuy helps San Diego operators dip into Web3 without needing to
-          pretend they like Discord. Focus: <strong>fees down, reliability up</strong>.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">Solana payments</span>
-          <span class="pill-tag">Stablecoin invoicing</span>
-          <span class="pill-tag">Crypto escrow</span>
-          <span class="pill-tag">On/off-ramps</span>
-        </div>
+
+  <!-- SUMMON PJ BUTTON -->
+  <div class="summon-wrapper">
+    <a
+      id="summonPJBubble"
+      class="summon-btn"
+      href="mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Coastal%20Portal)&body=Hey%20PJ%2C%0A%0AI'm coming%20through%20the%20Pacific%20storm%20portal.%0A%0A-%20"
+    >
+      <div class="summon-btn-main">
+        <span class="summon-emoji">⚡</span>
+        <span>TAP TO SUMMON PJ</span>
       </div>
-      <div class="card">
-        <h3>What this can look like</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Clients paying deposits in USDC instead of chasing wire confirmations</li>
-          <li>Ticketing or subscriptions with near-zero processing fees</li>
-          <li>“Crypto escrow” flows for dev work or big projects</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Web3 / Solana / Stablecoin Flows')">
-          EXPLORE WEB3 RAILS
-        </button>
-      </div>
-    </div>
-  </section>
- 
-  <!-- ============================= -->
-  <!-- TICKETS PAGE SECTION          -->
-  <!-- ============================= -->
-  <section class="section" id="tickets">
-    <div class="section-title">Ticketing · Venues · Live Rooms</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Decades of ticket trenches, pointed at North County.</h2>
-        <p class="section-lead">
-          The dream: faster confirmations, cleaner fees, and better data
-          for local venues, bars, and promoters — without handing
-          everything to giant platforms.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">Ticket flows</span>
-          <span class="pill-tag">Seat maps</span>
-          <span class="pill-tag">VIP & presale</span>
-          <span class="pill-tag">San Diego venues</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Where SideGuy fits</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Mapping current ticket system and fees</li>
-          <li>Lightweight direct ticket experiments</li>
-          <li>Hybrid models: keep the big platform, own your high-value flows</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Ticketing & Venue Systems')">
-          TALK TICKETS
-        </button>
-      </div>
-    </div>
-  </section>
- 
-  <!-- ============================= -->
-  <!-- DFS PAGE SECTION              -->
-  <!-- ============================= -->
-  <section class="section" id="dfs">
-    <div class="section-title">DFS · Promos · Systems</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Make promos and edges feel like a system, not chaos.</h2>
-        <p class="section-lead">
-          Educational tools and frameworks around DFS, promos, and parlay structures —
-          built for people who want to treat it like math, not vibes.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">DFS flows (educational)</span>
-          <span class="pill-tag">Promo sequencing</span>
-          <span class="pill-tag">Bankroll frameworks</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>What SideGuy helps with</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Promo tracking spreadsheets → simple tools</li>
-          <li>EV calculators that match your risk level</li>
-          <li>Systems thinking instead of “one big hit” thinking</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('DFS Tools & Promo Systems')">
-          BUILD A DFS SYSTEM
-        </button>
-      </div>
-    </div>
-  </section>
- 
-  <!-- ============================= -->
-  <!-- INTAKE PAGE SECTION           -->
-  <!-- ============================= -->
-  <section class="section" id="intake">
-    <div class="section-title">Project Intake · Start the Conversation</div>
-    <div class="intake-grid">
-      <div>
-        <h2 class="section-subheading">Tell PJ what you’re cooking up.</h2>
-        <p class="section-lead">
-          No giant form. Just enough structure so PJ can reply with a real
-          plan — not a generic “let’s hop on a call” (unless you want that).
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">San Diego & North County preferred</span>
-          <span class="pill-tag">Remote possible</span>
-        </div>
-        <p class="section-lead">
-          You can also skip the form and text
-          <strong>773-544-1231</strong> or email
-          <strong>peter.z@kromeon.com</strong> directly.
-        </p>
-      </div>
- 
-      <form id="intake-form" class="intake-form">
-        <label for="intake-name">Name</label>
-        <input id="intake-name" type="text" placeholder="Your name" />
- 
-        <label for="intake-email">Email</label>
-        <input id="intake-email" type="email" placeholder=you@example.com />
- 
-        <label for="intake-biz">Business / Project</label>
-        <input id="intake-biz" type="text" placeholder="Brand, venue, startup, etc." />
- 
-        <label for="intake-type">What lane fits best?</label>
-        <select id="intake-type">
-          <option value="Apps & Custom Builds">Apps &amp; custom builds</option>
-          <option value="AI Automation & Workflows">AI automation &amp; workflows</option>
-          <option value="Web3 / Solana / Stablecoin Flows">Web3 / Solana / stablecoin flows</option>
-          <option value="Ticketing & Venue Systems">Ticketing &amp; venue systems</option>
-          <option value="DFS Tools & Promo Systems">DFS tools &amp; promo systems</option>
-          <option value="Other / Not sure yet">Other / not sure yet</option>
-        </select>
- 
-        <label for="intake-budget">Rough budget / range (optional)</label>
-        <input id="intake-budget" type="text" placeholder="e.g. 5–10k, 20–40k, etc." />
- 
-        <label for="intake-notes">What are you trying to do?</label>
-        <textarea id="intake-notes" placeholder="A few lines about the problem, current setup, and timeline."></textarea>
- 
-        <button type="submit" class="btn-primary btn-secondary" style="width: 100%; justify-content:center;">
-          SEND TO PJ
-        </button>
-        <div class="intake-note">
-          This doesn’t auto-create a ticket — it just drafts an email to PJ with your answers so you both start on the same page.
-        </div>
-      </form>
-    </div>
-  </section>
- 
-  <!-- ============================= -->
-  <!-- BLOG / CONTENT TEASERS        -->
-  <!-- ============================= -->
-  <section class="section" id="blog">
-    <div class="section-title">Blog · Experiments · Coastal Dispatches</div>
-    <div class="blog-list">
-      <div class="card">
-        <div class="blog-card-title">AI Tools That Actually Help San Diego Small Businesses</div>
-        <div class="blog-card-meta">AI · Automation · Local ops</div>
-        <p class="card-small">
-          A short guide to using AI for intake, follow-up, and ops without
-          burning your whole week learning five new platforms.
-        </p>
-      </div>
-      <div class="card">
-        <div class="blog-card-title">Why Solana Payments Might Beat Stripe for Some Flows</div>
-        <div class="blog-card-meta">Web3 · Solana · Payments</div>
-        <p class="card-small">
-          Fees, speed, settlement, and how a few basis points saved can
-          actually matter to San Diego venues, agencies, and dev shops.
-        </p>
-      </div>
-      <div class="card">
-        <div class="blog-card-title">North County Ticketing Experiments</div>
-        <div class="blog-card-meta">Tickets · Venues · Live Rooms</div>
-        <p class="card-small">
-          Sketching how SideGuy wants to route more value to local rooms with
-          faster, cleaner flows — and less platform drag.
-        </p>
-      </div>
-    </div>
-  </section>
-  <!-- ============================= -->
-  <!--   MODAL STYLES + TOOL MODALS  -->
-  <!-- ============================= -->
-  <style>
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(14px);
-      z-index: 9999;
-    }
- 
-    .modal-content {
-      background: var(--card);
-      padding: 26px;
-      border-radius: 20px;
-      width: min(90%, 440px);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      box-shadow: 0 0 50px rgba(56, 189, 248, 0.5);
-    }
- 
-    .modal h2 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-    }
- 
-    .modal label {
-      font-size: 0.9rem;
-      color: var(--soft);
-    }
- 
-    .modal input {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 16px;
-      border-radius: 10px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text);
-    }
- 
-    .calc-btn {
-      background: #38bdf8;
-      color: #020617;
-      border-radius: var(--pill);
-      padding: 10px 14px;
-      cursor: pointer;
-      border: none;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      letter-spacing: 0.08em;
-    }
- 
-    .close-btn {
-      background: #ef4444;
-      color: #fff;
-      border-radius: var(--pill);
-      padding: 9px 14px;
-      cursor: pointer;
-      border: none;
-      font-weight: 700;
-      margin-top: 10px;
-    }
- 
-    .result-box {
-      margin-top: 12px;
-      background: rgba(56, 189, 248, 0.15);
-      padding: 12px;
-      border-radius: 12px;
-      color: #a5f3fc;
-      font-size: 0.95rem;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      display: none;
-    }
-  </style>
- 
-  <!-- SOLANA PROCESSING MODAL -->
-  <div id="modal-solana" class="modal">
-    <div class="modal-content">
-      <h2>Solana Processing Savings</h2>
- 
-      <label>Monthly Volume ($)</label>
-      <input id="solana-volume" type="number" placeholder="e.g. 25,000" />
- 
-      <label>Your Current Fee %</label>
-      <input id="solana-fee" type="number" step="0.01" placeholder="e.g. 2.9" />
- 
-      <button class="calc-btn" onclick="runSolanaCalc()">Calculate</button>
- 
-      <div id="solana-result" class="result-box"></div>
- 
-      <button class="close-btn" onclick="closeSolana()">Close</button>
-    </div>
+      <div class="summon-subtitle">Portal surge + ocean crash, then your inbox.</div>
+    </a>
+    <div class="summon-caption">North County only — for now.</div>
   </div>
- 
-  <!-- DFS MULTIPLIER MODAL -->
-  <div id="modal-dfs" class="modal">
-    <div class="modal-content">
-      <h2>DFS Promo Multiplier</h2>
- 
-      <label>Leg 1 Odds (e.g. -110)</label>
-      <input id="dfs-leg1" type="text" />
- 
-      <label>Leg 2 Odds</label>
-      <input id="dfs-leg2" type="text" />
- 
-      <label>Boost % (optional)</label>
-      <input id="dfs-boost" type="number" placeholder="e.g. 20" />
- 
-      <button class="calc-btn" onclick="runDFScalc()">Calculate EV</button>
- 
-      <div id="dfs-result" class="result-box"></div>
- 
-      <button class="close-btn" onclick="closeDFS()">Close</button>
+  <!-- MONETIZATION / CTA -->
+  <section id="cta" class="section section-alt">
+    <div class="container">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Work with PJ — Coastal concierge for your stack</h2>
+          <p class="section-subtext">
+            One person who can connect tickets, tech, transport, and systems that
+            don’t fight your life in North County.
+          </p>
+        </div>
+
+        <div class="cta-grid">
+          <div>
+            <div class="cta-highlight">
+              <span>🌊</span> High-trust projects for people who actually call back.
+            </div>
+            <p style="margin-top:10px;">
+              Need a build, a smarter flow, or a tickets / DFS system that doesn’t fall apart?
+              PJ can help design the system, find the edges, and keep it light enough that you
+              still want to surf.
+            </p>
+            <ul style="margin-top:10px; padding-left:18px; font-size:13px;">
+              <li>Custom software + AI automations</li>
+              <li>Ticketing & live events routing</li>
+              <li>DFS promo / edge frameworks</li>
+              <li>Payments, stablecoins, and “yield-to-pay” ideas</li>
+            </ul>
+          </div>
+
+          <div>
+            <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">
+              Best way in: a short, honest email with what you’re trying to do.
+            </p>
+            <a class="cta-book-btn"
+               href="mailto:peter.z@kromeon.com?subject=SideGuy%20Project%20Portal&body=Hey%20PJ%2C%0A%0AHere%27s%20what%20I%27m%20thinking%3A%0A%0A-%20">
+              Book PJ through the portal
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
- 
-  <!-- TICKET OPTIMIZER MODAL -->
-  <div id="modal-tickets" class="modal">
-    <div class="modal-content">
-      <h2>Ticket Flow Optimizer</h2>
- 
-      <label>Ticket Price ($)</label>
-      <input id="ticket-price" type="number" />
- 
-      <label>Platform Fee %</label>
-      <input id="ticket-fee" type="number" step="0.1" />
- 
-      <label>Venue Capacity</label>
-      <input id="ticket-cap" type="number" />
- 
-      <button class="calc-btn" onclick="runTicketCalc()">Optimize</button>
- 
-      <div id="ticket-result" class="result-box"></div>
- 
-      <button class="close-btn" onclick="closeTickets()">Close</button>
+  </section>
+
+  <!-- TRENDING -->
+  <section id="trending" class="section">
+    <div class="container">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Trending in the portal</h2>
+          <p class="section-subtext">A pulse of AI, DeFi, DFS, and coastal life topics.</p>
+        </div>
+        <ul id="trend-list" class="trend-list">
+          <li class="trend-pill">Loading...</li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <!-- ============================= -->
-  <!--        SCRIPTS + LOGIC        -->
-  <!-- ============================= -->
- 
-  <!-- THREE.js CDN -->
-  <script src=https://unpkg.com/three@0.160.0/build/three.min.js></script>
- 
+  </section>
+
+  <!-- SPORTS EDGE -->
+  <section id="sports-edge" class="section section-alt">
+    <div class="container">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Sports Edge — DFS & Futures</h2>
+          <p class="section-subtext">
+            One structured idea at a time. No picks sold, no nonsense — just edges and frameworks.
+          </p>
+        </div>
+        <div id="sports-edge-body" class="sports-edge-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAL SHOWS -->
+  <section id="local-shows" class="section">
+    <div class="container">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Local Shows — Direct, Fast, Coastal</h2>
+          <p class="section-subtext">
+            Solana Beach • Encinitas • Cardiff • Del Mar — routing value to the room, not just the giant sites.
+          </p>
+        </div>
+
+        <div class="tickets-grid">
+          <div>
+            <div class="tickets-pill">
+              <span>🎸</span> Coastal concert & comedy flows
+            </div>
+            <p>
+              SideGuy started in tickets. The dream: local fans, local venues, lighter fees,
+              faster confirmations — eventually powered by Solana or stablecoins.
+            </p>
+            <p style="margin-top:8px; color:#bbf7d0; font-size:12px;">
+              Today: simple intros and coordination.<br />
+              Tomorrow: instant confirmations and yield-to-pay.
+            </p>
+          </div>
+
+          <div>
+            <div class="tickets-badge">
+              <span>⚗️</span> Early-stage portal — invite only
+            </div>
+            <p style="margin-top:6px;">
+              If you run a room, bar, or venue in North County and want to test
+              faster, fairer ticket flows, PJ can help sketch the system and build
+              a lightweight prototype when it makes sense.
+            </p>
+            <p style="margin-top:8px;">
+              Email:
+              <a href="mailto:peter.z@kromeon.com?subject=Local%20Shows%20%2F%20Ticket%20Flow">
+                Local shows with SideGuy
+              </a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" class="section section-alt">
+    <div class="container">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>PJ’s Daily Drop — Inner circle</h2>
+          <p class="section-subtext">
+            Coastal experiments, DeFi-to-real-life ideas, DFS promo angles, and whatever’s actually interesting.
+          </p>
+        </div>
+
+        <p style="font-size:13px; color:var(--muted);">
+          Want in? Email PJ with <strong>“Add me to the Daily Drop”</strong> in the subject.
+        </p>
+        <a
+          class="newsletter-cta"
+          href="mailto:peter.z@kromeon.com?subject=Add%20me%20to%20the%20Daily%20Drop&body=Hey%20PJ%2C%0A%0APlease%20add%20me%20to%20your%20Daily%20Drop%20updates.%0A%0A-%20"
+        >
+          <span>📨</span>
+          <span>Email PJ to join</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>© 2025 SideGuy Solutions • Solana Beach, CA 🌊</div>
+    <div>Coastal concierge for tech, tickets, and systems that actually fit your life.</div>
+    <div id="version-info">v9.0-pacific-storm-orb-mode</div>
+  </footer>
+
+  <!-- OCEAN SOUND (replace src with your own hosted file if you want) -->
+  <audio id="oceanSound" preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_31a2328a0c.mp3?filename=ocean-waves-ambient-5611.mp3" type="audio/mpeg" />
+  </audio>
+  <!-- THREE.js -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+
   <script>
-    // =====================================
-    // DAY / NIGHT TINT FOR SAN DIEGO VIBES
-    // =====================================
-    (function setDayNight() {
-      try {
-        const hour = new Date().getHours();
-        const root = document.documentElement;
-        if (hour >= 6 && hour < 18) {
-          root.style.setProperty("--bg", "var(--bg-day)");
-          root.style.setProperty("--accent", "#38bdf8");
-        } else {
-          root.style.setProperty("--bg", "var(--bg-night)");
-          root.style.setProperty("--accent", "var(--accent-night)");
+    /* ---------- TRENDING ---------- */
+    const TREND_TOPICS = [
+      "Pacific storm shaders",
+      "Solana yield-to-pay",
+      "AI coastal workflows",
+      "DFS promos in California",
+      "Encinitas sunsets + builds",
+      "OnlineSeats DNA resurfacing",
+      "Stablecoin cash flow ideas",
+      "Web3 ticketing experiments",
+      "Coastal concierge systems",
+      "North County remote life"
+    ];
+
+    function pickRandomUnique(arr, count) {
+      const copy = [...arr];
+      const picked = [];
+      while (copy.length && picked.length < count) {
+        const idx = Math.floor(Math.random() * copy.length);
+        picked.push(copy.splice(idx, 1)[0]);
+      }
+      return picked;
+    }
+
+    function renderTrends() {
+      const list = document.getElementById("trend-list");
+      if (!list) return;
+      const topics = pickRandomUnique(TREND_TOPICS, 7);
+      list.innerHTML = topics.map(t => `<li class="trend-pill">#${t}</li>`).join("");
+    }
+
+    /* ---------- SPORTS EDGE MOCK ---------- */
+    const SPORTS_EDGES = [
+      {
+        league: "NBA",
+        matchup: "Phoenix Suns vs Dallas Mavericks",
+        context: "Regular Season • West window",
+        market: "Player Points + Rebounds + Assists",
+        pick: "Dereck Lively II — Over 14.5 PRA",
+        oddsMain: "+112"
+      },
+      {
+        league: "NFL",
+        matchup: "San Francisco 49ers vs Seattle Seahawks",
+        context: "Prime-time • disciplined side",
+        market: "Rushing + Receiving",
+        pick: "Versatile RB Over combo line",
+        oddsMain: "+104"
+      }
+    ];
+
+    function renderSportsEdge() {
+      const container = document.getElementById("sports-edge-body");
+      if (!container) return;
+      const edge = SPORTS_EDGES[Math.floor(Math.random() * SPORTS_EDGES.length)];
+      container.innerHTML = `
+        <div class="sports-main">
+          <div class="sports-label">${edge.league} • TODAY</div>
+          <div class="sports-matchup">${edge.matchup}</div>
+          <div class="sports-meta">${edge.context}</div>
+          <div class="sports-line"><strong>${edge.market}</strong></div>
+          <div class="sports-line">${edge.pick}</div>
+          <div class="sports-odds"><span>${edge.oddsMain}</span></div>
+        </div>
+        <div class="sports-side">
+          <strong>PJ’s angle:</strong><br/>
+          Small edges, promo money, and a system you can live with — not blasting every slate.
+        </div>
+      `;
+    }
+
+    /* ---------- VERSION ---------- */
+    function updateVersionStamp() {
+      const el = document.getElementById("version-info");
+      if (!el) return;
+      const now = new Date().toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      });
+      el.textContent = `v9.0-pacific-storm-orb-mode • Updated ${now} PST`;
+    }
+
+    /* ---------- THREE.JS REALER OCEAN SHADER ---------- */
+    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
+    let targetWaveAmp = 1.05;
+
+    function initOcean() {
+      const container = document.getElementById("ocean-container");
+      if (!container || !window.THREE) return;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio || 1);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000814, 1);
+      container.appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+
+      const aspect = window.innerWidth / window.innerHeight;
+      camera = new THREE.PerspectiveCamera(55, aspect, 0.1, 80);
+      camera.position.set(0, 7.2, 11.5);
+      camera.lookAt(0, 0, 0);
+
+      oceanClock = new THREE.Clock();
+
+      const geometry = new THREE.PlaneGeometry(42, 42, 260, 260);
+      geometry.rotateX(-Math.PI / 2);
+
+      const vertexShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+        uniform float uWaveAmp;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
         }
-      } catch (err) {
-        console.warn("Day/night tint issue:", err);
-      }
-    })();
- 
-    // =====================================
-    // CONTACT HELPERS (Summon PJ)
-    // =====================================
-    function openContactPortal() {
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href =
-          "sms:+17735441231?&body=" +
-          encodeURIComponent(
-            "Hey PJ, I just summoned the coastal portal from SideGuySolutions.com — let’s build something."
-          );
-      } else {
-        const subject = encodeURIComponent("Summon PJ · SideGuy Solutions (San Diego)");
-        const body = encodeURIComponent(
-          "Hey PJ,\n\nI just tapped the coastal portal on SideGuySolutions.com.\n\nHere’s what I’m looking at:\n- Tech build / app / site\n- Tickets / live events\n- DFS promos / systems\n- Solana / crypto payments\n- AI automation\n- Something else entirely\n\nReply when you’re free and let’s spin this up.\n\n— Sent from the coastal portal 🌊"
-        );
-        window.location.href = mailto:peter.z@kromeon.com?subject= + subject + "&body=" + body;
-      }
-    }
- 
-    // Portal burst cinematic
-    function triggerPortal() {
-      document.body.classList.add("portal-burst-flash");
-      setTimeout(() => {
-        document.body.classList.remove("portal-burst-flash");
-      }, 450);
- 
-      const ring = document.createElement("div");
-      ring.className = "portal-burst-ring";
-      document.body.appendChild(ring);
-      setTimeout(() => {
-        ring.remove();
-      }, 900);
- 
-      setTimeout(openContactPortal, 480);
-    }
- 
-    // Scroll helper (for CTAs)
-    function scrollToIntake(prefillLane) {
-      const select = document.getElementById("intake-type");
-      if (select && prefillLane) {
-        [...select.options].forEach((opt) => {
-          if (opt.value === prefillLane) select.value = opt.value;
-        });
-      }
-      const el = document.getElementById("intake");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
- 
-    // =====================================
-    // TOOLKIT MODALS OPEN/CLOSE
-    // =====================================
-    function openSavingsCalc() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "flex";
-    }
-    function closeSolana() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "none";
-    }
- 
-    function openDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "flex";
-    }
-    function closeDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "none";
-    }
- 
-    function openTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "flex";
-    }
-    function closeTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "none";
-    }
- 
-    // =====================================
-    // SOLANA SAVINGS CALCULATOR
-    // =====================================
-    function runSolanaCalc() {
-      const volEl = document.getElementById("solana-volume");
-      const feeEl = document.getElementById("solana-fee");
-      const outEl = document.getElementById("solana-result");
-      if (!volEl || !feeEl || !outEl) return;
- 
-      const vol = parseFloat(volEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      outEl.style.display = "block";
- 
-      if (!vol || !feePct) {
-        outEl.textContent = "Add both your monthly volume and current fee % to see the savings.";
-        return;
-      }
- 
-      const currentRate = feePct / 100;
-      const solanaRate = 0.003; // 0.3% example
- 
-      if (currentRate <= solanaRate) {
-        outEl.textContent =
-          "You’re already near Solana-level fees. Next step is layering yield, auto-pay, or stablecoin rails — that’s PJ’s lane.";
-        return;
-      }
- 
-      const currentMonthlyFees = vol * currentRate;
-      const solanaMonthlyFees = vol * solanaRate;
-      const monthlySavings = currentMonthlyFees - solanaMonthlyFees;
-      const yearlySavings = monthlySavings * 12;
- 
-      outEl.innerHTML =
-        "At $" +
-        vol.toLocaleString() +
-        " in monthly volume and " +
-        feePct.toFixed(2) +
-        "% fees, you’re paying about <strong>$" +
-        currentMonthlyFees.toFixed(0) +
-        "/month</strong> in fees.<br><br>" +
-        "Routing through Solana rails (~0.3%) drops that to roughly <strong>$" +
-        solanaMonthlyFees.toFixed(0) +
-        "/month</strong>, saving about <strong>$" +
-        monthlySavings.toFixed(0) +
-        "/month</strong> — or around <strong>$" +
-        yearlySavings.toFixed(0) +
-        "/year</strong>.<br><br>" +
-        "Tap the portal and PJ can map this into a real San Diego-friendly flow.";
-    }
- 
-    // =====================================
-    // DFS PROMO MULTIPLIER
-    // =====================================
-    function americanToDecimal(oddsStr) {
-      const cleaned = (oddsStr || "").toString().trim().replace(/[^\d+-]/g, "");
-      const odds = parseFloat(cleaned);
-      if (!odds || odds === 0) return null;
-      if (odds > 0) return odds / 100 + 1;
-      return 100 / Math.abs(odds) + 1;
-    }
- 
-    function runDFScalc() {
-      const leg1El = document.getElementById("dfs-leg1");
-      const leg2El = document.getElementById("dfs-leg2");
-      const boostEl = document.getElementById("dfs-boost");
-      const outEl = document.getElementById("dfs-result");
-      if (!leg1El || !leg2El || !outEl) return;
- 
-      const leg1 = americanToDecimal(leg1El.value);
-      const leg2 = americanToDecimal(leg2El.value);
-      const boostPct = parseFloat(boostEl.value || "0");
- 
-      outEl.style.display = "block";
- 
-      if (!leg1 || !leg2) {
-        outEl.textContent = "Use American odds like -110 or +120 for each leg.";
-        return;
-      }
- 
-      const comboDec = leg1 * leg2;
-      const boostedDec = comboDec * (1 + boostPct / 100);
- 
-      function decToAmerican(dec) {
-        if (dec <= 1) return 0;
-        const imp = dec - 1;
-        if (imp >= 1) {
-          return "+" + Math.round(imp * 100);
-        } else {
-          return "-" + Math.round(100 / imp);
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+
+          vec2 u = f * f * (3.0 - 2.0 * f);
+
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
         }
-      }
- 
-      const comboAm = decToAmerican(comboDec);
-      const comboBoostAm = decToAmerican(boostedDec);
- 
-      outEl.innerHTML =
-        "Raw 2-leg combo ≈ <strong>" +
-        comboDec.toFixed(2) +
-        "x</strong> (about " +
-        comboAm +
-        ").<br>" +
-        "With a <strong>" +
-        (boostPct || 0).toFixed(0) +
-        "% boost</strong>, you’re around <strong>" +
-        boostedDec.toFixed(2) +
-        "x</strong> (≈ " +
-        comboBoostAm +
-        ").<br><br>" +
-        "Next step is stake sizing, promo sequencing, and slate selection — PJ helps turn it into a calm system, not chaos.";
-    }
- 
-    // =====================================
-    // TICKET FLOW OPTIMIZER
-    // =====================================
-    function runTicketCalc() {
-      const priceEl = document.getElementById("ticket-price");
-      const feeEl = document.getElementById("ticket-fee");
-      const capEl = document.getElementById("ticket-cap");
-      const outEl = document.getElementById("ticket-result");
-      if (!priceEl || !feeEl || !capEl || !outEl) return;
- 
-      const price = parseFloat(priceEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      const cap = parseInt(capEl.value || "0", 10);
- 
-      outEl.style.display = "block";
- 
-      if (!price || !feePct || !cap) {
-        outEl.textContent =
-          "Add price, platform fee %, and venue capacity to see how the room pencils out.";
-        return;
-      }
- 
-      const feePerTicket = price * (feePct / 100);
-      const grossPerTicket = price + feePerTicket;
-      const grossIfFull = cap * grossPerTicket;
-      const totalFees = cap * feePerTicket;
- 
-      const improvedFeePct = Math.max(feePct - 2, 0); // sample improved scenario
-      const newFeePerTicket = price * (improvedFeePct / 100);
-      const newTotalFees = cap * newFeePerTicket;
-      const savings = totalFees - newTotalFees;
- 
-      outEl.innerHTML =
-        "Full room at $" +
-        price.toFixed(2) +
-        " + " +
-        feePct.toFixed(1) +
-        "% fees (" +
-        cap +
-        " tickets) means roughly <strong>$" +
-        totalFees.toFixed(0) +
-        "</strong> in platform fees and about <strong>$" +
-        grossIfFull.toFixed(0) +
-        "</strong> in gross volume.<br><br>" +
-        "If you shave ~2% off fees with a cleaner SideGuy flow, that’s around <strong>$" +
-        savings.toFixed(0) +
-        "</strong> that could stay with the venue, talent, or bar — not the platform.<br><br>" +
-        "That’s the North County ticketing experiment PJ wants to build with you.";
-    }
- 
-    // =====================================
-    // THREE.JS OCEAN — SAFE INIT
-    // =====================================
-    let oceanUniforms = null;
-    (function initOceanSafe() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) {
-        console.warn("Three.js or canvas missing — static gradient only.");
-        return;
-      }
- 
-      try {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-          55,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          100
-        );
-        camera.position.set(0, 6, 10);
-        camera.lookAt(0, 0, 0);
- 
-        const renderer = new THREE.WebGLRenderer({
-          canvas,
-          antialias: true
-        });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x020617, 1);
- 
-        const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
-        geometry.rotateX(-Math.PI / 2);
- 
-        oceanUniforms = {
+
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+
+          float t = uTime * 0.5;
+
+          float waveBig = sin(pos.x * 0.16 + t * 0.9) * 0.7;
+          float waveCross = sin((pos.x + pos.z) * 0.14 - t * 1.3) * 0.6;
+          float waveLong = sin(pos.z * 0.09 + t * 0.6) * 0.9;
+
+          float n1 = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
+          float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
+          float choppy = (n1 - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
+
+          float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
+          height *= uWaveAmp;
+
+          pos.y += height;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `;
+
+      const fragmentShader = `
+        varying vec2 vUv;
+        uniform float uTime;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+
+          vec2 u = f * f * (3.0 - 2.0 * f);
+
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        void main() {
+          float t = uTime * 0.06;
+
+          float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
+          float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
+          float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
+
+          float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
+
+          vec3 deep = vec3(0.0, 0.05, 0.18);
+          vec3 mid = vec3(0.0, 0.28, 0.56);
+          vec3 surf = vec3(0.76, 0.96, 1.0);
+
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 3.2));
+
+          float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
+          col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
+
+          float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
+          float rays = smoothstep(0.72, 1.0, rayPattern);
+          col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
+
+          float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
+          col += shimmer * 0.09;
+
+          float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
+          caustic = smoothstep(0.65, 1.0, caustic);
+          col += caustic * 0.07;
+
+          float spark = smoothstep(0.92, 1.0, nFine);
+          col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
+
+          vec2 center = vUv - 0.5;
+          float dist = length(center);
+          float vignette = smoothstep(0.8, 0.25, dist);
+          col *= mix(0.72, 1.22, vignette);
+
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      oceanMaterial = new THREE.ShaderMaterial({
+        uniforms: {
           uTime: { value: 0 },
-          uWaveAmp: { value: 1.0 }
-        };
- 
-        const vertexShader = `
-          varying vec2 vUv;
-          uniform float uTime;
-          uniform float uWaveAmp;
- 
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
- 
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
- 
-          void main() {
-            vUv = uv;
-            vec3 pos = position;
-            float t = uTime * 0.6;
- 
-            float waveBig = sin(pos.x * 0.16 + t * 0.7) * 0.6;
-            float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.9) * 0.5;
-            float waveLong = sin(pos.z * 0.1 + t * 0.35) * 0.75;
- 
-            float n = noise(vec2(pos.x * 0.24 + t * 0.5, pos.z * 0.22 - t * 0.35));
-            float n2 = noise(vec2(pos.x * 0.55 - t * 0.8, pos.z * 0.6 + t * 0.65));
-            float choppy = (n - 0.5) * 1.2 + (n2 - 0.5) * 0.9;
- 
-            float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.55;
-            height *= uWaveAmp;
- 
-            pos.y += height;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `;
- 
-        const fragmentShader = `
-          varying vec2 vUv;
-          uniform float uTime;
- 
-          float hash(vec2 p) {
-            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-          }
- 
-          float noise(vec2 p) {
-            vec2 i = floor(p);
-            vec2 f = fract(p);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            return mix(a, b, u.x) +
-                   (c - a) * u.y * (1.0 - u.x) +
-                   (d - b) * u.x * u.y;
-          }
- 
-          void main() {
-            float t = uTime * 0.05;
-            float n1 = noise(vUv * 8.0 + vec2(t * 2.0, t * -1.5));
-            float n2 = noise(vUv * 14.0 + vec2(-t * 2.7, t * 2.2));
-            float nFine = noise(vUv * 32.0 + vec2(t * 4.0, -t * 3.5));
- 
-            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
- 
-            vec3 deep = vec3(0.0, 0.06, 0.18);
-            vec3 mid = vec3(0.0, 0.3, 0.56);
-            vec3 surf = vec3(0.74, 0.96, 1.0);
- 
-            vec3 col = mix(deep, mid, depth);
-            col = mix(col, surf, pow(1.0 - depth, 3.2));
- 
-            float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
-            col += vec3(0.02, 0.04, 0.09) * horizonGlow * 1.6;
- 
-            float rayPattern = sin((vUv.x * 3.4 + vUv.y * 1.35) - t * 4.0 + n2 * 3.0);
-            float rays = smoothstep(0.72, 1.0, rayPattern);
-            col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
- 
-            float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
-            col += shimmer * 0.09;
- 
-            float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
-            caustic = smoothstep(0.65, 1.0, caustic);
-            col += caustic * 0.07;
- 
-            float spark = smoothstep(0.92, 1.0, nFine);
-            col += vec3(0.12, 0.18, 0.22) * spark * 0.6;
- 
-            vec2 center = vUv - 0.5;
-            float dist = length(center);
-            float vignette = smoothstep(0.8, 0.25, dist);
-            col *= mix(0.72, 1.22, vignette);
- 
-            gl_FragColor = vec4(col, 1.0);
-          }
-        `;
- 
-        const material = new THREE.ShaderMaterial({
-          uniforms: oceanUniforms,
-          vertexShader,
-          fragmentShader,
-          side: THREE.DoubleSide
-        });
- 
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
- 
-        const fogColor = new THREE.Color(0x000818);
-        scene.fog = new THREE.Fog(fogColor, 12, 45);
-        renderer.setClearColor(fogColor, 1);
- 
-        const clock = new THREE.Clock();
- 
-        function animate() {
-          requestAnimationFrame(animate);
-          const elapsed = clock.getElapsedTime();
-          oceanUniforms.uTime.value = elapsed;
- 
-          const sway = Math.sin(elapsed * 0.18) * 0.4;
-          camera.position.x = sway;
-          camera.lookAt(0, 0, 0);
- 
-          renderer.render(scene, camera);
-        }
- 
-        window.addEventListener("resize", function () {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        });
- 
-        animate();
-      } catch (err) {
-        console.warn("Ocean init failed, staying on gradient:", err);
-      }
-    })();
- 
-    // =====================================
-    // REACTIVE WAVES
-    // =====================================
-    let waveBoostTimeout;
-    function boostWavesOnce(strength, duration) {
-      if (!oceanUniforms || !oceanUniforms.uWaveAmp) return;
-      oceanUniforms.uWaveAmp.value = strength;
-      clearTimeout(waveBoostTimeout);
-      waveBoostTimeout = setTimeout(() => {
-        oceanUniforms.uWaveAmp.value = 1.0;
-      }, duration);
+          uWaveAmp: { value: 1.05 }
+        },
+        vertexShader,
+        fragmentShader,
+        side: THREE.DoubleSide
+      });
+
+      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
+      scene.add(oceanMesh);
+
+      const fogColor = new THREE.Color(0x000817);
+      scene.fog = new THREE.Fog(fogColor, 14, 50);
+      renderer.setClearColor(fogColor, 1);
+
+      window.addEventListener("resize", onWindowResize, false);
+      animateOcean();
     }
- 
-    window.addEventListener("mousemove", () => {
-      boostWavesOnce(1.6, 900);
-    });
- 
-    window.addEventListener("touchstart", () => {
-      boostWavesOnce(1.8, 1100);
-    });
- 
-    // =====================================
-    // DOM WIRING
-    // =====================================
-    document.addEventListener("DOMContentLoaded", function () {
-      const summonBtn = document.getElementById("summon-btn");
-      const orb = document.getElementById("summon-orb");
-      const toolkitBtn = document.getElementById("show-toolkit");
-      const intakeForm = document.getElementById("intake-form");
- 
+
+    function onWindowResize() {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animateOcean() {
+      requestAnimationFrame(animateOcean);
+      if (!oceanClock || !oceanMaterial || !camera || !renderer || !scene) return;
+
+      const elapsed = oceanClock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value = elapsed;
+
+      const current = oceanMaterial.uniforms.uWaveAmp.value;
+      oceanMaterial.uniforms.uWaveAmp.value =
+        current + (targetWaveAmp - current) * 0.03;
+
+      camera.position.x = Math.sin(elapsed * 0.18) * 0.4;
+      camera.position.z = 11.5 + Math.sin(elapsed * 0.06) * 0.3;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    function boostWaves() {
+      targetWaveAmp = 1.7;
+      setTimeout(() => {
+        targetWaveAmp = 1.05;
+      }, 650);
+    }
+
+    /* ---------- PORTAL FX + SOUND ---------- */
+    function firePortalFX() {
+      const crack = document.getElementById("portalCrack");
+      const flash = document.getElementById("horizonFlash");
+      const sound = document.getElementById("oceanSound");
+
+      if (crack) {
+        crack.classList.remove("active");
+        void crack.offsetWidth;
+        crack.classList.add("active");
+      }
+      if (flash) {
+        flash.classList.remove("active");
+        void flash.offsetWidth;
+        flash.classList.add("active");
+      }
+
+      boostWaves();
+
+      if (sound) {
+        sound.currentTime = 0;
+        sound.volume = 0.85;
+        sound.play().catch(() => {});
+      }
+    }
+
+    /* ---------- PARALLAX ---------- */
+    function initParallax() {
+      const layers = document.querySelectorAll(".parallax-layer");
+      if (!layers.length) return;
+
+      function applyParallax(x, y) {
+        layers.forEach((layer, i) => {
+          const depth = (i + 1) * 4;
+          layer.style.transform = `translate3d(${x * depth}px, ${y * depth * 0.7}px, 0)`;
+        });
+      }
+
+      window.addEventListener("pointermove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * -1;
+        const y = (e.clientY / window.innerHeight - 0.5) * -1;
+        applyParallax(x, y);
+      });
+
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", (e) => {
+          const x = (e.gamma || 0) / 45;
+          const y = ((e.beta || 0) - 45) / 70;
+          applyParallax(x, y);
+        });
+      }
+    }
+
+    /* ---------- LOADER ---------- */
+    function hideLoader() {
+      const loader = document.getElementById("portalLoader");
+      if (!loader) return;
+      setTimeout(() => {
+        loader.classList.add("hidden");
+      }, 1200);
+    }
+
+    /* ---------- INIT ---------- */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTrends();
+      renderSportsEdge();
+      updateVersionStamp();
+      initOcean();
+      initParallax();
+      hideLoader();
+
+      const summonBtn = document.getElementById("summonPJBubble");
+      const portalOrb = document.getElementById("portalOrb");
+
       if (summonBtn) {
-        summonBtn.addEventListener("click", function () {
-          boostWavesOnce(2.0, 1200);
-          triggerPortal();
+        summonBtn.addEventListener("click", () => {
+          firePortalFX();
         });
       }
- 
-      if (orb) {
-        orb.addEventListener("click", function () {
-          boostWavesOnce(2.2, 1300);
-          triggerPortal();
+      if (portalOrb) {
+        portalOrb.addEventListener("click", () => {
+          firePortalFX();
+          // Also open email via JS for orb taps:
+          window.location.href =
+            "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20(Coastal%20Portal%20Orb)&body=Hey%20PJ%2C%0A%0ATapping%20the%20orb%20from%20the%20storm%20portal.%0A%0A-%20";
         });
       }
- 
-      if (toolkitBtn) {
-        toolkitBtn.addEventListener("click", function () {
-          const tk = document.getElementById("toolkit");
-          if (tk) tk.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
- 
-      // Smooth scroll for nav links
-      const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
-      navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-          const targetId = this.getAttribute("href");
-          if (!targetId || !targetId.startsWith("#")) return;
-          e.preventDefault();
-          const target = document.querySelector(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-      });
- 
-      // Intake → email draft to PJ
-      if (intakeForm) {
-        intakeForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const name = (document.getElementById("intake-name") || {}).value || "";
-          const email = (document.getElementById("intake-email") || {}).value || "";
-          const biz = (document.getElementById("intake-biz") || {}).value || "";
-          const type = (document.getElementById("intake-type") || {}).value || "Project";
-          const budget = (document.getElementById("intake-budget") || {}).value || "";
-          const notes = (document.getElementById("intake-notes") || {}).value || "";
- 
-          const subject = encodeURIComponent("New Project Intake · " + type);
-          const bodyLines = [
-            "Hey PJ,",
-            "",
-            "You’ve got a new intake from SideGuySolutions.com:",
-            "",
-            "Name: " + name,
-            "Email: " + email,
-            "Business / Project: " + biz,
-            "Lane: " + type,
-            "Budget: " + budget,
-            "",
-            "Notes:",
-            notes,
-            "",
-            "Sent from the v11 Legendary Hybrid portal 🌊"
-          ];
-          const body = encodeURIComponent(bodyLines.join("\n"));
- 
-          window.location.href = mailto:peter.z@kromeon.com?subject= + subject + "&body=" + body;
-        });
-      }
- 
-      // Close modals when clicking backdrop
-      ["modal-solana", "modal-dfs", "modal-tickets"].forEach((id) => {
-        const m = document.getElementById(id);
-        if (!m) return;
-        m.addEventListener("click", function (e) {
-          if (e.target === m) {
-            m.style.display = "none";
-          }
-        });
-      });
     });
   </script>
- 
-  <!-- ============================= -->
-  <!--            FOOTER             -->
-  <!-- ============================= -->
-  <footer>
-    SideGuy Solutions · San Diego &amp; North County · v11.0 Legendary Hybrid · Tap the portal if you know what’s good for you.
-  </footer>
 </body>
 </html>
