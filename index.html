@@ -1,8 +1,8 @@
 <!--
   SideGuy Solutions
-  Version: 7.0-legendary-ocean
+  Version: 8.0-legendary-max
   Hero: "Where code meets the coastline."
-  Mode: Full-Screen Ocean + Floating Orb + Legendary Modal Toolkit
+  Mode: Full-Screen Ocean + Floating Orb + Legendary Toolkit
   Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 <!DOCTYPE html>
@@ -14,12 +14,16 @@
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
   <meta
     name="description"
-    content="SideGuy Solutions — coastal concierge for tech builds, tickets, DFS edges, Solana payments, crypto escrow, and smarter systems in North County. Tap the portal to summon PJ."
+    content="SideGuy Solutions — coastal concierge for apps, tickets, DFS tools, Solana payments, crypto escrow, and smarter systems in North County San Diego. Tap the portal to summon PJ."
+  />
+  <meta
+    name="keywords"
+    content="SideGuy Solutions, Solana payments, crypto escrow, DFS tools, ticketing, web3 coastal concierge, North County San Diego developer"
   />
 
   <!-- Open Graph -->
   <meta property="og:title" content="SideGuy Solutions | Where Code Meets the Coastline" />
-  <meta property="og:description" content="Coastal toolkit for apps, tickets, DFS tools, Solana rails, crypto escrow, and real-world automations. Tap to summon PJ." />
+  <meta property="og:description" content="Coastal toolkit for apps, tickets, DFS, Solana rails, crypto escrow, and real-world automations. Tap to summon PJ." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
@@ -110,14 +114,14 @@
         linear-gradient(to bottom, rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.97));
     }
 
-    /* Surface waves above content (parallax layer) */
+    /* Surface waves overlay (parallax feel) */
     .surface-waves {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: -1;
       overflow: hidden;
-      opacity: 0.65;
+      opacity: 0.7;
     }
 
     .surface-waves::before,
@@ -135,16 +139,16 @@
           rgba(59, 130, 246, 0.7) 50%,
           rgba(191, 219, 254, 1) 100%
         );
-      top: 15%;
+      top: 14%;
       mix-blend-mode: screen;
-      filter: blur(1.4px);
-      animation: surfaceWave 18s ease-in-out infinite;
+      filter: blur(1.3px);
+      animation: surfaceWave 20s ease-in-out infinite;
     }
 
     .surface-waves::after {
-      top: 12%;
+      top: 11%;
       opacity: 0.5;
-      animation-duration: 26s;
+      animation-duration: 28s;
       animation-direction: reverse;
     }
 
@@ -168,7 +172,7 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 40;
       backdrop-filter: blur(16px);
       background:
         linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.82), transparent);
@@ -243,9 +247,16 @@
     .nav-link {
       color: var(--text-soft);
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link span.icon {
+      font-size: 0.9rem;
     }
 
     .nav-link:hover {
@@ -458,7 +469,7 @@
       letter-spacing: 0.09em;
     }
 
-    /* ORB SIDE */
+    /* ORB SIDE (floating above everything) */
     .hero-orb-shell {
       position: relative;
       display: flex;
@@ -466,7 +477,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 10px;
-      z-index: 5;
+      z-index: 80;
     }
 
     .orb-glow {
@@ -514,7 +525,7 @@
         box-shadow 0.18s ease-out,
         filter 0.18s ease-out;
       animation: orbPulse 2.6s ease-in-out infinite;
-      z-index: 9999; /* Above everything */
+      z-index: 9999;
     }
 
     #summon-orb::after {
@@ -634,6 +645,13 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .toolkit-nav button span.icon {
+      font-size: 0.9rem;
     }
 
     .toolkit-nav button:hover {
@@ -822,7 +840,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 50;
+      z-index: 90;
       background: rgba(15, 23, 42, 0.78);
       backdrop-filter: blur(10px);
       align-items: center;
@@ -923,7 +941,7 @@
       position: fixed;
       left: 18px;
       bottom: 78px;
-      z-index: 60;
+      z-index: 95;
     }
 
     .chat-bubble-btn {
@@ -961,7 +979,7 @@
       position: fixed;
       inset-inline: 0;
       bottom: 0;
-      z-index: 60;
+      z-index: 70;
       background: rgba(15, 23, 42, 0.98);
       border-top: 1px solid rgba(30, 64, 175, 0.7);
       backdrop-filter: blur(14px);
@@ -1052,15 +1070,19 @@
   </style>
 </head>
 <body>
+  <!-- OCEAN CANVAS + OVERLAYS -->
   <canvas id="ocean-canvas"></canvas>
   <div class="ocean-overlay"></div>
   <div class="surface-waves"></div>
 
   <div class="page-shell">
 
-    <!-- HEADER -->
+    <!-- ================================
+         HEADER / TOP NAV
+    ================================= -->
     <header>
       <div class="nav-inner">
+
         <div class="brand-wrap">
           <div class="brand-mark"></div>
           <div>
@@ -1070,9 +1092,10 @@
         </div>
 
         <div class="nav-right">
+
           <div class="nav-links">
-            <a class="nav-link" href="#toolkit">Toolkit</a>
-            <a class="nav-link" href="#why-solana">Why Solana</a>
+            <a class="nav-link" href="#toolkit"><span class="icon">⚡</span> Toolkit</a>
+            <a class="nav-link" href="#why-solana"><span class="icon">💠</span> Why Solana</a>
           </div>
 
           <div class="nav-pill">
@@ -1081,19 +1104,28 @@
           </div>
 
           <div class="version">
-            version <span id="version-label">7.0</span>
+            Version <span id="version-label">8.0</span>
           </div>
+
         </div>
       </div>
     </header>
 
+    <!-- ================================
+         MAIN
+    ================================= -->
     <main>
 
-      <!-- HERO -->
+      <!-- ================================
+           HERO SECTION
+      ================================= -->
       <section class="hero-shell">
+
+        <!-- HERO TEXT -->
         <div class="hero-left">
+
           <div class="hero-kicker">
-            <span class="icon">🌊</span> COASTAL TECH / REAL WORLD FIXER
+            <span class="icon">🌊</span> COASTAL TECH / CONCIERGE
           </div>
 
           <h1 class="hero-title">
@@ -1101,10 +1133,9 @@
           </h1>
 
           <p class="hero-sub">
-            SideGuy Solutions helps founders, operators, artists and everyday locals
-            get things done — from <strong>apps</strong>, <strong>ticket systems</strong>,
-            <strong>DFS tools</strong>, <strong>crypto escrow</strong>, and
-            <strong>Solana payments</strong> to good old-fashioned coastal concierge.
+            Apps, tickets, systems, crypto escrow, DFS tools,
+            Solana payments, and real coastal concierge.  
+            Tap the portal and PJ takes care of the rest.
           </p>
 
           <div class="hero-tags">
@@ -1112,15 +1143,14 @@
             <span class="hero-tag-pill">Tickets</span>
             <span class="hero-tag-pill">DFS</span>
             <span class="hero-tag-pill">Solana</span>
-            <span class="hero-tag-pill">Crypto Escrow</span>
+            <span class="hero-tag-pill">Escrow</span>
             <span class="hero-tag-pill">Concierge</span>
           </div>
 
           <div class="hero-ctas">
             <button id="summon-btn" class="btn-primary">
-              Tap to Summon PJ
+              TAP TO SUMMON PJ
             </button>
-
             <button id="open-intake-modal" class="btn-ghost">
               Get Help
             </button>
@@ -1132,9 +1162,12 @@
             <span class="badge">Private</span>
             <span class="badge">Solana-Powered</span>
           </div>
+
         </div>
 
-        <!-- ORB -->
+        <!-- ================================
+             THE FLOATING ORB (PORTAL)
+        ================================= -->
         <div class="hero-orb-shell">
           <div class="orb-glow"></div>
           <div class="orb-ring"></div>
@@ -1145,119 +1178,115 @@
             </div>
           </div>
 
-          <div class="orb-caption">coastal portal</div>
+          <div class="orb-caption">Coastal Portal</div>
         </div>
+
       </section>
 
-      <!-- TOOLKIT -->
+      <!-- ================================
+           TOOLKIT SECTION
+      ================================= -->
       <section id="toolkit" class="section-shell">
+
         <div class="section-header-row">
           <div>
             <div class="section-title">Toolkit</div>
             <div class="section-subtitle">
-              Your coastal digital stack. Fast, secure, and ready.
+              Your coastal digital stack — fast, secure, and ready.
             </div>
           </div>
+
+          <!-- TOP TOOLKIT BUTTON NAV -->
           <div class="toolkit-nav">
-            <button onclick="openTool('solanaSavings')">Solana Savings</button>
-            <button onclick="openTool('stablecoinCompare')">Stablecoin Fees</button>
-            <button onclick="openTool('yield')">Solana Pay Yield</button>
-            <button onclick="openTool('escrow')">Crypto Escrow</button>
-            <button onclick="openTool('tickets')">Ticket Predictor</button>
-            <button onclick="openTool('dfs')">DFS Multiplier</button>
+            <button onclick="openTool('solanaSavings')"><span class="icon">⚡</span>Solana Savings</button>
+            <button onclick="openTool('stablecoinCompare')"><span class="icon">💵</span>Stablecoin Fees</button>
+            <button onclick="openTool('yield')"><span class="icon">📈</span>Yield</button>
+            <button onclick="openTool('escrow')"><span class="icon">🔒</span>Escrow</button>
+            <button onclick="openTool('tickets')"><span class="icon">🎟️</span>Tickets</button>
+            <button onclick="openTool('dfs')"><span class="icon">🔥</span>DFS</button>
           </div>
         </div>
 
+        <!-- TOOLKIT GRID -->
         <div class="toolkit-grid">
 
-          <!-- Solana Savings -->
+          <!-- CARD: Solana Savings -->
           <div class="card">
             <div class="card-kicker">Solana Rails</div>
             <div class="card-title">Processing Savings Calculator</div>
-            <div class="card-body">See how much you save ditching Stripe/PayPal.</div>
+            <div class="card-body">See how much you save ditching Stripe & PayPal.</div>
             <div class="card-meta-row">
               <span class="card-chip">Instant</span>
-              <button class="card-link-btn" onclick="openTool('solanaSavings')">
-                Open →
-              </button>
+              <button class="card-link-btn" onclick="openTool('solanaSavings')">Open →</button>
             </div>
           </div>
 
-          <!-- Stablecoin Compare -->
+          <!-- CARD: Stablecoin Compare -->
           <div class="card">
             <div class="card-kicker">Stablecoins</div>
             <div class="card-title">Payment Fee Comparison</div>
-            <div class="card-body">Compare old rails vs crypto rails.</div>
+            <div class="card-body">Compare legacy rails to crypto rails.</div>
             <div class="card-meta-row">
               <span class="card-chip">Savings</span>
-              <button class="card-link-btn" onclick="openTool('stablecoinCompare')">
-                Open →
-              </button>
+              <button class="card-link-btn" onclick="openTool('stablecoinCompare')">Open →</button>
             </div>
           </div>
 
-          <!-- Solana Pay Yield -->
+          <!-- CARD: Yield -->
           <div class="card">
             <div class="card-kicker">Solana Pay</div>
             <div class="card-title">Revenue Yield Estimator</div>
-            <div class="card-body">See the yield you earn from instant settlement.</div>
+            <div class="card-body">See yield earned from instant settlement.</div>
             <div class="card-meta-row">
               <span class="card-chip">Float</span>
-              <button class="card-link-btn" onclick="openTool('yield')">
-                Open →
-              </button>
+              <button class="card-link-btn" onclick="openTool('yield')">Open →</button>
             </div>
           </div>
 
-          <!-- Escrow -->
+          <!-- CARD: Escrow -->
           <div class="card">
             <div class="card-kicker">Crypto Escrow</div>
             <div class="card-title">ROI Calculator</div>
             <div class="card-body">Late payments destroy cashflow — fix it.</div>
             <div class="card-meta-row">
               <span class="card-chip">Trust</span>
-              <button class="card-link-btn" onclick="openTool('escrow')">
-                Open →
-              </button>
+              <button class="card-link-btn" onclick="openTool('escrow')">Open →</button>
             </div>
           </div>
 
-          <!-- Ticket Sellout -->
+          <!-- CARD: Tickets -->
           <div class="card">
             <div class="card-kicker">Tickets</div>
             <div class="card-title">Sellout Predictor</div>
-            <div class="card-body">Predict venue sellout based on hype + math.</div>
+            <div class="card-body">Predict venue sellout speed from hype & signals.</div>
             <div class="card-meta-row">
               <span class="card-chip">Crowds</span>
-              <button class="card-link-btn" onclick="openTool('tickets')">
-                Open →
-              </button>
+              <button class="card-link-btn" onclick="openTool('tickets')">Open →</button>
             </div>
           </div>
 
-          <!-- DFS -->
+          <!-- CARD: DFS -->
           <div class="card">
             <div class="card-kicker">DFS Tools</div>
             <div class="card-title">Promo Multiplier</div>
             <div class="card-body">Turn bonuses into real expected value.</div>
             <div class="card-meta-row">
               <span class="card-chip">EV</span>
-              <button class="card-link-btn" onclick="openTool('dfs')">
-                Open →
-              </button>
+              <button class="card-link-btn" onclick="openTool('dfs')">Open →</button>
             </div>
           </div>
 
         </div>
       </section>
 
-      <!-- WHY SOLANA -->
+      <!-- ================================
+           WHY SOLANA SECTION
+      ================================= -->
       <section id="why-solana" class="why-solana">
+
         <div class="why-header">
           <div class="why-title">Why Solana</div>
-          <div class="why-sub">
-            The fastest, cheapest, most reliable rails on earth.
-          </div>
+          <div class="why-sub">Faster, cheaper, and stronger than legacy rails.</div>
         </div>
 
         <div class="why-grid">
@@ -1265,35 +1294,38 @@
           <div class="why-card">
             <div class="why-label">Speed</div>
             <div class="why-headline">Instant Settlement</div>
-            Solana finalizes in ~400ms, traditional processors 2–3 days.
+            Solana settles in ~400ms, processors take 2–3 days.
           </div>
 
           <div class="why-card">
             <div class="why-label">Cost</div>
             <div class="why-headline">Under a Penny</div>
-            Most transactions cost $0.00025 — compare that to 3% + 30¢.
+            Most transactions cost $0.00025 — compare with 3% + 30¢.
           </div>
 
           <div class="why-card">
             <div class="why-label">Scale</div>
             <div class="why-headline">Millions TPS</div>
-            Built for global volumes without slowing down.
+            Built to handle global volume without slowing down.
           </div>
 
         </div>
       </section>
-
     </main>
 
-    <!-- FOOTER -->
+    <!-- ================================
+         FOOTER
+    ================================= -->
     <footer>
-      SideGuy Solutions · v<span id="version-label-footer">7.0</span>  
-      <br>Built from Solana Beach with ocean energy 🌊
+      SideGuy Solutions · v<span id="version-label-footer">8.0</span><br />
+      Built from Solana Beach with ocean energy 🌊
     </footer>
 
-  </div> <!-- end page-shell -->
+  </div> <!-- END page-shell -->
 
-  <!-- CHAT BUBBLE -->
+  <!-- ================================
+       FLOATING CHAT BUBBLE
+  ================================= -->
   <div class="chat-bubble-floating">
     <button class="chat-bubble-btn" onclick="openIntakeModal()">
       <span class="chat-bubble-emoji">🤙</span>
@@ -1301,32 +1333,32 @@
     </button>
   </div>
 
-  <!-- MOBILE NAV -->
+  <!-- ================================
+       MOBILE NAV
+  ================================= -->
   <div class="mobile-nav">
     <div class="mobile-nav-inner">
       <div class="mobile-nav-item" onclick="scrollToTop()">
         <span class="icon">🏝️</span> Home
       </div>
-
       <div class="mobile-nav-item" onclick="openTool('solanaSavings')">
         <span class="icon">⚡</span> Tools
       </div>
-
       <div class="mobile-nav-item" onclick="triggerPortal()">
         <span class="icon">🌀</span> PJ
       </div>
-
       <div class="mobile-nav-item" onclick="openIntakeModal()">
         <span class="icon">💬</span> Chat
       </div>
-
       <div class="mobile-nav-item" onclick="scrollToWhy()">
         <span class="icon">💠</span> Solana
       </div>
     </div>
   </div>
 
-  <!-- GLOBAL TOOL MODAL -->
+  <!-- ================================
+       GLOBAL TOOL MODAL
+  ================================= -->
   <div id="tool-modal-backdrop">
     <div id="tool-modal">
       <button class="modal-close" onclick="closeToolModal()">✕</button>
@@ -1335,7 +1367,9 @@
     </div>
   </div>
 
-  <!-- INTAKE MODAL -->
+  <!-- ================================
+       INTAKE MODAL
+  ================================= -->
   <div id="intake-modal-backdrop">
     <div id="intake-modal">
       <button class="modal-close" onclick="closeIntakeModal()">✕</button>
@@ -1357,368 +1391,367 @@
       <button class="modal-action" onclick="submitIntakeModal()">Send</button>
     </div>
   </div>
-  <!-- ============================
-       PART 3 — TOOLKIT ENGINE JS
-  ============================= -->
-  <script>
+<!-- ============================
+     PART 3 — LEGENDARY JS ENGINE
+============================= -->
+<script>
 
-    /* ============================
-       GLOBAL HELPERS
-    ============================= */
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  /* ============================
+       SMOOTH SCROLL HELPERS
+  ============================= */
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function scrollToWhy() {
+    document.getElementById("why-solana").scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
+  /* ============================
+       GLOBAL MODAL SYSTEM
+  ============================= */
+  function openToolModal(contentHTML) {
+    document.getElementById("tool-modal-content").innerHTML = contentHTML;
+    document.getElementById("tool-modal-result").innerHTML = "";
+    document.getElementById("tool-modal-backdrop").style.display = "flex";
+  }
+
+  function closeToolModal() {
+    document.getElementById("tool-modal-backdrop").style.display = "none";
+  }
+
+  /* ============================
+       TOOL UI TEMPLATES
+  ============================= */
+  const TOOL_UI = {
+
+    /* 1 — SOLANA SAVINGS */
+    solanaSavings: `
+      <h3 class="modal-title">Solana Processing Savings</h3>
+      <p class="modal-desc">Compare Stripe/PayPal to Solana rails.</p>
+
+      <div class="modal-input-group">
+        <label>Monthly Revenue ($)</label>
+        <input id="ss-rev" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Avg Ticket Size ($)</label>
+        <input id="ss-ticket" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Processor</label>
+        <select id="ss-proc">
+          <option value="stripe">Stripe (2.9% + 0.30)</option>
+          <option value="paypal">PayPal (3.5% + 0.30)</option>
+        </select>
+      </div>
+
+      <button class="modal-action" onclick="runSolanaSavings()">Calculate</button>
+    `,
+
+    /* 2 — STABLECOIN COMPARE */
+    stablecoinCompare: `
+      <h3 class="modal-title">Stablecoin Fee Comparison</h3>
+      <p class="modal-desc">Legacy rails vs crypto rails.</p>
+
+      <div class="modal-input-group">
+        <label>Invoice Amount ($)</label>
+        <input id="sc-amt" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Processor</label>
+        <select id="sc-proc">
+          <option value="stripe">Stripe (2.9% + 0.30)</option>
+          <option value="paypal">PayPal (3.5% + 0.30)</option>
+        </select>
+      </div>
+
+      <button class="modal-action" onclick="runStablecoinCompare()">Compare</button>
+    `,
+
+    /* 3 — SOLANA YIELD */
+    yield: `
+      <h3 class="modal-title">Solana Pay Yield Estimator</h3>
+      <p class="modal-desc">Yield from instant settlement.</p>
+
+      <div class="modal-input-group">
+        <label>Annual Processing Volume ($)</label>
+        <input id="y-vol" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Avg Settlement Delay (days)</label>
+        <input id="y-days" type="number" value="2">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Yield %</label>
+        <input id="y-yield" type="number" value="8">
+      </div>
+
+      <button class="modal-action" onclick="runYieldCalc()">Calculate</button>
+    `,
+
+    /* 4 — CRYPTO ESCROW */
+    escrow: `
+      <h3 class="modal-title">Crypto Escrow ROI</h3>
+      <p class="modal-desc">Eliminate late payments + protect work.</p>
+
+      <div class="modal-input-group">
+        <label>Avg Project Value ($)</label>
+        <input id="e-value" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Late Payment Probability (%)</label>
+        <input id="e-late" type="number" value="40">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Cost of Delay ($/day)</label>
+        <input id="e-delay" type="number" value="50">
+      </div>
+
+      <button class="modal-action" onclick="runEscrowCalc()">Calculate</button>
+    `,
+
+    /* 5 — TICKET SELLOUT PREDICTOR */
+    tickets: `
+      <h3 class="modal-title">Ticket Sellout Predictor</h3>
+      <p class="modal-desc">Predict demand + sellout window.</p>
+
+      <div class="modal-input-group">
+        <label>Venue Capacity</label>
+        <input id="t-cap" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Artist Followers</label>
+        <input id="t-follow" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Ad Budget ($)</label>
+        <input id="t-budget" type="number">
+      </div>
+
+      <button class="modal-action" onclick="runTicketPredict()">Predict</button>
+    `,
+
+    /* 6 — DFS MULTIPLIER */
+    dfs: `
+      <h3 class="modal-title">DFS Promo Multiplier</h3>
+      <p class="modal-desc">Turn bonuses into expected value.</p>
+
+      <div class="modal-input-group">
+        <label>Bonus Amount ($)</label>
+        <input id="d-bonus" type="number">
+      </div>
+
+      <div class="modal-input-group">
+        <label>Multiplier Odds</label>
+        <input id="d-odds" type="number" placeholder="+100">
+      </div>
+
+      <button class="modal-action" onclick="runDFS()">Calculate</button>
+    `,
+  };
+
+  /* ============================
+       OPENING A TOOL
+  ============================= */
+  function openTool(name) {
+    openToolModal(TOOL_UI[name]);
+  }
+
+  /* ============================
+       TOOL CALCULATORS
+  ============================= */
+
+  /* 1 — SOLANA SAVINGS */
+  function runSolanaSavings() {
+    let rev = parseFloat(document.getElementById("ss-rev").value);
+    let ticket = parseFloat(document.getElementById("ss-ticket").value);
+    let proc = document.getElementById("ss-proc").value;
+
+    if (!rev || !ticket) {
+      document.getElementById("tool-modal-result").innerHTML =
+        "<span style='color:#fb7185;'>Enter valid numbers.</span>";
+      return;
     }
 
-    function scrollToWhy() {
-      document.getElementById("why-solana").scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    let tx = rev / ticket;
+    let fee = proc === "stripe" ? 0.029 : 0.035;
+    let fixed = 0.30;
 
-    /* ============================
-       MODAL SYSTEM (GLOBAL)
-    ============================= */
-    function openToolModal(contentHTML) {
-      document.getElementById("tool-modal-content").innerHTML = contentHTML;
-      document.getElementById("tool-modal-result").innerHTML = "";
-      document.getElementById("tool-modal-backdrop").style.display = "flex";
-    }
+    let oldFees = rev * fee + tx * fixed;
+    let solFees = tx * 0.00025;
+    let save = oldFees - solFees;
 
-    function closeToolModal() {
-      document.getElementById("tool-modal-backdrop").style.display = "none";
-    }
+    document.getElementById("tool-modal-result").innerHTML = `
+      Current Fees: $${oldFees.toFixed(2)}<br>
+      On Solana: $${solFees.toFixed(4)}<br><br>
+      <strong>You Save: $${save.toFixed(2)} / month</strong>
+    `;
+  }
 
-    /* ============================
-       BUILD TOOL UIs
-    ============================= */
-    const TOOL_UI = {
+  /* 2 — STABLECOIN COMPARE */
+  function runStablecoinCompare() {
+    let amt = parseFloat(document.getElementById("sc-amt").value);
+    let proc = document.getElementById("sc-proc").value;
 
-      /* -----------------------------------------
-         1) SOLANA SAVINGS
-      ----------------------------------------- */
-      solanaSavings: `
-        <h3 class="modal-title">Solana Processing Savings</h3>
-        <p class="modal-desc">Compare Stripe/PayPal fees to Solana rails.</p>
+    if (!amt) return;
 
-        <div class="modal-input-group">
-          <label>Monthly Revenue ($)</label>
-          <input id="ss-rev" type="number">
-        </div>
+    let fee = proc === "stripe" ? 0.029 : 0.035;
+    let oldCost = amt * fee + 0.30;
+    let newCost = 0.00025;
 
-        <div class="modal-input-group">
-          <label>Avg Ticket Size ($)</label>
-          <input id="ss-ticket" type="number">
-        </div>
+    document.getElementById("tool-modal-result").innerHTML = `
+      Old Rails: $${oldCost.toFixed(2)}<br>
+      Stablecoin: $${newCost.toFixed(4)}<br><br>
+      <strong>Savings: $${(oldCost - newCost).toFixed(2)}</strong>
+    `;
+  }
 
-        <div class="modal-input-group">
-          <label>Processor</label>
-          <select id="ss-proc">
-            <option value="stripe">Stripe (2.9% + 0.30)</option>
-            <option value="paypal">PayPal (3.5% + 0.30)</option>
-          </select>
-        </div>
+  /* 3 — SOLANA YIELD */
+  function runYieldCalc() {
+    let vol = parseFloat(document.getElementById("y-vol").value);
+    let days = parseFloat(document.getElementById("y-days").value);
+    let rate = parseFloat(document.getElementById("y-yield").value);
 
-        <button class="modal-action" onclick="runSolanaSavings()">Calculate</button>
-      `,
+    if (!vol || !days || !rate) return;
 
-      /* -----------------------------------------
-         2) STABLECOIN PAYMENT FEES
-      ----------------------------------------- */
-      stablecoinCompare: `
-        <h3 class="modal-title">Stablecoin Fee Comparison</h3>
-        <p class="modal-desc">See the fee difference vs legacy rails.</p>
+    let float = (vol * days) / 365;
+    let earned = float * (rate / 100);
 
-        <div class="modal-input-group">
-          <label>Invoice Amount ($)</label>
-          <input id="sc-amt" type="number">
-        </div>
+    document.getElementById("tool-modal-result").innerHTML = `
+      Float Value: $${float.toFixed(2)}<br>
+      Annual Yield: $${earned.toFixed(2)}<br>
+      <strong>Processing Offset: ${(earned / vol * 100).toFixed(3)}%</strong>
+    `;
+  }
 
-        <div class="modal-input-group">
-          <label>Payment Processor</label>
-          <select id="sc-proc">
-            <option value="stripe">Stripe (2.9% + 0.30)</option>
-            <option value="paypal">PayPal (3.5% + 0.30)</option>
-          </select>
-        </div>
+  /* 4 — ESCROW ROI */
+  function runEscrowCalc() {
+    let value = parseFloat(document.getElementById("e-value").value);
+    let prob = parseFloat(document.getElementById("e-late").value) / 100;
+    let delay = parseFloat(document.getElementById("e-delay").value);
 
-        <button class="modal-action" onclick="runStablecoinCompare()">Compare</button>
-      `,
+    if (!value || !delay) return;
 
-      /* -----------------------------------------
-         3) SOLANA YIELD ESTIMATOR
-      ----------------------------------------- */
-      yield: `
-        <h3 class="modal-title">Solana Pay Yield Estimator</h3>
-        <p class="modal-desc">Estimate yield earned from instant settlement.</p>
+    let loss = prob * (delay * 50);
 
-        <div class="modal-input-group">
-          <label>Annual Processing Volume ($)</label>
-          <input id="y-vol" type="number">
-        </div>
+    document.getElementById("tool-modal-result").innerHTML = `
+      Current Late Payment Cost: $${loss.toFixed(2)}<br>
+      <strong>Escrow Savings: $${(loss * 0.9).toFixed(2)}</strong>
+    `;
+  }
 
-        <div class="modal-input-group">
-          <label>Avg Settlement Delay (days)</label>
-          <input id="y-days" type="number" value="2">
-        </div>
+  /* 5 — TICKET PREDICTOR */
+  function runTicketPredict() {
+    let cap = parseFloat(document.getElementById("t-cap").value);
+    let follow = parseFloat(document.getElementById("t-follow").value);
+    let budget = parseFloat(document.getElementById("t-budget").value);
 
-        <div class="modal-input-group">
-          <label>Yield %</label>
-          <input id="y-yield" type="number" value="8">
-        </div>
+    if (!cap || !follow) return;
 
-        <button class="modal-action" onclick="runYieldCalc()">Calculate</button>
-      `,
+    let hype = follow / 1000 + budget / 500;
+    let days = Math.max(0.8, cap / hype / 50);
 
-      /* -----------------------------------------
-         4) CRYPTO ESCROW ROI
-      ----------------------------------------- */
-      escrow: `
-        <h3 class="modal-title">Crypto Escrow ROI</h3>
-        <p class="modal-desc">See how escrow saves time + late payments.</p>
+    document.getElementById("tool-modal-result").innerHTML = `
+      Projected Sellout: <strong>${days.toFixed(1)} days</strong><br>
+      Hype Index: ${hype.toFixed(2)}
+    `;
+  }
 
-        <div class="modal-input-group">
-          <label>Avg Project Value ($)</label>
-          <input id="e-value" type="number">
-        </div>
+  /* 6 — DFS PROMO MULTIPLIER */
+  function runDFS() {
+    let bonus = parseFloat(document.getElementById("d-bonus").value);
+    let odds = parseFloat(document.getElementById("d-odds").value);
 
-        <div class="modal-input-group">
-          <label>Late Payment Probability (%)</label>
-          <input id="e-late" type="number" value="40">
-        </div>
+    if (!bonus || !odds) return;
 
-        <div class="modal-input-group">
-          <label>Cost of Delay ($/day)</label>
-          <input id="e-delay" type="number" value="50">
-        </div>
+    let implied = odds > 0
+      ? 100 / (odds + 100)
+      : Math.abs(odds) / (Math.abs(odds) + 100);
 
-        <button class="modal-action" onclick="runEscrowCalc()">Calculate</button>
-      `,
+    let ev = bonus * (1 - implied);
 
-      /* -----------------------------------------
-         5) TICKET SELLOUT PREDICTOR
-      ----------------------------------------- */
-      tickets: `
-        <h3 class="modal-title">Ticket Sellout Predictor</h3>
-        <p class="modal-desc">Predict sellout speed based on demand signals.</p>
+    document.getElementById("tool-modal-result").innerHTML = `
+      Implied Win Probability: ${(implied * 100).toFixed(2)}%<br>
+      <strong>Expected Value: $${ev.toFixed(2)}</strong>
+    `;
+  }
 
-        <div class="modal-input-group">
-          <label>Venue Capacity</label>
-          <input id="t-cap" type="number">
-        </div>
-
-        <div class="modal-input-group">
-          <label>Artist Followers</label>
-          <input id="t-follow" type="number">
-        </div>
-
-        <div class="modal-input-group">
-          <label>Ad Budget ($)</label>
-          <input id="t-budget" type="number">
-        </div>
-
-        <button class="modal-action" onclick="runTicketPredict()">Predict</button>
-      `,
-
-      /* -----------------------------------------
-         6) DFS PROMO MULTIPLIER
-      ----------------------------------------- */
-      dfs: `
-        <h3 class="modal-title">DFS Promo Multiplier</h3>
-        <p class="modal-desc">Turn deposit bonuses into EV quickly.</p>
-
-        <div class="modal-input-group">
-          <label>Bonus Amount ($)</label>
-          <input id="d-bonus" type="number">
-        </div>
-
-        <div class="modal-input-group">
-          <label>Multiplier Odds</label>
-          <input id="d-odds" type="number" placeholder="Example: +100">
-        </div>
-
-        <button class="modal-action" onclick="runDFS()">Calculate</button>
-      `,
-    };
-
-    /* ============================
-       OPEN A TOOL
-    ============================= */
-    function openTool(toolName) {
-      const html = TOOL_UI[toolName];
-      openToolModal(html);
-    }
-
-    /* ============================
-       TOOL ENGINE — CALCULATORS
-    ============================= */
-
-    /* 1) Solana Savings */
-    function runSolanaSavings() {
-      let rev = parseFloat(document.getElementById("ss-rev").value);
-      let ticket = parseFloat(document.getElementById("ss-ticket").value);
-      let proc = document.getElementById("ss-proc").value;
-
-      if (!rev || !ticket) {
-        document.getElementById("tool-modal-result").innerHTML =
-          "<span style='color:#fb7185;'>Enter valid numbers.</span>";
-        return;
-      }
-
-      let tx = rev / ticket;
-      let fee = proc === "stripe" ? 0.029 : 0.035;
-      let fixed = 0.30;
-
-      let oldFees = rev * fee + tx * fixed;
-      let solFees = tx * 0.00025;
-      let save = oldFees - solFees;
-
-      document.getElementById("tool-modal-result").innerHTML = `
-        <strong>Current Fees:</strong> $${oldFees.toFixed(2)}<br>
-        <strong>On Solana:</strong> $${solFees.toFixed(4)}<br><br>
-        <strong>You Save: $${save.toFixed(2)} / month</strong>
-      `;
-    }
-
-    /* 2) Stablecoin Compare */
-    function runStablecoinCompare() {
-      let amt = parseFloat(document.getElementById("sc-amt").value);
-      let proc = document.getElementById("sc-proc").value;
-
-      if (!amt) return;
-
-      let fee = proc === "stripe" ? 0.029 : 0.035;
-      let oldCost = amt * fee + 0.30;
-      let newCost = 0.00025;
-
-      document.getElementById("tool-modal-result").innerHTML = `
-        Old Rails: $${oldCost.toFixed(2)}<br>
-        Stablecoin: $${newCost.toFixed(4)}<br><br>
-        <strong>Savings: $${(oldCost - newCost).toFixed(2)}</strong>
-      `;
-    }
-
-    /* 3) Solana Pay Yield */
-    function runYieldCalc() {
-      let vol = parseFloat(document.getElementById("y-vol").value);
-      let days = parseFloat(document.getElementById("y-days").value);
-      let rate = parseFloat(document.getElementById("y-yield").value);
-
-      if (!vol || !days || !rate) return;
-
-      let float = (vol * days) / 365;
-      let earned = float * (rate / 100);
-
-      document.getElementById("tool-modal-result").innerHTML = `
-        Float Value: $${float.toFixed(2)}<br>
-        Annual Yield: $${earned.toFixed(2)}<br>
-        <strong>Effective Processing Offset: ${(earned / vol * 100).toFixed(3)}%</strong>
-      `;
-    }
-
-    /* 4) Escrow ROI */
-    function runEscrowCalc() {
-      let value = parseFloat(document.getElementById("e-value").value);
-      let prob = parseFloat(document.getElementById("e-late").value) / 100;
-      let delay = parseFloat(document.getElementById("e-delay").value);
-
-      if (!value || !delay) return;
-
-      let loss = prob * (delay * 50);
-      document.getElementById("tool-modal-result").innerHTML = `
-        Current Late Payment Cost: $${loss.toFixed(2)}<br>
-        <strong>Escrow Savings: $${(loss * 0.9).toFixed(2)}</strong>
-      `;
-    }
-
-    /* 5) Ticket Sellout Predictor */
-    function runTicketPredict() {
-      let cap = parseFloat(document.getElementById("t-cap").value);
-      let follow = parseFloat(document.getElementById("t-follow").value);
-      let budget = parseFloat(document.getElementById("t-budget").value);
-
-      if (!cap || !follow) return;
-
-      let hype = (follow / 1000) + (budget / 500);
-      let days = Math.max(0.8, cap / hype / 50);
-
-      document.getElementById("tool-modal-result").innerHTML = `
-        Projected Sellout: <strong>${days.toFixed(1)} days</strong><br>
-        Hype Index: ${hype.toFixed(2)}
-      `;
-    }
-
-    /* 6) DFS Multiplier */
-    function runDFS() {
-      let bonus = parseFloat(document.getElementById("d-bonus").value);
-      let odds = parseFloat(document.getElementById("d-odds").value);
-
-      if (!bonus || !odds) return;
-
-      let implied = odds > 0
-        ? 100 / (odds + 100)
-        : Math.abs(odds) / (Math.abs(odds) + 100);
-
-      let ev = bonus * (1 - implied);
-
-      document.getElementById("tool-modal-result").innerHTML = `
-        Implied Win Probability: ${(implied * 100).toFixed(2)}%<br>
-        <strong>Expected Value: $${ev.toFixed(2)}</strong>
-      `;
-    }
-
-    /* ============================
+  /* ============================
        INTAKE MODAL
-    ============================= */
-    function openIntakeModal() {
-      document.getElementById("intake-modal-backdrop").style.display = "flex";
-    }
+  ============================= */
+  function openIntakeModal() {
+    document.getElementById("intake-modal-backdrop").style.display = "flex";
+  }
 
-    function closeIntakeModal() {
-      document.getElementById("intake-modal-backdrop").style.display = "none";
-    }
+  function closeIntakeModal() {
+    document.getElementById("intake-modal-backdrop").style.display = "none";
+  }
 
-    function submitIntakeModal() {
-      let name = document.getElementById("intake-name").value;
-      let need = document.getElementById("intake-need").value;
+  function submitIntakeModal() {
+    let name = document.getElementById("intake-name").value;
+    let need = document.getElementById("intake-need").value;
 
-      if (!name || !need) {
-        document.getElementById("intake-modal-result").innerHTML =
-          "<span style='color:#fb7185;'>Please fill everything.</span>";
-        return;
-      }
-
-      let mailto =
-        "mailto:pj@sideguysolutions.com" +
-        "?subject=" + encodeURIComponent("SideGuy Intake from " + name) +
-        "&body=" + encodeURIComponent(need);
-
-      window.location.href = mailto;
-
+    if (!name || !need) {
       document.getElementById("intake-modal-result").innerHTML =
-        "<span style='color:#4ade80;'>Opening email…</span>";
+        "<span style='color:#fb7185;'>Please fill everything.</span>";
+      return;
     }
 
-    /* ============================
-       PORTAL TRIGGER (BUTTON)
-    ============================= */
-    function triggerPortal() {
-      boostWaves();
-      setTimeout(() => {
-        window.location.href = "mailto:pj@sideguysolutions.com?subject=Summon PJ";
-      }, 420);
-    }
+    let mailto =
+      "mailto:pj@sideguysolutions.com" +
+      "?subject=" + encodeURIComponent("SideGuy Intake from " + name) +
+      "&body=" + encodeURIComponent(need);
 
-    document.getElementById("summon-btn").addEventListener("click", triggerPortal);
+    window.location.href = mailto;
 
-    /* ORB CLICK */
-    document.getElementById("summon-orb").addEventListener("click", triggerPortal);
+    document.getElementById("intake-modal-result").innerHTML =
+      "<span style='color:#4ade80;'>Opening email…</span>";
+  }
 
-  </script>
+  /* ============================
+       PORTAL SUMMON
+  ============================= */
+  function triggerPortal() {
+    boostWaves();
+    setTimeout(() => {
+      window.location.href =
+        "mailto:pj@sideguysolutions.com?subject=Summon PJ";
+    }, 420);
+  }
+
+  document.getElementById("summon-btn").addEventListener("click", triggerPortal);
+  document.getElementById("summon-orb").addEventListener("click", triggerPortal);
+
+  /* ============================
+       VERSION LABELS
+  ============================= */
+  function updateVersionLabels() {
+    const v = "8.0";
+    const a = document.getElementById("version-label");
+    const b = document.getElementById("version-label-footer");
+    if (a) a.textContent = v;
+    if (b) b.textContent = v;
+  }
+
+  document.addEventListener("DOMContentLoaded", updateVersionLabels);
+</script>
   <!-- ============================
        PART 4 — OCEAN + AUDIO ENGINE
   ============================= -->
 
-  <!-- Optional audio files (add these .mp3s to your project root) -->
+  <!-- Optional audio (put these mp3 files in your project root) -->
   <audio id="ocean-audio" src="ocean-waves.mp3" preload="auto" loop></audio>
   <audio id="portal-audio" src="portal-whoosh.mp3" preload="auto"></audio>
 
@@ -1726,11 +1759,11 @@
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
-    let scene, camera, renderer, oceanMesh, oceanMaterial, oceanClock;
+    let renderer, scene, camera, oceanMesh, oceanMaterial, oceanClock;
     let targetWaveAmp = 1.05;
 
     /* ============================
-       OCEAN SHADERS
+         OCEAN SHADERS
     ============================= */
     const oceanVertexShader = `
       varying vec2 vUv;
@@ -1827,7 +1860,9 @@
         float rays = smoothstep(0.72, 1.0, rayPattern);
         col += vec3(0.07, 0.11, 0.16) * rays * 0.8;
 
-        float shimmer = smoothstep(0.78, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0));
+        float shimmer = smoothstep(0.78, 1.0,
+          sin((vUv.x + vUv.y + t * 4.0) * 18.0 + n2 * 6.0)
+        );
         col += shimmer * 0.09;
 
         float caustic = noise(vUv * 22.0 + vec2(t * 5.0, -t * 4.0));
@@ -1847,7 +1882,7 @@
     `;
 
     /* ============================
-       OCEAN INIT
+         OCEAN INIT
     ============================= */
     function initOcean() {
       const canvas = document.getElementById("ocean-canvas");
@@ -1864,4 +1899,103 @@
       scene = new THREE.Scene();
 
       const fov = 55;
-      const aspect = win
+      const aspect = window.innerWidth / window.innerHeight;
+      const near = 0.1;
+      const far = 100;
+      camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      camera.position.set(0, 7.2, 11.5);
+      camera.lookAt(0, 0, 0);
+
+      oceanClock = new THREE.Clock();
+
+      const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
+      geometry.rotateX(-Math.PI / 2);
+
+      oceanMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 },
+          uWaveAmp: { value: targetWaveAmp },
+        },
+        vertexShader: oceanVertexShader,
+        fragmentShader: oceanFragmentShader,
+        side: THREE.DoubleSide,
+      });
+
+      oceanMesh = new THREE.Mesh(geometry, oceanMaterial);
+      scene.add(oceanMesh);
+
+      const fogColor = new THREE.Color(0x000817);
+      scene.fog = new THREE.Fog(fogColor, 12, 45);
+      renderer.setClearColor(fogColor, 1);
+
+      window.addEventListener("resize", onWindowResize);
+      animateOcean();
+    }
+
+    function onWindowResize() {
+      if (!camera || !renderer) return;
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animateOcean() {
+      requestAnimationFrame(animateOcean);
+
+      if (!oceanClock || !oceanMaterial || !camera || !renderer || !scene) return;
+
+      const elapsed = oceanClock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value = elapsed;
+
+      const current = oceanMaterial.uniforms.uWaveAmp.value;
+      oceanMaterial.uniforms.uWaveAmp.value =
+        current + (targetWaveAmp - current) * 0.035;
+
+      const sway = Math.sin(elapsed * 0.18) * 0.4;
+      camera.position.x = sway;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    /* ============================
+         PORTAL WAVE / AUDIO BOOST
+         (used by triggerPortal in Part 3)
+    ============================= */
+    function boostWaves() {
+      targetWaveAmp = 1.7;
+      document.body.classList.add("portal-flash", "portal-ripple");
+
+      // Ocean ambience
+      const oceanAudio = document.getElementById("ocean-audio");
+      if (oceanAudio && oceanAudio.paused) {
+        oceanAudio.volume = 0.45;
+        oceanAudio.play().catch(() => {});
+      }
+
+      // Portal whoosh
+      const portalAudio = document.getElementById("portal-audio");
+      if (portalAudio) {
+        portalAudio.currentTime = 0;
+        portalAudio.play().catch(() => {});
+      }
+
+      setTimeout(() => {
+        targetWaveAmp = 1.05;
+        document.body.classList.remove("portal-flash");
+      }, 620);
+
+      setTimeout(() => {
+        document.body.classList.remove("portal-ripple");
+      }, 1500);
+    }
+
+    /* ============================
+         DOM READY
+    ============================= */
+    document.addEventListener("DOMContentLoaded", () => {
+      initOcean();
+    });
+  </script>
+</body>
+</html>
