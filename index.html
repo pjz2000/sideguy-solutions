@@ -90,6 +90,114 @@
     }
 
     html,
+    <!-- REAL THREE.JS OCEAN ENGINE -->
+<canvas id="ocean-canvas"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+let scene, camera, renderer, oceanMesh, oceanMaterial;
+let startTime = Date.now();
+
+function initOcean() {
+  const canvas = document.getElementById("ocean-canvas");
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  camera.position.set(0, 1.1, 2.2);
+
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true,
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+
+  const geo = new THREE.PlaneGeometry(7, 7, 220, 220);
+
+  oceanMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uWaveAmp: { value: 1.4 },
+      uBlueDeep: { value: new THREE.Color("#021529") },
+      uBlueHigh: { value: new THREE.Color("#2fc4ff") },
+    },
+    vertexShader: `
+      uniform float uTime;
+      uniform float uWaveAmp;
+      varying vec2 vUv;
+
+      void main() {
+        vUv = uv;
+        vec3 pos = position;
+        float t = uTime * 0.2;
+
+        float w1 = sin(pos.x * 1.5 + t) * 0.12;
+        float w2 = sin(pos.y * 2.0 - t * 1.3) * 0.18;
+        float w3 = sin(pos.x * 2.2 + pos.y * 2.0 + t * 1.6) * 0.09;
+
+        pos.z += (w1 + w2 + w3) * uWaveAmp;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      uniform vec3 uBlueDeep;
+      uniform vec3 uBlueHigh;
+      varying vec2 vUv;
+
+      void main() {
+        float t = uTime * 0.12;
+
+        float shade = sin(vUv.x * 8.0 + t * 2.0) * 0.15 +
+                      sin(vUv.y * 6.0 - t * 1.4) * 0.12;
+
+        float mixVal = vUv.y * 0.85 + shade;
+
+        vec3 color = mix(uBlueDeep, uBlueHigh, mixVal);
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `,
+    side: THREE.DoubleSide,
+  });
+
+  oceanMesh = new THREE.Mesh(geo, oceanMaterial);
+  oceanMesh.rotation.x = -Math.PI * 0.5;
+  scene.add(oceanMesh);
+
+  animateOcean();
+}
+
+function animateOcean() {
+  requestAnimationFrame(animateOcean);
+
+  const t = (Date.now() - startTime) * 0.001;
+  oceanMaterial.uniforms.uTime.value = t;
+
+  camera.position.x = Math.sin(t * 0.18) * 0.35;
+  camera.position.y = 1.1 + Math.sin(t * 0.12) * 0.05;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
+}
+
+window.addEventListener("resize", () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initOcean, 120);
+});
+</script>
     body {
       height: 100%;
       width: 100%;
