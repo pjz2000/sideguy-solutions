@@ -1,89 +1,28 @@
 <!--
   SideGuy Solutions
-  Version: 22.0-legendary-ocean-ultrablue
-  Hero: "Where code meets the coastline."
-  Mode: Deep Pacific Shader · Coastal Toolkit · Fast Lane x402
-  Author: PJ (+ ChatGPT assist)
+  OCEAN_TEST_V1_INSANE
+  Mode: Auto Day/Night · 4 Ocean Modes · Big Swell
+  Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
-
-  <!-- Core SEO -->
   <meta
-    name="description"
-    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Web3 & Solana payments, ticketing flows, and DFS tools for North County startups, venues, and operators."
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   />
-  <meta
-    name="keywords"
-    content="San Diego software development, San Diego app development, San Diego mobile app development, San Diego AI development, AI automation San Diego, San Diego tech concierge, North County San Diego startups, Encinitas developers, Solana Beach tech, custom software agency San Diego, Web3 development San Diego, blockchain developers San Diego, Solana developers San Diego, North County software agency, San Diego AI consulting, San Diego startup developers, DFS tools, ticketing software San Diego, coastal concierge tech"
-  />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta
-    property="og:description"
-    content="Tap the ocean portal to summon PJ. Custom apps, AI automation, Web3 & Solana payments, ticket flows, and DFS tools built from Solana Beach and North County San Diego."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sideguysolutions.com/" />
-
-  <link rel="canonical" href="https://sideguysolutions.com/" />
-
-  <!-- LocalBusiness Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "SideGuy Solutions",
-    "description": "Coastal tech concierge for San Diego and North County — custom apps, AI automation, Web3 and Solana payment flows, ticketing systems, and DFS tools.",
-    "url": "https://sideguysolutions.com/",
-    "telephone": "+1-773-544-1231",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Solana Beach",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    },
-    "areaServed": [
-      "San Diego",
-      "North County San Diego",
-      "Solana Beach",
-      "Encinitas",
-      "Del Mar",
-      "Carlsbad"
-    ]
-  }
-  </script>
+  <title>SideGuy Ocean Lab | Auto Day/Night</title>
 
   <style>
-    /* ================================================
-       ROOT THEME
-    ================================================= */
     :root {
-      --bg: #020617;
-      --bg-day: #041426;
-      --bg-night: #000814;
-
+      --bg: #000814;
       --text: #e5f2ff;
       --soft: #94a3b8;
-      --muted: #64748b;
-
       --accent: #38bdf8;
       --accent-night: #4cc9ff;
-
-      --card: rgba(15, 23, 42, 0.94);
-      --glass: rgba(15, 23, 42, 0.8);
-
-      --radius: 18px;
       --pill: 999px;
-
-      --shadow-deep: 0 22px 70px rgba(15, 23, 42, 0.96);
+      --radius: 16px;
     }
 
     * {
@@ -94,236 +33,115 @@
 
     html,
     body {
-      height: 100%;
       width: 100%;
+      height: 100%;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+        sans-serif;
       color: var(--text);
-      background: var(--bg);
-      overflow-x: hidden;
-      min-height: 100vh;
-      transition: background 0.5s ease;
+      background: radial-gradient(circle at top, #0b1730, #000814 65%);
+      overflow: hidden;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* ================================================
-       OCEAN CANVAS
-    ================================================= */
+    /* Fullscreen canvas */
     #ocean-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
       display: block;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
-    }
-
-    /* ================================================
-       AUDIO TOGGLE
-    ================================================= */
-    .audio-toggle {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      color: #e0f2fe;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
-
-    .audio-toggle span {
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* ================================================
-       HEADER / NAV
-    ================================================= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 10px 20px;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(2, 6, 23, 0.96),
-        rgba(2, 6, 23, 0.85),
-        transparent
+      z-index: 0;
+      background: radial-gradient(
+        circle at top,
+        #0ea5e9 0%,
+        #020617 55%,
+        #000814 100%
       );
-      border-bottom: 1px solid rgba(56, 189, 248, 0.28);
     }
 
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+    /* Subtle sky overlay based on time (updated in JS) */
+    .sky-gradient {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      mix-blend-mode: screen;
+      opacity: 0.45;
+      transition: background 0.6s ease, opacity 0.4s ease;
     }
 
-    .brand-block {
+    /* HUD / Controls */
+    .hud-shell {
+      position: fixed;
+      inset: 16px 16px auto 16px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 10px;
+      z-index: 5;
+      pointer-events: none;
     }
 
-    .brand-pill {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 45%, #0f172a 100%);
+    .hud-panel {
+      pointer-events: auto;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: radial-gradient(
+        circle at top left,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.86)
+      );
       box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.5),
-        0 0 26px rgba(56, 189, 248, 0.9);
+        0 18px 40px rgba(15, 23, 42, 0.9),
+        0 0 40px rgba(56, 189, 248, 0.6);
+      max-width: min(420px, 90vw);
     }
 
-    .brand-text {
-      font-size: 0.95rem;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .version-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 12px;
+    .hud-title {
       font-size: 0.8rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-links a {
       color: var(--soft);
-      padding-bottom: 2px;
-      border-bottom: 1px solid transparent;
-      cursor: pointer;
+      margin-bottom: 6px;
     }
 
-    .nav-links a:hover {
-      color: #e5f2ff;
-      border-bottom-color: rgba(56, 189, 248, 0.7);
+    .hud-main {
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
 
-    @media (max-width: 880px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-      }
+    .hud-main strong {
+      color: #e0f2fe;
     }
 
-    /* ================================================
-       HERO
-    ================================================= */
-    .hero {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 40px 20px 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 28px;
-      }
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.1rem);
-      font-weight: 850;
-      line-height: 1.04;
-      margin-bottom: 12px;
-      text-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-title span {
-      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--soft);
-      max-width: 34rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .hero-sub strong {
-      color: #e5f2ff;
-      font-weight: 600;
-    }
-
-    .hero-contacts {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .hero-ctas {
+    .hud-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 6px;
+      margin-top: 10px;
     }
 
-    .hero-fastlane-note {
-      font-size: 0.75rem;
-      color: var(--muted);
-      max-width: 32rem;
+    .hud-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: var(--soft);
+      background: rgba(15, 23, 42, 0.95);
     }
 
-    /* ================================================
-       BUTTONS
-    ================================================= */
+    .hud-labels {
+      font-size: 0.78rem;
+      color: var(--soft);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* Buttons */
     button {
       font-family: inherit;
       border: none;
@@ -331,913 +149,541 @@
       background: none;
     }
 
-    .btn-primary {
-      position: relative;
-      padding: 11px 18px;
-      border-radius: var(--pill);
-      background: radial-gradient(circle at 0 0, #e0f2fe, #38bdf8);
-      color: #020617;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.85),
-        0 14px 36px rgba(8, 47, 73, 0.95),
-        0 0 40px rgba(56, 189, 248, 0.85);
+    .btn-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: var(--pill);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border: 1px solid rgba(56, 189, 248, 0.8);
+      background: radial-gradient(
+        circle at top left,
+        #0ea5e9,
+        #0369a1 55%,
+        #020617 100%
+      );
+      color: #e0f2fe;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.85),
+        0 10px 26px rgba(8, 47, 73, 0.9),
+        0 0 30px rgba(56, 189, 248, 0.85);
       transition:
         transform 0.15s ease,
         box-shadow 0.15s ease,
         filter 0.15s ease;
-      overflow: hidden;
       white-space: nowrap;
     }
 
-    .btn-primary::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.45), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: saturate(1.25);
+    .btn-pill:hover {
+      transform: translateY(-1px) scale(1.02);
+      filter: saturate(1.2);
       box-shadow:
         0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 18px 40px rgba(8, 47, 73, 1),
-        0 0 70px rgba(56, 189, 248, 1);
+        0 14px 34px rgba(8, 47, 73, 1),
+        0 0 50px rgba(56, 189, 248, 1);
     }
 
-    .btn-primary:hover::after {
-      opacity: 1;
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.9);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 10px 22px rgba(15, 23, 42, 0.9);
+      color: var(--soft);
     }
 
-    .btn-secondary {
-      background: radial-gradient(circle at 0 0, #0ea5e9, #0369a1);
+    .btn-ghost:hover {
+      border-color: rgba(56, 189, 248, 0.9);
       color: #e0f2fe;
+      box-shadow:
+        0 0 0 1px rgba(56, 189, 248, 0.9),
+        0 12px 28px rgba(15, 23, 42, 0.95);
     }
 
-    /* Special glow for TAP TO SUMMON PJ */
-    .btn-summon {
-      animation: summonGlow 2.4s ease-in-out infinite;
-    }
-
-    .btn-fastlane {
-      background: radial-gradient(circle at 0 0, #22c55e, #15803d);
-      color: #eafff3;
-    }
-
-    @keyframes summonGlow {
-      0% {
-        box-shadow:
-          0 0 0 0 rgba(56, 189, 248, 0.8),
-          0 14px 36px rgba(8, 47, 73, 0.95),
-          0 0 40px rgba(56, 189, 248, 0.85);
-      }
-      50% {
-        box-shadow:
-          0 0 0 12px rgba(56, 189, 248, 0),
-          0 18px 48px rgba(8, 47, 73, 1),
-          0 0 80px rgba(56, 189, 248, 1);
-      }
-      100% {
-        box-shadow:
-          0 0 0 0 rgba(56, 189, 248, 0),
-          0 14px 36px rgba(8, 47, 73, 0.95),
-          0 0 40px rgba(56, 189, 248, 0.85);
-      }
-    }
-
-    /* ================================================
-       ORB GLOW
-    ================================================= */
-    .hero-orb-wrap {
+    .hud-actions {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      position: relative;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .orb-glow-ring {
-      position: absolute;
-      inset: -14%;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 0, rgba(224, 242, 254, 0.4), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(56, 189, 248, 0.55), transparent 65%);
+    /* Bottom-right mini status */
+    .hud-status {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .hud-status-inner {
+      pointer-events: auto;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      background: radial-gradient(
+        circle at top left,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.9)
+      );
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .status-label-strong {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.68rem;
+      color: #e5f2ff;
+    }
+
+    .status-muted {
       opacity: 0.8;
-      mix-blend-mode: screen;
-      pointer-events: none;
     }
 
-    #summon-orb {
-      position: relative;
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.55);
-      background:
-        radial-gradient(circle at 25% 20%, #f9fafb 0%, #bae6fd 30%, #38bdf8 55%, #0f172a 100%);
-      box-shadow:
-        0 0 45px rgba(56, 189, 248, 0.7),
-        0 0 120px rgba(56, 189, 248, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        filter 0.18s ease,
-        box-shadow 0.18s ease;
-      animation: orbPulseGlow 2.6s ease-in-out infinite;
-    }
-
-    #summon-orb::after {
-      content: "";
-      position: absolute;
-      inset: 16%;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.6);
-      box-shadow: 0 0 35px rgba(248, 250, 252, 0.9);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    #summon-orb:hover {
-      transform: translateY(-2px) scale(1.05);
-      filter: saturate(1.25);
-      box-shadow:
-        0 0 55px rgba(56, 189, 248, 0.9),
-        0 0 160px rgba(56, 189, 248, 1);
-    }
-
-    #summon-orb-label {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
-      color: #020617;
-      font-weight: 800;
-      text-shadow:
-        0 0 12px rgba(248, 250, 252, 0.9),
-        0 0 28px rgba(14, 165, 233, 0.95);
-      animation: labelGlow 2s ease-in-out infinite;
-    }
-
-    #summon-orb-label span {
-      display: block;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      opacity: 0.9;
-    }
-
-    .orb-caption {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    @keyframes orbPulseGlow {
-      0% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
+    @media (max-width: 640px) {
+      .hud-shell {
+        inset: 12px 12px auto 12px;
       }
-      50% {
-        transform: scale(1.03);
-        box-shadow:
-          0 0 60px rgba(56, 189, 248, 1),
-          0 0 150px rgba(56, 189, 248, 1);
+      .hud-panel {
+        padding: 10px 11px;
       }
-      100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
-    }
-
-    @keyframes labelGlow {
-      0%,
-      100% {
-        text-shadow:
-          0 0 10px rgba(248, 250, 252, 0.9),
-          0 0 20px rgba(59, 130, 246, 0.8);
-      }
-      50% {
-        text-shadow:
-          0 0 16px rgba(248, 250, 252, 1),
-          0 0 30px rgba(56, 189, 248, 1);
+      .hud-actions {
+        flex-direction: row;
       }
     }
   </style>
 </head>
 <body>
-  <!-- REAL THREE.JS OCEAN BACKGROUND -->
+  <!-- Fullscreen ocean canvas -->
   <canvas id="ocean-canvas"></canvas>
+  <div class="sky-gradient" id="sky-gradient"></div>
 
-  <!-- AUDIO (add your own ocean-loop.mp3 at site root if you want real sound) -->
-  <audio id="ocean-audio" loop>
-    <!-- Example: <source src="ocean-loop.mp3" type="audio/mpeg" /> -->
-  </audio>
-  <button type="button" class="audio-toggle" id="audio-toggle">
-    🌊 <span>Ocean Audio</span>
-  </button>
-
-  <!-- ============================= -->
-  <!-- HEADER                        -->
-  <!-- ============================= -->
-  <header>
-    <div class="nav-inner">
-      <div class="brand-block">
-        <div class="brand-pill"></div>
-        <div class="brand-text">SideGuy Solutions</div>
-      </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#apps">Apps</a>
-          <a href="#ai">AI</a>
-          <a href="#web3">Web3</a>
-          <a href="#tickets">Tickets</a>
-          <a href="#dfs">DFS</a>
-          <a href="#ai-dept">AI Dept</a>
-          <a href="#intake">Intake</a>
-          <a href="#blog">Blog</a>
-        </nav>
-        <div class="version-tag">v22.0 · LEGENDARY OCEAN ULTRABLUE · SAN DIEGO</div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ============================= -->
-  <!-- HERO SECTION                  -->
-  <!-- ============================= -->
-  <section class="hero">
-    <!-- LEFT SIDE: TEXT + BUTTONS -->
-    <div>
-      <h1 class="hero-title">
-        Where <span>San Diego</span> builds, codes, and scales.
-      </h1>
-
-      <p class="hero-sub">
-        Coastal concierge tech for the 2025 era — <strong>custom apps</strong>,
-        <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>,
-        <strong>ticketing flows</strong>, and <strong>DFS tools</strong> tuned for
-        North County and greater San Diego.
-      </p>
-
-      <div class="hero-contacts">
-        Text / call:
-        <strong><a href="tel:+17735441231">773-544-1231</a></strong><br />
-        Email:
-        <strong><a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a></strong>
+  <!-- HUD top-left -->
+  <div class="hud-shell">
+    <div class="hud-panel">
+      <div class="hud-title">SideGuy Ocean Lab</div>
+      <div class="hud-main">
+        <strong>Auto day/night Pacific shader</strong> with 4 modes:
+        classic, ultra blue, moon shimmer, and deep realwater.
+        <br />
+        <br />
+        This is the sandbox layer — when this feels like real water,
+        we feed it back into the main portal.
       </div>
 
-      <div class="hero-ctas">
-        <button id="summon-btn" class="btn-primary btn-summon">
-          TAP TO SUMMON PJ
+      <div class="hud-row">
+        <div class="hud-badge" id="hud-mode">Mode: —</div>
+        <div class="hud-badge" id="hud-time">Time: —</div>
+        <div class="hud-badge" id="hud-daynight">—</div>
+      </div>
+
+      <div class="hud-actions">
+        <button id="mode-toggle" class="btn-pill">
+          🌊 Cycle Ocean Mode
         </button>
-        <button id="fastlane-btn" class="btn-primary btn-fastlane">
-          FAST LANE · 9 USDC
-        </button>
-        <button id="show-toolkit" class="btn-primary btn-secondary">
-          OPEN TOOLKIT
+        <button id="wave-boost" class="btn-pill btn-ghost">
+          💥 Summon Swell
         </button>
       </div>
 
-      <div class="hero-fastlane-note">
-        Free portal for normal summons. Fast Lane uses on-chain USDC (x402-style) for
-        priority builds and tighter scopes.
+      <div class="hud-labels">
+        Mode ideas:<br />
+        0 = Classic Pacific • 1 = UltraBlue Swell (v18 vibes) •
+        2 = Aladeen Moon Shimmer • 3 = Deep RealWater test.
       </div>
     </div>
+  </div>
 
-    <!-- RIGHT SIDE: ORB -->
-    <div class="hero-orb-wrap">
-      <div class="orb-glow-ring"></div>
-      <button id="summon-orb" aria-label="Summon PJ coastal portal">
-        <div id="summon-orb-label">
-          TAP TO<br />SUMMON PJ
-          <span>Coastal Portal</span>
-        </div>
-      </button>
-      <div class="orb-caption">Portal Online · North County</div>
+  <!-- HUD bottom-right -->
+  <div class="hud-status">
+    <div class="hud-status-inner">
+      <div class="status-dot"></div>
+      <div class="status-label-strong">Ocean Engine</div>
+      <span class="status-muted">Auto day/night · WebGL</span>
     </div>
-  </section>
-  <!-- HERO END -->
-  <!-- ============================= -->
-  <!-- TOOLKIT SECTION               -->
-  <!-- ============================= -->
-  <section id="toolkit" style="max-width:1120px;margin:0 auto;padding:50px 20px 70px;">
-    <h2 style="
-      font-size:0.85rem;
-      text-transform:uppercase;
-      letter-spacing:0.2em;
-      color:var(--soft);
-      margin-bottom:16px;
-    ">
-      SideGuy Toolkit
-    </h2>
+  </div>
 
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:16px;
-    ">
-      <!-- CARD: Solana Payment Savings -->
-      <div style="
-        padding:20px;
-        border-radius:var(--radius);
-        background:var(--card);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3 style="margin-bottom:8px;">Solana Payment Savings</h3>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">
-          Compare your current Stripe/Shopify/PayPal rates vs Solana rails.
-        </p>
-        <button class="btn-primary btn-secondary" onclick="openSavingsCalc()">
-          OPEN TOOL
-        </button>
-      </div>
+  <!-- THREE.js -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
-      <!-- CARD: DFS Multiplier -->
-      <div style="
-        padding:20px;
-        border-radius:var(--radius);
-        background:var(--card);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3 style="margin-bottom:8px;">DFS Promo Multiplier</h3>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">
-          Quick EV snapshots. Zero pick-selling. Pure math.
-        </p>
-        <button class="btn-primary btn-secondary" onclick="openDFS()">
-          OPEN TOOL
-        </button>
-      </div>
-
-      <!-- CARD: Ticket Flow Optimizer -->
-      <div style="
-        padding:20px;
-        border-radius:var(--radius);
-        background:var(--card);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3 style="margin-bottom:8px;">Ticket Flow Optimizer</h3>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">
-          Model fees + hidden skim from ticket platforms.
-        </p>
-        <button class="btn-primary btn-secondary" onclick="openTickets()">
-          OPEN TOOL
-        </button>
-      </div>
-    </div>
-  </section>
-  <!-- TOOLKIT SECTION END -->
-
-  <!-- ============================= -->
-  <!-- APPS SECTION                  -->
-  <!-- ============================= -->
-  <section id="apps" style="
-    max-width:1120px;
-    margin:0 auto;
-    padding:40px 20px 60px;
-  ">
-    <h2 style="
-      font-size:0.85rem;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--soft);
-      margin-bottom:16px;
-    ">
-      Apps & Custom Software
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:20px;">
-      Custom mobile apps, web apps, internal dashboards, POS integrations,
-      membership systems, and tools for San Diego operators, founders, and venues.
-    </p>
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:16px;
-    ">
-      <div style="
-        background:var(--card);
-        padding:20px;
-        border-radius:var(--radius);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3>Mobile & Web Apps</h3>
-        <p style="color:var(--muted);font-size:0.85rem;line-height:1.5;">
-          iOS, Android, and full-stack builds. Tuned for speed, usability, and conversion.
-        </p>
-      </div>
-
-      <div style="
-        background:var(--card);
-        padding:20px;
-        border-radius:var(--radius);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3>Internal Tools & Dashboards</h3>
-        <p style="color:var(--muted);font-size:0.85rem;line-height:1.5;">
-          Ops automation, staff tools, CRM layers, and revenue dashboards for operators.
-        </p>
-      </div>
-
-      <div style="
-        background:var(--card);
-        padding:20px;
-        border-radius:var(--radius);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3>North County Specialty Builds</h3>
-        <p style="color:var(--muted);font-size:0.85rem;line-height:1.5;">
-          Boutique-style software tuned for Encinitas, Solana Beach, Del Mar, Carlsbad.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================= -->
-  <!-- AI SECTION                    -->
-  <!-- ============================= -->
-  <section id="ai" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="
-      font-size:0.85rem;
-      text-transform:uppercase;
-      letter-spacing:0.22em;
-      color:var(--soft);
-      margin-bottom:16px;
-    ">
-      AI Automation
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:20px;">
-      Custom AI agents, workflow automation, onboarding flows, data pipelines,
-      sales follow-up bots, service agents, and North County ops automation tools.
-    </p>
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:16px;
-    ">
-      <div style="
-        background:var(--card);
-        padding:20px;
-        border-radius:var(--radius);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3>AI Agents</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">
-          Customer service, sales, appointment scheduling, operations.
-        </p>
-      </div>
-
-      <div style="
-        background:var(--card);
-        padding:20px;
-        border-radius:var(--radius);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3>Process Automation</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">
-          Eliminate repetitive tasks, save hours, scale output.
-        </p>
-      </div>
-
-      <div style="
-        background:var(--card);
-        padding:20px;
-        border-radius:var(--radius);
-        border:1px solid rgba(56,189,248,0.35);
-        box-shadow:var(--shadow-deep);
-      ">
-        <h3>AI Training & Optimization</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">
-          Fine-tune agents for your brand voice & workflows.
-        </p>
-      </div>
-    </div>
-  </section>
-  <!-- ============================= -->
-  <!-- WEB3 SECTION                  -->
-  <!-- ============================= -->
-  <section id="web3" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="
-      font-size:0.85rem;
-      text-transform:uppercase;
-      letter-spacing:0.22em;
-      color:var(--soft);
-      margin-bottom:16px;
-    ">
-      Web3 & Solana Payments
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:20px;">
-      Payments, memberships, ticketing, and services powered by fast and cheap Solana rails.
-      Swap slow outdated payment rails for instant settlement & lower fees.
-    </p>
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:16px;
-    ">
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Solana Rails</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">USDC, SOL, NFTs, IRL transactions.</p>
-      </div>
-
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Membership Tokens</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">Access passes for gyms, clubs, events.</p>
-      </div>
-
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>x402 Fast Lane APIs</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">Pay-per-use API triggers for AI & builds.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================= -->
-  <!-- TICKETS SECTION               -->
-  <!-- ============================= -->
-  <section id="tickets" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.22em;color:var(--soft);margin-bottom:16px;">
-      Ticketing Tools
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:20px;">
-      Ticket listing tools, price modeling, fee predictions, and custom flows for venues and ticket brokers.
-    </p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Listing Automations</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">StubHub, Ticketmaster, SeatGeek integrations.</p>
-      </div>
-
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Fee Modeling</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">Estimate skim & platform take on every sale.</p>
-      </div>
-
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Seller Dashboards</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">Clean dashboards for IRL brokers.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================= -->
-  <!-- DFS SECTION                   -->
-  <!-- ============================= -->
-  <section id="dfs" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.22em;color:var(--soft);margin-bottom:16px;">
-      DFS Tools
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:20px;">
-      Promo multipliers, EV projections, risk models. 
-      Zero pick-selling — just clean math & edges.
-    </p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Promo EV Models</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">PrizePicks, Underdog, Sleeper math.</p>
-      </div>
-
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>Raindrop Risk Model</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">2-leg, 3-leg hedge patterns.</p>
-      </div>
-
-      <div style="background:var(--card);padding:20px;border-radius:var(--radius);
-                  border:1px solid rgba(56,189,248,0.35);box-shadow:var(--shadow-deep);">
-        <h3>FPV Calculator</h3>
-        <p style="color:var(--muted);font-size:0.85rem;">Expected value multiplier tool.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================= -->
-  <!-- AI DEPARTMENT SECTION         -->
-  <!-- ============================= -->
-  <section id="ai-dept" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.22em;color:var(--soft);margin-bottom:10px;">
-      AI Department (San Diego)
-    </h2>
-
-    <p style="color:var(--muted);max-width:780px;line-height:1.6;margin-bottom:20px;">
-      If you don’t have an AI Department… you’re still living in <strong>2024</strong>.
-      San Diego operators, founders, and venues can unlock AI workflows, staff automation,
-      onboarding flows, and customer service with a few weeks of integration.
-    </p>
-
-    <div style="
-      background:var(--card);
-      padding:22px;
-      border-radius:var(--radius);
-      border:1px solid rgba(56,189,248,0.35);
-      box-shadow:var(--shadow-deep);
-      line-height:1.6;
-    ">
-      <strong>What your AI Department handles:</strong>
-      <ul style="margin-top:10px;padding-left:22px;color:var(--soft);font-size:0.9rem;">
-        <li>Inbound chat/service automation</li>
-        <li>Sales follow-up agents</li>
-        <li>Onboarding & intake automations</li>
-        <li>Internal operations workflows</li>
-        <li>Scheduling & appointment handling</li>
-        <li>“Mini CTO” for small teams</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============================= -->
-  <!-- INTAKE SECTION                -->
-  <!-- ============================= -->
-  <section id="intake" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.22em;color:var(--soft);margin-bottom:16px;">
-      Intake
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:14px;">
-      Quick 90-second build intake. 
-      Tell PJ what you need — apps, AI, Web3, ticketing, or DFS tools.
-    </p>
-
-    <button class="btn-primary" onclick="openIntakeForm()">
-      OPEN INTAKE FORM
-    </button>
-  </section>
-
-  <!-- ============================= -->
-  <!-- BLOG SECTION                  -->
-  <!-- ============================= -->
-  <section id="blog" style="max-width:1120px;margin:0 auto;padding:40px 20px 60px;">
-    <h2 style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.22em;color:var(--soft);margin-bottom:16px;">
-      Blog / Updates
-    </h2>
-
-    <p style="color:var(--muted);max-width:760px;line-height:1.6;margin-bottom:14px;">
-      Short write-ups on apps, AI, payments, DFS strategy, and North County tech.
-    </p>
-
-    <!-- Placeholder blog entry -->
-    <div style="
-      background:var(--card);
-      padding:20px;
-      border-radius:var(--radius);
-      border:1px solid rgba(56,189,248,0.35);
-      box-shadow:var(--shadow-deep);
-      margin-bottom:20px;
-    ">
-      <h3 style="margin-bottom:6px;">Why North County Needs an AI Department</h3>
-      <p style="color:var(--soft);font-size:0.9rem;line-height:1.6;">
-        AI is the new staff multiplier.
-        San Diego operators can automate onboarding, communication, and workflows
-        using SideGuy custom agents.
-      </p>
-    </div>
-  </section>
-
-  <!-- MAIN SITE CONTENT END -->
-  <!-- ============================= -->
-  <!-- SUMMON PJ LOGIC               -->
-  <!-- ============================= -->
+  <!-- Ocean engine -->
   <script>
-    function summonPJ() {
-      const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
-      const body = encodeURIComponent("Hey PJ,\n\nJust tapped the coastal portal.\nLet's build something.\n\n— Sent from SideGuySolutions.com");
-      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-    }
-
-    document.getElementById("summon-btn").onclick = summonPJ;
-    document.getElementById("summon-orb").onclick = summonPJ;
-  </script>
-
-  <!-- ============================= -->
-  <!-- FAST LANE (9 USDC placeholder) -->
-  <!-- ============================= -->
-  <script>
-    document.getElementById("fastlane-btn").onclick = () => {
-      alert("Fast Lane coming soon — powered by USDC on Solana + x402.");
-    };
-  </script>
-
-  <!-- ============================= -->
-  <!-- TOOLKIT PLACEHOLDERS          -->
-  <!-- ============================= -->
-  <script>
-    function openSavingsCalc() {
-      alert("Solana Savings Calculator coming soon.");
-    }
-
-    function openDFS() {
-      alert("DFS Multiplier Tool coming soon.");
-    }
-
-    function openTickets() {
-      alert("Ticket Flow Optimizer coming soon.");
-    }
-
-    function openIntakeForm() {
-      alert("Intake Form coming soon.");
-    }
-  </script>
-
-  <!-- ============================= -->
-  <!-- AUDIO TOGGLE                  -->
-  <!-- ============================= -->
-  <script>
-    const audio = document.getElementById("ocean-audio");
-    const audioToggle = document.getElementById("audio-toggle");
-    let audioEnabled = false;
-
-    audioToggle.onclick = () => {
-      if (!audioEnabled) {
-        audioEnabled = true;
-        audio.play().catch(() => {});
-        audioToggle.style.borderColor = "rgba(56,189,248,0.9)";
-        audioToggle.style.color = "#e0faff";
-      } else {
-        audioEnabled = false;
-        audio.pause();
-        audioToggle.style.borderColor = "rgba(56,189,248,0.6)";
-        audioToggle.style.color = "#e0f2fe";
-      }
-    };
-  </script>
-
-  <!-- ============================= -->
-  <!-- 🌊 REAL PACIFIC OCEAN ENGINE -->
-  <!-- ============================= -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
-
-  <script>
-    let scene, camera, renderer, ocean, material;
-    let start = Date.now();
-
-    function initOcean() {
+    (function () {
       const canvas = document.getElementById("ocean-canvas");
-      scene = new THREE.Scene();
+      if (!canvas || !window.THREE) {
+        console.warn("Canvas or THREE missing — no ocean.");
+        return;
+      }
 
-      camera = new THREE.PerspectiveCamera(
-        60,
+      const hudMode = document.getElementById("hud-mode");
+      const hudTime = document.getElementById("hud-time");
+      const hudDayNight = document.getElementById("hud-daynight");
+      const skyGradient = document.getElementById("sky-gradient");
+      const toggleBtn = document.getElementById("mode-toggle");
+      const boostBtn = document.getElementById("wave-boost");
+
+      const modes = [
+        { id: 0, label: "Classic Pacific" },
+        { id: 1, label: "UltraBlue Swell" },
+        { id: 2, label: "Moon Shimmer Night" },
+        { id: 3, label: "RealWater Deep" }
+      ];
+
+      let currentModeIndex = 1; // Start on UltraBlue
+      function getDayFactor() {
+        const hour = new Date().getHours();
+        return hour >= 6 && hour < 18 ? 1.0 : 0.0;
+      }
+
+      function getDayLabel(f) {
+        return f >= 0.5 ? "Day" : "Night";
+      }
+
+      function getTimeLabel() {
+        const d = new Date();
+        const h = d.getHours().toString().padStart(2, "0");
+        const m = d.getMinutes().toString().padStart(2, "0");
+        return `${h}:${m}`;
+      }
+
+      function updateSky(dayFactor) {
+        if (!skyGradient) return;
+        if (dayFactor >= 0.5) {
+          skyGradient.style.background =
+            "radial-gradient(circle at top, rgba(56,189,248,0.85), rgba(37,99,235,0.5), transparent 70%)";
+          skyGradient.style.opacity = "0.55";
+        } else {
+          skyGradient.style.background =
+            "radial-gradient(circle at top, rgba(96,165,250,0.35), rgba(15,23,42,0.85), rgba(0,0,0,0.95))";
+          skyGradient.style.opacity = "0.6";
+        }
+      }
+
+      function updateHud(uniforms) {
+        const mode = modes[currentModeIndex];
+        const dayFactor = uniforms.uDayFactor.value;
+        if (hudMode) hudMode.textContent = `Mode: ${mode.label}`;
+        if (hudTime) hudTime.textContent = `Time: ${getTimeLabel()}`;
+        if (hudDayNight)
+          hudDayNight.textContent = `${getDayLabel(dayFactor)} · Auto`;
+        updateSky(dayFactor);
+      }
+
+      // THREE.js scene setup
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        55,
         window.innerWidth / window.innerHeight,
         0.1,
         100
       );
-      camera.position.set(0, 1.2, 2.4);
+      camera.position.set(0, 5.7, 9.5);
+      camera.lookAt(0, 0, 0);
 
-      renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGLRenderer({
         canvas,
-        antialias: true,
-        alpha: true
+        antialias: false,
+        alpha: false,
+        premultipliedAlpha: false,
+        powerPreference: "high-performance"
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000814, 1.0);
 
-      const geo = new THREE.PlaneGeometry(16, 16, 300, 300);
-      geo.rotateX(-Math.PI / 2);
+      const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
+      geometry.rotateX(-Math.PI / 2);
 
-      material = new THREE.ShaderMaterial({
-        uniforms: {
-          uTime: { value: 0.0 },
-          uDeep: { value: new THREE.Color("#001428") },
-          uBlue: { value: new THREE.Color("#0b82ff") },
-          uFoam: { value: new THREE.Color("#e6faff") }
-        },
-        vertexShader: `
-          uniform float uTime;
-          varying vec3 vPos;
-          varying vec2 vUv;
+      const uniforms = {
+        uTime: { value: 0 },
+        uWaveAmp: { value: 1.0 },
+        uMode: { value: currentModeIndex },
+        uDayFactor: { value: getDayFactor() }
+      };
 
-          vec3 gerstner(vec2 dir, float steep, float wavelength, float speed, vec3 position) {
-            float k = 2.0 * 3.14159 / wavelength;
-            float phase = speed * k;
-            float f = k * (dot(dir, position.xz) - speed * uTime);
-            float a = steep / k;
+      // Vertex shader: big swell + chop
+      const vertexShader = `
+        precision mediump float;
+        varying vec2 vUv;
+        varying float vWave;
+        uniform float uTime;
+        uniform float uWaveAmp;
 
-            return vec3(
-              dir.x * (a * cos(f)),
-              a * sin(f),
-              dir.y * (a * cos(f))
-            );
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+          float t = uTime * 0.45;
+
+          // Long rolling swell (bigger, slower)
+          float swellX = sin(pos.x * 0.12 + t * 0.7) * 1.0;
+          float swellZ = sin(pos.z * 0.08 + t * 0.5) * 1.3;
+          float cross  = sin((pos.x + pos.z) * 0.06 - t * 0.4) * 1.0;
+
+          // Medium chop / secondary motion
+          float n = noise(vec2(pos.x * 0.28 + t * 0.6, pos.z * 0.25 - t * 0.5));
+          float n2 = noise(vec2(pos.x * 0.55 - t * 0.9, pos.z * 0.6 + t * 0.8));
+          float chop = (n - 0.5) * 1.1 + (n2 - 0.5) * 0.9;
+
+          // Micro ripples
+          float micro = noise(vec2(pos.x * 1.4 - t * 1.3, pos.z * 1.6 + t * 1.4)) * 0.6;
+
+          float height = (swellX + swellZ + cross) * 0.35 + chop * 0.45 + micro * 0.25;
+          height *= uWaveAmp;
+
+          pos.y += height;
+          vWave = height;
+
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `;
+
+      // Fragment shader: blue, real, day/night + modes
+      const fragmentShader = `
+        precision mediump float;
+        varying vec2 vUv;
+        varying float vWave;
+        uniform float uTime;
+        uniform float uMode;
+        uniform float uDayFactor;
+
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(a, b, u.x) +
+                 (c - a) * u.y * (1.0 - u.x) +
+                 (d - b) * u.x * u.y;
+        }
+
+        vec3 classicPacific(float depth, float t, vec2 uv) {
+          vec3 deep = vec3(0.01, 0.10, 0.26);
+          vec3 mid  = vec3(0.03, 0.39, 0.77);
+          vec3 surf = vec3(0.78, 0.96, 1.0);
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 3.0));
+
+          float n1 = noise(uv * 7.0 + vec2(t * 2.0, -t * 1.2));
+          float horizon = smoothstep(0.45, 1.05, uv.y + n1 * 0.08);
+          col += vec3(0.03, 0.07, 0.16) * horizon * 1.3;
+
+          float rayPattern = sin((uv.x * 3.0 + uv.y * 1.3) - t * 3.6 + n1 * 3.0);
+          float rays = smoothstep(0.7, 1.0, rayPattern);
+          col += vec3(0.04, 0.11, 0.18) * rays * 0.7;
+
+          return col;
+        }
+
+        vec3 ultraBlue(float depth, float t, vec2 uv) {
+          vec3 deep = vec3(0.0, 0.08, 0.27);
+          vec3 mid  = vec3(0.02, 0.48, 0.90);
+          vec3 surf = vec3(0.82, 0.98, 1.0);
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 2.7));
+
+          float shimmer = smoothstep(
+            0.8,
+            1.0,
+            sin((uv.x + uv.y + t * 4.0) * 18.0 + noise(uv * 16.0) * 6.0)
+          );
+          col += shimmer * 0.10;
+
+          float caustic = noise(uv * 24.0 + vec2(t * 4.5, -t * 3.6));
+          caustic = smoothstep(0.66, 1.0, caustic);
+          col += caustic * 0.07;
+
+          return col;
+        }
+
+        vec3 moonShimmer(float depth, float t, vec2 uv) {
+          vec3 deep = vec3(0.0, 0.02, 0.08);
+          vec3 mid  = vec3(0.02, 0.18, 0.32);
+          vec3 surf = vec3(0.82, 0.94, 1.0);
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 4.0));
+
+          float moonBand = smoothstep(0.2, 0.85, uv.y);
+          col *= mix(0.6, 1.3, moonBand);
+
+          float rayPattern = sin((uv.x * 5.0) - t * 2.8);
+          float rays = smoothstep(0.75, 1.0, rayPattern);
+          col += vec3(0.35, 0.5, 0.9) * rays * 0.25;
+
+          return col;
+        }
+
+        vec3 realWaterDeep(float depth, float t, vec2 uv) {
+          vec3 deep = vec3(0.0, 0.06, 0.18);
+          vec3 mid  = vec3(0.04, 0.35, 0.72);
+          vec3 surf = vec3(0.84, 0.98, 1.0);
+          vec3 col = mix(deep, mid, depth);
+          col = mix(col, surf, pow(1.0 - depth, 3.2));
+
+          float nFine = noise(uv * 30.0 + vec2(t * 3.0, -t * 3.0));
+          float spark = smoothstep(0.92, 1.0, nFine);
+          col += vec3(0.15, 0.22, 0.28) * spark * 0.55;
+
+          return col;
+        }
+
+        void main() {
+          float t = uTime * 0.05;
+
+          float nDepth = noise(vUv * 6.0 + vec2(t * 1.7, -t * 1.3));
+          float depth = smoothstep(0.0, 1.0, vUv.y + nDepth * 0.13);
+
+          // Choose palette by mode
+          vec3 col;
+          if (uMode < 0.5) {
+            col = classicPacific(depth, t, vUv);
+          } else if (uMode < 1.5) {
+            col = ultraBlue(depth, t, vUv);
+          } else if (uMode < 2.5) {
+            col = moonShimmer(depth, t, vUv);
+          } else {
+            col = realWaterDeep(depth, t, vUv);
           }
 
-          void main() {
-            vUv = uv;
-            vPos = position;
+          // Day vs night tint
+          vec3 dayTint = vec3(0.0, 0.05, 0.10);
+          vec3 nightTint = vec3(0.0, 0.0, 0.0);
+          vec3 tint = mix(nightTint, dayTint, uDayFactor);
+          col += tint;
 
-            vec3 pos = position;
+          // Whitecaps on high wave crests
+          float crest = smoothstep(0.12, 0.32, abs(vWave));
+          col += vec3(0.35, 0.45, 0.55) * crest * 0.55;
 
-            pos += gerstner(normalize(vec2(1.0, 0.4)), 0.45, 2.5, 0.6, position);
-            pos += gerstner(normalize(vec2(-1.0, 0.2)), 0.35, 1.5, 0.9, position);
-            pos += gerstner(normalize(vec2(0.6, -1.0)), 0.25, 3.2, 0.4, position);
+          // Vignette
+          vec2 center = vUv - 0.5;
+          float dist = length(center);
+          float vignette = smoothstep(0.82, 0.25, dist);
+          col *= mix(0.78, 1.18, vignette);
 
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform float uTime;
-          uniform vec3 uDeep;
-          uniform vec3 uBlue;
-          uniform vec3 uFoam;
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
 
-          varying vec3 vPos;
-          varying vec2 vUv;
-
-          void main() {
-            float depth = smoothstep(-1.0, 2.0, vPos.y * 1.2);
-            vec3 color = mix(uDeep, uBlue, depth);
-
-            float foamLine = smoothstep(0.15, 0.25, vPos.y * 1.2);
-            color = mix(color, uFoam, foamLine * 0.25);
-
-            float shimmer = sin(vUv.x * 30.0 + uTime * 2.0) * 0.04;
-            shimmer += sin(vUv.y * 25.0 - uTime * 1.4) * 0.03;
-            color += shimmer;
-
-            gl_FragColor = vec4(color, 1.0);
-          }
-        `,
+      const material = new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader,
+        fragmentShader,
         side: THREE.DoubleSide
       });
 
-      ocean = new THREE.Mesh(geo, material);
-      scene.add(ocean);
+      const mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+      const fogColor = new THREE.Color(0x000814);
+      scene.fog = new THREE.Fog(fogColor, 12, 45);
+      renderer.setClearColor(fogColor, 1.0);
+
+      const clock = new THREE.Clock();
+
+      let waveBoostTimeout = null;
+      function boostWaves(strength, duration) {
+        if (!uniforms.uWaveAmp) return;
+        uniforms.uWaveAmp.value = strength;
+        if (waveBoostTimeout) clearTimeout(waveBoostTimeout);
+        waveBoostTimeout = setTimeout(function () {
+          uniforms.uWaveAmp.value = 1.0;
+        }, duration);
+      }
+      function onResize() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+
+      window.addEventListener("resize", onResize);
+      onResize();
+
+      // HUD events
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", function () {
+          currentModeIndex = (currentModeIndex + 1) % modes.length;
+          uniforms.uMode.value = currentModeIndex;
+          updateHud(uniforms);
+        });
+      }
+
+      if (boostBtn) {
+        boostBtn.addEventListener("click", function () {
+          boostWaves(2.1, 1400);
+        });
+      }
+
+      // Slight reactive waves
+      window.addEventListener("mousemove", function () {
+        boostWaves(1.4, 700);
+      });
+
+      window.addEventListener("touchstart", function () {
+        boostWaves(1.6, 900);
+      });
+
+      // Initial HUD + sky
+      updateHud(uniforms);
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        const elapsed = clock.getElapsedTime();
+        uniforms.uTime.value = elapsed;
+
+        // Gentle camera sway
+        const sway = Math.sin(elapsed * 0.16) * 0.6;
+        camera.position.x = sway;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
 
       animate();
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      let t = (Date.now() - start) * 0.001;
-      material.uniforms.uTime.value = t;
-
-      camera.position.x = Math.sin(t * 0.25) * 0.22;
-      camera.position.y = 1.2 + Math.sin(t * 0.15) * 0.06;
-      camera.rotation.z = Math.sin(t * 0.1) * 0.02;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-
-    window.addEventListener("resize", () => {
-      if (!renderer) return;
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(initOcean, 150);
-    });
+    })();
   </script>
-
-  <!-- ============================= -->
-  <!-- FOOTER                        -->
-  <!-- ============================= -->
-  <footer style="text-align:center;color:var(--muted);padding:30px 20px;font-size:0.75rem;">
-    SideGuy Solutions · North County San Diego · V22 UltraBlue
-  </footer>
-
 </body>
 </html>
