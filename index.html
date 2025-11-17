@@ -1,1036 +1,338 @@
-<!--
-  SideGuy Solutions
-  Version: 21.0-hybrid-ocean-blue
-  Hero: "Where code meets the coastline."
-  Mode: Hybrid V18 Blue · Day/Night Tint · Coastal Toolkit
-  Author: PJ (+ ChatGPT assist)
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
-
-  <!-- Core SEO -->
-  <meta
-    name="description"
-    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Web3 & Solana payments, ticketing flows, and DFS tools for North County startups, venues, and operators."
-  />
-  <meta
-    name="keywords"
-    content="San Diego software development, San Diego app development, San Diego mobile app development, San Diego AI development, AI automation San Diego, San Diego tech concierge, North County San Diego startups, Encinitas developers, Solana Beach tech, custom software agency San Diego, Web3 development San Diego, blockchain developers San Diego, Solana developers San Diego, North County software agency, San Diego AI consulting, San Diego startup developers, DFS tools, ticketing software San Diego, coastal concierge tech"
-  />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Tap the ocean portal to summon PJ. Custom apps, AI automation, Web3 & Solana payments, ticket flows, and DFS tools built from Solana Beach and North County San Diego." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sideguysolutions.com/" />
-
-  <link rel="canonical" href="https://sideguysolutions.com/" />
-
-  <!-- LocalBusiness Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "SideGuy Solutions",
-    "description": "Coastal tech concierge for San Diego and North County — custom apps, AI automation, Web3 and Solana payment flows, ticketing systems, and DFS tools.",
-    "url": "https://sideguysolutions.com/",
-    "telephone": "+1-773-544-1231",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Solana Beach",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    },
-    "areaServed": [
-      "San Diego",
-      "North County San Diego",
-      "Solana Beach",
-      "Encinitas",
-      "Del Mar",
-      "Carlsbad"
-    ]
-  }
-  </script>
+  <title>SideGuy Ocean Test</title>
 
   <style>
-    /* ================================================
-       ROOT THEME
-    ================================================= */
-    :root {
-      --bg: #020617;
-      --bg-day: #031528;
-      --bg-night: #000814;
-
-      --text: #e5f2ff;
-      --soft: #94a3b8;
-      --muted: #64748b;
-
-      --accent: #38bdf8;
-      --accent-night: #4cc9ff;
-
-      --card: rgba(15, 23, 42, 0.94);
-      --glass: rgba(15, 23, 42, 0.8);
-
-      --radius: 18px;
-      --pill: 999px;
-
-      --shadow-deep: 0 22px 70px rgba(15, 23, 42, 0.96);
-    }
-
+    /* RESET */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       height: 100%;
       width: 100%;
+      overflow: hidden;
+      background: #000814;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      overflow-x: hidden;
-      min-height: 100vh;
-      transition: background 0.5s ease;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* ================================================
-       OCEAN CANVAS
-    ================================================= */
+    /* CANVAS — FULLSCREEN */
     #ocean-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
+      display: block;
+      background: radial-gradient(circle at top, #0ea5e9 0%, #001428 70%);
       z-index: -1;
-      display: block;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
     }
 
-    /* ================================================
-       HEADER / NAV
-    ================================================= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 10px 20px;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(2, 6, 23, 0.96),
-        rgba(2, 6, 23, 0.85),
-        transparent
-      );
-      border-bottom: 1px solid rgba(56, 189, 248, 0.28);
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-pill {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 45%, #0f172a 100%);
-      box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.5),
-        0 0 26px rgba(56, 189, 248, 0.9);
-    }
-
-    .brand-text {
-      font-size: 0.95rem;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .version-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 12px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-links a {
-      color: var(--soft);
-      padding-bottom: 2px;
-      border-bottom: 1px solid transparent;
-      cursor: pointer;
-    }
-
-    .nav-links a:hover {
-      color: #e5f2ff;
-      border-bottom-color: rgba(56, 189, 248, 0.7);
-    }
-
-    @media (max-width: 880px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-      }
-    }
-
-    /* ================================================
-       HERO
-    ================================================= */
-    .hero {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 40px 20px 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 28px;
-      }
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.1rem);
-      font-weight: 850;
-      line-height: 1.04;
-      margin-bottom: 12px;
-      text-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-title span {
-      background: linear-gradient(to right, #e0f2fe, #38bdf8, #a5f3fc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--soft);
-      max-width: 34rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .hero-sub strong {
-      color: #e5f2ff;
-      font-weight: 600;
-    }
-
-    .hero-contacts {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    /* ================================================
-       BUTTONS
-    ================================================= */
-    button {
-      font-family: inherit;
-      border: none;
-      cursor: pointer;
-      background: none;
-    }
-
-    .btn-primary {
-      position: relative;
-      padding: 11px 18px;
-      border-radius: var(--pill);
-      background: radial-gradient(circle at 0 0, #e0f2fe, #38bdf8);
-      color: #020617;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.85),
-        0 14px 36px rgba(8, 47, 73, 0.95),
-        0 0 40px rgba(56, 189, 248, 0.85);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        filter 0.15s ease;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .btn-primary::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.45), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: saturate(1.25);
-      box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 18px 40px rgba(8, 47, 73, 1),
-        0 0 70px rgba(56, 189, 248, 1);
-    }
-
-    .btn-primary:hover::after {
-      opacity: 1;
-    }
-
-    .btn-secondary {
-      background: radial-gradient(circle at 0 0, #0ea5e9, #0369a1);
-      color: #e0f2fe;
-    }
-
-    /* Special glow for TAP TO SUMMON PJ */
-    .btn-summon {
-      animation: summonGlow 2.4s ease-in-out infinite;
-    }
-
-    @keyframes summonGlow {
-      0% {
-        box-shadow:
-          0 0 0 0 rgba(56, 189, 248, 0.8),
-          0 14px 36px rgba(8, 47, 73, 0.95),
-          0 0 40px rgba(56, 189, 248, 0.85);
-      }
-      50% {
-        box-shadow:
-          0 0 0 12px rgba(56, 189, 248, 0),
-          0 18px 48px rgba(8, 47, 73, 1),
-          0 0 80px rgba(56, 189, 248, 1);
-      }
-      100% {
-        box-shadow:
-          0 0 0 0 rgba(56, 189, 248, 0),
-          0 14px 36px rgba(8, 47, 73, 0.95),
-          0 0 40px rgba(56, 189, 248, 0.85);
-      }
-    }
-
-    /* ================================================
-       ORB GLOW
-    ================================================= */
-    .hero-orb-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-    }
-
-    .orb-glow-ring {
-      position: absolute;
-      inset: -14%;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 0, rgba(224, 242, 254, 0.4), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(56, 189, 248, 0.55), transparent 65%);
-      opacity: 0.8;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    #summon-orb {
-      position: relative;
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.55);
-      background:
-        radial-gradient(circle at 25% 20%, #f9fafb 0%, #bae6fd 30%, #38bdf8 55%, #0f172a 100%);
-      box-shadow:
-        0 0 45px rgba(56, 189, 248, 0.7),
-        0 0 120px rgba(56, 189, 248, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        filter 0.18s ease,
-        box-shadow 0.18s ease;
-      animation: orbPulseGlow 2.6s ease-in-out infinite;
-    }
-
-    #summon-orb::after {
-      content: "";
-      position: absolute;
-      inset: 16%;
-      border-radius: 50%;
-      border: 1px solid rgba(248, 250, 252, 0.6);
-      box-shadow: 0 0 35px rgba(248, 250, 252, 0.9);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    #summon-orb:hover {
-      transform: translateY(-2px) scale(1.05);
-      filter: saturate(1.25);
-      box-shadow:
-        0 0 55px rgba(56, 189, 248, 0.9),
-        0 0 160px rgba(56, 189, 248, 1);
-    }
-
-    #summon-orb-label {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
-      color: #020617;
-      font-weight: 800;
-      text-shadow:
-        0 0 12px rgba(248, 250, 252, 0.9),
-        0 0 28px rgba(14, 165, 233, 0.95);
-      animation: labelGlow 2s ease-in-out infinite;
-    }
-
-    #summon-orb-label span {
-      display: block;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      opacity: 0.9;
-    }
-
-    .orb-caption {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    @keyframes orbPulseGlow {
-      0% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
-      50% {
-        transform: scale(1.03);
-        box-shadow:
-          0 0 60px rgba(56, 189, 248, 1),
-          0 0 150px rgba(56, 189, 248, 1);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 38px rgba(56, 189, 248, 0.7),
-          0 0 100px rgba(56, 189, 248, 0.8);
-      }
-    }
-
-    @keyframes labelGlow {
-      0%,
-      100% {
-        text-shadow:
-          0 0 10px rgba(248, 250, 252, 0.9),
-          0 0 20px rgba(59, 130, 246, 0.8);
-      }
-      50% {
-        text-shadow:
-          0 0 16px rgba(248, 250, 252, 1),
-          0 0 30px rgba(56, 189, 248, 1);
-      }
-    }
-
-    /* ================================================
-       PORTAL BURST FX
-    ================================================= */
-    .portal-burst-flash {
-      animation: burstFlash 0.45s ease-out;
-    }
-
-    @keyframes burstFlash {
-      0% {
-        background: rgba(255, 255, 255, 0);
-      }
-      20% {
-        background: rgba(255, 255, 255, 0.35);
-      }
-      100% {
-        background: rgba(255, 255, 255, 0);
-      }
-    }
-
-    .portal-burst-ring {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      animation: burstRing 0.9s ease-out;
-      z-index: 9998;
-      border-radius: 50%;
-      border: 2px solid rgba(56, 189, 248, 1);
-    }
-
-    @keyframes burstRing {
-      0% {
-        transform: scale(0.2);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(3.6);
-        opacity: 0;
-      }
-    }
-
-    /* ================================================
-       SECTIONS / GRID / CARDS
-    ================================================= */
-    .section {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 32px 20px 40px;
-    }
-
-    .section-title {
-      font-size: 0.85rem;
-      color: var(--soft);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .section-subheading {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-    }
-
-    .section-lead {
-      font-size: 0.92rem;
-      color: var(--soft);
-      margin-bottom: 12px;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .pill-tag {
-      border-radius: var(--pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 4px 10px;
-      font-size: 0.72rem;
-      color: var(--soft);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 880px) {
-      .two-col {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    @media (max-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .card {
-      position: relative;
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      box-shadow: var(--shadow-deep);
-      overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.12), transparent 55%);
-      opacity: 0;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      transition: opacity 0.18s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.75);
-      box-shadow:
-        0 18px 55px rgba(15, 23, 42, 0.98),
-        0 0 40px rgba(56, 189, 248, 0.6);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card h3 {
-      font-size: 1rem;
-      margin-bottom: 6px;
-    }
-
-    .card p {
-      font-size: 0.86rem;
-      color: var(--soft);
-      margin-bottom: 10px;
-    }
-
-    .card-small {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* AUDIO TOGGLE */
-    .audio-toggle {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      color: #e0f2fe;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
-
-    .audio-toggle span {
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* OCEAN MODE TOGGLE */
-    .ocean-mode-toggle {
+    /* MODE BUTTON */
+    #mode-btn {
       position: fixed;
       left: 16px;
-      bottom: 18px;
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      color: #e0f2fe;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
-
-    .ocean-mode-toggle button {
-      font-size: 0.68rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: transparent;
-      color: #e0f2fe;
-    }
-
-    .ocean-mode-toggle button.active {
-      border-color: rgba(56, 189, 248, 0.95);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    /* INTAKE + BLOG + FOOTER (extra styles) */
-    .intake-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 880px) {
-      .intake-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .intake-form {
-      background: var(--glass);
-      border-radius: 18px;
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: var(--shadow-deep);
-    }
-
-    .intake-form label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--soft);
-      margin-bottom: 4px;
-    }
-
-    .intake-form input,
-    .intake-form select,
-    .intake-form textarea {
-      width: 100%;
-      padding: 9px 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text);
-      font-size: 0.85rem;
-    }
-
-    .intake-form textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-
-    .intake-note {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .blog-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    @media (max-width: 880px) {
-      .blog-list {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .blog-card-title {
-      font-size: 0.98rem;
-      margin-bottom: 4px;
-    }
-
-    .blog-card-meta {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 26px 20px 32px;
-      font-size: 0.75rem;
-      color: var(--muted);
-      border-top: 1px solid rgba(56, 189, 248, 0.25);
-      margin-top: 30px;
-      background: linear-gradient(to top, rgba(2, 6, 23, 0.96), transparent);
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-inline: 16px;
-      }
-      .section {
-        padding-inline: 16px;
-      }
-    }
-
-    /* MODALS */
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(14px);
-      z-index: 9999;
-    }
-
-    .modal-content {
-      background: var(--card);
-      padding: 26px;
-      border-radius: 20px;
-      width: min(90%, 440px);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      box-shadow: 0 0 50px rgba(56, 189, 248, 0.5);
-    }
-
-    .modal h2 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-    }
-
-    .modal label {
-      font-size: 0.9rem;
-      color: var(--soft);
-    }
-
-    .modal input,
-    .modal select {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 16px;
-      border-radius: 10px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text);
-      font-size: 0.85rem;
-    }
-
-    .calc-btn {
-      background: #38bdf8;
-      color: #020617;
-      border-radius: var(--pill);
+      bottom: 16px;
+      z-index: 20;
       padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: rgba(0, 9, 20, 0.7);
+      backdrop-filter: blur(8px);
+      color: #e0faff;
+      font-size: 0.8rem;
       cursor: pointer;
-      border: none;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 10px;
       letter-spacing: 0.08em;
     }
 
-    .close-btn {
-      background: #ef4444;
-      color: #fff;
-      border-radius: var(--pill);
-      padding: 9px 14px;
-      cursor: pointer;
-      border: none;
-      font-weight: 700;
-      margin-top: 10px;
-    }
-
-    .result-box {
-      margin-top: 12px;
-      background: rgba(56, 189, 248, 0.15);
-      padding: 12px;
-      border-radius: 12px;
-      color: #a5f3fc;
-      font-size: 0.95rem;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      display: none;
+    /* MODE LABEL */
+    #mode-label {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0, 9, 20, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      backdrop-filter: blur(8px);
+      color: #e0faff;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
     }
   </style>
 </head>
 <body>
-  <!-- REAL THREE.JS OCEAN BACKGROUND -->
+
+  <!-- OCEAN SURFACE -->
   <canvas id="ocean-canvas"></canvas>
 
-  <!-- AUDIO (put ocean-loop.mp3 at site root and uncomment source to enable) -->
-  <audio id="ocean-audio" loop>
-    <!-- <source src="ocean-loop.mp3" type="audio/mpeg" /> -->
-  </audio>
+  <!-- MODE BUTTON -->
+  <button id="mode-btn">Cycle Ocean Mode</button>
+  <div id="mode-label">Mode: Loading…</div>
+       <!-- THREE.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
-  <button type="button" class="audio-toggle" id="audio-toggle">
-    🌊 <span>Ocean Audio</span>
-  </button>
+  <script>
+    let scene, camera, renderer;
+    let oceanMesh, oceanMaterial;
+    let clock = new THREE.Clock();
 
-  <div class="ocean-mode-toggle" id="ocean-mode-toggle">
-    <span style="letter-spacing:0.1em; text-transform:uppercase; font-size:0.68rem;">Ocean</span>
-    <button type="button" data-mode="auto" class="active">Auto</button>
-    <button type="button" data-mode="day">Day</button>
-    <button type="button" data-mode="night">Night</button>
-  </div>
+    /* ============================================================
+       4 OCEAN MODES (FRAGMENT SHADERS)
+       Hybrid V18 Color + UltraBlue Motion + Night + Real Water
+    ============================================================ */
 
-  <!-- ============================= -->
-  <!-- HEADER                        -->
-  <!-- ============================= -->
-  <header>
-    <div class="nav-inner">
-      <div class="brand-block">
-        <div class="brand-pill"></div>
-        <div class="brand-text">SideGuy Solutions</div>
-      </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#apps">Apps</a>
-          <a href="#ai">AI</a>
-          <a href="#web3">Web3</a>
-          <a href="#tickets">Tickets</a>
-          <a href="#dfs">DFS</a>
-          <a href="#pain">Pain Points</a>
-          <a href="#ai-dept">AI Dept</a>
-          <a href="#intake">Intake</a>
-          <a href="#blog">Blog</a>
-        </nav>
-        <div class="version-tag">v21.0 · HYBRID LEGENDARY OCEAN BLUE · SAN DIEGO</div>
-      </div>
-    </div>
-  </header>
+    const fragmentClassic = `
+      uniform float uTime;
+      varying vec3 vPos;
 
-  <!-- ============================= -->
-  <!-- HERO SECTION                  -->
-  <!-- ============================= -->
-  <section class="hero">
-    <!-- LEFT SIDE: TEXT + BUTTONS -->
-    <div>
-      <h1 class="hero-title">
-        Where <span>San Diego</span> builds, codes, and scales.
-      </h1>
+      void main() {
+        float d = smoothstep(-1.0, 2.0, vPos.y * 1.2);
+        vec3 deep = vec3(0.0, 0.2, 0.45);
+        vec3 mid = vec3(0.0, 0.45, 0.85);
+        vec3 color = mix(deep, mid, d);
 
-      <p class="hero-sub">
-        Coastal concierge tech for the 2025 era — <strong>custom apps</strong>,
-        <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>,
-        <strong>ticketing flows</strong>, and <strong>DFS tools</strong> tuned for
-        North County and greater San Diego.
-      </p>
+        float shimmer = sin(vPos.x * 20.0 + uTime * 1.5) * 0.04;
+        shimmer += sin(vPos.z * 18.0 - uTime * 1.2) * 0.03;
+        color += shimmer;
 
-      <p class="section-lead" style="max-width:34rem;">
-        Don’t be “sooo 24.” If you don’t have an AI department in your life and business,
-        SideGuy helps you act like it’s already <strong>25 and beyond</strong>.
-      </p>
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
 
-      <div class="hero-contacts">
-        Text / call:
-        <strong><a href="tel:+17735441231">773-544-1231</a></strong><br />
-        Email:
-        <strong><a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a></strong>
-      </div>
+    const fragmentUltraBlue = `
+      uniform float uTime;
+      varying vec3 vPos;
 
-      <div class="hero-ctas">
-        <button id="summon-btn" class="btn-primary btn-summon">
-          TAP TO SUMMON PJ
-        </button>
-        <button id="show-toolkit" class="btn-primary btn-secondary">
-          OPEN TOOLKIT
-        </button>
-      </div>
+      void main() {
+        float d = smoothstep(-2.0, 3.0, vPos.y * 2.2);
+        vec3 deep = vec3(0.00, 0.15, 0.35);
+        vec3 mid = vec3(0.00, 0.60, 1.00);
+        vec3 color = mix(deep, mid, d);
 
-      <p class="card-small" style="margin-top:10px; max-width:32rem; color:var(--muted);">
-        Free portal gets you into PJ’s inbox. Coming soon: a tiny USDC “Fast Lane” for people who
-        want a scoped build brief in hours, not weeks.
-      </p>
-    </div>
+        float shimmer = sin(vPos.x * 35.0 + uTime * 2.4) * 0.06;
+        shimmer += sin(vPos.z * 22.0 - uTime * 1.6) * 0.04;
+        color += shimmer;
 
-    <!-- RIGHT SIDE: ORB -->
-    <div class="hero-orb-wrap">
-      <div class="orb-glow-ring"></div>
-      <button id="summon-orb" aria-label="Summon PJ coastal portal">
-        <div id="summon-orb-label">
-          TAP TO<br />SUMMON PJ
-          <span>Coastal Portal</span>
-        </div>
-      </button>
-      <div class="orb-caption">Portal Online · North County</div>
-    </div>
-  </section>
-  <!-- ============================= -->
-  <!-- TOOLKIT SECTION               -->
-  <!-- ============================= -->
-  <section class="section" id="toolkit">
-    <div class="section-title">SideGuy Toolkit</div>
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
 
-    <div class="grid">
-      <!-- SOLANA CALC -->
-      <div class="card">
-        <h3>💠 Solana Processing Savings</h3>
-        <p>See how much you save running payments on Solana rails versus old-school processors.</p>
-        <button class="btn-primary btn-secondary" onclick="openSavingsCalc()">
-          OPEN CALCULATOR
-        </button>
-        <div class="card-small">Built for San Diego agencies, venues, and startups.</div>
-      </div>
+    const fragmentNight = `
+      uniform float uTime;
+      varying vec3 vPos;
 
-      <!-- DFS MULTIPLIER -->
-      <div class="card">
-        <h3>📈 DFS Promo Multiplier</h3>
-        <p>Quick EV snapshots on 2-leg and boosted parlays. Educational only, zero pick-selling.</p>
-        <button class="btn-primary btn-secondary" onclick="openDFS()">
-          DFS TOOL
-        </button>
-        <div class="card-small">Helps structure promos and slates without going full degenerate.</div>
-      </div>
+      void main() {
+        float d = smoothstep(-2.0, 4.0, vPos.y * 3.0);
+        vec3 deep = vec3(0.00, 0.05, 0.12);
+        vec3 mid = vec3(0.35, 0.55, 0.90);
+        vec3 color = mix(deep, mid, d * 0.4);
 
-     
+        float moon = sin(vPos.x * 18.0 + uTime * 0.9) * 0.03;
+        moon += sin(vPos.z * 18.0 - uTime * 0.6) * 0.03;
+
+        color += moon * 1.8;
+
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
+
+    const fragmentRealWater = `
+      uniform float uTime;
+      varying vec3 vPos;
+
+      void main() {
+        float d = smoothstep(-2.0, 3.0, vPos.y * 1.6);
+        vec3 deep = vec3(0.00, 0.10, 0.22);
+        vec3 mid = vec3(0.15, 0.65, 0.95);
+        vec3 color = mix(deep, mid, d);
+
+        float sparkle = sin(vPos.x * 45.0 + uTime * 3.0) * 0.05;
+        sparkle += sin(vPos.z * 30.0 - uTime * 2.0) * 0.04;
+
+        color += sparkle;
+
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
+
+    /* ============================================================
+       VERTEX SHADER (Gerstner Hybrid, all modes share this)
+    ============================================================ */
+    const vertexShader = `
+      uniform float uTime;
+      varying vec3 vPos;
+
+      vec3 wave(vec2 dir, float steep, float wavelength, float speed, vec3 pos) {
+        float k = 6.28318 / wavelength;
+        float phase = speed * k;
+        float f = k * (dot(dir, pos.xz) - speed * uTime);
+        float a = steep / k;
+
+        return vec3(
+          dir.x * (a * cos(f)),
+          a * sin(f),
+          dir.y * (a * cos(f))
+        );
+      }
+
+      void main() {
+        vPos = position;
+        vec3 p = position;
+
+        p += wave(normalize(vec2(1.0, 0.4)), 0.35, 2.6, 0.8, position);
+        p += wave(normalize(vec2(-1.0, 0.2)), 0.25, 1.4, 1.2, position);
+        p += wave(normalize(vec2(0.6, -1.0)), 0.18, 3.4, 0.6, position);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `;
+
+    /* ============================================================
+       MODE SETUP
+    ============================================================ */
+    let modes = [
+      { name: "Classic Blue", shader: fragmentClassic },
+      { name: "UltraBlue Swell", shader: fragmentUltraBlue },
+      { name: "MoonShimmer Night", shader: fragmentNight },
+      { name: "Real Water", shader: fragmentRealWater }
+    ];
+
+    let currentMode = 0;
+    /* ============================================================
+       CREATE OCEAN MATERIAL BASED ON CURRENT MODE
+    ============================================================ */
+    function createMaterial(modeIndex) {
+      return new THREE.ShaderMaterial({
+        uniforms: {
+          uTime: { value: 0 }
+        },
+        vertexShader: vertexShader,
+        fragmentShader: modes[modeIndex].shader,
+        side: THREE.DoubleSide
+      });
+    }
+
+    /* ============================================================
+       INIT THREE.JS SCENE
+    ============================================================ */
+    function initOcean() {
+      const canvas = document.getElementById("ocean-canvas");
+
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 1.8, 3.5);
+
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: false,
+        alpha: false,
+        premultipliedAlpha: false,
+        powerPreference: "high-performance"
+      });
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+
+      // Ocean geometry
+      const geo = new THREE.PlaneGeometry(20, 20, 300, 300);
+      geo.rotateX(-Math.PI / 2);
+
+      // Material for current mode
+      oceanMaterial = createMaterial(currentMode);
+      oceanMesh = new THREE.Mesh(geo, oceanMaterial);
+      scene.add(oceanMesh);
+
+      // Auto mode based on SD time
+      autoSelectMode();
+
+      animate();
+    }
+
+    /* ============================================================
+       AUTO DAY/NIGHT MODE
+       San Diego logic → 6am–6pm = day, else night
+    ============================================================ */
+    function autoSelectMode() {
+      const now = new Date();
+      const hour = now.getHours();
+
+      if (hour >= 6 && hour < 18) {
+        // Day → Classic Hybrid look
+        currentMode = 0; // Classic Blue
+      } else {
+        // Night → MoonShimmer
+        currentMode = 2; // Night mode
+      }
+
+      oceanMaterial = createMaterial(currentMode);
+      oceanMesh.material = oceanMaterial;
+
+      updateModeLabel();
+    }
+
+    /* ============================================================
+       MODE SWITCH BUTTON
+    ============================================================ */
+    document.getElementById("mode-btn").onclick = () => {
+      currentMode = (currentMode + 1) % modes.length;
+      oceanMaterial = createMaterial(currentMode);
+      oceanMesh.material = oceanMaterial;
+      updateModeLabel();
+    };
+
+    function updateModeLabel() {
+      const label = document.getElementById("mode-label");
+      label.textContent = "Mode: " + modes[currentMode].name;
+    }
+
+    /* ============================================================
+       ANIMATION LOOP
+    ============================================================ */
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const t = clock.getElapsedTime();
+      oceanMaterial.uniforms.uTime.value = t;
+
+      // Camera slow oceanic motion
+      camera.position.x = Math.sin(t * 0.15) * 0.4;
+      camera.position.z = 3.5 + Math.sin(t * 0.1) * 0.2;
+      camera.position.y = 1.6 + Math.sin(t * 0.07) * 0.15;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    /* ============================================================
+       HANDLE RESIZE
+    ============================================================ */
+    window.addEventListener("resize", () => {
+      if (!renderer) return;
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+
+    /* ============================================================
+       DOM READY
+    ============================================================ */
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(initOcean, 50);
+      document.getElementById("mode-label").textContent = "Mode: Starting…";
+    });
+  </script>
+</body>
+</html>
