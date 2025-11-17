@@ -1,19 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>SideGuy Solutions | Real Ocean Engine</title>
+<title>SideGuy Solutions | Cinematic Ocean Engine</title>
 
 <style>
   html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: #020617;
     height: 100%;
+    background: #001524;
   }
+
   #ocean-canvas {
     position: fixed;
     inset: 0;
@@ -21,149 +23,210 @@
     height: 100vh;
   }
 
-  #modeBtn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 10px 18px;
-    border-radius: 50px;
-    font-family: sans-serif;
-    color: white;
-    cursor: pointer;
-    z-index: 10;
-    backdrop-filter: blur(8px);
-  }
-
   #label {
     position: fixed;
-    top: 60px;
-    right: 20px;
-    color: #8bdcff;
+    top: 20px;
+    left: 20px;
     font-family: sans-serif;
-    font-size: 12px;
+    color: #8bdcff;
+    font-size: 14px;
     z-index: 10;
+    letter-spacing: 1px;
+    text-shadow: 0 0 6px #000;
   }
 </style>
 </head>
 
 <body>
 
-<button id="modeBtn">Switch Ocean Mode</button>
-<div id="label">Pacific Blue</div>
-
+<div id="label">🌊 SideGuy Ocean Engine — V4 Cinema</div>
 <canvas id="ocean-canvas"></canvas>
 
+<!-- Three.js -->
 <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
+
+<!-- Water + Sky -->
 <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
-<script src="https://unpkg.com/three@0.138.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
+
+<!-- Post Processing for BLOOM -->
+<script src="https://unpkg.com/three@0.138.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://unpkg.com/three@0.138.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://unpkg.com/three@0.138.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
 <script>
 /* ===========================================================
-   OFFICIAL THREE.JS WATER (GUARANTEED TO RENDER)
+   FULL OCEAN ENGINE V4 — CINEMATIC + ORB + BLOOM
    =========================================================== */
 
-let camera, scene, renderer, water, sun, mode = 0;
+let camera, scene, renderer, water, sky, sun;
+let orbGroup, orb, orbLight, rippleLight;
+let composer, bloomPass;
+
+let camTime = 0;
+let camSpeed = 0.00035;
 
 init();
 animate();
 
 function init() {
-
   const canvas = document.getElementById("ocean-canvas");
 
   renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    antialias: true
+    antialias: true,
+    powerPreference: "high-performance"
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   scene = new THREE.Scene();
 
-  camera = new THREE.PerspectiveCamera(
-    55,
-    window.innerWidth / window.innerHeight,
-    1,
-    20000
-  );
-  camera.position.set(0, 50, 120);
+  /* ---- CAMERA ---- */
+  camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 20000);
+  camera.position.set(0, 60, 160);
 
+  /* ---- SUN ---- */
   sun = new THREE.Vector3();
 
-  // SKY COLOR (deep pacific)
-  const waterGeometry = new THREE.PlaneGeometry(20000, 20000);
+  /* ---- SKY ---- */
+  sky = new THREE.Sky();
+  sky.scale.setScalar(10000);
+  scene.add(sky);
 
-  /* ---- WATER NORMALS (From CDN, SAFE) ---- */
+  const skyU = sky.material.uniforms;
+  skyU["turbidity"].value = 12;
+  skyU["rayleigh"].value = 2.3;
+  skyU["mieCoefficient"].value = 0.005;
+  skyU["mieDirectionalG"].value = 0.8;
+
+  updateSun();
+
+  /* ---- WATER ---- */
+  const waterGeometry = new THREE.PlaneGeometry(20000, 20000);
   const waterNormals = new THREE.TextureLoader().load(
     "https://threejs.org/examples/textures/waternormals.jpg",
-    function (tex) {
+    (tex) => {
       tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
     }
   );
 
-  /* ---- WATER MATERIAL ---- */
   water = new THREE.Water(waterGeometry, {
-    textureWidth: 1024,
-    textureHeight: 1024,
+    textureWidth: 2048,
+    textureHeight: 2048,
     waterNormals: waterNormals,
-    sunDirection: new THREE.Vector3(),
+    sunDirection: sun,
     sunColor: 0xffffff,
-    waterColor: 0x001e57, // deep pacific blue
-    distortionScale: 3.7,
+    waterColor: 0x0066cc,
+    distortionScale: 4.8,
     fog: false
   });
-
   water.rotation.x = -Math.PI / 2;
   scene.add(water);
 
-  /* ---- LIGHT ---- */
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  scene.add(light);
+  /* ===========================================================
+     PART 3 — FLOATING ORB + GLOW LIGHT
+     =========================================================== */
 
-  /* ---- SKYBOX ---- */
-  scene.background = new THREE.Color("#0a1a39");
+  orbGroup = new THREE.Group();
+  scene.add(orbGroup);
 
-  /* ---- CONTROLS (optional) ---- */
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI * 0.48;
-  controls.enableZoom = false;
+  const orbGeom = new THREE.SphereGeometry(12, 64, 64);
 
-  /* ---- MODE TOGGLE ---- */
-  document.getElementById("modeBtn").onclick = toggleMode;
+  const orbMat = new THREE.MeshStandardMaterial({
+    emissive: new THREE.Color(0x2ab8ff),
+    emissiveIntensity: 4.2,
+    color: 0x0a3d66,
+    roughness: 0.2,
+    metalness: 0.6
+  });
+
+  orb = new THREE.Mesh(orbGeom, orbMat);
+  orbGroup.add(orb);
+
+  orb.position.set(0, 22, 0);
+
+  orbLight = new THREE.PointLight(0x35c7ff, 3.4, 350, 2);
+  orbLight.position.set(0, 26, 0);
+  orbGroup.add(orbLight);
+
+  rippleLight = new THREE.PointLight(0x1188ff, 0.4, 200, 3);
+  rippleLight.position.set(0, 5, 0);
+  orbGroup.add(rippleLight);
+
+  /* ---- POST PROCESSING + BLOOM (PART 4) ---- */
+  composer = new THREE.EffectComposer(renderer);
+
+  const renderScene = new THREE.RenderPass(scene, camera);
+  composer.addPass(renderScene);
+
+  bloomPass = new THREE.UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.3,   // Bloom strength
+    0.4,   // Radius
+    0.85   // Threshold
+  );
+  composer.addPass(bloomPass);
+
+  /* ---- ORB CLICK ---- */
+  window.addEventListener("click", () => {
+    const dist = camera.position.distanceTo(orb.position);
+    if (dist < 300) {
+      console.log("🔥 PJ PORTAL TRIGGERED");
+      // add portal animation or email CTA here
+    }
+  });
 
   window.addEventListener("resize", onWindowResize);
 }
 
-function toggleMode() {
-  mode = (mode + 1) % 3;
+/* ---- SUN UPDATE ---- */
+function updateSun() {
+  const phi = THREE.MathUtils.degToRad(88);
+  const theta = THREE.MathUtils.degToRad(180);
+  sun.setFromSphericalCoords(1, phi, theta);
 
-  if (mode === 0) {
-    water.material.uniforms["waterColor"].value = new THREE.Color(0x001e57); // Pacific
-    document.getElementById("label").textContent = "Pacific Blue";
-  }
-  if (mode === 1) {
-    water.material.uniforms["waterColor"].value = new THREE.Color(0x037acb); // Tropical
-    document.getElementById("label").textContent = "Tropical Blue";
-  }
-  if (mode === 2) {
-    water.material.uniforms["waterColor"].value = new THREE.Color(0x0a0f2b); // Night
-    scene.background = new THREE.Color("#05080f");
-    document.getElementById("label").textContent = "Night Mode";
-  }
+  sky.material.uniforms["sunPosition"].value.copy(sun);
+  if (water) water.material.uniforms["sunDirection"].value.copy(sun).normalize();
 }
 
+/* ---- RESIZE ---- */
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
 }
 
+/* ===========================================================
+   MAIN ANIMATION LOOP — CAMERA MOTION + ORB + WATER + BLOOM
+   =========================================================== */
 function animate() {
   requestAnimationFrame(animate);
-  water.material.uniforms["time"].value += 0.9 / 60.0;
-  renderer.render(scene, camera);
+
+  // Water movement
+  water.material.uniforms["time"].value += 0.8 / 60.0;
+
+  // Camera drift
+  camTime += camSpeed;
+  camera.position.y = 60 + Math.sin(camTime * 1.5) * 1.8;
+  camera.position.z = 160 + Math.sin(camTime * 0.35) * 8;
+  camera.position.x = Math.sin(camTime * 0.25) * 12;
+  camera.lookAt(0, 0, 0);
+
+  // Orb floating
+  orbGroup.position.y = 22 + Math.sin(camTime * 2.5) * 1.5;
+  orbGroup.position.x = Math.sin(camTime * 0.6) * 3;
+  orbGroup.position.z = Math.cos(camTime * 0.3) * 3;
+
+  // Orb rotation
+  orb.rotation.y += 0.003;
+
+  // Ripple light flicker
+  rippleLight.intensity = 0.3 + Math.sin(camTime * 6) * 0.06;
+
+  // Render WITH bloom
+  composer.render();
 }
 </script>
 
