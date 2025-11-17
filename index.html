@@ -1,361 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>SideGuy Solutions | Coastal Tech Concierge</title>
-
-  <meta name="description" content="SideGuy Solutions — coastal tech concierge for apps, AI, Web3, ticketing, and DFS tools across San Diego + North County. Summon PJ.">
-  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Tap the ocean portal to summon PJ. Custom apps, AI, Web3 payments, and DFS tools built from Solana Beach." />
-  <link rel="canonical" href="https://sideguysolutions.com/" />
-
-  <style>
-    :root {
-      --bg: #00101f;
-      --text: #e9f5ff;
-      --soft: #93acc4;
-      --muted: #648095;
-      --accent: #42c8ff;
-
-      --card: rgba(0, 16, 31, 0.72);
-      --glass: rgba(0, 25, 45, 0.6);
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* FULLSCREEN OCEAN CANVAS */
-    #ocean-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      display: block;
-      background: radial-gradient(circle at top, #008be8 0%, #00101f 60%);
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 12px 22px;
-      backdrop-filter: blur(18px);
-      background: rgba(0, 15, 30, 0.72);
-      border-bottom: 1px solid rgba(66, 200, 255, 0.25);
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand {
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .version-tag {
-      font-size: .7rem;
-      color: var(--soft);
-      letter-spacing: .2em;
-    }
-
-    .hero {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 60px 20px 80px;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 32px;
-      align-items: center;
-    }
-
-    @media(max-width:900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      margin-bottom: 12px;
-    }
-
-    .hero-title span {
-      background: linear-gradient(to right, #a8e5ff, #42c8ff, #90f3ff);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--soft);
-      line-height: 1.6;
-      max-width: 480px;
-    }
-
-    .hero-ctas {
-      margin-top: 22px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-    }
-
-    .btn {
-      background: var(--accent);
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: none;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      color: #00101f;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-    }
-
-    /* ORB */
-    #summon-orb {
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.4);
-      background: radial-gradient(circle at 30% 20%, #f0fbff 0%, #a9e9ff 30%, #42c8ff 55%, #00101f 100%);
-      box-shadow: 0 0 60px rgba(66,200,255,0.8), 0 0 140px rgba(66,200,255,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      animation: orbPulse 2.6s ease-in-out infinite;
-    }
-
-    @keyframes orbPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-  </style>
-</head>
-
-<body>
 <canvas id="ocean-canvas"></canvas>
-
-<header>
-  <div class="nav-inner">
-    <div class="brand">SideGuy Solutions</div>
-    <div class="version-tag">V22.B · PACIFIC REAL WATER</div>
-  </div>
-</header>
-<section class="hero">
-  <div>
-    <h1 class="hero-title">
-      Where <span>San Diego</span> builds, codes, and scales.
-    </h1>
-
-    <p class="hero-sub">
-      Coastal concierge tech for 2025 — apps, AI automation,
-      Web3/Solana rails, ticketing flows, and DFS tools built from North County.
-    </p>
-
-    <div class="hero-ctas">
-      <button id="summon-btn" class="btn">SUMMON PJ</button>
-      <button class="btn btn-secondary" onclick="scrollToToolkit()">OPEN TOOLKIT</button>
-    </div>
-  </div>
-
-  <div style="display:flex;flex-direction:column;align-items:center;">
-    <button id="summon-orb">
-      <div style="text-align:center;font-size:.8rem;font-weight:800;letter-spacing:.15em;">
-        SUMMON<br>PJ
-      </div>
-    </button>
-    <p style="color:var(--muted);font-size:.72rem;margin-top:8px;">
-      Portal Online · North County
-    </p>
-  </div>
-</section>
-
-<section class="section" id="toolkit" style="max-width:1120px;margin:0 auto;padding:40px 20px;">
-  <h2 style="font-size:.85rem;color:var(--soft);letter-spacing:.2em;text-transform:uppercase;">SideGuy Toolkit</h2>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px;">
-    <div class="card" style="padding:16px;border:1px solid rgba(66,200,255,.4);border-radius:14px;background:var(--card);">
-      <h3>Solana Processing Savings</h3>
-      <p class="card-small">See how much you save running payments on Solana rails.</p>
-      <button class="btn btn-secondary" onclick="openSavingsCalc()">OPEN</button>
-    </div>
-
-    <div class="card" style="padding:16px;border:1px solid rgba(66,200,255,.4);border-radius:14px;background:var(--card);">
-      <h3>DFS Promo Multiplier</h3>
-      <p class="card-small">Quick EV snapshots. Zero pick-selling.</p>
-      <button class="btn btn-secondary" onclick="openDFS()">OPEN</button>
-    </div>
-
-    <div class="card" style="padding:16px;border:1px solid rgba(66,200,255,.4);border-radius:14px;background:var(--card);">
-      <h3>Ticket Flow Optimizer</h3>
-      <p class="card-small">Model price + fees to see hidden platform skim.</p>
-      <button class="btn btn-secondary" onclick="openTickets()">OPEN</button>
-    </div>
-  </div>
-</section>
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 <script>
-(function initOcean() {
-  const canvas = document.getElementById("ocean-canvas");
-  if (!canvas || !window.THREE) return;
+let scene, camera, renderer, ocean, material;
+let start = Date.now();
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    55,
+function initOcean() {
+  const canvas = document.getElementById("ocean-canvas");
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(
+    60,
     window.innerWidth / window.innerHeight,
     0.1,
-    200
+    100
   );
-  camera.position.set(0, 4.5, 9);
+  camera.position.set(0, 1.2, 2.4);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x00101f, 1);
 
-  const geometry = new THREE.PlaneGeometry(40, 40, 240, 240);
-  geometry.rotateX(-Math.PI / 2);
+  const geo = new THREE.PlaneGeometry(16, 16, 300, 300);
+  geo.rotateX(-Math.PI / 2);
 
-  const oceanUniforms = {
-    uTime: { value: 0 },
-    uWaveAmp: { value: 1.0 }
-  };
+  material = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0.0 },
+      uDeep: { value: new THREE.Color("#001428") },
+      uBlue: { value: new THREE.Color("#0b82ff") },
+      uFoam: { value: new THREE.Color("#e6faff") }
+    },
+    vertexShader: `
+      uniform float uTime;
+      varying vec3 vPos;
+      varying vec2 vUv;
 
-  const vertexShader = `
-    varying vec2 vUv;
-    uniform float uTime;
-    uniform float uWaveAmp;
+      // Gerstner wave function
+      vec3 gerstner(vec2 dir, float steep, float wavelength, float speed, vec3 position) {
+        float k = 2.0 * 3.14159 / wavelength;
+        float phase = speed * k;
+        float f = k * (dot(dir, position.xz) - speed * uTime);
+        float a = steep / k;
 
-    float wave(float x, float z, float t) {
-      return (
-        sin(x * 0.14 + t * 0.6) * 0.5 +
-        sin(z * 0.11 + t * 0.4) * 0.7 +
-        sin((x + z) * 0.1 + t * 0.25) * 0.4
-      );
-    }
+        return vec3(
+          dir.x * (a * cos(f)),
+          a * sin(f),
+          dir.y * (a * cos(f))
+        );
+      }
 
-    void main() {
-      vUv = uv;
-      vec3 pos = position;
+      void main() {
+        vUv = uv;
+        vPos = position;
 
-      float t = uTime;
+        vec3 pos = position;
 
-      float h = wave(pos.x, pos.z, t) * 0.32;
-      pos.y += h * uWaveAmp;
+        pos += gerstner(normalize(vec2(1.0, 0.4)), 0.45, 2.5, 0.6, position);
+        pos += gerstner(normalize(vec2(-1.0, 0.2)), 0.35, 1.5, 0.9, position);
+        pos += gerstner(normalize(vec2(0.6, -1.0)), 0.25, 3.2, 0.4, position);
 
-      gl_Position = projectionMatrix *
-                    modelViewMatrix *
-                    vec4(pos, 1.0);
-    }
-  `;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      uniform vec3 uDeep;
+      uniform vec3 uBlue;
+      uniform vec3 uFoam;
 
-  const fragmentShader = `
-    varying vec2 vUv;
-    uniform float uTime;
+      varying vec3 vPos;
+      varying vec2 vUv;
 
-    void main() {
-      float t = uTime * 0.1;
+      void main() {
+        float depth = smoothstep(-1.0, 2.0, vPos.y * 1.2);
+        vec3 color = mix(uDeep, uBlue, depth);
 
-      // Deeper base
-      vec3 deep = vec3(0.0, 0.08, 0.20);   // deep pacific
-      vec3 mid  = vec3(0.0, 0.35, 0.65);   // medium blue
-      vec3 surf = vec3(0.55, 0.95, 1.0);   // bright crests
+        float foamLine = smoothstep(0.15, 0.25, vPos.y * 1.2);
+        color = mix(color, uFoam, foamLine * 0.25);
 
-      float depth = smoothstep(0.0, 1.0, vUv.y);
+        float shimmer = sin(vUv.x * 30.0 + uTime * 2.0) * 0.04;
+        shimmer += sin(vUv.y * 25.0 - uTime * 1.4) * 0.03;
+        color += shimmer;
 
-      vec3 col = mix(deep, mid, depth);
-      col = mix(col, surf, pow(1.0 - depth, 3.2));
-
-      float shimmer = sin(vUv.x * 20.0 + t * 8.0) *
-                      sin(vUv.y * 18.0 + t * 6.0);
-
-      shimmer = smoothstep(0.85, 1.0, shimmer);
-      col += shimmer * 0.22;
-
-      gl_FragColor = vec4(col, 1.0);
-    }
-  `;
-
-  const material = new THREE.ShaderMaterial({
-    uniforms: oceanUniforms,
-    vertexShader,
-    fragmentShader,
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `,
     side: THREE.DoubleSide
   });
 
-  const ocean = new THREE.Mesh(geometry, material);
+  ocean = new THREE.Mesh(geo, material);
   scene.add(ocean);
 
-  const clock = new THREE.Clock();
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    oceanUniforms.uTime.value = clock.getElapsedTime();
-
-    const sway = Math.sin(clock.elapsedTime * 0.14) * 0.4;
-    camera.position.x = sway;
-    camera.lookAt(0, 0, 0);
-
-    renderer.render(scene, camera);
-  }
-
   animate();
-
-  window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-})();
-</script>
-<script>
-function scrollToToolkit() {
-  const el = document.getElementById("toolkit");
-  if (el) el.scrollIntoView({ behavior: "smooth" });
 }
 
-function openContact() {
-  const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
-  const body = encodeURIComponent("Hey PJ,\n\nJust tapped the portal.\nLet's build something.\n");
-  window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+function animate() {
+  requestAnimationFrame(animate);
+
+  let t = (Date.now() - start) * 0.001;
+  material.uniforms.uTime.value = t;
+
+  camera.position.x = Math.sin(t * 0.25) * 0.22;
+  camera.position.y = 1.2 + Math.sin(t * 0.15) * 0.06;
+  camera.rotation.z = Math.sin(t * 0.1) * 0.02;
+  camera.lookAt(0, 0, 0);
+
+  renderer.render(scene, camera);
 }
 
-document.getElementById("summon-btn").onclick = openContact;
-document.getElementById("summon-orb").onclick = openContact;
+window.addEventListener("resize", () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initOcean, 150);
+});
 </script>
-
-<footer style="text-align:center;color:var(--muted);padding:30px 20px;font-size:.75rem;">
-  SideGuy Solutions · San Diego & North County · V22.B Real Pacific Water
-</footer>
-
-</body>
-</html>
