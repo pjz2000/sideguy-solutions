@@ -1,6 +1,6 @@
 <!--
   SideGuy Solutions
-  Version: 20.0-aladeen-deep-pacific
+  Version: 18.0-legendary-ocean-blue
   Hero: "Where code meets the coastline."
   Mode: Deep Pacific Shader · Coastal Toolkit · Project Estimator
   Author: PJ (+ ChatGPT assist)
@@ -25,8 +25,14 @@
   />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Tap the ocean portal to summon PJ. Custom apps, AI automation, Web3 & Solana payments, ticket flows, and DFS tools built from Solana Beach and North County San Diego." />
+  <meta
+    property="og:title"
+    content="SideGuy Solutions | San Diego Coastal Tech Concierge"
+  />
+  <meta
+    property="og:description"
+    content="Tap the ocean portal to summon PJ. Custom apps, AI automation, Web3 & Solana payments, ticket flows, and DFS tools built from Solana Beach and North County San Diego."
+  />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sideguysolutions.com/" />
 
@@ -62,19 +68,6 @@
     /* ================================================
        ROOT THEME
     ================================================= */
-    <style>
-
-  :root {
-    /* your color vars here */
-  }
-
-  /* ⬇️ ADD THIS PATCH RIGHT HERE */
-  /* V20.1 READABILITY PATCH */
-  …(patch code)…
-
-  /* your existing style continues below… */
-</style>
-    
     :root {
       --bg: #020617;
       --bg-day: #041426;
@@ -915,7 +908,7 @@
           <a href="#intake">Intake</a>
           <a href="#blog">Blog</a>
         </nav>
-        <div class="version-tag">v20.0 · ALADÉEN DEEP PACIFIC · SAN DIEGO</div>
+        <div class="version-tag">v18.0 · LEGENDARY OCEAN BLUE · SAN DIEGO</div>
       </div>
     </div>
   </header>
@@ -966,7 +959,6 @@
       <div class="orb-caption">Portal Online · North County</div>
     </div>
   </section>
-
   <!-- ============================= -->
   <!-- TOOLKIT SECTION               -->
   <!-- ============================= -->
@@ -1125,7 +1117,6 @@
       </div>
     </div>
   </section>
-
   <!-- ============================= -->
   <!-- TICKETS PAGE SECTION          -->
   <!-- ============================= -->
@@ -1406,7 +1397,6 @@
       <button class="close-btn" onclick="closeEstimator()">Close</button>
     </div>
   </div>
-
   <!-- THREE.js CDN -->
   <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
@@ -1764,10 +1754,9 @@
     }
 
     // =====================================
-    // THREE.JS OCEAN — ALADÉEN DEEP PACIFIC
+    // THREE.JS OCEAN — SAFE INIT (v18 blue & swell)
     // =====================================
     let oceanUniforms = null;
-
     (function initOceanSafe() {
       const canvas = document.getElementById("ocean-canvas");
       if (!canvas || !window.THREE) {
@@ -1796,20 +1785,15 @@
         const geometry = new THREE.PlaneGeometry(40, 40, 260, 260);
         geometry.rotateX(-Math.PI / 2);
 
-        // uWaveAmp is driven by mouse / touch / portal
-        // uBreath is a slow pulse synced with orb rhythm
         oceanUniforms = {
           uTime: { value: 0 },
-          uWaveAmp: { value: 1.0 },
-          uBreath: { value: 1.0 }
+          uWaveAmp: { value: 1.0 }
         };
 
         const vertexShader = `
           varying vec2 vUv;
-          varying float vWaveHeight;
           uniform float uTime;
           uniform float uWaveAmp;
-          uniform float uBreath;
 
           float hash(vec2 p) {
             return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -1833,40 +1817,24 @@
             vec3 pos = position;
             float t = uTime * 0.55;
 
-            // Long rolling swells (deep Pacific)
-            float longX = sin(pos.x * 0.10 + t * 0.40) * 1.4;
-            float longZ = sin(pos.z * 0.08 + t * 0.32) * 1.2;
-            float cross  = sin((pos.x + pos.z) * 0.16 - t * 0.65) * 0.9;
+            float waveBig = sin(pos.x * 0.12 + t * 0.7) * 0.9;
+            float waveCross = sin((pos.x + pos.z) * 0.14 - t * 0.8) * 0.5;
+            float waveLong = sin(pos.z * 0.09 + t * 0.4) * 1.0;
 
-            // Mid-frequency chop
-            float chop1 = sin(pos.x * 0.45 - t * 1.3) * 0.5;
-            float chop2 = sin(pos.z * 0.55 + t * 1.1) * 0.45;
+            float n = noise(vec2(pos.x * 0.22 + t * 0.5, pos.z * 0.2 - t * 0.35));
+            float n2 = noise(vec2(pos.x * 0.5 - t * 0.8, pos.z * 0.55 + t * 0.65));
+            float choppy = (n - 0.5) * 1.0 + (n2 - 0.5) * 0.8;
 
-            // Noise-based micro detail
-            float n1 = noise(vec2(pos.x * 0.23 + t * 0.6, pos.z * 0.21 - t * 0.4));
-            float n2 = noise(vec2(pos.x * 0.52 - t * 0.85, pos.z * 0.57 + t * 0.7));
-            float choppy = (n1 - 0.5) * 1.1 + (n2 - 0.5) * 0.9;
-
-            float swell = longX + longZ + cross;
-            float small = chop1 + chop2 + choppy;
-
-            // Base shape: big swell + detail
-            float height = swell * 0.33 + small * 0.50;
-
-            // Tie in orb "breathing" + interactive amp
-            float amp = (0.9 + 0.4 * uBreath) * uWaveAmp * 1.25;
-            height *= amp;
+            float height = (waveBig + waveCross + waveLong) * 0.32 + choppy * 0.5;
+            height *= uWaveAmp;
 
             pos.y += height;
-            vWaveHeight = height;
-
             gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
           }
         `;
 
         const fragmentShader = `
           varying vec2 vUv;
-          varying float vWaveHeight;
           uniform float uTime;
 
           float hash(vec2 p) {
@@ -1887,60 +1855,41 @@
           }
 
           void main() {
-            float t = uTime * 0.06;
+            float t = uTime * 0.05;
+            float n1 = noise(vUv * 7.0 + vec2(t * 2.0, t * -1.4));
+            float n2 = noise(vUv * 13.0 + vec2(-t * 2.4, t * 2.0));
+            float nFine = noise(vUv * 28.0 + vec2(t * 3.5, -t * 3.0));
 
-            // Fractal-ish layers for rays, caustics, shimmer
-            float n1 = noise(vUv * 7.5  + vec2(t * 2.2,  -t * 1.7));
-            float n2 = noise(vUv * 14.0 + vec2(-t * 2.7,  t * 2.1));
-            float nFine = noise(vUv * 30.0 + vec2(t * 4.2, -t * 3.6));
+            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.13);
 
-            // Depth gradient: bottom of screen = deep
-            float depth = smoothstep(0.0, 1.0, vUv.y + n1 * 0.12);
-
-            // Deep Pacific palette
-            vec3 deep = vec3(0.01, 0.09, 0.22);   // almost midnight
-            vec3 mid  = vec3(0.03, 0.34, 0.75);   // punchy blue
-            vec3 surf = vec3(0.83, 0.97, 1.0);    // bright crest
+            vec3 deep = vec3(0.01, 0.11, 0.28);
+            vec3 mid  = vec3(0.04, 0.45, 0.82);
+            vec3 surf = vec3(0.80, 0.97, 1.0);
 
             vec3 col = mix(deep, mid, depth);
-            col = mix(col, surf, pow(1.0 - depth, 3.1));
+            col = mix(col, surf, pow(1.0 - depth, 3.0));
 
-            // Horizon god rays
-            float horizonGlow = smoothstep(0.45, 1.07, vUv.y + n1 * 0.08);
-            col += vec3(0.05, 0.10, 0.20) * horizonGlow * 1.7;
+            float horizonGlow = smoothstep(0.45, 1.05, vUv.y + n1 * 0.08);
+            col += vec3(0.03, 0.07, 0.16) * horizonGlow * 1.5;
 
-            float rayPattern = sin((vUv.x * 3.1 + vUv.y * 1.35) - t * 3.8 + n2 * 3.2);
-            float rays = smoothstep(0.72, 1.0, rayPattern);
-            col += vec3(0.06, 0.15, 0.25) * rays * 0.9;
+            float rayPattern = sin((vUv.x * 3.0 + vUv.y * 1.3) - t * 3.6 + n2 * 3.0);
+            float rays = smoothstep(0.7, 1.0, rayPattern);
+            col += vec3(0.05, 0.13, 0.2) * rays * 0.8;
 
-            // Surface shimmer
-            float shimmer = smoothstep(
-              0.80, 1.0,
-              sin((vUv.x + vUv.y + t * 4.3) * 18.0 + n2 * 6.0)
-            );
-            col += shimmer * 0.09;
+            float shimmer = smoothstep(0.8, 1.0, sin((vUv.x + vUv.y + t * 4.0) * 16.0 + n2 * 5.5));
+            col += shimmer * 0.08;
 
-            // Caustics
-            float caustic = noise(vUv * 22.0 + vec2(t * 5.1, -t * 4.2));
+            float caustic = noise(vUv * 20.0 + vec2(t * 4.5, -t * 4.0));
             caustic = smoothstep(0.66, 1.0, caustic);
-            col += caustic * 0.07;
+            col += caustic * 0.06;
 
-            // Foam near peaks (driven by vWaveHeight)
-            float foamMask = smoothstep(0.22, 0.40, vWaveHeight);
-            float foamDetail = noise(vUv * 35.0 + vec2(-t * 5.0, t * 4.3));
-            foamDetail = smoothstep(0.55, 1.0, foamDetail);
-            float foam = foamMask * foamDetail;
-            col = mix(col, vec3(0.92, 0.99, 1.0), foam * 0.9);
-
-            // Tiny fireflies on surface
             float spark = smoothstep(0.93, 1.0, nFine);
-            col += vec3(0.13, 0.19, 0.24) * spark * 0.55;
+            col += vec3(0.11, 0.17, 0.22) * spark * 0.5;
 
-            // Vignette toward edges for cinematic feel
             vec2 center = vUv - 0.5;
             float dist = length(center);
             float vignette = smoothstep(0.82, 0.25, dist);
-            col *= mix(0.78, 1.18, vignette);
+            col *= mix(0.8, 1.15, vignette);
 
             gl_FragColor = vec4(col, 1.0);
           }
@@ -1967,16 +1916,8 @@
           const elapsed = clock.getElapsedTime();
           oceanUniforms.uTime.value = elapsed;
 
-          // Orb rhythm pulse (~2.6s cycle)
-          oceanUniforms.uBreath.value = 0.5 + 0.5 * Math.sin(elapsed * (2.0 * Math.PI / 2.6));
-
-          // Camera sway — option C: full Aladeen but still watchable
-          const amp = oceanUniforms.uWaveAmp.value;
-          const swayX = Math.sin(elapsed * 0.28) * 0.7 * amp;
-          const swayY = 6 + Math.sin(elapsed * 0.18) * 0.35 * amp;
-          const swayZ = 10 + Math.sin(elapsed * 0.22) * 0.45 * amp;
-
-          camera.position.set(swayX, swayY, swayZ);
+          const sway = Math.sin(elapsed * 0.16) * 0.5;
+          camera.position.x = sway;
           camera.lookAt(0, 0, 0);
 
           renderer.render(scene, camera);
@@ -2008,11 +1949,11 @@
     }
 
     window.addEventListener("mousemove", () => {
-      boostWavesOnce(1.7, 900);
+      boostWavesOnce(1.5, 900);
     });
 
     window.addEventListener("touchstart", () => {
-      boostWavesOnce(1.9, 1100);
+      boostWavesOnce(1.8, 1100);
     });
 
     // =====================================
@@ -2062,14 +2003,14 @@
 
       if (summonBtn) {
         summonBtn.addEventListener("click", function () {
-          boostWavesOnce(2.1, 1300);
+          boostWavesOnce(2.0, 1200);
           triggerPortal();
         });
       }
 
       if (orb) {
         orb.addEventListener("click", function () {
-          boostWavesOnce(2.3, 1400);
+          boostWavesOnce(2.2, 1300);
           triggerPortal();
         });
       }
@@ -2124,7 +2065,7 @@
             "Notes:",
             notes,
             "",
-            "Sent from the v20 Aladéen Deep Pacific portal 🌊"
+            "Sent from the v18 Legendary Ocean Blue portal 🌊"
           ];
           const body = encodeURIComponent(bodyLines.join("\n"));
           const mailto =
@@ -2156,7 +2097,7 @@
   <!--            FOOTER             -->
   <!-- ============================= -->
   <footer>
-    SideGuy Solutions · San Diego &amp; North County · v20.0 Aladéen Deep Pacific · Tap the portal if you
+    SideGuy Solutions · San Diego &amp; North County · v18.0 Legendary Ocean Blue · Tap the portal if you
     know what’s good for you.
   </footer>
 </body>
