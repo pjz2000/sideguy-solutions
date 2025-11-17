@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>SideGuy Solutions | Ocean Engine CINEMA FOG</title>
+<title>SideGuy Solutions | Crystal Blue Ocean</title>
 
 <style>
   html, body {
@@ -12,7 +12,7 @@
     padding: 0;
     overflow: hidden;
     height: 100%;
-    background: #001524;
+    background: #002544;
   }
 
   #ocean-canvas {
@@ -27,34 +27,25 @@
     top: 20px;
     left: 20px;
     font-family: sans-serif;
-    color: #8bdcff;
+    color: #a7e6ff;
     font-size: 14px;
     z-index: 10;
-    text-shadow: 0 0 4px #000;
+    text-shadow: 0 0 6px #000;
   }
 </style>
 </head>
 
 <body>
 
-<div id="label">🌅 SideGuy Ocean Engine — CINEMATIC FOG V1</div>
+<div id="label">🌊 SideGuy Ocean — Crystal Blue V1</div>
 <canvas id="ocean-canvas"></canvas>
 
-<!-- Three.js -->
 <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
-
-<!-- Water + Sky -->
 <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
 <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
 
 <script>
-/* ===========================================================
-   CINEMATIC OCEAN + ORB + SUN RAYS + HAZE (SAFE BUILD)
-   =========================================================== */
-
 let camera, scene, renderer, water, sky, sun;
-let orbGroup, orb, orbLight, rippleLight;
-
 let camTime = 0;
 let camSpeed = 0.00035;
 
@@ -72,16 +63,11 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  /* ===========================================================
-     SCENE + FOG (this is the Moana haze)
-     =========================================================== */
+  /* SCENE + CINEMATIC FOG */
   scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x5599cc, 0.0018);
 
-  // Fog gives depth + sun-ray scattering
-  scene.fog = new THREE.FogExp2(0x305070, 0.0026);
-  // (color, density) — tweak density for more/less haze
-
-  /* ---- CAMERA ---- */
+  /* CAMERA */
   camera = new THREE.PerspectiveCamera(
     65,
     window.innerWidth / window.innerHeight,
@@ -90,27 +76,23 @@ function init() {
   );
   camera.position.set(0, 65, 165);
 
-  /* ---- SUN ---- */
+  /* SUN */
   sun = new THREE.Vector3();
 
-  /* ===========================================================
-     SKY (the source of sun beams + horizon glow)
-     =========================================================== */
+  /* SKY — brighter, bluer, crystal */
   sky = new THREE.Sky();
   sky.scale.setScalar(10000);
   scene.add(sky);
 
   const skyU = sky.material.uniforms;
-  skyU["turbidity"].value = 14;      // thicker atmosphere
-  skyU["rayleigh"].value = 3.2;      // more blue scattering
-  skyU["mieCoefficient"].value = 0.008; // glow intensity
-  skyU["mieDirectionalG"].value = 0.92; // sun sharpness
+  skyU["turbidity"].value = 10;
+  skyU["rayleigh"].value = 3.0;   // brighter blue
+  skyU["mieCoefficient"].value = 0.005;
+  skyU["mieDirectionalG"].value = 0.85;
 
   updateSun();
 
-  /* ===========================================================
-     WATER
-     =========================================================== */
+  /* WATER — CRYSTAL BLUE EDITION */
   const waterGeometry = new THREE.PlaneGeometry(20000, 20000);
 
   const waterNormals = new THREE.TextureLoader().load(
@@ -126,54 +108,18 @@ function init() {
     waterNormals,
     sunDirection: sun,
     sunColor: 0xffffff,
-    waterColor: 0x0077dd,
-    distortionScale: 5.2,
-    fog: true  // <--- ENABLE fog blending with water
+    waterColor: 0x2bb7ff,  // 💙 CRYSTAL TROPICAL BLUE
+    distortionScale: 5.5,  // more detail
+    fog: true
   });
+
   water.rotation.x = -Math.PI / 2;
   scene.add(water);
-
-  /* ===========================================================
-     FLOATING ORB
-     =========================================================== */
-  orbGroup = new THREE.Group();
-  scene.add(orbGroup);
-
-  const orbGeom = new THREE.SphereGeometry(12, 64, 64);
-
-  const orbMat = new THREE.MeshStandardMaterial({
-    emissive: new THREE.Color(0x2ab8ff),
-    emissiveIntensity: 4.2,
-    color: 0x0a3d66,
-    roughness: 0.15,
-    metalness: 0.7
-  });
-
-  orb = new THREE.Mesh(orbGeom, orbMat);
-  orbGroup.add(orb);
-
-  orb.position.set(0, 22, 0);
-
-  // LIGHT CAST FROM ORB
-  orbLight = new THREE.PointLight(0x35c7ff, 3.4, 350, 2);
-  orbLight.position.set(0, 26, 0);
-  orbGroup.add(orbLight);
-
-  // SUBTLE RIPPLE LIGHT
-  rippleLight = new THREE.PointLight(0x1188ff, 0.4, 200, 3);
-  rippleLight.position.set(0, 5, 0);
-  orbGroup.add(rippleLight);
-
-  /* ---- CLICK ---- */
-  window.addEventListener("click", () => {
-    const dist = camera.position.distanceTo(orb.position);
-    if (dist < 300) console.log("🔥 PJ PORTAL TRIGGERED");
-  });
 
   window.addEventListener("resize", onWindowResize);
 }
 
-/* ---- SUN UPDATE ---- */
+/* SUN UPDATE */
 function updateSun() {
   const phi = THREE.MathUtils.degToRad(88);
   const theta = THREE.MathUtils.degToRad(180);
@@ -183,45 +129,31 @@ function updateSun() {
   sky.material.uniforms["sunPosition"].value.copy(sun);
 
   if (water) {
-    water.material.uniforms.sunDirection.value.set(
-      sun.x,
-      sun.y,
-      sun.z
-    ).normalize();
+    water.material.uniforms.sunDirection.value
+      .set(sun.x, sun.y, sun.z)
+      .normalize();
   }
 }
 
-/* ---- RESIZE ---- */
+/* RESIZE */
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
 }
 
-/* ===========================================================
-   MAIN ANIMATION LOOP
-   =========================================================== */
+/* ANIMATION */
 function animate() {
   requestAnimationFrame(animate);
 
   water.material.uniforms["time"].value += 0.8 / 60.0;
 
-  // camera drift
   camTime += camSpeed;
   camera.position.y = 65 + Math.sin(camTime * 1.5) * 1.8;
   camera.position.z = 165 + Math.sin(camTime * 0.35) * 8;
   camera.position.x = Math.sin(camTime * 0.25) * 12;
   camera.lookAt(0, 0, 0);
-
-  // orb floating
-  orbGroup.position.y = 22 + Math.sin(camTime * 2.5) * 1.5;
-  orbGroup.position.x = Math.sin(camTime * 0.6) * 3;
-  orbGroup.position.z = Math.cos(camTime * 0.3) * 3;
-
-  orb.rotation.y += 0.003;
-  rippleLight.intensity = 0.3 + Math.sin(camTime * 6) * 0.06;
 
   renderer.render(scene, camera);
 }
