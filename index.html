@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>SideGuy Solutions | Crystal Blue Ocean</title>
+<title>SideGuy Solutions | Crystal Blue Pacific Cinematic</title>
 
 <style>
   html, body {
@@ -12,34 +12,368 @@
     padding: 0;
     overflow: hidden;
     height: 100%;
-    background: #002544;
+    background: #00223a; /* Pacific fallback */
   }
 
+  /* --- OCEAN CANVAS --- */
   #ocean-canvas {
     position: fixed;
     inset: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 0;
   }
 
+  /* --- LABEL DEBUG (can hide later) --- */
   #label {
     position: fixed;
     top: 20px;
     left: 20px;
-    font-family: sans-serif;
-    color: #a7e6ff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #bcecff;
     font-size: 14px;
-    z-index: 10;
-    text-shadow: 0 0 6px #000;
+    z-index: 30;
+    text-shadow: 0 0 8px #000;
+    opacity: 0.85;
+  }
+
+  /* --- CINEMATIC VIGNETTE OVERLAY --- */
+  #vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.2) 55%, rgba(0, 0, 0, 0.5) 100%);
+    mix-blend-mode: multiply;
+  }
+
+  /* --- SPARKLES + CAUSTIC FX OVERLAY --- */
+  #fx-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.35;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.22) 0, rgba(255,255,255,0) 40%),
+      radial-gradient(circle at 80% 60%, rgba(255,255,255,0.18) 0, rgba(255,255,255,0) 45%),
+      radial-gradient(circle at 50% 90%, rgba(255,255,255,0.15) 0, rgba(255,255,255,0) 40%);
+    background-size: 140% 140%;
+    animation: sparkleDrift 18s linear infinite;
+  }
+
+  @keyframes sparkleDrift {
+    0% {
+      background-position: 0% 0%;
+      opacity: 0.25;
+    }
+    50% {
+      background-position: 30% 50%;
+      opacity: 0.45;
+    }
+    100% {
+      background-position: 0% 0%;
+      opacity: 0.25;
+    }
+  }
+
+  /* --- UI LAYER (TEXT + BUTTONS) --- */
+  #ui {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none; /* children re-enable */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .ui-inner {
+    max-width: 960px;
+    width: 100%;
+    text-align: center;
+    color: #e5f7ff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.85);
+    animation: fadeUp 1.4s ease-out forwards;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(5, 24, 45, 0.7);
+    border: 1px solid rgba(148, 227, 255, 0.3);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9bdcff;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    font-weight: 400;
+    margin: 0 0 6px 0;
+    color: #d4f3ff;
+  }
+
+  .hero-sub-2 {
+    font-size: clamp(13px, 1.8vw, 16px);
+    font-weight: 400;
+    margin: 0 0 24px 0;
+    color: #a8d8f4;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-primary {
+    pointer-events: auto;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: radial-gradient(circle at 0% 0%, #38bdf8 0%, #0ea5e9 45%, #0369a1 100%);
+    color: #e0faff;
+    box-shadow:
+      0 0 0 1px rgba(148, 227, 255, 0.3),
+      0 10px 25px rgba(15, 118, 178, 0.9);
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, filter 0.18s ease-out;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow:
+      0 0 0 1px rgba(148, 227, 255, 0.8),
+      0 16px 35px rgba(15, 118, 178, 1);
+    filter: brightness(1.1);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow:
+      0 0 0 1px rgba(148, 227, 255, 0.9),
+      0 6px 16px rgba(15, 118, 178, 0.9);
+  }
+
+  .btn-ghost {
+    pointer-events: auto;
+    padding: 11px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 227, 255, 0.4);
+    background: radial-gradient(circle at 0% 0%, rgba(15,23,42,0.7) 0%, rgba(15,23,42,0.3) 60%, rgba(15,23,42,0.1) 100%);
+    color: #c9e8ff;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    transition: background 0.18s ease-out, transform 0.18s ease-out, border-color 0.18s ease-out;
+  }
+
+  .btn-ghost:hover {
+    transform: translateY(-1px);
+    border-color: rgba(191, 239, 255, 0.9);
+    background: radial-gradient(circle at 0% 0%, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.45) 60%, rgba(15,23,42,0.15) 100%);
+  }
+
+  .hero-services {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .service-pill {
+    min-width: 180px;
+    max-width: 220px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 227, 255, 0.35);
+    background: rgba(7, 16, 28, 0.75);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.65);
+    font-size: 12px;
+    color: #d3f0ff;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .service-title {
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .service-desc {
+    font-size: 11px;
+    opacity: 0.9;
+  }
+
+  .scroll-cue {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 25;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8ccff6;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    animation: scrollPulse 1.7s ease-in-out infinite;
+  }
+
+  .scroll-cue-icon {
+    width: 16px;
+    height: 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(191, 239, 255, 0.7);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 4px;
+  }
+
+  .scroll-cue-dot {
+    width: 3px;
+    height: 6px;
+    border-radius: 999px;
+    background: #c8f4ff;
+    animation: dotDrop 1s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, 0); }
+    50%     { opacity: 1;    transform: translate(-50%, -4px); }
+  }
+
+  @keyframes dotDrop {
+    0%   { transform: translateY(0); opacity: 1; }
+    70%  { transform: translateY(8px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-services {
+      margin-top: 24px;
+    }
+    .service-pill {
+      max-width: none;
+      width: 100%;
+    }
   }
 </style>
 </head>
 
 <body>
 
-<div id="label">🌊 SideGuy Ocean — Crystal Blue V1</div>
+<div id="label">🌊 SideGuy Ocean — Crystal Blue Pacific + Hero V1</div>
+
+<!-- OCEAN BACKGROUND -->
 <canvas id="ocean-canvas"></canvas>
 
+<!-- FX OVERLAYS -->
+<div id="fx-layer"></div>
+<div id="vignette"></div>
+
+<!-- UI LAYER -->
+<div id="ui">
+  <div class="ui-inner">
+    <div class="hero-badge">
+      <span>San Diego · North County</span>
+    </div>
+
+    <h1 class="hero-title">SideGuy Solutions</h1>
+
+    <!-- Option 1 line -->
+    <p class="hero-sub">Where code meets the coastline.</p>
+
+    <!-- Option 2 style line blended -->
+    <p class="hero-sub-2">
+      Coastal tech concierge for apps, AI automation, Web3, and smarter systems.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary" id="summonBtn">
+        TAP TO SUMMON PJ
+      </button>
+
+      <button class="btn-ghost" id="servicesBtn">
+        VIEW COASTAL PLAYBOOK
+        <span>↗</span>
+      </button>
+    </div>
+
+    <div class="hero-services">
+      <div class="service-pill">
+        <span class="service-title">Custom Apps & Portals</span>
+        <span class="service-desc">iOS, Android & web builds tailored for San Diego operators, venues, and startups.</span>
+      </div>
+
+      <div class="service-pill">
+        <span class="service-title">AI & Automation Flows</span>
+        <span class="service-desc">Lead capture, intake, reporting & ops automation wired into your existing tools.</span>
+      </div>
+
+      <div class="service-pill">
+        <span class="service-title">Web3 & Solana Payments</span>
+        <span class="service-desc">Stablecoin checkouts, ticketing flows & loyalty for the next wave of customers.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll cue (just a visual hint for now) -->
+<div class="scroll-cue">
+  <div class="scroll-cue-icon">
+    <div class="scroll-cue-dot"></div>
+  </div>
+  <span>scroll to explore</span>
+</div>
+
+<!-- Three.js -->
 <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
 <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
@@ -47,8 +381,11 @@
 <script>
 let camera, scene, renderer, water, sky, sun;
 let camTime = 0;
-let camSpeed = 0.00035;
+let camSpeed = 0.00033;
 
+/* ============================================
+   INIT
+============================================ */
 init();
 animate();
 
@@ -63,11 +400,11 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  /* SCENE + CINEMATIC FOG */
+  /* Scene + Fog (Pacific tone) */
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x5599cc, 0.0018);
+  scene.fog = new THREE.FogExp2(0x1d3b55, 0.0019);
 
-  /* CAMERA */
+  /* Camera */
   camera = new THREE.PerspectiveCamera(
     65,
     window.innerWidth / window.innerHeight,
@@ -76,30 +413,27 @@ function init() {
   );
   camera.position.set(0, 65, 165);
 
-  /* SUN */
+  /* Sun/Lighting */
   sun = new THREE.Vector3();
 
-  /* SKY — brighter, bluer, crystal */
   sky = new THREE.Sky();
   sky.scale.setScalar(10000);
   scene.add(sky);
 
   const skyU = sky.material.uniforms;
-  skyU["turbidity"].value = 10;
-  skyU["rayleigh"].value = 3.0;   // brighter blue
-  skyU["mieCoefficient"].value = 0.005;
-  skyU["mieDirectionalG"].value = 0.85;
+  skyU["turbidity"].value = 9;
+  skyU["rayleigh"].value = 2.4;
+  skyU["mieCoefficient"].value = 0.006;
+  skyU["mieDirectionalG"].value = 0.88;
 
   updateSun();
 
-  /* WATER — CRYSTAL BLUE EDITION */
-  const waterGeometry = new THREE.PlaneGeometry(20000, 20000);
+  /* Water — PACIFIC CRYSTAL BLUE */
+  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
 
   const waterNormals = new THREE.TextureLoader().load(
     "https://threejs.org/examples/textures/waternormals.jpg",
-    (tex) => {
-      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    }
+    (tex) => { tex.wrapS = tex.wrapT = THREE.RepeatWrapping; }
   );
 
   water = new THREE.Water(waterGeometry, {
@@ -108,21 +442,33 @@ function init() {
     waterNormals,
     sunDirection: sun,
     sunColor: 0xffffff,
-    waterColor: 0x2bb7ff,  // 💙 CRYSTAL TROPICAL BLUE
-    distortionScale: 5.5,  // more detail
+    waterColor: 0x1e90ff,   // Crystal Pacific blue
+    distortionScale: 3.8,
     fog: true
   });
 
   water.rotation.x = -Math.PI / 2;
   scene.add(water);
 
+  /* Simple click hooks for now (no nav yet) */
+  document.getElementById("summonBtn").addEventListener("click", () => {
+    console.log("🔥 TAP TO SUMMON PJ — hook this into email/calendar later");
+    // You can wire this to mailto:, calendly, etc.
+  });
+
+  document.getElementById("servicesBtn").addEventListener("click", () => {
+    console.log("📘 View Coastal Playbook — hook to services section or another page");
+  });
+
   window.addEventListener("resize", onWindowResize);
 }
 
-/* SUN UPDATE */
+/* ============================================
+   SUN / SKY SYNC
+============================================ */
 function updateSun() {
-  const phi = THREE.MathUtils.degToRad(88);
-  const theta = THREE.MathUtils.degToRad(180);
+  const phi = THREE.MathUtils.degToRad(72);
+  const theta = THREE.MathUtils.degToRad(150);
 
   sun.setFromSphericalCoords(1, phi, theta);
 
@@ -135,7 +481,9 @@ function updateSun() {
   }
 }
 
-/* RESIZE */
+/* ============================================
+   RESIZE
+============================================ */
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -143,16 +491,20 @@ function onWindowResize() {
   renderer.setPixelRatio(window.devicePixelRatio);
 }
 
-/* ANIMATION */
+/* ============================================
+   ANIMATE
+============================================ */
 function animate() {
   requestAnimationFrame(animate);
 
-  water.material.uniforms["time"].value += 0.8 / 60.0;
+  // Ocean motion
+  water.material.uniforms["time"].value += 0.55 / 60.0;
 
+  // Camera drift
   camTime += camSpeed;
-  camera.position.y = 65 + Math.sin(camTime * 1.5) * 1.8;
-  camera.position.z = 165 + Math.sin(camTime * 0.35) * 8;
-  camera.position.x = Math.sin(camTime * 0.25) * 12;
+  camera.position.y = 65 + Math.sin(camTime * 1.25) * 1.4;
+  camera.position.z = 165 + Math.sin(camTime * 0.25) * 7;
+  camera.position.x = Math.sin(camTime * 0.22) * 11;
   camera.lookAt(0, 0, 0);
 
   renderer.render(scene, camera);
