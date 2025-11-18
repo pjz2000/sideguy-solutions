@@ -1,7 +1,7 @@
-<!--
+<!-- 
   SideGuy Solutions
-  Version: 20.3-cardiff-movie-ocean
-  Mode: Cardiff-by-the-Sea · Rolling Movie Waves
+  Version: 20.4-cardiff-movie-shine
+  Mode: Cardiff Movie Ocean · Specular Highlights · Normalmap
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
+  <title>SideGuy Solutions | Cardiff-by-the-Sea Ocean</title>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,19 +23,17 @@
       color: #e2e8f0;
     }
 
-    /* 3D background container with fallback gradient */
     #bg3d {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
+      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 65%);
     }
 
     .overlay {
       position: relative;
       z-index: 10;
       height: 100%;
-      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -46,195 +44,198 @@
     .box {
       max-width: 700px;
       padding: 2rem 2.3rem;
-      border-radius: 1.4rem;
       background: rgba(15,23,42,0.55);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      border-radius: 1.4rem;
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: 0 26px 70px rgba(0,0,0,0.6);
     }
 
     h1 {
       font-size: clamp(2rem, 4vw, 3.1rem);
-      color: #f9fafb;
       margin-bottom: 1rem;
+      color: #f9fafb;
     }
 
     p {
       color: #dbeafe;
-      line-height: 1.6;
+      line-height: 1.55;
       margin-bottom: 1.5rem;
     }
 
-    .contact {
-      color: #bae6fd;
-      margin-bottom: 1.5rem;
-    }
+    .contact { color: #bae6fd; margin-bottom: 1.5rem; }
 
     button {
-      padding: 0.85rem 1.7rem;
+      padding: .85rem 1.7rem;
       border-radius: 999px;
       border: none;
       cursor: pointer;
       background: linear-gradient(120deg, #22d3ee, #3b82f6);
       color: white;
-      font-size: .95rem;
       font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
+      letter-spacing: .05em;
     }
 
     .version-tag {
-      margin-top: 0.8rem;
-      font-size: 0.75rem;
-      color: #9ca3af;
-      opacity: 0.9;
+      margin-top: .85rem;
+      color: #94a3b8;
+      font-size: .75rem;
+      opacity: .9;
     }
   </style>
 </head>
 
 <body>
-  <div id="bg3d"></div>
 
-  <div class="overlay">
-    <div class="box">
-      <h1>Where San Diego builds, codes, and scales.</h1>
+<div id="bg3d"></div>
 
-      <p>
-        Coastal concierge tech for the 2025 era — custom apps, AI automation,
-        Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
-        North County and greater San Diego.
-      </p>
+<div class="overlay">
+  <div class="box">
+    <h1>Where San Diego builds, codes, and scales.</h1>
 
-      <div class="contact">
-        Text / call: <strong>773–544–1231</strong><br />
-        Email: <strong>peter.z@kromeon.com</strong>
-      </div>
+    <p>
+      Coastal concierge tech for the 2025 era — custom apps, AI automation,
+      Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
+      North County and greater San Diego.
+    </p>
 
-      <button id="summonPJ">TAP TO SUMMON PJ</button>
-
-      <div class="version-tag">
-        Build: <strong>V20.3 · Cardiff Movie Ocean</strong>
-      </div>
+    <div class="contact">
+      Text / call: <strong>773–544–1231</strong><br />
+      Email: <strong>peter.z@kromeon.com</strong>
     </div>
+
+    <button id="summonPJ">TAP TO SUMMON PJ</button>
+
+    <div class="version-tag">V20.4 · Cardiff Movie Ocean Shine</div>
   </div>
+</div>
 
-  <!-- Stable Three.js (no modules, Vercel-safe) -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
-  <script>
-    let scene, camera, renderer, ocean;
+<script>
+let scene, camera, renderer, ocean, normalMap;
 
-    function init() {
-      const container = document.getElementById("bg3d");
+function init() {
+  const container = document.getElementById("bg3d");
 
-      scene = new THREE.Scene();
-      // Softer blue-ish fog, not pure black
-      scene.fog = new THREE.Fog(0x020617, 12, 85);
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x031227, 14, 90);
 
-      camera = new THREE.PerspectiveCamera(
-        55,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      // Slightly above the water, looking out
-      camera.position.set(0, 7, 26);
+  camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  camera.position.set(0, 7, 28);
 
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0x020617, 1);
-      container.appendChild(renderer.domElement);
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x020617, 1);
+  container.appendChild(renderer.domElement);
 
-      // CARDIFF MOVIE LIGHTING
-      const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x020617, 0.9);
-      scene.add(hemi);
+  // === LIGHTS ===
+  const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x031227, 0.9);
+  scene.add(hemi);
 
-      const sun = new THREE.DirectionalLight(0xfff4e0, 1.35); // warm sun
-      sun.position.set(-18, 22, 10);
-      scene.add(sun);
+  const sun = new THREE.DirectionalLight(0xfff7d4, 1.55);
+  sun.position.set(-12, 22, 14);
+  sun.castShadow = false;
+  scene.add(sun);
 
-      // HIGH-RES OCEAN GEOMETRY
-      const geo = new THREE.PlaneGeometry(320, 320, 200, 200);
-      geo.rotateX(-Math.PI / 2);
+  // === NORMAL MAP (tiny detail ripples) ===
+  const loader = new THREE.TextureLoader();
+  normalMap = loader.load(
+    "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
+  );
+  normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
 
-      // CREATE VERTEX COLORS FOR GRADIENT (near = brighter teal, far = deep blue)
-      const pos = geo.attributes.position;
-      const colorArray = new Float32Array(pos.count * 3);
-      const colorNear = new THREE.Color("#0b8ec3"); // Cardiff teal-ish
-      const colorFar  = new THREE.Color("#03111f"); // deep outer Pacific
-      const c = new THREE.Color();
+  // === OCEAN GEOMETRY (high res) ===
+  const geo = new THREE.PlaneGeometry(350, 350, 240, 240);
+  geo.rotateX(-Math.PI / 2);
 
-      for (let i = 0; i < pos.count; i++) {
-        const x = pos.getX(i);
-        const z = pos.getZ(i);
+  // Vertex-gradient Cardiff look
+  const pos = geo.attributes.position;
+  const colorArray = new Float32Array(pos.count * 3);
+  const cNear = new THREE.Color("#24a4d8"); // Cardiff teal highlight
+  const cFar = new THREE.Color("#031227");  // deep pacific
 
-        // distance from camera-ish: nearer (z small) = brighter
-        const d = Math.sqrt(x*x + z*z);
-        let t = d / 200; // normalize
-        t = THREE.MathUtils.clamp(t, 0, 1);
+  const c = new THREE.Color();
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i);
+    const z = pos.getZ(i);
+    const d = Math.sqrt(x*x + z*z);
 
-        c.lerpColors(colorNear, colorFar, t);
+    let t = d / 240;
+    t = THREE.MathUtils.clamp(t, 0, 1);
 
-        colorArray[i * 3 + 0] = c.r;
-        colorArray[i * 3 + 1] = c.g;
-        colorArray[i * 3 + 2] = c.b;
-      }
+    c.lerpColors(cNear, cFar, t);
 
-      geo.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
+    colorArray[i*3+0] = c.r;
+    colorArray[i*3+1] = c.g;
+    colorArray[i*3+2] = c.b;
+  }
 
-      const mat = new THREE.MeshStandardMaterial({
-        vertexColors: true,
-        metalness: 0.5,
-        roughness: 0.34
-      });
+  geo.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
 
-      ocean = new THREE.Mesh(geo, mat);
-      scene.add(ocean);
+  // === MATERIAL with SPECULAR + NORMALMAP ===
+  const mat = new THREE.MeshStandardMaterial({
+    vertexColors: true,
+    metalness: 0.65,   // movie shine
+    roughness: 0.25,
+    normalMap: normalMap,
+    normalScale: new THREE.Vector2(1.2, 1.2),
+    envMapIntensity: 1.2
+  });
 
-      window.addEventListener("resize", onResize);
-      animate();
-    }
+  ocean = new THREE.Mesh(geo, mat);
+  scene.add(ocean);
 
-    function animate() {
-      requestAnimationFrame(animate);
+  window.addEventListener("resize", onResize);
+  animate();
+}
 
-      const t = performance.now() * 0.00035;
-      const pos = ocean.geometry.attributes.position;
+function animate() {
+  requestAnimationFrame(animate);
 
-      // Two-layer rolling waves for more organic motion
-      for (let i = 0; i < pos.count; i++) {
-        const x = pos.getX(i);
-        const z = pos.getZ(i);
+  const t = performance.now() * 0.00035;
+  const pos = ocean.geometry.attributes.position;
 
-        const y1 = Math.sin(x * 0.042 + t * 2.0) * 0.7;
-        const y2 = Math.cos(z * 0.065 + t * 1.6) * 0.35;
+  // === TRUE ROLLING WAVES + SUB-DETAIL ===
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i);
+    const z = pos.getZ(i);
 
-        pos.setY(i, y1 + y2);
-      }
+    const y1 = Math.sin(x * 0.045 + t * 2.0) * 0.75;
+    const y2 = Math.cos(z * 0.07 + t * 1.5) * 0.45;
 
-      pos.needsUpdate = true;
+    pos.setY(i, y1 + y2);
+  }
 
-      // Recompute normals so lights catch the waves → “wet” look
-      ocean.geometry.computeVertexNormals();
+  pos.needsUpdate = true;
 
-      camera.lookAt(0, 0, 0);
-      renderer.render(scene, camera);
-    }
+  // recompute normals → REQUIRED for specular highlights
+  ocean.geometry.computeVertexNormals();
 
-    function onResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+}
 
-    // Summon PJ
-    document.getElementById("summonPJ").onclick = () => {
-      window.location.href =
-        "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-    };
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
-    init();
-  </script>
+// Summon PJ
+document.getElementById("summonPJ").onclick = () => {
+  window.location.href =
+    "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+};
+
+init();
+</script>
+
 </body>
 </html>
