@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SideGuy Solutions | Cinematic Pacific v3.5</title>
+  <title>SideGuy Solutions | Cinematic Pacific v4 — Ultra Blue + Sun Disc</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -11,7 +11,7 @@
       padding: 0;
       overflow: hidden;
       height: 100%;
-      background: #003b7d; /* fallback ocean blue */
+      background: #0077ff; /* fallback blue */
     }
 
     #label {
@@ -34,118 +34,9 @@
 </head>
 
 <body>
-  <div id="label">🌊 Cinematic Pacific v3.5 — Blue Max + Sun Disc</div>
+  <div id="label">🌊 Cinematic Pacific v4 — Ultra Blue Water + Sun Restored</div>
   <canvas id="ocean-canvas"></canvas>
 
-  <!-- Three.js core + water + sky shaders -->
+  <!-- Three.js -->
   <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
-  <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
-  <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
-
-  <script>
-    let camera, scene, renderer, water, sky, sun;
-    let t = 0;
-
-    init();
-    animate();
-
-    function init() {
-      const canvas = document.getElementById("ocean-canvas");
-
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.outputEncoding = THREE.sRGBEncoding;
-
-      scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x0b3d72, 0.0014);
-      scene.background = new THREE.Color(0x0d4c8c);
-
-      camera = new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        1,
-        20000
-      );
-      camera.position.set(0, 60, 170);
-
-      /* SKY + SUN */
-      sun = new THREE.Vector3();
-      sky = new THREE.Sky();
-      sky.scale.setScalar(10000);
-      scene.add(sky);
-
-      const skyU = sky.material.uniforms;
-      skyU["turbidity"].value = 12;
-      skyU["rayleigh"].value = 3.2;
-      skyU["mieCoefficient"].value = 0.0034;
-      skyU["mieDirectionalG"].value = 0.88;
-
-      updateSun();
-
-      /* WATER */
-      const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
-
-      const waterNormals = new THREE.TextureLoader().load(
-        "https://threejs.org/examples/textures/waternormals.jpg",
-        t => {
-          t.wrapS = t.wrapT = THREE.RepeatWrapping;
-        }
-      );
-
-      water = new THREE.Water(waterGeometry, {
-        textureWidth: 2048,
-        textureHeight: 2048,
-        waterNormals: waterNormals,
-        sunDirection: sun.clone().normalize(),
-        sunColor: 0xffffff,
-        waterColor: 0x1aa4ff,  // ⭐ brighter crystal blue
-        distortionScale: 4.4,
-        fog: true
-      });
-
-      water.rotation.x = -Math.PI / 2;
-      scene.add(water);
-
-      window.addEventListener("resize", onWindowResize);
-    }
-
-    function updateSun() {
-      const phi = THREE.MathUtils.degToRad(60);
-      const theta = THREE.MathUtils.degToRad(145);
-
-      sun.setFromSphericalCoords(1, phi, theta);
-
-      sky.material.uniforms["sunPosition"].value.copy(sun);
-
-      if (water?.material?.uniforms?.sunDirection) {
-        water.material.uniforms.sunDirection.value.copy(sun).normalize();
-      }
-    }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      t += 0.002;
-
-      if (water?.material?.uniforms?.time) {
-        water.material.uniforms.time.value += 0.025;
-      }
-
-      camera.position.x = Math.sin(t * 0.28) * 24;
-      camera.position.y = 60 + Math.sin(t * 0.7) * 3;
-      camera.position.z = 170 + Math.sin(t * 0.18) * 12;
-
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-  </script>
-</body>
-</html>
+  <script src="https://unpkg.com/three@0.138
