@@ -1,14 +1,17 @@
 <!--
   SideGuy Solutions
-  Version: 21.0-cardiff-goldenhour-shader
-  Mode: Cardiff-by-the-Sea · Golden Hour Movie Ocean (Custom Shader)
+  Version: 30.0-pacific-movie-engine
+  Mode: Ferrari Build · Three.js Water + Sky · Medium Swell
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
   <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
 
   <style>
@@ -23,11 +26,12 @@
       color: #e2e8f0;
     }
 
+    /* Ocean canvas container + fallback gradient */
     #bg3d {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 65%);
+      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
     }
 
     .overlay {
@@ -45,11 +49,11 @@
     .box {
       max-width: 700px;
       padding: 2rem 2.3rem;
+      border-radius: 1.4rem;
       background: rgba(15,23,42,0.55);
       backdrop-filter: blur(20px);
-      border-radius: 1.4rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.65);
     }
 
     h1 {
@@ -82,228 +86,194 @@
     }
 
     .version-tag {
-      margin-top: .85rem;
-      color: #94a3b8;
+      margin-top: .8rem;
       font-size: .75rem;
+      color: #94a3b8;
       opacity: .9;
     }
   </style>
 </head>
 
 <body>
+  <div id="bg3d"></div>
 
-<div id="bg3d"></div>
+  <div class="overlay">
+    <div class="box">
+      <h1>Where San Diego builds, codes, and scales.</h1>
 
-<div class="overlay">
-  <div class="box">
-    <h1>Where San Diego builds, codes, and scales.</h1>
+      <p>
+        Coastal concierge tech for the 2025 era — custom apps, AI automation,
+        Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
+        North County and greater San Diego.
+      </p>
 
-    <p>
-      Coastal concierge tech for the 2025 era — custom apps, AI automation,
-      Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
-      North County and greater San Diego.
-    </p>
+      <div class="contact">
+        Text / call: <strong>773–544–1231</strong><br />
+        Email: <strong>peter.z@kromeon.com</strong>
+      </div>
 
-    <div class="contact">
-      Text / call: <strong>773–544–1231</strong><br />
-      Email: <strong>peter.z@kromeon.com</strong>
-    </div>
+      <button id="summonPJ">TAP TO SUMMON PJ</button>
 
-    <button id="summonPJ">TAP TO SUMMON PJ</button>
-
-    <div class="version-tag">
-      V21.0 · Cardiff Golden-Hour Shader Ocean
+      <div class="version-tag">
+        Build: <strong>V30.0 · Pacific Movie Water Engine (Medium Swell)</strong>
+      </div>
     </div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <!-- Three.js core + Water + Sky (classic scripts, Vercel-safe) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/objects/Water.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/objects/Sky.js"></script>
 
-<script>
-  let scene, camera, renderer, ocean;
-  let uniforms;
+  <script>
+    let camera, scene, renderer;
+    let water, sky, sun, pmrem;
+    const DAY_SECONDS = 40; // 40s = one cinematic "day"
 
-  function createOceanMaterial() {
-    uniforms = {
-      uTime: { value: 0.0 },
-      uDeepColor:   { value: new THREE.Color("#02101f") }, // deep pacific
-      uShallowColor:{ value: new THREE.Color("#27a8d8") }, // cardiff teal
-      uSunDirection:{ value: new THREE.Vector3(-0.4, 0.7, 0.3).normalize() },
-      uSunColor:    { value: new THREE.Color("#ffe3b0") }, // golden-hour sun
-      uSkyColor:    { value: new THREE.Color("#0b1f3b") }, // zenith
-      uHorizonColor:{ value: new THREE.Color("#3b82f6") }, // horizon blue
-      uFogColor:    { value: new THREE.Color("#020617") },
-      uFogNear:     { value: 30.0 },
-      uFogFar:      { value: 140.0 },
-    };
+    function init() {
+      const container = document.getElementById("bg3d");
 
-    const vertexShader = `
-      uniform float uTime;
-      varying vec3 vWorldPos;
-      varying vec3 vNormal;
+      // Scene
+      scene = new THREE.Scene();
 
-      // Wave function for displacement
-      float getWaveHeight(vec2 p, float time) {
-        float w1 = sin(p.x * 0.12 + time * 1.4) * 0.7;
-        float w2 = cos(p.y * 0.17 + time * 1.1) * 0.5;
-        float w3 = sin((p.x + p.y) * 0.07 + time * 1.7) * 0.4;
-        return w1 + w2 + w3;
-      }
+      // Camera
+      camera = new THREE.PerspectiveCamera(
+        55,
+        window.innerWidth / window.innerHeight,
+        1,
+        20000
+      );
+      camera.position.set(0, 45, 140);
 
-      void main() {
-        vec3 pos = position;
-        float h = getWaveHeight(pos.xz, uTime);
-        pos.y = h;
+      // Renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x020617, 1);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 0.95;
+      container.appendChild(renderer.domElement);
 
-        // Approximate normal from height field
-        float eps = 0.4;
-        float hX = getWaveHeight(pos.xz + vec2(eps, 0.0), uTime);
-        float hZ = getWaveHeight(pos.xz + vec2(0.0, eps), uTime);
+      // Sun vector
+      sun = new THREE.Vector3();
 
-        vec3 dx = vec3(eps, hX - h, 0.0);
-        vec3 dz = vec3(0.0, hZ - h, eps);
-        vec3 normal = normalize(cross(dz, dx));
+      // Sky
+      sky = new THREE.Sky();
+      sky.scale.setScalar(10000);
+      scene.add(sky);
 
-        vec4 worldPos = modelMatrix * vec4(pos, 1.0);
-        vWorldPos = worldPos.xyz;
-        vNormal = normalize(normalMatrix * normal);
+      const skyU = sky.material.uniforms;
+      skyU.turbidity.value = 8;
+      skyU.rayleigh.value = 2.2;
+      skyU.mieCoefficient.value = 0.005;
+      skyU.mieDirectionalG.value = 0.85;
 
-        gl_Position = projectionMatrix * viewMatrix * worldPos;
-      }
-    `;
+      // PMREM for environment lighting
+      pmrem = new THREE.PMREMGenerator(renderer);
+      pmrem.compileEquirectangularShader();
 
-    const fragmentShader = `
-      uniform vec3 uDeepColor;
-      uniform vec3 uShallowColor;
-      uniform vec3 uSunDirection;
-      uniform vec3 uSunColor;
-      uniform vec3 uSkyColor;
-      uniform vec3 uHorizonColor;
-      uniform vec3 uFogColor;
-      uniform float uFogNear;
-      uniform float uFogFar;
+      // Water
+      const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
 
-      varying vec3 vWorldPos;
-      varying vec3 vNormal;
-
-      void main() {
-        vec3 N = normalize(vNormal);
-        vec3 V = normalize(cameraPosition - vWorldPos);
-        vec3 L = normalize(uSunDirection);
-
-        float NdotL = max(dot(N, L), 0.0);
-        float NdotV = max(dot(N, V), 0.0);
-
-        // Depth-dependent water color
-        float dist = length(vWorldPos.xz);
-        float depthFactor = clamp(dist / 220.0, 0.0, 1.0);
-        vec3 baseColor = mix(uShallowColor, uDeepColor, depthFactor);
-
-        // Diffuse lighting
-        vec3 diffuse = baseColor * (0.25 + 0.8 * NdotL);
-
-        // Fresnel (edge glow)
-        float fresnel = pow(1.0 - NdotV, 3.0);
-        fresnel = clamp(fresnel, 0.0, 1.0);
-
-        // Fake sky reflection
-        float up = clamp(N.y * 0.5 + 0.5, 0.0, 1.0);
-        vec3 skyRef = mix(uHorizonColor, uSkyColor, up);
-        vec3 reflection = skyRef * (0.35 + 0.65 * NdotL);
-
-        // Sun glint (specular)
-        float spec = 0.0;
-        if (NdotL > 0.0) {
-          vec3 H = normalize(L + V);
-          float NdotH = max(dot(N, H), 0.0);
-          spec = pow(NdotH, 120.0); // tight highlight
+      const waterNormals = new THREE.TextureLoader().load(
+        "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg",
+        function (texture) {
+          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
         }
-        vec3 specular = uSunColor * spec * 2.3;
+      );
 
-        // Combine
-        vec3 color = diffuse + reflection * fresnel + specular;
+      water = new THREE.Water(waterGeometry, {
+        textureWidth: 1024,
+        textureHeight: 1024,
+        waterNormals: waterNormals,
+        alpha: 1.0,
+        sunDirection: new THREE.Vector3(),
+        sunColor: 0xffffff,
+        waterColor: new THREE.Color("#063055"), // deep movie pacific
+        distortionScale: 5.0, // MEDIUM SWELL (B)
+        fog: false,
+      });
 
-        // Distance fog
-        float fogFactor = smoothstep(uFogNear, uFogFar, dist);
-        color = mix(color, uFogColor, fogFactor);
+      water.rotation.x = -Math.PI / 2;
+      scene.add(water);
 
-        gl_FragColor = vec4(color, 1.0);
+      // Initial sun
+      updateSunFromPhase(0);
+
+      window.addEventListener("resize", onWindowResize);
+
+      // TAP TO SUMMON PJ
+      const btn = document.getElementById("summonPJ");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          setTimeout(() => {
+            window.location.href =
+              "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+          }, 320);
+        });
       }
-    `;
 
-    return new THREE.ShaderMaterial({
-      uniforms,
-      vertexShader,
-      fragmentShader,
-    });
-  }
-
-  function init() {
-    const container = document.getElementById("bg3d");
-
-    scene = new THREE.Scene();
-
-    camera = new THREE.PerspectiveCamera(
-      55,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.set(0, 8, 30);
-
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x020617, 1);
-    container.appendChild(renderer.domElement);
-
-    // A tiny ambient so shadows never go to 0
-    const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x020617, 0.4);
-    scene.add(hemi);
-
-    // High-res ocean mesh
-    const geo = new THREE.PlaneGeometry(360, 360, 260, 260);
-    geo.rotateX(-Math.PI / 2);
-
-    const mat = createOceanMaterial();
-    ocean = new THREE.Mesh(geo, mat);
-    scene.add(ocean);
-
-    window.addEventListener("resize", onResize);
-    animate();
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    const t = performance.now() * 0.0004;
-    if (uniforms) {
-      uniforms.uTime.value = t;
-
-      // slowly swing sun direction for subtle golden-hour movement
-      const swing = Math.sin(t * 0.25) * 0.2;
-      uniforms.uSunDirection.value.set(-0.4 + swing, 0.7, 0.3).normalize();
+      animate();
     }
 
-    camera.lookAt(0, 0, 0);
-    renderer.render(scene, camera);
-  }
+    function updateSun(elevationDeg, azimuthDeg) {
+      const phi = THREE.MathUtils.degToRad(90 - elevationDeg);
+      const theta = THREE.MathUtils.degToRad(azimuthDeg);
 
-  function onResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
+      sun.setFromSphericalCoords(1, phi, theta);
 
-  // Summon PJ
-  document.getElementById("summonPJ").onclick = () => {
-    window.location.href =
-      "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-  };
+      sky.material.uniforms["sunPosition"].value.copy(sun);
+      water.material.uniforms["sunDirection"].value.copy(sun).normalize();
 
-  init();
-</script>
+      const renderTarget = pmrem.fromScene(sky);
+      scene.environment = renderTarget.texture;
+    }
 
+    // t ∈ [0,1] over "day"
+    function updateSunFromPhase(t) {
+      // Golden-hour biased cycle
+      // Morning → golden → high sun → golden → dusk
+      const elevation = 5 + 70 * Math.sin(t * Math.PI); // arc
+      const azimuth = 180 + 140 * t; // swing across horizon
+
+      updateSun(elevation, azimuth);
+    }
+
+    function onWindowResize() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsed = performance.now() * 0.001;
+      const phase = ((elapsed % DAY_SECONDS) / DAY_SECONDS);
+
+      // Sun + sky color shift
+      updateSunFromPhase(phase);
+
+      // Ocean time uniform (built-in)
+      if (water && water.material && water.material.uniforms["time"]) {
+        water.material.uniforms["time"].value += 1.0 / 60.0;
+      }
+
+      // Gentle camera drift to feel like a cinematic shot
+      const radius = 18;
+      camera.position.x = Math.sin(elapsed * 0.03) * radius;
+      camera.position.z = 140 + Math.cos(elapsed * 0.025) * 18;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    init();
+  </script>
 </body>
 </html>
 
