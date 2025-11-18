@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>SideGuy Solutions | Crystal Blue Pacific</title>
+<title>SideGuy Solutions | Ocean Mode</title>
 
 <style>
   html, body {
@@ -12,7 +12,8 @@
     padding: 0;
     overflow: hidden;
     height: 100%;
-    background: #00223a;
+    background: #003b6f;
+    font-family: sans-serif;
   }
 
   #ocean-canvas {
@@ -20,35 +21,53 @@
     inset: 0;
     width: 100vw;
     height: 100vh;
+    z-index: -1;
   }
 
-  #label {
+  #header {
     position: fixed;
     top: 20px;
     left: 20px;
-    font-family: sans-serif;
-    color: #bcecff;
-    font-size: 14px;
+    z-index: 10;
+    color: #bde8ff;
+    font-size: 20px;
+    text-shadow: 0 0 10px #000;
+  }
+
+  #content-box {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.35);
+    padding: 20px 30px;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     z-index: 20;
-    text-shadow: 0 0 8px #000;
   }
 </style>
 </head>
 
 <body>
 
-<div id="label">🌊 Crystal Blue Pacific — BASELINE RESTORE</div>
+<div id="header">🌊 SideGuy Solutions — Ocean Mode</div>
+
+<div id="content-box">
+  Your ocean portal is ALIVE.<br>
+  <small>Stage 1 — core ocean engine running.</small>
+</div>
+
 <canvas id="ocean-canvas"></canvas>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r138/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r138/examples/js/objects/Water.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r138/examples/js/objects/Sky.js"></script>
-
+<!-- Minimal Three.js + Water -->
+<script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
 
 <script>
-let camera, scene, renderer, water, sky, sun;
-let camTime = 0;
-let camSpeed = 0.00033;
+let camera, scene, renderer, water;
 
 init();
 animate();
@@ -56,48 +75,38 @@ animate();
 function init() {
   const canvas = document.getElementById("ocean-canvas");
 
-  renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true
-  });
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x1d3b55, 0.0019);
 
-  camera = new THREE.PerspectiveCamera(65, window.innerWidth/window.innerHeight, 1, 20000);
-  camera.position.set(0, 65, 165);
+  camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    1,
+    20000
+  );
+  camera.position.set(0, 40, 120);
 
-  sun = new THREE.Vector3();
+  const waterGeometry = new THREE.PlaneGeometry(20000, 20000);
 
-  sky = new THREE.Sky();
-  sky.scale.setScalar(10000);
-  scene.add(sky);
-
-  const skyU = sky.material.uniforms;
-  skyU["turbidity"].value = 9;
-  skyU["rayleigh"].value = 2.4;
-  skyU["mieCoefficient"].value = 0.006;
-  skyU["mieDirectionalG"].value = 0.88;
-
-  updateSun();
-
-  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
   const waterNormals = new THREE.TextureLoader().load(
     "https://threejs.org/examples/textures/waternormals.jpg",
-    (t) => { t.wrapS = t.wrapT = THREE.RepeatWrapping; }
+    (texture) => {
+      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    }
   );
 
   water = new THREE.Water(waterGeometry, {
-    textureWidth: 2048,
-    textureHeight: 2048,
+    textureWidth: 1024,
+    textureHeight: 1024,
     waterNormals,
-    sunDirection: sun,
+    sunDirection: new THREE.Vector3(),
     sunColor: 0xffffff,
     waterColor: 0x1e90ff,
-    distortionScale: 3.8,
-    fog: true
+    distortionScale: 3.2,
+    fog: false,
   });
 
   water.rotation.x = -Math.PI / 2;
@@ -106,18 +115,8 @@ function init() {
   window.addEventListener("resize", onWindowResize);
 }
 
-function updateSun() {
-  const phi = THREE.MathUtils.degToRad(72);
-  const theta = THREE.MathUtils.degToRad(150);
-
-  sun.setFromSphericalCoords(1, phi, theta);
-
-  sky.material.uniforms["sunPosition"].value.copy(sun);
-  water.material.uniforms.sunDirection.value.set(sun.x, sun.y, sun.z).normalize();
-}
-
 function onWindowResize() {
-  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
@@ -125,12 +124,11 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate);
 
-  water.material.uniforms["time"].value += 0.55 / 60.0;
+  if (water.material.uniforms["time"]) {
+    water.material.uniforms["time"].value += 0.8 / 60;
+  }
 
-  camTime += camSpeed;
-  camera.position.y = 65 + Math.sin(camTime * 1.25) * 1.4;
-  camera.position.z = 165 + Math.sin(camTime * 0.25) * 7;
-  camera.position.x = Math.sin(camTime * 0.22) * 11;
+  camera.position.x = Math.sin(Date.now() * 0.0002) * 20;
   camera.lookAt(0, 0, 0);
 
   renderer.render(scene, camera);
@@ -139,3 +137,4 @@ function animate() {
 
 </body>
 </html>
+
