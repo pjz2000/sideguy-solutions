@@ -1,7 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 33.1-cardiff-multipass-ocean-stable
-  Mode: Cardiff Medium Swell · Multi-Pass Highlights · FIXED THREE.js
+  Version: 33.2-cardiff-movie-bright
+  Mode: Cardiff Late-Afternoon · Medium Swell · Multi-Pass Highlights
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -23,11 +23,12 @@
       color: #e2e8f0;
     }
 
+    /* Brighter fallback ocean gradient */
     #bg3d {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(circle at top, #0369a1 0%, #020617 70%);
+      background: radial-gradient(circle at top, #38c6ff 0%, #020617 70%);
     }
 
     .overlay {
@@ -46,10 +47,10 @@
       max-width: 700px;
       padding: 2rem 2.3rem;
       border-radius: 1.4rem;
-      background: rgba(15,23,42,0.55);
+      background: rgba(15,23,42,0.6);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.7);
     }
 
     h1 {
@@ -111,15 +112,14 @@
       <button id="summonPJ">TAP TO SUMMON PJ</button>
 
       <div class="version-tag">
-        Build: <strong>V33.1 · Cardiff Multi-Pass Ocean · FIXED</strong>
+        Build: <strong>V33.2 · Cardiff Movie Bright</strong>
       </div>
     </div>
   </div>
 
-  <!-- 🔥 THREE.JS MUST LOAD FIRST (this was the missing piece) -->
+  <!-- Three.js MUST load before any ocean code -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
-  <!-- 🌊 OCEAN ENGINE -->
   <script>
     let scene, camera, renderer;
     let oceanBase, oceanHighlight;
@@ -130,7 +130,8 @@
       const container = document.getElementById("bg3d");
 
       scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0x0a0f1c, 25, 150);
+      // Lighter fog & farther horizon → less “black void”
+      scene.fog = new THREE.Fog(0x061222, 40, 220);
 
       camera = new THREE.PerspectiveCamera(
         60,
@@ -143,45 +144,59 @@
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0x0a0f1c, 1);
+      renderer.setClearColor(0x061222, 1); // deep but not black
       container.appendChild(renderer.domElement);
 
-      // LIGHTING
-      const ambient = new THREE.HemisphereLight(0x88bfff, 0x0a0f1c, 0.55);
+      // --- LIGHTING: brighter, warmer, more “sun” feeling ---
+      const ambient = new THREE.HemisphereLight(0xbfe4ff, 0x061222, 0.8);
       scene.add(ambient);
 
-      const sunLight = new THREE.DirectionalLight(0xffc27c, 1.5);
-      sunLight.position.set(-80, 55, 60);
+      const sunLight = new THREE.DirectionalLight(0xffd29a, 1.7);
+      sunLight.position.set(-60, 55, 40);
       scene.add(sunLight);
 
-      // GEOMETRY
-      sharedGeo = new THREE.PlaneGeometry(480, 480, 240, 240);
+      // --- SHARED OCEAN GEOMETRY ---
+      sharedGeo = new THREE.PlaneGeometry(520, 520, 240, 240);
       sharedGeo.rotateX(-Math.PI / 2);
 
+      // Brighter, more balanced gradient shallow→deep
       const pos = sharedGeo.attributes.position;
       const colors = new Float32Array(pos.count * 3);
 
-      const shallow = new THREE.Color("#2eb7df");
-      const deep = new THREE.Color("#02101c");
-      const tmp = new THREE.Color();
+      const shallow = new THREE.Color("#3fd3ff"); // bright aqua
+      const mid     = new THREE.Color("#0d4474"); // mid blue
+      const deep    = new THREE.Color("#031321"); // deep pacific
+
+      const tmp1 = new THREE.Color();
+      const tmp2 = new THREE.Color();
 
       for (let i = 0; i < pos.count; i++) {
         const x = pos.getX(i);
         const z = pos.getZ(i);
         const d = Math.sqrt(x * x + z * z);
 
-        let t = d / 330;
+        let t = d / 360;
         t = THREE.MathUtils.clamp(t, 0, 1);
 
-        tmp.lerpColors(shallow, deep, t);
-        colors[i * 3 + 0] = tmp.r;
-        colors[i * 3 + 1] = tmp.g;
-        colors[i * 3 + 2] = tmp.b;
+        // Two-step gradient: shallow -> mid -> deep
+        if (t < 0.5) {
+          const tt = t / 0.5;
+          tmp1.lerpColors(shallow, mid, tt);
+          colors[i * 3 + 0] = tmp1.r;
+          colors[i * 3 + 1] = tmp1.g;
+          colors[i * 3 + 2] = tmp1.b;
+        } else {
+          const tt = (t - 0.5) / 0.5;
+          tmp2.lerpColors(mid, deep, tt);
+          colors[i * 3 + 0] = tmp2.r;
+          colors[i * 3 + 1] = tmp2.g;
+          colors[i * 3 + 2] = tmp2.b;
+        }
       }
 
       sharedGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-      // BASE MATERIAL
+      // --- BASE MATERIAL (shape + color + shimmer) ---
       const loader = new THREE.TextureLoader();
       const normalMap = loader.load(
         "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
@@ -190,20 +205,20 @@
 
       const baseMat = new THREE.MeshStandardMaterial({
         vertexColors: true,
-        metalness: 0.65,
-        roughness: 0.32,
+        metalness: 0.55,             // slightly less metallic = less plastic
+        roughness: 0.35,             // a bit rougher = more natural
         normalMap,
-        normalScale: new THREE.Vector2(1.25, 1.25)
+        normalScale: new THREE.Vector2(1.2, 1.2)
       });
 
       oceanBase = new THREE.Mesh(sharedGeo, baseMat);
       scene.add(oceanBase);
 
-      // HIGHLIGHT PASS
+      // --- HIGHLIGHT PASS (brighter rim + sun sparkle) ---
       highlightUniforms = {
-        uSunDir:   { value: new THREE.Vector3(-2.5, 1.5, 1.0).normalize() },
-        uWarm:     { value: new THREE.Color("#ffaf6b") },
-        uCool:     { value: new THREE.Color("#66d7ff") }
+        uSunDir:   { value: new THREE.Vector3(-2.0, 1.4, 0.9).normalize() },
+        uWarm:     { value: new THREE.Color("#ffb878") }, // warm sun
+        uCool:     { value: new THREE.Color("#7ce9ff") }  // teal rim
       };
 
       const highlightMat = new THREE.ShaderMaterial({
@@ -211,7 +226,6 @@
         vertexShader: `
           varying vec3 vPos;
           varying vec3 vNormal;
-
           void main() {
             vec4 wp = modelMatrix * vec4(position, 1.0);
             vPos = wp.xyz;
@@ -232,11 +246,22 @@
             vec3 V = normalize(cameraPosition - vPos);
             vec3 L = normalize(uSunDir);
 
-            float fres = pow(1.0 - max(dot(N, V), 0.0), 2.5);
-            float spec = pow(max(dot(N, normalize(L + V)), 0.0), 110.0);
+            float NdotV = max(dot(N, V), 0.0);
+            float fres = pow(1.0 - NdotV, 2.2);      // brighter rim
 
-            vec3 color = uCool * fres * 0.9 + uWarm * spec * 1.8;
-            float alpha = clamp(fres * 1.0 + spec * 1.3, 0.0, 1.0);
+            float spec = 0.0;
+            float NdotL = max(dot(N, L), 0.0);
+            if (NdotL > 0.0) {
+              vec3 H = normalize(L + V);
+              float NdotH = max(dot(N, H), 0.0);
+              spec = pow(NdotH, 80.0);              // slightly wider highlight
+            }
+
+            vec3 edge = uCool * fres * 1.2;
+            vec3 sunSparkle = uWarm * spec * 2.0;
+
+            vec3 color = edge + sunSparkle;
+            float alpha = clamp(fres * 1.0 + spec * 1.6, 0.0, 1.0);
 
             gl_FragColor = vec4(color, alpha);
           }
@@ -249,6 +274,7 @@
       oceanHighlight = new THREE.Mesh(sharedGeo, highlightMat);
       scene.add(oceanHighlight);
 
+      // Resize
       window.addEventListener("resize", onResize);
 
       // Summon PJ
@@ -266,14 +292,14 @@
       const t = performance.now() * 0.00035;
       const pos = sharedGeo.attributes.position;
 
-      // WAVES
+      // Medium swell, smoother, less “video game jitter”
       for (let i = 0; i < pos.count; i++) {
         const x = pos.getX(i);
         const z = pos.getZ(i);
 
-        const y1 = Math.sin(x * 0.035 + t * 1.2) * 0.9;
-        const y2 = Math.cos(z * 0.055 + t * 1.4) * 0.55;
-        const y3 = Math.sin((x + z) * 0.06 + t * 2.1) * 0.28;
+        const y1 = Math.sin(x * 0.03 + t * 1.2) * 0.9;   // main swell
+        const y2 = Math.cos(z * 0.05 + t * 1.4) * 0.55;  // cross swell
+        const y3 = Math.sin((x + z) * 0.055 + t * 2.0) * 0.25; // detail
 
         pos.setY(i, y1 + y2 + y3);
       }
@@ -281,10 +307,18 @@
       pos.needsUpdate = true;
       sharedGeo.computeVertexNormals();
 
-      // Camera move
-      const camR = 22;
+      // Subtle sun swing for life
+      const swing = Math.sin(t * 0.25) * 0.25;
+      if (highlightUniforms) {
+        highlightUniforms.uSunDir.value
+          .set(-2.0 + swing, 1.4, 0.9)
+          .normalize();
+      }
+
+      // Cinematic orbit
+      const camR = 23;
       camera.position.x = Math.sin(t * 0.25) * camR;
-      camera.position.z = 34 + Math.cos(t * 0.18) * 15;
+      camera.position.z = 34 + Math.cos(t * 0.18) * 16;
       camera.position.y = 9 + Math.sin(t * 0.28) * 1.0;
       camera.lookAt(0, 0, 0);
 
