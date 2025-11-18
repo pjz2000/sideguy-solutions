@@ -1,7 +1,7 @@
 <!-- 
   SideGuy Solutions
-  Version: 31.0-cardiff-ferrari-lite
-  Mode: Inline Ocean Shader · Cardiff Golden Hour · No Water.js/Sky.js
+  Version: 20.6-cardiff-golden-hour-plus
+  Mode: Cardiff Golden Hour · Normal Map Ocean · Stable Three.js
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -27,7 +27,10 @@
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(circle at 15% 0%, #38bdf8 0%, #020617 70%);
+      /* Warm golden-hour glow in the sky */
+      background:
+        radial-gradient(circle at 15% 0%, #fbbf24 0%, rgba(251,191,36,0.35) 8%, transparent 30%),
+        radial-gradient(circle at 50% 0%, #38bdf8 0%, #020617 65%);
     }
 
     .overlay {
@@ -44,11 +47,11 @@
     .box {
       max-width: 700px;
       padding: 2rem 2.3rem;
-      background: rgba(15,23,42,0.6);
+      background: rgba(15,23,42,0.62);
       backdrop-filter: blur(20px);
       border-radius: 1.4rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.65);
     }
 
     h1 {
@@ -107,144 +110,30 @@
 
     <button id="summonPJ">TAP TO SUMMON PJ</button>
 
-    <div class="version-tag">V31.0 · Cardiff Ferrari Ocean Lite</div>
+    <div class="version-tag">V20.6 · Cardiff Golden Hour Plus</div>
   </div>
 </div>
 
-<!-- Core Three.js only – no example scripts -->
+<!-- Core Three.js from unpkg (the one that works) -->
 <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
 
 <script>
-let scene, camera, renderer, ocean, clock;
-
-function createOceanMaterial() {
-  const vertexShader = `
-    uniform float uTime;
-
-    varying vec3 vWorldPos;
-
-    // Wave helpers
-    float wave(vec2 p, float freq, float amp, float speed, vec2 dir) {
-      float phase = dot(p, dir) * freq + uTime * speed;
-      return sin(phase) * amp;
-    }
-
-    float getWaveHeight(vec2 p) {
-      float h = 0.0;
-      // big slow swells
-      h += wave(p, 0.20, 0.45, 0.6, normalize(vec2(1.0, 0.3)));
-      // cardiff chop
-      h += wave(p, 0.32, 0.26, 0.9, normalize(vec2(-0.7, 0.5)));
-      // small shimmer
-      h += wave(p, 0.55, 0.12, 1.6, normalize(vec2(0.2, 1.0)));
-      return h;
-    }
-
-    void main() {
-      vec3 pos = position;
-      vec2 p = pos.xz * 0.08;
-      pos.y = getWaveHeight(p);
-
-      vec4 worldPos = modelMatrix * vec4(pos, 1.0);
-      vWorldPos = worldPos.xyz;
-
-      gl_Position = projectionMatrix * viewMatrix * worldPos;
-    }
-  `;
-
-  const fragmentShader = `
-    uniform float uTime;
-    uniform vec3 uSunDirection;
-    uniform vec3 uCameraPos;
-
-    varying vec3 vWorldPos;
-
-    // Recompute the same wave function for normals
-    float wave(vec2 p, float freq, float amp, float speed, vec2 dir) {
-      float phase = dot(p, dir) * freq + uTime * speed;
-      return sin(phase) * amp;
-    }
-
-    float getWaveHeight(vec2 p) {
-      float h = 0.0;
-      h += wave(p, 0.20, 0.45, 0.6, normalize(vec2(1.0, 0.3)));
-      h += wave(p, 0.32, 0.26, 0.9, normalize(vec2(-0.7, 0.5)));
-      h += wave(p, 0.55, 0.12, 1.6, normalize(vec2(0.2, 1.0)));
-      return h;
-    }
-
-    vec3 getNormal(vec3 worldPos) {
-      float eps = 0.35;
-      vec2 p = worldPos.xz * 0.08;
-      float h = getWaveHeight(p);
-      float hx = getWaveHeight((worldPos.xz + vec2(eps, 0.0)) * 0.08);
-      float hz = getWaveHeight((worldPos.xz + vec2(0.0, eps)) * 0.08);
-
-      vec3 dx = vec3(eps, hx - h, 0.0);
-      vec3 dz = vec3(0.0, hz - h, eps);
-      return normalize(cross(dz, dx));
-    }
-
-    void main() {
-      vec3 sunDir = normalize(uSunDirection);
-      vec3 viewDir = normalize(uCameraPos - vWorldPos);
-
-      // Gradient water color based on distance from camera (near teal, far deep blue)
-      float dist = length(vWorldPos.xz) * 0.015;
-      dist = clamp(dist, 0.0, 1.0);
-
-      vec3 nearColor = vec3(0.20, 0.77, 0.86);  // teal crests
-      vec3 farColor  = vec3(0.01, 0.10, 0.26);  // deep pacific navy
-      vec3 baseColor = mix(nearColor, farColor, dist);
-
-      vec3 normal = getNormal(vWorldPos);
-
-      // Diffuse from soft peach sun
-      float ndotl = max(dot(normal, sunDir), 0.0);
-      vec3 diffuse = baseColor * (0.35 + 0.9 * ndotl);
-
-      // Specular highlight (soft peach)
-      vec3 halfVec = normalize(sunDir + viewDir);
-      float spec = pow(max(dot(normal, halfVec), 0.0), 80.0);
-      vec3 specColor = vec3(1.0, 0.78, 0.55) * spec * 1.7;
-
-      // Fresnel: bright edges at grazing angles
-      float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 3.0);
-      fresnel *= 0.85;
-      vec3 skyColor = vec3(0.12, 0.30, 0.55);
-      vec3 fresnelColor = skyColor * fresnel;
-
-      // Gentle overall tint to warm things slightly
-      vec3 color = diffuse + specColor + fresnelColor;
-
-      gl_FragColor = vec4(color, 1.0);
-    }
-  `;
-
-  return new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uSunDirection: { value: new THREE.Vector3(-0.6, 0.75, 0.3).normalize() },
-      uCameraPos: { value: new THREE.Vector3() }
-    },
-    vertexShader,
-    fragmentShader
-  });
-}
+let scene, camera, renderer, ocean, clock, normalMap;
 
 function init() {
   const container = document.getElementById("bg3d");
-  clock = new THREE.Clock();
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x041529, 14, 90);
+  // Warm-ish fog, feels like air between you and horizon
+  scene.fog = new THREE.Fog(0x041627, 12, 95);
 
   camera = new THREE.PerspectiveCamera(
     55,
     window.innerWidth / window.innerHeight,
     0.1,
-    400
+    300
   );
+  // Lower, more cinematic angle
   camera.position.set(0, 4.6, 22);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -253,12 +142,17 @@ function init() {
   renderer.setClearColor(0x020617, 1);
   container.appendChild(renderer.domElement);
 
-  // Simple lights, mostly for fog & atmosphere
-  const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x02111f, 0.7);
+  clock = new THREE.Clock();
+
+  // === LIGHTS: soft golden hour ===
+  const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x021019, 0.75);
   scene.add(hemi);
 
-  const sun = new THREE.DirectionalLight(0xffb36b, 1.1);
-  sun.position.
+  const sun = new THREE.DirectionalLight(0xffb36b, 1.7); // soft peach
+  sun.position.set(-16, 14, 6);
+  scene.add(sun);
 
+  // === NORMAL MAP for fine ripples ===
+  const
 
 
