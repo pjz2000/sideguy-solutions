@@ -1,104 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PJ Ocean Test – Cinematic Blue</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
-      background: #3ab6ff;
-    }
+<title>SideGuy Solutions | Ultra Pacific Engine</title>
 
-    canvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #001a33;
+  }
+
+  #label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-family: sans-serif;
+    font-size: 15px;
+    color: #bcecff;
+    z-index: 10;
+    text-shadow: 0 0 10px #000;
+  }
+
+  canvas { display: block; }
+</style>
 </head>
 
 <body>
-  <canvas id="ocean"></canvas>
+<div id="label">🌊 Ultra Pacific Engine v2.1 — PJ MODE</div>
+<canvas id="ocean"></canvas>
 
-  <script>
-    const canvas = document.getElementById("ocean");
-    const ctx = canvas.getContext("2d");
+<script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.150.1/examples/js/objects/Water.js"></script>
+<script src="https://unpkg.com/three@0.150.1/examples/js/objects/Sky.js"></script>
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+<script>
+let camera, scene, renderer, water, sky, sun;
+
+init();
+animate();
+
+function init() {
+  const canvas = document.getElementById("ocean");
+
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  scene = new THREE.Scene();
+
+  camera = new THREE.PerspectiveCamera(
+    60,
+    window.innerWidth / window.innerHeight,
+    1,
+    20000
+  );
+  camera.position.set(0, 55, 160);
+
+  // Sky
+  sun = new THREE.Vector3();
+
+  sky = new THREE.Sky();
+  sky.scale.setScalar(10000);
+  scene.add(sky);
+
+  const skyU = sky.material.uniforms;
+  skyU["turbidity"].value = 11;
+  skyU["rayleigh"].value = 3.1;
+  skyU["mieCoefficient"].value = 0.0044;
+  skyU["mieDirectionalG"].value = 0.78;
+
+  updateSun();
+
+  // Water
+  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
+
+  const waterNormals = new THREE.TextureLoader().load(
+    "https://threejs.org/examples/textures/waternormals.jpg",
+    function (texture) {
+      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     }
-    resize();
-    window.addEventListener("resize", resize);
+  );
 
-    // --- COLORS ---
-    const topSky = "#66c8ff";        // Light sky blue
-    const horizonSky = "#3ab6ff";    // Medium blue (haze)
-    const deepOcean = "#0077be";     // Deep water
-    const sunGlow = "rgba(255,255,200,0.25)";
+  water = new THREE.Water(waterGeometry, {
+    textureWidth: 2048,
+    textureHeight: 2048,
+    waterNormals,
+    sunDirection: sun,
+    sunColor: 0xffffff,
+    waterColor: 0x1477d4,
+    distortionScale: 5.0,
+    fog: false
+  });
 
-    let t = 0;
+  water.rotation.x = -Math.PI / 2;
+  scene.add(water);
 
-    function draw() {
-      t += 0.003;
+  window.addEventListener("resize", onResize);
+}
 
-      const w = canvas.width;
-      const h = canvas.height;
+function updateSun() {
+  const phi = THREE.MathUtils.degToRad(75);
+  const theta = THREE.MathUtils.degToRad(160);
+  sun.setFromSphericalCoords(1, phi, theta);
 
-      // ---- SKY GRADIENT ----
-      const sky = ctx.createLinearGradient(0, 0, 0, h * 0.6);
-      sky.addColorStop(0, topSky);
-      sky.addColorStop(1, horizonSky);
-      ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, w, h);
+  sky.material.uniforms["sunPosition"].value.copy(sun);
+  water.material.uniforms["sunDirection"].value.copy(sun).normalize();
+}
 
-      // ---- SUN GLOW ----
-      const sunY = h * 0.28;
-      const sunX = w * 0.52;
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
-      const sun = ctx.createRadialGradient(
-        sunX, sunY, 20,
-        sunX, sunY, 280
-      );
-      sun.addColorStop(0, "rgba(255,255,240,0.8)");
-      sun.addColorStop(1, "rgba(255,255,240,0)");
-      ctx.fillStyle = sun;
-      ctx.beginPath();
-      ctx.arc(sunX, sunY, 260, 0, Math.PI * 2);
-      ctx.fill();
+let t = 0;
 
-      // ---- OCEAN ----
-      const ocean = ctx.createLinearGradient(0, h * 0.45, 0, h);
-      ocean.addColorStop(0, horizonSky);
-      ocean.addColorStop(1, deepOcean);
-      ctx.fillStyle = ocean;
-      ctx.fillRect(0, h * 0.45, w, h);
+function animate() {
+  requestAnimationFrame(animate);
 
-      // ---- WAVES ----
-      ctx.strokeStyle = "rgba(255,255,255,0.35)";
-      ctx.lineWidth = 1.2;
+  t += 0.0035;
 
-      let waveCount = 5;
-      for (let i = 0; i < waveCount; i++) {
-        let y = h * 0.55 + i * 50;
-        ctx.beginPath();
+  // Wave time
+  water.material.uniforms["time"].value = t * 4.0;
 
-        for (let x = 0; x < w; x++) {
-          let wave = Math.sin((x * 0.008) + t * 2 + i) * (12 + i * 1.5);
-          ctx.lineTo(x, y + wave);
-        }
-        ctx.stroke();
-      }
+  // Camera slow cinematic glide
+  camera.position.x = Math.sin(t * 0.25) * 18;
+  camera.position.y = 55 + Math.sin(t * 0.8) * 2.2;
+  camera.position.z = 160 + Math.sin(t * 0.18) * 9;
 
-      // ---- MOVEMENT LOOP ----
-      requestAnimationFrame(draw);
-    }
+  camera.lookAt(0, 0, 0);
 
-    draw();
-  </script>
+  renderer.render(scene, camera);
+}
+</script>
+
 </body>
 </html>
