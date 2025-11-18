@@ -1,15 +1,18 @@
-<!-- 
+<!--
   SideGuy Solutions
-  Version: 20.7-appletv-cardiff
-  Mode: AppleTV Nature Ocean · MeshPhysicalMaterial · Golden Hour
+  Version: 33.0-cardiff-multipass-ocean
+  Mode: Cardiff-by-the-Sea · Medium Swell · Multi-Pass Highlights
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Cardiff-by-the-Sea Ocean</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,19 +26,19 @@
       color: #e2e8f0;
     }
 
+    /* 3D background container + safe fallback */
     #bg3d {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background:
-        radial-gradient(circle at 18% 0%, rgba(251,191,36,0.9) 0%, rgba(251,191,36,0.35) 10%, transparent 32%),
-        radial-gradient(circle at 55% 0%, #38bdf8 0%, #020617 68%);
+      background: radial-gradient(circle at top, #0369a1 0%, #020617 70%);
     }
 
     .overlay {
       position: relative;
       z-index: 10;
       height: 100%;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -46,11 +49,11 @@
     .box {
       max-width: 700px;
       padding: 2rem 2.3rem;
-      background: rgba(15,23,42,0.60);
-      backdrop-filter: blur(20px);
       border-radius: 1.4rem;
-      border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.70);
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.65);
     }
 
     h1 {
@@ -65,7 +68,10 @@
       margin-bottom: 1.5rem;
     }
 
-    .contact { color: #bae6fd; margin-bottom: 1.5rem; }
+    .contact {
+      color: #bae6fd;
+      margin-bottom: 1.5rem;
+    }
 
     button {
       padding: .85rem 1.7rem;
@@ -80,187 +86,248 @@
     }
 
     .version-tag {
-      margin-top: .85rem;
-      color: #94a3b8;
+      margin-top: .8rem;
       font-size: .75rem;
+      color: #94a3b8;
       opacity: .9;
     }
   </style>
 </head>
 
 <body>
+  <div id="bg3d"></div>
 
-<div id="bg3d"></div>
+  <div class="overlay">
+    <div class="box">
+      <h1>Where San Diego builds, codes, and scales.</h1>
 
-<div class="overlay">
-  <div class="box">
-    <h1>Where San Diego builds, codes, and scales.</h1>
+      <p>
+        Coastal concierge tech for the 2025 era — custom apps, AI automation,
+        Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
+        North County and greater San Diego.
+      </p>
 
-    <p>
-      Coastal concierge tech for the 2025 era — custom apps, AI automation,
-      Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
-      North County and greater San Diego.
-    </p>
+      <div class="contact">
+        Text / call: <strong>773–544–1231</strong><br />
+        Email: <strong>peter.z@kromeon.com</strong>
+      </div>
 
-    <div class="contact">
-      Text / call: <strong>773–544–1231</strong><br />
-      Email: <strong>peter.z@kromeon.com</strong>
+      <button id="summonPJ">TAP TO SUMMON PJ</button>
+
+      <div class="version-tag">
+        Build: <strong>V33.0 · Cardiff Multi-Pass Ocean</strong>
+      </div>
     </div>
-
-    <button id="summonPJ">TAP TO SUMMON PJ</button>
-
-    <div class="version-tag">V20.7 · AppleTV Cardiff Ocean</div>
   </div>
-</div>
 
-<!-- Core Three.js from unpkg (stable) -->
-<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+  <!-- Core Three.js only -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
-<script>
-let scene, camera, renderer, ocean, clock, normalMap;
+  <script>
+    let scene, camera, renderer;
+    let oceanBase, oceanHighlight;
+    let sharedGeo;
+    let highlightUniforms;
 
-function init() {
-  const container = document.getElementById("bg3d");
+    function init() {
+      const container = document.getElementById("bg3d");
 
-  scene = new THREE.Scene();
-  // Slightly warm fog → more cinematic depth
-  scene.fog = new THREE.Fog(0x041627, 10, 95);
+      scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x020617, 20, 130);
 
-  camera = new THREE.PerspectiveCamera(
-    55,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    300
-  );
-  // AppleTV doc vibe → low, slightly off-center
-  camera.position.set(1.4, 4.3, 20.5);
+      camera = new THREE.PerspectiveCamera(
+        55,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.set(0, 8, 30);
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x020617, 1);
-  container.appendChild(renderer.domElement);
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x020617, 1);
+      container.appendChild(renderer.domElement);
 
-  clock = new THREE.Clock();
+      // GOLDEN-HOUR LIGHTS
+      const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x020617, 0.65);
+      scene.add(hemi);
 
-  // === LIGHTS: AppleTV-style soft but punchy ===
-  const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x020c19, 0.7);
-  scene.add(hemi);
+      const sun = new THREE.DirectionalLight(0xffe3b0, 1.6);
+      sun.position.set(-18, 22, 14);
+      scene.add(sun);
 
-  const sun = new THREE.DirectionalLight(0xffb36b, 1.7); // soft warm
-  sun.position.set(-18, 13, 4);
-  scene.add(sun);
+      // SHARED OCEAN GEOMETRY
+      sharedGeo = new THREE.PlaneGeometry(420, 420, 220, 220);
+      sharedGeo.rotateX(-Math.PI / 2);
 
-  // Slight cool kicker from the right (like fill from the sky)
-  const coolFill = new THREE.DirectionalLight(0x4cc9ff, 0.35);
-  coolFill.position.set(16, 8, 10);
-  scene.add(coolFill);
+      // Vertex colors for deep→shallow gradient
+      const pos = sharedGeo.attributes.position;
+      const colors = new Float32Array(pos.count * 3);
+      const cNear = new THREE.Color("#26b0de"); // bright teal
+      const cFar  = new THREE.Color("#020b1a"); // deep pacific
+      const c = new THREE.Color();
 
-  // === NORMAL MAP for micro ripples ===
-  const loader = new THREE.TextureLoader();
-  normalMap = loader.load(
-    "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg",
-    (tex) => {
-      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+        const d = Math.sqrt(x * x + z * z);
+        let t = d / 260;
+        t = THREE.MathUtils.clamp(t, 0, 1);
+        c.lerpColors(cNear, cFar, t);
+        colors[i * 3 + 0] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+
+      sharedGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+      // BASE MATERIAL (shape + color + normal map)
+      const loader = new THREE.TextureLoader();
+      const normalMap = loader.load(
+        "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
+      );
+      normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
+
+      const baseMat = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        metalness: 0.7,
+        roughness: 0.24,
+        normalMap: normalMap,
+        normalScale: new THREE.Vector2(1.3, 1.3)
+      });
+
+      oceanBase = new THREE.Mesh(sharedGeo, baseMat);
+      scene.add(oceanBase);
+
+      // HIGHLIGHT MATERIAL (tiny custom shader for rim light + sparkles)
+      highlightUniforms = {
+        uSunDir:   { value: new THREE.Vector3(-0.4, 0.7, 0.3).normalize() },
+        uSunColor: { value: new THREE.Color("#ffe3b0") },
+        uEdgeColor:{ value: new THREE.Color("#76e4ff") }
+      };
+
+      const highlightMat = new THREE.ShaderMaterial({
+        uniforms: highlightUniforms,
+        vertexShader: `
+          varying vec3 vWorldPos;
+          varying vec3 vNormal;
+          void main() {
+            vec4 worldPos = modelMatrix * vec4(position, 1.0);
+            vWorldPos = worldPos.xyz;
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * viewMatrix * worldPos;
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 uSunDir;
+          uniform vec3 uSunColor;
+          uniform vec3 uEdgeColor;
+
+          varying vec3 vWorldPos;
+          varying vec3 vNormal;
+
+          void main() {
+            vec3 N = normalize(vNormal);
+            vec3 V = normalize(cameraPosition - vWorldPos);
+            vec3 L = normalize(uSunDir);
+
+            float NdotL = max(dot(N, L), 0.0);
+            float NdotV = max(dot(N, V), 0.0);
+
+            // Fresnel edge glow
+            float fresnel = pow(1.0 - NdotV, 3.0);
+            fresnel = clamp(fresnel, 0.0, 1.0);
+
+            // Tight sun specular
+            float spec = 0.0;
+            if (NdotL > 0.0) {
+              vec3 H = normalize(L + V);
+              float NdotH = max(dot(N, H), 0.0);
+              spec = pow(NdotH, 90.0);
+            }
+
+            vec3 edge = uEdgeColor * (fresnel * 1.5);
+            vec3 sunSparkle = uSunColor * (spec * 2.5);
+
+            vec3 color = edge + sunSparkle;
+            float alpha = clamp(fresnel * 1.2 + spec * 1.5, 0.0, 1.0);
+
+            // keep it subtle, more like a sheen than neon
+            color *= 0.9;
+
+            gl_FragColor = vec4(color, alpha);
+          }
+        `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      oceanHighlight = new THREE.Mesh(sharedGeo, highlightMat);
+      scene.add(oceanHighlight);
+
+      // Resize
+      window.addEventListener("resize", onResize);
+
+      // Summon PJ
+      const btn = document.getElementById("summonPJ");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          window.location.href =
+            "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+        });
+      }
+
+      animate();
     }
-  );
 
-  // === GEOMETRY: high-res plane ===
-  const geo = new THREE.PlaneGeometry(380, 380, 220, 220);
-  geo.rotateX(-Math.PI / 2);
+    function animate() {
+      requestAnimationFrame(animate);
 
-  // Vertex color gradient (near = teal, far = deep blue)
-  const pos = geo.attributes.position;
-  const colorArray = new Float32Array(pos.count * 3);
+      const t = performance.now() * 0.00035;
+      const pos = sharedGeo.attributes.position;
 
-  const cNear = new THREE.Color("#39c3e0"); // bright but not cartoon
-  const cFar  = new THREE.Color("#03111f"); // deep pacific navy
-  const c = new THREE.Color();
+      // CPU-side MEDIUM SWELL (3-layer waves)
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
 
-  for (let i = 0; i < pos.count; i++) {
-    const x = pos.getX(i);
-    const z = pos.getZ(i);
-    const d = Math.sqrt(x * x + z * z);
+        const y1 = Math.sin(x * 0.045 + t * 2.0) * 0.9;
+        const y2 = Math.cos(z * 0.065 + t * 1.6) * 0.5;
+        const y3 = Math.sin((x + z) * 0.09 + t * 2.3) * 0.25;
 
-    let t = d / 270;
-    t = THREE.MathUtils.clamp(t, 0, 1);
+        pos.setY(i, y1 + y2 + y3);
+      }
+      pos.needsUpdate = true;
 
-    c.lerpColors(cNear, cFar, t);
+      // Recompute normals so both passes get good lighting
+      sharedGeo.computeVertexNormals();
 
-    colorArray[i * 3]     = c.r;
-    colorArray[i * 3 + 1] = c.g;
-    colorArray[i * 3 + 2] = c.b;
-  }
+      // Animate sun dir a bit for life
+      const swing = Math.sin(t * 0.25) * 0.25;
+      if (highlightUniforms) {
+        highlightUniforms.uSunDir.value.set(-0.4 + swing, 0.7, 0.3).normalize();
+      }
 
-  geo.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
+      // Drone-like camera move
+      const camT = t * 0.4;
+      const radius = 20;
+      camera.position.x = Math.sin(camT) * radius;
+      camera.position.z = 30 + Math.cos(camT * 0.7) * 18;
+      camera.position.y = 8.5 + Math.sin(camT * 0.5) * 1.0;
+      camera.lookAt(0, 0, 0);
 
-  // === MATERIAL: MeshPhysicalMaterial for more “water-like” look ===
-  const mat = new THREE.MeshPhysicalMaterial({
-    vertexColors: true,
-    metalness: 0.7,        // stronger specular reflections
-    roughness: 0.28,       // sharper highlights
-    clearcoat: 0.9,        // glossy clear surface
-    clearcoatRoughness: 0.15,
-    normalMap: normalMap,
-    normalScale: new THREE.Vector2(0.7, 0.7),
-    reflectivity: 0.9
-  });
+      renderer.render(scene, camera);
+    }
 
-  ocean = new THREE.Mesh(geo, mat);
-  scene.add(ocean);
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
 
-  window.addEventListener("resize", onResize);
-  animate();
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  const t = clock.getElapsedTime();
-  const pos = ocean.geometry.attributes.position;
-
-  // AppleTV-style: smooth, layered, not too chaotic
-  for (let i = 0; i < pos.count; i++) {
-    const x = pos.getX(i);
-    const z = pos.getZ(i);
-
-    // Big slow rolling sets
-    const w1 = Math.sin(x * 0.022 + t * 0.7) * 0.45;
-    // Mid-frequency chop
-    const w2 = Math.cos(z * 0.05 + t * 1.0) * 0.28;
-    // Fine shimmer on top
-    const w3 = Math.sin((x + z) * 0.038 + t * 1.7) * 0.11;
-
-    pos.setY(i, w1 + w2 + w3);
-  }
-
-  pos.needsUpdate = true;
-  ocean.geometry.computeVertexNormals();
-
-  // Gentle, controlled camera drift
-  const camT = t * 0.45;
-  camera.position.x = 1.4 + Math.sin(camT * 0.35) * 1.0;
-  camera.position.z = 20.5 + Math.cos(camT * 0.25) * 1.4;
-  camera.position.y = 4.3 + Math.sin(camT * 0.22) * 0.22;
-  camera.lookAt(0, 1.1, 0);
-
-  renderer.render(scene, camera);
-}
-
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-// Summon PJ
-document.getElementById("summonPJ").onclick = () => {
-  window.location.href =
-    "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-};
-
-init();
-</script>
-
+    init();
+  </script>
 </body>
 </html>
