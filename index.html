@@ -1,173 +1,303 @@
-<script>
-let scene, camera, renderer;
-let oceanBase, oceanHighlight;
-let sharedGeo;
-let highlightUniforms;
+<!--
+  SideGuy Solutions
+  Version: 33.1-cardiff-multipass-ocean-stable
+  Mode: Cardiff Medium Swell · Multi-Pass Highlights · FIXED THREE.js
+  Author: PJ + ChatGPT
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
 
-function init() {
-  const container = document.getElementById("bg3d");
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x0a0f1c, 25, 150); // softer horizon, cinematic
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020617;
+      font-family: system-ui, -apple-system, Inter, sans-serif;
+      color: #e2e8f0;
+    }
 
-  camera = new THREE.PerspectiveCamera(
-    60,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    2000
-  );
-  camera.position.set(0, 9, 34);
+    #bg3d {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at top, #0369a1 0%, #020617 70%);
+    }
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x0a0f1c, 1); // deeper pacific base
-  container.appendChild(renderer.domElement);
+    .overlay {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
 
-  // --- LIGHTING (more natural + warm sun) ---
-  const ambient = new THREE.HemisphereLight(0x88bfff, 0x0a0f1c, 0.55);
-  scene.add(ambient);
+    .box {
+      max-width: 700px;
+      padding: 2rem 2.3rem;
+      border-radius: 1.4rem;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.65);
+    }
 
-  const sunLight = new THREE.DirectionalLight(0xffc27c, 1.5);
-  sunLight.position.set(-80, 55, 60); // sun direction
-  scene.add(sunLight);
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      margin-bottom: 1rem;
+      color: #f9fafb;
+    }
 
-  // --- SHARED OCEAN GEOMETRY ---
-  sharedGeo = new THREE.PlaneGeometry(480, 480, 240, 240);
-  sharedGeo.rotateX(-Math.PI / 2);
+    p {
+      color: #dbeafe;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
 
-  // Color gradient (cleaner, more movie-like blues)
-  const pos = sharedGeo.attributes.position;
-  const colors = new Float32Array(pos.count * 3);
-  const shallow = new THREE.Color("#2eb7df");
-  const deep = new THREE.Color("#02101c");
-  const tmp = new THREE.Color();
+    .contact {
+      color: #bae6fd;
+      margin-bottom: 1.5rem;
+    }
 
-  for (let i = 0; i < pos.count; i++) {
-    const x = pos.getX(i);
-    const z = pos.getZ(i);
-    const d = Math.sqrt(x * x + z * z);
-    let t = d / 330;
-    t = THREE.MathUtils.clamp(t, 0, 1);
-    tmp.lerpColors(shallow, deep, t);
-    colors[i * 3 + 0] = tmp.r;
-    colors[i * 3 + 1] = tmp.g;
-    colors[i * 3 + 2] = tmp.b;
-  }
+    button {
+      padding: .85rem 1.7rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(120deg, #22d3ee, #3b82f6);
+      color: white;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
 
-  sharedGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    .version-tag {
+      margin-top: .8rem;
+      font-size: .75rem;
+      color: #94a3b8;
+      opacity: .9;
+    }
+  </style>
+</head>
 
-  // Base material
-  const loader = new THREE.TextureLoader();
-  const normalMap = loader.load(
-    "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
-  );
-  normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
+<body>
+  <div id="bg3d"></div>
 
-  const baseMat = new THREE.MeshStandardMaterial({
-    vertexColors: true,
-    metalness: 0.65,
-    roughness: 0.32,
-    normalMap,
-    normalScale: new THREE.Vector2(1.25, 1.25)
-  });
+  <div class="overlay">
+    <div class="box">
+      <h1>Where San Diego builds, codes, and scales.</h1>
 
-  oceanBase = new THREE.Mesh(sharedGeo, baseMat);
-  scene.add(oceanBase);
+      <p>
+        Coastal concierge tech for the 2025 era — custom apps, AI automation,
+        Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
+        North County and greater San Diego.
+      </p>
 
-  // --- HIGHLIGHT PASS (improved Fresnel + sun reflection) ---
-  highlightUniforms = {
-    uSunDir:   { value: new THREE.Vector3(-2.5, 1.5, 1.0).normalize() },
-    uWarm:     { value: new THREE.Color("#ffaf6b") }, // sun color
-    uCool:     { value: new THREE.Color("#66d7ff") }  // rim color
-  };
+      <div class="contact">
+        Text / call: <strong>773–544–1231</strong><br />
+        Email: <strong>peter.z@kromeon.com</strong>
+      </div>
 
-  const highlightMat = new THREE.ShaderMaterial({
-    uniforms: highlightUniforms,
-    vertexShader: `
-      varying vec3 vPos;
-      varying vec3 vNormal;
+      <button id="summonPJ">TAP TO SUMMON PJ</button>
 
-      void main() {
-        vec4 wp = modelMatrix * vec4(position, 1.0);
-        vPos = wp.xyz;
-        vNormal = normalize(normalMatrix * normal);
-        gl_Position = projectionMatrix * viewMatrix * wp;
+      <div class="version-tag">
+        Build: <strong>V33.1 · Cardiff Multi-Pass Ocean · FIXED</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔥 THREE.JS MUST LOAD FIRST (this was the missing piece) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+
+  <!-- 🌊 OCEAN ENGINE -->
+  <script>
+    let scene, camera, renderer;
+    let oceanBase, oceanHighlight;
+    let sharedGeo;
+    let highlightUniforms;
+
+    function init() {
+      const container = document.getElementById("bg3d");
+
+      scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x0a0f1c, 25, 150);
+
+      camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        2000
+      );
+      camera.position.set(0, 9, 34);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x0a0f1c, 1);
+      container.appendChild(renderer.domElement);
+
+      // LIGHTING
+      const ambient = new THREE.HemisphereLight(0x88bfff, 0x0a0f1c, 0.55);
+      scene.add(ambient);
+
+      const sunLight = new THREE.DirectionalLight(0xffc27c, 1.5);
+      sunLight.position.set(-80, 55, 60);
+      scene.add(sunLight);
+
+      // GEOMETRY
+      sharedGeo = new THREE.PlaneGeometry(480, 480, 240, 240);
+      sharedGeo.rotateX(-Math.PI / 2);
+
+      const pos = sharedGeo.attributes.position;
+      const colors = new Float32Array(pos.count * 3);
+
+      const shallow = new THREE.Color("#2eb7df");
+      const deep = new THREE.Color("#02101c");
+      const tmp = new THREE.Color();
+
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+        const d = Math.sqrt(x * x + z * z);
+
+        let t = d / 330;
+        t = THREE.MathUtils.clamp(t, 0, 1);
+
+        tmp.lerpColors(shallow, deep, t);
+        colors[i * 3 + 0] = tmp.r;
+        colors[i * 3 + 1] = tmp.g;
+        colors[i * 3 + 2] = tmp.b;
       }
-    `,
-    fragmentShader: `
-      uniform vec3 uSunDir;
-      uniform vec3 uWarm;
-      uniform vec3 uCool;
 
-      varying vec3 vPos;
-      varying vec3 vNormal;
+      sharedGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-      void main() {
-        vec3 N = normalize(vNormal);
-        vec3 V = normalize(cameraPosition - vPos);
-        vec3 L = normalize(uSunDir);
+      // BASE MATERIAL
+      const loader = new THREE.TextureLoader();
+      const normalMap = loader.load(
+        "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
+      );
+      normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
 
-        // Fresnel (rim light)
-        float fres = pow(1.0 - max(dot(N, V), 0.0), 2.5);
+      const baseMat = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        metalness: 0.65,
+        roughness: 0.32,
+        normalMap,
+        normalScale: new THREE.Vector2(1.25, 1.25)
+      });
 
-        // Warm sun reflection
-        float spec = pow(max(dot(N, normalize(L + V)), 0.0), 110.0);
+      oceanBase = new THREE.Mesh(sharedGeo, baseMat);
+      scene.add(oceanBase);
 
-        vec3 color = uCool * fres * 0.9 + uWarm * spec * 1.8;
-        float alpha = clamp(fres * 1.0 + spec * 1.3, 0.0, 1.0);
+      // HIGHLIGHT PASS
+      highlightUniforms = {
+        uSunDir:   { value: new THREE.Vector3(-2.5, 1.5, 1.0).normalize() },
+        uWarm:     { value: new THREE.Color("#ffaf6b") },
+        uCool:     { value: new THREE.Color("#66d7ff") }
+      };
 
-        gl_FragColor = vec4(color, alpha);
+      const highlightMat = new THREE.ShaderMaterial({
+        uniforms: highlightUniforms,
+        vertexShader: `
+          varying vec3 vPos;
+          varying vec3 vNormal;
+
+          void main() {
+            vec4 wp = modelMatrix * vec4(position, 1.0);
+            vPos = wp.xyz;
+            vNormal = normalize(normalMatrix * normal);
+            gl_Position = projectionMatrix * viewMatrix * wp;
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 uSunDir;
+          uniform vec3 uWarm;
+          uniform vec3 uCool;
+
+          varying vec3 vPos;
+          varying vec3 vNormal;
+
+          void main() {
+            vec3 N = normalize(vNormal);
+            vec3 V = normalize(cameraPosition - vPos);
+            vec3 L = normalize(uSunDir);
+
+            float fres = pow(1.0 - max(dot(N, V), 0.0), 2.5);
+            float spec = pow(max(dot(N, normalize(L + V)), 0.0), 110.0);
+
+            vec3 color = uCool * fres * 0.9 + uWarm * spec * 1.8;
+            float alpha = clamp(fres * 1.0 + spec * 1.3, 0.0, 1.0);
+
+            gl_FragColor = vec4(color, alpha);
+          }
+        `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+
+      oceanHighlight = new THREE.Mesh(sharedGeo, highlightMat);
+      scene.add(oceanHighlight);
+
+      window.addEventListener("resize", onResize);
+
+      // Summon PJ
+      document.getElementById("summonPJ").onclick = () => {
+        window.location.href =
+          "mailto:peter.z@kromeon.com?subject=Summon%20PJ";
+      };
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const t = performance.now() * 0.00035;
+      const pos = sharedGeo.attributes.position;
+
+      // WAVES
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+
+        const y1 = Math.sin(x * 0.035 + t * 1.2) * 0.9;
+        const y2 = Math.cos(z * 0.055 + t * 1.4) * 0.55;
+        const y3 = Math.sin((x + z) * 0.06 + t * 2.1) * 0.28;
+
+        pos.setY(i, y1 + y2 + y3);
       }
-    `,
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
 
-  oceanHighlight = new THREE.Mesh(sharedGeo, highlightMat);
-  scene.add(oceanHighlight);
+      pos.needsUpdate = true;
+      sharedGeo.computeVertexNormals();
 
-  window.addEventListener("resize", onResize);
-  animate();
-}
+      // Camera move
+      const camR = 22;
+      camera.position.x = Math.sin(t * 0.25) * camR;
+      camera.position.z = 34 + Math.cos(t * 0.18) * 15;
+      camera.position.y = 9 + Math.sin(t * 0.28) * 1.0;
+      camera.lookAt(0, 0, 0);
 
-function animate() {
-  requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
 
-  const t = performance.now() * 0.00035;
-  const pos = sharedGeo.attributes.position;
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
 
-  // More natural swell: slower, smoother, layered
-  for (let i = 0; i < pos.count; i++) {
-    const x = pos.getX(i);
-    const z = pos.getZ(i);
-
-    const y1 = Math.sin(x * 0.035 + t * 1.2) * 0.9;  // big swell
-    const y2 = Math.cos(z * 0.055 + t * 1.4) * 0.55; // cross swell
-    const y3 = Math.sin((x + z) * 0.06 + t * 2.1) * 0.28; // fine detail
-
-    pos.setY(i, y1 + y2 + y3);
-  }
-
-  pos.needsUpdate = true;
-  sharedGeo.computeVertexNormals();
-
-  // Camera — smoother cinematic orbit
-  const camR = 22;
-  camera.position.x = Math.sin(t * 0.25) * camR;
-  camera.position.z = 34 + Math.cos(t * 0.18) * 15;
-  camera.position.y = 9 + Math.sin(t * 0.28) * 1.0;
-  camera.lookAt(0, 0, 0);
-
-  renderer.render(scene, camera);
-}
-
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-init();
-</script>
+    init();
+  </script>
+</body>
+</html>
