@@ -1,180 +1,220 @@
 <!--
   SideGuy Solutions
-  Version: 40.0-encinitas-coastal-guide
-  Mode: Encinitas / Leucadia Chill · North County Tech Guide
-  Author: PJ (+ ChatGPT assist)
+  Version: 41.0-encinitas-sunset-orb
+  Mode: Encinitas Sunset Guide · Coastal Tech · Chill & Premium
+  Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-  <title>SideGuy Solutions | North County Coastal Tech Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SideGuy Solutions | North County Sunset Tech Guide</title>
 
   <meta
     name="description"
-    content="SideGuy Solutions helps North County businesses surf the next wave of tech — AI automation, custom apps, Web3 & Solana payments, ticketing flows, and DFS tools tuned for San Diego."
-  />
-  <meta
-    name="keywords"
-    content="North County San Diego tech, Encinitas software, San Diego app development, AI automation San Diego, Solana payments, DFS tools, ticketing flows"
+    content="SideGuy Solutions guides Encinitas, Leucadia, Cardiff, and Solana Beach into the next wave — AI, apps, automation, Solana payments, ticketing flows, and local tech playbooks."
   />
 
   <style>
+    /* -----------------------------------------------------
+       ROOT + GLOBAL
+    ----------------------------------------------------- */
     :root {
-      --bg-sky: #0ea5e9;
-      --bg-sea: #0f172a;
-      --bg-sand: #fbbf24;
-      --card: rgba(15, 23, 42, 0.9);
-      --card-soft: rgba(15, 23, 42, 0.75);
-      --border-soft: rgba(255, 255, 255, 0.18);
-      --accent: #22c55e;
-      --accent-soft: rgba(34, 197, 94, 0.16);
-      --text-main: #e5f1ff;
-      --text-sub: #bfdbfe;
+      --sunset-gold: #ffd28a;
+      --sunset-orange: #f6a74b;
+      --sunset-deep: #f57b42;
+      --sunset-soft: #ffe8c8;
+      --coastal-deep: #020617;
+      --coastal-mid: #0f172a;
+      --coastal-sky: #38bdf8;
+      --text-main: #fefefc;
+      --text-sub: #ffe8c8;
+      --card: rgba(15,23,42,0.85);
+      --card-soft: rgba(15,23,42,0.65);
+      --border-soft: rgba(255,255,255,0.18);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", sans-serif;
-      color: var(--text-main);
-      background: radial-gradient(circle at top, #38bdf8 0%, #020617 60%);
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      font-family: system-ui, Inter, sans-serif;
+      color: var(--text-main);
+      background: linear-gradient(to bottom,
+        #fbbb62 0%,
+        #f29e54 20%,
+        #d87840 40%,
+        #0f172a 70%,
+        #020617 100%
+      );
       overflow-x: hidden;
     }
 
-    /* Coastal animated background */
-    .bg-coast {
+    /* -----------------------------------------------------
+       BACKGROUND SUNSET VIBES
+    ----------------------------------------------------- */
+    .sunset-haze {
       position: fixed;
       inset: 0;
-      z-index: 0;
       background:
-        radial-gradient(circle at 5% -10%, rgba(248, 250, 252, 0.28) 0%, rgba(15, 23, 42, 0) 55%),
-        radial-gradient(circle at 90% 0%, rgba(56, 189, 248, 0.42) 0%, rgba(15, 23, 42, 0) 60%),
-        linear-gradient(to bottom, #0ea5e9 0%, #0f172a 40%, #020617 100%);
-      animation: skyDrift 26s ease-in-out infinite alternate;
+        radial-gradient(circle at 60% -20%, rgba(255, 212, 128, 0.45), transparent 60%),
+        radial-gradient(circle at 0% 20%, rgba(255, 122, 61, 0.3), transparent 70%);
+      mix-blend-mode: screen;
+      z-index: 0;
+      pointer-events: none;
+      animation: hazeMove 38s ease-in-out infinite alternate;
     }
 
-    .bg-waves {
+    @keyframes hazeMove {
+      0% { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(0,-20px,0); }
+    }
+
+    .sunset-horizon {
       position: fixed;
-      inset: auto 0 0 0;
-      height: 40vh;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(248, 250, 252, 0.1) 0, transparent 55%),
-        linear-gradient(to top, #020617 0%, #020617 35%, rgba(15, 23, 42, 0) 100%);
-      mix-blend-mode: soft-light;
+      bottom: 18vh;
+      left: 0;
+      width: 100%;
+      height: 20vh;
+      background: radial-gradient(circle at 50% -20%, rgba(255,185,90,0.35), transparent 75%);
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+
+    .sunset-shimmer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        115deg,
+        rgba(255,193,111,0.09) 0%,
+        rgba(255,118,56,0.03) 33%,
+        transparent 60%
+      );
+      animation: shimmerMove 55s linear infinite;
       pointer-events: none;
       z-index: 0;
     }
 
-    @keyframes skyDrift {
-      0% {
-        background-position: 0 0, 100% 0, 0 0;
-      }
-      100% {
-        background-position: -10% 3%, 110% -3%, 0 0;
-      }
+    @keyframes shimmerMove {
+      0% { transform: translateX(-30%); }
+      100% { transform: translateX(30%); }
     }
 
-    /* Floating orb */
+    /* -----------------------------------------------------
+       SUNSET ORB BUTTON
+    ----------------------------------------------------- */
+    .orb-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.6rem;
+      border-radius: 999px;
+      cursor: pointer;
+      border: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: radial-gradient(circle at 30% 20%,
+        #fff7e6 0%,
+        var(--sunset-gold) 20%,
+        var(--sunset-orange) 50%,
+        var(--sunset-deep) 100%
+      );
+      color: #1f2937;
+      box-shadow:
+        0 0 22px rgba(255,181,70,0.65),
+        0 0 60px rgba(255,111,0,0.35),
+        0 8px 20px rgba(0,0,0,0.55);
+      animation: orbPulse 4s ease-in-out infinite;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .orb-btn:hover {
+      transform: scale(1.06);
+      box-shadow:
+        0 0 30px rgba(255,181,70,0.9),
+        0 0 75px rgba(255,111,0,0.55),
+        0 10px 26px rgba(0,0,0,0.55);
+    }
+
+    @keyframes orbPulse {
+      0% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.035); filter: brightness(1.08); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+
+    /* Floating orb (corner summon) */
     .summon-orb {
       position: fixed;
-      right: 5vw;
+      right: 4vw;
       top: 18vh;
       width: 120px;
       height: 120px;
       border-radius: 999px;
-      background:
-        radial-gradient(circle at 30% 20%, #f9fafb 0%, #e0f2fe 15%, #38bdf8 40%, rgba(59, 130, 246, 0) 70%);
+      background: radial-gradient(circle at 30% 20%,
+        #fff3d9 0%, #ffd592 25%, #f5a35a 55%, rgba(245,123,66,0.05) 100%
+      );
       box-shadow:
-        0 0 30px rgba(56, 189, 248, 0.9),
-        0 0 80px rgba(59, 130, 246, 0.8);
+        0 0 40px rgba(255,185,90,0.7),
+        0 0 85px rgba(255,111,0,0.5);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #0f172a;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       text-align: center;
       cursor: pointer;
       z-index: 5;
-      transform-origin: center;
+      color: #1f2937;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       animation: orbFloat 7s ease-in-out infinite;
     }
 
-    .summon-orb::after {
-      content: "";
-      position: absolute;
-      inset: 10%;
-      border-radius: inherit;
-      border: 1px solid rgba(15, 23, 42, 0.12);
-    }
-
     @keyframes orbFloat {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      50% {
-        transform: translate3d(0, -10px, 0) scale(1.04);
-      }
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-9px) scale(1.04); }
+      100% { transform: translateY(0) scale(1); }
     }
 
-    .orb-label {
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 768px) {
+    @media(max-width:768px) {
       .summon-orb {
-        width: 88px;
-        height: 88px;
-        right: 4vw;
+        width: 90px;
+        height: 90px;
+        bottom: 16vh;
         top: auto;
-        bottom: 18vh;
-        font-size: 0.62rem;
+        right: 4vw;
+        font-size: 0.65rem;
       }
     }
 
-    /* Main layout */
+    /* -----------------------------------------------------
+       LAYOUT + UI
+    ----------------------------------------------------- */
     main {
       position: relative;
-      z-index: 1;
-      flex: 1;
-      padding: 1.5rem clamp(1.5rem, 5vw, 3.25rem) 3rem;
+      z-index: 2;
+      padding: 2rem clamp(1.5rem, 5vw, 3.5rem) 4rem;
       max-width: 1120px;
       margin: 0 auto;
     }
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
+    /* Brand */
     .brand {
       display: flex;
       align-items: center;
@@ -182,925 +222,419 @@
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
+      width: 38px;
+      height: 38px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      background: linear-gradient(120deg, var(--sunset-gold), var(--sunset-deep));
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 0 18px rgba(255,185,90,0.7);
+      color: #1f2937;
+      font-size: 1.1rem;
       font-weight: 800;
-      font-size: 1rem;
-      box-shadow: 0 0 18px rgba(34, 197, 94, 0.7);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
     }
 
     .brand-text span:first-child {
-      font-size: 0.85rem;
-      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #e5f1ff;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
     }
 
     .brand-text span:last-child {
       font-size: 0.75rem;
-      color: #9ca3af;
+      color: var(--sunset-soft);
     }
 
-    nav {
-      display: flex;
-      gap: 0.85rem;
-      font-size: 0.8rem;
-    }
-
+    /* Nav */
     nav button {
-      background: transparent;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 0.45rem 0.85rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
-      padding: 0.45rem 0.9rem;
+      color: var(--sunset-soft);
       cursor: pointer;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      font-size: 0.68rem;
-      transition: background 0.18s ease, border-color 0.18s ease, transform 0.16s ease;
     }
 
     nav button:hover {
-      background: rgba(15, 23, 42, 0.7);
-      border-color: #e5e7eb;
-      transform: translateY(-1px);
+      background: rgba(255,255,255,0.14);
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        flex-wrap: wrap;
-      }
-    }
-
-    /* Hero */
+    /* -----------------------------------------------------
+       HERO
+    ----------------------------------------------------- */
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
-      gap: 2.25rem;
-      margin-top: 1rem;
-      margin-bottom: 2.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
-    .hero-main h1 {
-      font-size: clamp(2rem, 4vw, 2.9rem);
+    @media(max-width:900px) { .hero { grid-template-columns: 1fr; } }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
       line-height: 1.05;
-      margin-bottom: 0.85rem;
+      margin-bottom: 1rem;
     }
 
-    .hero-main h1 span.highlight {
-      background: linear-gradient(120deg, #22c55e, #38bdf8);
+    .hero h1 .sunset {
+      background: linear-gradient(120deg, var(--sunset-gold), var(--sunset-deep));
       -webkit-background-clip: text;
-      background-clip: text;
       color: transparent;
     }
 
-    .hero-main p {
-      font-size: 0.98rem;
-      color: var(--text-sub);
+    .hero p {
       max-width: 34rem;
-      line-height: 1.5;
-      margin-bottom: 1.1rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.3rem;
+      color: var(--sunset-soft);
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
     }
 
     .badge {
       display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.28rem 0.7rem;
+      padding: 0.32rem 0.8rem;
+      margin-right: 0.45rem;
+      margin-bottom: 0.6rem;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.7rem;
-      color: #e5e7eb;
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
-    }
-
-    .hero-cta button.primary {
-      border-radius: 999px;
-      border: none;
-      padding: 0.7rem 1.4rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       font-size: 0.72rem;
-      font-weight: 700;
-      background: linear-gradient(120deg, #22c55e, #0ea5e9);
-      color: #02131f;
-      box-shadow: 0 12px 30px rgba(14, 165, 233, 0.45);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .hero-cta button.primary span.icon {
-      font-size: 1rem;
-    }
-
-    .hero-cta .contact-inline {
-      font-size: 0.82rem;
-      color: #cbd5f5;
-    }
-
-    .hero-cta .contact-inline strong {
-      color: #e5f1ff;
-    }
-
-    .hero-side {
-      align-self: center;
+      color: var(--sunset-soft);
     }
 
     .hero-card {
       background: var(--card-soft);
-      border-radius: 1.3rem;
-      padding: 1.2rem 1.3rem;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
       border: 1px solid var(--border-soft);
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.5);
-      font-size: 0.8rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
     }
 
     .hero-card h2 {
       font-size: 0.9rem;
-      letter-spacing: 0.16em;
+      color: var(--sunset-soft);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #bfdbfe;
     }
 
-    .hero-card p {
-      color: #e5f1ff;
-      line-height: 1.45;
-    }
-
-    .hero-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-    }
-
-    .hero-pill {
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      font-size: 0.7rem;
-      color: #cbd5f5;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero-side {
-        order: -1;
-      }
-    }
-
-    /* Sections */
+    /* -----------------------------------------------------
+       SECTIONS (Services, Playbooks, etc.)
+    ----------------------------------------------------- */
     section {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3.5rem;
     }
 
     .section-label {
+      text-transform: uppercase;
       font-size: 0.75rem;
       letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #a5b4fc;
+      color: var(--sunset-soft);
       margin-bottom: 0.4rem;
     }
 
     .section-title {
-      font-size: 1.1rem;
-      color: #e5f1ff;
-      margin-bottom: 0.7rem;
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
     }
 
     .section-subcopy {
-      font-size: 0.9rem;
-      color: #bfdbfe;
-      margin-bottom: 1.1rem;
-      max-width: 40rem;
+      max-width: 38rem;
+      font-size: 0.95rem;
+      color: var(--sunset-soft);
+      margin-bottom: 1.2rem;
+      line-height: 1.55;
     }
 
     .grid {
       display: grid;
-      gap: 0.9rem;
+      gap: 1rem;
     }
 
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    .grid-3 { grid-template-columns: repeat(3,1fr); }
+    .grid-2 { grid-template-columns: repeat(2,1fr); }
 
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media(max-width:960px) {
+      .grid-3 { grid-template-columns: repeat(2,1fr); }
     }
-
-    @media (max-width: 900px) {
-      .grid-3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .grid-3,
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    @media(max-width:640px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
     }
 
     .card {
       background: var(--card);
       border-radius: 1rem;
-      padding: 0.9rem 1rem;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      font-size: 0.82rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 0.6rem;
-      align-items: center;
-      margin-bottom: 0.15rem;
+      padding: 1rem 1.15rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
     }
 
     .card-title {
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: #e5f1ff;
-    }
-
-    .card-tag {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(37, 99, 235, 0.2);
-      color: #bfdbfe;
-      border: 1px solid rgba(129, 140, 248, 0.6);
-    }
-
-    .card-body {
-      color: #cbd5f5;
-      line-height: 1.45;
-    }
-
-    .card-meta {
-      margin-top: 0.3rem;
-      font-size: 0.72rem;
-      color: #9ca3af;
-    }
-
-    .card-meta span {
-      margin-right: 0.7rem;
+      margin-bottom: 0.3rem;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-top: 0.45rem;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
     }
 
     .pill {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.55rem;
+      padding: 0.25rem 0.55rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5f1ff;
-      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.68rem;
     }
 
-    .pill.soft {
-      border-style: dashed;
-      color: #bfdbfe;
-    }
-
-    /* CTA section */
+    /* -----------------------------------------------------
+       CTA & FOOTER
+    ----------------------------------------------------- */
     .cta-band {
-      margin-top: 1.6rem;
+      margin-top: 1.5rem;
       padding: 1rem 1.2rem;
-      border-radius: 1.15rem;
-      background: radial-gradient(circle at -10% 0%, rgba(34, 197, 94, 0.35) 0%, rgba(15, 23, 42, 0.9) 52%);
-      border: 1px solid rgba(74, 222, 128, 0.55);
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 1.1rem;
+      border: 1px solid rgba(255,255,255,0.18);
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      align-items: center;
       justify-content: space-between;
-      font-size: 0.85rem;
-    }
-
-    .cta-band-main {
-      max-width: 23rem;
-    }
-
-    .cta-band-main strong {
-      color: #bbf7d0;
-    }
-
-    .cta-band-actions {
-      display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.45);
     }
 
-    .cta-pill {
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(21, 128, 61, 0.8);
-      background: rgba(22, 163, 74, 0.15);
-      font-size: 0.75rem;
-      color: #bbf7d0;
-    }
-
-    .cta-btn-small {
-      padding: 0.4rem 0.85rem;
-      border-radius: 999px;
-      border: none;
-      background: #22c55e;
-      color: #022c22;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-    }
-
-    /* Footer */
     footer {
-      position: relative;
-      z-index: 1;
-      padding: 0.9rem clamp(1.5rem, 5vw, 3.25rem) 1.4rem;
-      max-width: 1120px;
-      margin: 0 auto;
+      padding: 1.4rem;
+      text-align: center;
       font-size: 0.75rem;
-      color: #9ca3af;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem;
-      justify-content: space-between;
+      color: var(--sunset-soft);
     }
 
     footer a {
-      color: #bfdbfe;
+      color: var(--sunset-gold);
       text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
-  <div class="bg-coast"></div>
-  <div class="bg-waves"></div>
+
+  <!-- Background Elements -->
+  <div class="sunset-haze"></div>
+  <div class="sunset-horizon"></div>
+  <div class="sunset-shimmer"></div>
 
   <!-- Summon PJ Orb -->
   <button class="summon-orb" id="summonOrb">
-    <span class="orb-label">Tap to<br />Summon PJ</span>
+    Tap<br>to<br>PJ
   </button>
 
   <main>
+
+    <!-- HEADER -->
     <header>
       <div class="brand">
         <div class="brand-mark">S</div>
         <div class="brand-text">
           <span>SideGuy Solutions</span>
-          <span>Coastal concierge for future-ready tech</span>
+          <span>North County Sunset Tech Guide</span>
         </div>
       </div>
+
       <nav>
         <button data-scroll="#services">Services</button>
         <button data-scroll="#playbooks">Playbooks</button>
-        <button data-scroll="#verticals">Who we help</button>
-        <button data-scroll="#signals">Future signals</button>
+        <button data-scroll="#verticals">Who We Help</button>
+        <button data-scroll="#signals">Future Signals</button>
       </nav>
     </header>
 
     <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="hero-main">
+    <section class="hero">
+      <div>
         <h1>
-          North County’s
-          <span class="highlight">coastal tech guide</span>
-          for the next wave.
+          North County’s <span class="sunset">sunset tech guide</span> to the next decade.
         </h1>
+
         <p>
-          From Encinitas to Solana Beach, SideGuy Solutions helps founders,
-          operators, and locals plug into the next decade of tech — AI,
-          automations, custom apps, Web3 &amp; Solana payments, ticketing flows,
-          and smarter DFS tools.
+          From Encinitas to Cardiff to Solana Beach — SideGuy helps locals,
+          operators, and founders adopt AI, apps, automations, Solana payments,
+          ticketing flows, and future-friendly tools without the chaos.
         </p>
 
-        <div class="hero-badges">
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span>Encinitas · Leucadia · Cardiff · Solana Beach</span>
-          </div>
-          <div class="badge">
-            <span class="badge-dot"></span>
-            <span>AI, Apps &amp; Automation for real-world operators</span>
-          </div>
+        <div>
+          <span class="badge">Encinitas · Leucadia · Cardiff · Solana Beach</span>
+          <span class="badge">AI, Apps & Automation</span>
         </div>
 
-        <div class="hero-cta">
-          <button class="primary" id="heroSummon">
-            <span class="icon">🌊</span>
-            <span>Tap to Summon PJ</span>
-          </button>
-          <div class="contact-inline">
-            Text / call: <strong>773-544-1231</strong> ·
-            <strong>peter.z@kromeon.com</strong>
-          </div>
-        </div>
+        <br />
+        <button class="orb-btn" id="heroSummon">Tap to Summon PJ</button>
       </div>
 
-      <aside class="hero-side">
-        <div class="hero-card">
-          <h2>North County Tech Snapshot · 2025</h2>
-          <p>
-            The gap between what’s possible and what most operators are running
-            is wider than ever. SideGuy plugs in as your coastal tech concierge:
-            we translate the chaos into a clear, local, “here’s what to do next”
-            plan.
-          </p>
-          <div class="hero-pill-row">
-            <span class="hero-pill">AI agents &amp; automations</span>
-            <span class="hero-pill">Custom booking &amp; ticket flows</span>
-            <span class="hero-pill">Solana &amp; stablecoin payments</span>
-            <span class="hero-pill">DFS &amp; sports-edge tooling</span>
-          </div>
-        </div>
-      </aside>
+      <div class="hero-card">
+        <h2>North County Snapshot · 2025</h2>
+        <p>
+          Most operators are 3–5 years behind the tools that actually make a difference.
+          SideGuy translates tech into moves you can execute this week — simple, local,
+          coastal-friendly decisions that compound.
+        </p>
+      </div>
     </section>
 
     <!-- SERVICES -->
     <section id="services">
-      <div class="section-label">What SideGuy does</div>
-      <div class="section-title">Simple services, tuned to coastal operators.</div>
+      <div class="section-label">Services</div>
+      <div class="section-title">Clear, coastal-tuned builds.</div>
       <div class="section-subcopy">
-        No 30-page decks, no buzzword fog. Just clear builds and wins for
-        restaurants, gyms, coaches, venues, real estate teams, and local
-        founders who want to move faster without burning the whole budget.
+        No 30-page decks. No Silicon Valley fog. Just simple tools that help real
+        North County operators.
       </div>
 
       <div class="grid grid-3">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">AI &amp; automation flows</div>
-            <span class="card-tag">Signal: 12–24 month edge</span>
-          </div>
-          <div class="card-body">
-            Turn your repeat work into background systems. Lead capture, intake
-            forms, follow-ups, reminders, waitlists, and basic customer support
-            — handled by flows, not your brain.
-          </div>
+        <div class="card">
+          <div class="card-title">AI & Automation Flows</div>
+          <p>Replace repeat work with quiet, background systems.</p>
           <div class="pill-row">
             <span class="pill">Lead funnels</span>
-            <span class="pill">Operator dashboards</span>
-            <span class="pill soft">“Do it for me” setup</span>
+            <span class="pill">Intake</span>
+            <span class="pill">Follow-up</span>
           </div>
-        </article>
+        </div>
 
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Custom apps &amp; portals</div>
-            <span class="card-tag">iOS · Android · Web</span>
-          </div>
-          <div class="card-body">
-            Lightweight apps and web portals for bookings, memberships, ticket
-            sales, and private experiences — built around your actual workflows,
-            not a generic template.
-          </div>
+        <div class="card">
+          <div class="card-title">Custom Apps & Portals</div>
+          <p>Booking, membership, ticketing, and VIP experiences.</p>
           <div class="pill-row">
-            <span class="pill">Membership &amp; passes</span>
-            <span class="pill">Ticketing &amp; events</span>
-            <span class="pill soft">VIP / community access</span>
+            <span class="pill">Memberships</span>
+            <span class="pill">Bookings</span>
           </div>
-        </article>
+        </div>
 
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Web3 &amp; Solana payments</div>
-            <span class="card-tag">Fees ↓ · Flexibility ↑</span>
-          </div>
-          <div class="card-body">
-            Help locals and travelers pay with stablecoins and crypto without
-            breaking your accounting. Lower fees, faster settlement, and better
-            loyalty loops for repeat customers.
-          </div>
+        <div class="card">
+          <div class="card-title">Solana & Stablecoin Payments</div>
+          <p>Lower fees. Instant settlement. Modern loyalty.</p>
           <div class="pill-row">
-            <span class="pill">Stablecoin rails</span>
-            <span class="pill">Loyalty tokens</span>
-            <span class="pill soft">Pilot programs</span>
+            <span class="pill">Stablecoins</span>
+            <span class="pill">Pilot programs</span>
           </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Ticketing &amp; experience design</div>
-            <span class="card-tag">For venues &amp; operators</span>
-          </div>
-          <div class="card-body">
-            Smarter flows for shows, events, and experiences: seat maps,
-            upgrades, bundles, merch, and post-event follow-ups that actually
-            drive the next sale.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Ticket UX audits</span>
-            <span class="pill">Upsell flows</span>
-            <span class="pill soft">Fan data capture</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">DFS &amp; sports-edge tooling</div>
-            <span class="card-tag">For the sharp side</span>
-          </div>
-          <div class="card-body">
-            Light tools that make promos, edges, and risk easier to track:
-            exposure snapshots, promo tracking, hedge helpers, and simple
-            visualization of your positions.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Promo trackers</span>
-            <span class="pill">Risk snapshots</span>
-            <span class="pill soft">Simple edge tools</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Advisory &amp; “walk the beach” sessions</div>
-            <span class="card-tag">Strategy &amp; clarity</span>
-          </div>
-          <div class="card-body">
-            Sometimes you don’t need a product yet — you need a clear map. We
-            sit down (or walk the beach) and translate the buzz into concrete
-            next steps that fit your energy and runway.
-          </div>
-          <div class="pill-row">
-            <span class="pill">One-on-one sessions</span>
-            <span class="pill">Roadmaps</span>
-            <span class="pill soft">Operator-friendly language</span>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
     <!-- PLAYBOOKS -->
     <section id="playbooks">
-      <div class="section-label">North County tech playbooks</div>
-      <div class="section-title">Short, practical blueprints for local operators.</div>
+      <div class="section-label">Playbooks</div>
+      <div class="section-title">Short, simple coastal strategies.</div>
       <div class="section-subcopy">
-        Think of these as “tech tide charts” — simple, specific plays you can
-        run in the next 30–90 days to make your business smoother, smarter, and
-        a little more future-proof.
+        Concrete 2–6 week projects any operator can run.
       </div>
 
       <div class="grid grid-2">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Playbook 01 · AI intake for service businesses</div>
-            <span class="card-tag">2–4 weeks</span>
-          </div>
-          <div class="card-body">
-            Turn texts, DMs, emails, and form fills into a single, clean intake
-            pipe. Lead qualifies, basic questions answered, and next steps sent
-            — while you’re actually surfing or working.
-          </div>
-          <div class="card-meta">
-            <span>Good for: coaches, agencies, trades, real estate teams</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Playbook 02 · Local venue ticket flow tune-up</div>
-            <span class="card-tag">3–6 weeks</span>
-          </div>
-          <div class="card-body">
-            Audit and rebuild the path from “heard about your show” to “bought
-            tickets + told a friend.” Clean mobile UX, less friction, better
-            bundles, and actual post-event follow-up.
-          </div>
-          <div class="card-meta">
-            <span>Good for: venues, bars, clubs, event hosts</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Playbook 03 · Solana &amp; stablecoin pilot lane</div>
-            <span class="card-tag">Pilot-friendly</span>
-          </div>
-          <div class="card-body">
-            Start with one or two use-cases: deposits, VIP tiers, or gift
-            balances. Keep it small, safe, and trackable while you feel out what
-            actually fits your customers.
-          </div>
-          <div class="card-meta">
-            <span>Good for: higher-ticket services, membership brands</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Playbook 04 · DFS &amp; promo tracking cockpit</div>
-            <span class="card-tag">For +EV grinders</span>
-          </div>
-          <div class="card-body">
-            One page that shows your current edges, open positions, promo
-            rollovers, and risk. Less spreadsheet pain, more clear decisions.
-          </div>
-          <div class="card-meta">
-            <span>Good for: DFS / sports-edge operators</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="cta-band">
-        <div class="cta-band-main">
-          Want a playbook tuned to your exact lane? Text
-          <strong>“PLAYBOOK”</strong> to <strong>773-544-1231</strong> with 2–3
-          lines about what you’re building.
+        <div class="card">
+          <div class="card-title">AI Intake Playbook</div>
+          <p>Make your DMs, emails, and texts flow cleanly — even while you surf.</p>
         </div>
-        <div class="cta-band-actions">
-          <span class="cta-pill">1:1 coastal tech concierge</span>
-          <button class="cta-btn-small" id="playbookBtn">Text PJ now</button>
+
+        <div class="card">
+          <div class="card-title">Ticketing Flow Tune-Up</div>
+          <p>Turn attention into seats: bundles, upgrades, and follow-ups.</p>
         </div>
       </div>
+
+      <br />
+      <button class="orb-btn" id="playbookBtn">Text PJ for Playbook</button>
     </section>
 
-    <!-- VERTICALS -->
+    <!-- WHO WE HELP -->
     <section id="verticals">
-      <div class="section-label">Who SideGuy helps</div>
-      <div class="section-title">If you live and build along the coast, you’re in range.</div>
-      <div class="section-subcopy">
-        This isn’t a “software from nowhere” thing. SideGuy is built around
-        North County life — waves, traffic, weekends, and the way business
-        really works here.
-      </div>
+      <div class="section-label">Who We Help</div>
+      <div class="section-title">Locals building along the coast.</div>
 
       <div class="grid grid-3">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Local operators</div>
-          </div>
-          <div class="card-body">
-            Restaurants, gyms, surf schools, yoga studios, barbers, wellness
-            brands, and anyone who runs a physical space and wants a tighter
-            relationship with their locals.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Bookings &amp; memberships</span>
-            <span class="pill soft">Loyalty &amp; reactivation</span>
-          </div>
-        </article>
+        <div class="card">
+          <div class="card-title">Local Operators</div>
+          <p>Restaurants, gyms, wellness, surf, yoga, barbers — anyone serving locals.</p>
+        </div>
 
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Founders &amp; solo builders</div>
-          </div>
-          <div class="card-body">
-            You’ve got a concept, an audience, or momentum — but your systems
-            are still duct-taped. SideGuy helps you go from “it works” to “it
-            scales” without losing the weirdness that works.
-          </div>
-          <div class="pill-row">
-            <span class="pill">MVP builds</span>
-            <span class="pill">Ops &amp; automations</span>
-          </div>
-        </article>
+        <div class="card">
+          <div class="card-title">Founders & Solo Builders</div>
+          <p>Your idea works. Let’s make it smoother and scalable.</p>
+        </div>
 
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Venues &amp; experiences</div>
-          </div>
-          <div class="card-body">
-            Spaces where people gather to watch, play, or connect: live music,
-            watch parties, ticketed experiences, and private events.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Ticketing &amp; flows</span>
-            <span class="pill soft">Upgrade &amp; merch paths</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Real estate &amp; advisory</div>
-          </div>
-          <div class="card-body">
-            Agents, brokers, and advisors who want better lead funnels, smarter
-            follow-up, and tighter data without hiring a full internal tech
-            team.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Lead funnels</span>
-            <span class="pill soft">Client portals</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">DFS &amp; sports-edge pros</div>
-          </div>
-          <div class="card-body">
-            Builders and grinders who want tools for tracking, risk, and promo
-            value — without spinning up a full quant shop.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Promo &amp; risk tools</span>
-            <span class="pill soft">Edge dashboards</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">“Future curious” locals</div>
-          </div>
-          <div class="card-body">
-            You might not know exactly what you want yet — just that you don’t
-            want to get left behind. This is a safe place to ask the questions
-            you don’t want to drop into a Discord.
-          </div>
-          <div class="pill-row">
-            <span class="pill">Straight answers</span>
-            <span class="pill soft">No dumb questions</span>
-          </div>
-        </article>
+        <div class="card">
+          <div class="card-title">Venues & Experiences</div>
+          <p>Better ticketing, upgrades, merch, and fan loops.</p>
+        </div>
       </div>
     </section>
 
     <!-- FUTURE SIGNALS -->
     <section id="signals">
-      <div class="section-label">Future signals · 2025 and beyond</div>
-      <div class="section-title">A few currents worth paying attention to.</div>
-      <div class="section-subcopy">
-        This isn’t “financial advice” or doom scroll fodder. It’s a living
-        snapshot of the tech waves that actually matter for North County
-        builders.
-      </div>
+      <div class="section-label">Future Signals</div>
+      <div class="section-title">2025+ coastal currents worth tracking.</div>
 
       <div class="grid grid-2">
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Signal · AI as background infrastructure</div>
-          </div>
-          <div class="card-body">
-            The loud part of AI is the headlines. The quiet part is intake
-            forms, routing, scheduling, follow-up, and a thousand tiny flows
-            happening in the background. That’s where operators win.
-          </div>
-          <div class="card-meta">
-            <span>Practical takeaway: start with one boring workflow.</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Signal · Stablecoins &amp; instant settlement</div>
-          </div>
-          <div class="card-body">
-            Fees, delays, and chargebacks are real friction for small
-            businesses. Stablecoins on fast chains like Solana are quietly
-            becoming the “back alley” rails for serious operators.
-          </div>
-          <div class="card-meta">
-            <span>Practical takeaway: run a tiny pilot, not a rebrand.</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Signal · Experiences > ads</div>
-          </div>
-          <div class="card-body">
-            The cost of attention is up. The value of a great experience —
-            on-site or online — is up more. Ticketing, membership, and
-            community-layer tools are the leverage.
-          </div>
-          <div class="card-meta">
-            <span>Practical takeaway: design one “wow” moment into your flow.</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <div class="card-title">Signal · Small, weird, local wins</div>
-          </div>
-          <div class="card-body">
-            The next decade belongs to people who combine weird, specific,
-            local superpowers with sharp tools. That’s the whole SideGuy thesis.
-          </div>
-          <div class="card-meta">
-            <span>Practical takeaway: your “too weird to scale” idea might be your edge.</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="cta-band">
-        <div class="cta-band-main">
-          Want a quiet, honest read on how these waves hit <strong>your</strong>
-          world? Ask PJ for a “future signals” session.
+        <div class="card">
+          <div class="card-title">AI as Background Infrastructure</div>
+          <p>The real power isn’t chat — it’s automation running quietly.</p>
         </div>
-        <div class="cta-band-actions">
-          <span class="cta-pill">1:1 future mapping</span>
-          <button class="cta-btn-small" id="signalsBtn">Summon PJ</button>
+
+        <div class="card">
+          <div class="card-title">Stablecoins & Instant Money</div>
+          <p>Cheaper, faster rails for local commerce.</p>
         </div>
       </div>
+
+      <br />
+      <button class="orb-btn" id="signalsBtn">Summon PJ</button>
     </section>
   </main>
 
   <footer>
-    <div>© <span id="year"></span> SideGuy Solutions · Built along the North County coast.</div>
-    <div>
-      Text / call: <a href="tel:17735441231">773-544-1231</a> ·
-      <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
-    </div>
+    © <span id="year"></span> SideGuy Solutions · Built at sunset along the North County coast.
+    <br />Text / call: 773-544-1231 · <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
   </footer>
 
   <script>
-    // Update year
+    // YEAR
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Smooth scroll for nav
-    document.querySelectorAll("nav button[data-scroll]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-scroll");
-        const el = document.querySelector(target);
-        if (!el) return;
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-
-    // Summon PJ = email
+    // SUMMON PJ ACTION
     function summonPJ() {
       window.location.href =
-        "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20-%20North%20County%20Tech%20Guide";
+        "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20-%20Encinitas%20Sunset%20Tech";
     }
 
     document.getElementById("summonOrb").addEventListener("click", summonPJ);
     document.getElementById("heroSummon").addEventListener("click", summonPJ);
     document.getElementById("signalsBtn").addEventListener("click", summonPJ);
 
-    // Playbook button = text intent (mobile first)
+    // PLAYBOOK TEXT
     document.getElementById("playbookBtn").addEventListener("click", () => {
       const phone = "17735441231";
       if (/Mobi|Android/i.test(navigator.userAgent)) {
         window.location.href = "sms:" + phone + "?&body=PLAYBOOK%20-%20";
       } else {
-        navigator.clipboard?.writeText("773-544-1231").catch(() => {});
-        alert("Text 773-544-1231 with “PLAYBOOK” and a few lines about what you’re building.");
+        navigator.clipboard.writeText("773-544-1231").catch(()=>{});
+        alert("Text 773-544-1231 with “PLAYBOOK” to get started.");
       }
     });
+
+    // SMOOTH NAV SCROLL
+    document.querySelectorAll("nav button[data-scroll]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = document.querySelector(btn.getAttribute("data-scroll"));
+        if (target) target.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
   </script>
+
 </body>
 </html>
