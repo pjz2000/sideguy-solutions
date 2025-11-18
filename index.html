@@ -1,272 +1,59 @@
-<!--
-  SideGuy Solutions
-  Version: 20.0-movie-pacific-daycycle
-  Hero: "Where San Diego builds, codes, and scales."
-  Mode: V20 Deep Pacific Ocean + 24h Sun Cycle
-  Author: PJ (+ ChatGPT assist)
--->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
-
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: system-ui, -apple-system, Inter, sans-serif;
-      background: #020617;
-      color: #e2e8f0;
-    }
-
-    /* 3D background */
-    #bg3d {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: radial-gradient(circle at top, #0f172a 0%, #020617 60%);
-    }
-
-    /* Text overlay */
-    .overlay {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .box {
-      max-width: 720px;
-      width: 100%;
-      padding: 2rem 2.3rem;
-      border-radius: 1.5rem;
-      backdrop-filter: blur(20px);
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.6);
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      color: #f9fafb;
-      margin-bottom: 1rem;
-      line-height: 1.05;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #dbeafe;
-      margin-bottom: 1.6rem;
-    }
-
-    .contact {
-      font-size: 0.95rem;
-      color: #bae6fd;
-      line-height: 1.5;
-      margin-bottom: 1.7rem;
-    }
-
-    button {
-      padding: 0.85rem 1.7rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(120deg, #22d3ee, #3b82f6);
-      color: #ecfeff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
-    }
-  </style>
+<html>
+<head><meta charset="UTF-8"><title>Ocean Debug</title>
+<style>html,body{margin:0;height:100%;overflow:hidden}#c{position:fixed;inset:0}</style>
 </head>
-
 <body>
-  <div id="bg3d"></div>
+<canvas id="c"></canvas>
+<script type="module">
+  import * as THREE from "https://unpkg.com/three@0.152.2/build/three.module.js";
+  import { Water } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Water.js?module";
+  import { Sky } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Sky.js?module";
 
-  <div class="overlay">
-    <div class="box">
-      <h1>Where San Diego builds, codes, and scales.</h1>
+  const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('c'), antialias:true, alpha:true});
+  console.log("WebGL2:", renderer.capabilities.isWebGL2, renderer.getContext());
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth/window.innerHeight, 1, 20000);
+  camera.position.set(0,55,135);
+  const sun = new THREE.Vector3();
 
-      <p>
-        Coastal concierge tech for the 2025 era — custom apps, AI automation,
-        Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
-        North County and greater San Diego.
-      </p>
+  const sky = new Sky();
+  sky.scale.setScalar(10000);
+  scene.add(sky);
+  const skyU = sky.material.uniforms;
+  skyU.turbidity.value = 10; skyU.rayleigh.value = 3;
+  skyU.mieCoefficient.value = 0.008; skyU.mieDirectionalG.value = 0.9;
 
-      <div class="contact">
-        Text / call: <strong>773-544-1231</strong><br />
-        Email: <strong>peter.z@kromeon.com</strong>
-      </div>
+  const waterGeo = new THREE.PlaneGeometry(10000,10000);
+  const waterNormals = new THREE.TextureLoader().load(
+    "https://unpkg.com/three@0.152.2/examples/textures/waternormals.jpg",
+    t=>{t.wrapS=t.wrapT=THREE.RepeatWrapping}
+  );
+  const water = new Water(waterGeo, {
+    textureWidth:1024, textureHeight:1024,
+    waterNormals, sunDirection:new THREE.Vector3(),
+    waterColor:"#0b3b66", distortionScale:4.0
+  });
+  water.rotation.x = -Math.PI/2;
+  scene.add(water);
 
-      <button id="summonPJ">TAP TO SUMMON PJ</button>
-    </div>
-  </div>
+  function updateSun(t){
+    const elevation=80; const azimuth=180;
+    const phi=THREE.MathUtils.degToRad(90-elevation);
+    const theta=THREE.MathUtils.degToRad(azimuth);
+    sun.setFromSphericalCoords(1,phi,theta);
+    sky.material.uniforms.sunPosition.value.copy(sun);
+    water.material.uniforms.sunDirection.value.copy(sun).normalize();
+  }
+  updateSun();
 
-  <!-- V20 Deep-Pacific Movie Ocean + Sun -->
-  <script type="module">
-    import * as THREE from "https://unpkg.com/three@0.152.2/build/three.module.js";
-    import { Water } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Water.js?module";
-    import { Sky } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Sky.js?module";
-
-    let camera, scene, renderer;
-    let water, sky, sun, clock;
-
-    const DAY_LENGTH = 40; // seconds for a full 24h-style cycle
-
-    function init() {
-      const container = document.getElementById("bg3d");
-
-      scene = new THREE.Scene();
-
-      camera = new THREE.PerspectiveCamera(
-        55,
-        window.innerWidth / window.innerHeight,
-        1,
-        20000
-      );
-      camera.position.set(0, 55, 135);
-
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.9;
-      container.appendChild(renderer.domElement);
-
-      clock = new THREE.Clock();
-      sun = new THREE.Vector3();
-
-      // Sky dome (movie-like deep pacific)
-      sky = new Sky();
-      sky.scale.setScalar(10000);
-      scene.add(sky);
-
-      const skyU = sky.material.uniforms;
-      skyU["turbidity"].value = 8;
-      skyU["rayleigh"].value = 2.5;
-      skyU["mieCoefficient"].value = 0.006;
-      skyU["mieDirectionalG"].value = 0.9;
-
-      // Water plane (V20 engine)
-      const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
-
-      const waterNormals = new THREE.TextureLoader().load(
-        "https://unpkg.com/three@0.152.2/examples/textures/waternormals.jpg",
-        (texture) => {
-          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-        }
-      );
-
-      water = new Water(waterGeometry, {
-        textureWidth: 1024,
-        textureHeight: 1024,
-        waterNormals,
-        alpha: 1.0,
-        sunDirection: new THREE.Vector3(),
-        sunColor: 0xffffff,
-        waterColor: new THREE.Color("#0b3b66"), // deep movie blue (option C)
-        distortionScale: 4.0,
-        fog: false,
-      });
-
-      water.rotation.x = -Math.PI / 2;
-      scene.add(water);
-
-      // Soft ambient + sun light for extra cinematic punch
-      const hemiLight = new THREE.HemisphereLight(0x0b1120, 0x020617, 0.6);
-      scene.add(hemiLight);
-
-      const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
-      dirLight.position.set(0, 100, 50);
-      scene.add(dirLight);
-
-      // Store on scene for access in animation
-      scene.userData.sunLight = dirLight;
-
-      window.addEventListener("resize", onWindowResize);
-      updateSunFromTime(0);
-
-      // Summon PJ click
-      const btn = document.getElementById("summonPJ");
-      if (btn) {
-        btn.addEventListener("click", () => {
-          setTimeout(() => {
-            window.location.href =
-              "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-          }, 320);
-        });
-      }
-
-      animate();
-    }
-
-    // Map t in [0,1] to a 24h-style sun arc
-    function updateSunFromTime(t) {
-      // t=0 → sunrise, t=0.5 → noon, t=1 → next sunrise
-      const elevation = 5 + 80 * Math.sin(t * Math.PI);
-      const azimuth = 180 + 180 * t;
-
-      const phi = THREE.MathUtils.degToRad(90 - elevation);
-      const theta = THREE.MathUtils.degToRad(azimuth);
-
-      sun.setFromSphericalCoords(1, phi, theta);
-
-      // Update sky & water
-      sky.material.uniforms["sunPosition"].value.copy(sun);
-      water.material.uniforms["sunDirection"].value.copy(sun).normalize();
-
-      // Move directional sun light with same vector
-      const sunLight = scene.userData.sunLight;
-      if (sunLight) {
-        sunLight.position.copy(sun.clone().multiplyScalar(300));
-      }
-    }
-
-    function onWindowResize() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    }
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      const elapsed = clock.getElapsedTime();
-      const t = (elapsed % DAY_LENGTH) / DAY_LENGTH;
-
-      updateSunFromTime(t);
-
-      if (water && water.material && water.material.uniforms["time"]) {
-        water.material.uniforms["time"].value += 1.0 / 60.0;
-      }
-
-      // Slight camera drift for movie feel
-      const radius = 14;
-      camera.position.x = Math.sin(elapsed * 0.035) * radius;
-      camera.position.z = 135 + Math.cos(elapsed * 0.025) * 12;
-      camera.lookAt(new THREE.Vector3(0, 10, 0));
-
-      renderer.render(scene, camera);
-    }
-
-    init();
-  </script>
+  function animate(){
+    requestAnimationFrame(animate);
+    if(water.material.uniforms.time) water.material.uniforms.time.value+=1/60;
+    renderer.render(scene,camera);
+  }
+  animate();
+</script>
 </body>
 </html>
