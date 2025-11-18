@@ -1,7 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 41.0-encinitas-sunset-orb
-  Mode: Encinitas Sunset Guide · Coastal Tech · Chill & Premium
+  Version: 41.5-ocean-vibes
+  Mode: Encinitas Coastal · Ocean Gradient · Teal Orb UI
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -10,105 +10,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SideGuy Solutions | North County Sunset Tech Guide</title>
+  <title>SideGuy Solutions | North County Coastal Tech Guide</title>
 
   <meta
     name="description"
-    content="SideGuy Solutions guides Encinitas, Leucadia, Cardiff, and Solana Beach into the next wave — AI, apps, automation, Solana payments, ticketing flows, and local tech playbooks."
+    content="SideGuy Solutions helps Encinitas, Leucadia, Cardiff, and Solana Beach adopt AI, apps, automations, Solana payments, ticketing flows, and tech playbooks tuned for coastal operators."
   />
 
   <style>
     /* -----------------------------------------------------
-       ROOT + GLOBAL
+       ROOT COLORS (Ocean Vibes)
     ----------------------------------------------------- */
     :root {
-      --sunset-gold: #ffd28a;
-      --sunset-orange: #f6a74b;
-      --sunset-deep: #f57b42;
-      --sunset-soft: #ffe8c8;
-      --coastal-deep: #020617;
-      --coastal-mid: #0f172a;
-      --coastal-sky: #38bdf8;
-      --text-main: #fefefc;
-      --text-sub: #ffe8c8;
-      --card: rgba(15,23,42,0.85);
-      --card-soft: rgba(15,23,42,0.65);
-      --border-soft: rgba(255,255,255,0.18);
+      --ocean-light: #5fe4ff;
+      --ocean-mid: #1e74b3;
+      --ocean-deep: #041931;
+      --foam: #d8f7ff;
+      --sky-top: #76dfff;
+      --sky-soft: #a6efff;
+
+      --card: rgba(10, 16, 28, 0.75);
+      --border: rgba(255, 255, 255, 0.18);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: system-ui, Inter, sans-serif;
-      color: var(--text-main);
-      background: linear-gradient(to bottom,
-        #fbbb62 0%,
-        #f29e54 20%,
-        #d87840 40%,
-        #0f172a 70%,
+      color: var(--foam);
+      background: linear-gradient(
+        to bottom,
+        var(--sky-top) 0%,
+        #52c7f9 22%,
+        #1484c1 40%,
+        var(--ocean-deep) 75%,
         #020617 100%
       );
       overflow-x: hidden;
     }
 
     /* -----------------------------------------------------
-       BACKGROUND SUNSET VIBES
+       OCEAN BACKGROUND VIBES
     ----------------------------------------------------- */
-    .sunset-haze {
+    .ocean-haze {
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 60% -20%, rgba(255, 212, 128, 0.45), transparent 60%),
-        radial-gradient(circle at 0% 20%, rgba(255, 122, 61, 0.3), transparent 70%);
-      mix-blend-mode: screen;
-      z-index: 0;
+        radial-gradient(circle at 40% -15%, rgba(255,255,255,0.25), transparent 60%),
+        radial-gradient(circle at 90% 10%, rgba(100,200,255,0.28), transparent 70%);
+      mix-blend-mode: soft-light;
       pointer-events: none;
-      animation: hazeMove 38s ease-in-out infinite alternate;
-    }
-
-    @keyframes hazeMove {
-      0% { transform: translate3d(0,0,0); }
-      100% { transform: translate3d(0,-20px,0); }
-    }
-
-    .sunset-horizon {
-      position: fixed;
-      bottom: 18vh;
-      left: 0;
-      width: 100%;
-      height: 20vh;
-      background: radial-gradient(circle at 50% -20%, rgba(255,185,90,0.35), transparent 75%);
-      mix-blend-mode: overlay;
+      animation: hazeFloat 30s ease-in-out infinite alternate;
       z-index: 0;
     }
 
-    .sunset-shimmer {
+    @keyframes hazeFloat {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-22px); }
+    }
+
+    .ocean-shimmer {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
+      inset: 0;
       background: linear-gradient(
-        115deg,
-        rgba(255,193,111,0.09) 0%,
-        rgba(255,118,56,0.03) 33%,
+        105deg,
+        rgba(255,255,255,0.05) 0%,
+        rgba(140,220,255,0.08) 30%,
         transparent 60%
       );
-      animation: shimmerMove 55s linear infinite;
+      animation: shimmerMove 65s linear infinite;
       pointer-events: none;
-      z-index: 0;
+      mix-blend-mode: screen;
     }
 
     @keyframes shimmerMove {
-      0% { transform: translateX(-30%); }
+      0%   { transform: translateX(-30%); }
       100% { transform: translateX(30%); }
     }
 
     /* -----------------------------------------------------
-       SUNSET ORB BUTTON
+       OCEAN ORB (Aqua/Teal)
     ----------------------------------------------------- */
     .orb-btn {
-      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -120,17 +103,18 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #00374f;
       background: radial-gradient(circle at 30% 20%,
-        #fff7e6 0%,
-        var(--sunset-gold) 20%,
-        var(--sunset-orange) 50%,
-        var(--sunset-deep) 100%
+        #eaffff 0%,
+        #b4f1ff 25%,
+        #63d8ff 55%,
+        #1ea7ea 85%,
+        #0b6fb1 100%
       );
-      color: #1f2937;
       box-shadow:
-        0 0 22px rgba(255,181,70,0.65),
-        0 0 60px rgba(255,111,0,0.35),
-        0 8px 20px rgba(0,0,0,0.55);
+        0 0 22px rgba(100,220,255,0.55),
+        0 0 50px rgba(0,153,255,0.35),
+        0 8px 20px rgba(0,0,0,0.45);
       animation: orbPulse 4s ease-in-out infinite;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -138,48 +122,50 @@
     .orb-btn:hover {
       transform: scale(1.06);
       box-shadow:
-        0 0 30px rgba(255,181,70,0.9),
-        0 0 75px rgba(255,111,0,0.55),
+        0 0 28px rgba(95,228,255,0.9),
+        0 0 70px rgba(0,153,255,0.55),
         0 10px 26px rgba(0,0,0,0.55);
     }
 
     @keyframes orbPulse {
-      0% { transform: scale(1); filter: brightness(1); }
-      50% { transform: scale(1.035); filter: brightness(1.08); }
-      100% { transform: scale(1); filter: brightness(1); }
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.035); }
+      100% { transform: scale(1); }
     }
 
-    /* Floating orb (corner summon) */
+    /* Floating Summon Orb */
     .summon-orb {
       position: fixed;
       right: 4vw;
       top: 18vh;
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 999px;
       background: radial-gradient(circle at 30% 20%,
-        #fff3d9 0%, #ffd592 25%, #f5a35a 55%, rgba(245,123,66,0.05) 100%
+        #effdff 0%,
+        #bdf3ff 25%,
+        #65ddff 55%,
+        #1eb2ea 80%
       );
-      box-shadow:
-        0 0 40px rgba(255,185,90,0.7),
-        0 0 85px rgba(255,111,0,0.5);
+      color: #00374f;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       cursor: pointer;
-      z-index: 5;
-      color: #1f2937;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
       animation: orbFloat 7s ease-in-out infinite;
+      box-shadow:
+        0 0 40px rgba(100,220,255,0.65),
+        0 0 85px rgba(0,153,255,0.5);
+      z-index: 5;
     }
 
     @keyframes orbFloat {
-      0% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-9px) scale(1.04); }
+      0%   { transform: translateY(0) scale(1); }
+      50%  { transform: translateY(-9px) scale(1.04); }
       100% { transform: translateY(0) scale(1); }
     }
 
@@ -190,12 +176,11 @@
         bottom: 16vh;
         top: auto;
         right: 4vw;
-        font-size: 0.65rem;
       }
     }
 
     /* -----------------------------------------------------
-       LAYOUT + UI
+       LAYOUT + HERO + SECTIONS
     ----------------------------------------------------- */
     main {
       position: relative;
@@ -214,7 +199,6 @@
       gap: 1rem;
     }
 
-    /* Brand */
     .brand {
       display: flex;
       align-items: center;
@@ -225,107 +209,67 @@
       width: 38px;
       height: 38px;
       border-radius: 999px;
-      background: linear-gradient(120deg, var(--sunset-gold), var(--sunset-deep));
+      background: linear-gradient(120deg, var(--sky-soft), var(--ocean-mid));
+      color: #002a40;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px rgba(255,185,90,0.7);
-      color: #1f2937;
-      font-size: 1.1rem;
+      box-shadow: 0 0 18px rgba(140,220,255,0.7);
       font-weight: 800;
+      font-size: 1.1rem;
     }
 
-    .brand-text span:first-child {
-      text-transform: uppercase;
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-    }
-
-    .brand-text span:last-child {
-      font-size: 0.75rem;
-      color: var(--sunset-soft);
-    }
-
-    /* Nav */
     nav button {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.22);
       padding: 0.45rem 0.85rem;
       border-radius: 999px;
-      color: var(--sunset-soft);
+      color: var(--foam);
       cursor: pointer;
-      font-size: 0.68rem;
-      text-transform: uppercase;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     nav button:hover {
       background: rgba(255,255,255,0.14);
     }
 
-    /* -----------------------------------------------------
-       HERO
-    ----------------------------------------------------- */
     .hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
       margin-bottom: 3rem;
     }
-
     @media(max-width:900px) { .hero { grid-template-columns: 1fr; } }
 
     .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
       line-height: 1.05;
       margin-bottom: 1rem;
     }
-
-    .hero h1 .sunset {
-      background: linear-gradient(120deg, var(--sunset-gold), var(--sunset-deep));
+    .hero h1 .ocean {
+      background: linear-gradient(120deg, var(--sky-soft), var(--ocean-light));
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero p {
       max-width: 34rem;
-      color: var(--sunset-soft);
+      color: var(--foam);
       line-height: 1.55;
       margin-bottom: 1.2rem;
-      font-size: 1rem;
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 0.32rem 0.8rem;
-      margin-right: 0.45rem;
-      margin-bottom: 0.6rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      font-size: 0.72rem;
-      color: var(--sunset-soft);
+      opacity: 0.92;
     }
 
     .hero-card {
-      background: var(--card-soft);
-      border-radius: 1.2rem;
+      background: var(--card);
       padding: 1.2rem;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      border-radius: 1.1rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 22px 55px rgba(0,0,0,0.45);
     }
 
-    .hero-card h2 {
-      font-size: 0.9rem;
-      color: var(--sunset-soft);
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    /* -----------------------------------------------------
-       SECTIONS (Services, Playbooks, etc.)
-    ----------------------------------------------------- */
     section {
       margin-bottom: 3.5rem;
     }
@@ -334,7 +278,7 @@
       text-transform: uppercase;
       font-size: 0.75rem;
       letter-spacing: 0.16em;
-      color: var(--sunset-soft);
+      color: var(--sky-soft);
       margin-bottom: 0.4rem;
     }
 
@@ -346,19 +290,15 @@
     .section-subcopy {
       max-width: 38rem;
       font-size: 0.95rem;
-      color: var(--sunset-soft);
+      color: var(--foam);
       margin-bottom: 1.2rem;
       line-height: 1.55;
+      opacity: 0.92;
     }
 
-    .grid {
-      display: grid;
-      gap: 1rem;
-    }
-
+    .grid { display: grid; gap: 1rem; }
     .grid-3 { grid-template-columns: repeat(3,1fr); }
     .grid-2 { grid-template-columns: repeat(2,1fr); }
-
     @media(max-width:960px) {
       .grid-3 { grid-template-columns: repeat(2,1fr); }
     }
@@ -370,81 +310,36 @@
       background: var(--card);
       border-radius: 1rem;
       padding: 1rem 1.15rem;
-      border: 1px solid rgba(255,255,255,0.18);
+      border: 1px solid var(--border);
       box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-    }
-
-    .card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
-    }
-
-    .pill {
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      font-size: 0.68rem;
-    }
-
-    /* -----------------------------------------------------
-       CTA & FOOTER
-    ----------------------------------------------------- */
-    .cta-band {
-      margin-top: 1.5rem;
-      padding: 1rem 1.2rem;
-      background: rgba(15, 23, 42, 0.65);
-      border-radius: 1.1rem;
-      border: 1px solid rgba(255,255,255,0.18);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      box-shadow: 0 18px 55px rgba(0,0,0,0.45);
     }
 
     footer {
       padding: 1.4rem;
       text-align: center;
       font-size: 0.75rem;
-      color: var(--sunset-soft);
-    }
-
-    footer a {
-      color: var(--sunset-gold);
-      text-decoration: none;
+      color: var(--foam);
+      opacity: 0.75;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Background Elements -->
-  <div class="sunset-haze"></div>
-  <div class="sunset-horizon"></div>
-  <div class="sunset-shimmer"></div>
+  <!-- BACKGROUND OCEAN EFFECTS -->
+  <div class="ocean-haze"></div>
+  <div class="ocean-shimmer"></div>
 
-  <!-- Summon PJ Orb -->
-  <button class="summon-orb" id="summonOrb">
-    Tap<br>to<br>PJ
-  </button>
+  <!-- SUMMON ORB -->
+  <button class="summon-orb" id="summonOrb">Tap<br>to<br>PJ</button>
 
   <main>
-
-    <!-- HEADER -->
     <header>
       <div class="brand">
         <div class="brand-mark">S</div>
         <div class="brand-text">
           <span>SideGuy Solutions</span>
-          <span>North County Sunset Tech Guide</span>
+          <span style="font-size:0.75rem;color:#bff3ff;">Coastal tech guide</span>
         </div>
       </div>
 
@@ -452,7 +347,7 @@
         <button data-scroll="#services">Services</button>
         <button data-scroll="#playbooks">Playbooks</button>
         <button data-scroll="#verticals">Who We Help</button>
-        <button data-scroll="#signals">Future Signals</button>
+        <button data-scroll="#signals">Future</button>
       </nav>
     </header>
 
@@ -460,30 +355,22 @@
     <section class="hero">
       <div>
         <h1>
-          North County’s <span class="sunset">sunset tech guide</span> to the next decade.
+          North County’s <span class="ocean">ocean tech guide</span> for 2025+.
         </h1>
-
         <p>
-          From Encinitas to Cardiff to Solana Beach — SideGuy helps locals,
-          operators, and founders adopt AI, apps, automations, Solana payments,
-          ticketing flows, and future-friendly tools without the chaos.
+          Encinitas, Leucadia, Cardiff, Solana Beach — SideGuy helps locals adopt AI,
+          apps, automations, Solana payments, ticketing flows, and future-ready tools
+          without chaos or jargon.
         </p>
 
-        <div>
-          <span class="badge">Encinitas · Leucadia · Cardiff · Solana Beach</span>
-          <span class="badge">AI, Apps & Automation</span>
-        </div>
-
-        <br />
         <button class="orb-btn" id="heroSummon">Tap to Summon PJ</button>
       </div>
 
       <div class="hero-card">
-        <h2>North County Snapshot · 2025</h2>
+        <h2 style="margin-bottom:0.4rem;">North County Snapshot</h2>
         <p>
-          Most operators are 3–5 years behind the tools that actually make a difference.
-          SideGuy translates tech into moves you can execute this week — simple, local,
-          coastal-friendly decisions that compound.
+          Most operators are 3–5 years behind the tools that actually matter. SideGuy
+          gives you simple, local, practical moves you can deploy this week.
         </p>
       </div>
     </section>
@@ -491,39 +378,25 @@
     <!-- SERVICES -->
     <section id="services">
       <div class="section-label">Services</div>
-      <div class="section-title">Clear, coastal-tuned builds.</div>
+      <div class="section-title">Coastal tools that actually help.</div>
       <div class="section-subcopy">
-        No 30-page decks. No Silicon Valley fog. Just simple tools that help real
-        North County operators.
+        No corporate fog. No endless meetings. Just clean builds for real operators.
       </div>
 
       <div class="grid grid-3">
         <div class="card">
-          <div class="card-title">AI & Automation Flows</div>
-          <p>Replace repeat work with quiet, background systems.</p>
-          <div class="pill-row">
-            <span class="pill">Lead funnels</span>
-            <span class="pill">Intake</span>
-            <span class="pill">Follow-up</span>
-          </div>
+          <div class="card-title">AI & Automation</div>
+          <p>Quiet background flows that replace repetitive work.</p>
         </div>
 
         <div class="card">
-          <div class="card-title">Custom Apps & Portals</div>
-          <p>Booking, membership, ticketing, and VIP experiences.</p>
-          <div class="pill-row">
-            <span class="pill">Memberships</span>
-            <span class="pill">Bookings</span>
-          </div>
+          <div class="card-title">Custom Apps</div>
+          <p>Memberships, bookings, ticketing, and VIP portals.</p>
         </div>
 
         <div class="card">
-          <div class="card-title">Solana & Stablecoin Payments</div>
-          <p>Lower fees. Instant settlement. Modern loyalty.</p>
-          <div class="pill-row">
-            <span class="pill">Stablecoins</span>
-            <span class="pill">Pilot programs</span>
-          </div>
+          <div class="card-title">Solana Payments</div>
+          <p>Lower fees, instant settlement, modern loyalty.</p>
         </div>
       </div>
     </section>
@@ -531,24 +404,23 @@
     <!-- PLAYBOOKS -->
     <section id="playbooks">
       <div class="section-label">Playbooks</div>
-      <div class="section-title">Short, simple coastal strategies.</div>
+      <div class="section-title">Short, coastal strategies.</div>
       <div class="section-subcopy">
-        Concrete 2–6 week projects any operator can run.
+        2–6 week projects any operator can run.
       </div>
 
       <div class="grid grid-2">
         <div class="card">
-          <div class="card-title">AI Intake Playbook</div>
-          <p>Make your DMs, emails, and texts flow cleanly — even while you surf.</p>
+          <div class="card-title">AI Intake</div>
+          <p>Make DMs, emails, and texts flow like a clean swell.</p>
         </div>
-
         <div class="card">
-          <div class="card-title">Ticketing Flow Tune-Up</div>
-          <p>Turn attention into seats: bundles, upgrades, and follow-ups.</p>
+          <div class="card-title">Ticketing Tune-Up</div>
+          <p>Upgrade flows, bundles, and follow-up loops.</p>
         </div>
       </div>
 
-      <br />
+      <br>
       <button class="orb-btn" id="playbookBtn">Text PJ for Playbook</button>
     </section>
 
@@ -560,17 +432,15 @@
       <div class="grid grid-3">
         <div class="card">
           <div class="card-title">Local Operators</div>
-          <p>Restaurants, gyms, wellness, surf, yoga, barbers — anyone serving locals.</p>
+          <p>Restaurants, gyms, surf schools, wellness, barbers.</p>
         </div>
-
         <div class="card">
-          <div class="card-title">Founders & Solo Builders</div>
-          <p>Your idea works. Let’s make it smoother and scalable.</p>
+          <div class="card-title">Founders</div>
+          <p>Your idea works. Let’s make it smooth and scalable.</p>
         </div>
-
         <div class="card">
-          <div class="card-title">Venues & Experiences</div>
-          <p>Better ticketing, upgrades, merch, and fan loops.</p>
+          <div class="card-title">Venues</div>
+          <p>Smarter ticketing, upgrades, merch, and fan flows.</p>
         </div>
       </div>
     </section>
@@ -578,45 +448,42 @@
     <!-- FUTURE SIGNALS -->
     <section id="signals">
       <div class="section-label">Future Signals</div>
-      <div class="section-title">2025+ coastal currents worth tracking.</div>
+      <div class="section-title">2025+ ocean currents worth tracking.</div>
 
       <div class="grid grid-2">
         <div class="card">
-          <div class="card-title">AI as Background Infrastructure</div>
-          <p>The real power isn’t chat — it’s automation running quietly.</p>
+          <div class="card-title">AI Infrastructure</div>
+          <p>Quiet background systems = real leverage.</p>
         </div>
 
         <div class="card">
-          <div class="card-title">Stablecoins & Instant Money</div>
-          <p>Cheaper, faster rails for local commerce.</p>
+          <div class="card-title">Stablecoins</div>
+          <p>Cheap, fast, local commerce rails.</p>
         </div>
       </div>
 
-      <br />
+      <br>
       <button class="orb-btn" id="signalsBtn">Summon PJ</button>
     </section>
   </main>
 
   <footer>
-    © <span id="year"></span> SideGuy Solutions · Built at sunset along the North County coast.
+    © <span id="year"></span> SideGuy Solutions · Built along the coast.
     <br />Text / call: 773-544-1231 · <a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a>
   </footer>
 
   <script>
-    // YEAR
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // SUMMON PJ ACTION
     function summonPJ() {
       window.location.href =
-        "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20-%20Encinitas%20Sunset%20Tech";
+        "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20-%20Coastal%20Tech%20Guide";
     }
 
     document.getElementById("summonOrb").addEventListener("click", summonPJ);
     document.getElementById("heroSummon").addEventListener("click", summonPJ);
     document.getElementById("signalsBtn").addEventListener("click", summonPJ);
 
-    // PLAYBOOK TEXT
     document.getElementById("playbookBtn").addEventListener("click", () => {
       const phone = "17735441231";
       if (/Mobi|Android/i.test(navigator.userAgent)) {
@@ -627,11 +494,10 @@
       }
     });
 
-    // SMOOTH NAV SCROLL
     document.querySelectorAll("nav button[data-scroll]").forEach(btn => {
       btn.addEventListener("click", () => {
-        const target = document.querySelector(btn.getAttribute("data-scroll"));
-        if (target) target.scrollIntoView({behavior:"smooth", block:"start"});
+        const t = document.querySelector(btn.getAttribute("data-scroll"));
+        if (t) t.scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
   </script>
