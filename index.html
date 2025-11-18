@@ -1,136 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>PJ Ocean Test – Cinematic Blue</title>
 
-<title>SideGuy Solutions | Ocean Stage 1</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: #3ab6ff;
+    }
 
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    height: 100%;
-    background: #001f33;
-  }
-
-  #ocean-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  #label {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-family: sans-serif;
-    color: #bcecff;
-    font-size: 14px;
-    z-index: 20;
-    text-shadow: 0 0 8px #000;
-  }
-</style>
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
 </head>
 
 <body>
+  <canvas id="ocean"></canvas>
 
-<div id="label">🌊 Ocean Stage 1 — Stable</div>
-<canvas id="ocean-canvas"></canvas>
+  <script>
+    const canvas = document.getElementById("ocean");
+    const ctx = canvas.getContext("2d");
 
-<script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
-<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
-<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
-
-<script>
-let camera, scene, renderer, water, sky, sun;
-
-init();
-animate();
-
-function init() {
-  const canvas = document.getElementById("ocean-canvas");
-
-  renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true
-  });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  scene = new THREE.Scene();
-
-  // Fog = depth realism
-  scene.fog = new THREE.FogExp2(0x1d3b55, 0.0015);
-
-  camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 20000);
-  camera.position.set(0, 60, 150);
-
-  sun = new THREE.Vector3();
-
-  // Sky
-  sky = new THREE.Sky();
-  sky.scale.setScalar(10000);
-  scene.add(sky);
-
-  const skyU = sky.material.uniforms;
-  skyU["turbidity"].value = 10;
-  skyU["rayleigh"].value = 2.5;
-  skyU["mieCoefficient"].value = 0.005;
-  skyU["mieDirectionalG"].value = 0.8;
-
-  updateSun();
-
-  // Water
-  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
-  const waterNormals = new THREE.TextureLoader().load(
-    "https://threejs.org/examples/textures/waternormals.jpg",
-    t => {
-      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-  );
+    resize();
+    window.addEventListener("resize", resize);
 
-  water = new THREE.Water(waterGeometry, {
-    textureWidth: 1024,
-    textureHeight: 1024,
-    waterNormals,
-    sunDirection: sun,
-    sunColor: 0xffffff,
-    waterColor: 0x1e90ff,
-    distortionScale: 3.7,
-    fog: true
-  });
+    // --- COLORS ---
+    const topSky = "#66c8ff";        // Light sky blue
+    const horizonSky = "#3ab6ff";    // Medium blue (haze)
+    const deepOcean = "#0077be";     // Deep water
+    const sunGlow = "rgba(255,255,200,0.25)";
 
-  water.rotation.x = -Math.PI / 2;
-  scene.add(water);
+    let t = 0;
 
-  window.addEventListener("resize", onWindowResize);
-}
+    function draw() {
+      t += 0.003;
 
-function updateSun() {
-  const phi = THREE.MathUtils.degToRad(70);
-  const theta = THREE.MathUtils.degToRad(150);
+      const w = canvas.width;
+      const h = canvas.height;
 
-  sun.setFromSphericalCoords(1, phi, theta);
+      // ---- SKY GRADIENT ----
+      const sky = ctx.createLinearGradient(0, 0, 0, h * 0.6);
+      sky.addColorStop(0, topSky);
+      sky.addColorStop(1, horizonSky);
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, w, h);
 
-  sky.material.uniforms["sunPosition"].value.copy(sun);
-  water.material.uniforms["sunDirection"].value.copy(sun).normalize();
-}
+      // ---- SUN GLOW ----
+      const sunY = h * 0.28;
+      const sunX = w * 0.52;
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
+      const sun = ctx.createRadialGradient(
+        sunX, sunY, 20,
+        sunX, sunY, 280
+      );
+      sun.addColorStop(0, "rgba(255,255,240,0.8)");
+      sun.addColorStop(1, "rgba(255,255,240,0)");
+      ctx.fillStyle = sun;
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, 260, 0, Math.PI * 2);
+      ctx.fill();
 
-function animate() {
-  requestAnimationFrame(animate);
-  water.material.uniforms["time"].value += 0.015;
-  renderer.render(scene, camera);
-}
-</script>
+      // ---- OCEAN ----
+      const ocean = ctx.createLinearGradient(0, h * 0.45, 0, h);
+      ocean.addColorStop(0, horizonSky);
+      ocean.addColorStop(1, deepOcean);
+      ctx.fillStyle = ocean;
+      ctx.fillRect(0, h * 0.45, w, h);
 
+      // ---- WAVES ----
+      ctx.strokeStyle = "rgba(255,255,255,0.35)";
+      ctx.lineWidth = 1.2;
+
+      let waveCount = 5;
+      for (let i = 0; i < waveCount; i++) {
+        let y = h * 0.55 + i * 50;
+        ctx.beginPath();
+
+        for (let x = 0; x < w; x++) {
+          let wave = Math.sin((x * 0.008) + t * 2 + i) * (12 + i * 1.5);
+          ctx.lineTo(x, y + wave);
+        }
+        ctx.stroke();
+      }
+
+      // ---- MOVEMENT LOOP ----
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
 </body>
 </html>
