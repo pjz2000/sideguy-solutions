@@ -1,19 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>SideGuy Solutions — Reset Test</title>
-  <style>
-    body {
-      margin: 0;
-      background: #0077be;
-      color: white;
-      font-family: Arial;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>SideGuy Solutions | Ocean Stage 1</title>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    background: #001f33;
+  }
+
+  #ocean-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-family: sans-serif;
+    color: #bcecff;
+    font-size: 14px;
+    z-index: 20;
+    text-shadow: 0 0 8px #000;
+  }
+</style>
 </head>
+
 <body>
-  <h1>Index Working 🚀</h1>
-  <p>If you see this, the site is FIXED.</p>
+
+<div id="label">🌊 Ocean Stage 1 — Stable</div>
+<canvas id="ocean-canvas"></canvas>
+
+<script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
+<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
+
+<script>
+let camera, scene, renderer, water, sky, sun;
+
+init();
+animate();
+
+function init() {
+  const canvas = document.getElementById("ocean-canvas");
+
+  renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  scene = new THREE.Scene();
+
+  // Fog = depth realism
+  scene.fog = new THREE.FogExp2(0x1d3b55, 0.0015);
+
+  camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 20000);
+  camera.position.set(0, 60, 150);
+
+  sun = new THREE.Vector3();
+
+  // Sky
+  sky = new THREE.Sky();
+  sky.scale.setScalar(10000);
+  scene.add(sky);
+
+  const skyU = sky.material.uniforms;
+  skyU["turbidity"].value = 10;
+  skyU["rayleigh"].value = 2.5;
+  skyU["mieCoefficient"].value = 0.005;
+  skyU["mieDirectionalG"].value = 0.8;
+
+  updateSun();
+
+  // Water
+  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
+  const waterNormals = new THREE.TextureLoader().load(
+    "https://threejs.org/examples/textures/waternormals.jpg",
+    t => {
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    }
+  );
+
+  water = new THREE.Water(waterGeometry, {
+    textureWidth: 1024,
+    textureHeight: 1024,
+    waterNormals,
+    sunDirection: sun,
+    sunColor: 0xffffff,
+    waterColor: 0x1e90ff,
+    distortionScale: 3.7,
+    fog: true
+  });
+
+  water.rotation.x = -Math.PI / 2;
+  scene.add(water);
+
+  window.addEventListener("resize", onWindowResize);
+}
+
+function updateSun() {
+  const phi = THREE.MathUtils.degToRad(70);
+  const theta = THREE.MathUtils.degToRad(150);
+
+  sun.setFromSphericalCoords(1, phi, theta);
+
+  sky.material.uniforms["sunPosition"].value.copy(sun);
+  water.material.uniforms["sunDirection"].value.copy(sun).normalize();
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  water.material.uniforms["time"].value += 0.015;
+  renderer.render(scene, camera);
+}
+</script>
+
 </body>
 </html>
