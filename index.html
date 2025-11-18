@@ -1,7 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 34.0-cardiff-movie-sun
-  Mode: Cardiff Movie · Bright Teal Swell · Golden Sun
+  Version: 35.0-cardiff-hidden-sun-reflections
+  Mode: Cardiff Movie · Medium Swell · Hidden Sun + Warm Reflections
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -23,32 +23,12 @@
       color: #e2e8f0;
     }
 
-    /* Brighter fallback ocean gradient */
+    /* Brighter fallback gradient so even if WebGL fails it feels oceany */
     #bg3d {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(circle at top, #3fd3ff 0%, #020617 70%);
-    }
-
-    /* Simple 2D golden sun for “movie” feel */
-    .sun {
-      position: fixed;
-      top: 8vh;
-      right: 14vw;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%,
-        #fffdf2 0%,
-        #ffe1a8 35%,
-        rgba(255, 184, 120, 0.0) 70%
-      );
-      filter: blur(1px);
-      opacity: 0.9;
-      z-index: 2;
-      pointer-events: none;
-      mix-blend-mode: screen;
+      background: radial-gradient(circle at top, #46d4ff 0%, #020617 70%);
     }
 
     .overlay {
@@ -58,7 +38,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      align-items: center;
+     	align-items: center;
       padding: 2rem;
       text-align: center;
     }
@@ -113,7 +93,6 @@
 
 <body>
   <div id="bg3d"></div>
-  <div class="sun"></div>
 
   <div class="overlay">
     <div class="box">
@@ -133,7 +112,7 @@
       <button id="summonPJ">TAP TO SUMMON PJ</button>
 
       <div class="version-tag">
-        Build: <strong>V34.0 · Cardiff Movie Sun</strong>
+        Build: <strong>V35.0 · Cardiff Hidden Sun Reflections</strong>
       </div>
     </div>
   </div>
@@ -143,34 +122,141 @@
 
   <script>
     let scene, camera, renderer;
-    let ocean;
-    let sharedGeo;
+    let ocean, sharedGeo;
 
     function init() {
       const container = document.getElementById("bg3d");
 
       scene = new THREE.Scene();
-      // Lighter fog & farther horizon → less “black void”
-      scene.fog = new THREE.Fog(0x061625, 55, 260);
+      // Brighter fog & farther horizon → less “black void”
+      scene.fog = new THREE.Fog(0x071629, 65, 260);
 
       camera = new THREE.PerspectiveCamera(
         58,
         window.innerWidth / window.innerHeight,
         0.1,
-        2000
+        1500
       );
       camera.position.set(0, 7.5, 32);
 
       renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0x061625, 1);
+      renderer.setClearColor(0x071629, 1);
       container.appendChild(renderer.domElement);
 
-      // --- LIGHTING: brighter ambient + warm sun from sun position ---
-      const ambient = new THREE.HemisphereLight(0xc5e7ff, 0x061625, 0.85);
-      scene.add(ambient);
+      // LIGHTING: hidden sun = strong warm directional + ambient sky
+      const hemi = new THREE.HemisphereLight(0xcce8ff, 0x06101d, 0.9);
+      scene.add(hemi);
 
-      const sunLight = new THREE.DirectionalLight(0xffe1a8, 1.6);
-      // roughly matches the CSS sun in the sky
-      sunLight.position.
+      const sunLight = new THREE.DirectionalLight(0xffd4a4, 1.8);
+      // Light coming from “off-screen” right/above = hidden sun look
+      sunLight.position.set(55, 45, -25);
+      scene.add(sunLight);
+
+      // OCEAN GEOMETRY
+      sharedGeo = new THREE.PlaneGeometry(540, 540, 220, 220);
+      sharedGeo.rotateX(-Math.PI / 2);
+
+      const pos = sharedGeo.attributes.position;
+      const colors = new Float32Array(pos.count * 3);
+
+      const shallow = new THREE.Color("#66e7ff"); // bright aqua near camera
+      const mid     = new THREE.Color("#1c79c4"); // mid blue
+      const deep    = new THREE.Color("#05192e"); // deep but not black
+
+      const c = new THREE.Color();
+
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+        const d = Math.sqrt(x * x + z * z);
+
+        // Push teal farther out so more of what you see is bright
+        let t = d / 380;
+        t = THREE.MathUtils.clamp(t, 0, 1);
+
+        if (t < 0.5) {
+          const tt = t / 0.5;
+          c.lerpColors(shallow, mid, tt);
+        } else {
+          const tt = (t - 0.5) / 0.5;
+          c.lerpColors(mid, deep, tt);
+        }
+
+        colors[i * 3 + 0] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+
+      sharedGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+      // BASE MATERIAL tuned for “hidden sun reflections”
+      const loader = new THREE.TextureLoader();
+      const normalMap = loader.load(
+        "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
+      );
+      normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
+
+      const baseMat = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        metalness: 0.6,               // shiny enough to catch warm light
+        roughness: 0.4,               // a bit rougher so it’s not plastic
+        normalMap,
+        normalScale: new THREE.Vector2(1.0, 1.0)
+      });
+
+      ocean = new THREE.Mesh(sharedGeo, baseMat);
+      scene.add(ocean);
+
+      window.addEventListener("resize", onResize);
+
+      document.getElementById("summonPJ").onclick = () => {
+        window.location.href =
+          "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+      };
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const t = performance.now() * 0.0003;
+      const pos = sharedGeo.attributes.position;
+
+      // Medium, smoother Cardiff-style swell (no jittery video-game noise)
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
+
+        const y1 = Math.sin(x * 0.028 + t * 1.05) * 0.9;    // main swell
+        const y2 = Math.cos(z * 0.043 + t * 1.3)  * 0.55;   // cross swell
+        const y3 = Math.sin((x + z) * 0.05 + t * 1.85) * 0.22; // detail
+
+        pos.setY(i, y1 + y2 + y3);
+      }
+
+      pos.needsUpdate = true;
+      sharedGeo.computeVertexNormals();
+
+      // Camera: gentle orbit like a drone shot at Cardiff
+      const camR = 23;
+      camera.position.x = Math.sin(t * 0.24) * camR;
+      camera.position.z = 32 + Math.cos(t * 0.17) * 17;
+      camera.position.y = 7.2 + Math.sin(t * 0.21) * 0.9;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    init();
+  </script>
+</body>
+</html>
