@@ -1,32 +1,19 @@
-<!--
-  SideGuy Solutions
-  Version: 24.0 — Ocean Engine + 402 Escrow + Solana Accents
-  Hero: "Where code meets the coastline."
-  Mode: Deep Pacific Shader · Solana-Powered · Smart Escrow
-  Author: PJ (+ ChatGPT assist)
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>SideGuy Solutions | Where Code Meets the Coastline</title>
-  <meta name="description"
-    content="SideGuy Solutions — San Diego coastal tech concierge specializing in apps, AI automations, Solana-powered payments, and the realest ocean UI on the internet." />
+  <meta
+    name="description"
+    content="SideGuy Solutions — Web3 coastal concierge for tech, transport, and smarter systems in North County. From Solana Beach to Encinitas, PJ helps you move, build, and live freely."
+  />
 
-  <!-- Solana Colors -->
   <style>
     :root {
-      --solana-purple: #9945FF;
-      --solana-green: #14F195;
-      --solana-blue: #00FFA3;
-      --solana-cyan: #03E1FF;
-
       --bg: #020617;
-      --card: rgba(15, 23, 42, 0.68);
-      --border: rgba(255, 255, 255, 0.1);
+      --blue-bg: radial-gradient(circle at top, #38bdf8 0%, #0f172a 45%, #020617 100%);
+      --card: rgba(15, 23, 42, 0.9);
       --text: #e2e8f0;
     }
 
@@ -38,20 +25,6 @@
       overflow-x: hidden;
     }
 
-    /* Solana Gradient Text */
-    .solanaText {
-      font-weight: 700;
-      background: linear-gradient(
-        90deg,
-        var(--solana-purple),
-        var(--solana-green),
-        var(--solana-blue)
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* Ocean Canvas */
     #ocean-canvas {
       position: fixed;
       inset: 0;
@@ -60,461 +33,150 @@
       z-index: -1;
     }
 
-    /* HERO */
     .hero {
       text-align: center;
       padding-top: 18vh;
-      padding-bottom: 16vh;
     }
 
-    .hero h1 {
-      font-size: 3.2rem;
-      margin: 0;
+    h1 {
+      font-size: 3rem;
       font-weight: 800;
-      text-shadow: 0 0 18px rgba(0,0,0,0.35);
+      margin: 0;
     }
 
-    .hero p {
-      opacity: 0.8;
-      font-size: 1.2rem;
-      margin-top: 16px;
-    }
-
-    /* Glass cards */
     .glass {
       background: var(--card);
       backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 26px;
       margin: 40px auto;
-      max-width: 880px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.35);
+      max-width: 680px;
     }
 
-    .solana-logo {
-      width: 38px;
-      height: 38px;
-      display: block;
-      margin: 0 auto 10px auto;
-      opacity: 0.9;
-    }
-
-    .btn-solana {
-      margin-top: 24px;
-      padding: 14px 24px;
-      border-radius: 12px;
+    #pjOrb {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--blue-bg);
+      box-shadow: 0 0 25px rgba(56,189,248,0.5);
+      margin: 40px auto;
+      animation: orbPulse 3s ease-in-out infinite;
       cursor: pointer;
-      font-weight: 600;
-      background: linear-gradient(
-        90deg,
-        var(--solana-purple),
-        var(--solana-blue)
-      );
-      border: none;
-      color: white;
-      box-shadow: 0 0 18px rgba(153,69,255,0.45);
-      transition: 0.25s ease;
     }
 
-    .btn-solana:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(20,241,149,0.55);
+    @keyframes orbPulse {
+      0% { transform: scale(1); box-shadow: 0 0 18px rgba(56,189,248,0.4); }
+      50% { transform: scale(1.08); box-shadow: 0 0 35px rgba(56,189,248,0.7); }
+      100% { transform: scale(1); box-shadow: 0 0 18px rgba(56,189,248,0.4); }
     }
   </style>
 </head>
 
 <body>
+
   <canvas id="ocean-canvas"></canvas>
 
-  <!-- HERO -->
   <div class="hero">
-    <h1 class="solanaText">SideGuy Solutions</h1>
-    <p>Your coastal tech concierge — apps, automations, Web3, and real ocean UI.</p>
-  </div>
-  <!-- 402 PAYMENTS · SMART ESCROW -->
-  <div class="glass" id="payments402">
-
-    <!-- Solana Logo -->
-    <img class="solana-logo"
-      src="https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png"
-      alt="Solana Logo" />
-
-    <h2 class="solanaText" style="text-align:center; font-size:2rem; margin-bottom:8px;">
-      402 Payments
-    </h2>
-
-    <p style="text-align:center; opacity:0.85; margin-top:0;">
-      <strong>Smart Escrow — Powered by Solana.</strong><br>
-      Instant payments, milestone releases, zero friction.
-    </p>
-
-    <button class="btn-solana" onclick="openEscrowModal()">
-      Open 402 Escrow
-    </button>
+    <h1>SideGuy Solutions</h1>
+    <p>Your coastal concierge for apps, AI, and ocean-powered UX.</p>
   </div>
 
-
-  <!-- 402 ESCROW MODAL -->
-  <div id="escrowModal"
-    style="
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.65);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:3000;
-    ">
-    <div
-      style="
-        width:90%;
-        max-width:540px;
-        background:rgba(15,23,42,0.85);
-        backdrop-filter:blur(14px);
-        border-radius:16px;
-        padding:28px;
-        border:1px solid rgba(255,255,255,0.1);
-        position:relative;
-      "
-    >
-      <h2 class="solanaText" style="margin-top:0; text-align:center;">
-        402 Escrow — Powered by Solana
-      </h2>
-
-      <p style="text-align:center; opacity:0.8;">
-        Secure your project with milestone-based escrow.  
-        Scan the QR or click below to simulate Solana Pay.
-      </p>
-
-      <div style="text-align:center; padding:16px;">
-        <img
-          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=solana-pay-demo"
-          style="border-radius:12px;"
-        />
-      </div>
-
-      <button class="btn-solana" onclick="simulatePayment()"
-        style="width:100%; margin-top:10px;">
-        Simulate Solana Pay
-      </button>
-
-      <button
-        onclick="closeEscrowModal()"
-        style="
-          width:100%;
-          margin-top:16px;
-          padding:12px;
-          border-radius:12px;
-          background:#1e293b;
-          border:1px solid rgba(255,255,255,0.15);
-          color:#cbd5e1;
-          cursor:pointer;
-        ">
-        Close
-      </button>
-
-      <!-- Payment Confirmation -->
-      <div id="paymentSuccess"
-        style="
-          margin-top:20px;
-          display:none;
-          text-align:center;
-          padding:14px;
-          border-radius:10px;
-          background:rgba(20,241,149,0.12);
-          border:1px solid rgba(20,241,149,0.4);
-          color:#14F195;
-          font-weight:600;
-          animation: pulseSuccess 1.4s ease infinite;
-        ">
-        ✓ Payment Verified On-Chain
-      </div>
-
-    </div>
-  </div>
-
-  <style>
-    @keyframes pulseSuccess {
-      0% { box-shadow: 0 0 6px rgba(20,241,149,0.4); }
-      50% { box-shadow: 0 0 20px rgba(20,241,149,0.7); }
-      100% { box-shadow: 0 0 6px rgba(20,241,149,0.4); }
-    }
-  </style>
+  <div id="pjOrb" onclick="summonPJ()"></div>
 
   <script>
-    function openEscrowModal() {
-      document.getElementById('escrowModal').style.display = 'flex';
-      document.getElementById('paymentSuccess').style.display = 'none';
-    }
-
-    function closeEscrowModal() {
-      document.getElementById('escrowModal').style.display = 'none';
-    }
-
-    function simulatePayment() {
-      // Fake delay then show success
-      setTimeout(() => {
-        document.getElementById('paymentSuccess').style.display = 'block';
-      }, 700);
+    function summonPJ() {
+      window.location.href = "mailto:support@sideguysolutions.com?subject=Summon%20PJ";
     }
   </script>
-  <!-- 12–24 MONTH EDGE -->
-  <div class="glass" style="margin-top:60px;">
-    <h2 class="solanaText" style="text-align:center; font-size:2rem;">
-      The 12–24 Month Edge
-    </h2>
-
-    <p style="text-align:center; opacity:0.85; margin-top:10px;">
-      Your advantage compounds over time. We build what gives you the edge now — and the moat later.
-    </p>
-
-    <div style="margin-top:32px;">
-      <div style="display:flex; flex-direction:column; gap:22px;">
-
-        <div style="padding:18px; border-left:4px solid var(--solana-purple); background:rgba(0,0,0,0.25); border-radius:10px;">
-          <strong class="solanaText">Month 0–3:</strong> Quick wins, automations, onboarding fixes, instant efficiencies.
-        </div>
-
-        <div style="padding:18px; border-left:4px solid var(--solana-blue); background:rgba(0,0,0,0.25); border-radius:10px;">
-          <strong class="solanaText">Month 3–6:</strong> AI workflows, smart APIs, Solana-backed payments, dashboards.
-        </div>
-
-        <div style="padding:18px; border-left:4px solid var(--solana-green); background:rgba(0,0,0,0.25); border-radius:10px;">
-          <strong class="solanaText">Month 6–12:</strong> Mobile apps, ticketing flows, customer portals, platform tools.
-        </div>
-
-        <div style="padding:18px; border-left:4px solid var(--solana-cyan); background:rgba(0,0,0,0.25); border-radius:10px;">
-          <strong class="solanaText">Month 12–24:</strong> Moats, defensible tech, automations, data leverage, long-term edges.
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-
-  <!-- OCEAN TECH GUIDE (SOLANA BOLD) -->
-  <div class="glass" style="margin-top:50px;">
-    <h2 class="solanaText" style="text-align:center; font-size:2rem;">
-      <strong>Ocean Tech Guide</strong>
-    </h2>
-
-    <p style="text-align:center; opacity:0.85;">
-      The official SideGuy guide for apps, AI, automation, payments, and ocean-driven UI design.
-    </p>
-
-    <button class="btn-solana" style="width:100%; margin-top:20px;">
-      Download Guide (Coming Soon)
-    </button>
-  </div>
-
-
-  <!-- SUMMON PJ ORB -->
-  <div style="margin-top:60px; text-align:center;">
-    <div id="pjOrb"
-      style="
-        width:120px;
-        height:120px;
-        margin:auto;
-        border-radius:50%;
-        background:linear-gradient(
-          135deg,
-          var(--solana-purple),
-          var(--solana-green),
-          var(--solana-blue)
-        );
-        box-shadow:0 0 35px rgba(153,69,255,0.55);
-        animation: orbPulse 3.5s ease-in-out infinite;
-        cursor:pointer;
-      "
-      onclick="openEmailPortal()">
-    </div>
-
-    <p style="margin-top:16px; opacity:0.8;">
-      <strong class="solanaText">Tap to Summon PJ</strong><br>
-      Your coastal tech concierge.
-    </p>
-  </div>
-
-  <style>
-    @keyframes orbPulse {
-      0% { transform:scale(1); box-shadow:0 0 18px rgba(153,69,255,0.4); }
-      50% { transform:scale(1.08); box-shadow:0 0 35px rgba(20,241,149,0.6); }
-      100% { transform:scale(1); box-shadow:0 0 18px rgba(153,69,255,0.4); }
-    }
-  </style>
-
-  <script>
-    function openEmailPortal() {
-      setTimeout(() => {
-        window.location = "mailto:support@sideguysolutions.com?subject=Summon%20PJ%20Request";
-      }, 400);
-    }
-  </script>
-  <!-- OCEAN ENGINE -->
-  <style>
-    #ocean-canvas {
-      pointer-events: none;
-    }
-  </style>
 
   <!-- Three.js -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
 
   <script>
     let scene, camera, renderer, oceanMesh, startTime;
 
-    function initOceanScene() {
+    function initOcean() {
       const canvas = document.getElementById('ocean-canvas');
-      if (!canvas) return;
-
-      // Renderer
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
       renderer.setClearColor(0x020617, 1);
 
-      // Scene & Camera
       scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(
-        55,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        100
-      );
-      camera.position.set(0, 3.2, 6.5);
+      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 1.6, 4.2);
       camera.lookAt(0, 0, 0);
 
-      // Lights
-      const ambient = new THREE.AmbientLight(0xffffff, 0.45);
-      scene.add(ambient);
+      const geometry = new THREE.PlaneGeometry(16, 16, 200, 200);
 
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
-      dirLight.position.set(5, 10, 2);
-      scene.add(dirLight);
+      const uniforms = { uTime: { value: 0 } };
 
-      // Geometry
-      const geo = new THREE.PlaneGeometry(22, 22, 220, 220);
-
-      // Simple Ocean Shader
-      const uniforms = {
-        uTime: { value: 0.0 }
-      };
-
-      const vert = `
+      const vertex = `
         uniform float uTime;
-        varying vec3 vPos;
-        varying vec3 vNormal;
-        varying vec2 vUv;
-
+        varying float vWave;
         void main() {
-          vUv = uv;
           vec3 pos = position;
-
-          // Two-layer sine waves
-          float t = uTime * 0.35;
-          float wave1 = sin(pos.x * 0.6 + t) * 0.18;
-          float wave2 = cos(pos.y * 0.9 - t * 1.3) * 0.22;
-          float wave3 = sin((pos.x + pos.y) * 0.45 + t * 0.7) * 0.16;
-
+          float t = uTime * 0.6;
+          float wave1 = sin(pos.x * 1.2 + t) * 0.18;
+          float wave2 = sin(pos.y * 1.5 + t * 0.7) * 0.14;
+          float wave3 = sin((pos.x + pos.y) * 0.9 + t * 0.4) * 0.1;
           pos.z = wave1 + wave2 + wave3;
-
-          vPos = pos;
-          vNormal = normal;
-
+          vWave = pos.z;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         }
       `;
 
-      const frag = `
-        varying vec3 vPos;
-        varying vec3 vNormal;
-        varying vec2 vUv;
-        
+      const fragment = `
+        varying float vWave;
         void main() {
-          // Normalize
-          vec3 N = normalize(vNormal);
-          vec3 V = normalize(vec3(0.0, 2.5, 6.0) - vPos);
+          vec3 deep = vec3(0.02, 0.06, 0.18);
+          vec3 mid  = vec3(0.08, 0.32, 0.55);
+          vec3 top  = vec3(0.15, 0.72, 0.85);
 
-          // Fake fresnel
-          float fresnel = pow(1.0 - max(dot(N, V), 0.0), 3.0);
-
-          // Depth blend
-          float depth = smoothstep(-1.5, 1.5, vPos.z);
-
-          // Deep + surface colors (Solana-ish)
-          vec3 deepColor = vec3(0.02, 0.06, 0.18);
-          vec3 midColor  = vec3(0.02, 0.32, 0.55);
-          vec3 topColor  = vec3(0.01, 0.72, 0.66);
-
-          vec3 base = mix(deepColor, midColor, depth);
-          base = mix(base, topColor, fresnel * 0.9);
-
-          // Small highlights
-          float sparkle = pow(abs(sin(vUv.x * 40.0 + vUv.y * 25.0)), 18.0);
-          vec3 highlight = vec3(0.8, 0.95, 1.0) * sparkle * 0.7;
-
-          vec3 color = base + highlight;
-
-          // Slight vignette by UV
-          float vignette = smoothstep(1.2, 0.4, length(vUv - 0.5));
-          color *= vignette + 0.15;
+          float w = smoothstep(-0.4, 0.4, vWave);
+          vec3 color = mix(deep, mid, w);
+          color = mix(color, top, w * 0.6);
 
           gl_FragColor = vec4(color, 1.0);
         }
       `;
 
-      const mat = new THREE.ShaderMaterial({
+      const material = new THREE.ShaderMaterial({
         uniforms,
-        vertexShader: vert,
-        fragmentShader: frag,
-        side: THREE.DoubleSide,
-        wireframe: false
+        vertexShader: vertex,
+        fragmentShader: fragment,
+        side: THREE.DoubleSide
       });
 
-      oceanMesh = new THREE.Mesh(geo, mat);
+      oceanMesh = new THREE.Mesh(geometry, material);
       oceanMesh.rotation.x = -Math.PI / 2;
-      oceanMesh.position.y = -1.2;
+      oceanMesh.position.y = -1.1;
       scene.add(oceanMesh);
 
       startTime = performance.now();
-      animateOcean();
-      window.addEventListener('resize', onWindowResize, false);
+      animate();
     }
 
-    function onWindowResize() {
-      if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+    function animate() {
+      requestAnimationFrame(animate);
+      let t = (performance.now() - startTime) / 1000;
+      oceanMesh.material.uniforms.uTime.value = t;
 
-    function animateOcean() {
-      requestAnimationFrame(animateOcean);
-
-      if (!scene || !camera || !renderer || !oceanMesh) return;
-
-      const now = performance.now();
-      const elapsed = (now - startTime) / 1000.0;
-
-      // Update time uniform
-      oceanMesh.material.uniforms.uTime.value = elapsed;
-
-      // Gentle camera drift
-      const radius = 6.5;
-      const camX = Math.sin(elapsed * 0.12) * radius * 0.4;
-      const camZ = 6.5 + Math.cos(elapsed * 0.08) * 0.8;
-      camera.position.x = camX;
-      camera.position.z = camZ;
+      camera.position.x = Math.sin(t * 0.1) * 0.6;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
     }
 
-    document.addEventListener('DOMContentLoaded', initOceanScene);
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+
+    initOcean();
   </script>
+
 </body>
 </html>
