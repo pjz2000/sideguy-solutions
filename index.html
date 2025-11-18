@@ -1,105 +1,141 @@
-<!-- Three.js core + water + sky -->
-<script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
-<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
-<script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SideGuy Solutions – Ocean Test Stage 2</title>
 
-<script>
-let camera, scene, renderer, water, sky, sun;
-let t = 0;
-
-init();
-animate();
-
-function init() {
-  const canvas = document.getElementById("ocean-canvas");
-
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0d4c8c);
-  scene.fog = new THREE.FogExp2(0x0d4c8c, 0.0014);
-
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 20000);
-  camera.position.set(0, 60, 170);
-
-  sun = new THREE.Vector3();
-
-  /* SKY */
-  sky = new THREE.Sky();
-  sky.scale.setScalar(10000);
-  scene.add(sky);
-
-  const skyU = sky.material.uniforms;
-  skyU["turbidity"].value = 10;
-  skyU["rayleigh"].value = 2;
-  skyU["mieCoefficient"].value = 0.005;
-  skyU["mieDirectionalG"].value = 0.8;
-
-  updateSun();
-
-  /* WATER */
-  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
-
-  const waterNormals = new THREE.TextureLoader().load(
-    "https://threejs.org/examples/textures/waternormals.jpg",
-    (t) => {
-      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background: #0a3d62;
     }
-  );
 
-  water = new THREE.Water(waterGeometry, {
-    textureWidth: 2048,
-    textureHeight: 2048,
-    waterNormals: waterNormals,
-    sunDirection: sun.clone().normalize(),
-    sunColor: 0xffffff,
-    waterColor: 0x1a9dff, 
-    distortionScale: 4.0,
-    fog: true,
-  });
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
 
-  water.rotation.x = -Math.PI / 2;
-  scene.add(water);
+<body>
+  <canvas id="ocean-canvas"></canvas>
 
-  window.addEventListener("resize", onWindowResize);
-}
+  <!-- Three.js core -->
+  <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
 
-function updateSun() {
-  const phi = THREE.MathUtils.degToRad(60);
-  const theta = THREE.MathUtils.degToRad(145);
-  sun.setFromSphericalCoords(1, phi, theta);
+  <!-- Water + Sky helpers -->
+  <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
+  <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
 
-  sky.material.uniforms["sunPosition"].value.copy(sun);
+  <script>
+    let camera, scene, renderer, water, sky, sun;
+    let t = 0;
 
-  if (water?.material?.uniforms?.sunDirection) {
-    water.material.uniforms.sunDirection.value.copy(sun).normalize();
-  }
-}
+    init();
+    animate();
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
+    function init() {
+      const canvas = document.getElementById("ocean-canvas");
 
-function animate() {
-  requestAnimationFrame(animate);
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-  t += 0.002;
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x77c9ff);  // bright pacific blue
+      scene.fog = new THREE.FogExp2(0x77c9ff, 0.0009);
 
-  if (water?.material?.uniforms?.time) {
-    water.material.uniforms.time.value += 0.025;
-  }
+      camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        1,
+        20000
+      );
+      camera.position.set(0, 60, 170);
 
-  camera.position.x = Math.sin(t * 0.28) * 24;
-  camera.position.y = 60 + Math.sin(t * 0.7) * 3;
-  camera.position.z = 170 + Math.sin(t * 0.18) * 12;
+      sun = new THREE.Vector3();
 
-  camera.lookAt(0, 0, 0);
+      /* --- SKY --- */
+      sky = new THREE.Sky();
+      sky.scale.setScalar(10000);
+      scene.add(sky);
 
-  renderer.render(scene, camera);
-}
-</script>
+      const skyU = sky.material.uniforms;
+      skyU["turbidity"].value = 8;
+      skyU["rayleigh"].value = 2.2;
+      skyU["mieCoefficient"].value = 0.005;
+      skyU["mieDirectionalG"].value = 0.75;
+
+      updateSun();
+
+      /* --- WATER --- */
+      const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
+
+      const waterNormals = new THREE.TextureLoader().load(
+        "https://threejs.org/examples/textures/waternormals.jpg",
+        (texture) => {
+          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        }
+      );
+
+      water = new THREE.Water(waterGeometry, {
+        textureWidth: 2048,
+        textureHeight: 2048,
+        waterNormals: waterNormals,
+        sunDirection: sun.clone().normalize(),
+        sunColor: 0xffffff,
+        waterColor: 0x1ca3ff,    // BLUER water tone
+        distortionScale: 3.8,    // smoother waves
+        fog: true,
+      });
+
+      water.rotation.x = -Math.PI / 2;
+      scene.add(water);
+
+      window.addEventListener("resize", onWindowResize);
+    }
+
+    function updateSun() {
+      const phi = THREE.MathUtils.degToRad(60);
+      const theta = THREE.MathUtils.degToRad(135);
+      sun.setFromSphericalCoords(1, phi, theta);
+
+      sky.material.uniforms["sunPosition"].value.copy(sun);
+      if (water?.material?.uniforms?.sunDirection) {
+        water.material.uniforms.sunDirection.value.copy(sun).normalize();
+      }
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      t += 0.003;
+
+      if (water?.material?.uniforms?.time) {
+        water.material.uniforms.time.value += 0.02;
+      }
+
+      // Gentle cinematic motion
+      camera.position.x = Math.sin(t * 0.28) * 26;
+      camera.position.y = 60 + Math.sin(t * 0.4) * 4;
+      camera.position.z = 170 + Math.sin(t * 0.18) * 10;
+
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+  </script>
+</body>
+</html>
   
