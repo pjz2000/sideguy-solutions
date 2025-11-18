@@ -1,145 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>SideGuy Solutions | Ultra Pacific Engine</title>
+  <title>SideGuy Solutions | Ocean Reset</title>
 
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: #001a33;
-  }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #0b4f9c;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-  #label {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-family: sans-serif;
-    font-size: 15px;
-    color: #bcecff;
-    z-index: 10;
-    text-shadow: 0 0 10px #000;
-  }
+    /* Full-screen “ocean” background */
+    .ocean-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at top,
+        #5fd5ff 0%,
+        #1f8ed9 30%,
+        #0b4f9c 65%,
+        #042a55 100%
+      );
+    }
 
-  canvas { display: block; }
-</style>
+    /* Small debug label so we always know what build we're on */
+    .label {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #d9f4ff;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px);
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+      z-index: 10;
+    }
+
+    /* Center helper if we want to test text later */
+    .center-test {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e8f9ff;
+      font-size: 1.1rem;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
+      pointer-events: none;
+    }
+  </style>
 </head>
 
 <body>
-<div id="label">🌊 Ultra Pacific Engine v2.1 — PJ MODE</div>
-<canvas id="ocean"></canvas>
+  <!-- Fullscreen bright blue ocean gradient (static, no animation) -->
+  <div class="ocean-bg"></div>
 
-<script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
-<script src="https://unpkg.com/three@0.150.1/examples/js/objects/Water.js"></script>
-<script src="https://unpkg.com/three@0.150.1/examples/js/objects/Sky.js"></script>
+  <!-- Debug label so we always know it's the safe reset build -->
+  <div class="label">
+    🌊 Stage-1 Ocean Reset · Static · No JS
+  </div>
 
-<script>
-let camera, scene, renderer, water, sky, sun;
-
-init();
-animate();
-
-function init() {
-  const canvas = document.getElementById("ocean");
-
-  renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true
-  });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  scene = new THREE.Scene();
-
-  camera = new THREE.PerspectiveCamera(
-    60,
-    window.innerWidth / window.innerHeight,
-    1,
-    20000
-  );
-  camera.position.set(0, 55, 160);
-
-  // Sky
-  sun = new THREE.Vector3();
-
-  sky = new THREE.Sky();
-  sky.scale.setScalar(10000);
-  scene.add(sky);
-
-  const skyU = sky.material.uniforms;
-  skyU["turbidity"].value = 11;
-  skyU["rayleigh"].value = 3.1;
-  skyU["mieCoefficient"].value = 0.0044;
-  skyU["mieDirectionalG"].value = 0.78;
-
-  updateSun();
-
-  // Water
-  const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
-
-  const waterNormals = new THREE.TextureLoader().load(
-    "https://threejs.org/examples/textures/waternormals.jpg",
-    function (texture) {
-      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    }
-  );
-
-  water = new THREE.Water(waterGeometry, {
-    textureWidth: 2048,
-    textureHeight: 2048,
-    waterNormals,
-    sunDirection: sun,
-    sunColor: 0xffffff,
-    waterColor: 0x1477d4,
-    distortionScale: 5.0,
-    fog: false
-  });
-
-  water.rotation.x = -Math.PI / 2;
-  scene.add(water);
-
-  window.addEventListener("resize", onResize);
-}
-
-function updateSun() {
-  const phi = THREE.MathUtils.degToRad(75);
-  const theta = THREE.MathUtils.degToRad(160);
-  sun.setFromSphericalCoords(1, phi, theta);
-
-  sky.material.uniforms["sunPosition"].value.copy(sun);
-  water.material.uniforms["sunDirection"].value.copy(sun).normalize();
-}
-
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-let t = 0;
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  t += 0.0035;
-
-  // Wave time
-  water.material.uniforms["time"].value = t * 4.0;
-
-  // Camera slow cinematic glide
-  camera.position.x = Math.sin(t * 0.25) * 18;
-  camera.position.y = 55 + Math.sin(t * 0.8) * 2.2;
-  camera.position.z = 160 + Math.sin(t * 0.18) * 9;
-
-  camera.lookAt(0, 0, 0);
-
-  renderer.render(scene, camera);
-}
-</script>
-
+  <!-- Optional center text (you can remove this once you confirm it works) -->
+  <div class="center-test">
+    Ocean Reset Loaded – If you see this, the base is STABLE ✅
+  </div>
 </body>
 </html>
