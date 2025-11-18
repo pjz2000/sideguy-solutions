@@ -110,7 +110,8 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+<!-- FIXED CDN: Three.js loads 100% -->
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
 
 <script>
 let scene, camera, renderer, ocean, normalMap;
@@ -144,24 +145,24 @@ function init() {
   sun.castShadow = false;
   scene.add(sun);
 
-  // === NORMAL MAP (tiny detail ripples) ===
+  // === NORMAL MAP ===
   const loader = new THREE.TextureLoader();
   normalMap = loader.load(
     "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg"
   );
   normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
 
-  // === OCEAN GEOMETRY (high res) ===
+  // === GEOMETRY ===
   const geo = new THREE.PlaneGeometry(350, 350, 240, 240);
   geo.rotateX(-Math.PI / 2);
 
-  // Vertex-gradient Cardiff look
   const pos = geo.attributes.position;
   const colorArray = new Float32Array(pos.count * 3);
-  const cNear = new THREE.Color("#24a4d8"); // Cardiff teal highlight
-  const cFar = new THREE.Color("#031227");  // deep pacific
 
+  const cNear = new THREE.Color("#24a4d8");
+  const cFar = new THREE.Color("#031227");
   const c = new THREE.Color();
+
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
     const z = pos.getZ(i);
@@ -172,21 +173,20 @@ function init() {
 
     c.lerpColors(cNear, cFar, t);
 
-    colorArray[i*3+0] = c.r;
+    colorArray[i*3] = c.r;
     colorArray[i*3+1] = c.g;
     colorArray[i*3+2] = c.b;
   }
 
   geo.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
 
-  // === MATERIAL with SPECULAR + NORMALMAP ===
+  // === MATERIAL ===
   const mat = new THREE.MeshStandardMaterial({
     vertexColors: true,
-    metalness: 0.65,   // movie shine
+    metalness: 0.65,
     roughness: 0.25,
     normalMap: normalMap,
-    normalScale: new THREE.Vector2(1.2, 1.2),
-    envMapIntensity: 1.2
+    normalScale: new THREE.Vector2(1.2, 1.2)
   });
 
   ocean = new THREE.Mesh(geo, mat);
@@ -202,7 +202,6 @@ function animate() {
   const t = performance.now() * 0.00035;
   const pos = ocean.geometry.attributes.position;
 
-  // === TRUE ROLLING WAVES + SUB-DETAIL ===
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
     const z = pos.getZ(i);
@@ -214,8 +213,6 @@ function animate() {
   }
 
   pos.needsUpdate = true;
-
-  // recompute normals → REQUIRED for specular highlights
   ocean.geometry.computeVertexNormals();
 
   camera.lookAt(0, 0, 0);
@@ -228,7 +225,6 @@ function onResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// Summon PJ
 document.getElementById("summonPJ").onclick = () => {
   window.location.href =
     "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
@@ -239,3 +235,4 @@ init();
 
 </body>
 </html>
+
