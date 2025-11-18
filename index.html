@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>SideGuy Solutions | Ocean Reset</title>
+  <title>SideGuy Solutions | Pacific Stage 2</title>
 
   <style>
     html, body {
@@ -12,66 +10,111 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background: #0b4f9c;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0094e8;
+      font-family: system-ui, sans-serif;
     }
 
-    /* Full-screen “ocean” background */
-    .ocean-bg {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle at top,
-        #5fd5ff 0%,
-        #1f8ed9 30%,
-        #0b4f9c 65%,
-        #042a55 100%
+    /* ---------------------------
+       🌅 SUN GLOW
+    ----------------------------*/
+    .sun {
+      position: absolute;
+      top: 18vh;
+      left: 50%;
+      width: 280px;
+      height: 280px;
+      margin-left: -140px;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,210,1) 0%,
+        rgba(255,220,120,0.7) 40%,
+        rgba(255,200,80,0.25) 60%,
+        rgba(255,180,50,0.12) 80%,
+        rgba(255,160,40,0.05) 100%
       );
+      border-radius: 50%;
+      filter: blur(12px);
+      animation: sunPulse 12s ease-in-out infinite;
+      z-index: 3;
     }
 
-    /* Small debug label so we always know what build we're on */
-    .label {
-      position: fixed;
-      top: 16px;
-      left: 16px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: #d9f4ff;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(10px);
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+    @keyframes sunPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.07); opacity: 1; }
+    }
+
+    /* ---------------------------
+       🌊 OCEAN BASE
+    ----------------------------*/
+    .ocean {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 55vh;
+      background: linear-gradient(#0094e8, #006bb3 45%, #004c80 100%);
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    /* ---------------------------
+       🌊 CSS WAVE LAYERS (Safe!)
+    ----------------------------*/
+    .wave {
+      position: absolute;
+      width: 200%;
+      height: 220px;
+      left: -50%;
+      opacity: 0.38;
+      background: rgba(255,255,255,0.55);
+      filter: blur(8px);
+      border-radius: 100%;
+      animation: waveMove 8s linear infinite;
+      transform: rotate(2deg);
+    }
+
+    .wave:nth-child(2) {
+      bottom: 45px;
+      opacity: 0.30;
+      animation-duration: 11s;
+    }
+
+    .wave:nth-child(3) {
+      bottom: 90px;
+      opacity: 0.22;
+      animation-duration: 15s;
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(0) rotate(2deg); }
+      100% { transform: translateX(55%) rotate(2deg); }
+    }
+
+    /* ---------------------------
+       TITLE LABEL
+    ----------------------------*/
+    #label {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      color: #dfffff;
+      font-size: 14px;
+      text-shadow: 0 0 8px #00334f;
       z-index: 10;
-    }
-
-    /* Center helper if we want to test text later */
-    .center-test {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #e8f9ff;
-      font-size: 1.1rem;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
-      pointer-events: none;
     }
   </style>
 </head>
 
 <body>
-  <!-- Fullscreen bright blue ocean gradient (static, no animation) -->
-  <div class="ocean-bg"></div>
 
-  <!-- Debug label so we always know it's the safe reset build -->
-  <div class="label">
-    🌊 Stage-1 Ocean Reset · Static · No JS
-  </div>
+<div id="label">🌅 Pacific Stage-2 — Sun + Soft Waves (Stable)</div>
 
-  <!-- Optional center text (you can remove this once you confirm it works) -->
-  <div class="center-test">
-    Ocean Reset Loaded – If you see this, the base is STABLE ✅
-  </div>
+<div class="sun"></div>
+
+<div class="ocean">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
 </body>
 </html>
