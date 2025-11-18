@@ -1,7 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 20.2-ocean-waves
-  Mode: Rolling Waves + Stable Rendering
+  Version: 20.3-cardiff-movie-ocean
+  Mode: Cardiff-by-the-Sea · Rolling Movie Waves
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Rolling Ocean Test v20.2</title>
+  <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,6 +23,7 @@
       color: #e2e8f0;
     }
 
+    /* 3D background container with fallback gradient */
     #bg3d {
       position: fixed;
       inset: 0;
@@ -112,94 +113,128 @@
       <button id="summonPJ">TAP TO SUMMON PJ</button>
 
       <div class="version-tag">
-        Build: <strong>V20.2 · Rolling Waves Engine</strong>
+        Build: <strong>V20.3 · Cardiff Movie Ocean</strong>
       </div>
     </div>
   </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <!-- Stable Three.js (no modules, Vercel-safe) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 
-<script>
-  let scene, camera, renderer, ocean;
+  <script>
+    let scene, camera, renderer, ocean;
 
-  function init() {
-    const container = document.getElementById("bg3d");
+    function init() {
+      const container = document.getElementById("bg3d");
 
-    scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x020617, 10, 70);
+      scene = new THREE.Scene();
+      // Softer blue-ish fog, not pure black
+      scene.fog = new THREE.Fog(0x020617, 12, 85);
 
-    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 7, 25);
+      camera = new THREE.PerspectiveCamera(
+        55,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      // Slightly above the water, looking out
+      camera.position.set(0, 7, 26);
 
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x020617, 1);
-    container.appendChild(renderer.domElement);
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x020617, 1);
+      container.appendChild(renderer.domElement);
 
-    // LIGHTING
-    const hemi = new THREE.HemisphereLight(0x88c0ff, 0x020617, 0.85);
-    scene.add(hemi);
+      // CARDIFF MOVIE LIGHTING
+      const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x020617, 0.9);
+      scene.add(hemi);
 
-    const sun = new THREE.DirectionalLight(0xffffff, 1.25);
-    sun.position.set(-10, 20, 15);
-    scene.add(sun);
+      const sun = new THREE.DirectionalLight(0xfff4e0, 1.35); // warm sun
+      sun.position.set(-18, 22, 10);
+      scene.add(sun);
 
-    // Ocean geometry (higher resolution)
-    const geo = new THREE.PlaneGeometry(300, 300, 180, 180);
-    geo.rotateX(-Math.PI / 2);
+      // HIGH-RES OCEAN GEOMETRY
+      const geo = new THREE.PlaneGeometry(320, 320, 200, 200);
+      geo.rotateX(-Math.PI / 2);
 
-    const mat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#0b3b66"),
-      metalness: 0.35,
-      roughness: 0.4,
-    });
+      // CREATE VERTEX COLORS FOR GRADIENT (near = brighter teal, far = deep blue)
+      const pos = geo.attributes.position;
+      const colorArray = new Float32Array(pos.count * 3);
+      const colorNear = new THREE.Color("#0b8ec3"); // Cardiff teal-ish
+      const colorFar  = new THREE.Color("#03111f"); // deep outer Pacific
+      const c = new THREE.Color();
 
-    ocean = new THREE.Mesh(geo, mat);
-    scene.add(ocean);
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
 
-    window.addEventListener("resize", onResize);
-    animate();
-  }
+        // distance from camera-ish: nearer (z small) = brighter
+        const d = Math.sqrt(x*x + z*z);
+        let t = d / 200; // normalize
+        t = THREE.MathUtils.clamp(t, 0, 1);
 
-  function animate() {
-    requestAnimationFrame(animate);
+        c.lerpColors(colorNear, colorFar, t);
 
-    const t = performance.now() * 0.00035;
-    const pos = ocean.geometry.attributes.position;
+        colorArray[i * 3 + 0] = c.r;
+        colorArray[i * 3 + 1] = c.g;
+        colorArray[i * 3 + 2] = c.b;
+      }
 
-    for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
-      const z = pos.getZ(i);
+      geo.setAttribute("color", new THREE.BufferAttribute(colorArray, 3));
 
-      // Rolling wave layer
-      const y1 = Math.sin(x * 0.04 + t * 2.0) * 0.6;
+      const mat = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        metalness: 0.5,
+        roughness: 0.34
+      });
 
-      // Detail layer
-      const y2 = Math.cos(z * 0.07 + t * 1.5) * 0.35;
+      ocean = new THREE.Mesh(geo, mat);
+      scene.add(ocean);
 
-      pos.setY(i, y1 + y2);
+      window.addEventListener("resize", onResize);
+      animate();
     }
 
-    pos.needsUpdate = true;
+    function animate() {
+      requestAnimationFrame(animate);
 
-    camera.lookAt(0, 0, 0);
-    renderer.render(scene, camera);
-  }
+      const t = performance.now() * 0.00035;
+      const pos = ocean.geometry.attributes.position;
 
-  function onResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
+      // Two-layer rolling waves for more organic motion
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const z = pos.getZ(i);
 
-  document.getElementById("summonPJ").onclick = () => {
-    window.location.href =
-      "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-  };
+        const y1 = Math.sin(x * 0.042 + t * 2.0) * 0.7;
+        const y2 = Math.cos(z * 0.065 + t * 1.6) * 0.35;
 
-  init();
-</script>
+        pos.setY(i, y1 + y2);
+      }
 
+      pos.needsUpdate = true;
+
+      // Recompute normals so lights catch the waves → “wet” look
+      ocean.geometry.computeVertexNormals();
+
+      camera.lookAt(0, 0, 0);
+      renderer.render(scene, camera);
+    }
+
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // Summon PJ
+    document.getElementById("summonPJ").onclick = () => {
+      window.location.href =
+        "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+    };
+
+    init();
+  </script>
 </body>
 </html>
