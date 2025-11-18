@@ -4,21 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SideGuy Solutions | Pacific Build</title>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html, body {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       overflow: hidden;
       font-family: system-ui, -apple-system, Inter, sans-serif;
       background: #020617;
       color: #e2e8f0;
     }
 
-    /* 3D background */
-    #bg3d {
+    /* 3D background container */
+    #oceanCanvas {
       position: fixed;
       inset: 0;
       z-index: 0;
@@ -26,34 +23,33 @@
     }
 
     /* Text overlay */
-    .content {
+    .overlay {
       position: relative;
       z-index: 10;
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 100%;
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
       text-align: center;
     }
 
     .box {
-      max-width: 720px;
-      width: 100%;
-      padding: 2rem 2.2rem;
-      border-radius: 1.5rem;
-      backdrop-filter: blur(20px);
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 25px 70px rgba(0,0,0,0.55);
+      max-width: 700px;
+      backdrop-filter: blur(18px);
+      background: rgba(15,23,42,0.55);
+      padding: 2rem 2.3rem;
+      border-radius: 1.4rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.55);
     }
 
     h1 {
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      font-weight: 700;
-      line-height: 1.05;
-      margin-bottom: 1rem;
+      font-size: clamp(2rem, 4vw, 3.2rem);
       color: #f0f9ff;
+      margin-bottom: 1rem;
+      line-height: 1.05;
     }
 
     p {
@@ -64,156 +60,161 @@
     }
 
     .contact {
-      font-size: 0.92rem;
+      font-size: .95rem;
+      margin-bottom: 1.7rem;
       color: #bae6fd;
       line-height: 1.5;
-      margin-bottom: 1.7rem;
     }
 
     button {
-      padding: 0.8rem 1.7rem;
+      padding: .85rem 1.7rem;
       border-radius: 999px;
       border: none;
       cursor: pointer;
       background: linear-gradient(120deg, #22d3ee, #3b82f6);
       color: #ecfeff;
-      font-size: 0.95rem;
+      font-size: .95rem;
       font-weight: 600;
+      letter-spacing: .05em;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.65);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
     }
   </style>
 </head>
 
 <body>
-  <div id="bg3d"></div>
 
-  <div class="content">
-    <div class="box">
-      <h1>Where San Diego builds, codes, and scales.</h1>
+<div id="oceanCanvas"></div>
 
-      <p>
-        Coastal concierge tech for the 2025 era — custom apps, AI automation,
-        Web3 & Solana payments, ticketing flows, and DFS tools tuned for North
-        County and greater San Diego.
-      </p>
+<div class="overlay">
+  <div class="box">
+    <h1>Where San Diego builds, codes, and scales.</h1>
 
-      <div class="contact">
-        Text / call: <strong>773-544-1231</strong><br />
-        Email: <strong>peter.z@kromeon.com</strong>
-      </div>
+    <p>
+      Coastal concierge tech for the 2025 era — custom apps, AI automation,
+      Web3 & Solana payments, ticketing flows, and DFS tools tuned for North County
+      and greater San Diego.
+    </p>
 
-      <button id="summonPJ">TAP TO SUMMON PJ</button>
+    <div class="contact">
+      Text / call: <strong>773-544-1231</strong><br>
+      Email: <strong>peter.z@kromeon.com</strong>
     </div>
+
+    <button id="summonPJ">TAP TO SUMMON PJ</button>
   </div>
+</div>
 
-  <!-- THREE.JS OCEAN + SUN -->
-  <script type="module">
-    import * as THREE from "https://unpkg.com/three@0.152.2/build/three.module.js";
-    import { Water } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Water.js";
-    import { Sky } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Sky.js";
+<!-- THREE.JS OCEAN ENGINE -->
+<script type="module">
+  import * as THREE from "https://unpkg.com/three@0.152.2/build/three.module.js";
+  import { Water } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Water.js";
+  import { Sky } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Sky.js";
 
-    let camera, scene, renderer, water, sky, sun, pmrem, clock;
-    const dayLength = 40; // 40s = full 24h cycle
+  let camera, scene, renderer, water, sky, sun, pmrem, clock;
+  const cycleTime = 40; // 40 seconds = full 24h
 
-    function init() {
-      const container = document.getElementById("bg3d");
+  function init() {
+    const dom = document.getElementById("oceanCanvas");
 
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
-      camera.position.set(0, 55, 135);
+    scene = new THREE.Scene();
 
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.93;
-      container.appendChild(renderer.domElement);
+    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
+    camera.position.set(0, 55, 135);
 
-      pmrem = new THREE.PMREMGenerator(renderer);
-      clock = new THREE.Clock();
-      sun = new THREE.Vector3();
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 0.93;
+    dom.appendChild(renderer.domElement);
 
-      // Sky
-      sky = new Sky();
-      sky.scale.setScalar(10000);
-      scene.add(sky);
+    pmrem = new THREE.PMREMGenerator(renderer);
 
-      const skyU = sky.material.uniforms;
-      skyU["turbidity"].value = 10;
-      skyU["rayleigh"].value = 3;
-      skyU["mieCoefficient"].value = 0.008;
-      skyU["mieDirectionalG"].value = 0.9;
+    sun = new THREE.Vector3();
+    clock = new THREE.Clock();
 
-      // Water
-      const waterGeo = new THREE.PlaneGeometry(10000, 10000);
-      const waterNormals = new THREE.TextureLoader().load(
-        "https://unpkg.com/three@0.152.2/examples/textures/waternormals.jpg",
-        t => (t.wrapS = t.wrapT = THREE.RepeatWrapping)
-      );
+    // Sky
+    sky = new Sky();
+    sky.scale.setScalar(10000);
+    scene.add(sky);
 
-      water = new Water(waterGeo, {
-        textureWidth: 1024,
-        textureHeight: 1024,
-        waterNormals,
-        sunDirection: new THREE.Vector3(),
-        sunColor: 0xffffff,
-        waterColor: "#1fa4ff",
-        distortionScale: 4.2,
-      });
+    const skyU = sky.material.uniforms;
+    skyU["turbidity"].value = 10;
+    skyU["rayleigh"].value = 3;
+    skyU["mieCoefficient"].value = 0.008;
+    skyU["mieDirectionalG"].value = 0.9;
 
-      water.rotation.x = -Math.PI / 2;
-      scene.add(water);
+    // Water
+    const waterGeo = new THREE.PlaneGeometry(10000, 10000);
+    const waterNormals = new THREE.TextureLoader().load(
+      "https://unpkg.com/three@0.152.2/examples/textures/waternormals.jpg",
+      t => (t.wrapS = t.wrapT = THREE.RepeatWrapping)
+    );
 
-      window.addEventListener("resize", onResize);
-      updateSunFromTime(0);
-      animate();
+    water = new Water(waterGeo, {
+      textureWidth: 1024,
+      textureHeight: 1024,
+      waterNormals: waterNormals,
+      sunDirection: new THREE.Vector3(),
+      sunColor: 0xffffff,
+      waterColor: "#1fa4ff",
+      distortionScale: 4,
+    });
+
+    water.rotation.x = -Math.PI / 2;
+    scene.add(water);
+
+    window.addEventListener("resize", onResize);
+
+    updateSunPosition(0);
+    animate();
+  }
+
+  function updateSunPosition(t) {
+    const elevation = 5 + 80 * Math.sin(t * Math.PI);
+    const azimuth = 180 + 180 * t;
+
+    const phi = THREE.MathUtils.degToRad(90 - elevation);
+    const theta = THREE.MathUtils.degToRad(azimuth);
+
+    sun.setFromSphericalCoords(1, phi, theta);
+
+    sky.material.uniforms["sunPosition"].value.copy(sun);
+    water.material.uniforms["sunDirection"].value.copy(sun).normalize();
+
+    const rt = pmrem.fromScene(sky);
+    scene.environment = rt.texture;
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    const elapsed = clock.getElapsedTime();
+    const t = (elapsed % cycleTime) / cycleTime;
+
+    updateSunPosition(t);
+
+    if (water.material.uniforms.time) {
+      water.material.uniforms.time.value += 1 / 60;
     }
 
-    function updateSunFromTime(t) {
-      const elevation = 5 + 80 * Math.sin(t * Math.PI);
-      const azimuth = 180 + 180 * t;
-      const phi = THREE.MathUtils.degToRad(90 - elevation);
-      const theta = THREE.MathUtils.degToRad(azimuth);
+    renderer.render(scene, camera);
+  }
 
-      sun.setFromSphericalCoords(1, phi, theta);
+  function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 
-      sky.material.uniforms["sunPosition"].value.copy(sun);
-      water.material.uniforms["sunDirection"].value.copy(sun).normalize();
+  document.getElementById("summonPJ").onclick = () => {
+    window.location.href =
+      "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+  };
 
-      const rt = pmrem.fromScene(sky);
-      scene.environment = rt.texture;
-    }
+  init();
+</script>
 
-    function animate() {
-      requestAnimationFrame(animate);
-      const t = (clock.getElapsedTime() % dayLength) / dayLength;
-
-      updateSunFromTime(t);
-
-      if (water.material.uniforms["time"])
-        water.material.uniforms["time"].value += 1.0 / 60.0;
-
-      renderer.render(scene, camera);
-    }
-
-    function onResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    // Email link
-    document.getElementById("summonPJ").onclick = () => {
-      setTimeout(() => {
-        window.location.href =
-          "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-      }, 300);
-    };
-
-    init();
-  </script>
 </body>
 </html>
- 
