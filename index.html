@@ -1,120 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SideGuy Solutions | Pacific Stage 2</title>
+  <title>SideGuy Solutions | Cinematic Pacific Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
+      overflow: hidden;
       height: 100%;
-      overflow: hidden;
-      background: #0094e8;
-      font-family: system-ui, sans-serif;
+      background: #020617;
     }
 
-    /* ---------------------------
-       🌅 SUN GLOW
-    ----------------------------*/
-    .sun {
-      position: absolute;
-      top: 18vh;
-      left: 50%;
-      width: 280px;
-      height: 280px;
-      margin-left: -140px;
-      background: radial-gradient(
-        circle,
-        rgba(255,255,210,1) 0%,
-        rgba(255,220,120,0.7) 40%,
-        rgba(255,200,80,0.25) 60%,
-        rgba(255,180,50,0.12) 80%,
-        rgba(255,160,40,0.05) 100%
-      );
-      border-radius: 50%;
-      filter: blur(12px);
-      animation: sunPulse 12s ease-in-out infinite;
-      z-index: 3;
+    canvas {
+      display: block;
     }
 
-    @keyframes sunPulse {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.07); opacity: 1; }
-    }
-
-    /* ---------------------------
-       🌊 OCEAN BASE
-    ----------------------------*/
-    .ocean {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 55vh;
-      background: linear-gradient(#0094e8, #006bb3 45%, #004c80 100%);
-      overflow: hidden;
-      z-index: 2;
-    }
-
-    /* ---------------------------
-       🌊 CSS WAVE LAYERS (Safe!)
-    ----------------------------*/
-    .wave {
-      position: absolute;
-      width: 200%;
-      height: 220px;
-      left: -50%;
-      opacity: 0.38;
-      background: rgba(255,255,255,0.55);
-      filter: blur(8px);
-      border-radius: 100%;
-      animation: waveMove 8s linear infinite;
-      transform: rotate(2deg);
-    }
-
-    .wave:nth-child(2) {
-      bottom: 45px;
-      opacity: 0.30;
-      animation-duration: 11s;
-    }
-
-    .wave:nth-child(3) {
-      bottom: 90px;
-      opacity: 0.22;
-      animation-duration: 15s;
-    }
-
-    @keyframes waveMove {
-      0% { transform: translateX(0) rotate(2deg); }
-      100% { transform: translateX(55%) rotate(2deg); }
-    }
-
-    /* ---------------------------
-       TITLE LABEL
-    ----------------------------*/
     #label {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      color: #dfffff;
-      font-size: 14px;
-      text-shadow: 0 0 8px #00334f;
+      position: fixed;
+      top: 16px;
+      left: 16px;
       z-index: 10;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      color: #dff8ff;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      text-shadow: 0 0 8px #000;
     }
   </style>
 </head>
 
 <body>
+  <div id="label">🌊 Cinematic Pacific v3.0 — Real 3D Water</div>
+  <canvas id="ocean-canvas"></canvas>
 
-<div id="label">🌅 Pacific Stage-2 — Sun + Soft Waves (Stable)</div>
+  <!-- Three.js + Water + Sky (matching versions) -->
+  <script src="https://unpkg.com/three@0.138.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Water.js"></script>
+  <script src="https://unpkg.com/three@0.138.0/examples/js/objects/Sky.js"></script>
 
-<div class="sun"></div>
+  <script>
+    let camera, scene, renderer, water, sky, sun;
+    let t = 0;
 
-<div class="ocean">
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
-</div>
+    init();
+    animate();
 
+    function init() {
+      const canvas = document.getElementById("ocean-canvas");
+
+      // Renderer
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.outputEncoding = THREE.sRGBEncoding;
+
+      // Scene
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0b2745, 0.0018);
+      scene.background = new THREE.Color(0x0b2745);
+
+      // Camera
+      camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        1,
+        20000
+      );
+      camera.position.set(0, 60, 170);
+
+      // Sun / Sky
+      sun = new THREE.Vector3();
+
+      sky = new THREE.Sky();
+      sky.scale.setScalar(10000);
+      scene.add(sky);
+
+      const skyUniforms = sky.material.uniforms;
+      skyUniforms["turbidity"].value = 10;
+      skyUniforms["rayleigh"].value = 2.4;
+      skyUniforms["mieCoefficient"].value = 0.004;
+      skyUniforms["mieDirectionalG"].value = 0.8;
+
+      updateSun(); // positions the sun + feeds water shader
+
+      // Water
+      const waterGeometry = new THREE.PlaneGeometry(30000, 30000);
+
+      const waterNormals = new THREE.TextureLoader().load(
+        "https://threejs.org/examples/textures/waternormals.jpg",
+        function (texture) {
+          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        }
+      );
+
+      water = new THREE.Water(waterGeometry, {
+        textureWidth: 2048,
+        textureHeight: 2048,
+        waterNormals: waterNormals,
+        sunDirection: sun.clone().normalize(),
+        sunColor: 0xffffff,
+        waterColor: 0x1d8fe5, // crystal Pacific blue
+        distortionScale: 3.9,
+        fog: true
+      });
+
+      water.rotation.x = -Math.PI / 2;
+      scene.add(water);
+
+      // Resize handling
+      window.addEventListener("resize", onWindowResize);
+    }
+
+    function updateSun() {
+      // angle of sun in the sky: low, warm, cinematic
+      const phi = THREE.MathUtils.degToRad(78);   // elevation
+      const theta = THREE.MathUtils.degToRad(140); // azimuth
+
+      sun.setFromSphericalCoords(1, phi, theta);
+
+      sky.material.uniforms["sunPosition"].value.copy(sun);
+      if (water && water.material && water.material.uniforms["sunDirection"]) {
+        water.material.uniforms["sunDirection"].value.copy(sun).normalize();
+      }
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      t += 0.0025;
+
+      // Advance water time uniform to animate waves
+      if (water && water.material && water.material.uniforms["time"]) {
+        water.material.uniforms["time"].value += 0.03;
+      }
+
+      // Smooth cinematic camera drift
+      camera.position.x = Math.sin(t * 0.3) * 20;
+      camera.position.y = 60 + Math.sin(t * 0.7) * 3;
+      camera.position.z = 170 + Math.sin(t * 0.2) * 10;
+
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+  </script>
 </body>
 </html>
