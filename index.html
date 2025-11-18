@@ -1,59 +1,185 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>Ocean Debug</title>
-<style>html,body{margin:0;height:100%;overflow:hidden}#c{position:fixed;inset:0}</style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SideGuy Solutions | Ocean Test Stable</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020617;
+      font-family: system-ui, -apple-system, Inter, sans-serif;
+      color: #e2e8f0;
+    }
+
+    #bg3d {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 700px;
+      padding: 2rem 2.3rem;
+      border-radius: 1.4rem;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      color: #f9fafb;
+      margin-bottom: 1rem;
+    }
+
+    p { color: #dbeafe; line-height: 1.6; margin-bottom: 1.5rem; }
+    .contact { color: #bae6fd; margin-bottom: 1.5rem; }
+
+    button {
+      padding: .85rem 1.7rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(120deg, #22d3ee, #3b82f6);
+      color: white;
+      font-size: .95rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+    }
+  </style>
 </head>
+
 <body>
-<canvas id="c"></canvas>
-<script type="module">
-  import * as THREE from "https://unpkg.com/three@0.152.2/build/three.module.js";
-  import { Water } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Water.js?module";
-  import { Sky } from "https://unpkg.com/three@0.152.2/examples/jsm/objects/Sky.js?module";
 
-  const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('c'), antialias:true, alpha:true});
-  console.log("WebGL2:", renderer.capabilities.isWebGL2, renderer.getContext());
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(55, window.innerWidth/window.innerHeight, 1, 20000);
-  camera.position.set(0,55,135);
-  const sun = new THREE.Vector3();
+<div id="bg3d"></div>
 
-  const sky = new Sky();
-  sky.scale.setScalar(10000);
-  scene.add(sky);
-  const skyU = sky.material.uniforms;
-  skyU.turbidity.value = 10; skyU.rayleigh.value = 3;
-  skyU.mieCoefficient.value = 0.008; skyU.mieDirectionalG.value = 0.9;
+<div class="overlay">
+  <div class="box">
+    <h1>Where San Diego builds, codes, and scales.</h1>
 
-  const waterGeo = new THREE.PlaneGeometry(10000,10000);
-  const waterNormals = new THREE.TextureLoader().load(
-    "https://unpkg.com/three@0.152.2/examples/textures/waternormals.jpg",
-    t=>{t.wrapS=t.wrapT=THREE.RepeatWrapping}
-  );
-  const water = new Water(waterGeo, {
-    textureWidth:1024, textureHeight:1024,
-    waterNormals, sunDirection:new THREE.Vector3(),
-    waterColor:"#0b3b66", distortionScale:4.0
-  });
-  water.rotation.x = -Math.PI/2;
-  scene.add(water);
+    <p>
+      Coastal concierge tech for the 2025 era — custom apps, AI automation,
+      Web3 & Solana payments, ticketing flows, and DFS tools tuned for North County and greater San Diego.
+    </p>
 
-  function updateSun(t){
-    const elevation=80; const azimuth=180;
-    const phi=THREE.MathUtils.degToRad(90-elevation);
-    const theta=THREE.MathUtils.degToRad(azimuth);
-    sun.setFromSphericalCoords(1,phi,theta);
-    sky.material.uniforms.sunPosition.value.copy(sun);
-    water.material.uniforms.sunDirection.value.copy(sun).normalize();
+    <div class="contact">
+      Text / call: <strong>773–544–1231</strong><br />
+      Email: <strong>peter.z@kromeon.com</strong>
+    </div>
+
+    <button id="summonPJ">TAP TO SUMMON PJ</button>
+  </div>
+</div>
+
+<!-- 100% stable ocean engine -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+
+<script>
+  let scene, camera, renderer, ocean;
+
+  function init() {
+    const container = document.getElementById("bg3d");
+
+    scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x020617, 1, 500);
+
+    camera = new THREE.PerspectiveCamera(
+      55,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(0, 8, 18);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x020617, 1);
+    container.appendChild(renderer.domElement);
+
+    // LIGHTS
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    mainLight.position.set(10, 20, 10);
+    scene.add(mainLight);
+
+    const fillLight = new THREE.HemisphereLight(0x0b1b2f, 0x020617, 0.8);
+    scene.add(fillLight);
+
+    // SMOOTH ROLLING WAVES (B)
+    const geo = new THREE.PlaneGeometry(300, 300, 240, 240);
+    geo.rotateX(-Math.PI / 2);
+
+    const mat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color("#0b3b66"), // movie deep blue
+      metalness: 0.35,
+      roughness: 0.45,
+    });
+
+    ocean = new THREE.Mesh(geo, mat);
+    scene.add(ocean);
+
+    window.addEventListener("resize", onResize);
+    animate();
   }
-  updateSun();
 
-  function animate(){
+  function animate() {
     requestAnimationFrame(animate);
-    if(water.material.uniforms.time) water.material.uniforms.time.value+=1/60;
-    renderer.render(scene,camera);
+
+    const t = performance.now() * 0.00035;
+
+    // smooth rolling waves (Option B)
+    ocean.geometry.verticesNeedUpdate = true;
+    const pos = ocean.geometry.attributes.position;
+
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i);
+      const z = pos.getZ(i);
+
+      // smooth rolling wave motion
+      const y =
+        Math.sin(x * 0.04 + t * 2.0) * 0.6 +
+        Math.cos(z * 0.05 + t * 1.7) * 0.6;
+
+      pos.setY(i, y);
+    }
+
+    pos.needsUpdate = true;
+
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
   }
-  animate();
+
+  function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  // Summon PJ
+  document.getElementById("summonPJ").onclick = () => {
+    window.location.href =
+      "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
+  };
+
+  init();
 </script>
+
 </body>
 </html>
