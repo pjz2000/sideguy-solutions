@@ -1,18 +1,15 @@
-<!--
+<!-- 
   SideGuy Solutions
-  Version: 30.0-pacific-movie-engine
-  Mode: Ferrari Build · Three.js Water + Sky · Medium Swell
+  Version: 31.0-cardiff-ferrari-lite
+  Mode: Inline Ocean Shader · Cardiff Golden Hour · No Water.js/Sky.js
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-  <title>SideGuy Solutions | Where San Diego builds, codes, and scales.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SideGuy Solutions | Cardiff-by-the-Sea Ocean</title>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,19 +23,17 @@
       color: #e2e8f0;
     }
 
-    /* Ocean canvas container + fallback gradient */
     #bg3d {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
+      background: radial-gradient(circle at 15% 0%, #38bdf8 0%, #020617 70%);
     }
 
     .overlay {
       position: relative;
       z-index: 10;
       height: 100%;
-      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -49,11 +44,11 @@
     .box {
       max-width: 700px;
       padding: 2rem 2.3rem;
-      border-radius: 1.4rem;
-      background: rgba(15,23,42,0.55);
+      background: rgba(15,23,42,0.6);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.65);
+      border-radius: 1.4rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.6);
     }
 
     h1 {
@@ -68,10 +63,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .contact {
-      color: #bae6fd;
-      margin-bottom: 1.5rem;
-    }
+    .contact { color: #bae6fd; margin-bottom: 1.5rem; }
 
     button {
       padding: .85rem 1.7rem;
@@ -86,195 +78,187 @@
     }
 
     .version-tag {
-      margin-top: .8rem;
-      font-size: .75rem;
+      margin-top: .85rem;
       color: #94a3b8;
+      font-size: .75rem;
       opacity: .9;
     }
   </style>
 </head>
 
 <body>
-  <div id="bg3d"></div>
 
-  <div class="overlay">
-    <div class="box">
-      <h1>Where San Diego builds, codes, and scales.</h1>
+<div id="bg3d"></div>
 
-      <p>
-        Coastal concierge tech for the 2025 era — custom apps, AI automation,
-        Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
-        North County and greater San Diego.
-      </p>
+<div class="overlay">
+  <div class="box">
+    <h1>Where San Diego builds, codes, and scales.</h1>
 
-      <div class="contact">
-        Text / call: <strong>773–544–1231</strong><br />
-        Email: <strong>peter.z@kromeon.com</strong>
-      </div>
+    <p>
+      Coastal concierge tech for the 2025 era — custom apps, AI automation,
+      Web3 &amp; Solana payments, ticketing flows, and DFS tools tuned for
+      North County and greater San Diego.
+    </p>
 
-      <button id="summonPJ">TAP TO SUMMON PJ</button>
-
-      <div class="version-tag">
-        Build: <strong>V30.0 · Pacific Movie Water Engine (Medium Swell)</strong>
-      </div>
+    <div class="contact">
+      Text / call: <strong>773–544–1231</strong><br />
+      Email: <strong>peter.z@kromeon.com</strong>
     </div>
+
+    <button id="summonPJ">TAP TO SUMMON PJ</button>
+
+    <div class="version-tag">V31.0 · Cardiff Ferrari Ocean Lite</div>
   </div>
+</div>
 
-  <!-- Three.js core + Water + Sky (classic scripts, Vercel-safe) -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/objects/Water.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/objects/Sky.js"></script>
+<!-- Core Three.js only – no example scripts -->
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
 
-  <script>
-    let camera, scene, renderer;
-    let water, sky, sun, pmrem;
-    const DAY_SECONDS = 40; // 40s = one cinematic "day"
+<script>
+let scene, camera, renderer, ocean, clock;
 
-    function init() {
-      const container = document.getElementById("bg3d");
+function createOceanMaterial() {
+  const vertexShader = `
+    uniform float uTime;
 
-      // Scene
-      scene = new THREE.Scene();
+    varying vec3 vWorldPos;
 
-      // Camera
-      camera = new THREE.PerspectiveCamera(
-        55,
-        window.innerWidth / window.innerHeight,
-        1,
-        20000
-      );
-      camera.position.set(0, 45, 140);
-
-      // Renderer
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x020617, 1);
-      renderer.outputEncoding = THREE.sRGBEncoding;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.95;
-      container.appendChild(renderer.domElement);
-
-      // Sun vector
-      sun = new THREE.Vector3();
-
-      // Sky
-      sky = new THREE.Sky();
-      sky.scale.setScalar(10000);
-      scene.add(sky);
-
-      const skyU = sky.material.uniforms;
-      skyU.turbidity.value = 8;
-      skyU.rayleigh.value = 2.2;
-      skyU.mieCoefficient.value = 0.005;
-      skyU.mieDirectionalG.value = 0.85;
-
-      // PMREM for environment lighting
-      pmrem = new THREE.PMREMGenerator(renderer);
-      pmrem.compileEquirectangularShader();
-
-      // Water
-      const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
-
-      const waterNormals = new THREE.TextureLoader().load(
-        "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/waternormals.jpg",
-        function (texture) {
-          texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-        }
-      );
-
-      water = new THREE.Water(waterGeometry, {
-        textureWidth: 1024,
-        textureHeight: 1024,
-        waterNormals: waterNormals,
-        alpha: 1.0,
-        sunDirection: new THREE.Vector3(),
-        sunColor: 0xffffff,
-        waterColor: new THREE.Color("#063055"), // deep movie pacific
-        distortionScale: 5.0, // MEDIUM SWELL (B)
-        fog: false,
-      });
-
-      water.rotation.x = -Math.PI / 2;
-      scene.add(water);
-
-      // Initial sun
-      updateSunFromPhase(0);
-
-      window.addEventListener("resize", onWindowResize);
-
-      // TAP TO SUMMON PJ
-      const btn = document.getElementById("summonPJ");
-      if (btn) {
-        btn.addEventListener("click", () => {
-          setTimeout(() => {
-            window.location.href =
-              "mailto:peter.z@kromeon.com?subject=Summon%20PJ%20%F0%9F%8C%8A";
-          }, 320);
-        });
-      }
-
-      animate();
+    // Wave helpers
+    float wave(vec2 p, float freq, float amp, float speed, vec2 dir) {
+      float phase = dot(p, dir) * freq + uTime * speed;
+      return sin(phase) * amp;
     }
 
-    function updateSun(elevationDeg, azimuthDeg) {
-      const phi = THREE.MathUtils.degToRad(90 - elevationDeg);
-      const theta = THREE.MathUtils.degToRad(azimuthDeg);
-
-      sun.setFromSphericalCoords(1, phi, theta);
-
-      sky.material.uniforms["sunPosition"].value.copy(sun);
-      water.material.uniforms["sunDirection"].value.copy(sun).normalize();
-
-      const renderTarget = pmrem.fromScene(sky);
-      scene.environment = renderTarget.texture;
+    float getWaveHeight(vec2 p) {
+      float h = 0.0;
+      // big slow swells
+      h += wave(p, 0.20, 0.45, 0.6, normalize(vec2(1.0, 0.3)));
+      // cardiff chop
+      h += wave(p, 0.32, 0.26, 0.9, normalize(vec2(-0.7, 0.5)));
+      // small shimmer
+      h += wave(p, 0.55, 0.12, 1.6, normalize(vec2(0.2, 1.0)));
+      return h;
     }
 
-    // t ∈ [0,1] over "day"
-    function updateSunFromPhase(t) {
-      // Golden-hour biased cycle
-      // Morning → golden → high sun → golden → dusk
-      const elevation = 5 + 70 * Math.sin(t * Math.PI); // arc
-      const azimuth = 180 + 140 * t; // swing across horizon
+    void main() {
+      vec3 pos = position;
+      vec2 p = pos.xz * 0.08;
+      pos.y = getWaveHeight(p);
 
-      updateSun(elevation, azimuth);
+      vec4 worldPos = modelMatrix * vec4(pos, 1.0);
+      vWorldPos = worldPos.xyz;
+
+      gl_Position = projectionMatrix * viewMatrix * worldPos;
+    }
+  `;
+
+  const fragmentShader = `
+    uniform float uTime;
+    uniform vec3 uSunDirection;
+    uniform vec3 uCameraPos;
+
+    varying vec3 vWorldPos;
+
+    // Recompute the same wave function for normals
+    float wave(vec2 p, float freq, float amp, float speed, vec2 dir) {
+      float phase = dot(p, dir) * freq + uTime * speed;
+      return sin(phase) * amp;
     }
 
-    function onWindowResize() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+    float getWaveHeight(vec2 p) {
+      float h = 0.0;
+      h += wave(p, 0.20, 0.45, 0.6, normalize(vec2(1.0, 0.3)));
+      h += wave(p, 0.32, 0.26, 0.9, normalize(vec2(-0.7, 0.5)));
+      h += wave(p, 0.55, 0.12, 1.6, normalize(vec2(0.2, 1.0)));
+      return h;
     }
 
-    function animate() {
-      requestAnimationFrame(animate);
+    vec3 getNormal(vec3 worldPos) {
+      float eps = 0.35;
+      vec2 p = worldPos.xz * 0.08;
+      float h = getWaveHeight(p);
+      float hx = getWaveHeight((worldPos.xz + vec2(eps, 0.0)) * 0.08);
+      float hz = getWaveHeight((worldPos.xz + vec2(0.0, eps)) * 0.08);
 
-      const elapsed = performance.now() * 0.001;
-      const phase = ((elapsed % DAY_SECONDS) / DAY_SECONDS);
-
-      // Sun + sky color shift
-      updateSunFromPhase(phase);
-
-      // Ocean time uniform (built-in)
-      if (water && water.material && water.material.uniforms["time"]) {
-        water.material.uniforms["time"].value += 1.0 / 60.0;
-      }
-
-      // Gentle camera drift to feel like a cinematic shot
-      const radius = 18;
-      camera.position.x = Math.sin(elapsed * 0.03) * radius;
-      camera.position.z = 140 + Math.cos(elapsed * 0.025) * 18;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
+      vec3 dx = vec3(eps, hx - h, 0.0);
+      vec3 dz = vec3(0.0, hz - h, eps);
+      return normalize(cross(dz, dx));
     }
 
-    init();
-  </script>
-</body>
-</html>
+    void main() {
+      vec3 sunDir = normalize(uSunDirection);
+      vec3 viewDir = normalize(uCameraPos - vWorldPos);
+
+      // Gradient water color based on distance from camera (near teal, far deep blue)
+      float dist = length(vWorldPos.xz) * 0.015;
+      dist = clamp(dist, 0.0, 1.0);
+
+      vec3 nearColor = vec3(0.20, 0.77, 0.86);  // teal crests
+      vec3 farColor  = vec3(0.01, 0.10, 0.26);  // deep pacific navy
+      vec3 baseColor = mix(nearColor, farColor, dist);
+
+      vec3 normal = getNormal(vWorldPos);
+
+      // Diffuse from soft peach sun
+      float ndotl = max(dot(normal, sunDir), 0.0);
+      vec3 diffuse = baseColor * (0.35 + 0.9 * ndotl);
+
+      // Specular highlight (soft peach)
+      vec3 halfVec = normalize(sunDir + viewDir);
+      float spec = pow(max(dot(normal, halfVec), 0.0), 80.0);
+      vec3 specColor = vec3(1.0, 0.78, 0.55) * spec * 1.7;
+
+      // Fresnel: bright edges at grazing angles
+      float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), 3.0);
+      fresnel *= 0.85;
+      vec3 skyColor = vec3(0.12, 0.30, 0.55);
+      vec3 fresnelColor = skyColor * fresnel;
+
+      // Gentle overall tint to warm things slightly
+      vec3 color = diffuse + specColor + fresnelColor;
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uSunDirection: { value: new THREE.Vector3(-0.6, 0.75, 0.3).normalize() },
+      uCameraPos: { value: new THREE.Vector3() }
+    },
+    vertexShader,
+    fragmentShader
+  });
+}
+
+function init() {
+  const container = document.getElementById("bg3d");
+  clock = new THREE.Clock();
+
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x041529, 14, 90);
+
+  camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    400
+  );
+  camera.position.set(0, 4.6, 22);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x020617, 1);
+  container.appendChild(renderer.domElement);
+
+  // Simple lights, mostly for fog & atmosphere
+  const hemi = new THREE.HemisphereLight(0x8ec5ff, 0x02111f, 0.7);
+  scene.add(hemi);
+
+  const sun = new THREE.DirectionalLight(0xffb36b, 1.1);
+  sun.position.
+
 
 
