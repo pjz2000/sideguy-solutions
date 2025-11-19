@@ -1,288 +1,263 @@
 <!--
   SideGuy Solutions
-  Version: 25.1 · GODWAVE EDITION
-  Timestamp: 2025-02-08 15:47 PST
-  Mode: Cinematic Ocean + Solana Pay + API Mesh + Level-3 Orbs
-  Author: PJ + ChatGPT
+  Version: 25.1-real-ocean-v11
+  Hero: "Where code meets the coastline."
+  Mode: Real Ocean Shader (V11) + Glowing Orbs + Solana Buttons
+  Author: PJ + Kromeon Dev Team (+ ChatGPT)
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
 
-  <!-- SEO + Schema will be finalized in PART 2 -->
-  <meta name="description" content="SideGuy Solutions — Coastal tech concierge for apps, AI, Web3, Solana payments, tickets, and systems. Real operators only — from North County to San Diego." />
-  <link rel="canonical" href="https://sideguysolutions.com/" />
+  <!-- Core SEO -->
+  <meta
+    name="description"
+    content="SideGuy Solutions — coastal tech concierge for San Diego and North County. Custom apps, AI automations, Web3 & Solana payments, and digital systems built with PJ."
+  />
+  <meta
+    name="keywords"
+    content="San Diego app development, Solana payments, AI automations, coastal tech concierge, North County software, PJ SideGuy Solutions"
+  />
 
-  <!-- Solana Colors -->
   <style>
     :root {
+      --bg: #02111f;
+      --ocean-blue: #0a6bff;
       --solana-green: #14f195;
-      --solana-purple: #9945ff;
-      --solana-blue: #00bfff;
-      --bg: #020617;
-      --card: rgba(11, 18, 33, 0.88);
-      --glass: rgba(11, 18, 33, 0.58);
-      --text: #e5f2ff;
-      --soft: #94a3b8;
-      --muted: #64748b;
-      --radius: 18px;
-      --orb-glow: drop-shadow(0 0 25px rgba(20, 241, 149, 0.85));
+      --text: #e6f6ff;
+      --muted: #a7c7dd;
+      --card: rgba(0, 18, 32, 0.65);
+      --orb-glow: rgba(20, 241, 149, 0.45);
     }
 
     body {
       margin: 0;
+      padding: 0;
+      overflow: hidden;
       background: var(--bg);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      overflow-x: hidden;
+      font-family: "Inter", sans-serif;
       color: var(--text);
     }
 
-    /* =======================================================
-       LEVEL-3 ORB BUTTON ENGINE
-       Magnetic Hover + Ripple Pulse + Solana Glow
-    ======================================================= */
+    /* Fullscreen ocean canvas */
+    #ocean {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: radial-gradient(circle at center, #074b8f, #02111f);
+    }
+
+    /* Glowing orb buttons */
     .orb-btn {
-      position: relative;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #020617;
-      background: radial-gradient(circle at 30% 20%, var(--solana-green), var(--solana-purple) 60%);
+      display: inline-block;
+      padding: 16px 32px;
+      margin-top: 16px;
+      border-radius: 40px;
+      background: #00000055;
+      border: 2px solid var(--solana-green);
+      color: var(--solana-green);
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: transform 0.2s ease-out, filter 0.2s ease-out;
-      box-shadow: 0 0 20px rgba(20, 241, 149, 0.75),
-                  0 0 60px rgba(153, 69, 255, 0.55);
-      filter: drop-shadow(0 0 8px rgba(153, 69, 255, 0.9));
-      overflow: hidden;
+      transition: 0.25s ease;
+      box-shadow: 0 0 12px var(--orb-glow);
     }
     .orb-btn:hover {
-      transform: translateY(-3px) scale(1.04);
-      filter: drop-shadow(0 0 30px rgba(20, 241, 149, 1));
-    }
-    .orb-btn:active {
-      transform: scale(0.96);
+      transform: scale(1.06);
+      box-shadow: 0 0 22px var(--solana-green);
     }
 
-    /* Magnetic cursor attraction */
-    .orb-btn-wrap {
-      display: inline-block;
-      perspective: 800px;
-    }
-
-    /* Ripple burst */
-    .orb-btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      opacity: 0;
-      background: rgba(255,255,255,0.4);
-      transform: scale(0.3);
-      transition: transform 0.4s ease-out, opacity 0.45s ease-out;
-      pointer-events: none;
-    }
-    .orb-btn.clicked::after {
-      opacity: 1;
-      transform: scale(2.9);
-    }
-
-    /* Timestamp badge */
-    .timestamp-badge {
+    /* Centered hero content */
+    .hero {
+      position: relative;
+      z-index: 10;
       text-align: center;
-      color: var(--solana-green);
-      font-size: 0.8rem;
-      margin-top: 8px;
-      letter-spacing: 0.15em;
-      opacity: 0.9;
+      margin-top: 14vh;
+      padding: 20px;
     }
 
-    /* =======================================================
-       CINEMATIC OCEAN V2 — BLUE SHIFT
-       (Safe GPU shader from V20 but with colder tones)
-    ======================================================= */
-    #ocean-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(circle at 40% -20%, #0077ff, #020617 70%);
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+      text-shadow: 0px 0px 12px #0af;
     }
 
-    /* Glow fog drift */
-    .ocean-fog {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 60%, rgba(0, 150, 255, 0.12), transparent 60%);
-      animation: fogDrift 18s ease-in-out infinite alternate;
-      pointer-events: none;
-      z-index: -1;
-    }
-    @keyframes fogDrift {
-      0% { transform: translateY(0px) scale(1); }
-      100% { transform: translateY(-40px) scale(1.2); }
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 22px auto;
     }
 
-    /* Mist sparkle particles */
-    .ocean-sparks {
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 3px 3px;
-      opacity: 0.12;
-      animation: sparkShift 12s linear infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-    @keyframes sparkShift {
-      0% { transform: translateX(0px); }
-      100% { transform: translateX(-120px); }
-    }
-
-    /* =======================================================
-       HEADER
-    ======================================================= */
-    header {
-      position: sticky;
-      top: 0;
-      padding: 14px 20px;
-      z-index: 20;
-      background: rgba(2, 6, 23, 0.72);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(20, 241, 149, 0.35);
-    }
-
-    .brand {
-      font-weight: 800;
-      letter-spacing: 0.14em;
+    /* Version & Timestamp */
+    #version {
+      margin-top: 10px;
       font-size: 0.95rem;
       color: var(--solana-green);
-      text-transform: uppercase;
+      text-shadow: 0 0 8px var(--solana-green);
     }
-
-    nav a {
-      color: var(--soft);
-      text-decoration: none;
-      margin: 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.75rem;
-    }
-    nav a:hover {
-      color: var(--solana-green);
-    }
-
   </style>
 </head>
 
 <body>
+  <canvas id="ocean"></canvas>
 
-<!-- =======================================================
-     OCEAN LAYERS
-======================================================= -->
-<canvas id="ocean-canvas"></canvas>
-<div class="ocean-fog"></div>
-<div class="ocean-sparks"></div>
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
-<header>
-  <div style="max-width: 1180px; margin: auto; display: flex; justify-content: space-between; align-items: center;">
-    <div class="brand">SIDEGUY SOLUTIONS</div>
-    <nav>
-      <a href="#apps">Apps</a>
-      <a href="#ai">AI</a>
-      <a href="#web3">Web3</a>
-      <a href="#tickets">Tickets</a>
-      <a href="#dfs">DFS</a>
-      <a href="#intake">Intake</a>
-      <a href="#blog">Blog</a>
-    </nav>
-  </div>
-</header>
-
-<!-- TIMESTAMP -->
-<div class="timestamp-badge">
-  Version 25.1 · Updated Live · 2025-02-08 15:47 PST
-</div>
-
-<!-- =======================================================
-     HERO
-======================================================= -->
-<section class="hero" style="max-width:1180px;margin:auto;padding:60px 20px;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:30px;">
-
-  <!-- TEXT -->
-  <div>
-    <h1 style="font-size:3rem;font-weight:900;line-height:1.05;margin-bottom:14px;">
-      Where <span style="background:linear-gradient(to right,var(--solana-purple),var(--solana-green));-webkit-background-clip:text;color:transparent;">San Diego</span> codes, scales & builds.
-    </h1>
-
-    <p style="color:var(--soft);font-size:1rem;line-height:1.6;margin-bottom:20px;">
-      Coastal concierge tech for the 2025 era — <strong>apps</strong>,
-      <strong>AI automation</strong>, <strong>Web3 & Solana payments</strong>,
-      <strong>ticketing</strong>, and <strong>DFS systems</strong> built from North County.
-    </p>
-
-    <p style="color:var(--muted);margin-bottom:18px;">
-      Text / Call: <a href="tel:+17735441231" style="color:var(--solana-green);font-weight:700;">773-544-1231</a><br>
-      Email: <a href="mailto:peter.z@kromeon.com" style="color:var(--solana-green);">peter.z@kromeon.com</a>
-    </p>
-
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <div class="orb-btn-wrap">
-        <button id="summonPJ" class="orb-btn">Summon PJ</button>
-      </div>
-
-      <div class="orb-btn-wrap">
-        <button id="solanaPayOpen" class="orb-btn" style="background:linear-gradient(135deg,var(--solana-green),var(--solana-blue));">Solana Pay</button>
-      </div>
+  <div class="hero">
+    <div class="hero-title">SideGuy Solutions</div>
+    <div class="hero-sub">
+      Where code meets the coastline.<br />
+      San Diego Coastal Tech Concierge — AI, Web3, Apps & Real-Time Systems.
     </div>
+
+    <a href="tel:+17735441234" class="orb-btn">
+      Call PJ Direct — 773-544-1234
+    </a>
+
+    <div id="version"></div>
   </div>
+  <!-- Three.js Core -->
+  <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
 
-  <!-- ORB -->
-  <div style="text-align:center;">
-    <div style="width:240px;height:240px;border-radius:50%;margin:auto;
-         background:radial-gradient(circle at 30% 20%,var(--solana-purple),var(--solana-green));
-         box-shadow:0 0 40px rgba(20,241,149,0.9),0 0 120px rgba(153,69,255,0.7);
-         animation:orbPulse 3s ease-in-out infinite;
-         filter:var(--orb-glow);">
-    </div>
-    <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);letter-spacing:0.15em;">
-      Coastal Portal • Online
-    </div>
-  </div>
+  <script>
+    let scene, camera, renderer, oceanMesh, uniforms;
 
-</section>
+    function initOcean() {
+      scene = new THREE.Scene();
 
-<script>
-/* Level-3 Orb Ripple */
-document.querySelectorAll(".orb-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    btn.classList.add("clicked");
-    setTimeout(() => btn.classList.remove("clicked"), 500);
-  });
-});
+      camera = new THREE.PerspectiveCamera(
+        55,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 1.3, 3.2);
 
-/* Magnetic Orb Hover */
-document.querySelectorAll(".orb-btn-wrap").forEach(wrap => {
-  const btn = wrap.querySelector(".orb-btn");
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width/2;
-    const y = e.clientY - rect.top - rect.height/2;
-    btn.style.transform = `translate(${x*0.08}px, ${y*0.08}px) scale(1.05)`;
-  });
-  wrap.addEventListener("mouseleave", () => {
-    btn.style.transform = "translate(0px,0px)";
-  });
-});
-</script>
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x02111f, 1);
+      document.getElementById("ocean").replaceWith(renderer.domElement);
+
+      /* ---------- REAL OCEAN SHADER (V11) ---------- */
+      uniforms = {
+        uTime: { value: 0.0 },
+        uWaveAmp: { value: 0.18 },
+        uBlue: { value: new THREE.Color("#0a6bff") },
+        uDeep: { value: new THREE.Color("#02111f") }
+      };
+
+      const oceanGeo = new THREE.PlaneGeometry(20, 20, 256, 256);
+
+      const oceanMat = new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader: `
+          uniform float uTime;
+          uniform float uWaveAmp;
+
+          void main() {
+            vec3 pos = position;
+
+            float wave1 = sin(pos.x * 2.2 + uTime * 1.1) * uWaveAmp;
+            float wave2 = sin(pos.y * 1.6 + uTime * 0.9) * (uWaveAmp * 0.7);
+            float wave3 = sin((pos.x + pos.y) * 1.0 + uTime * 1.4) * (uWaveAmp * 0.5);
+
+            pos.z += (wave1 + wave2 + wave3);
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 uBlue;
+          uniform vec3 uDeep;
+          uniform float uTime;
+
+          void main() {
+            float pulse = sin(uTime * 0.4) * 0.15;
+            vec3 color = mix(uDeep, uBlue, 0.55 + pulse);
+            gl_FragColor = vec4(color, 1.0);
+          }
+        `,
+        wireframe: false
+      });
+
+      oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
+      oceanMesh.rotation.x = -Math.PI / 2;
+      scene.add(oceanMesh);
+
+      animate();
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      uniforms.uTime.value += 0.016;
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+    <script>
+    /* ------------------------------
+        VERSION + TIMESTAMP
+    ------------------------------ */
+    function updateVersionStamp() {
+      const now = new Date();
+
+      const stamp =
+        "v25.1 • " +
+        now.toLocaleDateString() +
+        " • " +
+        now.toLocaleTimeString();
+
+      document.getElementById("version").textContent = stamp;
+    }
+
+    /* ------------------------------
+        ORB INTERACTION EFFECTS
+    ------------------------------ */
+    document.addEventListener("DOMContentLoaded", () => {
+      updateVersionStamp();
+
+      // Initialize ocean after slight delay for stability
+      setTimeout(initOcean, 120);
+    });
+
+    // Button pulse effect
+    document.querySelectorAll(".orb-btn").forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        btn.style.boxShadow = "0 0 26px var(--solana-green)";
+      });
+      btn.addEventListener("mouseleave", () => {
+        btn.style.boxShadow = "0 0 12px var(--orb-glow)";
+      });
+    });
+  </script>
+  <!-- Footer -->
+  <footer style="
+    position: fixed;
+    bottom: 18px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-shadow: 0 0 6px #000;
+  ">
+    SideGuy Solutions · San Diego Coastal Tech Concierge · © 2025
+  </footer>
+
+</body>
+</html>
