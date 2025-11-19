@@ -1,3 +1,9 @@
+<!--
+  SideGuy Solutions
+  Version: 25.1 — 2025-11-19 14:00 PST
+  Mode: Cinematic Ocean + Solana Pay + Tide + X + Audio
+  Author: PJ + ChatGPT
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +78,7 @@
         radial-gradient(circle at 80% -20%, rgba(20, 241, 149, 0.25), transparent 60%),
         radial-gradient(circle at 50% 110%, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 1));
       mix-blend-mode: screen;
-      opacity: 0.9;
+      opacity: 0.95;
     }
 
     .ocean-fog {
@@ -83,7 +89,7 @@
       background:
         radial-gradient(circle at 50% 120%, rgba(15, 23, 42, 0.95), transparent 55%),
         radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.5), transparent 60%);
-      opacity: 0.8;
+      opacity: 0.85;
       animation: fogDrift 42s linear infinite;
     }
 
@@ -92,7 +98,7 @@
         transform: translate3d(-8%, 4%, 0) scale(1.03);
       }
       50% {
-        transform: translate3d(6%, -4%, 0) scale(1.06);
+        transform: translate3d(6%, -4%, 0) scale(1.07);
       }
       100% {
         transform: translate3d(-8%, 4%, 0) scale(1.03);
@@ -125,13 +131,13 @@
         opacity: 0;
       }
       10% {
-        opacity: 0.7;
+        opacity: 0.8;
       }
       70% {
         opacity: 0.5;
       }
       100% {
-        transform: translate3d(0, -160px, 0);
+        transform: translate3d(10px, -180px, 0);
         opacity: 0;
       }
     }
@@ -181,9 +187,16 @@
     }
 
     .brand-name {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 800;
       letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .brand-version {
+      font-size: 0.7rem;
+      color: var(--soft);
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
@@ -270,6 +283,17 @@
       color: var(--muted);
     }
 
+    .hero-contact {
+      margin-top: 6px;
+      font-size: 0.86rem;
+      color: var(--soft);
+    }
+
+    .hero-contact a {
+      color: #a5f3fc;
+      text-decoration: underline;
+    }
+
     .cta-row {
       display: flex;
       flex-wrap: wrap;
@@ -297,7 +321,7 @@
     }
 
     .cta-primary {
-      background: linear-gradient(120deg, var(--sol-a), var(--sol-b));
+      background: linear-gradient(120deg, var(--sol-b), var(--sol-a));
       color: #020617;
       box-shadow:
         0 0 0 1px rgba(15, 23, 42, 0.85),
@@ -331,8 +355,8 @@
     }
 
     .cta-secondary {
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(20, 241, 149, 0.7);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--text);
     }
 
@@ -593,21 +617,115 @@
       font-size: 0.8rem;
       color: var(--muted);
     }
+
+    /* ============================
+       FLOATING UI: TIDE, AUDIO, X
+    ============================ */
+    .tide-widget {
+      position: fixed;
+      left: 16px;
+      bottom: 18px;
+      z-index: 40;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.72rem;
+      color: var(--soft);
+      backdrop-filter: blur(12px);
+      max-width: 220px;
+    }
+
+    .tide-widget strong {
+      color: #a5f3fc;
+    }
+
+    .audio-toggle {
+      position: fixed;
+      right: 16px;
+      bottom: 64px;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(20, 241, 149, 0.7);
+      color: #e0f2fe;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .audio-toggle span {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .x-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      z-index: 40;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, #e5f2ff, #020617 60%);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e5f2ff;
+      cursor: pointer;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(20, 241, 149, 0.6);
+    }
+
+    .x-fab span {
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
-  <!-- Cinema ocean stack -->
+  <!-- Ocean layers -->
   <canvas id="ocean-canvas"></canvas>
   <div class="ocean-overlay"></div>
   <div class="ocean-fog"></div>
   <div id="particle-layer"></div>
+
+  <!-- Tide widget (visual only) -->
+  <div class="tide-widget">
+    Tide phase (visual only): <strong id="tide-label">Calibrating…</strong>
+  </div>
+
+  <!-- Audio toggle -->
+  <button id="audio-toggle" class="audio-toggle">
+    🌊 <span>Ocean Audio</span>
+  </button>
+
+  <!-- X / Twitter FAB -->
+  <div class="x-fab" onclick="openXProfile()">
+    <span>X</span>
+  </div>
+
+  <!-- Audio element (add ocean.mp3 at site root to enable sound) -->
+  <audio id="ocean-audio" loop>
+    <!-- <source src="ocean.mp3" type="audio/mpeg" /> -->
+  </audio>
 
   <!-- NAV -->
   <header>
     <div class="nav-inner">
       <div class="brand">
         <div class="brand-pill"></div>
-        <div class="brand-name">SideGuy Solutions</div>
+        <div>
+          <div class="brand-name">SideGuy Solutions</div>
+          <div class="brand-version">v25.1 · Cinematic Ocean</div>
+        </div>
       </div>
       <nav class="links">
         <a href="#apps">Apps</a>
@@ -626,11 +744,14 @@
     <h1 class="hero-title">Where <span>San Diego</span> builds, codes, and scales.</h1>
     <p class="hero-sub">
       Coastal tech concierge for San Diego &amp; North County — <strong>custom apps</strong>,
-      <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>, 
+      <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>,
       <strong>402 Internet Payments</strong>, ticketing flows, and DFS tools.
     </p>
     <div class="hero-meta">
       Based in Solana Beach · Built for operators, not tech bros.
+    </div>
+    <div class="hero-contact">
+      Text / call: <a href="tel:+17735441231">(773) 544-1231</a>
     </div>
 
     <div class="cta-row">
@@ -836,6 +957,42 @@
       </div>
     </section>
 
+    <!-- SOCIAL / X -->
+    <section id="social" class="section reveal">
+      <div class="section-title">Coastal Dispatches · X / Twitter</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">@sideguysolutions on X</h2>
+          <p class="section-lead">
+            Live build logs, ticket trenches, DFS experiments, and coastal dispatches in real time.
+            Follow along if you like seeing projects in the wild, not just polished decks.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Latest from the feed</h3>
+          <p class="card-small">
+            Real-time posts pull from <strong>@sideguysolutions</strong> on X — builds, experiments,
+            and thoughts from the coastal portal.
+          </p>
+          <a
+            href="https://x.com/sideguysolutions"
+            target="_blank"
+            rel="noreferrer"
+            class="cta-secondary"
+            style="
+              margin-top: 10px;
+              text-decoration: none;
+              justify-content: center;
+              display: inline-flex;
+              width: 100%;
+            "
+          >
+            Open X Profile
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- INTAKE -->
     <section id="intake" class="section reveal">
       <div class="section-title">Start a Project</div>
@@ -907,7 +1064,9 @@
 
   <!-- FOOTER -->
   <footer>
-    SideGuy Solutions · Solana Beach · 2025 · Tap the portal if you know what’s good for you.
+    SideGuy Solutions · Solana Beach · 2025 · v25.1 Aladéen Coastal · Text / call
+    <a href="tel:+17735441231" style="color:#a5f3fc;text-decoration:underline;">(773) 544-1231</a> ·
+    Follow <a href="https://x.com/sideguysolutions" target="_blank" rel="noreferrer" style="color:#a5f3fc;text-decoration:underline;">@sideguysolutions</a> on X.
   </footer>
 
   <!-- SOLANA PAY MODAL -->
@@ -943,16 +1102,17 @@
   <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
 
   <script>
-    // ==============================
     // Smooth scroll helper
-    // ==============================
     function scrollToSection(id) {
       const target = document.getElementById(id);
       if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // Summon PJ (email draft)
+    // Summon PJ (email draft + vibration)
     function summonPJ() {
+      if (navigator && "vibrate" in navigator) {
+        navigator.vibrate([15, 35, 20]);
+      }
       const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
       const body = encodeURIComponent(
         "Hey PJ,\n\nI just tapped the coastal portal on SideGuySolutions.com.\n\n" +
@@ -969,9 +1129,12 @@
       window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
     }
 
-    // ==============================
+    // Open X profile
+    function openXProfile() {
+      window.open("https://x.com/sideguysolutions", "_blank", "noreferrer");
+    }
+
     // Scroll reveal
-    // ==============================
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -986,9 +1149,7 @@
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-    // ==============================
-    // Ocean via THREE.js (safe)
-    // ==============================
+    // Ocean via THREE.js (safe but more alive)
     (function initOcean() {
       const canvas = document.getElementById("ocean-canvas");
       if (!canvas || !window.THREE) return;
@@ -1008,23 +1169,23 @@
         0.1,
         80
       );
-      camera.position.set(0, 1.6, 5);
+      camera.position.set(0, 1.6, 5.2);
 
-      const geo = new THREE.PlaneGeometry(20, 20, 160, 160);
+      const geo = new THREE.PlaneGeometry(24, 24, 200, 200);
       const mat = new THREE.MeshStandardMaterial({
         color: 0x0ea5e9,
-        roughness: 0.4,
-        metalness: 0.25,
+        roughness: 0.35,
+        metalness: 0.28,
         transparent: true,
-        opacity: 0.9
+        opacity: 0.95
       });
       const ocean = new THREE.Mesh(geo, mat);
       ocean.rotation.x = -Math.PI / 2;
-      ocean.position.y = -1.2;
+      ocean.position.y = -1.25;
       scene.add(ocean);
 
       scene.add(new THREE.AmbientLight(0xffffff, 0.9));
-      const light = new THREE.DirectionalLight(0xaadfff, 0.9);
+      const light = new THREE.DirectionalLight(0xaadfff, 0.95);
       light.position.set(6, 12, 4);
       scene.add(light);
 
@@ -1035,19 +1196,26 @@
         const t = clock.getElapsedTime();
         const pos = ocean.geometry.attributes.position;
 
+        // Animate vertices for waves
         for (let i = 0; i < pos.count; i++) {
           const x = pos.getX(i);
           const y = pos.getY(i);
           const wave =
-            Math.sin(x * 1.15 + t * 1.2) * 0.16 +
-            Math.cos(y * 1.05 + t * 0.85) * 0.14 +
-            Math.sin((x + y) * 0.4 + t * 0.6) * 0.07;
+            Math.sin(x * 1.15 + t * 1.2) * 0.22 +
+            Math.cos(y * 1.05 + t * 0.9) * 0.2 +
+            Math.sin((x + y) * 0.45 + t * 0.65) * 0.11;
           pos.setZ(i, wave);
         }
         pos.needsUpdate = true;
 
-        camera.position.x = Math.sin(t * 0.1) * 0.55;
-        camera.position.z = 5 + Math.cos(t * 0.07) * 0.35;
+        // Ambient light breathing
+        const breath = 0.85 + 0.15 * Math.sin(t * 0.25);
+        light.intensity = 0.8 + 0.2 * breath;
+
+        // Camera sway
+        camera.position.x = Math.sin(t * 0.11) * 0.9;
+        camera.position.z = 5.2 + Math.cos(t * 0.08) * 0.55;
+        camera.position.y = 1.6 + Math.sin(t * 0.06) * 0.15;
         camera.lookAt(0, 0, 0);
 
         renderer.render(scene, camera);
@@ -1062,22 +1230,20 @@
       });
     })();
 
-    // ==============================
-    // Particles
-    // ==============================
+    // Particles (more alive)
     (function initParticles() {
       const layer = document.getElementById("particle-layer");
       if (!layer) return;
 
-      const count = 40;
+      const count = 70;
       for (let i = 0; i < count; i++) {
         const p = document.createElement("div");
         p.className = "particle";
         const left = Math.random() * 100;
         const top = Math.random() * 100;
-        const duration = 18 + Math.random() * 16;
-        const delay = Math.random() * 20;
-        const scale = 0.6 + Math.random() * 1.4;
+        const duration = 18 + Math.random() * 22;
+        const delay = Math.random() * 24;
+        const scale = 0.6 + Math.random() * 1.6;
 
         p.style.left = left + "%";
         p.style.top = top + "%";
@@ -1089,12 +1255,37 @@
       }
     })();
 
-    // ==============================
-    // Solana Pay modal + QR
-    // ==============================
+    // Tide widget (visual only, not real tide data)
+    (function initTideWidget() {
+      const label = document.getElementById("tide-label");
+      if (!label) return;
+
+      function updateTide() {
+        const now = new Date();
+        const cycleMs = 12.4 * 60 * 60 * 1000; // ~12.4h cycle
+        const phase = (now.getTime() % cycleMs) / cycleMs;
+
+        let text = "Rising";
+        if (phase < 0.25) text = "Rising";
+        else if (phase < 0.5) text = "High";
+        else if (phase < 0.75) text = "Falling";
+        else text = "Low";
+
+        label.textContent = text;
+      }
+
+      updateTide();
+      setInterval(updateTide, 60 * 1000);
+    })();
+
+    // Solana Pay modal + QR (with vibration)
     let solanaQR = null;
 
     function openSolanaPayModal() {
+      if (navigator && "vibrate" in navigator) {
+        navigator.vibrate([10, 25, 10]);
+      }
+
       const modal = document.getElementById("solana-modal");
       const target = document.getElementById("solana-pay-qr");
       if (!modal || !target || !window.SolanaPay || !window.QRCodeStyling) {
@@ -1102,14 +1293,13 @@
         return;
       }
 
-      // Clear any existing QR
       target.innerHTML = "";
 
       try {
         const recipient = new SolanaPay.PublicKey(
           "9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5"
         );
-        const amount = null; // any amount
+        const amount = null;
         const label = "SideGuy Solutions";
         const message = "Thanks for the support 🏄‍♂️";
 
@@ -1146,9 +1336,7 @@
       if (modal) modal.style.display = "none";
     }
 
-    // ==============================
     // Intake → email draft
-    // ==============================
     const intakeForm = document.getElementById("intake-form");
     if (intakeForm) {
       intakeForm.addEventListener("submit", function (e) {
@@ -1180,6 +1368,40 @@
         window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
       });
     }
+
+    // Audio toggle
+    (function initAudio() {
+      const btn = document.getElementById("audio-toggle");
+      const audio = document.getElementById("ocean-audio");
+      if (!btn || !audio) return;
+
+      let active = false;
+
+      function updateLabel() {
+        btn.querySelector("span").textContent = active ? "Audio On" : "Ocean Audio";
+      }
+
+      btn.addEventListener("click", async () => {
+        try {
+          if (!audio.src) {
+            alert("Add an ocean.mp3 file at the site root to enable sound.");
+            return;
+          }
+          if (!active) {
+            await audio.play();
+            active = true;
+          } else {
+            audio.pause();
+            active = false;
+          }
+          updateLabel();
+        } catch (err) {
+          console.warn("Audio issue:", err);
+        }
+      });
+
+      updateLabel();
+    })();
   </script>
 </body>
 </html>
