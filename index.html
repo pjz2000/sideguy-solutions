@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,17 +11,17 @@
 
   <meta
     name="description"
-    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Solana & 402 payments, and ticketing systems for venues and operators in North County."
+    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Solana & 402 internet payments, and ticketing systems for venues and operators in North County."
   />
 
   <meta
     name="keywords"
-    content="San Diego software development, North County app developer, AI automation San Diego, Solana payments San Diego, ticketing systems for venues, coastal tech concierge"
+    content="San Diego software development, North County app developer, AI automation San Diego, Solana payments San Diego, 402 internet payments, ticketing systems for venues, coastal tech concierge"
   />
 
   <!-- Open Graph -->
   <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Custom apps, AI automation, Solana payments & ticketing systems for real operators in San Diego & North County." />
+  <meta property="og:description" content="Custom apps, AI automation, Solana & 402 internet payments, and ticketing systems for real operators in San Diego & North County." />
   <meta property="og:url" content="https://www.sideguysolutions.com/" />
   <meta property="og:type" content="website" />
 
@@ -32,7 +31,6 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "SideGuy Solutions",
-    "image": "https://www.sideguysolutions.com/logo.png",
     "description": "SideGuy Solutions is a San Diego coastal tech concierge specializing in custom apps, AI automation, Solana payments, 402 internet payments, and ticketing systems for venues and operators in North County.",
     "url": "https://www.sideguysolutions.com/",
     "telephone": "+1-773-544-1231",
@@ -82,11 +80,19 @@
       scroll-behavior: smooth;
     }
 
-    /* OCEAN VIBES */
+    /* =============== OCEAN CANVAS BACKGROUND =============== */
+    #ocean-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+      display: block;
+    }
+
+    /* OCEAN VIBES OVERLAY */
     .ocean-hero {
       position: relative;
-      background:
-        radial-gradient(circle at top, #38bdf8 0%, #0f172a 48%, #020617 100%);
       color: white;
     }
     .ocean-hero::before {
@@ -95,7 +101,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 10% 0%, rgba(255,255,255,0.18), transparent 55%),
+        radial-gradient(circle at 10% 0%, rgba(255,255,255,0.16), transparent 55%),
         radial-gradient(circle at 80% 120%, rgba(56,189,248,0.25), transparent 60%);
       opacity: 0.55;
       mix-blend-mode: screen;
@@ -137,63 +143,119 @@
       font-size: 0.75rem;
     }
 
-    /* Mobile nav animation safety */
+    /* Solana gradient text (for OCEAN TECH GUIDE) */
+    .solana-text {
+      background: linear-gradient(120deg, #14f195, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* ALAD€€N MODE++ ORBS */
+    .solana-orb-btn {
+      position: relative;
+      overflow: hidden;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 10% 0%, #14f195, #38bdf8 35%, #0f172a 100%);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.8),
+        0 0 40px rgba(56, 189, 248, 0.9),
+        0 0 90px rgba(148, 163, 255, 0.8);
+    }
+    .solana-orb-btn::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.5), transparent 50%),
+        radial-gradient(circle at 80% 100%, rgba(20,241,149,0.5), transparent 55%);
+      opacity: 0.35;
+      mix-blend-mode: screen;
+      animation: orbSweep 4.4s ease-in-out infinite;
+    }
+    .solana-orb-btn span {
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes orbSweep {
+      0% { transform: translate3d(-10%, -10%, 0) rotate(0deg); }
+      50% { transform: translate3d(10%, 10%, 0) rotate(8deg); }
+      100% { transform: translate3d(-15%, 5%, 0) rotate(-6deg); }
+    }
+
+    /* Timestamp badge */
+    .version-badge {
+      background: rgba(15,23,42,0.9);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Modal base */
+    .sg-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15,23,42,0.85);
+      backdrop-filter: blur(14px);
+      z-index: 50;
+    }
+    .sg-modal {
+      max-width: 480px;
+      width: 90%;
+      background: #020617;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(56,189,248,0.4);
+      box-shadow: 0 0 40px rgba(15,23,42,0.9);
+      padding: 1.75rem;
+      color: #e5e7eb;
+    }
+
+    /* Mobile nav safety */
     [x-cloak] { display: none !important; }
   </style>
 
-  <!-- Google Analytics (optional – fill ID and uncomment) -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXX');
-  </script>
-  -->
-
-  <!-- Microsoft Clarity (optional – fill ID and uncomment) -->
-  <!--
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "CLARITY_ID");
-  </script>
-  -->
 </head>
 
-<body class="bg-white text-black">
+<body class="bg-slate-950 text-black">
 
-  <!-- NAV (Hybrid C) -->
-  <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur border-b border-slate-200 z-50">
+  <!-- Fullscreen Ocean Canvas (real-time 2D waves, safe everywhere) -->
+  <canvas id="ocean-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 bg-slate-950/85 backdrop-blur border-b border-slate-800/80 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-      <a href="/" class="text-2xl font-black tracking-tight">
-        SideGuy <span class="text-sky-500">Solutions</span>
+      <a href="#top" class="text-2xl font-black tracking-tight text-slate-50">
+        SideGuy <span class="text-sky-400">Solutions</span>
       </a>
 
       <!-- Desktop nav -->
-      <div class="hidden md:flex items-center gap-6 text-[15px] font-semibold">
-        <a href="/san-diego-app-development" class="hover:text-sky-600">Apps</a>
-        <a href="/san-diego-ai-automation" class="hover:text-sky-600">AI</a>
-        <a href="/san-diego-solana-payments" class="hover:text-sky-600">Solana</a>
-        <a href="/venue-ticketing-systems" class="hover:text-sky-600">Ticketing</a>
-        <a href="/north-county-software-development" class="hover:text-sky-600">North County</a>
-        <a href="/pricing" class="hover:text-sky-600">Pricing</a>
-        <a href="/blog" class="hover:text-sky-600">Blog</a>
+      <div class="hidden md:flex items-center gap-6 text-[15px] font-semibold text-slate-200">
+        <a href="#apps" class="hover:text-sky-300">Apps</a>
+        <a href="#ai" class="hover:text-sky-300">AI</a>
+        <a href="#solana" class="hover:text-sky-300">Solana &amp; 402</a>
+        <a href="#ticketing" class="hover:text-sky-300">Ticketing</a>
+        <a href="#north-county" class="hover:text-sky-300">North County</a>
+        <a href="#pricing" class="hover:text-sky-300">Pricing</a>
+        <a href="#blog-excerpt" class="hover:text-sky-300">Blog</a>
         <a
           href="tel:7735441231"
-          class="ocean-pill text-black px-5 py-2 rounded-full text-sm font-bold hover:brightness-110 transition"
+          class="ocean-pill text-black px-5 py-2 rounded-full text-sm font-bold hover:brightness-110 transition flex items-center gap-1"
         >
-          Text PJ → 773-544-1231
+          <span>Text PJ → 773-544-1231</span>
         </a>
       </div>
 
       <!-- Mobile toggle -->
       <button
         id="mobile-menu-toggle"
-        class="md:hidden inline-flex items-center justify-center p-2 rounded hover:bg-slate-100"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded hover:bg-slate-800 text-slate-100"
         aria-label="Toggle navigation"
       >
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,18 +279,18 @@
     </div>
 
     <!-- Mobile nav -->
-    <div id="mobile-menu" class="md:hidden hidden border-t bg-white">
-      <div class="px-4 pt-3 pb-4 space-y-2 text-[15px] font-semibold">
-        <a href="/san-diego-app-development" class="block py-1">Apps</a>
-        <a href="/san-diego-ai-automation" class="block py-1">AI</a>
-        <a href="/san-diego-solana-payments" class="block py-1">Solana</a>
-        <a href="/venue-ticketing-systems" class="block py-1">Ticketing</a>
-        <a href="/north-county-software-development" class="block py-1">North County</a>
-        <a href="/pricing" class="block py-1">Pricing</a>
-        <a href="/blog" class="block py-1">Blog</a>
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-800 bg-slate-950">
+      <div class="px-4 pt-3 pb-4 space-y-2 text-[15px] font-semibold text-slate-100">
+        <a href="#apps" class="block py-1">Apps</a>
+        <a href="#ai" class="block py-1">AI</a>
+        <a href="#solana" class="block py-1">Solana &amp; 402</a>
+        <a href="#ticketing" class="block py-1">Ticketing</a>
+        <a href="#north-county" class="block py-1">North County</a>
+        <a href="#pricing" class="block py-1">Pricing</a>
+        <a href="#blog-excerpt" class="block py-1">Blog</a>
         <a
           href="tel:7735441231"
-          class="mt-2 inline-flex w-full justify-center bg-black text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-900"
+          class="mt-2 inline-flex w-full justify-center bg-sky-400 text-black px-4 py-2 rounded-full text-sm font-bold hover:bg-sky-300"
         >
           Text PJ → 773-544-1231
         </a>
@@ -237,295 +299,477 @@
   </nav>
 
   <!-- HERO with ocean vibes -->
-  <section class="ocean-hero pt-28 pb-20 px-6">
-    <div class="ocean-hero-inner max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="uppercase tracking-[0.22em] text-[11px] text-sky-100 mb-3">
-          San Diego • North County • Coastal Operators
-        </p>
-        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-4 drop-shadow-xl">
-          Where code<br class="hidden md:block" />
-          meets the coastline.
-        </h1>
-        <p class="text-lg md:text-2xl text-sky-100/90 mb-6">
-          SideGuy Solutions is your
-          <span class="font-semibold">coastal tech concierge</span> — building custom apps, AI automation,
-          Solana &amp; 402 payments, and ticketing systems for venues, brands, and operators from
-          <span class="font-semibold">San Diego to North County</span>.
-        </p>
+  <main id="top">
+    <section class="ocean-hero pt-28 pb-20 px-6">
+      <div class="ocean-hero-inner max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="flex flex-wrap items-center gap-3 mb-4">
+            <p class="uppercase tracking-[0.22em] text-[11px] text-sky-100">
+              San Diego • North County • Coastal Operators
+            </p>
+            <span class="version-badge">
+              <span class="text-sky-300 font-semibold">v26.1</span>
+              <span class="hidden sm:inline">Ocean Max LITE · Solana</span>
+            </span>
+          </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+          <h1 class="text-4xl md:text-6xl font-black leading-tight mb-4 drop-shadow-xl">
+            Where code<br class="hidden md:block" />
+            meets the coastline.
+          </h1>
+
+          <p class="text-lg md:text-2xl text-sky-100/90 mb-4">
+            SideGuy Solutions is your
+            <span class="font-semibold">coastal tech concierge</span> — custom apps, AI automation,
+            <span class="font-semibold">Solana &amp; 402 internet payments</span>, and ticketing systems for venues,
+            brands, and operators from <span class="font-semibold">San Diego to North County</span>.
+          </p>
+
+          <p class="text-xs text-sky-100/80 mb-4">
+            Last updated: <span id="sg-timestamp">Nov 19, 2025 · 2:00 PM PT</span>
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 mb-4">
+            <a
+              href="https://forms.sideguysolutions.com/intake"
+              class="solana-orb-btn px-8 py-4 rounded-full text-lg font-bold text-black flex items-center justify-center hover:brightness-110 transition"
+            >
+              <span>Project Intake (60 sec)</span>
+            </a>
+            <button
+              type="button"
+              id="orb-summon-btn"
+              class="border border-sky-100/70 text-sky-50 px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center hover:bg-sky-50/10 transition"
+            >
+              Tap to Summon PJ
+            </button>
+          </div>
+
+          <div class="flex flex-wrap gap-2 text-xs text-sky-100/80">
+            <span class="ocean-tag border border-sky-200/40">San Diego software</span>
+            <span class="ocean-tag border border-sky-200/40">North County apps</span>
+            <span class="ocean-tag border border-sky-200/40">Solana &amp; 402 payments</span>
+            <span class="ocean-tag border border-sky-200/40">Ticketing for venues</span>
+          </div>
+
+          <p class="mt-4 text-xs text-sky-100/70">
+            Encinitas • Solana Beach • Carlsbad • Del Mar • Oceanside
+          </p>
+        </div>
+
+        <!-- Right side: “Ocean Tech Guide” card -->
+        <div class="relative">
+          <div class="rounded-3xl bg-slate-900/80 border border-sky-400/50 shadow-2xl p-6 md:p-7 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.18em] text-sky-300 mb-3">
+              <span class="solana-text font-bold">Ocean Tech Guide</span> · 2025
+            </p>
+            <h2 class="text-xl md:text-2xl font-bold text-sky-50 mb-3">
+              Built for operators, not just “startups.”
+            </h2>
+            <p class="text-sm text-sky-100/90 mb-4">
+              Venues, bars, agencies, service businesses, and founders who need
+              <span class="font-semibold">systems that match how their world actually works</span> — not a vague SaaS template.
+            </p>
+            <ul class="space-y-2 text-sm text-sky-100/90 mb-4">
+              <li>• Apps and portals that feel like an extension of your roster</li>
+              <li>• AI flows that quietly handle lead routing and follow-up</li>
+              <li>• <span class="font-semibold">Solana &amp; 402 internet payments</span> that stop bleeding processing fees</li>
+              <li>• Ticketing &amp; DFS tools tuned for people who live on slates and lineups</li>
+            </ul>
+            <p class="text-xs text-sky-200/80">
+              You don’t need a 20-slide deck. You need a SideGuy you can text.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ocean wave divider -->
+      <div class="ocean-divider mt-10">
+        <svg preserveAspectRatio="none" viewBox="0 0 1200 120">
+          <path
+            d="M0,0 C300,90 900,-60 1200,20 L1200,120 L0,120 Z"
+            fill="#f9fafb"
+          />
+        </svg>
+      </div>
+    </section>
+
+    <!-- CORE SERVICE LANES -->
+    <section id="apps" class="py-16 px-6 bg-slate-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-black text-center mb-10">What SideGuy actually does</h2>
+        <div class="grid md:grid-cols-4 gap-6 text-sm md:text-base text-slate-800">
+
+          <a href="#apps-detail" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="text-lg font-bold mb-1">Apps</h3>
+            <p>Custom web &amp; mobile apps for customers and internal teams.</p>
+            <p class="mt-3 text-xs text-slate-500">San Diego app development • internal tools • portals</p>
+          </a>
+
+          <a href="#ai" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="text-lg font-bold mb-1">AI Automation</h3>
+            <p>Lead routing, intake flows, internal assistants that remove busywork.</p>
+            <p class="mt-3 text-xs text-slate-500">AI for small businesses • ops automation</p>
+          </a>
+
+          <a href="#solana" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="text-lg font-bold mb-1">Solana &amp; 402</h3>
+            <p>USDC deposits, Solana Pay, and 402 internet-native payment flows.</p>
+            <p class="mt-3 text-xs text-slate-500">Stablecoins • Solana rails • 402 experiments</p>
+          </a>
+
+          <a href="#ticketing" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="text-lg font-bold mb-1">Ticketing</h3>
+            <p>Hybrid ticketing &amp; VIP systems for venues, bars, and live rooms.</p>
+            <p class="mt-3 text-xs text-slate-500">North County venues • live rooms • promoters</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NORTH COUNTY + OPERATOR BRAIN -->
+    <section id="north-county" class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl font-black mb-4">North County roots. Operator brain.</h2>
+          <p class="text-lg text-slate-700 mb-4">
+            If your life lives between <strong>Solana Beach, Encinitas, Carlsbad, and Del Mar</strong>,
+            your tech should feel like it grew up here too.
+          </p>
+          <p class="text-base text-slate-700 mb-4">
+            SideGuy is built for GMs, owners, and founders who juggle:
+          </p>
+          <ul class="space-y-2 text-slate-700 text-sm md:text-base">
+            <li>• Shows, tables, tickets, and headcounts</li>
+            <li>• Clients, retainers, and invoices</li>
+            <li>• Staff, shifts, and repeat regulars</li>
+            <li>• Wild ideas that don’t fit in a standard SaaS box</li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl bg-slate-900 text-slate-50 p-7 shadow-2xl border border-sky-400/40">
+          <h3 class="text-2xl font-bold mb-3">What a “SideGuy” actually is</h3>
+          <p class="text-sm md:text-base text-slate-100 mb-3">
+            A SideGuy is the person you text when:
+          </p>
+          <ul class="space-y-2 text-sm md:text-base text-slate-100 mb-4">
+            <li>✓ Something breaks before doors</li>
+            <li>✓ You’re hatching a new night, offer, or product</li>
+            <li>✓ You’re tired of getting rinsed by fees and bad tools</li>
+            <li>✓ You want an edge but don’t want a 20-slide pitch deck</li>
+          </ul>
+          <p class="text-xs text-slate-200">
+            That’s the entire job: be on your side, build the tech, keep it coastal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPS DETAIL SECTION -->
+    <section id="apps-detail" class="py-16 px-6 bg-slate-50">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl font-black mb-4">San Diego app development without SF drama.</h2>
+          <p class="text-lg text-slate-700 mb-4">
+            From MVPs and landing pages to internal dashboards, SideGuy builds
+            <span class="font-semibold">lean, fast, and actually-finished</span> products for San Diego and North County.
+          </p>
+          <p class="text-base text-slate-700 mb-4">
+            Good fits:
+          </p>
+          <ul class="space-y-2 text-slate-700 text-sm md:text-base mb-4">
+            <li>• Service businesses that need smoother onboarding or quoting</li>
+            <li>• Local brands turning spreadsheets into real tools</li>
+            <li>• Founders testing a v1 without burning a full raise</li>
+            <li>• San Diego teams that want a dev you can text</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl bg-white border border-slate-200 p-7 shadow-md">
+          <h3 class="text-xl font-bold mb-3">App &amp; Portal Starter Sprint</h3>
+          <p class="text-sm md:text-base text-slate-700 mb-4">
+            Most app projects start small: a simple portal, quote tool, or internal dashboard that
+            ships in weeks, not months.
+          </p>
+          <p class="text-xs text-slate-500 mb-4">
+            Think of it as a 12–24 month edge for your operations — not just “a website.”
+          </p>
           <a
             href="https://forms.sideguysolutions.com/intake"
-            class="ocean-pill px-8 py-4 rounded-full text-lg font-bold text-black flex items-center justify-center hover:brightness-110 transition"
+            class="inline-flex justify-center items-center solana-orb-btn px-6 py-3 rounded-full text-sm font-bold text-black hover:brightness-110 transition"
+          >
+            <span>Start an App Sprint</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI AUTOMATION SECTION -->
+    <section id="ai" class="py-16 px-6 bg-white">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl font-black mb-4">AI that quietly handles the boring stuff.</h2>
+          <p class="text-lg text-slate-700 mb-4">
+            No “AI guru” nonsense — just practical flows that move leads, data, and messages around so your team can breathe.
+          </p>
+          <ul class="space-y-2 text-slate-700 text-sm md:text-base mb-4">
+            <li>• Auto-replies that feel human when someone texts the business</li>
+            <li>• Syncing forms, calendars, and CRMs without 20 tools</li>
+            <li>• “What’s going on with this client?” one-click summaries</li>
+          </ul>
+          <p class="text-xs text-slate-500">
+            Built for the inbox and phone, not just some abstract “stack.”
+          </p>
+        </div>
+        <div class="rounded-3xl bg-slate-900 text-slate-50 p-7 shadow-2xl border border-sky-400/40">
+          <h3 class="text-xl font-bold mb-3">AI Automation · 12–24 Month Edge</h3>
+          <p class="text-sm md:text-base text-slate-100 mb-3">
+            The goal isn’t hype — it’s to give your operation a quiet, compounding edge over the next
+            <span class="font-semibold">12–24 months</span>.
+          </p>
+          <ul class="space-y-2 text-sm text-slate-100 mb-4">
+            <li>✓ Lead capture → nurture without dropping the ball</li>
+            <li>✓ Internal knowledge so staff can answer like a vet</li>
+            <li>✓ Reporting and summaries that don’t eat your Sunday</li>
+          </ul>
+          <button
+            type="button"
+            id="ai-modal-open"
+            class="inline-flex justify-center items-center px-6 py-3 rounded-full border border-sky-400 text-sky-100 text-sm font-bold hover:bg-sky-500/10 transition"
+          >
+            See AI Flow Examples
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLANA + 402 INTERNET PAYMENTS -->
+    <section id="solana" class="py-16 px-6 bg-slate-900 text-slate-50">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl font-black mb-4">Solana payments &amp; 402 internet payments.</h2>
+          <p class="text-lg mb-4 text-slate-100">
+            SideGuy helps San Diego operators dip into Web3 without needing to pretend they like Discord.
+            Focus: <span class="font-semibold">fees down, reliability up</span>.
+          </p>
+          <ul class="space-y-2 text-sm md:text-base text-slate-100 mb-4">
+            <li>• Clients paying deposits in USDC instead of chasing wire confirmations</li>
+            <li>• Ticketing or subscriptions with near-zero processing fees</li>
+            <li>• “Crypto escrow” flows for dev work or big projects</li>
+            <li>• 402 internet payments layered on top of Solana rails</li>
+          </ul>
+          <p class="text-xs text-slate-300">
+            402 = the idea that the internet should natively support small, instant payments — SideGuy wants
+            San Diego to benefit early.
+          </p>
+        </div>
+
+        <div class="rounded-3xl bg-slate-950 border border-sky-500/50 p-7 shadow-[0_0_60px_rgba(56,189,248,0.6)]">
+          <h3 class="text-xl font-bold mb-3">Solana Pay · SideGuy Wallet</h3>
+          <p class="text-sm text-slate-100 mb-3">
+            Want to test a flow or send a thank you? Scan the QR code to send SOL or USDC with
+            <span class="font-semibold text-emerald-300">0% platform fees</span>.
+          </p>
+          <div class="flex flex-col items-center gap-3">
+            <div
+              id="solana-qr-shell"
+              class="w-48 h-48 bg-slate-900/60 border border-sky-500/40 rounded-3xl flex items-center justify-center text-xs text-slate-500"
+            >
+              Loading Solana QR...
+            </div>
+            <p class="text-[11px] text-slate-400">
+              Wallet: <span class="font-mono text-emerald-300">9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5</span>
+            </p>
+            <div class="flex flex-wrap gap-2 justify-center text-[11px] text-slate-400">
+              <span class="px-2 py-1 rounded-full border border-emerald-400/60">Solana Pay</span>
+              <span class="px-2 py-1 rounded-full border border-sky-400/60">USDC · SOL</span>
+              <span class="px-2 py-1 rounded-full border border-purple-400/60">402 experiments</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKETING SECTION -->
+    <section id="ticketing" class="py-16 px-6 bg-slate-50">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl font-black mb-4">Ticketing built for venues, not just platforms.</h2>
+          <p class="text-lg text-slate-700 mb-4">
+            The dream: faster confirmations, cleaner fees, and better data for local venues, bars, and promoters —
+            without handing everything to giant platforms.
+          </p>
+          <ul class="space-y-2 text-slate-700 text-sm md:text-base mb-4">
+            <li>• Mapping your current ticket system and fees</li>
+            <li>• Lightweight direct ticket experiments</li>
+            <li>• Hybrid models: keep the big platform, own your high-value flows</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl bg-white border border-slate-200 p-7 shadow-md">
+          <h3 class="text-xl font-bold mb-3">North County Ticketing Experiments</h3>
+          <p class="text-sm md:text-base text-slate-700 mb-3">
+            SideGuy wants to route more value to local rooms with faster, cleaner flows and less platform drag.
+          </p>
+          <button
+            type="button"
+            id="ticket-modal-open"
+            class="inline-flex justify-center items-center px-6 py-3 rounded-full border border-slate-900 text-slate-900 text-sm font-bold hover:bg-slate-900 hover:text-white transition"
+          >
+            See Ticketing Ideas
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK LINKS / LANES CTA -->
+    <section id="pricing" class="py-16 px-6 bg-sky-50">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl font-black mb-4">Pick a lane and start small.</h2>
+        <p class="text-lg text-slate-700 mb-8">
+          Most projects start as a <span class="font-semibold">Starter Sprint</span> — something small, real,
+          and shippable in weeks, not months.
+        </p>
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+          <a
+            href="https://forms.sideguysolutions.com/intake"
+            class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
+          >
+            View pricing ranges with PJ
+          </a>
+          <a
+            href="#ai"
+            class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
+          >
+            Learn about AI automation
+          </a>
+          <a
+            href="#solana"
+            class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
+          >
+            Learn about Solana &amp; 402
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG / CONTENT STRIP -->
+    <section class="py-16 px-6 bg-white" id="blog-excerpt">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-black mb-8 text-center">Coastal dispatches &amp; experiments</h2>
+        <div class="grid md:grid-cols-3 gap-6 text-sm md:text-base">
+          <a href="#ai" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="font-bold mb-2">AI tools that actually help local businesses</h3>
+            <p class="text-slate-600">
+              A short guide to using AI for intake, follow-up, and ops without burning your whole week
+              learning five new platforms.
+            </p>
+            <p class="mt-3 text-xs text-slate-500">AI · Automation · Ops</p>
+          </a>
+          <a href="#solana" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="font-bold mb-2">Ocean Tech Guide · Solana payments</h3>
+            <p class="text-slate-600">
+              Fees, speed, settlement, and how a few basis points saved can actually matter to venues,
+              agencies, and dev shops over 12–24 months.
+            </p>
+            <p class="mt-3 text-xs text-slate-500">Solana · Payments · 402</p>
+          </a>
+          <a href="#ticketing" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+            <h3 class="font-bold mb-2">North County ticketing experiments</h3>
+            <p class="text-slate-600">
+              Sketching how to route more value to local rooms with faster, cleaner flows and less platform drag.
+            </p>
+            <p class="mt-3 text-xs text-slate-500">Tickets · Venues · Live rooms</p>
+          </a>
+        </div>
+
+        <p class="mt-6 text-xs text-slate-500">
+          SideGuy Solutions operates as a San Diego software development and AI automation partner for North County
+          businesses — from Encinitas and Solana Beach to Del Mar and Carlsbad — building custom apps, web platforms,
+          Solana payment flows, and 402 internet payments for real operators, not tech bros.
+        </p>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 px-6 bg-slate-900 text-slate-50 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-black mb-5">Need a SideGuy on your roster?</h2>
+        <p class="text-lg md:text-2xl mb-8 text-slate-100">
+          If you’re in San Diego or North County and need a real tech partner,
+          SideGuy is your coastal concierge.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://forms.sideguysolutions.com/intake"
+            class="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 transition"
           >
             Project Intake (60 sec)
           </a>
           <a
             href="tel:7735441231"
-            class="border border-sky-100/70 text-sky-50 px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center hover:bg-sky-50/10 transition"
+            class="border border-slate-100 px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 hover:text-black transition"
           >
             Text PJ → 773-544-1231
           </a>
         </div>
-
-        <div class="flex flex-wrap gap-2 text-xs text-sky-100/80">
-          <span class="ocean-tag border border-sky-200/40">San Diego software</span>
-          <span class="ocean-tag border border-sky-200/40">North County apps</span>
-          <span class="ocean-tag border border-sky-200/40">Solana &amp; 402 payments</span>
-          <span class="ocean-tag border border-sky-200/40">Ticketing for venues</span>
-        </div>
-
-        <p class="mt-4 text-xs text-sky-100/70">
-          Encinitas • Solana Beach • Carlsbad • Del Mar • Oceanside
-        </p>
       </div>
+    </section>
+  </main>
 
-      <!-- Right side: “ocean card” -->
-      <div class="relative">
-        <div class="rounded-3xl bg-slate-900/70 border border-sky-400/40 shadow-2xl p-6 md:p-7 backdrop-blur">
-          <p class="text-xs uppercase tracking-[0.18em] text-sky-300 mb-3">
-            Ocean Tech Guide · 2025
-          </p>
-          <h2 class="text-xl md:text-2xl font-bold text-sky-50 mb-3">
-            Built for operators, not just “startups.”
-          </h2>
-          <p class="text-sm text-sky-100/90 mb-4">
-            Venues, bars, agencies, service businesses, and founders who need
-            <span class="font-semibold">systems that match how their world actually works</span> — not a vague SaaS template.
-          </p>
-          <ul class="space-y-2 text-sm text-sky-100/90 mb-4">
-            <li>• Apps and portals that feel like an extension of your roster</li>
-            <li>• AI flows that quietly handle lead routing and follow-up</li>
-            <li>• Solana &amp; 402 rails that stop bleeding processing fees</li>
-            <li>• Ticketing &amp; DFS tools tuned for people who live on slates and lineups</li>
-          </ul>
-          <p class="text-xs text-sky-200/80">
-            You don’t need a 20-slide deck. You need a SideGuy you can text.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Ocean wave divider -->
-    <div class="ocean-divider mt-10">
-      <svg preserveAspectRatio="none" viewBox="0 0 1200 120">
-        <path
-          d="M0,0 C300,90 900,-60 1200,20 L1200,120 L0,120 Z"
-          fill="#f9fafb"
-        />
-      </svg>
-    </div>
-  </section>
-
-  <!-- CORE SERVICE LANES -->
-  <section class="py-16 px-6 bg-slate-50">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-black text-center mb-10">What SideGuy actually does</h2>
-      <div class="grid md:grid-cols-4 gap-6 text-sm md:text-base text-slate-800">
-
-        <a href="/san-diego-app-development" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="text-lg font-bold mb-1">Apps</h3>
-          <p>Custom web &amp; mobile apps for customers and internal teams.</p>
-          <p class="mt-3 text-xs text-slate-500">San Diego app development • internal tools • portals</p>
-        </a>
-
-        <a href="/san-diego-ai-automation" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="text-lg font-bold mb-1">AI Automation</h3>
-          <p>Lead routing, intake flows, internal assistants that remove busywork.</p>
-          <p class="mt-3 text-xs text-slate-500">AI for small businesses • ops automation</p>
-        </a>
-
-        <a href="/san-diego-solana-payments" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="text-lg font-bold mb-1">Solana &amp; 402</h3>
-          <p>USDC deposits, Solana Pay, and 402 internet-native payment flows.</p>
-          <p class="mt-3 text-xs text-slate-500">Stablecoins • Solana rails • experimental 402</p>
-        </a>
-
-        <a href="/venue-ticketing-systems" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="text-lg font-bold mb-1">Ticketing</h3>
-          <p>Hybrid ticketing &amp; VIP systems for venues, bars, and live rooms.</p>
-          <p class="mt-3 text-xs text-slate-500">North County venues • live rooms • promoters</p>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- NORTH COUNTY + OPERATOR BRAIN -->
-  <section class="py-16 px-6 bg-white">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-3xl font-black mb-4">North County roots. Operator brain.</h2>
-        <p class="text-lg text-slate-700 mb-4">
-          If your life lives between <strong>Solana Beach, Encinitas, Carlsbad, and Del Mar</strong>,
-          your tech should feel like it grew up here too.
-        </p>
-        <p class="text-base text-slate-700 mb-4">
-          SideGuy is built for GMs, owners, and founders who juggle:
-        </p>
-        <ul class="space-y-2 text-slate-700 text-sm md:text-base">
-          <li>• Shows, tables, tickets, and headcounts</li>
-          <li>• Clients, retainers, and invoices</li>
-          <li>• Staff, shifts, and repeat regulars</li>
-          <li>• Wild ideas that don’t fit in a standard SaaS box</li>
-        </ul>
-      </div>
-
-      <div class="rounded-3xl bg-slate-900 text-slate-50 p-7 shadow-2xl border border-sky-400/40">
-        <h3 class="text-2xl font-bold mb-3">What a “SideGuy” actually is</h3>
-        <p class="text-sm md:text-base text-slate-100 mb-3">
-          A SideGuy is the person you text when:
-        </p>
-        <ul class="space-y-2 text-sm md:text-base text-slate-100 mb-4">
-          <li>✓ Something breaks before doors</li>
-          <li>✓ You’re hatching a new night, offer, or product</li>
-          <li>✓ You’re tired of getting rinsed by fees and bad tools</li>
-          <li>✓ You want an edge but don’t want a 20-slide pitch deck</li>
-        </ul>
-        <p class="text-xs text-slate-200">
-          That’s the entire job: be on your side, build the tech, keep it coastal.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUICK LINKS / LANES CTA -->
-  <section class="py-16 px-6 bg-sky-50">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-black mb-4">Pick a lane and start small.</h2>
-      <p class="text-lg text-slate-700 mb-8">
-        Most projects start as a <span class="font-semibold">Starter Sprint</span> — something small, real,
-        and shippable in weeks, not months.
-      </p>
-      <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a
-          href="/pricing"
-          class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
-        >
-          View pricing ranges
-        </a>
-        <a
-          href="/san-diego-ai-automation"
-          class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
-        >
-          Learn about AI automation
-        </a>
-        <a
-          href="/san-diego-solana-payments"
-          class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
-        >
-          Learn about Solana payments
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG / CONTENT STRIP -->
-  <section class="py-16 px-6 bg-white" id="blog-excerpt">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-black mb-8 text-center">Coastal dispatches &amp; experiments</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-sm md:text-base">
-        <a href="/blog" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="font-bold mb-2">AI tools that actually help local businesses</h3>
-          <p class="text-slate-600">
-            A short guide to using AI for intake, follow-up, and ops without burning your whole week learning five new platforms.
-          </p>
-          <p class="mt-3 text-xs text-slate-500">AI · Automation · Ops</p>
-        </a>
-        <a href="/blog" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="font-bold mb-2">Ocean Tech Guide · Solana payments</h3>
-          <p class="text-slate-600">
-            Fees, speed, settlement, and how a few basis points saved can actually matter to venues, agencies, and dev shops over 12–24 months.
-          </p>
-          <p class="mt-3 text-xs text-slate-500">Solana · Payments · 402</p>
-        </a>
-        <a href="/blog" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-          <h3 class="font-bold mb-2">North County ticketing experiments</h3>
-          <p class="text-slate-600">
-            Sketching how to route more value to local rooms with faster, cleaner flows and less platform drag.
-          </p>
-          <p class="mt-3 text-xs text-slate-500">Tickets · Venues · Live rooms</p>
-        </a>
-      </div>
-
-      <p class="mt-6 text-xs text-slate-500">
-        SideGuy Solutions operates as a San Diego software development and AI automation partner for North County
-        businesses — from Encinitas and Solana Beach to Del Mar and Carlsbad — building custom apps, web platforms,
-        Solana payment flows, and 402 internet payments for real operators, not tech bros.
-      </p>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="py-20 px-6 bg-slate-900 text-slate-50 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-4xl font-black mb-5">Need a SideGuy on your roster?</h2>
-      <p class="text-lg md:text-2xl mb-8 text-slate-100">
-        If you’re in San Diego or North County and need a real tech partner,
-        SideGuy is your coastal concierge.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="https://forms.sideguysolutions.com/intake"
-          class="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 transition"
-        >
-          Project Intake (60 sec)
-        </a>
-        <a
-          href="tel:7735441231"
-          class="border border-slate-100 px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 hover:text-black transition"
-        >
-          Text PJ → 773-544-1231
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- GLOBAL FOOTER (Extended SEO Footer F3) -->
-  <footer class="py-10 px-6 border-t bg-white text-slate-700 text-sm">
+  <!-- GLOBAL FOOTER -->
+  <footer class="py-10 px-6 border-t border-slate-800 bg-slate-950 text-slate-300 text-sm">
     <div class="max-w-6xl mx-auto space-y-4 text-center md:text-left">
-      <p class="font-semibold text-base">
+      <p class="font-semibold text-base text-slate-100">
         SideGuy Solutions — San Diego Coastal Tech Concierge
       </p>
 
       <div class="md:flex md:items-start md:justify-between gap-6">
         <div class="mb-4 md:mb-0">
           <p class="font-semibold mb-1">Services:</p>
-          <p>
-            <a href="/san-diego-app-development" class="hover:text-sky-600">Apps</a> |
-            <a href="/san-diego-ai-automation" class="hover:text-sky-600">AI Automation</a> |
-            <a href="/san-diego-solana-payments" class="hover:text-sky-600">Solana Payments &amp; 402</a> |
-            <a href="/venue-ticketing-systems" class="hover:text-sky-600">Ticketing Systems</a> |
-            <a href="/north-county-software-development" class="hover:text-sky-600">North County Software</a> |
-            <a href="/pricing" class="hover:text-sky-600">Pricing</a> |
-            <a href="/blog" class="hover:text-sky-600">Blog</a>
+          <p class="text-slate-300">
+            Apps • AI Automation • Solana &amp; 402 internet payments • Ticketing Systems • North County Software
           </p>
         </div>
 
         <div class="mb-4 md:mb-0">
           <p class="font-semibold mb-1">Locations Served:</p>
-          <p>
+          <p class="text-slate-300">
             San Diego • Solana Beach • Encinitas • Cardiff • Leucadia • Carlsbad • Del Mar • Oceanside
           </p>
         </div>
 
-        <div>
+        <div class="space-y-1">
           <p class="font-semibold mb-1">Contact:</p>
           <p>
-            Text PJ → <a href="tel:7735441231" class="hover:text-sky-600 font-semibold">773-544-1231</a>
+            Text PJ → <a href="tel:7735441231" class="hover:text-sky-400 font-semibold">773-544-1231</a>
+          </p>
+          <p>
+            Follow on X →
+            <a
+              href="https://x.com/sideguysolutions"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-sky-400"
+            >
+              @sideguysolutions
+            </a>
           </p>
         </div>
       </div>
 
       <p class="text-slate-500 text-xs mt-2">
-        © 2025 SideGuy Solutions
+        © 2025 SideGuy Solutions · Built for operators, not tech bros.
       </p>
     </div>
   </footer>
 
-  <!-- Mobile nav script -->
+  <!-- PART 2 / 2 SCRIPTS BELOW -->
+  <!-- Solana Pay + QR libs -->
+  <script src="https://unpkg.com/@solana/pay@0.2.5/dist/umd/index.iife.min.js"></script>
+  <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+
   <script>
+    // ============= MOBILE NAV TOGGLE =============
     const toggle = document.getElementById('mobile-menu-toggle');
     const menu = document.getElementById('mobile-menu');
     const iconOpen = document.getElementById('mobile-menu-icon-open');
@@ -533,12 +777,257 @@
 
     if (toggle && menu && iconOpen && iconClose) {
       toggle.addEventListener('click', () => {
-        const hidden = menu.classList.contains('hidden');
-        menu.classList.toggle('hidden', !hidden === false ? true : false); // keep it simple: just toggle
         menu.classList.toggle('hidden');
-
         iconOpen.classList.toggle('hidden');
         iconClose.classList.toggle('hidden');
+      });
+
+      // close menu when clicking a link
+      menu.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        });
+      });
+    }
+
+    // ============= TIMESTAMP (STATIC BASE + JS REFRESH) =============
+    const tsEl = document.getElementById('sg-timestamp');
+    if (tsEl) {
+      try {
+        const now = new Date();
+        const opts = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' };
+        tsEl.textContent = now.toLocaleString('en-US', opts) + ' PT';
+      } catch (e) {
+        // keep fallback text
+      }
+    }
+
+    // ============= OCEAN MAX LITE (2D CANVAS WAVES) =============
+    (function initOceanLite() {
+      const canvas = document.getElementById('ocean-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      let t = 0;
+      function draw() {
+        t += 0.015;
+        const w = canvas.width;
+        const h = canvas.height;
+
+        // Deep ocean gradient background
+        const g = ctx.createLinearGradient(0, 0, 0, h);
+        g.addColorStop(0, '#020617');
+        g.addColorStop(0.35, '#0f172a');
+        g.addColorStop(1, '#020617');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+
+        // horizon glow
+        const hg = ctx.createRadialGradient(w * 0.5, h * 0.25, 0, w * 0.5, h * 0.25, h * 0.8);
+        hg.addColorStop(0, 'rgba(56,189,248,0.45)');
+        hg.addColorStop(0.3, 'rgba(15,23,42,0.0)');
+        hg.addColorStop(1, 'rgba(2,6,23,0.0)');
+        ctx.fillStyle = hg;
+        ctx.fillRect(0, 0, w, h);
+
+        // helper to draw a single wave
+        function drawWave(offset, amp, freq, speed, color, alpha) {
+          ctx.beginPath();
+          ctx.moveTo(0, h);
+          for (let x = 0; x <= w; x += 6) {
+            const y =
+              h * offset +
+              Math.sin(x * freq + t * speed) * amp +
+              Math.sin(x * freq * 0.5 + t * (speed * 0.6)) * (amp * 0.4);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(w, h);
+          ctx.closePath();
+          ctx.fillStyle = color;
+          ctx.globalAlpha = alpha;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+
+        // layered waves for parallax feel
+        drawWave(0.75, 16, 0.012, 1.2, '#020617', 0.9);                   // deep base
+        drawWave(0.7, 20, 0.014, 1.6, '#0b1120', 0.8);                    // mid
+        drawWave(0.65, 26, 0.018, 1.9, '#0369a1', 0.8);                   // brighter blue
+        drawWave(0.6, 30, 0.022, 2.2, 'rgba(148, 163, 255, 1)', 0.35);    // Solana purple shimmer
+        drawWave(0.58, 18, 0.03, 2.8, 'rgba(20, 241, 149, 1)', 0.25);     // Solana green highlights
+
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    // ============= SOLANA PAY QR =============
+    (function initSolanaQR() {
+      const shell = document.getElementById('solana-qr-shell');
+      if (!shell || !window.SolanaPay || !window.QRCodeStyling) return;
+
+      try {
+        const recipient = new window.SolanaPay.PublicKey('9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5');
+        const amount = null; // any amount
+        const label = 'SideGuy Solutions';
+        const message = 'Thanks for the support 🏄‍♂️';
+
+        const url = window.SolanaPay.createTransfer({
+          recipient,
+          amount,
+          splToken: undefined,
+          reference: null,
+          label,
+          message
+        });
+
+        shell.textContent = '';
+        const qr = new window.QRCodeStyling({
+          width: 192,
+          height: 192,
+          data: url.toString(),
+          margin: 10,
+          qrOptions: { errorCorrectionLevel: 'H' },
+          backgroundOptions: { color: '#020617' },
+          dotsOptions: { color: '#14f195', type: 'rounded' },
+          cornersSquareOptions: { color: '#38bdf8', type: 'extra-rounded' }
+        });
+        qr.append(shell);
+      } catch (e) {
+        console.warn('Solana QR issue:', e);
+        shell.textContent = 'Solana QR unavailable right now.';
+      }
+    })();
+
+    // ============= MODALS (AI + Ticketing) =============
+    function createModal(id, html) {
+      let backdrop = document.getElementById(id);
+      if (backdrop) return backdrop;
+
+      backdrop = document.createElement('div');
+      backdrop.id = id;
+      backdrop.className = 'sg-modal-backdrop';
+      backdrop.innerHTML = `
+        <div class="sg-modal">
+          ${html}
+        </div>
+      `;
+      document.body.appendChild(backdrop);
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) backdrop.style.display = 'none';
+      });
+      return backdrop;
+    }
+
+    // AI modal
+    const aiOpen = document.getElementById('ai-modal-open');
+    if (aiOpen) {
+      const aiModal = createModal('sg-ai-modal', `
+        <h2 class="text-xl font-bold mb-2">AI flows for real operators</h2>
+        <p class="text-sm text-slate-200 mb-3">
+          A few examples of where AI actually helps in San Diego &amp; North County — without feeling like a science project.
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-100 mb-4">
+          <li><strong>Lead catch-all inbox:</strong> text, web forms, and DMs roll into one place with suggested replies.</li>
+          <li><strong>Nightly “what happened today?” email:</strong> one digest with bookings, tickets, and hot leads.</li>
+          <li><strong>Client recap button:</strong> “remind me who this is” for any long-term client or tab.</li>
+        </ul>
+        <p class="text-xs text-slate-400 mb-4">
+          The play is a calm 12–24 month edge, not “AI everywhere.”
+        </p>
+        <button
+          type="button"
+          class="mt-1 inline-flex justify-center items-center px-4 py-2 rounded-full bg-sky-500 text-slate-950 text-xs font-bold hover:bg-sky-400"
+          onclick="window.location.href='https://forms.sideguysolutions.com/intake';"
+        >
+          Start an AI starter sprint
+        </button>
+        <button
+          type="button"
+          class="mt-2 ml-2 inline-flex justify-center items-center px-3 py-2 rounded-full border border-slate-500 text-slate-200 text-xs font-semibold hover:bg-slate-800"
+          onclick="document.getElementById('sg-ai-modal').style.display='none';"
+        >
+          Close
+        </button>
+      `);
+      aiOpen.addEventListener('click', () => {
+        aiModal.style.display = 'flex';
+      });
+    }
+
+    // Ticketing modal
+    const ticketOpen = document.getElementById('ticket-modal-open');
+    if (ticketOpen) {
+      const ticketModal = createModal('sg-ticket-modal', `
+        <h2 class="text-xl font-bold mb-2">North County ticketing ideas</h2>
+        <p class="text-sm text-slate-200 mb-3">
+          Where SideGuy wants to help local rooms keep more of the upside.
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-100 mb-4">
+          <li><strong>“Soft launch” nights:</strong> test direct ticket flows on one or two shows without blowing up the stack.</li>
+          <li><strong>VIP &amp; tables:</strong> separate flows for high-value seats, talent, and regulars.</li>
+          <li><strong>Hybrid models:</strong> keep using big platforms, but own your best offers and nights.</li>
+        </ul>
+        <p class="text-xs text-slate-400 mb-4">
+          The goal: cleaner fees, better lists, and more control — without reinventing your entire venue.
+        </p>
+        <button
+          type="button"
+          class="mt-1 inline-flex justify-center items-center px-4 py-2 rounded-full bg-slate-100 text-slate-900 text-xs font-bold hover:bg-slate-200"
+          onclick="window.location.href='https://forms.sideguysolutions.com/intake';"
+        >
+          Talk ticketing with PJ
+        </button>
+        <button
+          type="button"
+          class="mt-2 ml-2 inline-flex justify-center items-center px-3 py-2 rounded-full border border-slate-500 text-slate-200 text-xs font-semibold hover:bg-slate-800"
+          onclick="document.getElementById('sg-ticket-modal').style.display='none';"
+        >
+          Close
+        </button>
+      `);
+      ticketOpen.addEventListener('click', () => {
+        ticketModal.style.display = 'flex';
+      });
+    }
+
+    // ============= SUMMON PJ BUTTON (orb) =============
+    const summonBtn = document.getElementById('orb-summon-btn');
+    if (summonBtn) {
+      summonBtn.addEventListener('click', () => {
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.location.href =
+            'sms:+17735441231?&body=' +
+            encodeURIComponent(
+              "Hey PJ, I just summoned the coastal portal from SideGuySolutions.com — let’s build something."
+            );
+        } else {
+          const subject = encodeURIComponent('Summon PJ · SideGuy Solutions (San Diego)');
+          const body = encodeURIComponent(
+            "Hey PJ,\n\n" +
+            "I just tapped the coastal portal on SideGuySolutions.com.\n\n" +
+            "Here’s what I’m looking at:\n" +
+            "- Apps / portals\n" +
+            "- Tickets / live events\n" +
+            "- Solana / 402 payments\n" +
+            "- AI automation\n" +
+            "- Something else entirely\n\n" +
+            "Reply when you’re free and let’s spin this up.\n\n" +
+            "— Sent from the coastal portal 🌊"
+          );
+          window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+        }
       });
     }
   </script>
