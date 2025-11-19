@@ -1,36 +1,30 @@
-<!--
-  SideGuy Solutions
-  Version: 25.1-ocean-max-solana
-  Hero: "Where code meets the coastline."
-  Mode: Ocean Max · Solana Tools · 402 Internet Payments
-  Author: PJ (+ ChatGPT assist)
--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
 
-  <!-- Core SEO -->
   <meta
     name="description"
-    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Web3 & Solana payments, 402 Internet Payments, ticketing flows, and DFS tools for North County startups, venues, and operators."
+    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Solana & 402 payments, and ticketing systems for venues and operators in North County."
   />
+
   <meta
     name="keywords"
-    content="San Diego software development, San Diego app development, San Diego mobile app development, San Diego AI development, AI automation San Diego, San Diego tech concierge, North County San Diego startups, Encinitas developers, Solana Beach tech, custom software agency San Diego, Web3 development San Diego, blockchain developers San Diego, Solana developers San Diego, 402 internet payments, North County software agency, San Diego AI consulting, San Diego startup developers, DFS tools, ticketing software San Diego, coastal concierge tech"
+    content="San Diego software development, North County app developer, AI automation San Diego, Solana payments San Diego, ticketing systems for venues, coastal tech concierge"
   />
 
   <!-- Open Graph -->
   <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Tap the ocean portal to summon PJ. Custom apps, AI automation, Web3 & Solana payments, 402 Internet Payments, ticket flows, and DFS tools built from Solana Beach and North County San Diego." />
+  <meta property="og:description" content="Custom apps, AI automation, Solana payments & ticketing systems for real operators in San Diego & North County." />
+  <meta property="og:url" content="https://www.sideguysolutions.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sideguysolutions.com/" />
-
-  <link rel="canonical" href="https://sideguysolutions.com/" />
 
   <!-- LocalBusiness Schema -->
   <script type="application/ld+json">
@@ -38,2033 +32,516 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "SideGuy Solutions",
-    "description": "Coastal tech concierge for San Diego and North County — custom apps, AI automation, Web3 and Solana payment flows, 402 Internet Payments, ticketing systems, and DFS tools.",
-    "url": "https://sideguysolutions.com/",
+    "image": "https://www.sideguysolutions.com/logo.png",
+    "description": "SideGuy Solutions is a San Diego coastal tech concierge specializing in custom apps, AI automation, Solana payments, 402 internet payments, and ticketing systems for venues and operators in North County.",
+    "url": "https://www.sideguysolutions.com/",
     "telephone": "+1-773-544-1231",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Solana Beach",
+      "addressLocality": "San Diego",
       "addressRegion": "CA",
       "addressCountry": "US"
     },
     "areaServed": [
       "San Diego",
-      "North County San Diego",
       "Solana Beach",
       "Encinitas",
+      "Cardiff",
+      "Leucadia",
+      "Carlsbad",
       "Del Mar",
-      "Carlsbad"
-    ]
+      "Oceanside"
+    ],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    }]
   }
   </script>
 
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
-    /* ================================================
-       ROOT THEME
-    ================================================= */
-    :root {
-      --bg: #020617;
-      --bg-day: #041426;
-      --bg-night: #000814;
-
-      --text: #e5f2ff;
-      --soft: #94a3b8;
-      --muted: #64748b;
-
-      --accent: #38bdf8;
-      --accent-night: #4cc9ff;
-
-      --card: rgba(15, 23, 42, 0.94);
-      --glass: rgba(15, 23, 42, 0.8);
-
-      --radius: 18px;
-      --pill: 999px;
-
-      --shadow-deep: 0 22px 70px rgba(15, 23, 42, 0.96);
-
-      /* Solana palette */
-      --solana-green: #14f195;
-      --solana-purple: #9945ff;
-      --solana-blue: #00c2ff;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
     body {
-      height: 100%;
-      width: 100%;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
     }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      overflow-x: hidden;
-      min-height: 100vh;
-      transition: background 0.5s ease;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* ================================================
-       OCEAN CANVAS
-    ================================================= */
-    #ocean-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      display: block;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
-    }
-
-    /* ================================================
-       HEADER / NAV
-    ================================================= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      padding: 10px 20px;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(2, 6, 23, 0.96),
-        rgba(2, 6, 23, 0.85),
-        transparent
-      );
-      border-bottom: 1px solid rgba(56, 189, 248, 0.28);
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-pill {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
+    /* OCEAN VIBES */
+    .ocean-hero {
+      position: relative;
       background:
-        radial-gradient(circle at 30% 20%, #e0f2fe, #38bdf8 45%, #0f172a 100%);
-      box-shadow:
-        0 0 0 1px rgba(148, 163, 184, 0.5),
-        0 0 26px rgba(56, 189, 248, 0.9);
+        radial-gradient(circle at top, #38bdf8 0%, #0f172a 48%, #020617 100%);
+      color: white;
     }
-
-    .brand-text {
-      font-size: 0.95rem;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .version-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 12px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-links a {
-      color: var(--soft);
-      padding-bottom: 2px;
-      border-bottom: 1px solid transparent;
-      cursor: pointer;
-    }
-
-    .nav-links a:hover {
-      color: #e5f2ff;
-      border-bottom-color: rgba(56, 189, 248, 0.7);
-    }
-
-    @media (max-width: 880px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-      }
-      .nav-right {
-        width: 100%;
-        justify-content: space-between;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-      }
-    }
-
-    /* ================================================
-       HERO
-    ================================================= */
-    .hero {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 40px 20px 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-      position: relative;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 28px;
-      }
-    }
-
-    .hero-title {
-      font-size: clamp(2.4rem, 4vw, 3.1rem);
-      font-weight: 850;
-      line-height: 1.04;
-      margin-bottom: 12px;
-      text-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-title span {
-      background: linear-gradient(to right, var(--solana-purple), var(--solana-blue), var(--solana-green));
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--soft);
-      max-width: 34rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .hero-sub strong {
-      color: #e5f2ff;
-      font-weight: 600;
-    }
-
-    .hero-contacts {
-      font-size: 0.86rem;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .timestamp-badge {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--solana-green);
-      margin-top: 6px;
-    }
-
-    /* ================================================
-       BUTTONS
-    ================================================= */
-    button {
-      font-family: inherit;
-      border: none;
-      cursor: pointer;
-      background: none;
-    }
-
-    .btn-primary {
-      position: relative;
-      padding: 11px 18px;
-      border-radius: var(--pill);
-      background: radial-gradient(circle at 0 0, #e0f2fe, var(--solana-green));
-      color: #020617;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.85),
-        0 14px 36px rgba(8, 47, 73, 0.95),
-        0 0 40px rgba(56, 189, 248, 0.85);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        filter 0.15s ease;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .btn-primary::after {
+    .ocean-hero::before {
+      /* soft moving shimmer over hero */
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.45), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.15s ease;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,255,255,0.18), transparent 55%),
+        radial-gradient(circle at 80% 120%, rgba(56,189,248,0.25), transparent 60%);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      animation: oceanGlow 18s ease-in-out infinite alternate;
+    }
+    .ocean-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes oceanGlow {
+      0%   { transform: translate3d(0,0,0) scale(1.02); filter: hue-rotate(0deg); }
+      50%  { transform: translate3d(-18px,-12px,0) scale(1.06); filter: hue-rotate(8deg); }
+      100% { transform: translate3d(12px,-18px,0) scale(1.03); filter: hue-rotate(-6deg); }
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: saturate(1.25);
+    .ocean-divider {
+      position: relative;
+    }
+    .ocean-divider svg {
+      display: block;
+      width: 100%;
+      height: 60px;
+    }
+
+    .ocean-pill {
+      background: radial-gradient(circle at 0% 0%, #e0f2fe 0%, #38bdf8 40%, #0ea5e9 70%);
       box-shadow:
-        0 0 0 1px rgba(56, 189, 248, 0.9),
-        0 18px 40px rgba(8, 47, 73, 1),
-        0 0 70px rgba(56, 189, 248, 1);
+        0 0 0 1px rgba(15,23,42,0.9),
+        0 14px 40px rgba(8,47,73,0.9),
+        0 0 50px rgba(56,189,248,0.9);
     }
 
-    .btn-primary:hover::after {
-      opacity: 1;
-    }
-
-    .btn-secondary {
-      background: radial-gradient(circle at 0 0, #0ea5e9, #0369a1);
-      color: #e0f2fe;
-    }
-
-    .btn-summon {
-      animation: summonGlow 2.4s ease-in-out infinite;
-    }
-
-    @keyframes summonGlow {
-      0% {
-        box-shadow:
-          0 0 0 0 rgba(56, 189, 248, 0.8),
-          0 14px 36px rgba(8, 47, 73, 0.95),
-          0 0 40px rgba(56, 189, 248, 0.85);
-      }
-      50% {
-        box-shadow:
-          0 0 0 12px rgba(56, 189, 248, 0),
-          0 18px 48px rgba(8, 47, 73, 1),
-          0 0 80px rgba(56, 189, 248, 1);
-      }
-      100% {
-        box-shadow:
-          0 0 0 0 rgba(56, 189, 248, 0),
-          0 14px 36px rgba(8, 47, 73, 0.95),
-          0 0 40px rgba(56, 189, 248, 0.85);
-      }
-    }
-
-    /* AUDIO TOGGLE */
-    .audio-toggle {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      z-index: 40;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      padding: 7px 11px;
+    .ocean-tag {
+      background: rgba(15,23,42,0.9);
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      color: #e0f2fe;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-    }
-
-    .audio-toggle span {
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    /* SECTIONS / GRID / CARDS */
-    .section {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 32px 20px 40px;
-    }
-
-    .section-title {
-      font-size: 0.85rem;
-      color: var(--soft);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .section-subheading {
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-    }
-
-    .section-lead {
-      font-size: 0.92rem;
-      color: var(--soft);
-      margin-bottom: 12px;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .pill-tag {
-      border-radius: var(--pill);
-      border: 1px solid rgba(148, 163, 184, 0.5);
       padding: 4px 10px;
-      font-size: 0.72rem;
-      color: var(--soft);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 880px) {
-      .two-col {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    @media (max-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .card {
-      position: relative;
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      box-shadow: var(--shadow-deep);
-      overflow: hidden;
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.12), transparent 55%);
-      opacity: 0;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      transition: opacity 0.18s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.75);
-      box-shadow:
-        0 18px 55px rgba(15, 23, 42, 0.98),
-        0 0 40px rgba(56, 189, 248, 0.6);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card h3 {
-      font-size: 1rem;
-      margin-bottom: 6px;
-    }
-
-    .card p {
-      font-size: 0.86rem;
-      color: var(--soft);
-      margin-bottom: 10px;
-    }
-
-    .card-small {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* Intake + blog + footer */
-    .intake-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 880px) {
-      .intake-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .intake-form {
-      background: var(--glass);
-      border-radius: 18px;
-      padding: 16px 16px 18px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      box-shadow: var(--shadow-deep);
-    }
-
-    .intake-form label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--soft);
-      margin-bottom: 4px;
-    }
-
-    .intake-form input,
-    .intake-form select,
-    .intake-form textarea {
-      width: 100%;
-      padding: 9px 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text);
-      font-size: 0.85rem;
-    }
-
-    .intake-form textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-
-    .intake-note {
+      border: 1px solid rgba(148,163,184,0.6);
       font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 6px;
     }
 
-    .blog-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    @media (max-width: 880px) {
-      .blog-list {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .blog-card-title {
-      font-size: 0.98rem;
-      margin-bottom: 4px;
-    }
-
-    .blog-card-meta {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 26px 20px 32px;
-      font-size: 0.75rem;
-      color: var(--muted);
-      border-top: 1px solid rgba(56, 189, 248, 0.25);
-      margin-top: 30px;
-      background: linear-gradient(to top, rgba(2, 6, 23, 0.96), transparent);
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-inline: 16px;
-      }
-      .section {
-        padding-inline: 16px;
-      }
-    }
-
-    /* MODALS */
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(14px);
-      z-index: 9999;
-    }
-
-    .modal-content {
-      background: var(--card);
-      padding: 26px;
-      border-radius: 20px;
-      width: min(90%, 440px);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      box-shadow: 0 0 50px rgba(56, 189, 248, 0.5);
-    }
-
-    .modal h2 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-    }
-
-    .modal label {
-      font-size: 0.9rem;
-      color: var(--soft);
-    }
-
-    .modal input,
-    .modal select {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 16px;
-      border-radius: 10px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text);
-      font-size: 0.85rem;
-    }
-
-    .calc-btn {
-      background: #38bdf8;
-      color: #020617;
-      border-radius: var(--pill);
-      padding: 10px 14px;
-      cursor: pointer;
-      border: none;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      letter-spacing: 0.08em;
-    }
-
-    .close-btn {
-      background: #ef4444;
-      color: #fff;
-      border-radius: var(--pill);
-      padding: 9px 14px;
-      cursor: pointer;
-      border: none;
-      font-weight: 700;
-      margin-top: 10px;
-    }
-
-    .result-box {
-      margin-top: 12px;
-      background: rgba(56, 189, 248, 0.15);
-      padding: 12px;
-      border-radius: 12px;
-      color: #a5f3fc;
-      font-size: 0.95rem;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      display: none;
-    }
-
-    /* Ocean Max overrides (visual only) */
-    body {
-      background: radial-gradient(circle at 40% -20%, #0ea5e9 0%, #020617 60%);
-    }
-
-    .ocean-gradient {
-      position: fixed;
-      inset: -10%;
-      z-index: -3;
-      background:
-        radial-gradient(circle at 20% -10%, #38bdf8 0%, transparent 50%),
-        radial-gradient(circle at 80% 120%, #0ea5e9 0%, transparent 55%),
-        radial-gradient(circle at 50% 50%, #0b1120 0%, #020617 70%);
-      animation: oceanDrift 40s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes oceanDrift {
-      0% {
-        transform: translate3d(0px, 0px, 0) scale(1.02);
-        filter: hue-rotate(0deg);
-      }
-      50% {
-        transform: translate3d(-20px, -10px, 0) scale(1.06);
-        filter: hue-rotate(8deg);
-      }
-      100% {
-        transform: translate3d(12px, -18px, 0) scale(1.04);
-        filter: hue-rotate(-6deg);
-      }
-    }
-
-    .ocean-fog {
-      position: fixed;
-      inset: -8%;
-      z-index: -2;
-      background:
-        radial-gradient(circle at 50% 70%, rgba(56, 189, 248, 0.18), transparent 60%),
-        radial-gradient(circle at 10% 0%, rgba(15, 23, 42, 0.85), transparent 55%);
-      animation: fogMax 26s ease-in-out infinite alternate;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    @keyframes fogMax {
-      0% {
-        opacity: 0.65;
-        transform: translate3d(0px, 0px, 0);
-      }
-      50% {
-        opacity: 0.9;
-        transform: translate3d(-12px, -18px, 0);
-      }
-      100% {
-        opacity: 0.7;
-        transform: translate3d(18px, -10px, 0);
-      }
-    }
-
-    .ocean-sparks {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px),
-        radial-gradient(circle, rgba(56,189,248,0.16) 1px, transparent 1px);
-      background-size: 3px 3px, 5px 5px;
-      mix-blend-mode: screen;
-      opacity: 0.08;
-      animation: sparkMax 18s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes sparkMax {
-      0% {
-        transform: translate3d(0px, 0px, 0);
-      }
-      100% {
-        transform: translate3d(-160px, -40px, 0);
-      }
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -60px -40px;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(148, 163, 253, 0.35), transparent 60%),
-        radial-gradient(circle at 80% 110%, rgba(56, 189, 248, 0.35), transparent 60%);
-      opacity: 0.7;
-      filter: blur(8px);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .hero-waterline {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      height: 3px;
-      margin: 10px 0 16px;
-      border-radius: 999px;
-      overflow: hidden;
-      background: linear-gradient(
-        90deg,
-        rgba(15,23,42,0.2),
-        rgba(148, 163, 184, 0.45),
-        rgba(15,23,42,0.2)
-      );
-    }
-
-    .hero-waterline::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(56,189,248,0.95), transparent);
-      transform: translateX(-60%);
-      animation: waterlineSweep 7s ease-in-out infinite;
-    }
-
-    @keyframes waterlineSweep {
-      0%   { transform: translateX(-75%); opacity: 0.1; }
-      40%  { transform: translateX(50%);  opacity: 0.9; }
-      100% { transform: translateX(140%); opacity: 0; }
-    }
-
-    .hero-orb-shell {
-      position: relative;
-      width: 240px;
-      height: 240px;
-      margin: auto;
-      border-radius: 50%;
-      padding: 6px;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(255,255,255,0.25), transparent 55%),
-        radial-gradient(circle at 80% 120%, rgba(20,241,149,0.5), transparent 65%);
-      filter: drop-shadow(0 0 35px rgba(20,241,149,0.9))
-              drop-shadow(0 0 80px rgba(56,189,248,0.9));
-      animation: orbShellPulse 4.2s ease-in-out infinite;
-    }
-
-    .hero-orb-core {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 25% 15%, #f9fafb 0%, #bae6fd 24%, transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(20,241,149,0.4), transparent 60%),
-        radial-gradient(circle at 50% 70%, #0f172a 0%, #020617 70%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-orb-core::before,
-    .hero-orb-core::after {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        repeating-linear-gradient(
-          135deg,
-          rgba(56,189,248,0.18) 0px,
-          rgba(56,189,248,0.18) 2px,
-          transparent 3px,
-          transparent 7px
-        );
-      mix-blend-mode: screen;
-      opacity: 0.75;
-      animation: orbCaustics 12s linear infinite;
-    }
-
-    .hero-orb-core::after {
-      animation-duration: 18s;
-      animation-direction: reverse;
-      opacity: 0.5;
-    }
-
-    @keyframes orbShellPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes orbCaustics {
-      0% { transform: translate3d(-20px, 0px, 0) rotate(0deg); }
-      100% { transform: translate3d(40px, -10px, 0) rotate(360deg); }
-    }
-
+    /* Mobile nav animation safety */
+    [x-cloak] { display: none !important; }
   </style>
+
+  <!-- Google Analytics (optional – fill ID and uncomment) -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
+  -->
+
+  <!-- Microsoft Clarity (optional – fill ID and uncomment) -->
+  <!--
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_ID");
+  </script>
+  -->
 </head>
-<body>
-  <!-- REAL THREE.JS OCEAN BACKGROUND (fallback to CSS layers if fails) -->
-  <canvas id="ocean-canvas"></canvas>
-  <div class="ocean-gradient"></div>
-  <div class="ocean-fog"></div>
-  <div class="ocean-sparks"></div>
 
-  <!-- AUDIO (add your own ocean-loop.mp3 at site root if you want real sound) -->
-  <audio id="ocean-audio" loop>
-    <!-- <source src="ocean-loop.mp3" type="audio/mpeg" /> -->
-  </audio>
-  <button type="button" class="audio-toggle" id="audio-toggle">
-    🌊 <span>Ocean Audio</span>
-  </button>
+<body class="bg-white text-black">
 
-  <!-- HEADER -->
-  <header>
-    <div class="nav-inner">
-      <div class="brand-block">
-        <div class="brand-pill"></div>
-        <div class="brand-text">SideGuy Solutions</div>
-      </div>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#apps">Apps</a>
-          <a href="#ai">AI</a>
-          <a href="#web3">Web3</a>
-          <a href="#payments402">402</a>
-          <a href="#tickets">Tickets</a>
-          <a href="#dfs">DFS</a>
-          <a href="#intake">Intake</a>
-          <a href="#blog">Blog</a>
-        </nav>
-        <div class="version-tag">v25.1 · OCEAN MAX · SAN DIEGO</div>
-      </div>
-    </div>
-  </header>
+  <!-- NAV (Hybrid C) -->
+  <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur border-b border-slate-200 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-2xl font-black tracking-tight">
+        SideGuy <span class="text-sky-500">Solutions</span>
+      </a>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h1 class="hero-title">
-        Where <span>San Diego</span> codes, scales & builds.
-      </h1>
-      <div class="hero-waterline"></div>
-
-      <p class="hero-sub">
-        Coastal concierge tech for the 2025 era — <strong>custom apps</strong>,
-        <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>,
-        <strong>402 Internet Payments</strong>, <strong>ticketing flows</strong>, and
-        <strong>DFS tools</strong> tuned for North County and greater San Diego.
-      </p>
-
-      <div class="hero-contacts">
-        Text / call:
-        <strong><a href="tel:+17735441231">773-544-1231</a></strong><br />
-        Email:
-        <strong><a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a></strong>
-      </div>
-
-      <div class="hero-ctas">
-        <button id="summon-btn" class="btn-primary btn-summon">
-          TAP TO SUMMON PJ
-        </button>
-        <button id="show-toolkit" class="btn-primary btn-secondary">
-          OPEN TOOLKIT
-        </button>
-        <a href="https://x.com/sideguysolutions" target="_blank" rel="noreferrer" class="btn-primary btn-secondary" style="text-decoration:none;">
-          ◎ FOLLOW @SIDEGUYSOLUTIONS
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-6 text-[15px] font-semibold">
+        <a href="/san-diego-app-development" class="hover:text-sky-600">Apps</a>
+        <a href="/san-diego-ai-automation" class="hover:text-sky-600">AI</a>
+        <a href="/san-diego-solana-payments" class="hover:text-sky-600">Solana</a>
+        <a href="/venue-ticketing-systems" class="hover:text-sky-600">Ticketing</a>
+        <a href="/north-county-software-development" class="hover:text-sky-600">North County</a>
+        <a href="/pricing" class="hover:text-sky-600">Pricing</a>
+        <a href="/blog" class="hover:text-sky-600">Blog</a>
+        <a
+          href="tel:7735441231"
+          class="ocean-pill text-black px-5 py-2 rounded-full text-sm font-bold hover:brightness-110 transition"
+        >
+          Text PJ → 773-544-1231
         </a>
       </div>
 
-      <div id="version-timestamp" class="timestamp-badge">
-        Updated live · Ocean Tech Guide
-      </div>
+      <!-- Mobile toggle -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded hover:bg-slate-100"
+        aria-label="Toggle navigation"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            id="mobile-menu-icon-open"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+          <path
+            id="mobile-menu-icon-close"
+            class="hidden"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
     </div>
 
-    <!-- ORB · OCEAN MAX -->
-    <div style="text-align:center;">
-      <div class="hero-orb-shell">
-        <div class="hero-orb-core"></div>
-      </div>
-      <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);letter-spacing:0.15em;">
-        Coastal Portal • Online
-      </div>
-    </div>
-  </section>
-
-  <!-- TOOLKIT SECTION -->
-  <section class="section" id="toolkit">
-    <div class="section-title">SideGuy Toolkit</div>
-
-    <div class="grid">
-      <div class="card">
-        <h3>💠 Solana Processing Savings</h3>
-        <p>See how much you save running payments on Solana rails versus old-school processors.</p>
-        <button class="btn-primary btn-secondary" onclick="openSavingsCalc()">
-          OPEN CALCULATOR
-        </button>
-        <div class="card-small">Built for San Diego agencies, venues, and startups.</div>
-      </div>
-
-      <div class="card">
-        <h3>📈 DFS Promo Multiplier</h3>
-        <p>Quick EV snapshots on 2-leg and boosted parlays. Educational only, zero pick-selling.</p>
-        <button class="btn-primary btn-secondary" onclick="openDFS()">
-          DFS TOOL
-        </button>
-        <div class="card-small">Helps structure promos and slates without going full degenerate.</div>
-      </div>
-
-      <div class="card">
-        <h3>🎟 Ticket Flow Optimizer</h3>
-        <p>Model ticket price, fees, and capacity to see where big platforms are skimming.</p>
-        <button class="btn-primary btn-secondary" onclick="openTickets()">
-          OPTIMIZE
-        </button>
-        <div class="card-small">Perfect for North County venues, bars, and live rooms.</div>
-      </div>
-
-      <div class="card">
-        <h3>🧮 Project Quickscope Estimator</h3>
-        <p>
-          Rough-cut time &amp; budget bands for apps, AI flows, Web3 rails, tickets, or DFS tools —
-          so you know if you’re talking weekend experiment or real build.
-        </p>
-        <button class="btn-primary btn-secondary" onclick="openEstimator()">
-          ESTIMATE A PROJECT
-        </button>
-        <div class="card-small">Not a quote — just a starting point for a real conversation with PJ.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- APPS SECTION -->
-  <section class="section" id="apps">
-    <div class="section-title">Apps · Web · Internal Tools</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Custom apps and systems — without SF drama.</h2>
-        <p class="section-lead">
-          From MVPs and landing pages to internal dashboards, SideGuy builds
-          <strong>lean, fast, and actually-finished</strong> products for San Diego and North County.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">San Diego app development</span>
-          <span class="pill-tag">Internal tools</span>
-          <span class="pill-tag">Client portals</span>
-          <span class="pill-tag">Mobile-first flows</span>
-        </div>
-        <p class="section-lead">
-          PJ works with founders, GMs, and operators — not just “product people.”
-          You bring the story and constraints, SideGuy translates it into something shippable.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Good fits for this lane</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Service businesses that need smoother onboarding or quoting</li>
-          <li>Local brands turning spreadsheets into real tools</li>
-          <li>Founders testing a v1 without burning a full raise</li>
-          <li>San Diego teams that want a dev you can text</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Apps & Custom Builds')">
-          START AN APP PROJECT
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI SECTION -->
-  <section class="section" id="ai">
-    <div class="section-title">AI Automation · Workflows</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">AI that quietly handles the boring stuff.</h2>
-        <p class="section-lead">
-          No “AI guru” nonsense — just practical flows that move leads, data,
-          and messages around so your team can breathe.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">Inbound &amp; lead routing</span>
-          <span class="pill-tag">Follow-up sequences</span>
-          <span class="pill-tag">Internal Q&amp;A</span>
-          <span class="pill-tag">San Diego small biz AI</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Examples for North County</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Auto-replies that feel human when someone texts the business</li>
-          <li>Syncing forms, calendars, and CRMs without 20 tools</li>
-          <li>“What’s going on with this client?” one-click summaries</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('AI Automation & Workflows')">
-          MAP AN AI FLOW
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- WEB3 / SOLANA SECTION -->
-  <section class="section" id="web3">
-    <div class="section-title">Web3 · Solana · Stablecoin Flows</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">
-          Solana-grade payments for real-world businesses.
-        </h2>
-        <p class="section-lead">
-          SideGuy helps San Diego operators dip into Web3 without needing to
-          pretend they like Discord. Focus: <strong>fees down, reliability up</strong>.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">Solana payments</span>
-          <span class="pill-tag">Stablecoin invoicing</span>
-          <span class="pill-tag">Crypto escrow</span>
-          <span class="pill-tag">On/off-ramps</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>What this can look like</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Clients paying deposits in USDC instead of chasing wire confirmations</li>
-          <li>Ticketing or subscriptions with near-zero processing fees</li>
-          <li>“Crypto escrow” flows for dev work or big projects</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Web3 / Solana / Stablecoin Flows')">
-          EXPLORE WEB3 RAILS
-        </button>
-      </div>
-    </div>
-  </section>
-  <!-- 402 INTERNET PAYMENTS SECTION -->
-  <section class="section" id="payments402">
-    <div class="section-title">402 Internet Payments · Always-On Access</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">
-          “402: Payment Required” — but actually friendly.
-        </h2>
-        <p class="section-lead">
-          SideGuy experiments with <strong>402 Internet Payments</strong> — lightweight,
-          Solana-backed gates for APIs, tools, and digital access. Think “pay-per-door”
-          instead of giant subscriptions.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">HTTP 402 concepts</span>
-          <span class="pill-tag">Micropayments</span>
-          <span class="pill-tag">API access passes</span>
-          <span class="pill-tag">Member-only flows</span>
-        </div>
-        <p class="section-lead">
-          If you’re a small shop, venue, or dev team in San Diego that wants to
-          test 402-style flows without burning months, PJ will map a simple pilot.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Ocean Tech Guide · Solana Edition</h3>
-        <p class="card-small">
-          <strong style="background:linear-gradient(to right,var(--solana-purple),var(--solana-green));-webkit-background-clip:text;color:transparent;">
-            OCEAN TECH GUIDE
-          </strong>
-          walks through how Solana, stablecoins, and 402 payments can actually plug
-          into real-world venues, agencies, and dev shops — not just crypto Twitter.
-        </p>
-        <p class="card-small">
-          Ask PJ for the latest 12–24 month edge on Solana payments, routing, and
-          402 experiments in North County.
-        </p>
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Web3 / Solana / Stablecoin Flows')">
-          TALK 402 & SOLANA
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- TICKETS SECTION -->
-  <section class="section" id="tickets">
-    <div class="section-title">Ticketing · Venues · Live Rooms</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Decades of ticket trenches, pointed at North County.</h2>
-        <p class="section-lead">
-          The dream: faster confirmations, cleaner fees, and better data
-          for local venues, bars, and promoters — without handing
-          everything to giant platforms.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">Ticket flows</span>
-          <span class="pill-tag">Seat maps</span>
-          <span class="pill-tag">VIP &amp; presale</span>
-          <span class="pill-tag">San Diego venues</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Where SideGuy fits</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Mapping current ticket system and fees</li>
-          <li>Lightweight direct ticket experiments</li>
-          <li>Hybrid models: keep the big platform, own your high-value flows</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('Ticketing & Venue Systems')">
-          TALK TICKETS
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- DFS SECTION -->
-  <section class="section" id="dfs">
-    <div class="section-title">DFS · Promos · Systems</div>
-    <div class="two-col">
-      <div>
-        <h2 class="section-subheading">Make promos and edges feel like a system, not chaos.</h2>
-        <p class="section-lead">
-          Educational tools and frameworks around DFS, promos, and parlay structures —
-          built for people who want to treat it like math, not vibes.
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">DFS flows (educational)</span>
-          <span class="pill-tag">Promo sequencing</span>
-          <span class="pill-tag">Bankroll frameworks</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>What SideGuy helps with</h3>
-        <ul class="card-small" style="list-style: disc; padding-left: 18px;">
-          <li>Promo tracking spreadsheets → simple tools</li>
-          <li>EV calculators that match your risk level</li>
-          <li>Systems thinking instead of “one big hit” thinking</li>
-        </ul>
-        <br />
-        <button class="btn-primary btn-secondary" onclick="scrollToIntake('DFS Tools & Promo Systems')">
-          BUILD A DFS SYSTEM
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTAKE SECTION -->
-  <section class="section" id="intake">
-    <div class="section-title">Project Intake · Start the Conversation</div>
-    <div class="intake-grid">
-      <div>
-        <h2 class="section-subheading">Tell PJ what you’re cooking up.</h2>
-        <p class="section-lead">
-          No giant form. Just enough structure so PJ can reply with a real
-          plan — not a generic “let’s hop on a call” (unless you want that).
-        </p>
-        <div class="pill-row">
-          <span class="pill-tag">San Diego &amp; North County preferred</span>
-          <span class="pill-tag">Remote possible</span>
-        </div>
-        <p class="section-lead">
-          You can also skip the form and text
-          <strong><a href="tel:+17735441231">773-544-1231</a></strong> or email
-          <strong><a href="mailto:peter.z@kromeon.com">peter.z@kromeon.com</a></strong> directly.
-        </p>
-      </div>
-
-      <form id="intake-form" class="intake-form">
-        <label for="intake-name">Name</label>
-        <input id="intake-name" type="text" placeholder="Your name" />
-
-        <label for="intake-email">Email</label>
-        <input id="intake-email" type="email" placeholder="you@example.com" />
-
-        <label for="intake-biz">Business / Project</label>
-        <input id="intake-biz" type="text" placeholder="Brand, venue, startup, etc." />
-
-        <label for="intake-type">What lane fits best?</label>
-        <select id="intake-type">
-          <option value="Apps & Custom Builds">Apps &amp; custom builds</option>
-          <option value="AI Automation & Workflows">AI automation &amp; workflows</option>
-          <option value="Web3 / Solana / Stablecoin Flows">Web3 / Solana / stablecoin flows</option>
-          <option value="Ticketing & Venue Systems">Ticketing &amp; venue systems</option>
-          <option value="DFS Tools & Promo Systems">DFS tools &amp; promo systems</option>
-          <option value="Other / Not sure yet">Other / not sure yet</option>
-        </select>
-
-        <label for="intake-budget">Rough budget / range (optional)</label>
-        <input id="intake-budget" type="text" placeholder="e.g. 5–10k, 20–40k, etc." />
-
-        <label for="intake-notes">What are you trying to do?</label>
-        <textarea
-          id="intake-notes"
-          placeholder="A few lines about the problem, current setup, and timeline."
-        ></textarea>
-
-        <button
-          type="submit"
-          class="btn-primary btn-secondary"
-          style="width: 100%; justify-content: center;"
+    <!-- Mobile nav -->
+    <div id="mobile-menu" class="md:hidden hidden border-t bg-white">
+      <div class="px-4 pt-3 pb-4 space-y-2 text-[15px] font-semibold">
+        <a href="/san-diego-app-development" class="block py-1">Apps</a>
+        <a href="/san-diego-ai-automation" class="block py-1">AI</a>
+        <a href="/san-diego-solana-payments" class="block py-1">Solana</a>
+        <a href="/venue-ticketing-systems" class="block py-1">Ticketing</a>
+        <a href="/north-county-software-development" class="block py-1">North County</a>
+        <a href="/pricing" class="block py-1">Pricing</a>
+        <a href="/blog" class="block py-1">Blog</a>
+        <a
+          href="tel:7735441231"
+          class="mt-2 inline-flex w-full justify-center bg-black text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-900"
         >
-          SEND TO PJ
-        </button>
-        <div class="intake-note">
-          This doesn’t auto-create a ticket — it just drafts an email to PJ with your answers so you both
-          start on the same page.
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- BLOG SECTION -->
-  <section class="section" id="blog">
-    <div class="section-title">Blog · Experiments · Coastal Dispatches</div>
-    <div class="blog-list">
-      <div class="card">
-        <div class="blog-card-title">AI Tools That Actually Help San Diego Small Businesses</div>
-        <div class="blog-card-meta">AI · Automation · Local ops</div>
-        <p class="card-small">
-          A short guide to using AI for intake, follow-up, and ops without
-          burning your whole week learning five new platforms.
-        </p>
-      </div>
-      <div class="card">
-        <div class="blog-card-title">
-          <strong style="background:linear-gradient(to right,var(--solana-purple),var(--solana-green));-webkit-background-clip:text;color:transparent;">
-            Ocean Tech Guide · Solana Payments
-          </strong>
-        </div>
-        <div class="blog-card-meta">Web3 · Solana · Payments</div>
-        <p class="card-small">
-          Fees, speed, settlement, and how a few basis points saved can
-          actually matter to San Diego venues, agencies, and dev shops over a 12–24 month edge.
-        </p>
-      </div>
-      <div class="card">
-        <div class="blog-card-title">North County Ticketing Experiments</div>
-        <div class="blog-card-meta">Tickets · Venues · Live Rooms</div>
-        <p class="card-small">
-          Sketching how SideGuy wants to route more value to local rooms with
-          faster, cleaner flows — and less platform drag.
-        </p>
+          Text PJ → 773-544-1231
+        </a>
       </div>
     </div>
+  </nav>
 
-    <p
-      class="section-lead"
-      style="margin-top: 18px; font-size: 0.8rem; color: var(--muted);"
-    >
-      SideGuy Solutions operates as a San Diego software development and AI automation partner for
-      North County businesses — from Encinitas and Solana Beach to Del Mar and Carlsbad — building
-      custom apps, web platforms, Web3 / Solana payment flows, and 402 Internet Payments for real operators, not tech bros.
-    </p>
-  </section>
-
-  <!-- SOLANA PAY SECTION -->
-  <section class="section" id="solana-pay">
-    <div class="section-title">Solana Pay · Side Guy Solutions</div>
-    <div class="two-col">
+  <!-- HERO with ocean vibes -->
+  <section class="ocean-hero pt-28 pb-20 px-6">
+    <div class="ocean-hero-inner max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <h2 class="section-subheading">Tip, support, or test flows in SOL or USDC.</h2>
-        <p class="section-lead">
-          Scan the code with Phantom or a Solana wallet to send any amount in SOL or USDC —
-          <strong>0% platform fees</strong>, <strong>instant settlement</strong>, and
-          a live example of how SideGuy thinks about payments.
+        <p class="uppercase tracking-[0.22em] text-[11px] text-sky-100 mb-3">
+          San Diego • North County • Coastal Operators
         </p>
-        <div class="pill-row">
-          <span class="pill-tag">Solana Pay demo</span>
-          <span class="pill-tag">USDC / SOL</span>
-          <span class="pill-tag">0% platform fees</span>
+        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-4 drop-shadow-xl">
+          Where code<br class="hidden md:block" />
+          meets the coastline.
+        </h1>
+        <p class="text-lg md:text-2xl text-sky-100/90 mb-6">
+          SideGuy Solutions is your
+          <span class="font-semibold">coastal tech concierge</span> — building custom apps, AI automation,
+          Solana &amp; 402 payments, and ticketing systems for venues, brands, and operators from
+          <span class="font-semibold">San Diego to North County</span>.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+          <a
+            href="https://forms.sideguysolutions.com/intake"
+            class="ocean-pill px-8 py-4 rounded-full text-lg font-bold text-black flex items-center justify-center hover:brightness-110 transition"
+          >
+            Project Intake (60 sec)
+          </a>
+          <a
+            href="tel:7735441231"
+            class="border border-sky-100/70 text-sky-50 px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center hover:bg-sky-50/10 transition"
+          >
+            Text PJ → 773-544-1231
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-2 text-xs text-sky-100/80">
+          <span class="ocean-tag border border-sky-200/40">San Diego software</span>
+          <span class="ocean-tag border border-sky-200/40">North County apps</span>
+          <span class="ocean-tag border border-sky-200/40">Solana &amp; 402 payments</span>
+          <span class="ocean-tag border border-sky-200/40">Ticketing for venues</span>
+        </div>
+
+        <p class="mt-4 text-xs text-sky-100/70">
+          Encinitas • Solana Beach • Carlsbad • Del Mar • Oceanside
+        </p>
+      </div>
+
+      <!-- Right side: “ocean card” -->
+      <div class="relative">
+        <div class="rounded-3xl bg-slate-900/70 border border-sky-400/40 shadow-2xl p-6 md:p-7 backdrop-blur">
+          <p class="text-xs uppercase tracking-[0.18em] text-sky-300 mb-3">
+            Ocean Tech Guide · 2025
+          </p>
+          <h2 class="text-xl md:text-2xl font-bold text-sky-50 mb-3">
+            Built for operators, not just “startups.”
+          </h2>
+          <p class="text-sm text-sky-100/90 mb-4">
+            Venues, bars, agencies, service businesses, and founders who need
+            <span class="font-semibold">systems that match how their world actually works</span> — not a vague SaaS template.
+          </p>
+          <ul class="space-y-2 text-sm text-sky-100/90 mb-4">
+            <li>• Apps and portals that feel like an extension of your roster</li>
+            <li>• AI flows that quietly handle lead routing and follow-up</li>
+            <li>• Solana &amp; 402 rails that stop bleeding processing fees</li>
+            <li>• Ticketing &amp; DFS tools tuned for people who live on slates and lineups</li>
+          </ul>
+          <p class="text-xs text-sky-200/80">
+            You don’t need a 20-slide deck. You need a SideGuy you can text.
+          </p>
         </div>
       </div>
-      <div class="card" style="text-align:center;">
-        <h3>◎ Scan with Phantom</h3>
-        <div id="solana-pay-qr" style="margin:16px auto; max-width:260px;"></div>
-        <p class="card-small">
-          Wallet: <code>9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5</code><br/>
-          Powered by Solana — the fastest chain.
+    </div>
+
+    <!-- Ocean wave divider -->
+    <div class="ocean-divider mt-10">
+      <svg preserveAspectRatio="none" viewBox="0 0 1200 120">
+        <path
+          d="M0,0 C300,90 900,-60 1200,20 L1200,120 L0,120 Z"
+          fill="#f9fafb"
+        />
+      </svg>
+    </div>
+  </section>
+
+  <!-- CORE SERVICE LANES -->
+  <section class="py-16 px-6 bg-slate-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-black text-center mb-10">What SideGuy actually does</h2>
+      <div class="grid md:grid-cols-4 gap-6 text-sm md:text-base text-slate-800">
+
+        <a href="/san-diego-app-development" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="text-lg font-bold mb-1">Apps</h3>
+          <p>Custom web &amp; mobile apps for customers and internal teams.</p>
+          <p class="mt-3 text-xs text-slate-500">San Diego app development • internal tools • portals</p>
+        </a>
+
+        <a href="/san-diego-ai-automation" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="text-lg font-bold mb-1">AI Automation</h3>
+          <p>Lead routing, intake flows, internal assistants that remove busywork.</p>
+          <p class="mt-3 text-xs text-slate-500">AI for small businesses • ops automation</p>
+        </a>
+
+        <a href="/san-diego-solana-payments" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="text-lg font-bold mb-1">Solana &amp; 402</h3>
+          <p>USDC deposits, Solana Pay, and 402 internet-native payment flows.</p>
+          <p class="mt-3 text-xs text-slate-500">Stablecoins • Solana rails • experimental 402</p>
+        </a>
+
+        <a href="/venue-ticketing-systems" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="text-lg font-bold mb-1">Ticketing</h3>
+          <p>Hybrid ticketing &amp; VIP systems for venues, bars, and live rooms.</p>
+          <p class="mt-3 text-xs text-slate-500">North County venues • live rooms • promoters</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NORTH COUNTY + OPERATOR BRAIN -->
+  <section class="py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-3xl font-black mb-4">North County roots. Operator brain.</h2>
+        <p class="text-lg text-slate-700 mb-4">
+          If your life lives between <strong>Solana Beach, Encinitas, Carlsbad, and Del Mar</strong>,
+          your tech should feel like it grew up here too.
+        </p>
+        <p class="text-base text-slate-700 mb-4">
+          SideGuy is built for GMs, owners, and founders who juggle:
+        </p>
+        <ul class="space-y-2 text-slate-700 text-sm md:text-base">
+          <li>• Shows, tables, tickets, and headcounts</li>
+          <li>• Clients, retainers, and invoices</li>
+          <li>• Staff, shifts, and repeat regulars</li>
+          <li>• Wild ideas that don’t fit in a standard SaaS box</li>
+        </ul>
+      </div>
+
+      <div class="rounded-3xl bg-slate-900 text-slate-50 p-7 shadow-2xl border border-sky-400/40">
+        <h3 class="text-2xl font-bold mb-3">What a “SideGuy” actually is</h3>
+        <p class="text-sm md:text-base text-slate-100 mb-3">
+          A SideGuy is the person you text when:
+        </p>
+        <ul class="space-y-2 text-sm md:text-base text-slate-100 mb-4">
+          <li>✓ Something breaks before doors</li>
+          <li>✓ You’re hatching a new night, offer, or product</li>
+          <li>✓ You’re tired of getting rinsed by fees and bad tools</li>
+          <li>✓ You want an edge but don’t want a 20-slide pitch deck</li>
+        </ul>
+        <p class="text-xs text-slate-200">
+          That’s the entire job: be on your side, build the tech, keep it coastal.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- MODALS: TOOL CALCS + EST -->
-  <div id="modal-solana" class="modal">
-    <div class="modal-content">
-      <h2>Solana Processing Savings</h2>
-
-      <label for="solana-volume">Monthly Volume ($)</label>
-      <input id="solana-volume" type="number" placeholder="e.g. 25,000" />
-
-      <label for="solana-fee">Your Current Fee %</label>
-      <input id="solana-fee" type="number" step="0.01" placeholder="e.g. 2.9" />
-
-      <button class="calc-btn" onclick="runSolanaCalc()">Calculate</button>
-
-      <div id="solana-result" class="result-box"></div>
-
-      <button class="close-btn" onclick="closeSolana()">Close</button>
+  <!-- QUICK LINKS / LANES CTA -->
+  <section class="py-16 px-6 bg-sky-50">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-black mb-4">Pick a lane and start small.</h2>
+      <p class="text-lg text-slate-700 mb-8">
+        Most projects start as a <span class="font-semibold">Starter Sprint</span> — something small, real,
+        and shippable in weeks, not months.
+      </p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a
+          href="/pricing"
+          class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
+        >
+          View pricing ranges
+        </a>
+        <a
+          href="/san-diego-ai-automation"
+          class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
+        >
+          Learn about AI automation
+        </a>
+        <a
+          href="/san-diego-solana-payments"
+          class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
+        >
+          Learn about Solana payments
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div id="modal-dfs" class="modal">
-    <div class="modal-content">
-      <h2>DFS Promo Multiplier</h2>
+  <!-- BLOG / CONTENT STRIP -->
+  <section class="py-16 px-6 bg-white" id="blog-excerpt">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-black mb-8 text-center">Coastal dispatches &amp; experiments</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-sm md:text-base">
+        <a href="/blog" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="font-bold mb-2">AI tools that actually help local businesses</h3>
+          <p class="text-slate-600">
+            A short guide to using AI for intake, follow-up, and ops without burning your whole week learning five new platforms.
+          </p>
+          <p class="mt-3 text-xs text-slate-500">AI · Automation · Ops</p>
+        </a>
+        <a href="/blog" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="font-bold mb-2">Ocean Tech Guide · Solana payments</h3>
+          <p class="text-slate-600">
+            Fees, speed, settlement, and how a few basis points saved can actually matter to venues, agencies, and dev shops over 12–24 months.
+          </p>
+          <p class="mt-3 text-xs text-slate-500">Solana · Payments · 402</p>
+        </a>
+        <a href="/blog" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+          <h3 class="font-bold mb-2">North County ticketing experiments</h3>
+          <p class="text-slate-600">
+            Sketching how to route more value to local rooms with faster, cleaner flows and less platform drag.
+          </p>
+          <p class="mt-3 text-xs text-slate-500">Tickets · Venues · Live rooms</p>
+        </a>
+      </div>
 
-      <label for="dfs-leg1">Leg 1 Odds (e.g. -110)</label>
-      <input id="dfs-leg1" type="text" />
-
-      <label for="dfs-leg2">Leg 2 Odds</label>
-      <input id="dfs-leg2" type="text" />
-
-      <label for="dfs-boost">Boost % (optional)</label>
-      <input id="dfs-boost" type="number" placeholder="e.g. 20" />
-
-      <button class="calc-btn" onclick="runDFScalc()">Calculate EV</button>
-
-      <div id="dfs-result" class="result-box"></div>
-
-      <button class="close-btn" onclick="closeDFS()">Close</button>
+      <p class="mt-6 text-xs text-slate-500">
+        SideGuy Solutions operates as a San Diego software development and AI automation partner for North County
+        businesses — from Encinitas and Solana Beach to Del Mar and Carlsbad — building custom apps, web platforms,
+        Solana payment flows, and 402 internet payments for real operators, not tech bros.
+      </p>
     </div>
-  </div>
+  </section>
 
-  <div id="modal-tickets" class="modal">
-    <div class="modal-content">
-      <h2>Ticket Flow Optimizer</h2>
-
-      <label for="ticket-price">Ticket Price ($)</label>
-      <input id="ticket-price" type="number" />
-
-      <label for="ticket-fee">Platform Fee %</label>
-      <input id="ticket-fee" type="number" step="0.1" />
-
-      <label for="ticket-cap">Venue Capacity</label>
-      <input id="ticket-cap" type="number" />
-
-      <button class="calc-btn" onclick="runTicketCalc()">Optimize</button>
-
-      <div id="ticket-result" class="result-box"></div>
-
-      <button class="close-btn" onclick="closeTickets()">Close</button>
+  <!-- FINAL CTA -->
+  <section class="py-20 px-6 bg-slate-900 text-slate-50 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-4xl font-black mb-5">Need a SideGuy on your roster?</h2>
+      <p class="text-lg md:text-2xl mb-8 text-slate-100">
+        If you’re in San Diego or North County and need a real tech partner,
+        SideGuy is your coastal concierge.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://forms.sideguysolutions.com/intake"
+          class="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 transition"
+        >
+          Project Intake (60 sec)
+        </a>
+        <a
+          href="tel:7735441231"
+          class="border border-slate-100 px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 hover:text-black transition"
+        >
+          Text PJ → 773-544-1231
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div id="modal-estimator" class="modal">
-    <div class="modal-content">
-      <h2>Project Quickscope Estimator</h2>
+  <!-- GLOBAL FOOTER (Extended SEO Footer F3) -->
+  <footer class="py-10 px-6 border-t bg-white text-slate-700 text-sm">
+    <div class="max-w-6xl mx-auto space-y-4 text-center md:text-left">
+      <p class="font-semibold text-base">
+        SideGuy Solutions — San Diego Coastal Tech Concierge
+      </p>
 
-      <label for="est-type">Project lane</label>
-      <select id="est-type">
-        <option value="Apps">Apps &amp; custom builds</option>
-        <option value="AI">AI automation &amp; workflows</option>
-        <option value="Web3">Web3 / Solana flows</option>
-        <option value="Tickets">Ticketing &amp; venues</option>
-        <option value="DFS">DFS tools &amp; promo systems</option>
-        <option value="Other">Other / not sure yet</option>
-      </select>
+      <div class="md:flex md:items-start md:justify-between gap-6">
+        <div class="mb-4 md:mb-0">
+          <p class="font-semibold mb-1">Services:</p>
+          <p>
+            <a href="/san-diego-app-development" class="hover:text-sky-600">Apps</a> |
+            <a href="/san-diego-ai-automation" class="hover:text-sky-600">AI Automation</a> |
+            <a href="/san-diego-solana-payments" class="hover:text-sky-600">Solana Payments &amp; 402</a> |
+            <a href="/venue-ticketing-systems" class="hover:text-sky-600">Ticketing Systems</a> |
+            <a href="/north-county-software-development" class="hover:text-sky-600">North County Software</a> |
+            <a href="/pricing" class="hover:text-sky-600">Pricing</a> |
+            <a href="/blog" class="hover:text-sky-600">Blog</a>
+          </p>
+        </div>
 
-      <label for="est-size">Scope size</label>
-      <select id="est-size">
-        <option value="Small">Small (1–2 key features)</option>
-        <option value="Medium">Medium (product with a few modules)</option>
-        <option value="Large">Large (platform or multi-app)</option>
-      </select>
+        <div class="mb-4 md:mb-0">
+          <p class="font-semibold mb-1">Locations Served:</p>
+          <p>
+            San Diego • Solana Beach • Encinitas • Cardiff • Leucadia • Carlsbad • Del Mar • Oceanside
+          </p>
+        </div>
 
-      <label for="est-urgency">Timeline vibe</label>
-      <select id="est-urgency">
-        <option value="Chill">Chill (no rush)</option>
-        <option value="Normal">Normal (standard pace)</option>
-        <option value="Rush">Rush (compressed)</option>
-      </select>
+        <div>
+          <p class="font-semibold mb-1">Contact:</p>
+          <p>
+            Text PJ → <a href="tel:7735441231" class="hover:text-sky-600 font-semibold">773-544-1231</a>
+          </p>
+        </div>
+      </div>
 
-      <button class="calc-btn" onclick="runEstimator()">Get Rough Band</button>
-
-      <div id="est-result" class="result-box"></div>
-
-      <button class="close-btn" onclick="closeEstimator()">Close</button>
+      <p class="text-slate-500 text-xs mt-2">
+        © 2025 SideGuy Solutions
+      </p>
     </div>
-  </div>
+  </footer>
 
-  <!-- THREE.js CDN -->
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <!-- Solana Pay + QR libs -->
-  <script src="https://unpkg.com/@solana/pay@0.2.5/dist/umd/index.iife.min.js"></script>
-  <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
-
+  <!-- Mobile nav script -->
   <script>
-    // Day / night tint
-    (function setDayNight() {
-      try {
-        const hour = new Date().getHours();
-        const root = document.documentElement;
-        if (hour >= 6 && hour < 18) {
-          root.style.setProperty("--bg", "var(--bg-day)");
-          root.style.setProperty("--accent", "#38bdf8");
-        } else {
-          root.style.setProperty("--bg", "var(--bg-night)");
-          root.style.setProperty("--accent", "var(--accent-night)");
-        }
-      } catch (err) {
-        console.warn("Day/night tint issue:", err);
-      }
-    })();
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('mobile-menu-icon-open');
+    const iconClose = document.getElementById('mobile-menu-icon-close');
 
-    // Summon PJ – contact helper
-    function openContactPortal() {
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href =
-          "sms:+17735441231?&body=" +
-          encodeURIComponent(
-            "Hey PJ, I just summoned the coastal portal from SideGuySolutions.com — let’s build something."
-          );
-      } else {
-        const subject = encodeURIComponent("Summon PJ · SideGuy Solutions (San Diego)");
-        const body = encodeURIComponent(
-          "Hey PJ,\n\n" +
-          "I just tapped the coastal portal on SideGuySolutions.com.\n\n" +
-          "Here’s what I’m looking at:\n" +
-          "- Tech build / app / site\n" +
-          "- Tickets / live events\n" +
-          "- DFS promos / systems\n" +
-          "- Solana / crypto payments\n" +
-          "- AI automation\n" +
-          "- 402 / Internet payments\n" +
-          "- Something else entirely\n\n" +
-          "Reply when you’re free and let’s spin this up.\n\n" +
-          "— Sent from the coastal portal 🌊"
-        );
-        const mailto =
-          "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-        window.location.href = mailto;
-      }
-    }
+    if (toggle && menu && iconOpen && iconClose) {
+      toggle.addEventListener('click', () => {
+        const hidden = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !hidden === false ? true : false); // keep it simple: just toggle
+        menu.classList.toggle('hidden');
 
-    function triggerPortal() {
-      document.body.classList.add("portal-burst-flash");
-      setTimeout(() => document.body.classList.remove("portal-burst-flash"), 450);
-
-      const ring = document.createElement("div");
-      ring.className = "portal-burst-ring";
-      document.body.appendChild(ring);
-      setTimeout(() => ring.remove(), 900);
-
-      setTimeout(openContactPortal, 480);
-    }
-
-    function scrollToIntake(prefillLane) {
-      const select = document.getElementById("intake-type");
-      if (select && prefillLane) {
-        [...select.options].forEach((opt) => {
-          if (opt.value === prefillLane) select.value = opt.value;
-        });
-      }
-      const el = document.getElementById("intake");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-
-    // Toolkit modals
-    function openSavingsCalc() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "flex";
-    }
-    function closeSolana() {
-      const m = document.getElementById("modal-solana");
-      if (m) m.style.display = "none";
-    }
-
-    function openDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "flex";
-    }
-    function closeDFS() {
-      const m = document.getElementById("modal-dfs");
-      if (m) m.style.display = "none";
-    }
-
-    function openTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "flex";
-    }
-    function closeTickets() {
-      const m = document.getElementById("modal-tickets");
-      if (m) m.style.display = "none";
-    }
-
-    function openEstimator() {
-      const m = document.getElementById("modal-estimator");
-      if (m) m.style.display = "flex";
-    }
-    function closeEstimator() {
-      const m = document.getElementById("modal-estimator");
-      if (m) m.style.display = "none";
-    }
-
-    // Solana savings calc
-    function runSolanaCalc() {
-      const volEl = document.getElementById("solana-volume");
-      const feeEl = document.getElementById("solana-fee");
-      const outEl = document.getElementById("solana-result");
-      if (!volEl || !feeEl || !outEl) return;
-
-      const vol = parseFloat(volEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      outEl.style.display = "block";
-
-      if (!vol || !feePct) {
-        outEl.textContent = "Add both your monthly volume and current fee % to see the savings.";
-        return;
-      }
-
-      const currentRate = feePct / 100;
-      const solanaRate = 0.003;
-
-      if (currentRate <= solanaRate) {
-        outEl.textContent =
-          "You’re already near Solana-level fees. Next step is layering yield, auto-pay, or stablecoin rails — that’s PJ’s lane.";
-        return;
-      }
-
-      const currentMonthlyFees = vol * currentRate;
-      const solanaMonthlyFees = vol * solanaRate;
-      const monthlySavings = currentMonthlyFees - solanaMonthlyFees;
-      const yearlySavings = monthlySavings * 12;
-
-      outEl.innerHTML =
-        "At $" +
-        vol.toLocaleString() +
-        " in monthly volume and " +
-        feePct.toFixed(2) +
-        "% fees, you’re paying about <strong>$" +
-        currentMonthlyFees.toFixed(0) +
-        "/month</strong> in fees.<br><br>" +
-        "Routing through Solana rails (~0.3%) drops that to roughly <strong>$" +
-        solanaMonthlyFees.toFixed(0) +
-        "/month</strong>, saving about <strong>$" +
-        monthlySavings.toFixed(0) +
-        "/month</strong> — or around <strong>$" +
-        yearlySavings.toFixed(0) +
-        "/year</strong>.<br><br>" +
-        "Tap the portal and PJ can map this into a real San Diego-friendly flow.";
-    }
-
-    // DFS calc
-    function americanToDecimal(oddsStr) {
-      const cleaned = (oddsStr || "").toString().trim().replace(/[^\d+-]/g, "");
-      const odds = parseFloat(cleaned);
-      if (!odds || odds === 0) return null;
-      if (odds > 0) return odds / 100 + 1;
-      return 100 / Math.abs(odds) + 1;
-    }
-
-    function runDFScalc() {
-      const leg1El = document.getElementById("dfs-leg1");
-      const leg2El = document.getElementById("dfs-leg2");
-      const boostEl = document.getElementById("dfs-boost");
-      const outEl = document.getElementById("dfs-result");
-      if (!leg1El || !leg2El || !outEl) return;
-
-      const leg1 = americanToDecimal(leg1El.value);
-      const leg2 = americanToDecimal(leg2El.value);
-      const boostPct = parseFloat(boostEl.value || "0");
-
-      outEl.style.display = "block";
-
-      if (!leg1 || !leg2) {
-        outEl.textContent = "Use American odds like -110 or +120 for each leg.";
-        return;
-      }
-
-      const comboDec = leg1 * leg2;
-      const boostedDec = comboDec * (1 + boostPct / 100);
-
-      function decToAmerican(dec) {
-        if (dec <= 1) return 0;
-        const imp = dec - 1;
-        if (imp >= 1) {
-          return "+" + Math.round(imp * 100);
-        } else {
-          return "-" + Math.round(100 / imp);
-        }
-      }
-
-      const comboAm = decToAmerican(comboDec);
-      const comboBoostAm = decToAmerican(boostedDec);
-
-      outEl.innerHTML =
-        "Raw 2-leg combo ≈ <strong>" +
-        comboDec.toFixed(2) +
-        "x</strong> (about " +
-        comboAm +
-        ").<br>" +
-        "With a <strong>" +
-        (boostPct || 0).toFixed(0) +
-        "% boost</strong>, you’re around <strong>" +
-        boostedDec.toFixed(2) +
-        "x</strong> (≈ " +
-        comboBoostAm +
-        ").<br><br>" +
-        "Next step is stake sizing, promo sequencing, and slate selection — PJ helps turn it into a calm system, not chaos.";
-    }
-
-    // Ticket calc
-    function runTicketCalc() {
-      const priceEl = document.getElementById("ticket-price");
-      const feeEl = document.getElementById("ticket-fee");
-      const capEl = document.getElementById("ticket-cap");
-      const outEl = document.getElementById("ticket-result");
-      if (!priceEl || !feeEl || !capEl || !outEl) return;
-
-      const price = parseFloat(priceEl.value || "0");
-      const feePct = parseFloat(feeEl.value || "0");
-      const cap = parseInt(capEl.value || "0", 10);
-
-      outEl.style.display = "block";
-
-      if (!price || !feePct || !cap) {
-        outEl.textContent =
-          "Add price, platform fee %, and venue capacity to see how the room pencils out.";
-        return;
-      }
-
-      const feePerTicket = price * (feePct / 100);
-      const grossPerTicket = price + feePerTicket;
-      const grossIfFull = cap * grossPerTicket;
-      const totalFees = cap * feePerTicket;
-
-      const improvedFeePct = Math.max(feePct - 2, 0);
-      const newFeePerTicket = price * (improvedFeePct / 100);
-      const newTotalFees = cap * newFeePerTicket;
-      const savings = totalFees - newTotalFees;
-
-      outEl.innerHTML =
-        "Full room at $" +
-        price.toFixed(2) +
-        " + " +
-        feePct.toFixed(1) +
-        "% fees (" +
-        cap +
-        " tickets) means roughly <strong>$" +
-        totalFees.toFixed(0) +
-        "</strong> in platform fees and about <strong>$" +
-        grossIfFull.toFixed(0) +
-        "</strong> in gross volume.<br><br>" +
-        "If you shave ~2% off fees with a cleaner SideGuy flow, that’s around <strong>$" +
-        savings.toFixed(0) +
-        "</strong> that could stay with the venue, talent, or bar — not the platform.<br><br>" +
-        "That’s the North County ticketing experiment PJ wants to build with you.";
-    }
-
-    // Estimator
-    function runEstimator() {
-      const typeEl = document.getElementById("est-type");
-      const sizeEl = document.getElementById("est-size");
-      const urgEl = document.getElementById("est-urgency");
-      const outEl = document.getElementById("est-result");
-      if (!typeEl || !sizeEl || !urgEl || !outEl) return;
-
-      const lane = typeEl.value || "Other";
-      const size = sizeEl.value || "Small";
-      const urg = urgEl.value || "Normal";
-
-      let weeksMin = 2;
-      let weeksMax = 4;
-      let budgetMin = 5;
-      let budgetMax = 10;
-
-      if (size === "Medium") {
-        weeksMin = 4;
-        weeksMax = 8;
-        budgetMin = 10;
-        budgetMax = 30;
-      } else if (size === "Large") {
-        weeksMin = 8;
-        weeksMax = 16;
-        budgetMin = 30;
-        budgetMax = 80;
-      }
-
-      if (urg === "Rush") {
-        weeksMin = Math.max(1, Math.round(weeksMin * 0.7));
-        weeksMax = Math.round(weeksMax * 0.85);
-        budgetMin = Math.round(budgetMin * 1.2);
-        budgetMax = Math.round(budgetMax * 1.35);
-      } else if (urg === "Chill") {
-        weeksMin = Math.round(weeksMin * 1.1);
-        weeksMax = Math.round(weeksMax * 1.3);
-      }
-
-      const laneLabel = {
-        Apps: "apps & custom builds",
-        AI: "AI automation & workflows",
-        Web3: "Web3 / Solana rails",
-        Tickets: "ticketing & venue systems",
-        DFS: "DFS tools & promo systems",
-        Other: "misc / not sure yet"
-      }[lane] || "misc / not sure yet";
-
-      outEl.style.display = "block";
-      outEl.innerHTML =
-        "For <strong>" +
-        laneLabel +
-        "</strong> at a <strong>" +
-        size.toLowerCase() +
-        "</strong> scope and a <strong>" +
-        urg.toLowerCase() +
-        "</strong> timeline, this smells like roughly a <strong>" +
-        weeksMin +
-        "–" +
-        weeksMax +
-        " week</strong> build in the <strong>$" +
-        budgetMin +
-        "k–$" +
-        budgetMax +
-        "k</strong> band.<br><br>" +
-        "This isn’t a formal quote — it’s a quick scope to see if you’re in weekend-experiment territory or a real project. Tap the portal or fill the intake form and PJ will tighten it with you.";
-    }
-
-    // Simple CSS-only ocean (Three as optional visual engine)
-    (function initThreeBackground() {
-      const canvas = document.getElementById("ocean-canvas");
-      if (!canvas || !window.THREE) return;
-      try {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-          55,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          100
-        );
-        camera.position.set(0, 5, 10);
-        camera.lookAt(0, 0, 0);
-
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x020617, 1);
-
-        const geometry = new THREE.PlaneGeometry(40, 40, 60, 60);
-        geometry.rotateX(-Math.PI / 2);
-
-        const material = new THREE.MeshStandardMaterial({
-          color: 0x0f172a,
-          roughness: 0.4,
-          metalness: 0.1
-        });
-
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-
-        const hemi = new THREE.HemisphereLight(0x38bdf8, 0x020617, 0.7);
-        scene.add(hemi);
-
-        const dir = new THREE.DirectionalLight(0x14f195, 0.4);
-        dir.position.set(4, 10, 2);
-        scene.add(dir);
-
-        const clock = new THREE.Clock();
-
-        function animate() {
-          requestAnimationFrame(animate);
-          const t = clock.getElapsedTime();
-
-          const pos = geometry.attributes.position;
-          for (let i = 0; i < pos.count; i++) {
-            const x = pos.getX(i);
-            const z = pos.getZ(i);
-            const y =
-              Math.sin(x * 0.35 + t * 1.1) * 0.25 +
-              Math.sin(z * 0.25 + t * 0.9) * 0.2;
-            pos.setY(i, y);
-          }
-          pos.needsUpdate = true;
-          geometry.computeVertexNormals();
-
-          camera.position.x = Math.sin(t * 0.18) * 0.6;
-          camera.position.z = 10 + Math.sin(t * 0.12) * 0.4;
-          camera.lookAt(0, 0, 0);
-
-          renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener("resize", () => {
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
-          renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-      } catch (err) {
-        console.warn("Three.js ocean fallback to CSS only:", err);
-      }
-    })();
-
-    // Audio toggle
-    function initAudioToggle() {
-      const btn = document.getElementById("audio-toggle");
-      const audio = document.getElementById("ocean-audio");
-      if (!btn || !audio) return;
-
-      let active = false;
-      function updateLabel() {
-        btn.querySelector("span").textContent = active ? "Audio On" : "Ocean Audio";
-      }
-
-      btn.addEventListener("click", async () => {
-        try {
-          if (!audio.src) {
-            alert("Add an ocean-loop.mp3 file to the site to enable sound.");
-            return;
-          }
-          if (!active) {
-            await audio.play();
-            active = true;
-          } else {
-            audio.pause();
-            active = false;
-          }
-          updateLabel();
-        } catch (err) {
-          console.warn("Audio issue:", err);
-        }
+        iconOpen.classList.toggle('hidden');
+        iconClose.classList.toggle('hidden');
       });
-
-      updateLabel();
     }
-
-    // Solana Pay QR
-    function initSolanaPayQR() {
-      try {
-        if (!window.SolanaPay || !window.QRCodeStyling) return;
-        const recipient = new SolanaPay.PublicKey("9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5");
-        const amount = null;
-        const label = "Side Guy Solutions";
-        const message = "Thanks for the support 🏄‍♂️";
-
-        const url = SolanaPay.createTransfer({
-          recipient,
-          amount,
-          splToken: undefined,
-          reference: null,
-          label,
-          message
-        });
-
-        const qr = new QRCodeStyling({
-          width: 260,
-          height: 260,
-          data: url.toString(),
-          margin: 12,
-          qrOptions: { errorCorrectionLevel: "H" },
-          backgroundOptions: { color: "#020617" },
-          dotsOptions: { color: "#14f195", type: "square" },
-          cornersSquareOptions: { color: "#9945ff", type: "extra-rounded" }
-        });
-
-        const el = document.getElementById("solana-pay-qr");
-        if (el) qr.append(el);
-      } catch (err) {
-        console.warn("Solana Pay QR init error:", err);
-      }
-    }
-
-    // DOM wiring
-    document.addEventListener("DOMContentLoaded", function () {
-      const summonBtn = document.getElementById("summon-btn");
-      const toolkitBtn = document.getElementById("show-toolkit");
-      const intakeForm = document.getElementById("intake-form");
-
-      if (summonBtn) {
-        summonBtn.addEventListener("click", function () {
-          triggerPortal();
-        });
-      }
-
-      if (toolkitBtn) {
-        toolkitBtn.addEventListener("click", function () {
-          const tk = document.getElementById("toolkit");
-          if (tk) tk.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      }
-
-      const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
-      navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-          const targetId = this.getAttribute("href");
-          if (!targetId || !targetId.startsWith("#")) return;
-          e.preventDefault();
-          const target = document.querySelector(targetId);
-          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      });
-
-      if (intakeForm) {
-        intakeForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const name = (document.getElementById("intake-name") || {}).value || "";
-          const email = (document.getElementById("intake-email") || {}).value || "";
-          const biz = (document.getElementById("intake-biz") || {}).value || "";
-          const type = (document.getElementById("intake-type") || {}).value || "Project";
-          const budget = (document.getElementById("intake-budget") || {}).value || "";
-          const notes = (document.getElementById("intake-notes") || {}).value || "";
-
-          const subject = encodeURIComponent("New Project Intake · " + type);
-          const bodyLines = [
-            "Hey PJ,",
-            "",
-            "You’ve got a new intake from SideGuySolutions.com:",
-            "",
-            "Name: " + name,
-            "Email: " + email,
-            "Business / Project: " + biz,
-            "Lane: " + type,
-            "Budget: " + budget,
-            "",
-            "Notes:",
-            notes,
-            "",
-            "Sent from the v25.1 Ocean Max portal 🌊"
-          ];
-          const body = encodeURIComponent(bodyLines.join("\n"));
-          const mailto =
-            "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-
-          window.location.href = mailto;
-        });
-      }
-
-      ["modal-solana", "modal-dfs", "modal-tickets", "modal-estimator"].forEach(
-        (id) => {
-          const m = document.getElementById(id);
-          if (!m) return;
-          m.addEventListener("click", function (e) {
-            if (e.target === m) m.style.display = "none";
-          });
-        }
-      );
-
-      initAudioToggle();
-      initSolanaPayQR();
-
-      // Timestamp label
-      const ts = document.getElementById("version-timestamp");
-      if (ts) {
-        const now = new Date();
-        const stamp =
-          now.getFullYear() +
-          "-" +
-          String(now.getMonth() + 1).padStart(2, "0") +
-          "-" +
-          String(now.getDate()).padStart(2, "0") +
-          " · " +
-          String(now.getHours()).padStart(2, "0") +
-          ":" +
-          String(now.getMinutes()).padStart(2, "0");
-        ts.textContent = "Updated live · " + stamp + " PT · Ocean Tech Guide";
-      }
-    });
   </script>
 
-  <footer>
-    SideGuy Solutions · San Diego &amp; North County · v25.1 Ocean Max ·
-    You don’t have a Side Guy? Soo 2024. Tap the portal if you know what’s good for you.
-  </footer>
 </body>
 </html>
