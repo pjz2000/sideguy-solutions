@@ -772,268 +772,98 @@ document.querySelectorAll(".orb-btn-wrap").forEach(wrap => {
   If you don't have a side guy in 2025, that's a choice.
 </footer>
 <!-- ============================= -->
-<!-- SCRIPTS · DATA + HELPERS      -->
+<!-- REAL OCEAN ENGINE · GODWAVE V2 -->
 <!-- ============================= -->
-
-<!-- Solana Pay + QR libraries (safe, no-op if blocked) -->
-<script src="https://unpkg.com/@solana/pay@0.2.5/dist/umd/index.iife.min.js"></script>
-<script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
 
 <script>
-  // Smooth intake scroll helper
-  function scrollToIntake(prefillLane) {
-    const select = document.getElementById("intake-type");
-    if (select && prefillLane) {
-      [...select.options].forEach(o => {
-        if (o.text === prefillLane || o.value === prefillLane) {
-          select.value = o.text || o.value;
-        }
-      });
-    }
-    const el = document.getElementById("intake");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+(function initOcean() {
+  const canvas = document.getElementById("ocean-canvas");
+  if (!canvas) return;
 
-  // SOL PRICE (public API with graceful fallback)
-  async function loadSolPrice() {
-    const el = document.getElementById("sol-price");
-    if (!el) return;
-    try {
-      const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-      const data = await res.json();
-      const price = data.solana && data.solana.usd;
-      if (price) {
-        el.textContent = "SOL: $" + price.toFixed(2) + " USD";
-      } else {
-        el.textContent = "SOL: data unavailable";
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    powerPreference: "high-performance",
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    55,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  camera.position.set(0, 3, 6);
+
+  // LIGHT
+  const light = new THREE.DirectionalLight(0x55aaff, 1.3);
+  light.position.set(5, 10, 5);
+  scene.add(light);
+
+  // OCEAN GEOMETRY
+  const geo = new THREE.PlaneGeometry(20, 20, 200, 200);
+  geo.rotateX(-Math.PI / 2);
+
+  // OCEAN MATERIAL (GPU SAFE)
+  const mat = new THREE.ShaderMaterial({
+    transparent: true,
+    uniforms: {
+      uTime: { value: 0 },
+      uWaveAmp: { value: 0.18 },
+      uSpeed: { value: 0.15 },
+      uDeep: { value: new THREE.Color("#001b33") },
+      uShallow: { value: new THREE.Color("#0057ff") },
+    },
+    vertexShader: `
+      uniform float uTime;
+      uniform float uWaveAmp;
+      uniform float uSpeed;
+
+      void main() {
+        vec3 p = position;
+        float wave = sin(p.x * 0.18 + uTime * uSpeed) * 
+                     cos(p.z * 0.22 + uTime * uSpeed * 1.4);
+        p.y += wave * uWaveAmp;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
       }
-    } catch (e) {
-      el.textContent = "SOL: offline snapshot";
-    }
-  }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      uniform vec3 uDeep;
+      uniform vec3 uShallow;
 
-  // SIMPLE SURF SNAPSHOT (fake but fun)
-  function loadSurfStatus() {
-    const el = document.getElementById("surf-status");
-    if (!el) return;
-    const presets = [
-      "2–3 ft glassy · light offshore · “coffee before calls” conditions",
-      "3–4 ft playful · bit of bump · good for clearing the head",
-      "1–2 ft soft · perfect for walking the dog & scheming builds",
-      "Shoulder to head-high · punchy · maybe schedule calls later"
-    ];
-    const pick = presets[Math.floor(Math.random() * presets.length)];
-    el.textContent = pick + " (sample North County read)";
-  }
-
-  // TICKET INVENTORY MOCK
-  function loadTicketInventory() {
-    const el = document.getElementById("ticket-inventory");
-    if (!el) return;
-    const total = 120;
-    const sold = 87;
-    const left = total - sold;
-    el.innerHTML =
-      "Example room: <strong>" + total + "</strong> cap · " +
-      "<strong>" + sold + "</strong> sold · <strong>" + left +
-      "</strong> left.<br />" +
-      "SideGuy can expose just enough of this so fans move without killing the vibe.";
-  }
-
-  // DFS EDGE MOCK
-  function loadDFS() {
-    const el = document.getElementById("dfs-edge");
-    if (!el) return;
-    const ev = (Math.random() * 6 - 1).toFixed(1); // -1.0 to +5.0
-    const text =
-      ev > 0
-        ? "This week’s sample promo stack smells like roughly +" + ev + "% EV if you treat it like a system."
-        : "This slate looks a little thin. Might be a week to play small or just take the boosts.";
-    el.textContent = text + " Educational only — no picks, just frameworks.";
-  }
-
-  // LEAD MAGNET EMAIL (Edge Map)
-  function openEdgeEmail() {
-    const subject = encodeURIComponent("12–24 Month Edge Map · SideGuy Solutions");
-    const body = encodeURIComponent(
-      "Hey PJ,\n\n" +
-      "I’d like a simple 12–24 month edge map.\n\n" +
-      "I’m a (founder / operator / venue / small biz) in:\n" +
-      "[your niche / city]\n\n" +
-      "Things I’m thinking about (apps, AI, tickets, payments, DFS, etc.):\n" +
-      "[short bullets]\n\n" +
-      "Goal:\n" +
-      "[what you want the next 12–24 months to look like]\n\n" +
-      "If it makes sense, send back a one-page outline and we’ll go from there.\n\n" +
-      "– Sent from SideGuySolutions.com 🌊"
-    );
-    window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-  }
-
-  // SUMMON PJ BUTTON FROM HERO
-  (function hookSummonPJ() {
-    const btn = document.getElementById("summonPJ");
-    if (!btn) return;
-    btn.addEventListener("click", () => {
-      const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
-      const body = encodeURIComponent(
-        "Hey PJ,\n\n" +
-        "I just summoned you from SideGuySolutions.com.\n\n" +
-        "Quick version of what I’m thinking:\n\n" +
-        "- [app / AI / tickets / Solana / DFS / something else]\n" +
-        "- [rough budget]\n" +
-        "- [when you’d like to move]\n\n" +
-        "Reply when you’re free and we’ll spin this up.\n\n" +
-        "– Sent from the coastal portal 🌊"
-      );
-      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-    });
-  })();
-
-  // INTAKE FORM → EMAIL DRAFT
-  (function hookIntake() {
-    const form = document.getElementById("intake-form");
-    if (!form) return;
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name   = document.getElementById("intake-name")?.value || "";
-      const email  = document.getElementById("intake-email")?.value || "";
-      const biz    = document.getElementById("intake-biz")?.value || "";
-      const lane   = document.getElementById("intake-type")?.value || "";
-      const budget = document.getElementById("intake-budget")?.value || "";
-      const notes  = document.getElementById("intake-notes")?.value || "";
-
-      const subject = encodeURIComponent("New Project Intake · " + lane);
-      const body = encodeURIComponent(
-        "Hey PJ,\n\n" +
-        "You’ve got a new intake from SideGuySolutions.com:\n\n" +
-        "Name: " + name + "\n" +
-        "Email: " + email + "\n" +
-        "Business / Project: " + biz + "\n" +
-        "Lane: " + lane + "\n" +
-        "Budget: " + budget + "\n\n" +
-        "Notes:\n" + notes + "\n\n" +
-        "Sent from Version 25.1 GODWAVE 🌊"
-      );
-
-      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-    });
-  })();
-
-  // SOLANA PAY MODAL + QR
-  function openSolanaPay() {
-    const modal = document.getElementById("solanaPayModal");
-    if (!modal) return;
-    modal.style.display = "flex";
-
-    // Only create QR once
-    if (!window.__sideGuyQR && window.SolanaPay && window.QRCodeStyling) {
-      try {
-        const recipient = new SolanaPay.PublicKey("9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5");
-        const url = SolanaPay.createTransfer({
-          recipient,
-          amount: null,
-          splToken: undefined,
-          reference: null,
-          label: "SideGuy Solutions",
-          message: "Thanks for the support 🏄‍♂️"
-        });
-
-        window.__sideGuyQR = new QRCodeStyling({
-          width: 220,
-          height: 220,
-          data: url.toString(),
-          margin: 10,
-          qrOptions: { errorCorrectionLevel: "H" },
-          backgroundOptions: { color: "#020617" },
-          dotsOptions: { color: "#14f195", type: "square" },
-          cornersSquareOptions: { color: "#14f195", type: "extra-rounded" }
-        });
-
-        const target = document.getElementById("solana-qrcode");
-        if (target) window.__sideGuyQR.append(target);
-      } catch (e) {
-        console.warn("Solana QR issue:", e);
+      void main() {
+        float m = gl_FragCoord.y / 900.0;
+        vec3 col = mix(uDeep, uShallow, m);
+        gl_FragColor = vec4(col, 0.9);
       }
-    }
+    `,
+  });
+
+  const ocean = new THREE.Mesh(geo, mat);
+  scene.add(ocean);
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.01;
+    mat.uniforms.uTime.value = t;
+
+    camera.position.x = Math.sin(t * 0.12) * 1.2;
+    camera.lookAt(0, 0, 0);
+
+    renderer.render(scene, camera);
   }
+  animate();
 
-  function closeSolanaPay() {
-    const modal = document.getElementById("solanaPayModal");
-    if (modal) modal.style.display = "none";
-  }
-
-  (function wireSolanaBtn() {
-    const btn = document.getElementById("solanaPayOpen");
-    if (!btn) return;
-    btn.addEventListener("click", openSolanaPay);
-
-    const modal = document.getElementById("solanaPayModal");
-    if (modal) {
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeSolanaPay();
-      });
-    }
-  })();
-
-  // AI BUBBLE TOGGLE
-  (function wireAIBubble() {
-    const toggle = document.getElementById("aiBubbleToggle");
-    const bubble = document.getElementById("aiBubble");
-    if (!toggle || !bubble) return;
-    bubble.style.display = "none";
-    toggle.addEventListener("click", () => {
-      bubble.style.display = (bubble.style.display === "none" || !bubble.style.display)
-        ? "block"
-        : "none";
-    });
-  })();
-
-  // ORB PULSE KEYFRAMES (if not already defined)
-</script>
-
-<style>
-  @keyframes orbPulse {
-    0%   { transform: scale(1);     box-shadow:0 0 40px rgba(20,241,149,0.7),0 0 120px rgba(153,69,255,0.5); }
-    50%  { transform: scale(1.05);  box-shadow:0 0 60px rgba(20,241,149,1),0 0 160px rgba(153,69,255,0.8); }
-    100% { transform: scale(1);     box-shadow:0 0 40px rgba(20,241,149,0.7),0 0 120px rgba(153,69,255,0.5); }
-  }
-</style>
-
-<script>
-  // INITIAL DATA LOAD
-  loadSolPrice();
-  loadSurfStatus();
-  loadTicketInventory();
-  loadDFS();
-</script>
-
-<!-- ============================= -->
-<!-- LOCAL BUSINESS SCHEMA (SEO)   -->
-<!-- ============================= -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "SideGuy Solutions",
-  "description": "Coastal tech concierge for apps, AI, Web3, Solana payments, ticketing, and systems in North County & San Diego.",
-  "url": "https://sideguysolutions.com/",
-  "telephone": "+1-773-544-1231",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Solana Beach",
-    "addressRegion": "CA",
-    "addressCountry": "US"
-  },
-  "areaServed": [
-    "San Diego",
-    "North County",
-    "Solana Beach",
-    "Encinitas",
-    "Del Mar",
-    "Carlsbad"
-  ]
-}
+  window.addEventListener("resize", () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+})();
 </script>
 
 </body>
