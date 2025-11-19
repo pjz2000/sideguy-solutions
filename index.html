@@ -1,263 +1,1191 @@
 <!--
   SideGuy Solutions
-  Version: 25.1-real-ocean-v11
-  Hero: "Where code meets the coastline."
-  Mode: Real Ocean Shader (V11) + Glowing Orbs + Solana Buttons
-  Author: PJ + Kromeon Dev Team (+ ChatGPT)
+  Version: 25.1 · GODWAVE EDITION
+  Timestamp: 2025-02-08 15:47 PST
+  Mode: Cinematic Ocean + Solana Pay + API Mesh + Level-3 Orbs
+  Author: PJ + ChatGPT
 -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
 
-  <!-- Core SEO -->
-  <meta
-    name="description"
-    content="SideGuy Solutions — coastal tech concierge for San Diego and North County. Custom apps, AI automations, Web3 & Solana payments, and digital systems built with PJ."
-  />
-  <meta
-    name="keywords"
-    content="San Diego app development, Solana payments, AI automations, coastal tech concierge, North County software, PJ SideGuy Solutions"
-  />
+  <!-- SEO + Schema will be finalized in PART 2 -->
+  <meta name="description" content="SideGuy Solutions — Coastal tech concierge for apps, AI, Web3, Solana payments, tickets, and systems. Real operators only — from North County to San Diego." />
+  <link rel="canonical" href="https://sideguysolutions.com/" />
 
+  <!-- Solana Colors -->
   <style>
     :root {
-      --bg: #02111f;
-      --ocean-blue: #0a6bff;
       --solana-green: #14f195;
-      --text: #e6f6ff;
-      --muted: #a7c7dd;
-      --card: rgba(0, 18, 32, 0.65);
-      --orb-glow: rgba(20, 241, 149, 0.45);
+      --solana-purple: #9945ff;
+      --solana-blue: #00bfff;
+      --bg: #020617;
+      --card: rgba(11, 18, 33, 0.88);
+      --glass: rgba(11, 18, 33, 0.58);
+      --text: #e5f2ff;
+      --soft: #94a3b8;
+      --muted: #64748b;
+      --radius: 18px;
+      --orb-glow: drop-shadow(0 0 25px rgba(20, 241, 149, 0.85));
     }
 
     body {
       margin: 0;
-      padding: 0;
-      overflow: hidden;
       background: var(--bg);
-      font-family: "Inter", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      overflow-x: hidden;
       color: var(--text);
     }
 
-    /* Fullscreen ocean canvas */
-    #ocean {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background: radial-gradient(circle at center, #074b8f, #02111f);
-    }
-
-    /* Glowing orb buttons */
+    /* =======================================================
+       LEVEL-3 ORB BUTTON ENGINE
+       Magnetic Hover + Ripple Pulse + Solana Glow
+    ======================================================= */
     .orb-btn {
-      display: inline-block;
-      padding: 16px 32px;
-      margin-top: 16px;
-      border-radius: 40px;
-      background: #00000055;
-      border: 2px solid var(--solana-green);
-      color: var(--solana-green);
-      font-size: 1.1rem;
+      position: relative;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #020617;
+      background: radial-gradient(circle at 30% 20%, var(--solana-green), var(--solana-purple) 60%);
       cursor: pointer;
-      transition: 0.25s ease;
-      box-shadow: 0 0 12px var(--orb-glow);
+      transition: transform 0.2s ease-out, filter 0.2s ease-out;
+      box-shadow: 0 0 20px rgba(20, 241, 149, 0.75),
+                  0 0 60px rgba(153, 69, 255, 0.55);
+      filter: drop-shadow(0 0 8px rgba(153, 69, 255, 0.9));
+      overflow: hidden;
     }
     .orb-btn:hover {
-      transform: scale(1.06);
-      box-shadow: 0 0 22px var(--solana-green);
+      transform: translateY(-3px) scale(1.04);
+      filter: drop-shadow(0 0 30px rgba(20, 241, 149, 1));
+    }
+    .orb-btn:active {
+      transform: scale(0.96);
     }
 
-    /* Centered hero content */
-    .hero {
-      position: relative;
-      z-index: 10;
+    /* Magnetic cursor attraction */
+    .orb-btn-wrap {
+      display: inline-block;
+      perspective: 800px;
+    }
+
+    /* Ripple burst */
+    .orb-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      background: rgba(255,255,255,0.4);
+      transform: scale(0.3);
+      transition: transform 0.4s ease-out, opacity 0.45s ease-out;
+      pointer-events: none;
+    }
+    .orb-btn.clicked::after {
+      opacity: 1;
+      transform: scale(2.9);
+    }
+
+    /* Timestamp badge */
+    .timestamp-badge {
       text-align: center;
-      margin-top: 14vh;
-      padding: 20px;
+      color: var(--solana-green);
+      font-size: 0.8rem;
+      margin-top: 8px;
+      letter-spacing: 0.15em;
+      opacity: 0.9;
     }
 
-    .hero-title {
-      font-size: 2.6rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
-      text-shadow: 0px 0px 12px #0af;
+    /* =======================================================
+       CINEMATIC OCEAN V2 — BLUE SHIFT
+       (Safe GPU shader from V20 but with colder tones)
+    ======================================================= */
+    #ocean-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 40% -20%, #0077ff, #020617 70%);
     }
 
-    .hero-sub {
-      font-size: 1.25rem;
-      color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto 22px auto;
+    /* Glow fog drift */
+    .ocean-fog {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(0, 150, 255, 0.12), transparent 60%);
+      animation: fogDrift 18s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: -1;
+    }
+    @keyframes fogDrift {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-40px) scale(1.2); }
     }
 
-    /* Version & Timestamp */
-    #version {
-      margin-top: 10px;
+    /* Mist sparkle particles */
+    .ocean-sparks {
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.12;
+      animation: sparkShift 12s linear infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+    @keyframes sparkShift {
+      0% { transform: translateX(0px); }
+      100% { transform: translateX(-120px); }
+    }
+
+    /* =======================================================
+       HEADER
+    ======================================================= */
+    header {
+      position: sticky;
+      top: 0;
+      padding: 14px 20px;
+      z-index: 20;
+      background: rgba(2, 6, 23, 0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(20, 241, 149, 0.35);
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.14em;
       font-size: 0.95rem;
       color: var(--solana-green);
-      text-shadow: 0 0 8px var(--solana-green);
+      text-transform: uppercase;
     }
+
+    nav a {
+      color: var(--soft);
+      text-decoration: none;
+      margin: 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+    }
+    nav a:hover {
+      color: var(--solana-green);
+    }
+
   </style>
 </head>
 
 <body>
-  <canvas id="ocean"></canvas>
 
-  <div class="hero">
-    <div class="hero-title">SideGuy Solutions</div>
-    <div class="hero-sub">
-      Where code meets the coastline.<br />
-      San Diego Coastal Tech Concierge — AI, Web3, Apps & Real-Time Systems.
-    </div>
+<!-- =======================================================
+     OCEAN LAYERS
+======================================================= -->
+<canvas id="ocean-canvas"></canvas>
+<div class="ocean-fog"></div>
+<div class="ocean-sparks"></div>
 
-    <a href="tel:+17735441234" class="orb-btn">
-      Call PJ Direct — 773-544-1234
-    </a>
-
-    <div id="version"></div>
+<!-- =======================================================
+     HEADER
+======================================================= -->
+<header>
+  <div style="max-width: 1180px; margin: auto; display: flex; justify-content: space-between; align-items: center;">
+    <div class="brand">SIDEGUY SOLUTIONS</div>
+    <nav>
+      <a href="#apps">Apps</a>
+      <a href="#ai">AI</a>
+      <a href="#web3">Web3</a>
+      <a href="#tickets">Tickets</a>
+      <a href="#dfs">DFS</a>
+      <a href="#intake">Intake</a>
+      <a href="#blog">Blog</a>
+    </nav>
   </div>
-  <!-- Three.js Core -->
-  <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+</header>
 
-  <script>
-    let scene, camera, renderer, oceanMesh, uniforms;
+<!-- TIMESTAMP -->
+<div class="timestamp-badge">
+  Version 25.1 · Updated Live · 2025-02-08 15:47 PST
+</div>
 
-    function initOcean() {
-      scene = new THREE.Scene();
+<!-- =======================================================
+     HERO
+======================================================= -->
+<section class="hero" style="max-width:1180px;margin:auto;padding:60px 20px;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:30px;">
 
-      camera = new THREE.PerspectiveCamera(
-        55,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        200
-      );
-      camera.position.set(0, 1.3, 3.2);
+  <!-- TEXT -->
+  <div>
+    <h1 style="font-size:3rem;font-weight:900;line-height:1.05;margin-bottom:14px;">
+      Where <span style="background:linear-gradient(to right,var(--solana-purple),var(--solana-green));-webkit-background-clip:text;color:transparent;">San Diego</span> codes, scales & builds.
+    </h1>
 
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setClearColor(0x02111f, 1);
-      document.getElementById("ocean").replaceWith(renderer.domElement);
+    <p style="color:var(--soft);font-size:1rem;line-height:1.6;margin-bottom:20px;">
+      Coastal concierge tech for the 2025 era — <strong>apps</strong>,
+      <strong>AI automation</strong>, <strong>Web3 & Solana payments</strong>,
+      <strong>ticketing</strong>, and <strong>DFS systems</strong> built from North County.
+    </p>
 
-      /* ---------- REAL OCEAN SHADER (V11) ---------- */
-      uniforms = {
-        uTime: { value: 0.0 },
-        uWaveAmp: { value: 0.18 },
-        uBlue: { value: new THREE.Color("#0a6bff") },
-        uDeep: { value: new THREE.Color("#02111f") }
-      };
+    <p style="color:var(--muted);margin-bottom:18px;">
+      Text / Call: <a href="tel:+17735441231" style="color:var(--solana-green);font-weight:700;">773-544-1231</a><br>
+      Email: <a href="mailto:peter.z@kromeon.com" style="color:var(--solana-green);">peter.z@kromeon.com</a>
+    </p>
 
-      const oceanGeo = new THREE.PlaneGeometry(20, 20, 256, 256);
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div class="orb-btn-wrap">
+        <button id="summonPJ" class="orb-btn">Summon PJ</button>
+      </div>
 
-      const oceanMat = new THREE.ShaderMaterial({
-        uniforms,
-        vertexShader: `
-          uniform float uTime;
-          uniform float uWaveAmp;
+      <div class="orb-btn-wrap">
+        <button id="solanaPayOpen" class="orb-btn" style="background:linear-gradient(135deg,var(--solana-green),var(--solana-blue));">Solana Pay</button>
+      </div>
+    </div>
+  </div>
 
-          void main() {
-            vec3 pos = position;
+  <!-- ORB -->
+  <div style="text-align:center;">
+    <div style="width:240px;height:240px;border-radius:50%;margin:auto;
+         background:radial-gradient(circle at 30% 20%,var(--solana-purple),var(--solana-green));
+         box-shadow:0 0 40px rgba(20,241,149,0.9),0 0 120px rgba(153,69,255,0.7);
+         animation:orbPulse 3s ease-in-out infinite;
+         filter:var(--orb-glow);">
+    </div>
+    <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);letter-spacing:0.15em;">
+      Coastal Portal • Online
+    </div>
+  </div>
 
-            float wave1 = sin(pos.x * 2.2 + uTime * 1.1) * uWaveAmp;
-            float wave2 = sin(pos.y * 1.6 + uTime * 0.9) * (uWaveAmp * 0.7);
-            float wave3 = sin((pos.x + pos.y) * 1.0 + uTime * 1.4) * (uWaveAmp * 0.5);
+</section>
 
-            pos.z += (wave1 + wave2 + wave3);
+<script>
+/* Level-3 Orb Ripple */
+document.querySelectorAll(".orb-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.classList.add("clicked");
+    setTimeout(() => btn.classList.remove("clicked"), 500);
+  });
+});
 
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-          }
-        `,
-        fragmentShader: `
-          uniform vec3 uBlue;
-          uniform vec3 uDeep;
-          uniform float uTime;
+/* Magnetic Orb Hover */
+document.querySelectorAll(".orb-btn-wrap").forEach(wrap => {
+  const btn = wrap.querySelector(".orb-btn");
+  wrap.addEventListener("mousemove", (e) => {
+    const rect = wrap.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    btn.style.transform = `translate(${x*0.08}px, ${y*0.08}px) scale(1.05)`;
+  });
+  wrap.addEventListener("mouseleave", () => {
+    btn.style.transform = "translate(0px,0px)";
+  });
+});
+</script>
+<!-- ============================= -->
+<!--  PART 2 · CONTENT + LOGIC     -->
+<!-- ============================= -->
 
-          void main() {
-            float pulse = sin(uTime * 0.4) * 0.15;
-            vec3 color = mix(uDeep, uBlue, 0.55 + pulse);
-            gl_FragColor = vec4(color, 1.0);
-          }
-        `,
-        wireframe: false
-      });
+<style>
+  /* LAYOUT SECTIONS + CARDS */
+  .section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 20px 40px;
+  }
 
-      oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
-      oceanMesh.rotation.x = -Math.PI / 2;
-      scene.add(oceanMesh);
+  .section-title {
+    font-size: 0.84rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--soft);
+    margin-bottom: 14px;
+  }
 
-      animate();
-    }
+  .section-sub {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
 
-    function animate() {
-      requestAnimationFrame(animate);
-      uniforms.uTime.value += 0.016;
-      renderer.render(scene, camera);
-    }
+  .section-lead {
+    font-size: 0.94rem;
+    color: var(--soft);
+    margin-bottom: 12px;
+  }
 
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
-    <script>
-    /* ------------------------------
-        VERSION + TIMESTAMP
-    ------------------------------ */
-    function updateVersionStamp() {
-      const now = new Date();
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
 
-      const stamp =
-        "v25.1 • " +
-        now.toLocaleDateString() +
-        " • " +
-        now.toLocaleTimeString();
+  .pill-tag {
+    font-size: 0.74rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--soft);
+  }
 
-      document.getElementById("version").textContent = stamp;
-    }
+  .two-col {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: flex-start;
+  }
 
-    /* ------------------------------
-        ORB INTERACTION EFFECTS
-    ------------------------------ */
-    document.addEventListener("DOMContentLoaded", () => {
-      updateVersionStamp();
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    padding: 16px 16px 18px;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.95);
+    position: relative;
+    overflow: hidden;
+  }
 
-      // Initialize ocean after slight delay for stability
-      setTimeout(initOcean, 120);
-    });
+  .card h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
 
-    // Button pulse effect
-    document.querySelectorAll(".orb-btn").forEach((btn) => {
-      btn.addEventListener("mouseenter", () => {
-        btn.style.boxShadow = "0 0 26px var(--solana-green)";
-      });
-      btn.addEventListener("mouseleave", () => {
-        btn.style.boxShadow = "0 0 12px var(--orb-glow)";
-      });
-    });
-  </script>
-  <!-- Footer -->
-  <footer style="
-    position: fixed;
-    bottom: 18px;
-    width: 100%;
-    text-align: center;
-    z-index: 10;
+  .card p {
+    font-size: 0.86rem;
+    color: var(--soft);
+    margin-bottom: 8px;
+  }
+
+  .card-small {
+    font-size: 0.79rem;
     color: var(--muted);
-    font-size: 0.8rem;
-    text-shadow: 0 0 6px #000;
-  ">
-    SideGuy Solutions · San Diego Coastal Tech Concierge · © 2025
-  </footer>
+  }
 
-</body>
-</html>
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr) !important;
+      text-align: left !important;
+    }
+    .two-col {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .grid-3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    header > div {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+  }
+
+  /* STATUS STRIP (SOL PRICE / SURF / INVENTORY) */
+  .status-strip {
+    max-width: 1180px;
+    margin: 10px auto 0;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(20, 241, 149, 0.4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.74rem;
+    color: var(--soft);
+    align-items: center;
+    justify-content: space-between;
+  }
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--solana-green);
+  }
+
+  /* SOLANA PAY MODAL */
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(14px);
+    z-index: 50;
+  }
+
+  .modal-content {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 22px 20px 20px;
+    width: min(92%, 420px);
+    border: 1px solid rgba(20, 241, 149, 0.6);
+    box-shadow: 0 0 60px rgba(20, 241, 149, 0.7);
+  }
+
+  .modal-close {
+    margin-top: 16px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #ef4444;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .qr-box {
+    margin: 18px auto 10px;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle at 30% 20%, #020617, #020617);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+  }
+
+  /* INTAKE FORM */
+  .intake-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 20px;
+  }
+  .intake-form {
+    background: var(--glass);
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    padding: 16px 16px 18px;
+  }
+  .intake-form label {
+    font-size: 0.8rem;
+    color: var(--soft);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .intake-form input,
+  .intake-form select,
+  .intake-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(51, 65, 85, 0.9);
+    background: rgba(15, 23, 42, 0.96);
+    color: var(--text);
+    font-size: 0.85rem;
+  }
+  .intake-form textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .intake-note {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 960px) {
+    .intake-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .status-strip {
+      border-radius: 12px;
+      justify-content: flex-start;
+    }
+  }
+
+  footer {
+    max-width: 1180px;
+    margin: 10px auto 26px;
+    padding: 16px 20px 0;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid rgba(148, 163, 184, 0.4);
+  }
+
+  /* Simple AI bubble placeholder */
+  .ai-bubble {
+    position: fixed;
+    right: 16px;
+    bottom: 70px;
+    z-index: 40;
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid rgba(20, 241, 149, 0.55);
+    padding: 10px 12px;
+    max-width: 260px;
+    font-size: 0.78rem;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.9);
+  }
+  .ai-bubble-toggle {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 41;
+  }
+</style>
+
+<!-- ============================= -->
+<!-- STATUS STRIP (SOL / SURF / TIX) -->
+<!-- ============================= -->
+<div class="status-strip">
+  <div class="status-chip">
+    <div class="status-dot"></div>
+    <span id="sol-price">SOL: loading…</span>
+  </div>
+  <div class="status-chip">
+    🌊 <span id="surf-status">Surf: loading...</span>
+  </div>
+  <div class="status-chip">
+    🎟 <span id="ticket-status">Tickets: North County experiments live.</span>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- OCEAN TECH GUIDE + 402        -->
+<!-- ============================= -->
+<section class="section" id="guide">
+  <div class="section-title">Ocean Tech Guide · 402 Internet Payments</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">
+        <span style="background:linear-gradient(90deg,var(--solana-purple),var(--solana-green));-webkit-background-clip:text;color:transparent;font-weight:800;">
+          Ocean Tech Guide
+        </span>
+        for real operators.
+      </h2>
+      <p class="section-lead">
+        SideGuy maps out a <strong>12–24 month edge</strong> so you’re not just chasing tools — you’re
+        stacking systems: apps, AI, Web3 rails, and ticketing that calmly compound.
+      </p>
+      <p class="section-lead">
+        Don’t have a “side guy”? That’s <strong>sooo 2024</strong>. The new default in 2025 is having a
+        calm coastal operator in your corner who actually picks up the phone.
+      </p>
+      <div class="pill-row">
+        <span class="pill-tag">12–24 month edge planning</span>
+        <span class="pill-tag">San Diego &amp; North County</span>
+        <span class="pill-tag">Operators &amp; founders first</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>What is “402 Internet Payments”?</h3>
+      <p>
+        Think of <strong>402</strong> as the missing web status: “payment required.” SideGuy turns it into
+        a <strong>flexible revenue layer</strong> across your world — tips, subscriptions, tickets,
+        retainers, even “priority replies.”
+      </p>
+      <ul class="card-small" style="padding-left: 18px; list-style: disc;">
+        <li>Solana Pay tips &amp; micro-consults</li>
+        <li>Priority DM or SMS support slots</li>
+        <li>One-tap ticket upgrades &amp; table holds</li>
+        <li>Operator memberships &amp; retainers</li>
+      </ul>
+      <p class="card-small" style="margin-top:8px;">
+        The goal: <strong>less friction</strong>, <strong>faster settlement</strong>, and rails that feel like 2025,
+        not 2005.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- APPS SECTION                  -->
+<!-- ============================= -->
+<section class="section" id="apps">
+  <div class="section-title">Apps · Web · Internal Tools</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">Custom builds — without SF drama.</h2>
+      <p class="section-lead">
+        From landing pages to internal dashboards, SideGuy ships
+        <strong>lean, fast, actually-finished</strong> products for San Diego operators.
+      </p>
+      <div class="pill-row">
+        <span class="pill-tag">San Diego app dev</span>
+        <span class="pill-tag">Internal tools</span>
+        <span class="pill-tag">Client portals</span>
+        <span class="pill-tag">Operator dashboards</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Good fits for this lane</h3>
+      <ul class="card-small" style="list-style:disc;padding-left:18px;">
+        <li>Service businesses stuck in spreadsheet hell</li>
+        <li>Venues and studios needing smoother intake</li>
+        <li>Founders testing v1s before raising big</li>
+        <li>Teams that want a dev you can text</li>
+      </ul>
+      <br />
+      <div class="orb-btn-wrap">
+        <button class="orb-btn" onclick="scrollToIntake('Apps & Custom Builds')">Start an app project</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- AI SECTION                    -->
+<!-- ============================= -->
+<section class="section" id="ai">
+  <div class="section-title">AI Automation · Workflows</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">AI that quietly handles the boring stuff.</h2>
+      <p class="section-lead">
+        No guru talk — just flows that move leads, data, and messages so humans can breathe.
+      </p>
+      <div class="pill-row">
+        <span class="pill-tag">Inbound &amp; lead routing</span>
+        <span class="pill-tag">Follow-up sequences</span>
+        <span class="pill-tag">Internal Q&amp;A</span>
+        <span class="pill-tag">Small biz AI</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Examples in the wild</h3>
+      <ul class="card-small" style="list-style:disc;padding-left:18px;">
+        <li>Auto-text replies when someone hits your site or QR</li>
+        <li>“What’s going on with this client?” snapshots</li>
+        <li>Quiet internal copilots for ops and support</li>
+      </ul>
+      <br />
+      <div class="orb-btn-wrap">
+        <button class="orb-btn" onclick="scrollToIntake('AI Automation & Workflows')">Map an AI flow</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- WEB3 / SOLANA SECTION         -->
+<!-- ============================= -->
+<section class="section" id="web3">
+  <div class="section-title">Web3 · Solana · Stablecoins</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">Solana-grade rails, no crypto theater.</h2>
+      <p class="section-lead">
+        Solana for <strong>fees down</strong>, <strong>settlement fast</strong>, and flows that don’t scare the accountant.
+      </p>
+      <div class="pill-row">
+        <span class="pill-tag">Solana Pay gateways</span>
+        <span class="pill-tag">USDC invoicing</span>
+        <span class="pill-tag">Crypto escrow</span>
+        <span class="pill-tag">On / off ramps</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>What this can look like</h3>
+      <ul class="card-small" style="list-style:disc;padding-left:18px;">
+        <li>Deposits in USDC with clear on-chain receipts</li>
+        <li>Ticketing or memberships with near-zero fees</li>
+        <li>“SideGuy Crypto Escrow” for larger projects</li>
+      </ul>
+      <br />
+      <div class="orb-btn-wrap">
+        <button class="orb-btn" onclick="scrollToIntake('Web3 / Solana / Stablecoin Flows')">
+          Explore 402 rails
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- TICKETS SECTION               -->
+<!-- ============================= -->
+<section class="section" id="tickets">
+  <div class="section-title">Tickets · Venues · Live Rooms</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">Ticket trenches, pointed at North County.</h2>
+      <p class="section-lead">
+        SideGuy helps rooms <strong>own their best flows</strong> while still using big platforms when it makes sense.
+      </p>
+      <div class="pill-row">
+        <span class="pill-tag">Direct ticket flows</span>
+        <span class="pill-tag">Seat maps</span>
+        <span class="pill-tag">VIP &amp; tables</span>
+        <span class="pill-tag">North County rooms</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Inventory snapshot (sample)</h3>
+      <p class="card-small" id="ticket-inventory">
+        Loading a simple example of how SideGuy can show what’s left in the room…
+      </p>
+      <br />
+      <div class="orb-btn-wrap">
+        <button class="orb-btn" onclick="scrollToIntake('Ticketing & Venue Systems')">Talk tickets</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- DFS SECTION                   -->
+<!-- ============================= -->
+<section class="section" id="dfs">
+  <div class="section-title">DFS · Promos · Systems</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">Treat promos like math, not chaos.</h2>
+      <p class="section-lead">
+        Educational tools and frameworks for people who want to build a calm, repeatable system — not chase one big hit.
+      </p>
+      <div class="pill-row">
+        <span class="pill-tag">Promo sequencing</span>
+        <span class="pill-tag">Bankroll frameworks</span>
+        <span class="pill-tag">Slate filters</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>DFS Edge Snapshot</h3>
+      <p class="card-small" id="dfs-edge">
+        Loading a little “edge pulse” based on how promos stack…
+      </p>
+      <br />
+      <div class="orb-btn-wrap">
+        <button class="orb-btn" onclick="scrollToIntake('DFS Tools & Promo Systems')">Build a DFS system</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- PRICING / RETAINER            -->
+<!-- ============================= -->
+<section class="section" id="pricing">
+  <div class="section-title">Operator-Friendly Pricing</div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>Starter Sprint</h3>
+      <p class="card-small">
+        One tight sprint to ship something real — landing page, simple app, or automation.
+      </p>
+      <p class="card-small"><strong>$3–6k · 2–4 weeks</strong></p>
+    </div>
+    <div class="card">
+      <h3>Operator Build</h3>
+      <p class="card-small">
+        Full lane: apps, AI, or ticket flows with room to iterate and refine.
+      </p>
+      <p class="card-small"><strong>$10–30k · 4–10 weeks</strong></p>
+    </div>
+    <div class="card">
+      <h3>SideGuy Retainer</h3>
+      <p class="card-small">
+        Ongoing dev + strategy + “text-able” support for operators who never want to go back.
+      </p>
+      <p class="card-small"><strong>Custom · Monthly</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- LEAD MAGNET · 12–24 MONTH EDGE -->
+<!-- ============================= -->
+<section class="section" id="edge">
+  <div class="section-title">12–24 Month Edge · Mini Playbook</div>
+  <div class="two-col">
+    <div>
+      <h2 class="section-sub">Get a one-pager that doesn’t waste your time.</h2>
+      <p class="section-lead">
+        Drop a few details and SideGuy drafts a <strong>simple, brutal one-page “edge map”</strong>
+        you can use to decide where to aim: apps, AI, tickets, or rails.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Generate your mini playbook</h3>
+      <p class="card-small">
+        This won’t auto-gate you into a funnel. It just drafts an email to PJ with a clear outline.
+      </p>
+      <br />
+      <div class="orb-btn-wrap">
+        <button class="orb-btn" onclick="openEdgeEmail()">Generate my edge map</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- INTAKE SECTION                -->
+<!-- ============================= -->
+<section class="section" id="intake">
+  <div class="section-title">Project Intake · Start the Conversation</div>
+  <div class="intake-grid">
+    <div>
+      <h2 class="section-sub">Tell PJ what you’re cooking up.</h2>
+      <p class="section-lead">
+        Just enough structure for a real reply. Prefer to skip the form? Text
+        <strong><a href="tel:+17735441231" style="color:var(--solana-green);">773-544-1231</a></strong>
+        or email
+        <strong><a href="mailto:peter.z@kromeon.com" style="color:var(--solana-green);">peter.z@kromeon.com</a></strong>.
+      </p>
+    </div>
+    <form id="intake-form" class="intake-form">
+      <label for="intake-name">Name</label>
+      <input id="intake-name" type="text" placeholder="Your name" />
+
+      <label for="intake-email">Email</label>
+      <input id="intake-email" type="email" placeholder="you@example.com" />
+
+      <label for="intake-biz">Business / Project</label>
+      <input id="intake-biz" type="text" placeholder="Brand, venue, startup, etc." />
+
+      <label for="intake-type">What lane fits best?</label>
+      <select id="intake-type">
+        <option>Apps & Custom Builds</option>
+        <option>AI Automation & Workflows</option>
+        <option>Web3 / Solana / Stablecoin Flows</option>
+        <option>Ticketing & Venue Systems</option>
+        <option>DFS Tools & Promo Systems</option>
+        <option>Other / Not sure yet</option>
+      </select>
+
+      <label for="intake-budget">Budget / range (optional)</label>
+      <input id="intake-budget" type="text" placeholder="e.g. 5–10k, 20–40k, etc." />
+
+      <label for="intake-notes">What are you trying to do?</label>
+      <textarea id="intake-notes" placeholder="A few lines about the problem & timeline."></textarea>
+
+      <div class="orb-btn-wrap" style="width:100%;margin-top:8px;">
+        <button class="orb-btn" type="submit" style="width:100%;justify-content:center;">
+          Send to PJ
+        </button>
+      </div>
+      <div class="intake-note">
+        This just drafts an email using your answers so both sides start on the same page.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- BLOG · TWITTER                -->
+<!-- ============================= -->
+<section class="section" id="blog">
+  <div class="section-title">Coastal Dispatches · Blog</div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>AI Tools That Actually Help San Diego Small Biz</h3>
+      <p class="card-small">
+        A short guide to using AI for intake, follow-up, and ops without hiring a “platform whisperer.”
+      </p>
+    </div>
+    <div class="card">
+      <h3>Why Solana Payments Might Beat Stripe (Sometimes)</h3>
+      <p class="card-small">
+        Fees, settlement, and why 402 Internet Payments changes how tips, tickets, and retainers flow.
+      </p>
+    </div>
+    <div class="card">
+      <h3>North County Ticket Experiments</h3>
+      <p class="card-small">
+        Sketching test lanes that route more value to local rooms, not just the platform.
+      </p>
+    </div>
+  </div>
+  <p class="section-lead" style="font-size:0.8rem;margin-top:16px;color:var(--muted);">
+    Live updates and experiments: follow
+    <a href="https://twitter.com/sideguysolution" target="_blank" style="color:var(--solana-green);">@sideguysolutions</a>
+    on X.
+  </p>
+</section>
+
+<!-- ============================= -->
+<!-- SOLANA PAY MODAL              -->
+<!-- ============================= -->
+<div class="modal" id="solanaPayModal">
+  <div class="modal-content">
+    <h2 style="font-size:1.1rem;margin-bottom:6px;">SideGuy Solana Pay 🏄‍♂️</h2>
+    <p class="card-small">
+      Pay any amount in SOL or USDC · <strong>0% fees</strong> · instant settlement.  
+      Recipient: <code style="font-size:0.7rem;">9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5</code>
+    </p>
+    <div class="qr-box">
+      <div id="solana-qrcode" style="width:220px;height:220px;"></div>
+    </div>
+    <p class="card-small">
+      Prefer Phantom?  
+      <a href="https://phantom.com/user/pjz2000" target="_blank" style="color:var(--solana-green);">
+        Open @pjz2000 in Phantom
+      </a>
+    </p>
+    <button class="modal-close" type="button" onclick="closeSolanaPay()">Close</button>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- AI BUBBLE PLACEHOLDER         -->
+<!-- ============================= -->
+<div class="ai-bubble" id="aiBubble" style="display:none;">
+  <strong>Ask the Coastal Copilot</strong>
+  <p style="margin:6px 0 8px;">
+    Not sure what you need? Tell PJ in one line: “I’m a venue / founder / biz in ___ and I think I need ___.”
+  </p>
+  <p class="card-small">Tap “Summon PJ” or the intake form and paste that in. Simple.</p>
+</div>
+<div class="ai-bubble-toggle">
+  <div class="orb-btn-wrap">
+    <button class="orb-btn" id="aiBubbleToggle">Ask PJ AI</button>
+  </div>
+</div>
+
+<footer>
+  SideGuy Solutions · San Diego &amp; North County · Version 25.1 GODWAVE · If you don’t have a side guy in
+  2025, that’s a choice.
+</footer>
+
+<!-- ============================= -->
+<!-- SCRIPTS · DATA + HELPERS      -->
+<!-- ============================= -->
+
+<!-- Solana Pay + QR libraries (safe, no-op if blocked) -->
+<script src="https://unpkg.com/@solana/pay@0.2.5/dist/umd/index.iife.min.js"></script>
+<script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+
+<script>
+  // Smooth intake scroll helper (used above)
+  function scrollToIntake(prefillLane) {
+    const select = document.getElementById("intake-type");
+    if (select && prefillLane) {
+      [...select.options].forEach(o => { if (o.text === prefillLane || o.value === prefillLane) select.value = o.text || o.value; });
+    }
+    const el = document.getElementById("intake");
+    if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  // SOL PRICE (simple public API with graceful fallback)
+  async function loadSolPrice() {
+    const el = document.getElementById("sol-price");
+    if (!el) return;
+    try {
+      const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+      const data = await res.json();
+      const price = data.solana?.usd;
+      if (price) {
+        el.textContent = "SOL: $" + price.toFixed(2) + " USD";
+      } else {
+        el.textContent = "SOL: data unavailable";
+      }
+    } catch (e) {
+      el.textContent = "SOL: offline snapshot";
+    }
+  }
+
+  // SIMPLE SURF SNAPSHOT (not a real API, but feels alive)
+  function loadSurfStatus() {
+    const el = document.getElementById("surf-status");
+    if (!el) return;
+    const presets = [
+      "2–3 ft glassy · light offshore · “coffee before calls” conditions",
+      "3–4 ft playful · bit of bump · good for clearing the head",
+      "1–2 ft soft · perfect for walking the dog & scheming builds",
+      "Shoulder to head-high · punchy · maybe schedule calls later",
+    ];
+    const pick = presets[Math.floor(Math.random() * presets.length)];
+    el.textContent = pick + " (sample North County read)";
+  }
+
+  // TICKET INVENTORY MOCK
+  function loadTicketInventory() {
+    const el = document.getElementById("ticket-inventory");
+    if (!el) return;
+    const total = 120;
+    const sold = 87;
+    const left = total - sold;
+    el.innerHTML =
+      "Example room: <strong>" + total + "</strong> cap · " +
+      "<strong>" + sold + "</strong> sold · <strong>" + left +
+      "</strong> left.<br />" +
+      "SideGuy can expose just enough of this so fans move without killing the vibe.";
+  }
+
+  // DFS EDGE MOCK
+  function loadDFS() {
+    const el = document.getElementById("dfs-edge");
+    if (!el) return;
+    const ev = (Math.random() * 6 - 1).toFixed(1); // -1.0 to +5.0
+    const text =
+      ev > 0
+        ? "This week’s sample promo stack smells like roughly +" + ev + "% EV if you treat it like a system."
+        : "This slate looks a little thin. Might be a week to play small or just take the boosts.";
+    el.textContent = text + " Educational only — no picks, just frameworks.";
+  }
+
+  // LEAD MAGNET EMAIL
+  function openEdgeEmail() {
+    const subject = encodeURIComponent("12–24 Month Edge Map · SideGuy Solutions");
+    const body = encodeURIComponent(
+      "Hey PJ,\n\n" +
+      "I’d like a simple 12–24 month edge map.\n\n" +
+      "I’m a (founder / operator / venue / small biz) in:\n" +
+      "[your niche / city]\n\n" +
+      "Things I’m thinking about (apps, AI, tickets, payments, DFS, etc.):\n" +
+      "[short bullets]\n\n" +
+      "Goal:\n" +
+      "[what you want the next 12–24 months to look like]\n\n" +
+      "If it makes sense, send back a one-page outline and we’ll go from there.\n\n" +
+      "– Sent from SideGuySolutions.com 🌊"
+    );
+    window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+  }
+
+  // SUMMON PJ BUTTON FROM HERO
+  (function hookSummonPJ() {
+    const btn = document.getElementById("summonPJ");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
+      const body = encodeURIComponent(
+        "Hey PJ,\n\n" +
+        "I just summoned you from SideGuySolutions.com.\n\n" +
+        "Quick version of what I’m thinking:\n\n" +
+        "- [app / AI / tickets / Solana / DFS / something else]\n" +
+        "- [rough budget]\n" +
+        "- [when you’d like to move]\n\n" +
+        "Reply when you’re free and we’ll spin this up.\n\n" +
+        "– Sent from the coastal portal 🌊"
+      );
+      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+    });
+  })();
+
+  // INTAKE FORM → EMAIL DRAFT
+  (function hookIntake() {
+    const form = document.getElementById("intake-form");
+    if (!form) return;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("intake-name")?.value || "";
+      const email = document.getElementById("intake-email")?.value || "";
+      const biz = document.getElementById("intake-biz")?.value || "";
+      const lane = document.getElementById("intake-type")?.value || "";
+      const budget = document.getElementById("intake-budget")?.value || "";
+      const notes = document.getElementById("intake-notes")?.value || "";
+      const subject = encodeURIComponent("New Project Intake · " + lane);
+      const body = encodeURIComponent(
+        "Hey PJ,\n\n" +
+        "You’ve got a new intake from SideGuySolutions.com:\n\n" +
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n" +
+        "Business / Project: " + biz + "\n" +
+        "Lane: " + lane + "\n" +
+        "Budget: " + budget + "\n\n" +
+        "Notes:\n" + notes + "\n\n" +
+        "Sent from Version 25.1 GODWAVE 🌊"
+      );
+      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+    });
+  })();
+
+  // SOLANA PAY MODAL + QR
+  function openSolanaPay() {
+    const modal = document.getElementById("solanaPayModal");
+    if (!modal) return;
+    modal.style.display = "flex";
+
+    // Only create QR once
+    if (!window.__sideGuyQR && window.SolanaPay && window.QRCodeStyling) {
+      try {
+        const recipient = new SolanaPay.PublicKey("9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5");
+        const url = SolanaPay.createTransfer({
+          recipient,
+          amount: null,
+          splToken: undefined,
+          reference: null,
+          label: "SideGuy Solutions",
+          message: "Thanks for the support 🏄‍♂️"
+        });
+        window.__sideGuyQR = new QRCodeStyling({
+          width: 220,
+          height: 220,
+          data: url.toString(),
+          margin: 10,
+          qrOptions: { errorCorrectionLevel: "H" },
+          backgroundOptions: { color: "#020617" },
+          dotsOptions: { color: "#14f195", type: "square" },
+          cornersSquareOptions: { color: "#14f195", type: "extra-rounded" }
+        });
+        const target = document.getElementById("solana-qrcode");
+        if (target) window.__sideGuyQR.append(target);
+      } catch (e) {
+        console.warn("Solana QR issue:", e);
+      }
+    }
+  }
+
+  function closeSolanaPay() {
+    const modal = document.getElementById("solanaPayModal");
+    if (modal) modal.style.display = "none";
+  }
+
+  (function wireSolanaBtn() {
+    const btn = document.getElementById("solanaPayOpen");
+    if (!btn) return;
+    btn.addEventListener("click", openSolanaPay);
+    const modal = document.getElementById("solanaPayModal");
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeSolanaPay();
+      });
+    }
+  })();
+
+  // AI BUBBLE TOGGLE
+  (function wireAIBubble() {
+    const toggle = document.getElementById("aiBubbleToggle");
+    const bubble = document.getElementById("aiBubble");
+    if (!toggle || !bubble) return;
+    toggle.addEventListener("click", () => {
+      bubble.style.display = bubble.style.display === "none" ? "block" : "none";
+    });
+  })();
+
+  // INITIAL LOAD
+  loadSolPrice();
+  loadSurfStatus();
+  loadTicketInventory();
+  loadDFS();
+</script>
+
+<!-- Basic FAQ / LocalBusiness schema (SEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "SideGuy Solutions",
+  "description": "Coastal tech concierge for apps, AI, Web3, Solana payments, ticketing, and systems in North County & San Diego.",
+  "url": "https://sideguysolutions.com/",
+  "telephone": "+1-773-544-1231",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Solana Beach",
+    "addressRegion": "CA",
+    "addressCountry": "US"
+  },
+  "areaServed": ["San Diego", "North County", "Solana Beach", "Encinitas", "Del Mar", "Carlsbad"]
+}
+</script>
