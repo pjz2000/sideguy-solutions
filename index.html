@@ -1,15 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
   <title>SideGuy Solutions | Coastal Tech Concierge</title>
-
-  <meta name="description"
-    content="SideGuy Solutions — San Diego & North County coastal tech concierge. Custom apps, AI automations, Web3 & Solana payments, 402 Internet Payments, ticketing flows, and DFS tools." />
-
+  <meta
+    name="description"
+    content="SideGuy Solutions — San Diego coastal tech concierge. Apps, AI automation, Web3 & Solana payments, 402 Internet Payments, ticketing flows, and DFS tools for North County operators."
+  />
   <link rel="canonical" href="https://sideguysolutions.com/" />
 
   <style>
@@ -19,12 +20,11 @@
       --soft: #94a3b8;
       --muted: #64748b;
 
-      /* Solana gradient */
-      --sol-a: #9945FF;
-      --sol-b: #14F195;
+      --sol-a: #9945ff;
+      --sol-b: #14f195;
 
-      --card: rgba(15, 23, 42, 0.92);
-      --glass: rgba(15, 23, 42, 0.72);
+      --card: rgba(15, 23, 42, 0.93);
+      --glass: rgba(15, 23, 42, 0.75);
 
       --radius: 18px;
       --pill: 999px;
@@ -37,39 +37,130 @@
     }
 
     body {
+      min-height: 100vh;
       background: var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
       overflow-x: hidden;
     }
 
-    /* OCEAN CANVAS */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ============================
+       CINEMATIC OCEAN LAYERS
+    ============================ */
     #ocean-canvas {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -3;
+      display: block;
       background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
     }
 
-    /* NAV */
+    .ocean-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(148, 231, 255, 0.35), transparent 55%),
+        radial-gradient(circle at 80% -20%, rgba(20, 241, 149, 0.25), transparent 60%),
+        radial-gradient(circle at 50% 110%, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 1));
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .ocean-fog {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 120%, rgba(15, 23, 42, 0.95), transparent 55%),
+        radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.5), transparent 60%);
+      opacity: 0.8;
+      animation: fogDrift 42s linear infinite;
+    }
+
+    @keyframes fogDrift {
+      0% {
+        transform: translate3d(-8%, 4%, 0) scale(1.03);
+      }
+      50% {
+        transform: translate3d(6%, -4%, 0) scale(1.06);
+      }
+      100% {
+        transform: translate3d(-8%, 4%, 0) scale(1.03);
+      }
+    }
+
+    #particle-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(148, 231, 255, 0.9), rgba(148, 231, 255, 0));
+      opacity: 0;
+      animation-name: floatParticle;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translate3d(0, 40px, 0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      70% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate3d(0, -160px, 0);
+        opacity: 0;
+      }
+    }
+
+    /* ============================
+       NAV
+    ============================ */
     header {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(16px);
-      background: rgba(2, 6, 23, 0.8);
-      border-bottom: 1px solid rgba(20, 241, 149, 0.25);
-      padding: 12px 22px;
-      z-index: 10;
+      z-index: 20;
+      padding: 10px 20px;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.97),
+        rgba(2, 6, 23, 0.85),
+        transparent
+      );
+      border-bottom: 1px solid rgba(20, 241, 149, 0.4);
     }
 
     .nav-inner {
       max-width: 1120px;
-      margin: auto;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 14px;
     }
 
     .brand {
@@ -79,50 +170,70 @@
     }
 
     .brand-pill {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--sol-a), var(--sol-b));
-      box-shadow: 0 0 20px rgba(20, 241, 149, 0.6);
+      background:
+        radial-gradient(circle at 25% 20%, #e0f2fe, #38bdf8 35%, #0f172a 100%);
+      box-shadow:
+        0 0 0 1px rgba(148, 163, 184, 0.7),
+        0 0 30px rgba(20, 241, 149, 0.8);
     }
 
     .brand-name {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
     }
 
     nav.links {
       display: flex;
-      gap: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     nav.links a {
       color: var(--soft);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
     }
 
     nav.links a:hover {
-      color: #fff;
+      color: var(--text);
+      border-bottom-color: rgba(20, 241, 149, 0.7);
     }
 
-    /* HERO */
+    @media (max-width: 860px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ============================
+       HERO
+    ============================ */
     .hero {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 60px 20px 90px;
+      padding: 64px 20px 72px;
       text-align: center;
+      position: relative;
+      z-index: 5;
     }
 
     .hero-title {
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
-      font-weight: 850;
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      font-weight: 900;
       line-height: 1.05;
       margin-bottom: 14px;
-      text-shadow: 0 20px 55px rgba(0, 0, 0, 0.75);
+      text-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+      animation: heroGlow 8s ease-in-out infinite;
     }
 
     .hero-title span {
@@ -131,90 +242,367 @@
       color: transparent;
     }
 
-    .hero-sub {
-      max-width: 700px;
-      margin: 0 auto 22px;
-      color: var(--soft);
-      font-size: 1.05rem;
-      line-height: 1.6;
+    @keyframes heroGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(20, 241, 149, 0.2));
+      }
+      50% {
+        filter: drop-shadow(0 0 36px rgba(20, 241, 149, 0.5));
+      }
     }
 
-    /* BUTTONS */
+    .hero-sub {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--soft);
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    .hero-sub strong {
+      color: #e5f2ff;
+      font-weight: 600;
+    }
+
+    .hero-meta {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
     .cta-row {
       display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 20px;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
     }
 
-    .cta-primary, .cta-secondary {
-      padding: 12px 20px;
+    .cta-primary,
+    .cta-secondary,
+    .cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
       border-radius: var(--pill);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      white-space: nowrap;
     }
 
     .cta-primary {
-      background: linear-gradient(90deg, var(--sol-a), var(--sol-b));
+      background: linear-gradient(120deg, var(--sol-a), var(--sol-b));
       color: #020617;
-      box-shadow: 0 0 20px rgba(20, 241, 149, 0.6);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.85),
+        0 14px 40px rgba(15, 118, 110, 0.95),
+        0 0 70px rgba(20, 241, 149, 0.9);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.35), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: saturate(1.2);
+      box-shadow:
+        0 0 0 1px rgba(20, 241, 149, 0.9),
+        0 18px 48px rgba(15, 118, 110, 1),
+        0 0 90px rgba(20, 241, 149, 1);
+    }
+
+    .cta-primary:hover::after {
+      opacity: 1;
     }
 
     .cta-secondary {
-      border: 1px solid rgba(20, 241, 149, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.85);
       color: var(--text);
-      background: rgba(15, 23, 42, 0.7);
     }
 
-    /* SECTION WRAPPER */
+    .cta-ghost {
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: transparent;
+      color: var(--soft);
+    }
+
+    /* ============================
+       SECTIONS & CARDS
+    ============================ */
+    main {
+      position: relative;
+      z-index: 5;
+    }
+
     .section {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 50px 20px 70px;
-      position: relative;
-      z-index: 2;
+      padding: 40px 20px 64px;
     }
 
     .section-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--soft);
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
-    .solana-accent {
+    .section-kicker {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-lead {
+      font-size: 0.96rem;
+      color: var(--soft);
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 880px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(20, 241, 149, 0.35);
+      box-shadow: 0 16px 46px rgba(0, 0, 0, 0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 0 0, rgba(148, 231, 255, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(20, 241, 149, 0.22), transparent 50%);
+      opacity: 0;
+      mix-blend-mode: screen;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--soft);
+      margin-bottom: 10px;
+    }
+
+    .card-small {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .pill-tag {
+      display: inline-block;
+      border-radius: var(--pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+
+    .solana-text {
       background: linear-gradient(90deg, var(--sol-a), var(--sol-b));
       -webkit-background-clip: text;
       color: transparent;
       font-weight: 800;
     }
 
-    /* GRID */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 18px;
+    ul.bullets {
+      list-style: disc;
+      padding-left: 18px;
+      font-size: 0.86rem;
+      color: var(--soft);
+      line-height: 1.6;
     }
 
-    .card {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 20px;
-      border: 1px solid rgba(20, 241, 149, 0.3);
-      box-shadow: 0 12px 45px rgba(0,0,0,0.6);
+    /* ============================
+       SOLANA PAY MODAL
+    ============================ */
+    #solana-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
     }
 
+    .solana-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(153, 69, 255, 0.32), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(20, 241, 149, 0.26), transparent 60%),
+        rgba(3, 7, 18, 0.93);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .solana-modal-panel {
+      width: min(440px, 92vw);
+      border-radius: 20px;
+      padding: 20px 20px 22px;
+      background: radial-gradient(circle at 0 0, rgba(148, 231, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(20, 241, 149, 0.18), transparent 55%),
+        rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 231, 255, 0.6);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 22px 60px rgba(0, 0, 0, 0.9),
+        0 0 90px rgba(20, 241, 149, 0.9);
+    }
+
+    .solana-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .solana-modal-title {
+      font-size: 0.94rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .solana-modal-title span {
+      background: linear-gradient(90deg, var(--sol-a), var(--sol-b));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .solana-close-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--soft);
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    #solana-pay-qr {
+      margin: 14px auto 10px;
+      width: 260px;
+      height: 260px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .solana-modal-copy {
+      font-size: 0.82rem;
+      color: var(--soft);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .solana-modal-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #a5f3fc;
+      text-decoration: underline;
+    }
+
+    /* ============================
+       REVEAL ON SCROLL
+    ============================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 20px 40px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
   </style>
 </head>
-
 <body>
+  <!-- Cinema ocean stack -->
   <canvas id="ocean-canvas"></canvas>
+  <div class="ocean-overlay"></div>
+  <div class="ocean-fog"></div>
+  <div id="particle-layer"></div>
 
+  <!-- NAV -->
   <header>
     <div class="nav-inner">
       <div class="brand">
@@ -233,311 +621,565 @@
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <h1 class="hero-title">Where <span>San Diego</span> builds, codes, and scales.</h1>
     <p class="hero-sub">
-      Coastal concierge tech for 2025 — apps, AI flows, Web3/Solana rails, 402 Internet Payments, ticketing, and DFS tools.
+      Coastal tech concierge for San Diego &amp; North County — <strong>custom apps</strong>,
+      <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>, 
+      <strong>402 Internet Payments</strong>, ticketing flows, and DFS tools.
     </p>
+    <div class="hero-meta">
+      Based in Solana Beach · Built for operators, not tech bros.
+    </div>
 
     <div class="cta-row">
-      <a class="cta-primary" href="sms:+17735441231">Tap to Summon PJ</a>
-      <a class="cta-secondary" href="#toolkit">Open Toolkit</a>
-    </div>
-  </section>
-  <!-- =============================== -->
-  <!-- TOOLKIT SECTION -->
-  <!-- =============================== -->
-  <section id="toolkit" class="section">
-    <h2 class="section-title solana-accent">Ocean Tech Guide</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>💠 Solana Fee Savings</h3>
-        <p>Compare Solana rails vs 2.9% processors.</p>
-        <button onclick="openSolanaCalc()" class="cta-secondary" style="margin-top: 12px;">Open Calculator</button>
-      </div>
-
-      <div class="card">
-        <h3>📈 DFS Promo Multiplier</h3>
-        <p>2-leg boosts and quick EV snapshots.</p>
-        <button onclick="openDFSCalc()" class="cta-secondary" style="margin-top: 12px;">DFS Tool</button>
-      </div>
-
-      <div class="card">
-        <h3>🎟 Ticket Optimizer</h3>
-        <p>Capacity · fees · revenue · breakeven.</p>
-        <button onclick="openTicketCalc()" class="cta-secondary" style="margin-top: 12px;">Optimize</button>
-      </div>
-
-      <div class="card">
-        <h3>🧮 Project Estimator</h3>
-        <p>Quick rough bands for apps, AI, and Web3.</p>
-        <button onclick="openEstimator()" class="cta-secondary" style="margin-top: 12px;">Estimate</button>
-      </div>
+      <button class="cta-primary" onclick="summonPJ()">Tap to Summon PJ</button>
+      <button class="cta-secondary" onclick="scrollToSection('toolkit')">Open Toolkit</button>
+      <button class="cta-ghost" onclick="openSolanaPayModal()">Pay with Solana</button>
     </div>
   </section>
 
+  <main>
+    <!-- TOOLKIT / OCEAN TECH GUIDE -->
+    <section id="toolkit" class="section reveal">
+      <div class="section-title">Ocean Tech Guide</div>
+      <div class="section-kicker solana-text">Ocean Tech Guide · 12–24 Month Edge</div>
+      <p class="section-lead">
+        A living playbook for operators who want to compound instead of restart.
+        We map your apps, AI flows, Solana rails, and ticketing into one calm system.
+      </p>
 
-  <!-- =============================== -->
-  <!-- 402 INTERNET PAYMENTS -->
-  <!-- =============================== -->
-  <section id="payments" class="section">
-    <h2 class="section-title">402 Internet Payments</h2>
-    <p class="hero-sub" style="max-width: 720px; margin: 0 auto 30px;">
-      A modern backend for creators, venues, devs, and operators.  
-      <strong>USDC, Solana rails, instant settlement, fee-light.</strong>
-    </p>
+      <div class="grid">
+        <div class="card">
+          <span class="pill-tag">Solana</span>
+          <h3>💠 Solana Fee Savings</h3>
+          <p>Compare 2.9% processors vs Solana rails in two inputs.</p>
+          <p class="card-small">Perfect for venues, dev shops, agencies, and high-volume brands.</p>
+          <button class="cta-secondary" style="margin-top: 8px;" onclick="openSolanaCalc()">Open Calculator</button>
+        </div>
 
-    <div class="grid">
-      <div class="card">
-        <h3>USDC Invoice Flows</h3>
-        <p>Faster than ACH · zero chargebacks · real-time confirmations.</p>
+        <div class="card">
+          <span class="pill-tag">DFS · Promos</span>
+          <h3>📈 DFS Promo Multiplier</h3>
+          <p>2-leg + boost EV snapshots. Educational only, no picks.</p>
+          <p class="card-small">Helps you treat promos like math, not vibes.</p>
+          <button class="cta-secondary" style="margin-top: 8px;" onclick="openDFSCalc()">DFS Tool</button>
+        </div>
+
+        <div class="card">
+          <span class="pill-tag">Tickets</span>
+          <h3>🎟 Ticket Flow Optimizer</h3>
+          <p>Price · capacity · fees · what’s left on the table.</p>
+          <p class="card-small">Built for North County venues, bars, and live rooms.</p>
+          <button class="cta-secondary" style="margin-top: 8px;" onclick="openTicketCalc()">Optimize</button>
+        </div>
+
+        <div class="card">
+          <span class="pill-tag">Scoping</span>
+          <h3>🧮 Project Quickscope Estimator</h3>
+          <p>Time &amp; budget bands so you know if it’s a weekend hack or real build.</p>
+          <p class="card-small">Not a quote — a starting point for a real convo with PJ.</p>
+          <button class="cta-secondary" style="margin-top: 8px;" onclick="openEstimator()">Estimate</button>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Solana Payments</h3>
-        <p>Fees that feel illegal (+ the speed that Stripe wishes it had).</p>
+    <!-- 402 INTERNET PAYMENTS -->
+    <section id="payments" class="section reveal">
+      <div class="section-title">402 Internet Payments</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker solana-text">Solana-grade rails for real-world operators.</h2>
+          <p class="section-lead">
+            402 is SideGuy’s payments lane: USDC, Solana, hybrid flows, and milestone-based “crypto escrow”
+            for dev work, venues, creators, and retainers.
+          </p>
+          <ul class="bullets">
+            <li>USDC invoice flows with instant confirmation</li>
+            <li>Near-zero Solana fees compared to card rails</li>
+            <li>Milestone-based escrow for high-trust builds</li>
+            <li>Hybrid fiat/crypto models that still feel normal</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Tap-to-pay, the SideGuy way</h3>
+          <p>Scan once, confirm in Phantom, done. No ACH purgatory, no random holds.</p>
+          <button class="cta-primary" style="margin-top: 10px;" onclick="openSolanaPayModal()">
+            Pay with Solana
+          </button>
+          <a
+            href="https://phantom.com/user/pjz2000"
+            target="_blank"
+            rel="noreferrer"
+            class="card-small"
+            style="display:block;margin-top:10px;text-decoration:underline;color:#a5f3fc;"
+          >
+            Open Phantom profile
+          </a>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Crypto Escrow</h3>
-        <p>Perfect for dev shops, deposits, and high-trust projects.</p>
+    <!-- APPS -->
+    <section id="apps" class="section reveal">
+      <div class="section-title">Apps · Web · Internal Tools</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">Custom apps without SF drama.</h2>
+          <p class="section-lead">
+            SideGuy builds lean, finished software — not endless roadmap slides.
+            From MVPs to internal dashboards, built for San Diego operators.
+          </p>
+          <ul class="bullets">
+            <li>Internal tools to retire old spreadsheets</li>
+            <li>Client portals that actually get used</li>
+            <li>Mobile-first MVPs to test real demand</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Good fits</h3>
+          <ul class="bullets card-small">
+            <li>Service businesses that need smoother onboarding</li>
+            <li>Founders who want a v1 without burning a full raise</li>
+            <li>Teams that prefer texting their dev over tickets</li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Hybrid Models</h3>
-        <p>Fiat + USDC · subscriptions · ticketing add-ons · payouts.</p>
+    <!-- AI -->
+    <section id="ai" class="section reveal">
+      <div class="section-title">AI Automation · Workflows</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">AI that quietly handles the boring stuff.</h2>
+          <p class="section-lead">
+            No “AI guru” nonsense — just calm workflows that move leads, data, and updates around so
+            humans can do human work.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Examples</h3>
+          <ul class="bullets card-small">
+            <li>Auto-replies that feel human when someone texts the business</li>
+            <li>Lead routing and follow-up sequences that never forget</li>
+            <li>One-click “what’s going on with this client?” briefs</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="cta-row" style="margin-top: 30px;">
-      <a class="cta-primary" href="#intake">Explore 402 Flows</a>
-    </div>
-  </section>
-
-
-  <!-- =============================== -->
-  <!-- APPS -->
-  <!-- =============================== -->
-  <section id="apps" class="section">
-    <h2 class="section-title">Apps · Web · Tools</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Custom Apps</h3>
-        <p>MVPs, internal systems, B2B portals, dashboards.</p>
+    <!-- WEB3 -->
+    <section id="web3" class="section reveal">
+      <div class="section-title">Web3 · Solana · Stablecoins</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">Bring Solana rails into the real world.</h2>
+          <p class="section-lead">
+            SideGuy helps you accept stablecoins, run low-fee flows, and experiment with crypto escrow
+            without turning your ops into a Discord server.
+          </p>
+        </div>
+        <div class="card">
+          <h3>What this can look like</h3>
+          <ul class="bullets card-small">
+            <li>USDC deposits for big projects instead of wires</li>
+            <li>Membership or ticket flows with near-zero fees</li>
+            <li>“Crypto escrow” for dev shops and retainers</li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Landing Pages</h3>
-        <p>Fast, conversion-focused, mobile-first.</p>
+    <!-- TICKETS -->
+    <section id="tickets" class="section reveal">
+      <div class="section-title">Ticketing · Venues · Live Rooms</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">Decades of ticket trenches, pointed at North County.</h2>
+          <p class="section-lead">
+            Faster confirmations, cleaner fees, and better data for local rooms — without handing
+            everything to giant platforms.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Where SideGuy fits</h3>
+          <ul class="bullets card-small">
+            <li>Mapping your current system and all the fees</li>
+            <li>Running light direct-ticketing experiments</li>
+            <li>Hybrid: keep the big platforms, own your best flows</li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Internal Tools</h3>
-        <p>Automations · workflows · operational dashboards.</p>
+    <!-- DFS -->
+    <section id="dfs" class="section reveal">
+      <div class="section-title">DFS · Promos · Systems</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">Make promos feel like a system, not a heater.</h2>
+          <p class="section-lead">
+            Educational lanes around DFS, promo sequencing, and bankroll frameworks — built so you
+            can think in EV and edge, not desperation.
+          </p>
+        </div>
+        <div class="card">
+          <h3>What SideGuy helps with</h3>
+          <ul class="bullets card-small">
+            <li>Promo tracking dashboards instead of napkins</li>
+            <li>EV calculators that match your risk tolerance</li>
+            <li>Systems that protect you from “one big hit” brain</li>
+          </ul>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Client Portals</h3>
-        <p>Secure, clean, instant value for service businesses.</p>
+    <!-- INTAKE -->
+    <section id="intake" class="section reveal">
+      <div class="section-title">Start a Project</div>
+      <div class="two-col">
+        <div>
+          <h2 class="section-kicker">Tell PJ what you’re cooking up.</h2>
+          <p class="section-lead">
+            No giant form, no calendar gate. Just enough structure so PJ can respond with
+            an honest next step, not a generic deck.
+          </p>
+        </div>
+
+        <form id="intake-form" class="card">
+          <label class="card-small" for="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Your name"
+            style="width:100%;padding:9px 10px;margin-bottom:10px;border-radius:10px;border:1px solid rgba(51,65,85,0.9);background:var(--glass);color:var(--text);font-size:0.86rem;"
+          />
+
+          <label class="card-small" for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            style="width:100%;padding:9px 10px;margin-bottom:10px;border-radius:10px;border:1px solid rgba(51,65,85,0.9);background:var(--glass);color:var(--text);font-size:0.86rem;"
+          />
+
+          <label class="card-small" for="biz">Business / Project</label>
+          <input
+            id="biz"
+            type="text"
+            placeholder="Brand, venue, startup, etc."
+            style="width:100%;padding:9px 10px;margin-bottom:10px;border-radius:10px;border:1px solid rgba(51,65,85,0.9);background:var(--glass);color:var(--text);font-size:0.86rem;"
+          />
+
+          <label class="card-small" for="lane">Lane</label>
+          <select
+            id="lane"
+            style="width:100%;padding:9px 10px;margin-bottom:10px;border-radius:10px;border:1px solid rgba(51,65,85,0.9);background:var(--glass);color:var(--text);font-size:0.86rem;"
+          >
+            <option>Apps &amp; Custom Builds</option>
+            <option>AI Automation &amp; Workflows</option>
+            <option>Web3 / Solana / 402 Payments</option>
+            <option>Ticketing &amp; Venues</option>
+            <option>DFS Tools &amp; Promo Systems</option>
+            <option>Other / Not sure yet</option>
+          </select>
+
+          <label class="card-small" for="notes">What are you trying to do?</label>
+          <textarea
+            id="notes"
+            placeholder="A few lines about the problem, current setup, and timeline."
+            style="width:100%;padding:9px 10px;min-height:90px;border-radius:10px;border:1px solid rgba(51,65,85,0.9);background:var(--glass);color:var(--text);font-size:0.86rem;resize:vertical;"
+          ></textarea>
+
+          <button
+            type="submit"
+            class="cta-primary"
+            style="width:100%;justify-content:center;margin-top:12px;"
+          >
+            Send to PJ
+          </button>
+        </form>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-
-  <!-- =============================== -->
-  <!-- AI SECTION -->
-  <!-- =============================== -->
-  <section id="ai" class="section">
-    <h2 class="section-title">AI Automation · Workflows</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Lead Routing</h3>
-        <p>Instant inbound triage + smart follow-up sequences.</p>
-      </div>
-
-      <div class="card">
-        <h3>Inbox Intelligence</h3>
-        <p>Auto-responses that feel human. No bots. No cringe.</p>
-      </div>
-
-      <div class="card">
-        <h3>CRM Syncing</h3>
-        <p>Update pipelines without 10 integrated tools.</p>
-      </div>
-
-      <div class="card">
-        <h3>Knowledge Systems</h3>
-        <p>Internal assistant that knows your clients & ops.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =============================== -->
-  <!-- WEB3 -->
-  <!-- =============================== -->
-  <section id="web3" class="section">
-    <h2 class="section-title">Web3 · Solana · Stablecoins</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>USDC Payment Rails</h3>
-        <p>Ultra-low fees · instant settlement · no banking drama.</p>
-      </div>
-
-      <div class="card">
-        <h3>On/Off Ramp Flows</h3>
-        <p>Move between cash + crypto smoothly.</p>
-      </div>
-
-      <div class="card">
-        <h3>Solana Smart Payments</h3>
-        <p>Trusted, transparent, programmable money.</p>
-      </div>
-
-      <div class="card">
-        <h3>Escrow Contracts</h3>
-        <p>For dev shops, ticketing, venues, and projects.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =============================== -->
-  <!-- TICKETS -->
-  <!-- =============================== -->
-  <section id="tickets" class="section">
-    <h2 class="section-title">Ticketing · Venues · Live Rooms</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Seat Maps</h3>
-        <p>Interactive rows · sections · pricing tiers.</p>
-      </div>
-
-      <div class="card">
-        <h3>Direct Ticketing</h3>
-        <p>Skip the platforms · keep your fees.</p>
-      </div>
-
-      <div class="card">
-        <h3>Hybrid Models</h3>
-        <p>Use big platforms + own your premium flows.</p>
-      </div>
-
-      <div class="card">
-        <h3>Venue Ops</h3>
-        <p>Backstage dashboards · payouts · settlement.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =============================== -->
-  <!-- DFS -->
-  <!-- =============================== -->
-  <section id="dfs" class="section">
-    <h2 class="section-title">DFS · Promos · Systems</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Promo Multiplier</h3>
-        <p>EV snapshots for 2-leg and boosted plays.</p>
-      </div>
-
-      <div class="card">
-        <h3>Bankroll Models</h3>
-        <p>Systems > vibes. Build structure not chaos.</p>
-      </div>
-
-      <div class="card">
-        <h3>Slate Filters</h3>
-        <p>Find stable promo edges over time.</p>
-      </div>
-
-      <div class="card">
-        <h3>Flow Tracking</h3>
-        <p>See what’s hot, cold, and +EV.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- =============================== -->
-  <!-- INTAKE FORM -->
-  <!-- =============================== -->
-  <section id="intake" class="section">
-    <h2 class="section-title">Start a Project</h2>
-
-    <form id="intake-form" class="card" style="max-width: 600px; margin: 0 auto;">
-      <input id="name" type="text" placeholder="Your name" style="width:100%;padding:12px;margin-bottom:14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.1);color:var(--text);" />
-      <input id="email" type="email" placeholder="Email" style="width:100%;padding:12px;margin-bottom:14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.1);color:var(--text);" />
-      <input id="biz" type="text" placeholder="Business / project" style="width:100%;padding:12px;margin-bottom:14px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.1);color:var(--text);" />
-
-      <select id="lane" style="width:100%;padding:12px;margin-bottom:14px;border-radius:10px;background:var(--glass);color:var(--text);border:1px solid rgba(255,255,255,0.1);">
-        <option>Apps</option>
-        <option>AI Automation</option>
-        <option>Web3</option>
-        <option>Tickets</option>
-        <option>DFS</option>
-        <option>402 Payments</option>
-        <option>Other</option>
-      </select>
-
-      <textarea id="notes" placeholder="What are you trying to do?" style="width:100%;padding:12px;height:110px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.1);color:var(--text);"></textarea>
-
-      <button type="submit" class="cta-primary" style="width:100%;text-align:center;margin-top:16px;">
-        Send to PJ
-      </button>
-    </form>
-  </section>
-
-
-  <!-- =============================== -->
   <!-- FOOTER -->
-  <!-- =============================== -->
-  <footer style="text-align:center;padding:40px 20px;color:var(--muted);font-size:0.8rem;">
-    SideGuy Solutions · Solana Beach · 2025
+  <footer>
+    SideGuy Solutions · Solana Beach · 2025 · Tap the portal if you know what’s good for you.
   </footer>
 
+  <!-- SOLANA PAY MODAL -->
+  <div id="solana-modal">
+    <div class="solana-modal-backdrop" onclick="closeSolanaPayModal()">
+      <div class="solana-modal-panel" onclick="event.stopPropagation()">
+        <div class="solana-modal-header">
+          <div class="solana-modal-title">
+            SOLANA PAY · <span>SideGuy</span>
+          </div>
+          <button class="solana-close-btn" onclick="closeSolanaPayModal()">Close</button>
+        </div>
+        <div id="solana-pay-qr"></div>
+        <div class="solana-modal-copy">
+          Scan with Phantom or any Solana wallet to send SOL or USDC.<br />
+          0% platform fees · instant settlement.
+        </div>
+        <a
+          class="solana-modal-link"
+          href="https://phantom.com/user/pjz2000"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open Phantom Profile
+        </a>
+      </div>
+    </div>
+  </div>
 
-  <!-- =============================== -->
-  <!-- BASIC JS (Modal placeholders + intake mailto) -->
-  <!-- =============================== -->
+  <!-- LIBS: THREE + SOLANA PAY + QR -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/@solana/pay@0.2.5/dist/umd/index.iife.min.js"></script>
+  <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+
   <script>
-    function mail(body) {
-      window.location.href = "mailto:peter.z@kromeon.com?subject=SideGuy Intake&body=" + encodeURIComponent(body);
+    // ==============================
+    // Smooth scroll helper
+    // ==============================
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    document.getElementById("intake-form").addEventListener("submit", function (e) {
-      e.preventDefault();
+    // Summon PJ (email draft)
+    function summonPJ() {
+      const subject = encodeURIComponent("Summon PJ · SideGuy Solutions");
+      const body = encodeURIComponent(
+        "Hey PJ,\n\nI just tapped the coastal portal on SideGuySolutions.com.\n\n" +
+        "Here’s the lane I’m thinking about:\n" +
+        "- Apps / custom builds\n" +
+        "- AI automation\n" +
+        "- Web3 / Solana / 402\n" +
+        "- Ticketing / venues\n" +
+        "- DFS tools & systems\n\n" +
+        "Here’s what I’m trying to do:\n\n" +
+        "(drop a few lines here)\n\n" +
+        "— Sent from the ocean portal 🌊"
+      );
+      window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+    }
 
-      const name = document.getElementById("name").value || "";
-      const email = document.getElementById("email").value || "";
-      const biz = document.getElementById("biz").value || "";
-      const lane = document.getElementById("lane").value || "";
-      const notes = document.getElementById("notes").value || "";
+    // ==============================
+    // Scroll reveal
+    // ==============================
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 }
+    );
 
-      const body = `
-New intake from SideGuySolutions.com:
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-Name: ${name}
-Email: ${email}
-Business: ${biz}
-Lane: ${lane}
+    // ==============================
+    // Ocean via THREE.js (safe)
+    // ==============================
+    (function initOcean() {
+      const canvas = document.getElementById("ocean-canvas");
+      if (!canvas || !window.THREE) return;
 
-Notes:
-${notes}
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.8));
+      renderer.setClearColor(0x000000, 0);
 
-Sent from the portal 🌊
-      `;
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        80
+      );
+      camera.position.set(0, 1.6, 5);
 
-      mail(body);
-    });
+      const geo = new THREE.PlaneGeometry(20, 20, 160, 160);
+      const mat = new THREE.MeshStandardMaterial({
+        color: 0x0ea5e9,
+        roughness: 0.4,
+        metalness: 0.25,
+        transparent: true,
+        opacity: 0.9
+      });
+      const ocean = new THREE.Mesh(geo, mat);
+      ocean.rotation.x = -Math.PI / 2;
+      ocean.position.y = -1.2;
+      scene.add(ocean);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+      const light = new THREE.DirectionalLight(0xaadfff, 0.9);
+      light.position.set(6, 12, 4);
+      scene.add(light);
+
+      const clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+        const pos = ocean.geometry.attributes.position;
+
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i);
+          const y = pos.getY(i);
+          const wave =
+            Math.sin(x * 1.15 + t * 1.2) * 0.16 +
+            Math.cos(y * 1.05 + t * 0.85) * 0.14 +
+            Math.sin((x + y) * 0.4 + t * 0.6) * 0.07;
+          pos.setZ(i, wave);
+        }
+        pos.needsUpdate = true;
+
+        camera.position.x = Math.sin(t * 0.1) * 0.55;
+        camera.position.z = 5 + Math.cos(t * 0.07) * 0.35;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      window.addEventListener("resize", () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
+    })();
+
+    // ==============================
+    // Particles
+    // ==============================
+    (function initParticles() {
+      const layer = document.getElementById("particle-layer");
+      if (!layer) return;
+
+      const count = 40;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = 18 + Math.random() * 16;
+        const delay = Math.random() * 20;
+        const scale = 0.6 + Math.random() * 1.4;
+
+        p.style.left = left + "%";
+        p.style.top = top + "%";
+        p.style.transform = "scale(" + scale + ")";
+        p.style.animationDuration = duration + "s";
+        p.style.animationDelay = delay + "s";
+
+        layer.appendChild(p);
+      }
+    })();
+
+    // ==============================
+    // Solana Pay modal + QR
+    // ==============================
+    let solanaQR = null;
+
+    function openSolanaPayModal() {
+      const modal = document.getElementById("solana-modal");
+      const target = document.getElementById("solana-pay-qr");
+      if (!modal || !target || !window.SolanaPay || !window.QRCodeStyling) {
+        alert("Solana Pay libs not loaded yet. Try again in a second.");
+        return;
+      }
+
+      // Clear any existing QR
+      target.innerHTML = "";
+
+      try {
+        const recipient = new SolanaPay.PublicKey(
+          "9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5"
+        );
+        const amount = null; // any amount
+        const label = "SideGuy Solutions";
+        const message = "Thanks for the support 🏄‍♂️";
+
+        const url = SolanaPay.createTransfer({
+          recipient,
+          amount,
+          splToken: undefined,
+          reference: null,
+          label,
+          message
+        });
+
+        solanaQR = new QRCodeStyling({
+          width: 260,
+          height: 260,
+          data: url.toString(),
+          margin: 16,
+          qrOptions: { errorCorrectionLevel: "H" },
+          backgroundOptions: { color: "#020617" },
+          dotsOptions: { color: "#14f195", type: "square" },
+          cornersSquareOptions: { color: "#9945ff", type: "extra-rounded" }
+        });
+
+        solanaQR.append(target);
+        modal.style.display = "block";
+      } catch (err) {
+        console.warn("Solana Pay error:", err);
+        alert("Could not build Solana Pay request.");
+      }
+    }
+
+    function closeSolanaPayModal() {
+      const modal = document.getElementById("solana-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    // ==============================
+    // Intake → email draft
+    // ==============================
+    const intakeForm = document.getElementById("intake-form");
+    if (intakeForm) {
+      intakeForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = document.getElementById("name").value || "";
+        const email = document.getElementById("email").value || "";
+        const biz = document.getElementById("biz").value || "";
+        const lane = document.getElementById("lane").value || "";
+        const notes = document.getElementById("notes").value || "";
+
+        const subject = encodeURIComponent("New Project Intake · " + lane);
+        const bodyLines = [
+          "Hey PJ,",
+          "",
+          "You’ve got a new intake from SideGuySolutions.com:",
+          "",
+          "Name: " + name,
+          "Email: " + email,
+          "Business / Project: " + biz,
+          "Lane: " + lane,
+          "",
+          "Notes:",
+          notes,
+          "",
+          "Sent from the coastal portal 🌊"
+        ];
+        const body = encodeURIComponent(bodyLines.join("\n"));
+
+        window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
+      });
+    }
   </script>
-
 </body>
 </html>
