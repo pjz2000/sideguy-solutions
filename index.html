@@ -1,7 +1,7 @@
 <!--
   SideGuy Solutions
-  Version: 25.1 — 2025-11-19 14:00 PST
-  Mode: Cinematic Ocean + Solana Pay + Tide + X + Audio
+  Version: 25.2 — 2025-11-19 14:30 PST
+  Mode: Cinematic Blue Ocean + Orby CTAs + Live Coastal Feed
   Author: PJ + ChatGPT
 -->
 <!DOCTYPE html>
@@ -28,6 +28,10 @@
 
       --sol-a: #9945ff;
       --sol-b: #14f195;
+
+      --blue-deep: #020617;
+      --blue-mid: #0f3d91;
+      --blue-surf: #38bdf8;
 
       --card: rgba(15, 23, 42, 0.93);
       --glass: rgba(15, 23, 42, 0.75);
@@ -65,7 +69,7 @@
       height: 100%;
       z-index: -3;
       display: block;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 60%);
+      background: radial-gradient(circle at top, #0f5fff 0%, #020617 65%);
     }
 
     .ocean-overlay {
@@ -74,11 +78,11 @@
       z-index: -2;
       pointer-events: none;
       background:
-        radial-gradient(circle at 20% -10%, rgba(148, 231, 255, 0.35), transparent 55%),
-        radial-gradient(circle at 80% -20%, rgba(20, 241, 149, 0.25), transparent 60%),
-        radial-gradient(circle at 50% 110%, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 1));
+        radial-gradient(circle at 20% -10%, rgba(148, 231, 255, 0.4), transparent 55%),
+        radial-gradient(circle at 80% -20%, rgba(56, 189, 248, 0.25), transparent 60%),
+        radial-gradient(circle at 50% 110%, rgba(2, 6, 23, 1), rgba(2, 6, 23, 1));
       mix-blend-mode: screen;
-      opacity: 0.95;
+      opacity: 0.98;
     }
 
     .ocean-fog {
@@ -87,21 +91,21 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(circle at 50% 120%, rgba(15, 23, 42, 0.95), transparent 55%),
-        radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.5), transparent 60%);
-      opacity: 0.85;
+        radial-gradient(circle at 50% 120%, rgba(2, 6, 23, 1), transparent 55%),
+        radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.6), transparent 60%);
+      opacity: 0.9;
       animation: fogDrift 42s linear infinite;
     }
 
     @keyframes fogDrift {
       0% {
-        transform: translate3d(-8%, 4%, 0) scale(1.03);
+        transform: translate3d(-6%, 4%, 0) scale(1.02);
       }
       50% {
-        transform: translate3d(6%, -4%, 0) scale(1.07);
+        transform: translate3d(6%, -4%, 0) scale(1.06);
       }
       100% {
-        transform: translate3d(-8%, 4%, 0) scale(1.03);
+        transform: translate3d(-6%, 4%, 0) scale(1.02);
       }
     }
 
@@ -131,13 +135,13 @@
         opacity: 0;
       }
       10% {
-        opacity: 0.8;
+        opacity: 0.85;
       }
       70% {
         opacity: 0.5;
       }
       100% {
-        transform: translate3d(10px, -180px, 0);
+        transform: translate3d(12px, -190px, 0);
         opacity: 0;
       }
     }
@@ -157,7 +161,7 @@
         rgba(2, 6, 23, 0.85),
         transparent
       );
-      border-bottom: 1px solid rgba(20, 241, 149, 0.4);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.45);
     }
 
     .nav-inner {
@@ -183,7 +187,7 @@
         radial-gradient(circle at 25% 20%, #e0f2fe, #38bdf8 35%, #0f172a 100%);
       box-shadow:
         0 0 0 1px rgba(148, 163, 184, 0.7),
-        0 0 30px rgba(20, 241, 149, 0.8);
+        0 0 34px rgba(56, 189, 248, 0.9);
     }
 
     .brand-name {
@@ -218,7 +222,7 @@
 
     nav.links a:hover {
       color: var(--text);
-      border-bottom-color: rgba(20, 241, 149, 0.7);
+      border-bottom-color: rgba(56, 189, 248, 0.8);
     }
 
     @media (max-width: 860px) {
@@ -257,10 +261,10 @@
 
     @keyframes heroGlow {
       0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(20, 241, 149, 0.2));
+        filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.25));
       }
       50% {
-        filter: drop-shadow(0 0 36px rgba(20, 241, 149, 0.5));
+        filter: drop-shadow(0 0 36px rgba(56, 189, 248, 0.6));
       }
     }
 
@@ -277,8 +281,30 @@
       font-weight: 600;
     }
 
+    .hero-stamp-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-stamp {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, var(--blue-surf), var(--blue-deep));
+      color: #e5f2ff;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 12px 40px rgba(8, 47, 73, 1),
+        0 0 60px rgba(37, 99, 235, 0.9);
+    }
+
     .hero-meta {
-      margin-top: 16px;
       font-size: 0.85rem;
       color: var(--muted);
     }
@@ -299,7 +325,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 26px;
     }
 
     .cta-primary,
@@ -318,51 +344,71 @@
       border: none;
       outline: none;
       white-space: nowrap;
-    }
-
-    .cta-primary {
-      background: linear-gradient(120deg, var(--sol-b), var(--sol-a));
-      color: #020617;
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.85),
-        0 14px 40px rgba(15, 118, 110, 0.95),
-        0 0 70px rgba(20, 241, 149, 0.9);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
       position: relative;
       overflow: hidden;
     }
 
-    .cta-primary::after {
+    .orb-btn::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.35), transparent 55%);
-      opacity: 0;
+      inset: 4px;
+      border-radius: var(--pill);
+      background: radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.3), transparent 55%);
+      opacity: 0.0;
       transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .orb-btn::after {
+      content: "";
+      position: absolute;
+      width: 130%;
+      height: 130%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12), transparent 60%);
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .orb-btn:hover::before {
+      opacity: 0.6;
+    }
+
+    .orb-btn:hover::after {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+
+    .cta-primary {
+      background: radial-gradient(circle at 0 0, var(--sol-b), var(--sol-a));
+      color: #020617;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.85),
+        0 14px 40px rgba(15, 118, 110, 0.95),
+        0 0 80px rgba(37, 99, 235, 0.9);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
     }
 
     .cta-primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: saturate(1.2);
+      transform: translateY(-2px) scale(1.03);
+      filter: saturate(1.15);
       box-shadow:
         0 0 0 1px rgba(20, 241, 149, 0.9),
-        0 18px 48px rgba(15, 118, 110, 1),
-        0 0 90px rgba(20, 241, 149, 1);
-    }
-
-    .cta-primary:hover::after {
-      opacity: 1;
+        0 18px 48px rgba(37, 99, 235, 1),
+        0 0 120px rgba(56, 189, 248, 1);
     }
 
     .cta-secondary {
       border: 1px solid rgba(20, 241, 149, 0.7);
       background: rgba(15, 23, 42, 0.9);
       color: var(--text);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
     }
 
     .cta-ghost {
       border: 1px dashed rgba(148, 163, 184, 0.7);
-      background: transparent;
+      background: rgba(15, 23, 42, 0.5);
       color: var(--soft);
     }
 
@@ -436,8 +482,8 @@
       background: var(--card);
       border-radius: var(--radius);
       padding: 18px 18px 20px;
-      border: 1px solid rgba(20, 241, 149, 0.35);
-      box-shadow: 0 16px 46px rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 16px 46px rgba(0, 0, 0, 0.8);
       position: relative;
       overflow: hidden;
     }
@@ -447,8 +493,8 @@
       position: absolute;
       inset: -30%;
       background:
-        radial-gradient(circle at 0 0, rgba(148, 231, 255, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(20, 241, 149, 0.22), transparent 50%);
+        radial-gradient(circle at 0 0, rgba(148, 231, 255, 0.2), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.22), transparent 50%);
       opacity: 0;
       mix-blend-mode: screen;
       transition: opacity 0.2s ease;
@@ -516,8 +562,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 0%, rgba(153, 69, 255, 0.32), transparent 60%),
-        radial-gradient(circle at 80% 100%, rgba(20, 241, 149, 0.26), transparent 60%),
+        radial-gradient(circle at 20% 0%, rgba(153, 69, 255, 0.35), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 0.3), transparent 60%),
         rgba(3, 7, 18, 0.93);
       backdrop-filter: blur(18px);
       display: flex;
@@ -530,13 +576,13 @@
       border-radius: 20px;
       padding: 20px 20px 22px;
       background: radial-gradient(circle at 0 0, rgba(148, 231, 255, 0.12), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(20, 241, 149, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.2), transparent 55%),
         rgba(15, 23, 42, 0.98);
       border: 1px solid rgba(148, 231, 255, 0.6);
       box-shadow:
         0 0 0 1px rgba(15, 23, 42, 0.9),
         0 22px 60px rgba(0, 0, 0, 0.9),
-        0 0 90px rgba(20, 241, 149, 0.9);
+        0 0 90px rgba(56, 189, 248, 0.9);
     }
 
     .solana-modal-header {
@@ -652,7 +698,7 @@
       padding: 7px 11px;
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(20, 241, 149, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.8);
       color: #e0f2fe;
       cursor: pointer;
       backdrop-filter: blur(10px);
@@ -682,7 +728,7 @@
       cursor: pointer;
       box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.7),
-        0 0 30px rgba(20, 241, 149, 0.6);
+        0 0 40px rgba(56, 189, 248, 0.7);
     }
 
     .x-fab span {
@@ -724,7 +770,7 @@
         <div class="brand-pill"></div>
         <div>
           <div class="brand-name">SideGuy Solutions</div>
-          <div class="brand-version">v25.1 · Cinematic Ocean</div>
+          <div class="brand-version">v25.2 · Cinematic Blue Ocean</div>
         </div>
       </div>
       <nav class="links">
@@ -734,6 +780,7 @@
         <a href="#tickets">Tickets</a>
         <a href="#dfs">DFS</a>
         <a href="#payments">402</a>
+        <a href="#live">Live</a>
         <a href="#intake">Intake</a>
       </nav>
     </div>
@@ -747,17 +794,22 @@
       <strong>AI automation</strong>, <strong>Web3 &amp; Solana payments</strong>,
       <strong>402 Internet Payments</strong>, ticketing flows, and DFS tools.
     </p>
-    <div class="hero-meta">
-      Based in Solana Beach · Built for operators, not tech bros.
+    <div class="hero-stamp-row">
+      <div class="hero-stamp">
+        v25.2 · Updated Nov 19, 2025 · 2:30pm PST
+      </div>
+      <div class="hero-meta">
+        Based in Solana Beach · Built for operators, not tech bros.
+      </div>
     </div>
     <div class="hero-contact">
       Text / call: <a href="tel:+17735441231">(773) 544-1231</a>
     </div>
 
     <div class="cta-row">
-      <button class="cta-primary" onclick="summonPJ()">Tap to Summon PJ</button>
-      <button class="cta-secondary" onclick="scrollToSection('toolkit')">Open Toolkit</button>
-      <button class="cta-ghost" onclick="openSolanaPayModal()">Pay with Solana</button>
+      <button class="cta-primary orb-btn" onclick="summonPJ()">Tap to Summon PJ</button>
+      <button class="cta-secondary orb-btn" onclick="scrollToSection('toolkit')">Open Toolkit</button>
+      <button class="cta-ghost orb-btn" onclick="openSolanaPayModal()">Pay with Solana</button>
     </div>
   </section>
 
@@ -777,7 +829,7 @@
           <h3>💠 Solana Fee Savings</h3>
           <p>Compare 2.9% processors vs Solana rails in two inputs.</p>
           <p class="card-small">Perfect for venues, dev shops, agencies, and high-volume brands.</p>
-          <button class="cta-secondary" style="margin-top: 8px;" onclick="openSolanaCalc()">Open Calculator</button>
+          <button class="cta-secondary orb-btn" style="margin-top: 8px;" onclick="openSolanaCalc()">Open Calculator</button>
         </div>
 
         <div class="card">
@@ -785,7 +837,7 @@
           <h3>📈 DFS Promo Multiplier</h3>
           <p>2-leg + boost EV snapshots. Educational only, no picks.</p>
           <p class="card-small">Helps you treat promos like math, not vibes.</p>
-          <button class="cta-secondary" style="margin-top: 8px;" onclick="openDFSCalc()">DFS Tool</button>
+          <button class="cta-secondary orb-btn" style="margin-top: 8px;" onclick="openDFSCalc()">DFS Tool</button>
         </div>
 
         <div class="card">
@@ -793,7 +845,7 @@
           <h3>🎟 Ticket Flow Optimizer</h3>
           <p>Price · capacity · fees · what’s left on the table.</p>
           <p class="card-small">Built for North County venues, bars, and live rooms.</p>
-          <button class="cta-secondary" style="margin-top: 8px;" onclick="openTicketCalc()">Optimize</button>
+          <button class="cta-secondary orb-btn" style="margin-top: 8px;" onclick="openTicketCalc()">Optimize</button>
         </div>
 
         <div class="card">
@@ -801,7 +853,7 @@
           <h3>🧮 Project Quickscope Estimator</h3>
           <p>Time &amp; budget bands so you know if it’s a weekend hack or real build.</p>
           <p class="card-small">Not a quote — a starting point for a real convo with PJ.</p>
-          <button class="cta-secondary" style="margin-top: 8px;" onclick="openEstimator()">Estimate</button>
+          <button class="cta-secondary orb-btn" style="margin-top: 8px;" onclick="openEstimator()">Estimate</button>
         </div>
       </div>
     </section>
@@ -826,7 +878,7 @@
         <div class="card">
           <h3>Tap-to-pay, the SideGuy way</h3>
           <p>Scan once, confirm in Phantom, done. No ACH purgatory, no random holds.</p>
-          <button class="cta-primary" style="margin-top: 10px;" onclick="openSolanaPayModal()">
+          <button class="cta-primary orb-btn" style="margin-top: 10px;" onclick="openSolanaPayModal()">
             Pay with Solana
           </button>
           <a
@@ -957,6 +1009,43 @@
       </div>
     </section>
 
+    <!-- LIVE COASTAL BOARD (API + INVENTORY) -->
+    <section id="live" class="section reveal">
+      <div class="section-title">Live Coastal Board</div>
+      <div class="two-col">
+        <div class="card" id="coastal-card">
+          <h3>🌊 Coastal Conditions — Solana Beach</h3>
+          <p id="coastal-status" class="card-small">
+            Pulling current weather for Solana Beach…
+          </p>
+          <ul class="bullets card-small" id="coastal-stats" style="margin-top: 6px;">
+            <li>Temperature: <span id="coastal-temp">—</span></li>
+            <li>Wind: <span id="coastal-wind">—</span></li>
+          </ul>
+          <p class="card-small" style="margin-top: 10px;">
+            Powered by a simple public weather API — just enough “live” to keep the portal breathing.
+          </p>
+        </div>
+        <div class="card">
+          <h3>📋 Build Slots Inventory</h3>
+          <p class="card-small">
+            SideGuy keeps a limited number of active builds rolling at once to protect quality and sanity.
+          </p>
+          <ul class="bullets card-small" style="margin-top: 6px;">
+            <li>Approx. build slots this month: <strong id="slot-count">–</strong></li>
+            <li>Best for: <span id="slot-focus">San Diego &amp; North County operators</span></li>
+          </ul>
+          <button
+            class="cta-secondary orb-btn"
+            style="margin-top: 10px;"
+            onclick="scrollToSection('intake')"
+          >
+            Grab a Slot
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- SOCIAL / X -->
     <section id="social" class="section reveal">
       <div class="section-title">Coastal Dispatches · X / Twitter</div>
@@ -978,7 +1067,7 @@
             href="https://x.com/sideguysolutions"
             target="_blank"
             rel="noreferrer"
-            class="cta-secondary"
+            class="cta-secondary orb-btn"
             style="
               margin-top: 10px;
               text-decoration: none;
@@ -1052,7 +1141,7 @@
 
           <button
             type="submit"
-            class="cta-primary"
+            class="cta-primary orb-btn"
             style="width:100%;justify-content:center;margin-top:12px;"
           >
             Send to PJ
@@ -1064,7 +1153,7 @@
 
   <!-- FOOTER -->
   <footer>
-    SideGuy Solutions · Solana Beach · 2025 · v25.1 Aladéen Coastal · Text / call
+    SideGuy Solutions · Solana Beach · 2025 · v25.2 Aladéen Coastal · Text / call
     <a href="tel:+17735441231" style="color:#a5f3fc;text-decoration:underline;">(773) 544-1231</a> ·
     Follow <a href="https://x.com/sideguysolutions" target="_blank" rel="noreferrer" style="color:#a5f3fc;text-decoration:underline;">@sideguysolutions</a> on X.
   </footer>
@@ -1149,7 +1238,7 @@
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-    // Ocean via THREE.js (safe but more alive)
+    // Ocean via THREE.js — bluer & more alive, safe
     (function initOcean() {
       const canvas = document.getElementById("ocean-canvas");
       if (!canvas || !window.THREE) return;
@@ -1169,24 +1258,24 @@
         0.1,
         80
       );
-      camera.position.set(0, 1.6, 5.2);
+      camera.position.set(0, 1.7, 5.4);
 
-      const geo = new THREE.PlaneGeometry(24, 24, 200, 200);
+      const geo = new THREE.PlaneGeometry(26, 26, 220, 220);
       const mat = new THREE.MeshStandardMaterial({
-        color: 0x0ea5e9,
-        roughness: 0.35,
-        metalness: 0.28,
+        color: 0x0f5fff,
+        roughness: 0.32,
+        metalness: 0.35,
         transparent: true,
-        opacity: 0.95
+        opacity: 0.97
       });
       const ocean = new THREE.Mesh(geo, mat);
       ocean.rotation.x = -Math.PI / 2;
-      ocean.position.y = -1.25;
+      ocean.position.y = -1.2;
       scene.add(ocean);
 
-      scene.add(new THREE.AmbientLight(0xffffff, 0.9));
-      const light = new THREE.DirectionalLight(0xaadfff, 0.95);
-      light.position.set(6, 12, 4);
+      scene.add(new THREE.AmbientLight(0xbfdfff, 0.95));
+      const light = new THREE.DirectionalLight(0xe0f2ff, 0.95);
+      light.position.set(6, 12, 5);
       scene.add(light);
 
       const clock = new THREE.Clock();
@@ -1196,26 +1285,23 @@
         const t = clock.getElapsedTime();
         const pos = ocean.geometry.attributes.position;
 
-        // Animate vertices for waves
         for (let i = 0; i < pos.count; i++) {
           const x = pos.getX(i);
           const y = pos.getY(i);
           const wave =
-            Math.sin(x * 1.15 + t * 1.2) * 0.22 +
-            Math.cos(y * 1.05 + t * 0.9) * 0.2 +
-            Math.sin((x + y) * 0.45 + t * 0.65) * 0.11;
+            Math.sin(x * 1.05 + t * 1.3) * 0.24 +
+            Math.cos(y * 1.1 + t * 0.9) * 0.22 +
+            Math.sin((x + y) * 0.45 + t * 0.65) * 0.12;
           pos.setZ(i, wave);
         }
         pos.needsUpdate = true;
 
-        // Ambient light breathing
         const breath = 0.85 + 0.15 * Math.sin(t * 0.25);
         light.intensity = 0.8 + 0.2 * breath;
 
-        // Camera sway
-        camera.position.x = Math.sin(t * 0.11) * 0.9;
-        camera.position.z = 5.2 + Math.cos(t * 0.08) * 0.55;
-        camera.position.y = 1.6 + Math.sin(t * 0.06) * 0.15;
+        camera.position.x = Math.sin(t * 0.11) * 0.95;
+        camera.position.z = 5.4 + Math.cos(t * 0.08) * 0.55;
+        camera.position.y = 1.7 + Math.sin(t * 0.06) * 0.16;
         camera.lookAt(0, 0, 0);
 
         renderer.render(scene, camera);
@@ -1235,7 +1321,7 @@
       const layer = document.getElementById("particle-layer");
       if (!layer) return;
 
-      const count = 70;
+      const count = 80;
       for (let i = 0; i < count; i++) {
         const p = document.createElement("div");
         p.className = "particle";
@@ -1243,7 +1329,7 @@
         const top = Math.random() * 100;
         const duration = 18 + Math.random() * 22;
         const delay = Math.random() * 24;
-        const scale = 0.6 + Math.random() * 1.6;
+        const scale = 0.6 + Math.random() * 1.7;
 
         p.style.left = left + "%";
         p.style.top = top + "%";
@@ -1276,6 +1362,50 @@
 
       updateTide();
       setInterval(updateTide, 60 * 1000);
+    })();
+
+    // LIVE COASTAL CONDITIONS (simple weather API)
+    (function initCoastalConditions() {
+      const statusEl = document.getElementById("coastal-status");
+      const tempEl = document.getElementById("coastal-temp");
+      const windEl = document.getElementById("coastal-wind");
+      if (!statusEl || !tempEl || !windEl) return;
+
+      const url =
+        "https://api.open-meteo.com/v1/forecast?latitude=32.99&longitude=-117.27&current_weather=true";
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          const cw = data && data.current_weather;
+          if (!cw) throw new Error("No current_weather in response");
+
+          const temp = cw.temperature;
+          const wind = cw.windspeed;
+
+          statusEl.textContent = "Light snapshot from a public weather API.";
+          tempEl.textContent = temp.toFixed(1) + "°C";
+          windEl.textContent = wind.toFixed(1) + " km/h";
+        })
+        .catch(() => {
+          statusEl.textContent = "Couldn’t pull live data — still calibrating.";
+          tempEl.textContent = "—";
+          windEl.textContent = "—";
+        });
+    })();
+
+    // Build slots inventory (simple rule-based)
+    (function initBuildSlots() {
+      const slotEl = document.getElementById("slot-count");
+      if (!slotEl) return;
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const day = now.getDate();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const remaining = daysInMonth - day;
+      const approxSlots = Math.max(1, Math.min(4, Math.ceil(remaining / 10)));
+      slotEl.textContent = approxSlots + " active openings";
     })();
 
     // Solana Pay modal + QR (with vibration)
