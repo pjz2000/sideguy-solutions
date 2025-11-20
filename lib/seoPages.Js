@@ -267,4 +267,230 @@ export function getSeoPage(slug) {
   return seoPages.find((p) => p.slug === slug);
 
 }
+  // 6. web-development-san-diego
 
+  {
+
+    slug: "web-development-san-diego",
+
+    title: "Web Development San Diego | Fast, Modern Websites",
+
+    metaDescription:
+
+      "Web development in San Diego for businesses, startups, and operators. Fast, modern websites built locally.",
+
+    h1: "Web Development in San Diego",
+
+    intro:
+
+      "We build fast, modern websites for San Diego companies who want clean design, fast shipping, and zero agency overhead.",
+
+    bullets: [
+
+      "Modern business websites",
+
+      "Landing pages that convert",
+
+      "Custom web apps",
+
+      "API & backend setup",
+
+      "Speed-optimized builds"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "app-development-san-diego",
+
+      "custom-software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 7. software-developers-san-diego
+
+  {
+
+    slug: "software-developers-san-diego",
+
+    title: "Software Developers San Diego | SideGuy Solutions",
+
+    metaDescription:
+
+      "Hire software developers in San Diego. Local full-stack support for apps, automation, and custom software.",
+
+    h1: "Software Developers in San Diego",
+
+    intro:
+
+      "Looking for reliable software developers in San Diego? We help teams build, scale, and ship real products — without the bloat.",
+
+    bullets: [
+
+      "Full-stack developers",
+
+      "Mobile app specialists",
+
+      "API & backend experts",
+
+      "Local communication",
+
+      "Startup-friendly pricing"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-company-san-diego",
+
+      "software-engineering-san-diego",
+
+      "hire-software-developers-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 8. san-diego-software-company
+
+  {
+
+    slug: "san-diego-software-company",
+
+    title: "San Diego Software Company | Modern App & Web Builds",
+
+    metaDescription:
+
+      "A modern San Diego software company building apps, automation tools, dashboards, and Web3 integrations.",
+
+    h1: "San Diego Software Company",
+
+    intro:
+
+      "SideGuy Solutions is a local San Diego software company focused on clean builds, fast communication, and modern tooling.",
+
+    bullets: [
+
+      "Custom business tools",
+
+      "Mobile & web development",
+
+      "Automation systems",
+
+      "Cloud architecture",
+
+      "Web3 & Solana integrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "custom-software-san-diego",
+
+      "web-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 9. custom-software-san-diego
+
+  {
+
+    slug: "custom-software-san-diego",
+
+    title: "Custom Software San Diego | Local App Builders",
+
+    metaDescription:
+
+      "Custom software in San Diego for businesses and founders looking for fast builds and clean execution.",
+
+    h1: "Custom Software in San Diego",
+
+    intro:
+
+      "We build custom software that solves real problems — built locally in San Diego for businesses that need precision.",
+
+    bullets: [
+
+      "Custom workflows",
+
+      "Automations",
+
+      "Internal tools",
+
+      "Custom web apps",
+
+      "Database systems"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "custom-software-development-san-diego",
+
+      "app-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 10. it-services-san-diego
+
+  {
+
+    slug: "it-services-san-diego",
+
+    title: "IT Services San Diego | Tech Support & Automation",
+
+    metaDescription:
+
+      "IT services in San Diego for businesses needing support, modernization, and smarter infrastructure.",
+
+    h1: "IT Services in San Diego",
+
+    intro:
+
+      "We provide IT support and modern tech services for small businesses and operators across San Diego.",
+
+    bullets: [
+
+      "Technical support",
+
+      "System setup",
+
+      "Workflow automation",
+
+      "Security improvements",
+
+      "Cloud migrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "san-diego-it-consulting",
+
+      "software-consulting-san-diego",
+
+      "software-development-san-diego"
+
+    ]
+
+  },
