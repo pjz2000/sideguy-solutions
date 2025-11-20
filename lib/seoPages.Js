@@ -267,7 +267,7 @@ export function getSeoPage(slug) {
   return seoPages.find((p) => p.slug === slug);
 
 }
-  // 6. web-development-san-diego
+ // 6. web-development-san-diego
 
   {
 
@@ -493,4 +493,33 @@ export function getSeoPage(slug) {
 
     ]
 
-  },
+  }
+
+
+
+]; // ← FINAL CLOSING BRACKET FOR ARRAY
+
+
+
+// ------------------------------------------------
+
+// Required exports for the Next.js dynamic route
+
+// ------------------------------------------------
+
+
+
+export function getAllSeoSlugs() {
+
+  return seoPages.map((p) => p.slug);
+
+}
+
+
+
+export function getSeoPage(slug) {
+
+  return seoPages.find((p) => p.slug === slug);
+
+}
+
