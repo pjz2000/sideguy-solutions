@@ -1,1035 +1,4740 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- BASIC META -->
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SideGuy Solutions | San Diego Coastal Tech Concierge</title>
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Web Development San Diego | Modern Websites by SideGuy Solutions</title>
+  <meta name="description" content="Web development in San Diego for businesses that need fast, clean, modern websites. SideGuy Solutions builds conversion-focused websites, landing pages, and custom web apps.">
+  <meta name="keywords" content="web development san diego, web developer san diego, website company san diego, sideguy solutions, kromeon north county">
 
-  <meta
-    name="description"
-    content="SideGuy Solutions is a San Diego coastal tech concierge. Custom apps, AI automation, Solana & 402 internet payments, and ticketing systems for venues and operators in North County."
-  />
-
-  <meta
-    name="keywords"
-    content="San Diego software development, North County app developer, AI automation San Diego, Solana payments San Diego, 402 internet payments, ticketing systems for venues, coastal tech concierge"
-  />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="SideGuy Solutions | San Diego Coastal Tech Concierge" />
-  <meta property="og:description" content="Custom apps, AI automation, Solana & 402 internet payments, and ticketing systems for real operators in San Diego & North County." />
-  <meta property="og:url" content="https://www.sideguysolutions.com/" />
-  <meta property="og:type" content="website" />
-
-  <!-- LocalBusiness Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "SideGuy Solutions",
-    "description": "SideGuy Solutions is a San Diego coastal tech concierge specializing in custom apps, AI automation, Solana payments, 402 internet payments, and ticketing systems for venues and operators in North County.",
-    "url": "https://www.sideguysolutions.com/",
-    "telephone": "+1-773-544-1231",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "San Diego",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    },
-    "areaServed": [
-      "San Diego",
-      "Solana Beach",
-      "Encinitas",
-      "Cardiff",
-      "Leucadia",
-      "Carlsbad",
-      "Del Mar",
-      "Oceanside"
-    ],
-    "openingHoursSpecification": [{
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    }]
-  }
-  </script>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
-    rel="stylesheet"
-  />
-
+  <!-- SIMPLE STYLES (FAST SEO PAGE) -->
   <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.2);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
     body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    html {
-      scroll-behavior: smooth;
+    header {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
     }
-
-    /* =============== OCEAN CANVAS BACKGROUND =============== */
-    #ocean-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -10;
-      display: block;
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
     }
-
-    /* OCEAN VIBES OVERLAY */
-    .ocean-hero {
-      position: relative;
-      color: white;
-    }
-    .ocean-hero::before {
-      /* soft moving shimmer over hero */
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(255,255,255,0.16), transparent 55%),
-        radial-gradient(circle at 80% 120%, rgba(56,189,248,0.25), transparent 60%);
-      opacity: 0.55;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      animation: oceanGlow 18s ease-in-out infinite alternate;
-    }
-    .ocean-hero-inner {
-      position: relative;
-      z-index: 1;
-    }
-    @keyframes oceanGlow {
-      0%   { transform: translate3d(0,0,0) scale(1.02); filter: hue-rotate(0deg); }
-      50%  { transform: translate3d(-18px,-12px,0) scale(1.06); filter: hue-rotate(8deg); }
-      100% { transform: translate3d(12px,-18px,0) scale(1.03); filter: hue-rotate(-6deg); }
-    }
-
-    .ocean-divider {
-      position: relative;
-    }
-    .ocean-divider svg {
-      display: block;
-      width: 100%;
-      height: 60px;
-    }
-
-    .ocean-pill {
-      background: radial-gradient(circle at 0% 0%, #e0f2fe 0%, #38bdf8 40%, #0ea5e9 70%);
-      box-shadow:
-        0 0 0 1px rgba(15,23,42,0.9),
-        0 14px 40px rgba(8,47,73,0.9),
-        0 0 50px rgba(56,189,248,0.9);
-    }
-
-    .ocean-tag {
-      background: rgba(15,23,42,0.9);
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
       border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 0.75rem;
+      padding: 6px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    /* Solana gradient text (for OCEAN TECH GUIDE) */
-    .solana-text {
-      background: linear-gradient(120deg, #14f195, #38bdf8, #a855f7);
-      -webkit-background-clip: text;
-      color: transparent;
+    main {
+      flex: 1;
+      width: 100%;
     }
 
-    /* ALAD€€N MODE++ ORBS */
-    .solana-orb-btn {
-      position: relative;
-      overflow: hidden;
-      border-radius: 9999px;
-      background: radial-gradient(circle at 10% 0%, #14f195, #38bdf8 35%, #0f172a 100%);
-      box-shadow:
-        0 0 0 1px rgba(15, 23, 42, 0.8),
-        0 0 40px rgba(56, 189, 248, 0.9),
-        0 0 90px rgba(148, 163, 255, 0.8);
-    }
-    .solana-orb-btn::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.5), transparent 50%),
-        radial-gradient(circle at 80% 100%, rgba(20,241,149,0.5), transparent 55%);
-      opacity: 0.35;
-      mix-blend-mode: screen;
-      animation: orbSweep 4.4s ease-in-out infinite;
-    }
-    .solana-orb-btn span {
-      position: relative;
-      z-index: 1;
-    }
-    @keyframes orbSweep {
-      0% { transform: translate3d(-10%, -10%, 0) rotate(0deg); }
-      50% { transform: translate3d(10%, 10%, 0) rotate(8deg); }
-      100% { transform: translate3d(-15%, 5%, 0) rotate(-6deg); }
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 32px;
     }
 
-    /* Timestamp badge */
-    .version-badge {
-      background: rgba(15,23,42,0.9);
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 0.7rem;
-      padding: 4px 10px;
-      color: #e5e7eb;
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 10px;
+      }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
     }
 
-    /* Modal base */
-    .sg-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      display: none;
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(15,23,42,0.85);
-      backdrop-filter: blur(14px);
-      z-index: 50;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #38bdf8, #22d3ee);
+      color: #0f172a;
+      box-shadow: 0 18px 45px rgba(8, 47, 73, 0.5);
+      cursor: pointer;
+      white-space: nowrap;
     }
-    .sg-modal {
-      max-width: 480px;
-      width: 90%;
-      background: #020617;
-      border-radius: 1.5rem;
-      border: 1px solid rgba(56,189,248,0.4);
-      box-shadow: 0 0 40px rgba(15,23,42,0.9);
-      padding: 1.75rem;
-      color: #e5e7eb;
+    .btn-primary span {
+      font-size: 1.1rem;
+      margin-top: 1px;
     }
-
-    /* Mobile nav safety */
-    [x-cloak] { display: none !important; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
   </style>
-
 </head>
+<body>
 
-<body class="bg-slate-950 text-black">
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
 
-  <!-- Fullscreen Ocean Canvas (real-time 2D waves, safe everywhere) -->
-  <canvas id="ocean-canvas"></canvas>
-
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 bg-slate-950/85 backdrop-blur border-b border-slate-800/80 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-      <a href="#top" class="text-2xl font-black tracking-tight text-slate-50">
-        SideGuy <span class="text-sky-400">Solutions</span>
-      </a>
-
-      <!-- Desktop nav -->
-      <div class="hidden md:flex items-center gap-6 text-[15px] font-semibold text-slate-200">
-        <a href="#apps" class="hover:text-sky-300">Apps</a>
-        <a href="#ai" class="hover:text-sky-300">AI</a>
-        <a href="#solana" class="hover:text-sky-300">Solana &amp; 402</a>
-        <a href="#ticketing" class="hover:text-sky-300">Ticketing</a>
-        <a href="#north-county" class="hover:text-sky-300">North County</a>
-        <a href="#pricing" class="hover:text-sky-300">Pricing</a>
-        <a href="#blog-excerpt" class="hover:text-sky-300">Blog</a>
-        <a
-          href="tel:7735441231"
-          class="ocean-pill text-black px-5 py-2 rounded-full text-sm font-bold hover:brightness-110 transition flex items-center gap-1"
-        >
-          <span>Text PJ → 773-544-1231</span>
-        </a>
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Modern Web Development
       </div>
 
-      <!-- Mobile toggle -->
-      <button
-        id="mobile-menu-toggle"
-        class="md:hidden inline-flex items-center justify-center p-2 rounded hover:bg-slate-800 text-slate-100"
-        aria-label="Toggle navigation"
-      >
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            id="mobile-menu-icon-open"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-          <path
-            id="mobile-menu-icon-close"
-            class="hidden"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+      <h1>Web Development in San Diego That Feels Fast, Clean & Modern</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds websites and web apps that look clean, load fast,
+        and actually convert. Whether you're a startup, venue, or service business,
+        you get a North County partner who cares about performance and UX — not bloated agency overhead.
+      </p>
+
+      <div class="hero-tags">
+        <span>Modern websites</span>
+        <span>Landing pages</span>
+        <span>Web apps</span>
+        <span>SEO-focused builds</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Web%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Send your idea or project. PJ replies personally from North County.
+        </div>
+      </div>
     </div>
 
-    <!-- Mobile nav -->
-    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-800 bg-slate-950">
-      <div class="px-4 pt-3 pb-4 space-y-2 text-[15px] font-semibold text-slate-100">
-        <a href="#apps" class="block py-1">Apps</a>
-        <a href="#ai" class="block py-1">AI</a>
-        <a href="#solana" class="block py-1">Solana &amp; 402</a>
-        <a href="#ticketing" class="block py-1">Ticketing</a>
-        <a href="#north-county" class="block py-1">North County</a>
-        <a href="#pricing" class="block py-1">Pricing</a>
-        <a href="#blog-excerpt" class="block py-1">Blog</a>
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.8), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego Web Development Done Right</h2>
+      <p>
+        Skip the agency dance. You work directly with PJ and a lean Kromeon crew
+        that builds clean, optimized websites — not slow, complicated messes.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Fast, clean builds that look premium.</div></li>
+        <li><span>•</span><div>SEO-optimized structure from day one.</div></li>
+        <li><span>•</span><div>Clear communication — no jargon.</div></li>
+        <li><span>•</span><div>North County based, remote-friendly.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built in San Diego · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO WEB DEV -->
+    <section class="section">
+      <h2>Why Web Development in San Diego with SideGuy Solutions</h2>
+      <p>
+        San Diego businesses don’t need bloated agency websites that take six months
+        and still load slow. You need something clean, fast, practical — a real
+        operator’s website. Whether you’re in Solana Beach, Encinitas, La Jolla, or
+        downtown, SideGuy Solutions builds sites that feel modern, load instantly,
+        and make people trust your brand the second they land.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real operators</h3>
+          <p>
+            PJ works directly with founders, local businesses, venues, and operators
+            who need simple, practical web builds — not endless meetings and pitch
+            decks. Everything we build is meant to work in the real world, not
+            just look pretty in a portfolio.
+          </p>
+
+          <div class="pill-row">
+            <span>Fast iterations</span>
+            <span>Clean UX</span>
+            <span>Business-first decisions</span>
+            <span>Local expertise</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>How the process works</h3>
+          <p>
+            No complicated funnels. No long discovery phases. You talk to PJ, share
+            the reality, and we build what actually matters.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You send a quick email describing your site, brand, or problem.</td>
+              </tr>
+              <tr>
+                <td>2. Scope options</td>
+                <td>We outline the simplest path to launch + what an upgraded version looks like.</td>
+              </tr>
+              <tr>
+                <td>3. Design & build</td>
+                <td>Clean, modern UI with performance-focused code and SEO baked in.</td>
+              </tr>
+              <tr>
+                <td>4. Launch & refine</td>
+                <td>We go live, gather feedback, and make micro-improvements that matter.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + USE CASES -->
+    <section class="section">
+      <h2>Popular Web Development Projects in San Diego</h2>
+      <p>
+        From North County to downtown, these are the most common and effective web
+        projects SideGuy Solutions builds for San Diego businesses.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Starter Website</td>
+                <td>Local businesses needing a clean, modern online presence.</td>
+              </tr>
+              <tr>
+                <td>Landing Page</td>
+                <td>Ads, product launches, or lead generation funnels.</td>
+              </tr>
+              <tr>
+                <td>Web App Build</td>
+                <td>Operators who need dashboards, workflows, or custom tools.</td>
+              </tr>
+              <tr>
+                <td>Website Upgrade</td>
+                <td>Teams stuck with slow, outdated, or poorly structured sites.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Clear, honest communication — no tech maze.</div></li>
+            <li><span>•</span><div>SEO-first architecture for real search traffic.</div></li>
+            <li><span>•</span><div>Fast turnaround without agency bloat.</div></li>
+            <li><span>•</span><div>Direct access to PJ — no support tickets.</div></li>
+            <li><span>•</span><div>North County local expertise with global skill.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="section">
+      <h2>Ready to build a better website?</h2>
+      <p>
+        If you want a clean, fast, modern website built by someone who understands
+        real-world operators, SideGuy Solutions is your San Diego web development partner.
+      </p>
+
+      <div class="cta-row">
         <a
-          href="tel:7735441231"
-          class="mt-2 inline-flex w-full justify-center bg-sky-400 text-black px-4 py-2 rounded-full text-sm font-bold hover:bg-sky-300"
+          href="mailto:pj@kromeon.com?subject=Web%20Development%20San%20Diego"
+          class="btn-primary"
         >
-          Text PJ → 773-544-1231
+          <span>●</span> Send PJ a quick brief
         </a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO with ocean vibes -->
-  <main id="top">
-    <section class="ocean-hero pt-28 pb-20 px-6">
-      <div class="ocean-hero-inner max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <div class="flex flex-wrap items-center gap-3 mb-4">
-            <p class="uppercase tracking-[0.22em] text-[11px] text-sky-100">
-              San Diego • North County • Coastal Operators
-            </p>
-            <span class="version-badge">
-              <span class="text-sky-300 font-semibold">v26.1</span>
-              <span class="hidden sm:inline">Ocean Max LITE · Solana</span>
-            </span>
-          </div>
-
-          <h1 class="text-4xl md:text-6xl font-black leading-tight mb-4 drop-shadow-xl">
-            Where code<br class="hidden md:block" />
-            meets the coastline.
-          </h1>
-
-          <p class="text-lg md:text-2xl text-sky-100/90 mb-4">
-            SideGuy Solutions is your
-            <span class="font-semibold">coastal tech concierge</span> — custom apps, AI automation,
-            <span class="font-semibold">Solana &amp; 402 internet payments</span>, and ticketing systems for venues,
-            brands, and operators from <span class="font-semibold">San Diego to North County</span>.
-          </p>
-
-          <p class="text-xs text-sky-100/80 mb-4">
-            Last updated: <span id="sg-timestamp">Nov 19, 2025 · 2:00 PM PT</span>
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-4 mb-4">
-            <a
-              href="https://forms.sideguysolutions.com/intake"
-              class="solana-orb-btn px-8 py-4 rounded-full text-lg font-bold text-black flex items-center justify-center hover:brightness-110 transition"
-            >
-              <span>Project Intake (60 sec)</span>
-            </a>
-            <button
-              type="button"
-              id="orb-summon-btn"
-              class="border border-sky-100/70 text-sky-50 px-8 py-4 rounded-full text-lg font-bold flex items-center justify-center hover:bg-sky-50/10 transition"
-            >
-              Tap to Summon PJ
-            </button>
-          </div>
-
-          <div class="flex flex-wrap gap-2 text-xs text-sky-100/80">
-            <span class="ocean-tag border border-sky-200/40">San Diego software</span>
-            <span class="ocean-tag border border-sky-200/40">North County apps</span>
-            <span class="ocean-tag border border-sky-200/40">Solana &amp; 402 payments</span>
-            <span class="ocean-tag border border-sky-200/40">Ticketing for venues</span>
-          </div>
-
-          <p class="mt-4 text-xs text-sky-100/70">
-            Encinitas • Solana Beach • Carlsbad • Del Mar • Oceanside
-          </p>
-        </div>
-
-        <!-- Right side: “Ocean Tech Guide” card -->
-        <div class="relative">
-          <div class="rounded-3xl bg-slate-900/80 border border-sky-400/50 shadow-2xl p-6 md:p-7 backdrop-blur">
-            <p class="text-xs uppercase tracking-[0.18em] text-sky-300 mb-3">
-              <span class="solana-text font-bold">Ocean Tech Guide</span> · 2025
-            </p>
-            <h2 class="text-xl md:text-2xl font-bold text-sky-50 mb-3">
-              Built for operators, not just “startups.”
-            </h2>
-            <p class="text-sm text-sky-100/90 mb-4">
-              Venues, bars, agencies, service businesses, and founders who need
-              <span class="font-semibold">systems that match how their world actually works</span> — not a vague SaaS template.
-            </p>
-            <ul class="space-y-2 text-sm text-sky-100/90 mb-4">
-              <li>• Apps and portals that feel like an extension of your roster</li>
-              <li>• AI flows that quietly handle lead routing and follow-up</li>
-              <li>• <span class="font-semibold">Solana &amp; 402 internet payments</span> that stop bleeding processing fees</li>
-              <li>• Ticketing &amp; DFS tools tuned for people who live on slates and lineups</li>
-            </ul>
-            <p class="text-xs text-sky-200/80">
-              You don’t need a 20-slide deck. You need a SideGuy you can text.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ocean wave divider -->
-      <div class="ocean-divider mt-10">
-        <svg preserveAspectRatio="none" viewBox="0 0 1200 120">
-          <path
-            d="M0,0 C300,90 900,-60 1200,20 L1200,120 L0,120 Z"
-            fill="#f9fafb"
-          />
-        </svg>
-      </div>
-    </section>
-
-    <!-- CORE SERVICE LANES -->
-    <section id="apps" class="py-16 px-6 bg-slate-50">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-black text-center mb-10">What SideGuy actually does</h2>
-        <div class="grid md:grid-cols-4 gap-6 text-sm md:text-base text-slate-800">
-
-          <a href="#apps-detail" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="text-lg font-bold mb-1">Apps</h3>
-            <p>Custom web &amp; mobile apps for customers and internal teams.</p>
-            <p class="mt-3 text-xs text-slate-500">San Diego app development • internal tools • portals</p>
-          </a>
-
-          <a href="#ai" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="text-lg font-bold mb-1">AI Automation</h3>
-            <p>Lead routing, intake flows, internal assistants that remove busywork.</p>
-            <p class="mt-3 text-xs text-slate-500">AI for small businesses • ops automation</p>
-          </a>
-
-          <a href="#solana" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="text-lg font-bold mb-1">Solana &amp; 402</h3>
-            <p>USDC deposits, Solana Pay, and 402 internet-native payment flows.</p>
-            <p class="mt-3 text-xs text-slate-500">Stablecoins • Solana rails • 402 experiments</p>
-          </a>
-
-          <a href="#ticketing" class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="text-lg font-bold mb-1">Ticketing</h3>
-            <p>Hybrid ticketing &amp; VIP systems for venues, bars, and live rooms.</p>
-            <p class="mt-3 text-xs text-slate-500">North County venues • live rooms • promoters</p>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- NORTH COUNTY + OPERATOR BRAIN -->
-    <section id="north-county" class="py-16 px-6 bg-white">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 class="text-3xl font-black mb-4">North County roots. Operator brain.</h2>
-          <p class="text-lg text-slate-700 mb-4">
-            If your life lives between <strong>Solana Beach, Encinitas, Carlsbad, and Del Mar</strong>,
-            your tech should feel like it grew up here too.
-          </p>
-          <p class="text-base text-slate-700 mb-4">
-            SideGuy is built for GMs, owners, and founders who juggle:
-          </p>
-          <ul class="space-y-2 text-slate-700 text-sm md:text-base">
-            <li>• Shows, tables, tickets, and headcounts</li>
-            <li>• Clients, retainers, and invoices</li>
-            <li>• Staff, shifts, and repeat regulars</li>
-            <li>• Wild ideas that don’t fit in a standard SaaS box</li>
-          </ul>
-        </div>
-
-        <div class="rounded-3xl bg-slate-900 text-slate-50 p-7 shadow-2xl border border-sky-400/40">
-          <h3 class="text-2xl font-bold mb-3">What a “SideGuy” actually is</h3>
-          <p class="text-sm md:text-base text-slate-100 mb-3">
-            A SideGuy is the person you text when:
-          </p>
-          <ul class="space-y-2 text-sm md:text-base text-slate-100 mb-4">
-            <li>✓ Something breaks before doors</li>
-            <li>✓ You’re hatching a new night, offer, or product</li>
-            <li>✓ You’re tired of getting rinsed by fees and bad tools</li>
-            <li>✓ You want an edge but don’t want a 20-slide pitch deck</li>
-          </ul>
-          <p class="text-xs text-slate-200">
-            That’s the entire job: be on your side, build the tech, keep it coastal.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- APPS DETAIL SECTION -->
-    <section id="apps-detail" class="py-16 px-6 bg-slate-50">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 class="text-3xl font-black mb-4">San Diego app development without SF drama.</h2>
-          <p class="text-lg text-slate-700 mb-4">
-            From MVPs and landing pages to internal dashboards, SideGuy builds
-            <span class="font-semibold">lean, fast, and actually-finished</span> products for San Diego and North County.
-          </p>
-          <p class="text-base text-slate-700 mb-4">
-            Good fits:
-          </p>
-          <ul class="space-y-2 text-slate-700 text-sm md:text-base mb-4">
-            <li>• Service businesses that need smoother onboarding or quoting</li>
-            <li>• Local brands turning spreadsheets into real tools</li>
-            <li>• Founders testing a v1 without burning a full raise</li>
-            <li>• San Diego teams that want a dev you can text</li>
-          </ul>
-        </div>
-        <div class="rounded-3xl bg-white border border-slate-200 p-7 shadow-md">
-          <h3 class="text-xl font-bold mb-3">App &amp; Portal Starter Sprint</h3>
-          <p class="text-sm md:text-base text-slate-700 mb-4">
-            Most app projects start small: a simple portal, quote tool, or internal dashboard that
-            ships in weeks, not months.
-          </p>
-          <p class="text-xs text-slate-500 mb-4">
-            Think of it as a 12–24 month edge for your operations — not just “a website.”
-          </p>
-          <a
-            href="https://forms.sideguysolutions.com/intake"
-            class="inline-flex justify-center items-center solana-orb-btn px-6 py-3 rounded-full text-sm font-bold text-black hover:brightness-110 transition"
-          >
-            <span>Start an App Sprint</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- AI AUTOMATION SECTION -->
-    <section id="ai" class="py-16 px-6 bg-white">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 class="text-3xl font-black mb-4">AI that quietly handles the boring stuff.</h2>
-          <p class="text-lg text-slate-700 mb-4">
-            No “AI guru” nonsense — just practical flows that move leads, data, and messages around so your team can breathe.
-          </p>
-          <ul class="space-y-2 text-slate-700 text-sm md:text-base mb-4">
-            <li>• Auto-replies that feel human when someone texts the business</li>
-            <li>• Syncing forms, calendars, and CRMs without 20 tools</li>
-            <li>• “What’s going on with this client?” one-click summaries</li>
-          </ul>
-          <p class="text-xs text-slate-500">
-            Built for the inbox and phone, not just some abstract “stack.”
-          </p>
-        </div>
-        <div class="rounded-3xl bg-slate-900 text-slate-50 p-7 shadow-2xl border border-sky-400/40">
-          <h3 class="text-xl font-bold mb-3">AI Automation · 12–24 Month Edge</h3>
-          <p class="text-sm md:text-base text-slate-100 mb-3">
-            The goal isn’t hype — it’s to give your operation a quiet, compounding edge over the next
-            <span class="font-semibold">12–24 months</span>.
-          </p>
-          <ul class="space-y-2 text-sm text-slate-100 mb-4">
-            <li>✓ Lead capture → nurture without dropping the ball</li>
-            <li>✓ Internal knowledge so staff can answer like a vet</li>
-            <li>✓ Reporting and summaries that don’t eat your Sunday</li>
-          </ul>
-          <button
-            type="button"
-            id="ai-modal-open"
-            class="inline-flex justify-center items-center px-6 py-3 rounded-full border border-sky-400 text-sky-100 text-sm font-bold hover:bg-sky-500/10 transition"
-          >
-            See AI Flow Examples
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOLANA + 402 INTERNET PAYMENTS -->
-    <section id="solana" class="py-16 px-6 bg-slate-900 text-slate-50">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 class="text-3xl font-black mb-4">Solana payments &amp; 402 internet payments.</h2>
-          <p class="text-lg mb-4 text-slate-100">
-            SideGuy helps San Diego operators dip into Web3 without needing to pretend they like Discord.
-            Focus: <span class="font-semibold">fees down, reliability up</span>.
-          </p>
-          <ul class="space-y-2 text-sm md:text-base text-slate-100 mb-4">
-            <li>• Clients paying deposits in USDC instead of chasing wire confirmations</li>
-            <li>• Ticketing or subscriptions with near-zero processing fees</li>
-            <li>• “Crypto escrow” flows for dev work or big projects</li>
-            <li>• 402 internet payments layered on top of Solana rails</li>
-          </ul>
-          <p class="text-xs text-slate-300">
-            402 = the idea that the internet should natively support small, instant payments — SideGuy wants
-            San Diego to benefit early.
-          </p>
-        </div>
-
-        <div class="rounded-3xl bg-slate-950 border border-sky-500/50 p-7 shadow-[0_0_60px_rgba(56,189,248,0.6)]">
-          <h3 class="text-xl font-bold mb-3">Solana Pay · SideGuy Wallet</h3>
-          <p class="text-sm text-slate-100 mb-3">
-            Want to test a flow or send a thank you? Scan the QR code to send SOL or USDC with
-            <span class="font-semibold text-emerald-300">0% platform fees</span>.
-          </p>
-          <div class="flex flex-col items-center gap-3">
-            <div
-              id="solana-qr-shell"
-              class="w-48 h-48 bg-slate-900/60 border border-sky-500/40 rounded-3xl flex items-center justify-center text-xs text-slate-500"
-            >
-              Loading Solana QR...
-            </div>
-            <p class="text-[11px] text-slate-400">
-              Wallet: <span class="font-mono text-emerald-300">9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5</span>
-            </p>
-            <div class="flex flex-wrap gap-2 justify-center text-[11px] text-slate-400">
-              <span class="px-2 py-1 rounded-full border border-emerald-400/60">Solana Pay</span>
-              <span class="px-2 py-1 rounded-full border border-sky-400/60">USDC · SOL</span>
-              <span class="px-2 py-1 rounded-full border border-purple-400/60">402 experiments</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TICKETING SECTION -->
-    <section id="ticketing" class="py-16 px-6 bg-slate-50">
-      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <h2 class="text-3xl font-black mb-4">Ticketing built for venues, not just platforms.</h2>
-          <p class="text-lg text-slate-700 mb-4">
-            The dream: faster confirmations, cleaner fees, and better data for local venues, bars, and promoters —
-            without handing everything to giant platforms.
-          </p>
-          <ul class="space-y-2 text-slate-700 text-sm md:text-base mb-4">
-            <li>• Mapping your current ticket system and fees</li>
-            <li>• Lightweight direct ticket experiments</li>
-            <li>• Hybrid models: keep the big platform, own your high-value flows</li>
-          </ul>
-        </div>
-        <div class="rounded-3xl bg-white border border-slate-200 p-7 shadow-md">
-          <h3 class="text-xl font-bold mb-3">North County Ticketing Experiments</h3>
-          <p class="text-sm md:text-base text-slate-700 mb-3">
-            SideGuy wants to route more value to local rooms with faster, cleaner flows and less platform drag.
-          </p>
-          <button
-            type="button"
-            id="ticket-modal-open"
-            class="inline-flex justify-center items-center px-6 py-3 rounded-full border border-slate-900 text-slate-900 text-sm font-bold hover:bg-slate-900 hover:text-white transition"
-          >
-            See Ticketing Ideas
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUICK LINKS / LANES CTA -->
-    <section id="pricing" class="py-16 px-6 bg-sky-50">
-      <div class="max-w-5xl mx-auto text-center">
-        <h2 class="text-3xl font-black mb-4">Pick a lane and start small.</h2>
-        <p class="text-lg text-slate-700 mb-8">
-          Most projects start as a <span class="font-semibold">Starter Sprint</span> — something small, real,
-          and shippable in weeks, not months.
-        </p>
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
-          <a
-            href="https://forms.sideguysolutions.com/intake"
-            class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
-          >
-            View pricing ranges with PJ
-          </a>
-          <a
-            href="#ai"
-            class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
-          >
-            Learn about AI automation
-          </a>
-          <a
-            href="#solana"
-            class="px-6 py-3 border border-slate-900 rounded-full font-semibold hover:bg-slate-900 hover:text-white transition"
-          >
-            Learn about Solana &amp; 402
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- BLOG / CONTENT STRIP -->
-    <section class="py-16 px-6 bg-white" id="blog-excerpt">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-black mb-8 text-center">Coastal dispatches &amp; experiments</h2>
-        <div class="grid md:grid-cols-3 gap-6 text-sm md:text-base">
-          <a href="#ai" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="font-bold mb-2">AI tools that actually help local businesses</h3>
-            <p class="text-slate-600">
-              A short guide to using AI for intake, follow-up, and ops without burning your whole week
-              learning five new platforms.
-            </p>
-            <p class="mt-3 text-xs text-slate-500">AI · Automation · Ops</p>
-          </a>
-          <a href="#solana" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="font-bold mb-2">Ocean Tech Guide · Solana payments</h3>
-            <p class="text-slate-600">
-              Fees, speed, settlement, and how a few basis points saved can actually matter to venues,
-              agencies, and dev shops over 12–24 months.
-            </p>
-            <p class="mt-3 text-xs text-slate-500">Solana · Payments · 402</p>
-          </a>
-          <a href="#ticketing" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
-            <h3 class="font-bold mb-2">North County ticketing experiments</h3>
-            <p class="text-slate-600">
-              Sketching how to route more value to local rooms with faster, cleaner flows and less platform drag.
-            </p>
-            <p class="mt-3 text-xs text-slate-500">Tickets · Venues · Live rooms</p>
-          </a>
-        </div>
-
-        <p class="mt-6 text-xs text-slate-500">
-          SideGuy Solutions operates as a San Diego software development and AI automation partner for North County
-          businesses — from Encinitas and Solana Beach to Del Mar and Carlsbad — building custom apps, web platforms,
-          Solana payment flows, and 402 internet payments for real operators, not tech bros.
-        </p>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="py-20 px-6 bg-slate-900 text-slate-50 text-center">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-black mb-5">Need a SideGuy on your roster?</h2>
-        <p class="text-lg md:text-2xl mb-8 text-slate-100">
-          If you’re in San Diego or North County and need a real tech partner,
-          SideGuy is your coastal concierge.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://forms.sideguysolutions.com/intake"
-            class="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 transition"
-          >
-            Project Intake (60 sec)
-          </a>
-          <a
-            href="tel:7735441231"
-            class="border border-slate-100 px-10 py-5 rounded-full text-xl font-bold hover:bg-slate-100 hover:text-black transition"
-          >
-            Text PJ → 773-544-1231
-          </a>
+        <div class="cta-note">
+          Include your business, your goal, and any links you have — PJ will reply personally.
         </div>
       </div>
     </section>
   </main>
 
-  <!-- GLOBAL FOOTER -->
-  <footer class="py-10 px-6 border-t border-slate-800 bg-slate-950 text-slate-300 text-sm">
-    <div class="max-w-6xl mx-auto space-y-4 text-center md:text-left">
-      <p class="font-semibold text-base text-slate-100">
-        SideGuy Solutions — San Diego Coastal Tech Concierge
-      </p>
-
-      <div class="md:flex md:items-start md:justify-between gap-6">
-        <div class="mb-4 md:mb-0">
-          <p class="font-semibold mb-1">Services:</p>
-          <p class="text-slate-300">
-            Apps • AI Automation • Solana &amp; 402 internet payments • Ticketing Systems • North County Software
-          </p>
-        </div>
-
-        <div class="mb-4 md:mb-0">
-          <p class="font-semibold mb-1">Locations Served:</p>
-          <p class="text-slate-300">
-            San Diego • Solana Beach • Encinitas • Cardiff • Leucadia • Carlsbad • Del Mar • Oceanside
-          </p>
-        </div>
-
-        <div class="space-y-1">
-          <p class="font-semibold mb-1">Contact:</p>
-          <p>
-            Text PJ → <a href="tel:7735441231" class="hover:text-sky-400 font-semibold">773-544-1231</a>
-          </p>
-          <p>
-            Follow on X →
-            <a
-              href="https://x.com/sideguysolutions"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-sky-400"
-            >
-              @sideguysolutions
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <p class="text-slate-500 text-xs mt-2">
-        © 2025 SideGuy Solutions · Built for operators, not tech bros.
-      </p>
-    </div>
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
   </footer>
 
-  <!-- PART 2 / 2 SCRIPTS BELOW -->
-  <!-- Solana Pay + QR libs -->
-  <script src="https://unpkg.com/@solana/pay@0.2.5/dist/umd/index.iife.min.js"></script>
-  <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>App Development Company San Diego | Modern Apps by SideGuy Solutions</title>
+  <meta name="description" content="App development company in San Diego building modern, fast, user-friendly apps for iOS, Android, and the web. SideGuy Solutions creates clean mobile and web app experiences that actually ship.">
+  <meta name="keywords" content="app development company san diego, mobile app developer san diego, app development san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.2);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 10px;
+      }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #38bdf8, #22d3ee);
+      color: #0f172a;
+      box-shadow: 0 18px 45px rgba(8, 47, 73, 0.5);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary span {
+      font-size: 1.1rem;
+      margin-top: 1px;
+    }
+
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · App Development Company
+      </div>
+
+      <h1>App Development in San Diego That Actually Ships</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds clean, modern apps for iOS, Android, and the web.
+        No bloated agency teams. No endless timelines. You work directly with PJ —
+        a San Diego operator who knows how to turn ideas into real, working products.
+      </p>
+
+      <div class="hero-tags">
+        <span>iOS apps</span>
+        <span>Android apps</span>
+        <span>Cross-platform</span>
+        <span>Custom app builds</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=App%20Development%20Company%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Send your idea or project. PJ replies personally from North County.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.8), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego App Development that Delivers</h2>
+      <p>
+        Apps need to feel smooth, intuitive, and fast. With SideGuy Solutions,
+        you skip the slow agency pipelines and work directly with a builder who
+        understands real usage and real deadlines.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>iOS, Android, and cross-platform builds.</div></li>
+        <li><span>•</span><div>Lean product strategy to avoid over-building v1.</div></li>
+        <li><span>•</span><div>Smooth UI and clean backend foundations.</div></li>
+        <li><span>•</span><div>Local San Diego partner you can actually reach.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built in San Diego · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO APP DEVELOPMENT -->
+    <section class="section">
+      <h2>Why Build Your App in San Diego with SideGuy Solutions</h2>
+      <p>
+        San Diego businesses don’t need a 20-person agency and a six-month timeline.
+        You need an app that gets into users’ hands fast — clean, intuitive, stable,
+        and built with real-world operators in mind. Whether you're in Solana Beach,
+        Encinitas, La Jolla, Carlsbad, or downtown, SideGuy Solutions focuses on
+        practical builds, simple UX, and faster delivery.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real founders & operators</h3>
+          <p>
+            PJ works directly with founders, venues, service businesses, creators,
+            and local operators who need an app that works — not a pitch deck UI
+            or over-engineered agency project. We aim for clarity, speed, and
+            building exactly what users actually need.
+          </p>
+
+          <div class="pill-row">
+            <span>iOS & Android</span>
+            <span>Cross-platform</span>
+            <span>Business-first builds</span>
+            <span>Lean product strategy</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>How the process works</h3>
+          <p>
+            No bloated discovery phases. No complicated funnels. Just a direct
+            conversation with PJ about what you're trying to build and why.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You email your idea, problem, or feature list. PJ responds personally.</td>
+              </tr>
+              <tr>
+                <td>2. Scope & options</td>
+                <td>You get a clear path for v1, a roadmap for future upgrades, and real timelines.</td>
+              </tr>
+              <tr>
+                <td>3. Design & build</td>
+                <td>We create a clean, smooth experience with solid backend foundations.</td>
+              </tr>
+              <tr>
+                <td>4. Launch & iterate</td>
+                <td>Ship to users, gather feedback, and refine based on real behavior.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + USE CASES -->
+    <section class="section">
+      <h2>Popular App Development Projects in San Diego</h2>
+      <p>
+        From startups to local services to venues, these are the most common and
+        high-impact app builds SideGuy Solutions delivers across San Diego.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MVP App Build</td>
+                <td>Founders needing a real product for users, pilots, or investors.</td>
+              </tr>
+              <tr>
+                <td>Business App</td>
+                <td>Local operators who need a mobile tool for customers or staff.</td>
+              </tr>
+              <tr>
+                <td>Hybrid App</td>
+                <td>Teams who want a fast cross-platform build that still feels native.</td>
+              </tr>
+              <tr>
+                <td>App Upgrade</td>
+                <td>Companies with an existing app that needs stability, UI upgrades, or performance fixes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct communication — no account managers.</div></li>
+            <li><span>•</span><div>Realistic timelines with zero fluff.</div></li>
+            <li><span>•</span><div>Smooth UI and high-performance architecture.</div></li>
+            <li><span>•</span><div>Weekly updates and clear progress checks.</div></li>
+            <li><span>•</span><div>San Diego-based partner who actually understands your market.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to build your app?</h2>
+      <p>
+        If you're looking for a San Diego app development company that actually
+        ships real products — not endless concepts — SideGuy Solutions is your team.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=App%20Development%20Company%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Send PJ a quick brief
+        </a>
+        <div class="cta-note">
+          Include your idea, features, and any app examples you like — PJ will reply personally.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
 
   <script>
-    // ============= MOBILE NAV TOGGLE =============
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const iconOpen = document.getElementById('mobile-menu-icon-open');
-    const iconClose = document.getElementById('mobile-menu-icon-close');
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
-    if (toggle && menu && iconOpen && iconClose) {
-      toggle.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-        iconOpen.classList.toggle('hidden');
-        iconClose.classList.toggle('hidden');
-      });
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      // close menu when clicking a link
-      menu.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', () => {
-          menu.classList.add('hidden');
-          iconOpen.classList.remove('hidden');
-          iconClose.classList.add('hidden');
-        });
-      });
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>iOS App Development San Diego | iPhone App Experts · SideGuy Solutions</title>
+  <meta name="description" content="iOS app development in San Diego for startups, businesses, and operators. SideGuy Solutions builds clean, modern, high-performance iPhone apps that actually ship. Work directly with PJ.">
+  <meta name="keywords" content="ios app development san diego, iphone app development san diego, mobile app developer san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.2);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    // ============= TIMESTAMP (STATIC BASE + JS REFRESH) =============
-    const tsEl = document.getElementById('sg-timestamp');
-    if (tsEl) {
-      try {
-        const now = new Date();
-        const opts = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' };
-        tsEl.textContent = now.toLocaleString('en-US', opts) + ' PT';
-      } catch (e) {
-        // keep fallback text
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 10px;
       }
     }
 
-    // ============= OCEAN MAX LITE (2D CANVAS WAVES) =============
-    (function initOceanLite() {
-      const canvas = document.getElementById('ocean-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
 
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize);
-      resize();
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+    }
 
-      let t = 0;
-      function draw() {
-        t += 0.015;
-        const w = canvas.width;
-        const h = canvas.height;
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #38bdf8, #22d3ee);
+      color: #0f172a;
+      box-shadow: 0 18px 45px rgba(8, 47, 73, 0.5);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary span {
+      font-size: 1.1rem;
+      margin-top: 1px;
+    }
 
-        // Deep ocean gradient background
-        const g = ctx.createLinearGradient(0, 0, 0, h);
-        g.addColorStop(0, '#020617');
-        g.addColorStop(0.35, '#0f172a');
-        g.addColorStop(1, '#020617');
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, w, h);
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
 
-        // horizon glow
-        const hg = ctx.createRadialGradient(w * 0.5, h * 0.25, 0, w * 0.5, h * 0.25, h * 0.8);
-        hg.addColorStop(0, 'rgba(56,189,248,0.45)');
-        hg.addColorStop(0.3, 'rgba(15,23,42,0.0)');
-        hg.addColorStop(1, 'rgba(2,6,23,0.0)');
-        ctx.fillStyle = hg;
-        ctx.fillRect(0, 0, w, h);
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
 
-        // helper to draw a single wave
-        function drawWave(offset, amp, freq, speed, color, alpha) {
-          ctx.beginPath();
-          ctx.moveTo(0, h);
-          for (let x = 0; x <= w; x += 6) {
-            const y =
-              h * offset +
-              Math.sin(x * freq + t * speed) * amp +
-              Math.sin(x * freq * 0.5 + t * (speed * 0.6)) * (amp * 0.4);
-            ctx.lineTo(x, y);
-          }
-          ctx.lineTo(w, h);
-          ctx.closePath();
-          ctx.fillStyle = color;
-          ctx.globalAlpha = alpha;
-          ctx.fill();
-          ctx.globalAlpha = 1;
-        }
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · iOS App Development
+      </div>
 
-        // layered waves for parallax feel
-        drawWave(0.75, 16, 0.012, 1.2, '#020617', 0.9);                   // deep base
-        drawWave(0.7, 20, 0.014, 1.6, '#0b1120', 0.8);                    // mid
-        drawWave(0.65, 26, 0.018, 1.9, '#0369a1', 0.8);                   // brighter blue
-        drawWave(0.6, 30, 0.022, 2.2, 'rgba(148, 163, 255, 1)', 0.35);    // Solana purple shimmer
-        drawWave(0.58, 18, 0.03, 2.8, 'rgba(20, 241, 149, 1)', 0.25);     // Solana green highlights
+      <h1>iOS App Development in San Diego for Real-World Users</h1>
 
-        requestAnimationFrame(draw);
-      }
-      requestAnimationFrame(draw);
-    })();
+      <p class="hero-sub">
+        SideGuy Solutions builds clean, smooth, modern iPhone apps for founders,
+        operators, and businesses across San Diego. No bloated agency teams. No
+        endless timelines. You work directly with PJ — someone who knows how to
+        turn ideas into real, user-ready iOS products.
+      </p>
 
-    // ============= SOLANA PAY QR =============
-    (function initSolanaQR() {
-      const shell = document.getElementById('solana-qr-shell');
-      if (!shell || !window.SolanaPay || !window.QRCodeStyling) return;
+      <div class="hero-tags">
+        <span>iPhone apps</span>
+        <span>Swift & SwiftUI</span>
+        <span>App Store launch</span>
+        <span>UX-first builds</span>
+      </div>
 
-      try {
-        const recipient = new window.SolanaPay.PublicKey('9ADeFCQxrkC3vdv5guMhcfCmB9CNwidV6DfcwFoPFvf5');
-        const amount = null; // any amount
-        const label = 'SideGuy Solutions';
-        const message = 'Thanks for the support 🏄‍♂️';
-
-        const url = window.SolanaPay.createTransfer({
-          recipient,
-          amount,
-          splToken: undefined,
-          reference: null,
-          label,
-          message
-        });
-
-        shell.textContent = '';
-        const qr = new window.QRCodeStyling({
-          width: 192,
-          height: 192,
-          data: url.toString(),
-          margin: 10,
-          qrOptions: { errorCorrectionLevel: 'H' },
-          backgroundOptions: { color: '#020617' },
-          dotsOptions: { color: '#14f195', type: 'rounded' },
-          cornersSquareOptions: { color: '#38bdf8', type: 'extra-rounded' }
-        });
-        qr.append(shell);
-      } catch (e) {
-        console.warn('Solana QR issue:', e);
-        shell.textContent = 'Solana QR unavailable right now.';
-      }
-    })();
-
-    // ============= MODALS (AI + Ticketing) =============
-    function createModal(id, html) {
-      let backdrop = document.getElementById(id);
-      if (backdrop) return backdrop;
-
-      backdrop = document.createElement('div');
-      backdrop.id = id;
-      backdrop.className = 'sg-modal-backdrop';
-      backdrop.innerHTML = `
-        <div class="sg-modal">
-          ${html}
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=iOS%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Send your idea or feature list. PJ replies personally.
         </div>
-      `;
-      document.body.appendChild(backdrop);
-      backdrop.addEventListener('click', (e) => {
-        if (e.target === backdrop) backdrop.style.display = 'none';
-      });
-      return backdrop;
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.8), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego iOS Development That Ships</h2>
+      <p>
+        iOS users expect smooth UX, fast load times, and clean UI. SideGuy
+        Solutions focuses on real-world usage, performance, and design — not
+        agency fluff or unnecessary complexity.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Swift, SwiftUI, and modern Apple frameworks.</div></li>
+        <li><span>•</span><div>Smooth UX built for real users — not mockups.</div></li>
+        <li><span>•</span><div>Fast builds without corporate overhead.</div></li>
+        <li><span>•</span><div>San Diego-based, timezone aligned.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built in North County · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>iOS App Development San Diego | iPhone App Experts · SideGuy Solutions</title>
+  <meta name="description" content="iOS app development in San Diego for startups, founders, and businesses. SideGuy Solutions builds clean, modern, fast iPhone apps using Swift & SwiftUI. Work directly with PJ — no agency overhead.">
+  <meta name="keywords" content="ios app development san diego, iphone app development san diego, mobile app developer san diego, swift ui apps san diego, sideguy solutions">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    // AI modal
-    const aiOpen = document.getElementById('ai-modal-open');
-    if (aiOpen) {
-      const aiModal = createModal('sg-ai-modal', `
-        <h2 class="text-xl font-bold mb-2">AI flows for real operators</h2>
-        <p class="text-sm text-slate-200 mb-3">
-          A few examples of where AI actually helps in San Diego &amp; North County — without feeling like a science project.
-        </p>
-        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-100 mb-4">
-          <li><strong>Lead catch-all inbox:</strong> text, web forms, and DMs roll into one place with suggested replies.</li>
-          <li><strong>Nightly “what happened today?” email:</strong> one digest with bookings, tickets, and hot leads.</li>
-          <li><strong>Client recap button:</strong> “remind me who this is” for any long-term client or tab.</li>
-        </ul>
-        <p class="text-xs text-slate-400 mb-4">
-          The play is a calm 12–24 month edge, not “AI everywhere.”
-        </p>
-        <button
-          type="button"
-          class="mt-1 inline-flex justify-center items-center px-4 py-2 rounded-full bg-sky-500 text-slate-950 text-xs font-bold hover:bg-sky-400"
-          onclick="window.location.href='https://forms.sideguysolutions.com/intake';"
-        >
-          Start an AI starter sprint
-        </button>
-        <button
-          type="button"
-          class="mt-2 ml-2 inline-flex justify-center items-center px-3 py-2 rounded-full border border-slate-500 text-slate-200 text-xs font-semibold hover:bg-slate-800"
-          onclick="document.getElementById('sg-ai-modal').style.display='none';"
-        >
-          Close
-        </button>
-      `);
-      aiOpen.addEventListener('click', () => {
-        aiModal.style.display = 'flex';
-      });
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
     }
 
-    // Ticketing modal
-    const ticketOpen = document.getElementById('ticket-modal-open');
-    if (ticketOpen) {
-      const ticketModal = createModal('sg-ticket-modal', `
-        <h2 class="text-xl font-bold mb-2">North County ticketing ideas</h2>
-        <p class="text-sm text-slate-200 mb-3">
-          Where SideGuy wants to help local rooms keep more of the upside.
-        </p>
-        <ul class="list-disc pl-5 space-y-2 text-sm text-slate-100 mb-4">
-          <li><strong>“Soft launch” nights:</strong> test direct ticket flows on one or two shows without blowing up the stack.</li>
-          <li><strong>VIP &amp; tables:</strong> separate flows for high-value seats, talent, and regulars.</li>
-          <li><strong>Hybrid models:</strong> keep using big platforms, but own your best offers and nights.</li>
-        </ul>
-        <p class="text-xs text-slate-400 mb-4">
-          The goal: cleaner fees, better lists, and more control — without reinventing your entire venue.
-        </p>
-        <button
-          type="button"
-          class="mt-1 inline-flex justify-center items-center px-4 py-2 rounded-full bg-slate-100 text-slate-900 text-xs font-bold hover:bg-slate-200"
-          onclick="window.location.href='https://forms.sideguysolutions.com/intake';"
-        >
-          Talk ticketing with PJ
-        </button>
-        <button
-          type="button"
-          class="mt-2 ml-2 inline-flex justify-center items-center px-3 py-2 rounded-full border border-slate-500 text-slate-200 text-xs font-semibold hover:bg-slate-800"
-          onclick="document.getElementById('sg-ticket-modal').style.display='none';"
-        >
-          Close
-        </button>
-      `);
-      ticketOpen.addEventListener('click', () => {
-        ticketModal.style.display = 'flex';
-      });
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
     }
 
-    // ============= SUMMON PJ BUTTON (orb) =============
-    const summonBtn = document.getElementById('orb-summon-btn');
-    if (summonBtn) {
-      summonBtn.addEventListener('click', () => {
-        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-          window.location.href =
-            'sms:+17735441231?&body=' +
-            encodeURIComponent(
-              "Hey PJ, I just summoned the coastal portal from SideGuySolutions.com — let’s build something."
-            );
-        } else {
-          const subject = encodeURIComponent('Summon PJ · SideGuy Solutions (San Diego)');
-          const body = encodeURIComponent(
-            "Hey PJ,\n\n" +
-            "I just tapped the coastal portal on SideGuySolutions.com.\n\n" +
-            "Here’s what I’m looking at:\n" +
-            "- Apps / portals\n" +
-            "- Tickets / live events\n" +
-            "- Solana / 402 payments\n" +
-            "- AI automation\n" +
-            "- Something else entirely\n\n" +
-            "Reply when you’re free and let’s spin this up.\n\n" +
-            "— Sent from the coastal portal 🌊"
-          );
-          window.location.href = "mailto:peter.z@kromeon.com?subject=" + subject + "&body=" + body;
-        }
-      });
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
     }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · iOS App Development
+      </div>
+
+      <h1>iOS App Development in San Diego for Real Users</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds clean, smooth, modern iPhone apps for founders,
+        startups, and operators across San Diego. No bloated agency timelines. No
+        slow corporate build cycles. You work directly with PJ — someone who knows
+        how to ship real apps fast.
+      </p>
+
+      <div class="hero-tags">
+        <span>iPhone apps</span>
+        <span>Swift & SwiftUI</span>
+        <span>App Store launch</span>
+        <span>Product-focused UX</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=iOS%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your idea or feature list — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego iOS Development That Ships</h2>
+      <p>
+        iOS apps need to feel smooth, intuitive, and fast. SideGuy Solutions
+        focuses on real-world performance, clean UX, and practical product
+        decisions — not unnecessary complexity or fluff.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Swift & SwiftUI native iOS builds.</div></li>
+        <li><span>•</span><div>Lean product strategy to avoid over-building v1.</div></li>
+        <li><span>•</span><div>Smooth animations + premium user flows.</div></li>
+        <li><span>•</span><div>Local San Diego communication & support.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Crafted in North County · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO IOS DEVELOPMENT -->
+    <section class="section">
+      <h2>Why Build Your iOS App in San Diego with SideGuy Solutions</h2>
+      <p>
+        San Diego is full of founders, creators, and businesses that need clean,
+        fast, user-friendly iPhone apps. What they don’t need is an expensive,
+        slow-moving agency. SideGuy Solutions focuses on real product development:
+        clear UX, fast builds, stable architecture, and shipping apps quickly.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real founders & operators</h3>
+          <p>
+            PJ works directly with startups, creators, local operators, and
+            entrepreneurs who want iOS apps that actually launch. Everything we
+            build is focused on usability and speed — not overbuilt features
+            that slow v1 down.
+          </p>
+
+          <div class="pill-row">
+            <span>Swift & SwiftUI</span>
+            <span>Native apps</span>
+            <span>App Store ready</span>
+            <span>Lean product strategy</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The iOS app development process</h3>
+          <p>
+            A simple, fast process built around getting a working app in your hands ASAP.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>Share your idea, concept, or current build — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Scope & roadmap</td>
+                <td>A clear plan for v1 + enhancement roadmap for future growth.</td>
+              </tr>
+              <tr>
+                <td>3. Build & refine</td>
+                <td>Design, Swift/SwiftUI development, backend, and UX smoothing.</td>
+              </tr>
+              <tr>
+                <td>4. Launch</td>
+                <td>App Store submission + real user testing + performance tuning.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + EXAMPLES -->
+    <section class="section">
+      <h2>Popular iOS App Projects in San Diego</h2>
+      <p>
+        These are the most common and high-impact iPhone app builds across San Diego’s
+        startup and small business ecosystem.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MVP iOS App</td>
+                <td>Founders who need a working version for users or investors.</td>
+              </tr>
+              <tr>
+                <td>Business iPhone App</td>
+                <td>Local businesses wanting tools for customers or staff.</td>
+              </tr>
+              <tr>
+                <td>Content Creator App</td>
+                <td>Creators needing a hub for their audience and content.</td>
+              </tr>
+              <tr>
+                <td>iOS App Upgrade</td>
+                <td>Apps needing UI modernization or performance improvements.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct contact — no account managers.</div></li>
+            <li><span>•</span><div>Clean Swift/SwiftUI architecture.</div></li>
+            <li><span>•</span><div>User-first design for better retention.</div></li>
+            <li><span>•</span><div>Fast turnaround with zero fluff.</div></li>
+            <li><span>•</span><div>San Diego partner who knows the market.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to build your iPhone app?</h2>
+      <p>
+        If you want an experienced, fast-moving iOS developer in San Diego who builds
+        clean products without corporate overhead, SideGuy Solutions is your partner.
+        Share your idea — PJ will respond personally.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=iOS%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Send PJ your idea
+        </a>
+        <div class="cta-note">
+          Include your features, references, or current build.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Android App Development San Diego | Modern Android Apps · SideGuy Solutions</title>
+  <meta name="description" content="Android app development in San Diego for startups, businesses & creators. SideGuy Solutions builds fast, smooth, user-friendly Android apps with a clean product-first approach.">
+  <meta name="keywords" content="android app development san diego, android app developer san diego, mobile app development san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Android App Development
+      </div>
+
+      <h1>Android App Development in San Diego That Ships Fast</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds clean, fast, user-friendly Android apps for founders,
+        businesses, and creators across San Diego. No agency bloat. No slow timelines.
+        You work directly with PJ — someone who builds real products quickly.
+      </p>
+
+      <div class="hero-tags">
+        <span>Android apps</span>
+        <span>Kotlin</span>
+        <span>Cross-platform</span>
+        <span>Google Play launch</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Android%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your idea or app — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego Android Builds Done Right</h2>
+      <p>
+        Android apps need smooth UX, clean UI, and strong performance across many
+        device types. SideGuy Solutions builds apps that work in the real world —
+        fast, stable, and user-friendly.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Kotlin native Android builds.</div></li>
+        <li><span>•</span><div>Cross-platform options for dual iOS/Android.</div></li>
+        <li><span>•</span><div>Lean product strategy for faster v1 launch.</div></li>
+        <li><span>•</span><div>Direct communication with PJ always.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built in San Diego · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO ANDROID DEVELOPMENT -->
+    <section class="section">
+      <h2>Why Android App Development in San Diego with SideGuy Solutions</h2>
+      <p>
+        Android users make up the majority of mobile devices worldwide, and San Diego
+        is full of founders, creators, and businesses who need powerful, user-friendly
+        apps — not slow, expensive agency builds. SideGuy Solutions focuses on fast,
+        modern Android development with clean UX, stable architecture, and real-world
+        performance.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real founders & operators</h3>
+          <p>
+            PJ works directly with local businesses, startups, and operators who need 
+            Android apps that actually ship. You get clean UI, fast performance, and 
+            streamlined builds — not over-engineered features that slow everything down.
+          </p>
+
+          <div class="pill-row">
+            <span>Kotlin</span>
+            <span>Native Android</span>
+            <span>Cross-platform</span>
+            <span>Lean UX</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The Android development process</h3>
+          <p>
+            A simple, fast, product-first workflow built for real results — not 
+            corporate delays.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your idea, problem, or current build — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Scope & roadmap</td>
+                <td>We define the fastest, simplest path to a real, user-ready app.</td>
+              </tr>
+              <tr>
+                <td>3. Build & refine</td>
+                <td>Kotlin or cross-platform development with clean UX + stable backend.</td>
+              </tr>
+              <tr>
+                <td>4. Launch</td>
+                <td>Google Play release, user testing, and performance tuning.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + USE CASES -->
+    <section class="section">
+      <h2>Popular Android App Projects in San Diego</h2>
+      <p>
+        Across San Diego — from startups to local service businesses — these are the 
+        most common and high-impact Android projects we deliver.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MVP Android App</td>
+                <td>Founders who need something real for users or investors.</td>
+              </tr>
+              <tr>
+                <td>Business Android App</td>
+                <td>Local businesses needing internal tools or customer apps.</td>
+              </tr>
+              <tr>
+                <td>Cross-Platform App</td>
+                <td>Teams who want both Android + iOS with one codebase.</td>
+              </tr>
+              <tr>
+                <td>Android App Upgrade</td>
+                <td>Fixing outdated UI, improving performance, or redesigning flows.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct communication — no agency layers.</div></li>
+            <li><span>•</span><div>Kotlin-based, clean Android builds.</div></li>
+            <li><span>•</span><div>Fast turnaround with zero corporate fluff.</div></li>
+            <li><span>•</span><div>Real-world UX for users on all device sizes.</div></li>
+            <li><span>•</span><div>Local San Diego partner who gets your market.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to build your Android app?</h2>
+      <p>
+        If you're looking for a San Diego Android app developer who ships modern,
+        clean, stable apps without slow timelines, SideGuy Solutions is your partner.
+        Share your idea — PJ will respond personally.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Android%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Send PJ your idea
+        </a>
+        <div class="cta-note">
+          Include your features, reference apps, or current build.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>AI Automation San Diego | Workflow Automation · SideGuy Solutions</title>
+  <meta name="description" content="AI automation in San Diego for businesses, startups, and operators. SideGuy Solutions builds custom AI workflows, automations, and tools that save time and increase revenue.">
+  <meta name="keywords" content="ai automation san diego, workflow automation san diego, zapier automation san diego, ai tools business san diego, sideguy solutions">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · AI Automation
+      </div>
+
+      <h1>AI Automation in San Diego That Saves Time & Makes Money</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds custom AI automations, AI workflows, and smart
+        business tools that cut manual work, increase output, and unlock new
+        revenue opportunities. No fluff. No complexity. Just real results for
+        San Diego operators, founders, and teams.
+      </p>
+
+      <div class="hero-tags">
+        <span>AI workflows</span>
+        <span>Automation tools</span>
+        <span>Zapier & Make</span>
+        <span>Custom AI agents</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=AI%20Automation%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your problems — PJ replies personally with solutions.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego AI Automation Done Right</h2>
+      <p>
+        AI automation only works when it's built around your actual workflow.
+        SideGuy Solutions creates custom automations that replace repetitive work
+        and scale your output instantly.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>AI-powered workflow automation.</div></li>
+        <li><span>•</span><div>Zapier, Make.com & API integrations.</div></li>
+        <li><span>•</span><div>Custom GPTs + business-specific agents.</div></li>
+        <li><span>•</span><div>Direct access to PJ — fast turnaround.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built for SD operators · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO AI AUTOMATION -->
+    <section class="section">
+      <h2>Why AI Automation Matters for San Diego Businesses</h2>
+      <p>
+        San Diego is full of operators, founders, and local businesses who are
+        overwhelmed with manual work — scheduling, messaging, lead handling, data
+        entry, follow-ups, reporting, and daily repetitive tasks. AI automation
+        eliminates that busywork so you can focus on growth, clients, and revenue.
+        SideGuy Solutions builds custom AI tools tailored to your workflow.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real operators</h3>
+          <p>
+            You don’t need a huge AI project. You need specific automations that
+            actually save time. SideGuy Solutions works with founders, restaurants,
+            local service businesses, creators, real estate teams, fitness coaches,
+            salons, and more to build automations that plug into your real workflow.
+          </p>
+
+          <div class="pill-row">
+            <span>Lead automation</span>
+            <span>AI follow-ups</span>
+            <span>Scheduling bots</span>
+            <span>Workflow accelerators</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The AI automation process</h3>
+          <p>
+            A simple, fast process focused on understanding your workflow and
+            removing manual tasks immediately.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>Describe your repetitive tasks or pain points. PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Automation map</td>
+                <td>We outline exactly what can be automated — and how fast.</td>
+              </tr>
+              <tr>
+                <td>3. Build</td>
+                <td>Custom workflows, AI agents, Zapier/Make automations, APIs & integrations.</td>
+              </tr>
+              <tr>
+                <td>4. Deploy & optimize</td>
+                <td>Automation goes live, we monitor, refine, and expand the workflow.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + USE CASES -->
+    <section class="section">
+      <h2>Popular AI Automation Projects in San Diego</h2>
+      <p>
+        These are some of the most effective AI-powered automations for local SD
+        businesses looking to streamline operations and unlock more revenue.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lead Automation System</td>
+                <td>Real estate, fitness, and service businesses needing instant responses.</td>
+              </tr>
+              <tr>
+                <td>AI Customer Assistant</td>
+                <td>Restaurants, venues, salons, and retail needing 24/7 support.</td>
+              </tr>
+              <tr>
+                <td>Internal Workflow Automation</td>
+                <td>Teams drowning in scheduling, follow-ups, or data entry.</td>
+              </tr>
+              <tr>
+                <td>Custom AI Agent</td>
+                <td>Founders who want a business-specific AI that acts like a team member.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct communication — PJ only.</div></li>
+            <li><span>•</span><div>Fast delivery — usually within days.</div></li>
+            <li><span>•</span><div>Real-world automations, not overbuilt systems.</div></li>
+            <li><span>•</span><div>Savings of 10–30 hours/week for most clients.</div></li>
+            <li><span>•</span><div>Local SD partner who understands your business.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to automate your business?</h2>
+      <p>
+        If you're in San Diego and want AI automation that actually saves time and
+        increases revenue — not vague promises — SideGuy Solutions is your partner.
+        Share your workflow and PJ will map out what can be automated today.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=AI%20Automation%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Send PJ your workflow
+        </a>
+        <div class="cta-note">
+          Describe your repetitive tasks — we’ll automate them.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>AI Chatbot Development San Diego | Custom AI Assistants · SideGuy Solutions</title>
+  <meta name="description" content="AI chatbot development in San Diego for businesses, startups, and local operators. SideGuy Solutions builds custom AI chatbots and assistants that handle support, leads, scheduling, and more.">
+  <meta name="keywords" content="ai chatbot development san diego, chatbot developer san diego, custom ai assistant san diego, business chatbot san diego, sideguy solutions">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · AI Chatbot Development
+      </div>
+
+      <h1>AI Chatbot Development in San Diego for Real Businesses</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds custom AI chatbots and AI assistants that handle
+        support, leads, sales, FAQs, scheduling, onboarding, and more. These aren’t
+        generic widgets — these are tailored AI agents trained on your business.
+      </p>
+
+      <div class="hero-tags">
+        <span>AI chatbots</span>
+        <span>Custom AI agents</span>
+        <span>24/7 support bots</span>
+        <span>Lead handling + FAQs</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=AI%20Chatbot%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your goals — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego Chatbots That Actually Work</h2>
+      <p>
+        Most chatbots are slow, generic, and unhelpful. SideGuy Solutions builds
+        business-specific AI chatbots that understand your services, your customers,
+        and your workflow — and deliver real results.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Custom-trained AI chatbots.</div></li>
+        <li><span>•</span><div>Lead capture & automated support.</div></li>
+        <li><span>•</span><div>Scheduling + onboarding workflows.</div></li>
+        <li><span>•</span><div>Direct communication with PJ only.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built for SD operators · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO AI CHATBOTS -->
+    <section class="section">
+      <h2>Why San Diego Businesses Need AI Chatbots</h2>
+      <p>
+        San Diego is full of fast-moving businesses — from restaurants and fitness
+        studios to real estate teams, service companies, creators, startups, and
+        local operators. Most of them drown in repetitive support, lead handling,
+        and answering the same questions. AI chatbots eliminate that bottleneck by
+        giving your customers instant answers 24/7.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real operators</h3>
+          <p>
+            Most “AI chatbots” are generic widgets that annoy customers. SideGuy
+            Solutions builds custom-trained AI agents that understand your services,
+            policies, pricing, tone, and workflow — so every response feels accurate
+            and helpful.
+          </p>
+
+          <div class="pill-row">
+            <span>Lead capture</span>
+            <span>Booking & scheduling</span>
+            <span>24/7 support</span>
+            <span>Business-trained AI</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The chatbot development process</h3>
+          <p>
+            A simple, fast workflow designed to get your AI assistant live and
+            helping customers ASAP — not months from now.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You explain your business and your biggest repetitive problems.</td>
+              </tr>
+              <tr>
+                <td>2. Training plan</td>
+                <td>We map the information your AI chatbot needs to know.</td>
+              </tr>
+              <tr>
+                <td>3. Build & train</td>
+                <td>Your chatbot is built, trained on your business, and connected to your site.</td>
+              </tr>
+              <tr>
+                <td>4. Deploy & refine</td>
+                <td>We launch, adjust tone, add knowledge, and improve responses.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + USE CASES -->
+    <section class="section">
+      <h2>Popular AI Chatbot Projects in San Diego</h2>
+      <p>
+        AI chatbots have become a secret weapon for local businesses that want to
+        grow without adding more staff. Here are common builds SideGuy Solutions
+        delivers across San Diego.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lead Capture Chatbot</td>
+                <td>Real estate teams, contractors, fitness coaches, salons.</td>
+              </tr>
+              <tr>
+                <td>Customer Support Chatbot</td>
+                <td>Restaurants, online shops, venues, local service businesses.</td>
+              </tr>
+              <tr>
+                <td>Scheduling & Booking Bot</td>
+                <td>Salons, spas, coaches, medical, home services.</td>
+              </tr>
+              <tr>
+                <td>Custom AI Agent</td>
+                <td>Startups needing advanced logic, workflows, or knowledge bases.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Chatbots trained *specifically* on your business.</div></li>
+            <li><span>•</span><div>Faster response times → more conversions.</div></li>
+            <li><span>•</span><div>Lower workload for your team.</div></li>
+            <li><span>•</span><div>Zero fluff — only useful automations.</div></li>
+            <li><span>•</span><div>Local San Diego support and fast updates.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to add an AI chatbot to your business?</h2>
+      <p>
+        If you want a custom AI assistant that handles leads, support, scheduling,
+        or FAQs — and actually understands your business — SideGuy Solutions is your
+        San Diego partner. Share your workflow and PJ will build a chatbot that
+        works for you 24/7.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=AI%20Chatbot%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Build my chatbot
+        </a>
+        <div class="cta-note">
+          Include your website & biggest repetitive tasks.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Custom Software Development San Diego | Modern Software Solutions · SideGuy Solutions</title>
+  <meta name="description" content="Custom software development in San Diego for startups, operators, and businesses. SideGuy Solutions builds clean, modern, scalable software tailored to real-world workflows.">
+  <meta name="keywords" content="custom software development san diego, software developers san diego, software solutions san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Custom Software Development
+      </div>
+
+      <h1>Custom Software Development in San Diego for Real Businesses</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds clean, modern, reliable software that solves
+        real operational problems. No outdated tech. No agency bloat. You work
+        directly with PJ — a builder who understands product, workflow, and
+        real-world business needs.
+      </p>
+
+      <div class="hero-tags">
+        <span>Custom dashboards</span>
+        <span>Internal tools</span>
+        <span>APIs & integrations</span>
+        <span>Web apps</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Custom%20Software%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Send your idea or workflow — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego Software That Actually Works</h2>
+      <p>
+        Most software projects fail because they're overbuilt or managed by people
+        who never ship products. SideGuy Solutions builds lean, purpose-driven
+        software that supports your workflow instead of complicating it.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Custom dashboards and internal systems.</div></li>
+        <li><span>•</span><div>APIs, automation, and business logic.</div></li>
+        <li><span>•</span><div>Stable, scalable architecture.</div></li>
+        <li><span>•</span><div>Direct communication with PJ, always.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Built for SD operators · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY CUSTOM SOFTWARE SAN DIEGO -->
+    <section class="section">
+      <h2>Why San Diego Businesses Need Custom Software</h2>
+      <p>
+        San Diego companies run fast — but most rely on outdated systems, scattered
+        tools, and manual processes that slow everything down. Custom software solves
+        those problems with tools built specifically for your workflow, your team,
+        and your customers. SideGuy Solutions creates clean, modern software that
+        eliminates bottlenecks and unlocks real efficiency.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for real operators & teams</h3>
+          <p>
+            Whether you're a startup, service business, venue, operations team,
+            real estate group, or SD-based company — you need tools that match your
+            workflow, not generic software built for someone else. SideGuy Solutions
+            builds systems that make your business smoother instantly.
+          </p>
+
+          <div class="pill-row">
+            <span>Internal tools</span>
+            <span>Dashboards</span>
+            <span>Automation</span>
+            <span>Custom workflows</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The custom software development process</h3>
+          <p>
+            A fast, simple workflow built around delivering working software — not
+            endless documents and meetings.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your workflow, problem, or need — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Scope & architecture</td>
+                <td>We define the simplest version that solves your biggest bottlenecks.</td>
+              </tr>
+              <tr>
+                <td>3. Build</td>
+                <td>Clean UI, stable backend, APIs, integrations, and real-world logic.</td>
+              </tr>
+              <tr>
+                <td>4. Launch & refine</td>
+                <td>Deploy, test with your team, improve the key components.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + USE CASES -->
+    <section class="section">
+      <h2>Popular Custom Software Projects in San Diego</h2>
+      <p>
+        These are the most common and high-impact software systems SideGuy Solutions
+        builds for San Diego companies.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Internal Dashboard</td>
+                <td>Operators needing visibility into sales, logistics, or ops data.</td>
+              </tr>
+              <tr>
+                <td>Workflow Management System</td>
+                <td>Businesses drowning in manual processes or spreadsheets.</td>
+              </tr>
+              <tr>
+                <td>Custom API + Integrations</td>
+                <td>Teams needing systems to sync, automate, or connect tools.</td>
+              </tr>
+              <tr>
+                <td>Full SaaS MVP</td>
+                <td>Founders who want a clean, modern v1 to launch quickly.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct communication — PJ only, no layers.</div></li>
+            <li><span>•</span><div>Software designed around your actual workflow.</div></li>
+            <li><span>•</span><div>Modern architecture and fast performance.</div></li>
+            <li><span>•</span><div>Lean build process to avoid over-engineering.</div></li>
+            <li><span>•</span><div>Local San Diego support & iteration.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to build custom software?</h2>
+      <p>
+        If you're looking for real custom software development in San Diego — software
+        that actually solves business problems — SideGuy Solutions is your partner.
+        Share your workflow and get a real plan.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Custom%20Software%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Send PJ your idea
+        </a>
+        <div class="cta-note">
+          Include your workflow or the problem you're trying to solve.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Software Developers San Diego | Local Developers · SideGuy Solutions</title>
+  <meta name="description" content="Looking for software developers in San Diego? SideGuy Solutions builds custom software, apps, automation, dashboards, APIs, and full-stack solutions for real businesses.">
+  <meta name="keywords" content="software developers san diego, software developer san diego, hire software developer san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note { font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Software Developers
+      </div>
+
+      <h1>Software Developers in San Diego for Real Businesses & Startups</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions provides real software development — custom systems,
+        dashboards, automations, APIs, mobile apps, and full-stack builds.
+        No bloated agencies. No freelancers disappearing. You work directly
+        with PJ, a builder who ships clean, modern, reliable software.
+      </p>
+
+      <div class="hero-tags">
+        <span>Web apps</span>
+        <span>Internal tools</span>
+        <span>Automation</span>
+        <span>Mobile development</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Software%20Developers%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your idea or workflow — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>San Diego Software Developers Who Actually Ship</h2>
+      <p>
+        Most “software developers” in SD are either overpriced agencies or
+        freelancers who disappear mid-project. SideGuy Solutions builds real,
+        business-focused software — fast, clean, and long-term scalable.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Full-stack custom development.</div></li>
+        <li><span>•</span><div>API integrations + automation.</div></li>
+        <li><span>•</span><div>Mobile & web app builds.</div></li>
+        <li><span>•</span><div>Direct access to PJ at all times.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> Local SD Developer · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO NEEDS REAL SOFTWARE DEVELOPERS -->
+    <section class="section">
+      <h2>Why San Diego Businesses Need Real Software Developers</h2>
+      <p>
+        Most San Diego companies rely on a mix of outdated tools, spreadsheets,
+        manual processes, and disconnected systems. Real software developers fix
+        that with custom tools, automation, modern UX, and software that actually
+        supports the business instead of slowing it down.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for founders, operators & teams</h3>
+          <p>
+            Whether you're running a startup, local service business, venue,
+            operations team, or real estate group — you need software that matches
+            YOUR workflow. SideGuy Solutions builds tools that fit your real-world
+            needs, not generic one-size-fits-all systems.
+          </p>
+
+          <div class="pill-row">
+            <span>Custom builds</span>
+            <span>Automation</span>
+            <span>Dashboards</span>
+            <span>Mobile apps</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The development process</h3>
+          <p>
+            A fast, simple workflow designed to get you working software — quickly
+            and without friction.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your idea, workflow, or current issues — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Plan & architecture</td>
+                <td>We map the cleanest, simplest path to a working version.</td>
+              </tr>
+              <tr>
+                <td>3. Build</td>
+                <td>Frontend, backend, automation, APIs, and UI/UX — all built cleanly.</td>
+              </tr>
+              <tr>
+                <td>4. Launch & refine</td>
+                <td>Real-world testing, tuning, and improving key components.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PACKAGES + EXAMPLES -->
+    <section class="section">
+      <h2>Popular Software Development Projects in San Diego</h2>
+      <p>
+        SideGuy Solutions builds a wide range of software solutions for companies
+        across North County and greater San Diego.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Custom Web App</td>
+                <td>Startups & businesses needing a full product or portal.</td>
+              </tr>
+              <tr>
+                <td>Automation System</td>
+                <td>Operators wanting workflows to move faster automatically.</td>
+              </tr>
+              <tr>
+                <td>Internal Dashboard</td>
+                <td>Teams needing visibility into data, ops, or performance.</td>
+              </tr>
+              <tr>
+                <td>API + Integrations</td>
+                <td>Businesses that need tools to talk to each other.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct communication — no middle layers.</div></li>
+            <li><span>•</span><div>Fast, clean, modern software development.</div></li>
+            <li><span>•</span><div>Real-world solutions, not overbuilt systems.</div></li>
+            <li><span>•</span><div>Local SD support & continued iteration.</div></li>
+            <li><span>•</span><div>Tools built for your actual workflow.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Need a software developer in San Diego?</h2>
+      <p>
+        If you're looking for real, reliable software development — not corporate
+        fluff — SideGuy Solutions is the partner you've been searching for. Share
+        your workflow or project idea and PJ will map out a clean, simple plan.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Software%20Developers%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Send PJ your idea
+        </a>
+        <div class="cta-note">
+          Describe your workflow or project goal in 1–2 sentences.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Software Company San Diego | Modern Tech Solutions · SideGuy Solutions</title>
+  <meta name="description" content="A modern software company in San Diego building custom software, mobile apps, AI automation, dashboards, and full-stack digital solutions. Work directly with PJ — a trusted local builder.">
+  <meta name="keywords" content="software company san diego, software development san diego, tech company san diego, custom software san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    /* TAGS */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Software Company
+      </div>
+
+      <h1>A Modern Software Company in San Diego — Built for Real Operators</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions is a boutique software company in San Diego building clean,
+        modern, scalable software — without the bloat, overhead, or slow timelines of
+        traditional agencies. You work directly with PJ, a builder who understands
+        product, workflow, and real business needs.
+      </p>
+
+      <div class="hero-tags">
+        <span>Custom software</span>
+        <span>Dashboards</span>
+        <span>AI automation</span>
+        <span>Mobile apps</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Software%20Company%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Tell PJ what you want to build — he replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>Why SideGuy Solutions?</h2>
+      <p>
+        Because you don’t need a massive agency — you need a real builder. Someone
+        who understands operations, automation, product design, and modern software
+        engineering. That’s PJ’s lane. Clean builds. Fast timelines. Operator-focused
+        solutions for San Diego companies.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Custom software & dashboards.</div></li>
+        <li><span>•</span><div>AI workflows & automation.</div></li>
+        <li><span>•</span><div>API integrations & backend systems.</div></li>
+        <li><span>•</span><div>Direct communication with PJ only.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> San Diego Software Company · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO CHOOSES BOUTIQUE SOFTWARE COMPANIES -->
+    <section class="section">
+      <h2>Why San Diego Businesses Choose Boutique Software Companies</h2>
+      <p>
+        Most big agencies in San Diego overcharge, overbuild, and move slowly.
+        SideGuy Solutions operates differently — fast, clean, modern software
+        built directly around your workflow, not corporate templates or outdated
+        systems. You get real communication, real speed, and real product quality.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for San Diego operators</h3>
+          <p>
+            From Encinitas to La Jolla to downtown SD — local founders and operators
+            want software that works day one. SideGuy Solutions builds lean systems
+            designed to improve operations immediately, without months of planning
+            and paperwork.
+          </p>
+
+          <div class="pill-row">
+            <span>AI automation</span>
+            <span>Dashboards</span>
+            <span>Internal tools</span>
+            <span>Custom workflows</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The SideGuy software development process</h3>
+          <p>
+            A simple, direct, transparent workflow that cuts out all the noise and
+            gets you to working software ASAP.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your idea or workflow — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Architecture & plan</td>
+                <td>We map the cleanest, simplest v1 that solves your real needs.</td>
+              </tr>
+              <tr>
+                <td>3. Build</td>
+                <td>Modern frontend, stable backend, APIs, automations — everything clean.</td>
+              </tr>
+              <tr>
+                <td>4. Deploy & refine</td>
+                <td>Launch fast, tune based on real-world usage, and improve.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: POPULAR SOFTWARE PROJECTS -->
+    <section class="section">
+      <h2>Popular Software Projects in San Diego</h2>
+      <p>
+        San Diego companies across tech, healthcare, operations, venues, services,
+        and real estate use SideGuy Solutions for modern, scalable custom software.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Custom Software System</td>
+                <td>Businesses needing full internal tools or portals.</td>
+              </tr>
+              <tr>
+                <td>AI Automation System</td>
+                <td>Operators wanting to eliminate repetitive work instantly.</td>
+              </tr>
+              <tr>
+                <td>Internal Dashboard</td>
+                <td>Companies needing insights into sales, ops, logistics, or data.</td>
+              </tr>
+              <tr>
+                <td>API & Integration Suite</td>
+                <td>Teams needing systems to sync, automate, or connect tools.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with SideGuy Solutions</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Direct build process — no agency bottlenecks.</div></li>
+            <li><span>•</span><div>Clean, modern, stable software architecture.</div></li>
+            <li><span>•</span><div>Software built around YOUR workflow.</div></li>
+            <li><span>•</span><div>Fast updates, real communication.</div></li>
+            <li><span>•</span><div>Local SD expertise & fast turnaround times.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Looking for a software company in San Diego?</h2>
+      <p>
+        SideGuy Solutions builds modern software for real-world operators — clean
+        dashboards, automation, apps, custom tools, and scalable systems. If you
+        want a partner who moves fast and communicates clearly, link with PJ below.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Software%20Company%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Contact PJ
+        </a>
+        <div class="cta-note">
+          Tell PJ what you're trying to build or fix.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Mobile App Development San Diego | iOS & Android Apps · SideGuy Solutions</title>
+  <meta name="description" content="Mobile app development in San Diego for startups, founders, and businesses. SideGuy Solutions builds clean, modern, scalable iOS and Android apps built for real users.">
+  <meta name="keywords" content="mobile app development san diego, ios app developer san diego, android app developer san diego, app developers san diego, sideguy solutions, kromeon">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Mobile App Development
+      </div>
+
+      <h1>Mobile App Development in San Diego for Founders & Businesses</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds modern, scalable, user-friendly mobile apps for
+        iOS and Android. Whether it’s a startup MVP, a customer-facing app, or a
+        business tool — PJ builds clean apps that actually ship and actually work.
+      </p>
+
+      <div class="hero-tags">
+        <span>iOS apps</span>
+        <span>Android apps</span>
+        <span>Startup MVPs</span>
+        <span>Business tools</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Mobile%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your idea — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>Apps That Feel Modern — and Actually Ship</h2>
+      <p>
+        Most app projects fail because they take too long, cost too much, or end up
+        confusing users. SideGuy Solutions builds clean, lightweight, scalable apps
+        that real people enjoy using. Fast timelines. Direct communication. No fluff.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>iOS & Android development.</div></li>
+        <li><span>•</span><div>Startup MVP builds.</div></li>
+        <li><span>•</span><div>Full-stack backend + APIs.</div></li>
+        <li><span>•</span><div>Direct communication with PJ only.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> San Diego Mobile App Developer · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO NEEDS REAL MOBILE APP DEVELOPERS -->
+    <section class="section">
+      <h2>Why San Diego Founders Need Real Mobile App Developers</h2>
+      <p>
+        San Diego’s startup and business scene is booming — but most app development
+        options are either overpriced agencies or offshore teams that never deliver.
+        SideGuy Solutions builds modern apps with fast timelines, clean UI, and a
+        builder-focused mindset. You get real product progress, not endless delays.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Built for founders, startups & real operators</h3>
+          <p>
+            Whether you're launching a startup MVP, improving an existing app, or
+            building a customer-facing experience — you need real mobile app
+            development that understands both product and business needs.
+          </p>
+
+          <div class="pill-row">
+            <span>iOS apps</span>
+            <span>Android apps</span>
+            <span>APIs & backend</span>
+            <span>Startup MVPs</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The mobile app development process</h3>
+          <p>
+            A fast, simple, founder-friendly workflow that gets your app live fast.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your idea — PJ replies personally with direction.</td>
+              </tr>
+              <tr>
+                <td>2. Product plan</td>
+                <td>We map the cleanest MVP or app version that can launch quickly.</td>
+              </tr>
+              <tr>
+                <td>3. Build</td>
+                <td>UI, user flows, backend, APIs, and full iOS/Android builds.</td>
+              </tr>
+              <tr>
+                <td>4. Launch & refine</td>
+                <td>Ship to App Store/Play Store, collect feedback, upgrade fast.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: POPULAR MOBILE APP PROJECTS -->
+    <section class="section">
+      <h2>Popular Mobile App Projects in San Diego</h2>
+      <p>
+        These are the most common — and most impactful — app builds across San Diego.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Startup MVP App</td>
+                <td>Founders needing a clean v1 to launch & validate quickly.</td>
+              </tr>
+              <tr>
+                <td>Business Operations App</td>
+                <td>Companies wanting internal tools or customer-facing apps.</td>
+              </tr>
+              <tr>
+                <td>Customer Experience App</td>
+                <td>Venues, gyms, restaurants, events, membership communities.</td>
+              </tr>
+              <tr>
+                <td>API-Driven App</td>
+                <td>Products requiring data sync, automation, or integrations.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Clean, modern, scalable mobile apps.</div></li>
+            <li><span>•</span><div>Fast, founder-friendly timelines.</div></li>
+            <li><span>•</span><div>iOS & Android builds with backend included.</div></li>
+            <li><span>•</span><div>Direct communication with PJ only.</div></li>
+            <li><span>•</span><div>No agency bloat. No offshore confusion.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Ready to build your mobile app?</h2>
+      <p>
+        If you're looking for clean, modern mobile app development in San Diego —
+        startup MVPs, business tools, or customer-facing apps — SideGuy Solutions is
+        your partner. Share your idea and get a fast plan from PJ.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Mobile%20App%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Build my app
+        </a>
+        <div class="cta-note">
+          Include your app idea in 1–2 sentences.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>Website Development San Diego | Modern Websites · SideGuy Solutions</title>
+  <meta name="description" content="Website development in San Diego for startups, businesses, and operators. SideGuy Solutions builds clean, fast, modern websites and landing pages that convert.">
+  <meta name="keywords" content="website development san diego, web developer san diego, website design san diego, web development san diego, sideguy solutions">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      margin: 0 0 10px;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note { font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · Website Development
+      </div>
+
+      <h1>Website Development in San Diego for Businesses & Startups</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions builds clean, fast, modern websites and landing pages for
+        San Diego companies. No bloated templates. No slow load times. Just clean,
+        functional websites built for conversions, trust, and real business results.
+      </p>
+
+      <div class="hero-tags">
+        <span>Custom websites</span>
+        <span>Landing pages</span>
+        <span>Fast performance</span>
+        <span>Modern UI/UX</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Website%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your website goal — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>Websites That Load Fast & Look Modern</h2>
+      <p>
+        Most websites are slow, outdated, or overloaded with unnecessary features.
+        SideGuy Solutions builds lightweight, optimized websites that feel clean,
+        modern, and reliable — exactly what San Diego customers expect today.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Lightning-fast load speeds.</div></li>
+        <li><span>•</span><div>Optimized for mobile & SEO.</div></li>
+        <li><span>•</span><div>Custom UI/UX for your brand.</div></li>
+        <li><span>•</span><div>Direct communication with PJ.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> San Diego Website Developer · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO NEEDS REAL WEBSITE DEVELOPMENT -->
+    <section class="section">
+      <h2>Why San Diego Companies Need Real Website Development</h2>
+      <p>
+        Most San Diego websites are slow, outdated, or built with bloated templates.
+        Customers expect clean design, fast load speeds, and a site that actually
+        works on mobile. SideGuy Solutions builds modern websites designed to convert
+        visitors and support real business goals.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Designed for real businesses & operators</h3>
+          <p>
+            Whether you're a startup, restaurant, service business, real estate team,
+            venue, or online brand — you need a website that feels modern and loads
+            instantly. SideGuy Solutions delivers clean pages built around your brand
+            and your actual customers.
+          </p>
+
+          <div class="pill-row">
+            <span>Landing pages</span>
+            <span>Business websites</span>
+            <span>Fast performance</span>
+            <span>Modern UI/UX</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The website development process</h3>
+          <p>
+            A clean, simple workflow designed to avoid delays and get your site live
+            quickly and correctly.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your goal, brand, or example sites — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Design & structure</td>
+                <td>We map out a clean, modern layout and page flow.</td>
+              </tr>
+              <tr>
+                <td>3. Build</td>
+                <td>Modern frontend, responsive design, SEO optimization, fast load speeds.</td>
+              </tr>
+              <tr>
+                <td>4. Launch & refine</td>
+                <td>Deploy your site live, test on mobile, and upgrade as needed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: POPULAR WEBSITE PROJECTS -->
+    <section class="section">
+      <h2>Popular Website Projects in San Diego</h2>
+      <p>
+        These are the most common — and highest performing — website builds for SD
+        companies and founders.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Modern Business Website</td>
+                <td>Local companies needing trust, speed, and clean UI.</td>
+              </tr>
+              <tr>
+                <td>Startup Landing Page</td>
+                <td>Founders launching a product or idea quickly.</td>
+              </tr>
+              <tr>
+                <td>Sales Funnel Page</td>
+                <td>Businesses wanting clicks → conversions instantly.</td>
+              </tr>
+              <tr>
+                <td>SEO-Optimized Website</td>
+                <td>Brands wanting long-term visibility and Google growth.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Clean, modern, mobile-first design.</div></li>
+            <li><span>•</span><div>Fast load speeds that improve SEO.</div></li>
+            <li><span>•</span><div>Transparent communication — PJ only.</div></li>
+            <li><span>•</span><div>No templates, no bloat, no slow agencies.</div></li>
+            <li><span>•</span><div>Real San Diego local support.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Need website development in San Diego?</h2>
+      <p>
+        If you want a modern, fast, high-performing website — SideGuy Solutions is
+        your San Diego partner. Whether it’s a landing page, full website, or
+        complete redesign, PJ builds it clean, fast, and optimized.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=Website%20Development%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Build my website
+        </a>
+        <div class="cta-note">
+          Share your website goals in 1–2 sentences.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PAGE-SPECIFIC SEO -->
+  <title>IT Services San Diego | Modern Tech Support · SideGuy Solutions</title>
+  <meta name="description" content="IT services in San Diego for small businesses, founders, and teams. SideGuy Solutions provides modern tech support, cloud tools, automation, and workflow fixes without the slow MSP bloat.">
+  <meta name="keywords" content="it services san diego, managed it san diego, tech support san diego, cloud support san diego, sideguy solutions">
+
+  <!-- CLEAN SEO PAGE STYLES -->
+  <style>
+    :root {
+      --bg: radial-gradient(circle at top, #0ea5e9 0%, #020617 50%, #000 100%);
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      border: 1px solid rgba(148,163,184,0.3);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    main { flex: 1; width: 100%; }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 32px;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 10px; }
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      margin: 0 0 10px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .hero-pill span {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94);
+    }
+
+    .hero-sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .hero-tags span {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg,#38bdf8,#22d3ee);
+      color: #0f172a;
+      text-decoration: none;
+      box-shadow: 0 18px 45px rgba(8,47,73,0.5);
+    }
+    .btn-primary span { font-size: 1.1rem; }
+    .cta-note { font-size: 0.85rem; color: var(--muted); }
+
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="brand">SideGuy Solutions · San Diego</div>
+  <a href="/" class="nav-link">← Back to Ocean Portal</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- LEFT SIDE -->
+    <div class="hero-left">
+      <div class="hero-pill">
+        <span></span> San Diego · IT Services
+      </div>
+
+      <h1>IT Services in San Diego for Modern Teams & Small Businesses</h1>
+
+      <p class="hero-sub">
+        SideGuy Solutions delivers clean, fast, modern IT support for San Diego
+        businesses — without the corporate MSP pricing, slow tickets, jargon, or
+        outdated systems. You get real fixes, modern tools, and direct access to PJ.
+      </p>
+
+      <div class="hero-tags">
+        <span>Tech support</span>
+        <span>Cloud tools</span>
+        <span>Automation</span>
+        <span>Workflow fixes</span>
+      </div>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=IT%20Services%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Link with PJ
+        </a>
+        <div class="cta-note">
+          Share your IT or tech pain — PJ replies personally.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE (SIDECARD) -->
+    <aside class="hero-right" style="
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.85), #020617);
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 20px;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.9);
+    ">
+      <h2>Modern IT Services That Actually Help</h2>
+      <p>
+        Most MSPs feel outdated — slow response times, confusing support tickets,
+        and expensive retainers. SideGuy Solutions fixes this by offering clean,
+        fast, direct tech support built for how small businesses operate today.
+      </p>
+
+      <ul class="offer-list">
+        <li><span>•</span><div>Modern cloud tools & workflow fixes.</div></li>
+        <li><span>•</span><div>Tech support without MSP bloat.</div></li>
+        <li><span>•</span><div>Automation for repetitive tasks.</div></li>
+        <li><span>•</span><div>Direct communication with PJ — always.</div></li>
+      </ul>
+
+      <div class="badge">
+        <span>◦</span> San Diego IT Support · SideGuy Solutions
+      </div>
+    </aside>
+  </section>
+    <!-- SECTION: WHY SAN DIEGO NEEDS MODERN IT SERVICES -->
+    <section class="section">
+      <h2>Why San Diego Businesses Need Modern IT Services</h2>
+      <p>
+        Most IT providers in San Diego still operate like it’s 2008 — slow response
+        times, complicated ticket portals, outdated tools, and support teams that
+        barely understand your workflow. SideGuy Solutions is built for today’s
+        businesses: lightweight, fast, cloud-first, automation-driven, and focused
+        on real operational improvements.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD -->
+        <div class="card">
+          <h3>Designed for SMBs, founders & operators</h3>
+          <p>
+            Whether you're running a small business, startup, real estate team,
+            service company, or local brand — you need IT support that is fast,
+            simple, and modern. SideGuy replaces outdated MSP chaos with clean
+            solutions that actually help your day-to-day.
+          </p>
+
+          <div class="pill-row">
+            <span>Cloud tools</span>
+            <span>Tech support</span>
+            <span>Automations</span>
+            <span>Workflow fixes</span>
+          </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+          <h3>The SideGuy IT services process</h3>
+          <p>
+            A modern, straightforward workflow designed to keep your business running
+            smoothly — without the corporate slowdowns.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>What happens</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1. Link with PJ</td>
+                <td>You share your tech issues or workflow pain points — PJ replies personally.</td>
+              </tr>
+              <tr>
+                <td>2. Diagnose</td>
+                <td>We identify what's slowing down your tools, processes, or systems.</td>
+              </tr>
+              <tr>
+                <td>3. Fix & upgrade</td>
+                <td>Implement modern cloud tools, workflows, security improvements.</td>
+              </tr>
+              <tr>
+                <td>4. Ongoing support</td>
+                <td>Simple, direct support when you need it — no MSP red tape.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: POPULAR IT SERVICE PROJECTS -->
+    <section class="section">
+      <h2>Popular IT Service Projects in San Diego</h2>
+      <p>
+        SideGuy Solutions delivers modern IT services to companies across San Diego —
+        from beachside shops to fast-moving startups to real estate and service teams.
+      </p>
+
+      <div class="two-col">
+        <!-- LEFT CARD – PACKAGES -->
+        <div class="card">
+          <h3>Packages & examples</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Modern IT Support</td>
+                <td>SMBs needing fast fixes & clean support.</td>
+              </tr>
+              <tr>
+                <td>Cloud Setup + Migration</td>
+                <td>Teams moving from outdated tools to modern platforms.</td>
+              </tr>
+              <tr>
+                <td>Workflow Automation</td>
+                <td>Businesses eliminating repetitive tasks.</td>
+              </tr>
+              <tr>
+                <td>Tech Stack Cleanup</td>
+                <td>Companies overwhelmed with too many tools & logins.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RIGHT CARD – BENEFITS -->
+        <div class="card">
+          <h3>What you get working with PJ</h3>
+
+          <ul class="offer-list">
+            <li><span>•</span><div>Modern, cloud-first solutions.</div></li>
+            <li><span>•</span><div>Simple communication — no support ticket hell.</div></li>
+            <li><span>•</span><div>Automation that replaces manual work.</div></li>
+            <li><span>•</span><div>Real fixes, not band-aids.</div></li>
+            <li><span>•</span><div>Local SD support with fast turnaround times.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <h2>Need IT services in San Diego?</h2>
+      <p>
+        If you’re tired of slow MSPs, outdated tech support, or complicated systems —
+        SideGuy Solutions is your modern IT partner. Everything is clean, simple,
+        automation-friendly, and designed to make your business run smoothly.
+      </p>
+
+      <div class="cta-row">
+        <a
+          href="mailto:pj@kromeon.com?subject=IT%20Services%20San%20Diego"
+          class="btn-primary"
+        >
+          <span>●</span> Fix my tech setup
+        </a>
+        <div class="cta-note">
+          Share your biggest tech issues in 1–2 sentences.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> SideGuy Solutions · San Diego Coastal Tech Concierge
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
 </body>
