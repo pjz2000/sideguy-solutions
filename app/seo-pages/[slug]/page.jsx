@@ -1,4 +1,4 @@
-import { getAllSeoSlugs, getSeoPage } from "../../../lib/seoPages";
+import { getAllSeoSlugs, getSeoPage } from "../../../lib/seoPages.js";
 
 
 
