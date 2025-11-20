@@ -522,4 +522,231 @@ export function getSeoPage(slug) {
   return seoPages.find((p) => p.slug === slug);
 
 }
+  // 11. saas-development-san-diego
+
+  {
+
+    slug: "saas-development-san-diego",
+
+    title: "SaaS Development San Diego | Build Scalable Software",
+
+    metaDescription:
+
+      "SaaS development in San Diego for founders and startups. Build scalable subscription software with local support.",
+
+    h1: "SaaS Development in San Diego",
+
+    intro:
+
+      "We help founders and teams build scalable SaaS platforms with clean architecture, modern design, and clear communication.",
+
+    bullets: [
+
+      "SaaS MVP development",
+
+      "User authentication & billing",
+
+      "Cloud hosting & scaling",
+
+      "Dashboard & admin tools",
+
+      "API integrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "startup-software-development-san-diego",
+
+      "software-product-development-san-diego",
+
+      "software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 12. enterprise-software-development-san-diego
+
+  {
+
+    slug: "enterprise-software-development-san-diego",
+
+    title: "Enterprise Software Development San Diego | Scalable Systems",
+
+    metaDescription:
+
+      "Enterprise software development in San Diego for complex platforms, security, and scalable systems.",
+
+    h1: "Enterprise Software Development in San Diego",
+
+    intro:
+
+      "We build secure, scalable enterprise software for biotech, defense, healthcare, and growth-stage teams.",
+
+    bullets: [
+
+      "Enterprise-grade systems",
+
+      "Security-first architecture",
+
+      "Cloud migrations",
+
+      "Internal applications",
+
+      "Process automation"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-engineering-san-diego",
+
+      "san-diego-tech-companies",
+
+      "software-consulting-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 13. software-consulting-san-diego
+
+  {
+
+    slug: "software-consulting-san-diego",
+
+    title: "Software Consulting San Diego | Technical Strategy",
+
+    metaDescription:
+
+      "Software consulting in San Diego for founders, operators, and companies needing technical strategy and guidance.",
+
+    h1: "Software Consulting in San Diego",
+
+    intro:
+
+      "We guide San Diego businesses on architecture, strategy, and execution so you avoid costly mistakes and build smarter.",
+
+    bullets: [
+
+      "Technical planning",
+
+      "Architecture review",
+
+      "Project roadmapping",
+
+      "System audits",
+
+      "Build or buy guidance"
+
+    ],
+
+    relatedSlugs: [
+
+      "enterprise-software-development-san-diego",
+
+      "software-development-san-diego",
+
+      "san-diego-it-consulting"
+
+    ]
+
+  },
+
+
+
+  // 14. san-diego-tech-companies
+
+  {
+
+    slug: "san-diego-tech-companies",
+
+    title: "San Diego Tech Companies | Local Software & Innovation",
+
+    metaDescription:
+
+      "A guide to San Diego tech companies and modern software teams building apps, automation, and digital products.",
+
+    h1: "San Diego Tech Companies",
+
+    intro:
+
+      "San Diego is home to a growing tech ecosystem — from startups to enterprise teams building world-class products.",
+
+    bullets: [
+
+      "Local tech ecosystem",
+
+      "Startup innovation",
+
+      "Biotech & defense hubs",
+
+      "Software companies",
+
+      "AI & automation growth"
+
+    ],
+
+    relatedSlugs: [
+
+      "san-diego-technology-companies",
+
+      "software-company-san-diego",
+
+      "software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 15. blockchain-development-san-diego
+
+  {
+
+    slug: "blockchain-development-san-diego",
+
+    title: "Blockchain Development San Diego | Web3 & Solana Experts",
+
+    metaDescription:
+
+      "Blockchain and Web3 development in San Diego — Solana, smart contracts, wallets, and decentralized apps.",
+
+    h1: "Blockchain Development in San Diego",
+
+    intro:
+
+      "We help teams build Web3 products using fast, modern technology — especially Solana, wallets, and on-chain apps.",
+
+    bullets: [
+
+      "Solana integrations",
+
+      "Web3 wallets",
+
+      "Smart contract development",
+
+      "On-chain dashboards",
+
+      "Tokenized platforms"
+
+    ],
+
+    relatedSlugs: [
+
+      "ai-development-san-diego",
+
+      "software-development-san-diego",
+
+      "fintech-software-san-diego"
+
+    ]
+
+  },
 
