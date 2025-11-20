@@ -1,1 +1,268 @@
 
+<style>
+  :root {
+    --sg-deep: #020617;
+    --sg-ocean: #0a1424;
+    --sg-sky: #38bdf8;
+    --sg-solana: #14f195;
+    --sg-white: #ffffff;
+  }
+
+  /* Global reset */
+  body { margin: 0; font-family: "Inter", system-ui, sans-serif; }
+
+  /* ===== OCEAN HERO 2.0 ===== */
+  .sg-hero {
+    position: relative;
+    padding: 6rem 0 5rem;
+    background:
+      radial-gradient(circle at 20% -10%, #38bdf8 0%, #0f172a 40%, #020617 100%);
+    overflow: hidden;
+    color: white;
+  }
+
+  /* Glow sweep */
+  .sg-hero::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(255,255,255,0.25), transparent 60%),
+      radial-gradient(circle at 80% 110%, rgba(20,241,149,0.35), transparent 70%);
+    mix-blend-mode: screen;
+    animation: sgSweep 16s ease-in-out infinite alternate;
+    pointer-events: none;
+    opacity: .8;
+  }
+
+  @keyframes sgSweep {
+    0% { transform: translate(0,0) scale(1.05); filter: hue-rotate(0deg); }
+    50% { transform: translate(-22px,12px) scale(1.08); filter: hue-rotate(14deg); }
+    100% { transform: translate(16px,-18px) scale(1.03); filter: hue-rotate(-12deg); }
+  }
+
+  /* Floating micro particles */
+  .sg-particles {
+    position: absolute; inset: 0;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: .08;
+    mix-blend-mode: screen;
+    animation: sgFloat 20s linear infinite;
+  }
+  @keyframes sgFloat { from {transform: translateY(0);} to {transform: translateY(-20%);} }
+
+  /* Layout */
+  .sg-wrap {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 2.8rem;
+  }
+
+  @media (min-width: 900px) {
+    .sg-wrap {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: center;
+    }
+  }
+
+  .sg-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    font-size: .75rem;
+    letter-spacing: .22em;
+    background: rgba(15,23,42,0.92);
+    padding: .4rem .9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.5);
+  }
+
+  .sg-dot {
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    background: var(--sg-solana);
+    box-shadow: 0 0 12px var(--sg-solana);
+  }
+
+  .sg-title {
+    margin: 1rem 0;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 4vw, 3.6rem);
+    line-height: 1.08;
+    text-shadow: 
+      0 20px 40px rgba(0,0,0,0.6),
+      0 0 40px rgba(56,189,248,0.6);
+  }
+
+  .sg-sub {
+    max-width: 36rem;
+    line-height: 1.65;
+    font-size: 1.15rem;
+    color: rgba(225,235,255,0.9);
+    margin-bottom: 1.4rem;
+  }
+
+  .sg-chips {
+    display: flex; flex-wrap: wrap;
+    gap: .5rem; margin-bottom: 1.4rem;
+  }
+
+  .sg-chip {
+    font-size: .8rem;
+    padding: .3rem .75rem;
+    border-radius: 999px;
+    background: rgba(15,23,42,0.75);
+    border: 1px solid rgba(148,163,184,0.5);
+    white-space: nowrap;
+  }
+
+  .sg-ctas {
+    display: flex; flex-wrap: wrap;
+    gap: .8rem;
+    margin-bottom: 1rem;
+  }
+
+  .sg-btn {
+    padding: .9rem 1.7rem;
+    font-size: .95rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease-out;
+  }
+
+  .sg-btn-primary {
+    background: radial-gradient(circle at 0% 0%, #e0f2fe, #38bdf8 45%, #0ea5e9 70%);
+    color: #020617;
+    box-shadow:
+      0 0 0 1px rgba(15,23,42,0.9),
+      0 18px 40px rgba(8,47,73,0.9),
+      0 0 50px rgba(56,189,248,0.9);
+  }
+  .sg-btn-primary:hover {
+    transform: translateY(-2px);
+  }
+
+  .sg-btn-secondary {
+    border: 1px solid rgba(200,220,255,0.7);
+    color: #e0f4ff;
+  }
+  .sg-btn-secondary:hover {
+    background: rgba(15,23,42,0.65);
+  }
+
+  /* ORB 2.0 */
+  .sg-orb-card {
+    position: relative;
+    padding: 1.7rem;
+    border-radius: 1.7rem;
+    background: radial-gradient(circle at top left, rgba(56,189,248,0.25), rgba(15,23,42,0.96));
+    border: 1px solid rgba(148,163,184,0.4);
+    box-shadow: 
+      0 16px 40px rgba(0,0,0,0.6),
+      0 0 40px rgba(56,189,248,0.6);
+    overflow: hidden;
+  }
+
+  .sg-orb-card::before {
+    content: "";
+    position: absolute;
+    width: 230px; height: 230px;
+    border-radius: 50%;
+    right: -42px; top: -62px;
+    background: radial-gradient(circle at 33% 25%, white, #38bdf8, #14f195 70%);
+    box-shadow:
+      0 0 50px rgba(56,189,248,0.7),
+      0 0 100px rgba(20,241,149,0.7);
+    animation: sgOrb 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes sgOrb {
+    0% {transform: translate3d(0,0,0);}
+    50% {transform: translate3d(-14px,22px,0) scale(1.06);}
+    100% {transform: translate3d(-24px,3px,0) scale(1.04);}
+  }
+
+  .sg-orb-title { font-size: 1.2rem; font-weight: 700; margin-bottom: .4rem; }
+  .sg-orb-text { font-size: .88rem; line-height: 1.6; opacity: .9; margin-bottom: .9rem; }
+
+  .sg-timestamp {
+    margin-top: .5rem;
+    font-size: .75rem;
+    opacity: .9;
+    color: #dbeafe;
+  }
+</style>
+<header class="sg-hero">
+  <div class="sg-particles"></div>
+
+  <div class="sg-wrap">
+
+    <!-- LEFT SIDE -->
+    <div>
+      <div class="sg-tag">
+        <span class="sg-dot"></span> COASTAL OPERATORS • SAN DIEGO • NORTH COUNTY
+      </div>
+
+      <h1 class="sg-title">Where code meets the coastline.</h1>
+
+      <p class="sg-sub">
+        SideGuy Solutions is your <b>coastal tech concierge</b> —
+        building custom software, apps, AI automation,
+        <b>Solana &amp; 402</b> internet payments, and ticketing systems
+        for operators from <b>Solana Beach to Encinitas, Carlsbad & Del Mar</b>.
+      </p>
+
+      <div class="sg-chips">
+        <span class="sg-chip">San Diego software development</span>
+        <span class="sg-chip">Custom apps & web platforms</span>
+        <span class="sg-chip">AI & automation</span>
+        <span class="sg-chip">Solana & 402 payments</span>
+        <span class="sg-chip">Ticketing for venues</span>
+      </div>
+
+      <div class="sg-ctas">
+        <a href="https://forms.sideguysolutions.com/intake" class="sg-btn sg-btn-primary">
+          Project Intake (60 sec)
+        </a>
+
+        <a href="tel:7735441231" class="sg-btn sg-btn-secondary">
+          Text PJ → 773-544-1231
+        </a>
+      </div>
+
+      <div class="sg-timestamp" id="sg-ts"></div>
+    </div>
+
+    <!-- RIGHT SIDE ORB -->
+    <div class="sg-orb-card">
+      <div class="sg-orb-title">Built for real operators, not “startups.”</div>
+      <p class="sg-orb-text">
+        Venues, founders, agencies, and service businesses who live on real
+        headcounts, slates, and repeat clients — not slide decks.
+      </p>
+
+      <ul class="sg-orb-list">
+        <li>• Custom software & apps in San Diego</li>
+        <li>• AI automation that kills manual work</li>
+        <li>• Solana & 402 payments (stop fee bleed)</li>
+        <li>• Ticketing & VIP systems tuned for the coast</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  try {
+    const el = document.getElementById("sg-ts");
+    const f = new Date().toLocaleString("en-US", {
+      month: "short", day: "numeric", year: "numeric",
+      hour: "2-digit", minute: "2-digit"
+    });
+    el.innerHTML = "Ocean Hero 2.0 · v25.2 · Updated " + f;
+  } catch (e) {}
+</script>
