@@ -1,8 +1,8 @@
 <!--
   SideGuy Solutions
-  Version: 27.0 · TRAFFIC MODE
-  Timestamp: 2025-11-21 11:05 PST
-  Mode: SEO + Payments + Services
+  Version: 30.0 · TRAFFIC MODE · DUAL NEON
+  Timestamp: 2025-11-21 12:15 PST
+  Mode: SEO + Payments + Services · Mobile-First
   Author: PJ + ChatGPT
 -->
 
@@ -10,18 +10,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <title>SideGuy Solutions | San Diego Software, Solana Payments & AI Automation</title>
 
-  <meta name="description"
-    content="SideGuy Solutions is a San Diego coastal tech and payments partner. Solana .4 second payments, custom software, AI automation, and SEO-friendly builds for North County businesses that want more traffic and more margin.">
-  <meta name="keywords"
-    content="San Diego software development, Solana payments, instant settlement, payment processing San Diego, AI automation, North County tech, Encinitas software, Solana Beach payments, SideGuy Solutions, SideGuy Payments, coastal tech concierge">
-
-  <link rel="canonical" href="https://www.sideguysolutions.com/">
+  <meta
+    name="description"
+    content="SideGuy Solutions is a San Diego coastal tech and payments partner. Solana .4 second payments, custom software, AI automation, and SEO-friendly builds for North County businesses that want more traffic and more margin."
+  />
+  <meta
+    name="keywords"
+    content="San Diego software development, Solana payments, instant settlement, payment processing San Diego, AI automation, North County tech, Encinitas software, Solana Beach payments, SideGuy Solutions, SideGuy Payments"
+  />
+  <link rel="canonical" href="https://www.sideguysolutions.com/" />
 
   <style>
+    :root {
+      --bg: #020617;
+      --bg-alt: #0b1220;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent-green: #22c55e;
+      --accent-aqua: #38bdf8;
+      --border-soft: rgba(148, 163, 184, 0.45);
+      --card-bg: rgba(15, 23, 42, 0.96);
+      --radius-lg: 1rem;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -31,8 +49,9 @@
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top, #0ea5e9 0%, #020617 45%, #000 100%);
-      color: #e5e7eb;
+      background:
+        radial-gradient(circle at top, #0ea5e9 0%, #020617 48%, #000 100%);
+      color: var(--text);
       display: flex;
       flex-direction: column;
     }
@@ -42,681 +61,1858 @@
       text-decoration: none;
     }
 
-    header {
-      width: 100%;
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* HEADER + NEON MENU */
+
+    .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.4), transparent);
-      border-bottom: 1px solid rgba(148,163,184,0.25);
-    }
-
-    .logo {
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(56, 189, 248, 0.5);
+      padding: 0.9rem 1.1rem env(safe-area-inset-top, 0);
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      color: #38bdf8;
-      text-shadow: 0 0 16px rgba(56,189,248,0.8);
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 0;
     }
 
     .logo-pill {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #22c55e, #16a34a, #0f766e);
-      box-shadow: 0 0 16px rgba(34,197,94,0.9);
+      background:
+        radial-gradient(circle at 30% 20%, #bbf7d0, var(--accent-green), #166534),
+        radial-gradient(circle at 70% 80%, #e0f2fe, var(--accent-aqua), #0f172a);
+      box-shadow:
+        0 0 16px rgba(34, 197, 94, 0.9),
+        0 0 26px rgba(56, 189, 248, 0.9);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-main {
+      font-weight: 800;
+      font-size: 0.98rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-aqua);
+      text-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+      white-space: nowrap;
     }
 
     .logo-sub {
       font-size: 0.7rem;
-      color: #9ca3af;
-      text-shadow: none;
+      color: var(--muted);
+      white-space: nowrap;
     }
 
-    nav {
+    .menu-toggle {
+      margin-left: auto;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      width: 46px;
+      height: 38px;
+      border-radius: 999px;
       display: flex;
-      gap: 18px;
-      font-size: 0.9rem;
-      flex-wrap: wrap;
-    }
-
-    nav a {
+      align-items: center;
+      justify-content: center;
       position: relative;
-      padding-bottom: 3px;
-      opacity: 0.9;
-      transition: 0.2s;
+      box-shadow:
+        0 0 14px rgba(34, 197, 94, 0.7),
+        0 0 18px rgba(56, 189, 248, 0.7);
+      background: radial-gradient(
+        circle at 20% 0,
+        rgba(190, 242, 100, 0.3),
+        rgba(22, 163, 74, 0.4),
+        rgba(15, 23, 42, 0.9)
+      );
     }
 
-    nav a::after {
+    .menu-toggle-bars {
+      width: 22px;
+      height: 16px;
+      position: relative;
+    }
+
+    .menu-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        var(--accent-green),
+        var(--accent-aqua)
+      );
+      box-shadow:
+        0 0 8px rgba(34, 197, 94, 0.8),
+        0 0 8px rgba(56, 189, 248, 0.8);
+      transition: transform 0.16s ease, opacity 0.16s ease, top 0.16s ease,
+        bottom 0.16s ease;
+    }
+
+    .menu-bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-bar:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .menu-bar:nth-child(3) {
+      bottom: 0;
+    }
+
+    body.nav-open .menu-bar:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    body.nav-open .menu-bar:nth-child(2) {
+      opacity: 0;
+    }
+    body.nav-open .menu-bar:nth-child(3) {
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    .desktop-nav {
+      display: none;
+      gap: 1.1rem;
+      font-size: 0.9rem;
+      margin-left: 1rem;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    .desktop-nav a::after {
       content: "";
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: -0.15rem;
       width: 0;
       height: 2px;
-      background: linear-gradient(to right, #22c55e, #a3e635);
-      box-shadow: 0 0 10px rgba(34,197,94,0.8);
-      transition: width 0.2s ease-out;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        var(--accent-green),
+        var(--accent-aqua)
+      );
+      box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.9),
+        0 0 12px rgba(56, 189, 248, 0.9);
+      transition: width 0.18s ease-out;
     }
 
-    nav a:hover {
+    .desktop-nav a:hover::after {
+      width: 100%;
+    }
+
+    @media (min-width: 960px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+      }
+
+      .site-header {
+        padding-inline: 2.4rem;
+      }
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s ease-out;
+    }
+
+    body.nav-open .mobile-nav-overlay {
+      pointer-events: auto;
       opacity: 1;
     }
 
-    nav a:hover::after {
-      width: 100%;
+    .mobile-nav-backdrop {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top,
+        rgba(56, 189, 248, 0.18),
+        rgba(15, 23, 42, 0.92)
+      );
+      backdrop-filter: blur(18px);
     }
+
+    .mobile-nav-panel {
+      position: absolute;
+      top: env(safe-area-inset-top, 0);
+      right: 0;
+      width: min(260px, 80%);
+      bottom: 0;
+      background: radial-gradient(
+        circle at top left,
+        rgba(34, 197, 94, 0.22),
+        rgba(15, 23, 42, 0.98)
+      );
+      border-left: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow:
+        -12px 0 40px rgba(15, 23, 42, 0.95),
+        0 0 30px rgba(34, 197, 94, 0.6);
+      transform: translateX(100%);
+      transition: transform 0.18s ease-out;
+      padding: 1.1rem 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    body.nav-open .mobile-nav-panel {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-panel a {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      font-size: 0.95rem;
+    }
+
+    .mobile-nav-panel a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav-footer {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* MAIN LAYOUT */
 
     main {
       flex: 1;
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;
-      padding: 28px 18px 64px;
+      padding: 1.8rem 1.1rem 3.2rem;
+    }
+
+    @media (min-width: 960px) {
+      main {
+        padding-inline: 2.4rem;
+      }
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(56,189,248,0.6);
-      font-size: 0.78rem;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      margin-bottom: 16px;
+      color: var(--muted);
+      margin-bottom: 1.1rem;
     }
 
     .badge-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34,197,94,0.9);
+      background: var(--accent-green);
+      box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.9),
+        0 0 18px rgba(56, 189, 248, 0.9);
     }
 
-    .hero-grid {
+    .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
-      gap: 32px;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+      gap: 1.9rem;
       align-items: center;
-      margin-bottom: 36px;
     }
 
-    @media (max-width: 880px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      nav {
-        justify-content: flex-start;
-      }
-      .hero-grid {
+    @media (max-width: 900px) {
+      .hero {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .hero-title {
-      font-size: clamp(2.1rem, 4vw, 3rem);
-      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3rem);
       line-height: 1.1;
+      font-weight: 800;
       color: #f9fafb;
-      margin-bottom: 12px;
-      text-shadow: 0 0 34px rgba(56,189,248,0.4);
+      text-shadow: 0 0 30px rgba(56, 189, 248, 0.45);
+      margin-bottom: 0.6rem;
     }
 
     .hero-highlight {
-      background: linear-gradient(to right, #22c55e, #a3e635);
+      background: linear-gradient(
+        90deg,
+        var(--accent-green),
+        var(--accent-aqua)
+      );
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .hero-sub {
-      font-size: 1rem;
+      font-size: 0.96rem;
       color: #cbd5f5;
-      opacity: 0.95;
-      max-width: 520px;
-      margin-bottom: 16px;
+      margin-bottom: 0.6rem;
     }
 
     .hero-note {
-      font-size: 0.9rem;
-      color: #9ca3af;
-      margin-bottom: 18px;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 12px;
+      justify-content: center;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-align: center;
+      min-height: 44px;
     }
 
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border-radius: 999px;
-      border: 1px solid #22c55e;
-      background: radial-gradient(circle at 20% 0, #bbf7d0, #22c55e, #15803d);
+      background: radial-gradient(
+        circle at 20% 0,
+        #bbf7d0,
+        var(--accent-green),
+        #166534
+      );
+      border-color: var(--accent-green);
       color: #022c22;
-      font-weight: 700;
-      font-size: 0.98rem;
-      cursor: pointer;
       box-shadow:
-        0 0 20px rgba(34,197,94,0.9),
-        0 0 35px rgba(34,197,94,0.6);
-      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, filter 0.1s;
-      white-space: nowrap;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.03);
-      box-shadow:
-        0 0 26px rgba(34,197,94,1),
-        0 0 44px rgba(34,197,94,0.9);
-      filter: saturate(1.05);
+        0 0 18px rgba(34, 197, 94, 0.95),
+        0 0 28px rgba(56, 189, 248, 0.75);
     }
 
     .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.9);
-      color: #e5e7eb;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: 0.15s;
-      white-space: nowrap;
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(248,250,252,0.9);
-      background: rgba(15,23,42,1);
+      background: rgba(15, 23, 42, 0.96);
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text);
     }
 
     .hero-footnote {
-      font-size: 0.82rem;
-      color: #9ca3af;
-      max-width: 480px;
-    }
-
-    .hero-locations {
-      margin-top: 16px;
-      font-size: 0.86rem;
-      color: #9ca3af;
-    }
-
-    .hero-locations span {
-      color: #e5e7eb;
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 430px;
     }
 
     .hero-card {
-      border-radius: 18px;
-      padding: 18px 18px 16px;
-      background: rgba(15,23,42,0.96);
-      border: 1px solid rgba(148,163,184,0.4);
-      box-shadow: 0 0 30px rgba(15,23,42,0.95);
+      border-radius: var(--radius-lg);
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
       font-size: 0.88rem;
     }
 
     .hero-card h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: #e5e7eb;
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
     }
 
     .hero-card ul {
       list-style: none;
       display: grid;
-      gap: 6px;
-      margin-top: 8px;
-      color: #9ca3af;
+      gap: 0.4rem;
+      color: #cbd5f5;
     }
 
-    .hero-card strong {
-      color: #e5e7eb;
+    /* SECTIONS */
+
+    .section {
+      margin-top: 2.3rem;
+    }
+
+    .section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section p.lead {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 1rem;
+    }
+
+    .cards-3 {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 900px) {
+      .cards-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.88rem;
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.3rem;
+      color: #cbd5f5;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .link-bright {
+      color: var(--accent-aqua);
+    }
+
+    .link-green {
+      color: var(--accent-green);
+    }
+
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.96);
+      background: radial-gradient(
+        circle at top,
+        rgba(15, 23, 42, 0.98),
+        #020617 70%
+      );
+      padding: 0.9rem 1.1rem 1.4rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 960px) {
+      footer {
+        padding-inline: 2.4rem;
+      }
+    }
+
+    body.nav-open {
+      overflow: hidden;
     }
   </style>
 </head>
 
 <body>
-<header>
-  <div class="logo">
-    <div class="logo-pill"></div>
-    SideGuy Solutions
-    <span class="logo-sub">San Diego · Coastal Tech & Payments</span>
-  </div>
-  <nav>
-    <a href="#services">Services</a>
-    <a href="/payments.html">Payments (.4s)</a>
-    <a href="/software.html">Software</a>
-    <a href="/automation.html">AI Automation</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<main>
-  <section aria-labelledby="hero-heading">
-    <div class="badge">
-      <div class="badge-dot"></div>
-      <span>San Diego · North County · 402 Internet Era</span>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo-pill"></div>
+      <div class="logo-text">
+        <div class="logo-main">SIDEGUY SOLUTIONS</div>
+        <div class="logo-sub">Coastal tech & payments · San Diego</div>
+      </div>
     </div>
 
-    <div class="hero-grid">
-      <div>
-        <h1 id="hero-heading" class="hero-title">
-          Coastal tech, payments & AI<br />
-          for <span class="hero-highlight">San Diego operators.</span>
-        </h1>
-        <p class="hero-sub">
-          SideGuy Solutions helps North County businesses upgrade to .4 second Solana payments, smarter software, and AI automation — with a real human you can text when you need help.
-        </p>
-        <p class="hero-note">
-          Best site without traffic sucks. This homepage is tuned for search, speed, and sending business to the pages that actually make you money.
-        </p>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/payments.html">Payments (.4s)</a>
+      <a href="/software.html">Software</a>
+      <a href="/automation.html">AI Automation</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-        <div class="cta-row">
-          <a class="btn-primary" href="/payments.html">
-            SideGuy Payments · .4s Settlements
-          </a>
-          <a
-            class="btn-secondary"
-            href="sms:+17735441231?body=Hey%20PJ%2C%20I%20saw%20SideGuy%20Solutions%20and%20I%20want%20help%20with%20traffic%2C%20payments%20or%20apps.">
-            Text PJ · (773) 544-1231
-          </a>
-          <a class="btn-secondary" href="#services">
-            View software & AI services
-          </a>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <div class="menu-toggle-bars">
+        <div class="menu-bar"></div>
+        <div class="menu-bar"></div>
+        <div class="menu-bar"></div>
+      </div>
+    </button>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <div class="mobile-nav-backdrop"></div>
+    <nav class="mobile-nav-panel" aria-label="Mobile navigation">
+      <a href="/">Home</a>
+      <a href="/payments.html">SideGuy Payments (.4s)</a>
+      <a href="/software.html">Software</a>
+      <a href="/automation.html">AI Automation</a>
+      <a href="#contact">Contact</a>
+      <div class="mobile-nav-footer">
+        Text PJ · (773) 544-1231 · San Diego & North County
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section aria-labelledby="hero-heading">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>SAN DIEGO · NORTH COUNTY · 402 INTERNET</span>
+      </div>
+
+      <div class="hero">
+        <div>
+          <h1 id="hero-heading" class="hero-title">
+            Coastal tech, payments & AI for
+            <span class="hero-highlight">San Diego operators.</span>
+          </h1>
+          <p class="hero-sub">
+            SideGuy Solutions helps North County businesses upgrade to .4 second
+            Solana payments, custom software, and AI automation — with a real
+            human you can text.
+          </p>
+          <p class="hero-note">
+            Best site without traffic sucks. This homepage is tuned for search,
+            speed, and sending people to the pages that actually make you money.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="/payments.html">
+              SideGuy Payments · .4s Settlements
+            </a>
+            <a class="btn btn-secondary" href="sms:+17735441231">
+              Text PJ · (773) 544-1231
+            </a>
+          </div>
+
+          <p class="hero-footnote">
+            “Text PJ your monthly card volume or what you’re stuck on. Get a
+            simple plan and a clear next step — not a 40-page PDF.”
+          </p>
         </div>
 
-        <p class="hero-footnote">
-          “Text PJ (773) 544-1231 — send your monthly volume or the problem you’re stuck on. Get a simple plan and an intro video, not a 40-page PDF.”
-        </p>
-
-        <p class="hero-locations">
-          Serving <span>Solana Beach, Encinitas, Del Mar, Carlsbad, North County</span> and beyond.
-        </p>
+        <aside class="hero-card">
+          <h3>What SideGuy actually does:</h3>
+          <ul>
+            <li>
+              • <strong>.4s SideGuy Payments</strong> —
+              Solana-backed rails that settle in .4 seconds instead of 2–3
+              business days.
+            </li>
+            <li>
+              • <strong>Custom software & apps</strong> —
+              tools, portals, and mobile apps so your team stops living in
+              spreadsheets.
+            </li>
+            <li>
+              • <strong>AI automation</strong> —
+              flows that answer, route, summarize, and follow up while you
+              sleep.
+            </li>
+            <li>
+              • <strong>SEO landings</strong> —
+              pages like this that bring the right people in.
+            </li>
+          </ul>
+        </aside>
       </div>
+    </section>
 
-      <aside class="hero-card">
-        <h3>What SideGuy actually does:</h3>
-        <ul>
-          <li><strong>SideGuy Payments:</strong> .4 second Solana rails, lower fees, and cash flow that shows up when you need it.</li>
-          <li><strong>Custom software & mobile:</strong> apps, portals, and tools so your team stops living in spreadsheets.</li>
-          <li><strong>AI automation:</strong> flows that answer, route, summarize, and follow up while you sleep.</li>
-          <li><strong>SEO & landing builds:</strong> pages like this one, aimed at the exact people you want in San Diego and North County.</li>
-        </ul>
-      </aside>
+    <section id="services" class="section" aria-labelledby="services-heading">
+      <h2 id="services-heading">Services tuned for 2025 operators.</h2>
+      <p class="lead">
+        You don’t need ten agencies. You need a SideGuy who lives in the tech,
+        understands your business, and can ship payments, software, and
+        automation under one roof.
+      </p>
+
+      <div class="cards-3">
+        <article class="card">
+          <h3>.4s SideGuy Payments</h3>
+          <p>
+            Solana-backed payment rails that settle in .4 seconds instead of
+            waiting days for funds.
+          </p>
+          <ul>
+            <li>• Lower effective fees vs legacy processors</li>
+            <li>• Real support — text PJ, not a ticket portal</li>
+            <li>• Tuned for restaurants, venues, and service operators</li>
+          </ul>
+          <p style="margin-top: 0.5rem;">
+            <a href="/payments.html" class="link-green">Go to SideGuy Payments →</a>
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Custom software & apps</h3>
+          <p>
+            Web and mobile builds that replace duct-tape spreadsheets and
+            copy-paste workflows.
+          </p>
+          <ul>
+            <li>• Internal tools, portals, and dashboards</li>
+            <li>• Fan, ticketing, and membership flows</li>
+            <li>• Built with a dev team that ships</li>
+          </ul>
+          <p style="margin-top: 0.5rem;">
+            <a href="/software.html" class="link-bright">See software options →</a>
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>AI automation & flows</h3>
+          <p>
+            Automation that answers, routes, summarizes, and follows up so your
+            team focuses on high-value work.
+          </p>
+          <ul>
+            <li>• SMS / WhatsApp and web chat flows</li>
+            <li>• Email & CRM automation</li>
+            <li>• Operator-friendly dashboards</li>
+          </ul>
+          <p style="margin-top: 0.5rem;">
+            <a href="/automation.html" class="link-bright">Explore AI automations →</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="local-heading">
+      <h2 id="local-heading">Built for San Diego & North County.</h2>
+      <p class="lead">
+        SideGuy Solutions focuses on the coastline and city that actually
+        matters to you: Solana Beach, Encinitas, Cardiff, Del Mar, Carlsbad,
+        La Jolla, and greater San Diego. The goal: more traffic, better tools,
+        and cleaner cash flow.
+      </p>
+
+      <div class="cards-3">
+        <article class="card">
+          <h3>Local problems we like solving</h3>
+          <ul>
+            <li>• High blended fees crushing restaurant margins</li>
+            <li>• Venues juggling ticketing, guest lists, and memberships</li>
+            <li>• Services running everything in email and notes</li>
+            <li>• Founders who “know they need AI” but aren’t sure where to start</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Why SideGuy instead of a random agency?</h3>
+          <ul>
+            <li>• Direct line — you text PJ instead of opening tickets</li>
+            <li>• Operator brain — we care about cash flow & time, not just code</li>
+            <li>• Traffic-aware — pages are built to rank and convert</li>
+            <li>• Stack-aware — we plug into how you run today</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Favorite starting points</h3>
+          <ul>
+            <li>• Move payments first, then upgrade flows</li>
+            <li>• Ship one automation that instantly saves time</li>
+            <li>• Launch a focused SEO page to bring the right people in</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id="contact"
+      class="section"
+      aria-labelledby="contact-heading"
+    >
+      <h2 id="contact-heading">Ready for a SideGuy?</h2>
+      <p class="lead">
+        Two ways to move this forward — whichever is easiest today:
+      </p>
+
+      <div class="contact-grid">
+        <article class="card">
+          <h3>1 · Text PJ directly</h3>
+          <p>
+            Text <strong>(773) 544-1231</strong> with your monthly volume,
+            your current site, or the thing that’s bothering you most.
+          </p>
+          <p style="margin-top: 0.5rem;">
+            <a class="btn btn-secondary" href="sms:+17735441231">
+              Text PJ now
+            </a>
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>2 · Click into the money pages</h3>
+          <ul>
+            <li>• <a href="/payments.html" class="link-green">SideGuy Payments (.4s)</a></li>
+            <li>• <a href="/software.html" class="link-bright">Software & app builds</a></li>
+            <li>• <a href="/automation.html" class="link-bright">AI automation & flows</a></li>
+          </ul>
+          <p style="margin-top: 0.5rem; color: var(--muted); font-size: 0.8rem;">
+            Start wherever the ROI feels most obvious. We can always expand later.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year-span"></span> SideGuy Solutions · SideGuy Payments</span>
+      <span>Coastal tech & payments · San Diego & North County</span>
     </div>
-  </section>
-  <section id="services" aria-labelledby="services-heading" style="margin-top: 40px;">
-    <h2 id="services-heading" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">
-      Services tuned for 2025 operators.
-    </h2>
-    <p style="font-size: 0.94rem; color: #9ca3af; margin-bottom: 18px; max-width: 640px;">
-      You don’t need ten agencies. You need a SideGuy who lives in the tech, understands your business,
-      and can actually ship payments, software, and automation under one roof.
-    </p>
+  </footer>
 
-    <div style="
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-bottom: 26px;
-    ">
-      <article style="
-        border-radius: 16px;
-        padding: 16px 14px 14px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(56,189,248,0.4);
-      ">
-        <h3 style="font-size: 1rem; margin-bottom: 6px; color: #e5e7eb;">
-          .4s SideGuy Payments
-        </h3>
-        <p style="font-size: 0.9rem; color: #cbd5f5; margin-bottom: 8px;">
-          Solana-backed payment rails that settle in .4 seconds instead of 2–3 business days.
-        </p>
-        <ul style="list-style: none; font-size: 0.84rem; color: #9ca3af; display: grid; gap: 4px;">
-          <li>• Lower effective fees vs legacy processors</li>
-          <li>• Real support (text PJ, not a bot)</li>
-          <li>• Tuned for restaurants, venues, and services</li>
-        </ul>
-        <a href="/payments.html" style="display: inline-block; margin-top: 10px; font-size: 0.86rem; color: #22c55e;">
-          Learn about SideGuy Payments →
-        </a>
-      </article>
+  <script>
+    (function () {
+      const body = document.body;
+      const toggle = document.querySelector(".menu-toggle");
+      const overlay = document.getElementById("mobile-nav");
+      const yearSpan = document.getElementById("year-span");
 
-      <article style="
-        border-radius: 16px;
-        padding: 16px 14px 14px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(148,163,184,0.6);
-      ">
-        <h3 style="font-size: 1rem; margin-bottom: 6px; color: #e5e7eb;">
-          Custom Software & Apps
-        </h3>
-        <p style="font-size: 0.9rem; color: #cbd5f5; margin-bottom: 8px;">
-          Web and mobile builds that replace duct-tape spreadsheets and manual copy-paste workflows.
-        </p>
-        <ul style="list-style: none; font-size: 0.84rem; color: #9ca3af; display: grid; gap: 4px;">
-          <li>• Internal tools, portals, dashboards</li>
-          <li>• Fan, ticketing, and membership flows</li>
-          <li>• Built with a dev team that ships</li>
-        </ul>
-        <a href="/software.html" style="display: inline-block; margin-top: 10px; font-size: 0.86rem; color: #38bdf8;">
-          See software options →
-        </a>
-      </article>
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
 
-      <article style="
-        border-radius: 16px;
-        padding: 16px 14px 14px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(148,163,184,0.6);
-      ">
-        <h3 style="font-size: 1rem; margin-bottom: 6px; color: #e5e7eb;">
-          AI Automation & Flows
-        </h3>
-        <p style="font-size: 0.9rem; color: #cbd5f5; margin-bottom: 8px;">
-          Automation that answers, routes, summarizes, and follows up so your team focuses on the high-value stuff.
-        </p>
-        <ul style="list-style: none; font-size: 0.84rem; color: #9ca3af; display: grid; gap: 4px;">
-          <li>• SMS/WhatsApp and web chat flows</li>
-          <li>• Email & CRM automation</li>
-          <li>• Operator-friendly dashboards</li>
-        </ul>
-        <a href="/automation.html" style="display: inline-block; margin-top: 10px; font-size: 0.86rem; color: #38bdf8;">
-          Explore AI automations →
-        </a>
-      </article>
-    </div>
+      function closeNav() {
+        body.classList.remove("nav-open");
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+      }
 
-    <div style="
-      border-radius: 16px;
-      padding: 18px 16px;
-      background: rgba(15,23,42,0.96);
-      border: 1px dashed rgba(34,197,94,0.7);
-      display: grid;
-      gap: 12px;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-    ">
-      <div>
-        <h3 style="font-size: 1.05rem; margin-bottom: 6px; color: #e5e7eb;">
-          Featured: SideGuy Payments for San Diego & North County.
-        </h3>
-        <p style="font-size: 0.9rem; color: #cbd5f5; margin-bottom: 8px;">
-          If you only change one thing this quarter, make it your payments. Faster settlements and lower fees fix
-          cash flow and margin before you even touch your marketing.
-        </p>
-        <p style="font-size: 0.86rem; color: #9ca3af;">
-          Text PJ your monthly card volume. You’ll get a simple savings breakdown and an onboarding link — not a sales pitch.
-        </p>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-        <a class="btn-primary" href="/payments.html">
-          Go to SideGuy Payments →
-        </a>
-        <a
-          class="btn-secondary"
-          href="sms:+17735441231?body=Hey%20PJ%2C%20here%27s%20our%20monthly%20card%20volume.%20Can%20you%20show%20me%20SideGuy%20Payments%20savings%3F">
-          Text PJ your volume
-        </a>
-        <p style="font-size: 0.8rem; color: #9ca3af;">
-          “We do ~$X/mo in card volume across Y terminals + online.” That’s enough to start.
-        </p>
-      </div>
-    </div>
-  </section>
-  <section aria-labelledby="local-heading" style="margin-top: 42px;">
-    <h2 id="local-heading" style="font-size: 1.4rem; font-weight: 700; margin-bottom: 10px;">
-      Built for San Diego & North County operators.
-    </h2>
-    <p style="font-size: 0.94rem; color: #9ca3af; margin-bottom: 14px; max-width: 720px;">
-      SideGuy Solutions focuses on the strip of coastline and city that actually matters to you:
-      Solana Beach, Encinitas, Cardiff, Del Mar, Carlsbad, La Jolla, and greater San Diego. The goal:
-      more traffic, better tools, and cleaner cash flow.
-    </p>
+      if (toggle && overlay) {
+        toggle.addEventListener("click", function () {
+          const isOpen = body.classList.toggle("nav-open");
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
 
-    <div style="
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-      gap: 20px;
-    ">
-      <div style="
-        border-radius: 16px;
-        padding: 16px 14px;
-        background: rgba(15,23,42,0.97);
-        border: 1px solid rgba(148,163,184,0.5);
-      ">
-        <h3 style="font-size: 1rem; margin-bottom: 8px; color: #e5e7eb;">
-          Local problems we like solving:
-        </h3>
-        <ul style="list-style: none; display: grid; gap: 8px; font-size: 0.88rem; color: #cbd5f5;">
-          <li>• Restaurants with high fees and slow settlements that crush cash flow.</li>
-          <li>• Venues and bars juggling ticketing, guest lists, and membership spreadsheets.</li>
-          <li>• Service businesses doing everything in email and notes instead of a clean system.</li>
-          <li>• Founders who “know they need AI and automation” but don’t know where to start.</li>
-        </ul>
-      </div>
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) {
+            closeNav();
+          }
+        });
 
-      <div style="
-        border-radius: 16px;
-        padding: 16px 14px;
-        background: rgba(15,23,42,0.97);
-        border: 1px solid rgba(56,189,248,0.5);
-      ">
-        <h3 style="font-size: 1rem; margin-bottom: 8px; color: #e5e7eb;">
-          Why businesses use SideGuy instead of a random agency:
-        </h3>
-        <ul style="list-style: none; display: grid; gap: 8px; font-size: 0.88rem; color: #cbd5f5;">
-          <li>• <strong>Direct line:</strong> you text PJ instead of opening support tickets.</li>
-          <li>• <strong>Operator brain:</strong> we care about cash flow and time, not just code.</li>
-          <li>• <strong>Traffic-aware:</strong> pages are written to rank and convert, not just “look pretty.”</li>
-          <li>• <strong>Stack-aware:</strong> we plug into how you run today instead of forcing you to rebuild everything overnight.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+        overlay.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", closeNav);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
+<!--
+  SideGuy Payments
+  Version: 30.0 · .4 SECOND SOLANA · DUAL NEON
+  Timestamp: 2025-11-21 12:15 PST
+  Mode: Payments Landing · Mobile-First
+  Author: PJ + ChatGPT
+-->
 
-  <section aria-labelledby="faq-heading" style="margin-top: 38px;">
-    <h2 id="faq-heading" style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px;">
-      Quick questions operators ask.
-    </h2>
-    <div style="
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr);
-      gap: 18px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <title>SideGuy Payments | .4 Second Solana Settlements</title>
+
+  <meta
+    name="description"
+    content="SideGuy Payments helps San Diego and North County businesses escape slow, expensive processors. .4 second Solana settlements, lower fees, and real human support — just text PJ your monthly volume."
+  />
+  <meta
+    name="keywords"
+    content="Solana payments, instant settlement, payment processing San Diego, SideGuy Payments, .4 second payments, Stripe alternative, PayPal alternative, low fee card processing, stablecoin rails, North County merchants"
+  />
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-alt: #0b1220;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent-green: #22c55e;
+      --accent-aqua: #38bdf8;
+      --border-soft: rgba(148, 163, 184, 0.45);
+      --card-bg: rgba(15, 23, 42, 0.96);
+      --radius-lg: 1rem;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #0ea5e9 0%, #020617 48%, #000 100%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER + NEON MENU (same system as index) */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(56, 189, 248, 0.5);
+      padding: 0.9rem 1.1rem env(safe-area-inset-top, 0);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
+    .logo-pill {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 20%, #bbf7d0, var(--accent-green), #166534),
+        radial-gradient(circle at 70% 80%, #e0f2fe, var(--accent-aqua), #0f172a);
+      box-shadow:
+        0 0 16px rgba(34, 197, 94, 0.9),
+        0 0 26px rgba(56, 189, 248, 0.9);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-main {
+      font-weight: 800;
+      font-size: 0.98rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-aqua);
+      text-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+      white-space: nowrap;
+    }
+
+    .logo-sub {
+      font-size: 0.7rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      margin-left: auto;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      width: 46px;
+      height: 38px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow:
+        0 0 14px rgba(34, 197, 94, 0.7),
+        0 0 18px rgba(56, 189, 248, 0.7);
+      background: radial-gradient(
+        circle at 20% 0,
+        rgba(190, 242, 100, 0.3),
+        rgba(22, 163, 74, 0.4),
+        rgba(15, 23, 42, 0.9)
+      );
+    }
+
+    .menu-toggle-bars {
+      width: 22px;
+      height: 16px;
+      position: relative;
+    }
+
+    .menu-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        var(--accent-green),
+        var(--accent-aqua)
+      );
+      box-shadow:
+        0 0 8px rgba(34, 197, 94, 0.8),
+        0 0 8px rgba(56, 189, 248, 0.8);
+      transition: transform 0.16s ease, opacity 0.16s ease, top 0.16s ease,
+        bottom 0.16s ease;
+    }
+
+    .menu-bar:nth-child(1) {
+      top: 0;
+    }
+    .menu-bar:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .menu-bar:nth-child(3) {
+      bottom: 0;
+    }
+
+    body.nav-open .menu-bar:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    body.nav-open .menu-bar:nth-child(2) {
+      opacity: 0;
+    }
+    body.nav-open .menu-bar:nth-child(3) {
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    .desktop-nav {
+      display: none;
+      gap: 1.1rem;
       font-size: 0.9rem;
-    ">
-      <div style="
-        border-radius: 14px;
-        padding: 12px 12px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(31,41,55,0.95);
-      ">
-        <strong>“Can you just look at what we already have?”</strong><br />
-        <span style="color: #9ca3af;">
-          Yes. Send your site, your processor screenshot, or your current tools. We’ll respond with what we’d fix first
-          and how fast it actually is to do.
-        </span>
-      </div>
+      margin-left: 1rem;
+    }
 
-      <div style="
-        border-radius: 14px;
-        padding: 12px 12px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(31,41,55,0.95);
-      ">
-        <strong>“Do I have to move everything to crypto?”</strong><br />
-        <span style="color: #9ca3af;">
-          No. Customers can still tap, swipe, and pay online in normal ways. Solana and stablecoins power the rails
-          behind the scenes where it makes sense.
-        </span>
-      </div>
+    .desktop-nav a {
+      position: relative;
+      color: var(--text);
+      opacity: 0.9;
+    }
 
-      <div style="
-        border-radius: 14px;
-        padding: 12px 12px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(31,41,55,0.95);
-      ">
-        <strong>“Can you help with just one piece?”</strong><br />
-        <span style="color: #9ca3af;">
-          Yes. We can start with just payments, just one app, or just one AI automation and build from there when you’re ready.
-        </span>
-      </div>
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.15rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        var(--accent-green),
+        var(--accent-aqua)
+      );
+      box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.9),
+        0 0 12px rgba(56, 189, 248, 0.9);
+      transition: width 0.18s ease-out;
+    }
 
-      <div style="
-        border-radius: 14px;
-        padding: 12px 12px;
-        background: rgba(15,23,42,0.96);
-        border: 1px solid rgba(31,41,55,0.95);
-      ">
-        <strong>“What’s the easiest next step?”</strong><br />
-        <span style="color: #9ca3af;">
-          Text PJ with what you’re paying now or what you’re stuck on. From there we can send a loom video, a simple plan,
-          or jump on a quick call.
-        </span>
+    .desktop-nav a:hover::after {
+      width: 100%;
+    }
+
+    @media (min-width: 960px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+      }
+
+      .site-header {
+        padding-inline: 2.4rem;
+      }
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s ease-out;
+    }
+
+    body.nav-open .mobile-nav-overlay {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    .mobile-nav-backdrop {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top,
+        rgba(56, 189, 248, 0.18),
+        rgba(15, 23, 42, 0.92)
+      );
+      backdrop-filter: blur(18px);
+    }
+
+    .mobile-nav-panel {
+      position: absolute;
+      top: env(safe-area-inset-top, 0);
+      right: 0;
+      width: min(260px, 80%);
+      bottom: 0;
+      background: radial-gradient(
+        circle at top left,
+        rgba(34, 197, 94, 0.22),
+        rgba(15, 23, 42, 0.98)
+      );
+      border-left: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow:
+        -12px 0 40px rgba(15, 23, 42, 0.95),
+        0 0 30px rgba(34, 197, 94, 0.6);
+      transform: translateX(100%);
+      transition: transform 0.18s ease-out;
+      padding: 1.1rem 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    body.nav-open .mobile-nav-panel {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-panel a {
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      font-size: 0.95rem;
+    }
+
+    .mobile-nav-panel a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav-footer {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    /* MAIN LAYOUT */
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.8rem 1.1rem 3.2rem;
+    }
+
+    @media (min-width: 960px) {
+      main {
+        padding-inline: 2.4rem;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.1rem;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-green);
+      box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.9),
+        0 0 18px rgba(56, 189, 248, 0.9);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 1.9rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+      font-weight: 800;
+      color: #f9fafb;
+      text-shadow: 0 0 30px rgba(56, 189, 248, 0.45);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(
+        90deg,
+        var(--accent-green),
+        var(--accent-aqua)
+      );
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 0.96rem;
+      color: #cbd5f5;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-note {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-align: center;
+      min-height: 44px;
+    }
+
+    .btn-primary {
+      background: radial-gradient(
+        circle at 20% 0,
+        #bbf7d0,
+        var(--accent-green),
+        #166534
+      );
+      border-color: var(--accent-green);
+      color: #022c22;
+      box-shadow:
+        0 0 18px rgba(34, 197, 94, 0.95),
+        0 0 28px rgba(56, 189, 248, 0.75);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.96);
+      border-color: rgba(148, 163, 184, 0.7);
+      color: var(--text);
+    }
+
+    .hero-caption {
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 430px;
+    }
+
+    .orb-wrap {
+      position: relative;
+      width: 260px;
+      max-width: 100%;
+      margin: 0 auto;
+      aspect-ratio: 1/1;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 20% 20%, #e0f2fe, #38bdf8, #0f172a 70%),
+        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.16), transparent 65%);
+      box-shadow:
+        0 0 38px rgba(56, 189, 248, 0.9),
+        0 0 70px rgba(34, 197, 94, 0.8);
+      overflow: hidden;
+    }
+
+    .orb-horizon {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 28%;
+      height: 30%;
+      background: radial-gradient(
+        circle at 50% 0,
+        rgba(248, 250, 252, 0.9),
+        transparent 60%
+      );
+    }
+
+    .orb-stripe {
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      height: 10%;
+      border-radius: 999px;
+      background: linear-gradient(
+        120deg,
+        var(--accent-green),
+        #a855f7,
+        var(--accent-aqua)
+      );
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+    }
+
+    .orb-stripe:nth-child(1) {
+      top: 20%;
+    }
+    .orb-stripe:nth-child(2) {
+      top: 34%;
+      opacity: 0.9;
+    }
+
+    .orb-band {
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: 18%;
+      height: 16%;
+      background: repeating-linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.8),
+        rgba(15, 23, 42, 0.8) 6px,
+        rgba(15, 23, 42, 0.4) 6px,
+        rgba(15, 23, 42, 0.4) 12px
+      );
+      opacity: 0.9;
+    }
+
+    .orb-pj {
+      position: absolute;
+      bottom: 14%;
+      right: 18%;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: radial-gradient(
+        circle at 30% 30%,
+        #bbf7d0,
+        var(--accent-green),
+        #166534
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #022c22;
+      box-shadow:
+        0 0 18px rgba(34, 197, 94, 0.9),
+        0 0 30px rgba(34, 197, 94, 0.8);
+    }
+
+    .orb-caption {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      margin-top: 2.3rem;
+    }
+
+    .section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section p.lead {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 1rem;
+    }
+
+    .two-col {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.88rem;
+    }
+
+    .card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      color: #cbd5f5;
+    }
+
+    .card ol {
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+      color: #cbd5f5;
+    }
+
+    .strip {
+      margin-top: 2.1rem;
+      border-radius: 0.9rem;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: rgba(15, 23, 42, 0.96);
+      box-shadow: 0 0 26px rgba(8, 47, 73, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+
+    .strip-right {
+      text-align: right;
+    }
+
+    .strip-label {
+      color: var(--muted);
+    }
+
+    .link-green {
+      color: var(--accent-green);
+    }
+
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.96);
+      background: radial-gradient(
+        circle at top,
+        rgba(15, 23, 42, 0.98),
+        #020617 70%
+      );
+      padding: 0.9rem 1.1rem 1.4rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    footer .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 960px) {
+      footer {
+        padding-inline: 2.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo-pill"></div>
+      <div class="logo-text">
+        <div class="logo-main">SIDEGUY PAYMENTS</div>
+        <div class="logo-sub">.4 second Solana settlements</div>
       </div>
     </div>
-  </section>
-  <section style="margin-top: 40px;">
-    <div style="
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      align-items:center;
-      justify-content:space-between;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(56,189,248,0.5);
-      background:rgba(15,23,42,0.96);
-      box-shadow:0 0 24px rgba(8,47,73,0.9);
-      font-size:0.85rem;
-    ">
-      <div>
-        <strong>This homepage is wired for traffic & conversions.</strong><br />
-        <span style="color:#9ca3af;">
-          Clean copy, local keywords, and clear links into the pages that make you money — especially SideGuy Payments.
-        </span>
-      </div>
-      <div style="text-align:right;">
-        <div style="color:#9ca3af;">Checked in:</div>
-        <div id="live-timestamp" style="font-weight:600; color:#e5e7eb;">—</div>
-        <div style="color:#6b7280;">Pacific Time</div>
-      </div>
-    </div>
-  </section>
 
-  <section id="contact" aria-labelledby="contact-heading" style="margin-top: 28px;">
-    <h2 id="contact-heading" style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">
-      Ready for a SideGuy?
-    </h2>
-    <p style="font-size: 0.94rem; color: #9ca3af; margin-bottom: 10px;">
-      Two ways to move this forward — whichever is easiest for you today:
-    </p>
-    <div style="
-      display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(0,1.1fr);
-      gap:14px;
-      font-size:0.9rem;
-    ">
-      <div style="
-        border-radius: 14px;
-        padding: 12px 12px;
-        background: rgba(15,23,42,0.97);
-        border: 1px solid rgba(148,163,184,0.6);
-      ">
-        <strong>1 · Text PJ directly</strong><br />
-        <span style="color:#cbd5f5;">
-          Text <strong>(773) 544-1231</strong> with your monthly volume, your current site, or what’s bothering you the most.
-        </span>
-        <div style="margin-top: 8px;">
-          <a
-            class="btn-secondary"
-            href="sms:+17735441231?body=Hey%20PJ%2C%20here%27s%20what%20we%27re%20working%20with%20and%20what%20we%20want%20to%20fix%20first%20with%20SideGuy%20Solutions.">
-            Text PJ now
-          </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/payments.html">Payments (.4s)</a>
+      <a href="/software.html">Software</a>
+      <a href="/automation.html">AI Automation</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <div class="menu-toggle-bars">
+        <div class="menu-bar"></div>
+        <div class="menu-bar"></div>
+        <div class="menu-bar"></div>
+      </div>
+    </button>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <div class="mobile-nav-backdrop"></div>
+    <nav class="mobile-nav-panel" aria-label="Mobile navigation">
+      <a href="/">Home</a>
+      <a href="/payments.html">SideGuy Payments (.4s)</a>
+      <a href="/software.html">Software</a>
+      <a href="/automation.html">AI Automation</a>
+      <a href="/#contact">Contact</a>
+      <div class="mobile-nav-footer">
+        Text PJ · (773) 544-1231 · San Diego & North County
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section aria-labelledby="hero-heading">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>LIVE · SOLANA RAILS · .4S SETTLEMENT</span>
+      </div>
+
+      <div class="hero">
+        <div>
+          <h1 id="hero-heading" class="hero-title">
+            .4 second
+            <span class="hero-highlight">payments for your business.</span>
+          </h1>
+          <p class="hero-sub">
+            Escape 2–3 day settlement lags and bloated fees. SideGuy Payments
+            runs on Solana rails so you get fast, low-cost, modern payment
+            rails — with a real human in San Diego you can text.
+          </p>
+          <p class="hero-note">
+            Text your monthly card volume. You’ll get a clear savings breakdown
+            and an onboarding link — or just say “hey” and I’ll walk you
+            through it.
+          </p>
+
+          <div class="cta-row">
+            <a
+              class="btn btn-primary"
+              href="sms:+17735441231?body=Hey%20PJ%2C%20here%27s%20my%20monthly%20card%20volume%20for%20SideGuy%20Payments%20savings%3A"
+            >
+              Text PJ · (773) 544-1231
+            </a>
+            <a class="btn btn-secondary" href="tel:+17735441231">
+              Or tap to call PJ
+            </a>
+          </div>
+
+          <p class="hero-caption">
+            “Text PJ (773) 544-1231, send your monthly volume. Get exact savings
+            and an onboarding link in minutes — or just say hey and I’ll walk
+            you through it.”
+          </p>
+        </div>
+
+        <div>
+          <div class="orb-wrap">
+            <div class="orb-horizon"></div>
+            <div class="orb-stripe"></div>
+            <div class="orb-stripe"></div>
+            <div class="orb-band"></div>
+            <div class="orb-pj">PJ</div>
+          </div>
+          <p class="orb-caption">
+            Solana Beach meets Solana rails. Faster settlements, better
+            margins, same tap / swipe experience for your customers.
+          </p>
         </div>
       </div>
-      <div style="
-        border-radius: 14px;
-        padding: 12px 12px;
-        background: rgba(15,23,42,0.97);
-        border: 1px solid rgba(148,163,184,0.6);
-      ">
-        <strong>2 · Click into the money pages</strong><br />
-        <ul style="list-style:none; margin-top:6px; display:grid; gap:4px; color:#cbd5f5;">
-          <li>• <a href="/payments.html" style="color:#22c55e;">SideGuy Payments (.4s settlements)</a></li>
-          <li>• <a href="/software.html" style="color:#38bdf8;">Custom software & app builds</a></li>
-          <li>• <a href="/automation.html" style="color:#38bdf8;">AI automation & flows</a></li>
-        </ul>
-        <p style="font-size:0.82rem; color:#9ca3af; margin-top:6px;">
-          Start wherever the ROI feels the most obvious. We can always expand later.
-        </p>
+    </section>
+
+    <section class="section" aria-labelledby="why-heading">
+      <div class="two-col">
+        <article class="card">
+          <h2 id="why-heading">Why SideGuy Payments beats waiting days.</h2>
+          <p>
+            Most processors were built for the 2010s. We’re building for the
+            402 internet — fast, cheap, and global rails that feel as instant as
+            sending a text.
+          </p>
+          <ul>
+            <li>
+              • <strong>.4 second settlement rails</strong> instead of 2–3
+              business days sitting in limbo.
+            </li>
+            <li>
+              • <strong>Lower effective fees</strong> by routing on Solana
+              rails and stablecoin where it makes sense.
+            </li>
+            <li>
+              • <strong>Real human on the other end</strong> — text PJ instead
+              of opening a support ticket in a portal.
+            </li>
+            <li>
+              • <strong>North County friendly</strong> — tuned for venues,
+              restaurants, service businesses, and operators who care about cash
+              flow.
+            </li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>How it works</h3>
+          <ol>
+            <li>
+              <strong>1 · Text PJ your monthly volume.</strong><br />
+              <span style="color: var(--muted);">
+                Example: “We do ~$80k/mo in card volume across 2 terminals +
+                online.”
+              </span>
+            </li>
+            <li>
+              <strong>2 · You get a simple savings breakdown.</strong><br />
+              <span style="color: var(--muted);">
+                Side-by-side vs your current provider — no jargon, just what you
+                actually keep.
+              </span>
+            </li>
+            <li>
+              <strong>3 · Onboarding link & done-for-you setup.</strong><br />
+              <span style="color: var(--muted);">
+                We help you plug in modern rails behind the scenes so your
+                customers still “just pay”.
+              </span>
+            </li>
+          </ol>
+          <div
+            style="
+              margin-top: 0.7rem;
+              padding: 0.55rem 0.7rem;
+              border-radius: 0.75rem;
+              border: 1px dashed rgba(34, 197, 94, 0.7);
+              background: rgba(22, 163, 74, 0.08);
+              font-size: 0.8rem;
+              color: #bbf7d0;
+            "
+          >
+            You don’t have to learn crypto or change your whole stack. You just
+            get faster, cheaper rails behind the scenes.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="savings-heading">
+      <div class="two-col">
+        <article class="card">
+          <h2 id="savings-heading">Savings snapshot (example only).</h2>
+          <p>
+            Every business is different, but most operators are surprised when
+            they see their real blended fees. SideGuy Payments is about giving
+            you back margin and time.
+          </p>
+          <div
+            style="
+              border-radius: 0.75rem;
+              overflow: hidden;
+              border: 1px solid var(--border-soft);
+              background: rgba(15, 23, 42, 0.98);
+              font-size: 0.84rem;
+              margin-top: 0.7rem;
+            "
+          >
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1.1fr 1fr 1fr;
+                padding: 0.45rem 0.55rem;
+                font-weight: 600;
+              "
+            >
+              <div>Scenario</div>
+              <div>Legacy Processor*</div>
+              <div>SideGuy Payments</div>
+            </div>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1.1fr 1fr 1fr;
+                padding: 0.45rem 0.55rem;
+                border-top: 1px solid rgba(31, 41, 55, 0.95);
+              "
+            >
+              <div>$50k/mo restaurant</div>
+              <div>2.9% + misc fees</div>
+              <div style="color: var(--accent-green);">Lower effective rate</div>
+            </div>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: 1.1fr 1fr 1fr;
+                padding: 0.45rem 0.55rem;
+                border-top: 1px solid rgba(31, 41, 55, 0.95);
+              "
+            >
+              <div>$80k/mo venue + online</div>
+              <div>High blended fees</div>
+              <div style="color: var(--accent-green);">
+                Optimized mix on Solana
+              </div>
+            </div>
+            <div
+              style="
+                padding: 0.45rem 0.55rem;
+                border-top: 1px solid rgba(31, 41, 55, 0.95);
+                color: #6b7280;
+              "
+            >
+              *Illustrative only. Text PJ your real numbers for an exact savings
+              breakdown.
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Quick FAQ</h3>
+          <ul>
+            <li>
+              <strong>Do my customers need crypto wallets?</strong><br />
+              <span style="color: var(--muted);">
+                No. They can still tap, swipe, or pay online like they always
+                have. We optimize how it settles behind the scenes.
+              </span>
+            </li>
+            <li>
+              <strong>Is this only for San Diego?</strong><br />
+              <span style="color: var(--muted);">
+                We love North County and San Diego, but we can help operators in
+                other markets too. Text PJ and we’ll see if it’s a fit.
+              </span>
+            </li>
+            <li>
+              <strong>What if I’m locked into a contract?</strong><br />
+              <span style="color: var(--muted);">
+                Send a photo of your statement and terms. Sometimes there are
+                ways to improve things sooner than you think.
+              </span>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Ready to see your savings?</h2>
+      <p class="lead">
+        Two simple ways to move this forward — neither includes a long form:
+      </p>
+
+      <div class="two-col">
+        <article class="card">
+          <h3>1 · Text PJ directly</h3>
+          <p>
+            Text <strong>(773) 544-1231</strong> with your monthly card volume,
+            current processor, or a screenshot of your latest statement.
+          </p>
+          <p style="margin-top: 0.5rem;">
+            <a
+              class="btn btn-secondary"
+              href="sms:+17735441231?body=Hey%20PJ%2C%20here%27s%20our%20monthly%20card%20volume%20and%20current%20processor.%20Can%20you%20show%20me%20SideGuy%20Payments%20savings%3F"
+            >
+              Text PJ now
+            </a>
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>2 · Start where ROI is obvious</h3>
+          <ul>
+            <li>
+              • Use SideGuy Payments as your “payments test” with .4s rails.
+            </li>
+            <li>
+              • Once you like what you see, we can talk software or automation.
+            </li>
+            <li>
+              • Or keep it simple and just run payments. Your call.
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="strip">
+      <div>
+        <strong>Live SideGuy Payments lane.</strong><br />
+        <span class="strip-label">
+          This page is wired for .4 second Solana settlement rails and updated
+          coastal vibes.
+        </span>
+      </div>
+      <div class="strip-right">
+        <div class="strip-label">Checked in:</div>
+        <div id="live-timestamp">—</div>
+        <div style="color: #6b7280;">Pacific Time</div>
       </div>
     </div>
-  </section>
-</main>
+  </main>
 
-<footer style="
-  padding: 18px 22px 24px;
-  font-size: 0.8rem;
-  color: #6b7280;
-  border-top: 1px solid rgba(15,23,42,0.96);
-  background: radial-gradient(circle at top, rgba(15,23,42,0.98), #020617 70%);
-">
-  <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-    <span>© <span id="year-span"></span> SideGuy Solutions · SideGuy Payments</span>
-    <span>Coastal tech & payments · San Diego & North County</span>
-  </div>
-</footer>
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year-span"></span> SideGuy Payments · SideGuy Solutions</span>
+      <span>Built coastal in San Diego · Text PJ at (773) 544-1231</span>
+    </div>
+  </footer>
 
-<script>
-  (function () {
-    try {
-      const tsEl = document.getElementById('live-timestamp');
-      const yearEl = document.getElementById('year-span');
-      const now = new Date();
+  <script>
+    (function () {
+      const body = document.body;
+      const toggle = document.querySelector(".menu-toggle");
+      const overlay = document.getElementById("mobile-nav");
+      const yearSpan = document.getElementById("year-span");
+      const tsEl = document.getElementById("live-timestamp");
 
-      if (yearEl) {
-        yearEl.textContent = now.getFullYear();
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
       }
 
       if (tsEl) {
+        const now = new Date();
         const options = {
-          year: 'numeric',
-          month: 'short',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
           hour12: true,
-          timeZone: 'America/Los_Angeles'
+          timeZone: "America/Los_Angeles",
         };
-        tsEl.textContent = now.toLocaleString('en-US', options);
+        tsEl.textContent = now.toLocaleString("en-US", options);
       }
-    } catch (e) {
-      console.warn('Timestamp render issue:', e);
-    }
-  })();
-</script>
 
+      function closeNav() {
+        body.classList.remove("nav-open");
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+      }
+
+      if (toggle && overlay) {
+        toggle.addEventListener("click", function () {
+          const isOpen = body.classList.toggle("nav-open");
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) {
+            closeNav();
+          }
+        });
+
+        overlay.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", closeNav);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
