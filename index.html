@@ -1,1783 +1,655 @@
 <!--
   SideGuy Payments
-  Version: 1.2-ultra-clean-solana
-  Mode: Ultra Clean · Solana Accents · Call/Text Ready · Prefilled SMS
+  Version: 1.3 · .4 Second Solana Settlements
+  Timestamp: 2025-11-21 10:32 PST
+  Mode: Coastal Payments · Solana Rails · Instant Savings
   Author: PJ + ChatGPT
 -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SideGuy Payments | Stop Paying Stripe & PayPal Fees</title>
-  <meta
-    name="description"
-    content="SideGuy Payments helps your business stop overpaying Stripe & PayPal. Get paid in 0.4 seconds with ultra-low fees and personal onboarding from PJ in Solana Beach."
-  />
-  <meta
-    name="keywords"
-    content="payment processing, instant payouts, low fees, san diego payments, sideguy payments, stripe alternatives"
-  />
+  <title>SideGuy Payments | .4 Second Solana Settlements</title>
+
+  <meta name="description"
+    content="SideGuy Payments helps San Diego and North County businesses escape slow, expensive processors. .4 second Solana settlements, lower fees, and real human support — just text PJ your monthly volume.">
+  <meta name="keywords"
+    content="Solana payments, instant settlement, San Diego payment processing, SideGuy Payments, .4 second payments, Stripe alternative, PayPal alternative, low fee card processing, stablecoin rails, North County merchants">
 
   <style>
-    :root {
-      --bg: #f5f7fb;
-      --bg-soft: #e6f2ff;
-      --white: #ffffff;
-      --text-main: #020617;
-      --text-soft: #6b7280;
-      --accent-blue: #2563eb;
-      --accent-purple: #7c3aed;
-      --accent-teal: #14b8a6;
-      --accent-green: #22c55e;
-      --accent-green-dark: #16a34a;
-      --border-subtle: #e5e7eb;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --radius-pill: 999px;
-      --transition-fast: 150ms ease-out;
-    }
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Helvetica Neue", Arial, sans-serif;
-      background: radial-gradient(circle at top, #e0f2fe 0, #f9fafb 38%, #eef2ff 100%);
-      color: var(--text-main);
       min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(circle at top, #0ea5e9 0%, #020617 45%, #000 100%);
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 20px 16px 72px;
-    }
-
-    /* HEADER */
+    a { color: inherit; text-decoration: none; }
 
     header {
+      width: 100%;
+      padding: 18px 32px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 10px 14px;
-      margin-bottom: 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
-      backdrop-filter: blur(16px);
+      align-items: center;
       position: sticky;
-      top: 10px;
+      top: 0;
       z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.85), rgba(15,23,42,0));
+      border-bottom: 1px solid rgba(148,163,184,0.2);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-badge {
-      width: 32px;
-      height: 32px;
-      border-radius: 14px;
-      background:
-        radial-gradient(circle at 30% 0%, #38bdf8 0, #0ea5e9 30%, transparent 70%),
-        radial-gradient(circle at 70% 100%, #22c55e 0, #16a34a 35%, transparent 80%),
-        radial-gradient(circle at 100% 30%, #a855f7 0, #7c3aed 40%, transparent 80%),
-        #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #eff6ff;
-      font-weight: 700;
-      font-size: 15px;
-      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.5);
-    }
-
-    .brand-text-main {
-      font-weight: 600;
-      font-size: 15px;
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #38bdf8;
       letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .brand-text-sub {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 13px;
-    }
-
-    .nav-link {
-      padding: 6px 10px;
-      border-radius: 999px;
-      color: var(--text-soft);
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: background var(--transition-fast), color var(--transition-fast),
-        border-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .nav-link:hover {
-      background: rgba(219, 234, 254, 0.9);
-      color: var(--accent-blue);
-      border-color: rgba(191, 219, 254, 0.9);
-      transform: translateY(-1px);
-    }
-
-    .nav-cta-row {
+      text-shadow: 0 0 16px rgba(56,189,248,0.9);
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .nav-cta-primary {
-      padding: 7px 14px;
+    .logo-pill {
+      width: 22px;
+      height: 22px;
       border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #ecfdf5;
-      background: linear-gradient(135deg, var(--accent-green-dark), var(--accent-green));
-      box-shadow:
-        0 0 12px rgba(34, 197, 94, 0.7),
-        0 0 26px rgba(16, 185, 129, 0.5);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-        background var(--transition-fast);
+      background: radial-gradient(circle at 30% 30%, #22c55e, #16a34a, #0f766e);
+      box-shadow: 0 0 18px rgba(34,197,94,0.9);
     }
 
-    .nav-cta-primary:hover {
-      transform: translateY(-1px);
-      background: linear-gradient(135deg, #15803d, #22c55e);
-      box-shadow:
-        0 0 16px rgba(22, 163, 74, 0.8),
-        0 0 36px rgba(16, 185, 129, 0.6);
-    }
-
-    .nav-cta-secondary {
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: 1px solid #d1fae5;
-      color: #047857;
-      background: #f0fdf4;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: background var(--transition-fast), transform var(--transition-fast),
-        border-color var(--transition-fast);
-    }
-
-    .nav-cta-secondary:hover {
-      background: #dcfce7;
-      border-color: #bbf7d0;
-      transform: translateY(-1px);
-    }
-
-    .timestamp-bar {
-      margin-top: 10px;
-      margin-bottom: 8px;
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 11px;
-      color: #4b5563;
-      background: linear-gradient(
-        90deg,
-        rgba(56, 189, 248, 0.08),
-        rgba(34, 197, 94, 0.12),
-        rgba(129, 140, 248, 0.08)
-      );
+    nav {
       display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: center;
+      gap: 20px;
+      font-size: 0.95rem;
     }
 
-    .timestamp-bar span.highlight {
-      font-weight: 500;
-      color: #047857;
+    nav a {
+      position: relative;
+      padding-bottom: 3px;
+      opacity: 0.9;
+      transition: 0.2s;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #22c55e, #a3e635);
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+      transition: width 0.2s ease-out;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    nav a:hover::after {
+      width: 100%;
     }
 
     main {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    /* HERO */
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.1fr);
-      gap: 26px;
-      align-items: stretch;
-    }
-
-    .hero-left {
-      background: rgba(255, 255, 255, 0.96);
-      border-radius: 26px;
-      padding: 26px 24px 24px;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: #ecfdf3;
-      color: #15803d;
-      font-size: 12px;
-      font-weight: 500;
-      width: fit-content;
-    }
-
-    .hero-tag-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #f0f9ff;
-      font-size: 11px;
-      color: #0369a1;
-    }
-
-    .hero-title {
-      font-size: clamp(2.1rem, 3vw, 2.6rem);
-      line-height: 1.04;
-      letter-spacing: -0.03em;
-      color: var(--text-main);
-    }
-
-    .hero-highlight {
-      color: var(--accent-green-dark);
-    }
-
-    .hero-sub {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-soft);
-      max-width: 520px;
-    }
-
-    .hero-sub em {
-      font-style: normal;
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 18px;
-      border-radius: var(--radius-pill);
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid transparent;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background var(--transition-fast), color var(--transition-fast),
-        box-shadow var(--transition-fast), transform var(--transition-fast),
-        border-color var(--transition-fast);
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-green-dark), var(--accent-green));
-      color: #ecfdf5;
-      box-shadow:
-        0 0 16px rgba(34, 197, 94, 0.8),
-        0 0 32px rgba(34, 197, 94, 0.4);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #15803d, #22c55e);
-      transform: translateY(-2px);
-      box-shadow:
-        0 0 20px rgba(16, 185, 129, 0.9),
-        0 0 40px rgba(16, 185, 129, 0.5);
-    }
-
-    .btn-secondary {
-      background: #ffffff;
-      color: #111827;
-      border-color: var(--border-subtle);
-    }
-
-    .btn-secondary:hover {
-      background: #f9fafb;
-      border-color: #d1d5db;
-      transform: translateY(-1px);
-    }
-
-    .btn-tertiary {
-      background: transparent;
-      color: var(--text-soft);
-      border-color: transparent;
-      padding-inline: 8px;
-      font-size: 13px;
-      gap: 4px;
-    }
-
-    .btn-tertiary:hover {
-      color: var(--accent-blue);
-      transform: translateY(-1px);
-    }
-
-    .hero-trust {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      align-items: center;
-      margin-top: 6px;
-    }
-
-    .hero-trust-label {
-      font-size: 11px;
-      color: var(--text-soft);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .hero-trust-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .trust-pill {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: #f3f4f6;
-      color: #4b5563;
-      border: 1px solid #e5e7eb;
-    }
-
-    /* CSS AVATAR FOR PJ */
-
-    .pj-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .pj-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 0%, #38bdf8 0, transparent 60%),
-        radial-gradient(circle at 80% 100%, #22c55e 0, transparent 65%),
-        radial-gradient(circle at 0% 100%, #a855f7 0, transparent 70%),
-        #020617;
-      box-shadow:
-        0 0 10px rgba(59, 130, 246, 0.6),
-        0 0 20px rgba(34, 197, 94, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pj-avatar::before,
-    .pj-avatar::after {
-      content: "";
-      position: absolute;
-      left: 10%;
-      right: 10%;
-      height: 18%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #22c55e, #38bdf8, #a855f7);
-      opacity: 0.85;
-    }
-
-    .pj-avatar::before {
-      top: 22%;
-    }
-
-    .pj-avatar::after {
-      bottom: 22%;
-    }
-
-    .pj-avatar-initials {
-      position: relative;
-      z-index: 1;
-      font-size: 15px;
-      font-weight: 700;
-      color: #ecfeff;
-      text-shadow: 0 1px 3px rgba(15, 23, 42, 0.8);
-    }
-
-    .pj-text-meta {
-      font-size: 11px;
-      color: #6b7280;
-      line-height: 1.4;
-    }
-
-    .pj-text-meta strong {
-      color: #047857;
-    }
-
-    /* HERO RIGHT */
-
-    .hero-right {
-      border-radius: 26px;
-      padding: 22px 22px 20px;
-      background: radial-gradient(circle at 0% 0%, #22c55e22, transparent 60%),
-        radial-gradient(circle at 110% 10%, #38bdf822, transparent 60%),
-        radial-gradient(circle at 50% 100%, #7c3aed2b, transparent 60%),
-        #020617;
-      color: #e5e7eb;
-      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.85);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-right-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      height: 100%;
-      justify-content: space-between;
-    }
-
-    .hero-metric-title {
-      font-size: 13px;
-      color: #cbd5f5;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .hero-metric-main {
-      font-size: 26px;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      color: #eff6ff;
-    }
-
-    .hero-metric-sub {
-      font-size: 12px;
-      color: #cbd5f5;
-      max-width: 260px;
-    }
-
-    .hero-metric-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .metric-card {
-      padding: 9px 10px 8px;
-      border-radius: 14px;
-      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.06), transparent),
-        rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      backdrop-filter: blur(12px);
-    }
-
-    .metric-label {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .metric-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #e5e7eb;
-      margin-top: 2px;
-    }
-
-    .hero-switch-card {
-      margin-top: 12px;
-      padding: 11px 12px;
-      border-radius: 18px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .hero-switch-text {
-      font-size: 12px;
-      color: #e5e7eb;
-    }
-
-    .hero-switch-text strong {
-      color: #bbf7d0;
-    }
-
-    .hero-switch-chip {
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 250, 252, 0.35);
-      font-size: 11px;
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .hero-footer-note {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 6px;
-    }
-
-    .hero-footer-note span {
-      color: #a5b4fc;
-    }
-
-    /* SECTIONS */
-
-    .section {
-      margin-top: 8px;
-      padding: 22px 22px 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: var(--text-soft);
-      max-width: 360px;
-    }
-
-    .section-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .pill {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      font-size: 11px;
-      color: #4b5563;
-      background: #f9fafb;
-    }
-
-    .list {
-      list-style: none;
-      display: grid;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .list-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text-soft);
-    }
-
-    .list-bullet {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-
-    .bullet-bad {
-      background: #fef2f2;
-      color: #b91c1c;
-    }
-
-    .bullet-good {
-      background: #ecfdf3;
-      color: #15803d;
-    }
-
-    .grid-two {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .grid-two {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .muted {
-      color: var(--text-soft);
-    }
-
-    /* MOBILE FLOAT BAR */
-
-    .mobile-contact-bar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 40;
-      padding: 7px 12px 9px;
-      background: linear-gradient(
-        90deg,
-        rgba(34, 197, 94, 0.96),
-        rgba(56, 189, 248, 0.96),
-        rgba(129, 140, 248, 0.9)
-      );
-      display: none;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .mobile-contact-bar a {
       flex: 1;
-      padding: 7px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: none;
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      text-decoration: none;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 18px 64px;
     }
 
-    @media (max-width: 720px) {
-      .mobile-contact-bar {
-        display: flex;
-      }
-      body {
-        padding-bottom: 56px;
-      }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(56,189,248,0.5);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.9);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
     }
 
     @media (max-width: 860px) {
-      header {
-        border-radius: 20px;
-      }
-      .nav-links {
-        display: none;
-      }
-      .hero {
+      .hero-grid {
         grid-template-columns: minmax(0, 1fr);
       }
-      .hero-left {
-        order: 1;
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
       }
-      .hero-right {
-        order: 2;
+      nav {
+        flex-wrap: wrap;
       }
     }
 
-    @media (max-width: 640px) {
-      .page {
-        padding-inline: 14px;
-      }
-      header {
-        padding-inline: 12px;
-      }
-      .hero-left,
-      .hero-right {
-        border-radius: 22px;
-      }
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #f9fafb;
+      margin-bottom: 12px;
+      text-shadow: 0 0 38px rgba(56,189,248,0.4);
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #22c55e, #a3e635);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #cbd5f5;
+      opacity: 0.92;
+      max-width: 480px;
+      margin-bottom: 18px;
+    }
+
+    .hero-note {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      border: 1px solid #22c55e;
+      background: radial-gradient(circle at 20% 0, #bbf7d0, #22c55e, #15803d);
+      color: #022c22;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow:
+        0 0 20px rgba(34,197,94,0.9),
+        0 0 35px rgba(34,197,94,0.6);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, filter 0.12s;
+    }
+
+    .btn-primary span.small {
+      font-size: 0.78rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow:
+        0 0 28px rgba(34,197,94,1),
+        0 0 48px rgba(34,197,94,0.9);
+      filter: saturate(1.1);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.8);
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(248,250,252,0.9);
+      background: rgba(15,23,42,0.95);
+    }
+
+    .hero-caption {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      max-width: 420px;
     }
   </style>
 </head>
-<body>
-  <div class="page">
-    <header>
-      <div class="brand">
-        <div class="brand-badge">S</div>
-        <div>
-          <div class="brand-text-main">SideGuy Payments</div>
-          <div class="brand-text-sub">Solana Beach · Instant payouts</div>
-        </div>
-      </div>
-      <div class="nav-links">
-        <button class="nav-link" data-scroll-target="#hero">Overview</button>
-        <button class="nav-link" data-scroll-target="#calculator">Savings</button>
-        <button class="nav-link" data-scroll-target="#pricing">Pricing</button>
-        <button class="nav-link" data-scroll-target="#faq">FAQ</button>
-        <button class="nav-link" data-scroll-target="#contact">Contact</button>
-      </div>
-      <div class="nav-cta-row">
-        <a href="tel:+17735441231" class="nav-cta-primary">
-          <span>📞 Call PJ</span>
-        </a>
-        <a
-          href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20my%20monthly%20volume%20is%20_____.%20Can%20you%20show%20me%20my%20exact%20savings%20and%20send%20the%20onboarding%20link%3F"
-          class="nav-cta-secondary"
-        >
-          <span>💬 Text</span>
-        </a>
-      </div>
-    </header>
 
-    <div class="timestamp-bar">
-      <span id="last-updated">Last updated just now.</span>
-      <span class="highlight">Built for real businesses, not bots.</span>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-pill"></div>
+    SideGuy Payments
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/software.html">Software</a>
+    <a href="/automation.html">AI Automation</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <span>Live · Solana Rails · .4s Settlements</span>
     </div>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero" id="hero">
-        <div class="hero-left">
-          <div class="hero-tag">
-            <span>🚀 Live now</span>
-            <span class="hero-tag-pill">
-              <span>⏱</span> 0.4s payouts · ultra-low fees
-            </span>
-          </div>
-          <h1 class="hero-title">
-            Stop paying Stripe & PayPal.<br />
-            <span class="hero-highlight">Get paid in 0.4 seconds.</span>
-          </h1>
-          <p class="hero-sub">
-            SideGuy Payments swaps out old-school processors for a modern rail.
-            <em>Instant settlement, tiny fees, and a real human (PJ) in Solana Beach to walk you through it.</em>
-          </p>
-
-          <div class="hero-actions">
-            <a href="tel:+17735441231" class="btn btn-primary">
-              📞 Call PJ now
-            </a>
-            <a
-              href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20my%20monthly%20volume%20is%20_____.%20Can%20you%20show%20me%20my%20exact%20savings%20and%20send%20the%20onboarding%20link%3F"
-              class="btn btn-secondary"
-            >
-              💬 Text PJ a question
-            </a>
-            <button class="btn btn-tertiary" type="button" data-scroll-target="#calculator">
-              Calculate my savings →
-            </button>
-          </div>
-
-          <p class="muted" style="font-size:12px;margin-top:6px;">
-            Text PJ (+1-773-544-1231): Send your monthly volume. I’ll reply in ~5 minutes with exact savings
-            and your onboarding link — or just say “hey” and I’ll walk you through it.
-          </p>
-
-          <div class="hero-trust">
-            <div class="hero-trust-label">BUILT FOR</div>
-            <div class="hero-trust-pills">
-              <span class="trust-pill">Restaurants & bars</span>
-              <span class="trust-pill">Salons & studios</span>
-              <span class="trust-pill">Creators & coaches</span>
-              <span class="trust-pill">Local services</span>
-            </div>
-          </div>
-
-          <div class="pj-row">
-            <div class="pj-avatar" aria-hidden="true">
-              <span class="pj-avatar-initials">PJ</span>
-            </div>
-            <div class="pj-text-meta">
-              <strong>Talk to a real human.</strong><br />
-              Based in Solana Beach, CA. Quick replies, no jargon, no bots.
-            </div>
-          </div>
-        </div>
-
-        <aside class="hero-right" aria-label="SideGuy Payments quick stats">
-          <div class="hero-right-inner">
-            <div>
-              <div class="hero-metric-title">FEE COMPRESSION ENGINE</div>
-              <div class="hero-metric-main">From 2.9% down to a fraction of a cent.</div>
-              <p class="hero-metric-sub">
-                We route payments over modern rails so you keep more of what you earn without changing how you sell.
-              </p>
-              <div class="hero-metric-row">
-                <div class="metric-card">
-                  <div class="metric-label">Payout speed</div>
-                  <div class="metric-value">≈ 0.4 seconds</div>
-                </div>
-                <div class="metric-card">
-                  <div class="metric-label">Typical fee</div>
-                  <div class="metric-value">&lt; $0.01 / tx</div>
-                </div>
-                <div class="metric-card">
-                  <div class="metric-label">Chargeback fraud</div>
-                  <div class="metric-value">Drastically reduced</div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div class="hero-switch-card">
-                <p class="hero-switch-text">
-                  Switch one checkout page and
-                  <strong>watch your processing bill drop over the next 30 days.</strong>
-                </p>
-                <span class="hero-switch-chip">
-                  <span>💡</span>
-                  Start with a single “test” flow
-                </span>
-              </div>
-              <p class="hero-footer-note">
-                <span>SideGuy rule:</span> if it doesn’t clearly save or make you money, we don’t ship it.
-              </p>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- WHY SWITCH -->
-      <section class="section" id="why-switch">
-        <div class="section-header">
-          <div>
-            <div class="section-tag">problem</div>
-            <h2 class="section-title">You’re overpaying for payments.</h2>
-            <p class="section-sub">
-              Stripe, PayPal, and traditional processors quietly take a slice of every sale.
-              It adds up to thousands per year for small businesses.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-two">
-          <div>
-            <h3 class="muted" style="font-size:13px;margin-bottom:6px;">
-              The old way (Stripe / PayPal / legacy)
-            </h3>
-            <ul class="list">
-              <li class="list-item">
-                <span class="list-bullet bullet-bad">💸</span>
-                <span>2.9% + $0.30 (or more) on every transaction.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-bad">⏳</span>
-                <span>1–3 day payouts, weekends excluded.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-bad">🚫</span>
-                <span>Risk of funds held or “PayPal jail” with no one to call.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-bad">🤷‍♂️</span>
-                <span>No local partner — just inboxes and bots.</span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="muted" style="font-size:13px;margin-bottom:6px;">
-              SideGuy Payments (the modern way)
-            </h3>
-            <ul class="list">
-              <li class="list-item">
-                <span class="list-bullet bullet-good">⚡</span>
-                <span>Near-instant settlement (≈ 0.4 seconds).</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">💰</span>
-                <span>Ultra-low network-style fees — often a fraction of a cent per transaction.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">🧠</span>
-                <span>Flows designed around how your business actually operates.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">🙋</span>
-                <span>Real human onboarding with PJ — no generic support queue.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- WHY SIDEGUY -->
-      <section class="section" id="difference">
-        <div class="section-header">
-          <div>
-            <div class="section-tag">why sideguy</div>
-            <h2 class="section-title">It’s faster. It’s cheaper. And PJ sets it up for you.</h2>
-            <p class="section-sub">
-              You get the benefits of modern rails without needing to learn anything about “crypto.”
-              Customers still click a button, pay, and get a confirmation.
-            </p>
-          </div>
-          <div class="pill-row" style="margin-top:6px;">
-            <span class="pill">Instant payouts</span>
-            <span class="pill">Lower fees</span>
-            <span class="pill">Solana-inspired rails</span>
-          </div>
-        </div>
-
-        <div class="grid-two">
-          <div>
-            <h3 style="font-size:14px;margin-bottom:6px;">What you see</h3>
-            <ul class="list">
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✅</span>
-                <span>A clean checkout or payment link your customers already know how to use.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✅</span>
-                <span>Instant confirmation that funds have landed.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✅</span>
-                <span>Simple reporting: what came in, when, and from where.</span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 style="font-size:14px;margin-bottom:6px;">What runs under the hood</h3>
-            <ul class="list">
-              <li class="list-item">
-                <span class="list-bullet bullet-good">🌊</span>
-                <span>Modern high-speed rails handling payments at low cost.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">🪙</span>
-                <span>Stable value paths so you’re not exposed to wild swings.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">🧩</span>
-                <span>SideGuy-level care so things snap into your existing systems instead of breaking them.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="muted" style="font-size:12px;margin-top:14px;">
-          You don’t have to become a “blockchain person.” You just get faster money and a smaller bill.
-          SideGuy handles the gnarly parts.
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-title">
+          .4 second<br>
+          <span class="hero-highlight">payments for your business.</span>
+        </h1>
+        <p class="hero-sub">
+          Escape 2–3 day settlement lags and bloated fees. SideGuy Payments runs on Solana rails so you get fast, low-cost, modern payment rails — with a real human in San Diego you can text.
         </p>
-      </section>
+        <p class="hero-note">
+          Text your monthly card volume. I’ll show you your exact savings and get you an onboarding link — or just say “hey” and I’ll walk you through it.
+        </p>
 
-      <!-- SAVINGS CALCULATOR -->
-      <section class="section" id="calculator">
-        <div class="section-header">
-          <div>
-            <div class="section-tag">savings</div>
-            <h2 class="section-title">See how much you’re losing in fees.</h2>
-            <p class="section-sub">
-              Plug in your monthly volume and average ticket size. We’ll estimate your current
-              processing costs vs a SideGuy-style flow.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-two">
-          <div>
-            <form id="savings-form" autocomplete="off">
-              <div style="margin-bottom:10px;">
-                <label
-                  for="monthly-revenue"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Monthly revenue processed</label>
-                <div
-                  style="
-                    display:flex;
-                    align-items:center;
-                    gap:6px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    padding:6px 10px;
-                    background:#f9fafb;
-                  "
-                >
-                  <span style="font-size:13px;color:#6b7280;">$</span>
-                  <input
-                    type="number"
-                    id="monthly-revenue"
-                    name="monthly-revenue"
-                    min="0"
-                    step="100"
-                    placeholder="e.g. 25,000"
-                    required
-                    style="
-                      border:none;
-                      outline:none;
-                      background:transparent;
-                      width:100%;
-                      font-size:13px;
-                      color:#111827;
-                    "
-                  />
-                </div>
-              </div>
-
-              <div style="margin-bottom:10px;">
-                <label
-                  for="average-ticket"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Average ticket size</label>
-                <div
-                  style="
-                    display:flex;
-                    align-items:center;
-                    gap:6px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    padding:6px 10px;
-                    background:#f9fafb;
-                  "
-                >
-                  <span style="font-size:13px;color:#6b7280;">$</span>
-                  <input
-                    type="number"
-                    id="average-ticket"
-                    name="average-ticket"
-                    min="1"
-                    step="1"
-                    placeholder="e.g. 75"
-                    required
-                    style="
-                      border:none;
-                      outline:none;
-                      background:transparent;
-                      width:100%;
-                      font-size:13px;
-                      color:#111827;
-                    "
-                  />
-                </div>
-              </div>
-
-              <div style="margin-bottom:10px;">
-                <label
-                  for="current-rate"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Current processor % fee</label>
-                <div
-                  style="
-                    display:flex;
-                    align-items:center;
-                    gap:6px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    padding:6px 10px;
-                    background:#f9fafb;
-                  "
-                >
-                  <input
-                    type="number"
-                    id="current-rate"
-                    name="current-rate"
-                    min="0"
-                    max="10"
-                    step="0.1"
-                    value="2.9"
-                    style="
-                      border:none;
-                      outline:none;
-                      background:transparent;
-                      width:100%;
-                      font-size:13px;
-                      color:#111827;
-                    "
-                  />
-                  <span style="font-size:13px;color:#6b7280;">%</span>
-                </div>
-              </div>
-
-              <div style="margin-bottom:12px;">
-                <label
-                  for="current-fixed"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Current fixed fee per transaction</label>
-                <div
-                  style="
-                    display:flex;
-                    align-items:center;
-                    gap:6px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    padding:6px 10px;
-                    background:#f9fafb;
-                  "
-                >
-                  <span style="font-size:13px;color:#6b7280;">$</span>
-                  <input
-                    type="number"
-                    id="current-fixed"
-                    name="current-fixed"
-                    min="0"
-                    step="0.01"
-                    value="0.30"
-                    style="
-                      border:none;
-                      outline:none;
-                      background:transparent;
-                      width:100%;
-                      font-size:13px;
-                      color:#111827;
-                    "
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                class="btn btn-primary"
-                style="width:100%;justify-content:center;margin-top:4px;"
-              >
-                Calculate my savings
-              </button>
-
-              <p class="muted" style="font-size:11px;margin-top:8px;">
-                This is a simple estimate based on typical fee structures. We refine the numbers
-                with you on a live call or text.
-              </p>
-            </form>
-          </div>
-
-          <div id="savings-output" aria-live="polite">
-            <div
-              style="
-                border-radius:18px;
-                background:#f9fafb;
-                border:1px dashed #d1d5db;
-                padding:14px 14px 12px;
-                min-height:140px;
-                display:flex;
-                flex-direction:column;
-                justify-content:center;
-                gap:10px;
-              "
-            >
-              <p
-                id="savings-summary"
-                style="font-size:13px;color:#6b7280;line-height:1.6;"
-              >
-                Enter your monthly volume on the left. We’ll show you a rough comparison between
-                a traditional processor and a SideGuy-style flow.
-              </p>
-              <div id="savings-numbers" style="display:none;gap:8px;flex-direction:column;">
-                <div style="display:flex;justify-content:space-between;font-size:13px;">
-                  <span class="muted">Estimated current fees / month</span>
-                  <span id="current-fees" style="font-weight:600;color:#b91c1c;">$0</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:13px;">
-                  <span class="muted">Estimated SideGuy-style fees / month</span>
-                  <span id="sideguy-fees" style="font-weight:600;color:#059669;">$0</span>
-                </div>
-                <div
-                  style="
-                    margin-top:4px;
-                    padding:6px 9px;
-                    border-radius:12px;
-                    background:#ecfdf3;
-                    font-size:12px;
-                    display:flex;
-                    justify-content:space-between;
-                    align-items:center;
-                    gap:6px;
-                  "
-                >
-                  <span>Savings estimate / month</span>
-                  <span id="savings-month" style="font-weight:700;">$0</span>
-                </div>
-                <div
-                  style="
-                    font-size:11px;
-                    margin-top:4px;
-                    color:#4b5563;
-                  "
-                >
-                  Annualized, that’s roughly
-                  <span id="savings-year" style="font-weight:600;color:#111827;">$0</span>
-                  back into your business instead of your processor.
-                </div>
-              </div>
-              <p class="muted" style="font-size:12px;margin-top:8px;">
-                Text PJ (+1-773-544-1231): Send your monthly volume. I’ll reply in ~5 minutes with exact
-                savings and your onboarding link — or just say “hey” and I’ll walk you through it.
-              </p>
-              <a
-                href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20my%20monthly%20volume%20is%20_____.%20Can%20you%20show%20me%20my%20exact%20savings%20and%20send%20the%20onboarding%20link%3F"
-                class="btn btn-secondary"
-                style="margin-top:6px;align-self:flex-start;"
-              >
-                Text PJ these numbers →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PRICING -->
-      <section class="section" id="pricing">
-        <div class="section-header">
-          <div>
-            <div class="section-tag">pricing</div>
-            <h2 class="section-title">Simple plans. No gotchas.</h2>
-            <p class="section-sub">
-              Start with a single flow or go all-in. We keep the structure simple so you always
-              know what you’re paying and what you’re saving.
-            </p>
-          </div>
-          <div class="pill-row" style="margin-top:6px;">
-            <span class="pill">Month-to-month</span>
-            <span class="pill">No long contracts</span>
-            <span class="pill">Human support</span>
-          </div>
-        </div>
-
-        <div class="grid-two" style="align-items:stretch;">
-          <div
-            style="
-              border-radius:18px;
-              border:1px solid #e5e7eb;
-              padding:14px 14px 12px;
-              background:#f9fafb;
-            "
-          >
-            <h3 style="font-size:15px;font-weight:600;margin-bottom:4px;">Starter</h3>
-            <p class="muted" style="font-size:13px;margin-bottom:10px;">
-              Perfect for testing SideGuy Payments on one page or offer.
-            </p>
-            <div style="margin-bottom:10px;">
-              <div style="font-size:22px;font-weight:600;">$50<span style="font-size:13px;">/mo</span></div>
-              <div class="muted" style="font-size:12px;">$0 setup for early adopters</div>
-            </div>
-            <ul class="list" style="margin-bottom:10px;">
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✓</span>
-                <span>One checkout or payment button.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✓</span>
-                <span>Modern rail setup and tuning.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✓</span>
-                <span>Basic reporting and support.</span>
-              </li>
-            </ul>
-            <a
-              href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20I%E2%80%99m%20interested%20in%20the%20Starter%20plan.%20My%20monthly%20volume%20is%20_____."
-              class="btn btn-primary"
-              style="width:100%;justify-content:center;margin-top:4px;"
-            >
-              Text PJ “Starter” →
-            </a>
-          </div>
-
-          <div
-            style="
-              border-radius:18px;
-              border:1px solid #c4b5fd;
-              padding:16px 14px 14px;
-              background:linear-gradient(135deg,#f5f3ff,#eef2ff);
-              box-shadow:0 18px 40px rgba(129,140,248,0.35);
-            "
-          >
-            <div
-              style="
-                display:inline-flex;
-                align-items:center;
-                gap:6px;
-                padding:3px 9px;
-                border-radius:999px;
-                background:#eef2ff;
-                border:1px solid #c7d2fe;
-                font-size:11px;
-                color:#4f46e5;
-                margin-bottom:6px;
-              "
-            >
-              <span>⭐</span> Most popular
-            </div>
-            <h3 style="font-size:15px;font-weight:600;margin-bottom:4px;">Business</h3>
-            <p class="muted" style="font-size:13px;margin-bottom:10px;">
-              For serious operators wanting multiple flows and better insights.
-            </p>
-            <div style="margin-bottom:10px;">
-              <div style="font-size:22px;font-weight:600;">$99<span style="font-size:13px;">/mo</span></div>
-              <div class="muted" style="font-size:12px;">+$199 one-time setup</div>
-            </div>
-            <ul class="list" style="margin-bottom:10px;">
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✓</span>
-                <span>Multiple checkout flows & links.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✓</span>
-                <span>QR codes for in-person payments.</span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">✓</span>
-                <span>Enhanced reporting and live review calls.</span>
-              </li>
-            </ul>
-            <a
-              href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20I%E2%80%99m%20interested%20in%20the%20Business%20plan.%20My%20monthly%20volume%20is%20_____."
-              class="btn btn-primary"
-              style="width:100%;justify-content:center;margin-top:4px;"
-            >
-              Text PJ “Business” →
-            </a>
-          </div>
-        </div>
-
-        <div
-          style="
-            margin-top:14px;
-            border-radius:16px;
-            padding:10px 12px;
-            background:#0f172a;
-            color:#e5e7eb;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:10px;
-            flex-wrap:wrap;
-          "
-        >
-          <p style="font-size:12px;">
-            Need multiple locations, POS, or something weird & wonderful?
-            <span style="font-weight:500;">There’s a SideGuy Pro tier with your name on it.</span>
-          </p>
+        <div class="cta-row">
           <a
-            href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20tell%20me%20about%20SideGuy%20Pro.%20Here%E2%80%99s%20my%20monthly%20volume%3A%20_____." 
-            class="btn btn-secondary"
-            style="background:#111827;color:#e5e7eb;border-color:#4b5563;"
-          >
-            Text PJ “Pro” →
+            class="btn-primary"
+            href="sms:+17735441231?body=Hey%20PJ%2C%20here%27s%20my%20monthly%20card%20volume%20for%20SideGuy%20Payments%20savings%3A">
+            <div>
+              Text PJ · (773) 544-1231
+              <div class="small">Send your monthly volume · get savings in minutes</div>
+            </div>
+          </a>
+          <a class="btn-ghost" href="tel:+17735441231">
+            Or tap to call PJ
           </a>
         </div>
-      </section>
 
-      <!-- FAQ & ABOUT -->
-      <section class="section" id="faq">
-        <div class="section-header">
-          <div>
-            <div class="section-tag">questions</div>
-            <h2 class="section-title">“Do I have to become a crypto person?” (and other FAQs)</h2>
-            <p class="section-sub">
-              Short answer: no. SideGuy is designed so your business gets the benefits of new
-              rails without needing to think like a trader.
-            </p>
+        <p class="hero-caption">
+          “Text PJ (773) 544-1231, send your monthly volume. Get exact savings and onboarding link in 5 minutes — or just say hey and I’ll walk you through it.”
+        </p>
+      </div>
+      <div>
+        <!-- Solana Beach · Solana Blockchain Avatar Orb -->
+        <div style="
+          position: relative;
+          width: 280px;
+          max-width: 100%;
+          margin: 0 auto;
+          aspect-ratio: 1 / 1;
+          border-radius: 999px;
+          background:
+            radial-gradient(circle at 20% 20%, #e0f2fe, #38bdf8, #0f172a 70%),
+            radial-gradient(circle at 80% 80%, rgba(34,197,94,0.15), transparent 65%);
+          box-shadow:
+            0 0 40px rgba(56,189,248,0.9),
+            0 0 85px rgba(34,197,94,0.8);
+          overflow: hidden;
+        ">
+          <!-- horizon glow -->
+          <div style="
+            position:absolute;
+            bottom: 28%;
+            left: 0;
+            right: 0;
+            height: 32%;
+            background:
+              radial-gradient(circle at 50% 0%, rgba(248,250,252,0.82), transparent 60%);
+            opacity: 0.95;
+          "></div>
+
+          <!-- stylized “blockchain” bands -->
+          <div style="
+            position:absolute;
+            inset: 18%;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.4);
+            box-shadow: 0 0 22px rgba(56,189,248,0.7) inset;
+          "></div>
+          <div style="
+            position:absolute;
+            inset: 30% 12%;
+            border-radius: 999px;
+            border: 1px dashed rgba(148,163,184,0.55);
+            opacity: 0.9;
+          "></div>
+
+          <!-- subtle wave bands -->
+          <div style="
+            position:absolute;
+            left:-10%;
+            right:-10%;
+            bottom:18%;
+            height:16%;
+            background:
+              repeating-linear-gradient(
+                to right,
+                rgba(15,23,42,0.7) 0,
+                rgba(15,23,42,0.7) 6px,
+                rgba(15,23,42,0.4) 6px,
+                rgba(15,23,42,0.4) 12px
+              );
+            opacity: 0.85;
+          "></div>
+
+          <!-- “Solana stripes” -->
+          <div style="
+            position:absolute;
+            top: 18%;
+            left: 18%;
+            right: 18%;
+            height: 10%;
+            border-radius: 999px;
+            background: linear-gradient(120deg, #22c55e, #a855f7, #0ea5e9);
+            filter: saturate(1.3);
+            box-shadow: 0 0 18px rgba(56,189,248,0.9);
+          "></div>
+          <div style="
+            position:absolute;
+            top: 32%;
+            left: 18%;
+            right: 18%;
+            height: 10%;
+            border-radius: 999px;
+            background: linear-gradient(120deg, #22c55e, #a855f7, #0ea5e9);
+            opacity: 0.9;
+          "></div>
+
+          <!-- small “PJ node” -->
+          <div style="
+            position:absolute;
+            bottom: 14%;
+            right: 18%;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, #bbf7d0, #22c55e, #166534);
+            box-shadow:
+              0 0 16px rgba(34,197,94,0.9),
+              0 0 32px rgba(34,197,94,0.7);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color:#022c22;
+          ">
+            PJ
           </div>
         </div>
 
-        <div class="grid-two">
-          <div>
-            <h3 style="font-size:14px;margin-bottom:6px;">Common questions</h3>
-            <ul class="list">
-              <li class="list-item">
-                <span class="list-bullet bullet-good">?</span>
-                <span>
-                  <strong>Do my customers need to know anything about Solana or blockchain?</strong><br />
-                  No. They click a button or scan a code, pay, and get a confirmation. We hide
-                  the complexity.
-                </span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">?</span>
-                <span>
-                  <strong>Can I still cash out to my bank?</strong><br />
-                  Yes. We help you set up a flow where funds can land in stable paths and then be
-                  converted to your normal business bank.
-                </span>
-              </li>
-              <li class="list-item">
-                <span class="list-bullet bullet-good">?</span>
-                <span>
-                  <strong>Is this compliant and safe?</strong><br />
-                  We lean on stable, well-supported rails and keep clear flows. We’ll walk through
-                  specifics for your use case so it’s boring and predictable.
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 style="font-size:14px;margin-bottom:6px;">Who’s behind this?</h3>
-            <div class="pj-row" style="margin-bottom:8px;">
-              <div class="pj-avatar">
-                <span class="pj-avatar-initials">PJ</span>
-              </div>
-              <div class="pj-text-meta">
-                <strong>PJ · Your SideGuy</strong><br />
-                Solana Beach–based, payments-obsessed, and here to make this easy.
-              </div>
-            </div>
-            <p class="muted" style="font-size:13px;margin-bottom:8px;">
-              Think of SideGuy Payments as:
-              <strong>“the friend who already figured this out and sets it up for you.”</strong>
-            </p>
-            <p class="muted" style="font-size:12px;margin-bottom:10px;">
-              We’ll talk like humans, map out where payments show up in your business, and then
-              decide whether this upgrade makes sense. If it doesn’t, I’ll tell you.
-            </p>
-            <p class="muted" style="font-size:12px;">
-              You can call or text anytime. If I’m not free, I’ll hit you back as soon as I can
-              with real answers, not scripts.
-            </p>
-          </div>
+        <div style="
+          margin-top: 18px;
+          padding: 10px 14px;
+          border-radius: 999px;
+          background: rgba(15,23,42,0.9);
+          border: 1px solid rgba(148,163,184,0.4);
+          font-size: 0.8rem;
+          display:flex;
+          flex-wrap:wrap;
+          gap: 10px;
+          justify-content:center;
+        ">
+          <span>↯ .4s settlement rails</span>
+          <span>• Solana stablecoin backbone</span>
+          <span>• San Diego based support</span>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
+  <section style="margin-top: 34px;">
+    <div style="
+      display:grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 26px;
+    ">
+      <div>
+        <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color:#e5e7eb;">
+          Why SideGuy Payments beats waiting days.
+        </h2>
+        <p style="font-size:0.95rem; color:#9ca3af; margin-bottom:14px;">
+          Most processors were built for the 2010s. We’re building for the 402 internet — fast, cheap, and global rails that feel as instant as sending a text.
+        </p>
+        <ul style="list-style:none; display:grid; gap:10px; margin-top:8px;">
+          <li style="display:flex; gap:8px; align-items:flex-start;">
+            <span style="color:#22c55e;">✔</span>
+            <p><strong>.4 second settlement rails</strong> instead of 2–3 business days sitting in limbo.</p>
+          </li>
+          <li style="display:flex; gap:8px; align-items:flex-start;">
+            <span style="color:#22c55e;">✔</span>
+            <p><strong>Lower effective fees</strong> by routing on Solana rails and stablecoin where it makes sense.</p>
+          </li>
+          <li style="display:flex; gap:8px; align-items:flex-start;">
+            <span style="color:#22c55e;">✔</span>
+            <p><strong>Real human on the other end</strong> — text PJ directly instead of opening a support ticket in a portal.</p>
+          </li>
+          <li style="display:flex; gap:8px; align-items:flex-start;">
+            <span style="color:#22c55e;">✔</span>
+            <p><strong>North County friendly</strong> — tuned for venues, restaurants, service businesses, and operators who need cash flow.</p>
+          </li>
+        </ul>
+      </div>
 
-      <!-- CONTACT -->
-      <section class="section" id="contact">
-        <div class="section-header">
-          <div>
-            <div class="section-tag">next step</div>
-            <h2 class="section-title">Call or text PJ personally.</h2>
-            <p class="section-sub">
-              No bots. No offshore support. Send a quick note with your approximate monthly
-              volume and current setup. I’ll personally reply and map out what a SideGuy Payments
-              upgrade could look like for you.
-            </p>
-          </div>
+      <div style="
+        background: radial-gradient(circle at top, rgba(15,23,42,0.95), rgba(15,23,42,0.98));
+        border-radius: 18px;
+        padding: 16px 18px;
+        border: 1px solid rgba(148,163,184,0.4);
+        box-shadow: 0 0 32px rgba(15,23,42,0.9);
+      ">
+        <h3 style="font-size:1.05rem; font-weight:600; margin-bottom:10px; color:#e5e7eb;">
+          How it works
+        </h3>
+        <ol style="list-style:none; display:grid; gap:10px; font-size:0.9rem; color:#cbd5f5;">
+          <li>
+            <strong>1 · Text PJ your monthly volume</strong><br>
+            <span style="color:#9ca3af;">Example: “We do ~$80k/mo in card volume across 2 terminals + online.”</span>
+          </li>
+          <li>
+            <strong>2 · You get a simple savings breakdown</strong><br>
+            <span style="color:#9ca3af;">Side-by-side vs your current provider — no jargon, just what you keep.</span>
+          </li>
+          <li>
+            <strong>3 · Onboarding link & done-for-you setup</strong><br>
+            <span style="color:#9ca3af;">We help you plug in modern rails behind the scenes so your customers still “just pay”.</span>
+          </li>
+        </ol>
+        <div style="
+          margin-top: 12px;
+          padding: 10px 12px;
+          border-radius: 12px;
+          background: rgba(22,163,74,0.08);
+          border: 1px dashed rgba(34,197,94,0.6);
+          font-size:0.8rem;
+          color:#bbf7d0;
+        ">
+          You don’t have to learn crypto. You don’t have to change your whole stack. You just get faster, cheaper rails behind the scenes.
         </div>
+      </div>
+    </div>
+  </section>
 
-        <p class="muted" style="font-size:12px;margin-bottom:10px;">
-          Text PJ (+1-773-544-1231): Send your monthly volume. I’ll reply in ~5 minutes with exact
-          savings and your onboarding link — or just say “hey” and I’ll walk you through it.
+  <section style="margin-top: 34px;">
+    <div style="display:grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr); gap:22px;">
+      <div>
+        <h2 style="font-size:1.25rem; font-weight:700; margin-bottom:10px; color:#e5e7eb;">
+          Savings snapshot (example only).
+        </h2>
+        <p style="font-size:0.9rem; color:#9ca3af; margin-bottom:14px;">
+          Every business is different, but most operators are shocked when they see what they’re really paying in blended fees.
+          SideGuy Payments is about giving you back margin and time.
         </p>
 
-        <div class="grid-two">
-          <div>
-            <div style="margin-bottom:10px;">
-              <a href="tel:+17735441231" class="btn btn-primary" style="width:100%;justify-content:center;">
-                📞 Call PJ now (+1-773-544-1231)
-              </a>
-            </div>
-            <div style="margin-bottom:10px;">
-              <a
-                href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20my%20monthly%20volume%20is%20_____.%20Can%20you%20show%20me%20my%20exact%20savings%20and%20send%20the%20onboarding%20link%3F"
-                class="btn btn-secondary"
-                style="width:100%;justify-content:center;"
-              >
-                💬 Text PJ details about your business
-              </a>
-            </div>
-            <p class="muted" style="font-size:11px;margin-bottom:8px;">
-              Tell me roughly what you do, your monthly card volume, and who you process with now
-              (Stripe, PayPal, Square, etc.). I’ll do the homework and come back with options.
-            </p>
+        <div style="
+          border-radius: 16px;
+          overflow:hidden;
+          border:1px solid rgba(148,163,184,0.5);
+          background:rgba(15,23,42,0.95);
+          font-size:0.85rem;
+        ">
+          <div style="display:grid; grid-template-columns: 1.1fr 1fr 1fr; background:rgba(15,23,42,0.98); padding:8px 10px; font-weight:600;">
+            <div>Scenario</div>
+            <div>Legacy Processor*</div>
+            <div>SideGuy Payments</div>
           </div>
-          <div>
-            <form
-              id="contact-form"
-              action="mailto:payments@sideguysolutions.com"
-              method="post"
-              enctype="text/plain"
-            >
-              <div style="margin-bottom:10px;">
-                <label
-                  for="contact-name"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Your name</label>
-                <input
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  required
-                  placeholder="Name"
-                  style="
-                    width:100%;
-                    padding:7px 10px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    font-size:13px;
-                    background:#f9fafb;
-                    color:#111827;
-                  "
-                />
-              </div>
-              <div style="margin-bottom:10px;">
-                <label
-                  for="contact-email"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Email</label>
-                <input
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  required
-                  placeholder="you@business.com"
-                  style="
-                    width:100%;
-                    padding:7px 10px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    font-size:13px;
-                    background:#f9fafb;
-                    color:#111827;
-                  "
-                />
-              </div>
-              <div style="margin-bottom:10px;">
-                <label
-                  for="contact-volume"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Rough monthly card volume</label>
-                <input
-                  type="text"
-                  id="contact-volume"
-                  name="monthly_volume"
-                  placeholder="e.g. $40,000 / month"
-                  style="
-                    width:100%;
-                    padding:7px 10px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    font-size:13px;
-                    background:#f9fafb;
-                    color:#111827;
-                  "
-                />
-              </div>
-              <div style="margin-bottom:10px;">
-                <label
-                  for="contact-message"
-                  style="display:block;font-size:12px;font-weight:500;margin-bottom:4px;color:#4b5563;"
-                >Anything else I should know?</label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows="4"
-                  placeholder="e.g. restaurant with 2 locations, using Stripe & Square right now..."
-                  style="
-                    width:100%;
-                    padding:7px 10px;
-                    border-radius:12px;
-                    border:1px solid var(--border-subtle);
-                    font-size:13px;
-                    background:#f9fafb;
-                    color:#111827;
-                    resize:vertical;
-                  "
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="btn btn-secondary"
-                style="width:100%;justify-content:center;margin-top:6px;"
-              >
-                Email PJ about SideGuy Payments
-              </button>
-
-              <p class="muted" style="font-size:11px;margin-top:8px;">
-                Prefer text or a call? Use the buttons on the left — that’s usually fastest.
-              </p>
-            </form>
+          <div style="display:grid; grid-template-columns: 1.1fr 1fr 1fr; padding:8px 10px; border-top:1px solid rgba(31,41,55,0.9);">
+            <div>$50k/mo restaurant</div>
+            <div>2.9% + misc fees</div>
+            <div style="color:#22c55e;">Lower effective rate</div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1.1fr 1fr 1fr; padding:8px 10px; border-top:1px solid rgba(31,41,55,0.9);">
+            <div>$80k/mo venue + online</div>
+            <div>High blended fees</div>
+            <div style="color:#22c55e;">Optimized mix on Solana</div>
+          </div>
+          <div style="padding:8px 10px; border-top:1px solid rgba(31,41,55,0.9); color:#6b7280;">
+            *Illustrative only. Text PJ your real numbers for an exact savings breakdown.
           </div>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <footer
-      style="
-        margin-top:24px;
-        font-size:11px;
-        color:#9ca3af;
-        display:flex;
-        justify-content:space-between;
-        gap:8px;
-        flex-wrap:wrap;
-      "
-    >
-      <span>
-        © <span id="year-span"></span> SideGuy Solutions · Solana Beach, CA · SideGuy Payments v1.2 ·
-        Text PJ anytime: +1-773-544-1231
-      </span>
-      <a href="/" style="text-decoration:underline;">Back to main site</a>
-    </footer>
+      <div>
+        <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:10px; color:#e5e7eb;">
+          Quick FAQ
+        </h3>
+        <div style="display:grid; gap:10px; font-size:0.9rem;">
+          <div style="
+            padding:10px 12px;
+            border-radius:12px;
+            background:rgba(15,23,42,0.95);
+            border:1px solid rgba(31,41,55,0.95);
+          ">
+            <strong>Do my customers need crypto wallets?</strong><br>
+            <span style="color:#9ca3af;">No. They can still tap, swipe, or pay online like they always have. We optimize how it settles behind the scenes.</span>
+          </div>
+          <div style="
+            padding:10px 12px;
+            border-radius:12px;
+            background:rgba(15,23,42,0.95);
+            border:1px solid rgba(31,41,55,0.95);
+          ">
+            <strong>Is this only for San Diego?</strong><br>
+            <span style="color:#9ca3af;">We love North County and San Diego, but we can help operators in other markets too. Text PJ and we’ll see if it’s a fit.</span>
+          </div>
+          <div style="
+            padding:10px 12px;
+            border-radius:12px;
+            background:rgba(15,23,42,0.95);
+            border:1px solid rgba(31,41,55,0.95);
+          ">
+            <strong>What if I’m locked into a contract?</strong><br>
+            <span style="color:#9ca3af;">Send me a photo of your statement and terms. Sometimes there are ways to improve things sooner than you think.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="margin-top: 34px;">
+    <div style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(56,189,248,0.5);
+      background:rgba(15,23,42,0.95);
+      box-shadow:0 0 26px rgba(8,47,73,0.8);
+      font-size:0.85rem;
+    ">
+      <div>
+        <strong>Live SideGuy Payments lane.</strong><br>
+        <span style="color:#9ca3af;">This page is wired for .4 second Solana settlement rails and updated coastal vibes.</span>
+      </div>
+      <div style="text-align:right;">
+        <div style="color:#9ca3af;">Checked in:</div>
+        <div id="live-timestamp" style="font-weight:600; color:#e5e7eb;">—</div>
+        <div style="color:#6b7280;">Pacific Time</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="
+  padding:16px 22px 26px;
+  font-size:0.8rem;
+  color:#6b7280;
+  border-top:1px solid rgba(15,23,42,0.95);
+  background:radial-gradient(circle at top, rgba(15,23,42,0.96), #020617 70%);
+">
+  <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;">
+    <span>© <span id="year-span"></span> SideGuy Payments · SideGuy Solutions</span>
+    <span>Built coastal in San Diego · Text PJ at (773) 544-1231</span>
   </div>
+</footer>
 
-  <!-- Mobile contact bar -->
-  <div class="mobile-contact-bar">
-    <a
-      href="sms:+17735441231?&body=Hey%20PJ%20%E2%80%94%20my%20monthly%20volume%20is%20_____.%20Can%20you%20show%20me%20my%20exact%20savings%20and%20send%20the%20onboarding%20link%3F"
-    >
-      💬 Text PJ: +1-773-544-1231
-    </a>
-  </div>
+<script>
+  (function () {
+    try {
+      const tsEl = document.getElementById('live-timestamp');
+      const yearEl = document.getElementById('year-span');
+      const now = new Date();
 
-  <script>
-    // Set year in footer
-    (function () {
-      var yearSpan = document.getElementById("year-span");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+      if (yearEl) {
+        yearEl.textContent = now.getFullYear();
       }
-    })();
 
-    // Set "last updated" timestamp using local time (feels live)
-    (function () {
-      var el = document.getElementById("last-updated");
-      if (!el) return;
-      var now = new Date();
-      var opts = {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      };
-      el.textContent = "Last updated · " + now.toLocaleString(undefined, opts);
-    })();
-
-    // Smooth scroll handler
-    function setupScrollTargets() {
-      var elements = document.querySelectorAll("[data-scroll-target]");
-      elements.forEach(function (el) {
-        el.addEventListener("click", function () {
-          var targetSelector = el.getAttribute("data-scroll-target");
-          var target = document.querySelector(targetSelector);
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
-      });
+      if (tsEl) {
+        const options = {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+          timeZone: 'America/Los_Angeles'
+        };
+        tsEl.textContent = now.toLocaleString('en-US', options);
+      }
+    } catch (e) {
+      console.warn('Timestamp render issue:', e);
     }
+  })();
+</script>
 
-    // Savings calculator logic
-    function setupSavingsCalculator() {
-      var form = document.getElementById("savings-form");
-      if (!form) return;
-
-      var summary = document.getElementById("savings-summary");
-      var numbersWrapper = document.getElementById("savings-numbers");
-      var currentFeesEl = document.getElementById("current-fees");
-      var sideguyFeesEl = document.getElementById("sideguy-fees");
-      var savingsMonthEl = document.getElementById("savings-month");
-      var savingsYearEl = document.getElementById("savings-year");
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        var monthlyRevenue = parseFloat(
-          document.getElementById("monthly-revenue").value || "0"
-        );
-        var avgTicket = parseFloat(
-          document.getElementById("average-ticket").value || "0"
-        );
-        var currentRatePercent = parseFloat(
-          document.getElementById("current-rate").value || "0"
-        );
-        var currentFixed = parseFloat(
-          document.getElementById("current-fixed").value || "0"
-        );
-
-        if (!monthlyRevenue || !avgTicket || avgTicket <= 0) {
-          alert("Please enter a reasonable monthly revenue and average ticket.");
-          return;
-        }
-
-        var transactionsPerMonth = monthlyRevenue / avgTicket;
-
-        // Current processor estimate
-        var currentRate = currentRatePercent / 100;
-        var currentFees =
-          monthlyRevenue * currentRate + transactionsPerMonth * currentFixed;
-
-        // SideGuy-style rail estimate (illustrative)
-        var sideguyRate = 0.001; // 0.1%
-        var sideguyFees = monthlyRevenue * sideguyRate;
-
-        var savingsMonth = Math.max(currentFees - sideguyFees, 0);
-        var savingsYear = savingsMonth * 12;
-
-        function formatCurrency(value) {
-          return "$" + value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        if (summary) {
-          summary.textContent =
-            "Here’s a rough estimate based on your numbers. We’ll refine this on a call or text, but it shows what your processor is taking today.";
-        }
-        if (numbersWrapper) {
-          numbersWrapper.style.display = "flex";
-        }
-        if (currentFeesEl) currentFeesEl.textContent = formatCurrency(currentFees);
-        if (sideguyFeesEl) sideguyFeesEl.textContent = formatCurrency(sideguyFees);
-        if (savingsMonthEl) savingsMonthEl.textContent = formatCurrency(savingsMonth);
-        if (savingsYearEl) savingsYearEl.textContent = formatCurrency(savingsYear);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      setupScrollTargets();
-      setupSavingsCalculator();
-    });
-  </script>
 </body>
 </html>
-
