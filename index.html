@@ -1,1349 +1,540 @@
 <!--
-
-  SideGuy Solutions · Master Homepage
-
-  Mode: Payments-First · Solana Ocean Hero · Vision 1.0
-
+  SideGuy Payments Homepage
+  Version: 1.2 — Sunset Pacific Solana Edition (A1)
   Author: PJ + ChatGPT
-
-
-
-  Notes:
-
-  - This file is meant to live at: index.html in your repo root.
-
-  - For the hero background, upload your Solana sunset ocean image
-
-    to your repo (e.g. /solana-ocean-hero.jpg) and update the URL below if needed.
-
+  Notes: Pure HTML/CSS — GitHub Pages friendly. All nav links are in-page anchors (no 404s).
 -->
 
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
-
-  <title>SideGuy Solutions | Solana Payments · Vision 1.0</title>
-
-
+  <title>SideGuy Payments | .4 Second Solana Settlements</title>
 
   <meta name="description"
-
-        content="SideGuy Solutions helps San Diego and North County businesses escape slow, expensive processors. .4-second Solana payments, lower fees, and a bigger vision: building a network where technology works for people again.">
-
+        content="SideGuy Payments helps San Diego and North County businesses escape slow processors. .4-second Solana settlements, lower fees, real human support — text PJ your monthly volume.">
   <meta name="keywords"
-
-        content="SideGuy, SideGuy Solutions, SideGuy Payments, Solana payments, instant settlement, San Diego payment processing, Stripe alternative, Web3 payments, North County merchants">
-
-
+        content="Solana payments, SideGuy Payments, instant settlement, San Diego payment processing, low fee payments, Stripe alternative, North County merchants">
 
   <style>
-
     :root {
-
-      --bg: #05070c;
-
-      --bg-soft: #0d1018;
-
-      --accent: #48ff9b;
-
-      --accent-strong: #00ff9d;
-
-      --text-main: #f5f7ff;
-
-      --text-soft: #c2c7e6;
-
-      --border-soft: rgba(255,255,255,0.08);
-
+      --neon-green: #24ff9b;
+      --solana-aqua: #00e0ff;
+      --sunset-orange: #ff7a3c;
+      --deep-violet: #1a1040;
+      --card-bg: rgba(4, 8, 18, 0.82);
+      --text-soft: #d3d3d3;
     }
-
-
 
     * {
-
       box-sizing: border-box;
-
     }
-
-
 
     body {
-
       margin: 0;
-
       padding: 0;
-
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Arial, sans-serif;
-
-      background: radial-gradient(circle at top, #11172a 0%, #020308 50%, #000 100%);
-
-      color: var(--text-main);
-
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: white;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,122,60,0.25), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(0,192,255,0.35), transparent 55%),
+        linear-gradient(135deg, #050608 0%, #0b1020 40%, #050608 100%);
+      background-attachment: fixed;
       overflow-x: hidden;
-
     }
 
-
-
-    a {
-
-      color: var(--accent);
-
-      text-decoration: none;
-
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 60px;
     }
 
-
-
-    a:hover {
-
-      text-decoration: underline;
-
-    }
-
-
-
-    /* HEADER / NAV */
-
-
-
+    /* Header & Nav */
     header {
-
-      position: sticky;
-
-      top: 0;
-
-      z-index: 10;
-
-      padding: 14px 24px;
-
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(120deg, rgba(10,10,22,0.9), rgba(14,18,30,0.92));
+      backdrop-filter: blur(14px);
       display: flex;
-
+      flex-wrap: wrap;
       align-items: center;
-
       justify-content: space-between;
-
-      background: rgba(3, 5, 12, 0.9);
-
-      backdrop-filter: blur(12px);
-
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-
+      gap: 10px;
+      position: sticky;
+      top: 10px;
+      z-index: 20;
     }
 
-
-
-    .logo {
-
-      font-weight: 800;
-
-      letter-spacing: 0.16em;
-
-      font-size: 0.9rem;
-
+    .logo-text {
+      font-size: 14px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      color: var(--text-soft);
     }
 
-
-
-    .logo span {
-
-      color: var(--accent);
-
+    .logo-text span {
+      color: var(--neon-green);
     }
 
-
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
 
     nav a {
-
-      margin-left: 18px;
-
-      font-size: 0.9rem;
-
+      color: var(--neon-green);
+      text-decoration: none;
+      font-size: 14px;
       opacity: 0.9;
-
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: opacity 0.16s ease, border-bottom-color 0.16s ease;
     }
-
-
 
     nav a:hover {
-
       opacity: 1;
-
+      border-bottom-color: var(--neon-green);
     }
 
-
-
-    /* LAYOUT */
-
-
-
-    main {
-
-      max-width: 1120px;
-
-      margin: 0 auto;
-
-      padding: 32px 20px 60px;
-
-    }
-
-
-
-    section {
-
-      margin-top: 48px;
-
-      padding: 26px 22px;
-
-      border-radius: 18px;
-
-      background: rgba(5, 9, 24, 0.92);
-
-      border: 1px solid var(--border-soft);
-
-    }
-
-
-
-    h1, h2 {
-
-      margin-top: 0;
-
-    }
-
-
-
-    h2 {
-
-      font-size: 1.6rem;
-
-      margin-bottom: 10px;
-
-    }
-
-
-
-    p {
-
-      margin-top: 0;
-
-      margin-bottom: 10px;
-
-      color: var(--text-soft);
-
-      line-height: 1.6;
-
-    }
-
-
-
-    .kicker {
-
-      font-size: 0.7rem;
-
-      letter-spacing: 0.28em;
-
-      text-transform: uppercase;
-
-      color: #9caad8;
-
-      margin-bottom: 10px;
-
-    }
-
-
-
-    /* HERO (PAYMENTS) */
-
-
-
-    .hero {
-
-      margin-top: 24px;
-
-      padding: 40px 22px 34px;
-
-      border-radius: 22px;
-
-      position: relative;
-
-      overflow: hidden;
-
-      border: 1px solid var(--border-soft);
-
-      background:
-
-        linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(3,5,12,0.95)),
-
-        #020308;
-
-    }
-
-
-
-    /* Static ocean background image — replace URL with your uploaded file path if needed */
-
-    .hero::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background-image: url("solana-ocean-hero.jpg");
-
-      background-size: cover;
-
-      background-position: center;
-
-      opacity: 0.4;
-
-      filter: saturate(1.2);
-
-      z-index: -2;
-
-    }
-
-
-
-    .hero::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background: radial-gradient(circle at top, rgba(72,255,155,0.22), transparent 55%);
-
-      z-index: -1;
-
-    }
-
-
-
-    .hero-inner {
-
-      max-width: 720px;
-
-      position: relative;
-
-    }
-
-
-
-    .hero h1 {
-
-      font-size: clamp(2.4rem, 4vw, 3.2rem);
-
-      font-weight: 800;
-
-      margin-bottom: 10px;
-
-      background: linear-gradient(90deg, #48ff9b, #00ffa3);
-
-      -webkit-background-clip: text;
-
-      color: transparent;
-
-    }
-
-
-
-    .hero-sub {
-
-      font-size: 1.05rem;
-
-      color: #e4e9ff;
-
-      margin-bottom: 20px;
-
-    }
-
-
-
-    .hero-sub strong {
-
-      color: var(--accent);
-
-    }
-
-
-
-    .hero-highlight {
-
-      font-size: 0.9rem;
-
-      color: #e0fffb;
-
-      margin-bottom: 20px;
-
-    }
-
-
-
-    .hero-highlight span {
-
-      color: #ffea7f;
-
-      font-weight: 600;
-
-    }
-
-
-
-    .cta-row {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      align-items: center;
-
-      gap: 14px;
-
-      margin-top: 6px;
-
-    }
-
-
-
-    .cta-primary {
-
-      display: inline-block;
-
-      padding: 14px 28px;
-
-      border-radius: 999px;
-
-      background: var(--accent-strong);
-
-      color: #000;
-
-      font-weight: 800;
-
-      font-size: 1rem;
-
-      box-shadow: 0 0 22px rgba(0,255,157,0.75);
-
-      text-decoration: none;
-
-    }
-
-
-
-    .cta-primary:hover {
-
-      box-shadow: 0 0 34px rgba(0,255,157,0.95);
-
-      transform: translateY(-1px);
-
-    }
-
-
-
-    .cta-secondary {
-
-      font-size: 0.9rem;
-
-      color: #d0d7ff;
-
-    }
-
-
-
-    .cta-secondary strong {
-
-      color: var(--accent);
-
-    }
-
-
-
-    .hero-meta {
-
-      margin-top: 18px;
-
-      font-size: 0.85rem;
-
-      color: #c6cff9;
-
-    }
-
-
-
-    .hero-meta span {
-
-      color: var(--accent);
-
-      font-weight: 600;
-
-    }
-
-
-
-    /* BENEFITS GRID */
-
-
-
-    .grid {
-
+    /* Layout: hero + cards */
+    .hero-layout {
       display: grid;
-
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-
-      gap: 18px;
-
-      margin-top: 16px;
-
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 26px;
+      margin-top: 40px;
+      align-items: stretch;
     }
 
-
-
-    .card {
-
-      background: rgba(10, 14, 35, 0.95);
-
-      border-radius: 14px;
-
-      border: 1px solid rgba(255,255,255,0.07);
-
-      padding: 14px 16px 16px;
-
-      font-size: 0.95rem;
-
-    }
-
-
-
-    .card h3 {
-
-      margin-top: 0;
-
-      margin-bottom: 6px;
-
-      font-size: 1.05rem;
-
-    }
-
-
-
-    .tag {
-
-      display: inline-block;
-
-      font-size: 0.7rem;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.22em;
-
-      color: #9da7e5;
-
-      margin-bottom: 6px;
-
-    }
-
-
-
-    ul {
-
-      padding-left: 18px;
-
-      margin: 10px 0 0;
-
-      color: var(--text-soft);
-
-      font-size: 0.95rem;
-
-    }
-
-
-
-    li {
-
-      margin-bottom: 6px;
-
-    }
-
-
-
-    /* SECTION-SPECIFIC */
-
-
-
-    .section-title-main {
-
-      font-size: 1.8rem;
-
-      margin-bottom: 8px;
-
-    }
-
-
-
-    .section-lead {
-
-      font-size: 0.98rem;
-
-      color: var(--text-soft);
-
-      max-width: 720px;
-
-    }
-
-
-
-    .pill-link {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding: 6px 14px;
-
-      border-radius: 999px;
-
-      border: 1px solid rgba(255,255,255,0.16);
-
-      font-size: 0.8rem;
-
-      margin-top: 10px;
-
-    }
-
-
-
-    .pill-link span {
-
-      font-size: 1.1rem;
-
-    }
-
-
-
-    /* FOOTER */
-
-
-
-    footer {
-
-      padding: 26px 20px 34px;
-
-      text-align: center;
-
-      font-size: 0.8rem;
-
-      color: #9da4c8;
-
-      border-top: 1px solid rgba(255,255,255,0.06);
-
-      background: rgba(0,0,0,0.9);
-
-      margin-top: 38px;
-
-    }
-
-
-
-    /* RESPONSIVE */
-
-
-
-    @media (max-width: 768px) {
+    @media (max-width: 840px) {
+      .hero-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
 
       header {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 8px;
-
+        position: static;
       }
-
-
-
-      nav {
-
-        width: 100%;
-
-      }
-
-
-
-      nav a {
-
-        margin-left: 0;
-
-        margin-right: 14px;
-
-      }
-
-
-
-      .hero {
-
-        padding: 32px 18px 26px;
-
-      }
-
-
-
-      section {
-
-        padding: 22px 18px;
-
-      }
-
     }
 
-  </style>
+    /* Hero card */
+    .hero-card {
+      position: relative;
+      padding: 34px 26px 30px;
+      border-radius: 22px;
+      background: radial-gradient(circle at 20% 0%, rgba(0,255,157,0.18), transparent 60%),
+                  linear-gradient(145deg, rgba(5,9,18,0.96), rgba(7,18,26,0.98));
+      border: 1px solid rgba(132,255,196,0.28);
+      box-shadow:
+        0 0 35px rgba(36,255,155,0.25),
+        0 20px 40px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
 
+    .hero-pill {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(222,255,239,0.8);
+      margin-bottom: 8px;
+    }
+
+    .hero-pill span {
+      color: var(--neon-green);
+    }
+
+    .hero-title {
+      font-size: 40px;
+      line-height: 1.04;
+      font-weight: 800;
+      margin: 0 0 14px;
+      background: linear-gradient(90deg, var(--neon-green), var(--solana-aqua));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 460px;
+    }
+
+    .hero-sub strong {
+      color: #f8f8f8;
+      font-weight: 600;
+    }
+
+    .stripe-line {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(232,255,244,0.9);
+    }
+
+    .stripe-line strong {
+      color: var(--neon-green);
+      font-weight: 700;
+    }
+
+    .hero-cta {
+      margin-top: 26px;
+    }
+
+    .cta-btn-main {
+      display: inline-block;
+      padding: 16px 26px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 0%, #ffffff, #b2ffe0);
+      color: #02130a;
+      text-decoration: none;
+      box-shadow:
+        0 0 22px rgba(36,255,155,0.65),
+        0 14px 30px rgba(0,0,0,0.9);
+      border: 1px solid #98ffd0;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+      white-space: nowrap;
+    }
+
+    .cta-btn-main:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow:
+        0 0 32px rgba(36,255,155,0.9),
+        0 18px 40px rgba(0,0,0,0.95);
+    }
+
+    .cta-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(210,240,232,0.9);
+    }
+
+    /* Right column cards */
+    .info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 18px 18px 20px;
+      border-radius: 18px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.7);
+    }
+
+    .info-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(180,191,210,0.9);
+      margin-bottom: 4px;
+    }
+
+    .info-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #f4f4f6;
+    }
+
+    .info-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-soft);
+    }
+
+    .info-body strong {
+      color: var(--neon-green);
+      font-weight: 600;
+    }
+
+    /* Section blocks */
+    section.section-block {
+      margin-top: 42px;
+      padding: 26px 22px 26px;
+      border-radius: 20px;
+      background: rgba(5,10,18,0.92);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.75);
+    }
+
+    section.section-block h2 {
+      margin: 0 0 14px;
+      font-size: 26px;
+      color: var(--neon-green);
+    }
+
+    section.section-block p {
+      margin: 0 0 14px;
+      font-size: 15px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      max-width: 820px;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 6px 18px;
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .feature-list li::before {
+      content: "✔";
+      color: var(--neon-green);
+      margin-right: 6px;
+    }
+
+    .pricing-rows p {
+      margin-bottom: 10px;
+    }
+
+    .text-cta-inline {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(111,255,193,0.7);
+      text-decoration: none;
+      font-size: 14px;
+      color: var(--neon-green);
+    }
+
+    .text-cta-inline:hover {
+      background: rgba(36,255,155,0.08);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 22px 10px 10px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
 </head>
 
-
-
 <body>
+  <div class="page-wrap">
+    <!-- HEADER -->
+    <header>
+      <div class="logo-text">
+        SIDEGUY <span>PAYMENTS</span> · SAN DIEGO
+      </div>
+      <nav>
+        <a href="#top">Home</a>
+        <a href="#solana-gallery">Solana Gallery</a>
+        <a href="#vision">Vision 1.0</a>
+        <a href="#target-worksheet">Target Worksheet</a>
+      </nav>
+    </header>
 
-
-
-<header>
-
-  <div class="logo">SIDEGUY <span>SOLUTIONS</span></div>
-
-  <nav>
-
-    <a href="index.html">Payments</a>
-
-    <a href="solana-gallery.html">Solana Gallery</a>
-
-    <a href="sideguy-vision.html">Vision 1.0</a>
-
-    <a href="target-worksheet.html">Target Worksheet</a>
-
-  </nav>
-
-</header>
-
-
-
-<main>
-
-  <!-- HERO · PAYMENTS + OCEAN BACKDROP -->
-
-  <section class="hero">
-
-    <div class="kicker">SIDEGUY PAYMENTS · SAN DIEGO</div>
-
-    <div class="hero-inner">
-
-      <h1>.4-Second Solana Payments</h1>
-
-      <p class="hero-sub">
-
-        Stop paying high fees and waiting days for payouts. Solana settles in
-
-        <strong>0.4 seconds</strong>, costs pennies, and finally lets you
-
-        <strong>own a piece of your processing</strong> —
-
-        because <strong>Stripe gives you nothing.</strong>
-
-      </p>
-
-      <p class="hero-highlight">
-
-        Built for North County restaurants, gyms, salons, ecommerce brands,
-
-        and operators who want <span>speed, savings, and real support.</span>
-
-      </p>
-
-
-
-      <div class="cta-row">
-
-        <a class="cta-primary" href="sms:+17735441231?&body=Hey%20PJ%2C%20I%20want%20to%20see%20my%20processing%20savings">
-
-          📱 Text PJ (773) 544-1231 — Get Your Savings
-
-        </a>
-
-        <div class="cta-secondary">
-
-          Or just text <strong>"hey"</strong> and PJ will walk you through it.
-
+    <!-- HERO + WHY CARDS -->
+    <main id="top" class="hero-layout">
+      <!-- HERO LEFT -->
+      <section class="hero-card">
+        <div class="hero-pill">
+          COASTAL PAYMENTS · <span>.4-SECOND SETTLEMENTS</span>
         </div>
 
-      </div>
+        <h1 class="hero-title">.4-Second Solana Payments</h1>
 
-
-
-      <div class="hero-meta">
-
-        SideGuy plugs you into Solana rails — we handle the tech so your
-
-        business just gets <span>faster money and lower fees.</span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- SECTION · WHY SOLANA / WHAT YOU GET -->
-
-  <section>
-
-    <div class="kicker">WHY THIS MATTERS</div>
-
-    <h2 class="section-title-main">Why Solana Payments + SideGuy</h2>
-
-    <p class="section-lead">
-
-      Solana isn’t “crypto hype.” It’s the fastest, cheapest, most reliable
-
-      settlement layer on earth. SideGuy is your local gateway — so you don’t
-
-      need to understand any of the plumbing to benefit from it.
-
-    </p>
-
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <div class="tag">Speed</div>
-
-        <h3>⚡ 0.4-Second Settlement</h3>
-
-        <p>
-
-          Cash flow in real time instead of days. No more “funds on hold” or
-
-          waiting for batch payouts — the network closes the gap.
-
+        <p class="hero-sub">
+          Stop paying high fees and waiting days for payouts.
+          Solana settles in <strong>0.4 seconds</strong>, costs pennies,
+          and finally lets you
+          <strong>own a piece of your processing</strong>.
         </p>
 
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Fees</div>
-
-        <h3>💸 Lower Processing Costs</h3>
-
-        <p>
-
-          Keep more of every sale. We target lower blended rates than Stripe,
-
-          Square, and PayPal — and near-zero fees on Solana-native flows.
-
+        <p class="stripe-line">
+          <strong>Own a piece of your processing — Stripe gives you nothing.</strong>
         </p>
 
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Support</div>
-
-        <h3>📱 Real Human (PJ) Support</h3>
-
-        <p>
-
-          No ticket portals. No chatbot. Just text PJ at
-
-          <strong>(773) 544-1231</strong> and get help, ideas, and actual answers.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Implementation</div>
-
-        <h3>🛠 Integration Help Included</h3>
-
-        <p>
-
-          We handle the messy parts: connecting to your site, POS, forms, or
-
-          invoicing. You stay focused on running the business.
-
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- SECTION · PRICING & SIDEGUY ADVANTAGE -->
-
-  <section>
-
-    <div class="kicker">NUMBERS THAT MAKE SENSE</div>
-
-    <h2>Transparent Pricing</h2>
-
-    <p>
-
-      No hidden fees. No monthly minimums. No “got you” nonsense.
-
-    </p>
-
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <h3>Visa / Mastercard</h3>
-
-        <p>
-
-          <strong>1.2% – 1.7%</strong> depending on volume and risk profile.<br />
-
-          We’ll show you exactly where the savings come from.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Solana / Stablecoin</h3>
-
-        <p>
-
-          <strong>~$0.00025</strong> per transaction — effectively free compared
-
-          to traditional card rails.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>ACH & Bank Flows</h3>
-
-        <p>
-
-          Free or near-free depending on the setup. Great for high-ticket
-
-          services, retainers, and membership models.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Implementation</h3>
-
-        <p>
-
-          Included. We help you connect everything and train your team on
-
-          how to use it — without slowing down your operations.
-
-        </p>
-
-      </div>
-
-    </div>
-
-
-
-    <h2 style="margin-top:26px;">The SideGuy Advantage</h2>
-
-    <ul>
-
-      <li>✔ 0.4-second settlement</li>
-
-      <li>✔ Local San Diego / North County support</li>
-
-      <li>✔ Solana-native infrastructure for the future of payments</li>
-
-      <li>✔ Works with major POS systems and custom sites</li>
-
-      <li>✔ Optional stablecoin escrow for high-risk flows</li>
-
-      <li>✔ AI invoicing & automated billing options</li>
-
-      <li>✔ Custom dashboards for operators and owners</li>
-
-    </ul>
-
-  </section>
-
-
-
-  <!-- SECTION · SOLANA GALLERY PREVIEW -->
-
-  <section>
-
-    <div class="kicker">SEE THE RAILS</div>
-
-    <h2>Solana Gallery</h2>
-
-    <p class="section-lead">
-
-      Most people have never seen what’s actually powering “crypto” or
-
-      Web3. The Solana Gallery page shows the infrastructure behind
-
-      SideGuy: TVL, DEX/AMM landscape, ecosystem visuals, and why we
-
-      chose Solana as the base layer.
-
-    </p>
-
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <div class="tag">Visual</div>
-
-        <h3>Solana Skyline</h3>
-
-        <p>
-
-          The “Burj Khalifa” moment for Solana — tall, fast, built for
-
-          real traffic. A visual that anchors the brand in something big.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Ecosystem</div>
-
-        <h3>DEX / AMM Landscape</h3>
-
-        <p>
-
-          Jupiter, Orca, Raydium, and more — deep liquidity and
-
-          composability that SideGuy taps into under the hood.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Metric</div>
-
-        <h3>Solana TVL</h3>
-
-        <p>
-
-          Billions in Total Value Locked across DeFi, payments, and apps.
-
-          Eventually we can add a live TVL widget to keep this real-time.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Vibe</div>
-
-        <h3>Sunset Ocean Visuals</h3>
-
-        <p>
-
-          The Solana sunset ocean vibe connects invisible rails to the
-
-          Pacific coastline. SideGuy sits right at that intersection.
-
-        </p>
-
-      </div>
-
-    </div>
-
-
-
-    <a class="pill-link" href="solana-gallery.html">
-
-      <span>🖼</span> Open Solana Gallery
-
-    </a>
-
-  </section>
-
-
-
-  <!-- SECTION · VISION 1.0 PREVIEW -->
-
-  <section>
-
-    <div class="kicker">VISION 1.0</div>
-
-    <h2>From Fiat Extraction to Network Distribution</h2>
-
-    <p class="section-lead">
-
-      SideGuy Vision 1.0 is simple: move real businesses onto Solana rails,
-
-      grow the network, and explore ways the value generated can flow back
-
-      to the people actually using it — not just intermediaries.
-
-    </p>
-
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <div class="tag">Problem</div>
-
-        <h3>Legacy Systems Extract</h3>
-
-        <p>
-
-          Card networks, banks, processors, and chargeback insurance all
-
-          take a cut. Businesses pay 2–4% just to get paid.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Shift</div>
-
-        <h3>Solana as Base Layer</h3>
-
-        <p>
-
-          Fast, neutral, global rails where anyone can build. Perfect
-
-          for real-world commerce — not just trading.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Network</div>
-
-        <h3>San Diego Pilot</h3>
-
-        <p>
-
-          Start with North County. Prove a local economy can run on Solana,
-
-          then replicate the model city by city.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <div class="tag">Future</div>
-
-        <h3>UBI 3.0</h3>
-
-        <p>
-
-          As meaningful volume runs on these rails, part of the upside
-
-          can flow back to businesses and people using the network.
-
-        </p>
-
-      </div>
-
-    </div>
-
-
-
-    <a class="pill-link" href="sideguy-vision.html">
-
-      <span>🚀</span> Read SideGuy Vision 1.0
-
-    </a>
-
-  </section>
-
-
-
-  <!-- SECTION · TARGET WORKSHEET PREVIEW -->
-
-  <section>
-
-    <div class="kicker">PIPELINE</div>
-
-    <h2>Who SideGuy Helps First</h2>
-
-    <p class="section-lead">
-
-      We maintain a simple internal worksheet of ideal targets — gyms,
-
-      restaurants, salons, med spas, ecommerce brands, venues, and more.
-
-      The public Target Worksheet page gives visitors a peek at the plan.
-
-    </p>
-
-
-
-    <div class="grid">
-
-      <div class="card">
-
-        <h3>North County Gyms</h3>
-
-        <p>
-
-          Membership-based, high-volume, recurring payments. Perfect
-
-          fit for instant settlement and lower blended rates.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Restaurants & Bars</h3>
-
-        <p>
-
-          Heavy weekend volume, hates payout delays and processor risk holds.
-
-          Solana-based flows can improve cash flow.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Salons / Med Spas</h3>
-
-        <p>
-
-          High-ticket services + memberships — ideal for stable,
-
-          instant bank or Solana-based payments.
-
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h3>Ecommerce & Creators</h3>
-
-        <p>
-
-          Online-native. Often stuck in Stripe land with disputes and
-
-          high fees. SideGuy gives them an exit ramp.
-
-        </p>
-
-      </div>
-
-    </div>
-
-
-
-    <a class="pill-link" href="target-worksheet.html">
-
-      <span>📝</span> View Target Worksheet
-
-    </a>
-
-  </section>
-
-
-
-  <!-- SECTION · FINAL CTA -->
-
-  <section>
-
-    <div class="kicker">NEXT STEP</div>
-
-    <h2>Text PJ and See Your Savings</h2>
-
-    <p class="section-lead">
-
-      You don’t have to understand Solana or Web3. You just need to know
-
-      your current monthly processing volume. Text PJ, get your exact
-
-      numbers, and decide if keeping more of every sale is worth it.
-
-    </p>
-
-
-
-    <div class="cta-row" style="margin-top:16px;">
-
-      <a class="cta-primary" href="sms:+17735441231?&body=Hey%20PJ%2C%20I%20want%20to%20see%20my%20processing%20savings">
-
-        📱 Text PJ (773) 544-1231
-
+        <div class="hero-cta">
+          <a class="cta-btn-main" href="sms:+17735441231?&body=Hey%20PJ%2C%20show%20me%20my%20processing%20savings">
+            📱 Text PJ (773) 544-1231 — Get Your Savings
+          </a>
+          <div class="cta-note">
+            Just say “hey” — PJ will pull your current statement and show exact Solana savings.
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="info-col">
+        <div class="info-card">
+          <div class="info-label">WHY THIS MATTERS</div>
+          <div class="info-title">Why Solana Payments + SideGuy</div>
+          <div class="info-body">
+            Solana isn’t “crypto hype.” It’s the fastest, cheapest, most reliable
+            settlement layer on earth. SideGuy turns it into something your
+            bookkeeper can understand and your team can benefit from.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">FEES</div>
+          <div class="info-title">Lower Processing Costs</div>
+          <div class="info-body">
+            Keep more of every sale. We route as much volume as possible over
+            <strong>Solana rails</strong>, then optimize your remaining card
+            volume — so you see real savings without burning your staff.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">SUPPORT</div>
+          <div class="info-title">Real Human Help (PJ)</div>
+          <div class="info-body">
+            No ticket portals. No chatbot. You text PJ, you get PJ.
+            Need answers on fees, payouts, or integration ideas?
+            Just text and we’ll walk it through live.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">IMPLEMENTATION</div>
+          <div class="info-title">Integration Help Included</div>
+          <div class="info-body">
+            We handle the messy parts: connecting to your current site,
+            POS or invoicing system, wiring up Solana rails, and testing flows —
+            so you can keep running the business.
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- WHY SOLANA SECTION -->
+    <section id="solana-gallery" class="section-block section-why">
+      <h2>Why Solana for Payments?</h2>
+      <p>
+        Solana is the settlement layer under the hood — like a faster, cheaper,
+        programmable version of the card networks. It gives you
+        <strong>instant finality</strong>, <strong>near-zero fees</strong>,
+        and on-chain transparency that traditional processors can’t match.
+      </p>
+      <ul class="feature-list">
+        <li>Sub-second finality — no “pending” limbo</li>
+        <li>Fees measured in fractions of a cent</li>
+        <li>Global, 24/7 settlement — weekends included</li>
+        <li>Perfect for memberships, subscriptions & tipping</li>
+        <li>Works alongside your existing cards & ACH</li>
+        <li>Plays nicely with wallets, QR codes and links</li>
+      </ul>
+
+      <a class="text-cta-inline" href="#vision">
+        View SideGuy Vision 1.0 →
       </a>
+    </section>
 
-      <div class="cta-secondary">
+    <!-- WHAT YOU GET -->
+    <section class="section-block">
+      <h2>What You Get With SideGuy Payments</h2>
+      <p>
+        This isn’t another faceless processor. It’s a coastal payments partner
+        that cares about your cash flow and your customers.
+      </p>
+      <ul class="feature-list">
+        <li><strong>.4-second settlement</strong> — money almost instantly</li>
+        <li><strong>Lower blended fees</strong> than Stripe, Square or PayPal</li>
+        <li><strong>Stablecoin escrow</strong> options for high-risk / high-ticket flows</li>
+        <li><strong>Local San Diego support</strong> — text, call or meet up</li>
+        <li><strong>Integration help</strong> for any website, POS or custom app</li>
+        <li><strong>AI-assisted invoicing</strong> and automated billing options</li>
+        <li><strong>Custom dashboards</strong> for owners, operators and finance</li>
+      </ul>
+    </section>
 
-        “Hey PJ, here’s my monthly volume…” is all you need.
-
+    <!-- PRICING -->
+    <section class="section-block">
+      <h2>Transparent Pricing</h2>
+      <p>No hidden fees. No monthly minimums. No “got you” fine print.</p>
+      <div class="pricing-rows">
+        <p><strong>Visa / Mastercard Processing:</strong><br>
+          Typically <strong>1.2% – 1.7%</strong> depending on volume and risk.
+        </p>
+        <p><strong>Stablecoin / Solana Payments:</strong><br>
+          About <strong>$0.00025 per transaction</strong> — basically free.
+        </p>
+        <p><strong>ACH / Bank Payments:</strong><br>
+          Free or near-free depending on the flow.
+        </p>
+        <p><strong>Integration Help:</strong><br>
+          Included — we help set it up for you.
+        </p>
       </div>
+    </section>
 
-    </div>
+    <!-- VISION 1.0 -->
+    <section id="vision" class="section-block">
+      <h2>SideGuy Vision 1.0 — Pay People to Use Better Money</h2>
+      <p>
+        The old rails extract value from every swipe and give nothing back.
+        We believe Solana lets us flip that model.
+      </p>
+      <p>
+        As more volume moves over instant, low-cost settlement rails, there’s
+        real room to <strong>share the upside</strong> with the people actually
+        using the network — businesses, workers and eventually everyday customers.
+      </p>
+      <p>
+        SideGuy’s long-term vision is a world where:
+      </p>
+      <ul class="feature-list">
+        <li>Local businesses keep more of every dollar they earn</li>
+        <li>Workers and creators share in upside from the rails they help grow</li>
+        <li>Communities benefit from network growth instead of faceless processors</li>
+        <li>Stable, transparent payment rails become a kind of “digital oil field” that funds real-world good</li>
+      </ul>
+      <p>
+        It starts simple: <strong>help San Diego businesses switch to Solana-powered payments</strong>,
+        prove the savings, then expand the model city by city.
+      </p>
+    </section>
 
-  </section>
+    <!-- TARGET WORKSHEET -->
+    <section id="target-worksheet" class="section-block">
+      <h2>Target Worksheet — 5 Minutes to Real Numbers</h2>
+      <p>
+        If you can answer a few basic questions, we can show you exactly what
+        Solana rails + SideGuy would save you.
+      </p>
+      <ul class="feature-list">
+        <li>Current monthly processing volume</li>
+        <li>Average ticket size (or range)</li>
+        <li>Rough split of in-person vs online</li>
+        <li>Your current effective rate (if you know it)</li>
+        <li>Any special flows (subscriptions, tips, high-ticket, etc.)</li>
+      </ul>
+      <p>
+        Text those details to PJ and you’ll get:
+      </p>
+      <ul class="feature-list">
+        <li>Estimated Solana + card blended rate</li>
+        <li>Projected annual savings</li>
+        <li>Recommended flow (cards, Solana, ACH)</li>
+        <li>Integration plan that fits your stack</li>
+      </ul>
 
-</main>
+      <a class="text-cta-inline"
+         href="sms:+17735441231?&body=Hey%20PJ%2C%20I%20want%20my%20SideGuy%20savings%20worksheet.">
+        📲 Text PJ “Target Worksheet” to get started
+      </a>
+    </section>
 
-
-
-<footer>
-
-  © 2025 SideGuy Solutions — San Diego Coastal Tech + Payments · Built on Solana rails.
-
-</footer>
-
-
-
+    <footer>
+      © 2025 SideGuy Solutions — San Diego Coastal Tech + Payments · Text PJ (773) 544-1231
+    </footer>
+  </div>
 </body>
-
 </html>
