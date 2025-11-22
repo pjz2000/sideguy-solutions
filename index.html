@@ -1,476 +1,141 @@
-<!--
-
-  SideGuy Payments
-
-  Version: 2.0 — Live Solana Beach Edition
-
-  Author: PJ + ChatGPT
-
-  Auto-Timestamp + Glow UI + Twitter Feed
-
--->
-
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-  <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-
-  <title>SideGuy Payments | .4 Second Solana Settlements</title>
-
-
-
-  <meta name="description"
-
-    content=".4-second Solana payments for San Diego businesses. Lower fees, instant settlements, and real human support. Text PJ for your savings.">
-
-  <meta name="keywords"
-
-    content="Solana payments, San Diego, instant settlement, SideGuy Payments, blockchain payments, Stripe alternative">
-
-
-
-  <style>
-
-    :root {
-
-      --green: #00ff9d;
-
-      --aqua: #48ffea;
-
-      --bg: #050607;
-
-      --card: rgba(255,255,255,0.04);
-
-      --text: #e8e8e8;
-
-    }
-
-
-
-    body {
-
-      margin: 0;
-
-      background: radial-gradient(circle at 50% 10%, #0e1a14, #050607 70%);
-
-      color: var(--text);
-
-      font-family: Arial, sans-serif;
-
-      overflow-x: hidden;
-
-    }
-
-
-
-    header {
-
-      text-align: center;
-
-      padding: 30px 10px 10px;
-
-      color: var(--green);
-
-      font-size: 26px;
-
-      font-weight: bold;
-
-      letter-spacing: 1px;
-
-      text-shadow: 0 0 15px var(--green);
-
-    }
-
-
-
-    #timestamp {
-
-      margin-top: 6px;
-
-      font-size: 13px;
-
-      color: #aaa;
-
-    }
-
-
-
-    nav {
-
-      margin-top: 12px;
-
-    }
-
-    nav a {
-
-      text-decoration: none;
-
-      color: var(--aqua);
-
-      margin: 0 14px;
-
-      font-size: 16px;
-
-      opacity: .9;
-
-    }
-
-    nav a:hover {
-
-      opacity: 1;
-
-      text-shadow: 0 0 10px var(--aqua);
-
-    }
-
-
-
-    .hero {
-
-      text-align: center;
-
-      padding: 70px 20px 40px;
-
-    }
-
-
-
-    .hero h1 {
-
-      font-size: 54px;
-
-      font-weight: 900;
-
-      background: linear-gradient(90deg, var(--green), var(--aqua));
-
-      -webkit-background-clip: text;
-
-      color: transparent;
-
-      text-shadow: 0 0 30px var(--green);
-
-      margin-bottom: 18px;
-
-    }
-
-
-
-    .hero p {
-
-      font-size: 22px;
-
-      max-width: 780px;
-
-      margin: 0 auto 28px;
-
-      color: #d7d7d7;
-
-      line-height: 1.6;
-
-    }
-
-
-
-    .cta-btn {
-
-      display: inline-block;
-
-      background: var(--green);
-
-      color: #000;
-
-      padding: 18px 40px;
-
-      border-radius: 12px;
-
-      font-size: 22px;
-
-      font-weight: bold;
-
-      text-decoration: none;
-
-      box-shadow: 0 0 30px var(--green);
-
-      transition: 0.2s;
-
-    }
-
-
-
-    .cta-btn:hover {
-
-      transform: scale(1.06);
-
-      box-shadow: 0 0 45px var(--green);
-
-    }
-
-
-
-    .section {
-
-      padding: 60px 20px;
-
-      max-width: 900px;
-
-      margin: 0 auto;
-
-    }
-
-
-
-    .section h2 {
-
-      color: var(--green);
-
-      font-size: 34px;
-
-      margin-bottom: 14px;
-
-      text-shadow: 0 0 12px var(--green);
-
-    }
-
-
-
-    .card {
-
-      background: var(--card);
-
-      padding: 30px;
-
-      border-radius: 14px;
-
-      margin-top: 18px;
-
-      line-height: 1.7;
-
-    }
-
-
-
-    footer {
-
-      text-align: center;
-
-      padding: 40px 20px;
-
-      margin-top: 60px;
-
-      background: rgba(255,255,255,0.02);
-
-      color: #777;
-
-      font-size: 14px;
-
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SideGuy Payments — .4s Solana Settlements | San Diego</title>
+<meta name="description" content="Instant Solana payments for San Diego businesses. Lower fees, 0.4s settlement, real human support. Text PJ → (773) 544-1231">
+<style>
+:root{
+  --solana-purple:#9945FF;--solana-green:#14f195;--bg:#000000;--card:rgba(20,10,40,0.6);
+  --text:#e0e0ff;--glow:#14f195;--glow2:#9945FF;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:radial-gradient(circle at 20% 10%,#0f0720,#000 60%),#000;
+  color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;
+  min-height:100vh;display:flex;flex-direction:column;
+}
+header{
+  text-align:center;padding:2rem 1rem 1rem;
+  background:linear-gradient(to bottom,rgba(153,69,255,0.15),transparent);
+}
+h1{
+  font-size:clamp(2.8rem,8vw,5rem);font-weight:900;margin:1rem 0;
+  background:linear-gradient(90deg,var(--solana-green),#14f195,var(--solana-purple));
+  -webkit-background-clip:text;color:transparent;
+  text-shadow:0 0 40px rgba(20,251,145,0.6);
+}
+.subtitle{
+  font-size:1.4rem;color:#bb99ff;margin-bottom:1.5rem;
+}
+#ts{
+  font-size:0.9rem;color:#888;margin:1rem 0;
+}
+nav{
+  margin:1.5rem 0;
+}
+nav a{
+  color:#14f195;margin:0 0 1rem;font-weight:600;text-shadow:0 0 10px var(--glow);
+}
+nav a:hover{opacity:0.8}
+main{flex:1;max-width:1100px;margin:0 auto;padding:2rem 1rem;width:100%}
+.cta{
+  display:block;width:fit-content;margin:2rem auto;padding:1.2rem 3rem;
+  background:linear-gradient(45deg,var(--solana-green),#00ff9d);
+  color:#000;font-size:1.4rem;font-weight:900;border-radius:99px;
+  box-shadow:0 0 40px var(--glow),inset 0 0 20px #fff3;
+  transition:.3s;animation:pulse 4s infinite;
+}
+.cta:hover{transform:scale(1.05);box-shadow:0 0 60px var(--glow)}
+@keyframes pulse{0%,100%{box-shadow:0 0 40px var(--glow)}50%{box-shadow:0 0 70px var(--glow)}}
+.section{
+  margin:4rem 0;text-align:center;
+}
+.section h2{
+  font-size:2.4rem;margin-bottom:1.5rem;
+  background:linear-gradient(90deg,#14f195,#9945FF); -webkit-background-clip:text;color:transparent;
+}
+.card{
+  background:var(--card);backdrop-filter:blur(12px);border:1px solid rgba(153,69,255,0.3);
+  border-radius:1.5rem;padding:2rem;margin:1.5rem auto;max-width:800px;border-radius:1.5rem;
+  box-shadow:0 10px 40px rgba(153,69,255,0.25);
+}
+.tweet-grid{
+  display:grid;gap:1.5rem;max-width:680px;margin:3rem auto;
+}
+.twitter-tweet{
+  background:rgba(20,10,40,0.5)!important;border:1px solid rgba(153,69,255,0.4)!important;
+  border-radius:1rem!important;padding:1rem!important;
+}
+footer{
+  text-align:center;padding:3rem 1rem;font-size:0.95rem;color:#777;
+  background:linear-gradient(to top,rgba(153,69,255,0.1),transparent);
+}
+</style>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=inter:600,800,900" rel="stylesheet">
 </head>
-
-
-
 <body>
 
-
-
 <header>
-
-  SIDEGUY PAYMENTS — SAN DIEGO
-
-  <div id="timestamp"></div>
-
-
-
+  <h1>SIDEGUY PAYMENTS</h1>
+  <div class="subtitle">.4 second Solana settlements · San Diego & North County</div>
+  <div id="ts"></div>
   <nav>
-
-    <a href="index.html">Home</a>
-
-    <a href="solana-gallery.html">Solana Gallery</a>
-
-    <a href="sideguy-vision.html">Vision 1.0</a>
-
-    <a href="target-worksheet.html">Target Worksheet</a>
-
+    <a href="/">Home</a>
+    <a href="/payments.html">Payments</a>
+    <a href="/software.html">Software</a>
+    <a href="/automation.html">AI</a>
   </nav>
-
 </header>
 
-
-
-<section class="hero">
-
-  <h1>.4-Second Solana Payments</h1>
-
-  <p>
-
-    Stop paying high fees. Stop waiting days.  
-
-    Solana settles in <strong style="color:var(--green)">0.4 seconds</strong>, costs pennies,  
-
-    and lets you <strong style="color:var(--green)">own a piece of your processing</strong> —  
-
-    because Stripe gives you nothing.
-
-  </p>
-
-
-
-  <a class="cta-btn" href="sms:+17735441231">
-
-    Text PJ (773) 544-1231 — Get Your Savings
-
+<main>
+  <a href="sms:+17735441231" class="cta">
+    Text PJ (773) 544-1231 → Get Your Savings Now
   </a>
 
-</section>
-
-
-
-<section class="section">
-
-  <h2>Why Solana Payments + SideGuy?</h2>
-
-
-
-  <div class="card">
-
-    Solana isn’t hype — it’s the fastest, cheapest, most reliable settlement layer on earth.  
-
-    Your business keeps more of every sale, and everything settles instantly.
-
-    <br><br>
-
-    ✔ 0.4s settlement  
-
-    ✔ Near-free transactions  
-
-    ✔ Local San Diego support  
-
-    ✔ Works with all major sites + POS  
-
-    ✔ Stablecoin escrow protection  
-
-  </div>
-
-</section>
-
-
-
-<section class="section">
-
-  <h2>Transparent Pricing</h2>
-
-  <div class="card">
-
-    <strong>Visa / Mastercard:</strong> 1.2% – 1.7%  
-
-    <br><strong>Solana / Stablecoin:</strong> $0.00025  
-
-    <br><strong>ACH / Bank:</strong> Free or near-free  
-
-    <br><strong>Integration Help:</strong> Included — PJ sets it up  
-
-  </div>
-
-</section>
-
-
-
-<section class="twitter-feed section">
-
-  <h2>Latest from @SideGuySolana 🚀</h2>
-
-
-
-  <div style="display:grid;gap:1rem;max-width:620px;margin:0 auto">
-
-    <blockquote class="twitter-tweet">
-
-      <a href="https://x.com/SideGuySolana/status/1991917127931248958"></a>
-
-    </blockquote>
-
-    <blockquote class="twitter-tweet">
-
-      <a href="https://x.com/SideGuySolana/status/1992258234234567890"></a>
-
-    </blockquote>
-
-    <blockquote class="twitter-tweet">
-
-      <a href="https://x.com/SideGuySolana/status/1992987654321098765"></a>
-
-    </blockquote>
-
-  </div>
-
-
-
-  <p style="margin-top:15px;">
-
-    <a href="https://x.com/SideGuySolana"
-
-       style="color:var(--green);font-weight:bold;text-decoration:none;">
-
-      Follow @SideGuySolana for daily Solana alpha →
-
-    </a>
-
-  </p>
-
-
-
-</section>
-
-
-
-<script async src="https://platform.twitter.com/widgets.js"></script>
-
-
-
-<script>
-
-  function updateTimestamp() {
-
-    const now = new Date();
-
-    document.getElementById("timestamp").textContent =
-
-      "Updated · " + now.toLocaleString();
-
-  }
-
-  updateTimestamp();
-
-  setInterval(updateTimestamp, 60000);
-
-</script>
-
-
+  <section class="section">
+    <h2>Why Solana Changes Everything</h2>
+    <div class="card">
+      Legacy processors take 2–3 days and 2–3%.<br>
+      Solana settles in <strong>0.4 seconds</strong> for <strong>pennies</strong>.<br><br>
+      You keep more. Your customers feel nothing different. You sleep better.
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Live from @SideGuySolana</h2>
+    <div class="tweet-grid">
+      <blockquote class="twitter-tweet">
+        <a href="https://x.com/SideGuySolana/status/1991917127931248958"></a>
+      </blockquote>
+      <blockquote class="twitter-tweet">
+        <a href="https://x.com/SideGuySolana/status/1992987654321098765"></a>
+      </blockquote>
+      <blockquote class="twitter-tweet">
+        <a href="https://x.com/SideGuySolana/status/1992258234234567890"></a>
+      </blockquote>
+    </div>
+    <p style="margin-top:2rem">
+      <a href="https://x.com/SideGuySolana" style="color:var(--glow);font-weight:800">
+        → Follow @SideGuySolana for daily receipts
+      </a>
+    </p>
+  </section>
+</main>
 
 <footer>
-
-  © 2025 SideGuy Solutions — San Diego Coastal Tech + Payments  
-
-  <br>
-
-  Built with PJ energy + Solana speed ⚡️
-
+  © 2025 SideGuy Solutions — Built coastal in Solana Beach, powered by Solana.<br>
+  <span style="color:#14f195">Text PJ anytime · (773) 544-1231</span>
 </footer>
 
-
-
+<script async src="https://platform.twitter.com/widgets.js"></script>
+<script>
+  document.getElementById('ts').textContent = 'Live · ' + new Date().toLocaleString('en-US', {
+    month:'short', day:'numeric', hour:'numeric', minute:'2-digit', hour12:true, timeZone:'America/Los_Angeles'
+  }) + ' PST';
+  setInterval(()=>{ location.reload(); }, 300000); // refresh every 5 min
+</script>
 </body>
-
 </html>
-
