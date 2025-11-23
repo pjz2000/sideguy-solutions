@@ -1,6 +1,6 @@
-// SideGuy SEO Engine v2
+// SideGuy SEO Engine — Perfect Match Version
 
-// Auto-links all SEO pages in /seo-pages/
+// Matches EXACTLY the filenames in /seo-pages/
 
 
 
@@ -30,23 +30,55 @@ const seoPages = [
 
   "cloud-software-san-diego",
 
+  "custom-crm-san-diego",
+
   "custom-software-development-san-diego",
 
-  "data-automation-san-diego",
+  "database-design-san-diego",
 
-  "fintech-software-san-diego",
+  "digital-transformation-san-diego",
+
+  "ecommerce-development-san-diego",
+
+  "enterprise-software-san-diego",
+
+  "inventory-software-san-diego",
+
+  "legacy-software-upgrades-san-diego",
+
+  "machine-learning-development-san-diego",
+
+  "membership-software-san-diego",
 
   "mobile-app-development-san-diego",
 
-  "north-county-san-diego-software",
+  "near-me-custom-software",
+
+  "north-county-app-development",
+
+  "north-county-software",
+
+  "saas-development-san-diego",
+
+  "san-diego-software-company",
+
+  "san-diego-software-consulting",
 
   "software-development-san-diego",
 
+  "software-maintenance-san-diego",
+
+  "solana-beach-software",
+
   "solana-developers-san-diego",
 
-  "web-app-development-san-diego"
+  "startup-software-san-diego",
 
-  // Add more any time — website updates automatically
+  "tech-consulting-san-diego",
+
+  "web-app-development-san-diego",
+
+  "workflow-automation-san-diego"
 
 ];
 
@@ -68,5 +100,6 @@ window.onload = () => {
 
   });
 
+};
 };
 
