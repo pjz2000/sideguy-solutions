@@ -2,14 +2,15 @@ export default function Home() {
 
   return (
 
-    <div style={{ padding: "40px", color: "white" }}>
+    <main className="home-container">
 
       <h1>SideGuy Solutions</h1>
 
-      <p>Welcome to the homepage.</p>
+      <p>Welcome to the new Solana Beach–powered homepage.</p>
 
-    </div>
+    </main>
 
   );
 
 }
+
