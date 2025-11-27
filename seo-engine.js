@@ -1041,4 +1041,321 @@
     relatedSlugs: ["software-development-san-diego", "ai-development-san-diego"]
 
   },
+{
+
+  slug: "oceanside-software-development",
+
+  title: "Oceanside Software Development / Clean Apps & Automations",
+
+  metaDescription: "Software development in Oceanside — modern apps, automation workflows, and Solana payments for growing teams.",
+
+  h1: "Software Development Oceanside",
+
+  intro: "SideGuy Solutions helps Oceanside founders, teams, and operators build the custom dashboards, apps, and tools they actually use — not bloated agency software.",
+
+  bullets: [
+
+    "Automation workflows",
+
+    "Internal dashboards",
+
+    "Web apps",
+
+    "Solana payments",
+
+    "AI tools"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "custom-software-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "encinitas-software-development",
+
+  title: "Software Development Encinitas / Apps & Automation",
+
+  metaDescription: "Encinitas software development — clean tools, automations, and Solana-based payments to modernize your operations.",
+
+  h1: "Software Development Encinitas",
+
+  intro: "From Swami’s to Cardiff, Encinitas operators trust SideGuy Solutions to simplify workflows, reduce costs, and ship clean internal software the same week.",
+
+  bullets: [
+
+    "Automation workflows",
+
+    "Internal tools",
+
+    "Web apps",
+
+    "AI integrations",
+
+    "Solana payments"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "app-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "solana-beach-payments",
+
+  title: "Solana Beach Payments / .4 Second Settlements",
+
+  metaDescription: "Solana Beach payment processing — .4 second settlements, lower fees, and real human support from PJ.",
+
+  h1: "Solana Beach Payment Processing",
+
+  intro: "SideGuy Payments is built in Solana Beach for Solana Beach — lightning-fast payouts, lower fees, and direct text support from PJ. Own a piece of your processing.",
+
+  bullets: [
+
+    ".4 second Solana settlements",
+
+    "Lower fees than Stripe",
+
+    "Fast onboarding",
+
+    "Clean payment workflows",
+
+    "Founder-friendly support"
+
+  ],
+
+  relatedSlugs: ["san-diego-payments", "solana-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "carlsbad-custom-software",
+
+  title: "Carlsbad Custom Software / Automation & Payments",
+
+  metaDescription: "Carlsbad software development — modern tools, AI workflows, and Solana rails to upgrade operations.",
+
+  h1: "Carlsbad Custom Software Development",
+
+  intro: "SideGuy Solutions builds modern internal tools for Carlsbad operators — automation, dashboards, reporting tools, and lightning-fast payments.",
+
+  bullets: [
+
+    "Automation workflows",
+
+    "Internal dashboards",
+
+    "AI tools",
+
+    "Solana payments",
+
+    "Web apps"
+
+  ],
+
+  relatedSlugs: ["carlsbad-software-development", "software-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "la-jolla-software-development",
+
+  title: "La Jolla Software Development / High-End Apps & Tools",
+
+  metaDescription: "La Jolla custom software — automation workflows, AI tools, dashboards, and fast Solana payments.",
+
+  h1: "Software Development La Jolla",
+
+  intro: "SideGuy Solutions brings premium software quality to La Jolla teams — AI-powered automations, internal dashboards, and lightning-fast payments built for serious operators.",
+
+  bullets: [
+
+    "AI-powered workflows",
+
+    "Internal dashboards",
+
+    "Automation tools",
+
+    "Web apps",
+
+    "Solana payments"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "custom-software-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "san-diego-ai-development",
+
+  title: "San Diego AI Development / Automations & Internal Tools",
+
+  metaDescription: "AI development in San Diego — automation, smart workflows, and AI tools that save time and eliminate repetitive tasks.",
+
+  h1: "AI Development San Diego",
+
+  intro: "SideGuy Solutions builds AI workflows that automate repetitive tasks so San Diego teams can focus on real work — not busy work.",
+
+  bullets: [
+
+    "AI-powered automations",
+
+    "Smart workflows",
+
+    "Internal dashboards",
+
+    "AI report builders",
+
+    "Process improvements"
+
+  ],
+
+  relatedSlugs: ["ai-development-san-diego", "business-automation-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "san-diego-solana-development",
+
+  title: "San Diego Solana Development / Payments & Smart Tools",
+
+  metaDescription: "San Diego Solana development — .4 second settlements, payment flows, dashboards, and automation tools.",
+
+  h1: "Solana Development San Diego",
+
+  intro: "Forward-thinking San Diego teams choose SideGuy Solutions for Solana payments, smart contracts, automation tools, and modern dashboards.",
+
+  bullets: [
+
+    ".4 second Solana payments",
+
+    "Smart contract integrations",
+
+    "Automation workflows",
+
+    "Dashboard builds",
+
+    "Web3 tools"
+
+  ],
+
+  relatedSlugs: ["solana-development-san-diego", "blockchain-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "san-diego-business-automation",
+
+  title: "San Diego Business Automation / AI, Workflows & Tools",
+
+  metaDescription: "Business automation in San Diego — clean AI workflows, automation tools, dashboards, and reporting systems.",
+
+  h1: "Business Automation San Diego",
+
+  intro: "SideGuy Solutions eliminates the repetitive tasks choking San Diego businesses — automation workflows, AI tools, dashboards, and internal systems.",
+
+  bullets: [
+
+    "AI-powered automations",
+
+    "Automation workflows",
+
+    "Internal dashboards",
+
+    "Reporting tools",
+
+    "Process optimization"
+
+  ],
+
+  relatedSlugs: ["business-automation-san-diego", "software-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "north-county-software-development",
+
+  title: "North County Software Development / Apps & Automations",
+
+  metaDescription: "North County software — custom tools, AI workflows, dashboards, and Solana payments.",
+
+  h1: "Software Development North County",
+
+  intro: "From Del Mar to Oceanside, SideGuy Solutions ships clean internal tools and automation workflows for operators up and down North County.",
+
+  bullets: [
+
+    "Automation workflows",
+
+    "Internal dashboards",
+
+    "AI tools",
+
+    "Solana payments",
+
+    "Web apps"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "custom-software-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "san-diego-dashboards",
+
+  title: "San Diego Dashboards / Reports & Internal Tools",
+
+  metaDescription: "San Diego dashboards — clean reporting tools, internal dashboards, and automated business data systems.",
+
+  h1: "Dashboard Development San Diego",
+
+  intro: "SideGuy Solutions builds dashboards San Diego teams actually use — not complicated agency fluff. Clean reporting, fast insights, real impact.",
+
+  bullets: [
+
+    "Custom dashboards",
+
+    "Data reporting tools",
+
+    "AI-assisted analytics",
+
+    "Automation workflows",
+
+    "Internal tools"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "business-automation-san-diego"]
+
+}
 
