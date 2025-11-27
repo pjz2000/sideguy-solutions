@@ -675,6 +675,161 @@
     "energy-companies-san-diego"
 
   ]
+{
+
+  slug: "cardiff-by-the-sea-software-development",
+
+  title: "Software Development Cardiff-by-the-Sea | Clean Apps & Automations",
+
+  metaDescription: "Custom apps, dashboards, AI workflows, and Solana-powered tools for Cardiff-by-the-Sea businesses. Built clean, built fast, built locally.",
+
+  h1: "Cardiff-by-the-Sea Software Development",
+
+  intro: "SideGuy Solutions builds clean, modern software and automations for Cardiff founders and operators who want results — not agency fluff.",
+
+  bullets: [
+
+    "Custom business apps",
+
+    "Automation workflows",
+
+    "Internal dashboards",
+
+    "AI-powered operations",
+
+    "Solana integrations"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "solana-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "del-mar-software-development",
+
+  title: "Software Development Del Mar | Automations, Apps & Payments",
+
+  metaDescription: "Del Mar businesses use SideGuy Solutions for clean software, automation workflows, and Solana-powered payment tools.",
+
+  h1: "Software Development in Del Mar",
+
+  intro: "We help Del Mar teams ship cleaner software, automate operations, and upgrade payments with .4 second Solana settlements.",
+
+  bullets: [
+
+    "Automation workflows",
+
+    "Custom dashboards",
+
+    "Web & mobile apps",
+
+    "Solana payments",
+
+    "AI tools"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "san-diego-business-automation"]
+
+},
+
+
+
+{
+
+  slug: "rancho-santa-fe-software-development",
+
+  title: "Rancho Santa Fe Software Development | High-End Automations",
+
+  metaDescription: "Premium software, AI workflows, and Solana payments for Rancho Santa Fe businesses looking to modernize operations.",
+
+  h1: "Software Development in Rancho Santa Fe",
+
+  intro: "SideGuy builds high-end internal tools, clean apps, and automation workflows tailored for Rancho Santa Fe operators.",
+
+  bullets: [
+
+    "AI-powered automations",
+
+    "Operations dashboards",
+
+    "High-end internal tools",
+
+    "Solana business payments",
+
+    "Custom workflow apps"
+
+  ],
+
+  relatedSlugs: ["custom-software-san-diego", "solana-payments-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "la-jolla-software-development",
+
+  title: "Software Development La Jolla | Apps, AI & Payments",
+
+  metaDescription: "SideGuy Solutions builds clean apps, dashboards, and Solana-powered automations for La Jolla teams and founders.",
+
+  h1: "Software Development in La Jolla",
+
+  intro: "La Jolla businesses use SideGuy Solutions to automate operations, upgrade payments, and ship modern software — quickly.",
+
+  bullets: [
+
+    "Automation workflows",
+
+    "AI-powered internal tools",
+
+    "Reporting dashboards",
+
+    "Solana integrations",
+
+    "Custom apps"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "ai-development-san-diego"]
+
+},
+
+
+
+{
+
+  slug: "solana-beach-software-development",
+
+  title: "Software Development Solana Beach | Automations & Fast Payments",
+
+  metaDescription: "Local Solana Beach software development — apps, dashboards, workflows, and .4 second Solana settlements for businesses.",
+
+  h1: "Solana Beach Software Development",
+
+  intro: "SideGuy Solutions builds clean automations, apps, and Solana-powered payment tools for Solana Beach operators who want efficiency.",
+
+  bullets: [
+
+    "Custom dashboards",
+
+    "Automation workflows",
+
+    "AI-powered operations",
+
+    ".4 second Solana payments",
+
+    "Internal business tools"
+
+  ],
+
+  relatedSlugs: ["software-development-san-diego", "solana-development-san-diego"]
 
 },
 
