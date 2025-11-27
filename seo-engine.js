@@ -570,3 +570,111 @@
     ]
 
   },
+{
+
+  "slug": "solana-beach-software-development",
+
+  "title": "Software Development Solana Beach | Apps, Automation & Payments",
+
+  "metaDescription": "Software development, clean automations, and Solana-powered payment tools built for Solana Beach businesses.",
+
+  "h1": "Software Development in Solana Beach",
+
+  "intro": "SideGuy Solutions builds custom software, automations, and modern Solana payment flows for founders, operators, and teams in Solana Beach.",
+
+  "bullets": [
+
+    "Custom dashboards & automations",
+
+    "AI-powered workflows",
+
+    ".4 second Solana payments",
+
+    "Mobile & web apps",
+
+    "Internal tools"
+
+  ],
+
+  "relatedSlugs": [
+
+    "software-development-san-diego",
+
+    "custom-software-san-diego"
+
+  ]
+
+},
+
+{
+
+  "slug": "encinitas-software-development",
+
+  "title": "Encinitas Software Development | AI, Apps & Automation",
+
+  "metaDescription": "AI workflows, automations, and modern software development built for Encinitas founders, operators, and teams.",
+
+  "h1": "Software Development in Encinitas",
+
+  "intro": "SideGuy Solutions helps Encinitas businesses reduce costs, automate manual tasks, and upgrade tech with clean apps, dashboards, and AI workflows.",
+
+  "bullets": [
+
+    "AI automations",
+
+    "Dashboards & internal tools",
+
+    "Clean web & mobile apps",
+
+    ".4 second Solana payment rails",
+
+    "Workflow modernization"
+
+  ],
+
+  "relatedSlugs": [
+
+    "software-development-san-diego",
+
+    "ai-development-san-diego"
+
+  ]
+
+},
+
+{
+
+  "slug": "oceanside-software-development",
+
+  "title": "Oceanside Software Development | Clean Tech, AI & Solana Payments",
+
+  "metaDescription": "Custom software, automation workflows, and Solana payments built for Oceanside businesses and operators.",
+
+  "h1": "Software Development in Oceanside",
+
+  "intro": "SideGuy Solutions builds modern software, clean automation workflows, and Solana payment tools for Oceanside teams ready to save time and money.",
+
+  "bullets": [
+
+    "Automation workflows",
+
+    "AI-powered tools",
+
+    "Custom dashboards",
+
+    "Solana payments",
+
+    "Web & mobile development"
+
+  ],
+
+  "relatedSlugs": [
+
+    "software-development-san-diego",
+
+    "energy-companies-san-diego"
+
+  ]
+
+},
+
