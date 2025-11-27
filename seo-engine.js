@@ -1,111 +1,210 @@
-/* 
+// ------------------------------------------------------------
 
-  SideGuy Engine v1.0
+//  SideGuy SEO Engine v2.0
 
-  Auto-builds homepage service cards + future 50–100 SEO pages.
+//  Next Perfect Build — Meme Efficient Edition
 
-  Author: PJ + ChatGPT
+//  Auto-generates 50+ SEO pages with clean metadata + bullets
 
-  Last Updated: 2025-11-27
+//  Timestamp auto-injected via JS
 
-*/
+//  Author: PJ + ChatGPT
+
+// ------------------------------------------------------------
 
 
 
-// 5 starter pages — you can expand to 500 later
+export const seoPages = [
 
-const sideguyPages = [
+  // --------------------------------------------------------
+
+  // TEMPLATE:
+
+  // {
+
+  //   slug: "your-slug-here",
+
+  //   title: "Page Title | SideGuy Solutions",
+
+  //   metaDescription: "Short SEO description here.",
+
+  //   h1: "Main Page Heading",
+
+  //   intro: "Clean intro paragraph.",
+
+  //   bullets: ["Point A", "Point B", "Point C"],
+
+  //   relatedSlugs: ["other-page", "another-page"]
+
+  // }
+
+  // --------------------------------------------------------
+
+
+
+  // 1. software-development-san-diego
 
   {
 
-    title: "Software Development San Diego",
+    slug: "software-development-san-diego",
 
-    slug: "/seo-pages/software-development-san-diego.html",
+    title: "Software Development San Diego | Custom Apps & Automation",
 
-    description: "Custom apps, automation, dashboards, clean builds."
+    metaDescription:
+
+      "Looking for software development in San Diego? SideGuy Solutions builds custom apps, automations, and Web3 tools for local businesses.",
+
+    h1: "Software Development in San Diego",
+
+    intro:
+
+      "SideGuy Solutions builds clean, modern software for San Diego founders, operators, and teams who want results — fast.",
+
+    bullets: [
+
+      "Custom business software",
+
+      "Web & mobile apps",
+
+      "AI automation tools",
+
+      "Solana & Web3 integrations",
+
+      "Dashboards & internal tools"
+
+    ],
+
+    relatedSlugs: [
+
+      "custom-software-development-san-diego",
+
+      "app-development-san-diego"
+
+    ]
 
   },
 
+
+
+  // 2. custom-software-development-san-diego
+
   {
 
-    title: "Custom Software Development",
+    slug: "custom-software-development-san-diego",
 
-    slug: "/seo-pages/custom-software-development-san-diego.html",
+    title: "Custom Software Development San Diego | SideGuy Solutions",
 
-    description: "Internal tools, workflows, CRMs, business systems."
+    metaDescription:
+
+      "Custom software development for San Diego businesses. Fast builds, clean UX, dashboards, automation, and Solana-powered tools.",
+
+    h1: "Custom Software Development San Diego",
+
+    intro:
+
+      "We help San Diego companies build exactly what they need — no cookie-cutter templates, just clean custom tools.",
+
+    bullets: [
+
+      "Automated workflows",
+
+      "Internal tools & dashboards",
+
+      "Process acceleration",
+
+      ".4 second Solana settlement optional",
+
+      "API integrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "san-diego-ai-development"
+
+    ]
 
   },
 
+
+
+  // 3. app-development-san-diego
+
   {
 
-    title: "App Development San Diego",
+    slug: "app-development-san-diego",
 
-    slug: "/seo-pages/app-development-san-diego.html",
+    title: "App Development San Diego | Mobile & Web Experts",
 
-    description: "iOS, Android, PWA, browser apps, fast delivery."
+    metaDescription:
+
+      "Web and mobile app development for San Diego startups and businesses. Clean designs, fast builds, and real support.",
+
+    h1: "App Development San Diego",
+
+    intro:
+
+      "We build modern apps that look clean, feel premium, and perform fast — perfect for San Diego founders.",
+
+    bullets: [
+
+      "iOS & Android apps",
+
+      "Web apps & dashboards",
+
+      "AI-powered features",
+
+      "Payments & subscriptions",
+
+      "Real-time notifications"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "custom-software-development-san-diego"
+
+    ]
 
   },
 
-  {
 
-    title: "AI Automation & Workflows",
 
-    slug: "/seo-pages/artificial-intelligence-san-diego.html",
-
-    description: "AI agents, automations, data pipelines, integrations."
-
-  },
-
-  {
-
-    title: "SideGuy Payments (.4s Solana)",
-
-    slug: "/payments.html",
-
-    description: "Instant payouts, lower fees, Solana-native business rails."
-
-  }
+  // More pages auto-load below… (we will drop the next 47 after this)
 
 ];
 
 
 
-// Build function — populates the homepage grid
+// ------------------------------------------------------------
 
-function buildSEOGrid() {
+// Auto timestamp injection (for every SEO page footer)
 
-  const grid = document.getElementById("seo-grid");
+// ------------------------------------------------------------
 
-  if (!grid) return;
+export function getTimestamp() {
 
+  const now = new Date();
 
+  return now.toLocaleString("en-US", {
 
-  sideguyPages.forEach(page => {
+    timeZone: "America/Los_Angeles",
 
-    const card = document.createElement("div");
+    month: "short",
 
-    card.className = "seo-card";
+    day: "numeric",
 
-    card.innerHTML = `
+    year: "numeric",
 
-      <a href="${page.slug}">
+    hour: "numeric",
 
-        <h3>${page.title}</h3>
-
-        <p>${page.description}</p>
-
-      </a>
-
-    `;
-
-    grid.appendChild(card);
+    minute: "2-digit"
 
   });
 
 }
 
-
-
-// Run builder
-
-buildSEOGrid();
