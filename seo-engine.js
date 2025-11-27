@@ -1,12 +1,10 @@
 // ------------------------------------------------------------
 
-//  SideGuy SEO Engine v2.0
+//  SideGuy SEO Engine v3.0
 
-//  Next Perfect Build — Meme Efficient Edition
+//  Perfect Engine Code Base — Stable, Clean, Scalable
 
-//  Auto-generates 50+ SEO pages with clean metadata + bullets
-
-//  Timestamp auto-injected via JS
+//  Auto-generates all SEO pages for SideGuy Solutions
 
 //  Author: PJ + ChatGPT
 
@@ -18,7 +16,7 @@ export const seoPages = [
 
   // --------------------------------------------------------
 
-  // TEMPLATE:
+  // TEMPLATE (for future expansion)
 
   // {
 
@@ -174,7 +172,91 @@ export const seoPages = [
 
 
 
-  // More pages auto-load below… (we will drop the next 47 after this)
+  // 4. san-diego-ai-development
+
+  {
+
+    slug: "san-diego-ai-development",
+
+    title: "San Diego AI Development | Automation & Custom AI Tools",
+
+    metaDescription:
+
+      "AI development for San Diego businesses. Automations, chatbots, AI dashboards, custom GPT tools, and real local support.",
+
+    h1: "San Diego AI Development",
+
+    intro:
+
+      "SideGuy Solutions builds practical AI tools for real San Diego operators — automation that actually saves time and makes money.",
+
+    bullets: [
+
+      "Custom GPT tools & assistants",
+
+      "Automated workflows",
+
+      "Data dashboards & reporting",
+
+      "Customer AI chatbots",
+
+      "AI-driven business insights"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "custom-software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  // 5. blockchain-development-san-diego
+
+  {
+
+    slug: "blockchain-development-san-diego",
+
+    title: "Blockchain Development San Diego | Solana & Web3 Tools",
+
+    metaDescription:
+
+      "Blockchain development for San Diego businesses. Solana apps, smart contracts, payments, NFTs, and automation with real support.",
+
+    h1: "Blockchain Development San Diego",
+
+    intro:
+
+      "We build clean, fast blockchain tools for San Diego teams who want the next edge — from Solana payments to smart contracts.",
+
+    bullets: [
+
+      ".4 second Solana payments",
+
+      "Smart contracts & tokens",
+
+      "NFT membership/loyalty",
+
+      "Web3 dashboards",
+
+      "Solana Pay integrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "san-diego-ai-development",
+
+      "software-development-san-diego"
+
+    ]
+
+  }
 
 ];
 
@@ -182,7 +264,7 @@ export const seoPages = [
 
 // ------------------------------------------------------------
 
-// Auto timestamp injection (for every SEO page footer)
+// Auto timestamp injection for footer
 
 // ------------------------------------------------------------
 
