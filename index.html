@@ -1,3 +1,17 @@
+<!--
+
+  SideGuy Solutions
+
+  Version: 4.0 — GODWAVE · Meme Mode · SideGuy Savings Directory
+
+  Author: PJ + ChatGPT
+
+  Notes: Payments-first hero, Meme Zone, SideGuy Savings Directory, live timestamps, Peege orb.
+
+-->
+
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,15 +24,39 @@
 
 
 
-  <title>SideGuy Solutions | .4 Second Solana Payments</title>
+  <title>SideGuy Solutions | .4 Second Solana Payments & Savings Directory</title>
 
-  <meta name="description" content="SideGuy Payments helps San Diego businesses stop paying Stripe & PayPal fees. 0.4 second Solana settlements, lower costs, and real human onboarding from PJ.">
+  <meta name="description" content="SideGuy Solutions helps San Diego businesses stop overpaying Stripe & PayPal. .4 second Solana settlements, custom software, AI automation, and the SideGuy Savings Directory. Text PJ (773) 544-1231.">
 
 
 
   <style>
 
-    /* ---------- GLOBAL ---------- */
+    :root {
+
+      --bg-dark: #050608;
+
+      --bg-soft: #0d1510;
+
+      --accent: #1bff8c;
+
+      --accent-soft: #93ffd1;
+
+      --text-main: #ecfffa;
+
+      --text-muted: #b7e8d0;
+
+    }
+
+
+
+    * {
+
+      box-sizing: border-box;
+
+    }
+
+
 
     body {
 
@@ -26,11 +64,23 @@
 
       padding: 0;
 
-      font-family: -apple-system, Inter, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif;
 
-      background: radial-gradient(circle at 30% 20%, #0f1f14 0%, #0d0f0e 40%, #0a0a0a 100%);
+      color: var(--text-main);
 
-      color: white;
+      background:
+
+        radial-gradient(circle at 10% 0%, #122635 0, transparent 55%),
+
+        radial-gradient(circle at 90% 0%, #0d3b2a 0, transparent 55%),
+
+        radial-gradient(circle at 15% 100%, #092216 0, transparent 55%),
+
+        radial-gradient(circle at 85% 100%, #062118 0, transparent 55%),
+
+        linear-gradient(180deg, #020306, #050608 40%, #020306 100%);
+
+      min-height: 100vh;
 
       overflow-x: hidden;
 
@@ -38,21 +88,9 @@
 
 
 
-    h1, h2, h3 {
-
-      margin: 0;
-
-      padding: 0;
-
-      line-height: 1.2;
-
-    }
-
-
-
     a {
 
-      color: var(--accent, #21f97c);
+      color: var(--accent);
 
       text-decoration: none;
 
@@ -60,25 +98,109 @@
 
 
 
-    /* ---------- LAYOUT ---------- */
+    a:hover {
 
-    .container {
-
-      max-width: 1100px;
-
-      margin: auto;
-
-      padding: 40px 20px;
+      text-decoration: underline;
 
     }
 
 
 
-    /* ---------- HERO ---------- */
+    .page-wrap {
 
-    .hero {
+      max-width: 1100px;
 
-      padding: 80px 0 60px;
+      margin: 0 auto;
+
+      padding: 40px 20px 80px;
+
+    }
+
+
+
+    /* TOP LIVE TIMESTAMP */
+
+    #timestampTop {
+
+      position: fixed;
+
+      top: 14px;
+
+      right: 14px;
+
+      background: rgba(0, 255, 140, 0.14);
+
+      padding: 6px 14px;
+
+      border-radius: 999px;
+
+      font-size: 0.82rem;
+
+      font-weight: 600;
+
+      color: var(--accent-soft);
+
+      border: 1px solid rgba(0, 255, 140, 0.4);
+
+      backdrop-filter: blur(4px);
+
+      z-index: 1000;
+
+      box-shadow: 0 0 10px rgba(0, 255, 140, 0.4);
+
+      white-space: nowrap;
+
+    }
+
+
+
+    .section {
+
+      margin-bottom: 52px;
+
+    }
+
+
+
+    .hero-eyebrow {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 4px 10px;
+
+      border-radius: 999px;
+
+      font-size: 0.8rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+
+      background: rgba(0, 0, 0, 0.5);
+
+      border: 1px solid rgba(147, 255, 209, 0.3);
+
+      color: var(--accent-soft);
+
+    }
+
+
+
+    .hero-eyebrow-dot {
+
+      width: 8px;
+
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+
+      box-shadow: 0 0 8px var(--accent);
 
     }
 
@@ -86,11 +208,21 @@
 
     .hero-title {
 
-      font-size: 3.2rem;
+      margin-top: 20px;
+
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
 
       font-weight: 800;
 
-      background: linear-gradient(to bottom, #21f97c, #0bd671);
+      line-height: 1.05;
+
+    }
+
+
+
+    .hero-title span {
+
+      background: linear-gradient(120deg, #1bff8c, #a4ffd8);
 
       -webkit-background-clip: text;
 
@@ -102,13 +234,13 @@
 
     .hero-sub {
 
-      font-size: 1.15rem;
+      margin-top: 16px;
 
-      color: #c9ffdf;
+      font-size: 1.05rem;
 
-      margin-top: 10px;
+      max-width: 640px;
 
-      max-width: 620px;
+      color: var(--text-muted);
 
       line-height: 1.6;
 
@@ -116,81 +248,223 @@
 
 
 
-    /* ---------- TEXT PJ BUTTON ---------- */
+    .hero-actions {
 
-    .textpj-btn {
+      margin-top: 28px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      align-items: center;
+
+      gap: 16px;
+
+    }
+
+
+
+    .btn-primary {
 
       display: inline-flex;
 
       align-items: center;
 
-      background: #1bff8c;
+      gap: 10px;
 
-      color: black;
+      padding: 14px 24px;
+
+      border-radius: 999px;
+
+      background: var(--accent);
+
+      color: #020303;
 
       font-weight: 700;
 
-      padding: 14px 26px;
+      font-size: 1.02rem;
 
-      border-radius: 50px;
+      text-decoration: none;
 
-      margin-top: 35px;
+      box-shadow: 0 0 20px rgba(27, 255, 140, 0.7);
 
-      font-size: 1.05rem;
+      border: none;
 
-      box-shadow: 0 0 20px #1bff8c70;
+      cursor: pointer;
 
-      transition: transform .2s, box-shadow .3s;
+      transition: transform 0.16s ease, box-shadow 0.18s ease;
 
-      animation: pulse 2.5s infinite ease-in-out;
-
-    }
-
-
-
-    .textpj-btn:hover {
-
-      transform: scale(1.05);
-
-      box-shadow: 0 0 28px #1bff8c;
+      animation: btnPulse 2.5s infinite ease-in-out;
 
     }
 
 
 
-    @keyframes pulse {
+    .btn-primary:hover {
 
-      0% { box-shadow: 0 0 12px #1bff8c; }
+      transform: translateY(-1px) scale(1.03);
 
-      50% { box-shadow: 0 0 28px #1bff8c; }
+      box-shadow: 0 0 28px rgba(27, 255, 140, 0.95);
 
-      100% { box-shadow: 0 0 12px #1bff8c; }
-
-    }
-
-
-
-    .phoneicon {
-
-      margin-right: 10px;
-
-      font-size: 1.2rem;
+      text-decoration: none;
 
     }
 
 
 
-    /* ---------- WHAT WE BUILD ---------- */
+    .btn-pill {
+
+      padding: 9px 16px;
+
+      border-radius: 999px;
+
+      font-size: 0.86rem;
+
+      border: 1px solid rgba(147, 255, 209, 0.4);
+
+      background: rgba(3, 12, 8, 0.8);
+
+      color: var(--accent-soft);
+
+    }
+
+
+
+    .hero-note {
+
+      font-size: 0.85rem;
+
+      color: var(--text-muted);
+
+      margin-top: 6px;
+
+    }
+
+
+
+    @keyframes btnPulse {
+
+      0% { box-shadow: 0 0 12px rgba(27, 255, 140, 0.7); }
+
+      50% { box-shadow: 0 0 26px rgba(27, 255, 140, 1); }
+
+      100% { box-shadow: 0 0 12px rgba(27, 255, 140, 0.7); }
+
+    }
+
+
+
+    /* MEME ZONE */
+
+    .meme-zone {
+
+      padding: 20px 18px 18px;
+
+      border-radius: 18px;
+
+      border: 1px solid rgba(27, 255, 140, 0.35);
+
+      background: radial-gradient(circle at 0 0, rgba(27, 255, 140, 0.12), transparent 55%),
+
+                  radial-gradient(circle at 100% 100%, rgba(0, 180, 120, 0.18), transparent 55%),
+
+                  rgba(3, 12, 8, 0.9);
+
+      box-shadow: 0 0 26px rgba(0, 0, 0, 0.7);
+
+    }
+
+
+
+    .meme-label {
+
+      font-size: 0.78rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.16em;
+
+      color: var(--accent-soft);
+
+      margin-bottom: 8px;
+
+    }
+
+
+
+    .meme-grid {
+
+      display: grid;
+
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+
+      gap: 18px;
+
+    }
+
+
+
+    .meme-lines {
+
+      font-size: 0.92rem;
+
+      color: var(--text-main);
+
+      line-height: 1.7;
+
+    }
+
+
+
+    .meme-lines div {
+
+      margin-bottom: 6px;
+
+    }
+
+
+
+    .meme-bubble {
+
+      border-radius: 18px;
+
+      padding: 12px 14px;
+
+      background: rgba(0, 0, 0, 0.7);
+
+      border: 1px solid rgba(147, 255, 209, 0.5);
+
+      font-size: 0.9rem;
+
+      color: var(--text-muted);
+
+    }
+
+
+
+    .meme-bubble-cta {
+
+      margin-top: 8px;
+
+      font-size: 0.85rem;
+
+      color: var(--accent-soft);
+
+    }
+
+
+
+    /* WHAT WE BUILD */
 
     .section-title {
 
-      margin-top: 70px;
-
-      font-size: 1.8rem;
+      font-size: 1.6rem;
 
       font-weight: 700;
 
-      color: #9bffcb;
+      margin-bottom: 14px;
+
+      color: var(--accent-soft);
 
     }
 
@@ -198,13 +472,155 @@
 
     .build-list {
 
-      margin-top: 18px;
+      font-size: 1.02rem;
 
-      line-height: 1.8;
+      color: var(--text-muted);
 
-      font-size: 1.1rem;
+      line-height: 1.7;
 
-      color: #e7ffe7;
+    }
+
+
+
+    /* SAVINGS DIRECTORY */
+
+    .directory-intro {
+
+      font-size: 0.98rem;
+
+      color: var(--text-muted);
+
+      max-width: 720px;
+
+      line-height: 1.7;
+
+      margin-bottom: 18px;
+
+    }
+
+
+
+    .directory-links a {
+
+      display: inline-block;
+
+      margin-bottom: 6px;
+
+    }
+
+
+
+    .directory-tagline {
+
+      font-size: 0.9rem;
+
+      color: var(--accent-soft);
+
+      margin-top: 8px;
+
+    }
+
+
+
+    /* FOOTER */
+
+    footer {
+
+      text-align: center;
+
+      opacity: 0.75;
+
+      font-size: 0.9rem;
+
+      padding: 40px 20px 26px;
+
+    }
+
+
+
+    /* PEEGE ORB */
+
+    #peege-orb {
+
+      position: fixed;
+
+      bottom: 22px;
+
+      right: 20px;
+
+      width: 62px;
+
+      height: 62px;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-shadow: 0 0 26px rgba(27, 255, 140, 0.9);
+
+      z-index: 1000;
+
+      animation: orbPulse 2.8s infinite ease-in-out;
+
+    }
+
+
+
+    #peege-orb a {
+
+      color: #020303;
+
+      font-weight: 800;
+
+      font-size: 0.85rem;
+
+      text-decoration: none;
+
+      letter-spacing: 0.04em;
+
+    }
+
+
+
+    @keyframes orbPulse {
+
+      0% { transform: scale(1); box-shadow: 0 0 16px rgba(27, 255, 140, 0.7); }
+
+      50% { transform: scale(1.08); box-shadow: 0 0 32px rgba(27, 255, 140, 1); }
+
+      100% { transform: scale(1); box-shadow: 0 0 16px rgba(27, 255, 140, 0.7); }
+
+    }
+
+
+
+    @media (max-width: 720px) {
+
+      .page-wrap {
+
+        padding-top: 32px;
+
+      }
+
+      .meme-grid {
+
+        grid-template-columns: minmax(0, 1fr);
+
+      }
+
+      #peege-orb {
+
+        width: 56px;
+
+        height: 56px;
+
+      }
 
     }
 
@@ -218,200 +634,234 @@
 
 
 
-<!-- ---------- CONTAINER ---------- -->
-
-<div class="container">
+<div id="timestampTop">LIVE · Loading…</div>
 
 
 
-  <!-- ---------- HERO SECTION ---------- -->
+<div class="page-wrap">
 
-  <section class="hero">
 
-    <h1 class="hero-title">Stop Paying Stripe.<br>0.4 Second Solana Settlements.</h1>
+
+  <!-- HERO -->
+
+  <section class="section">
+
+    <div class="hero-eyebrow">
+
+      <span class="hero-eyebrow-dot"></span> SideGuy Payments · San Diego
+
+    </div>
+
+
+
+    <h1 class="hero-title">
+
+      Stop Paying Stripe.<br>
+
+      <span>.4 Second Solana Settlements.</span>
+
+    </h1>
 
 
 
     <p class="hero-sub">
 
-      SideGuy Payments is your unfair advantage in San Diego — faster payouts,
+      SideGuy Payments is your unfair advantage in San Diego —
 
-      lower fees, and real human onboarding. Own a piece of your processing.
+      faster payouts, lower fees, and a real human (PJ) you can text anytime.
 
-      Stripe gives you nothing.
+      Own a piece of your processing. Stripe gives you nothing.
 
     </p>
 
 
 
-    <a class="textpj-btn" href="sms:+17735441231">
+    <div class="hero-actions">
 
-      <span class="phoneicon">📱</span> Text PJ (773) 544-1231
+      <a class="btn-primary" href="sms:+17735441231">
 
-    </a>
+        <span>📱</span>
+
+        <span>Text PJ (773) 544-1231</span>
+
+      </a>
+
+      <div class="btn-pill">
+
+        Send your monthly volume → get exact savings in minutes.
+
+      </div>
+
+    </div>
+
+
+
+    <div class="hero-note">
+
+      Built for founders, operators, and teams who are done
+
+      donating margin to Stripe & PayPal.
+
+    </div>
 
   </section>
 
 
 
-  <!-- ---------- WHAT SIDEGUY BUILDS ---------- -->
+  <!-- MEME ZONE -->
 
-  <h2 class="section-title">What SideGuy Actually Builds</h2>
+  <section class="section">
 
-  <div class="build-list">
+    <div class="meme-zone">
 
-    • Custom dashboards, internal tools & apps<br>
+      <div class="meme-label">SideGuy Meme Mode · Most Effective · Most Efficient</div>
 
-    • AI automation workflows (big clean builds that actually help)<br>
+      <div class="meme-grid">
 
-    • 0.4-Second Solana Payments<br>
+        <div class="meme-lines">
 
-    • Founder-friendly builds with real strategy
+          <div>• 0.4 second settlements — Stripe could never.</div>
 
-  </div>
-  <!-- ---------- SEO DIRECTORY ---------- -->
+          <div>• Own a piece of your processing — Stripe gives you nothing.</div>
 
-  <h2 class="section-title" style="margin-top:60px;">Explore the SEO Directory</h2>
+          <div>• Stop waiting days for payouts like it’s 1998.</div>
+
+          <div>• Send your volume → I’ll send your savings. No fluff.</div>
+
+          <div>• If I can’t save you money, I’ll tell you straight.</div>
+
+          <div>• “We’ll just stick with Stripe” is how people stay average.</div>
+
+          <div>• Real human + Solana rails + San Diego support.</div>
+
+        </div>
+
+        <div>
+
+          <div class="meme-bubble">
+
+            “Most businesses have no idea what they’re actually paying
+
+            in processing fees. That’s where SideGuy comes in.”
+
+            <div class="meme-bubble-cta">
+
+              Text PJ (773) 544-1231 and say:<br>
+
+              <strong>“Here’s our monthly volume — what can you do?”</strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 
 
 
-  <div style="margin-top:20px; line-height:1.8; font-size:1.1rem;">
+  <!-- WHAT SIDEGUY BUILDS -->
 
-    <a href="/seo-pages/software-development-san-diego.html">• Software Development San Diego</a><br>
+  <section class="section">
 
-    <a href="/seo-pages/app-development-san-diego.html">• App Development San Diego</a><br>
+    <h2 class="section-title">What SideGuy Actually Builds</h2>
 
-    <a href="/seo-pages/solana-development-san-diego.html">• Solana Development San Diego</a><br>
+    <div class="build-list">
 
-    <a href="/seo-pages/artificial-intelligence-san-diego.html">• AI Development San Diego</a><br>
+      • Custom dashboards, internal tools, and clean web apps<br>
 
-    <a href="/seo-pages/san-diego-business-automation.html">• Business Automation San Diego</a><br>
+      • AI automation workflows that actually ship and save time<br>
 
-  </div>
+      • SideGuy Payments — 0.4 second Solana settlements<br>
+
+      • SideGuy Savings Directory for local San Diego businesses<br>
+
+      • Future: energy & clean-tech payments, x402 Life Fix, and more
+
+    </div>
+
+  </section>
+  <!-- SIDEGUY SAVINGS DIRECTORY -->
+
+  <section class="section">
+
+    <h2 class="section-title">SideGuy Savings Directory</h2>
 
 
 
-</div> <!-- END CONTAINER -->
+    <p class="directory-intro">
+
+      The SideGuy Savings Directory is your hub for San Diego businesses looking to
+
+      reduce payment fees, upgrade their apps, automate workflows, and modernize operations.
+
+    </p>
 
 
 
-<!-- ---------- PEEGE ORB BUTTON ---------- -->
+    <div class="directory-links">
 
-<div id="peege-orb" style="
+      <a href="/seo/software-development-san-diego.html">• Software Development San Diego</a><br>
 
-  position: fixed;
+      <a href="/seo/app-development-san-diego.html">• App Development San Diego</a><br>
 
-  bottom: 26px;
+      <a href="/seo/solana-development-san-diego.html">• Solana Development San Diego</a><br>
 
-  right: 22px;
+      <a href="/seo/artificial-intelligence-san-diego.html">• AI Development San Diego</a><br>
 
-  width: 62px;
+      <a href="/seo/san-diego-business-automation.html">• Business Automation San Diego</a><br>
 
-  height: 62px;
+    </div>
 
-  background: #19f97d;
 
-  border-radius: 50%;
 
-  display: flex;
+    <div class="directory-tagline">
 
-  justify-content: center;
+      More pages coming — and each one helps you dominate San Diego search.
 
-  align-items: center;
+    </div>
 
-  box-shadow: 0 0 22px #19f97d;
+  </section>
 
-  cursor: pointer;
 
-  animation: orbPulse 2.8s infinite ease-in-out;
 
-  z-index: 9999;
+</div> <!-- END .page-wrap -->
 
-">
 
-  <a href='sms:+17735441231' style='color:black; font-weight:700; font-size:0.85rem; text-decoration:none;'>
 
-    PJ
+<!-- ---------- PEEGE ORB (BOTTOM RIGHT) ---------- -->
 
-  </a>
+<div id="peege-orb">
+
+  <a href="sms:+17735441231">PJ</a>
 
 </div>
 
 
 
-<style>
+<!-- ---------- FOOTER ---------- -->
 
-@keyframes orbPulse {
-
-  0% { box-shadow: 0 0 12px #19f97d; transform: scale(1); }
-
-  50% { box-shadow: 0 0 32px #19f97d; transform: scale(1.08); }
-
-  100% { box-shadow: 0 0 12px #19f97d; transform: scale(1); }
-
-}
-
-</style>
-
-
-
-<!-- ---------- LIVE TIMESTAMP (TOP + FOOTER) ---------- -->
-
-<div id="timestampTop" style="
-
-  position: fixed;
-
-  top: 14px;
-
-  right: 14px;
-
-  background: rgba(0,255,120,0.18);
-
-  padding: 6px 14px;
-
-  border-radius: 20px;
-
-  font-size: 0.82rem;
-
-  font-weight: 600;
-
-  color: #00ff9d;
-
-  border: 1px solid rgba(0,255,140,0.35);
-
-  backdrop-filter: blur(4px);
-
-  z-index: 9999;
-
-  box-shadow: 0 0 10px #00ff9d55;
-
-">
-
-  LIVE · Loading…
-
-</div>
-
-
-
-<footer style="text-align:center; margin-top:80px; padding:40px 0; opacity:0.7; font-size:0.9rem;">
+<footer>
 
   <div id="timestampFooter">Live · Loading…</div>
 
-  <div style="margin-top:8px; font-size:0.85rem;">SideGuy Solutions · San Diego</div>
+  <div style="margin-top:8px;">SideGuy Solutions · San Diego</div>
 
 </footer>
 
 
 
-<!-- ---------- TIMESTAMP SCRIPT ---------- -->
+<!-- ---------- TIMESTAMP SCRIPT (TOP + FOOTER) ---------- -->
 
 <script>
 
 function updateTimestamp() {
 
   const now = new Date();
-
-
 
   const formatted = now.toLocaleString("en-US", {
 
@@ -433,27 +883,15 @@ function updateTimestamp() {
 
 
 
-  // Top timestamp
-
   const topEl = document.getElementById("timestampTop");
 
-  if (topEl) {
-
-    topEl.textContent = "LIVE · " + formatted + " PST";
-
-  }
+  if (topEl) topEl.textContent = "LIVE · " + formatted + " PST";
 
 
-
-  // Footer timestamp
 
   const footerEl = document.getElementById("timestampFooter");
 
-  if (footerEl) {
-
-    footerEl.textContent = "Live · Updated " + formatted + " PST";
-
-  }
+  if (footerEl) footerEl.textContent = "Live · Updated " + formatted + " PST";
 
 }
 
@@ -470,3 +908,4 @@ setInterval(updateTimestamp, 60000);
 </body>
 
 </html>
+
