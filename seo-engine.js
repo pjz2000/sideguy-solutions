@@ -151,3 +151,422 @@
     "relatedSlugs": ["blockchain-development-san-diego", "software-development-san-diego"]  
   }  
 ]
+  {
+
+    slug: "payment-processing-san-diego",
+
+    title: "Payment Processing San Diego | SideGuy Payments",
+
+    metaDescription:
+
+      "Reduce Stripe & PayPal fees with .4 second Solana settlements. SideGuy Payments saves San Diego businesses time and money.",
+
+    h1: "Payment Processing in San Diego",
+
+    intro:
+
+      "San Diego businesses shouldn't be donating 2.9% + 30¢ to Stripe for every swipe. SideGuy Payments gives you faster payouts, lower fees, and a real human (PJ) to text anytime.",
+
+    bullets: [
+
+      ".4 second Solana settlements",
+
+      "Lower fees than Stripe & PayPal",
+
+      "Instant onboarding",
+
+      "Founders-first support",
+
+      "Clean, simple payment flows"
+
+    ],
+
+    relatedSlugs: [
+
+      "solana-payments-san-diego",
+
+      "software-development-san-diego",
+
+      "ai-automation-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "solana-payments-san-diego",
+
+    title: "Solana Payments San Diego | Instant .4 Second Transactions",
+
+    metaDescription:
+
+      "Upgrade your payment system with ultra-fast Solana rails. Save money, improve margins, and modernize your operations.",
+
+    h1: "Solana Payments in San Diego",
+
+    intro:
+
+      "Solana delivers payments at speeds legacy processors can't touch. SideGuy Payments helps San Diego operators upgrade to modern, instant, cheaper transactions.",
+
+    bullets: [
+
+      ".4 second processing",
+
+      "Lower operating costs",
+
+      "No middlemen",
+
+      "Real human onboarding",
+
+      "Local San Diego support"
+
+    ],
+
+    relatedSlugs: [
+
+      "payment-processing-san-diego",
+
+      "solana-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "ai-automation-san-diego",
+
+    title: "AI Automation San Diego | Save Time with Smart Workflows",
+
+    metaDescription:
+
+      "Automated workflows, clean dashboards, and custom AI tools for San Diego teams who want to save time and scale.",
+
+    h1: "AI Automation in San Diego",
+
+    intro:
+
+      "AI isn't hype — it's leverage. SideGuy Solutions helps businesses eliminate manual busywork with clean, founder-friendly automation systems.",
+
+    bullets: [
+
+      "Workflow automation",
+
+      "AI assistants",
+
+      "Auto-reporting",
+
+      "Task elimination",
+
+      "Dashboard automation"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "ai-consulting-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "ai-consulting-san-diego",
+
+    title: "AI Consulting San Diego | Build Smart, Automated Systems",
+
+    metaDescription:
+
+      "Get expert help implementing AI systems that reduce costs and boost efficiency. SideGuy builds automation with real outcomes.",
+
+    h1: "AI Consulting in San Diego",
+
+    intro:
+
+      "From strategy to implementation, SideGuy Solutions helps businesses adopt AI tools that save money, cut time, and streamline operations.",
+
+    bullets: [
+
+      "Custom AI systems",
+
+      "Automation mapping",
+
+      "LLM & workflow tools",
+
+      "Data extraction & cleanup",
+
+      "Dashboard integration"
+
+    ],
+
+    relatedSlugs: [
+
+      "ai-automation-san-diego",
+
+      "software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "software-development-san-diego",
+
+    title: "Software Development San Diego | Custom Apps & Tools",
+
+    metaDescription:
+
+      "Web apps, dashboards, internal tools, API integrations, and AI automation for San Diego businesses.",
+
+    h1: "Software Development in San Diego",
+
+    intro:
+
+      "SideGuy builds clean, modern software for operators, founders, and teams who want real, functional tools without the agency fluff.",
+
+    bullets: [
+
+      "Custom software",
+
+      "Internal tools",
+
+      "Dashboards & metrics",
+
+      "AI workflows",
+
+      "API & data integrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "custom-software-san-diego",
+
+      "solana-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "custom-software-san-diego",
+
+    title: "Custom Software San Diego | Built For Your Business",
+
+    metaDescription:
+
+      "Custom-built software, dashboards, and automation tailored to how your business actually runs.",
+
+    h1: "Custom Software Development in San Diego",
+
+    intro:
+
+      "Your business isn't generic — your tools shouldn't be either. SideGuy builds custom systems that automate, simplify, and scale your operations.",
+
+    bullets: [
+
+      "Built for your workflow",
+
+      "Simple, clean UI",
+
+      "Automation-ready",
+
+      "Dashboard reporting",
+
+      "Long-term maintainability"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "ai-automation-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "solana-development-san-diego",
+
+    title: "Solana Development San Diego | Modern Web3 Tools",
+
+    metaDescription:
+
+      "Fast, modern blockchain development for San Diego startups exploring Solana technology.",
+
+    h1: "Solana Development in San Diego",
+
+    intro:
+
+      "Solana is the fastest blockchain in the world, and SideGuy helps San Diego companies build apps, tools, and integrations on top of it.",
+
+    bullets: [
+
+      "Solana dApps",
+
+      "Payment rails",
+
+      "Wallet integrations",
+
+      "Smart contract setup",
+
+      "Developer APIs"
+
+    ],
+
+    relatedSlugs: [
+
+      "solana-payments-san-diego",
+
+      "software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "solana-beach-software-development",
+
+    title: "Software Development Solana Beach | SideGuy Solutions",
+
+    metaDescription:
+
+      "Local Solana Beach software development, apps, dashboards, and AI automation with a coastal, founder-friendly vibe.",
+
+    h1: "Software Development in Solana Beach",
+
+    intro:
+
+      "Right here in Solana Beach, SideGuy Solutions builds clean, modern software and automation tools customized for local operators and founders.",
+
+    bullets: [
+
+      "Local support",
+
+      "Clean custom apps",
+
+      "AI workflows",
+
+      "Data dashboards",
+
+      "Payments + Solana tools"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "solana-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "encinitas-software-development",
+
+    title: "Software Development Encinitas | Apps & Automation",
+
+    metaDescription:
+
+      "Custom apps, automation, dashboards, and payment tools for Encinitas businesses and founders.",
+
+    h1: "Software Development in Encinitas",
+
+    intro:
+
+      "Encinitas companies need fast, simple tools that work — SideGuy builds software that saves time and boosts margins for local operators.",
+
+    bullets: [
+
+      "AI automation",
+
+      "Dashboard tools",
+
+      "Payment workflow upgrades",
+
+      "Clean web apps",
+
+      "API integrations"
+
+    ],
+
+    relatedSlugs: [
+
+      "solana-beach-software-development",
+
+      "software-development-san-diego"
+
+    ]
+
+  },
+
+
+
+  {
+
+    slug: "carlsbad-software-development",
+
+    title: "Software Development Carlsbad | Automations & Apps",
+
+    metaDescription:
+
+      "Clean software, automation workflows, and payment tools built specifically for Carlsbad businesses.",
+
+    h1: "Software Development in Carlsbad",
+
+    intro:
+
+      "SideGuy Solutions helps Carlsbad founders and operators improve workflows, automate operations, and modernize payments.",
+
+    bullets: [
+
+      "Automation workflows",
+
+      "Custom dashboards",
+
+      "AI tools",
+
+      "Web apps",
+
+      "Solana payments"
+
+    ],
+
+    relatedSlugs: [
+
+      "software-development-san-diego",
+
+      "custom-software-san-diego"
+
+    ]
+
+  },
