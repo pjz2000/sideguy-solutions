@@ -832,4 +832,213 @@
   relatedSlugs: ["software-development-san-diego", "solana-development-san-diego"]
 
 },
+  {
+
+    slug: "cardiff-software-development",
+
+    title: "Software Development Cardiff | Automations & Clean Apps",
+
+    metaDescription: "Local Cardiff software development for founders, operators, and teams needing clean apps, automations, and modern workflows.",
+
+    h1: "Software Development Cardiff",
+
+    intro: "SideGuy Solutions builds clean software and automation tools for Cardiff businesses who want better workflows and lower costs.",
+
+    bullets: [
+
+      "Custom dashboards",
+
+      "Automation workflows",
+
+      "AI-powered business tools",
+
+      "4-second Solana payments",
+
+      "Internal team apps"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego", "custom-software-san-diego"]
+
+  },
+
+  {
+
+    slug: "encinitas-software-development",
+
+    title: "Software Development Encinitas | Automations & Workflows",
+
+    metaDescription: "Encinitas software development, automations, dashboards, and AI workflows for fast-moving businesses.",
+
+    h1: "Software Development Encinitas",
+
+    intro: "SideGuy Solutions builds custom software, dashboards, and workflow automations for Encinitas founders, operators, and teams.",
+
+    bullets: [
+
+      "Automation workflows",
+
+      "Internal dashboards",
+
+      "AI-powered tools",
+
+      "Custom reporting systems",
+
+      "Solana payment integrations"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego", "ai-development-san-diego"]
+
+  },
+
+  {
+
+    slug: "del-mar-software-development",
+
+    title: "Software Development Del Mar | Automations & AI Tools",
+
+    metaDescription: "Del Mar software development including internal tools, automations, and clean business apps.",
+
+    h1: "Software Development Del Mar",
+
+    intro: "SideGuy Solutions builds custom software, internal tools, and AI automations for Del Mar businesses.",
+
+    bullets: [
+
+      "AI workflow tools",
+
+      "Automation pipelines",
+
+      "Internal business apps",
+
+      "4-second Solana payments",
+
+      "Custom dashboards"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego", "ai-development-san-diego"]
+
+  },
+
+  {
+
+    slug: "la-jolla-software-development",
+
+    title: "Software Development La Jolla | Apps & Automations",
+
+    metaDescription: "La Jolla software development for founders and operators needing clean dashboards, automations, and internal tools.",
+
+    h1: "Software Development La Jolla",
+
+    intro: "SideGuy Solutions builds custom software, automations, and internal tools for La Jolla founders and teams.",
+
+    bullets: [
+
+      "AI workflow systems",
+
+      "Automation pipelines",
+
+      "Solana payments",
+
+      "Founder dashboards",
+
+      "Internal tools"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego"]
+
+  },
+
+  {
+
+    slug: "oceanside-software-development",
+
+    title: "Software Development Oceanside | AI & Automations",
+
+    metaDescription: "Oceanside software development including apps, dashboards, AI automations, and modern workflow tools.",
+
+    h1: "Software Development Oceanside",
+
+    intro: "SideGuy Solutions builds clean apps, dashboards, and automations for Oceanside founders and operators.",
+
+    bullets: [
+
+      "AI tools",
+
+      "Automation workflows",
+
+      "Team dashboards",
+
+      "Solana payment integrations",
+
+      "Internal tools"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego", "ai-development-san-diego"]
+
+  },
+
+  {
+
+    slug: "vista-software-development",
+
+    title: "Software Development Vista | AI Tools & Automations",
+
+    metaDescription: "Vista software development and workflow automation tools built for North County businesses.",
+
+    h1: "Software Development Vista",
+
+    intro: "SideGuy Solutions builds clean software, simple dashboards, and modern workflow automations for Vista operators.",
+
+    bullets: [
+
+      "Automation pipelines",
+
+      "Internal dashboards",
+
+      "AI-powered tools",
+
+      "Solana payment rails",
+
+      "Web apps"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego", "custom-software-san-diego"]
+
+  },
+
+  {
+
+    slug: "san-marcos-software-development",
+
+    title: "Software Development San Marcos | Apps & Modern Workflows",
+
+    metaDescription: "San Marcos software development, dashboards, automations, and modern business tools.",
+
+    h1: "Software Development San Marcos",
+
+    intro: "SideGuy Solutions builds automation workflows, business dashboards, and internal apps for San Marcos founders and teams.",
+
+    bullets: [
+
+      "Internal apps",
+
+      "Automation workflows",
+
+      "AI-powered tools",
+
+      "Solana payments",
+
+      "Custom dashboards"
+
+    ],
+
+    relatedSlugs: ["software-development-san-diego", "ai-development-san-diego"]
+
+  },
 
