@@ -2,7 +2,7 @@
 
    SideGuy Solutions · GODWAVE WATER EDITION
 
-   Version 3.1 — Styles for Water + Burj + Savings Hub
+   Version 3.3 — Solana .4 Seconds · Meme Bar Edition
 
    Author: PJ + ChatGPT
 
@@ -10,15 +10,15 @@
 
 
 
-/* BASE RESET */
+/* RESET */
 
 * {
-
-  box-sizing: border-box;
 
   margin: 0;
 
   padding: 0;
+
+  box-sizing: border-box;
 
 }
 
@@ -38,9 +38,9 @@ body {
 
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
 
-  color: #e8f4ff;
+  background: #00101d;
 
-  background: #000814;
+  color: #e8f4ff;
 
   overflow-x: hidden;
 
@@ -50,9 +50,11 @@ body {
 
 /* -------------------------------------------------
 
-   WATER BACKGROUND + OVERLAY
+   WATER + BACKGROUND (NO BLACK EVER)
 
 ---------------------------------------------------*/
+
+
 
 #oceanCanvas {
 
@@ -64,11 +66,15 @@ body {
 
   height: 100%;
 
-  z-index: -3;
+  z-index: -3 !important;
+
+  background: transparent !important;
 
 }
 
 
+
+/* Always translucent — no black fallback */
 
 .ocean-overlay {
 
@@ -76,19 +82,47 @@ body {
 
   inset: 0;
 
-  background: radial-gradient(circle at 20% -20%, rgba(255,255,255,0.16), transparent 60%),
+  background: radial-gradient(circle at 25% -20%, rgba(255,255,255,0.12), rgba(0,0,0,0.25) 60%),
 
-              radial-gradient(circle at 80% 130%, rgba(0,0,0,0.85), rgba(0,0,0,1) 70%);
+              radial-gradient(circle at 80% 130%, rgba(0,0,0,0.55), rgba(0,0,0,0.85) 70%);
+
+  backdrop-filter: blur(8px);
 
   pointer-events: none;
 
-  z-index: -2;
+  z-index: -2 !important;
 
 }
 
 
 
-/* Fade-in backdrop for readability */
+/* Permanent Burj Solana Ghost */
+
+.burj-fixed {
+
+  position: fixed;
+
+  inset: 0;
+
+  background: url('https://cdn.jsdelivr.net/gh/pjz2000/cdn-assets/burj-solana-v1.png')
+
+    center bottom / 80% no-repeat;
+
+  opacity: 0.16;
+
+  pointer-events: none;
+
+  z-index: -1 !important;
+
+}
+
+
+
+/* -------------------------------------------------
+
+   PAGE LAYOUT
+
+---------------------------------------------------*/
 
 .page {
 
@@ -96,7 +130,7 @@ body {
 
   margin: auto;
 
-  padding: 20px;
+  padding: 24px;
 
   display: flex;
 
@@ -114,7 +148,7 @@ body {
 
 /* -------------------------------------------------
 
-   HEADER AREA
+   HEADER
 
 ---------------------------------------------------*/
 
@@ -127,10 +161,6 @@ header {
   justify-content: space-between;
 
   align-items: center;
-
-  gap: 20px;
-
-  padding-top: 10px;
 
 }
 
@@ -150,9 +180,9 @@ header {
 
 .orb-logo {
 
-  width: 34px;
+  width: 36px;
 
-  height: 34px;
+  height: 36px;
 
   border-radius: 999px;
 
@@ -160,7 +190,7 @@ header {
 
   box-shadow:
 
-    0 0 18px rgba(50,245,164,0.9),
+    0 0 15px rgba(50,245,164,1),
 
     0 0 40px rgba(50,245,164,0.6);
 
@@ -182,13 +212,9 @@ header {
 
 .brand-text h1 {
 
-  font-size: 1.3rem;
+  font-size: 1.35rem;
 
-  text-transform: uppercase;
-
-  letter-spacing: 0.12em;
-
-  color: #e8f9ff;
+  letter-spacing: 0.1em;
 
 }
 
@@ -196,9 +222,9 @@ header {
 
 .brand-text p {
 
-  font-size: 0.82rem;
+  font-size: 0.8rem;
 
-  color: #b2cde6;
+  opacity: 0.8;
 
 }
 
@@ -206,31 +232,7 @@ header {
 
 .top-cta {
 
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-end;
-
-  gap: 5px;
-
-}
-
-
-
-.top-cta .pill {
-
-  border: 1px solid rgba(255,255,255,0.25);
-
-  padding: 4px 10px;
-
-  border-radius: 999px;
-
-  background: rgba(0,60,90,0.55);
-
-  font-size: 0.8rem;
-
-  color: #b7d9f9;
+  text-align: right;
 
 }
 
@@ -238,9 +240,11 @@ header {
 
 .top-phone {
 
-  text-decoration: none;
-
   color: #32f5a4;
+
+  font-weight: bold;
+
+  text-decoration: none;
 
   font-size: 1rem;
 
@@ -250,7 +254,7 @@ header {
 
 /* -------------------------------------------------
 
-   HERO + BURJ + SUMMARY
+   HERO CARD
 
 ---------------------------------------------------*/
 
@@ -260,9 +264,9 @@ main {
 
   display: grid;
 
-  grid-template-columns: 1.1fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
 
-  gap: 24px;
+  gap: 26px;
 
 }
 
@@ -276,59 +280,21 @@ main {
 
   }
 
-  .top-cta {
-
-    align-items: flex-start;
-
-  }
-
 }
 
 
-
-/* BURJ BACKDROP (ghosted) */
-
-.burj-ghost {
-
-  position: absolute;
-
-  inset: 0;
-
-  background: url('https://i.ibb.co/8j98LkM/burj-solana-clean.png') center bottom / 85% no-repeat;
-
-  opacity: 0.16;
-
-  z-index: 1;
-
-  pointer-events: none;
-
-}
-
-
-
-/* HERO CARD */
 
 .hero-card {
 
-  position: relative;
-
-  z-index: 2;
-
-  background: rgba(0,15,30,0.72);
+  background: rgba(0,20,35,0.7);
 
   backdrop-filter: blur(14px);
 
-  border: 1px solid rgba(255,255,255,0.15);
+  padding: 28px;
 
   border-radius: 22px;
 
-  padding: 28px 24px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 18px;
+  border: 1px solid rgba(255,255,255,0.15);
 
   box-shadow: 0 16px 60px rgba(0,0,0,0.5);
 
@@ -336,47 +302,15 @@ main {
 
 
 
-.hero-chip-row {
+.hero-headline {
 
-  display: flex;
+  font-size: 2.4rem;
 
-  flex-wrap: wrap;
+  font-weight: 700;
 
-  gap: 10px;
+  line-height: 1.15;
 
-  z-index: 3;
-
-}
-
-
-
-.hero-chip-row span {
-
-  padding: 4px 11px;
-
-  border-radius: 999px;
-
-  font-size: 0.78rem;
-
-  color: #dbf5ff;
-
-  background: rgba(0, 70, 120, 0.65);
-
-  border: 1px solid rgba(140,200,255,0.35);
-
-}
-
-
-
-.hero-card h2 {
-
-  font-size: 2.3rem;
-
-  line-height: 1.2;
-
-  color: #eafdff;
-
-  z-index: 3;
+  color: #eaffff;
 
 }
 
@@ -386,9 +320,9 @@ main {
 
   font-size: 1.05rem;
 
-  color: #b9d9f0;
+  margin-top: 12px;
 
-  z-index: 3;
+  color: #bfd5e7;
 
   line-height: 1.55;
 
@@ -400,9 +334,7 @@ main {
 
   list-style: none;
 
-  color: #cae9ff;
-
-  font-size: 0.98rem;
+  margin-top: 16px;
 
   display: flex;
 
@@ -410,11 +342,17 @@ main {
 
   gap: 8px;
 
+  color: #d5f3ff;
+
+  font-size: 1rem;
+
 }
 
 
 
 .hero-cta-row {
+
+  margin-top: 18px;
 
   display: flex;
 
@@ -430,23 +368,21 @@ main {
 
   position: relative;
 
-  background: rgba(0, 20, 30, 0.75);
+  display: flex;
 
-  padding: 16px 18px;
+  flex-direction: column;
 
-  border-radius: 16px;
+  padding: 16px;
+
+  border-radius: 14px;
+
+  background: rgba(0, 25, 40, 0.75);
 
   border: 1px solid rgba(50,245,164,0.35);
 
   text-decoration: none;
 
   color: #e7fffb;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
 
   overflow: hidden;
 
@@ -462,25 +398,17 @@ main {
 
   right: -40px;
 
-  width: 100px;
+  width: 110px;
 
-  height: 100px;
-
-  border-radius: 999px;
+  height: 110px;
 
   background: radial-gradient(circle at 40% 30%, #ffffff, #32f5a4);
 
-  opacity: 0.45;
+  border-radius: 50%;
 
   filter: blur(16px);
 
-}
-
-
-
-.cta-orb:hover {
-
-  border-color: #32f5a4;
+  opacity: 0.45;
 
 }
 
@@ -498,9 +426,9 @@ main {
 
 .cta-text-sub {
 
-  font-size: 0.82rem;
+  font-size: 0.8rem;
 
-  color: #b1d7c9;
+  opacity: 0.85;
 
 }
 
@@ -510,15 +438,59 @@ main {
 
   background: rgba(255,255,255,0.08);
 
-  border: 1px solid rgba(255,255,255,0.18);
-
   padding: 10px 14px;
 
   border-radius: 10px;
 
+  border: 1px solid rgba(255,255,255,0.14);
+
+  color: #d8f7ff;
+
   font-size: 0.9rem;
 
-  color: #cce7ff;
+}
+
+
+
+/* -------------------------------------------------
+
+   HIGH MEME BAR (NEW)
+
+---------------------------------------------------*/
+
+
+
+.meme-bar {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 10px;
+
+}
+
+
+
+.meme-item {
+
+  background: rgba(0, 40, 60, 0.6);
+
+  border: 1px solid rgba(50,245,164,0.35);
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 0.82rem;
+
+  color: #dbfff4;
+
+  backdrop-filter: blur(8px);
+
+  white-space: nowrap;
 
 }
 
@@ -530,25 +502,19 @@ main {
 
 ---------------------------------------------------*/
 
+
+
 .status-card {
 
-  background: rgba(0,10,22,0.65);
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  border-radius: 22px;
+  background: rgba(0,15,30,0.7);
 
   padding: 24px;
 
-  backdrop-filter: blur(12px);
+  border-radius: 22px;
 
-  display: flex;
+  border: 1px solid rgba(255,255,255,0.12);
 
-  flex-direction: column;
-
-  gap: 18px;
-
-  box-shadow: 0 14px 55px rgba(0,0,0,0.45);
+  backdrop-filter: blur(10px);
 
 }
 
@@ -558,7 +524,7 @@ main {
 
   font-size: 1.35rem;
 
-  color: #e3f7ff;
+  margin-bottom: 6px;
 
 }
 
@@ -566,9 +532,11 @@ main {
 
 .status-sub {
 
-  font-size: 0.98rem;
+  color: #c1d6e7;
 
-  color: #b7d1e2;
+  font-size: 1rem;
+
+  margin-bottom: 12px;
 
 }
 
@@ -577,8 +545,6 @@ main {
 .status-grid {
 
   display: grid;
-
-  grid-template-columns: 1fr;
 
   gap: 10px;
 
@@ -598,25 +564,15 @@ main {
 
   border-radius: 10px;
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.12);
 
 }
 
 
 
-.status-item .label {
+.value {
 
-  color: #9ab1c9;
-
-  font-size: 0.86rem;
-
-}
-
-
-
-.status-item .value {
-
-  color: #d0f4ff;
+  color: #32f5a4;
 
   font-weight: 600;
 
@@ -624,21 +580,9 @@ main {
 
 
 
-.status-footer {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
-
-}
-
-
-
 .timestamp-label {
 
-  color: #88aacc;
+  opacity: 0.7;
 
   font-size: 0.8rem;
 
@@ -656,33 +600,11 @@ main {
 
 
 
-.tiny {
-
-  font-size: 0.75rem;
-
-  color: #7da3c5;
-
-}
-
-
-
 /* -------------------------------------------------
 
-   SAN DIEGO FINANCIAL SAVING SERVICES GRID
+   SERVICES
 
 ---------------------------------------------------*/
-
-
-
-.services {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 26px;
-
-}
 
 
 
@@ -690,19 +612,19 @@ main {
 
   font-size: 2rem;
 
-  color: #e9faff;
-
 }
 
 
 
 .services-grid {
 
+  margin-top: 18px;
+
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-
   gap: 22px;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
 }
 
@@ -710,29 +632,21 @@ main {
 
 .service-card {
 
-  text-decoration: none;
-
-  background: rgba(0,20,35,0.65);
-
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,20,35,0.7);
 
   padding: 20px;
 
-  border-radius: 20px;
+  border-radius: 18px;
+
+  border: 1px solid rgba(255,255,255,0.12);
 
   backdrop-filter: blur(10px);
 
-  box-shadow: 0 10px 45px rgba(0,0,0,0.4);
+  text-decoration: none;
 
-  display: flex;
+  color: #eaffff;
 
-  flex-direction: column;
-
-  gap: 10px;
-
-  color: #e9f9ff;
-
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: 0.2s;
 
 }
 
@@ -740,9 +654,9 @@ main {
 
 .service-card:hover {
 
-  transform: translateY(-4px);
-
   border-color: #32f5a4;
+
+  transform: translateY(-3px);
 
 }
 
@@ -752,7 +666,7 @@ main {
 
   display: inline-block;
 
-  margin-top: 4px;
+  margin-top: 6px;
 
   font-size: 0.8rem;
 
@@ -760,9 +674,9 @@ main {
 
   border-radius: 999px;
 
-  background: rgba(50,245,164,0.25);
+  background: rgba(50,245,164,0.3);
 
-  color: #d4fff0;
+  color: #d7fff1;
 
 }
 
@@ -774,53 +688,17 @@ main {
 
 ---------------------------------------------------*/
 
+
+
 .payments {
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 16px;
+  gap: 12px;
 
-  margin-top: 20px;
-
-}
-
-
-
-.payments h2 {
-
-  font-size: 1.8rem;
-
-}
-
-
-
-.payments-list {
-
-  list-style: none;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 6px;
-
-  font-size: 1rem;
-
-  color: #d7f9ff;
-
-}
-
-
-
-.payments-cta-row {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
+  margin-top: 40px;
 
 }
 
@@ -828,31 +706,23 @@ main {
 
 .cta-solid {
 
-  text-decoration: none;
+  display: block;
 
-  padding: 14px 18px;
+  text-align: center;
 
   background: #32f5a4;
 
   color: #003123;
 
-  font-weight: 700;
+  padding: 14px;
 
   border-radius: 12px;
 
-  text-align: center;
+  font-weight: bold;
 
-  box-shadow: 0 10px 30px rgba(50,245,164,0.5);
+  text-decoration: none;
 
-}
-
-
-
-.payments-note {
-
-  font-size: 0.85rem;
-
-  color: #b4e7ce;
+  box-shadow: 0 10px 25px rgba(50,245,164,0.4);
 
 }
 
@@ -860,43 +730,21 @@ main {
 
 /* -------------------------------------------------
 
-   CONTACT + FOOTER
+   CONTACT
 
 ---------------------------------------------------*/
 
 
 
-.contact {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 16px;
-
-  margin-top: 20px;
-
-}
-
-
-
-.contact h2 {
-
-  font-size: 1.9rem;
-
-}
-
-
-
 .contact-grid {
+
+  margin-top: 18px;
 
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-
   gap: 18px;
 
-  margin-top: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
 }
 
@@ -904,17 +752,15 @@ main {
 
 .contact-block {
 
-  background: rgba(0,25,40,0.65);
+  background: rgba(0,25,40,0.7);
 
   padding: 20px;
 
   border-radius: 18px;
 
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.12);
 
   backdrop-filter: blur(10px);
-
-  color: #e7faff;
 
 }
 
@@ -926,32 +772,27 @@ main {
 
   text-decoration: none;
 
-  font-weight: bold;
-
 }
+
+
+
+/* -------------------------------------------------
+
+   FOOTER
+
+---------------------------------------------------*/
 
 
 
 footer {
 
-  margin-top: 30px;
+  margin-top: 40px;
 
   text-align: center;
 
   font-size: 0.9rem;
 
-  color: #a8c5db;
+  opacity: 0.75;
 
 }
 
-
-
-.footer-small {
-
-  font-size: 0.75rem;
-
-  color: #80a9c0;
-
-  margin-top: 6px;
-
-}
