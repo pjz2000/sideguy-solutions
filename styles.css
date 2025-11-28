@@ -1,446 +1,271 @@
-/* 
-
-  SideGuy Solutions · Premium Stylesheet
-
-  Version: 4.0 — Clean Fintech + Solana Energy
-
+/*
+  SideGuy Solutions · GODWAVE Water Styles
+  Version: 7.0 — Animated Ocean + Premium UI
 */
 
-
-
 /* RESET */
-
 *,
-
 *::before,
-
 *::after {
-
   box-sizing: border-box;
-
 }
-
-
 
 html, body {
-
   margin: 0;
-
   padding: 0;
-
 }
 
-
-
-/* BASE BACKGROUND (non-black ocean-inspired gradient) */
-
+/* BASE BODY */
 body {
-
   min-height: 100vh;
-
-  padding: 24px;
-
   font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-
-  color: #d9f3ff;
-
+  color: #dff3ff;
   overflow-x: hidden;
+  background: #020712;
+}
 
+/* WATER LAYERS */
+.ocean {
+  position: fixed;
+  inset: -60px;
+  z-index: -2;
 
+  background-image:
+    radial-gradient(circle at 0% 0%, #2a9dff 0, transparent 55%),
+    radial-gradient(circle at 100% 120%, #021633 0, #010712 65%),
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,0.09) 0,
+      rgba(255,255,255,0.09) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+  opacity: 0.95;
+  filter: blur(1px);
+  animation: waveDrift 32s ease-in-out infinite alternate;
+}
 
+.ocean-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background:
-
-    linear-gradient(180deg, #0a3b67 0%, #02121f 90%);
-
+    radial-gradient(circle at 50% -10%, rgba(255,255,255,0.05) 0, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.85) 55%);
 }
 
+/* WATER ANIMATION */
+@keyframes waveDrift {
+  0%   { transform: translate3d(0,0,0) scale(1.02); }
+  50%  { transform: translate3d(-80px,25px,0) scale(1.05); }
+  100% { transform: translate3d(-140px,-30px,0) scale(1.08); }
+}
 
-
-/* PAGE WIDTH */
-
+/* PAGE WRAPPER */
 .page {
-
   max-width: 1200px;
-
   margin: 0 auto;
-
+  padding: 24px;
 }
-
-
 
 /* HEADER */
-
 header {
-
   display: flex;
-
   justify-content: space-between;
-
   align-items: flex-start;
-
-  margin-bottom: 24px;
-
   gap: 16px;
-
+  margin-bottom: 24px;
 }
-
-
 
 .brand {
-
   display: flex;
-
   align-items: center;
-
   gap: 12px;
-
 }
-
-
 
 .orb-logo {
-
-  width: 28px;
-
-  height: 28px;
-
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
-
   background: radial-gradient(circle at 30% 20%, #ffffff, #00ffb3 40%, #005cdf 100%);
-
   box-shadow: 0 0 18px rgba(0,255,179,0.9);
-
 }
-
-
 
 .brand-text h1 {
-
   margin: 0;
-
   font-size: 1.5rem;
-
-  color: #e1f8ff;
-
+  color: #ecfbff;
 }
-
-
 
 .brand-text p {
-
   margin: 2px 0 0;
-
-  color: #a8d4ff;
-
   font-size: 0.9rem;
-
+  color: #aad4ff;
 }
-
-
 
 .top-cta {
-
   text-align: right;
-
+  font-size: 0.9rem;
 }
-
-
 
 .pill {
-
   display: inline-block;
-
-  background: rgba(255,255,255,0.1);
-
   padding: 6px 14px;
-
   border-radius: 999px;
-
-  margin-bottom: 6px;
-
+  background: rgba(0,0,0,0.45);
   border: 1px solid rgba(255,255,255,0.25);
-
-  font-size: 0.85rem;
-
-  color: #d9f3ff;
-
+  margin-bottom: 6px;
 }
-
-
 
 /* CARDS */
-
 .card {
-
-  background: rgba(255,255,255,0.06);
-
-  padding: 24px;
-
-  border-radius: 16px;
-
+  background: rgba(1, 12, 30, 0.86);
+  border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.18);
-
+  padding: 24px;
   margin-top: 22px;
-
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
   backdrop-filter: blur(12px);
-
-  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
-
 }
-
-
 
 h2, h3 {
-
-  color: #f0fbff;
-
   margin-top: 0;
-
+  color: #f3fbff;
 }
-
-
 
 /* HERO */
-
 .hero-subtext {
-
   font-size: 1.05rem;
-
-  color: #c6eaff;
-
-  line-height: 1.55;
-
-  margin-bottom: 16px;
-
+  color: #c9e6ff;
+  line-height: 1.6;
+  margin-bottom: 18px;
 }
-
-
 
 .hero-cta-group {
-
   display: flex;
-
-  gap: 12px;
-
   flex-wrap: wrap;
-
+  gap: 12px;
 }
-
-
 
 .highlight {
-
   color: #00ffc3;
-
-  text-shadow: 0 0 10px rgba(0,255,191,0.5);
-
+  text-shadow: 0 0 10px rgba(0,255,191,0.6);
 }
 
-
-
-/* CTA BUTTONS */
+/* BUTTONS */
+.cta-green,
+.cta-ghost {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: 0.18s ease;
+}
 
 .cta-green {
-
-  display: inline-block;
-
-  padding: 12px 22px;
-
-  border-radius: 12px;
-
-  text-decoration: none;
-
-  color: #002b17;
-
-  font-weight: 700;
-
   background: radial-gradient(circle at 20% 0%, #ffffff, #00ffc3 40%, #00a36c 100%);
-
+  color: #002b17;
   box-shadow:
-
     0 0 12px rgba(0,255,191,0.8),
-
     0 0 24px rgba(0,196,140,0.55);
-
-  transition: 0.18s ease;
-
 }
-
-
 
 .cta-green:hover {
-
   transform: translateY(-2px) scale(1.03);
-
   box-shadow:
-
     0 0 18px rgba(0,255,191,1),
-
     0 0 32px rgba(0,196,140,0.85);
-
 }
-
-
 
 .cta-ghost {
-
-  display: inline-block;
-
-  padding: 12px 22px;
-
-  border-radius: 12px;
-
   background: rgba(255,255,255,0.12);
-
   border: 1px solid rgba(255,255,255,0.25);
-
-  text-decoration: none;
-
-  color: #d9f3ff;
-
+  color: #e2f5ff;
   font-weight: 600;
-
-  transition: 0.18s ease;
-
 }
-
-
 
 .cta-ghost:hover {
-
   background: rgba(255,255,255,0.2);
-
 }
 
-
-
-/* BULLET LISTS */
-
+/* LISTS */
 .bullet-list {
-
   padding-left: 20px;
-
-  line-height: 1.55;
-
+  line-height: 1.6;
   color: #cfeaff;
-
 }
-
-
 
 /* SERVICES GRID */
-
 .services-grid {
-
   display: grid;
-
   gap: 16px;
-
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-
   margin-top: 18px;
-
 }
-
-
 
 .service-card {
-
-  background: rgba(255,255,255,0.08);
-
+  background: rgba(255,255,255,0.06);
   padding: 16px;
-
   border-radius: 12px;
-
   border: 1px solid rgba(255,255,255,0.22);
-
   backdrop-filter: blur(8px);
-
 }
-
-
 
 .service-card h3 {
-
   margin-bottom: 6px;
-
 }
-
-
 
 .service-card p {
-
-  color: #cceafe;
-
+  margin: 0;
   font-size: 0.95rem;
-
+  color: #cbe4ff;
 }
-
-
 
 /* CONTACT CARD */
-
 .contact-card {
-
   text-align: left;
-
 }
-
-
 
 .contact-buttons {
-
   display: flex;
-
   gap: 12px;
-
   margin-top: 12px;
-
 }
-
-
 
 /* FOOTER */
-
 footer {
-
   margin-top: 40px;
-
   text-align: center;
-
-  color: #a4d8ff;
-
-  opacity: 0.85;
-
   font-size: 0.9rem;
-
+  color: #a8d8ff;
+  opacity: 0.88;
 }
 
-
+/* GLOBAL ANCHORS */
+a {
+  color: #8fffe0;
+}
+a:hover {
+  text-decoration: underline;
+}
 
 /* MOBILE */
-
-@media (max-width: 700px) {
-
-  body {
-
+@media (max-width: 720px) {
+  .page {
     padding: 16px;
-
   }
-
   header {
-
     flex-direction: column;
-
     align-items: flex-start;
-
   }
-
   .top-cta {
-
     text-align: left;
-
+    margin-top: 8px;
   }
-
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
-
