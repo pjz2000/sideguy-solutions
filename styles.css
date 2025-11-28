@@ -1,8 +1,8 @@
 /* -----------------------------------------------------
 
-   SideGuy Solutions · GODWAVE WATER EDITION
+   SideGuy Solutions · Simple Ocean Edition
 
-   Version 3.3 — Solana .4 Seconds · Meme Bar Edition
+   Guaranteed blue moving background, no black.
 
    Author: PJ + ChatGPT
 
@@ -34,85 +34,103 @@ html, body {
 
 
 
+/* BASE BODY */
+
 body {
 
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
-
-  background: #00101d;
 
   color: #e8f4ff;
 
   overflow-x: hidden;
 
-}
+  background: #021d3a; /* fallback blue */
 
-
-
-/* -------------------------------------------------
-
-   WATER + BACKGROUND (NO BLACK EVER)
-
----------------------------------------------------*/
-
-
-
-#oceanCanvas {
-
-  position: fixed;
-
-  inset: 0;
-
-  width: 100%;
-
-  height: 100%;
-
-  z-index: -3 !important;
-
-  background: transparent !important;
+  position: relative;
 
 }
 
 
 
-/* Always translucent — no black fallback */
+/* SIMPLE CSS OCEAN BACKGROUND (NO JS, NO CANVAS) */
 
-.ocean-overlay {
+body::before {
+
+  content: "";
 
   position: fixed;
 
   inset: 0;
 
-  background: radial-gradient(circle at 25% -20%, rgba(255,255,255,0.12), rgba(0,0,0,0.25) 60%),
+  z-index: -2;
 
-              radial-gradient(circle at 80% 130%, rgba(0,0,0,0.55), rgba(0,0,0,0.85) 70%);
+  background: linear-gradient(
 
-  backdrop-filter: blur(8px);
+      180deg,
+
+      #0c3b78 0%,
+
+      #06569e 30%,
+
+      #033a70 60%,
+
+      #011d3a 100%
+
+  );
+
+  background-size: 100% 200%;
+
+  animation: oceanShift 18s ease-in-out infinite alternate;
+
+}
+
+
+
+/* soft glow overlay */
+
+body::after {
+
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: -1;
+
+  background:
+
+    radial-gradient(circle at 20% -20%, rgba(255,255,255,0.18), transparent 55%),
+
+    radial-gradient(circle at 80% 130%, rgba(0,0,0,0.6), rgba(0,0,0,0.85) 70%);
 
   pointer-events: none;
 
-  z-index: -2 !important;
+}
+
+
+
+@keyframes oceanShift {
+
+  0%   { background-position: 0% 0%; }
+
+  50%  { background-position: 0% 50%; }
+
+  100% { background-position: 0% 100%; }
 
 }
 
 
 
-/* Permanent Burj Solana Ghost */
+/* Hide any old water canvas if it exists */
+
+#oceanCanvas,
+
+.ocean-overlay,
 
 .burj-fixed {
 
-  position: fixed;
-
-  inset: 0;
-
-  background: url('https://cdn.jsdelivr.net/gh/pjz2000/cdn-assets/burj-solana-v1.png')
-
-    center bottom / 80% no-repeat;
-
-  opacity: 0.16;
-
-  pointer-events: none;
-
-  z-index: -1 !important;
+  display: none !important;
 
 }
 
@@ -120,7 +138,7 @@ body {
 
 /* -------------------------------------------------
 
-   PAGE LAYOUT
+   PAGE WRAPPER
 
 ---------------------------------------------------*/
 
@@ -140,7 +158,7 @@ body {
 
   position: relative;
 
-  z-index: 10;
+  z-index: 1;
 
 }
 
@@ -151,8 +169,6 @@ body {
    HEADER
 
 ---------------------------------------------------*/
-
-
 
 header {
 
@@ -192,7 +208,7 @@ header {
 
     0 0 15px rgba(50,245,164,1),
 
-    0 0 40px rgba(50,245,164,0.6);
+    0 0 40px rgba(50,245,164,0.7);
 
   animation: orbPulse 3s ease-in-out infinite alternate;
 
@@ -204,7 +220,7 @@ header {
 
   0% { transform: scale(1); }
 
-  100% { transform: scale(1.12); }
+  100% { transform: scale(1.1); }
 
 }
 
@@ -224,7 +240,7 @@ header {
 
   font-size: 0.8rem;
 
-  opacity: 0.8;
+  opacity: 0.85;
 
 }
 
@@ -233,6 +249,26 @@ header {
 .top-cta {
 
   text-align: right;
+
+}
+
+
+
+.top-cta .pill {
+
+  display: inline-block;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+
+  background: rgba(0, 84, 130, 0.9);
+
+  border: 1px solid rgba(162, 220, 255, 0.5);
+
+  color: #d5f0ff;
 
 }
 
@@ -254,11 +290,9 @@ header {
 
 /* -------------------------------------------------
 
-   HERO CARD
+   MAIN GRID
 
 ---------------------------------------------------*/
-
-
 
 main {
 
@@ -284,19 +318,25 @@ main {
 
 
 
+/* -------------------------------------------------
+
+   HERO CARD
+
+---------------------------------------------------*/
+
 .hero-card {
 
-  background: rgba(0,20,35,0.7);
-
-  backdrop-filter: blur(14px);
-
-  padding: 28px;
+  background: rgba(0, 26, 50, 0.88);
 
   border-radius: 22px;
 
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(175, 230, 255, 0.45);
 
-  box-shadow: 0 16px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 60px rgba(0,0,0,0.6);
+
+  padding: 26px;
+
+  backdrop-filter: blur(14px);
 
 }
 
@@ -304,13 +344,13 @@ main {
 
 .hero-headline {
 
-  font-size: 2.4rem;
+  font-size: 2.3rem;
 
   font-weight: 700;
 
   line-height: 1.15;
 
-  color: #eaffff;
+  color: #ecfbff;
 
 }
 
@@ -318,13 +358,13 @@ main {
 
 .hero-sub {
 
-  font-size: 1.05rem;
-
   margin-top: 12px;
 
-  color: #bfd5e7;
+  font-size: 1.02rem;
 
-  line-height: 1.55;
+  color: #c4dff2;
+
+  line-height: 1.6;
 
 }
 
@@ -342,9 +382,7 @@ main {
 
   gap: 8px;
 
-  color: #d5f3ff;
-
-  font-size: 1rem;
+  color: #d6f3ff;
 
 }
 
@@ -358,7 +396,7 @@ main {
 
   flex-direction: column;
 
-  gap: 14px;
+  gap: 12px;
 
 }
 
@@ -368,21 +406,17 @@ main {
 
   position: relative;
 
-  display: flex;
-
-  flex-direction: column;
-
-  padding: 16px;
+  padding: 14px 16px;
 
   border-radius: 14px;
 
-  background: rgba(0, 25, 40, 0.75);
+  border: 1px solid rgba(50,245,164,0.7);
 
-  border: 1px solid rgba(50,245,164,0.35);
+  background: rgba(0, 32, 50, 0.9);
 
   text-decoration: none;
 
-  color: #e7fffb;
+  color: #e9fffb;
 
   overflow: hidden;
 
@@ -402,13 +436,13 @@ main {
 
   height: 110px;
 
+  border-radius: 999px;
+
   background: radial-gradient(circle at 40% 30%, #ffffff, #32f5a4);
 
-  border-radius: 50%;
+  filter: blur(14px);
 
-  filter: blur(16px);
-
-  opacity: 0.45;
+  opacity: 0.55;
 
 }
 
@@ -416,7 +450,7 @@ main {
 
 .cta-text-main {
 
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 
   font-weight: 600;
 
@@ -428,7 +462,7 @@ main {
 
   font-size: 0.8rem;
 
-  opacity: 0.85;
+  opacity: 0.9;
 
 }
 
@@ -438,37 +472,31 @@ main {
 
   background: rgba(255,255,255,0.08);
 
-  padding: 10px 14px;
-
   border-radius: 10px;
 
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(200,225,255,0.35);
 
-  color: #d8f7ff;
+  padding: 10px 14px;
 
   font-size: 0.9rem;
+
+  color: #e4f2ff;
 
 }
 
 
 
-/* -------------------------------------------------
-
-   HIGH MEME BAR (NEW)
-
----------------------------------------------------*/
-
-
+/* High meme bar */
 
 .meme-bar {
+
+  margin-top: 10px;
 
   display: flex;
 
   flex-wrap: wrap;
 
-  gap: 12px;
-
-  margin-top: 10px;
+  gap: 10px;
 
 }
 
@@ -476,21 +504,17 @@ main {
 
 .meme-item {
 
-  background: rgba(0, 40, 60, 0.6);
-
-  border: 1px solid rgba(50,245,164,0.35);
-
-  padding: 6px 12px;
+  padding: 5px 11px;
 
   border-radius: 999px;
 
-  font-size: 0.82rem;
+  background: rgba(0, 72, 110, 0.9);
 
-  color: #dbfff4;
+  border: 1px solid rgba(50,245,164,0.6);
 
-  backdrop-filter: blur(8px);
+  font-size: 0.78rem;
 
-  white-space: nowrap;
+  color: #e8fff7;
 
 }
 
@@ -502,19 +526,19 @@ main {
 
 ---------------------------------------------------*/
 
-
-
 .status-card {
 
-  background: rgba(0,15,30,0.7);
-
-  padding: 24px;
+  background: rgba(0, 24, 46, 0.9);
 
   border-radius: 22px;
 
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(173, 216, 255, 0.45);
 
-  backdrop-filter: blur(10px);
+  padding: 22px;
+
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 16px 60px rgba(0,0,0,0.6);
 
 }
 
@@ -522,7 +546,7 @@ main {
 
 .status-card h3 {
 
-  font-size: 1.35rem;
+  font-size: 1.3rem;
 
   margin-bottom: 6px;
 
@@ -532,11 +556,11 @@ main {
 
 .status-sub {
 
-  color: #c1d6e7;
+  font-size: 0.96rem;
 
-  font-size: 1rem;
+  color: #c1d9ee;
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 
 }
 
@@ -546,7 +570,9 @@ main {
 
   display: grid;
 
-  gap: 10px;
+  gap: 9px;
+
+  margin-bottom: 10px;
 
 }
 
@@ -558,33 +584,47 @@ main {
 
   justify-content: space-between;
 
-  padding: 10px 12px;
-
-  background: rgba(0,30,50,0.45);
+  padding: 8px 10px;
 
   border-radius: 10px;
 
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0, 46, 76, 0.9);
+
+  border: 1px solid rgba(190, 230, 255, 0.4);
 
 }
 
 
 
-.value {
+.status-item .label {
 
-  color: #32f5a4;
+  font-size: 0.82rem;
+
+  color: #a8c5de;
+
+}
+
+
+
+.status-item .value {
+
+  font-size: 0.9rem;
 
   font-weight: 600;
 
+  color: #32f5a4;
+
 }
 
 
 
+/* glowing green timestamp */
+
 .timestamp-label {
 
-  opacity: 0.7;
-
   font-size: 0.8rem;
+
+  color: #a6c4dd;
 
 }
 
@@ -592,9 +632,15 @@ main {
 
 .timestamp-value {
 
+  font-size: 0.9rem;
+
   color: #32f5a4;
 
-  font-size: 0.9rem;
+  text-shadow:
+
+    0 0 6px rgba(50,245,164,0.9),
+
+    0 0 16px rgba(50,245,164,0.7);
 
 }
 
@@ -602,9 +648,15 @@ main {
 
 /* -------------------------------------------------
 
-   SERVICES
+   SERVICES GRID
 
 ---------------------------------------------------*/
+
+.services {
+
+  margin-top: 10px;
+
+}
 
 
 
@@ -612,17 +664,29 @@ main {
 
   font-size: 2rem;
 
+  margin-bottom: 6px;
+
+}
+
+
+
+.services p {
+
+  font-size: 0.96rem;
+
+  color: #cbe2f5;
+
 }
 
 
 
 .services-grid {
 
-  margin-top: 18px;
+  margin-top: 16px;
 
   display: grid;
 
-  gap: 22px;
+  gap: 20px;
 
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
@@ -632,21 +696,23 @@ main {
 
 .service-card {
 
-  background: rgba(0,20,35,0.7);
+  text-decoration: none;
 
-  padding: 20px;
+  color: #e7f7ff;
+
+  background: rgba(0, 32, 58, 0.92);
 
   border-radius: 18px;
 
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(180, 221, 255, 0.5);
 
-  backdrop-filter: blur(10px);
+  padding: 18px;
 
-  text-decoration: none;
+  backdrop-filter: blur(12px);
 
-  color: #eaffff;
+  box-shadow: 0 14px 45px rgba(0,0,0,0.6);
 
-  transition: 0.2s;
+  transition: transform 0.16s ease, border-color 0.16s ease;
 
 }
 
@@ -654,9 +720,9 @@ main {
 
 .service-card:hover {
 
-  border-color: #32f5a4;
-
   transform: translateY(-3px);
+
+  border-color: #32f5a4;
 
 }
 
@@ -668,15 +734,15 @@ main {
 
   margin-top: 6px;
 
-  font-size: 0.8rem;
-
-  padding: 4px 10px;
+  padding: 3px 9px;
 
   border-radius: 999px;
 
-  background: rgba(50,245,164,0.3);
+  font-size: 0.78rem;
 
-  color: #d7fff1;
+  background: rgba(50,245,164,0.25);
+
+  color: #e9fff6;
 
 }
 
@@ -684,21 +750,33 @@ main {
 
 /* -------------------------------------------------
 
-   PAYMENTS SECTION
+   PAYMENTS
 
 ---------------------------------------------------*/
 
-
-
 .payments {
+
+  margin-top: 30px;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 12px;
+  gap: 10px;
 
-  margin-top: 40px;
+}
+
+
+
+.payments-list {
+
+  list-style: none;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
 
 }
 
@@ -706,23 +784,35 @@ main {
 
 .cta-solid {
 
-  display: block;
+  display: inline-block;
 
   text-align: center;
 
-  background: #32f5a4;
+  margin-top: 8px;
 
-  color: #003123;
-
-  padding: 14px;
+  padding: 12px 16px;
 
   border-radius: 12px;
 
-  font-weight: bold;
+  background: #32f5a4;
+
+  color: #003322;
+
+  font-weight: 700;
 
   text-decoration: none;
 
-  box-shadow: 0 10px 25px rgba(50,245,164,0.4);
+  box-shadow: 0 10px 28px rgba(50,245,164,0.6);
+
+}
+
+
+
+.payments-note {
+
+  font-size: 0.85rem;
+
+  color: #c6f0da;
 
 }
 
@@ -734,11 +824,17 @@ main {
 
 ---------------------------------------------------*/
 
+.contact {
+
+  margin-top: 30px;
+
+}
+
 
 
 .contact-grid {
 
-  margin-top: 18px;
+  margin-top: 16px;
 
   display: grid;
 
@@ -752,15 +848,15 @@ main {
 
 .contact-block {
 
-  background: rgba(0,25,40,0.7);
-
-  padding: 20px;
+  background: rgba(0, 32, 56, 0.9);
 
   border-radius: 18px;
 
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(185, 225, 255, 0.5);
 
-  backdrop-filter: blur(10px);
+  padding: 18px;
+
+  backdrop-filter: blur(12px);
 
 }
 
@@ -772,6 +868,8 @@ main {
 
   text-decoration: none;
 
+  font-weight: 600;
+
 }
 
 
@@ -782,17 +880,26 @@ main {
 
 ---------------------------------------------------*/
 
-
-
 footer {
 
-  margin-top: 40px;
+  margin-top: 30px;
 
   text-align: center;
 
   font-size: 0.9rem;
 
-  opacity: 0.75;
+  color: #c0d7ee;
 
 }
 
+
+
+.footer-small {
+
+  font-size: 0.78rem;
+
+  color: #9bb9d8;
+
+  margin-top: 4px;
+
+}
