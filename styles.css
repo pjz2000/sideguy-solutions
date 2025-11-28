@@ -2,9 +2,7 @@
 
   SideGuy Solutions · Ocean Water Styles
 
-  Version: 1.0
-
-  This file gives you a moving ocean background + clean cards.
+  Version: 1.0 — Moving Water + Premium Glow
 
 */
 
@@ -34,13 +32,7 @@ html, body {
 
 
 
-/* GLOBAL OCEAN BACKGROUND
-
-   Uses animated gradients + subtle ripples.
-
-   !important so it wins over old inline body styles.
-
-*/
+/* GLOBAL OCEAN BACKGROUND */
 
 body {
 
@@ -56,7 +48,7 @@ body {
 
 
 
-  /* Deep Pacific base */
+  /* Base gradient */
 
   background:
 
@@ -72,7 +64,7 @@ body {
 
 
 
-/* Moving water layer */
+/* MOVING WATER LAYER */
 
 body::before {
 
@@ -85,8 +77,6 @@ body::before {
   z-index: -2;
 
 
-
-  /* Layers: soft light + teal sheen + ripple stripes */
 
   background-image:
 
@@ -110,6 +100,8 @@ body::before {
 
     );
 
+
+
   opacity: 0.75;
 
   mix-blend-mode: screen;
@@ -124,7 +116,7 @@ body::before {
 
 
 
-/* Subtle darker overlay so text stays readable */
+/* Dark overlay for readability */
 
 body::after {
 
@@ -144,31 +136,21 @@ body::after {
 
 
 
+/* WATER ANIMATION */
+
 @keyframes sideguyWave {
 
-  0% {
+  0% { transform: translate3d(0, 0, 0) scale(1.02); }
 
-    transform: translate3d(0, 0, 0) scale(1.02);
+  50% { transform: translate3d(-60px, 30px, 0) scale(1.04); }
 
-  }
-
-  50% {
-
-    transform: translate3d(-60px, 30px, 0) scale(1.04);
-
-  }
-
-  100% {
-
-    transform: translate3d(-120px, -20px, 0) scale(1.06);
-
-  }
+  100% { transform: translate3d(-120px, -20px, 0) scale(1.06); }
 
 }
 
 
 
-/* PAGE WRAPPER (for the other pages you created) */
+/* PAGE WIDTH */
 
 .page {
 
@@ -180,7 +162,7 @@ body::after {
 
 
 
-/* HEADERS / TOP BAR */
+/* HEADER */
 
 header {
 
@@ -258,16 +240,6 @@ header {
 
 
 
-.top-cta .pill {
-
-  margin-bottom: 6px;
-
-}
-
-
-
-/* GENERIC PILL */
-
 .pill {
 
   display: inline-block;
@@ -306,7 +278,7 @@ a:hover {
 
 
 
-/* CARDS / SECTIONS (used on index + other pages) */
+/* CARDS */
 
 .card,
 
@@ -336,39 +308,15 @@ a:hover {
 
 
 
-/* Index-specific live box already uses .live-box */
-
-.live-box h3 {
-
-  margin-top: 0;
-
-}
-
-
-
-/* HEADINGS */
-
 h1, h2, h3 {
 
   font-weight: 700;
 
 }
 
-h2 {
-
-  margin-top: 0;
-
-}
-
-h3 {
-
-  margin-bottom: 6px;
-
-}
 
 
-
-/* GREEN GLOW CTA BUTTONS (index + pages) */
+/* CTA BUTTONS */
 
 .cta-green,
 
@@ -384,6 +332,8 @@ h3 {
 
   cursor: pointer;
 
+
+
   background: radial-gradient(circle at 20% 0%, #ffffff 0, #00ffbf 45%, #00a36c 100%);
 
   color: #001b10;
@@ -392,17 +342,23 @@ h3 {
 
   font-size: 0.98rem;
 
+
+
   box-shadow:
 
     0 0 14px rgba(0,255,191,0.8),
 
     0 0 32px rgba(0,196,140,0.65);
 
+
+
   transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
 
   text-decoration: none;
 
 }
+
+
 
 .cta-green:hover,
 
@@ -417,208 +373,6 @@ h3 {
     0 0 40px rgba(0,196,140,0.9);
 
   filter: brightness(1.05);
-
-}
-
-
-
-/* Ghost / outline CTAs on other pages */
-
-.cta-ghost {
-
-  display: inline-block;
-
-  padding: 10px 18px;
-
-  border-radius: 999px;
-
-  border: 1px solid rgba(190,220,255,0.7);
-
-  background: rgba(2,16,34,0.65);
-
-  color: #dcefff;
-
-  font-size: 0.9rem;
-
-  text-decoration: none;
-
-  margin-left: 10px;
-
-}
-
-.cta-ghost:hover {
-
-  background: rgba(9,47,88,0.85);
-
-}
-
-
-
-/* Operator network style CTA used on pages */
-
-.cta-orb {
-
-  position: relative;
-
-  display: inline-flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  padding: 10px 20px 10px 48px;
-
-  border-radius: 999px;
-
-  border: 1px solid rgba(184,231,255,0.9);
-
-  background: radial-gradient(circle at 0% 50%, rgba(0,255,191,0.28), rgba(1,14,32,0.98));
-
-  color: #e9f6ff;
-
-  text-decoration: none;
-
-  overflow: hidden;
-
-}
-
-.cta-orb .orb-inner {
-
-  position: absolute;
-
-  left: 10px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  width: 24px;
-
-  height: 24px;
-
-  border-radius: 999px;
-
-  background: radial-gradient(circle at 20% 10%, #ffffff, #00ffbf 50%, #00a36c 100%);
-
-  box-shadow:
-
-    0 0 12px rgba(0,255,191,0.9),
-
-    0 0 22px rgba(0,191,140,0.8);
-
-}
-
-.cta-text-main {
-
-  font-weight: 700;
-
-  font-size: 0.95rem;
-
-}
-
-.cta-text-sub {
-
-  font-size: 0.8rem;
-
-  opacity: 0.85;
-
-}
-
-
-
-/* TIMESTAMPS */
-
-.timestamp,
-
-.timestamp-value,
-
-.footer-small {
-
-  font-size: 0.8rem;
-
-  color: #a7f3d0;
-
-}
-
-
-
-/* SERVICES SECTIONS FOR OTHER PAGES */
-
-.services h2,
-
-.payments h2,
-
-.contact h2 {
-
-  margin-top: 0;
-
-}
-
-
-
-.services-grid,
-
-.contact-grid {
-
-  display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-
-  gap: 14px;
-
-  margin-top: 16px;
-
-}
-
-
-
-.service-card,
-
-.contact-block {
-
-  border-radius: 14px;
-
-  border: 1px solid rgba(183,222,255,0.22);
-
-  background: radial-gradient(circle at 0% 0%, rgba(79,173,255,0.25), rgba(1,16,33,0.96));
-
-  padding: 14px;
-
-  font-size: 0.93rem;
-
-}
-
-
-
-.service-card h3,
-
-.contact-block h3 {
-
-  margin-top: 0;
-
-  margin-bottom: 6px;
-
-  font-size: 1rem;
-
-}
-
-
-
-.tag {
-
-  display: inline-block;
-
-  margin-top: 8px;
-
-  padding: 4px 10px;
-
-  border-radius: 999px;
-
-  background: rgba(0,0,0,0.55);
-
-  font-size: 0.8rem;
-
-  color: #bde6ff;
 
 }
 
@@ -665,3 +419,4 @@ footer {
   }
 
 }
+
