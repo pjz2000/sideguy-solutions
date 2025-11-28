@@ -1,179 +1,1075 @@
+<!--
+
+  SideGuy Solutions – Solana Payments · San Diego
+
+  Version: 41.0 · Ocean Neon Edition
+
+  Updated: 2025-11-29
+
+  Author: PJ + ChatGPT
+
+-->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+  <title>SideGuy Solutions | Solana Payments in 0.4 Seconds</title>
+
+  <meta name="description"
+
+        content="SideGuy Solutions routes San Diego operators onto fast, low-fee Solana payments with clean tools, dashboards, and real human support from PJ. 0.4 second settlement, lower fees, and operator-first upside." />
+
+
+
+  <style>
+
+    /* ---------- RESET ---------- */
+
+    *, *::before, *::after {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+
+      background: radial-gradient(circle at top left, #06334b 0, #02131f 40%, #020711 100%);
+
+      color: #f5f7ff;
+
+      min-height: 100vh;
+
+    }
+
+
+
+    a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+
+
+    /* ---------- LAYOUT ---------- */
+
+    .page-shell {
+
+      max-width: 1200px;
+
+      margin: 0 auto;
+
+      padding: 24px 16px 40px;
+
+    }
+
+
+
+    @media (min-width: 768px) {
+
+      .page-shell {
+
+        padding: 32px 32px 48px;
+
+      }
+
+    }
+
+
+
+    /* ---------- TOP BAR ---------- */
+
+    .top-row {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 16px;
+
+      margin-bottom: 20px;
+
+    }
+
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-size: 18px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.16em;
+
+    }
+
+
+
+    .brand-dot {
+
+      width: 14px;
+
+      height: 14px;
+
+      border-radius: 999px;
+
+      background: radial-gradient(circle, #1fff8f 0, #00c46a 40%, #007a45 90%);
+
+      box-shadow: 0 0 12px rgba(0, 255, 153, 0.9);
+
+    }
+
+
+
+    .tagline {
+
+      font-size: 11px;
+
+      font-weight: 400;
+
+      opacity: 0.8;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.18em;
+
+    }
+
+
+
+    .pill {
+
+      border-radius: 999px;
+
+      padding: 6px 14px;
+
+      background: rgba(0, 0, 0, 0.4);
+
+      border: 1px solid rgba(115, 252, 190, 0.35);
+
+      font-size: 11px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      white-space: nowrap;
+
+    }
+
+
+
+    .pill-dot {
+
+      width: 8px;
+
+      height: 8px;
+
+      border-radius: 999px;
+
+      background: #1fff8f;
+
+      box-shadow: 0 0 6px rgba(0, 255, 153, 0.9);
+
+    }
+
+
+
+    /* ---------- MAIN GRID ---------- */
+
+    .layout {
+
+      display: grid;
+
+      grid-template-columns: minmax(0, 3fr) minmax(0, 3fr);
+
+      gap: 24px;
+
+      margin-top: 12px;
+
+    }
+
+
+
+    @media (max-width: 900px) {
+
+      .layout {
+
+        grid-template-columns: minmax(0, 1fr);
+
+      }
+
+    }
+
+
+
+    .card {
+
+      border-radius: 22px;
+
+      padding: 22px 22px 24px;
+
+      background: linear-gradient(135deg, rgba(5, 39, 65, 0.96), rgba(3, 18, 32, 0.98));
+
+      border: 1px solid rgba(115, 252, 190, 0.12);
+
+      box-shadow:
+
+        0 18px 40px rgba(0, 0, 0, 0.65),
+
+        0 0 0 1px rgba(0, 0, 0, 0.8);
+
+    }
+
+
+
+    .card-header-label {
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.19em;
+
+      opacity: 0.7;
+
+      margin-bottom: 12px;
+
+    }
+
+
+
+    .hero-title {
+
+      font-size: clamp(28px, 4vw, 36px);
+
+      line-height: 1.1;
+
+      font-weight: 750;
+
+      margin-bottom: 10px;
+
+    }
+
+
+
+    .hero-highlight {
+
+      color: #4af9bd;
+
+    }
+
+
+
+    .hero-sub {
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      opacity: 0.84;
+
+      margin-bottom: 16px;
+
+    }
+
+
+
+    .bullet-list {
+
+      list-style: none;
+
+      margin-bottom: 18px;
+
+      font-size: 14px;
+
+    }
+
+
+
+    .bullet-list li {
+
+      margin-bottom: 6px;
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 8px;
+
+    }
+
+
+
+    .bullet-dot {
+
+      width: 6px;
+
+      height: 6px;
+
+      border-radius: 999px;
+
+      margin-top: 7px;
+
+      background: linear-gradient(135deg, #4af9bd, #34d399);
+
+      box-shadow: 0 0 8px rgba(74, 249, 189, 0.75);
+
+      flex-shrink: 0;
+
+    }
+
+
+
+    .button-row {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+    }
+
+
+
+    .btn-main {
+
+      border-radius: 999px;
+
+      padding: 10px 20px;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      border: none;
+
+      cursor: pointer;
+
+      background: radial-gradient(circle at 10% 0%, #4af9bd 0, #00e08b 45%, #00a86b 100%);
+
+      color: #01100c;
+
+      box-shadow:
+
+        0 0 14px rgba(74, 249, 189, 0.7),
+
+        0 8px 24px rgba(0, 0, 0, 0.8);
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      text-decoration: none;
+
+    }
+
+
+
+    .btn-main:hover {
+
+      transform: translateY(-1px);
+
+      box-shadow:
+
+        0 0 18px rgba(74, 249, 189, 0.85),
+
+        0 10px 28px rgba(0, 0, 0, 0.9);
+
+    }
+
+
+
+    .btn-ghost {
+
+      border-radius: 999px;
+
+      padding: 9px 18px;
+
+      border: 1px solid rgba(148, 163, 184, 0.6);
+
+      background: rgba(10, 22, 36, 0.85);
+
+      color: #e5f0ff;
+
+      font-size: 13px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      text-decoration: none;
+
+    }
+
+
+
+    .btn-ghost:hover {
+
+      border-color: rgba(148, 163, 184, 0.9);
+
+      background: rgba(15, 29, 46, 0.98);
+
+    }
+
+
+
+    .btn-ghost small {
+
+      opacity: 0.75;
+
+    }
+
+
+
+    /* ---------- RIGHT COLUMN ---------- */
+
+    .section-title {
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+      margin-bottom: 10px;
+
+    }
+
+
+
+    .section-sub {
+
+      font-size: 13px;
+
+      opacity: 0.8;
+
+      margin-bottom: 18px;
+
+      max-width: 440px;
+
+    }
+
+
+
+    .pill-grid {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-bottom: 16px;
+
+    }
+
+
+
+    .pill-link {
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.18em;
+
+      padding: 6px 10px;
+
+      border-radius: 999px;
+
+      border: 1px solid rgba(148, 163, 184, 0.7);
+
+      background: rgba(12, 23, 38, 0.9);
+
+      opacity: 0.9;
+
+    }
+
+
+
+    .pill-link span {
+
+      opacity: 0.8;
+
+    }
+
+
+
+    .card-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+
+      gap: 12px;
+
+      margin-top: 6px;
+
+    }
+
+
+
+    .mini-card {
+
+      border-radius: 18px;
+
+      padding: 12px 14px 14px;
+
+      background: radial-gradient(circle at top, rgba(25, 55, 80, 0.9), rgba(10, 18, 30, 0.98));
+
+      border: 1px solid rgba(51, 65, 85, 0.9);
+
+      font-size: 13px;
+
+    }
+
+
+
+    .mini-label {
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.18em;
+
+      opacity: 0.7;
+
+      margin-bottom: 4px;
+
+    }
+
+
+
+    .mini-title {
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      margin-bottom: 4px;
+
+    }
+
+
+
+    .mini-copy {
+
+      font-size: 12px;
+
+      opacity: 0.8;
+
+      margin-bottom: 6px;
+
+    }
+
+
+
+    .mini-link {
+
+      font-size: 12px;
+
+      color: #4af9bd;
+
+      opacity: 0.92;
+
+    }
+
+
+
+    /* ---------- FOOTER ROW ---------- */
+
+    .bottom-row {
+
+      margin-top: 26px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      font-size: 12px;
+
+      opacity: 0.8;
+
+    }
+
+
+
+    .bottom-row a {
+
+      color: #4af9bd;
+
+    }
+
+
+
+    /* ---------- PJ ORB ---------- */
+
+    .pj-orb {
+
+      position: fixed;
+
+      right: 18px;
+
+      bottom: 18px;
+
+      z-index: 50;
+
+      border-radius: 999px;
+
+      padding: 10px 16px;
+
+      background: radial-gradient(circle at 30% 0%, #4af9bd 0, #12b981 40%, #036554 90%);
+
+      color: #01110b;
+
+      box-shadow:
+
+        0 0 14px rgba(74, 249, 189, 0.9),
+
+        0 14px 30px rgba(0, 0, 0, 0.85);
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      text-decoration: none;
+
+    }
+
+
+
+    .pj-orb-badge {
+
+      width: 22px;
+
+      height: 22px;
+
+      border-radius: 999px;
+
+      background: #01110b;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #4af9bd;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+    }
+
+
+
+    .pj-orb small {
+
+      display: block;
+
+      font-size: 10px;
+
+      opacity: 0.8;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.14em;
+
+    }
+
+
+
+    @media (max-width: 600px) {
+
+      .pj-orb {
+
+        right: 12px;
+
+        bottom: 12px;
+
+        padding: 9px 14px;
+
+      }
+
+      .pj-orb span {
+
+        font-size: 12px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
 <body>
 
-<div class="container">
+
+
+  <div class="page-shell">
+
+    <!-- TOP BAR -->
+
+    <div class="top-row">
+
+      <div>
+
+        <div class="brand">
+
+          <div class="brand-dot"></div>
+
+          <span>SIDEGUY SOLUTIONS</span>
+
+        </div>
+
+        <div class="tagline">Solana Payments · Operator Tools · Real Savings</div>
+
+      </div>
 
 
 
-  <div class="timestamp">Updated: Nov 29, 2025 • Live</div>
+      <div class="pill">
 
+        <span class="pill-dot"></span>
 
+        <span>Updated: Nov 29, 2025 · Live</span>
 
-  <h1 class="header-title">
-
-    <span class="pj-orb">PJ</span>
-
-    SideGuy Solutions
-
-  </h1>
-
-
-
-  <p style="color:#8fdbff; margin-top:-8px;">
-
-    Solana Payments • Operator Tools • Real Savings
-
-  </p>
-
-
-
-  <h2 class="section-title">Solana payments in <span style="color:#34ffbf;">0.4 seconds</span> for San Diego operators.</h2>
-
-
-
-  <p style="max-width:640px; line-height:1.6; color:#c9f8ff;">
-
-    Stop overpaying Stripe & PayPal. SideGuy routes money on fast, low-fee Solana rails with clean tools, dashboards, and real human support — text PJ anytime.
-
-  </p>
-
-
-
-  <ul style="color:#bff8ff; line-height:1.6;">
-
-    <li>0.4 second settlement instead of multi-day payouts</li>
-
-    <li>Lower fees than Stripe & PayPal</li>
-
-    <li>Cleaner dashboards vs bolt-on SaaS chaos</li>
-
-    <li>Local support — text PJ directly</li>
-
-  </ul>
-
-
-
-  <a href="save-on-stripe-fees-san-diego.html" class="btn">See Your Savings →</a>
-
-
-
-  <h2 class="section-title">San Diego Operator Payments Hub</h2>
-
-
-
-  <div class="grid">
-
-
-
-    <div class="card">
-
-      <h3>Restaurant Payments</h3>
-
-      Faster nightly close. Lower credit card fees.
-
-      <br><br><a href="restaurant-payment-processing-san-diego.html">Open page →</a>
+      </div>
 
     </div>
 
 
 
-    <div class="card">
+    <!-- MAIN LAYOUT -->
 
-      <h3>Gym & Fitness Payments</h3>
+    <div class="layout">
 
-      Local memberships. Instant auto-billing.
+      <!-- LEFT: HERO -->
 
-      <br><br><a href="gym-payment-processing-san-diego.html">Open page →</a>
+      <section class="card">
+
+        <div class="card-header-label">Solana payments · San Diego & North County</div>
+
+
+
+        <h1 class="hero-title">
+
+          Solana payments in <span class="hero-highlight">0.4 seconds</span><br />
+
+          for San Diego operators.
+
+        </h1>
+
+
+
+        <p class="hero-sub">
+
+          Stop overpaying Stripe &amp; PayPal. SideGuy routes money on fast, low-fee Solana rails
+
+          with clean tools, dashboards, and real human support from PJ.
+
+        </p>
+
+
+
+        <ul class="bullet-list">
+
+          <li>
+
+            <span class="bullet-dot"></span>
+
+            <span><strong>0.4 second settlement</strong> instead of multi-day payouts.</span>
+
+          </li>
+
+          <li>
+
+            <span class="bullet-dot"></span>
+
+            <span><strong>Lower effective fees</strong> than Stripe &amp; PayPal on real volume.</span>
+
+          </li>
+
+          <li>
+
+            <span class="bullet-dot"></span>
+
+            <span><strong>Clean dashboards</strong> instead of messy bolt-on tools.</span>
+
+          </li>
+
+          <li>
+
+            <span class="bullet-dot"></span>
+
+            <span><strong>Local operator upside</strong> — participate in the network you help grow.</span>
+
+          </li>
+
+        </ul>
+
+
+
+        <div class="button-row">
+
+          <a class="btn-main" href="tel:17735441231">
+
+            See Your Savings →
+
+          </a>
+
+
+
+          <a class="btn-ghost" href="tel:17735441231">
+
+            Text PJ (773) 544-1231
+
+            <small>Send your monthly volume · get exact savings in ~5 minutes.</small>
+
+          </a>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- RIGHT: OPERATOR HUB -->
+
+      <section class="card">
+
+        <div class="card-header-label">San Diego Operator Payments Hub</div>
+
+
+
+        <h2 class="section-title">A growing grid of payments &amp; savings pages for real operators.</h2>
+
+        <p class="section-sub">
+
+          Every card unlocks a focused page for one real operator type. Use it as a playbook, a
+
+          savings worksheet, or a conversation starter with PJ.
+
+        </p>
+
+
+
+        <div class="pill-grid">
+
+          <a class="pill-link" href="seo.html">
+
+            <span>SideGuy Vision Board → All Operator Pages</span>
+
+          </a>
+
+        </div>
+
+
+
+        <div class="card-grid">
+
+
+
+          <a class="mini-card" href="contractor-payments-san-diego.html">
+
+            <div class="mini-label">Field &amp; Trades</div>
+
+            <div class="mini-title">Contractor Payments</div>
+
+            <p class="mini-copy">
+
+              Faster cash flow, lower card fees, fewer painful payout delays.
+
+            </p>
+
+            <div class="mini-link">Open contractor payments page →</div>
+
+          </a>
+
+
+
+          <a class="mini-card" href="gym-payment-processing-san-diego.html">
+
+            <div class="mini-label">Gyms &amp; Fitness</div>
+
+            <div class="mini-title">Gym &amp; Fitness Payments</div>
+
+            <p class="mini-copy">
+
+              Local memberships, clean recurring billing, instant settlements.
+
+            </p>
+
+            <div class="mini-link">Open gym payments page →</div>
+
+          </a>
+
+
+
+          <a class="mini-card" href="salon-payment-processing-san-diego.html">
+
+            <div class="mini-label">Salon &amp; Spa</div>
+
+            <div class="mini-title">Salon &amp; Spa Payments</div>
+
+            <p class="mini-copy">
+
+              Chair fees, memberships, tips — all flowing on fast Solana rails.
+
+            </p>
+
+            <div class="mini-link">Open salon &amp; spa page →</div>
+
+          </a>
+
+
+
+          <a class="mini-card" href="ecommerce-payment-processing-san-diego.html">
+
+            <div class="mini-label">E-Commerce</div>
+
+            <div class="mini-title">E-Commerce Payments</div>
+
+            <p class="mini-copy">
+
+              Modern checkout, lower fees, high-speed settlement built for operators.
+
+            </p>
+
+            <div class="mini-link">Open e-commerce page →</div>
+
+          </a>
+
+
+
+          <a class="mini-card" href="local-business-savings-san-diego.html">
+
+            <div class="mini-label">Savings Department</div>
+
+            <div class="mini-title">Local Business Savings</div>
+
+            <p class="mini-copy">
+
+              SideGuy as your unofficial savings department — payments, tools, and time.
+
+            </p>
+
+            <div class="mini-link">Open savings page →</div>
+
+          </a>
+
+
+
+          <a class="mini-card" href="save-on-stripe-fees-san-diego.html">
+
+            <div class="mini-label">Stripe &amp; PayPal</div>
+
+            <div class="mini-title">Save on Stripe Fees</div>
+
+            <p class="mini-copy">
+
+              See what happens when even 10–20% of your volume moves off legacy rails.
+
+            </p>
+
+            <div class="mini-link">Open Stripe savings page →</div>
+
+          </a>
+
+
+
+        </div>
+
+      </section>
 
     </div>
 
 
 
-    <div class="card">
+    <!-- BOTTOM ROW -->
 
-      <h3>Salon & Spa</h3>
+    <div class="bottom-row">
 
-      Memberships, invoices, clean workflows.
+      <div>
 
-      <br><br><a href="salon-payment-processing-san-diego.html">Open page →</a>
+        Built for San Diego operators · SideGuy Solutions · Solana-powered rails · Real world assets later.
 
-    </div>
+      </div>
 
+      <div>
 
+        <a href="seo.html">SideGuy Vision Board (all operator pages)</a>
 
-    <div class="card">
-
-      <h3>Local Business Savings</h3>
-
-      Your unofficial savings department.
-
-      <br><br><a href="local-business-savings-san-diego.html">Open page →</a>
+      </div>
 
     </div>
-
-
-
-    <div class="card">
-
-      <h3>E-commerce Payments</h3>
-
-      Lower fees • Modern checkout.
-
-      <br><br><a href="ecommerce-payment-processing-san-diego.html">Open page →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>Instant Settlement</h3>
-
-      0.4 seconds instead of days.
-
-      <br><br><a href="instant-settlement-payments.html">Open page →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>Stripe Alternatives</h3>
-
-      Lower cost. Faster money.
-
-      <br><br><a href="stripe-alternative-san-diego.html">Open page →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>Solana Payments (Main)</h3>
-
-      Clean, fast, real-time.
-
-      <br><br><a href="solana-payments-san-diego.html">Open page →</a>
-
-    </div>
-
-
 
   </div>
 
 
 
-  <br><br>
+  <!-- PJ ORB – FLOATING TEXT BUTTON -->
 
-  <a href="seo.html" class="btn" style="background:linear-gradient(90deg,#00f2ff,#3d7bff);">SideGuy Vision Board →</a>
+  <a class="pj-orb" href="tel:17735441231">
+
+    <div class="pj-orb-badge">PJ</div>
+
+    <span>Text PJ · 0.4 sec payments</span>
+
+    <small>San Diego &amp; North County</small>
+
+  </a>
 
 
-
-</div>
 
 </body>
 
 </html>
-
-
