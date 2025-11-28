@@ -1,8 +1,8 @@
 <!--
 
-  SideGuy Solutions · GODWAVE WATER EDITION
+  SideGuy Solutions · Ocean + API Edition
 
-  Version: 3.4 — .4 Second Solana Payments + Meme Bar
+  Version: 4.0 — Color + Live Solana + Savings Calculator
 
   Author: PJ + ChatGPT
 
@@ -24,19 +24,147 @@
 
 
 
-  <title>SideGuy Solutions | Solana Payments in .4 Seconds</title>
+  <title>SideGuy Solutions | Faster Than Stripe, Cheaper Than PayPal</title>
 
   <meta
 
     name="description"
 
-    content="Faster than Stripe. Cheaper than PayPal. Solana-powered payments that settle in .4 seconds. Software, tools, and savings for San Diego operators."
+    content="SideGuy Solutions is San Diego’s Financial Savings Department. Faster than Stripe, cheaper than PayPal — Solana-speed payments and custom software that saves operators real money."
 
   />
 
 
 
   <link rel="stylesheet" href="styles.css" />
+
+
+
+  <style>
+
+    /* Ocean background */
+
+    body {
+
+      background: linear-gradient(180deg, #0e6ccf 0%, #094a8f 45%, #052f60 100%);
+
+      background-attachment: fixed;
+
+      color: white;
+
+      font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
+
+      padding: 30px;
+
+    }
+
+
+
+    h1, h2, h3 { font-weight: 700; }
+
+
+
+    /* Glowing green buttons */
+
+    .cta-green {
+
+      display: inline-block;
+
+      padding: 14px 24px;
+
+      background: #00ff95cc;
+
+      color: #002a18;
+
+      font-weight: 700;
+
+      border-radius: 12px;
+
+      text-decoration: none;
+
+      box-shadow: 0 0 18px #00ffbb;
+
+      transition: transform 0.2s, box-shadow 0.2s;
+
+    }
+
+    .cta-green:hover {
+
+      transform: scale(1.03);
+
+      box-shadow: 0 0 24px #00ffc8;
+
+    }
+
+
+
+    /* Solana price + timestamp */
+
+    .live-box {
+
+      background: rgba(0,0,0,0.25);
+
+      border: 1px solid rgba(255,255,255,0.25);
+
+      padding: 16px;
+
+      border-radius: 14px;
+
+      margin-top: 18px;
+
+      backdrop-filter: blur(6px);
+
+    }
+
+
+
+    .timestamp {
+
+      font-size: 0.85rem;
+
+      color: #a7f3d0;
+
+      margin-top: 4px;
+
+    }
+
+
+
+    /* Card layout */
+
+    .card {
+
+      background: rgba(0,0,0,0.35);
+
+      border: 1px solid rgba(255,255,255,0.15);
+
+      border-radius: 16px;
+
+      padding: 22px;
+
+      margin-top: 22px;
+
+      backdrop-filter: blur(6px);
+
+    }
+
+
+
+    .pill {
+
+      display: inline-block;
+
+      padding: 6px 14px;
+
+      border-radius: 20px;
+
+      background: rgba(255,255,255,0.15);
+
+      font-size: 0.85rem;
+
+    }
+
+  </style>
 
 </head>
 
@@ -46,692 +174,296 @@
 
 
 
-  <!-- BACKGROUND -->
+  <header>
 
-  <canvas id="oceanCanvas"></canvas>
+    <h1>SideGuy Solutions</h1>
 
-  <div class="ocean-overlay"></div>
+    <p class="pill">San Diego's Financial Savings Department</p>
 
-  <div class="burj-fixed"></div>
+    <p>
 
+      <strong>Text PJ:</strong>
 
+      <a href="tel:+17735441231" style="color:#00ffbb;">(773) 544-1231</a>
 
-  <div class="page">
+    </p>
 
+  </header>
 
 
-    <!-- HEADER -->
 
-    <header>
+  <section class="card">
 
-      <div class="brand">
+    <h2>Faster Than Stripe. Cheaper Than PayPal.<br/>(.4 Seconds)</h2>
 
-        <div class="orb-logo"></div>
+    <p>
 
-        <div class="brand-text">
+      Operators shouldn't wait 48 hours for money. Get paid in under a second with Solana-speed rails.
 
-          <h1>SideGuy Solutions</h1>
+      Lower fees. Faster settlement. Real human support.
 
-          <p>San Diego’s Financial Savings Department</p>
+    </p>
 
-        </div>
+    <a class="cta-green" href="tel:+17735441231">Text PJ Your Monthly Volume →</a>
 
-      </div>
+  </section>
 
 
 
-      <div class="top-cta">
+  <section class="live-box">
 
-        <div class="pill">📍 North County · Solana Beach</div>
+    <h3>Live Solana Price</h3>
 
-        <small>Text or call anytime</small><br/>
+    <p id="solPrice">Loading...</p>
 
-        <a class="top-phone" href="tel:+17735441231">
 
-          <strong>(773) 544-1231</strong>
 
-        </a>
+    <h3 style="margin-top:16px;">Live Settlement Speed</h3>
 
-      </div>
+    <p id="solBlock">Loading...</p>
 
-    </header>
 
 
+    <p class="timestamp">
 
-    <!-- HERO + STATUS -->
+      Last updated: <span id="timestamp"></span>
 
-    <main>
+    </p>
 
+  </section>
+    <!-- SAVINGS CALCULATOR -->
 
+  <section class="card">
 
-      <!-- HERO LEFT -->
+    <h2>Stripe vs PayPal vs Solana: Savings Calculator</h2>
 
-      <section class="hero-card">
+    <p>Enter your monthly volume to see the difference.</p>
 
 
 
-        <h2 class="hero-headline">
+    <input
 
-          Faster Than Stripe.<br/>
+      id="volumeInput"
 
-          Cheaper Than PayPal.<br/>
+      type="number"
 
-          <span class="dot4">(.4 Seconds)</span>
+      min="0"
 
-        </h2>
+      placeholder="Monthly Volume (e.g. 25000)"
 
+      style="
 
+        width:100%;padding:12px;font-size:1rem;border-radius:10px;
 
-        <!-- HIGH MEME BAR -->
+        border:none;margin-top:12px;margin-bottom:16px;"
 
-        <div class="meme-bar">
+    />
 
-          <div class="meme-item">Real Operators Don’t Wait 48 Hours</div>
 
-          <div class="meme-item">Stripe Gives You Nothing</div>
 
-          <div class="meme-item">Solana Settles Before You Put Your Phone Down</div>
+    <button class="cta-green" onclick="calculateSavings()">
 
-          <div class="meme-item">Faster Money = Happier Operators</div>
+      Calculate Savings →
 
-        </div>
+    </button>
 
 
 
-        <p class="hero-sub">
+    <p id="savingsResult" style="margin-top:16px;font-size:1.1rem;"></p>
 
-          Solana-powered money rails with instant settlement and lower fees.
+  </section>
 
-          A modern alternative to slow, expensive processors — built for San Diego operators.
 
-        </p>
 
+  <!-- MEMES / OPERATOR HUMOR -->
 
+  <section class="card">
 
-        <ul class="hero-list">
+    <h2>SideGuy Operator Humor</h2>
 
-          <li>⚡ Instant settlement (~0.4 sec)</li>
+    <ul style="line-height:1.6;margin-top:12px;">
 
-          <li>💸 Lower fees than Stripe & PayPal</li>
+      <li>• Stripe gives you nothing for slowness.</li>
 
-          <li>📱 Simple “text PJ” onboarding</li>
+      <li>• PayPal takes a cut because… why?</li>
 
-          <li>🏝️ Local support · Solana Beach</li>
+      <li>• Operators don't need more dashboards — they need results.</li>
 
-        </ul>
+      <li>• “Just email me your fees” solves more problems than most SaaS.</li>
 
+      <li>• .4 seconds is not a suggestion — it's the new expectation.</li>
 
+    </ul>
 
-        <div class="hero-cta-row">
+  </section>
 
-          <a href="tel:+17735441231" class="cta-orb">
 
-            <span class="orb-inner"></span>
 
-            <span class="cta-text-main">Tap to Summon PJ</span>
+  <!-- OPERATOR NETWORK -->
 
-            <span class="cta-text-sub">Text me your monthly volume</span>
+  <section class="card">
 
-          </a>
+    <h2>Join the SideGuy Operator Network</h2>
 
+    <p>
 
+      San Diego’s Financial Savings Department. Lower fees. Faster settlement.
 
-          <button class="cta-ghost" type="button">
+      Cleaner workflows. If we don’t save you time or money, you don’t pay.
 
-            Send me a screenshot of your fees →
+    </p>
 
-          </button>
 
-        </div>
 
+    <a class="cta-green" href="the-new-financial-system.html">
 
+      The New Financial System →
 
-      </section>
+    </a>
 
 
 
-      <!-- STATUS CARD -->
+    <br/><br/>
 
-      <section class="status-card">
 
-        <h3>Live Savings Status</h3>
 
+    <a class="cta-green" href="tel:+17735441231">
 
+      Text PJ — Start Your Savings Audit →
 
-        <p class="status-sub">
+    </a>
 
-          SideGuy monitors your payments, tools, and subscriptions — saving San Diego operators
+  </section>
 
-          time, fees, and headaches.
 
-        </p>
 
+  <!-- FOOTER -->
 
+  <footer style="margin-top:40px;text-align:center;opacity:0.8;">
 
-        <div class="status-grid">
+    <p>SideGuy Solutions · San Diego Operator Network</p>
 
-          <div class="status-item">
+    <p style="font-size:0.85rem;">Version 4.0 — Live API Edition</p>
 
-            <span class="label">Settlement Speed</span>
+    <p style="font-size:0.85rem;">Last Updated <span id="footerTime"></span></p>
 
-            <span class="value">~0.4 seconds</span>
+  </footer>
 
-          </div>
 
 
-
-          <div class="status-item">
-
-            <span class="label">Legacy Processor Fees</span>
-
-            <span class="value">Higher Than You Think</span>
-
-          </div>
-
-
-
-          <div class="status-item">
-
-            <span class="label">Automation Potential</span>
-
-            <span class="value">Massive</span>
-
-          </div>
-
-
-
-          <div class="status-item">
-
-            <span class="label">Support</span>
-
-            <span class="value">Text PJ Directly</span>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="status-footer">
-
-          <span class="timestamp-label">Updated:</span>
-
-          <span id="lastUpdated" class="timestamp-value"></span>
-
-        </div>
-
-      </section>
-
-
-
-    </main>
-
-
-
-    <!-- SERVICES SECTION -->
-
-    <section class="services">
-
-      <h2>San Diego Financial Saving Services</h2>
-
-      <p>Tools, software, rails, and workflows that save local operators real money every month.</p>
-
-
-
-      <div class="services-grid">
-
-
-
-        <a href="software-development-san-diego.html" class="service-card">
-
-          <h3>Software Development · San Diego</h3>
-
-          <p>Replace messy tools with one clean SideGuy system.</p>
-
-          <span class="tag">Build once · Save monthly</span>
-
-        </a>
-
-
-
-        <a href="custom-software-development-san-diego.html" class="service-card">
-
-          <h3>Custom Software Savings</h3>
-
-          <p>Stop renting 7 subscriptions. Own your stack.</p>
-
-          <span class="tag">Own > Rent</span>
-
-        </a>
-
-
-
-        <a href="ai-development-san-diego.html" class="service-card">
-
-          <h3>AI Automation</h3>
-
-          <p>Turn repetitive tasks into background work.</p>
-
-          <span class="tag">Meme-level efficiency</span>
-
-        </a>
-
-
-
-        <a href="app-development-san-diego.html" class="service-card">
-
-          <h3>App Development</h3>
-
-          <p>Apps that make your business look unfairly organized.</p>
-
-          <span class="tag">Operator tools</span>
-
-        </a>
-
-
-
-        <a href="blockchain-development-san-diego.html" class="service-card">
-
-          <h3>Solana & Blockchain Savings</h3>
-
-          <p>Real rails, real speed, real savings.</p>
-
-          <span class="tag">.4 sec settlement</span>
-
-        </a>
-        <a href="energy-companies-san-diego.html" class="service-card">
-
-          <h3>Energy & Utility Savings</h3>
-
-          <p>Dashboards, credits, automations — energy wins big.</p>
-
-          <span class="tag">Energy x Fintech</span>
-
-        </a>
-
-
-
-        <a href="san-diego-saas-savings.html" class="service-card">
-
-          <h3>SaaS Consolidation</h3>
-
-          <p>Audit all your SaaS. Kill the waste.</p>
-
-          <span class="tag">SaaS Diet</span>
-
-        </a>
-
-
-
-        <a href="payments-savings-san-diego.html" class="service-card">
-
-          <h3>Payment Processing Savings</h3>
-
-          <p>Stripe gives you nothing. Solana gives you speed.</p>
-
-          <span class="tag">Switch & save</span>
-
-        </a>
-
-
-
-        <a href="ticketing-solutions-san-diego.html" class="service-card">
-
-          <h3>Ticketing & Events</h3>
-
-          <p>Lower fees, faster payouts, smoother experiences.</p>
-
-          <span class="tag">Local venues win</span>
-
-        </a>
-
-
-
-        <a href="san-diego-financial-savings-audit.html" class="service-card">
-
-          <h3>Financial Savings Audit</h3>
-
-          <p>Software + payments + automations fixed in one call.</p>
-
-          <span class="tag">One-shot clarity</span>
-
-        </a>
-
-
-
-        <a href="san-diego-crm-automation.html" class="service-card">
-
-          <h3>CRM & Sales Automation</h3>
-
-          <p>Auto follow-up, reminders, pipeline cleanup.</p>
-
-          <span class="tag">Auto follow-up</span>
-
-        </a>
-
-
-
-        <a href="north-county-san-diego-business-savings.html" class="service-card">
-
-          <h3>North County Operator Savings</h3>
-
-          <p>Solana Beach · Encinitas · Cardiff · Carlsbad.</p>
-
-          <span class="tag">Local cheat codes</span>
-
-        </a>
-
-
-
-      </div>
-
-
-
-      <p class="section-foot">
-
-        Want something custom? Text PJ: “Build me a savings play.”
-
-      </p>
-
-    </section>
-
-
-
-    <!-- PAYMENTS SECTION -->
-
-    <section class="payments">
-
-      <h2>SideGuy Payments · .4 Second Solana Settlements</h2>
-
-      <p>
-
-        Traditional processors tax your success. SideGuy Payments replaces slow,
-
-        expensive rails with Solana-speed payouts and lower fees.
-
-      </p>
-
-
-
-      <ul class="payments-list">
-
-        <li>⚡ Instant settlement (~0.4 seconds)</li>
-
-        <li>💸 Lower processing fees</li>
-
-        <li>📊 Clear reporting & money flows</li>
-
-        <li>📱 Simple “text PJ” onboarding</li>
-
-      </ul>
-
-
-
-      <div class="payments-cta-row">
-
-        <a href="tel:+17735441231" class="cta-solid">
-
-          Text PJ your monthly volume →
-
-        </a>
-
-        <span class="payments-note">
-
-          You send screenshots of your fees. I send exact savings and next steps.
-
-        </span>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- CONTACT SECTION -->
-
-    <section class="contact">
-
-      <h2>Tap Out of the Old Stack</h2>
-
-      <p>
-
-        You don't need to learn AI or blockchain.
-
-        You need one SideGuy who already did and answers texts instantly.
-
-      </p>
-
-
-
-      <div class="contact-grid">
-
-        <div class="contact-block">
-
-          <h3>Text / Call PJ</h3>
-
-          <p>📱 <a href="tel:+17735441231">(773) 544-1231</a></p>
-
-          <p>“Here’s what we’re paying now — make it better?”</p>
-
-        </div>
-
-
-
-        <div class="contact-block">
-
-          <h3>Send Screenshots</h3>
-
-          <p>Processor fees, SaaS invoices, tool lists.</p>
-
-          <p>I mark up the easiest wins first.</p>
-
-        </div>
-
-
-
-        <div class="contact-block">
-
-          <h3>Get Your Savings Plan</h3>
-
-          <p>Clean, no-fluff summary of tools, automations, and rails that save you money every month.</p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-      <p>SideGuy Solutions · San Diego</p>
-
-      <p class="footer-small">Version 3.4 · GODWAVE Water Edition · Authored by PJ + ChatGPT</p>
-
-    </footer>
-
-
-
-  </div> <!-- END .page -->
-
-
-
-  <!-- THREE.JS -->
-
-  <script src="https://unpkg.com/three@0.161.0/build/three.min.js"></script>
-
-
-
-  <!-- TIMESTAMP -->
+  <!-- JAVASCRIPT -->
 
   <script>
 
-    (function () {
+    // SOLANA PRICE
 
-      const el = document.getElementById("lastUpdated");
+    async function fetchSOL() {
 
-      if (!el) return;
+      try {
 
-      const now = new Date();
+        const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
 
-      const opts = { year: "numeric", month: "short", day: "numeric" };
+        const d = await r.json();
 
-      el.textContent = now.toLocaleDateString("en-US", opts) + " · Live";
+        document.getElementById("solPrice").innerHTML =
 
-    })();
+          "$" + d.solana.usd.toLocaleString() + " USD";
 
-  </script>
+      } catch (e) {
 
-
-
-  <!-- WATER SCRIPT -->
-
-  <script>
-
-    (function () {
-
-      const canvas = document.getElementById("oceanCanvas");
-
-      if (!canvas || !window.THREE) return;
-
-
-
-      const scene = new THREE.Scene();
-
-      const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-      camera.position.set(0, 18, 32);
-
-      camera.lookAt(0, 0, 0);
-
-
-
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-
-
-      const ambient = new THREE.AmbientLight(0x88aaff, 0.7);
-
-      scene.add(ambient);
-
-
-
-      const sun = new THREE.DirectionalLight(0xffffff, 1.1);
-
-      sun.position.set(25, 40, 15);
-
-      scene.add(sun);
-
-
-
-      const geo = new THREE.PlaneGeometry(220, 220, 160, 160);
-
-      geo.rotateX(-Math.PI / 2);
-
-
-
-      const mat = new THREE.MeshPhongMaterial({
-
-        color: 0x024b78,
-
-        shininess: 80,
-
-        specular: 0x66d1ff,
-
-        transparent: true,
-
-        opacity: 0.95,
-
-      });
-
-
-
-      const ocean = new THREE.Mesh(geo, mat);
-
-      scene.add(ocean);
-
-
-
-      const pos = geo.attributes.position;
-
-      const initial = new Float32Array(pos.array.length);
-
-      initial.set(pos.array);
-
-
-
-      let t = 0;
-
-
-
-      function animate() {
-
-        requestAnimationFrame(animate);
-
-        t += 0.016;
-
-
-
-        for (let i = 0; i < pos.count; i++) {
-
-          const ix = i * 3;
-
-          const x = initial[ix];
-
-          const z = initial[ix + 2];
-
-
-
-          const wave1 = Math.sin(x * 0.18 + t * 1.1) * 0.55 + Math.cos(z * 0.22 + t * 0.9) * 0.35;
-
-          const wave2 = Math.sin(x * 0.08 - z * 0.12 + t * 0.6) * 0.25;
-
-
-
-          pos.array[ix + 1] = wave1 + wave2;
-
-        }
-
-
-
-        pos.needsUpdate = true;
-
-
-
-        ocean.rotation.y += 0.0008;
-
-        renderer.render(scene, camera);
+        document.getElementById("solPrice").innerHTML = "Error loading price";
 
       }
 
-
-
-      animate();
+    }
 
 
 
-      window.addEventListener("resize", () => {
+    // SOLANA BLOCK TIME
 
-        const w = window.innerWidth;
+    async function fetchBlock() {
 
-        const h = window.innerHeight;
+      try {
 
-        camera.aspect = w / h;
+        const r = await fetch("https://api.helius.xyz/v0/block-height?api-key=helius-embedded-api");
 
-        camera.updateProjectionMatrix();
+        const d = await r.json();
 
-        renderer.setSize(w, h);
+        document.getElementById("solBlock").innerHTML =
 
-      });
+          "Blocks: " + d.height.toLocaleString();
 
-    })();
+      } catch (e) {
+
+        document.getElementById("solBlock").innerHTML = "Error loading speed";
+
+      }
+
+    }
+
+
+
+    // SAVINGS CALCULATOR
+
+    function calculateSavings() {
+
+      const vol = parseFloat(document.getElementById("volumeInput").value);
+
+      if (!vol) return;
+
+
+
+      const stripe = vol * 0.029 + 0.3;
+
+      const paypal = vol * 0.034 + 0.3;
+
+      const solana = vol * 0.0005;
+
+
+
+      const saved = Math.max(stripe, paypal) - solana;
+
+
+
+      document.getElementById("savingsResult").innerHTML =
+
+        "You save approx: <strong>$" +
+
+        saved.toFixed(2).toLocaleString() +
+
+        "</strong> per month by switching.";
+
+    }
+
+
+
+    // TIMESTAMP
+
+    function updateTimestamp() {
+
+      const now = new Date().toLocaleString();
+
+      document.getElementById("timestamp").innerHTML = now;
+
+      document.getElementById("footerTime").innerHTML = now;
+
+    }
+
+
+
+    // LIVE REFRESH
+
+    fetchSOL();
+
+    fetchBlock();
+
+    updateTimestamp();
+
+    setInterval(fetchSOL, 8000);
+
+    setInterval(fetchBlock, 8000);
+
+    setInterval(updateTimestamp, 30000);
 
   </script>
 
