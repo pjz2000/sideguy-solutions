@@ -1,341 +1,269 @@
-<!--
-  SideGuy Solutions · White Solana Edition
-  Version: 5.1
-  Updated: 2025-11-29
-  Author: PJ + ChatGPT
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SideGuy Solutions | Solana Payments in 0.4 Seconds</title>
-  <meta name="description" content="SideGuy Solutions helps San Diego operators switch to 0.4 second Solana payments, lower fees, and cleaner tools. Local support from PJ in North County." />
+
+  <title>SideGuy Solutions</title>
 
   <style>
-    :root {
-      --bg-soft: #ecf7ff;
-      --bg-card: #ffffff;
-      --bg-chip: #f5fbff;
-      --bg-pill: #09111f;
-      --text-main: #04111f;
-      --text-muted: #6a7a8f;
-      --accent: #22e38b;
-      --accent-soft: #d6ffef;
-      --accent-dark: #007154;
-      --border-soft: rgba(15, 23, 42, 0.08);
-      --radius-lg: 28px;
-      --radius-pill: 999px;
-      --shadow-soft: 0 28px 80px rgba(15, 23, 42, 0.10);
-      --shadow-orb: 0 16px 40px rgba(15, 23, 42, 0.35);
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: -apple-system, Inter, sans-serif;
+      background: #00131f;
+      color: white;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: radial-gradient(circle at top left, #e4f5ff, #ecf7ff 36%, #b8e1ff 100%);
-      color: var(--text-main);
+    /* Water background full screen */
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      display: block;
     }
 
-    .page { min-height: 100vh; padding: 24px 16px 120px; display: flex; justify-content: center; }
-    .shell { max-width: 1220px; width: 100%; }
-
-    /* HEADER */
-    .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 16px; }
-
-    .brand-chip {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 20px;
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
-      backdrop-filter: blur(18px);
+    /* Overlay content */
+    .hero {
+      position: relative;
+      z-index: 10;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+      backdrop-filter: blur(1px);
     }
 
-    .brand-dot {
-      width: 12px; height: 24px; border-radius: 999px;
-      background: radial-gradient(circle at 20% 20%, #b7ffdf 0, #22e38b 40%, #009f4c 100%);
-      box-shadow: 0 0 16px rgba(34, 227, 139, 0.9);
+    .hero h1 {
+      font-size: 54px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px black;
     }
 
-    .brand-lines { display: flex; flex-direction: column; gap: 2px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #64748b; }
-    .brand-lines strong { font-size: 16px; letter-spacing: .18em; color: #020617; }
-
-    .status-pill {
-      padding: 10px 18px; border-radius: 999px; background: rgba(5,15,31,0.9);
-      color: #e2f3ff; font-size: 12px; display: flex; gap: 10px; align-items: center;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-    .status-dot { width: 10px; height: 10px; background: #22e38b; border-radius: 999px; box-shadow: 0 0 12px rgba(34,227,139,0.9); }
-
-    /* GRID */
-    .grid { display: grid; grid-template-columns: 2.1fr 1.4fr; gap: 22px; }
-    @media(max-width: 960px){ .grid { grid-template-columns: 1fr; } .top-row{flex-direction:column;align-items:flex-start;} }
-
-    .card { background: var(--bg-card); border-radius: 32px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-soft); padding: 26px; }
-
-    /* HERO */
-    .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-    .hero-chip { padding: 7px 14px; border-radius: 999px; font-size: 11px; letter-spacing: .14em; background: #f4f7fb; border: 1px solid rgba(148,163,184,0.4); color: #64748b; text-transform: uppercase; }
-    .hero-chip--primary { background: var(--accent-soft); color: var(--accent-dark); border-color: rgba(34,227,139,0.6); }
-
-    .hero-title { font-size: 38px; line-height: 1.05; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
-    .hero-title .accent { color: #00c975; }
-
-    .hero-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; max-width: 560px; }
-
-    .hero-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; font-size: 14px; }
-    .hero-bullets li { display: flex; gap: 8px; }
-    .hero-bullets li::before { content: "•"; color: #22e38b; font-size: 18px; }
-
-    .hero-actions { display: flex; gap: 10px; margin-bottom: 8px; }
-
-    .btn-main {
-      padding: 11px 22px; border-radius: 999px; border: none; cursor: pointer;
-      font-size: 14px; font-weight: 600; color: #001018;
-      background: linear-gradient(135deg, #22e38b, #09c173);
-      box-shadow: 0 18px 45px rgba(15,118,76,0.5);
+    .hero p {
+      font-size: 20px;
+      opacity: 0.9;
+      text-shadow: 0 0 12px black;
+      max-width: 600px;
     }
 
-    .btn-ghost {
-      padding: 10px 16px; border-radius: 999px;
-      background: #f8fbff; border: 1px solid rgba(148,163,184,0.5);
-      font-size: 13px; cursor: pointer;
+    .cta {
+      margin-top: 24px;
+      display: inline-block;
+      padding: 16px 32px;
+      background: #14f195;
+      color: #002b37;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 14px #14f195aa;
     }
 
-    .hero-footer-note { font-size: 12px; color: var(--text-muted); }
-
-    /* RIGHT SIDE */
-    .right-stack { display: flex; flex-direction: column; gap: 16px; }
-    .stack-card-title { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #64748b; }
-    .stack-card-main { font-size: 16px; font-weight: 700; margin: 4px 0; }
-    .stack-card-body { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
-    .stack-link { font-size: 13px; color: #0369a1; text-decoration: underline; }
-
-    .hub-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 10px; }
-    @media(max-width:720px){ .hub-grid { grid-template-columns:1fr; } }
-
-    .mini-pill {
-      padding: 7px 11px; border-radius: 999px;
-      background: #f4f7fb; border: 1px solid rgba(148,163,184,0.4);
-      font-size: 11px; display: inline-flex; gap: 6px; align-items: center; color:#475569;
-    }
-    .mini-pill .dot { width: 7px; height: 7px; background: #22e38b; border-radius: 999px; }
-
-    /* SITEMAP */
-    .sitemap-section { margin-top: 26px; }
-    .sitemap-heading-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-    .sitemap-heading-row h2 { font-size: 16px; letter-spacing: .18em; text-transform: uppercase; color:#64748b; }
-
-    .sitemap-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; font-size: 13px; }
-    @media(max-width:1040px){ .sitemap-grid{grid-template-columns:repeat(2,1fr);} }
-    @media(max-width:720px){ .sitemap-grid{grid-template-columns:1fr;} }
-
-    .sitemap-column h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .15em; color:#475569; margin-bottom: 6px; }
-    .sitemap-column ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-    .sitemap-column a:hover { text-decoration: underline; color: #0369a1; }
-
-    /* PJ ORB */
-    .pj-orb {
-      position: fixed; right: 16px; bottom: 16px; z-index: 50;
-      background: var(--bg-pill); border-radius:999px; padding:10px 16px;
-      display:flex; gap:10px; align-items:center;
-      color:#e5f3ff; border:1px solid rgba(148,163,184,0.7);
-      box-shadow: var(--shadow-orb); max-width: 420px;
+    section {
+      position: relative;
+      z-index: 10;
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .pj-avatar {
-      width: 32px; height: 32px; border-radius:999px;
-      background: radial-gradient(circle at 20% 20%, #ccffe8,#22e38b,#007154);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:700; font-size:14px; color:#020617;
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .pj-orb-main { flex:1; }
-    .pj-orb-main strong { font-size: 13px; display:block; margin-bottom:2px; }
-    .pj-orb-main span { font-size: 11px; color:#cbd5f5; }
-
-    @media(max-width:640px){
-      .pj-orb { left:8px; right:8px; }
-      .pj-avatar { width:28px; height:28px; font-size:13px; }
-      .pj-orb-main strong{font-size:12px;}
-      .pj-orb-main span{font-size:10px;}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
+    .card {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 22px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 10px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      opacity: 0.85;
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      opacity: 0.7;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 10;
+    }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <main class="shell">
-      <!-- HEADER -->
-      <header class="top-row">
-        <div class="brand-chip">
-          <div class="brand-dot"></div>
-          <div class="brand-lines">
-            <span>SIDEGUY SOLUTIONS</span>
-            <strong>Solana Payments</strong>
-            <span>Automations · Operator Tools</span>
-          </div>
-        </div>
 
-        <div class="status-pill">
-          <span class="status-dot"></span>
-          <span>Updated: Nov 29, 2025 · Live in San Diego & North County</span>
-        </div>
-      </header>
+<!-- HERO OVER WATER -->
+<div class="hero">
+  <h1>SideGuy Solutions</h1>
+  <p>Custom Software • AI Automation • .4 Second Solana Payments<br>Built in Solana Beach for San Diego Operators</p>
+  <a href="sms:17735441231" class="cta">Text PJ (773) 544-1231</a>
+</div>
 
-      <section class="grid">
-        <!-- LEFT HERO -->
-        <article class="card">
-          <div class="hero-chips">
-            <span class="hero-chip">San Diego & North County · Solana Rails</span>
-            <span class="hero-chip hero-chip--primary">0.4 Second Settlements</span>
-            <span class="hero-chip">Stripe & PayPal Alternatives</span>
-          </div>
+<!-- SERVICES SECTION -->
+<section>
+  <h2>What We Build</h2>
+  <div class="grid">
 
-          <h1 class="hero-title">Solana payments in <span class="accent">0.4 seconds</span> for every operator.</h1>
-
-          <p class="hero-sub">
-            Stop overpaying Stripe & PayPal. SideGuy routes money on fast, low-fee Solana rails with clean tools and real human support from PJ in North County.
-          </p>
-
-          <ul class="hero-bullets">
-            <li>0.4 second settlement vs multi-day payouts.</li>
-            <li>Lower effective fees on real operator volume.</li>
-            <li>Cleaner dashboards, no messy bolt-on tools.</li>
-            <li>Local operator upside — participate in the network.</li>
-          </ul>
-
-          <div class="hero-actions">
-            <button class="btn-main" onclick="window.location.href='stripe-fees-calculator.html'">See Your Savings →</button>
-            <button class="btn-ghost" onclick="window.location.href='crypto-help-desk-san-diego.html'">Crypto Help Desk</button>
-          </div>
-
-          <p class="hero-footer-note">
-            Text PJ at <strong>(773) 544-1231</strong> with your monthly volume & card mix.
-          </p>
-        </article>
-
-        <!-- RIGHT STACK -->
-        <aside class="right-stack">
-          <section class="card">
-            <div class="stack-card-title">San Diego Operator Hub</div>
-            <div class="stack-card-main">North County Verified Operator Hub</div>
-            <p class="stack-card-body">
-              Face-to-face, no BS upgrades for real operators in Encinitas, Carlsbad, La Jolla, and beyond.
-            </p>
-
-            <a class="stack-link" href="north-county-verified-operator-hub.html">Open Operator Hub →</a>
-          </section>
-
-          <section class="card">
-            <div class="stack-card-title">Vision Board</div>
-            <div class="stack-card-main">San Diego SEO & Operator Blueprint</div>
-            <p class="stack-card-body">
-              Every emerging niche PJ is building into — payment pages, operator tools, future AIs.
-            </p>
-            <a class="stack-link" href="seo.html">View SideGuy Vision Board →</a>
-          </section>
-
-          <section class="card">
-            <div class="stack-card-title">Crypto Help Desk</div>
-            <div class="stack-card-main">Straight answers, no crypto Twitter noise</div>
-            <p class="stack-card-body">
-              Finally: clear explanations about Solana, stablecoins, and payments.
-            </p>
-            <a class="stack-link" href="crypto-help-desk-san-diego.html">Open Help Desk →</a>
-          </section>
-        </aside>
-      </section>
-
-      <!-- SITEMAP SECTION STARTS (PART 2 continues from here) -->
-      <section class="card sitemap-section">
-        <div class="sitemap-heading-row">
-          <h2>SideGuy Site Map · Live Pages</h2>
-          <span>Every live page in one place.</span>
-        </div>
-
-        <div class="sitemap-grid">
-          <!-- Column 1 -->
-          <div class="sitemap-column">
-            <h3>Neighborhood Payments</h3>
-            <ul>
-              <li><a href="best-payment-processing-san-diego.html">Best Payment Processing · San Diego</a></li>
-              <li><a href="carlsbad-payment-processing-san-diego.html">Carlsbad Payment Processing</a></li>
-              <li><a href="encinitas-payment-processing-san-diego.html">Encinitas Payment Processing</a></li>
-              <li><a href="la-jolla-payment-processing-san-diego.html">La Jolla Payment Processing</a></li>
-              <li><a href="del-mar-payment-processing-san-diego.html">Del Mar Payment Processing</a></li>
-              <li><a href="oceanside-payment-processing-san-diego.html">Oceanside Payment Processing</a></li>
-              <li><a href="rancho-santa-fe-payment-processing-san-diego.html">Rancho Santa Fe Payment Processing</a></li>
-              <li><a href="north-county-payment-processing-san-diego.html">North County Payment Processing</a></li>
-              <li><a href="north-county-solana-payments-san-diego.html">North County Solana Payments</a></li>
-            </ul>
-          </div>
-
-          <!-- Column 2 -->
-          <div class="sitemap-column">
-            <h3>By Operator Type</h3>
-            <ul>
-              <li><a href="restaurant-payments-san-diego.html">Restaurant & Hospitality Payments</a></li>
-              <li><a href="gym-fitness-payment-processing-san-diego.html">Gym & Fitness Payments</a></li>
-              <li><a href="salon-spa-payments-san-diego.html">Salon & Spa Payments</a></li>
-              <li><a href="medical-payment-processing-san-diego.html">Medical & Professional Payments</a></li>
-              <li><a href="contractor-payment-processing-san-diego.html">Contractor & Field Service Payments</a></li>
-              <li><a href="ecommerce-payment-processing-san-diego.html">E-Commerce Payments</a></li>
-              <li><a href="mobile-operator-payments-san-diego.html">Mobile & On-Site Operator Payments</a></li>
-              <li><a href="local-business-savings-san-diego.html">Local Business Savings · San Diego</a></li>
-            </ul>
-          </div>
-
-          <!-- Column 3 -->
-          <div class="sitemap-column">
-            <h3>Savings & Stripe Alternatives</h3>
-            <ul>
-              <li><a href="instant-settlement-payments-san-diego.html">Instant Settlement Payments</a></li>
-              <li><a href="instant-payouts-contractors-san-diego.html">Instant Payouts for Contractors</a></li>
-              <li><a href="stripe-alternative-payments-san-diego.html">Stripe & PayPal Alternatives</a></li>
-              <li><a href="lower-credit-card-fees-san-diego.html">Lower Credit Card Fees</a></li>
-              <li><a href="save-on-stripe-fees-san-diego.html">Save on Stripe Fees · Calculator</a></li>
-              <li><a href="subscription-payments-san-diego.html">Subscription & Membership Payments</a></li>
-              <li><a href="switch-from-square-san-diego.html">Switch from Square</a></li>
-              <li><a href="local-operator-savings-san-diego.html">Local Operator Savings Department</a></li>
-            </ul>
-          </div>
-
-          <!-- Column 4 -->
-          <div class="sitemap-column">
-            <h3>Tools & AIs</h3>
-            <ul>
-              <li><a href="ai-payment-automation-san-diego.html">AI Payment Automation</a></li>
-              <li><a href="san-diego-dashboard-development.html">San Diego Dashboard Development</a></li>
-              <li><a href="san-diego-business-automation.html">Business Automation · San Diego</a></li>
-              <li><a href="crypto-payments-san-diego.html">Crypto & Stablecoin Payments</a></li>
-              <li><a href="crypto-help-desk-san-diego.html">Crypto Help Desk</a></li>
-              <li><a href="sideguy-vision-board-san-diego.html">SideGuy Vision Board</a></li>
-              <li><a href="north-county-verified-operator-hub.html">North County Operator Hub</a></li>
-              <li><a href="seo.html">SEO Page Index</a></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <footer style="margin-top: 18px; font-size: 11px; color: #94a3b8;">
-        Built for San Diego operators · SideGuy Solutions · 0.4 second Solana settlements · Own a piece of your processing — Stripe gives you nothing.
-      </footer>
-    </main>
-  </div>
-
-  <!-- PJ ORB -->
-  <a href="sms:+17735441231" class="pj-orb">
-    <div class="pj-avatar">PJ</div>
-    <div class="pj-orb-main">
-      <strong>Text PJ · 0.4 sec payments</strong>
-      <span>Send your monthly volume for exact savings. Real human in North County.</span>
+    <div class="card">
+      <h3>Custom Software</h3>
+      <p>Dashboards, portals, internal tools, apps, business systems — clean builds that work.</p>
     </div>
-  </a>
+
+    <div class="card">
+      <h3>AI Automation</h3>
+      <p>Remove busywork. Bots, workflows, automation for any business process.</p>
+    </div>
+
+    <div class="card">
+      <h3>.4 Second Payments</h3>
+      <p>Instant settlement on Solana rails. Lower fees. No middlemen. Real savings.</p>
+    </div>
+
+    <div class="card">
+      <h3>Business Dashboards</h3>
+      <p>Operate with clarity. Reporting, visibility, CRM, metrics — all realtime.</p>
+    </div>
+
+    <div class="card">
+      <h3>CleanTech / Energy</h3>
+      <p>Tools for utilities, CCAs, solar, carbon credits & San Diego energy ops.</p>
+    </div>
+
+    <div class="card">
+      <h3>Local Operators</h3>
+      <p>Restaurants, gyms, pros, retail — if you're in San Diego, we build for you.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAYMENTS SECTION -->
+<section>
+  <h2>.4 Second Solana Payments</h2>
+  <div class="card">
+    <p>
+      Stop paying Stripe & PayPal 3% and waiting days to settle.  
+      SideGuy Payments settles in <strong>0.4 seconds</strong> with fees so low you’ll laugh.  
+      Built for San Diego operators, with personal onboarding from PJ.
+    </p>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section style="text-align:center;">
+  <a href="sms:17735441231" class="cta">Text PJ to Get Started</a>
+</section>
+
+<footer>
+  SideGuy Solutions • Solana Beach • Updated Live
+</footer>
+
+<!-- WATER SHADER -->
+<canvas id="water"></canvas>
+
+<script>
+const canvas = document.getElementById("water");
+const gl = canvas.getContext("webgl");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+}
+resize();
+window.addEventListener("resize", resize);
+
+const vertex = `
+attribute vec2 a;
+void main() {
+  gl_Position = vec4(a, 0.0, 1.0);
+}
+`;
+
+const fragment = `
+precision highp float;
+uniform float u_time;
+uniform vec2 u_res;
+
+float wave(vec2 uv, float speed, float scale) {
+  return sin(uv.x * scale + u_time * speed) * 0.02 +
+         cos(uv.y * scale * 0.7 + u_time * (speed + 0.4)) * 0.015;
+}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / u_res.xy;
+  float w = wave(uv, 1.2, 8.0) + wave(uv, 1.6, 14.0) + wave(uv, 0.8, 5.0);
+
+  vec3 deep = vec3(0.0, 0.15, 0.25);
+  vec3 light = vec3(0.0, 0.5, 0.8);
+
+  vec3 color = mix(deep, light, uv.y + w * 3.0);
+  gl_FragColor = vec4(color, 1.0);
+}
+`;
+
+function compile(type, source) {
+  const s = gl.createShader(type);
+  gl.shaderSource(s, source);
+  gl.compileShader(s);
+  return s;
+}
+
+const program = gl.createProgram();
+gl.attachShader(program, compile(gl.VERTEX_SHADER, vertex));
+gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragment));
+gl.linkProgram(program);
+gl.useProgram(program);
+
+const vertices = new Float32Array([
+  -1, -1, 1, -1, -1, 1,
+  -1,  1, 1, -1, 1,  1
+]);
+
+const buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+const loc = gl.getAttribLocation(program, "a");
+gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+const u_time = gl.getUniformLocation(program, "u_time");
+const u_res = gl.getUniformLocation(program, "u_res");
+
+function loop(t) {
+  gl.uniform1f(u_time, t * 0.001);
+  gl.uniform2f(u_res, canvas.width, canvas.height);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  requestAnimationFrame(loop);
+}
+loop(0);
+</script>
+
 </body>
 </html>
