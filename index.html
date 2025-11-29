@@ -1,343 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    SideGuy Solutions · Ocean/Solana Superbuild
-    Version: 7.0 — Inline, SEO, Freeze-Proof · Full Merge Edition
-    Author: PJ + ChatGPT
-  -->
+  <!-- SideGuy Solutions · Ocean-Light Superbuild v7.5 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SideGuy Solutions · San Diego Operator Tools · Solana Payments & AI</title>
-  <meta name="description" content="SideGuy Solutions builds Solana-fast operator tools for San Diego: instant payments, AI automation, clean software, and real human support from PJ in Solana Beach." />
+
+  <title>SideGuy Solutions · San Diego Operator Tools</title>
+  <meta name="description" content="Solana-fast operator tools for San Diego: instant payments, AI automation, software, dashboards, and real human support from PJ." />
 
   <style>
-    /* RESET + THEME */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     :root{
-      --bg-top:#e6f7ff;--bg-mid:#c9ecff;--bg-bottom:#9edbff;
-      --nav-text:#03527f;--primary:#00c98b;--primary-dark:#00a06d;
-      --card-bg:rgba(255,255,255,0.92);--card-border:rgba(255,255,255,0.9);
-      --shadow-soft:0 12px 30px rgba(0,0,0,0.08);--text-main:#033045;
-    }
-    body{
-      font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
-      background:linear-gradient(180deg,var(--bg-top),var(--bg-mid),var(--bg-bottom));
-      color:var(--text-main);min-height:100vh;overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
-    }
-    .page{position:relative;max-width:1200px;margin:0 auto;padding:24px 20px 60px;z-index:1;}
+      --o1:#baf2ff;
+      --o2:#92e1ff;
+      --o3:#63cbff;
+      --o4:#4bb6ff;
+      --o5:#7a7cff;
 
-    .wave-wrapper{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.55;}
-    .wave-svg{width:140%;height:100%;transform:translateX(-10%);filter:drop-shadow(0 30px 40px rgba(0,0,0,0.12));}
+      --primary:#00c98b;
+      --primary-dark:#009b67;
+
+      --card-bg:rgba(255,255,255,0.95);
+      --card-border:rgba(255,255,255,0.9);
+      --shadow:0 14px 32px rgba(0,0,0,0.08);
+
+      --text:#033045;
+    }
+
+    body{
+      background:linear-gradient(180deg,var(--o1),var(--o2),var(--o3),var(--o4),var(--o5));
+      font-family:-apple-system,Inter,system-ui,sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* PAGE WRAP */
+    .page{
+      position:relative;
+      max-width:1280px;
+      margin:0 auto;
+      padding:28px 22px 80px;
+      z-index:2;
+    }
 
     /* HEADER */
-    .site-header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:14px;}
+    .site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:32px;
+      gap:16px;
+    }
     .logo-lockup{display:flex;align-items:center;gap:10px;}
-    .logo-orb-mini{width:30px;height:30px;border-radius:999px;background:radial-gradient(circle at 30% 20%,#66ffcc,#19b5ff,#6a5bff);box-shadow:0 0 18px rgba(0,255,153,0.5);}
-    .logo-main{font-weight:800;font-size:20px;color:#004e7f;}
-    .logo-sub{display:block;font-size:12px;color:#26648c;opacity:0.8;}
-    .nav{display:flex;align-items:center;gap:16px;font-size:14px;flex-wrap:wrap;}
-    .nav-link{text-decoration:none;color:var(--nav-text);opacity:0.9;padding:4px 0;border-bottom:2px solid transparent;transition:0.18s ease;white-space:nowrap;}
-    .nav-link:hover,.nav-link-active{border-color:rgba(0,0,0,0.18);opacity:1;}
-    .pill-text-pj{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;text-decoration:none;color:#015c40;box-shadow:0 0 0 1px rgba(0,0,0,0.04),0 10px 25px rgba(0,0,0,0.09);}
-    .pill-dot{width:10px;height:10px;border-radius:999px;background:#16d576;box-shadow:0 0 10px rgba(0,255,153,0.7);}
+    .logo-orb{
+      width:24px;height:24px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 20%,#7affd7,#31baff,#7868ff);
+      box-shadow:0 0 14px rgba(0,255,170,0.45);
+    }
+    .logo-main{font-size:21px;font-weight:800;color:#004e7f;}
+    .logo-sub{font-size:12px;opacity:0.75;color:#1f6088;}
+
+    .nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;}
+    .nav-link{text-decoration:none;color:#004f7a;opacity:0.9;border-bottom:2px solid transparent;padding:3px 0;}
+    .nav-link:hover,.nav-active{border-color:rgba(0,0,0,0.15);opacity:1;}
+
+    .text-pj{
+      display:flex;align-items:center;gap:8px;
+      background:white;
+      padding:8px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:13px;
+      color:#015c40;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.05),0 10px 22px rgba(0,0,0,0.1);
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:#16d576;box-shadow:0 0 10px rgba(0,255,153,0.7);
+    }
 
     /* HERO */
-    .hero{position:relative;z-index:2;margin-bottom:28px;padding:22px 18px 26px;border-radius:26px;background:linear-gradient(145deg,rgba(255,255,255,0.97),rgba(230,248,255,0.98));box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,0.9);overflow:hidden;}
-    .hero-content{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1.3fr);gap:24px;align-items:center;}
-    .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
-    .hero-chip{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(3,82,127,0.07);color:#03527f;}
-    .hero-chip-solana{background:rgba(0,233,179,0.12);color:#007a55;}
-    .hero-title{font-size:30px;line-height:1.15;margin-bottom:10px;}
-    .hero-desc{font-size:15px;line-height:1.55;opacity:0.9;max-width:480px;margin-bottom:14px;}
-    .hero-cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px;}
-    .cta-primary{padding:9px 16px;border-radius:999px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 10px 22px rgba(0,201,139,0.32);}
-    .cta-secondary{padding:8px 14px;border-radius:999px;border:1px solid rgba(0,0,0,0.1);background:#fff;font-size:13px;text-decoration:none;color:#03527f;opacity:0.9;}
-    .hero-meta{font-size:11px;opacity:0.78;color:#4a6a82;}
+    .hero{
+      background:linear-gradient(145deg,rgba(255,255,255,0.97),rgba(238,251,255,0.98));
+      padding:28px 24px 34px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,0.9);
+      box-shadow:var(--shadow);
+      margin-bottom:40px;
+    }
 
-    /* SECTION HEADERS */
-    .section-title{font-size:22px;margin-bottom:14px;color:#033045;}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.9fr) minmax(0,1.2fr);
+      gap:32px;
+      align-items:center;
+    }
 
-    /* Operator Grid */
-    .operator-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:12px;}
-    .op-card{background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);text-decoration:none;color:inherit;box-shadow:var(--shadow-soft);transition:0.15s;}
-    .op-card:hover{transform:translateY(-3px);border-color:rgba(0,233,179,0.9);}
-    .op-card-orb{width:10px;height:10px;margin-bottom:8px;border-radius:999px;background:#19d076;box-shadow:0 0 10px rgba(0,255,153,0.7);}
+    .hero-chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+    .chip{
+      padding:4px 12px;
+      border-radius:999px;
+      font-size:13px;
+      background:rgba(0,0,0,0.06);
+      color:#03527f;
+    }
+    .chip-solana{background:rgba(0,233,179,0.14);color:#006b4f;}
+
+    .hero-title{font-size:32px;line-height:1.14;margin-bottom:12px;}
+    .hero-desc{font-size:16px;line-height:1.6;max-width:480px;margin-bottom:16px;}
+
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+    .cta-primary{
+      padding:10px 20px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+      text-decoration:none;
+      font-size:15px;
+      font-weight:600;
+      color:white;
+      box-shadow:0 12px 24px rgba(0,201,139,0.35);
+    }
+    .cta-secondary{
+      padding:9px 18px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.12);
+      background:white;
+      font-size:14px;
+      text-decoration:none;
+      color:#03527f;
+    }
+
+    /* SMALLER ORB (15% reduction) */
+    .hero-orb-wrap{position:relative;}
+    .hero-orb{
+      width:170px;height:170px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 20%,#7dffe0,#19b5ff,#6e5bff);
+      box-shadow:0 0 30px rgba(110,91,255,0.45),0 0 60px rgba(0,233,179,0.55);
+    }
+    .hero-ring{
+      position:absolute;
+      width:225px;height:225px;
+      border-radius:50%;
+      border:1px dashed rgba(255,255,255,0.85);
+      left:50%;top:50%;transform:translate(-50%,-50%);
+    }
+
+    /* GLOBAL SECTION HEADERS */
+    .section-title{
+      font-size:24px;
+      margin-bottom:18px;
+      font-weight:700;
+      text-align:left;
+      color:#022e40;
+    }
+
+    /* CARD GRID — WIDER SPACING */
+    .op-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:26px;
+      margin-top:12px;
+    }
+
+    .op-card{
+      background:var(--card-bg);
+      padding:20px;
+      border-radius:20px;
+      border:1px solid var(--card-border);
+      text-decoration:none;
+      color:inherit;
+      box-shadow:var(--shadow);
+      transition:0.15s ease;
+    }
+    .op-card:hover{transform:translateY(-4px);border-color:#00e3a4;}
+    .orb{width:11px;height:11px;border-radius:50%;background:#19d076;margin-bottom:10px;
+      box-shadow:0 0 10px rgba(0,255,153,0.7);}
   </style>
 </head>
 
 <body>
-  <!-- WAVES -->
-  <div class="wave-wrapper">
-    <svg class="wave-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
-      <defs><linearGradient id="waveGrad1"><stop offset="0%" stop-color="#20e3b2"/><stop offset="50%" stop-color="#23a6d5"/><stop offset="100%" stop-color="#6a5bff"/></linearGradient></defs>
-      <path fill="url(#waveGrad1)" fill-opacity="0.45" d="M0,320 C300,380 420,260 720,320 C1020,380 1140,260 1440,320 L1440,600 L0,600 Z"/>
-    </svg>
-  </div>
 
   <div class="page">
+
     <!-- HEADER -->
     <header class="site-header">
       <div class="logo-lockup">
-        <div class="logo-orb-mini"></div>
-        <div><span class="logo-main">SideGuy Solutions</span><span class="logo-sub">San Diego · Operator Tools</span></div>
+        <div class="logo-orb"></div>
+        <div>
+          <div class="logo-main">SideGuy Solutions</div>
+          <div class="logo-sub">San Diego · Operator Tools</div>
+        </div>
       </div>
 
       <nav class="nav">
-        <a href="/" class="nav-link nav-link-active">Home</a>
+        <a href="/" class="nav-link nav-active">Home</a>
         <a href="/Best-Payment-Processing-San-Diego.html" class="nav-link">Payments</a>
         <a href="/solana-business-tools-san-diego.html" class="nav-link">Solana Tools</a>
         <a href="/web-development-san-diego.html" class="nav-link">Software</a>
         <a href="/ai-automation-san-diego.html" class="nav-link">AI & Automation</a>
       </nav>
 
-      <a href="sms:+17735441231" class="pill-text-pj"><span class="pill-dot"></span>Text PJ · (773) 544-1231</a>
+      <a href="sms:+17735441231" class="text-pj"><span class="dot"></span>Text PJ</a>
     </header>
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-content">
+      <div class="hero-grid">
+
         <div>
           <div class="hero-chips">
-            <span class="hero-chip">San Diego · North County</span>
-            <span class="hero-chip hero-chip-solana">Solana · 0.4s Settlements</span>
+            <span class="chip">San Diego · North County</span>
+            <span class="chip chip-solana">Solana · 0.4s Settlements</span>
           </div>
 
           <h1 class="hero-title">Operator Tools Built for San Diego Businesses</h1>
+          <p class="hero-desc">
+            Payments, automation, software and clean operator workflows powered by Solana.
+            Speed, clarity, and real-world usage from a local operator who actually picks up the phone.
+          </p>
 
-          <p class="hero-desc">Payments, software, automation, and clean operator tools powered by Solana. Designed for speed, clarity, and real-world operator usage.</p>
-
-          <div class="hero-cta-row">
+          <div class="hero-ctas">
             <a href="sms:+17735441231" class="cta-primary">Text PJ to Start</a>
             <a href="/solana-business-tools-san-diego.html" class="cta-secondary">Browse Operator Tools</a>
           </div>
-
-          <p class="hero-meta">Version 7.0 · Ocean/Solana Superbuild · <span id="timestamp">Loading…</span></p>
         </div>
 
         <div class="hero-orb-wrap">
           <div class="hero-orb"></div>
-          <div class="hero-orb-ring"></div>
+          <div class="hero-ring"></div>
         </div>
+
       </div>
     </section>
-
-    <!-- MEME ZONE -->
-    <section>
+    <!-- SIDEGUY MEME ZONE -->
+    <section style="margin-top:40px;">
       <h2 class="section-title">SideGuy Meme Zone</h2>
 
-      <div class="operator-grid">
-        <div class="op-card"><div class="op-card-orb"></div><h3>“Coastal vibes + 0.4s settlements.”</h3></div>
-        <div class="op-card"><div class="op-card-orb"></div><h3>“Operators love speed. Solana said bet.”</h3></div>
-        <div class="op-card"><div class="op-card-orb"></div><h3>“Stripe settles like 2008. PJ settles in 0.4s.”</h3></div>
-        <div class="op-card"><div class="op-card-orb"></div><h3>“Ticket PTSD cured by Solana rails.”</h3></div>
+      <div class="op-grid">
+
+        <div class="op-card">
+          <div class="orb"></div>
+          <h3>“Coastal vibes + 0.4s settlements.”</h3>
+        </div>
+
+        <div class="op-card">
+          <div class="orb"></div>
+          <h3>“Operators love speed. Solana said bet.”</h3>
+        </div>
+
+        <div class="op-card">
+          <div class="orb"></div>
+          <h3>“Stripe settles like 2008. PJ settles in 0.4s.”</h3>
+        </div>
+
+        <div class="op-card">
+          <div class="orb"></div>
+          <h3>“Ticket PTSD cured by Solana rails.”</h3>
+        </div>
+
       </div>
     </section>
 
-    <!-- OPERATOR TOOLS -->
-    <section>
+
+    <!-- CORE OPERATOR TOOL GRID -->
+    <section style="margin-top:48px;">
       <h2 class="section-title">SideGuy Operator Tools</h2>
 
-      <div class="operator-grid">
+      <div class="op-grid">
+
         <a href="/Best-Payment-Processing-San-Diego.html" class="op-card">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Payments</h3>
-          <p>Instant .4s settlements + lower fees + real onboarding.</p>
+          <p>Instant .4s settlements · lower fees · real onboarding.</p>
         </a>
+
         <a href="/web-development-san-diego.html" class="op-card">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Software</h3>
-          <p>Dashboards, tools, and fast operator UX.</p>
+          <p>Dashboards, tools, and operator-ready UX.</p>
         </a>
+
         <a href="/ai-automation-san-diego.html" class="op-card">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>AI & Automation</h3>
-          <p>Follow-up, inbox cleanup, booking flows.</p>
+          <p>Follow-up, booking flows, inbox cleanup.</p>
         </a>
+
         <a href="/solana-business-tools-san-diego.html" class="op-card">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Solana Tools</h3>
-          <p>Rails, stablecoins, reporting.</p>
+          <p>Rails · stablecoins · reporting flows.</p>
         </a>
+
       </div>
     </section>
+
+
+    <!-- NETWORK + HELP DESK -->
+    <section style="margin-top:48px;">
+      <h2 class="section-title">SideGuy Network & Help Desk</h2>
+
+      <div class="op-grid">
+
+        <a href="/San-Diego-Operator-Network.html" class="op-card">
+          <div class="orb"></div>
+          <h3>Operator Network</h3>
+          <p>Local workflows · tools · wins.</p>
+        </a>
+
+        <a href="/Crypto-Help-Desk-San-Diego.html" class="op-card">
+          <div class="orb"></div>
+          <h3>Crypto Help Desk</h3>
+          <p>No-BS answers for rails, wallets, and operators.</p>
+        </a>
+
+        <a href="/San-Diego-Solana-Payments-Near-Me.html" class="op-card">
+          <div class="orb"></div>
+          <h3>Solana Payments Near Me</h3>
+          <p>Local-facing savings flows.</p>
+        </a>
+
+        <a href="/San-Diego-Energy-Payments.html" class="op-card">
+          <div class="orb"></div>
+          <h3>Energy & Clean-Tech</h3>
+          <p>Utilities · CCAs · Solana rails.</p>
+        </a>
+
+      </div>
+    </section>
+
+
     <!-- SIDEGUY TICKETS · VISION 2025 -->
-    <section style="margin-top:34px; position:relative; z-index:2;">
+    <section style="margin-top:58px;">
       <h2 class="section-title">🎫 SideGuy Tickets · Instant-Settlement Ticketing Vision</h2>
 
       <div style="
         background:var(--card-bg);
-        border-radius:20px;
-        padding:26px;
+        padding:28px;
+        border-radius:24px;
         border:1px solid var(--card-border);
-        box-shadow:var(--shadow-soft);
+        box-shadow:var(--shadow);
         max-width:900px;
         margin:auto;
+        line-height:1.65;
+        font-size:15px;
       ">
 
-        <p style="font-size:15px; line-height:1.65; margin-bottom:18px;">
-          SideGuy Tickets brings the entire ticket market — primary + secondary — directly into
-          operators, event teams, and businesses at instantly better pricing with ultra-low fees
-          and instant settlement using Solana rails.
+        <p style="margin-bottom:20px;">
+          SideGuy Tickets brings the entire ticket market — primary + secondary —
+          directly into operators, event teams, and businesses at instantly better pricing
+          with ultra-low fees and instant-settlement using Solana rails.
         </p>
 
-        <h3 style="font-size:18px; margin-bottom:10px;">🚀 Operator Flow · Why This Works</h3>
-        <ul style="font-size:14px; line-height:1.6; padding-left:20px; margin-bottom:22px;">
-          <li>Access to billions in global ticket inventory through primary APIs.</li>
-          <li>Cleaner operator-friendly checkout flow for venues, restaurants, and nightlife groups.</li>
+        <h3 style="margin-bottom:10px; font-size:18px;">🚀 Operator Flow · Why This Works</h3>
+        <ul style="padding-left:20px; margin-bottom:22px; line-height:1.55;">
+          <li>Access to billions in global ticket inventory via primary APIs.</li>
+          <li>Cleaner operator checkout for venues, restaurants, nightlife groups.</li>
           <li>Predictable pay flow for ticket-heavy operators.</li>
-          <li>SideGuy becomes the easiest place to buy tickets using USDC on Solana rails.</li>
-          <li>No need to hold inventory — affiliate style, passthrough only.</li>
-          <li>Operator-clean interface layered on top of enterprise ticket feeds.</li>
+          <li>Easiest place to buy tickets with USDC (Solana rails).</li>
+          <li>No inventory needed — affiliate-style passthrough.</li>
+          <li>Clean SideGuy interface over enterprise ticket feeds.</li>
         </ul>
 
-        <h3 style="font-size:18px; margin-bottom:10px;">🎯 Why This Fits SideGuy Solutions</h3>
-        <p style="font-size:15px; line-height:1.65;">
-          This aligns perfectly with SideGuy: real operator experience, deep knowledge, and
-          a decade of ticketing history. With SideGuy Payments + Solana rails, ticketing becomes
-          the most natural extension of daily operator needs.
+        <h3 style="margin-bottom:10px; font-size:18px;">🎯 Why This Fits SideGuy Solutions</h3>
+        <p>
+          This model matches SideGuy perfectly: deep operator knowledge +
+          ticketing experience + Solana payments = a natural extension of the
+          SideGuy operator stack.
         </p>
 
       </div>
     </section>
 
 
-    <!-- OPERATOR DIRECTORY (FULL MERGE) -->
-    <section style="margin-top:42px;">
+    <!-- OPERATOR DIRECTORY (FULL GRID) -->
+    <section style="margin-top:60px;">
       <h2 class="section-title">📘 SideGuy Operator Directory</h2>
-      <p style="
-        text-align:center;
-        font-size:15px;
-        opacity:0.78;
-        max-width:720px;
-        margin:0 auto 24px;
-        line-height:1.55;
-      ">
-        San Diego’s master list of business tools, AI automation, Solana payments & operator-focused solutions.
+
+      <p style="font-size:15px; opacity:0.78; max-width:740px; margin:0 auto 26px; text-align:center;">
+        San Diego’s master list of business tools, automation workflows,
+        Solana payments & operator solutions.
       </p>
 
-      <div class="operator-grid">
+      <div class="op-grid">
 
         <a class="op-card" href="restaurant-software-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Restaurant Software</h3>
-          <p>POS, automation, instant settlement payments.</p>
+          <p>POS · automation · instant settlement.</p>
         </a>
 
         <a class="op-card" href="gym-software-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Gym & Fitness Software</h3>
           <p>Membership automation + AI follow-up.</p>
         </a>
 
         <a class="op-card" href="salon-booking-software-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Salon Software</h3>
           <p>AI scheduling + Solana payments.</p>
         </a>
 
         <a class="op-card" href="contractor-crm-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Contractor CRM</h3>
-          <p>Instant estimates, workflows, automations.</p>
+          <p>Instant estimates · workflows · automations.</p>
         </a>
 
         <a class="op-card" href="nightlife-pos-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Bar & Nightlife POS</h3>
-          <p>Fast payments & automation flows.</p>
+          <p>Fast checkout · Solana rails.</p>
         </a>
 
         <a class="op-card" href="ai-for-small-business-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>AI for Small Business</h3>
-          <p>Inbox cleanup, follow-up, booking tools.</p>
+          <p>Follow-up flows · inbox cleanup.</p>
         </a>
 
         <a class="op-card" href="solana-for-business-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Solana for Business</h3>
-          <p>Instant settlement, low fees, modern rails.</p>
+          <p>Instant settlement · low fees.</p>
         </a>
 
         <a class="op-card" href="payment-processing-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Payment Processing</h3>
           <p>Stop paying Stripe & PayPal fees.</p>
         </a>
 
         <a class="op-card" href="business-automation-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>Business Automation</h3>
-          <p>AI workflows & revenue systems.</p>
+          <p>AI workflows · revenue systems.</p>
         </a>
 
         <a class="op-card" href="ai-marketing-automation-san-diego.html">
-          <div class="op-card-orb"></div>
+          <div class="orb"></div>
           <h3>AI Marketing Automation</h3>
-          <p>Hands-off marketing for operators.</p>
+          <p>Hands-off marketing systems.</p>
         </a>
 
         <a class="op-card" href="energy-companies-san-diego.html">
-          <div class="op-card-orb"></div>
-          <h3>Energy & Clean-Tech Tools</h3>
-          <p>Automation & Solana rails for energy ops.</p>
+          <div class="orb"></div>
+          <h3>Energy & Clean-Tech</h3>
+          <p>Automation + Solana rails.</p>
         </a>
 
       </div>
     </section>
     <!-- ABOUT PJ -->
-    <section style="margin-top:48px; max-width:860px; margin-left:auto; margin-right:auto;">
-      <h2 class="section-title" style="text-align:center; font-size:24px;">About PJ</h2>
-      <p style="text-align:center; opacity:0.85; margin-bottom:30px;">
+    <section style="margin-top:70px; max-width:860px; margin-left:auto; margin-right:auto;">
+      <h2 class="section-title" style="text-align:center; font-size:26px;">About PJ</h2>
+
+      <p style="text-align:center; opacity:0.85; margin-bottom:36px; line-height:1.6;">
         Founder · Operator Whisperer · Solana Advocate · Local San Diego Support
       </p>
 
-      <h3 style="font-size:18px; margin-bottom:8px;">The Operator Background</h3>
+      <h3 style="font-size:18px; margin-bottom:10px;">The Operator Background</h3>
       <p style="font-size:15px; line-height:1.65; margin-bottom:28px;">
-        PJ spent years running restaurants, ticketing companies, small teams, local service
-        businesses, and real-world operations. He understands operators because he lived it—
-        payroll, schedules, customers, fees, broken systems. This shaped everything SideGuy builds.
+        PJ spent years running restaurants, ticketing companies, and local service operations.  
+        He understands real operators because he lived it — payroll, schedules, customers, busy nights,
+        chargebacks, fees, broken systems. This shaped every part of SideGuy.
       </p>
 
-      <h3 style="font-size:18px; margin-bottom:8px;">SideGuy: Built for Real Businesses</h3>
+      <h3 style="font-size:18px; margin-bottom:10px;">SideGuy: Built for Real Businesses</h3>
       <p style="font-size:15px; line-height:1.65; margin-bottom:28px;">
-        SideGuy Solutions exists for operators who want fast answers, clean tools, low fees,
-        and no bullshit. Tools are built to save time, reduce stress, and drive revenue through
-        AI automation + Solana rails.
+        SideGuy Solutions exists for operators who want fast answers, clean tools, low fees, and no bullshit.
+        Everything is built to save time, reduce stress, and deliver real wins through automation and Solana rails.
       </p>
 
-      <h3 style="font-size:18px; margin-bottom:8px;">Technology, But Simple</h3>
+      <h3 style="font-size:18px; margin-bottom:10px;">Technology, But Simple</h3>
       <p style="font-size:15px; line-height:1.65; margin-bottom:28px;">
-        Instead of selling “big tech,” PJ delivers simple dashboards, booking automations,
-        follow-up flows, payment rails, and fast wins that actually matter to local operators.
+        Instead of selling “big tech,” PJ delivers simple dashboards, booking flows, follow-up automations,
+        payment rails, and usable software that makes everyday operations smoother.
       </p>
 
-      <h3 style="font-size:18px; margin-bottom:8px;">Local Support, Real Person</h3>
+      <h3 style="font-size:18px; margin-bottom:10px;">Local Support, Real Person</h3>
       <p style="font-size:15px; line-height:1.65;">
-        PJ lives in Solana Beach and supports businesses across San Diego. You can text him,
-        call him, or get tools shipped same-day. This is SideGuy: real human, real support.
+        PJ lives in Solana Beach and supports businesses across San Diego.  
+        You can text him, call him, or get tools shipped same-day.  
+        Real person, real help — not a ticketing system.
       </p>
     </section>
 
 
     <!-- FOOTER -->
-    <footer class="footer">
-      <span class="footer-orb"></span>
-      SideGuy Solutions · San Diego Operator Tools · Built by PJ + ChatGPT · Ocean/Solana Edition
+    <footer style="
+      margin-top:80px;
+      padding:20px 6px 8px;
+      font-size:13px;
+      text-align:center;
+      opacity:0.85;
+      color:#024059;
+    ">
+      <span style="
+        width:10px;
+        height:10px;
+        display:inline-block;
+        border-radius:50%;
+        background:#19d076;
+        box-shadow:0 0 10px rgba(0,255,153,0.7);
+        margin-right:6px;
+      "></span>
+      SideGuy Solutions · San Diego Operator Tools · Built by PJ + ChatGPT · Ocean-Light Edition
+      <br>
+      <span id="timestamp" style="font-size:11px; opacity:0.7;"></span>
     </footer>
 
-  </div> <!-- END .page -->
+  </div><!-- END PAGE -->
 
 
-  <!-- TIMESTAMP -->
+  <!-- TIMESTAMP SCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const ts = document.getElementById("timestamp");
       if (ts) {
         const now = new Date();
-        ts.textContent = `Last Updated • ${now.toLocaleDateString()} • ${now.toLocaleTimeString()}`;
+        ts.textContent =
+          "Last Updated • " +
+          now.toLocaleDateString() +
+          " • " +
+          now.toLocaleTimeString();
       }
     });
   </script>
