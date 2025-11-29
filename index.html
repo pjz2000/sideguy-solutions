@@ -1,713 +1,996 @@
-<!--
-  SideGuy Solutions · White Solana Edition
-  Version: 5.1
-  Updated: 2025-11-29
-  Author: PJ + ChatGPT
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--
+    SideGuy Solutions · Hybrid Premium GODWAVE
+    Version: 40.0
+    Last Updated: 2025-11-28
+    Mode: Hybrid Premium · Coastal Fintech · Solana Rails
+    Author: PJ + ChatGPT
+  -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SideGuy Solutions | Solana Payments in 0.4 Seconds for San Diego Operators</title>
-  <meta
-    name="description"
-    content="SideGuy Solutions helps San Diego operators switch to 0.4 second Solana payments, low fees, and clean operator tools. Local support from PJ in North County."
-  />
+  <title>SideGuy Solutions · San Diego Operator Tools & Instant Payments</title>
+  <meta name="description" content="SideGuy Solutions helps San Diego and North County operators cut payment fees, get .4 second Solana settlements, and launch clean AI & software tools. Text PJ (773) 544-1231.">
 
+  <!-- External stylesheet if present -->
+  <link rel="stylesheet" href="sideguy.css" />
+
+  <!-- Fallback core styling so the page still looks good even if sideguy.css is missing -->
   <style>
     :root {
-      --bg-soft: #ecf7ff;
-      --bg-card: #ffffff;
-      --bg-chip: #f5fbff;
-      --bg-pill: #09111f;
-      --text-main: #04111f;
-      --text-muted: #6a7a8f;
-      --accent: #22e38b;
-      --accent-soft: #d6ffef;
-      --accent-dark: #007154;
-      --border-soft: rgba(15, 23, 42, 0.08);
-      --radius-lg: 28px;
-      --radius-pill: 999px;
-      --shadow-soft: 0 28px 80px rgba(15, 23, 42, 0.10);
-      --shadow-orb: 0 16px 40px rgba(15, 23, 42, 0.35);
+      --bg: #050816;
+      --bg-soft: #060b1c;
+      --card-bg: #0b1024;
+      --accent: #09f7a0;
+      --accent-soft: rgba(9, 247, 160, 0.15);
+      --accent-2: #4fd1ff;
+      --text-main: #f5f7ff;
+      --text-soft: #a7b0d4;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --danger: #ff6b81;
+      --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.65);
+      --radius-xl: 26px;
+      --radius-full: 999px;
+      --max-width: 1120px;
     }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-    }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        system-ui, sans-serif;
-      background:
-        radial-gradient(circle at top left, #e4f5ff 0, #ecf7ff 36%, #b8e1ff 100%);
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif;
+      background: radial-gradient(circle at top, #13224a 0, #050816 45%, #02030a 100%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
+    .sg-shell {
       min-height: 100vh;
-      padding: 24px 16px 120px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: 1220px;
-    }
-
-    /* HEADER */
-
-    .top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      gap: 16px;
-    }
-
-    .brand-chip {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 20px;
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
-      backdrop-filter: blur(18px);
-    }
-
-    .brand-dot {
-      width: 12px;
-      height: 24px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 20% 20%, #b7ffdf 0, #22e38b 40%, #009f4c 100%);
-      box-shadow: 0 0 16px rgba(34, 227, 139, 0.9);
-    }
-
-    .brand-lines {
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #64748b;
+      align-items: stretch;
     }
 
-    .brand-lines strong {
-      font-size: 16px;
-      letter-spacing: 0.18em;
-      color: #020617;
+    .sg-max {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 18px 16px 40px;
     }
 
-    .status-pill {
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: rgba(5, 15, 31, 0.90);
-      color: #e2f3ff;
+    /* Top nav */
+    .sg-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5, 8, 22, 0.96), rgba(5, 8, 22, 0.82), transparent);
+    }
+
+    .sg-nav-left {
       display: flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      font-size: 12px;
-      white-space: nowrap;
     }
 
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: #22e38b;
-      box-shadow: 0 0 12px rgba(34, 227, 139, 0.9);
-    }
-
-    /* LAYOUT GRID */
-
-    .grid {
-      display: grid;
-      grid-template-columns: 2.1fr 1.4fr;
-      gap: 22px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 960px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .top-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    .card {
-      background: var(--bg-card);
-      border-radius: 32px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-soft);
-      padding: 26px 26px 24px;
-    }
-
-    /* HERO CARD */
-
-    .hero-card {
+    .sg-logo-orb {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      background: radial-gradient(circle at 20% 0, #ffffff, #85ffe0 25%, #29e3ff 48%, #0a94ff 70%, #050816 100%);
+      box-shadow:
+        0 0 0 2px rgba(41, 227, 255, 0.35),
+        0 0 45px rgba(10, 148, 255, 0.75);
       position: relative;
       overflow: hidden;
     }
 
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
+    .sg-logo-orb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 130%, rgba(9, 247, 160, 0.6), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
     }
 
-    .hero-chip {
-      padding: 7px 14px;
-      border-radius: 999px;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      background: #f4f7fb;
-      color: #64748b;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .hero-chip--primary {
-      background: var(--accent-soft);
-      color: var(--accent-dark);
-      border-color: rgba(34, 227, 139, 0.6);
-    }
-
-    .hero-title {
-      font-size: 32px;
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .hero-title span.accent {
-      color: #00c975;
-    }
-
-    @media (min-width: 1024px) {
-      .hero-title {
-        font-size: 42px;
-      }
-    }
-
-    .hero-sub {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      max-width: 560px;
-    }
-
-    .hero-bullets {
-      list-style: none;
+    .sg-nav-title {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 14px;
-      color: #0f172a;
-      margin-bottom: 18px;
+      gap: 2px;
     }
 
-    .hero-bullets li {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    .hero-bullets li::before {
-      content: "•";
-      color: #22e38b;
-      font-size: 18px;
-      line-height: 1;
-      margin-top: -1px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .btn-main {
-      padding: 11px 22px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
+    .sg-nav-title-main {
+      font-size: 15px;
       font-weight: 600;
-      color: #001018;
-      background: linear-gradient(135deg, #22e38b, #09c173);
-      box-shadow: 0 18px 45px rgba(15, 118, 76, 0.50);
-    }
-
-    .btn-ghost {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: #f8fbff;
-      font-size: 13px;
-      color: #0f172a;
-      cursor: pointer;
-    }
-
-    .hero-footer-note {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* RIGHT COLUMN */
-
-    .right-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .stack-card-title {
-      font-size: 13px;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #64748b;
-      margin-bottom: 4px;
+      color: var(--text-main);
     }
 
-    .stack-card-main {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .stack-card-body {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .stack-link {
-      font-size: 13px;
-      color: #0369a1;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-weight: 500;
-    }
-
-    /* VISION BOARD + HUB */
-
-    .hub-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 720px) {
-      .hub-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .mini-pill {
-      padding: 7px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: #f4f7fb;
+    .sg-nav-title-sub {
       font-size: 11px;
-      color: #475569;
+      color: var(--text-soft);
+    }
+
+    .sg-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sg-chip {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(3, 220, 130, 0.08);
+      border: 1px solid rgba(3, 220, 130, 0.4);
+      color: var(--accent);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-bottom: 6px;
     }
 
-    .mini-pill span.dot {
-      width: 7px;
-      height: 7px;
+    .sg-chip-dot {
+      width: 6px;
+      height: 6px;
       border-radius: 999px;
-      background: #22e38b;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(9, 247, 160, 0.8);
     }
 
-    /* SITEMAP SECTION */
-
-    .sitemap-section {
-      margin-top: 26px;
+    .sg-nav-cta {
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: radial-gradient(circle at top left, rgba(9, 247, 160, 0.16), rgba(20, 115, 255, 0.05));
+      color: var(--text-main);
+      font-size: 11px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
     }
 
-    .sitemap-heading-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 10px;
+    .sg-nav-cta span.sg-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
     }
 
-    .sitemap-heading-row h2 {
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #64748b;
-    }
-
-    .sitemap-heading-row span {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-
-    .sitemap-grid {
+    /* Hero layout */
+    .sg-hero {
+      margin-top: 22px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      font-size: 13px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
     }
 
-    @media (max-width: 1040px) {
-      .sitemap-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 860px) {
+      .sg-hero {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
-    @media (max-width: 720px) {
-      .sitemap-grid {
-        grid-template-columns: 1fr;
-      }
+    .sg-hero-card {
+      background: radial-gradient(circle at top, rgba(21, 90, 255, 0.3), transparent 60%), var(--bg-soft);
+      border-radius: 32px;
+      padding: 22px 20px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
     }
 
-    .sitemap-column h3 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #475569;
-      margin-bottom: 6px;
-    }
-
-    .sitemap-column ul {
-      list-style: none;
+    .sg-hero-badge-row {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .sitemap-column a {
-      color: #0f172a;
-    }
-
-    .sitemap-column a:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      color: #0369a1;
-    }
-
-    /* PJ ORB */
-
-    .pj-orb {
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 50;
-      background: var(--bg-pill);
-      border-radius: 999px;
-      padding: 10px 16px;
-      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
       align-items: center;
-      gap: 10px;
-      box-shadow: var(--shadow-orb);
-      border: 1px solid rgba(148, 163, 184, 0.70);
-      color: #e5f3ff;
-      max-width: min(420px, 92vw);
     }
 
-    .pj-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 20% 20%, #ccffe8 0, #22e38b 40%, #007154 100%);
-      display: flex;
+    .sg-badge {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(5, 8, 22, 0.8);
+      color: var(--text-soft);
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 700;
+      gap: 6px;
+    }
+
+    .sg-highlight-pill {
+      font-size: 11px;
+      padding: 6px 11px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(90deg, rgba(9, 247, 160, 0.14), rgba(79, 209, 255, 0.16));
+      color: var(--accent);
+      border: 1px solid rgba(9, 247, 160, 0.4);
+    }
+
+    .sg-hero-title {
+      font-size: clamp(26px, 3.1vw, 32px);
+      line-height: 1.08;
+      letter-spacing: 0.01em;
+      margin: 4px 0 10px;
+    }
+
+    .sg-hero-title span.sg-gradient {
+      background: linear-gradient(120deg, #49ffe3, #4fd1ff, #f9ffb2);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .sg-hero-sub {
       font-size: 14px;
-      color: #020617;
+      color: var(--text-soft);
+      max-width: 500px;
+      margin-bottom: 14px;
     }
 
-    .pj-orb-main {
-      flex: 1;
+    .sg-hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 16px;
     }
 
-    .pj-orb-main strong {
-      font-size: 13px;
-      display: block;
+    .sg-metric {
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(5, 8, 22, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-width: 130px;
+    }
+
+    .sg-metric-label {
+      font-size: 11px;
+      color: var(--text-soft);
       margin-bottom: 2px;
     }
 
-    .pj-orb-main span {
-      font-size: 11px;
-      color: #cbd5f5;
+    .sg-metric-value {
+      font-size: 16px;
+      font-weight: 600;
     }
 
-    .pj-orb-tag {
+    .sg-metric-note {
       font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: rgba(167, 176, 212, 0.8);
+    }
+
+    .sg-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .sg-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      border: none;
+      text-decoration: none;
+      background: linear-gradient(120deg, #09f7a0, #4fd1ff);
+      color: #020308;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow:
+        0 0 0 1px rgba(6, 39, 26, 0.5),
+        0 18px 40px rgba(0, 0, 0, 0.8);
+      cursor: pointer;
       white-space: nowrap;
     }
 
+    .sg-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      text-decoration: none;
+      background: rgba(3, 7, 18, 0.9);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .sg-hero-footnote {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* Right side: ocean / orb visual */
+    .sg-hero-visual {
+      position: relative;
+      border-radius: 30px;
+      background: radial-gradient(circle at top, #0a1a3c, #020410 60%, #000 100%);
+      border: 1px solid rgba(79, 209, 255, 0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 16px 14px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85);
+    }
+
+    .sg-wave-band {
+      position: absolute;
+      inset: 55% -40% -10%;
+      background: radial-gradient(circle at 20% 0, rgba(79, 209, 255, 0.8), transparent 50%),
+                  radial-gradient(circle at 80% 30%, rgba(9, 247, 160, 0.75), transparent 55%),
+                  linear-gradient(to bottom, rgba(4, 13, 37, 0.2), #020410 58%, #000 100%);
+      opacity: 0.9;
+      filter: blur(6px);
+      mix-blend-mode: screen;
+    }
+
+    .sg-orb-main {
+      position: relative;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      align-self: center;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 18% 0, #ffffff, #9cffef 25%, #5ee3ff 40%, #1c8fff 60%, #020410 100%);
+      box-shadow:
+        0 0 0 2px rgba(151, 246, 255, 0.5),
+        0 0 65px rgba(10, 148, 255, 0.9),
+        0 0 120px rgba(9, 247, 160, 0.7);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sg-orb-inner-wave {
+      position: absolute;
+      inset: 45% -20% -10%;
+      background:
+        radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.9), transparent 55%),
+        radial-gradient(circle at 90% 30%, rgba(9, 247, 210, 0.95), transparent 55%),
+        linear-gradient(to bottom, rgba(7, 28, 64, 0.5), #020410 60%, #000 100%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .sg-orb-label {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      text-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
+    }
+
+    .sg-orb-label span {
+      display: block;
+    }
+
+    .sg-orb-label span.sg-orb-mainlabel {
+      font-size: 15px;
+    }
+
+    .sg-orb-label span.sg-orb-sub {
+      font-size: 11px;
+      color: #e4fdfb;
+      opacity: 0.9;
+    }
+
+    .sg-orb-float {
+      position: absolute;
+      inset: -20%;
+      animation: sg-orb-drift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes sg-orb-drift {
+      0% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(-6px, -10px, 0); }
+      100% { transform: translate3d(6px, 4px, 0); }
+    }
+
+    .sg-visual-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .sg-pill-soft {
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(79, 209, 255, 0.6);
+      background: rgba(3, 8, 24, 0.9);
+      color: #c1e9ff;
+    }
+
+    .sg-bubble {
+      font-size: 11px;
+      padding: 7px 10px;
+      border-radius: 14px;
+      background: rgba(5, 10, 30, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-soft);
+      max-width: 180px;
+    }
+
+    .sg-visual-bottom {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .sg-visual-metric-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sg-visual-metric {
+      flex: 1 1 110px;
+      padding: 8px 9px;
+      border-radius: 12px;
+      background: rgba(5, 8, 22, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .sg-visual-metric strong {
+      display: block;
+      font-size: 13px;
+      color: #ffffff;
+      margin-bottom: 1px;
+    }
+
+    .sg-visual-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: rgba(180, 192, 230, 0.9);
+      margin-top: 3px;
+    }
+
+    .sg-visual-footer span.sg-live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 9px rgba(9, 247, 160, 0.9);
+      margin-right: 5px;
+    }
+
+    /* Sections */
+    .sg-section {
+      margin-top: 28px;
+    }
+
+    .sg-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .sg-section-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .sg-section-kicker {
+      font-size: 11px;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .sg-section-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .sg-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 880px) {
+      .sg-grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sg-card {
+      padding: 14px 14px 13px;
+      border-radius: 22px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sg-card::before {
+      content: "";
+      position: absolute;
+      inset: -40% 20% 40%;
+      background: radial-gradient(circle at top, rgba(79, 209, 255, 0.15), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .sg-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .sg-card-body {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .sg-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .sg-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-soft);
+      background: rgba(5, 8, 22, 0.9);
+    }
+
+    .sg-card-cta {
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sg-pill-note {
+      font-size: 11px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(5, 8, 22, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-soft);
+    }
+
+    /* Footer */
+    .sg-footer {
+      margin-top: 28px;
+      padding: 16px 0 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+      color: var(--text-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sg-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sg-footer a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    .sg-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Text orb CTA fixed-ish on mobile */
+    .sg-floating-text-orb {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 60px;
+      height: 60px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 0, #ffffff, #9cffef 25%, #5ee3ff 42%, #09f7a0 70%, #020410 100%);
+      box-shadow:
+        0 0 0 2px rgba(151, 246, 255, 0.5),
+        0 0 35px rgba(10, 148, 255, 0.9),
+        0 0 60px rgba(9, 247, 160, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #020308;
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+      padding: 8px;
+      z-index: 40;
+    }
+
+    .sg-floating-text-orb span {
+      display: block;
+    }
+
     @media (max-width: 640px) {
-      .pj-orb {
-        left: 8px;
-        right: 8px;
-        bottom: 12px;
-        padding: 9px 13px;
-      }
-      .pj-avatar {
-        width: 28px;
-        height: 28px;
-        font-size: 13px;
-      }
-      .pj-orb-main strong {
-        font-size: 12px;
-      }
-      .pj-orb-main span {
-        font-size: 10px;
-      }
-      .pj-orb-tag {
+      .sg-nav-right .sg-chip {
         display: none;
+      }
+      .sg-nav-right .sg-nav-cta {
+        padding-inline: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <main class="shell">
-      <header class="top-row">
-        <div class="brand-chip">
-          <div class="brand-dot"></div>
-          <div class="brand-lines">
-            <span>SIDEGUY SOLUTIONS</span>
-            <strong>Solana Payments</strong>
-            <span>Automations · Operator Tools</span>
+  <div class="sg-shell">
+    <div class="sg-max">
+      <!-- NAV -->
+      <header class="sg-nav">
+        <div class="sg-nav-left">
+          <div class="sg-logo-orb"></div>
+          <div class="sg-nav-title">
+            <div class="sg-nav-title-main">SideGuy Solutions</div>
+            <div class="sg-nav-title-sub">San Diego · Instant-Settlement Operator Tools</div>
           </div>
         </div>
-        <div class="status-pill">
-          <span class="status-dot"></span>
-          <span>Updated: Nov 29, 2025 · Live in San Diego &amp; North County</span>
+        <div class="sg-nav-right">
+          <div class="sg-chip">
+            <span class="sg-chip-dot"></span>
+            Live · Version 40.0
+          </div>
+          <a href="payments.html" class="sg-nav-cta">
+            <span class="sg-dot"></span>
+            <span>Payments Hub</span>
+          </a>
         </div>
       </header>
 
-      <section class="grid">
-        <!-- LEFT: HERO -->
-        <article class="card hero-card">
-          <div class="hero-chips">
-            <span class="hero-chip">San Diego &amp; North County · Solana Rails</span>
-            <span class="hero-chip hero-chip--primary">0.4 Second Settlements</span>
-            <span class="hero-chip">Stripe &amp; PayPal Alternatives</span>
+      <!-- HERO -->
+      <main class="sg-hero">
+        <section class="sg-hero-card">
+          <div class="sg-hero-badge-row">
+            <span class="sg-section-kicker">San Diego Operators</span>
+            <span class="sg-highlight-pill">.4 second Solana settlements · Lower fees · Real human onboarding</span>
           </div>
 
-          <h1 class="hero-title">
-            Solana payments in <span class="accent">0.4 seconds</span>
-            for every type of operator.
+          <h1 class="sg-hero-title">
+            SideGuy is your <span class="sg-gradient">off-menu operator advantage</span> for payments & AI tools.
           </h1>
 
-          <p class="hero-sub">
-            Stop overpaying Stripe &amp; PayPal. SideGuy routes money on fast,
-            low-fee Solana rails with clean tools, dashboards, and real human
-            support from PJ in North County.
+          <p class="sg-hero-sub">
+            We help North County & San Diego operators escape slow, expensive processors, ship clean software, and plug into
+            instant-settlement Solana rails — with one text to Peege.
           </p>
 
-          <ul class="hero-bullets">
-            <li>0.4 second settlement instead of multi-day payouts.</li>
-            <li>Lower effective fees than Stripe &amp; PayPal on real volume.</li>
-            <li>Clean dashboards instead of messy bolt-on tools.</li>
-            <li>Local operator upside — participate in the network, not just pay fees.</li>
-          </ul>
-
-          <div class="hero-actions">
-            <button class="btn-main" onclick="window.location.href='stripe-fees-calculator.html'">
-              See Your Savings →
-            </button>
-            <button class="btn-ghost" onclick="window.location.href='crypto-help-desk-san-diego.html'">
-              Visit Crypto Help Desk
-            </button>
+          <div class="sg-hero-metrics">
+            <div class="sg-metric">
+              <div class="sg-metric-label">Instant Settlements</div>
+              <div class="sg-metric-value">0.4s</div>
+              <div class="sg-metric-note">Solana rails · no 2-day float</div>
+            </div>
+            <div class="sg-metric">
+              <div class="sg-metric-label">Fee Savings</div>
+              <div class="sg-metric-value">20–60%</div>
+              <div class="sg-metric-note">vs legacy card processors</div>
+            </div>
+            <div class="sg-metric">
+              <div class="sg-metric-label">Local Focus</div>
+              <div class="sg-metric-value">North County</div>
+              <div class="sg-metric-note">Operators, service, field, gyms & more</div>
+            </div>
           </div>
 
-          <p class="hero-footer-note">
-            Text PJ at <strong>(773) 544-1231</strong> with your monthly volume &amp; card mix.
-            Get a real savings estimate in minutes.
-          </p>
-        </article>
+          <div class="sg-hero-actions">
+            <a href="payments.html" class="sg-btn-primary">
+              View SideGuy Payments
+            </a>
+            <a href="seo.html" class="sg-btn-secondary">
+              Browse SEO Operator Pages
+            </a>
+            <a href="tel:17735441231" class="sg-btn-secondary">
+              Text Peege · (773) 544-1231
+            </a>
+          </div>
 
-        <!-- RIGHT: STACK -->
-        <aside class="right-stack">
-          <section class="card">
-            <div class="stack-card-title">San Diego Operator Payments Hub</div>
-            <div class="stack-card-main">North County Verified Operator Hub</div>
-            <p class="stack-card-body">
-              A focused hub for verified local operators who want face-to-face,
-              no-BS upgrades on payments, tools, and automations.
-            </p>
-            <div class="hub-grid">
-              <div>
-                <div class="mini-pill">
-                  <span class="dot"></span> Verified Local Operators
-                </div>
-                <p class="stack-card-body">
-                  From Encinitas to Carlsbad to La&nbsp;Jolla — real businesses,
-                  real humans, real results.
-                </p>
+          <div class="sg-hero-footnote">
+            Own a piece of your processing. Stripe gives you nothing — we help you keep the upside and the float.
+          </div>
+        </section>
+
+        <aside class="sg-hero-visual">
+          <div class="sg-visual-top-row">
+            <span class="sg-pill-soft">San Diego · Solana Beach · North County</span>
+            <div class="sg-bubble">
+              “SideGuy is your private payments + software department — without the bloat, retainers, or agency fluff.”
+            </div>
+          </div>
+
+          <div class="sg-orb-main">
+            <div class="sg-orb-float">
+              <div class="sg-orb-inner-wave"></div>
+            </div>
+            <div class="sg-orb-label">
+              <span class="sg-orb-mainlabel">Godwave</span>
+              <span class="sg-orb-sub">Solana rails · Operator speed</span>
+            </div>
+          </div>
+
+          <div class="sg-visual-bottom">
+            <div class="sg-visual-metric-row">
+              <div class="sg-visual-metric">
+                <strong>.4s</strong>
+                Settlement speed on Solana rails when you’re set up correctly.
               </div>
-              <div>
-                <div class="mini-pill">
-                  <span class="dot"></span> In-Person &amp; Remote
-                </div>
-                <p class="stack-card-body">
-                  Meet at the office, on-site at your location, or over a quick call.
-                </p>
+              <div class="sg-visual-metric">
+                <strong>Swap Stripe</strong>
+                Keep the upside, cut junk fees, keep your same customers.
               </div>
             </div>
-            <a class="stack-link" href="north-county-verified-operator-hub.html">
-              Open North County Verified Operator Hub →
-            </a>
-          </section>
-
-          <section class="card">
-            <div class="stack-card-title">SideGuy Vision Board</div>
-            <div class="stack-card-main">San Diego SEO &amp; Operator Blueprint</div>
-            <p class="stack-card-body">
-              Every local niche SideGuy is building into — payment pages,
-              operator tools, future AIs, and long-term operator upside.
-            </p>
-            <a class="stack-link" href="seo.html">
-              View SideGuy Vision Board · All SEO Pages →
-            </a>
-          </section>
-
-          <section class="card">
-            <div class="stack-card-title">Crypto Help Desk</div>
-            <div class="stack-card-main">Straight answers, no crypto Twitter noise.</div>
-            <p class="stack-card-body">
-              Finally: clear explanations about Solana, stablecoins, and on-chain
-              payments — without hype, memes, or hourly price predictions.
-            </p>
-            <a class="stack-link" href="crypto-help-desk-san-diego.html">
-              Open Crypto Help Desk →
-            </a>
-          </section>
+            <div class="sg-visual-footer">
+              <span><span class="sg-live-dot"></span>SideGuy Operator Network · Live</span>
+              <span>Text “Payments” to (773) 544-1231</span>
+            </div>
+          </div>
         </aside>
-      </section>
-
-      <!-- SITEMAP SECTION (continues in Part 2) -->
-      <section class="card sitemap-section">
-        <div class="sitemap-heading-row">
-          <h2>SideGuy Site Map · Live Operator Pages</h2>
-          <span>Always-open view · No hidden sections · Every live page in one place.</span>
+      </main>
+      <!-- SECTION: Why SideGuy -->
+      <section class="sg-section">
+        <div class="sg-section-header">
+          <div>
+            <div class="sg-section-kicker">Why SideGuy Exists</div>
+            <div class="sg-section-title">Built for operators, not committees.</div>
+          </div>
+          <div class="sg-section-sub">
+            You get a single operator-minded partner (Peege) backed by clean code, instant-settlement rails, and a growing
+            library of San Diego-specific tools.
+          </div>
         </div>
 
-        <div class="sitemap-grid">
-          <!-- Column 1: Neighborhood Payments -->
-          <div class="sitemap-column">
-            <h3>Neighborhood Payments</h3>
-            <ul>
-              <li><a href="best-payment-processing-san-diego.html">Best Payment Processing · San Diego</a></li>
-              <li><a href="carlsbad-payment-processing-san-diego.html">Carlsbad Payment Processing</a></li>
-              <li><a href="encinitas-payment-processing-san-diego.html">Encinitas Payment Processing</a></li>
-              <li><a href="la-jolla-payment-processing-san-diego.html">La&nbsp;Jolla Payment Processing</a></li>
-              <li><a href="del-mar-payment-processing-san-diego.html">Del&nbsp;Mar Payment Processing</a></li>
-              <li><a href="oceanside-payment-processing-san-diego.html">Oceanside Payment Processing</a></li>
-              <li><a href="rancho-santa-fe-payment-processing-san-diego.html">Rancho Santa Fe Payment Processing</a></li>
-              <li><a href="north-county-payment-processing-san-diego.html">North County Payment Processing</a></li>
-              <li><a href="north-county-solana-payments-san-diego.html">North County Solana Payments</a></li>
-            </ul>
-          </div>
-                    <!-- Column 2: Operator Types -->
-          <div class="sitemap-column">
-            <h3>By Operator Type</h3>
-            <ul>
-              <li><a href="restaurant-payments-san-diego.html">Restaurant &amp; Hospitality Payments</a></li>
-              <li><a href="gym-fitness-payment-processing-san-diego.html">Gym &amp; Fitness Payments</a></li>
-              <li><a href="salon-spa-payments-san-diego.html">Salon &amp; Spa Payments</a></li>
-              <li><a href="medical-payment-processing-san-diego.html">Medical &amp; Professional Payments</a></li>
-              <li><a href="contractor-payment-processing-san-diego.html">Contractor &amp; Field Service Payments</a></li>
-              <li><a href="ecommerce-payment-processing-san-diego.html">E-Commerce Payments</a></li>
-              <li><a href="mobile-operator-payments-san-diego.html">Mobile &amp; On-site Operator Payments</a></li>
-              <li><a href="local-business-savings-san-diego.html">Local Business Savings · San Diego</a></li>
-            </ul>
-          </div>
+        <div class="sg-grid-3">
+          <article class="sg-card">
+            <h3 class="sg-card-title">.4 Second Solana Settlements</h3>
+            <p class="sg-card-body">
+              We plug your business into Solana rails so payouts land in seconds — not days. Customers still pay how they like;
+              you just settle smarter.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">Instant payouts</span>
+              <span class="sg-tag">Stablecoins & cash-out</span>
+              <span class="sg-tag">Lower fees</span>
+            </div>
+            <a href="payments.html" class="sg-card-cta">
+              Open the Payments Hub →
+            </a>
+          </article>
 
-          <!-- Column 3: Savings & Stripe Alternatives -->
-          <div class="sitemap-column">
-            <h3>Savings &amp; Stripe Alternatives</h3>
-            <ul>
-              <li><a href="instant-settlement-payments-san-diego.html">Instant Settlement Payments · San Diego</a></li>
-              <li><a href="instant-payouts-contractors-san-diego.html">Instant Payouts for Contractors</a></li>
-              <li><a href="stripe-alternative-payments-san-diego.html">Stripe &amp; PayPal Alternatives</a></li>
-              <li><a href="lower-credit-card-fees-san-diego.html">Lower Credit Card Fees · San Diego</a></li>
-              <li><a href="save-on-stripe-fees-san-diego.html">Save on Stripe Fees · Calculator</a></li>
-              <li><a href="subscription-payments-san-diego.html">Subscription &amp; Membership Payments</a></li>
-              <li><a href="switch-from-square-san-diego.html">Switch from Square · San Diego</a></li>
-              <li><a href="local-operator-savings-san-diego.html">Local Operator Savings Department</a></li>
-            </ul>
-          </div>
+          <article class="sg-card">
+            <h3 class="sg-card-title">SideGuy Operator Tools</h3>
+            <p class="sg-card-body">
+              Contractor billing, gyms, salons, field services, crypto-curious customers — we have pages and flows built
+              specifically for how you actually operate.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">Contractors</span>
+              <span class="sg-tag">Gyms & fitness</span>
+              <span class="sg-tag">Medical & pro services</span>
+            </div>
+            <a href="seo.html" class="sg-card-cta">
+              View San Diego operator pages →
+            </a>
+          </article>
 
-          <!-- Column 4: Tools, AI & Future Pages -->
-          <div class="sitemap-column">
-            <h3>Operator Tools &amp; AIs</h3>
-            <ul>
-              <li><a href="ai-payment-automation-san-diego.html">AI Payment Automation · San Diego</a></li>
-              <li><a href="san-diego-dashboard-development.html">San Diego Dashboard Development</a></li>
-              <li><a href="san-diego-business-automation.html">San Diego Business Automation</a></li>
-              <li><a href="crypto-payments-san-diego.html">Crypto &amp; Stablecoin Payments</a></li>
-              <li><a href="crypto-help-desk-san-diego.html">Crypto Help Desk · Straight Answers</a></li>
-              <li><a href="sideguy-vision-board-san-diego.html">SideGuy Vision Board · Full Map</a></li>
-              <li><a href="north-county-verified-operator-hub.html">North County Verified Operator Hub</a></li>
-              <li><a href="seo.html">All San Diego SEO Pages</a></li>
-            </ul>
-          </div>
+          <article class="sg-card">
+            <h3 class="sg-card-title">“Text Peege” Support</h3>
+            <p class="sg-card-body">
+              No ticket portals. No “your request is important to us” emails. You text PJ. We figure it out and ship the fix or
+              flow together.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">1:1 onboarding</span>
+              <span class="sg-tag">Clear math</span>
+              <span class="sg-tag">Local context</span>
+            </div>
+            <a href="tel:17735441231" class="sg-card-cta">
+              Text Peege now →
+            </a>
+          </article>
         </div>
       </section>
 
-      <footer style="margin-top: 18px; font-size: 11px; color: #94a3b8;">
-        Built for San Diego operators · SideGuy Solutions · 0.4 second Solana settlements ·
-        Own a piece of your processing — Stripe gives you nothing.
+      <!-- SECTION: North County Verified Operator Hub -->
+      <section class="sg-section">
+        <div class="sg-section-header">
+          <div>
+            <div class="sg-section-kicker">North County · Solana Beach · Encinitas · Carlsbad</div>
+            <div class="sg-section-title">North County Verified Operator Hub</div>
+          </div>
+          <div class="sg-section-sub">
+            A dedicated path for local operators who want to lock in better payments, show up in the savings directory, and
+            ship real upgrades — not just “new websites.”
+          </div>
+        </div>
+
+        <div class="sg-grid-3">
+          <article class="sg-card">
+            <h3 class="sg-card-title">Verified Operator Listing</h3>
+            <p class="sg-card-body">
+              Get added to the North County Verified Operator Hub so customers know you run tight systems and modern rails.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">Carlsbad</span>
+              <span class="sg-tag">Solana Beach</span>
+              <span class="sg-tag">Encinitas</span>
+            </div>
+            <a href="north-county-verified-operator.html" class="sg-card-cta">
+              Open the Verified Operator page →
+            </a>
+          </article>
+
+          <article class="sg-card">
+            <h3 class="sg-card-title">Stripe & Square Savings</h3>
+            <p class="sg-card-body">
+              We benchmark your current processor and use the SideGuy math to show exactly what you’d save on fees and
+              settlement timing.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">Stripe</span>
+              <span class="sg-tag">Square</span>
+              <span class="sg-tag">Legacy processors</span>
+            </div>
+            <a href="stripe-fees-calculator.html" class="sg-card-cta">
+              Open the Stripe Fees Calculator →
+            </a>
+          </article>
+
+          <article class="sg-card">
+            <h3 class="sg-card-title">Local Savings Directory</h3>
+            <p class="sg-card-body">
+              Coming next: a live index of North County businesses running SideGuy rails, with transparent savings stories
+              and operator-level breakdowns.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">Operator stories</span>
+              <span class="sg-tag">Before / after</span>
+              <span class="sg-tag">Local case studies</span>
+            </div>
+            <span class="sg-pill-note">Saved for next build · SideGuy Savings Directory v1</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: Explore Operator Pages -->
+      <section class="sg-section">
+        <div class="sg-section-header">
+          <div>
+            <div class="sg-section-kicker">SEO Engine · San Diego</div>
+            <div class="sg-section-title">Explore live operator pages we’ve already built.</div>
+          </div>
+          <div class="sg-section-sub">
+            These pages are built so you rank for what you actually sell: instant payouts, better processing, AI tools, and
+            North County-specific problems you already solve.
+          </div>
+        </div>
+
+        <div class="sg-grid-3">
+          <article class="sg-card">
+            <h3 class="sg-card-title">San Diego Payments & Operators</h3>
+            <p class="sg-card-body">
+              Deep pages for payment processing, gym and salon upgrades, home services, restaurants, pro services and more.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">payment-processing-san-diego.html</span>
+              <span class="sg-tag">restaurant & gym flows</span>
+            </div>
+            <a href="seo.html" class="sg-card-cta">
+              View full SEO index →
+            </a>
+          </article>
+
+          <article class="sg-card">
+            <h3 class="sg-card-title">AI & Automation in San Diego</h3>
+            <p class="sg-card-body">
+              AI automation, crypto help desk, and software development pages designed for founders and operators — not just dev
+              teams.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">ai-development-san-diego.html</span>
+              <span class="sg-tag">crypto-help-desk-san-diego.html</span>
+            </div>
+            <a href="ai-development-san-diego.html" class="sg-card-cta">
+              Open AI Development page →
+            </a>
+          </article>
+
+          <article class="sg-card">
+            <h3 class="sg-card-title">Solana Payments & Tools</h3>
+            <p class="sg-card-body">
+              Solana payments, North County rails, and crypto-friendly customer flows — with normal people explanations.
+            </p>
+            <div class="sg-tag-row">
+              <span class="sg-tag">solana-payments-san-diego.html</span>
+              <span class="sg-tag">solana-payments-north-county.html</span>
+            </div>
+            <a href="solana-payments-san-diego.html" class="sg-card-cta">
+              Open Solana Payments page →
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="sg-footer">
+        <div>
+          © <span id="sg-year">2025</span> SideGuy Solutions · Built in Solana Beach, CA · Version 40.0 · Hybrid Premium GODWAVE
+        </div>
+        <div class="sg-footer-links">
+          <a href="payments.html">Payments Hub</a>
+          <a href="seo.html">SEO Operator Index</a>
+          <a href="north-county-verified-operator.html">Verified Operator Hub</a>
+          <a href="tel:17735441231">Text Peege</a>
+        </div>
       </footer>
-    </main>
+    </div>
   </div>
 
-  <!-- PJ TEXT ORB -->
-  <a href="sms:+17735441231" class="pj-orb">
-    <div class="pj-avatar">PJ</div>
-    <div class="pj-orb-main">
-      <strong>Text PJ · 0.4 sec payments</strong>
-      <span>
-        Send your monthly volume &amp; card mix — get exact savings
-        in minutes. Real human in North County.
-      </span>
-    </div>
-    <div class="pj-orb-tag">San Diego &amp; North County</div>
+  <!-- Floating Text Peege Orb -->
+  <a href="tel:17735441231" class="sg-floating-text-orb">
+    <span>Text</span>
+    <span>Peege</span>
   </a>
+
+  <script>
+    // Simple year updater so it always looks fresh
+    (function () {
+      var el = document.getElementById("sg-year");
+      if (el) {
+        el.textContent = new Date().getFullYear();
+      }
+    })();
+  </script>
 </body>
 </html>
