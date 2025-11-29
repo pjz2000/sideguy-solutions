@@ -1,69 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Crypto Help Desk · Inline Ocean Build -->
+  <!--
+    SideGuy Solutions · Crypto Help Desk
+    Filename: crypto-help-desk-san-diego.html
+    Version: 1.0-superbuild-crypto
+    Timestamp: 2025-11-29 · San Diego
+    Author: PJ + ChatGPT
+  -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Crypto Help Desk San Diego · SideGuy Solutions</title>
-  <meta name="description" content="The SideGuy Crypto Help Desk gives San Diego operators clear answers about wallets, stablecoins, rails, Solana payments, and real-world crypto usage—without the noise." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Crypto Help Desk San Diego | SideGuy Solutions</title>
+  <meta
+    name="description"
+    content="SideGuy Solutions runs a Crypto Help Desk for San Diego operators. Get clear answers on Solana, USDC, wallets, compliance, and instant-settlement payments. Text PJ to get a calm, human walkthrough."
+  />
+  <meta
+    name="keywords"
+    content="crypto help desk san diego, solana support san diego, usdc payments, crypto questions, web3 support san diego, sideguy solutions"
+  />
 
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:-apple-system,Inter,sans-serif;background:linear-gradient(180deg,#e6f7ff,#c9ecff,#9edbff);color:#033045;padding:20px;-webkit-font-smoothing:antialiased;}
-    .page{max-width:1200px;margin:auto;}
-    .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
-    .logo{font-size:22px;font-weight:700;}
-    .pill{padding:8px 16px;background:white;border-radius:999px;text-decoration:none;color:#015c40;font-weight:600;box-shadow:0 0 0 1px rgba(0,0,0,0.05),0 8px 20px rgba(0,0,0,0.08);}
-    .section{background:rgba(255,255,255,0.94);padding:24px;border-radius:20px;margin-bottom:24px;box-shadow:0 8px 20px rgba(0,0,0,0.08);}
-    .title{font-size:26px;font-weight:800;margin-bottom:10px;}
-    .sub{font-size:15px;opacity:0.85;margin-bottom:16px;}
-    .faq{margin-top:20px;display:flex;flex-direction:column;gap:18px;}
-    .q{font-weight:700;margin-bottom:6px;}
-    .footer{text-align:center;margin-top:30px;font-size:12px;opacity:0.8;}
+    :root {
+      --bg-main: #f3f7fc;
+      --bg-soft: #e5f0ff;
+      --bg-deep: #0d1b2a;
+      --accent: #3dd5ff;
+      --accent-soft: rgba(61, 213, 255, 0.16);
+      --accent-strong: #14f195;
+      --orb: radial-gradient(circle at 30% 30%, #14f195, #3dd5ff 45%, #5b5bff 80%);
+      --text-main: #0b1220;
+      --text-soft: #4b5563;
+      --border-subtle: rgba(15, 23, 42, 0.06);
+      --shadow-soft: 0 18px 60px rgba(15, 23, 42, 0.22);
+      --radius-lg: 22px;
+      --radius-xl: 26px;
+      --radius-pill: 999px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(61, 213, 255, 0.35), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(20, 241, 149, 0.32), transparent 55%),
+        linear-gradient(to bottom, #f7fbff, #e9f2ff 42%, #f6f9ff 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      padding: 24px 16px 72px;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.20);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(61, 213, 255, 0.16), transparent 60%),
+        radial-gradient(circle at 110% 40%, rgba(20, 241, 149, 0.22), transparent 60%);
+      opacity: 0.55;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .inner {
+      position: relative;
+      z-index: 1;
+      padding: 18px 22px 26px;
+    }
+
+    /* Top nav */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 4px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.45);
+      margin-bottom: 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-orb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--orb);
+      box-shadow: 0 0 22px rgba(20, 241, 149, 0.75);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-weight: 650;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--text-soft);
+      background: rgba(248, 250, 252, 0.7);
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: white;
+      color: #020617;
+      transform: translateY(-1px);
+    }
+
+    .nav-links a.active {
+      border-color: rgba(20, 241, 149, 0.8);
+      background: rgba(20, 241, 149, 0.12);
+      color: #022c22;
+      box-shadow: 0 0 12px rgba(20, 241, 149, 0.7);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .nav-pill {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.03);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+    }
+
+    .nav-cta {
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--orb);
+      color: #020617;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(15, 23, 42, 0.35);
+      transform: translateY(0);
+      transition: transform 0.16s ease-out, box-shadow 0.16s ease-out;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.5);
+    }
+
+    .phone-icon {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1px solid rgba(15, 23, 42, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 26px;
+      padding: 22px 4px 18px;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 11px;
+      color: var(--text-soft);
+      width: fit-content;
+    }
+
+    .eyebrow-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(20, 241, 149, 0.15);
+      color: #022c22;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 span.highlight {
+      background: linear-gradient(120deg, #14f195, #3dd5ff, #5b5bff);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 750;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 520px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 10px;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .hero-pill {
+      padding: 8px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(248, 250, 252, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .hero-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0ea5e9;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .primary-cta {
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--orb);
+      border: 1px solid rgba(15, 23, 42, 0.5);
+      box-shadow: var(--shadow-soft);
+      color: #020617;
+      font-size: 13px;
+      font-weight: 650;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .primary-cta span.sub {
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    .ghost-cta {
+      text-decoration: none;
+      padding: 9px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      font-size: 11px;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.015);
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+    .hero-note strong {
+      color: #020617;
+    }
+
+    .hero-right {
+      position: relative;
+      padding: 12px 10px 10px;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, rgba(61, 213, 255, 0.3), rgba(15, 23, 42, 0.98));
+      color: #e5f0ff;
+      padding: 18px 18px 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.75);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      background: var(--orb);
+      opacity: 0.65;
+      filter: blur(1px);
+    }
+
+    .hero-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero-card-sub {
+      font-size: 11px;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      font-size: 10px;
+    }
+
+    .metric {
+      padding: 8px 9px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .metric-label {
+      color: #9ca3af;
+      margin-bottom: 3px;
+    }
+
+    .metric-value {
+      font-size: 13px;
+      font-weight: 650;
+      color: #e5f0ff;
+    }
+
+    .metric-tag {
+      margin-top: 2px;
+      font-size: 9px;
+      color: #a5b4fc;
+    }
+
+    .hero-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 10px;
+      color: #cbd5f5;
+    }
+
+    .wallet-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .wallet-pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .status-pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.16);
+      border: 1px solid rgba(22, 163, 74, 0.7);
+      color: #bbf7d0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    /* Sections */
+
+    .section {
+      margin-top: 24px;
+      padding: 16px 4px 4px;
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      color: var(--text-soft);
+      max-width: 320px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: rgba(248, 250, 252, 0.96);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .bullet-list li {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      margin-top: 6px;
+      background: #0ea5e9;
+      flex-shrink: 0;
+    }
+
+    .section-note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-right {
+        align-self: stretch;
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 10px 80px;
+      }
+
+      .inner {
+        padding: 14px 12px 20px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-card {
+        padding: 14px 12px 12px;
+      }
+
+      .nav-links {
+        gap: 8px;
+      }
+    }
   </style>
 </head>
-
 <body>
-<div class="page">
+  <div class="page">
+    <div class="inner">
+      <header class="nav">
+        <div class="nav-left">
+          <div class="logo-orb"></div>
+          <div class="brand-text">
+            <div class="brand-title">SideGuy Solutions</div>
+            <div class="brand-sub">San Diego · Operator Crypto Help Desk</div>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="/index.html">Operator Home</a>
+          <a href="/best-payment-processing-san-diego.html">Payment Processing</a>
+          <a href="/solana-payments-san-diego.html">Solana Payments</a>
+          <a href="/crypto-help-desk-san-diego.html" class="active">Crypto Help Desk</a>
+          <a href="/Cardiff-Payment-Processing.html">Cardiff Operators</a>
+        </nav>
+        <div class="nav-right">
+          <div class="nav-pill">
+            <span class="nav-pill-dot"></span>
+            <span>Live in San Diego · Text-first</span>
+          </div>
+          <a href="tel:17735441231" class="nav-cta">
+            <div class="phone-icon">📱</div>
+            <span>Text PJ</span>
+          </a>
+        </div>
+      </header>
 
-  <div class="header">
-    <div class="logo">SideGuy Solutions</div>
-    <a href="sms:+17735441231" class="pill">Text PJ</a>
-  </div>
+      <main>
+        <section class="hero">
+          <div class="hero-left">
+            <div class="eyebrow">
+              <span class="eyebrow-tag">Crypto Help Desk · San Diego</span>
+              <span>Calm, human answers for busy operators.</span>
+            </div>
+            <h1>
+              The <span class="highlight">Crypto Help Desk</span> for San Diego
+              operators who want clarity, not chaos.
+            </h1>
+            <p class="hero-sub">
+              SideGuy’s Crypto Help Desk gives you a direct line to a human who
+              actually understands Solana, USDC, wallets, and on/off-ramps –
+              and can translate it into real business decisions for your
+              restaurant, venue, ticketing flow, fund, or SaaS.
+            </p>
+            <div class="hero-grid">
+              <div class="hero-pill">
+                <span class="hero-pill-dot"></span>
+                Under 5-minute text replies
+              </div>
+              <div class="hero-pill">
+                <span class="hero-pill-dot"></span>
+                Solana & USDC first, not hype
+              </div>
+              <div class="hero-pill">
+                <span class="hero-pill-dot"></span>
+                Built for real operators
+              </div>
+            </div>
+            <div class="hero-ctas">
+              <a href="tel:17735441231" class="primary-cta">
+                <span>Text PJ “Crypto Help Desk”</span>
+                <span class="sub">Tell me your situation in 1 text.</span>
+              </a>
+              <a href="#faq" class="ghost-cta">
+                See common San Diego crypto questions ↓
+              </a>
+            </div>
+            <p class="hero-note">
+              <strong>Perfect if:</strong> you keep hearing about “Solana”, “USDC”, or
+              “0.4 second settlement” and want to know what actually matters
+              for <strong>your</strong> business in North County.
+            </p>
+          </div>
 
-  <div class="section">
-    <div class="title">Crypto Help Desk · San Diego</div>
-    <div class="sub">
-      Clear, simple, non-technical answers for San Diego operators who want to use crypto rails the right way.
-      No hype. No YouTube noise. Real business clarity.
-    </div>
+          <div class="hero-right">
+            <div class="hero-card">
+              <div class="hero-card-top">
+                <div>
+                  <div class="hero-card-title">San Diego Crypto Help Desk</div>
+                  <div class="hero-card-sub">
+                    Live operator lane · Solana & USDC · Business-first answers
+                  </div>
+                </div>
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>Session ready · PJ on deck</span>
+                </div>
+              </div>
 
-    <div class="faq">
-      <div>
-        <div class="q">• What wallet should my business use?</div>
-        <p>Use Phantom or Backpack for Solana. Clean UX, fast, secure, widely adopted.</p>
-      </div>
+              <div class="hero-metrics">
+                <div class="metric">
+                  <div class="metric-label">Avg. Response</div>
+                  <div class="metric-value">4 min</div>
+                  <div class="metric-tag">Text lane for operators</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Topics</div>
+                  <div class="metric-value">Solana · USDC</div>
+                  <div class="metric-tag">Payments · wallets · flows</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-label">Mode</div>
+                  <div class="metric-value">Plain English</div>
+                  <div class="metric-tag">No crypto Twitter jargon</div>
+                </div>
+              </div>
 
-      <div>
-        <div class="q">• What stablecoin should I accept?</div>
-        <p>USDC on Solana. Fast, cheap, widely supported, and safe for business flows.</p>
-      </div>
-
-      <div>
-        <div class="q">• Can I replace Stripe?</div>
-        <p>Yes. You get near-instant settlement with Solana payments and avoid multi-day holds.</p>
-      </div>
-
-      <div>
-        <div class="q">• How do I prevent crypto mistakes?</div>
-        <p>Use stablecoins, verify addresses, and start with simple flows. PJ can onboard you personally.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer">Built by PJ + ChatGPT · SideGuy Solutions</div>
-
-</div>
-</body>
-</html>
+              <div class="hero-bottom-row">
+                <div class="wallet-row">
+                  <div class="wallet-pill">Wallet setup & security</div>
+                  <div class="wallet-pill">On/Off ramps</div>
+                  <div class="wallet-pill">Accounting & reports</div>
+                </div>
+                <div class="status-pill">
+                  <span class="status-dot"></span>
+                  <span>Now taking San Diego questions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
