@@ -3,7 +3,7 @@
 <head>
   <!--
     SideGuy Solutions · Ocean Light Portal
-    Version: 7.0 — Premium, Lowercase, Freeze-Safe
+    Version: 7.1 — Animated Ocean, No 404s
     Author: PJ + ChatGPT
   -->
   <meta charset="UTF-8" />
@@ -14,10 +14,8 @@
         content="SideGuy Solutions builds Solana-fast operator tools for San Diego: instant payments, AI automation, clean software, and real human support from PJ in Solana Beach." />
 
   <style>
-    /* ====================================== */
-    /* Base Ocean-Light Styles               */
-    /* ====================================== */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
     :root{
       --bg-top:#e6f7ff;
       --bg-mid:#c9ecff;
@@ -27,7 +25,7 @@
       --primary:#00c98b;
       --primary-dark:#00a06d;
 
-      --card-bg:rgba(255,255,255,0.92);
+      --card-bg:rgba(255,255,255,0.96);
       --card-border:rgba(255,255,255,0.9);
 
       --shadow-soft:0 12px 30px rgba(0,0,0,0.08);
@@ -36,11 +34,32 @@
 
     body{
       font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
-      background:linear-gradient(180deg,#e6f7ff 0%,#c9ecff 45%,#9edbff 100%);
+      background:linear-gradient(180deg,var(--bg-top),var(--bg-mid),var(--bg-bottom));
       color:var(--text-main);
       min-height:100vh;
       overflow-x:hidden;
       -webkit-font-smoothing:antialiased;
+      position:relative;
+      padding-bottom:80px;
+    }
+
+    /* SIMPLE, LIGHT OCEAN MOTION STRIP (TOP) */
+    .ocean-wave-strip{
+      position:fixed;
+      top:0;
+      left:0;
+      width:200%;
+      height:140px;
+      background:radial-gradient(circle at 20% 0%,#ffffff 0,#c9ecff 32%,#8fd0ff 70%,#6a9ff5 100%);
+      opacity:0.55;
+      z-index:0;
+      pointer-events:none;
+      animation:oceanSlide 28s linear infinite;
+      filter:blur(1px);
+    }
+    @keyframes oceanSlide{
+      0%{transform:translateX(0);}
+      100%{transform:translateX(-25%);}
     }
 
     .page{
@@ -48,44 +67,25 @@
       max-width:1200px;
       margin:0 auto;
       padding:24px 20px 60px;
-      z-index:1;
-    }
-
-    /* OCEAN WAVE (STATIC) */
-    .wave-wrapper{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      opacity:0.55;
-    }
-    .wave-svg{
-      width:140%;
-      height:100%;
-      transform:translateX(-10%);
-      filter:drop-shadow(0 30px 40px rgba(0,0,0,0.12));
+      z-index:5;
     }
 
     /* HEADER */
     .site-header{
-      position:relative;
-      z-index:2;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:14px;
       margin-bottom:28px;
-      flex-wrap:wrap;
     }
-
     .logo-lockup{display:flex;align-items:center;gap:10px;}
     .logo-orb-mini{
-      width:26px;height:26px;border-radius:999px;
+      width:28px;height:28px;border-radius:999px;
       background:radial-gradient(circle at 30% 20%,#66ffcc,#19b5ff,#6a5bff);
-      box-shadow:0 0 16px rgba(0,255,153,0.5);
+      box-shadow:0 0 16px rgba(0,255,153,0.55);
     }
     .logo-main{font-weight:800;font-size:20px;color:#004e7f;}
-    .logo-sub{font-size:12px;color:#26648c;opacity:0.85;}
+    .logo-sub{display:block;font-size:12px;color:#26648c;opacity:0.9;}
 
     .nav{
       display:flex;
@@ -98,64 +98,59 @@
       text-decoration:none;
       color:var(--nav-text);
       opacity:0.9;
-      border-bottom:2px solid transparent;
       padding:4px 0;
+      border-bottom:2px solid transparent;
       transition:0.18s ease;
+      white-space:nowrap;
     }
-    .nav-link:hover,.nav-link-active{
+    .nav-link:hover,
+    .nav-link-active{
       border-color:rgba(0,0,0,0.18);
       opacity:1;
     }
 
-    /* TEXT PJ pill */
     .pill-text-pj{
-      background:#fff;
-      border-radius:999px;
-      padding:7px 14px;
       display:inline-flex;
       align-items:center;
       gap:8px;
+      background:#fff;
+      border-radius:999px;
+      padding:7px 14px;
       font-size:13px;
+      text-decoration:none;
       color:#015c40;
       box-shadow:0 0 0 1px rgba(0,0,0,0.04),0 10px 25px rgba(0,0,0,0.09);
-      text-decoration:none;
-      white-space:nowrap;
     }
     .pill-dot{
       width:10px;height:10px;border-radius:999px;
       background:#16d576;
-      box-shadow:0 0 10px rgba(0,255,153,0.7);
+      box-shadow:0 0 10px rgba(0,255,153,0.8);
     }
 
     /* HERO */
     .hero{
-      position:relative;
-      z-index:2;
       margin-bottom:32px;
       padding:22px 18px 26px;
       border-radius:26px;
       background:linear-gradient(145deg,rgba(255,255,255,0.97),rgba(230,248,255,0.98));
       box-shadow:var(--shadow-soft);
       border:1px solid rgba(255,255,255,0.9);
+      position:relative;
+      overflow:hidden;
     }
 
     .hero-content{
       display:grid;
-      grid-template-columns:minmax(0,2fr) minmax(0,1.2fr);
+      grid-template-columns:minmax(0,2.1fr) minmax(0,1.3fr);
       gap:24px;
       align-items:center;
     }
 
-    .hero-chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:12px;
-    }
+    .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
     .hero-chip{
+      font-size:12px;
       padding:4px 10px;
       border-radius:999px;
-      font-size:12px;
       background:rgba(3,82,127,0.07);
       color:#03527f;
     }
@@ -164,60 +159,39 @@
       color:#007a55;
     }
 
-    .hero-title{
-      font-size:30px;
-      line-height:1.15;
-      margin-bottom:10px;
-      margin-top:10px;
-    }
+    .hero-title{font-size:30px;line-height:1.15;margin-bottom:10px;margin-top:10px;}
+    .hero-desc{font-size:15px;line-height:1.55;opacity:0.9;max-width:480px;margin-bottom:14px;}
 
-    .hero-desc{
-      font-size:15px;
-      line-height:1.55;
-      max-width:480px;
-      margin-bottom:14px;
-      opacity:0.95;
-    }
-
-    .hero-cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      margin-bottom:8px;
-    }
-
+    .hero-cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px;}
     .cta-primary{
       padding:9px 16px;
       border-radius:999px;
+      border:none;
       background:linear-gradient(135deg,var(--primary),var(--primary-dark));
       color:#fff;
       font-size:14px;
       font-weight:600;
       text-decoration:none;
       box-shadow:0 10px 22px rgba(0,201,139,0.32);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
     }
-
     .cta-secondary{
       padding:8px 14px;
       border-radius:999px;
       border:1px solid rgba(0,0,0,0.1);
       background:#fff;
       font-size:13px;
-      color:#03527f;
       text-decoration:none;
-      opacity:0.9;
+      color:#03527f;
+      opacity:0.92;
     }
 
-    .hero-meta{
-      font-size:11px;
-      opacity:0.78;
-      color:#4a6a82;
-      margin-top:6px;
-      line-height:1.5;
-    }
+    .hero-meta{font-size:11px;opacity:0.78;color:#4a6a82;}
+    #timestamp{font-weight:500;}
 
-    /* ORB (micro-tweaked) */
     .hero-orb-wrap{
       position:relative;
       display:flex;
@@ -225,34 +199,29 @@
       justify-content:center;
     }
     .hero-orb{
-      width:155px;
-      height:155px;
-      border-radius:999px;
+      width:155px;height:155px;border-radius:999px;
       background:radial-gradient(circle at 30% 20%,#7dffe0,#19b5ff,#6e5bff);
-      box-shadow:0 0 40px rgba(110,91,255,0.5),0 0 70px rgba(0,233,179,0.6);
+      box-shadow:
+        0 0 40px rgba(110,91,255,0.55),
+        0 0 80px rgba(0,233,179,0.55),
+        0 0 120px rgba(0,233,179,0.35);
+      opacity:0.96;
     }
     .hero-orb-ring{
       position:absolute;
-      width:230px;
-      height:230px;
-      border-radius:999px;
+      width:230px;height:230px;border-radius:999px;
       border:1px dashed rgba(255,255,255,0.9);
-      box-shadow:0 0 25px rgba(0,0,0,0.08);
     }
 
-    /* SECTIONS */
-    .section{
-      position:relative;
-      z-index:2;
-      margin-top:34px;
-    }
+    /* SECTIONS + TITLES */
+    .section{position:relative;z-index:5;margin-top:30px;}
     .section-title{
       font-size:22px;
-      margin-bottom:14px;
+      margin-bottom:16px;
       letter-spacing:1px;
-      color:var(--text-main);
+      color:#033045;
       font-weight:600;
-      text-transform:lowercase;
+      text-transform:uppercase;
     }
 
     /* MEME ZONE */
@@ -271,20 +240,16 @@
       gap:10px;
     }
     .meme-orb{
-      width:12px;
-      height:12px;
-      flex-shrink:0;
-      border-radius:999px;
+      width:12px;height:12px;border-radius:999px;
       background:#18d777;
-      box-shadow:0 0 10px rgba(0,255,170,0.7);
+      box-shadow:0 0 10px rgba(0,255,170,0.8);
       margin-top:3px;
+      flex-shrink:0;
     }
-    .meme-text{
-      font-size:14px;
-      line-height:1.45;
-    }
+    .meme-text{font-size:14px;line-height:1.45;}
 
-    /* OPERATOR GRID */
+    /* OPERATOR GRIDS */
+    .operator-grid-section{position:relative;z-index:5;margin-top:32px;}
     .operator-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -298,34 +263,25 @@
       border-radius:18px;
       padding:16px 16px 18px;
       border:1px solid var(--card-border);
-      box-shadow:0 2px 6px rgba(0,0,0,0.08);
-      transition:transform 0.14s ease,box-shadow 0.14s ease,border-color 0.14s ease;
+      box-shadow:var(--shadow-soft);
+      transition:transform 0.16s ease,box-shadow 0.16s ease,border-color 0.16s ease;
     }
     .op-card:hover{
       transform:translateY(-3px);
       border-color:rgba(0,233,179,0.9);
-      box-shadow:0 14px 26px rgba(0,0,0,0.12);
+      box-shadow:0 14px 26px rgba(0,0,0,0.14);
     }
     .op-card-orb{
-      width:11px;
-      height:11px;
-      border-radius:999px;
+      width:11px;height:11px;border-radius:999px;
       background:#1fd27b;
-      box-shadow:0 0 10px rgba(0,255,170,0.8);
+      box-shadow:0 0 10px rgba(0,255,170,0.9);
       margin-bottom:8px;
     }
-    .op-card h3{
-      font-size:16px;
-      margin-bottom:6px;
-      text-transform:lowercase;
-    }
-    .op-card p{
-      font-size:13px;
-      opacity:0.86;
-      line-height:1.45;
-    }
+    .op-card h3{font-size:16px;margin-bottom:6px;text-transform:lowercase;}
+    .op-card p{font-size:13px;opacity:0.87;line-height:1.45;}
 
     /* TWITTER */
+    .twitter-live-section{position:relative;z-index:5;margin-top:32px;}
     .twitter-embeds{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -339,35 +295,64 @@
       box-shadow:var(--shadow-soft);
       font-size:13px;
     }
-    .twitter-block p{
-      margin-bottom:6px;
-      opacity:0.8;
+    .twitter-block p{margin-bottom:6px;opacity:0.8;}
+
+    /* TEXT PJ CTA SECTION */
+    .text-pj-section{
+      position:relative;
+      z-index:5;
+      margin-top:34px;
+      padding:18px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.96);
+      box-shadow:var(--shadow-soft);
+      border:1px solid rgba(255,255,255,0.9);
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-size:14px;
+    }
+    .text-pj-copy{max-width:520px;}
+
+    .text-pj-big{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      background:linear-gradient(135deg,#00c98b,#00a06d);
+      color:#fff;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:600;
+      box-shadow:0 10px 22px rgba(0,201,139,0.35);
+      font-size:14px;
     }
 
     /* FOOTER */
     .footer{
       position:relative;
-      z-index:2;
-      margin-top:40px;
-      padding:14px 4px 10px;
+      z-index:5;
+      margin-top:34px;
+      padding:14px 4px 8px;
       font-size:12px;
       text-align:center;
       color:#244764;
-      opacity:0.9;
+      opacity:0.95;
     }
     .footer-orb{
-      width:10px;
-      height:10px;
-      border-radius:999px;
+      width:10px;height:10px;border-radius:999px;
       background:#19d076;
       display:inline-block;
       margin-right:6px;
-      box-shadow:0 0 10px rgba(0,255,180,0.6);
+      box-shadow:0 0 10px rgba(0,255,180,0.65);
     }
 
     /* RESPONSIVE */
     @media(max-width:800px){
       .site-header{
+        flex-direction:column;
         align-items:flex-start;
       }
       .hero-content{
@@ -379,212 +364,204 @@
     }
   </style>
 </head>
-
 <body>
 
-<!-- WAVES -->
-<div class="wave-wrapper">
-  <svg class="wave-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#20e3b2" />
-        <stop offset="50%" stop-color="#23a6d5" />
-        <stop offset="100%" stop-color="#6a5bff" />
-      </linearGradient>
-    </defs>
-    <path fill="url(#waveGrad1)" fill-opacity="0.45"
-      d="M0,320 C300,380 420,260 720,320 C1020,380 1140,260 1440,320 L1440,600 L0,600 Z" />
-  </svg>
-</div>
+  <!-- SOFT OCEAN MOTION STRIP -->
+  <div class="ocean-wave-strip"></div>
 
-<div class="page">
-
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="logo-lockup">
-      <div class="logo-orb-mini"></div>
-      <div>
-        <span class="logo-main">SideGuy Solutions</span><br>
-        <span class="logo-sub">San Diego · Operator Tools</span>
+  <div class="page">
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="logo-lockup">
+        <div class="logo-orb-mini"></div>
+        <div>
+          <span class="logo-main">SideGuy Solutions</span>
+          <span class="logo-sub">San Diego · Operator Tools</span>
+        </div>
       </div>
-    </div>
 
-    <nav class="nav">
-      <a href="/" class="nav-link nav-link-active">home</a>
-      <a href="/best-payment-processing-san-diego.html" class="nav-link">payments</a>
-      <a href="/solana-business-tools-san-diego.html" class="nav-link">solana tools</a>
-      <a href="/web-development-san-diego.html" class="nav-link">software</a>
-      <a href="/ai-automation-san-diego.html" class="nav-link">ai & automation</a>
-    </nav>
+      <nav class="nav">
+        <a href="/" class="nav-link nav-link-active">Home</a>
+        <a href="/best-payment-processing-san-diego.html" class="nav-link">Payments</a>
+        <a href="/solana-business-tools-san-diego.html" class="nav-link">Solana Tools</a>
+        <a href="/web-development-san-diego.html" class="nav-link">Software</a>
+        <a href="/ai-automation-san-diego.html" class="nav-link">AI & Automation</a>
+      </nav>
 
-    <a href="sms:+17735441231" class="pill-text-pj">
-      <span class="pill-dot"></span>
-      text pj · (773) 544-1231
-    </a>
-  </header>
+      <a href="sms:+17735441231" class="pill-text-pj">
+        <span class="pill-dot"></span>
+        Text PJ · (773) 544-1231
+      </a>
+    </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <div>
-        <div class="hero-chips">
-          <span class="hero-chip">san diego · north county</span>
-          <span class="hero-chip hero-chip-solana">solana rails · .4s settlements</span>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div>
+          <div class="hero-chips">
+            <span class="hero-chip">San Diego · North County</span>
+            <span class="hero-chip hero-chip-solana">Solana rails · 0.4s settlements</span>
+          </div>
+
+          <h1 class="hero-title">Operator tools built for real San Diego businesses.</h1>
+
+          <p class="hero-desc">
+            Payments, software, automation, and clean operator tools powered by Solana.
+            Built for speed, clarity, and real-world operators who actually care what hits the bank.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="sms:+17735441231" class="cta-primary">Text PJ to start</a>
+            <a href="/solana-business-tools-san-diego.html" class="cta-secondary">Browse operator tools</a>
+          </div>
+
+          <p class="hero-meta">
+            Version 7.1 · Ocean Light Portal ·
+            <span id="timestamp">loading…</span>
+          </p>
         </div>
 
-        <h1 class="hero-title">operator tools built for san diego businesses</h1>
+        <div class="hero-orb-wrap">
+          <div class="hero-orb"></div>
+          <div class="hero-orb-ring"></div>
+        </div>
+      </div>
+    </section>
 
-        <p class="hero-desc">
-          payments, software, automation, and clean operator tools powered by solana.
-          fast, simple, and built for real operators who care about what hits the bank.
-        </p>
+    <!-- MEME ZONE -->
+    <section class="section">
+      <h2 class="section-title">sideguy meme zone</h2>
+      <div class="meme-grid">
+        <div class="meme-card">
+          <div class="meme-orb"></div>
+          <p class="meme-text">“sideguy: where ocean vibes meet 0.4-second money.”</p>
+        </div>
+        <div class="meme-card">
+          <div class="meme-orb"></div>
+          <p class="meme-text">“operators love speed. solana said: bet.”</p>
+        </div>
+        <div class="meme-card">
+          <div class="meme-orb"></div>
+          <p class="meme-text">“ticket PTSD cured by solana rails + clean UX.”</p>
+        </div>
+        <div class="meme-card">
+          <div class="meme-orb"></div>
+          <p class="meme-text">“stripe settles like it’s 2008. pj settles in 0.4 seconds.”</p>
+        </div>
+      </div>
+    </section>
+    <!-- OPERATOR TOOLS CORE -->
+    <section class="operator-grid-section">
+      <h2 class="section-title">sideguy operator tools</h2>
+      <div class="operator-grid">
 
-        <div class="hero-cta-row">
-          <a href="sms:+17735441231" class="cta-primary">text pj to start</a>
-          <a href="/solana-business-tools-san-diego.html" class="cta-secondary">browse operator tools</a>
+        <a href="/best-payment-processing-san-diego.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>payments</h3>
+          <p>instant 0.4s settlements, lower fees, and real human onboarding from pj.</p>
+        </a>
+
+        <a href="/web-development-san-diego.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>software</h3>
+          <p>custom web tools, dashboards, and portals that actually get used.</p>
+        </a>
+
+        <a href="/ai-automation-san-diego.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>ai & automation</h3>
+          <p>clean automations, inbox cleanup, booking flows, and follow-up systems.</p>
+        </a>
+
+        <a href="/solana-business-tools-san-diego.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>solana tools</h3>
+          <p>high-speed rails, stablecoin flows, escrow, and real-time operator dashboards.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- OPERATOR NETWORK + BUSINESS SAVINGS -->
+    <section class="operator-grid-section">
+      <h2 class="section-title">sideguy network & savings</h2>
+      <div class="operator-grid">
+
+        <a href="/san-diego-operator-network.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>operator network</h3>
+          <p>local operators sharing speed hacks, tools, workflows, and wins.</p>
+        </a>
+
+        <a href="/business-savings-san-diego.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>business savings directory</h3>
+          <p>instant savings across payments, ai, and tools for san diego operators.</p>
+        </a>
+
+        <a href="/san-diego-solana-payments-near-me.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>solana payments near me</h3>
+          <p>local-facing flows for operators ready to move off slow legacy rails.</p>
+        </a>
+
+        <a href="/san-diego-energy-payments.html" class="op-card">
+          <div class="op-card-orb"></div>
+          <h3>energy & clean-tech</h3>
+          <p>high-speed rails & savings for utilities, ccas, and energy operators.</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- TWITTER / X LIVE -->
+    <section class="twitter-live-section">
+      <h2 class="section-title">live operator network updates</h2>
+      <div class="twitter-embeds">
+
+        <div class="twitter-block">
+          <p>solana ecosystem:</p>
+          <a class="twitter-timeline" href="https://twitter.com/solana">Tweets by Solana</a>
         </div>
 
-        <p class="hero-meta">
-          version 7.0 · ocean light portal ·
-          <span id="timestamp">loading…</span><br>
-          text pj if there is a problem you need help with.
-        </p>
+        <div class="twitter-block">
+          <p>dev & operator alpha:</p>
+          <a class="twitter-timeline" href="https://twitter.com/solana_devs">Tweets by Solana Devs</a>
+        </div>
+
       </div>
+    </section>
 
-      <div class="hero-orb-wrap">
-        <div class="hero-orb"></div>
-        <div class="hero-orb-ring"></div>
+    <!-- TEXT PJ CTA SECTION -->
+    <section class="text-pj-section">
+      <div class="text-pj-copy">
+        <strong>stuck on something in your business?</strong>
+        <br />
+        payments, ai, weird edge cases, or “can solana even do this?” — text pj and get a real answer,
+        not a support ticket.
       </div>
-    </div>
-  </section>
-  <!-- MEME ZONE -->
-  <section class="section">
-    <h2 class="section-title">sideguy meme zone</h2>
-
-    <div class="meme-grid">
-      <div class="meme-card">
-        <div class="meme-orb"></div>
-        <p class="meme-text">“sideguy: where ocean vibes meet .4-second money.”</p>
-      </div>
-      <div class="meme-card">
-        <div class="meme-orb"></div>
-        <p class="meme-text">“operators love speed. solana said: bet.”</p>
-      </div>
-      <div class="meme-card">
-        <div class="meme-orb"></div>
-        <p class="meme-text">“ticket PTSD cured by solana rails + clean UX.”</p>
-      </div>
-      <div class="meme-card">
-        <div class="meme-orb"></div>
-        <p class="meme-text">“.4 seconds vs next day deposits? not even close.”</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPERATOR TOOLS -->
-  <section class="section">
-    <h2 class="section-title">sideguy operator tools</h2>
-
-    <div class="operator-grid">
-
-      <a href="/best-payment-processing-san-diego.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>payments</h3>
-        <p>instant .4 second settlements, lower fees, real human onboarding.</p>
+      <a href="sms:+17735441231" class="text-pj-big">
+        <span>📲 text pj · (773) 544-1231</span>
       </a>
+    </section>
 
-      <a href="/web-development-san-diego.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>software</h3>
-        <p>custom web tools, dashboards, and automations built fast.</p>
-      </a>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span class="footer-orb"></span>
+      sideguy solutions · san diego operator tools · ocean light edition · built by pj + chatgpt
+    </footer>
+  </div><!-- /.page -->
 
-      <a href="/ai-automation-san-diego.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>ai & automation</h3>
-        <p>clean flows, follow-up systems, inbox cleanup, booking automation.</p>
-      </a>
-
-      <a href="/solana-business-tools-san-diego.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>solana tools</h3>
-        <p>high-speed rails, stablecoin flows, escrow, real-time dashboards.</p>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- OPERATOR NETWORK + HELP DESK -->
-  <section class="section">
-    <h2 class="section-title">sideguy network & crypto help desk</h2>
-
-    <div class="operator-grid">
-
-      <a href="/san-diego-operator-network.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>operator network</h3>
-        <p>local operators sharing speed hacks, tools, workflows, and wins.</p>
-      </a>
-
-      <a href="crypto-help-desk-san-diego.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>crypto help desk</h3>
-        <p>no-bs answers for wallets, rails, deposits, and real usage.</p>
-      </a>
-
-      <a href="/san-diego-solana-payments-near-me.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>solana payments near me</h3>
-        <p>local-facing flows for operators ready to move off slow rails.</p>
-      </a>
-
-      <a href="/san-diego-energy-payments.html" class="op-card">
-        <div class="op-card-orb"></div>
-        <h3>energy & clean-tech</h3>
-        <p>high-speed rails & savings for utilities, CCAs, and energy operators.</p>
-      </a>
-
-    </div>
-  </section>
-  <!-- TWITTER / X LIVE -->
-  <section class="section">
-    <h2 class="section-title">live operator network updates</h2>
-
-    <div class="twitter-embeds">
-
-      <div class="twitter-block">
-        <p>solana ecosystem:</p>
-        <a class="twitter-timeline" href="https://twitter.com/solana">Tweets by Solana</a>
-      </div>
-
-      <div class="twitter-block">
-        <p>dev & operator alpha:</p>
-        <a class="twitter-timeline" href="https://twitter.com/solana_devs">Tweets by Solana Devs</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <span class="footer-orb"></span>
-    SideGuy Solutions · San Diego operator tools · ocean light edition · built by PJ + ChatGPT ·
-    text PJ if there is a problem you need help with.
-  </footer>
-
-</div><!-- END .page -->
-
-<!-- Timestamp + Twitter -->
-<script>
-  document.addEventListener("DOMContentLoaded",()=> {
-    const ts=document.getElementById("timestamp");
-    if(ts){
-      const now=new Date();
-      ts.textContent=`last updated • ${now.toLocaleDateString()} • ${now.toLocaleTimeString()}`;
-    }
-  });
-</script>
-<script async src="https://platform.twitter.com/widgets.js"></script>
-
+  <!-- Timestamp + Twitter widgets -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const ts = document.getElementById("timestamp");
+      if (ts) {
+        const now = new Date();
+        ts.textContent = `last updated • ${now.toLocaleDateString()} • ${now.toLocaleTimeString()}`;
+      }
+    });
+  </script>
+  <script async src="https://platform.twitter.com/widgets.js"></script>
 </body>
 </html>
