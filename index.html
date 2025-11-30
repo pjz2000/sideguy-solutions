@@ -1,212 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    SideGuy Solutions · Ocean Light Portal
-    Version: 7.0 — Lowercase, Freeze-Proof, Premium
-    Author: PJ + ChatGPT
-  -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>sideguy solutions · san diego operator tools</title>
-  <meta name="description" content="SideGuy Solutions builds Solana-fast operator tools for San Diego: instant payments, AI automation, websites, and real operator support from PJ in Solana Beach." />
+
+  <title>SideGuy Solutions · San Diego Operator Tools · Solana Payments & AI</title>
+  <meta name="description"
+        content="SideGuy Solutions builds Solana-fast operator tools for San Diego: instant payments, AI automation, clean software, and real human support from PJ in Solana Beach." />
 
   <style>
-    /* RESET + THEME */
+    /* ====================================== */
+    /* Base Ocean-Light Styles (your favorite) */
+    /* ====================================== */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     :root{
-      --bg-top:#e6f7ff;--bg-mid:#c9ecff;--bg-bottom:#9edbff;
-      --nav-text:#03527f;--primary:#00c98b;--primary-dark:#00a06d;
-      --card-bg:rgba(255,255,255,0.92);--card-border:rgba(255,255,255,0.9);
-      --shadow-soft:0 12px 30px rgba(0,0,0,0.08);--text-main:#033045;
+      --bg-top:#e6f7ff;
+      --bg-mid:#c9ecff;
+      --bg-bottom:#9edbff;
+
+      --nav-text:#03527f;
+      --primary:#00c98b;
+      --primary-dark:#00a06d;
+
+      --card-bg:rgba(255,255,255,0.92);
+      --card-border:rgba(255,255,255,0.9);
+
+      --shadow-soft:0 12px 30px rgba(0,0,0,0.08);
+      --text-main:#033045;
     }
 
     body{
-      font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
-      background:linear-gradient(180deg,var(--bg-top),var(--bg-mid),var(--bg-bottom));
-      color:var(--text-main);min-height:100vh;overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
+      font-family:-apple-system,Inter,sans-serif;
+      background:linear-gradient(180deg,#e6f7ff,#c9ecff,#9edbff);
+      color:var(--text-main);
+      min-height:100vh;
+      overflow-x:hidden;
     }
 
-    .page{position:relative;max-width:1200px;margin:0 auto;padding:24px 20px 60px;z-index:1;}
+    .page{
+      position:relative;
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px 20px 60px;
+      z-index:1;
+    }
 
-    /* WAVES */
-    .wave-wrapper{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.55;}
-    .wave-svg{width:140%;height:100%;transform:translateX(-10%);filter:drop-shadow(0 30px 40px rgba(0,0,0,0.12));}
+    /* OCEAN WAVE */
+    .wave-wrapper{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:0.50;
+    }
+    .wave-svg{width:140%;height:100%;transform:translateX(-10%);}
 
     /* HEADER */
-    .site-header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:14px;}
+    .site-header{
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:28px;
+    }
     .logo-lockup{display:flex;align-items:center;gap:10px;}
-    .logo-orb-mini{width:26px;height:26px;border-radius:999px;background:radial-gradient(circle at 30% 20%,#66ffcc,#19b5ff,#6a5bff);box-shadow:0 0 18px rgba(0,255,153,0.45);}
+    .logo-orb-mini{
+      width:26px;height:26px;border-radius:999px;
+      background:radial-gradient(circle at 30% 20%,#66ffcc,#19b5ff,#6a5bff);
+      box-shadow:0 0 16px rgba(0,255,153,0.5);
+    }
     .logo-main{font-weight:800;font-size:20px;color:#004e7f;}
-    .logo-sub{display:block;font-size:12px;color:#26648c;opacity:0.8;}
-    .nav{display:flex;align-items:center;gap:16px;font-size:14px;flex-wrap:wrap;}
-    .nav-link{text-decoration:none;color:var(--nav-text);opacity:0.9;padding:4px 0;border-bottom:2px solid transparent;transition:0.18s ease;white-space:nowrap;}
-    .nav-link:hover,.nav-link-active{border-color:rgba(0,0,0,0.18);opacity:1;}
+    .logo-sub{font-size:12px;color:#26648c;}
 
-    .pill-text-pj{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;text-decoration:none;color:#015c40;box-shadow:0 0 0 1px rgba(0,0,0,0.04),0 10px 25px rgba(0,0,0,0.09);}
-    .pill-dot{width:10px;height:10px;border-radius:999px;background:#16d576;box-shadow:0 0 10px rgba(0,255,153,0.7);}
+    .nav{display:flex;align-items:center;gap:16px;font-size:14px;}
+    .nav-link{text-decoration:none;color:var(--nav-text);opacity:0.9;border-bottom:2px solid transparent;}
+    .nav-link:hover{border-color:rgba(0,0,0,0.18);opacity:1;}
+
+    /* TEXT PJ pill */
+    .pill-text-pj{
+      background:#fff;border-radius:999px;padding:7px 14px;
+      display:inline-flex;align-items:center;
+      font-size:13px;color:#015c40;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.04),0 10px 25px rgba(0,0,0,0.09);
+      text-decoration:none;
+    }
+    .pill-dot{
+      width:10px;height:10px;border-radius:999px;
+      background:#16d576;box-shadow:0 0 10px rgba(0,255,153,0.7);
+    }
 
     /* HERO */
-    .hero{position:relative;z-index:2;margin-bottom:28px;padding:22px 18px 26px;border-radius:26px;background:linear-gradient(145deg,rgba(255,255,255,0.97),rgba(230,248,255,0.98));box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,0.9);}
-    .hero-content{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1.3fr);gap:24px;align-items:center;}
+    .hero{
+      margin-bottom:32px;
+      padding:22px 18px 26px;
+      border-radius:26px;
+      background:linear-gradient(145deg,rgba(255,255,255,0.97),rgba(230,248,255,0.98));
+      box-shadow:var(--shadow-soft);
+      border:1px solid rgba(255,255,255,0.9);
+    }
+
+    .hero-content{
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.2fr);
+      gap:24px;
+      align-items:center;
+    }
+
     .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
-    .hero-chip{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(3,82,127,0.07);color:#03527f;}
+    .hero-chip{padding:4px 10px;border-radius:999px;font-size:12px;background:rgba(3,82,127,0.07);}
     .hero-chip-solana{background:rgba(0,233,179,0.12);color:#007a55;}
 
-    .hero-title{font-size:30px;line-height:1.15;margin-bottom:10px;}
-    .hero-desc{font-size:15px;line-height:1.55;opacity:0.9;max-width:480px;margin-bottom:14px;}
+    .hero-title{font-size:30px;line-height:1.15;margin-bottom:10px;margin-top:10px;}
 
-    .hero-cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px;}
-    .cta-primary{padding:9px 16px;border-radius:999px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 10px 22px rgba(0,201,139,0.32);}
-    .cta-secondary{padding:8px 14px;border-radius:999px;border:1px solid rgba(0,0,0,0.1);background:#fff;font-size:13px;text-decoration:none;color:#03527f;opacity:0.9;}
+    .hero-desc{font-size:15px;line-height:1.55;max-width:480px;margin-bottom:14px;}
 
-    .hero-meta{font-size:11px;opacity:0.78;color:#4a6a82;}
+    .hero-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+    .cta-primary{
+      padding:9px 16px;border-radius:999px;background:linear-gradient(135deg,#00c98b,#00a06d);
+      color:#fff;font-size:14px;font-weight:600;text-decoration:none;
+      box-shadow:0 10px 22px rgba(0,201,139,0.32);
+    }
+    .cta-secondary{
+      padding:8px 14px;border-radius:999px;border:1px solid rgba(0,0,0,0.1);
+      background:#fff;font-size:13px;color:#03527f;text-decoration:none;
+    }
 
-    .hero-orb-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
-    .hero-orb{width:160px;height:160px;border-radius:999px;background:radial-gradient(circle at 30% 20%,#7dffe0,#19b5ff,#6e5bff);box-shadow:0 0 40px rgba(110,91,255,0.5),0 0 70px rgba(0,233,179,0.6);opacity:0.94;}
-    .hero-orb-ring{position:absolute;width:220px;height:220px;border-radius:999px;border:1px dashed rgba(255,255,255,0.9);box-shadow:0 0 25px rgba(0,0,0,0.08);}
+    .hero-meta{font-size:11px;opacity:0.78;}
 
-    /* SECTION TITLES */
-    .section{position:relative;z-index:2;margin-top:26px;}
-    .section-title{font-size:22px;margin-bottom:14px;color:#033045;}
+    /* ORB — with your requested micro-tweak applied */
+    .hero-orb-wrap{display:flex;align-items:center;justify-content:center;}
+    .hero-orb{
+      width:155px;height:155px;border-radius:999px;
+      background:radial-gradient(circle at 30% 20%,#7dffe0,#19b5ff,#6e5bff);
+      box-shadow:0 0 40px rgba(110,91,255,0.5),0 0 70px rgba(0,233,179,0.6);
+    }
+    .hero-orb-ring{
+      position:absolute;width:230px;height:230px;border-radius:999px;
+      border:1px dashed rgba(255,255,255,0.9);
+    }
 
-    /* MEME ZONE */
-    .meme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
-    .meme-card{background:var(--card-bg);border-radius:18px;padding:14px 14px 16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);display:flex;gap:10px;}
-    .meme-orb{width:12px;height:12px;flex-shrink:0;border-radius:999px;background:#18d777;box-shadow:0 0 10px rgba(0,255,170,0.7);margin-top:3px;}
-    .meme-text{font-size:14px;line-height:1.45;}
-  </style>
-</head>
-
-<body>
-
-<!-- WAVES -->
-<div class="wave-wrapper">
-  <svg class="wave-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#20e3b2" />
-        <stop offset="50%" stop-color="#23a6d5" />
-        <stop offset="100%" stop-color="#6a5bff" />
-      </linearGradient>
-    </defs>
-    <path fill="url(#waveGrad1)" fill-opacity="0.45"
-      d="M0,320 C300,380 420,260 720,320 C1020,380 1140,260 1440,320 L1440,600 L0,600 Z" />
-  </svg>
-</div>
-
-<div class="page">
-
-<!-- HEADER -->
-<header class="site-header">
-  <div class="logo-lockup">
-    <div class="logo-orb-mini"></div>
-    <div>
-      <span class="logo-main">sideguy solutions</span>
-      <span class="logo-sub">san diego · operator tools</span>
-    </div>
-  </div>
-
-  <nav class="nav">
-    <a href="/" class="nav-link nav-link-active">home</a>
-    <a href="/best-payment-processing-san-diego.html" class="nav-link">payments</a>
-    <a href="/solana-business-tools-san-diego.html" class="nav-link">solana tools</a>
-    <a href="/web-development-san-diego.html" class="nav-link">software</a>
-    <a href="/ai-automation-san-diego.html" class="nav-link">ai & automation</a>
-  </nav>
-
-  <a href="sms:+17735441231" class="pill-text-pj">
-    <span class="pill-dot"></span>
-    text pj · (773) 544-1231
-  </a>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <div>
-      <div class="hero-chips">
-        <span class="hero-chip">san diego · north county</span>
-        <span class="hero-chip hero-chip-solana">solana rails · .4s settlements</span>
-      </div>
-
-      <h1 class="hero-title">operator tools built for san diego businesses</h1>
-
-      <p class="hero-desc">
-        payments, software, automation, and clean operator tools powered by solana.
-        fast, simple, and built for real operators who care about what hits the bank.
-      </p>
-
-      <div class="hero-cta-row">
-        <a href="sms:+17735441231" class="cta-primary">text pj to start</a>
-        <a href="/solana-business-tools-san-diego.html" class="cta-secondary">browse operator tools</a>
-      </div>
-
-      <p class="hero-meta">
-        version 7.0 · ocean light portal ·
-        <span id="timestamp">loading…</span>
-      </p>
-    </div>
-
-    <div class="hero-orb-wrap">
-      <div class="hero-orb"></div>
-      <div class="hero-orb-ring"></div>
-    </div>
-  </div>
-</section>
+    /* MICRO-TWEAKS v1.0 (already applied) */
+    .section-title{
+      letter-spacing:1px;
+      color:#033045;
+      font-weight:600;
+    }
+    .card{margin-bottom:22px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
 <!-- MEME ZONE -->
-<section class="section">
+<section class="section" style="position:relative;z-index:2;margin-top:34px;">
   <h2 class="section-title">sideguy meme zone</h2>
-  <div class="meme-grid">
-    <div class="meme-card">
-      <div class="meme-orb"></div>
-      <p class="meme-text">“sideguy: where ocean vibes meet .4-second money.”</p>
+
+  <div class="meme-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+    <div class="meme-card" style="background:var(--card-bg);border-radius:18px;padding:14px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);display:flex;gap:10px;">
+      <div class="meme-orb" style="width:12px;height:12px;border-radius:999px;background:#18d777;box-shadow:0 0 10px rgba(0,255,170,0.7);margin-top:3px;"></div>
+      <p class="meme-text" style="font-size:14px;line-height:1.45;">“sideguy: where ocean vibes meet .4-second money.”</p>
     </div>
-    <div class="meme-card">
-      <div class="meme-orb"></div>
-      <p class="meme-text">“operators love speed. solana said: bet.”</p>
+    <div class="meme-card" style="background:var(--card-bg);border-radius:18px;padding:14px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);display:flex;gap:10px;">
+      <div class="meme-orb" style="width:12px;height:12px;border-radius:999px;background:#18d777;box-shadow:0 0 10px rgba(0,255,170,0.7);margin-top:3px;"></div>
+      <p class="meme-text" style="font-size:14px;line-height:1.45;">“operators love speed. solana said: bet.”</p>
     </div>
-    <div class="meme-card">
-      <div class="meme-orb"></div>
-      <p class="meme-text">“ticket PTSD cured by solana rails + clean UX.”</p>
+    <div class="meme-card" style="background:var(--card-bg);border-radius:18px;padding:14px;border:11px solid var(--card-border);box-shadow:var(--shadow-soft);display:flex;gap:10px;">
+      <div class="meme-orb" style="width:12px;height:12px;border-radius:999px;background:#18d777;box-shadow:0 0 10px rgba(0,255,170,0.7);margin-top:3px;"></div>
+      <p class="meme-text" style="font-size:14px;line-height:1.45;">“ticket PTSD cured by solana rails + clean UX.”</p>
     </div>
-    <div class="meme-card">
-      <div class="meme-orb"></div>
-      <p class="meme-text">“.4 seconds vs next day deposits? not even close.”</p>
+    <div class="meme-card" style="background:var(--card-bg);border-radius:18px;padding:14px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);display:flex;gap:10px;">
+      <div class="meme-orb" style="width:12px;height:12px;border-radius:999px;background:#18d777;box-shadow:0 0 10px rgba(0,255,170,0.7);margin-top:3px;"></div>
+      <p class="meme-text" style="font-size:14px;line-height:1.45;">“.4 seconds vs next day deposits? not even close.”</p>
     </div>
   </div>
 </section>
 
 
-<!-- OPERATOR TOOL GRID -->
-<section class="section" style="margin-top:34px;">
+<!-- OPERATOR TOOLS -->
+<section class="section" style="position:relative;z-index:2;margin-top:34px;">
   <h2 class="section-title">sideguy operator tools</h2>
 
-  <div class="operator-grid">
+  <div class="operator-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
 
-    <a href="/best-payment-processing-san-diego.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>payments</h3>
-      <p>instant .4 second settlements, lower fees, real human onboarding.</p>
+    <a href="/best-payment-processing-san-diego.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">payments</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">instant .4 second settlements, lower fees, real human onboarding.</p>
     </a>
 
-    <a href="/web-development-san-diego.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>software</h3>
-      <p>custom web tools, dashboards, and automations built fast.</p>
+    <a href="/web-development-san-diego.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">software</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">custom web tools, dashboards, and automations built fast.</p>
     </a>
 
-    <a href="/ai-automation-san-diego.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>ai & automation</h3>
-      <p>clean flows, follow-up systems, inbox cleanup, booking automation.</p>
+    <a href="/ai-automation-san-diego.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">ai & automation</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">clean flows, follow-up systems, inbox cleanup, booking automation.</p>
     </a>
 
-    <a href="/solana-business-tools-san-diego.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>solana tools</h3>
-      <p>high-speed rails, stablecoin flows, escrow, real-time dashboards.</p>
+    <a href="/solana-business-tools-san-diego.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">solana tools</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">high-speed rails, stablecoin flows, escrow, real-time dashboards.</p>
     </a>
 
   </div>
@@ -214,56 +211,58 @@
 
 
 <!-- OPERATOR NETWORK + HELP DESK -->
-<section class="section" style="margin-top:34px;">
+<section class="section" style="position:relative;z-index:2;margin-top:34px;">
   <h2 class="section-title">sideguy network & crypto help desk</h2>
 
-  <div class="operator-grid">
+  <div class="operator-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
 
-    <a href="/san-diego-operator-network.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>operator network</h3>
-      <p>local operators sharing speed hacks, tools, workflows, and wins.</p>
+    <a href="/san-diego-operator-network.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">operator network</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">local operators sharing speed hacks, tools, workflows, and wins.</p>
     </a>
 
-    <a href="/crypto-help-desk-san-diego.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>crypto help desk</h3>
-      <p>no-BS answers for wallets, rails, deposits, and real usage.</p>
+    <a href="/crypto-help-desk-san-diego.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">crypto help desk</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">no-bs answers for wallets, rails, deposits, and real usage.</p>
     </a>
 
-    <a href="/san-diego-solana-payments-near-me.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>solana payments near me</h3>
-      <p>local-facing flows for operators ready to move off slow rails.</p>
+    <a href="/san-diego-solana-payments-near-me.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">solana payments near me</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">local-facing flows for operators ready to move off slow rails.</p>
     </a>
 
-    <a href="/san-diego-energy-payments.html" class="op-card">
-      <div class="op-card-orb"></div>
-      <h3>energy & clean-tech</h3>
-      <p>high-speed rails & savings for utilities, CCAs, and energy operators.</p>
+    <a href="/san-diego-energy-payments.html" class="op-card"
+       style="display:block;text-decoration:none;color:inherit;background:var(--card-bg);border-radius:18px;padding:16px;border:1px solid var(--card-border);box-shadow:var(--shadow-soft);">
+      <div class="op-card-orb" style="width:11px;height:11px;border-radius:999px;background:#1fd27b;box-shadow:0 0 10px rgba(0,255,170,0.8);margin-bottom:8px;"></div>
+      <h3 style="font-size:16px;margin-bottom:6px;">energy & clean-tech</h3>
+      <p style="font-size:13px;opacity:0.86;line-height:1.45;">high-speed rails & savings for utilities, CCAs, and energy operators.</p>
     </a>
 
   </div>
 </section>
 
 
-<!-- TWITTER / X SECTION -->
-<section class="section" style="margin-top:34px;">
+<!-- TWITTER / X LIVE -->
+<section class="section" style="position:relative;z-index:2;margin-top:34px;">
   <h2 class="section-title">live operator network updates</h2>
 
-  <div class="twitter-embeds" style="
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:16px;
-  ">
+  <div class="twitter-embeds" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
 
-    <div class="twitter-block">
-      <p>solana ecosystem:</p>
+    <div class="twitter-block"
+         style="background:rgba(255,255,255,0.96);border-radius:18px;padding:14px;border:1px solid rgba(255,255,255,0.9);box-shadow:var(--shadow-soft);font-size:13px;">
+      <p style="margin-bottom:6px;opacity:0.8;">solana ecosystem:</p>
       <a class="twitter-timeline" href="https://twitter.com/solana">Tweets by Solana</a>
     </div>
 
-    <div class="twitter-block">
-      <p>dev & operator alpha:</p>
+    <div class="twitter-block"
+         style="background:rgba(255,255,255,0.96);border-radius:18px;padding:14px;border:1px solid rgba(255,255,255,0.9);box-shadow:var(--shadow-soft);font-size:13px;">
+      <p style="margin-bottom:6px;opacity:0.8;">dev & operator alpha:</p>
       <a class="twitter-timeline" href="https://twitter.com/solana_devs">Tweets by Solana Devs</a>
     </div>
 
@@ -272,21 +271,8 @@
 
 
 <!-- FOOTER -->
-<footer class="footer" style="
-  position:relative;
-  z-index:2;
-  margin-top:36px;
-  padding:18px 4px 6px;
-  font-size:12px;
-  text-align:center;
-  color:#244764;
-  opacity:0.9;
-">
-  <span class="footer-orb" style="
-    width:10px;height:10px;border-radius:999px;
-    background:#19d076;display:inline-block;margin-right:6px;
-    box-shadow:0 0 10px rgba(0,255,180,0.6);
-  "></span>
+<footer class="footer" style="position:relative;z-index:2;margin-top:40px;padding:14px 4px 10px;font-size:12px;text-align:center;color:#244764;opacity:0.9;">
+  <span style="width:10px;height:10px;border-radius:999px;background:#19d076;display:inline-block;margin-right:6px;box-shadow:0 0 10px rgba(0,255,180,0.6);"></span>
   sideguy solutions · san diego operator tools · ocean light edition · built by pj + chatgpt
 </footer>
 
@@ -294,7 +280,7 @@
 </div><!-- END .page -->
 
 
-<!-- Timestamp + Twitter Script -->
+<!-- Timestamp + Twitter -->
 <script>
   document.addEventListener("DOMContentLoaded",()=> {
     const ts=document.getElementById("timestamp");
