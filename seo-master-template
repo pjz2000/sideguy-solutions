@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>@PAGE_TITLE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="@META_DESC" />
+
+  <link rel="stylesheet" href="sideguy.css" />
+  <script src="sideguy-include.js"></script>
+
+  <style>
+    body {
+      margin:0;
+      font-family:-apple-system,Inter,sans-serif;
+      background:linear-gradient(180deg,#e6f7ff,#c9ecff,#9edbff);
+      color:#013349;
+      line-height:1.55;
+    }
+    .seo-wrapper { max-width:900px; margin:auto; padding:40px 20px; }
+    .seo-title   { font-size:32px; margin-bottom:12px; font-weight:700; }
+    .seo-sub     { font-size:18px; opacity:0.85; margin-bottom:20px; }
+    .seo-bullets li { margin-bottom:12px; }
+    footer { margin-top:40px; text-align:center; opacity:0.8; font-size:13px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- AUTO HEADER -->
+  <div data-include="sideguy-header.html"></div>
+
+  <div class="seo-wrapper">
+    <h1 class="seo-title">@PAGE_TITLE</h1>
+    <p class="seo-sub">@PAGE_SUB</p>
+
+    <ul class="seo-bullets">
+      <li>@POINT_1</li>
+      <li>@POINT_2</li>
+      <li>@POINT_3</li>
+    </ul>
+
+    <p style="margin-top:20px;font-size:14px;opacity:0.7;">
+      Last updated: <span id="timestamp"></span>
+    </p>
+  </div>
+
+  <!-- AUTO FOOTER -->
+  <div data-include="sideguy-footer.html"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("timestamp").textContent =
+        new Date().toLocaleString();
+    });
+  </script>
+
+</body>
+</html>
