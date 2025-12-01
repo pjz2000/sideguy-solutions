@@ -1,818 +1,174 @@
-<!--
-
-  North County Verified Operator Hub · SideGuy Solutions
-
-  Version: 1.0 — Operator Trust Edition
-
-  Updated: Nov 28, 2025
-
-  Author: PJ + ChatGPT
-
--->
-
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
+  <!-- SideGuy Solutions · North County Verified Operators · Stub v1.0 -->
   <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <meta name="color-scheme" content="light" />
-
-
-
-  <title>North County Verified Operator Hub | SideGuy Solutions</title>
-
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>North County Verified Operators · SideGuy Solutions</title>
   <meta name="description"
-
-        content="North County San Diego’s verified operator hub. Real businesses, real humans, real support. No agency bullshit — come see PJ in person and get straight answers about payments, savings, and tech." />
-
-
+        content="North County San Diego’s verified operator hub. SideGuy Solutions highlights trusted, vetted, community-backed operators who run clean businesses with great service." />
 
   <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --sky:#e6f7ff; --sea:#bfe9ff; --sea-deep:#8fd0ff;
+      --accent:#008cff; --accent-soft:#35b7ff;
+      --text-main:#033045; --text-soft:#38586b;
+      --card-bg:#ffffff; --card-border:rgba(3,48,69,0.06);
+      --radius-lg:22px; --radius-pill:999px;
+    }
+    body{
+      font-family:-apple-system,system-ui,Inter,sans-serif;
+      background:radial-gradient(circle at 10% 0%,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
+      color:var(--text-main); -webkit-font-smoothing:antialiased;
+    }
+    .page{min-height:100vh;display:flex;flex-direction:column;}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(14px);
+      background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
+      border-bottom:1px solid rgba(3,48,69,.05);
+    }
+    .nav{max-width:1120px;margin:0 auto;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;}
+    .nav-left{display:flex;align-items:center;gap:10px;}
+    .nav-orb{
+      width:26px;height:26px;border-radius:50%;
+      background:radial-gradient(circle at 30% 0%,#ffffff,#9be7ff,#3fa9ff);
+      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.3);
+    }
+    .nav-title{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .nav-sub{font-size:11px;color:var(--text-soft);}
+    .nav-cta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-soft);}
+    .pill-link{
+      text-decoration:none;border-radius:var(--radius-pill);font-size:12px;font-weight:600;
+      padding:7px 14px;background:linear-gradient(135deg,#00b894,#00c2ff);
+      color:#fff;box-shadow:0 10px 24px rgba(0,140,255,.3);display:inline-flex;gap:6px;
+    }
+    main{flex:1;max-width:1120px;margin:0 auto;padding:26px 20px 40px;}
+    .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:rgba(3,48,69,.7);margin-bottom:8px;}
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin-bottom:10px;}
 
+    .lead{font-size:14px;line-height:1.6;color:var(--text-soft);
+      max-width:640px;margin-bottom:18px;}
 
-
-    body {
-
-      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-
-      background:#ffffff;
-
-      color:#0a1020;
-
-      line-height:1.6;
-
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;font-size:11px;}
+    .pill{
+      padding:5px 10px;border-radius:var(--radius-pill);
+      background:rgba(255,255,255,.95);
+      border:1px solid rgba(3,48,69,.08);
+      color:var(--text-soft);
     }
 
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+    .btn-secondary{text-decoration:none;padding:9px 14px;border-radius:var(--radius-pill);
+      border:1px solid rgba(3,48,69,.08);background:rgba(255,255,255,.9);font-size:12px;color:var(--text-soft);}
 
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:26px;}
+    @media(max-width:860px){.grid{grid-template-columns:1fr;}}
 
-    .page {
-
-      min-height:100vh;
-
-      padding:32px 20px 120px;
-
-      background:
-
-        radial-gradient(circle at top left, #e6f3ff 0%, #ffffff 55%),
-
-        radial-gradient(circle at bottom right, #e6fff4 0%, #ffffff 60%);
-
-      display:flex;
-
-      justify-content:center;
-
+    .card{
+      background:rgba(255,255,255,.97);border-radius:var(--radius-lg);
+      border:1px solid var(--card-border);
+      box-shadow:0 12px 30px rgba(3,48,69,.06);
+      padding:16px 18px 18px;
+      display:flex;flex-direction:column;gap:8px;
     }
 
-
-
-    .content {
-
-      max-width:960px;
-
-      width:100%;
-
-    }
-
-
-
-    .chip {
-
-      display:inline-flex;
-
-      align-items:center;
-
-      gap:8px;
-
-      padding:6px 14px;
-
-      border-radius:999px;
-
-      border:1px solid #d6e2f3;
-
-      background:#f7fbff;
-
-      font-size:11px;
-
-      color:#4a5870;
-
-      margin-bottom:18px;
-
-      text-transform:uppercase;
-
-      letter-spacing:0.14em;
-
-    }
-
-
-
-    .chip-dot {
-
-      width:8px;
-
-      height:8px;
-
-      border-radius:999px;
-
-      background:#16ff8b;
-
-    }
-
-
-
-    h1 {
-
-      font-size:32px;
-
-      font-weight:800;
-
-      margin-bottom:8px;
-
-      color:#050b18;
-
-    }
-
-
-
-    h1 span {
-
-      color:#00c46d;
-
-    }
-
-
-
-    .sub {
-
-      font-size:15px;
-
-      color:#4c5973;
-
-      margin-bottom:24px;
-
-    }
-
-
-
-    h2 {
-
-      font-size:20px;
-
-      margin-bottom:10px;
-
-      color:#081121;
-
-    }
-
-
-
-    p {
-
-      font-size:15px;
-
-      color:#2a3547;
-
-      margin-bottom:14px;
-
-    }
-
-
-
-    ul {
-
-      margin-left:20px;
-
-      margin-bottom:16px;
-
-      font-size:15px;
-
-      color:#2a3547;
-
-    }
-
-
-
-    li { margin-bottom:8px; }
-
-
-
-    .section {
-
-      background:#ffffff;
-
-      border-radius:20px;
-
-      border:1px solid #dbe5f4;
-
-      padding:20px 20px 18px;
-
-      margin-bottom:18px;
-
-      box-shadow:0 10px 30px rgba(2,19,46,0.06);
-
-    }
-
-
-
-    .tagline {
-
-      font-size:13px;
-
-      text-transform:uppercase;
-
-      letter-spacing:0.18em;
-
-      color:#7a88a1;
-
-      margin-bottom:6px;
-
-    }
-
-
-
-    .pill-row {
-
-      display:flex;
-
-      flex-wrap:wrap;
-
-      gap:8px;
-
-      margin-top:8px;
-
-    }
-
-
-
-    .pill {
-
-      font-size:11px;
-
-      padding:6px 10px;
-
-      border-radius:999px;
-
-      border:1px solid #d6e2f3;
-
-      background:#f8fbff;
-
-      color:#4a5870;
-
-      white-space:nowrap;
-
-    }
-
-
-
-    .columns {
-
-      display:flex;
-
-      flex-wrap:wrap;
-
-      gap:16px;
-
-      margin-top:8px;
-
-    }
-
-
-
-    .col {
-
-      flex:1 1 260px;
-
-    }
-
-
-
-    a.btn {
-
-      display:inline-block;
-
-      padding:12px 22px;
-
-      border-radius:999px;
-
-      font-size:14px;
-
-      font-weight:600;
-
-      text-decoration:none;
-
-      margin-right:10px;
-
-      margin-top:6px;
-
-      margin-bottom:4px;
-
-      white-space:nowrap;
-
-    }
-
-
-
-    .btn-primary {
-
-      background:linear-gradient(135deg,#16ff8b,#00c46d);
-
-      color:#00130a;
-
-      box-shadow:0 10px 26px rgba(0,255,160,0.45);
-
-    }
-
-
-
-    .btn-secondary {
-
-      background:#ffffff;
-
-      border:1px solid #d2deee;
-
-      color:#263349;
-
-    }
-
-
-
-    .inline-link {
-
-      color:#007f5f;
-
-      font-weight:500;
-
-      text-decoration:none;
-
-    }
-
-
-
-    .inline-link:hover {
-
-      text-decoration:underline;
-
-    }
-
-
-
-    .footer-links {
-
-      margin-top:16px;
-
-      font-size:13px;
-
-      color:#65718a;
-
-    }
-
-
-
-    .footer-links a {
-
-      color:#007f5f;
-
-      text-decoration:none;
-
-      font-weight:500;
-
-    }
-
-
-
-    .footer-links a:hover {
-
-      text-decoration:underline;
-
-    }
-
-
-
-    /* PJ ORB */
-
-    .pj-orb {
-
-      position:fixed;
-
-      right:18px;
-
-      bottom:18px;
-
-      background:rgba(3,5,10,0.96);
-
-      color:#ffffff;
-
-      padding:12px 18px;
-
-      border-radius:999px;
-
-      display:flex;
-
-      align-items:center;
-
-      gap:10px;
-
-      box-shadow:0 14px 38px rgba(0,0,0,0.55);
-
-      max-width:320px;
-
-      z-index:99;
-
-    }
-
-
-
-    .pj-badge {
-
-      width:30px;
-
-      height:30px;
-
-      border-radius:999px;
-
-      background:#16ff8b;
-
-      color:#00130a;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      font-weight:800;
-
-      font-size:14px;
-
-    }
-
-
-
-    .pj-text-main {
-
-      font-size:13px;
-
-      font-weight:600;
-
-      line-height:1.3;
-
-    }
-
-
-
-    .pj-text-sub {
-
-      font-size:11px;
-
-      opacity:0.88;
-
-    }
-
-
-
-    .pj-meta {
-
-      font-size:9px;
-
-      text-transform:uppercase;
-
-      letter-spacing:0.16em;
-
-      opacity:0.68;
-
-      white-space:nowrap;
-
-    }
-
-
-
-    @media (max-width:640px) {
-
-      .page { padding:22px 16px 110px; }
-
-      body { font-size:15px; }
-
-      h1 { font-size:26px; }
-
-      .section { padding:16px 14px 14px; }
-
-      .pj-orb {
-
-        left:12px;
-
-        right:12px;
-
-        bottom:14px;
-
-        border-radius:18px;
-
-        justify-content:space-between;
-
-      }
-
-      .pj-text-main { font-size:12px; }
-
-      .pj-text-sub { font-size:11px; }
-
-      .pj-meta { display:none; }
-
-    }
+    .card-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:rgba(3,48,69,.6);}
+    .card-title{font-size:16px;font-weight:600;}
+    .card-body{font-size:13px;line-height:1.5;color:var(--text-soft);}
+
+    footer{border-top:1px solid rgba(3,48,69,.06);padding:18px 20px 26px;
+      font-size:11px;color:var(--text-soft);text-align:center;}
+    .back-link{text-decoration:none;color:var(--accent);font-weight:500;}
 
   </style>
-
 </head>
 
-
-
 <body>
+<div class="page">
 
-<div class="page"><div class="content">
-
-
-
-  <div class="chip">
-
-    <div class="chip-dot"></div>
-
-    NORTH COUNTY · VERIFIED OPERATORS · UPDATED NOV 28, 2025
-
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <div class="nav-orb"></div>
+      <div>
+        <div class="nav-title">SideGuy Solutions</div>
+        <div class="nav-sub">North County Operators</div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <span>Questions?</span>
+      <a class="pill-link" href="sms:17735441231">Text PJ</a>
+    </div>
   </div>
+</header>
 
+<main>
+  <div class="eyebrow">North County · Operator Hub</div>
+  <h1>North County’s Verified Operator Community.</h1>
 
-
-  <h1>North County Verified Operator Hub<br><span>Real Humans. Real Business. No Bullshit.</span></h1>
-
-  <p class="sub">
-
-    For operators in Encinitas, Solana Beach, Del Mar, Carlsbad, Cardiff, and Oceanside who are done
-
-    with agency promises, disappearing reps, and emails that go nowhere. If you want straight answers, you get PJ — not a sales script.
-
+  <p class="lead">
+    SideGuy’s North County Verified Operator Hub highlights legit, vetted, trusted 
+    operators — shops, bars, restaurants, services, builders, tech firms, and founders 
+    who run clean businesses and treat customers and community right.
   </p>
 
+  <div class="pill-row">
+    <div class="pill">Vetted operators</div>
+    <div class="pill">Trusted by community</div>
+    <div class="pill">Coastal-first</div>
+    <div class="pill">SideGuy verified</div>
+  </div>
 
-
-  <div class="section">
-
-    <div class="tagline">What this is</div>
-
-    <h2>The Anti-Agency, Pro-Operator Network</h2>
-
-    <p>
-
-      The North County Verified Operator Hub is where real local businesses plug into SideGuy for
-
-      payments, savings, and clean tech without the usual games. No mystery teams. No vague “strategy decks.”
-
-      No 6-month retainers that vanish into email threads.
-
-    </p>
-
-    <p>
-
-      If you don’t believe the results, you can literally drive a few minutes, walk into the office, and
-
-      talk to PJ face-to-face. That’s the difference.
-
-    </p>
-
-
-
-    <div class="pill-row">
-
-      <div class="pill">Local only · North County San Diego</div>
-
-      <div class="pill">Verified owners · real businesses</div>
-
-      <div class="pill">In-person support available</div>
-
-      <div class="pill">0.4s Solana settlement</div>
-
-      <div class="pill">Savings, automation, and clean builds</div>
-
-    </div>
-
+  <div class="btn-row">
+    <a class="pill-link" href="sms:17735441231">Text PJ to nominate an operator</a>
+    <a class="btn-secondary" href="index.html">← Back to homepage</a>
   </div>
 
 
-
-  <div class="section">
-
-    <div class="tagline">Who this is for</div>
-
-    <h2>Built for Real Operators, Not “Marketing Departments”</h2>
-
-
-
-    <div class="columns">
-
-      <div class="col">
-
-        <p>Perfect if you’re a:</p>
-
-        <ul>
-
-          <li>Restaurant, bar, café, or brewery</li>
-
-          <li>Gym, studio, trainer, or coach</li>
-
-          <li>Contractor, HVAC, landscaper, or mobile operator</li>
-
-          <li>Salon, spa, barber, or personal service</li>
-
-          <li>Local e-commerce or subscription brand</li>
-
-        </ul>
-
-      </div>
-
-      <div class="col">
-
-        <p>And you’re tired of:</p>
-
-        <ul>
-
-          <li>Agency decks with zero follow-through</li>
-
-          <li>“Your rep has changed…” emails every 3 months</li>
-
-          <li>Stripe/PayPal fees that keep creeping up</li>
-
-          <li>Support chats that go nowhere</li>
-
-          <li>Crypto / AI / tech jargon with no clear “here’s what to do today”</li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="section">
-
-    <div class="tagline">What “Verified Operator” means</div>
-
-    <h2>Verified = You’re Actually Real (and So Are We)</h2>
-
-    <p>
-
-      This isn’t a random directory. To be part of the hub, you’re a real operator with a real business,
-
-      real customers, and real stakes. And you’re working with a real person — PJ — not a chatbot pretending
-
-      to care or a sales rep chasing quota.
-
-    </p>
-
-
-
-    <ul>
-
-      <li>Real identity — you’re a real business owner in or around North County</li>
-
-      <li>Real presence — if needed, we can meet in person to review everything</li>
-
-      <li>Real money — we’re talking about actual payments, savings, and systems</li>
-
-      <li>Real accountability — if something breaks, you know exactly who to call or text</li>
-
-    </ul>
-
-  </div>
-
-
-
-  <div class="section">
-
-    <div class="tagline">How it works</div>
-
-    <h2>Simple: Bring Your Numbers, Walk Out With a Plan</h2>
-
-    <p>There’s no funnel trick here. It’s literally this simple:</p>
-
-
-
-    <ol style="margin-left:20px; margin-bottom:14px; color:#2a3547; font-size:15px;">
-
-      <li style="margin-bottom:8px;"><strong>Text PJ:</strong> Send your monthly volume, processors, and any “WTF fees” you see.</li>
-
-      <li style="margin-bottom:8px;"><strong>15-Minute Savings Session:</strong> On text, call, or in person — your choice.</li>
-
-      <li style="margin-bottom:8px;"><strong>Operator Plan:</strong> We map out payments, potential Solana rails, and any quick automations.</li>
-
-      <li><strong>Decision:</strong> If the upside is real, we move. If not, you at least know the truth.</li>
-
-    </ol>
-
-
-
-    <a href="sms:17735441231" class="btn btn-primary">Text PJ (773) 544-1231 · Get Verified</a>
-
-    <a href="index.html" class="btn btn-secondary">← Back to Homepage</a>
-
-  </div>
-
-
-
-  <div class="section">
-
-    <div class="tagline">Beyond payments</div>
-
-    <h2>Operator Hub = Savings + Tech + Clear Answers</h2>
-
-    <p>
-
-      Once you’re in the hub, you’re not just getting payment processing. You have a “SideGuy” you can call
-
-      when you hit anything in the “I don’t have time to figure this out” bucket:
-
-    </p>
-
-
-
-    <ul>
-
-      <li>Payment processing and fee savings (0.4 second Solana rails)</li>
-
-      <li>Site upgrades, SEO pages, and clean landing pages that actually ship</li>
-
-      <li>Simple automations that remove dumb manual work</li>
-
-      <li>
-
-        Crypto and modern payments clarity via the
-
-        <a href="crypto-help-desk-san-diego.html" class="inline-link">Crypto Help Desk</a> —
-
-        in plain English, no “Fibonacci retracement guru” nonsense
-
-      </li>
-
-    </ul>
-
-
-
-    <p>
-
-      You’re not required to use every piece on day one. The hub is your base. From there, we add what
-
-      makes sense and ignore what doesn’t.
-
-    </p>
-
-
-
-    <div class="footer-links">
-
-      Also see:
-
-      <a href="crypto-help-desk-san-diego.html">Crypto Help Desk · San Diego</a> ·
-
-      <a href="local-business-savings-san-diego.html">Local Business Savings</a>
-
-    </div>
-
-  </div>
-
-
-
-</div></div>
-
-
-
-<!-- PJ ORB -->
-
-<a href="sms:17735441231" class="pj-orb">
-
-  <div class="pj-badge">PJ</div>
-
+  <section class="grid">
+
+    <article class="card">
+      <div class="card-label">Who qualifies</div>
+      <div class="card-title">Operators with real integrity.</div>
+      <p class="card-body">
+        These are businesses that show up, deliver quality, and support the community:
+      </p>
+      <ul class="list">
+        <li>Local restaurants & cafés</li>
+        <li>Event venues & bars</li>
+        <li>Fitness, wellness, & surf shops</li>
+        <li>Builders, contractors, & home services</li>
+        <li>Founders & tech operators</li>
+      </ul>
+    </article>
+
+
+    <article class="card">
+      <div class="card-label">SideGuy Value</div>
+      <div class="card-title">A cleaner, trusted operator list.</div>
+      <p class="card-body">
+        We’re building the first real “local operator whitelist” for North County — 
+        not paid ads, not clickbait, but verified good people running good businesses.
+      </p>
+      <a class="pill-link" href="sms:17735441231">Nominate a business</a>
+    </article>
+
+  </section>
+
+</main>
+
+<footer>
   <div>
-
-    <div class="pj-text-main">Text PJ · North County Operator Desk</div>
-
-    <div class="pj-text-sub">Bring your statements. Walk out with the real numbers.</div>
-
+    SideGuy Solutions · North County Verified Operators · Stub v1.0 ·
+    <a class="back-link" href="index.html">Back to homepage</a>
   </div>
+  <div style="margin-top:4px;">Text PJ · 773-544-1231</div>
+</footer>
 
-  <div class="pj-meta">Verified · Local · Real</div>
-
-</a>
-
-
-
+</div>
 </body>
-
 </html>
-
