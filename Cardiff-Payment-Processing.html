@@ -1,36 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Cardiff Payment Processing · SideGuy Solutions</title>
+  <!-- SideGuy Solutions · Cardiff Payment Processing · Stub v1.0 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Cardiff-by-the-Sea payment processing with instant settlement, lower fees, and clean operator tools built for local businesses. Text PJ to get setup." />
+  <title>Cardiff Payment Processing · SideGuy Solutions</title>
+  <meta name="description"
+        content="SideGuy Solutions brings modern, lower-fee, Solana-speed payment processing to Cardiff businesses. Bars, restaurants, retail, and operators who need speed and clarity." />
 
   <style>
-    body{margin:0;font-family:-apple-system,Inter,sans-serif;background:linear-gradient(180deg,#e6f7ff,#c9ecff,#9edbff);color:#033045;padding:20px;}
-    .page{max-width:800px;margin:auto;background:rgba(255,255,255,0.96);border-radius:20px;padding:30px;border:1px solid rgba(255,255,255,0.85);}
-    h1{font-size:28px;margin-bottom:12px;}
-    p{font-size:15px;opacity:0.88;line-height:1.55;}
-    ul{padding-left:20px;margin:18px 0;} li{margin-bottom:10px;} 
-    .cta{display:inline-block;margin-top:20px;padding:10px 18px;background:#00c98b;color:white;border-radius:999px;text-decoration:none;}
-    footer{text-align:center;margin-top:26px;font-size:12px;opacity:0.8;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --sky:#e6f7ff; --sea:#bfe9ff; --sea-deep:#8fd0ff;
+      --accent:#008cff; --accent-soft:#35b7ff;
+      --text-main:#033045; --text-soft:#38586b;
+      --card-bg:#ffffff; --card-border:rgba(3,48,69,0.06);
+      --radius-lg:22px; --radius-pill:999px;
+    }
+    body{
+      font-family:-apple-system,system-ui,Inter,sans-serif;
+      background:radial-gradient(circle at 10% 0%,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
+      color:var(--text-main); -webkit-font-smoothing:antialiased;
+    }
+    .page{min-height:100vh;display:flex;flex-direction:column;}
+    header{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(14px);
+      background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
+      border-bottom:1px solid rgba(3,48,69,.05);
+    }
+    .nav{max-width:1120px;margin:0 auto;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;}
+    .nav-left{display:flex;align-items:center;gap:10px;}
+    .nav-orb{
+      width:26px;height:26px;border-radius:50%;
+      background:radial-gradient(circle at 30% 0%,#ffffff,#9be7ff,#3fa9ff);
+      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.3);
+    }
+    .nav-title{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .nav-sub{font-size:11px;color:var(--text-soft);}
+    .nav-cta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-soft);}
+    .pill-link{
+      text-decoration:none;border-radius:var(--radius-pill);font-size:12px;font-weight:600;
+      padding:7px 14px;background:linear-gradient(135deg,#00b894,#00c2ff);
+      color:#fff;box-shadow:0 10px 24px rgba(0,140,255,.3);display:inline-flex;gap:6px;
+    }
+    main{flex:1;max-width:1120px;margin:0 auto;padding:26px 20px 40px;}
+    .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:rgba(3,48,69,.7);margin-bottom:8px;}
+    h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin-bottom:10px;}
+    .lead{font-size:14px;line-height:1.6;color:var(--text-soft);max-width:640px;margin-bottom:18px;}
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;font-size:11px;}
+    .pill{padding:5px 10px;border-radius:var(--radius-pill);background:rgba(255,255,255,.95);
+      border:1px solid rgba(3,48,69,.08);color:var(--text-soft);}
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+    .btn-secondary{
+      text-decoration:none;padding:9px 14px;border-radius:var(--radius-pill);
+      border:1px solid rgba(3,48,69,.08);background:rgba(255,255,255,.9);
+      font-size:12px;color:var(--text-soft);
+    }
+    .grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.3fr);gap:18px;margin-bottom:26px;}
+    @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+    .card{
+      background:rgba(255,255,255,.97);border-radius:var(--radius-lg);border:1px solid var(--card-border);
+      box-shadow:0 12px 30px rgba(3,48,69,.06);padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;
+    }
+    .card-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:rgba(3,48,69,.6);}
+    .card-title{font-size:16px;font-weight:600;}
+    .card-body{font-size:13px;line-height:1.5;color:var(--text-soft);}
+    .list{padding-left:16px;font-size:13px;color:var(--text-soft);}
+    .list li{margin-bottom:6px;}
+    .subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    @media(max-width:700px){.subgrid{grid-template-columns:1fr;}}
+    footer{border-top:1px solid rgba(3,48,69,.06);padding:18px 20px 26px;
+      font-size:11px;color:var(--text-soft);text-align:center;}
+    .back-link{text-decoration:none;color:var(--accent);font-weight:500;}
   </style>
 </head>
 
 <body>
 <div class="page">
-  <h1>Cardiff Payment Processing</h1>
-  <p>SideGuy Solutions brings instant-settlement payments and lower fees to Cardiff restaurants, surf shops, contractors, wellness studios, and service operators.</p>
-  
-  <ul>
-    <li>✔ Same-day onboarding for local operators.</li>
-    <li>✔ Instant settlement options for high-volume days.</li>
-    <li>✔ Lower fees than Stripe, Square, or Clover.</li>
-  </ul>
 
-  <a class="cta" href="sms:+17735441231">Text PJ · (773) 544-1231</a>
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <div class="nav-orb"></div>
+      <div>
+        <div class="nav-title">SideGuy Solutions</div>
+        <div class="nav-sub">Cardiff Payment Processing</div>
+      </div>
+    </div>
+    <div class="nav-cta">
+      <span>Questions?</span>
+      <a class="pill-link" href="sms:17735441231">Text PJ</a>
+    </div>
+  </div>
+</header>
 
-  <footer>SideGuy Solutions · Cardiff Payment Processing</footer>
+<main>
+  <div class="eyebrow">Cardiff · Payments</div>
+  <h1>Modern Payment Processing for Cardiff Operators.</h1>
+
+  <p class="lead">
+    Cardiff runs on small, tight, local operators — bars, surf cafés, food spots, shops, 
+    and service crews who don’t have time for slow payouts or 3%+ fee structures.
+    SideGuy brings faster, cleaner, Solana-speed rails to Cardiff’s real businesses.
+  </p>
+
+  <div class="pill-row">
+    <div class="pill">Lower effective fees</div>
+    <div class="pill">~0.4s settlement</div>
+    <div class="pill">Cleaner reporting</div>
+    <div class="pill">SideGuy support</div>
+  </div>
+
+  <div class="btn-row">
+    <a class="pill-link" href="sms:17735441231">Text PJ · 773-544-1231</a>
+    <a class="btn-secondary" href="index.html">← Back to SideGuy homepage</a>
+  </div>
+
+  <section class="grid">
+    <article class="card">
+      <div class="card-label">Why change?</div>
+      <div class="card-title">Cardiff operators deserve better rails.</div>
+      <p class="card-body">
+        Most Cardiff businesses are paying legacy processor fees that were never built
+        for small coastal operator life. Solana rails change the flow completely.
+      </p>
+      <ul class="list">
+        <li>Instant payout visibility</li>
+        <li>Less float + less uncertainty</li>
+        <li>Simpler tools for staff</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <div class="card-label">SideGuy Flow</div>
+      <div class="card-title">Fast checkup, simple path.</div>
+      <p class="card-body">
+        Text PJ, send a statement—done. We map your Cardiff operator flow to something faster.
+      </p>
+      <a class="pill-link" href="sms:17735441231">Start your checkup</a>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    SideGuy Solutions · Cardiff Payment Processing · Stub v1.0 ·
+    <a class="back-link" href="index.html">Back to homepage</a>
+  </div>
+  <div style="margin-top:4px;">Text PJ · 773-544-1231</div>
+</footer>
+
 </div>
 </body>
 </html>
