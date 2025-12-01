@@ -1,9 +1,7 @@
 // SideGuy Problem Engine · Auto Page Generator v1.0
 
-
-
-import fs from 'fs';
-
+"use strict"
+const fs = require('fs');
 
 
 // Load problem list
