@@ -10,6 +10,26 @@ const DOMAIN = 'https://sideguysolutions.com';
 
 
 
+// Escape bad XML characters
+
+function escapeXML(str) {
+
+  return str
+
+    .replace(/&/g, '&amp;')
+
+    .replace(/</g, '&lt;')
+
+    .replace(/>/g, '&gt;')
+
+    .replace(/"/g, '&quot;')
+
+    .replace(/'/g, '&apos;');
+
+}
+
+
+
 function walk(dir) {
 
   let results = [];
@@ -32,9 +52,21 @@ function walk(dir) {
 
     } else {
 
-      if (full.endsWith('.html') && !full.includes('404.html')) {
+      if (
 
-        results.push(full);
+        full.endsWith('.html') &&
+
+        !full.includes('404.html') &&
+
+        !file.startsWith('.') &&
+
+        !file.includes(' ') &&
+
+        !file.includes('?')
+
+      ) {
+
+        results.push(full.replace('./', ''));
 
       }
 
@@ -54,31 +86,26 @@ const pages = walk(ROOT);
 
 
 
-const sitemap =
+let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
 
-  `<?xml version="1.0" encoding="UTF-8"?>\n` +
-
-  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-
-  pages
-
-    .map(p => {
-
-      const clean = p.replace('./', '');
-
-      return `  <url><loc>${DOMAIN}/${clean}</loc></url>`;
-
-    })
-
-    .join('\n') +
-
-  `\n</urlset>`;
+xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
 
 
-fs.writeFileSync('sitemap.xml', sitemap);
+pages.forEach(p => {
+
+  xml += `  <url><loc>${escapeXML(`${DOMAIN}/${p}`)}</loc></url>\n`;
+
+});
 
 
 
-console.log(`Generated sitemap with ${pages.length} pages!`);
+xml += `</urlset>`;
 
+
+
+fs.writeFileSync('sitemap.xml', xml);
+
+
+
+console.log(`Generated sitemap with ${pages.length} valid pages.`);
