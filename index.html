@@ -1,12 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- SideGuy Solutions · Homepage v7.0 · Auto-Sitemap Index -->
+  <!--
+    SideGuy Solutions · Homepage v7.0
+    The 4-Second Settlement Stack for Real Operators
+    Author: PJ + ChatGPT
+  -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SideGuy Solutions · The 4-Second Settlement Company</title>
-  <meta name="description" content="SideGuy Solutions helps real operators swap Stripe for 4-second money: instant-settlement payments, SideGuy Tickets, AI workflows, crypto help desk, and real savings for San Diego operators." />
+  <title>SideGuy Solutions · The 4-Second Settlement Stack</title>
+  <meta name="description" content="SideGuy Solutions helps San Diego operators swap Stripe for 4-second money, clean ticket flows, and real savings — without forcing you to become a tech person." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://sideguysolutions.com/" />
 
   <style>
     *, *::before, *::after {
@@ -16,728 +21,809 @@
     }
 
     :root {
-      --bg-top: #e7f6ff;
-      --bg-mid: #d1ecff;
-      --bg-bottom: #c0e3ff;
-      --card-bg: rgba(255,255,255,0.94);
-      --card-soft: rgba(255,255,255,0.88);
-      --ink: #043049;
-      --ink-soft: #355979;
-      --accent: #0ea5e9;
-      --accent-soft: rgba(14,165,233,0.12);
-      --accent-strong: #0891b2;
-      --orb-blue: #2563eb;
-      --orb-teal: #22c1c3;
-      --orb-purple: #6d28d9;
-      --shadow-soft: 0 18px 45px rgba(15,23,42,0.14);
-      --radius-lg: 26px;
-      --radius-md: 20px;
-      --radius-pill: 999px;
+      --shell-bg: #eaf5ff;
+      --panel-bg: #f7fbff;
+      --accent: #2780ff;
+      --accent-soft: rgba(39,128,255,0.12);
+      --text-main: #08324a;
+      --text-soft: #4f6b80;
+      --border-soft: rgba(15,76,129,0.08);
+      --shadow-soft: 0 22px 50px rgba(5,42,73,0.18);
+      --radius-big: 32px;
+      --radius-card: 24px;
     }
 
     body {
-      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Inter", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", Inter, sans-serif;
+      background: radial-gradient(circle at top left, #fdfbff 0, #e1f1ff 35%, #c8e5ff 70%, #b2dcff 100%);
+      color: var(--text-main);
       -webkit-font-smoothing: antialiased;
-      color: var(--ink);
-      background: radial-gradient(circle at top left, #ffffff 0, #e6f4ff 38%, #cfe9ff 72%, #b3ddff 100%);
-      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .shell {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px 64px;
+    }
+
+    .frame {
+      width: 100%;
       max-width: 1120px;
-      margin: 40px auto 80px auto;
-      padding: 24px 20px 80px 20px;
-      border-radius: 32px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(232,246,255,0.98));
-      box-shadow: 0 30px 80px rgba(15,23,42,0.18);
+      background: var(--panel-bg);
+      border-radius: 40px;
+      box-shadow: var(--shadow-soft);
+      padding: 28px 28px 40px;
+      border: 1px solid rgba(255,255,255,0.8);
       position: relative;
       overflow: hidden;
     }
 
-    .shell::before {
+    .frame::before {
       content: "";
       position: absolute;
-      inset: -80px -120px auto auto;
-      background:
-        radial-gradient(circle at top right, rgba(56,189,248,0.5), transparent 55%),
-        radial-gradient(circle at 20% 40%, rgba(129,140,248,0.4), transparent 55%);
-      opacity: 0.45;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(166,214,255,0.6), transparent 55%);
+      opacity: 0.7;
       pointer-events: none;
-      z-index: -1;
     }
 
-    .top-row {
-      display: flex;
-      gap: 32px;
-      align-items: flex-start;
-      flex-wrap: wrap;
+    .frame-inner {
+      position: relative;
+      z-index: 1;
     }
 
-    .brand-block {
-      flex: 0 0 260px;
+    /* HEADER */
+
+    .header {
       display: flex;
-      flex-direction: column;
-      gap: 24px;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 20px;
     }
 
     .orb {
-      width: 120px;
-      height: 120px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      background:
-        radial-gradient(circle at 20% 20%, #ffffff, rgba(255,255,255,0.1) 32%, transparent 60%),
-        radial-gradient(circle at 0% 100%, var(--orb-teal), transparent 55%),
-        radial-gradient(circle at 80% 0%, var(--orb-purple), transparent 55%),
-        radial-gradient(circle at 30% 80%, var(--orb-blue), transparent 70%);
-      box-shadow:
-        0 0 30px rgba(56,189,248,0.45),
-        0 22px 40px rgba(15,23,42,0.4);
-      position: relative;
-      overflow: hidden;
+      background: radial-gradient(circle at 25% 20%, #ffffff 0, #b8e3ff 35%, #9d9dff 65%, #3f36ff 100%);
+      box-shadow: 0 16px 40px rgba(63,54,255,0.35);
+      flex-shrink: 0;
     }
 
-    .orb::after {
-      content: "";
-      position: absolute;
-      inset: 40% -20% -40% -20%;
-      background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.35), transparent 60%);
-      mix-blend-mode: screen;
-      opacity: 0.9;
-    }
-
-    .brand-heading {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .brand-heading h1 {
-      font-size: 32px;
+    .title-wrap h1 {
+      font-size: 26px;
       letter-spacing: 0.02em;
     }
 
-    .tagline {
+    .title-wrap p {
+      margin-top: 4px;
       font-size: 14px;
-      color: var(--ink-soft);
-      max-width: 260px;
-      line-height: 1.5;
+      color: var(--text-soft);
+      max-width: 420px;
     }
 
-    .quick-contact {
+    .header-right {
+      margin-left: auto;
+      text-align: right;
       font-size: 13px;
-      color: var(--ink-soft);
+      color: var(--text-soft);
+      line-height: 1.4;
     }
 
-    .quick-contact a {
-      color: var(--accent-strong);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .quick-contact a:hover {
-      text-decoration: underline;
-    }
-
-    .hero-main {
-      flex: 1 1 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .subline {
-      font-size: 14px;
-      color: var(--ink-soft);
-      max-width: 460px;
-      line-height: 1.5;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .pill {
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      border: 1px solid rgba(148,163,184,0.55);
-      color: #475569;
-      background: rgba(255,255,255,0.8);
-    }
-
-    .pill--blue {
-      border-color: rgba(56,189,248,0.6);
-      color: #0369a1;
-      background: rgba(224,242,254,0.9);
-    }
-
-    .hero-bottom-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .quick-math {
-      border-radius: var(--radius-md);
-      background: radial-gradient(circle at 0 0, rgba(59,130,246,0.1), transparent 55%),
-                  radial-gradient(circle at 100% 100%, rgba(56,189,248,0.16), transparent 55%),
-                  var(--card-bg);
-      padding: 16px 18px 16px 18px;
-      box-shadow: 0 14px 40px rgba(15,23,42,0.22);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quick-math h2 {
-      font-size: 13px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #0369a1;
-    }
-
-    .quick-math-main {
-      font-size: 15px;
+    .header-right a {
       font-weight: 600;
-      color: var(--ink);
+      color: var(--accent);
     }
 
-    .quick-math-num {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--accent-strong);
-    }
+    /* TAB ROW */
 
-    .quick-math-meta {
-      font-size: 11px;
-      color: #64748b;
-    }
-
-    .quick-math-footer {
-      font-size: 11px;
-      color: #64748b;
+    .tabs-row {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 10px;
+      margin: 12px 0 18px;
     }
 
-    .quick-math-footer strong {
-      color: #0f172a;
-    }
-
-    .quick-math-tag {
-      background: rgba(15,23,42,0.04);
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: 10px;
+    .tab-pill {
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.14em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(8,50,74,0.12);
+      background: rgba(255,255,255,0.85);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
+
+    .tab-pill span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #4fd1c5 55%, #2563eb 100%);
+    }
+
+    .tab-pill.is-primary {
+      border-color: rgba(39,128,255,0.3);
+      background: linear-gradient(135deg, rgba(202,229,255,0.95), rgba(223,243,255,0.95));
+      color: var(--text-main);
+    }
+
+    /* GRID LAYOUT */
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .grid--three {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    @media (max-width: 880px) {
+      .frame {
+        border-radius: 28px;
+        padding: 20px 18px 28px;
+      }
+
+      .header {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .header-right {
+        display: none;
+      }
+
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
-    .grid--deep {
-      margin-top: 10px;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    /* LEFT COLUMN – HERO + MATH */
+
+    .hero-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(224,242,255,0.96));
+      border-radius: var(--radius-big);
+      padding: 24px 24px 22px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 45px rgba(9,55,95,0.14);
+      margin-bottom: 16px;
     }
 
-    .column-label {
+    .hero-eyebrow {
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #6b7280;
-      margin-bottom: 6px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero-lede {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-main);
+      max-width: 540px;
+    }
+
+    .math-card {
+      background: linear-gradient(135deg, #1e96ff, #5c6bff);
+      border-radius: var(--radius-big);
+      padding: 22px 22px 18px;
+      color: #ebf5ff;
+      box-shadow: 0 20px 50px rgba(23,84,154,0.65);
+    }
+
+    .math-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+
+    .math-main {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .math-body {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: 0.96;
+    }
+
+    .math-body strong {
+      font-weight: 600;
+    }
+
+    .math-footnote {
+      margin-top: 10px;
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    /* RIGHT COLUMN – CORE ENGINES */
+
+    .right-col {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .row-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 880px) {
+      .right-col {
+        grid-template-rows: auto;
+      }
+      .row-cards {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .card {
+      border-radius: var(--radius-card);
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px;
+      box-shadow: 0 10px 30px rgba(7,40,70,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 8px;
-      padding: 12px 13px;
-      border-radius: 18px;
-      background: var(--card-soft);
-      border: 1px solid rgba(148,163,184,0.35);
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 10px 24px rgba(15,23,42,0.06);
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out, background 0.15s ease-out;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 36px rgba(15,23,42,0.13);
-      border-color: rgba(56,189,248,0.8);
-      background: #ffffff;
     }
 
     .card h3 {
-      font-size: 13px;
-      margin-bottom: 4px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 6px;
     }
 
     .card p {
       font-size: 12px;
-      color: var(--ink-soft);
-      line-height: 1.5;
+      line-height: 1.6;
+      color: var(--text-soft);
+      margin-bottom: 10px;
     }
 
-    .card-tag {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #6b7280;
-    }
-
-    .card-link {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--accent-strong);
-    }
-
-    .card--highlight {
-      background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(56,189,248,0.08));
-    }
-
-    .section-title {
-      font-size: 15px;
-      margin-top: 32px;
-      margin-bottom: 8px;
-    }
-
-    .section-sub {
+    .card a.card-link {
+      margin-top: auto;
       font-size: 12px;
-      color: var(--ink-soft);
-      margin-bottom: 14px;
-      max-width: 620px;
-    }
-
-    .deep-index {
-      margin-top: 40px;
-    }
-
-    .deep-index h2 {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .deep-index p {
-      font-size: 11px;
-      color: #6b7280;
-    }
-
-    footer {
-      margin-top: 52px;
-      font-size: 11px;
-      color: #6b7280;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      font-weight: 600;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
       gap: 4px;
     }
 
-    footer a {
-      color: var(--accent-strong);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .text-orb {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 50;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 0 0, rgba(59,130,246,0.6), rgba(56,189,248,0.7));
-      color: #ecfeff;
+    .card a.card-link span.arrow {
       font-size: 12px;
-      box-shadow: 0 18px 40px rgba(15,23,42,0.55);
+      transform: translateY(1px);
     }
 
-    .text-orb-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #a5b4fc 40%, #22c55e 90%);
-      box-shadow: 0 0 12px rgba(34,197,94,0.9);
+    .card--tinted {
+      background: linear-gradient(135deg, rgba(232,245,255,0.95), rgba(255,255,255,0.98));
     }
 
-    .text-orb-label {
-      font-weight: 600;
+    .card--highlight {
+      background: linear-gradient(135deg, rgba(245,252,255,0.98), rgba(209,246,255,0.98));
+      border-color: rgba(34,197,94,0.45);
     }
 
-    .text-orb-sub {
-      font-size: 11px;
-      opacity: 0.88;
+    /* OPERATOR TOOLKIT GRID */
+
+    .section-title {
+      margin-top: 26px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
     }
 
-    @media (max-width: 900px) {
-      .hero-bottom-row {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
 
-      .grid--three {
+    @media (max-width: 1040px) {
+      .tools-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 720px) {
-      .shell {
-        margin: 16px auto 60px auto;
-        padding: 18px 16px 70px 16px;
-      }
-
-      .top-row {
-        flex-direction: column;
-      }
-
-      .brand-block {
-        flex-direction: row;
-        align-items: center;
-        gap: 18px;
-      }
-
-      .brand-heading h1 {
-        font-size: 26px;
-      }
-
-      .orb {
-        width: 88px;
-        height: 88px;
-      }
-
-      .grid, .grid--three {
+    @media (max-width: 640px) {
+      .tools-grid {
         grid-template-columns: minmax(0, 1fr);
       }
+    }
 
-      .text-orb {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        bottom: 14px;
+    .tool-card {
+      border-radius: 18px;
+      padding: 14px 14px 15px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(15,76,129,0.1);
+      box-shadow: 0 10px 26px rgba(5,44,83,0.08);
+    }
+
+    .tool-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .tool-card h3 {
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .tool-card p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .tool-card a {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* OPERATOR MAP – WILL BE CONTINUED IN PART 2 */
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <main class="frame">
+      <div class="frame-inner">
+        <!-- HEADER -->
+        <header class="header">
+          <div class="orb" aria-hidden="true"></div>
+          <div class="title-wrap">
+            <h1>SideGuy Solutions</h1>
+            <p>
+              The 4-second settlement stack for real operators — SideGuy Payments, Tickets,
+              AI tools, and savings for San Diego operators who are done with 3-day floats.
+            </p>
+          </div>
+          <div class="header-right">
+            <div>Need a real person? Text Peege at <a href="tel:+17735441321">773-544-1321</a>.</div>
+            <div>Solana rails, local operator brain, and an actually-shippable stack.</div>
+          </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="tabs-row">
+          <div class="tab-pill is-primary">
+            <span class="dot"></span>
+            SAN DIEGO · OPERATOR STACK
+          </div>
+          <div class="tab-pill">
+            <span class="dot"></span>
+            4-SECOND MONEY
+          </div>
+          <div class="tab-pill">
+            <span class="dot"></span>
+            SIDEGUY PAYMENTS · SOLANA
+          </div>
+        </div>
+
+        <!-- MAIN GRID -->
+        <section class="grid" aria-label="Core money stack overview">
+          <!-- LEFT: HERO + QUICK MATH -->
+          <div>
+            <article class="hero-card">
+              <div class="hero-eyebrow">For real operators, not hobby SaaS people.</div>
+              <p class="hero-lede">
+                We help operators swap Stripe for 4-second money, clean ticket flows, and real savings —
+                without forcing you to become a “tech person”. Local brain, Solana rails, and pages that
+                actually ship.
+              </p>
+            </article>
+
+            <article class="math-card">
+              <div class="math-eyebrow">Tonight’s quick math</div>
+              <h2 class="math-main">Swap Stripe for 4-second money.</h2>
+              <p class="math-body">
+                Example: <strong>$80,000 / month</strong> in card volume.<br />
+                Stripe at 2.9% + 0.30 ≈ <strong>$2,400+ in fees</strong> plus 2–3 day float.<br />
+                Solana rails at SideGuy pricing can drop that burn and pay you out
+                <strong>in ~0.4 seconds</strong> instead of “sometime next week”.
+              </p>
+              <p class="math-footnote">
+                Real payouts, real savings. Stripe gives you nothing. Own a piece of your processing.
+              </p>
+            </article>
+          </div>
+
+          <!-- RIGHT: CORE MONEY ENGINES -->
+          <div class="right-col">
+            <div class="row-cards">
+              <article class="card card--tinted">
+                <h3>SideGuy Payments · Instant-settlement card payments</h3>
+                <p>
+                  4-second payouts, lower fees, and Solana-speed rails for San Diego operators who are done
+                  with 3-day floats and “your funds are on the way” emails.
+                </p>
+                <a class="card-link" href="/Best-Payment-Processing-San-Diego.html">
+                  Open payments stack <span class="arrow">↗</span>
+                </a>
+              </article>
+
+              <article class="card">
+                <h3>SideGuy Tickets · Ticket flows that don’t hate you</h3>
+                <p>
+                  Zero-BS ticketing, real net on every seat, and instant payouts that don’t vanish into
+                  processing fees. Built by someone who’s actually sold tickets.
+                </p>
+                <a class="card-link" href="/Ticketing-Event-Software-San-Diego.html">
+                  Open tickets stack <span class="arrow">↗</span>
+                </a>
+              </article>
+            </div>
+
+            <div class="row-cards">
+              <article class="card card--highlight">
+                <h3>Operator Network · North County</h3>
+                <p>
+                  Verified North County operators, shared templates, and SideGuy intros when you need a real
+                  local operator on the other side of the table.
+                </p>
+                <a class="card-link" href="/North-County-Operator-Payments.html">
+                  View operator hub <span class="arrow">↗</span>
+                </a>
+              </article>
+
+              <article class="card">
+                <h3>San Diego Savings Directory</h3>
+                <p>
+                  Local operator savings — payments, energy, software, and tools where the math is actually
+                  visible instead of buried in fine print.
+                </p>
+                <a class="card-link" href="/San-Diego-Savings-Directory.html">
+                  Browse savings directory <span class="arrow">↗</span>
+                </a>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- OPERATOR TOOLKIT -->
+        <h2 class="section-title">Operator Toolkit · Money, tools, and clean dashboards</h2>
+        <section class="tools-grid" aria-label="Operator toolkit">
+          <article class="tool-card">
+            <div class="tool-tag">AI automations &amp; workflows</div>
+            <h3>AI Automation &amp; Workflows</h3>
+            <p>
+              Replace admin hours with clean automations, smart alerts, and dashboards that actually ship
+              instead of dying in a Notion doc.
+            </p>
+            <a href="/San-Diego-Business-Automation.html">See AI automations ↗</a>
+          </article>
+
+          <article class="tool-card">
+            <div class="tool-tag">Crypto help desk</div>
+            <h3>Operator Crypto Help Desk</h3>
+            <p>
+              Not crypto bro noise — just straight answers on wallets, rails, and how to use them for
+              everyday operator problems.
+            </p>
+            <a href="/Crypto-Help-Desk-San-Diego.html">Open crypto help desk ↗</a>
+          </article>
+
+          <article class="tool-card">
+            <div class="tool-tag">Solana business tools</div>
+            <h3>Solana Business Tools</h3>
+            <p>
+              Real-time settlement rails, clean wallets, and tools that make Solana feel like a button,
+              not a science project.
+            </p>
+            <a href="/Solana-Business-Tools-San-Diego.html">See Solana tools ↗</a>
+          </article>
+
+          <article class="tool-card">
+            <div class="tool-tag">Carbon &amp; clean tech</div>
+            <h3>Carbon Credits &amp; Clean Tech</h3>
+            <p>
+              SideGuy carbon credit flows, reporting, and real transparency for operators who care about
+              efficiency, not buzzwords.
+            </p>
+            <a href="/Carbon-Credits-San-Diego.html">Open carbon credits ↗</a>
+          </article>
+        </section>
+ <!-- SAN DIEGO OPERATOR MAP · ALL PAGES -->
+        <section class="operator-map" aria-label="San Diego operator map">
+          <div class="operator-map-inner">
+            <div class="operator-map-copy">
+              <h2>San Diego Operator Map — All Pages</h2>
+              <p>
+                Every SideGuy operator page, tool, and savings insight — auto-generated from your dynamic
+                sitemap. If a page isn’t built yet, you’ll land on the SideGuy 404 catch page and we’ll ship it.
+              </p>
+            </div>
+
+            <div class="operator-map-grid" aria-label="Featured operator pages">
+              <a class="operator-tile" href="/Best-Payment-Processing-San-Diego.html">
+                <span class="tile-tag">Payments</span>
+                <span class="tile-title">Best Payment Processing · San Diego</span>
+                <span class="tile-note">Flagship .4-second money page for San Diego operators.</span>
+              </a>
+
+              <a class="operator-tile" href="/Solana-Payments-San-Diego.html">
+                <span class="tile-tag">Solana rails</span>
+                <span class="tile-title">Solana Payments · San Diego</span>
+                <span class="tile-note">Solana-speed settlement rails for real operators.</span>
+              </a>
+
+              <a class="operator-tile" href="/Cardiff-Payment-Processing.html">
+                <span class="tile-tag">Neighborhood</span>
+                <span class="tile-title">Cardiff Payment Processing</span>
+                <span class="tile-note">Local SideGuy stack for Cardiff operators.</span>
+              </a>
+
+              <a class="operator-tile" href="/Carlsbad-Contractor-Payments.html">
+                <span class="tile-tag">Contractors</span>
+                <span class="tile-title">Carlsbad Contractor Payments</span>
+                <span class="tile-note">Contractor-friendly payouts without 3-day float.</span>
+              </a>
+
+              <a class="operator-tile" href="/North-County-Solana-Payments.html">
+                <span class="tile-tag">North County</span>
+                <span class="tile-title">North County Solana Payments</span>
+                <span class="tile-note">Instant settlement across the North County operator map.</span>
+              </a>
+
+              <a class="operator-tile" href="/San-Diego-Crypto-Payments.html">
+                <span class="tile-tag">Crypto</span>
+                <span class="tile-title">San Diego Crypto Payments</span>
+                <span class="tile-note">Crypto rails that feel like a card terminal, not a PhD.</span>
+              </a>
+
+              <a class="operator-tile" href="/Solana-Beach-Crypto-Payments.html">
+                <span class="tile-tag">Solana Beach</span>
+                <span class="tile-title">Solana Beach Crypto Payments</span>
+                <span class="tile-note">Local rails for the Solana Beach operator set.</span>
+              </a>
+
+              <a class="operator-tile" href="/Stripe-Fees-Calculator.html">
+                <span class="tile-tag">Math</span>
+                <span class="tile-title">Stripe Fees Calculator</span>
+                <span class="tile-note">See exactly what Stripe is costing you every month.</span>
+              </a>
+
+              <a class="operator-tile" href="/San-Diego-Software-Development.html">
+                <span class="tile-tag">Software</span>
+                <span class="tile-title">San Diego Software Development</span>
+                <span class="tile-note">Custom dev when templates aren’t enough.</span>
+              </a>
+
+              <a class="operator-tile" href="/San-Diego-Savings-Directory.html">
+                <span class="tile-tag">Directory</span>
+                <span class="tile-title">San Diego Savings Directory</span>
+                <span class="tile-note">Payments, tools, energy, and more — all in one map.</span>
+              </a>
+            </div>
+
+            <div class="operator-map-footer">
+              <a class="map-button" href="/sitemap-index.html">
+                Browse full map (155+ pages) ↗
+              </a>
+              <p class="map-footnote">
+                Sitemap is driven by <code>/sitemap.xml</code>. When we add new pages, they’ll light up here and
+                inside Search Console automatically.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+          <div class="footer-left">
+            <div class="footer-brand">SideGuy Solutions · The 4-Second Settlement Company</div>
+            <div class="footer-meta">
+              Built with Peege &amp; ChatGPT · v7.0 ·
+              <span class="footer-pill">San Diego · North County · Solana rails</span>
+            </div>
+          </div>
+          <div class="footer-right">
+            <a class="footer-cta" href="tel:+17735441321">Text Peege · 773-544-1321</a>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    /* OPERATOR MAP STYLES + FOOTER (kept here so Part 2 is safe to paste) */
+
+    .operator-map {
+      margin-top: 32px;
+      border-radius: 32px;
+      padding: 22px 20px 22px;
+      background: linear-gradient(135deg, rgba(222,242,255,0.98), rgba(245,252,255,0.98));
+      border: 1px solid rgba(152,199,241,0.7);
+      box-shadow: 0 18px 40px rgba(21,78,138,0.18);
+    }
+
+    .operator-map-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .operator-map-copy h2 {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .operator-map-copy p {
+      font-size: 13px;
+      color: var(--text-soft);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    .operator-map-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 1120px) {
+      .operator-map-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .operator-map-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .operator-map-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .operator-tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 4px;
+      padding: 12px 11px 11px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.98);
+      border: 1px solid rgba(156,190,222,0.8);
+      box-shadow: 0 12px 28px rgba(16,69,119,0.14);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, border-color 0.12s;
+      font-size: 12px;
+    }
+
+    .operator-tile:hover {
+      transform: translateY(-3px);
+      border-color: rgba(37,99,235,0.85);
+      box-shadow: 0 16px 38px rgba(16,69,119,0.26);
+    }
+
+    .tile-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      opacity: 0.9;
+    }
+
+    .tile-title {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .tile-note {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .operator-map-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .map-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 0, #ffffff 0, #b7ddff 40%, #7ba7ff 100%);
+      color: #082f49;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(30,64,175,0.4);
+      border: 1px solid rgba(37,99,235,0.4);
+      white-space: nowrap;
+    }
+
+    .map-footnote {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      margin-top: 26px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(148,163,184,0.35);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .footer-meta {
+      margin-top: 4px;
+      font-size: 11px;
+    }
+
+    .footer-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15,118,110,0.08);
+      border: 1px solid rgba(56,189,248,0.5);
+    }
+
+    .footer-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(37,99,235,0.4);
+      background: rgba(255,255,255,0.95);
+      font-weight: 600;
+      color: var(--accent);
+      box-shadow: 0 10px 24px rgba(37,99,235,0.25);
+      font-size: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .site-footer {
+        align-items: flex-start;
+      }
+      .footer-right {
+        width: 100%;
+      }
+      .footer-cta {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        display: inline-flex;
       }
     }
   </style>
-</head>
-<body>
-<div class="shell">
-  <div class="top-row">
-    <div class="brand-block">
-      <div class="orb" aria-hidden="true"></div>
-      <div class="brand-heading">
-        <h1>SideGuy Solutions</h1>
-        <p class="tagline">
-          The 4-second settlement stack for real operators — SideGuy Payments, Tickets, AI tools, crypto help desk, and savings for San Diego operators.
-        </p>
-      </div>
-      <p class="quick-contact">
-        Want this in your stack? Text Peege at
-        <a href="sms:+17735441231">773-544-1231</a>.
-      </p>
-    </div>
-
-    <div class="hero-main">
-      <div class="pill-row">
-        <span class="pill-pill pill">San Diego · Operator Stack</span>
-        <span class="pill pill--blue">.4-Second Money</span>
-      </div>
-      <p class="subline">
-        We help operators swap Stripe for 4-second money, clean ticket flows, and real savings — without forcing you to become a “tech person.”
-      </p>
-
-      <div class="hero-bottom-row">
-        <!-- QUICK MATH CARD -->
-        <aside class="quick-math" id="quickMathCard">
-          <h2>Tonight’s quick math</h2>
-          <div class="quick-math-main">
-            Swap Stripe for <span class="quick-math-num">4-second money.</span>
-          </div>
-          <p class="quick-math-meta">
-            Example: $89,000 / month in card volume at 2.9% + 30¢ vs SideGuy at 1.65% + pennies on Solana rails.<br>
-            <span id="quickMathResult">You keep the exact savings math here.</span>
-          </p>
-          <div class="quick-math-footer">
-            <span><strong>Real payouts, real savings.</strong> Stripe gives you nothing.</span>
-            <span class="quick-math-tag">SideGuy · Operator math</span>
-          </div>
-        </aside>
-
-        <!-- CORE MONEY ENGINES GRID -->
-        <section>
-          <div class="column-label">Core money engines</div>
-          <div class="grid">
-            <a class="card card--highlight" href="payments.html">
-              <div>
-                <div class="card-tag">SideGuy Payments</div>
-                <h3>Instant-settlement card payments</h3>
-                <p>4-second payouts, lower fees, and Solana-speed rails for San Diego operators who are done with 3-day floats.</p>
-              </div>
-              <div class="card-link">Open payments →</div>
-            </a>
-
-            <a class="card card--highlight" href="tickets.html">
-              <div>
-                <div class="card-tag">SideGuy Tickets</div>
-                <h3>Ticket flows that don’t hate you</h3>
-                <p>Zero-BS ticketing, real net on every seat, and instant payouts that don’t vanish into processing fees.</p>
-              </div>
-              <div class="card-link">Open tickets →</div>
-            </a>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-
-  <!-- OPERATOR TOOLKIT + SAVINGS -->
-  <section style="margin-top:28px;">
-    <div class="grid grid--three">
-      <a class="card" href="ai-automation-san-diego.html">
-        <div>
-          <div class="card-tag">Operator Toolkit</div>
-          <h3>AI Automation &amp; Workflows</h3>
-          <p>Replace admin hours with clean automations, smart alerts, and dashboards that actually ship.</p>
-        </div>
-        <div class="card-link">See AI automations →</div>
-      </a>
-
-      <a class="card" href="crypto-help-desk-san-diego.html">
-        <div>
-          <div class="card-tag">Operator Toolkit</div>
-          <h3>Crypto Help Desk</h3>
-          <p>No YouTube, no noise — just straight answers on wallets, rails, and new tools from someone who actually uses them.</p>
-        </div>
-        <div class="card-link">Open crypto help desk →</div>
-      </a>
-
-      <a class="card" href="operator-hub-north-county.html">
-        <div>
-          <div class="card-tag">Operator Network</div>
-          <h3>Operator Hub · North County</h3>
-          <p>Verified North County operators, shared templates, and SideGuy-level intros when you need a real local operator.</p>
-        </div>
-        <div class="card-link">View operator hub →</div>
-      </a>
-
-      <a class="card" href="san-diego-savings-directory.html">
-        <div>
-          <div class="card-tag">Savings Directory</div>
-          <h3>San Diego Savings Directory</h3>
-          <p>Local operator savings — payments, energy, software, and tools where the math is actually visible.</p>
-        </div>
-        <div class="card-link">Browse savings directory →</div>
-      </a>
-
-      <a class="card" href="solana-business-tools-san-diego.html">
-        <div>
-          <div class="card-tag">Solana Business Tools</div>
-          <h3>Solana rails for real operators</h3>
-          <p>Real-time settlement rails, clean wallets, and tools that make Solana feel like a button, not a science project.</p>
-        </div>
-        <div class="card-link">See Solana tools →</div>
-      </a>
-
-      <a class="card" href="carbon-credits-san-diego.html">
-        <div>
-          <div class="card-tag">Carbon &amp; Clean Tech</div>
-          <h3>Carbon Credits &amp; Clean Tech</h3>
-          <p>SideGuy carbon credit flows, reporting, and real transparency for operators who care about real efficiency.</p>
-        </div>
-        <div class="card-link">Open carbon credits →</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- DEEP INDEX FROM SITEMAP -->
-  <section class="deep-index">
-    <h2>San Diego Operator Map · All Pages</h2>
-    <p>
-      Every SideGuy SEO page and operator tool pulled straight from your
-      <code>sitemap-index.xml</code>. If a page isn’t built yet, you’ll land on the SideGuy 404 catch page — text Peege and we’ll ship it.
-    </p>
-    <div id="deep-index-grid" class="grid grid--deep"></div>
-  </section>
-
-  <footer>
-    <span>SideGuy Solutions · The 4-Second Settlement Company.</span>
-    <span>Built with Peege &amp; ChatGPT · v7.0</span>
-  </footer>
-</div>
-
-<a class="text-orb" href="sms:+17735441231">
-  <span class="text-orb-dot"></span>
-  <span>
-    <span class="text-orb-label">Text Peege</span><br>
-    <span class="text-orb-sub">773-544-1231 · “What can we fix?”</span>
-  </span>
-</a>
-<script>
-  // Quick math card – simple Stripe vs SideGuy example
-  (function () {
-    const el = document.getElementById('quickMathResult');
-    if (!el) return;
-
-    const monthlyVolume = 89000; // example monthly card volume
-    const stripeRate = 0.029;
-    const sideguyRate = 0.0165;
-
-    const stripeFees = monthlyVolume * stripeRate;
-    const sideguyFees = monthlyVolume * sideguyRate;
-    const monthlySavings = stripeFees - sideguyFees;
-    const yearlySavings = monthlySavings * 12;
-
-    const fmt = (n) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    el.textContent = `You’d keep about ${fmt(monthlySavings)} more every month, or ${fmt(yearlySavings)} every year, running this through SideGuy.`;
-  })();
-
-  // Floating orb: make sure number is always 773-544-1231 even if browser locale changes
-  (function () {
-    const orb = document.querySelector('.text-orb-sub');
-    if (!orb) return;
-    orb.textContent = '773-544-1231 · “What can we fix?”';
-  })();
-
-  // Deep index: pull every page from sitemap-index.xml and build cards
-  (async function buildDeepIndex() {
-    const grid = document.getElementById('deep-index-grid');
-    if (!grid) return;
-
-    try {
-      const res = await fetch('sitemap-index.xml', { cache: 'no-store' });
-      if (!res.ok) return;
-
-      const text = await res.text();
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(text, 'application/xml');
-      const locs = Array.from(xml.getElementsByTagName('loc'));
-
-      const seen = new Set();
-
-      locs.forEach(loc => {
-        const urlText = (loc.textContent || '').trim();
-        if (!urlText) return;
-
-        let path;
-        try {
-          const u = new URL(urlText);
-          path = u.pathname.replace(/^\//, '');
-        } catch (e) {
-          path = urlText.replace(/^\//, '');
-        }
-
-        if (!path || seen.has(path)) return;
-        if (path === 'index.html' || path === '404.html') return;
-        if (!path.endsWith('.html')) return;
-
-        seen.add(path);
-
-        const title = path
-          .replace('.html', '')
-          .replace(/-/g, ' ')
-          .replace(/\s+san diego/i, ' · San Diego')
-          .replace(/\s+/g, ' ')
-          .replace(/\b\w/g, m => m.toUpperCase());
-
-        const card = document.createElement('a');
-        card.className = 'card card--small';
-        card.href = path;
-        card.innerHTML = `
-          <h3>${title}</h3>
-          <p>Open this SideGuy page straight from the sitemap index. If it’s not live yet, you’ll hit the SideGuy 404 page and can text Peege to fast-track it.</p>
-        `;
-        grid.appendChild(card);
-      });
-
-      if (!grid.children.length) {
-        const backup = document.createElement('p');
-        backup.style.fontSize = '11px';
-        backup.style.color = '#6b7280';
-        backup.style.marginTop = '8px';
-        backup.textContent = 'Sitemap is empty for now. Once sitemap-index.xml lists your pages, they’ll auto-show here.';
-        grid.parentNode.appendChild(backup);
-      }
-    } catch (err) {
-      console.error('Deep index error', err);
-    }
-  })();
-  <!-- SAN DIEGO OPERATOR MAP – PREVIEW -->
-
-<section style="
-
-  margin-top: 60px;
-
-  padding: 40px;
-
-  background: white;
-
-  border-radius: 22px;
-
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-
-">
-
-  <h2 style="font-size: 26px; font-weight: 700; margin-bottom: 14px; color:#033045;">
-
-    San Diego Operator Map — All Pages
-
-  </h2>
-
-  <p style="margin-bottom: 20px; font-size: 15px; opacity: .75;">
-
-    Every SideGuy page, tool, and operator insight — auto-generated from your dynamic sitemap.
-
-  </p>
-
-
-
-  <div style="
-
-    display: grid;
-
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-
-    gap: 12px;
-
-  ">
-
-    <a href="best-payment-processing-san-diego.html" style="padding:12px; background:#f4faff; border-radius:12px; text-decoration:none; color:#033045;">Best Payment Processing San Diego</a>
-
-    <a href="san-diego-software-development.html" style="padding:12px; background:#f4faff; border-radius:12px; text-decoration:none; color:#033045;">San Diego Software Development</a>
-
-    <a href="ai-development-san-diego.html" style="padding:12px; background:#f4faff; border-radius:12px; text-decoration:none; color:#033045;">AI Development San Diego</a>
-
-    <a href="carbon-credits-san-diego.html" style="padding:12px; background:#f
-
-
-</script>
 </body>
 </html>
+
 
