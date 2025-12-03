@@ -6,7 +6,7 @@
 
   <!-- 
 
-    SideGuy Solutions · Homepage v9.3 — GODWAVE + Pages Dashboard
+    SideGuy Solutions · Homepage v9.4 — GODWAVE + Moving Ocean + Pages Dashboard
 
     Author: PJ + ChatGPT
 
@@ -34,7 +34,7 @@
 
     body{
 
-      font-family:-apple-system, BlinkMacSystemFont, Inter, sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;
 
       background:linear-gradient(180deg,#e9faff 0%,#d6f3ff 40%,#b5e7ff 100%);
 
@@ -134,7 +134,7 @@
 
 
 
-    /* HERO */
+    /* HERO WITH CLEAR MOVING OCEAN */
 
     .hero{
 
@@ -150,45 +150,49 @@
 
       overflow:hidden;
 
-    }
+      background:linear-gradient(
 
+        135deg,
 
+        #b3e5ff 0%,
 
-    /* MOVING OCEAN: Godwave Shimmer */
+        #6dd5fa 25%,
 
-    .hero::before{
+        #4facfe 50%,
 
-      content:"";
+        #6dd5fa 75%,
 
-      position:absolute;
+        #b3e5ff 100%
 
-      top:-40px;left:0;
+      );
 
-      width:100%;height:130%;
+      background-size:400% 400%;
 
-      background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1650&q=80');
-
-      background-size:cover;
-
-      background-position:center;
-
-      filter:brightness(0.85) blur(1.8px);
-
-      opacity:0.25;
-
-      animation:godwave 18s ease-in-out infinite alternate;
-
-      z-index:-1;
+      animation:oceanScroll 18s ease-in-out infinite;
 
     }
 
 
 
-    @keyframes godwave{
+    @keyframes oceanScroll{
 
-      0%{transform:translateY(0) scale(1.03);opacity:0.23;}
+      0%{background-position:0% 50%;}
 
-      100%{transform:translateY(-35px) scale(1.07);opacity:0.30;}
+      50%{background-position:100% 50%;}
+
+      100%{background-position:0% 50%;}
+
+    }
+
+
+
+    .hero-inner{
+
+      max-width:960px;
+
+      margin:0 auto;
+
+      padding:0 20px;
 
     }
 
@@ -206,6 +210,8 @@
 
       line-height:1.15;
 
+      color:#022233;
+
     }
 
 
@@ -220,7 +226,7 @@
 
       line-height:1.45;
 
-      color:#033045;
+      color:#e8f7ff;
 
     }
 
@@ -296,7 +302,7 @@
 
     .feature-card{
 
-      background:rgba(255,255,255,0.65);
+      background:rgba(255,255,255,0.9);
 
       padding:22px;
 
@@ -368,7 +374,7 @@
 
       border-radius:999px;
 
-      background:rgba(255,255,255,0.8);
+      background:rgba(255,255,255,0.95);
 
       text-decoration:none;
 
@@ -388,11 +394,9 @@
 
     }
 
-
-
     .page-link:hover{
 
-      background:rgba(0,255,157,0.12);
+      background:rgba(0,255,157,0.14);
 
     }
 
@@ -452,7 +456,7 @@
 
       width:100%;
 
-      background:rgba(255,255,255,0.55);
+      background:rgba(255,255,255,0.7);
 
       padding:40px 20px;
 
@@ -461,6 +465,10 @@
       margin-top:40px;
 
       backdrop-filter:blur(6px);
+
+      font-size:0.9rem;
+
+      color:#033045;
 
     }
 
@@ -478,7 +486,7 @@
 
   <div class="build-bar" id="build-bar">
 
-    SideGuy Solutions · Homepage v9.3 GODWAVE · Loading...
+    SideGuy Solutions · Homepage v9.4 GODWAVE · Loading...
 
   </div>
 
@@ -512,17 +520,21 @@
 
   <section class="hero">
 
-    <h1>Instant 0.4-Second Solana Payments & Clean Operator Tools</h1>
+    <div class="hero-inner">
 
-    <p>
+      <h1>Instant 0.4-Second Solana Payments & Clean Operator Tools</h1>
 
-      SideGuy Solutions upgrades your business with lightning-fast Solana payments,
+      <p>
 
-      real operator tools, and clean software that works in the real world — not the fantasy world of corporate platforms.
+        SideGuy Solutions upgrades your business with lightning-fast Solana payments,
 
-    </p>
+        real operator tools, and clean software that works in the real world — not the fantasy world of corporate platforms.
 
-    <a href="sms:7735441231" class="cta-btn">Text PJ (773) 544-1231</a>
+      </p>
+
+      <a href="sms:7735441231" class="cta-btn">Text PJ (773) 544-1231</a>
+
+    </div>
 
   </section>
 
@@ -618,6 +630,8 @@
 
       <a class="page-link" href="/San-Diego-SaaS-Development.html">SaaS Development · San Diego</a>
 
+      <!-- room for 10 more links once we add them -->
+
     </div>
 
   </section>
@@ -672,7 +686,7 @@
 
       var formatted = now.toLocaleString('en-US', options);
 
-      el.textContent = 'SideGuy Solutions · Homepage v9.3 GODWAVE · Loaded: ' + formatted + ' PT';
+      el.textContent = 'SideGuy Solutions · Homepage v9.4 GODWAVE · Loaded: ' + formatted + ' PT';
 
     })();
 
