@@ -1,0 +1,178 @@
+// SideGuy Solutions · Auto-SEO Generator v1.0 (Light-Ocean)
+// Usage:
+// https://sideguysolutions.com/auto-seo.js?
+// title=Restaurant%20Payment%20Processing%20San%20Diego&
+// desc=Fast%20settlements%20and%20lower%20fees%20for%20restaurants&
+// h1=Restaurant%20Payment%20Processing&
+// pains=High%20fees|Slow%20payouts|Chargebacks|Bad%20dashboards&
+// local=San%20Diego%20restaurant%20operators
+
+function htmlEscape(str) {
+  return decodeURIComponent(str || "")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function getParam(key) {
+  return htmlEscape(
+    (new URLSearchParams(globalThis.location.search)).get(key) || ""
+  );
+}
+
+const title = getParam("title") || "Untitled Page · SideGuy Solutions";
+const desc  = getParam("desc")  || "SideGuy Solutions SEO Page";
+const h1    = getParam("h1")    || title;
+const pains = getParam("pains").split("|").filter(x => x.trim() !== "");
+const local = getParam("local") || "San Diego operators";
+
+const output = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>${title}</title>
+  <meta name="description" content="${desc}" />
+
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      font-family:-apple-system,Inter,BlinkMacSystemFont,sans-serif;
+      background:linear-gradient(180deg,#e6f7ff,#c9ecff,#9edbff);
+      color:#022437;
+      padding:24px 18px 100px;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .page{max-width:900px;margin:0 auto;}
+
+    h1{
+      font-size:32px;
+      margin-bottom:10px;
+      line-height:1.15;
+      letter-spacing:-0.02em;
+    }
+
+    .lead{
+      font-size:15px;
+      opacity:0.9;
+      margin-bottom:26px;
+      max-width:620px;
+      line-height:1.55;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.95);
+      border-radius:22px;
+      border:1px solid rgba(3,48,69,0.08);
+      padding:22px;
+      margin-bottom:22px;
+      box-shadow:0 12px 36px rgba(15,23,42,0.12);
+    }
+
+    .card h2{
+      font-size:20px;
+      margin-bottom:10px;
+      letter-spacing:-0.01em;
+    }
+
+    ul{margin-top:12px;padding-left:20px;}
+    li{margin-bottom:6px;font-size:15px;opacity:0.9;}
+
+    .cta{
+      display:inline-block;
+      margin-top:18px;
+      padding:12px 22px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#0ea5e9,#14f195);
+      color:#fff;
+      font-weight:600;
+      text-decoration:none;
+      box-shadow:0 12px 28px rgba(14,165,233,0.35);
+    }
+
+    footer{
+      margin-top:40px;
+      font-size:13px;
+      opacity:0.75;
+      text-align:center;
+    }
+
+    /* TEXT PJ ORB */
+    .pj-orb{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      width:80px;
+      height:80px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,#ffffff,#d4f1ff,#9eddff);
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+      border:1px solid rgba(255,255,255,0.5);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+    }
+    .pj-orb a{
+      color:#033045;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:700;
+      text-align:center;
+      line-height:1.1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <h1>${h1}</h1>
+
+    <p class="lead">
+      ${desc}
+    </p>
+
+    <div class="card">
+      <h2>Why ${h1} matters for ${local}</h2>
+      <p>Here are the most common issues real operators face:</p>
+      <ul>
+        ${pains.map(p => `<li>${p}</li>`).join("")}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The SideGuy Fix</h2>
+      <p>
+        We replace slow, expensive, legacy processors with Solana-speed payments,
+        clean dashboards, and lower effective fees — without blowing up your operations.
+      </p>
+
+      <ul>
+        <li>0.4s Solana settlement</li>
+        <li>Lower fees vs Stripe/Square</li>
+        <li>Cleaner dashboards</li>
+        <li>Real operator support (text PJ)</li>
+      </ul>
+
+      <a href="sms:+17735441231" class="cta">Text PJ · Fix My Stack</a>
+    </div>
+
+    <footer>
+      Generated automatically by SideGuy Auto-SEO Engine v1.0 · Peege × ChatGPT
+    </footer>
+
+  </div>
+
+  <div class="pj-orb">
+    <a href="sms:+17735441231">Text<br>PJ</a>
+  </div>
+</body>
+</html>
+`;
+
+document.open();
+document.write(output);
+document.close();
