@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -358,13 +356,69 @@
 
 <a href="sms:7735441231" class="orb">Text PJ</a>
 
+
+
 <script>
 
-  /* ORANGE PRIORITY PAGES — All new growth batches including Batch D */
+  /* ORANGE PRIORITY PAGES — All new growth batches including Batch E */
 
   const newBatch = [
 
-    /* Batch D — Highest intent across all categories (20 new pages) */
+    /* Batch E — new all-category high-intent pages (25) */
+
+    "solar-battery-installation-san-diego.html",
+
+    "ev-charger-repair-san-diego.html",
+
+    "roof-replacement-san-diego.html",
+
+    "foundation-repair-san-diego.html",
+
+    "water-damage-restoration-san-diego.html",
+
+    "flood-cleanup-san-diego.html",
+
+    "mold-remediation-san-diego.html",
+
+    "black-mold-removal-san-diego.html",
+
+    "crawl-space-cleaning-san-diego.html",
+
+    "garage-floor-coating-san-diego.html",
+
+    "patio-cover-installation-san-diego.html",
+
+    "floor-refinishing-san-diego.html",
+
+    "custom-closet-installation-san-diego.html",
+
+    "interior-design-services-san-diego.html",
+
+    "apartment-cleaning-san-diego.html",
+
+    "deep-cleaning-service-san-diego.html",
+
+    "window-repair-san-diego.html",
+
+    "sliding-glass-door-repair-san-diego.html",
+
+    "driveway-repair-san-diego.html",
+
+    "sewer-camera-inspection-san-diego.html",
+
+    "hydro-jetting-san-diego.html",
+
+    "copper-repipe-san-diego.html",
+
+    "furnace-installation-san-diego.html",
+
+    "heat-pump-installation-san-diego.html",
+
+    "attic-insulation-san-diego.html",
+
+
+
+    /* Batch D — Highest intent across all categories (20) */
 
     "garage-door-repair-san-diego.html",
 
@@ -408,7 +462,7 @@
 
 
 
-    /* Prior Orange Batches (A, B, C) — already shipped earlier */
+    /* Earlier orange batches (home / business / tech / emergency) */
 
     "roof-inspection-san-diego.html",
 
@@ -457,8 +511,6 @@
     "landscape-lighting-san-diego.html",
 
 
-
-    /* Batch B + Batch C (Home / Business / Tech High Intent) */
 
     "fence-installation-san-diego.html",
 
@@ -512,8 +564,6 @@
 
 
 
-    /* Emergency / Trades / IT batch */
-
     "mobile-mechanic-san-diego.html",
 
     "tow-truck-service-san-diego.html",
@@ -527,8 +577,6 @@
     "roof-leak-repair-san-diego.html",
 
     "electrician-emergency-san-diego.html",
-
-    "water-heater-repair-san-diego.html",
 
     "sewer-line-repair-san-diego.html",
 
@@ -555,8 +603,6 @@
     "google-business-help-san-diego.html",
 
 
-
-    /* POS / Smart Home / Install / Mobile Pros */
 
     "smart-home-installation-san-diego.html",
 
@@ -598,11 +644,11 @@
 
 
 
-  /* CORE PAGES — Original list + all green pages */
+  /* CORE PAGES — main grid + older pages */
 
   const pages = [
 
-    /* Payments + Operator Core */
+    /* Payment & Operator Core */
 
     "auto-repair-payment-processing-san-diego.html",
 
@@ -694,15 +740,13 @@
 
     "pest-control-san-diego.html",
 
-    "garage-door-repair-san-diego.html",
-
     "junk-removal-san-diego.html",
 
     "window-cleaning-san-diego.html",
 
 
 
-    /* Tech + Business Help Pages */
+    /* Tech / Business Help Core */
 
     "tech-help-san-diego.html",
 
@@ -726,7 +770,7 @@
 
 
 
-    /* Accountant / Mortgage / Loans / Misc */
+    /* Accountant / Mortgage / Misc Older Batch */
 
     "accountant-services-san-diego.html",
 
@@ -766,7 +810,7 @@
 
 
 
-    /* Append ALL orange pages */
+    /* Attach ALL orange pages as well */
 
     ...newBatch
 
@@ -866,11 +910,11 @@
 
   }
 
-  /* ===== DEDUPE + SORT (orange first, then alphabetical) ===== */
+
+
+  /* ===== DEDUPE + SORT (orange first, then alpha) ===== */
 
   const uniquePages = Array.from(new Set(pages));
-
-
 
   const sortedPages = uniquePages.sort((a,b)=>{
 
@@ -930,7 +974,7 @@
 
 
 
-  /* ===== TIMESTAMP ===== */
+  /* ===== HUD: TIMESTAMP + GROWTH + VERSION ===== */
 
   const timestampEl = document.getElementById("timestamp");
 
@@ -966,19 +1010,13 @@
 
 
 
-  /* ===== PAGE COUNTS ===== */
-
   const currentCount = sortedPages.length;
 
 
 
-  /* max pages memory — never go backwards */
-
   const storedMax = Number(localStorage.getItem("sg_maxPages") || "0");
 
   let maxPages = storedMax;
-
-
 
   if (currentCount > maxPages) {
 
@@ -990,19 +1028,15 @@
 
 
 
-  /* ===== ROLLING 24-HOUR GROWTH TRACKER ===== */
-
   const historyKey = "sg_history";
 
   const nowMs = Date.now();
 
-  const cutoff = nowMs - 24*60*60*1000; // 24 hours
+  const cutoff = nowMs - 24*60*60*1000;
 
 
 
   let history = [];
-
-
 
   try {
 
@@ -1018,17 +1052,9 @@
 
 
 
-  // Add current reading
-
   history.push({ ts: nowMs, count: currentCount });
 
-
-
-  // Keep only last 24 hours
-
   history = history.filter(entry => entry && entry.ts >= cutoff);
-
-
 
   localStorage.setItem(historyKey, JSON.stringify(history));
 
@@ -1050,11 +1076,7 @@
 
 
 
-  /* ===== AUTO VERSIONING ===== */
-
   let versionStr = localStorage.getItem("sg_version") || "33.0";
-
-
 
   function parseVersion(v){
 
@@ -1076,8 +1098,6 @@
 
   if (maxPages > prevMax) {
 
-    // We grew → bump version
-
     let {major, minor} = prev;
 
     minor++;
@@ -1095,8 +1115,6 @@
   const parsed = parseVersion(versionStr);
 
 
-
-  /* ===== AUTO DESCRIPTOR ===== */
 
   const descriptors = [
 
@@ -1122,15 +1140,11 @@
 
   ];
 
-
-
   const descriptorIndex = (parsed.major * 10 + parsed.minor) % descriptors.length;
 
   const descriptor = descriptors[descriptorIndex];
 
 
-
-  /* ===== UPDATE HUD ===== */
 
   pageStatsEl.textContent =
 
@@ -1144,7 +1158,7 @@
 
 
 
-  /* ===== FILTER LOGIC ===== */
+  /* ===== FILTERS ===== */
 
   const filterButtons = document.querySelectorAll(".filter-btn");
 
@@ -1158,15 +1172,7 @@
 
       const cat = card.getAttribute("data-category");
 
-      if (filter === "all" || cat === filter){
-
-        card.style.display = "";
-
-      } else {
-
-        card.style.display = "none";
-
-      }
+      card.style.display = (filter === "all" || cat === filter) ? "" : "none";
 
     });
 
@@ -1192,8 +1198,6 @@
 
 
 
-  /* Default filter: All */
-
   applyFilter("all");
 
 </script>
@@ -1203,6 +1207,4 @@
 </body>
 
 </html>
-
-
 
