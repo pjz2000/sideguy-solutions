@@ -4,7 +4,7 @@
 
 <head>
 
-  <!-- SideGuy Solutions · Command Center v8.0 · 12/04/2025 -->
+  <!-- SideGuy Solutions · Command Center v9.0 · Orange Priority Edition -->
 
   <meta charset="UTF-8" />
 
@@ -126,6 +126,8 @@
 
 
 
+    /* ORANGE NEW PAGES */
+
     .card.orange{
 
       border:2px solid #ff9c42;
@@ -148,9 +150,21 @@
 
     }
 
-    .card a{font-size:14px;color:#046b8c;text-decoration:none;font-weight:600;word-break:break-all;}
 
 
+    .card a{
+
+      font-size:14px;color:#046b8c;
+
+      text-decoration:none;font-weight:600;
+
+      word-break:break-all;
+
+    }
+
+
+
+    /* Text PJ Orb */
 
     .orb{
 
@@ -192,7 +206,7 @@
 
   <strong>Napkin Note · Today's Focus</strong><br>
 
-  Grow this grid to <strong>200+ operator & tech pages</strong>. Every new filename below becomes a live card instantly.
+  Grow this grid to <strong>200+ operator & tech pages</strong>. New pages appear at the TOP in orange.
 
 </div>
 
@@ -216,7 +230,7 @@
 
 
 
-  /* NEW 20 (orange highlight) */
+  /* NEW 20 (ORANGE) */
 
   const newBatch = [
 
@@ -266,13 +280,11 @@
 
 
 
-  /* FULL PAGE LIST (existing + new 20) */
+  /* FULL PAGE LIST */
 
   const pages = [
 
-
-
-    /* --- Your whole core set (KEEPING EVERYTHING YOU ADDED) --- */
+    /* CORE (existing pages) */
 
     "auto-repair-payment-processing-san-diego.html",
 
@@ -368,7 +380,7 @@
 
 
 
-    /* Top 10 Operators */
+    /* TOP 10 OPERATOR */
 
     "plumber-san-diego.html",
 
@@ -392,7 +404,7 @@
 
 
 
-    /* Top 10 Tech Help */
+    /* TOP 10 TECH HELP */
 
     "tech-help-san-diego.html",
 
@@ -416,7 +428,7 @@
 
 
 
-    /* NEW 20 */
+    /* NEW 20 ORANGE */
 
     ...newBatch
 
@@ -424,15 +436,35 @@
 
 
 
+  /* DEDUPE + SORT (ORANGE FIRST) */
+
   const uniquePages = Array.from(new Set(pages));
 
-  const grid = document.getElementById("pageGrid");
+
+
+  const sortedPages = uniquePages.sort((a,b) => {
+
+    const A = newBatch.includes(a);
+
+    const B = newBatch.includes(b);
+
+    if (A && !B) return -1;
+
+    if (!A && B) return 1;
+
+    return a.localeCompare(b);
+
+  });
 
 
 
   /* BUILD CARDS */
 
-  uniquePages.forEach(filename => {
+  const grid = document.getElementById("pageGrid");
+
+
+
+  sortedPages.forEach(filename => {
 
     const pretty = filename.replace(".html","").replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase());
 
@@ -442,7 +474,7 @@
 
     grid.innerHTML += `
 
-      <div class="card ${isNew ? 'orange':''}">
+      <div class="card ${isNew ? 'orange' : ''}">
 
         <a href="${filename}" class="status">OPEN</a>
 
@@ -462,7 +494,7 @@
 
   document.getElementById("pageCount").innerText =
 
-    "Updated " + dateString + " — " + uniquePages.length + " Pages Live";
+    "Updated " + dateString + " — " + sortedPages.length + " Pages Live";
 
 </script>
 
