@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-  <!-- SideGuy Solutions · Command Center v9.1 · Orange Priority Edition -->
+  <!-- SideGuy Solutions · Command Center v12.0 · Category Filter + Glow Edition -->
 
   <meta charset="UTF-8" />
 
@@ -39,7 +38,7 @@
 
     h1{font-size:34px;font-weight:800;color:#014a66;margin-bottom:6px;}
 
-    .updated{font-size:14px;color:#035372;opacity:.85;margin-bottom:6px;}
+    .updated{font-size:14px;color:#035372;opacity:.9;margin-bottom:6px;font-weight:600;}
 
     .subtitle{font-size:16px;font-weight:600;color:#014a66;}
 
@@ -61,11 +60,63 @@
 
 
 
+    /* CATEGORY FILTER BAR */
+
+    .filters{
+
+      width:93%;max-width:900px;
+
+      margin:18px auto 0;
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:8px;
+
+      justify-content:center;
+
+    }
+
+    .filter-btn{
+
+      padding:6px 12px;
+
+      border-radius:999px;
+
+      border:1px solid #9ed9f8;
+
+      background:#ffffffc8;
+
+      cursor:pointer;
+
+      font-size:13px;
+
+      color:#035372;
+
+      font-weight:600;
+
+      transition:0.2s ease;
+
+    }
+
+    .filter-btn.active{
+
+      background:#035372;
+
+      color:#e6faff;
+
+      box-shadow:0 0 10px rgba(3,83,114,.4);
+
+    }
+
+
+
     .grid{
 
       width:93%;max-width:1150px;
 
-      margin:28px auto 0;
+      margin:26px auto 0;
 
       display:grid;
 
@@ -103,6 +154,8 @@
 
 
 
+    /* GREEN GLOW BUTTON */
+
     .status{
 
       display:inline-block;
@@ -111,7 +164,7 @@
 
       color:white;
 
-      padding:4px 12px;
+      padding:6px 14px;
 
       font-size:12px;
 
@@ -123,17 +176,25 @@
 
       margin-bottom:10px;
 
+      box-shadow:0 0 8px rgba(33,197,93,0.65);
+
+      transition:0.2s ease;
+
     }
 
+    .status:hover{box-shadow:0 0 14px rgba(33,197,93,0.9);}
 
 
-    /* ORANGE NEW PAGES */
+
+    /* ORANGE PRIORITY PAGES */
 
     .card.orange{
 
       border:2px solid #ff9c42;
 
       background:#fff8ef;
+
+      box-shadow:0 0 10px rgba(255,156,66,0.35);
 
     }
 
@@ -201,7 +262,7 @@
 
   <div id="pageCount" class="updated"></div>
 
-  <div class="subtitle">Instant Solana Payments · Real Operator Tools · San Diego</div>
+  <div class="subtitle">Instant Solana Payments · Operator Tools · Tech Help · San Diego</div>
 
 </header>
 
@@ -209,9 +270,31 @@
 
 <div class="napkin">
 
-  <strong>Napkin Note · Today's Focus</strong><br>
+  <strong>Napkin Note — Today’s Mission:</strong><br>
 
-  Grow this grid to <strong>200+ operator & tech pages</strong>. New pages appear at the TOP in orange.
+  Build San Diego’s 200+ page problem engine. New pages appear at the TOP in orange. Use the filters to focus: Home, Tech, Business, Auto, Medical, Solar, Other.
+
+</div>
+
+
+
+<div class="filters">
+
+  <button class="filter-btn active" data-filter="all">All</button>
+
+  <button class="filter-btn" data-filter="home">Home Services</button>
+
+  <button class="filter-btn" data-filter="tech">Tech Help</button>
+
+  <button class="filter-btn" data-filter="business">Business Services</button>
+
+  <button class="filter-btn" data-filter="auto">Automotive</button>
+
+  <button class="filter-btn" data-filter="medical">Medical & Wellness</button>
+
+  <button class="filter-btn" data-filter="solar">Solar & Energy</button>
+
+  <button class="filter-btn" data-filter="other">Other</button>
 
 </div>
 
@@ -231,109 +314,277 @@
 
   const today = new Date();
 
-  const dateString = (today.getMonth()+1)+"/"+today.getDate()+"/"+today.getFullYear();
+  const dateString =
+
+    String(today.getMonth()+1).padStart(2,"0") + "/" +
+
+    String(today.getDate()).padStart(2,"0") + "/" +
+
+    today.getFullYear();
 
 
 
-  /* ORANGE PRIORITY PAGES (latest batches) */
+  /* ORANGE PRIORITY BATCHES — everything new we’ve been adding */
 
   const newBatch = [
 
-    "accountant-services-san-diego.html",
+    /* Batch 1 — Home Services Elite (25) */
 
-    "mortgage-broker-payment-processing.html",
+    "roof-repair-san-diego.html",
 
-    "loan-officer-payment-processing.html",
+    "roof-inspection-san-diego.html",
 
-    "carpet-installation-san-diego.html",
+    "stucco-repair-san-diego.html",
 
-    "tile-installation-san-diego.html",
+    "foundation-inspection-san-diego.html",
 
-    "drywall-repair-san-diego.html",
+    "window-installation-san-diego.html",
 
-    "appliance-repair-san-diego.html",
+    "sliding-door-repair-san-diego.html",
 
-    "pool-cleaning-service-san-diego.html",
+    "door-installation-san-diego.html",
 
-    "tree-trimming-service-san-diego.html",
+    "garage-door-installation-san-diego.html",
 
-    "fencing-contractor-san-diego.html",
+    "insulation-installation-san-diego.html",
 
-    "bookkeeping-help-san-diego.html",
+    "hvac-maintenance-san-diego.html",
 
-    "pos-system-help-san-diego.html",
+    "furnace-repair-san-diego.html",
 
-    "website-speed-fix-san-diego.html",
+    "air-duct-cleaning-san-diego.html",
 
-    "email-setup-help-san-diego.html",
+    "chimney-cleaning-san-diego.html",
 
-    "domain-setup-help-san-diego.html",
+    "asbestos-removal-san-diego.html",
 
-    "online-scheduling-help-san-diego.html",
+    "lead-paint-removal-san-diego.html",
 
-    "business-automation-san-diego.html",
-
-    "crm-setup-san-diego.html",
-
-    "zelle-business-help-san-diego.html",
-
-    "credit-card-fees-explained.html",
-
-    "payment-processing-san-diego-guide.html",
-
-
-
-    /* NEW 160–180 */
-
-    "water-damage-restoration-san-diego.html",
+    "mold-testing-san-diego.html",
 
     "mold-removal-san-diego.html",
 
-    "fire-damage-restoration-san-diego.html",
+    "termite-inspection-san-diego.html",
 
-    "solar-panel-cleaning-san-diego.html",
+    "termite-tenting-san-diego.html",
 
-    "pressure-washing-san-diego.html",
+    "deck-building-san-diego.html",
 
-    "gutter-cleaning-san-diego.html",
+    "patio-installation-san-diego.html",
 
-    "pest-inspection-san-diego.html",
+    "concrete-driveway-repair-san-diego.html",
 
-    "foundation-repair-san-diego.html",
+    "stamped-concrete-san-diego.html",
 
-    "concrete-contractor-san-diego.html",
+    "artificial-grass-installation-san-diego.html",
 
-    "flooring-repair-san-diego.html",
+    "landscape-lighting-san-diego.html",
 
-    "cabinet-installation-san-diego.html",
 
-    "interior-painting-san-diego.html",
+
+    /* Batch 2 — Installers, Repair, Renovation (25) */
+
+    "fence-installation-san-diego.html",
+
+    "vinyl-fence-installation-san-diego.html",
+
+    "wrought-iron-fence-san-diego.html",
+
+    "paver-installation-san-diego.html",
+
+    "wood-fence-repair-san-diego.html",
+
+    "chain-link-fence-installation-san-diego.html",
+
+    "block-wall-contractor-san-diego.html",
+
+    "retaining-wall-installation-san-diego.html",
+
+    "stucco-patching-san-diego.html",
 
     "exterior-painting-san-diego.html",
 
-    "storm-door-installation-san-diego.html",
+    "interior-painting-san-diego.html",
 
-    "locksmith-services-san-diego.html",
+    "cabinet-installation-san-diego.html",
 
-    "home-security-installation-san-diego.html",
+    "cabinet-refinishing-san-diego.html",
 
-    "network-wifi-setup-san-diego.html",
+    "countertop-installation-san-diego.html",
 
-    "computer-repair-san-diego.html",
+    "kitchen-remodel-san-diego.html",
 
-    "credit-card-terminal-help-san-diego.html",
+    "bathroom-remodel-san-diego.html",
 
-    "merchant-statement-analysis-san-diego.html"
+    "tile-installation-san-diego.html",
+
+    "tile-repair-san-diego.html",
+
+    "shower-installation-san-diego.html",
+
+    "bathtub-repair-san-diego.html",
+
+    "drywall-repair-san-diego.html",
+
+    "ceiling-repair-san-diego.html",
+
+    "plaster-repair-san-diego.html",
+
+    "floor-leveling-san-diego.html",
+
+    "vinyl-plank-flooring-san-diego.html",
+
+
+
+    /* Batch 3 — Business, Marketing, Automation (25) */
+
+    "small-business-consulting-san-diego.html",
+
+    "business-automation-san-diego.html",
+
+    "ai-small-business-automation-san-diego.html",
+
+    "crm-setup-san-diego.html",
+
+    "hubspot-setup-san-diego.html",
+
+    "salesforce-help-san-diego.html",
+
+    "zapier-automation-san-diego.html",
+
+    "make-com-automation-san-diego.html",
+
+    "workflow-automation-san-diego.html",
+
+    "email-marketing-setup-san-diego.html",
+
+    "google-ads-management-san-diego.html",
+
+    "facebook-ads-management-san-diego.html",
+
+    "local-seo-services-san-diego.html",
+
+    "website-seo-audit-san-diego.html",
+
+    "business-website-redesign-san-diego.html",
+
+    "branding-services-san-diego.html",
+
+    "logo-design-san-diego.html",
+
+    "content-writing-san-diego.html",
+
+    "lead-generation-san-diego.html",
+
+    "gmb-optimization-san-diego.html",
+
+    "quickbooks-setup-san-diego.html",
+
+    "bookkeeping-help-san-diego.html",
+
+    "invoice-system-setup-san-diego.html",
+
+    "payment-processing-help-san-diego.html",
+
+    "credit-card-fee-analysis-san-diego.html",
+
+
+
+    /* Earlier emergency / tech / local help batch (20) */
+
+    "mobile-mechanic-san-diego.html",
+
+    "tow-truck-service-san-diego.html",
+
+    "ac-repair-san-diego.html",
+
+    "heating-repair-san-diego.html",
+
+    "plumbing-emergency-service-san-diego.html",
+
+    "roof-leak-repair-san-diego.html",
+
+    "electrician-emergency-san-diego.html",
+
+    "water-heater-repair-san-diego.html",
+
+    "sewer-line-repair-san-diego.html",
+
+    "drain-cleaning-san-diego.html",
+
+    "it-support-san-diego.html",
+
+    "computer-setup-san-diego.html",
+
+    "wifi-installation-san-diego.html",
+
+    "laptop-repair-san-diego.html",
+
+    "virus-removal-san-diego.html",
+
+    "email-recovery-help-san-diego.html",
+
+    "domain-transfer-help-san-diego.html",
+
+    "website-maintenance-san-diego.html",
+
+    "ecommerce-store-setup-san-diego.html",
+
+    "google-business-help-san-diego.html",
+
+
+
+    /* Smart-home / POS / ads / mobile pros (20) */
+
+    "solar-installers-san-diego.html",
+
+    "electric-vehicle-charger-installation-san-diego.html",
+
+    "smart-home-installation-san-diego.html",
+
+    "security-camera-installation-san-diego.html",
+
+    "home-theater-installation-san-diego.html",
+
+    "mobile-notary-san-diego.html",
+
+    "legal-document-prep-san-diego.html",
+
+    "process-server-san-diego.html",
+
+    "mobile-iv-therapy-san-diego.html",
+
+    "mobile-vet-san-diego.html",
+
+    "restaurant-pos-setup-san-diego.html",
+
+    "menu-digitization-san-diego.html",
+
+    "qr-code-menu-setup-san-diego.html",
+
+    "wifi-guest-network-setup-san-diego.html",
+
+    "small-business-cybersecurity-san-diego.html",
+
+    "insurance-verification-help-san-diego.html",
+
+    "billing-and-invoicing-help-san-diego.html",
+
+    "lead-generation-help-san-diego.html",
+
+    "google-ads-help-san-diego.html",
+
+    "facebook-ads-help-san-diego.html"
 
   ];
 
 
 
-  /* FULL PAGE LIST */
+  /* CORE PAGES (existing command-center set) */
 
   const pages = [
 
-    /* CORE EXISTING PAGES */
+    /* Payment / operator core */
 
     "auto-repair-payment-processing-san-diego.html",
 
@@ -407,29 +658,9 @@
 
     "carlsbad-lower-credit-card-fees.html",
 
-    "bookkeeping-services-san-diego.html",
-
-    "tax-preparation-san-diego.html",
-
-    "insurance-agent-payments-san-diego.html",
-
-    "real-estate-agent-payment-processing.html",
-
-    "solar-installation-payment-processing.html",
-
-    "home-remodeling-payment-processing.html",
-
-    "janitorial-company-payments-san-diego.html",
-
-    "auto-detailing-payment-processing.html",
-
-    "pet-grooming-payment-processing.html",
-
-    "carpet-cleaning-payment-processing-san-diego.html",
 
 
-
-    /* TOP 10 OPERATOR */
+    /* Local service “short-tail” */
 
     "plumber-san-diego.html",
 
@@ -453,7 +684,7 @@
 
 
 
-    /* TOP 10 TECH HELP */
+    /* Tech / help / software */
 
     "tech-help-san-diego.html",
 
@@ -477,7 +708,55 @@
 
 
 
-    /* ORANGE PRIORITY BATCHES */
+    /* Early “accountant / mortgage / schedule / systems” batch */
+
+    "accountant-services-san-diego.html",
+
+    "mortgage-broker-payment-processing.html",
+
+    "loan-officer-payment-processing.html",
+
+    "carpet-installation-san-diego.html",
+
+    "tile-installation-san-diego.html",
+
+    "drywall-repair-san-diego.html",
+
+    "appliance-repair-san-diego.html",
+
+    "pool-cleaning-service-san-diego.html",
+
+    "tree-trimming-service-san-diego.html",
+
+    "fencing-contractor-san-diego.html",
+
+    "bookkeeping-services-san-diego.html",
+
+    "bookkeeping-help-san-diego.html",
+
+    "pos-system-help-san-diego.html",
+
+    "website-speed-fix-san-diego.html",
+
+    "email-setup-help-san-diego.html",
+
+    "domain-setup-help-san-diego.html",
+
+    "online-scheduling-help-san-diego.html",
+
+    "business-automation-san-diego.html",
+
+    "crm-setup-san-diego.html",
+
+    "zelle-business-help-san-diego.html",
+
+    "credit-card-fees-explained.html",
+
+    "payment-processing-san-diego-guide.html",
+
+
+
+    /* ALL new orange batches get appended */
 
     ...newBatch
 
@@ -485,13 +764,101 @@
 
 
 
-  /* DEDUPE + SORT (ORANGE FIRST) */
+  /* CATEGORY INFERENCE (no need to hand-tag 200+) */
+
+  function getCategory(filename){
+
+    const s = filename.toLowerCase();
+
+
+
+    // automotive
+
+    if (s.includes("mechanic") || s.includes("tow") || s.includes("truck") || s.includes("auto-")) return "auto";
+
+
+
+    // medical / wellness
+
+    if (s.includes("medical") || s.includes("clinic") || s.includes("dental") || s.includes("chiropractor") ||
+
+        s.includes("therapy") || s.includes("iv-therapy") || s.includes("vet")) return "medical";
+
+
+
+    // solar / energy
+
+    if (s.includes("solar") || s.includes("electric-vehicle-charger") || s.includes("ev-") ||
+
+        s.includes("inverter") || s.includes("battery") || s.includes("energy")) return "solar";
+
+
+
+    // tech help (devices / IT)
+
+    if (s.includes("it-support") || s.includes("computer-") || s.includes("laptop-") ||
+
+        s.includes("wifi") || s.includes("virus-removal") || s.includes("domain-") ||
+
+        s.includes("email-") || s.includes("cybersecurity")) return "tech";
+
+
+
+    // business services / marketing / ops / payments / crm
+
+    if (s.includes("automation") || s.includes("crm") || s.includes("hubspot") || s.includes("salesforce") ||
+
+        s.includes("zapier") || s.includes("make-com") || s.includes("quickbooks") ||
+
+        s.includes("bookkeeping") || s.includes("invoice") || s.includes("payment-processing") ||
+
+        s.includes("credit-card") || s.includes("seo") || s.includes("ads-") ||
+
+        s.includes("branding") || s.includes("logo-") || s.includes("content-") ||
+
+        s.includes("lead-generation") || s.includes("gmb-") || s.includes("google-business") ||
+
+        s.includes("consulting") || s.includes("pos-") || s.includes("restaurant-pos") ||
+
+        s.includes("menu-") || s.includes("schedule") || s.includes("website-") ||
+
+        s.includes("ecommerce") || s.includes("small-business")) return "business";
+
+
+
+    // home services (everything else construction / repair / install)
+
+    const homeKeywords = [
+
+      "roof","plumb","hvac","electric","landscape","clean","remodel","repair",
+
+      "installation","install","painting","fence","deck","patio","driveway",
+
+      "concrete","grass","sprinkler","termite","mold","chimney","window","door",
+
+      "garage-door","insulation","stucco","foundation","pest","pool","gutter",
+
+      "tile","shower","bathtub","floor","countertop","cabinet","wall","stucco-",
+
+      "sprinkler","grass"
+
+    ];
+
+    if (homeKeywords.some(k => s.includes(k))) return "home";
+
+
+
+    return "other";
+
+  }
+
+
+
+  /* DEDUPE + SORT (orange first, then alphabetically) */
 
   const uniquePages = Array.from(new Set(pages));
 
-
-
-  const sortedPages = uniquePages.sort((a,b) => {
+  const sortedPages = uniquePages.sort((a,b)=>{
 
     const A = newBatch.includes(a);
 
@@ -507,13 +874,13 @@
 
 
 
-  /* BUILD CARDS */
+  /* RENDER GRID */
 
   const grid = document.getElementById("pageGrid");
 
 
 
-  sortedPages.forEach(filename => {
+  sortedPages.forEach(filename=>{
 
     const pretty = filename
 
@@ -525,13 +892,15 @@
 
     const isNew = newBatch.includes(filename);
 
+    const category = getCategory(filename);
+
 
 
     grid.innerHTML += `
 
-      <div class="card ${isNew ? 'orange' : ''}">
+      <div class="card ${isNew ? 'orange' : ''}" data-category="${category}">
 
-        <a href="${filename}" class="status">OPEN</a>
+        <a class="status" href="${filename}">OPEN</a>
 
         <div class="card-title">${pretty}</div>
 
@@ -545,11 +914,65 @@
 
 
 
-  /* COUNTER */
+  /* PAGE COUNT + TIMESTAMP */
 
   document.getElementById("pageCount").innerText =
 
     "Updated " + dateString + " — " + sortedPages.length + " Pages Live";
+
+
+
+  /* FILTER LOGIC */
+
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+
+
+  function applyFilter(filter){
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+
+      const cat = card.getAttribute("data-category");
+
+      if (filter === "all" || cat === filter){
+
+        card.style.display = "block";
+
+      } else {
+
+        card.style.display = "none";
+
+      }
+
+    });
+
+  }
+
+
+
+  filterButtons.forEach(btn=>{
+
+    btn.addEventListener("click", ()=>{
+
+      const filter = btn.getAttribute("data-filter");
+
+      filterButtons.forEach(b=>b.classList.remove("active"));
+
+      btn.classList.add("active");
+
+      applyFilter(filter);
+
+    });
+
+  });
+
+
+
+  /* default: show all */
+
+  applyFilter("all");
 
 </script>
 
@@ -558,4 +981,3 @@
 </body>
 
 </html>
-
