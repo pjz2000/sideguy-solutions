@@ -1,13 +1,12 @@
 
 
-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-  <!-- SideGuy Solutions · Command Center · Hybrid Growth v4.1 -->
+  <!-- SideGuy Solutions · Command Center · Hybrid Growth v4.2 -->
 
   <meta charset="UTF-8" />
 
@@ -319,7 +318,7 @@
 
       background:var(--card-bg);
 
-      padding:18px;
+      padding:16px 18px 18px;
 
       border-radius:var(--radius-lg);
 
@@ -333,7 +332,19 @@
 
       gap:6px;
 
-      position:relative;
+    }
+
+
+
+    .card-header-row {
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      margin-bottom:4px;
 
     }
 
@@ -373,12 +384,6 @@
 
     .badge {
 
-      position:absolute;
-
-      top:12px;
-
-      right:12px;
-
       padding:4px 10px;
 
       border-radius:var(--radius-pill);
@@ -389,6 +394,12 @@
 
       color:white;
 
+      display:inline-flex;
+
+      align-items:center;
+
+      justify-content:center;
+
     }
 
 
@@ -397,7 +408,7 @@
 
       background:#00c46c;
 
-      box-shadow:0 0 8px rgba(0,255,150,0.5);
+      box-shadow:0 0 10px rgba(0,255,150,0.55);
 
     }
 
@@ -407,7 +418,7 @@
 
       background:#ff9c3f;
 
-      box-shadow:0 0 8px rgba(255,150,60,0.45);
+      box-shadow:0 0 10px rgba(255,170,80,0.55);
 
     }
 
@@ -458,6 +469,8 @@
   </style>
 
 </head>
+
+
 
 <body>
 
@@ -579,7 +592,7 @@
 
   const trackedPages = [
 
-    // HOME / EMERGENCY
+    // HOME / EMERGENCY (NEW)
 
     { name:"Water Damage Restoration San Diego", url:"water-damage-restoration-san-diego.html", status:"new", category:"home" },
 
@@ -590,6 +603,8 @@
     { name:"Foundation Repair San Diego", url:"foundation-repair-san-diego.html", status:"new", category:"home" },
 
 
+
+    // HOME / CORE
 
     { name:"AC Repair San Diego", url:"ac-repair-san-diego.html", status:"open", category:"home" },
 
@@ -631,7 +646,7 @@
 
 
 
-    // You can keep adding more here as you go...
+    // keep adding more as you go...
 
   ];
 
@@ -671,7 +686,7 @@
 
   /************************************************************
 
-   * RENDER CARDS
+   * RENDER CARDS (with cleaner header row)
 
    ************************************************************/
 
@@ -689,13 +704,9 @@
 
 
 
-    const badge = document.createElement("div");
+    const headerRow = document.createElement("div");
 
-    badge.className = "badge " + (page.status === "new" ? "badge-orange" : "badge-green");
-
-    badge.innerText = page.status === "new" ? "NEW" : "OPEN";
-
-    card.appendChild(badge);
+    headerRow.className = "card-header-row";
 
 
 
@@ -705,7 +716,21 @@
 
     title.innerText = page.name;
 
-    card.appendChild(title);
+
+
+    const badge = document.createElement("div");
+
+    badge.className = "badge " + (page.status === "new" ? "badge-orange" : "badge-green");
+
+    badge.innerText = page.status === "new" ? "NEW" : "OPEN";
+
+
+
+    headerRow.appendChild(title);
+
+    headerRow.appendChild(badge);
+
+    card.appendChild(headerRow);
 
 
 
@@ -805,16 +830,12 @@
 
 
 
-  // Fun simple versioning: 400 series + total pages
+  // Simple versioning: 400 series + tracked pages count
 
-  document.getElementById("version").innerText = "v4.1 · " + (400 + sortedPages.length);
-
-
+  document.getElementById("version").innerText = "v4.2 · " + (400 + sortedPages.length);
 
 </script>
 
 </body>
 
 </html>
-
-
