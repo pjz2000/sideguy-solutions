@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -6,15 +8,11 @@
 
   <!-- SideGuy Solutions · Command Center Homepage -->
 
-  <!-- Timestamp: 12/03/2025 · 6:10 PM PST -->
+  <!-- Timestamp: 12/03/2025 · ~6:45 PM PST -->
 
-  <!-- Mode: Full Overwrite + Backup (C) -->
+  <!-- Mode: SideGuy Fun Edition -->
 
-  <!-- Live Pages: Autofill -->
 
-  <!-- Target Pages: 200+ -->
-
-  
 
   <meta charset="UTF-8" />
 
@@ -370,7 +368,35 @@
 
       opacity:0.65;
 
-      padding:30px 0 40px;
+      padding:30px 0 80px;
+
+    }
+
+
+
+    .text-orb-bottom {
+
+      position:fixed;
+
+      right:20px;
+
+      bottom:20px;
+
+      padding:12px 20px;
+
+      background:#00e2b2;
+
+      border-radius:999px;
+
+      color:white;
+
+      font-weight:700;
+
+      text-decoration:none;
+
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+
+      font-size:14px;
 
     }
 
@@ -402,27 +428,27 @@
 
     <div class="hero-tag">
 
-      <span>⚡ Solana Payments</span>
+      <span>⚡ 0.4s Solana Payments</span>
 
-      <span>🚀 0.4s Settlements</span>
+      <span>🌊 Coastal Command Center</span>
 
-      <span>🧠 Command Center</span>
+      <span>🧠 Built with ChatGPT</span>
 
     </div>
 
-    <h1>SideGuy Command Center — 0.4s Solana Payments & Real Operator Tools</h1>
+    <h1>SideGuy Command Center — Instant Solana Payments & Real Operator Tools</h1>
 
     <p class="hero-text">
 
-      This is your real-time dashboard of every SideGuy page — live builds in green, targets
+      This homepage tracks your whole empire: every live SideGuy page and every target URL we still need to build.
 
-      in blue. Build, improve, expand. One home. One mission. Instant settlement included.
+      Green means live, blue means “Build Me”. No more guessing, no more redoing work.
 
     </p>
 
     <p class="hero-meta">
 
-      Homepage v2.0 · Updated 12/03/2025 · 6:10 PM PST
+      Homepage v3.0 · SideGuy Fun Edition · Updated 12/03/2025
 
     </p>
 
@@ -430,23 +456,11 @@
 
 
 
-  <!-- TOP 20 LIVE HERO SECTION -->
-
-  <h2 class="section-header">LIVE PAGES — TOP 20</h2>
-
-  <p class="section-sub">Your strongest, most important, most clicked pages.</p>
-
-
-
-  <div id="live-top-grid" class="grid"></div>
-
-
-
   <!-- COMMAND GRID -->
 
-  <h2 class="section-header">SideGuy Command Grid</h2>
+  <h2 class="section-header">Core SideGuy Command Grid</h2>
 
-  <p class="section-sub">200+ pages — green = live · blue = to-build.</p>
+  <p class="section-sub">Live pages in green · Targets in blue. Add or tweak URLs in one list at the bottom of this file.</p>
 
   <div id="page-count" class="page-count"></div>
 
@@ -456,275 +470,279 @@
 
   <script>
 
-    /******************************************************************
+    /*
 
-     * LIVE PAGES (GREEN) — pulled from your real repo filenames
+      PAGES ARRAY
 
-     * These are grouped in the exact SideGuy Fun Mode (D) order:
+      -----------
 
-     * Payments → Solana → Contractors → Cities → AI → Energy → WebDev → Tools
+      This is the only part you ever need to edit to grow the site.
 
-     ******************************************************************/
 
 
+      Each item:
 
-    const LIVE_PAGES = [
+        slug:   file name (e.g. "mobile-payments-san-diego.html")
 
-      /* ==== PAYMENTS ==== */
+        label:  human title that shows on the card
 
-      "mobile-payments-san-diego.html",
+        cat:    category (Payments, Solana, Contractors, Cities, AI, Energy, Web, Tools, etc.)
 
-      "credit-card-processing-san-diego.html",
+        live:   true  => page already exists (green "Open" pill)
 
-      "cheapest-payment-processing.html",
+                false => target to build (blue "Build Me" pill)
 
-      "payment-processing-san-diego.html",
 
-      "get-paid-today.html",
 
-      "instant-payments-san-diego.html",
+      To add more:
 
-      "instant-settlement-payments.html",
+        1) Add a new object to PAGES with live:true or live:false
 
-      "same-day-pay.html",
+        2) Save + commit → Command Center updates automatically
 
-      "local-business-payment-processing.html",
+    */
 
-      "business-payment-processing.html",
 
-      "contractor-payment-processing-san-diego.html",
 
-      "merchant-services-san-diego.html",
+    const PAGES = [
 
-      "settlement-payments-san-diego.html",
+      /* ==== PAYMENTS — LIVE ==== */
 
-      "ecommerce-payment-processing-san-diego.html",
+      { slug:"mobile-payments-san-diego.html",        label:"Mobile Payments · San Diego",                 cat:"Payments",   live:true },
 
+      { slug:"credit-card-processing-san-diego.html", label:"Credit Card Processing · San Diego",         cat:"Payments",   live:true },
 
+      { slug:"cheapest-payment-processing.html",      label:"Cheapest Payment Processing",                cat:"Payments",   live:true },
 
-      /* ==== SOLANA ==== */
+      { slug:"payment-processing-san-diego.html",     label:"Payment Processing · San Diego",             cat:"Payments",   live:true },
 
-      "solana-payments-san-diego.html",
+      { slug:"get-paid-today.html",                   label:"Get Paid Today",                             cat:"Payments",   live:true },
 
-      "solana-checkout-api.html",
+      { slug:"instant-payments-san-diego.html",       label:"Instant Payments · San Diego",               cat:"Payments",   live:true },
 
-      "solana-business-tools-san-diego.html",
+      { slug:"instant-settlement-payments.html",      label:"Instant Settlement Payments",                cat:"Payments",   live:true },
 
-      "solana-payroll-payments.html",
+      { slug:"same-day-pay.html",                     label:"Same Day Pay",                               cat:"Payments",   live:true },
 
-      "solana-automation.html",
+      { slug:"local-business-payment-processing.html",label:"Local Business Payment Processing",          cat:"Payments",   live:true },
 
-      "north-county-solana-payments.html",
+      { slug:"business-payment-processing.html",      label:"Business Payment Processing",                cat:"Payments",   live:true },
 
-      "la-jolla-solana-payments.html",
+      { slug:"ecommerce-payment-processing-san-diego.html", label:"E-commerce Payment Processing · SD",   cat:"Payments",   live:true },
 
+      { slug:"contractor-payment-processing-san-diego.html", label:"Contractor Payment Processing · SD",  cat:"Payments",   live:true },
 
+      { slug:"merchant-services-san-diego.html",      label:"Merchant Services · San Diego",              cat:"Payments",   live:true },
 
-      /* ==== CONTRACTORS ==== */
+      { slug:"settlement-payments-san-diego.html",    label:"Settlement Payments · San Diego",            cat:"Payments",   live:true },
 
-      "hvac-payment-processing.html",
+      { slug:"card-not-present-processing.html",      label:"Card-Not-Present Processing",                cat:"Payments",   live:true },
 
-      "plumber-payment-processing.html",
+      { slug:"local-business-payment-processing-san-diego.html", label:"Local Business Payments · SD",    cat:"Payments",   live:false }, // adjust live=true if built
 
-      "electrician-payment-processing.html",
 
-      "home-service-payment-processing.html",
 
-      "auto-detailing-san-diego.html",
+      /* ==== SOLANA — LIVE ==== */
 
+      { slug:"solana-payments-san-diego.html",        label:"Solana Payments · San Diego",                cat:"Solana",     live:true },
 
+      { slug:"solana-business-tools-san-diego.html",  label:"Solana Business Tools · San Diego",          cat:"Solana",     live:true },
 
-      /* ==== LOCAL CITIES ==== */
+      { slug:"solana-checkout-api.html",              label:"Solana Checkout API",                        cat:"Solana",     live:true },
 
-      "cardiff-payment-processing.html",
+      { slug:"solana-payroll-payments.html",          label:"Solana Payroll Payments",                    cat:"Solana",     live:true },
 
-      "carlsbad-payment-processing-san-diego.html",
+      { slug:"solana-automation.html",                label:"Solana Automation Flows",                    cat:"Solana",     live:true },
 
-      "del-mar-payment-processing-san-diego.html",
+      { slug:"north-county-solana-payments.html",     label:"North County Solana Payments",               cat:"Solana",     live:true },
 
-      "encinitas-payment-processing-san-diego.html",
+      { slug:"la-jolla-solana-payments.html",         label:"La Jolla Solana Payments",                   cat:"Solana",     live:true },
 
-      "la-jolla-payment-processing.html",
 
-      "oceanside-payment-processing.html",
 
-      "north-county-payment-processing.html",
+      /* ==== CONTRACTORS — LIVE ==== */
 
-      "coastal-business-automation.html",
+      { slug:"hvac-payment-processing.html",          label:"HVAC Payment Processing",                    cat:"Contractors",live:true },
 
+      { slug:"plumber-payment-processing.html",       label:"Plumber Payment Processing",                 cat:"Contractors",live:true },
 
+      { slug:"electrician-payment-processing.html",   label:"Electrician Payment Processing",             cat:"Contractors",live:true },
 
-      /* ==== AI / AUTOMATION ==== */
+      { slug:"home-service-payment-processing.html",  label:"Home Service Payment Processing",            cat:"Contractors",live:true },
 
-      "ai-development-san-diego.html",
+      { slug:"auto-detailing-san-diego.html",         label:"Auto Detailing Payments · San Diego",        cat:"Contractors",live:true },
 
-      "ai-payment-automation-san-diego.html",
+      { slug:"cardiff-contractor-payments.html",      label:"Cardiff Contractor Payments",                cat:"Contractors",live:true },
 
-      "artificial-intelligence-san-diego.html",
 
-      "crm-automation.html",
 
-      "automation-builders.html",
+      /* ==== CITIES — LIVE ==== */
 
-      "workflow-automation.html",
+      { slug:"cardiff-payment-processing.html",               label:"Payment Processing · Cardiff",         cat:"Cities",     live:true },
 
-      "business-automation.html",
+      { slug:"cardiff-lower-credit-card-fees.html",           label:"Cardiff Lower Credit Card Fees",      cat:"Cities",     live:true },
 
+      { slug:"carlsbad-payment-processing.html",              label:"Payment Processing · Carlsbad",       cat:"Cities",     live:true },
 
+      { slug:"carlsbad-payment-processing-san-diego.html",    label:"Carlsbad Payment Processing · SD",    cat:"Cities",     live:true },
 
-      /* ==== ENERGY / CLIMATE ==== */
+      { slug:"carlsbad-lower-credit-card-fees.html",          label:"Carlsbad Lower Credit Card Fees",    cat:"Cities",     live:true },
 
-      "energy-payments-san-diego.html",
+      { slug:"del-mar-payment-processing-san-diego.html",     label:"Payment Processing · Del Mar",       cat:"Cities",     live:true },
 
-      "carbon-credit-payments-san-diego.html",
+      { slug:"encinitas-payment-processing-san-diego.html",   label:"Payment Processing · Encinitas",     cat:"Cities",     live:true },
 
+      { slug:"la-jolla-payment-processing.html",              label:"Payment Processing · La Jolla",      cat:"Cities",     live:true },
 
+      { slug:"oceanside-payment-processing.html",             label:"Payment Processing · Oceanside",     cat:"Cities",     live:true },
 
-      /* ==== WEB DEV / SOFTWARE ==== */
+      { slug:"north-county-payment-processing.html",          label:"Payment Processing · North County",  cat:"Cities",     live:true },
 
-      "web-development-san-diego.html",
+      { slug:"coastal-business-automation.html",              label:"Coastal Business Automation",        cat:"Cities",     live:true },
 
-      "software-development-san-diego.html",
 
-      "dashboard-development-san-diego.html",
 
-      "api-integration-san-diego.html",
+      /* ==== AI / AUTOMATION — LIVE ==== */
 
+      { slug:"ai-business-tools-san-diego.html",      label:"AI Business Tools · San Diego",              cat:"AI",         live:true },
 
+      { slug:"ai-development-san-diego.html",         label:"AI Development · San Diego",                 cat:"AI",         live:true },
 
-      /* ==== OPERATOR TOOLS / MISC ==== */
+      { slug:"ai-payment-automation-san-diego.html",  label:"AI Payment Automation · San Diego",          cat:"AI",         live:true },
 
-      "sideguy-savings-directory-san-diego.html",
+      { slug:"artificial-intelligence-san-diego.html",label:"Artificial Intelligence · San Diego",        cat:"AI",         live:true },
 
-      "sideguy-operator-network.html",
+      { slug:"crm-automation.html",                   label:"CRM Automation",                             cat:"AI",         live:true },
 
-      "crypto-help-desk-san-diego.html"
+      { slug:"automation-builders.html",              label:"Automation Builders",                        cat:"AI",         live:true },
+
+      { slug:"workflow-automation.html",              label:"Workflow Automation",                        cat:"AI",         live:true },
+
+      { slug:"business-automation.html",              label:"Business Automation",                        cat:"AI",         live:true },
+
+
+
+      /* ==== ENERGY / CLIMATE — LIVE ==== */
+
+      { slug:"energy-payments-san-diego.html",        label:"Energy Payments · San Diego",                cat:"Energy",     live:true },
+
+      { slug:"carbon-credit-payments-san-diego.html", label:"Carbon Credit Payments · San Diego",         cat:"Energy",     live:true },
+
+      { slug:"carbon-credit-automation.html",         label:"Carbon Credit Automation",                   cat:"Energy",     live:true },
+
+      { slug:"carbon-credits-climate-software.html",  label:"Climate & Credits Software",                 cat:"Energy",     live:true },
+
+
+
+      /* ==== WEB / SOFTWARE — LIVE ==== */
+
+      { slug:"web-development-san-diego.html",        label:"Web Development · San Diego",                cat:"Web",        live:true },
+
+      { slug:"software-development-san-diego.html",   label:"Software Development · San Diego",           cat:"Web",        live:true },
+
+      { slug:"dashboard-development-san-diego.html",  label:"Dashboard Development · San Diego",          cat:"Web",        live:false }, // flip to true when built
+
+      { slug:"app-development-san-diego.html",        label:"App Development · San Diego",                cat:"Web",        live:true },
+
+      { slug:"app-development-solutions-san-diego.html", label:"App Development Solutions · SD",         cat:"Web",        live:true },
+
+      { slug:"api-integration-san-diego.html",        label:"API Integration · San Diego",                cat:"Web",        live:false }, // set true if built
+
+      { slug:"web-app-development-san-diego.html",    label:"Web App Development · San Diego",            cat:"Web",        live:false }, // set true if built
+
+
+
+      /* ==== TOOLS / MISC — LIVE ==== */
+
+      { slug:"sideguy-savings-directory-san-diego.html", label:"SideGuy Savings Directory · San Diego",   cat:"Tools",      live:true },
+
+      { slug:"sideguy-operator-network.html",         label:"SideGuy Operator Network",                   cat:"Tools",      live:true },
+
+      { slug:"crypto-help-desk-san-diego.html",       label:"Crypto Help Desk · San Diego",               cat:"Tools",      live:true },
+
+
+
+      /* ==== TARGETS — TO BUILD (BLUE) ==== */
+
+      { slug:"restaurant-payment-processing-san-diego.html", label:"Restaurant Payment Processing · SD",  cat:"Payments",   live:false },
+
+      { slug:"bar-restaurant-payment-processing.html", label:"Bar & Restaurant Payment Processing",      cat:"Payments",   live:false },
+
+      { slug:"coffee-shop-payment-processing-san-diego.html", label:"Coffee Shop Payment Processing · SD",cat:"Payments",  live:false },
+
+      { slug:"marketplace-payments-san-diego.html",   label:"Marketplace Payments · San Diego",           cat:"Payments",   live:false },
+
+      { slug:"solana-pos-system-san-diego.html",      label:"Solana POS System · San Diego",              cat:"Solana",     live:false },
+
+      { slug:"solana-subscription-payments.html",     label:"Solana Subscription Payments",               cat:"Solana",     live:false },
+
+      { slug:"solana-stablecoin-payments.html",       label:"Solana Stablecoin Payments",                 cat:"Solana",     live:false },
+
+      { slug:"general-contractor-payment-processing.html", label:"General Contractor Payment Processing", cat:"Contractors",live:false },
+
+      { slug:"roofing-payment-processing.html",       label:"Roofing Payment Processing",                 cat:"Contractors",live:false },
+
+      { slug:"pool-service-payment-processing.html",  label:"Pool Service Payment Processing",            cat:"Contractors",live:false },
+
+      { slug:"mission-beach-payment-processing.html", label:"Mission Beach Payment Processing",           cat:"Cities",     live:false },
+
+      { slug:"pacific-beach-payment-processing.html", label:"Pacific Beach Payment Processing",          cat:"Cities",     live:false },
+
+      { slug:"ai-chatbots-san-diego.html",            label:"AI Chatbots · San Diego",                    cat:"AI",         live:false },
+
+      { slug:"lead-automation-san-diego.html",        label:"Lead Automation · San Diego",                cat:"AI",         live:false },
+
+      { slug:"sales-automation-san-diego.html",       label:"Sales Automation · San Diego",               cat:"AI",         live:false },
+
+      { slug:"customer-support-automation.html",      label:"Customer Support Automation",                cat:"AI",         live:false },
+
+      { slug:"solar-installation-payments-san-diego.html", label:"Solar Installation Payments · SD",      cat:"Energy",     live:false },
+
+      { slug:"clean-tech-payments-san-diego.html",    label:"Clean-Tech Payments · San Diego",            cat:"Energy",     live:false },
+
+      { slug:"stripe-fees-calculator.html",           label:"Stripe Fees Calculator",                     cat:"Tools",      live:false },
+
+      { slug:"subscription-payments-san-diego.html",  label:"Subscription Payments · San Diego",          cat:"Payments",   live:false },
+
+      { slug:"switch-from-square-san-diego.html",     label:"Switch from Square · San Diego",             cat:"Payments",   live:false },
+
+      { slug:"switch-from-stripe.html",               label:"Switch from Stripe",                         cat:"Payments",   live:false },
+
+      { slug:"ticket-escrow-solana.html",             label:"Ticket Escrow on Solana",                    cat:"Tickets",    live:false },
+
+      { slug:"ticketing-payments-san-diego.html",     label:"Ticketing Payments · San Diego",             cat:"Tickets",    live:false },
+
+      { slug:"sideguy-payments-calculator.html",      label:"SideGuy Payments Calculator",                cat:"Tools",      live:false },
+
+      { slug:"sideguy-case-studies.html",             label:"SideGuy Case Studies",                       cat:"Tools",      live:false },
+
+      { slug:"sideguy-membership.html",               label:"SideGuy Membership",                         cat:"Tools",      live:false }
 
     ];
 
 
 
-    /******************************************************************
+    const grid = document.getElementById("command-grid");
 
-     * TO-BUILD TARGETS (BLUE) — expand to 200+ SEO pages
+    const countEl = document.getElementById("page-count");
 
-     * These DO NOT exist yet — they'll show BLUE until built.
 
-     ******************************************************************/
 
+    let liveCount = 0;
 
+    let buildCount = 0;
 
-    const TARGET_PAGES = [
 
-      /* Payments */
 
-      "restaurant-payment-processing-san-diego.html",
+    PAGES.forEach((p, index) => {
 
-      "bar-restaurant-payment-processing.html",
+      if (p.live) liveCount++; else buildCount++;
 
-      "coffee-shop-payment-processing-san-diego.html",
 
-      "mobile-merchant-services-san-diego.html",
-
-      "card-not-present-payments-san-diego.html",
-
-
-
-      /* Solana */
-
-      "solana-pos-system-san-diego.html",
-
-      "solana-payouts-san-diego.html",
-
-      "solana-subscription-payments.html",
-
-      "solana-stablecoin-payments.html",
-
-
-
-      /* Contractors */
-
-      "general-contractor-payment-processing.html",
-
-      "roofing-payment-processing.html",
-
-      "landscaping-payment-processing.html",
-
-      "pool-service-payment-processing.html",
-
-
-
-      /* Cities */
-
-      "mission-beach-payment-processing.html",
-
-      "pacific-beach-payment-processing.html",
-
-      "point-loma-payment-processing.html",
-
-      "scripps-ranch-payment-processing.html",
-
-
-
-      /* AI */
-
-      "ai-chatbots-san-diego.html",
-
-      "lead-automation-san-diego.html",
-
-      "sales-automation-san-diego.html",
-
-      "customer-support-automation.html",
-
-
-
-      /* Energy */
-
-      "solar-installation-payments-san-diego.html",
-
-      "clean-tech-payments-san-diego.html",
-
-
-
-      /* Web */
-
-      "fintech-software-development-san-diego.html",
-
-      "website-redesign-san-diego.html",
-
-      "custom-internal-tools-san-diego.html",
-
-
-
-      /* Tools */
-
-      "sideguy-payments-calculator.html",
-
-      "sideguy-case-studies.html",
-
-      "sideguy-membership.html"
-
-    ];
-
-
-
-    /******************************************************************
-
-     * RENDERING LOGIC
-
-     ******************************************************************/
-
-    
-
-    // Top 20 LIVE Pages
-
-    const topLiveGrid = document.getElementById("live-top-grid");
-
-    LIVE_PAGES.slice(0, 20).forEach((slug, index) => {
 
       const card = document.createElement("a");
 
-      card.href = slug;
+      card.href = p.slug;
 
       card.className = "card";
 
@@ -736,7 +754,7 @@
 
       title.className = "card-title";
 
-      title.textContent = (index + 1) + ". " + slug.replace(".html", "").replace(/-/g, " ");
+      title.textContent = (index + 1) + ". " + p.label;
 
 
 
@@ -744,7 +762,7 @@
 
       sub.className = "card-sub";
 
-      sub.textContent = "LIVE · " + slug;
+      sub.textContent = (p.live ? "LIVE · " : "TO BUILD · ") + p.cat + " · " + p.slug;
 
 
 
@@ -756,69 +774,9 @@
 
       const pill = document.createElement("div");
 
-      pill.className = "pill-live";
+      pill.className = p.live ? "pill-live" : "pill-build";
 
-      pill.textContent = "Open";
-
-
-
-      card.appendChild(left);
-
-      card.appendChild(pill);
-
-      topLiveGrid.appendChild(card);
-
-    });
-
-
-
-    // COMMAND GRID (All live + targets)
-
-    const commandGrid = document.getElementById("command-grid");
-
-    let rowNumber = 1;
-
-
-
-    LIVE_PAGES.forEach(slug => {
-
-      const card = document.createElement("a");
-
-      card.href = slug;
-
-      card.className = "card";
-
-
-
-      const left = document.createElement("div");
-
-      const title = document.createElement("div");
-
-      title.className = "card-title";
-
-      title.textContent = rowNumber + ". " + slug.replace(".html", "").replace(/-/g, " ");
-
-
-
-      const sub = document.createElement("div");
-
-      sub.className = "card-sub";
-
-      sub.textContent = "LIVE · " + slug;
-
-
-
-      left.appendChild(title);
-
-      left.appendChild(sub);
-
-
-
-      const pill = document.createElement("div");
-
-      pill.className = "pill-live";
-
-      pill.textContent = "Open";
+      pill.textContent = p.live ? "Open" : "Build Me";
 
 
 
@@ -826,75 +784,15 @@
 
       card.appendChild(pill);
 
-      commandGrid.appendChild(card);
-
-
-
-      rowNumber++;
+      grid.appendChild(card);
 
     });
 
 
 
-    TARGET_PAGES.forEach(slug => {
+    countEl.textContent =
 
-      const card = document.createElement("a");
-
-      card.href = slug;
-
-      card.className = "card";
-
-
-
-      const left = document.createElement("div");
-
-      const title = document.createElement("div");
-
-      title.className = "card-title";
-
-      title.textContent = rowNumber + ". " + slug.replace(".html", "").replace(/-/g, " ");
-
-
-
-      const sub = document.createElement("div");
-
-      sub.className = "card-sub";
-
-      sub.textContent = "TO BUILD · " + slug;
-
-
-
-      left.appendChild(title);
-
-      left.appendChild(sub);
-
-
-
-      const pill = document.createElement("div");
-
-      pill.className = "pill-build";
-
-      pill.textContent = "Build Me";
-
-
-
-      card.appendChild(left);
-
-      card.appendChild(pill);
-
-      commandGrid.appendChild(card);
-
-
-
-      rowNumber++;
-
-    });
-
-
-
-    document.getElementById("page-count").textContent =
-
-      LIVE_PAGES.length + " Live Pages · " + TARGET_PAGES.length + " Targets · Total " + (LIVE_PAGES.length + TARGET_PAGES.length);
+      PAGES.length + " pages tracked · " + liveCount + " live · " + buildCount + " to build";
 
   </script>
 
@@ -902,36 +800,23 @@
 
   <footer class="footer">
 
-    Homepage v2.0 · Command Center Edition · Updated 12/03/2025 · 6:10 PM PST<br />
+    Homepage v3.0 · Command Center Edition · Updated 12/03/2025 · SideGuy Fun Mode<br />
 
-    © 2025 SideGuy Solutions — Real Operators Only.
+    © 2025 SideGuy Solutions — Real Operators Only. Own a piece of your processing.
 
   </footer>
 
 
 
-  <!-- ============================
+  <!-- Bottom Text PJ orb -->
 
-       BACKUP OF OLD INDEX BELOW
-
-       (This preserves your old file)
-
-       ============================ -->
-
-  <!-- 
-
-     Your previous index.html content is preserved here
-
-     (Paste it manually if you want it backed up fully)
-
-  -->
+  <a href="sms:+17735441231" class="text-orb-bottom">Text PJ · 773-544-1231</a>
 
 
 
 </body>
 
 </html>
-
 
 
 
