@@ -4,7 +4,7 @@
 
 <head>
 
-  <!-- SideGuy Solutions · Command Center v12.0 · Category Filter + Glow Edition -->
+  <!-- SideGuy Solutions · Command Center v13.x · Auto-Version + Real-Time Growth -->
 
   <meta charset="UTF-8" />
 
@@ -26,7 +26,7 @@
 
       color:#033045;
 
-      padding-bottom:100px;
+      padding-bottom:120px;
 
       -webkit-font-smoothing:antialiased;
 
@@ -34,19 +34,43 @@
 
 
 
-    header{text-align:center;padding:32px 16px 10px;}
+    header{text-align:center;padding:32px 16px 14px;}
 
-    h1{font-size:34px;font-weight:800;color:#014a66;margin-bottom:6px;}
+    h1{font-size:34px;font-weight:800;color:#014a66;margin-bottom:10px;}
 
-    .updated{font-size:14px;color:#035372;opacity:.9;margin-bottom:6px;font-weight:600;}
 
-    .subtitle{font-size:16px;font-weight:600;color:#014a66;}
+
+    .statline{
+
+      font-size:15px;
+
+      font-weight:600;
+
+      color:#035372;
+
+      margin:4px 0;
+
+    }
+
+
+
+    .subtitle{
+
+      font-size:16px;
+
+      font-weight:600;
+
+      color:#014a66;
+
+      margin-top:10px;
+
+    }
 
 
 
     .napkin{
 
-      width:92%;max-width:650px;margin:18px auto 0;
+      width:92%;max-width:650px;margin:20px auto 0;
 
       padding:14px 16px;border-radius:14px;
 
@@ -60,7 +84,7 @@
 
 
 
-    /* CATEGORY FILTER BAR */
+    /* FILTER BAR */
 
     .filters{
 
@@ -78,9 +102,11 @@
 
     }
 
+
+
     .filter-btn{
 
-      padding:6px 12px;
+      padding:7px 14px;
 
       border-radius:999px;
 
@@ -100,6 +126,8 @@
 
     }
 
+
+
     .filter-btn.active{
 
       background:#035372;
@@ -111,6 +139,8 @@
     }
 
 
+
+    /* CARD GRID */
 
     .grid{
 
@@ -154,7 +184,7 @@
 
 
 
-    /* GREEN GLOW BUTTON */
+    /* GREEN GLOW OPEN BUTTON */
 
     .status{
 
@@ -176,17 +206,21 @@
 
       margin-bottom:10px;
 
-      box-shadow:0 0 8px rgba(33,197,93,0.65);
+      box-shadow:0 0 8px rgba(33,197,93,0.7);
 
       transition:0.2s ease;
 
     }
 
-    .status:hover{box-shadow:0 0 14px rgba(33,197,93,0.9);}
+    .status:hover{
+
+      box-shadow:0 0 14px rgba(33,197,93,1);
+
+    }
 
 
 
-    /* ORANGE PRIORITY PAGES */
+    /* ORANGE NEW PAGES */
 
     .card.orange{
 
@@ -230,7 +264,7 @@
 
 
 
-    /* Text PJ Orb */
+    /* TEXT PJ ORB */
 
     .orb{
 
@@ -243,6 +277,8 @@
       display:flex;align-items:center;justify-content:center;
 
       color:white;font-weight:800;font-size:13px;text-decoration:none;
+
+      z-index:9999;
 
     }
 
@@ -260,9 +296,21 @@
 
   <h1>SideGuy Command Center</h1>
 
-  <div id="pageCount" class="updated"></div>
 
-  <div class="subtitle">Instant Solana Payments · Operator Tools · Tech Help · San Diego</div>
+
+  <div id="timestamp" class="statline"></div>
+
+  <div id="pageStats" class="statline"></div>
+
+  <div id="versionLine" class="statline"></div>
+
+
+
+  <div class="subtitle">
+
+    Instant Solana Payments · Operator Tools · Tech Help · San Diego
+
+  </div>
 
 </header>
 
@@ -270,9 +318,11 @@
 
 <div class="napkin">
 
-  <strong>Napkin Note — Today’s Mission:</strong><br>
+  <strong>Napkin Note — SideGuy Growth Mode:</strong><br>
 
-  Build San Diego’s 200+ page problem engine. New pages appear at the TOP in orange. Use the filters to focus: Home, Tech, Business, Auto, Medical, Solar, Other.
+  This Command Center auto-tracks real-time expansion. Orange = New Pages.
+
+  Filters show sectors. Version updates automatically with growth.
 
 </div>
 
@@ -282,17 +332,17 @@
 
   <button class="filter-btn active" data-filter="all">All</button>
 
-  <button class="filter-btn" data-filter="home">Home Services</button>
+  <button class="filter-btn" data-filter="home">Home</button>
 
-  <button class="filter-btn" data-filter="tech">Tech Help</button>
+  <button class="filter-btn" data-filter="tech">Tech</button>
 
-  <button class="filter-btn" data-filter="business">Business Services</button>
+  <button class="filter-btn" data-filter="business">Business</button>
 
-  <button class="filter-btn" data-filter="auto">Automotive</button>
+  <button class="filter-btn" data-filter="auto">Auto</button>
 
-  <button class="filter-btn" data-filter="medical">Medical & Wellness</button>
+  <button class="filter-btn" data-filter="medical">Medical</button>
 
-  <button class="filter-btn" data-filter="solar">Solar & Energy</button>
+  <button class="filter-btn" data-filter="solar">Solar</button>
 
   <button class="filter-btn" data-filter="other">Other</button>
 
@@ -306,25 +356,9 @@
 
 <a href="sms:7735441231" class="orb">Text PJ</a>
 
-
-
 <script>
 
-  /* AUTO DATE */
-
-  const today = new Date();
-
-  const dateString =
-
-    String(today.getMonth()+1).padStart(2,"0") + "/" +
-
-    String(today.getDate()).padStart(2,"0") + "/" +
-
-    today.getFullYear();
-
-
-
-  /* ORANGE PRIORITY BATCHES — everything new we’ve been adding */
+  /* ORANGE PRIORITY PAGES — all new growth batches */
 
   const newBatch = [
 
@@ -684,7 +718,7 @@
 
 
 
-    /* Tech / help / software */
+    /* Tech / help / software core */
 
     "tech-help-san-diego.html",
 
@@ -708,7 +742,7 @@
 
 
 
-    /* Early “accountant / mortgage / schedule / systems” batch */
+    /* Early accountant / mortgage / scheduling batch */
 
     "accountant-services-san-diego.html",
 
@@ -720,8 +754,6 @@
 
     "tile-installation-san-diego.html",
 
-    "drywall-repair-san-diego.html",
-
     "appliance-repair-san-diego.html",
 
     "pool-cleaning-service-san-diego.html",
@@ -731,8 +763,6 @@
     "fencing-contractor-san-diego.html",
 
     "bookkeeping-services-san-diego.html",
-
-    "bookkeeping-help-san-diego.html",
 
     "pos-system-help-san-diego.html",
 
@@ -744,10 +774,6 @@
 
     "online-scheduling-help-san-diego.html",
 
-    "business-automation-san-diego.html",
-
-    "crm-setup-san-diego.html",
-
     "zelle-business-help-san-diego.html",
 
     "credit-card-fees-explained.html",
@@ -756,7 +782,7 @@
 
 
 
-    /* ALL new orange batches get appended */
+    /* Append ALL orange batches */
 
     ...newBatch
 
@@ -764,7 +790,7 @@
 
 
 
-  /* CATEGORY INFERENCE (no need to hand-tag 200+) */
+  /* CATEGORY INFERENCE */
 
   function getCategory(filename){
 
@@ -774,59 +800,111 @@
 
     // automotive
 
-    if (s.includes("mechanic") || s.includes("tow") || s.includes("truck") || s.includes("auto-")) return "auto";
+    if (s.includes("mechanic") || s.includes("tow") || s.includes("truck") || s.includes("auto-")) {
+
+      return "auto";
+
+    }
 
 
 
     // medical / wellness
 
-    if (s.includes("medical") || s.includes("clinic") || s.includes("dental") || s.includes("chiropractor") ||
+    if (
 
-        s.includes("therapy") || s.includes("iv-therapy") || s.includes("vet")) return "medical";
+      s.includes("medical") || s.includes("clinic") || s.includes("dental") ||
+
+      s.includes("chiropractor") || s.includes("therapy") ||
+
+      s.includes("iv-therapy") || s.includes("vet")
+
+    ){
+
+      return "medical";
+
+    }
 
 
 
     // solar / energy
 
-    if (s.includes("solar") || s.includes("electric-vehicle-charger") || s.includes("ev-") ||
+    if (
 
-        s.includes("inverter") || s.includes("battery") || s.includes("energy")) return "solar";
+      s.includes("solar") || s.includes("electric-vehicle-charger") ||
+
+      s.includes("ev-") || s.includes("inverter") || s.includes("battery") ||
+
+      s.includes("energy")
+
+    ){
+
+      return "solar";
+
+    }
 
 
 
     // tech help (devices / IT)
 
-    if (s.includes("it-support") || s.includes("computer-") || s.includes("laptop-") ||
+    if (
 
-        s.includes("wifi") || s.includes("virus-removal") || s.includes("domain-") ||
+      s.includes("it-support") || s.includes("computer-") || s.includes("laptop-") ||
 
-        s.includes("email-") || s.includes("cybersecurity")) return "tech";
+      s.includes("wifi") || s.includes("virus-removal") ||
+
+      s.includes("domain-") || s.includes("email-") ||
+
+      s.includes("cybersecurity")
+
+    ){
+
+      return "tech";
+
+    }
 
 
 
     // business services / marketing / ops / payments / crm
 
-    if (s.includes("automation") || s.includes("crm") || s.includes("hubspot") || s.includes("salesforce") ||
+    if (
 
-        s.includes("zapier") || s.includes("make-com") || s.includes("quickbooks") ||
+      s.includes("automation") || s.includes("crm") || s.includes("hubspot") ||
 
-        s.includes("bookkeeping") || s.includes("invoice") || s.includes("payment-processing") ||
+      s.includes("salesforce") || s.includes("zapier") ||
 
-        s.includes("credit-card") || s.includes("seo") || s.includes("ads-") ||
+      s.includes("make-com") || s.includes("quickbooks") ||
 
-        s.includes("branding") || s.includes("logo-") || s.includes("content-") ||
+      s.includes("bookkeeping") || s.includes("invoice") ||
 
-        s.includes("lead-generation") || s.includes("gmb-") || s.includes("google-business") ||
+      s.includes("payment-processing") || s.includes("credit-card") ||
 
-        s.includes("consulting") || s.includes("pos-") || s.includes("restaurant-pos") ||
+      s.includes("seo") || s.includes("ads-") || s.includes("branding") ||
 
-        s.includes("menu-") || s.includes("schedule") || s.includes("website-") ||
+      s.includes("logo-") || s.includes("content-") ||
 
-        s.includes("ecommerce") || s.includes("small-business")) return "business";
+      s.includes("lead-generation") || s.includes("gmb-") ||
+
+      s.includes("google-business") || s.includes("consulting") ||
+
+      s.includes("pos-") || s.includes("restaurant-pos") ||
+
+      s.includes("menu-") || s.includes("schedule") ||
+
+      s.includes("website-") || s.includes("ecommerce") ||
+
+      s.includes("small-business") || s.includes("insurance-verification") ||
+
+      s.includes("billing-and-invoicing")
+
+    ){
+
+      return "business";
+
+    }
 
 
 
-    // home services (everything else construction / repair / install)
+    // home services (construction / repair / install)
 
     const homeKeywords = [
 
@@ -851,8 +929,6 @@
     return "other";
 
   }
-
-
 
   /* DEDUPE + SORT (orange first, then alphabetically) */
 
@@ -890,6 +966,8 @@
 
       .replace(/\b\w/g,c=>c.toUpperCase());
 
+
+
     const isNew = newBatch.includes(filename);
 
     const category = getCategory(filename);
@@ -914,11 +992,225 @@
 
 
 
-  /* PAGE COUNT + TIMESTAMP */
+  /* ===== REAL-TIME TIMESTAMP + GROWTH + VERSION SYSTEM ===== */
 
-  document.getElementById("pageCount").innerText =
 
-    "Updated " + dateString + " — " + sortedPages.length + " Pages Live";
+
+  const timestampEl = document.getElementById("timestamp");
+
+  const pageStatsEl = document.getElementById("pageStats");
+
+  const versionLineEl = document.getElementById("versionLine");
+
+
+
+  const now = new Date();
+
+  const datePart =
+
+    String(now.getMonth()+1).padStart(2,"0") + "/" +
+
+    String(now.getDate()).padStart(2,"0") + "/" +
+
+    now.getFullYear();
+
+
+
+  const timePart = now.toLocaleTimeString([], {
+
+    hour: "numeric",
+
+    minute: "2-digit",
+
+    hour12: true
+
+  });
+
+
+
+  timestampEl.textContent = `Updated ${datePart} · ${timePart} PT`;
+
+
+
+  const currentCount = sortedPages.length;
+
+
+
+  /* Max pages memory lock — never go backwards */
+
+  const storedMax = Number(localStorage.getItem("sg_maxPages") || "0");
+
+  let maxPages = storedMax;
+
+  if (currentCount > maxPages) {
+
+    maxPages = currentCount;
+
+    localStorage.setItem("sg_maxPages", String(maxPages));
+
+  }
+
+
+
+  /* Rolling 24h growth window using simple history */
+
+  const historyKey = "sg_history";
+
+  const nowMs = Date.now();
+
+  const cutoff = nowMs - 24*60*60*1000; // 24 hours
+
+  let history = [];
+
+
+
+  try {
+
+    history = JSON.parse(localStorage.getItem(historyKey) || "[]");
+
+    if (!Array.isArray(history)) history = [];
+
+  } catch(e){
+
+    history = [];
+
+  }
+
+
+
+  // Push current reading
+
+  history.push({ ts: nowMs, count: currentCount });
+
+
+
+  // Prune old entries
+
+  history = history.filter(entry => entry && typeof entry.ts === "number" && entry.ts >= cutoff);
+
+
+
+  localStorage.setItem(historyKey, JSON.stringify(history));
+
+
+
+  let minCountLast24 = currentCount;
+
+  if (history.length > 0) {
+
+    minCountLast24 = history.reduce((min, entry)=>{
+
+      if (!entry || typeof entry.count !== "number") return min;
+
+      return Math.min(min, entry.count);
+
+    }, currentCount);
+
+  }
+
+  let addedLast24 = currentCount - minCountLast24;
+
+  if (addedLast24 < 0) addedLast24 = 0;
+
+
+
+  /* Auto-increment version based on growth */
+
+  let versionStr = localStorage.getItem("sg_version") || "13.0";
+
+
+
+  function parseVersion(v){
+
+    const m = /^(\d+)\.(\d+)$/.exec(v.trim());
+
+    if (!m) return {major:13, minor:0};
+
+    return {major:parseInt(m[1],10), minor:parseInt(m[2],10)};
+
+  }
+
+
+
+  const prevVersion = parseVersion(versionStr);
+
+  const prevMaxPages = storedMax;
+
+
+
+  if (maxPages > prevMaxPages) {
+
+    // We grew => bump minor
+
+    let {major, minor} = prevVersion;
+
+    minor += 1;
+
+    if (minor >= 10) {
+
+      major += 1;
+
+      minor = 0;
+
+    }
+
+    versionStr = `${major}.${minor}`;
+
+    localStorage.setItem("sg_version", versionStr);
+
+  }
+
+
+
+  const vParsed = parseVersion(versionStr);
+
+
+
+  /* Auto-generated descriptor based on version index */
+
+  const descriptors = [
+
+    "Real-Time Growth Engine",
+
+    "Momentum Surge",
+
+    "Operator Scaling Mode",
+
+    "Expansion Wave",
+
+    "Traffic Ramp Protocol",
+
+    "SideGuy Growth Burst",
+
+    "Operator Network Uplink",
+
+    "Problem Engine Acceleration",
+
+    "Citywide Coverage Sweep",
+
+    "Lead Flow Upgrade"
+
+  ];
+
+
+
+  const descriptorIndex = (vParsed.major * 10 + vParsed.minor) % descriptors.length;
+
+  const descriptor = descriptors[descriptorIndex];
+
+
+
+  /* Update stats + version lines */
+
+  pageStatsEl.textContent =
+
+    `Pages Live: ${maxPages} · Pages Added (Last 24h): ${addedLast24}`;
+
+
+
+  versionLineEl.textContent =
+
+    `Version: v${vParsed.major}.${vParsed.minor} — ${descriptor}`;
 
 
 
@@ -938,7 +1230,7 @@
 
       if (filter === "all" || cat === filter){
 
-        card.style.display = "block";
+        card.style.display = "";
 
       } else {
 
@@ -970,7 +1262,7 @@
 
 
 
-  /* default: show all */
+  /* Default filter: all */
 
   applyFilter("all");
 
@@ -981,3 +1273,6 @@
 </body>
 
 </html>
+
+
+
