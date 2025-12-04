@@ -1,126 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    SideGuy Solutions · SEO Ocean Template
-    Page: AC Repair San Diego
-    Version: 1.0 — Inline Only
-    Author: PJ + ChatGPT
-  -->
+  <!-- SideGuy Solutions · AC Repair San Diego · Stub v1.0 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>AC Repair San Diego · SideGuy Solutions</title>
   <meta name="description"
-        content="Reliable AC repair in San Diego. Fast diagnostics, honest pricing, and trusted HVAC technicians supported by SideGuy Solutions. Real operators. Real results." />
+        content="Fast, reliable AC repair in San Diego. SideGuy Solutions connects operators and homeowners with trusted HVAC techs who fix cooling issues quickly and professionally." />
 
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --sky:#e6f7ff;
+      --sea:#bfe9ff;
+      --sea-deep:#8fd0ff;
+      --accent:#008cff;
+      --accent-soft:#35b7ff;
+      --text-main:#033045;
+      --text-soft:#38586b;
+      --card-bg:#ffffff;
+      --card-border:rgba(3,48,69,0.06);
+      --radius-lg:22px;
+      --radius-pill:999px;
+    }
     body{
       font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
-      background:linear-gradient(180deg,#e6f7ff,#c9ecff,#9edbff);
-      color:#033045;
+      background:radial-gradient(circle at 10% 0%,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
+      color:var(--text-main);
       -webkit-font-smoothing:antialiased;
-      padding:20px;
     }
-    header{text-align:center;padding:20px 0 10px 0;}
-    h1{font-size:2rem;margin-bottom:10px;}
-    p{margin:10px 0;line-height:1.55;}
-    h2{margin-top:22px;font-size:1.45rem;}
+    .page{min-height:100vh;display:flex;flex-direction:column;}
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(14px);
+      background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
+      border-bottom:1px solid rgba(3,48,69,.05);
+    }
+    .nav{
+      max-width:1120px;margin:0 auto;
+      padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;
+    }
+    .nav-left{display:flex;align-items:center;gap:10px;}
+    .nav-orb{
+      width:26px;height:26px;border-radius:50%;
+      background:radial-gradient(circle at 30% 0%,#ffffff,#9be7ff,#3fa9ff);
+      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.3);
+    }
+    .nav-title{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .nav-sub{font-size:11px;color:var(--text-soft);}
+    .nav-cta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-soft);}
+    .pill-link{
+      text-decoration:none;border-radius:var(--radius-pill);
+      font-size:12px;font-weight:600;padding:7px 14px;
+      background:linear-gradient(135deg,#00b894,#00c2ff);
+      color:#fff;box-shadow:0 10px 24px rgba(0,140,255,.3);
+      display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+    }
 
-    nav{
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      flex-wrap:wrap;
-      margin:25px 0;
+    main{flex:1;max-width:1120px;margin:0 auto;padding:26px 20px 40px;}
+    .eyebrow{
+      font-size:11px;text-transform:uppercase;
+      letter-spacing:.16em;color:rgba(3,48,69,.7);
+      margin-bottom:8px;
     }
-    nav a{
-      text-decoration:none;
-      color:#024;
-      background:#fff;
-      padding:10px 16px;
-      border-radius:12px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-      transition:0.2s;
+    h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin-bottom:10px;}
+    .lead{
+      font-size:14px;line-height:1.6;color:var(--text-soft);
+      max-width:640px;margin-bottom:18px;
     }
-    nav a:hover{
-      transform:translateY(-2px);
-      box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;font-size:11px;}
+    .pill{
+      padding:5px 10px;border-radius:var(--radius-pill);
+      background:rgba(255,255,255,.95);border:1px solid rgba(3,48,69,.08);
+      color:var(--text-soft);
     }
 
-    .orb{
-      position:fixed;
-      bottom:25px;
-      right:25px;
-      background:linear-gradient(135deg,#00ffa3,#03e1ff);
-      padding:18px 26px;
-      border-radius:50px;
-      color:#003;
-      font-weight:600;
-      text-decoration:none;
-      animation:pulse 3s infinite;
+    .btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+    .btn-secondary{
+      text-decoration:none;padding:9px 14px;border-radius:var(--radius-pill);
+      border:1px solid rgba(3,48,69,.08);background:rgba(255,255,255,.9);
+      font-size:12px;color:var(--text-soft);
+      display:inline-flex;align-items:center;gap:6px;
     }
-    @keyframes pulse{
-      0%{box-shadow:0 0 12px rgba(0,255,163,0.5);}
-      50%{box-shadow:0 0 26px rgba(0,255,163,0.9);}
-      100%{box-shadow:0 0 12px rgba(0,255,163,0.5);}
+
+    .grid{
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.3fr);
+      gap:18px;margin-bottom:26px;
+    }
+    @media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr);}}
+
+    .card{
+      background:rgba(255,255,255,.97);border-radius:var(--radius-lg);
+      border:1px solid var(--card-border);
+      box-shadow:0 12px 30px rgba(3,48,69,.06);
+      padding:16px 18px 18px;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .card-label{
+      font-size:11px;text-transform:uppercase;
+      letter-spacing:.14em;color:rgba(3,48,69,.6);
+    }
+    .card-title{font-size:16px;font-weight:600;}
+    .card-body{font-size:13px;line-height:1.5;color:var(--text-soft);}
+    ul.list{padding-left:16px;font-size:13px;color:var(--text-soft);}
+    ul.list li{margin-bottom:6px;}
+
+    .subgrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width:700px){
+      .subgrid{grid-template-columns:minmax(0,1fr);}
+      .btn-row{flex-direction:column;}
     }
 
     footer{
-      margin-top:40px;
+      border-top:1px solid rgba(3,48,69,.06);
+      padding:18px 20px 26px;
+      font-size:11px;color:var(--text-soft);
       text-align:center;
-      font-size:0.85rem;
-      opacity:0.75;
     }
+    .back-link{text-decoration:none;color:var(--accent);font-weight:500;}
   </style>
 </head>
 
 <body>
+<div class="page">
 
-  <header>
-    <h1>AC Repair San Diego</h1>
-    <p>Fast, affordable cooling repair backed by trusted San Diego operators.</p>
-  </header>
+<header>
+  <div class="nav">
+    <div class="nav-left">
+      <div class="nav-orb"></div>
+      <div>
+        <div class="nav-title">SideGuy Solutions</div>
+        <div class="nav-sub">AC Repair · San Diego</div>
+      </div>
+    </div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="ai-small-business-automation-san-diego.html">AI Automation</a>
-    <a href="air-duct-cleaning-san-diego.html">Air Duct Cleaning</a>
-    <a href="artificial-grass-installation-san-diego.html">Artificial Grass</a>
-  </nav>
+    <div class="nav-cta">
+      <span>Questions?</span>
+      <a class="pill-link" href="sms:17735441231">Text PJ</a>
+    </div>
+  </div>
+</header>
 
-  <h2>Cooling Problems Fixed Fast</h2>
-  <p>Whether it’s a broken compressor, warm air flow, or a full system failure, SideGuy Solutions connects you with proven HVAC technicians who deliver fast AC repair anywhere in San Diego.</p>
+<main>
 
-  <h2>The SideGuy Operator Advantage</h2>
-  <p>Unlike random listings or ads, every HVAC partner we source is vetted through real operator networks.  
-     That means better communication, honest pricing, and no runaround.</p>
+  <div class="eyebrow">San Diego · HVAC Repair</div>
 
-  <h2>Common AC Issues We Help Solve</h2>
-  <p>- AC not cooling  
-     - Weak airflow  
-     - Refrigerant leaks  
-     - Thermostat issues  
-     - Dirty coils  
-     - Blower motor failures  
-     - Full unit replacement guidance  
+  <h1>Fast, Reliable AC Repair for Real San Diego Operators.</h1>
+
+  <p class="lead">
+    If your AC stopped cooling, airflow is weak, or your system sounds like it’s tapping out,
+    SideGuy connects you with trusted HVAC technicians who fix problems fast without the upsell games.
+    Residential, commercial, and operator-friendly service built around real San Diego needs.
   </p>
 
-  <h2>Why San Diego Residents Trust Us</h2>
-  <p>Hot days hit hard in San Diego. When your AC goes down, you need fast support — not a week-long waiting list.  
-     SideGuy bridges the gap between homeowners, businesses, and trusted local HVAC operators.</p>
+  <div class="pill-row">
+    <div class="pill">Emergency AC repair</div>
+    <div class="pill">Cooling diagnostics</div>
+    <div class="pill">Fair operator pricing</div>
+    <div class="pill">Trusted HVAC technicians</div>
+  </div>
 
-  <footer>
-    <p>Page: ac-repair-san-diego.html · Posted: <span id="timestamp"></span></p>
-  </footer>
+  <div class="btn-row">
+    <a class="pill-link" href="sms:17735441231">Text PJ · 773-544-1231</a>
+    <a class="btn-secondary" href="index.html">← Back to SideGuy homepage</a>
+  </div>
 
-  <script>
-    document.getElementById("timestamp").innerText =
-      new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
-  </script>
+  <!-- GRID 1 -->
+  <section class="grid">
+    <article class="card">
+      <div class="card-label">Why call someone?</div>
+      <div class="card-title">“My AC worked yesterday…”</div>
+      <p class="card-body">
+        AC issues often show up overnight — refrigerant loss, clogged filters, electrical faults,
+        frozen coils, or compressor problems. Most operators wait too long and end up with bigger issues.
+      </p>
+      <p class="card-body">
+        SideGuy helps you skip the guessing. We quickly match you with reliable techs who diagnose the
+        real cause and get your cooling back online without wasting your day.
+      </p>
+      <ul class="list">
+        <li>Clear diagnosis of AC problems</li>
+        <li>Fast on-site repair availability</li>
+        <li>Honest guidance on repair vs. replace</li>
+      </ul>
+    </article>
 
-  <a href="tel:7735441231" class="orb">Text PJ</a>
+    <article class="card">
+      <div class="card-label">How it works</div>
+      <div class="card-title">One quick SideGuy checkup.</div>
+      <p class="card-body">
+        You text PJ, we gather a few details about your current AC issue, and then we dispatch a trusted
+        HVAC partner who shows up ready to solve instead of sell.
+      </p>
+      <ul class="list">
+        <li>Describe the issue (sounds, airflow, no cooling)</li>
+        <li>We pair you with the right local HVAC pro</li>
+        <li>You get fast, same-day repair when possible</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- GRID 2 -->
+  <section class="grid">
+    <article class="card">
+      <div class="card-label">For Operators & Homes</div>
+      <div class="card-title">Where AC repair matters most.</div>
+
+      <div class="subgrid">
+        <div>
+          <p class="card-body"><strong>Homes & apartments</strong><br />
+            Beat the heat with fast fixes and clean diagnostic work.</p>
+        </div>
+
+        <div>
+          <p class="card-body"><strong>Bars & restaurants</strong><br />
+            Keep staff, guests, and kitchens cool during peak hours.</p>
+        </div>
+
+        <div>
+          <p class="card-body"><strong>Retail & offices</strong><br />
+            Comfortable spaces = better business and fewer complaints.</p>
+        </div>
+
+        <div>
+          <p class="card-body"><strong>Short-term rentals</strong><br />
+            Save yourself from bad reviews with rapid AC service.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-label">Next step</div>
+      <div class="card-title">One text. Real AC solutions.</div>
+
+      <p class="card-body">
+        This page gives you the overview — but the real fix starts with a short message about what’s happening.
+        Air not cold? Unit frozen? Loud buzzing? We diagnose the direction immediately.
+      </p>
+
+      <p class="card-body">
+        No call centers. No upsell scripts. Just a SideGuy who gets AC issues and connects you with techs who actually fix things.
+      </p>
+
+      <a class="pill-link" href="sms:17735441231">Text PJ to start the repair</a>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    SideGuy Solutions · AC Repair San Diego · Stub v1.0 · 
+    <a class="back-link" href="index.html">Back to homepage</a>
+  </div>
+  <div style="margin-top:4px;">
+    Posted: <span id="timestamp"></span> · Text PJ · 773-544-1231
+  </div>
+</footer>
+
+</div>
+
+<script>
+  document.getElementById("timestamp").innerText =
+    new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
+</script>
 
 </body>
 </html>
