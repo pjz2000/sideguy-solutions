@@ -3,120 +3,402 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SideGuy Solutions · Instant Solana Payments & Operator Tools</title>
-  <meta name="description" content="SideGuy Solutions helps San Diego operators with instant 0.4-second Solana payments, clean operator tools, automation, and real support.">
+  <title>SideGuy Solutions · The Digital Grid</title>
+  <meta name="description" content="San Diego Operator Tools. Instant Solana payments, automation, and the SideGuy Digital Grid.">
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{--text:#033045;--text-soft:#4a7185;--accent:#00c2ff;--solana:#00ffa3;--card-bg:#ffffff;--card-border:rgba(0,0,0,0.06);}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;overflow:hidden;position:relative;height:100vh;}
-    header{position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);background:rgba(255,255,255,0.92);border-bottom:1px solid rgba(0,0,0,0.06);}
-    .nav{max-width:1120px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
-    .nav-left{display:flex;align-items:center;gap:12px;}
-    .nav-orb{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 0%,#ffffff,#b6f4ff,#42b4ff);box-shadow:0 0 0 3px #fff,0 8px 28px rgba(0,140,255,0.3);}
-    .nav-title{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
-    .nav-sub{font-size:11px;color:var(--text-soft);}
-    .pill-btn{text-decoration:none;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#00ffa3,#00c2ff);color:#003829;font-weight:600;font-size:14px;box-shadow:0 6px 20px rgba(0,140,255,0.32);}
-    main{max-width:1120px;margin:0 auto;padding:40px 22px 80px;position:relative;z-index:2;}
-    h1{font-size:42px;font-weight:900;margin-bottom:12px;line-height:1.1;max-width:760px;text-shadow:0 2px 10px rgba(0,0,0,0.2);}
-    .lead{font-size:17px;color:var(--text-soft);max-width:680px;line-height:1.6;margin-bottom:28px;}
-    .hero-actions{display:flex;gap:14px;margin-bottom:40px;}
-    .triple-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin:50px 0;}
-    .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:24px;padding:28px;box-shadow:0 15px 40px rgba(0,0,0,0.08);backdrop-filter:blur(10px);}
-    .card-label{font-size:12px;color:#56798d;text-transform:uppercase;margin-bottom:6px;letter-spacing:1px;}
-    .card-title{font-size:20px;font-weight:800;margin-bottom:8px;}
-    .card-body{font-size:15px;color:var(--text-soft);line-height:1.6;}
-    .section-title{font-size:26px;font-weight:900;margin:60px 0 20px 0;color:#033045;}
-    .pill-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;}
-    .page-pill{background:rgba(255,255,255,0.95);padding:9px 18px;font-size:13px;border-radius:999px;border:1px solid rgba(0,0,0,0.08);text-decoration:none;color:var(--text);box-shadow:0 6px 16px rgba(0,0,0,0.07);transition:all .2s;}
-    .page-pill:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.15);}
-    footer{text-align:center;padding:40px 20px;font-size:13px;color:#4a7185;background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);}
-    /* TEXT PJ ORB */
-    .pj-orb{width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 30% 0%,#fff,#b6f4ff,#42b4ff);position:fixed;bottom:24px;right:24px;z-index:999;display:flex;justify-content:center;align-items:center;text-align:center;font-size:12px;font-weight:800;color:#033045;text-decoration:none;box-shadow:0 0 0 4px #fff,0 12px 40px rgba(0,140,255,0.5);animation:float 6s ease-in-out infinite;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    :root {
+      --deep-ocean: #0f172a;
+      --surface: #0ea5e9;
+      --shimmer: #e0f2fe;
+      --glass: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --text: #0f172a;
+      --text-mute: #475569;
+      --accent: #00c2ff;
+      --solana: #14f195;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      color: var(--text);
+      background: var(--deep-ocean); /* Fallback */
+      overflow-x: hidden;
+    }
+
+    /* --- THE REAL OCEAN CANVAS --- */
+    #ocean-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    /* --- UI LAYOUT --- */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 24px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --- HEADER --- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .orb {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, #00c2ff);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .pj-btn {
+      background: var(--text);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    .pj-btn:hover { transform: scale(1.05); }
+
+    /* --- HERO --- */
+    h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, #0f172a 0%, #334155 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-mute);
+      max-width: 600px;
+      margin-bottom: 40px;
+      background: var(--glass);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+
+    /* --- DIGITAL GRID SYSTEM (AUTO NUMBERING) --- */
+    .digital-grid-container {
+      counter-reset: grid-counter; /* Initialize the counter */
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .grid-section h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-mute);
+      margin-bottom: 16px;
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .grid-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    /* The Link Card */
+    .grid-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 14px 18px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .grid-item:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 100, 255, 0.15);
+      border-color: var(--accent);
+    }
+
+    /* The Auto-Numbering Magic */
+    .grid-item::before {
+      counter-increment: grid-counter;
+      content: counter(grid-counter, decimal-leading-zero);
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--accent);
+      background: rgba(0, 194, 255, 0.1);
+      padding: 4px 6px;
+      border-radius: 4px;
+      margin-right: 12px;
+      font-weight: 700;
+    }
+
+    .grid-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* --- STATS BAR --- */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .stat-val { font-size: 24px; font-weight: 800; color: var(--text); }
+    .stat-lbl { font-size: 12px; text-transform: uppercase; color: var(--text-mute); margin-top: 4px; }
+
+    /* --- FLOATING TEXT BUTTON --- */
+    .float-pj {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: var(--text);
+      color: #fff;
+      font-weight: 700;
+      padding: 16px 24px;
+      border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.2s;
+    }
+    .float-pj:hover { transform: scale(1.05); }
+    .status-dot { width: 8px; height: 8px; background: var(--solana); border-radius: 50%; box-shadow: 0 0 8px var(--solana); }
+
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: 1fr; }
+      h1 { font-size: 36px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- PHOTOREALISTIC FLOWING OCEAN (2025 VERSION) -->
-  <div id="ocean"></div>
+  <canvas id="ocean-canvas"></canvas>
 
-  <header>
-    <div class="nav">
-      <div class="nav-left">
-        <div class="nav-orb"></div>
-        <div><div class="nav-title">SideGuy Solutions</div><div class="nav-sub">San Diego Operator Tools</div></div>
-      </div>
-      <a class="pill-btn" href="sms:17735441231">Text PJ</a>
+  <nav>
+    <div class="brand">
+      <div class="orb"></div>
+      <span>SideGuy Solutions</span>
     </div>
-  </header>
+    <a href="sms:17735441231" class="pj-btn">Text PJ</a>
+  </nav>
 
   <main>
-    <section class="hero">
-      <h1>Instant 0.4-Second Solana Payments & Real Operator Tools</h1>
-      <p class="lead">SideGuy Solutions upgrades your business with lightning-fast Solana payments, clean operator tools, automation, and real support from PJ.</p>
-      <div class="hero-actions">
-        <a class="pill-btn" href="sms:17735441231">Text PJ · 773-544-1231</a>
+    <section>
+      <h1>The San Diego<br>Operator Grid.</h1>
+      <p class="lead">
+        Welcome to the command center. Instant Solana rails, automation tools, and local support. 
+        Select a module from the Digital Grid below.
+      </p>
+    </section>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-val">0.4s</div>
+        <div class="stat-lbl">Settlement Speed</div>
       </div>
-    </section>
+      <div class="stat-card">
+        <div class="stat-val">$0.002</div>
+        <div class="stat-lbl">Transaction Cost</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">100%</div>
+        <div class="stat-lbl">San Diego Based</div>
+      </div>
+    </div>
 
-    <section class="triple-grid">
-      <div class="card"><div class="card-label">Instant Payments</div><div class="card-title">No delays. No legacy rails.</div><p class="card-body">Sub-second settlement. Stop waiting days for Stripe or processors.</p></div>
-      <div class="card"><div class="card-label">Real Operator Tools</div><div class="card-title">Tools that make sense.</div><p class="card-body">Dashboards, calculators, automation, and workflow tools for operators.</p></div>
-      <div class="card"><div class="card-label">SideGuy Support</div><div class="card-title">Talk to PJ directly.</div><p class="card-body">No tickets. No bots. Real support for real operators.</p></div>
-    </section>
+    <div class="digital-grid-container">
 
-    <h2 class="section-title">San Diego Efficiency Pages</h2>
-    <!-- FULL NUMBERED GRID — same as last message but now sits perfectly on the water -->
-    <!-- (I’ll keep it collapsed here for space — it’s 100% identical to the previous message) -->
-    <!-- Just paste the exact numbered grid from my last reply — it’s perfect -->
+      <div class="grid-section">
+        <h3>Core Infrastructure</h3>
+        <div class="grid-links">
+          <a class="grid-item" href="Best-Payment-Processing-San-Diego.html"><span class="grid-text">Payment Processing Main</span></a>
+          <a class="grid-item" href="Solana-Business-Tools-San-Diego.html"><span class="grid-text">Solana Business Tools</span></a>
+          <a class="grid-item" href="Web-Development-San-Diego.html"><span class="grid-text">Web Development</span></a>
+          <a class="grid-item" href="Energy-Payments-San-Diego.html"><span class="grid-text">Energy & Solar Payments</span></a>
+          <a class="grid-item" href="contractor-payment-processing-san-diego.html"><span class="grid-text">Contractor Payments</span></a>
+        </div>
+      </div>
 
-    <footer><span id="build-meta"></span><br>© 2025 SideGuy Solutions · Built with real support from PJ.</footer>
+      <div class="grid-section">
+        <h3>Payment Rails</h3>
+        <div class="grid-links">
+          <a class="grid-item" href="credit-card-processing-san-diego.html"><span class="grid-text">Credit Card Processing</span></a>
+          <a class="grid-item" href="merchant-services-san-diego.html"><span class="grid-text">Merchant Services</span></a>
+          <a class="grid-item" href="instant-payouts-san-diego.html"><span class="grid-text">Instant Payouts</span></a>
+          <a class="grid-item" href="get-paid-today-san-diego.html"><span class="grid-text">Same-Day Settlements</span></a>
+          <a class="grid-item" href="solana-payments-san-diego.html"><span class="grid-text">Solana Payments</span></a>
+          <a class="grid-item" href="usdc-payments-san-diego.html"><span class="grid-text">USDC Stablecoin Flows</span></a>
+        </div>
+      </div>
+
+      <div class="grid-section">
+        <h3>Hospitality & Venues</h3>
+        <div class="grid-links">
+          <a class="grid-item" href="restaurant-payment-processing-san-diego.html"><span class="grid-text">Restaurant Systems</span></a>
+          <a class="grid-item" href="bar-payment-processing-san-diego.html"><span class="grid-text">Bar & Nightclub Ops</span></a>
+          <a class="grid-item" href="food-truck-payments-san-diego.html"><span class="grid-text">Food Truck POS</span></a>
+          <a class="grid-item" href="ticketing-payments-san-diego.html"><span class="grid-text">Event Ticketing</span></a>
+        </div>
+      </div>
+
+      <div class="grid-section">
+        <h3>Wellness & Service</h3>
+        <div class="grid-links">
+          <a class="grid-item" href="gym-payment-processing-san-diego.html"><span class="grid-text">Gym & Fitness</span></a>
+          <a class="grid-item" href="yoga-studio-payments.html"><span class="grid-text">Yoga & Pilates</span></a>
+          <a class="grid-item" href="plumber-payment-processing.html"><span class="grid-text">Plumbers & HVAC</span></a>
+          <a class="grid-item" href="cleaning-service-payments.html"><span class="grid-text">Cleaning Services</span></a>
+        </div>
+      </div>
+
+      <div class="grid-section">
+        <h3>San Diego Local</h3>
+        <div class="grid-links">
+          <a class="grid-item" href="carlsbad-payment-processing.html"><span class="grid-text">Carlsbad Operators</span></a>
+          <a class="grid-item" href="encinitas-payment-processing.html"><span class="grid-text">Encinitas Operators</span></a>
+          <a class="grid-item" href="solana-beach-payment-processing.html"><span class="grid-text">Solana Beach Operators</span></a>
+          <a class="grid-item" href="del-mar-payment-processing.html"><span class="grid-text">Del Mar Operators</span></a>
+        </div>
+      </div>
+
+      <div class="grid-section">
+        <h3>Automation & Intelligence</h3>
+        <div class="grid-links">
+          <a class="grid-item" href="ai-automation-san-diego.html"><span class="grid-text">AI Automation SD</span></a>
+          <a class="grid-item" href="operations-automation-san-diego.html"><span class="grid-text">Ops Automation</span></a>
+          <a class="grid-item" href="best-ai-tools-san-diego.html"><span class="grid-text">Top AI Tools 2025</span></a>
+        </div>
+      </div>
+
+    </div>
   </main>
 
-  <a href="sms:17735441231" class="pj-orb">Text PJ</a>
+  <a href="sms:17735441231" class="float-pj">
+    <div class="status-dot"></div>
+    Text PJ
+  </a>
 
-  <!-- PHOTOREALISTIC OCEAN 2025 -->
   <script>
-    const ocean = document.getElementById('ocean');
-    ocean.style.position = 'fixed';
-    ocean.style.top = '0'; ocean.style.left = '0';
-    ocean.style.width = '100%'; ocean.style.height = '100%';
-    ocean.style.zIndex = '-1';
-    ocean.innerHTML = `<iframe src="https://grok.x.ai/ocean" style="border:none;width:100%;height:100%;pointer-events:none;" allow="autoplay"></iframe>`;
+    /**
+     * OCEAN ENGINE V2.0
+     * Features: Multi-layered sine stacking + Glare particles
+     */
+    const canvas = document.getElementById('ocean-canvas');
+    const ctx = canvas.getContext('2d');
     
-    // Fallback ultra-real water if iframe ever blocked (pure canvas)
-    if (!ocean.querySelector('iframe')) {
-      const canvas = document.createElement('canvas');
-      canvas.style.position = 'absolute';
-      canvas.style.top = '0'; canvas.style.left = '0';
-      canvas.width = window.innerWidth * 2;
-      canvas.height = window.innerHeight * 2;
-      ocean.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      let time = 0;
-      function animate() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        const grad = ctx.createLinearGradient(0,0,0,canvas.height);
-        grad.addColorStop(0,'#001a33'); grad.addColorStop(0.3,'#003366'); grad.addColorStop(0.7,'#0088cc'); grad.addColorStop(1,'#66ccff');
-        ctx.fillStyle = grad; ctx.fillRect(0,0,canvas.width,canvas.height);
-        for(let i=0;i<5;i++){
-          ctx.fillStyle = `rgba(255,255,255,${0.03+i*0.02})`;
-          ctx.beginPath();
-          for(let x=0;x<canvas.width;x+=3){
-            const y = canvas.height/2 + Math.sin((x*0.008)+time*0.02+(i*2))* (40+i*30);
-            ctx.lineTo(x,y);
-          }
-          ctx.lineTo(canvas.width,canvas.height);
-          ctx.lineTo(0,canvas.height);
-          ctx.closePath(); ctx.fill();
-        }
-        time++; requestAnimationFrame(animate);
-      }
-      animate();
-    }
+    let width, height;
+    let time = 0;
 
-    // Timestamp
-    document.getElementById("build-meta").textContent = "Homepage v13 REAL OCEAN · Loaded: " + new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
+    // Ocean Configuration
+    const waves = [
+      { y: 0,   amp: 40, freq: 0.01, speed: 0.05, color: 'rgba(0, 194, 255, 0.2)' },
+      { y: 20,  amp: 50, freq: 0.008, speed: 0.04, color: 'rgba(14, 165, 233, 0.3)' },
+      { y: 40,  amp: 60, freq: 0.006, speed: 0.02, color: 'rgba(15, 23, 42, 0.5)' } // Deep layer
+    ];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function draw() {
+      // Clear with gradient
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0, '#f0f9ff'); // Sky/Surface
+      gradient.addColorStop(0.5, '#bae6fd');
+      gradient.addColorStop(1, '#0ea5e9'); // Deep
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw Sun Glare / Sparkles
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      for(let i=0; i<20; i++) {
+        let x = (Math.sin(time * 0.5 + i) * 300) + (width/2);
+        let y = (Math.cos(time * 0.3 + i) * 100) + (height/2);
+        let s = Math.random() * 3;
+        ctx.beginPath();
+        ctx.arc(x, y, s, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // Draw Waves
+      waves.forEach(wave => {
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        
+        for (let x = 0; x <= width; x += 10) {
+          // Complex sine stacking for "choppy" water look
+          let y = (height / 1.8) + wave.y 
+                  + Math.sin(x * wave.freq + time * wave.speed) * wave.amp
+                  + Math.sin(x * wave.freq * 2 + time * wave.speed * 1.5) * (wave.amp / 3);
+          ctx.lineTo(x, y);
+        }
+        
+        ctx.lineTo(width, height);
+        ctx.lineTo(0, height);
+        ctx.fillStyle = wave.color;
+        ctx.fill();
+      });
+
+      time += 0.05;
+      requestAnimationFrame(draw);
+    }
+    draw();
   </script>
 </body>
 </html>
