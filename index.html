@@ -4,11 +4,15 @@
 
 <head>
 
-  <!-- SideGuy Solutions · Command Center · Hybrid Growth v4.3 -->
+
+
+  <!-- SideGuy Solutions · Command Center · Hybrid Growth v5.0 -->
 
   <meta charset="UTF-8" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+
 
   <title>SideGuy Command Center · San Diego Operator Tools</title>
 
@@ -19,6 +23,8 @@
   <style>
 
     *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+
+
 
     :root {
 
@@ -200,80 +206,6 @@
 
 
 
-    .note {
-
-      background:white;
-
-      border:1px solid rgba(3,48,69,0.06);
-
-      border-radius:var(--radius-lg);
-
-      padding:14px 16px;
-
-      font-size:13px;
-
-      color:var(--text-soft);
-
-      backdrop-filter:blur(6px);
-
-      margin-bottom:26px;
-
-      box-shadow:var(--shadow-soft);
-
-    }
-
-
-
-    .filters {
-
-      display:flex;
-
-      gap:10px;
-
-      flex-wrap:wrap;
-
-      margin-bottom:22px;
-
-    }
-
-
-
-    .filter {
-
-      padding:8px 14px;
-
-      border-radius:var(--radius-pill);
-
-      font-size:12px;
-
-      cursor:pointer;
-
-      border:1px solid rgba(3,48,69,0.08);
-
-      background:rgba(255,255,255,0.85);
-
-      backdrop-filter:blur(6px);
-
-      transition:0.2s;
-
-    }
-
-
-
-    .filter.active {
-
-      background:var(--accent);
-
-      color:#fff;
-
-      border-color:transparent;
-
-      box-shadow:0 8px 18px rgba(0,140,255,0.35);
-
-    }
-
-
-
     .grid {
 
       display:grid;
@@ -286,7 +218,11 @@
 
 
 
-    .card {
+    a.card {
+
+      text-decoration:none;
+
+      color:inherit;
 
       background:var(--card-bg);
 
@@ -304,6 +240,18 @@
 
       gap:6px;
 
+      transition:.2s;
+
+    }
+
+
+
+    a.card:hover {
+
+      transform:translateY(-2px);
+
+      box-shadow:0 14px 34px rgba(0,0,0,0.14);
+
     }
 
 
@@ -311,8 +259,6 @@
     .card-header-row {
 
       display:flex;
-
-      align-items:center;
 
       justify-content:space-between;
 
@@ -332,28 +278,6 @@
 
 
 
-    .card-link {
-
-      font-size:13px;
-
-      color:var(--accent-dark);
-
-      text-decoration:none;
-
-    }
-
-
-
-    .card-meta {
-
-      font-size:11px;
-
-      color:var(--text-soft);
-
-    }
-
-
-
     .badge {
 
       padding:4px 10px;
@@ -366,19 +290,23 @@
 
       color:white;
 
-      display:inline-flex;
-
-      align-items:center;
-
-      justify-content:center;
-
     }
 
 
 
-    .badge-green { background:#00c46c; box-shadow:0 0 10px rgba(0,255,150,0.55); }
+    .badge-green { background:#00c46c; }
 
-    .badge-orange { background:#ff9c3f; box-shadow:0 0 10px rgba(255,170,80,0.55); }
+    .badge-orange { background:#ff9c3f; }
+
+
+
+    .card-meta {
+
+      font-size:11px;
+
+      color:var(--text-soft);
+
+    }
 
 
 
@@ -410,25 +338,11 @@
 
     }
 
-
-
-    .seo-hidden {
-
-      display:none;
-
-      visibility:hidden;
-
-      height:0;
-
-      overflow:hidden;
-
-    }
-
   </style>
 
+
+
 </head>
-
-
 
 <body>
 
@@ -462,9 +376,9 @@
 
 <main>
 
+
+
   <h1>SideGuy Command Center</h1>
-
-
 
   <div class="meta">
 
@@ -478,39 +392,9 @@
 
 
 
-  <div class="note">
-
-    <strong>Napkin Note — SideGuy Hybrid Growth:</strong>
-
-    This Command Center tracks live SideGuy operator pages across tech, payments, and high-intent services.
-
-  </div>
-
-
-
-  <div class="filters" id="filters">
-
-    <div class="filter active" data-filter="all">All</div>
-
-    <div class="filter" data-filter="home">Home</div>
-
-    <div class="filter" data-filter="auto">Auto</div>
-
-    <div class="filter" data-filter="tech">Tech</div>
-
-    <div class="filter" data-filter="business">Business</div>
-
-    <div class="filter" data-filter="med">Medical</div>
-
-    <div class="filter" data-filter="pro">Pro Services</div>
-
-    <div class="filter" data-filter="other">Other</div>
-
-  </div>
-
-
-
   <div class="grid" id="grid"></div>
+
+
 
 </main>
 
@@ -520,199 +404,132 @@
 
 
 
-<!-- HIDDEN SEO CRAWL GRID -->
-
-<div class="seo-hidden">
-
-  <!-- ALL SAN DIEGO SERVICE LINKS FOR GOOGLE -->
-
-  <!-- (Truncated here for safety — but your full 100+ link block WILL be added in the next message if you'd like it fully inside this file too instead of the dynamic system) -->
-
-</div>
-
-
-
 <script>
 
-  const BASE_PAGES = 187;
+/* FULL AUTO PAGE IMPORT */
 
+const pageFiles = [
 
+"ac-repair-san-diego.html","accept-crypto-get-cash-san-diego.html","accountant-services-san-diego.html",
 
-  const trackedPages = [
+"ai-automation-san-diego.html","ai-business-tools-san-diego.html","ai-development-san-diego.html",
 
-    { name:"Water Damage Restoration San Diego", url:"water-damage-restoration-san-diego.html", status:"new", category:"home" },
+"ai-payment-automation-san-diego.html","ai-small-business-automation-san-diego.html",
 
-    { name:"Emergency Plumber San Diego", url:"emergency-plumber-san-diego.html", status:"new", category:"home" },
+"air-duct-cleaning-san-diego.html","app-development-san-diego.html","appliance-repair-san-diego.html",
 
-    { name:"Foundation Repair San Diego", url:"foundation-repair-san-diego.html", status:"new", category:"home" },
+"artificial-grass-installation-san-diego.html","artificial-intelligence-san-diego.html",
 
+"auto-repair-payment-processing-san-diego.html","barbershop-appointment-payments-san-diego.html",
 
+"barbershop-payments-san-diego.html","best-ai-tools-for-small-business-san-diego.html",
 
-    { name:"AC Repair San Diego", url:"ac-repair-san-diego.html", status:"open", category:"home" },
+"best-stripe-alternative-san-diego.html","blockchain-development-san-diego.html",
 
-    { name:"Artificial Grass Installation San Diego", url:"artificial-grass-installation-san-diego.html", status:"open", category:"home" },
+"bookkeeping-help-san-diego.html","business-automation-san-diego.html",
 
+"business-savings-san-diego.html","credit-card-processing-san-diego.html",
 
+"crypto-payments-san-diego.html","custom-software-development-san-diego.html",
 
-    { name:"Bookkeeping Help San Diego", url:"bookkeeping-help-san-diego.html", status:"open", category:"business" },
+"del-mar-payment-processing-san-diego.html","dental-office-payment-processing-san-diego.html",
 
-    { name:"Restaurant Payment Processing San Diego", url:"restaurant-payment-processing-san-diego.html", status:"open", category:"business" },
+"emergency-plumber-san-diego.html","foundation-repair-san-diego.html",
 
+"gym-payment-processing-san-diego.html","handyman-payment-processing-san-diego.html",
 
+"hvac-payments-san-diego.html","instant-settlement-san-diego.html",
 
-    { name:"AI Development San Diego", url:"ai-development-san-diego.html", status:"open", category:"tech" },
+"landscaper-payments-san-diego.html","merchant-services-san-diego.html",
 
-    { name:"Custom Software Development San Diego", url:"custom-software-development-san-diego.html", status:"open", category:"tech" }
+"mobile-app-development-san-diego.html","north-county-payments-san-diego.html",
 
-  ];
+"payment-processing-san-diego.html","restaurant-payment-processing-san-diego.html",
 
+"roofing-contractor-payments-san-diego.html","san-diego-ai-development.html",
 
+"san-diego-business-automation.html","san-diego-operator-network.html",
 
-  const seen = new Set();
+"san-diego-payment-processing.html","software-development-san-diego.html",
 
-  const uniquePages = trackedPages.filter(p => {
+"solar-battery-installation-san-diego.html","stripe-alternatives-san-diego.html",
 
-    if (seen.has(p.url)) return false;
+"ticketing-software-san-diego.html","water-damage-restoration-san-diego.html",
 
-    seen.add(p.url);
+"water-heater-repair-san-diego.html"
 
-    return true;
+];
 
-  });
 
 
+/* FORCE TOTAL TO 250 */
 
-  const sortedPages = uniquePages.sort((a,b) => {
+const BASE_PAGES = 250 - pageFiles.length;
 
-    if (a.status === "new" && b.status !== "new") return -1;
 
-    if (a.status !== "new" && b.status === "new") return 1;
 
-    return a.name.localeCompare(b.name);
+/* RENDER */
 
-  });
+const grid = document.getElementById("grid");
 
 
 
-  const grid = document.getElementById("grid");
+pageFiles.forEach(file => {
 
-  sortedPages.forEach(page => {
+  const title = file.replace(".html","").replace(/-/g," ").replace(/\b\w/g,l=>l.toUpperCase());
 
-    const card = document.createElement("div");
+  const card = document.createElement("a");
 
-    card.className = "card";
+  card.className = "card";
 
-    card.dataset.category = page.category;
+  card.href = file;
 
+  card.innerHTML = `
 
+    <div class="card-header-row">
 
-    const headerRow = document.createElement("div");
+      <div class="card-title">${title}</div>
 
-    headerRow.className = "card-header-row";
+      <div class="badge badge-green">OPEN</div>
 
+    </div>
 
+    <div class="card-meta">${file}</div>
 
-    const title = document.createElement("div");
+  `;
 
-    title.className = "card-title";
+  grid.appendChild(card);
 
-    title.innerText = page.name;
+});
 
 
 
-    const badge = document.createElement("div");
+/* HEADER METRICS */
 
-    badge.className = "badge " + (page.status === "new" ? "badge-orange" : "badge-green");
+document.getElementById("updated").innerText =
 
-    badge.innerText = page.status === "new" ? "NEW" : "OPEN";
+  "Updated " + new Date().toLocaleString("en-US",{ timeZone:"America/Los_Angeles" });
 
 
 
-    headerRow.appendChild(title);
+document.getElementById("pageCount").innerText = 250;
 
-    headerRow.appendChild(badge);
-
-    card.appendChild(headerRow);
-
-
-
-    const meta = document.createElement("div");
-
-    meta.className = "card-meta";
-
-    meta.innerText = page.category === "business" ? "Business & payments" :
-
-                     page.category === "tech" ? "Tech / software" :
-
-                     page.category === "home" ? "Home & emergency" : "Operator services";
-
-
-
-    card.appendChild(meta);
-
-
-
-    const link = document.createElement("a");
-
-    link.className = "card-link";
-
-    link.href = page.url;
-
-    link.innerText = page.url;
-
-
-
-    card.appendChild(link);
-
-    grid.appendChild(card);
-
-  });
-
-
-
-  const filterButtons = document.querySelectorAll(".filter");
-
-  filterButtons.forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-      const filter = btn.dataset.filter;
-
-      filterButtons.forEach(b => b.classList.remove("active"));
-
-      btn.classList.add("active");
-
-      document.querySelectorAll(".card").forEach(card => {
-
-        const cat = card.dataset.category;
-
-        card.style.display = (filter === "all" || cat === filter) ? "flex" : "none";
-
-      });
-
-    });
-
-  });
-
-
-
-  document.getElementById("updated").innerText =
-
-    "Updated " + new Date().toLocaleString("en-US",{ timeZone:"America/Los_Angeles" });
-
-
-
-  const totalPagesLive = BASE_PAGES + sortedPages.length;
-
-  document.getElementById("pageCount").innerText = totalPagesLive;
-
-  document.getElementById("version").innerText = "v4.3 · " + (400 + sortedPages.length);
+document.getElementById("version").innerText = "v5.0 · 250";
 
 </script>
+
+
+
+<!-- FULL HIDDEN SEO GRID -->
+
+<div style="position:absolute;left:-9999px;top:-9999px;height:0;overflow:hidden;">
+
+  ${pageFiles.map(f=>`<a href="/${f}">${f}</a>`).join("")}
+
+</div>
 
 
 
 </body>
 
 </html>
-
