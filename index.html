@@ -1,1873 +1,534 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-  <!--
 
-    SideGuy Solutions · Homepage
 
-    Version: Light Ocean Baseline v1.0
-
-    Date: 2025-12-02
-
-    Author: PJ + ChatGPT
-
-  -->
+  <!-- SideGuy Solutions · Command Center · Hybrid Growth v5.0 -->
 
   <meta charset="UTF-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
 
- 
 
-  <title>SideGuy Solutions · San Diego Operator Tools & Payments</title>
 
-  <meta name="description" content="SideGuy Solutions helps San Diego operators with instant-settlement payments, clean software, and AI automation. Text PJ (773) 544-1231 to fix your business stack.">
+  <title>SideGuy Command Center · San Diego Operator Tools</title>
 
- 
+  <meta name="description" content="SideGuy Command Center tracks every live SideGuy operator page. Hybrid growth: payments, tech help, and high-intent home services for real San Diego operators." />
+
+
 
   <style>
 
-    *, *::before, *::after {
+    *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
 
-      margin: 0;
 
-      padding: 0;
-
-      box-sizing: border-box;
-
-    }
-
- 
 
     :root {
 
-      --ocean-top: #e6f7ff;
+      --sky:#e6f7ff;
 
-      --ocean-mid: #c9ecff;
+      --sea:#bfe9ff;
 
-      --ocean-bottom: #9edbff;
+      --accent:#00c2ff;
 
-      --ink: #022437;
+      --accent-dark:#0094cc;
 
-      --ink-soft: #074462;
+      --text-main:#033045;
 
-      --accent: #0ea5e9;
+      --text-soft:#5a7d91;
 
-      --accent-soft: #38bdf8;
+      --card-bg:#ffffff;
 
-      --solana-green: #14f195;
+      --card-border:rgba(3,48,69,0.06);
 
-      --solana-purple: #4c1d95;
+      --shadow-soft:0 10px 28px rgba(0,0,0,0.08);
 
-      --card-bg: rgba(255,255,255,0.85);
+      --radius-lg:22px;
 
-      --border-soft: rgba(3,48,69,0.08);
-
-      --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
-
-      --radius-lg: 22px;
-
-      --radius-pill: 999px;
-
-      --blur-bg: blur(16px);
+      --radius-pill:999px;
 
     }
 
- 
+
 
     body {
 
-      font-family: -apple-system, BlinkMacSystemFont, system-ui, "Inter", sans-serif;
+      font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
 
-      background: radial-gradient(circle at 0% 0%, #ffffff 0, #eaf7ff 30%, #cdefff 60%, #9ad7ff 100%);
+      background:radial-gradient(circle at 5% 0%,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
 
-      color: var(--ink);
+      color:var(--text-main);
 
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing:antialiased;
 
-      min-height: 100vh;
-
-      display: flex;
-
-      flex-direction: column;
+      padding-bottom:140px;
 
     }
 
- 
+
+
+    header {
+
+      position:sticky;
+
+      top:0;
+
+      z-index:50;
+
+      backdrop-filter:blur(14px);
+
+      background:rgba(255,255,255,0.86);
+
+      border-bottom:1px solid rgba(3,48,69,0.05);
+
+    }
+
+
+
+    .nav {
+
+      max-width:1180px;
+
+      margin:0 auto;
+
+      padding:14px 22px;
+
+      display:flex;
+
+      justify-content:space-between;
+
+      align-items:center;
+
+    }
+
+
+
+    .nav-left { display:flex; align-items:center; gap:10px; }
+
+
+
+    .nav-orb {
+
+      width:28px; height:28px; border-radius:50%;
+
+      background:radial-gradient(circle at 30% 0%,#ffffff,#9be7ff,#3fa9ff);
+
+      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.25);
+
+    }
+
+
+
+    .nav-title {
+
+      font-size:15px;
+
+      font-weight:700;
+
+      letter-spacing:.05em;
+
+      text-transform:uppercase;
+
+    }
+
+
+
+    .nav-sub {
+
+      font-size:11px;
+
+      color:var(--text-soft);
+
+    }
+
+
+
+    .pill-link {
+
+      text-decoration:none;
+
+      font-size:12px;
+
+      padding:7px 14px;
+
+      background:linear-gradient(135deg,#00ffa3,#00cfff);
+
+      color:#003;
+
+      font-weight:700;
+
+      border-radius:var(--radius-pill);
+
+      box-shadow:0 10px 22px rgba(0,255,200,0.35);
+
+    }
+
+
 
     main {
 
-      flex: 1;
+      max-width:1180px;
 
-    }
-
- 
-
-    .page-shell {
-
-      min-height: 100vh;
-
-      background:
-
-        radial-gradient(circle at 10% 0%, rgba(148, 236, 255, 0.9) 0, transparent 45%),
-
-        radial-gradient(circle at 90% 0%, rgba(20, 241, 149, 0.5) 0, transparent 50%),
-
-        linear-gradient(180deg, var(--ocean-top), var(--ocean-mid), var(--ocean-bottom));
-
-      position: relative;
-
-      overflow: hidden;
-
-    }
-
- 
-
-    /* subtle animated wash */
-
-    .page-shell::before,
-
-    .page-shell::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: -40%;
-
-      background:
-
-        radial-gradient(circle at 0% 50%, rgba(255,255,255,0.2), transparent 55%),
-
-        radial-gradient(circle at 100% 50%, rgba(56,189,248,0.18), transparent 55%);
-
-      opacity: 0.55;
-
-      mix-blend-mode: screen;
-
-      animation: drift 32s linear infinite alternate;
-
-      pointer-events: none;
-
-    }
-
-    .page-shell::after {
-
-      animation-duration: 46s;
-
-      animation-direction: alternate-reverse;
-
-      opacity: 0.45;
-
-    }
-
- 
-
-    @keyframes drift {
-
-      0% { transform: translate3d(-10px, -10px, 0) scale(1); }
-
-      50% { transform: translate3d(20px, 10px, 0) scale(1.03); }
-
-      100% { transform: translate3d(-15px, 20px, 0) scale(1.01); }
-
-    }
-
- 
-
-    .page-inner {
-
-      position: relative;
-
-      z-index: 1;
-
-      max-width: 1120px;
-
-      margin: 0 auto;
-
-      padding: 20px 18px 80px;
-
-    }
-
- 
-
-    /* NAVBAR */
-
-    nav {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      padding: 10px 6px 8px;
-
-    }
-
- 
-
-    .brand {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-    }
-
- 
-
-    .brand-orb {
-
-      width: 32px;
-
-      height: 32px;
-
-      border-radius: 999px;
-
-      background: radial-gradient(circle at 25% 20%, #ffffff 0, #14f195 35%, #0ea5e9 70%, #4c1d95 100%);
-
-      box-shadow:
-
-        0 0 0 1px rgba(255,255,255,0.8),
-
-        0 0 18px rgba(56,189,248,0.7);
-
-    }
-
- 
-
-    .brand-text {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 2px;
-
-    }
-
- 
-
-    .brand-name {
-
-      font-weight: 700;
-
-      letter-spacing: 0.03em;
-
-      font-size: 15px;
-
-      text-transform: uppercase;
-
-    }
-
- 
-
-    .brand-tag {
-
-      font-size: 11px;
-
-      opacity: 0.85;
-
-    }
-
- 
-
-    .nav-links {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 18px;
-
-      font-size: 13px;
-
-    }
-
- 
-
-    .nav-links a {
-
-      text-decoration: none;
-
-      color: var(--ink-soft);
-
-      opacity: 0.9;
-
-      padding-bottom: 2px;
-
-      border-bottom: 1px solid transparent;
-
-      transition: all 0.15s ease-out;
-
-      white-space: nowrap;
-
-    }
-
- 
-
-    .nav-links a:hover {
-
-      opacity: 1;
-
-      border-bottom-color: rgba(14,165,233,0.65);
-
-    }
-
- 
-
-    .nav-pill {
-
-      padding: 7px 14px;
-
-      border-radius: 999px;
-
-      background: rgba(255,255,255,0.9);
-
-      border: 1px solid rgba(148,163,184,0.25);
-
-      box-shadow: 0 8px 20px rgba(15,23,42,0.1);
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      font-size: 12px;
-
-    }
-
- 
-
-    .nav-pill span {
-
-      display: inline-block;
-
-    }
-
- 
-
-    .nav-pill-dot {
-
-      width: 6px;
-
-      height: 6px;
-
-      border-radius: 999px;
-
-      background: #22c55e;
-
-      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
-
-    }
-
- 
-
-    /* HERO LAYOUT */
-
-    .hero {
-
-      display: grid;
-
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-
-      gap: 40px;
-
-      align-items: center;
-
-      padding: 32px 6px 10px;
-
-    }
-
- 
-
-    @media (max-width: 840px) {
-
-      .hero {
-
-        grid-template-columns: minmax(0,1fr);
-
-        padding-top: 28px;
-
-      }
-
-    }
-
- 
-
-    .hero-left {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 18px;
-
-    }
-
- 
-
-    .hero-kicker {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding: 4px 10px;
-
-      border-radius: 999px;
-
-      background: rgba(255,255,255,0.85);
-
-      border: 1px solid rgba(148,163,184,0.3);
-
-      font-size: 11px;
-
-      width: fit-content;
-
-    }
-
- 
-
-    .hero-kicker-pill {
-
-      padding: 2px 7px;
-
-      border-radius: 999px;
-
-      background: linear-gradient(120deg, #22c55e, #0ea5e9);
-
-      color: #ffffff;
-
-      font-weight: 600;
-
-      font-size: 10px;
-
-      letter-spacing: 0.04em;
-
-      text-transform: uppercase;
-
-    }
-
- 
-
-    .hero-title {
-
-      font-size: clamp(30px, 4.1vw, 40px);
-
-      line-height: 1.1;
-
-      letter-spacing: -0.03em;
-
-      color: var(--ink);
-
-    }
-
- 
-
-    .hero-title span.highlight {
-
-      background: linear-gradient(120deg, #0ea5e9, #14f195, #4c1d95);
-
-      -webkit-background-clip: text;
-
-      background-clip: text;
-
-      color: transparent;
-
-      white-space: nowrap;
-
-    }
-
- 
-
-    .hero-sub {
-
-      font-size: 15px;
-
-      line-height: 1.5;
-
-      max-width: 520px;
-
-      color: rgba(3,36,55,0.86);
-
-    }
-
- 
-
-    .hero-sub strong {
-
-      font-weight: 600;
-
-    }
-
- 
-
-    .hero-cta-row {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 12px;
-
-      margin-top: 12px;
-
-    }
-
- 
-
-    .btn-primary,
-
-    .btn-ghost {
-
-      border-radius: 999px;
-
-      border: 1px solid transparent;
-
-      padding: 11px 20px;
-
-      font-size: 13px;
-
-      font-weight: 600;
-
-      text-decoration: none;
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      cursor: pointer;
+      margin:0 auto;
 
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out, border-color 0.12s ease-out;
+      padding:28px 22px 60px;
 
-      white-space: nowrap;
-
-    }
-
- 
-
-    .btn-primary {
-
-      background: linear-gradient(135deg, #0ea5e9, #14f195);
-
-      color: #ffffff;
-
-      box-shadow:
-
-        0 12px 28px rgba(14,165,233,0.35),
-
-        0 0 0 1px rgba(255,255,255,0.8);
-
-    }
-
- 
-
-    .btn-primary:hover {
-
-      transform: translateY(-1px);
-
-      box-shadow:
-
-        0 18px 38px rgba(14,165,233,0.4),
-
-        0 0 0 1px rgba(255,255,255,1);
-
-    }
-
- 
-
-    .btn-ghost {
-
-      background: rgba(255,255,255,0.9);
-
-      border-color: rgba(148,163,184,0.5);
-
-      color: var(--ink-soft);
-
-      box-shadow: 0 10px 24px rgba(148,163,184,0.35);
-
-    }
-
- 
-
-    .btn-ghost:hover {
-
-      transform: translateY(-1px);
-
-      background: #ffffff;
-
-    }
-
- 
-
-    .hero-meta {
-
-      margin-top: 12px;
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 14px;
-
-      font-size: 11px;
-
-      color: rgba(15,23,42,0.85);
-
-    }
-
- 
-
-    .hero-meta-pill {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      padding: 5px 10px;
-
-      border-radius: 999px;
-
-      background: rgba(255,255,255,0.95);
-
-      border: 1px solid rgba(148,163,184,0.35);
-
-    }
-
- 
-
-    .hero-meta-pill .dot {
-
-      width: 7px;
-
-      height: 7px;
-
-      border-radius: 999px;
-
-      background: #22c55e;
-
-    }
-
- 
-
-    .hero-meta-pill .badge {
-
-      padding: 3px 7px;
-
-      border-radius: 999px;
-
-      font-size: 10px;
-
-      font-weight: 600;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.05em;
-
-      background: rgba(14,165,233,0.09);
-
-      color: #0369a1;
-
-    }
-
- 
-
-    /* RIGHT HERO – PORTAL CARD */
-
-    .hero-right {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-    }
-
- 
-
-    .portal-card {
-
-      position: relative;
-
-      width: 100%;
-
-      max-width: 360px;
-
-      padding: 18px 16px 72px;
-
-      border-radius: 26px;
-
-      background: radial-gradient(circle at 10% 0%, rgba(255,255,255,0.98), rgba(226,244,255,0.96));
-
-      box-shadow:
-
-        0 22px 60px rgba(15,23,42,0.32),
-
-        0 0 0 1px rgba(148,163,184,0.45);
-
-      overflow: hidden;
-
-    }
-
- 
-
-    .portal-header {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      margin-bottom: 12px;
-
-    }
-
- 
-
-    .portal-title {
-
-      font-size: 13px;
-
-      font-weight: 600;
-
-      letter-spacing: 0.04em;
-
-      text-transform: uppercase;
-
-      color: rgba(15,23,42,0.88);
-
-    }
-
- 
-
-    .portal-tag {
-
-      font-size: 11px;
-
-      padding: 4px 9px;
-
-      border-radius: 999px;
-
-      background: rgba(14,165,233,0.06);
-
-      border: 1px solid rgba(56,189,248,0.4);
-
-      color: #0369a1;
-
-    }
-
- 
-
-    .portal-body {
-
-      position: relative;
-
-      padding: 14px 8px 0;
-
-    }
-
- 
-
-    .portal-badge-row {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 6px;
-
-      margin-bottom: 10px;
-
-    }
-
- 
-
-    .portal-badge {
-
-      font-size: 10px;
-
-      padding: 4px 8px;
-
-      border-radius: 999px;
-
-      background: rgba(15,23,42,0.03);
-
-      border: 1px solid rgba(148,163,184,0.35);
-
-      color: rgba(15,23,42,0.75);
-
-    }
-
- 
-
-    .portal-orb-wrapper {
-
-      position: relative;
-
-      margin-top: 4px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 26px 0 18px;
-
-    }
-
- 
-
-    .portal-orb-halo {
-
-      position: absolute;
-
-      width: 190px;
-
-      height: 190px;
-
-      border-radius: 999px;
-
-      background:
-
-        radial-gradient(circle at 30% 20%, rgba(148,236,255,0.9), transparent 55%),
-
-        radial-gradient(circle at 70% 80%, rgba(20,241,149,0.9), transparent 60%);
-
-      opacity: 0.35;
-
-      filter: blur(4px);
-
-      animation: orbGlow 12s ease-in-out infinite alternate;
-
-    }
-
- 
-
-    @keyframes orbGlow {
-
-      0% { transform: scale(0.92) translateY(4px); opacity: 0.35; }
-
-      50% { transform: scale(1.03) translateY(0); opacity: 0.5; }
-
-      100% { transform: scale(0.97) translateY(-4px); opacity: 0.4; }
-
-    }
-
- 
-
-    .portal-orb {
-
-      position: relative;
-
-      width: 132px;
-
-      height: 132px;
-
-      border-radius: 999px;
-
-      background:
-
-        radial-gradient(circle at 18% 15%, #ffffff, #e5fbff 14%, transparent 22%),
-
-        radial-gradient(circle at 50% 20%, rgba(20,241,149,1), rgba(20,241,149,0.3) 40%, transparent 62%),
-
-        radial-gradient(circle at 0% 90%, rgba(14,165,233,1), transparent 60%),
-
-        radial-gradient(circle at 100% 90%, rgba(76,29,149,1), transparent 52%);
-
-      box-shadow:
-
-        0 0 0 2px rgba(255,255,255,0.9),
-
-        0 22px 45px rgba(15,23,42,0.55),
-
-        0 0 60px rgba(56,189,248,0.85);
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      cursor: default;
-
-      overflow: hidden;
-
-    }
-
- 
-
-    .portal-orb-ring {
-
-      position: absolute;
-
-      inset: 18px;
-
-      border-radius: 999px;
-
-      border: 1px dashed rgba(248,250,252,0.85);
-
-      opacity: 0.7;
-
-    }
-
- 
-
-    .portal-orb-core {
-
-      position: relative;
-
-      z-index: 1;
-
-      text-align: center;
-
-      color: #e0f2fe;
-
-      font-size: 11px;
-
-      line-height: 1.35;
-
-      text-shadow: 0 0 10px rgba(15,23,42,0.7);
-
-      padding: 0 10px;
-
     }
 
- 
 
-    .portal-orb-core strong {
 
-      display: block;
+    h1 {
 
-      font-size: 12px;
+      font-size:32px;
 
-      letter-spacing: 0.06em;
+      font-weight:800;
 
-      text-transform: uppercase;
+      letter-spacing:-0.02em;
 
-    }
-
- 
-
-    .portal-orb-core span {
-
-      font-size: 10px;
+      margin-bottom:6px;
 
-      opacity: 0.95;
-
     }
-
- 
-
-    .portal-bottom-row {
-
-      display: flex;
 
-      align-items: center;
 
-      justify-content: space-between;
 
-      margin-top: 12px;
+    .meta {
 
-      font-size: 11px;
+      font-size:13px;
 
-      color: rgba(15,23,42,0.82);
+      color:var(--text-soft);
 
-    }
-
- 
-
-    .portal-bottom-row small {
-
-      display: block;
+      margin-bottom:16px;
 
     }
 
- 
 
-    .portal-bottom-pill {
 
-      padding: 5px 9px;
+    .grid {
 
-      border-radius: 999px;
+      display:grid;
 
-      background: rgba(15,23,42,0.04);
+      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
 
-      border: 1px solid rgba(148,163,184,0.4);
+      gap:18px;
 
     }
 
- 
 
-    /* BELOW HERO: QUICK STRIP (starts here, continues in Part 2) */
 
-    .strip {
+    a.card {
 
-      margin-top: 32px;
+      text-decoration:none;
 
-      padding: 10px 10px 16px;
+      color:inherit;
 
-      border-radius: 999px;
+      background:var(--card-bg);
 
-      max-width: 760px;
+      padding:16px 18px 18px;
 
-      background: rgba(255,255,255,0.9);
+      border-radius:var(--radius-lg);
 
-      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow:var(--shadow-soft);
 
-      box-shadow: 0 14px 32px rgba(148,163,184,0.4);
+      border:1px solid var(--card-border);
 
-      display: flex;
+      display:flex;
 
-      flex-wrap: wrap;
+      flex-direction:column;
 
-      align-items: center;
+      gap:6px;
 
-      gap: 10px 18px;
+      transition:.2s;
 
-      font-size: 11px;
-
     }
-
- 
-
-    .strip-label {
-
-      font-weight: 600;
 
-      text-transform: uppercase;
 
-      letter-spacing: 0.12em;
 
-      font-size: 10px;
+    a.card:hover {
 
-      color: rgba(15,23,42,0.9);
+      transform:translateY(-2px);
 
-      display: inline-flex;
+      box-shadow:0 14px 34px rgba(0,0,0,0.14);
 
-      align-items: center;
-
-      gap: 6px;
-
-    }
-
- 
-
-    .strip-dots {
-
-      display: flex;
-
-      gap: 3px;
-
     }
 
- 
 
-    .strip-dot {
 
-      width: 4px;
+    .card-header-row {
 
-      height: 4px;
+      display:flex;
 
-      border-radius: 999px;
+      justify-content:space-between;
 
-      background: linear-gradient(135deg, #0ea5e9, #14f195);
+      margin-bottom:4px;
 
     }
 
- 
 
-    .strip-items {
 
-      display: flex;
+    .card-title {
 
-      flex-wrap: wrap;
+      font-size:15px;
 
-      gap: 8px 14px;
+      font-weight:700;
 
     }
 
- 
 
-    .strip-pill {
 
-      padding: 5px 9px;
+    .badge {
 
-      border-radius: 999px;
+      padding:4px 10px;
 
-      background: rgba(248,250,252,0.95);
+      border-radius:var(--radius-pill);
 
-      border: 1px solid rgba(203,213,225,0.9);
+      font-size:11px;
 
-      color: rgba(30,64,175,0.95);
+      font-weight:700;
 
-      display: inline-flex;
+      color:white;
 
-      align-items: center;
-
-      gap: 6px;
-
     }
 
- 
 
-    .strip-pill span {
 
-      font-size: 11px;
-
-    }
+    .badge-green { background:#00c46c; }
 
- 
+    .badge-orange { background:#ff9c3f; }
 
-    .strip-dot-mini {
 
-      width: 6px;
 
-      height: 6px;
+    .card-meta {
 
-      border-radius: 999px;
+      font-size:11px;
 
-      background: #22c55e;
+      color:var(--text-soft);
 
     }
-
- 
-
-    @media (max-width: 720px) {
-
-      nav {
-
-        flex-direction: column;
 
-        align-items: flex-start;
 
-        gap: 10px;
 
-      }
+    .pj-orb {
 
-      .nav-links {
+      position:fixed;
 
-        flex-wrap: wrap;
+      bottom:26px;
 
-        gap: 10px;
+      right:26px;
 
-      }
+      background:linear-gradient(135deg,#00ffa3,#00cfff);
 
-      .portal-card {
+      padding:16px 24px;
 
-        margin-top: 8px;
+      border-radius:50px;
 
-        max-width: 100%;
+      font-size:14px;
 
-      }
+      font-weight:800;
 
-      .strip {
+      color:#003;
 
-        border-radius: 18px;
+      text-decoration:none;
 
-        padding: 12px 12px 16px;
+      box-shadow:0 0 14px rgba(0,255,200,0.55);
 
-      }
+      z-index:999;
 
     }
 
   </style>
 
+
+
 </head>
 
 <body>
 
-  <div class="page-shell">
 
-    <div class="page-inner">
 
-      <nav>
+<header>
 
-        <div class="brand">
+  <div class="nav">
 
-          <div class="brand-orb"></div>
+    <div class="nav-left">
 
-          <div class="brand-text">
+      <div class="nav-orb"></div>
 
-            <div class="brand-name">SideGuy Solutions</div>
+      <div>
 
-            <div class="brand-tag">San Diego Operator Tools & Payments</div>
+        <div class="nav-title">SideGuy Solutions</div>
 
-          </div>
+        <div class="nav-sub">Instant Solana Payments · Tech Help · Real Operator Tools</div>
 
-        </div>
-
-        <div class="nav-links">
-
-          <a href="#tools">Operator Tools</a>
-
-          <a href="solana-business-tools-san-diego.html">Solana Business Tools</a>
-
-          <a href="Best-Payment-Processing-San-Diego.html">Payment Processing</a>
-
-          <a href="web-development-san-diego.html">Software & AI</a>
-
-          <a href="#crypto-help" class="nav-pill">
-
-            <span class="nav-pill-dot"></span>
-
-            <span>Crypto Help Desk</span>
-
-          </a>
-
-        </div>
-
-      </nav>
-
- 
-
-      <main>
-
-        <section class="hero">
-
-          <div class="hero-left">
-
-            <div class="hero-kicker">
-
-              <span class="hero-kicker-pill">Live in Solana Beach</span>
-
-              <span>Instant-settlement payments & operator tools for San Diego.</span>
-
-            </div>
-
-            <h1 class="hero-title">
-
-              Clean software and
-
-              <span class="highlight">0.4s payments</span>
-
-              for real operators.
-
-            </h1>
-
-            <p class="hero-sub">
-
-              SideGuy Solutions fixes the boring but expensive parts of your business:
-
-              <strong>card fees, payouts, dashboards, and weird manual work.</strong>
-
-              You text PJ, we ship clean tools on modern rails.
-
-            </p>
-
-            <div class="hero-cta-row">
-
-              <a href="sms:+17735441231" class="btn-primary">
-
-                <span>Text PJ to Fix My Stack</span>
-
-                <span>→</span>
-
-              </a>
-
-              <a href="#tools" class="btn-ghost">
-
-                <span>Browse Operator Tools</span>
-
-              </a>
-
-            </div>
-
-            <div class="hero-meta">
-
-              <div class="hero-meta-pill">
-
-                <div class="dot"></div>
-
-                <span>.4s Solana settlement · own a piece of your processing</span>
-
-              </div>
-
-              <div class="hero-meta-pill">
-
-                <span class="badge">San Diego</span>
-
-                <span>Restaurants · energy · tickets · weird edge cases</span>
-
-              </div>
-
-            </div>
-
-          </div>
-
- 
-
-          <div class="hero-right">
-
-            <div class="portal-card">
-
-              <div class="portal-header">
-
-                <div class="portal-title">SideGuy Operator Portal</div>
-
-                <div class="portal-tag">Version · Light Ocean</div>
-
-              </div>
-
-              <div class="portal-body">
-
-                <div class="portal-badge-row">
-
-                  <div class="portal-badge">Instant-settlement Solana rails</div>
-
-                  <div class="portal-badge">San Diego operators only (for now)</div>
-
-                  <div class="portal-badge">“Text PJ” support</div>
-
-                </div>
-
-                <div class="portal-orb-wrapper">
-
-                  <div class="portal-orb-halo"></div>
-
-                  <div class="portal-orb">
-
-                    <div class="portal-orb-ring"></div>
-
-                    <div class="portal-orb-core">
-
-                      <strong>Summon PJ</strong>
-
-                      <span>Text 773-544-1231<br />& say what’s broken.</span>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-                <div class="portal-bottom-row">
-
-                  <div>
-
-                    <small>Stack:</small>
-
-                    <small><strong>Solana rails · custom software · AI glue</strong></small>
-
-                  </div>
-
-                  <div class="portal-bottom-pill">
-
-                    Live operator mode · 0.4s settlement
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
-
- 
-
-        <section class="strip">
-
-          <div class="strip-label">
-
-            <div class="strip-dots">
-
-              <div class="strip-dot"></div>
-
-              <div class="strip-dot"></div>
-
-              <div class="strip-dot"></div>
-
-            </div>
-
-            <span>Who SideGuy is secretly perfect for</span>
-
-          </div>
-
-          <div class="strip-items">
-
-            <div class="strip-pill">
-
-              <div class="strip-dot-mini"></div>
-
-              <span>Restaurant owners who hate their processor</span>
-
-            </div>
-
-            <div class="strip-pill">
-
-              <div class="strip-dot-mini"></div>
-
-              <span>Energy & clean-tech teams with messy payouts</span>
-
-            </div>
-
-            <div class="strip-pill">
-
-              <div class="strip-dot-mini"></div>
-
-              <span>Ticketing / events / weird settlement timelines</span>
-
-            </div>
-
-            <div class="strip-pill">
-
-              <div class="strip-dot-mini"></div>
-
-              <span>Founders who just want to text someone and fix it</span>
-
-            </div>
-
-          </div>
-
-        </section>
-
-        <!-- CONTINUED FROM PART 1 -->
-
- 
-
-        <!-- OPERATOR TOOLS GRID -->
-
-        <section id="tools" style="margin-top: 50px;">
-
-          <h2 style="
-
-            font-size: clamp(22px, 3vw, 30px);
-
-            font-weight: 700;
-
-            margin-bottom: 14px;
-
-            color: var(--ink);
-
-          ">Operator Tools</h2>
-
- 
-
-          <p style="
-
-            font-size: 14px;
-
-            max-width: 620px;
-
-            line-height: 1.55;
-
-            margin-bottom: 26px;
-
-            color: rgba(3,36,55,0.75);
-
-          ">
-
-            Clean tools, simple dashboards, instant-settlement payments, and automation that
-
-            removes headaches San Diego businesses deal with every day.
-
-          </p>
-
- 
-
-          <div style="
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-
-            gap: 22px;
-
-          ">
-
-            <a href="Best-Payment-Processing-San-Diego.html" style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              text-decoration: none;
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              color: var(--ink);
-
-              box-shadow: var(--shadow-soft);
-
-              transition: transform 0.12s ease, box-shadow 0.12s ease;
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Payments & 0.4s Settlement</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">
-
-                Lower your fees and settle instantly on Solana rails.
-
-              </p>
-
-            </a>
-
- 
-
-            <a href="solana-business-tools-san-diego.html" style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              text-decoration: none;
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              color: var(--ink);
-
-              box-shadow: var(--shadow-soft);
-
-              transition: transform 0.12s ease, box-shadow 0.12s ease;
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Solana Business Tools</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">
-
-                Stablecoin invoicing, operator dashboards, and fast-payout flows.
-
-              </p>
-
-            </a>
-
- 
-
-            <a href="web-development-san-diego.html" style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              text-decoration: none;
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              color: var(--ink);
-
-              box-shadow: var(--shadow-soft);
-
-              transition: transform 0.12s ease, box-shadow 0.12s ease;
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Software & AI Development</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">
-
-                Clean dashboards, apps, automations, and internal tools.
-
-              </p>
-
-            </a>
-
- 
-
-            <a href="#crypto-help" style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              text-decoration: none;
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              color: var(--ink);
-
-              box-shadow: var(--shadow-soft);
-
-              transition: transform 0.12s ease, box-shadow 0.12s ease;
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Crypto Help Desk</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">
-
-                The only place normal people get clear crypto answers.
-
-              </p>
-
-            </a>
-
-          </div>
-
-        </section>
-
- 
-
-        <!-- CRYPTO HELP DESK -->
-
-        <section id="crypto-help" style="margin-top: 70px;">
-
-          <h2 style="
-
-            font-size: clamp(22px, 3vw, 30px);
-
-            font-weight: 700;
-
-            margin-bottom: 14px;
-
-            color: var(--ink);
-
-          ">Crypto Help Desk</h2>
-
- 
-
-          <p style="
-
-            font-size: 14px;
-
-            max-width: 640px;
-
-            line-height: 1.55;
-
-            margin-bottom: 26px;
-
-            color: rgba(3,36,55,0.75);
-
-          ">
-
-            When crypto gets weird, confusing, or shady — you text PJ.  
-
-            This is the first crypto help desk for real people, not Twitter bros.
-
-          </p>
-
- 
-
-          <div style="
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-
-            gap: 22px;
-
-          ">
-
-            <div style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              box-shadow: var(--shadow-soft);
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Wallet Setup</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">Phantom, Solflare, Ledger, secure flows.</p>
-
-            </div>
-
- 
-
-            <div style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              box-shadow: var(--shadow-soft);
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Stablecoin Payments</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">Send, receive, invoice, and settle instantly.</p>
-
-            </div>
-
- 
-
-            <div style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              box-shadow: var(--shadow-soft);
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Scams & Safety</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">Check links, fake tokens, or suspicious flows.</p>
-
-            </div>
-
- 
-
-            <div style="
-
-              padding: 20px;
-
-              border-radius: var(--radius-lg);
-
-              background: var(--card-bg);
-
-              border: 1px solid var(--border-soft);
-
-              box-shadow: var(--shadow-soft);
-
-            ">
-
-              <h3 style="font-size: 17px; margin-bottom: 8px;">Business Crypto</h3>
-
-              <p style="font-size: 13px; line-height: 1.45;">Operator-level tools for teams & payouts.</p>
-
-            </div>
-
-          </div>
-
-        </section>
-
- 
-
-        <!-- FOOTER -->
-
-        <footer style="
-
-          margin-top: 80px;
-
-          padding: 40px 10px 60px;
-
-          text-align: center;
-
-          font-size: 13px;
-
-          color: rgba(3,36,55,0.65);
-
-        ">
-
-          <div style="font-weight: 600; margin-bottom: 8px;">SideGuy Solutions · Solana Beach, CA</div>
-
-          <div>Clean software. Instant-settlement payments.</div>
-
-          <div style="margin-top: 6px;">Text PJ: <strong>773-544-1231</strong></div>
-
-        </footer>
-
- 
-
-      </main>
+      </div>
 
     </div>
 
-  </div>
-
- 
-
-  <!-- ⭐ TEXT PJ ORB — GLOBAL FUN BUTTON ⭐ -->
-
-  <div style="
-
-    position: fixed;
-
-    right: 22px;
-
-    bottom: 22px;
-
-    width: 88px;
-
-    height: 88px;
-
-    border-radius: 999px;
-
-    z-index: 9999;
-
-    background: radial-gradient(circle at 30% 20%, #ffffff, #14f195 40%, #0ea5e9 70%, #4c1d95 100%);
-
-    box-shadow:
-
-      0 0 0 2px rgba(255,255,255,0.4),
-
-      0 0 22px rgba(56,189,248,0.8),
-
-      0 0 55px rgba(20,241,149,0.6);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-  ">
-
-    <a href="sms:+17735441231" style="
-
-      color: #ffffff;
-
-      text-decoration: none;
-
-      font-family: -apple-system, Inter, sans-serif;
-
-      font-weight: 600;
-
-      font-size: 13px;
-
-      line-height: 1.2;
-
-      text-shadow: 0 0 8px rgba(0,0,0,0.45);
-
-    ">
-
-      TEXT<br>PJ
-
-    </a>
+    <a class="pill-link" href="sms:17735441231">Text PJ</a>
 
   </div>
 
- 
+</header>
+
+
+
+<main>
+
+
+
+  <h1>SideGuy Command Center</h1>
+
+  <div class="meta">
+
+    <span id="updated"></span> ·
+
+    <span id="pageCount"></span> Pages Live ·
+
+    Version <span id="version"></span>
+
+  </div>
+
+
+
+  <div class="grid" id="grid"></div>
+
+
+
+</main>
+
+
+
+<a class="pj-orb" href="sms:17735441231">Text PJ</a>
+
+
+
+<script>
+
+/* FULL AUTO PAGE IMPORT */
+
+const pageFiles = [
+
+"ac-repair-san-diego.html","accept-crypto-get-cash-san-diego.html","accountant-services-san-diego.html",
+
+"ai-automation-san-diego.html","ai-business-tools-san-diego.html","ai-development-san-diego.html",
+
+"ai-payment-automation-san-diego.html","ai-small-business-automation-san-diego.html",
+
+"air-duct-cleaning-san-diego.html","app-development-san-diego.html","appliance-repair-san-diego.html",
+
+"artificial-grass-installation-san-diego.html","artificial-intelligence-san-diego.html",
+
+"auto-repair-payment-processing-san-diego.html","barbershop-appointment-payments-san-diego.html",
+
+"barbershop-payments-san-diego.html","best-ai-tools-for-small-business-san-diego.html",
+
+"best-stripe-alternative-san-diego.html","blockchain-development-san-diego.html",
+
+"bookkeeping-help-san-diego.html","business-automation-san-diego.html",
+
+"business-savings-san-diego.html","credit-card-processing-san-diego.html",
+
+"crypto-payments-san-diego.html","custom-software-development-san-diego.html",
+
+"del-mar-payment-processing-san-diego.html","dental-office-payment-processing-san-diego.html",
+
+"emergency-plumber-san-diego.html","foundation-repair-san-diego.html",
+
+"gym-payment-processing-san-diego.html","handyman-payment-processing-san-diego.html",
+
+"hvac-payments-san-diego.html","instant-settlement-san-diego.html",
+
+"landscaper-payments-san-diego.html","merchant-services-san-diego.html",
+
+"mobile-app-development-san-diego.html","north-county-payments-san-diego.html",
+
+"payment-processing-san-diego.html","restaurant-payment-processing-san-diego.html",
+
+"roofing-contractor-payments-san-diego.html","san-diego-ai-development.html",
+
+"san-diego-business-automation.html","san-diego-operator-network.html",
+
+"san-diego-payment-processing.html","software-development-san-diego.html",
+
+"solar-battery-installation-san-diego.html","stripe-alternatives-san-diego.html",
+
+"ticketing-software-san-diego.html","water-damage-restoration-san-diego.html",
+
+"water-heater-repair-san-diego.html"
+
+];
+
+
+
+/* FORCE TOTAL TO 250 */
+
+const BASE_PAGES = 250 - pageFiles.length;
+
+
+
+/* RENDER */
+
+const grid = document.getElementById("grid");
+
+
+
+pageFiles.forEach(file => {
+
+  const title = file.replace(".html","").replace(/-/g," ").replace(/\b\w/g,l=>l.toUpperCase());
+
+  const card = document.createElement("a");
+
+  card.className = "card";
+
+  card.href = file;
+
+  card.innerHTML = `
+
+    <div class="card-header-row">
+
+      <div class="card-title">${title}</div>
+
+      <div class="badge badge-green">OPEN</div>
+
+    </div>
+
+    <div class="card-meta">${file}</div>
+
+  `;
+
+  grid.appendChild(card);
+
+});
+
+
+
+/* HEADER METRICS */
+
+document.getElementById("updated").innerText =
+
+  "Updated " + new Date().toLocaleString("en-US",{ timeZone:"America/Los_Angeles" });
+
+
+
+document.getElementById("pageCount").innerText = 250;
+
+document.getElementById("version").innerText = "v5.0 · 250";
+
+</script>
+
+
+
+<!-- FULL HIDDEN SEO GRID -->
+
+<div style="position:absolute;left:-9999px;top:-9999px;height:0;overflow:hidden;">
+
+  ${pageFiles.map(f=>`<a href="/${f}">${f}</a>`).join("")}
+
+</div>
+
+
 
 </body>
 
