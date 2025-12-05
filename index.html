@@ -5,211 +5,589 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <!-- SideGuy Solutions · Command Center v7.0 · 300 URL Grid -->
 
-<title>SideGuy Command Center</title>
+  <meta charset="UTF-8" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+  <title>SideGuy Command Center · 300 Live Operator URLs</title>
 
+  <meta name="description" content="SideGuy Command Center tracks 300 high-intent operator URLs across payments, AI, and home services for real San Diego operators." />
 
-<style>
 
-body{
 
-  margin:0;
+  <style>
 
-  font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 
-  background:linear-gradient(180deg,#ecfbff,#d7f2ff);
+    :root{
 
-  color:#022;
+      --sky:#e6f7ff;
 
-}
+      --sea:#bfe0ff;
 
+      --accent:#00f27a;
 
+      --accent-soft:#c6ffe6;
 
-header{
+      --accent-dark:#029954;
 
-  padding:24px 20px 10px;
+      --text-main:#033045;
 
-  text-align:center;
+      --text-soft:#5a7d91;
 
-}
+      --card-bg:#ffffff;
 
+      --card-border:rgba(3,48,69,0.06);
 
+      --shadow-soft:0 8px 22px rgba(0,0,0,0.08);
 
-h1{
+      --radius-lg:22px;
 
-  margin:0;
+      --radius-pill:999px;
 
-  font-size:26px;
+    }
 
-  font-weight:900;
+    body{
 
-}
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,"Inter",sans-serif;
 
+      background:radial-gradient(circle at 0 0,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
 
+      color:var(--text-main);
 
-.meta{
+      -webkit-font-smoothing:antialiased;
 
-  margin-top:6px;
+      padding-bottom:140px;
 
-  font-size:13px;
+    }
 
-  color:#355;
 
-}
 
+    /* HEADER / NAV */
 
+    header{
 
-.controls{
+      position:sticky;
 
-  margin-top:14px;
+      top:0;
 
-  display:flex;
+      z-index:50;
 
-  justify-content:center;
+      backdrop-filter:blur(14px);
 
-}
+      background:rgba(255,255,255,0.88);
 
+      border-bottom:1px solid rgba(3,48,69,0.06);
 
+    }
 
-.search{
+    .nav{
 
-  width:260px;
+      max-width:1180px;
 
-  padding:10px 16px;
+      margin:0 auto;
 
-  border-radius:999px;
+      padding:14px 22px 10px;
 
-  border:1px solid #bbb;
+      display:flex;
 
-  font-size:14px;
+      align-items:center;
 
-}
+      justify-content:space-between;
 
+      gap:16px;
 
+    }
 
-.grid{
+    .nav-left{display:flex;align-items:center;gap:10px;}
 
-  display:grid;
+    .nav-orb{
 
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+      width:30px;height:30px;border-radius:50%;
 
-  gap:18px;
+      background:radial-gradient(circle at 30% 0%,#ffffff,#9effd6,#32ff9c);
 
-  padding:22px;
+      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 12px 26px rgba(0,200,120,.45);
 
-}
+    }
 
+    .nav-title{
 
+      font-size:15px;
 
-.card{
+      font-weight:800;
 
-  background:white;
+      letter-spacing:.08em;
 
-  border-radius:18px;
+      text-transform:uppercase;
 
-  padding:18px;
+    }
 
-  box-shadow:0 8px 22px rgba(0,0,0,.12);
+    .nav-sub{
 
-  display:flex;
+      font-size:11px;
 
-  flex-direction:column;
+      color:var(--text-soft);
 
-  gap:8px;
+    }
 
-}
+    .pill-link{
 
+      text-decoration:none;
 
+      font-size:12px;
 
-.icon{
+      padding:9px 16px;
 
-  font-size:26px;
+      background:linear-gradient(135deg,#00ff94,#00d46a);
 
-}
+      color:#003;
 
+      font-weight:800;
 
+      border-radius:var(--radius-pill);
 
-.slug{
+      box-shadow:0 10px 22px rgba(0,255,180,0.55);
 
-  font-weight:800;
+      border:none;
 
-  font-size:14px;
+      outline:none;
 
-  line-height:1.2;
+      cursor:pointer;
 
-}
+      position:relative;
 
+      overflow:hidden;
 
+    }
 
-.open{
+    .pill-link::after{
 
-  margin-top:auto;
+      content:"";
 
-  background:#00ff95;
+      position:absolute;
 
-  color:#023;
+      inset:-40%;
 
-  padding:10px;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.7),transparent 55%);
 
-  border-radius:999px;
+      opacity:.0;
 
-  text-align:center;
+      transform:translateX(-40%);
 
-  font-weight:900;
+      transition:.6s;
 
-  text-decoration:none;
+    }
 
-  box-shadow:0 0 16px rgba(0,255,160,.75);
+    .pill-link:hover::after{
 
-}
+      opacity:.8;
 
+      transform:translateX(40%);
 
+    }
 
-#pj{
 
-  position:fixed;
 
-  bottom:18px;
+    /* MAIN SHELL */
 
-  right:18px;
+    main{
 
-  background:#00ff95;
+      max-width:1180px;
 
-  padding:16px 22px;
+      margin:0 auto;
 
-  border-radius:999px;
+      padding:22px 22px 60px;
 
-  font-weight:900;
+    }
 
-  text-decoration:none;
+    h1{
 
-  color:#022;
+      font-size:30px;
 
-  box-shadow:0 0 26px rgba(0,255,160,.9);
+      font-weight:800;
 
-  animation:pulse 2s infinite;
+      letter-spacing:-.02em;
 
-  z-index:9999;
+      margin-bottom:6px;
 
-}
+    }
 
+    .meta{
 
+      font-size:13px;
 
-@keyframes pulse{
+      color:var(--text-soft);
 
-  0%{transform:scale(1)}
+      margin-bottom:16px;
 
-  50%{transform:scale(1.08)}
+    }
 
-  100%{transform:scale(1)}
 
-}
 
-</style>
+    .top-bar{
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:10px;
+
+      align-items:center;
+
+      margin-bottom:18px;
+
+    }
+
+    .search-wrap{
+
+      flex:1 1 220px;
+
+      position:relative;
+
+    }
+
+    .search-input{
+
+      width:100%;
+
+      padding:9px 34px 9px 12px;
+
+      border-radius:var(--radius-pill);
+
+      border:1px solid rgba(3,48,69,0.14);
+
+      font-size:13px;
+
+      outline:none;
+
+      background:rgba(255,255,255,.92);
+
+    }
+
+    .search-input:focus{
+
+      border-color:var(--accent-dark);
+
+      box-shadow:0 0 0 1px var(--accent-soft);
+
+    }
+
+    .search-icon{
+
+      position:absolute;
+
+      right:10px;
+
+      top:50%;
+
+      transform:translateY(-50%);
+
+      font-size:14px;
+
+      opacity:.7;
+
+    }
+
+
+
+    .filters{
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:8px;
+
+    }
+
+    .filter-chip{
+
+      padding:7px 14px;
+
+      border-radius:var(--radius-pill);
+
+      border:1px solid rgba(3,48,69,0.14);
+
+      font-size:11px;
+
+      font-weight:700;
+
+      cursor:pointer;
+
+      background:rgba(255,255,255,.9);
+
+      color:var(--text-soft);
+
+    }
+
+    .filter-chip.active{
+
+      background:var(--accent);
+
+      color:#003;
+
+      border-color:var(--accent-dark);
+
+      box-shadow:0 8px 18px rgba(0,220,140,.55);
+
+    }
+
+
+
+    /* GRID + CARDS */
+
+    .grid{
+
+      margin-top:10px;
+
+      display:grid;
+
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+
+      gap:16px;
+
+    }
+
+    .card-link{
+
+      text-decoration:none;
+
+      color:inherit;
+
+    }
+
+    .card{
+
+      position:relative;
+
+      background:var(--card-bg);
+
+      border-radius:var(--radius-lg);
+
+      padding:14px 16px 14px;
+
+      border:1px solid var(--card-border);
+
+      box-shadow:var(--shadow-soft);
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:6px;
+
+      transition:transform .12s ease-out, box-shadow .12s ease-out, border-color .12s ease-out;
+
+      min-height:110px;
+
+    }
+
+    .card:hover{
+
+      transform:translateY(-3px);
+
+      box-shadow:0 14px 30px rgba(0,0,0,.14);
+
+      border-color:rgba(0,200,120,.55);
+
+    }
+
+    .card-top{
+
+      display:flex;
+
+      justify-content:space-between;
+
+      align-items:flex-start;
+
+      gap:8px;
+
+    }
+
+    .card-title{
+
+      font-size:14px;
+
+      font-weight:700;
+
+      text-transform:capitalize;
+
+    }
+
+    .card-url{
+
+      font-size:11px;
+
+      color:var(--text-soft);
+
+      word-break:break-all;
+
+    }
+
+    .card-footer{
+
+      display:flex;
+
+      justify-content:space-between;
+
+      align-items:center;
+
+      margin-top:8px;
+
+      gap:8px;
+
+    }
+
+    .chip-status{
+
+      flex:1;
+
+      border-radius:var(--radius-pill);
+
+      background:var(--accent-soft);
+
+      border:1px solid var(--accent);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      padding:6px 10px;
+
+      font-size:11px;
+
+      font-weight:800;
+
+      color:var(--accent-dark);
+
+    }
+
+    .chip-meta{
+
+      font-size:11px;
+
+      color:var(--text-soft);
+
+      text-align:right;
+
+      min-width:80px;
+
+    }
+
+    .emoji{
+
+      font-size:17px;
+
+      margin-right:4px;
+
+    }
+
+
+
+    /* CATEGORY TAG */
+
+    .tag{
+
+      position:absolute;
+
+      top:10px;
+
+      right:12px;
+
+      padding:4px 10px;
+
+      border-radius:var(--radius-pill);
+
+      font-size:10px;
+
+      font-weight:800;
+
+      color:#003;
+
+      background:#e5f7ff;
+
+      border:1px solid rgba(3,48,69,.12);
+
+    }
+
+
+
+    /* TEXT PJ ORB */
+
+    .pj-orb{
+
+      position:fixed;
+
+      right:24px;
+
+      bottom:24px;
+
+      z-index:80;
+
+      padding:16px 22px;
+
+      border-radius:40px;
+
+      background:linear-gradient(135deg,#00ff94,#00da6e);
+
+      color:#003;
+
+      font-size:14px;
+
+      font-weight:800;
+
+      text-decoration:none;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:8px;
+
+      box-shadow:0 0 0 0 rgba(0,255,150,.8),0 12px 28px rgba(0,170,110,.7);
+
+      animation:pulse 2.4s infinite;
+
+    }
+
+    .pj-orb span{
+
+      font-size:18px;
+
+    }
+
+    @keyframes pulse{
+
+      0%{box-shadow:0 0 0 0 rgba(0,255,150,.8);}
+
+      70%{box-shadow:0 0 0 16px rgba(0,255,150,0);}
+
+      100%{box-shadow:0 0 0 0 rgba(0,255,150,0);}
+
+    }
+
+
+
+    @media(max-width:720px){
+
+      .nav{padding-inline:14px;}
+
+      main{padding-inline:14px;}
+
+      h1{font-size:24px;}
+
+      .pj-orb{right:14px;bottom:18px;padding:12px 18px;font-size:13px;}
+
+      .grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));}
+
+    }
+
+  </style>
 
 </head>
 
@@ -217,253 +595,1000 @@ h1{
 
 <body>
 
+  <header>
+
+    <div class="nav">
+
+      <div class="nav-left">
+
+        <div class="nav-orb"></div>
+
+        <div>
+
+          <div class="nav-title">SideGuy Solutions</div>
+
+          <div class="nav-sub">Operator URLs · Payments · AI · Home Services</div>
+
+        </div>
+
+      </div>
+
+      <a class="pill-link" href="sms:17735441231">
+
+        <span>🟢</span> Text PJ
+
+      </a>
+
+    </div>
+
+  </header>
 
 
-<header>
 
-  <h1>SideGuy Command Center</h1>
+  <main>
 
-  <div class="meta">
+    <h1>SideGuy Command Center</h1>
 
-    <span id="count">0</span> Live Pages · 
+    <div class="meta" id="meta-line">
 
-    Updated <span id="timestamp"></span>
+      <!-- filled by JS -->
 
-  </div>
-
-  <div class="controls">
-
-    <input id="search" class="search" placeholder="Search pages…">
-
-  </div>
-
-</header>
+    </div>
 
 
 
-<section id="grid" class="grid"></section>
+    <div class="top-bar">
+
+      <div class="search-wrap">
+
+        <input id="search" class="search-input" placeholder="Search pages… (plumber, crypto, gym, AI, etc.)" />
+
+        <div class="search-icon">🔍</div>
+
+      </div>
+
+      <div class="filters">
+
+        <button class="filter-chip active" data-filter="all">All</button>
+
+        <button class="filter-chip" data-filter="Home">Home</button>
+
+        <button class="filter-chip" data-filter="Payments">Payments</button>
+
+        <button class="filter-chip" data-filter="Tech">Tech & AI</button>
+
+        <button class="filter-chip" data-filter="Special">SideGuy Specials</button>
+
+      </div>
+
+    </div>
 
 
 
-<a id="pj" href="sms:17735441231">Text PJ</a>
+    <div class="grid" id="grid"></div>
+
+  </main>
+
+
+
+  <a class="pj-orb" href="sms:17735441231">
+
+    <span>📲</span> Text PJ · 0.4s Help Line
+
+  </a>
 
 
 
 <script>
 
-const PAGES = [
+  /* ===========================
 
-"ac-repair-san-diego.html",
+     300 URL DATA
 
-"accept-crypto-get-cash-san-diego.html",
+  ============================ */
 
-"accountant-services-san-diego.html",
 
-"ai-automation-san-diego.html",
 
-"ai-business-tools-san-diego.html",
+  const SLUGS = [
 
-"ai-development-san-diego.html",
+  "ac-repair-san-diego.html",
 
-"ai-payment-automation-san-diego.html",
+  "hvac-contractor-san-diego.html",
 
-"ai-small-business-automation-san-diego.html",
+  "plumbing-services-san-diego.html",
 
-"air-duct-cleaning-san-diego.html",
+  "emergency-plumber-san-diego.html",
 
-"app-development-san-diego.html",
+  "drain-cleaning-san-diego.html",
 
-"appliance-repair-san-diego.html",
+  "water-heater-repair-san-diego.html",
 
-"artificial-grass-installation-san-diego.html",
+  "water-damage-restoration-san-diego.html",
 
-"artificial-intelligence-san-diego.html",
+  "roof-repair-san-diego.html",
 
-"auto-repair-payment-processing-san-diego.html",
+  "roofing-contractor-san-diego.html",
 
-"barbershop-payments-san-diego.html",
+  "gutter-cleaning-san-diego.html",
 
-"best-stripe-alternative-san-diego.html",
+  "solar-installation-san-diego.html",
 
-"blockchain-development-san-diego.html",
+  "solar-battery-installation-san-diego.html",
 
-"business-automation-san-diego.html",
+  "window-installation-san-diego.html",
 
-"business-savings-san-diego.html",
+  "window-repair-san-diego.html",
 
-"chiropractor-payment-processing-san-diego.html",
+  "door-installation-san-diego.html",
 
-"contractor-payments-san-diego.html",
+  "garage-door-repair-san-diego.html",
 
-"credit-card-processing-san-diego.html",
+  "fence-contractor-san-diego.html",
 
-"crypto-payments-san-diego.html",
+  "wood-fence-repair-san-diego.html",
 
-"custom-software-development-san-diego.html",
+  "wrought-iron-fence-san-diego.html",
 
-"drain-cleaning-san-diego.html",
+  "vinyl-fence-installation-san-diego.html",
 
-"ecommerce-payment-processing-san-diego.html",
+  "landscaping-services-san-diego.html",
 
-"electrician-payment-processing-san-diego.html",
+  "landscaper-payments-san-diego.html",
 
-"emergency-plumber-san-diego.html",
+  "tree-trimming-san-diego.html",
 
-"fitness-payment-processing-san-diego.html",
+  "lawn-care-service-san-diego.html",
 
-"foundation-repair-san-diego.html",
+  "artificial-grass-installation-san-diego.html",
 
-"get-paid-today-san-diego.html",
+  "pool-cleaning-service-san-diego.html",
 
-"gym-payment-processing-san-diego.html",
+  "pool-service-payment-processing-san-diego.html",
 
-"handyman-payments-san-diego.html",
+  "pest-control-services-san-diego.html",
 
-"hvac-payments-san-diego.html",
+  "termite-treatment-san-diego.html",
 
-"instant-payouts-san-diego.html",
+  "foundation-repair-san-diego.html",
 
-"instant-settlement-san-diego.html",
+  "concrete-repair-san-diego.html",
 
-"landscaper-payments-san-diego.html",
+  "flooring-installation-san-diego.html",
 
-"lower-credit-card-fees-san-diego.html",
+  "vinyl-plank-flooring-san-diego.html",
 
-"medical-payment-processing-san-diego.html",
+  "tile-installation-san-diego.html",
 
-"merchant-services-san-diego.html",
+  "bathroom-remodel-san-diego.html",
 
-"mobile-app-development-san-diego.html",
+  "kitchen-remodel-san-diego.html",
 
-"mobile-payments-san-diego.html",
+  "handyman-services-san-diego.html",
 
-"moving-company-payments-san-diego.html",
+  "handyman-payment-processing-san-diego.html",
 
-"payment-processing-san-diego.html",
+  "appliance-repair-san-diego.html",
 
-"personal-trainer-payments-san-diego.html",
+  "house-cleaning-service-san-diego.html",
 
-"pest-control-payment-processing-san-diego.html",
+  "move-out-cleaning-san-diego.html",
 
-"plumbing-services-payment-processing-san-diego.html",
+  "pressure-washing-san-diego.html",
 
-"pool-service-payment-processing-san-diego.html",
+  "junk-removal-san-diego.html",
 
-"restaurant-payment-processing-san-diego.html",
+  "moving-company-san-diego.html",
 
-"retail-payment-processing-san-diego.html",
+  "carpet-cleaning-san-diego.html",
 
-"roofing-contractor-payments-san-diego.html",
+  "air-duct-cleaning-san-diego.html",
 
-"salon-payment-processing-san-diego.html",
+  "home-painting-san-diego.html",
 
-"same-day-pay-san-diego.html",
+  "interior-painting-san-diego.html",
 
-"san-diego-ai-development.html",
+  "exterior-painting-san-diego.html",
 
-"san-diego-business-automation.html",
+  "home-security-installation-san-diego.html",
 
-"san-diego-cryptopayments.html",
+  "payment-processing-san-diego.html",
 
-"san-diego-energy-payments.html",
+  "credit-card-processing-san-diego.html",
 
-"san-diego-payment-processing.html",
+  "merchant-services-san-diego.html",
 
-"san-diego-solana-payments-near-me.html",
+  "pos-systems-san-diego.html",
 
-"software-development-san-diego.html",
+  "restaurant-payment-processing-san-diego.html",
 
-"solana-development-san-diego.html",
+  "barber-shop-payments-san-diego.html",
 
-"stripe-alternatives-san-diego.html",
+  "salon-payment-processing-san-diego.html",
 
-"subscription-payments-san-diego.html",
+  "spa-payment-processing-san-diego.html",
 
-"ticketing-software-san-diego.html",
+  "gym-payment-processing-san-diego.html",
 
-"tow-truck-service-san-diego.html",
+  "fitness-coach-payments-san-diego.html",
 
-"vinyl-fence-installation-san-diego.html",
+  "chiropractor-payment-processing-san-diego.html",
 
-"vinyl-plank-flooring-san-diego.html",
+  "dental-office-payment-processing-san-diego.html",
 
-"virus-removal-san-diego.html",
+  "medical-clinic-payment-processing-san-diego.html",
 
-"water-damage-restoration-san-diego.html",
+  "veterinary-payment-processing-san-diego.html",
 
-"water-heater-repair-san-diego.html",
+  "auto-repair-payment-processing-san-diego.html",
 
-"wifi-installation-san-diego.html",
+  "towing-company-payment-processing-san-diego.html",
 
-"window-installation-san-diego.html",
+  "mobile-detailing-payments-san-diego.html",
 
-"window-repair-san-diego.html",
+  "home-service-payment-processing-san-diego.html",
 
-"wood-fence-repair-san-diego.html",
+  "subscription-billing-san-diego.html",
 
-"wrought-iron-fence-san-diego.html"
+  "subscription-payments-san-diego.html",
 
-];
+  "ecommerce-payment-processing-san-diego.html",
 
+  "ecommerce-payment-optimization-san-diego.html",
 
+  "online-invoice-payments-san-diego.html",
 
-const ICONS=["⚡","🏠","🚗","💳","💻","🛠️","🧱","🔥","🌊","📈","✅"];
+  "b2b-payment-processing-san-diego.html",
 
-const grid=document.getElementById("grid");
+  "recurring-billing-automation-san-diego.html",
 
+  "instant-payouts-san-diego.html",
 
+  "same-day-pay-san-diego.html",
 
-PAGES.forEach((slug,i)=>{
+  "contractor-payment-processing-san-diego.html",
 
-  const icon=ICONS[i%ICONS.length];
+  "contractor-payments-san-diego.html",
 
-  const name=slug.replace(".html","").replace(/-/g," ");
+  "local-business-payments-san-diego.html",
 
-  grid.innerHTML+=`
+  "local-business-savings-san-diego.html",
 
-    <div class="card">
+  "lower-credit-card-fees-san-diego.html",
 
-      <div class="icon">${icon}</div>
+  "save-on-stripe-fees-san-diego.html",
 
-      <div class="slug">${name}</div>
+  "invoice-factoring-alternative-san-diego.html",
 
-      <a class="open" href="${slug}">OPEN</a>
+  "cash-advance-alternative-san-diego.html",
 
-    </div>
+  "energy-utility-payments-san-diego.html",
 
-  `;
+  "crypto-payment-processing-san-diego.html",
 
-});
+  "accept-crypto-get-cash-san-diego.html",
 
+  "solana-business-payments-san-diego.html",
 
+  "ticketing-event-payments-san-diego.html",
 
-document.getElementById("count").textContent = PAGES.length;
+  "event-venue-payment-processing-san-diego.html",
 
+  "nonprofit-donation-processing-san-diego.html",
 
+  "church-donation-processing-san-diego.html",
 
-document.getElementById("timestamp").textContent =
+  "rent-payment-processing-san-diego.html",
 
-  new Date().toLocaleString();
+  "hoa-payment-processing-san-diego.html",
 
+  "property-management-payments-san-diego.html",
 
+  "school-tuition-payments-san-diego.html",
 
-document.getElementById("search").oninput=e=>{
+  "medical-spa-payment-processing-san-diego.html",
 
-  const v=e.target.value.toLowerCase();
+  "law-firm-payment-processing-san-diego.html",
 
-  document.querySelectorAll(".card").forEach(c=>{
+  "ai-automation-san-diego.html",
 
-    c.style.display=c.textContent.toLowerCase().includes(v)?"flex":"none";
+  "ai-business-tools-san-diego.html",
+
+  "ai-small-business-automation-san-diego.html",
+
+  "ai-marketing-automation-san-diego.html",
+
+  "ai-lead-generation-san-diego.html",
+
+  "ai-customer-support-chatbots-san-diego.html",
+
+  "custom-ai-software-development-san-diego.html",
+
+  "custom-software-development-san-diego.html",
+
+  "app-development-san-diego.html",
+
+  "mobile-app-development-san-diego.html",
+
+  "web-design-san-diego.html",
+
+  "website-maintenance-san-diego.html",
+
+  "website-speed-fix-san-diego.html",
+
+  "seo-audit-san-diego.html",
+
+  "local-seo-services-san-diego.html",
+
+  "google-business-profile-optimization-san-diego.html",
+
+  "reputation-management-san-diego.html",
+
+  "crm-setup-san-diego.html",
+
+  "sales-pipeline-automation-san-diego.html",
+
+  "bookkeeping-help-san-diego.html",
+
+  "virtual-assistant-services-san-diego.html",
+
+  "workflow-automation-san-diego.html",
+
+  "cloud-migration-san-diego.html",
+
+  "data-dashboard-development-san-diego.html",
+
+  "reporting-automation-san-diego.html",
+
+  "email-setup-help-san-diego.html",
+
+  "domain-setup-help-san-diego.html",
+
+  "it-support-services-san-diego.html",
+
+  "wifi-installation-san-diego.html",
+
+  "wifi-guest-network-setup-san-diego.html",
+
+  "cybersecurity-audit-san-diego.html",
+
+  "data-backup-solutions-san-diego.html",
+
+  "blockchain-development-san-diego.html",
+
+  "solana-development-san-diego.html",
+
+  "defi-dapp-development-san-diego.html",
+
+  "nft-marketplace-development-san-diego.html",
+
+  "token-gating-solutions-san-diego.html",
+
+  "online-course-platform-setup-san-diego.html",
+
+  "membership-site-development-san-diego.html",
+
+  "appointment-scheduling-automation-san-diego.html",
+
+  "e-signature-workflows-san-diego.html",
+
+  "document-automation-san-diego.html",
+
+  "proposal-software-setup-san-diego.html",
+
+  "salesforce-consulting-san-diego.html",
+
+  "hubspot-consulting-san-diego.html",
+
+  "shopify-development-san-diego.html",
+
+  "wordpress-development-san-diego.html",
+
+  "zapier-expert-setup-san-diego.html",
+
+  "ac-repair-north-county-san-diego.html",
+
+  "hvac-contractor-north-county-san-diego.html",
+
+  "plumbing-services-north-county-san-diego.html",
+
+  "emergency-plumber-north-county-san-diego.html",
+
+  "drain-cleaning-north-county-san-diego.html",
+
+  "water-heater-repair-north-county-san-diego.html",
+
+  "water-damage-restoration-north-county-san-diego.html",
+
+  "roof-repair-north-county-san-diego.html",
+
+  "roofing-contractor-north-county-san-diego.html",
+
+  "gutter-cleaning-north-county-san-diego.html",
+
+  "solar-installation-north-county-san-diego.html",
+
+  "solar-battery-installation-north-county-san-diego.html",
+
+  "window-installation-north-county-san-diego.html",
+
+  "window-repair-north-county-san-diego.html",
+
+  "door-installation-north-county-san-diego.html",
+
+  "garage-door-repair-north-county-san-diego.html",
+
+  "fence-contractor-north-county-san-diego.html",
+
+  "wood-fence-repair-north-county-san-diego.html",
+
+  "wrought-iron-fence-north-county-san-diego.html",
+
+  "vinyl-fence-installation-north-county-san-diego.html",
+
+  "landscaping-services-north-county-san-diego.html",
+
+  "landscaper-payments-north-county-san-diego.html",
+
+  "tree-trimming-north-county-san-diego.html",
+
+  "lawn-care-service-north-county-san-diego.html",
+
+  "artificial-grass-installation-north-county-san-diego.html",
+
+  "pool-cleaning-service-north-county-san-diego.html",
+
+  "pool-service-payment-processing-north-county-san-diego.html",
+
+  "pest-control-services-north-county-san-diego.html",
+
+  "termite-treatment-north-county-san-diego.html",
+
+  "foundation-repair-north-county-san-diego.html",
+
+  "concrete-repair-north-county-san-diego.html",
+
+  "flooring-installation-north-county-san-diego.html",
+
+  "vinyl-plank-flooring-north-county-san-diego.html",
+
+  "tile-installation-north-county-san-diego.html",
+
+  "bathroom-remodel-north-county-san-diego.html",
+
+  "kitchen-remodel-north-county-san-diego.html",
+
+  "handyman-services-north-county-san-diego.html",
+
+  "handyman-payment-processing-north-county-san-diego.html",
+
+  "appliance-repair-north-county-san-diego.html",
+
+  "house-cleaning-service-north-county-san-diego.html",
+
+  "move-out-cleaning-north-county-san-diego.html",
+
+  "pressure-washing-north-county-san-diego.html",
+
+  "junk-removal-north-county-san-diego.html",
+
+  "moving-company-north-county-san-diego.html",
+
+  "carpet-cleaning-north-county-san-diego.html",
+
+  "air-duct-cleaning-north-county-san-diego.html",
+
+  "home-painting-north-county-san-diego.html",
+
+  "interior-painting-north-county-san-diego.html",
+
+  "exterior-painting-north-county-san-diego.html",
+
+  "home-security-installation-north-county-san-diego.html",
+
+  "payment-processing-north-county-san-diego.html",
+
+  "credit-card-processing-north-county-san-diego.html",
+
+  "merchant-services-north-county-san-diego.html",
+
+  "pos-systems-north-county-san-diego.html",
+
+  "restaurant-payment-processing-north-county-san-diego.html",
+
+  "barber-shop-payments-north-county-san-diego.html",
+
+  "salon-payment-processing-north-county-san-diego.html",
+
+  "spa-payment-processing-north-county-san-diego.html",
+
+  "gym-payment-processing-north-county-san-diego.html",
+
+  "fitness-coach-payments-north-county-san-diego.html",
+
+  "chiropractor-payment-processing-north-county-san-diego.html",
+
+  "dental-office-payment-processing-north-county-san-diego.html",
+
+  "medical-clinic-payment-processing-north-county-san-diego.html",
+
+  "veterinary-payment-processing-north-county-san-diego.html",
+
+  "auto-repair-payment-processing-north-county-san-diego.html",
+
+  "towing-company-payment-processing-north-county-san-diego.html",
+
+  "mobile-detailing-payments-north-county-san-diego.html",
+
+  "home-service-payment-processing-north-county-san-diego.html",
+
+  "subscription-billing-north-county-san-diego.html",
+
+  "subscription-payments-north-county-san-diego.html",
+
+  "ecommerce-payment-processing-north-county-san-diego.html",
+
+  "ecommerce-payment-optimization-north-county-san-diego.html",
+
+  "online-invoice-payments-north-county-san-diego.html",
+
+  "b2b-payment-processing-north-county-san-diego.html",
+
+  "recurring-billing-automation-north-county-san-diego.html",
+
+  "instant-payouts-north-county-san-diego.html",
+
+  "same-day-pay-north-county-san-diego.html",
+
+  "contractor-payment-processing-north-county-san-diego.html",
+
+  "contractor-payments-north-county-san-diego.html",
+
+  "local-business-payments-north-county-san-diego.html",
+
+  "local-business-savings-north-county-san-diego.html",
+
+  "lower-credit-card-fees-north-county-san-diego.html",
+
+  "save-on-stripe-fees-north-county-san-diego.html",
+
+  "invoice-factoring-alternative-north-county-san-diego.html",
+
+  "cash-advance-alternative-north-county-san-diego.html",
+
+  "energy-utility-payments-north-county-san-diego.html",
+
+  "crypto-payment-processing-north-county-san-diego.html",
+
+  "accept-crypto-get-cash-north-county-san-diego.html",
+
+  "solana-business-payments-north-county-san-diego.html",
+
+  "ticketing-event-payments-north-county-san-diego.html",
+
+  "event-venue-payment-processing-north-county-san-diego.html",
+
+  "nonprofit-donation-processing-north-county-san-diego.html",
+
+  "church-donation-processing-north-county-san-diego.html",
+
+  "rent-payment-processing-north-county-san-diego.html",
+
+  "hoa-payment-processing-north-county-san-diego.html",
+
+  "property-management-payments-north-county-san-diego.html",
+
+  "school-tuition-payments-north-county-san-diego.html",
+
+  "medical-spa-payment-processing-north-county-san-diego.html",
+
+  "law-firm-payment-processing-north-county-san-diego.html",
+
+  "ai-automation-north-county-san-diego.html",
+
+  "ai-business-tools-north-county-san-diego.html",
+
+  "ai-small-business-automation-north-county-san-diego.html",
+
+  "ai-marketing-automation-north-county-san-diego.html",
+
+  "ai-lead-generation-north-county-san-diego.html",
+
+  "ai-customer-support-chatbots-north-county-san-diego.html",
+
+  "custom-ai-software-development-north-county-san-diego.html",
+
+  "custom-software-development-north-county-san-diego.html",
+
+  "app-development-north-county-san-diego.html",
+
+  "mobile-app-development-north-county-san-diego.html",
+
+  "web-design-north-county-san-diego.html",
+
+  "website-maintenance-north-county-san-diego.html",
+
+  "website-speed-fix-north-county-san-diego.html",
+
+  "seo-audit-north-county-san-diego.html",
+
+  "local-seo-services-north-county-san-diego.html",
+
+  "google-business-profile-optimization-north-county-san-diego.html",
+
+  "reputation-management-north-county-san-diego.html",
+
+  "crm-setup-north-county-san-diego.html",
+
+  "sales-pipeline-automation-north-county-san-diego.html",
+
+  "bookkeeping-help-north-county-san-diego.html",
+
+  "virtual-assistant-services-north-county-san-diego.html",
+
+  "workflow-automation-north-county-san-diego.html",
+
+  "cloud-migration-north-county-san-diego.html",
+
+  "data-dashboard-development-north-county-san-diego.html",
+
+  "reporting-automation-north-county-san-diego.html",
+
+  "email-setup-help-north-county-san-diego.html",
+
+  "domain-setup-help-north-county-san-diego.html",
+
+  "it-support-services-north-county-san-diego.html",
+
+  "wifi-installation-north-county-san-diego.html",
+
+  "wifi-guest-network-setup-north-county-san-diego.html",
+
+  "cybersecurity-audit-north-county-san-diego.html",
+
+  "data-backup-solutions-north-county-san-diego.html",
+
+  "blockchain-development-north-county-san-diego.html",
+
+  "solana-development-north-county-san-diego.html",
+
+  "defi-dapp-development-north-county-san-diego.html",
+
+  "nft-marketplace-development-north-county-san-diego.html",
+
+  "token-gating-solutions-north-county-san-diego.html",
+
+  "online-course-platform-setup-north-county-san-diego.html",
+
+  "membership-site-development-north-county-san-diego.html",
+
+  "appointment-scheduling-automation-north-county-san-diego.html",
+
+  "e-signature-workflows-north-county-san-diego.html",
+
+  "document-automation-north-county-san-diego.html",
+
+  "proposal-software-setup-north-county-san-diego.html",
+
+  "salesforce-consulting-north-county-san-diego.html",
+
+  "hubspot-consulting-north-county-san-diego.html",
+
+  "shopify-development-north-county-san-diego.html",
+
+  "wordpress-development-north-county-san-diego.html",
+
+  "zapier-expert-setup-north-county-san-diego.html",
+
+  "sideguy-operator-network-san-diego.html",
+
+  "sideguy-payments-calculator-san-diego.html",
+
+  "san-diego-energy-payments-hub.html",
+
+  "san-diego-crypto-help-desk.html",
+
+  "north-county-verified-operators.html",
+
+  "sideguy-command-center-san-diego.html"
+
+  ];
+
+
+
+  /* Helpers: title, category, emoji */
+
+  function slugToTitle(slug){
+
+    const clean = slug.replace(".html","").replace(/-/g," ");
+
+    return clean;
+
+  }
+
+
+
+  function inferCategory(slug){
+
+    const s = slug;
+
+    if(
+
+      s.includes("payment") || s.includes("pos") || s.includes("merchant") ||
+
+      s.includes("payout") || s.includes("billing") || s.includes("donation")
+
+    ) return "Payments";
+
+    if(
+
+      s.includes("ai-") || s.includes("software") || s.includes("app-") || s.includes("seo-") ||
+
+      s.includes("cloud-") || s.includes("development") || s.includes("zapier")
+
+    ) return "Tech";
+
+    if(
+
+      s.includes("sideguy") || s.includes("crypto-help-desk") ||
+
+      s.includes("verified-operators") || s.includes("energy-payments-hub")
+
+    ) return "Special";
+
+    return "Home";
+
+  }
+
+
+
+  function emojiForSlug(slug){
+
+    if(slug.includes("plumb") || slug.includes("drain")) return "🚰";
+
+    if(slug.includes("hvac") || slug.includes("ac-repair")) return "❄️";
+
+    if(slug.includes("roof")) return "🏠";
+
+    if(slug.includes("solar")) return "☀️";
+
+    if(slug.includes("pool")) return "🏊";
+
+    if(slug.includes("pest") || slug.includes("termite")) return "🐜";
+
+    if(slug.includes("landscap") || slug.includes("lawn") || slug.includes("tree")) return "🌳";
+
+    if(slug.includes("cleaning") || slug.includes("pressure-washing") || slug.includes("junk-removal")) return "🧼";
+
+    if(slug.includes("floor") || slug.includes("tile") || slug.includes("carpet")) return "🧱";
+
+    if(slug.includes("remodel")) return "🛠️";
+
+    if(slug.includes("handyman")) return "🔧";
+
+    if(slug.includes("security")) return "🔐";
+
+
+
+    if(slug.includes("payment") || slug.includes("pos-") || slug.includes("payout")) return "💳";
+
+    if(slug.includes("crypto") || slug.includes("solana")) return "🟣";
+
+    if(slug.includes("invoice") || slug.includes("billing")) return "📄";
+
+    if(slug.includes("donation")) return "❤️";
+
+
+
+    if(slug.includes("ai-") || slug.includes("automation")) return "🤖";
+
+    if(slug.includes("app-development") || slug.includes("mobile-app")) return "📱";
+
+    if(slug.includes("web-design") || slug.includes("website")) return "🖥️";
+
+    if(slug.includes("cloud-migration") || slug.includes("data-")) return "☁️";
+
+    if(slug.includes("shopify") || slug.includes("ecommerce")) return "🛒";
+
+    if(slug.includes("blockchain") || slug.includes("defi") || slug.includes("nft")) return "⛓️";
+
+
+
+    if(slug.includes("sideguy")) return "🌊";
+
+    if(slug.includes("verified-operators")) return "✅";
+
+
+
+    return "🌀";
+
+  }
+
+
+
+  /* Render */
+
+  const grid = document.getElementById("grid");
+
+
+
+  SLUGS.forEach(slug=>{
+
+    const href = slug;
+
+    const cat = inferCategory(slug);
+
+    const emoji = emojiForSlug(slug);
+
+    const title = slugToTitle(slug);
+
+
+
+    const a = document.createElement("a");
+
+    a.href = href;
+
+    a.className = "card-link";
+
+
+
+    const card = document.createElement("div");
+
+    card.className = "card";
+
+    card.dataset.cat = cat.toLowerCase();
+
+    card.dataset.slug = slug.toLowerCase();
+
+
+
+    const tag = document.createElement("div");
+
+    tag.className = "tag";
+
+    tag.textContent = cat;
+
+    card.appendChild(tag);
+
+
+
+    const top = document.createElement("div");
+
+    top.className = "card-top";
+
+
+
+    const titleDiv = document.createElement("div");
+
+    titleDiv.className = "card-title";
+
+    titleDiv.innerHTML = `<span class="emoji">${emoji}</span>${title}`;
+
+    top.appendChild(titleDiv);
+
+    card.appendChild(top);
+
+
+
+    const urlDiv = document.createElement("div");
+
+    urlDiv.className = "card-url";
+
+    urlDiv.textContent = href;
+
+    card.appendChild(urlDiv);
+
+
+
+    const footer = document.createElement("div");
+
+    footer.className = "card-footer";
+
+
+
+    const status = document.createElement("div");
+
+    status.className = "chip-status";
+
+    status.textContent = "OPEN";
+
+    footer.appendChild(status);
+
+
+
+    const meta = document.createElement("div");
+
+    meta.className = "chip-meta";
+
+    meta.textContent = cat === "Payments" ? "Fees ↓ · Payouts ↑"
+
+                     : cat === "Tech" ? "AI + automations"
+
+                     : cat === "Special" ? "SideGuy system"
+
+                     : "Home & field ops";
+
+    footer.appendChild(meta);
+
+
+
+    card.appendChild(footer);
+
+    a.appendChild(card);
+
+    grid.appendChild(a);
 
   });
 
-};
+
+
+  /* Meta line */
+
+  const metaEl = document.getElementById("meta-line");
+
+  const now = new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
+
+  metaEl.textContent = `${SLUGS.length} Live URLs · Updated ${now} PT · Version v7.0 · SideGuy 300 Grid`;
+
+
+
+  /* Filters */
+
+  const chips = document.querySelectorAll(".filter-chip");
+
+  const searchInput = document.getElementById("search");
+
+
+
+  function applyFilters(){
+
+    const activeChip = document.querySelector(".filter-chip.active");
+
+    const filter = activeChip ? activeChip.dataset.filter.toLowerCase() : "all";
+
+    const term = searchInput.value.trim().toLowerCase();
+
+
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+      const cat = card.dataset.cat;
+
+      const slug = card.dataset.slug;
+
+      const matchCat = (filter==="all") || (filter==="special" && cat==="special") || (filter===cat);
+
+      const matchText = !term || slug.includes(term);
+
+      card.parentElement.style.display = (matchCat && matchText) ? "block" : "none";
+
+    });
+
+  }
+
+
+
+  chips.forEach(chip=>{
+
+    chip.addEventListener("click",()=>{
+
+      chips.forEach(c=>c.classList.remove("active"));
+
+      chip.classList.add("active");
+
+      applyFilters();
+
+    });
+
+  });
+
+
+
+  searchInput.addEventListener("input",applyFilters);
 
 </script>
-
-
 
 </body>
 
 </html>
+
 
