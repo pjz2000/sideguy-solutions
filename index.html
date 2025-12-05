@@ -1,228 +1,1166 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <title>SideGuy Solutions · Live Command Center</title>
+
+  <title>SideGuy Solutions · Operator Command Center</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="SideGuy Solutions Live Page Index · Real-Time Operator Directory" />
+
+  <meta name="description" content="SideGuy Solutions Command Center · Live operator pages, payments, automation and carbon-credit tools for San Diego operators." />
+
+
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, Inter, Arial, sans-serif;
+
+      font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
+
       background:
-        radial-gradient(circle at 20% 10%, #ffffff 0%, transparent 40%),
-        radial-gradient(circle at 80% 20%, #caffea 0%, transparent 45%),
-        radial-gradient(circle at 50% 80%, #bfe9ff 0%, transparent 60%),
-        linear-gradient(180deg, #edf9ff, #d6efff);
+
+        radial-gradient(circle at 15% 0%, #ffffff 0%, transparent 45%),
+
+        radial-gradient(circle at 85% 10%, #caffea 0%, transparent 45%),
+
+        radial-gradient(circle at 50% 90%, #bfe9ff 0%, transparent 60%),
+
+        linear-gradient(180deg,#edf9ff,#d6efff);
+
       color:#033045;
-      min-height:100vh;
+
+      -webkit-font-smoothing:antialiased;
+
+      transition:background-position .1s linear;
+
     }
 
-    header {
-      padding: 28px 20px 16px;
-      text-align: center;
+
+
+    a { color:inherit; text-decoration:none; }
+
+
+
+    .page-shell {
+
+      max-width:1200px;
+
+      margin:0 auto;
+
+      padding:24px 16px 80px;
+
     }
 
-    h1 {
-      font-size: 30px;
-      margin-bottom: 6px;
-      background: linear-gradient(90deg,#033045,#00c35a,#033045);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+
+    /* TOP BAR */
+
+
+
+    .top-bar {
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      margin-bottom:20px;
+
     }
 
-    .meta {
-      font-size: 14px;
-      opacity: .75;
-      margin-bottom:16px;
+
+
+    .brand {
+
+      display:flex;
+
+      align-items:center;
+
+      gap:8px;
+
+      font-weight:700;
+
+      letter-spacing:.04em;
+
+      font-size:14px;
+
     }
 
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
+
+
+    .brand-pill {
+
+      padding:4px 10px;
+
+      border-radius:999px;
+
+      background:rgba(255,255,255,.8);
+
+      box-shadow:0 8px 18px rgba(0,0,0,.05);
+
     }
 
-    .stat-box {
-      background: white;
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
-      font-size: 14px;
-    }
 
-    main {
-      padding: 16px 28px 40px;
-      max-width: 1500px;
-      margin: auto;
-    }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 18px;
-    }
+    .top-meta {
 
-    .card {
-      background: rgba(255,255,255,.95);
-      border-radius: 14px;
-      padding: 18px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 10px 24px rgba(0,0,0,.08);
-      transition: all .15s ease;
-      display:block;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(0,0,0,.15);
-    }
-
-    .card-title {
-      font-weight: 600;
-      margin-bottom: 6px;
-      font-size:15px;
-    }
-
-    .card-url {
-      font-size: 12px;
-      opacity:.65;
-      word-break: break-all;
-    }
-
-    footer {
-      text-align:center;
       font-size:12px;
-      opacity:.6;
-      padding:40px 12px 90px;
+
+      opacity:.7;
+
+      text-align:right;
+
     }
+
+
+
+    .top-meta strong { opacity:1; }
+
+
+
+    /* HERO */
+
+
+
+    .hero {
+
+      display:grid;
+
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+
+      gap:20px;
+
+      align-items:stretch;
+
+      margin-bottom:28px;
+
+    }
+
+
+
+    @media (max-width:800px) {
+
+      .hero {
+
+        grid-template-columns:1fr;
+
+      }
+
+    }
+
+
+
+    .hero-left {
+
+      background:rgba(255,255,255,.92);
+
+      border-radius:24px;
+
+      padding:22px 22px 20px;
+
+      box-shadow:0 18px 40px rgba(0,0,0,.15);
+
+      position:relative;
+
+      overflow:hidden;
+
+    }
+
+
+
+    .hero-left::after{
+
+      content:"";
+
+      position:absolute;
+
+      inset:-40%;
+
+      background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.4),transparent 80%);
+
+      opacity:.0;
+
+      animation:heroSweep 10s linear infinite;
+
+    }
+
+
+
+    @keyframes heroSweep{
+
+      0%{transform:translateX(-50%) rotate(8deg); opacity:0;}
+
+      20%{opacity:.65;}
+
+      50%{transform:translateX(60%) rotate(8deg); opacity:.4;}
+
+      100%{transform:translateX(160%) rotate(8deg); opacity:0;}
+
+    }
+
+
+
+    .hero-tag {
+
+      font-size:12px;
+
+      text-transform:uppercase;
+
+      letter-spacing:.16em;
+
+      opacity:.8;
+
+      margin-bottom:8px;
+
+    }
+
+
+
+    .hero-title {
+
+      font-size:26px;
+
+      line-height:1.25;
+
+      margin-bottom:8px;
+
+    }
+
+
+
+    .hero-sub {
+
+      font-size:14px;
+
+      opacity:.8;
+
+      margin-bottom:16px;
+
+    }
+
+
+
+    .hero-mission {
+
+      font-size:13px;
+
+      padding:10px 12px;
+
+      border-radius:12px;
+
+      background:rgba(0,0,0,.03);
+
+      margin-bottom:16px;
+
+    }
+
+
+
+    .hero-bullets {
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:12px;
+
+      margin-bottom:18px;
+
+      font-size:13px;
+
+    }
+
+
+
+    .hero-badge {
+
+      padding:7px 10px;
+
+      border-radius:999px;
+
+      background:rgba(99,230,153,.12);
+
+      border:1px solid rgba(16,185,129,.22);
+
+      display:flex;
+
+      align-items:center;
+
+      gap:6px;
+
+    }
+
+
+
+    .hero-badge span.icon {
+
+      font-size:15px;
+
+    }
+
+
+
+    .hero-cta-row {
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:10px;
+
+      margin-bottom:4px;
+
+    }
+
+
+
+    .btn-main {
+
+      padding:8px 14px;
+
+      border-radius:999px;
+
+      background:linear-gradient(120deg,#00c35a,#12b3ff);
+
+      color:#fff;
+
+      font-size:13px;
+
+      font-weight:600;
+
+      border:none;
+
+      cursor:pointer;
+
+      display:inline-flex;
+
+      align-items:center;
+
+      gap:6px;
+
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+
+    }
+
+
+
+    .btn-ghost {
+
+      padding:8px 14px;
+
+      border-radius:999px;
+
+      background:rgba(255,255,255,.7);
+
+      border:1px solid rgba(15,23,42,.08);
+
+      font-size:13px;
+
+      display:inline-flex;
+
+      align-items:center;
+
+      gap:6px;
+
+      cursor:pointer;
+
+    }
+
+
+
+    .hero-note {
+
+      font-size:11px;
+
+      opacity:.6;
+
+    }
+
+
+
+    .hero-right {
+
+      background:rgba(255,255,255,.95);
+
+      border-radius:24px;
+
+      padding:18px 18px 16px;
+
+      box-shadow:0 18px 40px rgba(0,0,0,.18);
+
+      display:flex;
+
+      flex-direction:column;
+
+      justify-content:space-between;
+
+      position:relative;
+
+      overflow:hidden;
+
+    }
+
+
+
+    .hero-right::before{
+
+      content:"";
+
+      position:absolute;
+
+      width:180px;
+
+      height:180px;
+
+      border-radius:50%;
+
+      background:radial-gradient(circle at 30% 30%,rgba(74,222,128,.55),transparent 65%);
+
+      top:-40px;
+
+      right:-40px;
+
+      opacity:.8;
+
+    }
+
+
+
+    .hero-right-inner{
+
+      position:relative;
+
+      z-index:2;
+
+    }
+
+
+
+    .hero-right-title{
+
+      font-size:16px;
+
+      font-weight:600;
+
+      margin-bottom:6px;
+
+    }
+
+
+
+    .hero-right-copy{
+
+      font-size:13px;
+
+      opacity:.8;
+
+      margin-bottom:12px;
+
+    }
+
+
+
+    .hero-right-steps{
+
+      font-size:12px;
+
+      margin-bottom:12px;
+
+    }
+
+
+
+    .hero-right-steps li{
+
+      margin-left:18px;
+
+      margin-bottom:3px;
+
+    }
+
+
+
+    .hero-right-footer{
+
+      font-size:11px;
+
+      opacity:.65;
+
+    }
+
+
+
+    /* FILTER / STATS ROW BELOW HERO */
+
+
+
+    .filters-row{
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      justify-content:space-between;
+
+      align-items:center;
+
+      margin:8px 0 16px;
+
+      gap:10px;
+
+      font-size:12px;
+
+    }
+
+
+
+    .chips{
+
+      display:flex;
+
+      flex-wrap:wrap;
+
+      gap:6px;
+
+    }
+
+
+
+    .chip{
+
+      padding:6px 10px;
+
+      border-radius:999px;
+
+      background:rgba(255,255,255,.8);
+
+      border:1px solid rgba(15,23,42,.06);
+
+      cursor:default;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:6px;
+
+    }
+
+
+
+    .chip span.icon{font-size:14px;}
+
+
+
+    .filters-meta{
+
+      opacity:.75;
+
+    }
+
+
+
+    /* GRID */
+
+
+
+    .grid{
+
+      display:grid;
+
+      grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+
+      gap:16px;
+
+    }
+
+
+
+    .card{
+
+      background:rgba(255,255,255,.92);
+
+      border-radius:16px;
+
+      padding:14px 14px 12px;
+
+      box-shadow:0 12px 26px rgba(15,23,42,.12);
+
+      position:relative;
+
+      overflow:hidden;
+
+      transition:transform .16s ease, box-shadow .16s ease;
+
+    }
+
+
+
+    .card::after{
+
+      content:"";
+
+      position:absolute;
+
+      inset:0;
+
+      background:linear-gradient(120deg,transparent 25%,rgba(45,212,191,.16),transparent 75%);
+
+      opacity:0;
+
+      transition:opacity .24s ease;
+
+    }
+
+
+
+    .card:hover{
+
+      transform:translateY(-5px) scale(1.01);
+
+      box-shadow:0 20px 44px rgba(15,23,42,.22);
+
+    }
+
+
+
+    .card:hover::after{opacity:1;}
+
+
+
+    .card-icon-orb{
+
+      width:28px;
+
+      height:28px;
+
+      border-radius:999px;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      font-size:16px;
+
+      margin-bottom:8px;
+
+      background:radial-gradient(circle at 30% 30%,#bbf7d0,#22c55e);
+
+      color:#064e3b;
+
+    }
+
+
+
+    .card-title{
+
+      font-size:14px;
+
+      font-weight:600;
+
+      margin-bottom:4px;
+
+    }
+
+
+
+    .card-url{
+
+      font-size:11px;
+
+      opacity:.65;
+
+      word-break:break-all;
+
+      margin-bottom:6px;
+
+    }
+
+
+
+    .card-tagline{
+
+      font-size:11px;
+
+      opacity:.8;
+
+    }
+
+
+
+    footer{
+
+      margin-top:30px;
+
+      font-size:11px;
+
+      opacity:.6;
+
+      text-align:center;
+
+    }
+
+
 
     /* TEXT PJ ORB */
-    .pj-orb {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: radial-gradient(circle at 30% 30%, #8cffb5, #00c35a);
+
+
+
+    .pj-orb{
+
+      position:fixed;
+
+      bottom:18px;
+
+      right:18px;
+
+      background:radial-gradient(circle at 30% 30%,#8cffb5,#00c35a);
+
       color:#033045;
-      padding:14px 20px;
+
+      padding:13px 19px;
+
       border-radius:999px;
+
       font-weight:700;
-      text-decoration:none;
-      box-shadow:0 0 0 0 rgba(0,195,90,.7);
+
+      font-size:13px;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:6px;
+
+      box-shadow:0 0 0 0 rgba(0,195,90,.6);
+
       animation:pulse 2.4s infinite;
+
       z-index:9999;
+
     }
 
-    @keyframes pulse {
-      0%{box-shadow:0 0 0 0 rgba(0,195,90,.6);}
-      50%{box-shadow:0 0 24px 6px rgba(0,195,90,.25);}
-      100%{box-shadow:0 0 0 0 rgba(0,195,90,.6);}
+
+
+    @keyframes pulse{
+
+      0%{box-shadow:0 0 0 0 rgba(0,195,90,.55);}
+
+      50%{box-shadow:0 0 26px 6px rgba(0,195,90,.25);}
+
+      100%{box-shadow:0 0 0 0 rgba(0,195,90,.55);}
+
     }
+
+
+
+    @media (max-width:600px){
+
+      .pj-orb{
+
+        left:50%;
+
+        right:auto;
+
+        transform:translateX(-50%);
+
+        bottom:12px;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 <body>
 
-<header>
-  <h1>SideGuy Solutions · Command Center</h1>
-  <div class="meta">
-    SideGuy is where Google discovers problems, AI explains them, and a real human resolves them.
+
+
+<div class="page-shell">
+
+  <!-- TOP BAR -->
+
+  <div class="top-bar">
+
+    <div class="brand">
+
+      <div class="brand-pill">SIDEGUY SOLUTIONS</div>
+
+    </div>
+
+    <div class="top-meta">
+
+      Live Operator Command Center<br/>
+
+      Build: <strong id="buildTime"></strong>
+
+    </div>
+
   </div>
 
-  <div class="stats">
-    <div class="stat-box">Live Pages: <strong id="pageCount">0</strong></div>
-    <div class="stat-box">Build Timestamp: <strong id="buildTime"></strong></div>
-  </div>
-</header>
 
-<main>
-  <section class="grid" id="pageGrid"></section>
-</main>
 
-<footer>
-  © SideGuy Solutions · Live Operator Index
-</footer>
+  <!-- HERO -->
 
-<a class="pj-orb" href="tel:7735441231">Text PJ · 773-544-1231</a>
+  <section class="hero">
+
+    <!-- LEFT -->
+
+    <div class="hero-left">
+
+      <div class="hero-tag">SAN DIEGO · OPERATORS</div>
+
+      <h1 class="hero-title">Automation, Payments & Problem-Solving for Real Operators.</h1>
+
+      <p class="hero-sub">
+
+        SideGuy turns high-intent search into real conversations, real savings, and real outcomes —
+
+        across payments, software, carbon credits, ticketing, and local operator tools.
+
+      </p>
+
+      <div class="hero-mission">
+
+        <strong>Mission:</strong>
+
+        SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it.
+
+      </div>
+
+
+
+      <div class="hero-bullets">
+
+        <div class="hero-badge"><span class="icon">💳</span> Solana-speed payment rails</div>
+
+        <div class="hero-badge"><span class="icon">🧰</span> Operator tools & automations</div>
+
+        <div class="hero-badge"><span class="icon">🌱</span> Carbon & sustainability flows</div>
+
+        <div class="hero-badge"><span class="icon">📈</span> SEO pages that compound</div>
+
+      </div>
+
+
+
+      <div class="hero-cta-row">
+
+        <a href="tel:7735441231" class="btn-main">
+
+          Text PJ · 773-544-1231 <span>↗</span>
+
+        </a>
+
+        <a href="#grid" class="btn-ghost">
+
+          View all live pages <span id="pageCountChip">(0)</span>
+
+        </a>
+
+      </div>
+
+      <div class="hero-note">
+
+        Built with real operators in mind — restaurants, trades, software, carbon, ticketing, and beyond.
+
+      </div>
+
+    </div>
+
+
+
+    <!-- RIGHT -->
+
+    <div class="hero-right">
+
+      <div class="hero-right-inner">
+
+        <div class="hero-right-title">SideGuy Live Savings Check.</div>
+
+        <p class="hero-right-copy">
+
+          Pick any service page, text PJ a screenshot of your current fees or process,
+
+          and get a SideGuy-only savings or automation idea.
+
+        </p>
+
+        <ul class="hero-right-steps">
+
+          <li>Browse a page from the command grid below.</li>
+
+          <li>Text PJ a photo or link to how you do it today.</li>
+
+          <li>Get a faster, cheaper or simpler operator flow.</li>
+
+        </ul>
+
+      </div>
+
+      <div class="hero-right-footer">
+
+        Zero-pressure, zero-retainer. If we can’t improve it, you keep the playbook for free.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- FILTERS / META -->
+
+  <section class="filters-row">
+
+    <div class="chips">
+
+      <div class="chip"><span class="icon">💳</span> Payments & Fees</div>
+
+      <div class="chip"><span class="icon">🛠️</span> Operator Tools</div>
+
+      <div class="chip"><span class="icon">🌱</span> Carbon & Sustainability</div>
+
+      <div class="chip"><span class="icon">🎟️</span> Tickets & Events</div>
+
+      <div class="chip"><span class="icon">📍</span> Local SEO Pages</div>
+
+    </div>
+
+    <div class="filters-meta">
+
+      Live pages: <strong id="pageCountText">0</strong>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- GRID -->
+
+  <section id="grid" class="grid"></section>
+
+
+
+  <footer>
+
+    © SideGuy Solutions · Live Operator Index · Built for San Diego & North County operators.
+
+  </footer>
+
+</div>
+
+
+
+<a class="pj-orb" href="tel:7735441231">
+
+  <span>🟢</span> Text PJ · 773-544-1231
+
+</a>
+
+
 
 <script>
-  // ✅ CLEANED & NORMALIZED FROM YOUR REPO LIST
+
+  // 🔧 MASTER PAGE LIST
+
+  // Put every .html page from your repo here.
+
+  // (You can always add more later. No other code changes needed.)
+
   const pages = [
-    "business-savings-san-diego.html",
-    "instant-payouts-san-diego.html",
+
+    // EXAMPLES — fill this list from your repo
+
+    "index.html",
+
+    "credit-card-processing-carlsbad.html",
+
+    "carbon-credit-automation-tools.html",
+
+    "payment-processing-san-diego.html",
+
     "san-diego-ai-development.html",
-    "carbon-credit-automation.html",
-    "instant-settlement-payments-san-diego.html",
-    "san-diego-business-automation.html",
-    "carbon-credits-climate-software.html",
-    "instant-settlement-payments.html",
-    "san-diego-business-tools.html",
-    "card-not-present-processing.html",
-    "instant-settlement-san-diego.html",
-    "san-diego-cryptopayments.html",
-    "carlsbad-payment-processing.html",
-    "la-jolla-payment-processing.html",
-    "san-diego-energy-payments.html",
-    "cheapest-payment-processing.html",
-    "landscape-payment-processing.html",
-    "san-diego-mobile-business-payments.html",
-    "chiropractor-payment-processing-san-diego.html",
-    "landscaper-payments-san-diego.html",
-    "san-diego-operator-network.html",
-    "local-business-payments-san-diego.html",
-    "san-diego-payment-gateway.html",
-    "san-diego-payment-optimization.html",
-    "local-business-savings-san-diego.html",
-    "san-diego-payment-processing.html",
-    "san-diego-solana-payments-near-me.html",
-    "san-diego-startup-development.html",
-    "lower-credit-card-fees-san-diego.html",
-    "medical-clinic-payment-solutions-san-diego.html",
-    "san-diego-savings-directory",
-    "save-on-stripe-fees-san-diego.html",
-    "credit-card-processing-san-diego.html",
-    "merchant-services-san-diego.html",
-    "mobile-app-development-san-diego.html",
-    "north-county-operator-tools.html",
+
+    "san-diego-software-development.html",
+
     "north-county-payment-processing.html",
-    "north-county-payments-san-diego.html",
-    "north-county-same-day-pay.html",
-    "north-county-verified-operator.html",
-    "same-day-pay-san-diego.html",
-    "solar-battery-installation-san-diego.html",
-    "solana-business-tools-san-diego.html",
-    "ticketing-software-san-diego.html",
-    "water-damage-restoration-san-diego.html",
-    "water-heater-repair-san-diego.html"
+
+    "crypto-payment-processing-san-diego.html",
+
+    "sideguy-operator-tools.html",
+
+    "san-diego-carbon-credit-automation.html",
+
+    "sideguy-solana-payments-san-diego.html",
+
+    "north-county-operator-tools.html",
+
+    "web-design-san-diego.html",
+
+    "website-maintenance-san-diego.html",
+
+    "wifi-installation-san-diego.html",
+
+    "wifi-guest-network-setup-san-diego.html",
+
+    "window-installation-san-diego.html",
+
+    "window-repair-san-diego.html",
+
+    "wood-fence-repair-san-diego.html",
+
+    "wrought-iron-fence-san-diego.html"
+
+    // 👉 add the rest of your repo pages here as needed
+
   ];
 
-  const grid = document.getElementById("pageGrid");
+
+
+  // 🔍 ICON PICKER BASED ON FILENAME
+
+  function pickIcon(filename){
+
+    const f = filename.toLowerCase();
+
+    if (f.includes("ticket")) return "🎟️";
+
+    if (f.includes("carbon") || f.includes("sustain") || f.includes("climate")) return "🌱";
+
+    if (f.includes("solana") || f.includes("crypto")) return "🟢";
+
+    if (f.includes("seo")) return "📈";
+
+    if (f.includes("design") || f.includes("website")) return "🖥️";
+
+    if (f.includes("payment") || f.includes("card") || f.includes("processing")) return "💳";
+
+    if (f.includes("repair") || f.includes("install") || f.includes("plumber") || f.includes("ac")) return "🔧";
+
+    if (f.includes("energy") || f.includes("solar")) return "⚡";
+
+    return "📍";
+
+  }
+
+
+
+  // 🔍 SHORT TAGLINE BASED ON FILENAME
+
+  function pickTagline(filename){
+
+    const f = filename.toLowerCase();
+
+    if (f.includes("carlsbad")) return "Carlsbad operator search landing.";
+
+    if (f.includes("north-county")) return "North County operator growth page.";
+
+    if (f.includes("solana")) return "Solana-speed settlement & flows.";
+
+    if (f.includes("carbon") || f.includes("sustain")) return "Carbon markets, climate tools & credits.";
+
+    if (f.includes("ticket")) return "Ticketing, events and live inventory concepts.";
+
+    if (f.includes("seo")) return "SEO-first operator visibility.";
+
+    if (f.includes("payment") || f.includes("processing")) return "Lower fees, faster payouts, clearer statements.";
+
+    if (f.includes("repair") || f.includes("install")) return "Local service operator template.";
+
+    return "Live SideGuy operator template.";
+
+  }
+
+
+
+  // 🧱 BUILD GRID
+
+  const grid = document.getElementById("grid");
+
+
 
   pages.forEach(url => {
-    const title = url
+
+    const safeUrl = url.trim();
+
+    if (!safeUrl) return;
+
+
+
+    const prettyTitle = safeUrl
+
       .replace(".html","")
+
       .replace(/-/g," ")
+
       .replace(/\b\w/g, c => c.toUpperCase());
 
+
+
     const card = document.createElement("a");
-    card.href = url;
+
+    card.href = safeUrl;
+
     card.className = "card";
+
     card.innerHTML = `
-      <div class="card-title">${title}</div>
-      <div class="card-url">${url}</div>
+
+      <div class="card-icon-orb">${pickIcon(safeUrl)}</div>
+
+      <div class="card-title">${prettyTitle}</div>
+
+      <div class="card-url">${safeUrl}</div>
+
+      <div class="card-tagline">${pickTagline(safeUrl)}</div>
+
     `;
+
     grid.appendChild(card);
+
   });
 
-  document.getElementById("pageCount").textContent = pages.length;
+
+
+  // COUNT
+
+  const count = pages.length;
+
+  document.getElementById("pageCountText").textContent = count;
+
+  document.getElementById("pageCountChip").textContent = "(" + count + ")";
+
   document.getElementById("buildTime").textContent =
+
     new Date().toLocaleDateString() + " @ " + new Date().toLocaleTimeString();
+
+
+
+  // SUBTLE BG MOTION
+
+  window.addEventListener("scroll", () => {
+
+    document.body.style.backgroundPositionY = window.scrollY * 0.15 + "px";
+
+  });
+
 </script>
 
+
+
 </body>
+
 </html>
+
