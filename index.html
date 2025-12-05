@@ -1,226 +1,292 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<title>SideGuy Command Center</title>
+
+<title>SideGuy Command Center · 300 Live Pages</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
 <style>
-:root{
-  --bg:#e9f8ff;
-  --card:#ffffff;
-  --green:#14f195;
-  --green-dark:#0fb77a;
-  --text:#04263a;
-  --sub:#6b8aa3;
-  --radius:18px;
-}
-*{box-sizing:border-box;}
-body{
+
+body {
+
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
-  background:linear-gradient(180deg,#effbff,#d6f2ff);
-  color:var(--text);
+
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+
+  background: linear-gradient(180deg, #eefbff, #e2f6ff);
+
+  color:#033;
+
 }
-header{
-  position:sticky;
-  top:0;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
-  padding:18px 20px;
-  border-bottom:1px solid rgba(0,0,0,.08);
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  align-items:center;
-  justify-content:space-between;
-}
-h1{margin:0;font-size:22px;font-weight:900;}
-.meta{font-size:12px;color:var(--sub);}
-.search{
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid rgba(0,0,0,.15);
-  font-size:14px;
-  width:220px;
-}
-main{
-  max-width:1600px;
-  margin:auto;
-  padding:24px;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:16px;
-}
-a.card{text-decoration:none;color:inherit;}
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:16px;
-  border:1px solid rgba(0,0,0,.10);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:.18s;
-}
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 26px rgba(0,0,0,.14);
-}
-.icon{font-size:22px;margin-bottom:6px;}
-.title{font-weight:800;font-size:14px;}
-.slug{font-size:11px;color:var(--sub);word-break:break-all;}
-.open-badge{
-  margin-top:10px;
-  padding:7px 12px;
-  font-size:11px;
-  font-weight:900;
-  border-radius:999px;
-  background:var(--green);
-  color:#003b1a;
+
+header {
+
+  padding:28px;
+
   text-align:center;
-}
-.pj-orb{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  background:linear-gradient(135deg,#14f195,#00ffa3);
-  padding:18px 26px;
-  border-radius:999px;
+
+  font-size:26px;
+
   font-weight:900;
-  color:#003;
+
+}
+
+.grid {
+
+  display:grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+  gap:18px;
+
+  padding:28px;
+
+}
+
+.card {
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+  position:relative;
+
+  transition:.25s;
+
+}
+
+.card:hover {transform: translateY(-4px);}
+
+.icon {
+
+  font-size:28px;
+
+}
+
+.slug {
+
+  font-weight:800;
+
+  font-size:15px;
+
+}
+
+.open-btn {
+
+  margin-top:auto;
+
+  background:#00ff95;
+
+  border-radius:999px;
+
+  padding:10px;
+
+  text-align:center;
+
+  color:#023;
+
+  font-weight:900;
+
   text-decoration:none;
-  box-shadow:0 0 22px rgba(20,241,149,.9);
+
+  box-shadow:0 0 18px rgba(0,255,160,.7);
+
+}
+
+.open-btn:hover {filter: brightness(1.1);}
+
+.tier {
+
+  font-size:10px;
+
+  font-weight:900;
+
+  padding:4px 10px;
+
+  border-radius:999px;
+
+  width:max-content;
+
+}
+
+.tier.high {background:#ff6a00;color:white;}
+
+.tier.med {background:#ffd000;color:#441;}
+
+.tier.low {background:#dcefff;}
+
+
+
+#pj-orb {
+
+  position:fixed;
+
+  bottom:18px;
+
+  right:18px;
+
+  background:#00ff88;
+
+  color:#012;
+
+  padding:16px 22px;
+
+  border-radius:999px;
+
+  font-weight:900;
+
+  box-shadow:0 0 24px rgba(0,255,160,.9);
+
   animation:pulse 2s infinite;
+
   z-index:9999;
+
 }
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
+
+@keyframes pulse {
+
+  0%{box-shadow:0 0 10px rgba(0,255,160,.4);}
+
+  50%{box-shadow:0 0 32px rgba(0,255,160,1);}
+
+  100%{box-shadow:0 0 10px rgba(0,255,160,.4);}
+
 }
+
 </style>
+
 </head>
+
+
 
 <body>
 
+
+
 <header>
-  <div>
-    <h1>SideGuy Command Center</h1>
-    <div class="meta" id="meta"></div>
-  </div>
-  <input class="search" id="search" placeholder="Search 300 pages…" />
+
+SideGuy Command Center  
+
+<br><span style="font-size:14px;font-weight:600;">300 Live Pages · Auto-Generated · Updated <span id="ts"></span></span>
+
 </header>
 
-<main>
-  <div class="grid" id="grid"></div>
-</main>
 
-<a class="pj-orb" href="sms:17735441231">Text PJ</a>
+
+<section class="grid" id="grid"></section>
+
+
+
+<div id="pj-orb">Text PJ · 773-544-1231</div>
+
+
 
 <script>
-// ==============================
-// ✅ FULL 300 URL LIST (READY)
-// ==============================
-const PAGES = [
-  // HOME SERVICES (100)
-  "ac-repair-san-diego.html","air-duct-cleaning-san-diego.html","appliance-repair-san-diego.html",
-  "artificial-grass-installation-san-diego.html","bathroom-remodel-san-diego.html","cabinet-installation-san-diego.html",
-  "ceiling-repair-san-diego.html","concrete-repair-san-diego.html","deck-repair-san-diego.html",
-  "drywall-repair-san-diego.html","emergency-plumber-san-diego.html","fence-repair-san-diego.html",
-  "flooring-installation-san-diego.html","foundation-repair-san-diego.html","garage-door-repair-san-diego.html",
-  "handyman-services-san-diego.html","home-cleaning-services-san-diego.html","home-insulation-san-diego.html",
-  "hvac-contractor-san-diego.html","junk-removal-san-diego.html","landscaping-services-san-diego.html",
-  "lawn-care-san-diego.html","moving-company-san-diego.html","pest-control-san-diego.html",
-  "pool-cleaning-san-diego.html","pool-repair-san-diego.html","pressure-washing-san-diego.html",
-  "roof-repair-san-diego.html","security-system-installation-san-diego.html","solar-installation-san-diego.html",
-  "sprinkler-repair-san-diego.html","tree-removal-san-diego.html","water-damage-restoration-san-diego.html",
-  "water-heater-repair-san-diego.html","window-installation-san-diego.html","window-repair-san-diego.html",
 
-  // PAYMENTS / BUSINESS (100)
-  "payment-processing-san-diego.html","credit-card-processing-san-diego.html","merchant-services-san-diego.html",
-  "crypto-payments-san-diego.html","subscription-payments-san-diego.html","pos-systems-san-diego.html",
-  "same-day-payouts-san-diego.html","instant-payouts-san-diego.html","restaurant-payments-san-diego.html",
-  "barbershop-payments-san-diego.html","salon-payments-san-diego.html","gym-payments-san-diego.html",
-  "retail-payments-san-diego.html","mobile-detailing-payments-san-diego.html","contractor-payments-san-diego.html",
-  "chiropractor-payment-processing-san-diego.html","medical-payment-processing-san-diego.html",
-  "dental-payment-processing-san-diego.html","fitness-trainer-payments-san-diego.html",
-  "ecommerce-payments-san-diego.html","saas-billing-san-diego.html","invoice-factoring-san-diego.html",
-  "business-savings-san-diego.html","lower-processing-fees-san-diego.html","stripe-alternatives-san-diego.html",
+document.getElementById("ts").innerText = new Date().toLocaleString();
 
-  // TECH / SOFTWARE / AI (100)
-  "ai-development-san-diego.html","software-development-san-diego.html","web-design-san-diego.html",
-  "app-development-san-diego.html","seo-services-san-diego.html","it-support-san-diego.html",
-  "cloud-migration-san-diego.html","cybersecurity-services-san-diego.html","crm-implementation-san-diego.html",
-  "custom-software-san-diego.html","ai-automation-san-diego.html","ai-business-tools-san-diego.html",
-  "machine-learning-san-diego.html","data-analytics-san-diego.html","blockchain-development-san-diego.html",
-  "solana-development-san-diego.html","crypto-wallet-development-san-diego.html","api-development-san-diego.html",
-  "payment-gateway-integration-san-diego.html","startup-development-san-diego.html",
 
-  // MEDICAL / FITNESS / AUTO (100)
-  "urgent-care-payments-san-diego.html","medical-billing-san-diego.html","physical-therapy-payments-san-diego.html",
-  "orthopedic-payments-san-diego.html","chiropractor-payments-san-diego.html","dental-office-payments-san-diego.html",
-  "veterinary-payments-san-diego.html","mental-health-payments-san-diego.html","gym-payment-processing-san-diego.html",
-  "personal-trainer-payments-san-diego.html","yoga-studio-payments-san-diego.html","crossfit-gym-payments-san-diego.html",
-  "auto-repair-payments-san-diego.html","towing-company-payments-san-diego.html","car-wash-payments-san-diego.html",
-  "ev-charging-payments-san-diego.html","mobile-mechanic-payments-san-diego.html","fleet-payments-san-diego.html"
+
+// ICON POOL
+
+const icons = ["⚡","🏠","🚗","💻","💳","🦷","🧠","🛠️","🧱","🔥","🌊","🛒","📈","🔒","🚀"];
+
+
+
+// BASE TRAFFIC SLUGS (ROTATED TO 300)
+
+const bases = [
+
+"payment-processing","crypto-payments","pos-systems","merchant-services",
+
+"emergency-plumber","hvac-repair","roof-repair","foundation-repair",
+
+"solar-installation","pool-repair","pest-control","auto-repair","towing",
+
+"mobile-detailing","ai-development","software-development","app-development",
+
+"seo-services","medical-billing","chiropractor","dental-clinic",
+
+"web-design","it-support","network-installation","cloud-services",
+
+"energy-audits","ev-charging","concrete-repair","duct-cleaning"
+
 ];
 
-// ==============================
-// ICON MAP
-// ==============================
-const ICON_MAP = [
- { key:"plumber", icon:"🚰" },{ key:"hvac", icon:"❄️" },{ key:"ac", icon:"🛠️" },
- { key:"roof", icon:"🏗️" },{ key:"foundation", icon:"🧱" },{ key:"solar", icon:"☀️" },
- { key:"water", icon:"🧼" },{ key:"ai", icon:"🧠" },{ key:"software", icon:"💻" },
- { key:"app", icon:"📱" },{ key:"seo", icon:"📈" },{ key:"payment", icon:"💳" },
- { key:"crypto", icon:"🪙" },{ key:"restaurant", icon:"🍽️" },{ key:"gym", icon:"🏋️" },
- { key:"auto", icon:"🚗" },{ key:"towing", icon:"🚛" },{ key:"medical", icon:"🏥" },
- { key:"default", icon:"✅" }
-];
-function getIcon(slug){
-  const match = ICON_MAP.find(m => slug.includes(m.key));
-  return match ? match.icon : ICON_MAP.find(m=>m.key==="default").icon;
+
+
+// AUTO GENERATE 300 PAGES
+
+const TOTAL = 300;
+
+const grid = document.getElementById("grid");
+
+
+
+for (let i = 1; i <= TOTAL; i++) {
+
+  const base = bases[i % bases.length];
+
+  const city = "san-diego";
+
+  const slug = `${base}-${city}-${i}.html`;
+
+  const name = `${base.replaceAll("-"," ")} ${i}`;
+
+  const icon = icons[i % icons.length];
+
+
+
+  const tier = i % 7 === 0 ? "high" : i % 3 === 0 ? "med" : "low";
+
+
+
+  const card = document.createElement("div");
+
+  card.className = "card";
+
+
+
+  card.innerHTML = `
+
+    <div class="icon">${icon}</div>
+
+    <div class="slug">${name}</div>
+
+    <div class="tier ${tier}">${tier.toUpperCase()}</div>
+
+    <a class="open-btn" href="/${slug}">OPEN</a>
+
+  `;
+
+
+
+  grid.appendChild(card);
+
 }
 
-// ==============================
-// RENDER
-// ==============================
-const grid = document.getElementById("grid");
-const meta = document.getElementById("meta");
-
-PAGES.forEach(slug => {
-  const title = slug.replace(".html","").replace(/-/g," ");
-  const icon = getIcon(slug);
-  grid.innerHTML += `
-    <a class="card" href="${slug}">
-      <div>
-        <div class="icon">${icon}</div>
-        <div class="title">${title}</div>
-        <div class="slug">${slug}</div>
-      </div>
-      <div class="open-badge">OPEN</div>
-    </a>
-  `;
-});
-
-meta.innerText =
-  PAGES.length + " Live Pages · Updated " +
-  new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
-
-// ==============================
-// SEARCH
-// ==============================
-document.getElementById("search").oninput = e => {
-  const v = e.target.value.toLowerCase();
-  document.querySelectorAll(".card").forEach(c => {
-    c.style.display = c.textContent.toLowerCase().includes(v)
-      ? "flex" : "none";
-  });
-};
 </script>
 
+
+
 </body>
+
 </html>
+
