@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,59 +15,155 @@
 
 <style>
 
-body{margin:0;font-family:system-ui,-apple-system,Inter,sans-serif;
+body{
 
-background:linear-gradient(180deg,#eefbff,#d6f2ff);color:#022}
+  margin:0;
 
+  font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
 
+  background:linear-gradient(180deg,#ecfbff,#d7f2ff);
 
-header{text-align:center;padding:26px;font-weight:900}
-
-.title{font-size:26px}
-
-.sub{font-size:13px;color:#466;margin-top:6px}
-
-
-
-.search{margin:14px auto;padding:10px 16px;border-radius:999px;
-
-border:1px solid #ccc;width:260px}
-
-
-
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-
-gap:18px;padding:26px}
-
-
-
-.card{
-
-background:white;border-radius:18px;padding:18px;
-
-box-shadow:0 8px 24px rgba(0,0,0,.12);
-
-display:flex;flex-direction:column;gap:8px
+  color:#022;
 
 }
 
 
 
-.icon{font-size:26px}
+header{
 
-.slug{font-weight:800;font-size:14px}
+  padding:24px 20px 10px;
+
+  text-align:center;
+
+}
+
+
+
+h1{
+
+  margin:0;
+
+  font-size:26px;
+
+  font-weight:900;
+
+}
+
+
+
+.meta{
+
+  margin-top:6px;
+
+  font-size:13px;
+
+  color:#355;
+
+}
+
+
+
+.controls{
+
+  margin-top:14px;
+
+  display:flex;
+
+  justify-content:center;
+
+}
+
+
+
+.search{
+
+  width:260px;
+
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  border:1px solid #bbb;
+
+  font-size:14px;
+
+}
+
+
+
+.grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+
+  gap:18px;
+
+  padding:22px;
+
+}
+
+
+
+.card{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+
+}
+
+
+
+.icon{
+
+  font-size:26px;
+
+}
+
+
+
+.slug{
+
+  font-weight:800;
+
+  font-size:14px;
+
+  line-height:1.2;
+
+}
 
 
 
 .open{
 
-margin-top:auto;background:#00ff95;color:#023;
+  margin-top:auto;
 
-padding:10px;border-radius:999px;text-align:center;
+  background:#00ff95;
 
-font-weight:900;text-decoration:none;
+  color:#023;
 
-box-shadow:0 0 16px rgba(0,255,160,.8)
+  padding:10px;
+
+  border-radius:999px;
+
+  text-align:center;
+
+  font-weight:900;
+
+  text-decoration:none;
+
+  box-shadow:0 0 16px rgba(0,255,160,.75);
 
 }
 
@@ -74,15 +171,29 @@ box-shadow:0 0 16px rgba(0,255,160,.8)
 
 #pj{
 
-position:fixed;bottom:18px;right:18px;
+  position:fixed;
 
-background:#00ff95;padding:16px 22px;
+  bottom:18px;
 
-border-radius:999px;font-weight:900;
+  right:18px;
 
-box-shadow:0 0 26px rgba(0,255,160,.9);
+  background:#00ff95;
 
-animation:pulse 2s infinite;z-index:9999
+  padding:16px 22px;
+
+  border-radius:999px;
+
+  font-weight:900;
+
+  text-decoration:none;
+
+  color:#022;
+
+  box-shadow:0 0 26px rgba(0,255,160,.9);
+
+  animation:pulse 2s infinite;
+
+  z-index:9999;
 
 }
 
@@ -90,11 +201,11 @@ animation:pulse 2s infinite;z-index:9999
 
 @keyframes pulse{
 
-0%{transform:scale(1)}
+  0%{transform:scale(1)}
 
-50%{transform:scale(1.08)}
+  50%{transform:scale(1.08)}
 
-100%{transform:scale(1)}
+  100%{transform:scale(1)}
 
 }
 
@@ -110,11 +221,21 @@ animation:pulse 2s infinite;z-index:9999
 
 <header>
 
-  <div class="title">SideGuy Command Center</div>
+  <h1>SideGuy Command Center</h1>
 
-  <div class="sub">Restored Live Pages</div>
+  <div class="meta">
 
-  <input id="search" class="search" placeholder="Search pages…">
+    <span id="count">0</span> Live Pages · 
+
+    Updated <span id="timestamp"></span>
+
+  </div>
+
+  <div class="controls">
+
+    <input id="search" class="search" placeholder="Search pages…">
+
+  </div>
 
 </header>
 
@@ -160,17 +281,11 @@ const PAGES = [
 
 "auto-repair-payment-processing-san-diego.html",
 
-"barbershop-appointment-payments-san-diego.html",
-
 "barbershop-payments-san-diego.html",
-
-"best-ai-tools-for-small-business-san-diego.html",
 
 "best-stripe-alternative-san-diego.html",
 
 "blockchain-development-san-diego.html",
-
-"bookkeeping-help-san-diego.html",
 
 "business-automation-san-diego.html",
 
@@ -178,43 +293,21 @@ const PAGES = [
 
 "chiropractor-payment-processing-san-diego.html",
 
-"contractor-billing-tools-san-diego.html",
-
-"contractor-payment-processing-san-diego.html",
-
 "contractor-payments-san-diego.html",
 
 "credit-card-processing-san-diego.html",
 
 "crypto-payments-san-diego.html",
 
-"custom-ai-software-development-san-diego.html",
-
 "custom-software-development-san-diego.html",
-
-"del-mar-payment-processing-san-diego.html",
-
-"dental-office-payment-processing-san-diego.html",
 
 "drain-cleaning-san-diego.html",
 
 "ecommerce-payment-processing-san-diego.html",
 
-"ecommerce-payment-solutions-san-diego.html",
-
-"ecommerce-payment-upgrades-san-diego.html",
-
-"ecommerce-payments-san-diego.html",
-
 "electrician-payment-processing-san-diego.html",
 
 "emergency-plumber-san-diego.html",
-
-"energy-utility-payments-san-diego.html",
-
-"fitness-coach-payments-san-diego.html",
-
-"fitness-doctor-payment-processing-san-diego.html",
 
 "fitness-payment-processing-san-diego.html",
 
@@ -222,49 +315,19 @@ const PAGES = [
 
 "get-paid-today-san-diego.html",
 
-"gym-fitness-payment-processing-san-diego.html",
-
 "gym-payment-processing-san-diego.html",
-
-"gym-payments-san-diego.html",
-
-"handyman-payment-processing-san-diego.html",
-
-"handyman-payment-solutions-san-diego.html",
 
 "handyman-payments-san-diego.html",
 
-"home-cleaning-service-payments-san-diego.html",
-
-"home-service-payment-processing-san-diego.html",
-
-"horse-payments-san-diego.html",
-
-"hvac-contractor-payment-processing-san-diego.html",
-
 "hvac-payments-san-diego.html",
 
-"instant-payouts-contractors-san-diego.html",
-
 "instant-payouts-san-diego.html",
-
-"instant-settlement-payments-san-diego.html",
 
 "instant-settlement-san-diego.html",
 
 "landscaper-payments-san-diego.html",
 
-"landscaping-business-payments-san-diego.html",
-
-"local-business-payments-san-diego.html",
-
-"local-business-savings-san-diego.html",
-
-"local-operator-savings-san-diego.html",
-
 "lower-credit-card-fees-san-diego.html",
-
-"medical-clinic-payment-solutions-san-diego.html",
 
 "medical-payment-processing-san-diego.html",
 
@@ -272,19 +335,9 @@ const PAGES = [
 
 "mobile-app-development-san-diego.html",
 
-"mobile-detailing-payments-san-diego.html",
-
-"mobile-operator-payments-san-diego.html",
-
-"mobile-operators-san-diego.html",
-
 "mobile-payments-san-diego.html",
 
-"moving-company-payment-solutions-san-diego.html",
-
-"north-county-payments-san-diego.html",
-
-"payment-processing-mobile-detailing-san-diego.html",
+"moving-company-payments-san-diego.html",
 
 "payment-processing-san-diego.html",
 
@@ -292,25 +345,11 @@ const PAGES = [
 
 "pest-control-payment-processing-san-diego.html",
 
-"physical-therapy-clinic-payments-san-diego.html",
-
 "plumbing-services-payment-processing-san-diego.html",
 
 "pool-service-payment-processing-san-diego.html",
 
-"pos-payment-systems-san-diego.html",
-
-"professional-services-payments-san-diego.html",
-
-"property-management-payments-san-diego.html",
-
-"restaurant-instant-payouts-san-diego.html",
-
 "restaurant-payment-processing-san-diego.html",
-
-"restaurant-payments-san-diego.html",
-
-"restaurant-processing-san-diego.html",
 
 "retail-payment-processing-san-diego.html",
 
@@ -324,57 +363,45 @@ const PAGES = [
 
 "san-diego-business-automation.html",
 
-"san-diego-business-tools.html",
-
 "san-diego-cryptopayments.html",
 
 "san-diego-energy-payments.html",
-
-"san-diego-mobile-business-payments.html",
-
-"san-diego-operator-network.html",
-
-"san-diego-payment-gateway.html",
-
-"san-diego-payment-optimization.html",
 
 "san-diego-payment-processing.html",
 
 "san-diego-solana-payments-near-me.html",
 
-"san-diego-startup-development.html",
-
-"save-on-paypay-fees-san-diego.html",
-
-"save-on-stripe-fees-san-diego.html",
-
-"seo-pages-app-development-san-diego.html",
-
 "software-development-san-diego.html",
-
-"solana-business-tools-san-diego.html",
 
 "solana-development-san-diego.html",
 
-"solar-battery-installation-san-diego.html",
-
 "stripe-alternatives-san-diego.html",
-
-"subscription-billing-san-diego.html",
 
 "subscription-payments-san-diego.html",
 
-"subscription-services-payments-san-diego.html",
-
-"ticketing-event-software-san-diego.html",
-
 "ticketing-software-san-diego.html",
 
-"towing-company-payment-processing-san-diego.html",
+"tow-truck-service-san-diego.html",
+
+"vinyl-fence-installation-san-diego.html",
+
+"vinyl-plank-flooring-san-diego.html",
+
+"virus-removal-san-diego.html",
 
 "water-damage-restoration-san-diego.html",
 
-"water-heater-repair-san-diego.html"
+"water-heater-repair-san-diego.html",
+
+"wifi-installation-san-diego.html",
+
+"window-installation-san-diego.html",
+
+"window-repair-san-diego.html",
+
+"wood-fence-repair-san-diego.html",
+
+"wrought-iron-fence-san-diego.html"
 
 ];
 
@@ -407,6 +434,16 @@ PAGES.forEach((slug,i)=>{
   `;
 
 });
+
+
+
+document.getElementById("count").textContent = PAGES.length;
+
+
+
+document.getElementById("timestamp").textContent =
+
+  new Date().toLocaleString();
 
 
 
