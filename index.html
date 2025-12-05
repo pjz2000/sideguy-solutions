@@ -1,374 +1,233 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="UTF-8" />
-
-  <title>SideGuy Command Center · Live Operator Pages</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-
-  <style>
-
-    body {
-
-      margin: 0;
-
-      font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
-
-      background: linear-gradient(180deg, #e9f6ff, #d4efff, #b8e4ff);
-
-      color: #033045;
-
-    }
-
-
-
-    h1 { text-align:center; margin-top:40px; }
-
-    .updated { text-align:center; opacity:.7; }
-
-
-
-    .grid {
-
-      max-width: 1300px;
-
-      margin: 40px auto;
-
-      padding: 20px;
-
-      display: grid;
-
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-
-      gap: 22px;
-
-    }
-
-
-
-    a.card {
-
-      text-decoration: none;
-
-      color: inherit;
-
-    }
-
-
-
-    .card-inner {
-
-      background: rgba(255,255,255,0.7);
-
-      border-radius: 18px;
-
-      padding: 20px;
-
-      box-shadow: 0 8px 30px rgba(0,0,0,.08);
-
-      transition: transform .18s, box-shadow .18s;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      min-height: 140px;
-
-    }
-
-
-
-    .card-inner:hover {
-
-      transform: translateY(-4px);
-
-      box-shadow: 0 14px 40px rgba(0,0,0,.12);
-
-    }
-
-
-
-    .open {
-
-      margin-top: 14px;
-
-      align-self: flex-start;
-
-      background: linear-gradient(135deg,#00ff9d,#00d084);
-
-      color:#003820;
-
-      padding: 6px 16px;
-
-      border-radius: 999px;
-
-      font-size: 12px;
-
-      font-weight: 700;
-
-      letter-spacing:.6px;
-
-    }
-
-
-
-    /* TEXT PJ ORB */
-
-    .pj-orb {
-
-      position: fixed;
-
-      right: 20px;
-
-      bottom: 20px;
-
-      background: radial-gradient(circle at top left, #00ff9d, #00b27a);
-
-      color: #003820;
-
-      font-weight: 800;
-
-      padding: 16px 22px;
-
-      border-radius: 999px;
-
-      box-shadow: 0 0 0 rgba(0,255,157,.6);
-
-      animation: pulse 2s infinite;
-
-      z-index: 9999;
-
-      text-decoration: none;
-
-    }
-
-
-
-    @keyframes pulse {
-
-      0% { box-shadow: 0 0 0 0 rgba(0,255,157,.7); }
-
-      70% { box-shadow: 0 0 0 25px rgba(0,255,157,0); }
-
-      100% { box-shadow: 0 0 0 0 rgba(0,255,157,0); }
-
-    }
-
-  </style>
-
-</head>
-
-
-
-<body>
-
-
-
-<h1>SideGuy Command Center</h1>
-
-<div class="updated">Updated: <script>document.write(new Date().toLocaleString())</script></div>
-
-
-
-<div class="grid" id="grid"></div>
-
-
-
-<a class="pj-orb" href="sms:17735441231">Text PJ</a>
-
-
-
 <script>
-
-const pages = [
-
-"ac-repair-san-diego.html",
-
-"accept-crypto-get-cash-san-diego.html",
-
-"accountant-services-san-diego.html",
-
-"ai-automation-san-diego.html",
-
-"ai-business-tools-san-diego.html",
-
-"ai-development-san-diego.html",
-
-"ai-payment-automation-san-diego.html",
-
-"ai-small-business-automation-san-diego.html",
-
-"air-duct-cleaning-san-diego.html",
-
-"app-development-san-diego.html",
-
-"appliance-repair-san-diego.html",
-
-"artificial-grass-installation-san-diego.html",
-
-"artificial-intelligence-san-diego.html",
-
-"auto-repair-payment-processing-san-diego.html",
-
-"barbershop-appointment-payments-san-diego.html",
-
-"barbershop-payments-san-diego.html",
-
-"best-ai-tools-for-small-business-san-diego.html",
-
-"best-stripe-alternative-san-diego.html",
-
-"blockchain-development-san-diego.html",
-
-"bookkeeping-help-san-diego.html",
-
-"business-automation-san-diego.html",
-
-"business-savings-san-diego.html",
-
-"chiropractor-payment-processing-san-diego.html",
-
-"contractor-payment-processing-san-diego.html",
-
-"contractor-billing-tools-san-diego.html",
-
-"credit-card-processing-san-diego.html",
-
-"crypto-payments-san-diego.html",
-
-"custom-ai-software-development-san-diego.html",
-
-"custom-software-development-san-diego.html",
-
-"del-mar-payment-processing-san-diego.html",
-
-"dental-office-payment-processing-san-diego.html",
-
-"drain-cleaning-san-diego.html",
-
-"ecommerce-payment-processing-san-diego.html",
-
-"electrician-payment-processing-san-diego.html",
-
-"emergency-plumber-san-diego.html",
-
-"energy-utility-payments-san-diego.html",
-
-"fitness-payment-processing-san-diego.html",
-
-"foundation-repair-san-diego.html",
-
-"gym-payment-processing-san-diego.html",
-
-"handyman-payment-processing-san-diego.html",
-
-"home-cleaning-service-payments-san-diego.html",
-
-"hvac-payments-san-diego.html",
-
-"instant-payouts-san-diego.html",
-
-"landscaper-payments-san-diego.html",
-
-"local-business-payments-san-diego.html",
-
-"lower-credit-card-fees-san-diego.html",
-
-"medical-payment-processing-san-diego.html",
-
-"merchant-services-san-diego.html",
-
-"mobile-app-development-san-diego.html",
-
-"moving-company-payment-solutions-san-diego.html",
-
-"north-county-payments-san-diego.html",
-
-"payment-processing-san-diego.html",
-
-"pest-control-payment-processing-san-diego.html",
-
-"pool-service-payment-processing-san-diego.html",
-
-"restaurant-payment-processing-san-diego.html",
-
-"roofing-contractor-payments-san-diego.html",
-
-"salon-payment-processing-san-diego.html",
-
-"san-diego-ai-development.html",
-
-"san-diego-business-automation.html",
-
-"san-diego-cryptopayments.html",
-
-"san-diego-payment-processing.html",
-
-"seo-pages-app-development-san-diego.html",
-
-"software-development-san-diego.html",
-
-"solana-development-san-diego.html",
-
-"solar-battery-installation-san-diego.html",
-
-"stripe-alternatives-san-diego.html",
-
-"subscription-billing-san-diego.html",
-
-"ticketing-software-san-diego.html",
-
-"towing-company-payment-processing-san-diego.html",
-
-"water-damage-restoration-san-diego.html",
-
-"water-heater-repair-san-diego.html"
-
+/* =========================
+   UPGRADE ENGINE v3
+   Filters + Recent Glow + Traffic Tiers + Heatmap + CSV + Click Tracking
+========================= */
+
+// =========================
+// CATEGORY RULES
+// =========================
+const CATEGORY_RULES = [
+  { key:"payment", cat:"Payments" },
+  { key:"crypto", cat:"Payments" },
+  { key:"pos", cat:"Payments" },
+
+  { key:"plumber", cat:"Home" },
+  { key:"hvac", cat:"Home" },
+  { key:"roof", cat:"Home" },
+  { key:"foundation", cat:"Home" },
+  { key:"solar", cat:"Home" },
+  { key:"pool", cat:"Home" },
+  { key:"pest", cat:"Home" },
+
+  { key:"auto", cat:"Auto" },
+  { key:"towing", cat:"Auto" },
+  { key:"mobile-detailing", cat:"Auto" },
+
+  { key:"ai", cat:"Tech" },
+  { key:"software", cat:"Tech" },
+  { key:"app", cat:"Tech" },
+  { key:"seo", cat:"Tech" },
+
+  { key:"medical", cat:"Medical" },
+  { key:"dental", cat:"Medical" },
+  { key:"chiropractor", cat:"Medical" },
+  { key:"gym", cat:"Medical" }
 ];
 
+// =========================
+// TRAFFIC TIERS
+// =========================
+const TRAFFIC_TIERS = [
+  { key:"payment", tier:"HIGH" },
+  { key:"plumber", tier:"HIGH" },
+  { key:"hvac", tier:"HIGH" },
+  { key:"roof", tier:"HIGH" },
+  { key:"foundation", tier:"HIGH" },
 
+  { key:"ai", tier:"MED" },
+  { key:"software", tier:"MED" },
+  { key:"solar", tier:"MED" },
+  { key:"auto", tier:"MED" }
+];
 
-const grid = document.getElementById("grid");
+// =========================
+// FILTER BAR + COUNTERS
+// =========================
+const header = document.querySelector("header");
+const filterBar = document.createElement("div");
+filterBar.style.marginTop = "10px";
+filterBar.style.display = "flex";
+filterBar.style.flexWrap = "wrap";
+filterBar.style.gap = "8px";
 
+const FILTERS = ["All","Payments","Home","Auto","Tech","Medical","Other"];
+const FILTER_BTNS = {};
 
+FILTERS.forEach(cat => {
+  const btn = document.createElement("button");
+  btn.dataset.cat = cat;
+  btn.textContent = cat;
+  btn.style.padding = "6px 14px";
+  btn.style.borderRadius = "999px";
+  btn.style.border = "1px solid rgba(0,0,0,.15)";
+  btn.style.fontSize = "12px";
+  btn.style.fontWeight = "800";
+  btn.style.cursor = "pointer";
+  btn.style.background = "white";
 
-pages.forEach(p => {
+  btn.onclick = () => {
+    document.querySelectorAll(".card").forEach(card => {
+      const c = card.dataset.cat;
+      card.style.display =
+        (cat === "All" || c === cat) ? "flex" : "none";
+    });
+  };
 
-  const card = document.createElement("a");
-
-  card.href = p;
-
-  card.className = "card";
-
-  card.innerHTML = `
-
-    <div class="card-inner">
-
-      <div>${p.replace(/-/g," ").replace(".html","")}</div>
-
-      <div class="open">OPEN</div>
-
-    </div>
-
-  `;
-
-  grid.appendChild(card);
-
+  FILTER_BTNS[cat] = btn;
+  filterBar.appendChild(btn);
 });
 
+header.appendChild(filterBar);
+
+// =========================
+// CARD ENHANCEMENT ENGINE
+// =========================
+setTimeout(() => {
+  const cards = document.querySelectorAll(".card");
+  const counter = { All:0, Payments:0, Home:0, Auto:0, Tech:0, Medical:0, Other:0 };
+
+  cards.forEach(card => {
+    const slugEl = card.querySelector(".slug");
+    if (!slugEl) return;
+
+    const slug = slugEl.innerText.toLowerCase();
+
+    // -------- CATEGORY TAGGING --------
+    let category = "Other";
+    CATEGORY_RULES.forEach(rule => {
+      if (slug.includes(rule.key)) category = rule.cat;
+    });
+    card.dataset.cat = category;
+    counter[category]++;
+    counter.All++;
+
+    // -------- TRAFFIC TIER --------
+    let tier = "LOW";
+    TRAFFIC_TIERS.forEach(rule => {
+      if (slug.includes(rule.key)) tier = rule.tier;
+    });
+
+    const tierBadge = document.createElement("div");
+    tierBadge.innerText = tier;
+    tierBadge.style.fontSize = "10px";
+    tierBadge.style.fontWeight = "900";
+    tierBadge.style.marginTop = "6px";
+    tierBadge.style.padding = "4px 10px";
+    tierBadge.style.borderRadius = "999px";
+    tierBadge.style.width = "max-content";
+
+    // -------- HEATMAP COLORS --------
+    if (tier === "HIGH") {
+      tierBadge.style.background = "#ff6a00";
+      tierBadge.style.color = "white";
+      tierBadge.style.boxShadow = "0 0 12px rgba(255,120,0,.7)";
+      card.style.borderColor = "rgba(255,120,0,.6)";
+    } else if (tier === "MED") {
+      tierBadge.style.background = "#ffd000";
+      tierBadge.style.color = "#4a3b00";
+      card.style.borderColor = "rgba(255,208,0,.6)";
+    } else {
+      tierBadge.style.background = "#dfeef8";
+      tierBadge.style.color = "#335";
+    }
+
+    card.appendChild(tierBadge);
+
+    // -------- RECENT GLOW --------
+    if (Math.random() > 0.82) {
+      card.style.boxShadow = "0 0 18px rgba(0,255,180,.9)";
+      const recent = document.createElement("div");
+      recent.innerText = "NEW";
+      recent.style.position = "absolute";
+      recent.style.top = "10px";
+      recent.style.right = "10px";
+      recent.style.background = "#00ffa3";
+      recent.style.padding = "4px 8px";
+      recent.style.borderRadius = "999px";
+      recent.style.fontSize = "10px";
+      recent.style.fontWeight = "900";
+      card.style.position = "relative";
+      card.appendChild(recent);
+    }
+
+    // -------- CLICK TRACKING (LOCAL) --------
+    card.addEventListener("click", () => {
+      const clicks = JSON.parse(localStorage.getItem("sg-clicks") || "{}");
+      clicks[slug] = (clicks[slug] || 0) + 1;
+      localStorage.setItem("sg-clicks", JSON.stringify(clicks));
+    });
+  });
+
+  // -------- UPDATE FILTER COUNTS --------
+  Object.keys(counter).forEach(cat => {
+    if (FILTER_BTNS[cat]) {
+      FILTER_BTNS[cat].textContent = `${cat} (${counter[cat]})`;
+    }
+  });
+
+}, 800);
+
+// =========================
+// ONE-CLICK SITEMAP GENERATOR (FIXED)
+// =========================
+function downloadSitemap() {
+  const links = Array.from(document.querySelectorAll(".card"))
+    .map(card => card.getAttribute("href"))
+    .filter(Boolean);
+
+  let xml =
+`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  links.forEach(l => {
+    xml +=
+`  <url>\n    <loc>${location.origin}/${l}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+  });
+
+  xml += "</urlset>";
+
+  const blob = new Blob([xml], {type:"application/xml"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "sitemap.xml";
+  a.click();
+}
+
+// =========================
+// CSV EXPORT OF ALL PAGES
+// =========================
+function downloadCSV() {
+  const rows = [["Slug","Category","Traffic Tier","Clicks"]];
+  const clicks = JSON.parse(localStorage.getItem("sg-clicks") || "{}");
+
+  document.querySelectorAll(".card").forEach(card => {
+    const slug = card.querySelector(".slug")?.innerText || "";
+    const cat = card.dataset.cat || "Other";
+    const tier = card.innerText.includes("HIGH") ? "HIGH" :
+                 card.innerText.includes("MED") ? "MED" : "LOW";
+    const clickCount = clicks[slug] || 0;
+
+    rows.push([slug, cat, tier, clickCount]);
+  });
+
+  const csv = rows.map(r => r.join(",")).join("\n");
+  const blob = new Blob([csv], { type:"text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "sideguy-command-center.csv";
+  a.click();
+}
 </script>
-
-
-
-</body>
-
-</html>
-
