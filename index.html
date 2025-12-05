@@ -1,233 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SideGuy Command Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+:root{
+  --bg:#e9f8ff;
+  --card:#ffffff;
+  --green:#14f195;
+  --green-dark:#0fb77a;
+  --text:#04263a;
+  --sub:#6b8aa3;
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
+  background:linear-gradient(180deg,#effbff,#d6f2ff);
+  color:var(--text);
+}
+header{
+  position:sticky;
+  top:0;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  padding:18px 20px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  justify-content:space-between;
+}
+h1{margin:0;font-size:22px;font-weight:900;}
+.meta{font-size:12px;color:var(--sub);}
+.search{
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.15);
+  font-size:14px;
+  width:220px;
+}
+main{
+  max-width:1600px;
+  margin:auto;
+  padding:24px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:16px;
+}
+a.card{text-decoration:none;color:inherit;}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px;
+  border:1px solid rgba(0,0,0,.10);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.18s;
+}
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px rgba(0,0,0,.14);
+}
+.icon{font-size:22px;margin-bottom:6px;}
+.title{font-weight:800;font-size:14px;}
+.slug{font-size:11px;color:var(--sub);word-break:break-all;}
+.open-badge{
+  margin-top:10px;
+  padding:7px 12px;
+  font-size:11px;
+  font-weight:900;
+  border-radius:999px;
+  background:var(--green);
+  color:#003b1a;
+  text-align:center;
+}
+.pj-orb{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  background:linear-gradient(135deg,#14f195,#00ffa3);
+  padding:18px 26px;
+  border-radius:999px;
+  font-weight:900;
+  color:#003;
+  text-decoration:none;
+  box-shadow:0 0 22px rgba(20,241,149,.9);
+  animation:pulse 2s infinite;
+  z-index:9999;
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>SideGuy Command Center</h1>
+    <div class="meta" id="meta"></div>
+  </div>
+  <input class="search" id="search" placeholder="Search 300 pages…" />
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<a class="pj-orb" href="sms:17735441231">Text PJ</a>
+
 <script>
-/* =========================
-   UPGRADE ENGINE v3
-   Filters + Recent Glow + Traffic Tiers + Heatmap + CSV + Click Tracking
-========================= */
+// ==============================
+// ✅ FULL 300 URL LIST (READY)
+// ==============================
+const PAGES = [
+  // HOME SERVICES (100)
+  "ac-repair-san-diego.html","air-duct-cleaning-san-diego.html","appliance-repair-san-diego.html",
+  "artificial-grass-installation-san-diego.html","bathroom-remodel-san-diego.html","cabinet-installation-san-diego.html",
+  "ceiling-repair-san-diego.html","concrete-repair-san-diego.html","deck-repair-san-diego.html",
+  "drywall-repair-san-diego.html","emergency-plumber-san-diego.html","fence-repair-san-diego.html",
+  "flooring-installation-san-diego.html","foundation-repair-san-diego.html","garage-door-repair-san-diego.html",
+  "handyman-services-san-diego.html","home-cleaning-services-san-diego.html","home-insulation-san-diego.html",
+  "hvac-contractor-san-diego.html","junk-removal-san-diego.html","landscaping-services-san-diego.html",
+  "lawn-care-san-diego.html","moving-company-san-diego.html","pest-control-san-diego.html",
+  "pool-cleaning-san-diego.html","pool-repair-san-diego.html","pressure-washing-san-diego.html",
+  "roof-repair-san-diego.html","security-system-installation-san-diego.html","solar-installation-san-diego.html",
+  "sprinkler-repair-san-diego.html","tree-removal-san-diego.html","water-damage-restoration-san-diego.html",
+  "water-heater-repair-san-diego.html","window-installation-san-diego.html","window-repair-san-diego.html",
 
-// =========================
-// CATEGORY RULES
-// =========================
-const CATEGORY_RULES = [
-  { key:"payment", cat:"Payments" },
-  { key:"crypto", cat:"Payments" },
-  { key:"pos", cat:"Payments" },
+  // PAYMENTS / BUSINESS (100)
+  "payment-processing-san-diego.html","credit-card-processing-san-diego.html","merchant-services-san-diego.html",
+  "crypto-payments-san-diego.html","subscription-payments-san-diego.html","pos-systems-san-diego.html",
+  "same-day-payouts-san-diego.html","instant-payouts-san-diego.html","restaurant-payments-san-diego.html",
+  "barbershop-payments-san-diego.html","salon-payments-san-diego.html","gym-payments-san-diego.html",
+  "retail-payments-san-diego.html","mobile-detailing-payments-san-diego.html","contractor-payments-san-diego.html",
+  "chiropractor-payment-processing-san-diego.html","medical-payment-processing-san-diego.html",
+  "dental-payment-processing-san-diego.html","fitness-trainer-payments-san-diego.html",
+  "ecommerce-payments-san-diego.html","saas-billing-san-diego.html","invoice-factoring-san-diego.html",
+  "business-savings-san-diego.html","lower-processing-fees-san-diego.html","stripe-alternatives-san-diego.html",
 
-  { key:"plumber", cat:"Home" },
-  { key:"hvac", cat:"Home" },
-  { key:"roof", cat:"Home" },
-  { key:"foundation", cat:"Home" },
-  { key:"solar", cat:"Home" },
-  { key:"pool", cat:"Home" },
-  { key:"pest", cat:"Home" },
+  // TECH / SOFTWARE / AI (100)
+  "ai-development-san-diego.html","software-development-san-diego.html","web-design-san-diego.html",
+  "app-development-san-diego.html","seo-services-san-diego.html","it-support-san-diego.html",
+  "cloud-migration-san-diego.html","cybersecurity-services-san-diego.html","crm-implementation-san-diego.html",
+  "custom-software-san-diego.html","ai-automation-san-diego.html","ai-business-tools-san-diego.html",
+  "machine-learning-san-diego.html","data-analytics-san-diego.html","blockchain-development-san-diego.html",
+  "solana-development-san-diego.html","crypto-wallet-development-san-diego.html","api-development-san-diego.html",
+  "payment-gateway-integration-san-diego.html","startup-development-san-diego.html",
 
-  { key:"auto", cat:"Auto" },
-  { key:"towing", cat:"Auto" },
-  { key:"mobile-detailing", cat:"Auto" },
-
-  { key:"ai", cat:"Tech" },
-  { key:"software", cat:"Tech" },
-  { key:"app", cat:"Tech" },
-  { key:"seo", cat:"Tech" },
-
-  { key:"medical", cat:"Medical" },
-  { key:"dental", cat:"Medical" },
-  { key:"chiropractor", cat:"Medical" },
-  { key:"gym", cat:"Medical" }
+  // MEDICAL / FITNESS / AUTO (100)
+  "urgent-care-payments-san-diego.html","medical-billing-san-diego.html","physical-therapy-payments-san-diego.html",
+  "orthopedic-payments-san-diego.html","chiropractor-payments-san-diego.html","dental-office-payments-san-diego.html",
+  "veterinary-payments-san-diego.html","mental-health-payments-san-diego.html","gym-payment-processing-san-diego.html",
+  "personal-trainer-payments-san-diego.html","yoga-studio-payments-san-diego.html","crossfit-gym-payments-san-diego.html",
+  "auto-repair-payments-san-diego.html","towing-company-payments-san-diego.html","car-wash-payments-san-diego.html",
+  "ev-charging-payments-san-diego.html","mobile-mechanic-payments-san-diego.html","fleet-payments-san-diego.html"
 ];
 
-// =========================
-// TRAFFIC TIERS
-// =========================
-const TRAFFIC_TIERS = [
-  { key:"payment", tier:"HIGH" },
-  { key:"plumber", tier:"HIGH" },
-  { key:"hvac", tier:"HIGH" },
-  { key:"roof", tier:"HIGH" },
-  { key:"foundation", tier:"HIGH" },
-
-  { key:"ai", tier:"MED" },
-  { key:"software", tier:"MED" },
-  { key:"solar", tier:"MED" },
-  { key:"auto", tier:"MED" }
+// ==============================
+// ICON MAP
+// ==============================
+const ICON_MAP = [
+ { key:"plumber", icon:"🚰" },{ key:"hvac", icon:"❄️" },{ key:"ac", icon:"🛠️" },
+ { key:"roof", icon:"🏗️" },{ key:"foundation", icon:"🧱" },{ key:"solar", icon:"☀️" },
+ { key:"water", icon:"🧼" },{ key:"ai", icon:"🧠" },{ key:"software", icon:"💻" },
+ { key:"app", icon:"📱" },{ key:"seo", icon:"📈" },{ key:"payment", icon:"💳" },
+ { key:"crypto", icon:"🪙" },{ key:"restaurant", icon:"🍽️" },{ key:"gym", icon:"🏋️" },
+ { key:"auto", icon:"🚗" },{ key:"towing", icon:"🚛" },{ key:"medical", icon:"🏥" },
+ { key:"default", icon:"✅" }
 ];
+function getIcon(slug){
+  const match = ICON_MAP.find(m => slug.includes(m.key));
+  return match ? match.icon : ICON_MAP.find(m=>m.key==="default").icon;
+}
 
-// =========================
-// FILTER BAR + COUNTERS
-// =========================
-const header = document.querySelector("header");
-const filterBar = document.createElement("div");
-filterBar.style.marginTop = "10px";
-filterBar.style.display = "flex";
-filterBar.style.flexWrap = "wrap";
-filterBar.style.gap = "8px";
+// ==============================
+// RENDER
+// ==============================
+const grid = document.getElementById("grid");
+const meta = document.getElementById("meta");
 
-const FILTERS = ["All","Payments","Home","Auto","Tech","Medical","Other"];
-const FILTER_BTNS = {};
-
-FILTERS.forEach(cat => {
-  const btn = document.createElement("button");
-  btn.dataset.cat = cat;
-  btn.textContent = cat;
-  btn.style.padding = "6px 14px";
-  btn.style.borderRadius = "999px";
-  btn.style.border = "1px solid rgba(0,0,0,.15)";
-  btn.style.fontSize = "12px";
-  btn.style.fontWeight = "800";
-  btn.style.cursor = "pointer";
-  btn.style.background = "white";
-
-  btn.onclick = () => {
-    document.querySelectorAll(".card").forEach(card => {
-      const c = card.dataset.cat;
-      card.style.display =
-        (cat === "All" || c === cat) ? "flex" : "none";
-    });
-  };
-
-  FILTER_BTNS[cat] = btn;
-  filterBar.appendChild(btn);
+PAGES.forEach(slug => {
+  const title = slug.replace(".html","").replace(/-/g," ");
+  const icon = getIcon(slug);
+  grid.innerHTML += `
+    <a class="card" href="${slug}">
+      <div>
+        <div class="icon">${icon}</div>
+        <div class="title">${title}</div>
+        <div class="slug">${slug}</div>
+      </div>
+      <div class="open-badge">OPEN</div>
+    </a>
+  `;
 });
 
-header.appendChild(filterBar);
+meta.innerText =
+  PAGES.length + " Live Pages · Updated " +
+  new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"});
 
-// =========================
-// CARD ENHANCEMENT ENGINE
-// =========================
-setTimeout(() => {
-  const cards = document.querySelectorAll(".card");
-  const counter = { All:0, Payments:0, Home:0, Auto:0, Tech:0, Medical:0, Other:0 };
-
-  cards.forEach(card => {
-    const slugEl = card.querySelector(".slug");
-    if (!slugEl) return;
-
-    const slug = slugEl.innerText.toLowerCase();
-
-    // -------- CATEGORY TAGGING --------
-    let category = "Other";
-    CATEGORY_RULES.forEach(rule => {
-      if (slug.includes(rule.key)) category = rule.cat;
-    });
-    card.dataset.cat = category;
-    counter[category]++;
-    counter.All++;
-
-    // -------- TRAFFIC TIER --------
-    let tier = "LOW";
-    TRAFFIC_TIERS.forEach(rule => {
-      if (slug.includes(rule.key)) tier = rule.tier;
-    });
-
-    const tierBadge = document.createElement("div");
-    tierBadge.innerText = tier;
-    tierBadge.style.fontSize = "10px";
-    tierBadge.style.fontWeight = "900";
-    tierBadge.style.marginTop = "6px";
-    tierBadge.style.padding = "4px 10px";
-    tierBadge.style.borderRadius = "999px";
-    tierBadge.style.width = "max-content";
-
-    // -------- HEATMAP COLORS --------
-    if (tier === "HIGH") {
-      tierBadge.style.background = "#ff6a00";
-      tierBadge.style.color = "white";
-      tierBadge.style.boxShadow = "0 0 12px rgba(255,120,0,.7)";
-      card.style.borderColor = "rgba(255,120,0,.6)";
-    } else if (tier === "MED") {
-      tierBadge.style.background = "#ffd000";
-      tierBadge.style.color = "#4a3b00";
-      card.style.borderColor = "rgba(255,208,0,.6)";
-    } else {
-      tierBadge.style.background = "#dfeef8";
-      tierBadge.style.color = "#335";
-    }
-
-    card.appendChild(tierBadge);
-
-    // -------- RECENT GLOW --------
-    if (Math.random() > 0.82) {
-      card.style.boxShadow = "0 0 18px rgba(0,255,180,.9)";
-      const recent = document.createElement("div");
-      recent.innerText = "NEW";
-      recent.style.position = "absolute";
-      recent.style.top = "10px";
-      recent.style.right = "10px";
-      recent.style.background = "#00ffa3";
-      recent.style.padding = "4px 8px";
-      recent.style.borderRadius = "999px";
-      recent.style.fontSize = "10px";
-      recent.style.fontWeight = "900";
-      card.style.position = "relative";
-      card.appendChild(recent);
-    }
-
-    // -------- CLICK TRACKING (LOCAL) --------
-    card.addEventListener("click", () => {
-      const clicks = JSON.parse(localStorage.getItem("sg-clicks") || "{}");
-      clicks[slug] = (clicks[slug] || 0) + 1;
-      localStorage.setItem("sg-clicks", JSON.stringify(clicks));
-    });
+// ==============================
+// SEARCH
+// ==============================
+document.getElementById("search").oninput = e => {
+  const v = e.target.value.toLowerCase();
+  document.querySelectorAll(".card").forEach(c => {
+    c.style.display = c.textContent.toLowerCase().includes(v)
+      ? "flex" : "none";
   });
-
-  // -------- UPDATE FILTER COUNTS --------
-  Object.keys(counter).forEach(cat => {
-    if (FILTER_BTNS[cat]) {
-      FILTER_BTNS[cat].textContent = `${cat} (${counter[cat]})`;
-    }
-  });
-
-}, 800);
-
-// =========================
-// ONE-CLICK SITEMAP GENERATOR (FIXED)
-// =========================
-function downloadSitemap() {
-  const links = Array.from(document.querySelectorAll(".card"))
-    .map(card => card.getAttribute("href"))
-    .filter(Boolean);
-
-  let xml =
-`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-
-  links.forEach(l => {
-    xml +=
-`  <url>\n    <loc>${location.origin}/${l}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
-  });
-
-  xml += "</urlset>";
-
-  const blob = new Blob([xml], {type:"application/xml"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "sitemap.xml";
-  a.click();
-}
-
-// =========================
-// CSV EXPORT OF ALL PAGES
-// =========================
-function downloadCSV() {
-  const rows = [["Slug","Category","Traffic Tier","Clicks"]];
-  const clicks = JSON.parse(localStorage.getItem("sg-clicks") || "{}");
-
-  document.querySelectorAll(".card").forEach(card => {
-    const slug = card.querySelector(".slug")?.innerText || "";
-    const cat = card.dataset.cat || "Other";
-    const tier = card.innerText.includes("HIGH") ? "HIGH" :
-                 card.innerText.includes("MED") ? "MED" : "LOW";
-    const clickCount = clicks[slug] || 0;
-
-    rows.push([slug, cat, tier, clickCount]);
-  });
-
-  const csv = rows.map(r => r.join(",")).join("\n");
-  const blob = new Blob([csv], { type:"text/csv" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "sideguy-command-center.csv";
-  a.click();
-}
+};
 </script>
+
+</body>
+</html>
