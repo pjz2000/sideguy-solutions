@@ -1,135 +1,244 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SideGuy Solutions · Command Center</title>
-  <meta name="description" content="Live dashboard of every SideGuy Solutions page · Real-time operator index · Built by PJ" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SideGuy Solutions Command Center · Live Page Dashboard · Real-Time Operator Index" />
+
   <style>
-    :root{--bg:#0a1f3d;--accent:#00d4ff;--solana:#00ffa3;--text:#e0f2ff;--card:rgba(255,255,255,0.12);}
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      background:radial-gradient(circle at 50% 20%,#0f3466 0%,#0a1f3d 70%);
-      position:relative;
-      overflow-x:hidden;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system,BlinkMacSystemFont,Inter,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, #ffffff 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, #caffea 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, #bfe9ff 0%, transparent 60%),
+        linear-gradient(180deg, #edf9ff, #d6efff);
+      color:#033045;
+      transition: background-position .1s linear;
     }
-    /* Animated ocean glow background */
-    body::before{
-      content:"";position:absolute;top:0;left:0;width:100%;height:100%;z-index:-2;
-      background:linear-gradient(135deg,#00c2ff33,#00ffa333),radial-gradient(circle at 20% 80%,#00d4ff40,#0000 50%),radial-gradient(circle at 80% 20%,#00ffa340,#0000 50%);
-      animation:oceanGlow 20s ease infinite;
+
+    header {
+      padding: 28px 20px 16px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
     }
-    @keyframes oceanGlow{0%,100%{opacity:0.4}50%{opacity:0.7}}
-    
-    header{
-      text-align:center;padding:40px 20px 20px;
-      position:relative;z-index:10;
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg,#033045,#00c35a,#033045);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: .3px;
     }
-    h1{
-      font-size:42px;font-weight:900;background:linear-gradient(90deg,#00d4ff,#00ffa3);background-clip:text;-webkit-background-clip:text;color:transparent;
-      text-shadow:0 0 30px rgba(0,212,255,0.5);
+
+    .meta {
+      font-size: 14px;
+      opacity: .75;
     }
-    .meta{
-      font-size:16px;opacity:0.9;margin:12px 0 20px;
-      background:linear-gradient(90deg,#00d4ff,#00ffa3);background-clip:text;-webkit-background-clip:text;color:transparent;
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 16px;
+      flex-wrap: wrap;
     }
-    .stats{
-      display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:20px 0;
+
+    .stat-box {
+      background: white;
+      padding: 14px 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      font-size: 14px;
     }
-    .stat-box{
-      background:var(--card);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.1);
-      padding:16px 28px;border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.3);
-      font-weight:700;font-size:15px;
-      min-width:180px;text-align:center;
+
+    /* === HERO MOTION BANNER === */
+
+    .hero {
+      height: 200px;
+      margin: 20px 16px 28px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(0,255,180,.35), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(0,160,255,.25), transparent 55%),
+        linear-gradient(120deg, #cfefff, #e6fff5);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,.15);
     }
-    .stat-number{
-      font-size:28px;display:block;margin-bottom:4px;
-      background:linear-gradient(90deg,#00d4ff,#00ffa3);background-clip:text;-webkit-background-clip:text;color:transparent;
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,.45),
+        transparent 80%
+      );
+      animation: heroSweep 8s linear infinite;
     }
-    main{
-      max-width:1400px;margin:0 auto;padding:20px;
-      position:relative;z-index:10;
+
+    @keyframes heroSweep {
+      0% { transform: translateX(-40%) rotate(10deg); }
+      100% { transform: translateX(140%) rotate(10deg); }
     }
-    .search{
-      margin-bottom:30px;text-align:center;
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 16px;
     }
-    #searchInput{
-      width:100%;max-width:600px;padding:18px 24px;font-size:18px;
-      border-radius:50px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);
-      color:white;backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,0.3);
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
-    #searchInput::placeholder{color:rgba(255,255,255,0.6);}
-    .grid{
-      display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;
+
+    .hero-sub {
+      font-size: 15px;
+      opacity: .8;
+      max-width: 760px;
     }
-    .card{
-      background:var(--card);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);
-      border-radius:20px;padding:20px;text-decoration:none;color:var(--text);
-      box-shadow:0 12px 40px rgba(0,0,0,0.4);transition:all .3s ease;position:relative;overflow:hidden;
+
+    main {
+      padding: 16px 28px 40px;
+      max-width: 1400px;
+      margin: auto;
     }
-    .card::before{
-      content:"";position:absolute;top:0;left:-100%;width:50%;height:100%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
-      transition:all .6s;transform:skewX(-25deg);
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+      gap: 18px;
     }
-    .card:hover::before{left:120%;}
-    .card:hover{transform:translateY(-8px);box-shadow:0 20 60px rgba(0,212,255,0.4);}
-    .card-number{
-      position:absolute;top:12px;right:16px;font-size:11px;opacity:0.6;font-weight:700;
+
+    .card {
+      background: rgba(255,255,255,.92);
+      border-radius: 14px;
+      padding: 18px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+      transition: transform .15s ease, box-shadow .15s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .card-title{
-      font-size:18px;font-weight:800;margin-bottom:8px;line-height:1.3;
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(0,255,180,.15),
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity .3s;
     }
-    .card-url{
-      font-size:13px;opacity:0.7;word-break:break-all;margin-top:8px;
-      font-family:monospace;
+
+    .card:hover::after {
+      opacity: 1;
     }
-    footer{
-      text-align:center;padding:60px 20px 100px;font-size:13px;opacity:0.7;
-      background:linear-gradient(to top,rgba(10,31,61,0.8),transparent);
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(0,0,0,.15);
     }
-    /* PJ ORB — now legendary */
-    .pj-orb{
-      position:fixed;bottom:24px;right:24px;background:radial-gradient(circle at 30% 30%,#8cffb5,#00ffa3,#00c35a);
-      color:#033045;padding:18px 28px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;
-      box-shadow:0 0 40px rgba(0,255,163,0.8),inset 0 0 20px rgba(255,255,255,0.3);
-      z-index:9999;animation:pulse 3s infinite, float 6s ease-in-out infinite;
-      border:3px solid rgba(255,255,255,0.3);
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 6px;
     }
-    @keyframes pulse{0%,100%{box-shadow:0 0 40px rgba(0,255,163,0.8)}50%{box-shadow:0 0 60px rgba(0,255,163,1)}}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+    .card-url {
+      font-size: 12px;
+      opacity: .65;
+      word-break: break-all;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      opacity: .6;
+      padding: 40px 12px 90px;
+    }
+
+    /* === TEXT PJ ORB === */
+
+    .pj-orb {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: radial-gradient(circle at 30% 30%, #8cffb5, #00c35a);
+      color: #033045;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 0 0 0 rgba(0,195,90,.7);
+      animation: pulse 2.4s infinite;
+      z-index: 9999;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(0,195,90,.6); }
+      50%  { box-shadow: 0 0 24px 6px rgba(0,195,90,.25); }
+      100% { box-shadow: 0 0 0 0 rgba(0,195,90,.6); }
+    }
   </style>
 </head>
 <body>
 
 <header>
   <h1>SideGuy Solutions · Command Center</h1>
-  <div class="meta">"Google finds the problem. AI explains it. PJ fixes it."</div>
+  <div class="meta">
+    "SideGuy is where Google finds the problem, AI explains it, and a real human resolves it."
+  </div>
+
   <div class="stats">
-    <div class="stat-box"><span class="stat-number" id="pageCount">0</span>Live Pages</div>
-    <div class="stat-box"><span class="stat-number" id="lastUpdate">—</span>Last Updated</div>
+    <div class="stat-box">Live Pages: <strong id="pageCount">0</strong></div>
+    <div class="stat-box">Build Timestamp: <strong id="buildTime"></strong></div>
   </div>
 </header>
 
-<main>
-  <div class="search">
-    <input type="text" id="searchInput" placeholder="Search all pages…" autocomplete="off">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-title">San Diego Operator Intelligence</div>
+    <div class="hero-sub">
+      Live service pages · Real-time indexing · Human-backed execution ·
+      Built for speed, trust, and compounding local presence.
+    </div>
   </div>
+</section>
+
+<main>
   <section class="grid" id="pageGrid"></section>
 </main>
 
-<footer>© 2025 SideGuy Solutions · Real-Time Operator Index · Built with love from Solana Beach</footer>
+<footer>
+  © SideGuy Solutions · Live Operator Index
+</footer>
 
-<a href="sms:17735441231" class="pj-orb">Text PJ · 773-544-1231</a>
+<a class="pj-orb" href="tel:7735441231">Text PJ · 773-544-1231</a>
 
 <script>
-  // MASTER PAGE REGISTRY — ADD NEW PAGES HERE ONLY
+  // ✅ MASTER PAGE REGISTRY
   const pages = [
     "payment-processing-san-diego.html",
     "web-design-san-diego.html",
@@ -147,40 +256,40 @@
     "window-repair-san-diego.html",
     "wood-fence-repair-san-diego.html",
     "wrought-iron-fence-san-diego.html"
-    // ← just keep adding here
   ];
 
+  // ✅ AUTO BUILD GRID
   const grid = document.getElementById("pageGrid");
-  const searchInput = document.getElementById("searchInput");
+  pages.forEach(url => {
+    const title = url
+      .replace(".html","")
+      .replace(/-/g," ")
+      .replace(/\b\w/g, c => c.toUpperCase());
 
-  function renderPages(filter = "") {
-    grid.innerHTML = "";
-    const filtered = pages
-      .filter(p => p.toLowerCase().includes(filter.toLowerCase()))
-      .sort();
+    const card = document.createElement("a");
+    card.href = url;
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-title">${title}</div>
+      <div class="card-url">${url}</div>
+    `;
+    grid.appendChild(card);
+  });
 
-    filtered.forEach((url, i) => {
-      const title = url.replace(".html","").replace(/-/g," ").replace(/\b\w/g, c => c.toUpperCase());
-      const card = document.createElement("a");
-      card.href = url;
-      card.className = "card";
-      card.innerHTML = `
-        <div class="card-number">#${(i+1).toString().padStart(2,'0')}</div>
-        <div class="card-title">${title}</div>
-        <div class="card-url">${url}</div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  // Live search
-  searchInput.addEventListener("input", (e) => renderPages(e.target.value));
-
-  // Initial render + stats
-  renderPages();
+  // ✅ AUTO PAGE COUNT
   document.getElementById("pageCount").textContent = pages.length;
-  const now = new Date().toLocaleString("en-US", {timeZone:"America/Los_Angeles", month:"short", day:"numeric", hour:"numeric", minute:"2-digit"});
-  document.getElementById("lastUpdate").textContent = now;
+
+  // ✅ AUTO TIMESTAMP
+  const now = new Date();
+  document.getElementById("buildTime").textContent =
+    now.toLocaleDateString() + " @ " + now.toLocaleTimeString();
+
+  // ✅ SUBTLE SCROLL DEPTH MOTION
+  window.addEventListener("scroll", () => {
+    document.body.style.backgroundPositionY =
+      window.scrollY * 0.15 + "px";
+  });
 </script>
+
 </body>
 </html>
