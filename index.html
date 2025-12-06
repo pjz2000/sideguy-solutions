@@ -6,245 +6,173 @@
 
   <meta charset="UTF-8" />
 
-  <title>SideGuy Solutions · Operator Command Center</title>
+  <title>SideGuy Solutions · Live Service Index</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
 
   <style>
 
-    :root{
+    body {
 
-      --bg1:#e9f6ff;
+      margin: 0;
 
-      --bg2:#cfeeff;
+      font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
 
-      --card:#ffffffcc;
+      background: linear-gradient(180deg,#e6f7ff,#ccecff);
 
-      --ink:#06324a;
-
-      --accent:#38bdf8;
-
-      --orb:#22c55e;
+      color: #05324b;
 
     }
 
 
 
-    *{box-sizing:border-box;margin:0;padding:0}
+    header {
 
-    body{
+      padding: 26px 20px 10px;
 
-      font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;
-
-      background:linear-gradient(180deg,var(--bg1),var(--bg2));
-
-      color:var(--ink);
+      text-align: center;
 
     }
 
 
 
-    header{
+    h1 {
 
-      padding:24px 28px;
+      margin: 0;
 
-      display:flex;
-
-      flex-direction:column;
-
-      gap:10px;
+      font-size: 28px;
 
     }
 
 
 
-    h1{font-size:28px;font-weight:700}
+    .meta {
 
-    .sub{opacity:.75}
+      font-size: 12px;
 
+      opacity: .75;
 
-
-    .meta{
-
-      font-size:13px;
-
-      opacity:.7;
-
-      display:flex;
-
-      flex-wrap:wrap;
-
-      gap:14px;
+      margin-top: 6px;
 
     }
 
 
 
-    .grid{
+    #stats {
 
-      padding:24px;
+      margin-top: 8px;
 
-      display:grid;
+      font-size: 14px;
 
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-
-      gap:18px;
+      font-weight: 600;
 
     }
 
 
 
-    .card{
+    #grid {
 
-      background:var(--card);
+      display: grid;
 
-      border-radius:14px;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
 
-      padding:16px 16px 18px;
+      gap: 16px;
 
-      box-shadow:0 10px 30px rgba(0,0,0,.06);
-
-      display:flex;
-
-      flex-direction:column;
-
-      gap:8px;
-
-      transition:.2s;
+      padding: 26px;
 
     }
 
 
 
-    .card:hover{
+    .card {
 
-      transform:translateY(-3px);
+      background: rgba(255,255,255,.75);
 
-      box-shadow:0 16px 36px rgba(0,0,0,.08);
+      border-radius: 14px;
 
-    }
+      padding: 14px 12px;
 
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
 
-
-    .icon{
-
-      font-size:22px;
+      transition: transform .15s ease, box-shadow .15s ease;
 
     }
 
 
 
-    .title{
+    .card:hover {
 
-      font-weight:600;
+      transform: translateY(-4px);
 
-      font-size:15px;
-
-      line-height:1.3;
+      box-shadow: 0 10px 26px rgba(0,0,0,.14);
 
     }
 
 
 
-    .path{
+    .card a {
 
-      font-size:12px;
+      text-decoration: none;
 
-      opacity:.6;
+      color: #003a55;
 
-      word-break:break-all;
+      font-weight: 600;
 
-    }
+      font-size: 14px;
 
-
-
-    .open{
-
-      margin-top:auto;
-
-      text-decoration:none;
-
-      font-size:13px;
-
-      color:white;
-
-      background:linear-gradient(135deg,var(--accent),#0ea5e9);
-
-      padding:8px 12px;
-
-      border-radius:10px;
-
-      width:max-content;
+      display: block;
 
     }
 
 
 
-    .pj-orb{
+    .pj-orb {
 
-      position:fixed;
+      position: fixed;
 
-      right:18px;
+      right: 18px;
 
-      bottom:18px;
+      bottom: 18px;
 
-      width:64px;
+      background: radial-gradient(circle at 30% 30%,#2aff73,#00c853);
 
-      height:64px;
+      color: #003518;
 
-      border-radius:50%;
+      width: 62px;
 
-      background:radial-gradient(circle at 30% 30%,#6ee7b7,var(--orb));
+      height: 62px;
 
-      box-shadow:0 0 22px rgba(34,197,94,.8);
+      border-radius: 50%;
 
-      display:flex;
+      font-weight: 800;
 
-      align-items:center;
+      display: flex;
 
-      justify-content:center;
+      align-items: center;
 
-      color:#033014;
+      justify-content: center;
 
-      font-weight:700;
+      box-shadow: 0 0 22px rgba(0,255,120,.65);
 
-      font-size:11px;
+      animation: pulse 2.2s infinite;
 
-      text-align:center;
+      cursor: pointer;
 
-      cursor:pointer;
-
-      animation:pulse 2.4s infinite;
-
-      text-decoration:none;
+      text-decoration: none;
 
     }
 
 
 
-    @keyframes pulse{
+    @keyframes pulse {
 
-      0%{box-shadow:0 0 8px rgba(34,197,94,.6)}
+      0% { box-shadow: 0 0 18px rgba(0,255,120,.55); }
 
-      50%{box-shadow:0 0 26px rgba(34,197,94,1)}
+      50% { box-shadow: 0 0 32px rgba(0,255,160,.95); }
 
-      100%{box-shadow:0 0 8px rgba(34,197,94,.6)}
-
-    }
-
-
-
-    footer{
-
-      padding:24px;
-
-      font-size:12px;
-
-      opacity:.6;
-
-      text-align:center;
+      100% { box-shadow: 0 0 18px rgba(0,255,120,.55); }
 
     }
 
@@ -252,349 +180,107 @@
 
 </head>
 
+
+
 <body>
 
 
 
 <header>
 
-  <h1>SideGuy Solutions · Operator Command Center</h1>
+  <h1>SideGuy Solutions · Live Service Index</h1>
 
-  <div class="sub">Live index generated from your repo</div>
+  <div class="meta" id="timestamp"></div>
 
-
-
-  <div class="meta">
-
-    <div id="buildTime"></div>
-
-    <div id="pageCount"></div>
-
-  </div>
+  <div id="stats">Loading pages…</div>
 
 </header>
 
 
 
-<section class="grid" id="grid"></section>
+<section id="grid"></section>
 
 
 
-<a class="pj-orb" href="tel:17735441231">Text<br>PJ</a>
-
-
-
-<footer>
-
-  SideGuy Solutions · Real humans · Instant settlement · San Diego & North County
-
-</footer>
+<a class="pj-orb" href="tel:17735441231">PJ</a>
 
 
 
 <script>
 
-  // BUILD TIMESTAMP
+  const timestamp = new Date().toLocaleString();
 
-  document.getElementById("buildTime").textContent =
+  document.getElementById("timestamp").textContent = "Last Updated: " + timestamp;
 
-    "Build: " + new Date().toLocaleString();
+</script>
 
 
 
-  // ====== PAGES FROM YOUR REPO (CLEANED TO HTML ONLY) ======
+<script>
 
-  const pages = [
+fetch("/page-list.json")
 
-    "index.html",
+  .then(res => res.json())
 
-    "index-test.html",
+  .then(pages => {
 
-    "command-center-v2.html",
+    const grid = document.getElementById("grid");
 
-    "404.html",
+    const stats = document.getElementById("stats");
 
-    "ac-repair-san-diego.html",
 
-    "accept-crypto-get-cash-san-diego.html",
 
-    "accountant-services-san-diego.html",
+    pages.forEach(file => {
 
-    "ai-automation-san-diego.html",
+      if(file.includes("index")) return;
 
-    "ai-business-tools-san-diego.html",
 
-    "ai-development-san-diego.html",
 
-    "ai-payment-automation-san-diego.html",
+      const card = document.createElement("div");
 
-    "ai-small-business-automation-san-diego.html",
+      card.className = "card";
 
-    "air-duct-cleaning-san-diego.html",
 
-    "app-development-san-diego.html",
 
-    "appliance-repair-san-diego.html",
+      const link = document.createElement("a");
 
-    "artificial-grass-installation-san-diego.html",
+      link.href = "/" + file;
 
-    "artificial-intelligence-san-diego.html",
+      link.target = "_self";
 
-    "auto-repair-payment-processing-san-diego.html",
 
-    "barbershop-appointment-payments-san-diego.html",
 
-    "barbershop-payments-san-diego.html",
+      const label = file
 
-    "best-ai-tools-for-small-business-san-diego.html",
+        .replace(".html","")
 
-    "Best-Payment-Processing-San-Diego.html.html",
+        .replaceAll("-", " ")
 
-    "best-stripe-alternative-san-diego.html",
+        .replace(/\b\w/g, l => l.toUpperCase());
 
-    "blockchain-development-san-diego.html",
 
-    "bookkeeping-help-san-diego.html",
 
-    "business-automation-san-diego.html",
+      link.textContent = label;
 
-    "business-savings-san-diego.html",
 
-    "carbon-credit-automation.html",
 
-    "carbon-credits-climate-software.html",
+      card.appendChild(link);
 
-    "card-not-present-processing.html",
+      grid.appendChild(card);
 
-    "Cardiff-Payment-Processing.html",
+    });
 
-    "Carlsbad-Contractor-Payments.html",
 
-    "Carlsbad-Lower-Credit-Card-Fees.html",
 
-    "carlsbad-payment-processing.html",
+    stats.textContent = pages.length + " Live Pages Auto-Indexed";
 
-    "cheapest-payment-processing.html",
+  })
 
-    "chiropractor-payment-processing-san-diego.html",
+  .catch(() => {
 
-    "coastal-business-automation.html",
-
-    "contractor-billing-tools-san-diego.html",
-
-    "contractor-payment-processing-san-diego.html",
-
-    "contractor-payments-san-diego.html",
-
-    "credit-card-processing-san-diego.html",
-
-    "crypto-help-desk-san-dego.html",
-
-    "Crypto-Payment-Processing.html",
-
-    "crypto-payments-san-diego.html",
-
-    "custom-ai-software-development-san-diego.html",
-
-    "custom-software-development-san-diego.html",
-
-    "del-mar-payment-processing-san-diego.html",
-
-    "deli-payment-processing.html",
-
-    "dental-office-payment-processing-san-diego.html",
-
-    "drain-cleaning-san-diego.html",
-
-    "ecommerce-payment-processing-san-diego.html",
-
-    "ecommerce-payment-solutions-san-diego.html",
-
-    "ecommerce-payment-upgrades-san-diego.html",
-
-    "ecommerce-payments-san-diego.html",
-
-    "electrician-payment-processing-san-diego.html",
-
-    "emergency-plumber-san-diego.html",
-
-    "encinitas-instant-payments.html",
-
-    "encinitas-payment-processing.html",
-
-    "energy-utility-payments-san-diego.html",
-
-    "finance-payment-processing.html",
-
-    "fitness-payment-processing-san-diego.html",
-
-    "foundation-repair-san-diego.html",
-
-    "free-payment-processing-setup.html",
-
-    "get-paid-today.html",
-
-    "handyman-payment-processing-san-diego.html",
-
-    "home-cleaning-service-payments-san-diego.html",
-
-    "hvac-contractor-payment-processing-san-diego.html",
-
-    "instant-payment-processing.html",
-
-    "instant-settlement-payments-san-diego.html",
-
-    "la-jolla-payment-processing.html",
-
-    "landscaper-payments-san-diego.html",
-
-    "local-business-payments-san-diego.html",
-
-    "local-business-savings-san-diego.html",
-
-    "merchant-services-san-diego.html",
-
-    "mobile-app-development-san-diego.html",
-
-    "north-county-payment-processing.html",
-
-    "north-county-same-day-pay.html",
-
-    "oceanside-payment-processing.html",
-
-    "payment-processing-near-me.html",
-
-    "payment-processing-san-diego.html",
-
-    "personal-trainer-payments-san-diego.html",
-
-    "pest-control-payment-processing-san-diego.html",
-
-    "plumbing-services-payment-processing-san-diego.html",
-
-    "pool-service-payment-processing-san-diego.html",
-
-    "restaurant-payment-processing-san-diego.html",
-
-    "restaurant-payments-san-diego.html",
-
-    "retail-payment-processing-san-diego.html",
-
-    "roofing-contractor-payments-san-diego.html",
-
-    "salon-payment-processing-san-diego.html",
-
-    "same-day-pay-san-diego.html",
-
-    "san-diego-business-automation.html",
-
-    "san-diego-payment-processing.html",
-
-    "san-diego-solana-payments-near-me.html",
-
-    "software-development-san-diego.html",
-
-    "solana-payment-processing.html",
-
-    "stripe-fees-calculator.html",
-
-    "subscription-billing-san-diego.html",
-
-    "ticketing-software-san-diego.html",
-
-    "tickets.html",
-
-    "towing-company-payment-processing-san-diego.html",
-
-    "water-damage-restoration-san-diego.html",
-
-    "water-heater-repair-san-diego.html",
-
-    "Web-Development-San-Diego.html"
-
-  ];
-
-
-
-  document.getElementById("pageCount").textContent =
-
-    "Live pages: " + pages.length;
-
-
-
-  const grid = document.getElementById("grid");
-
-
-
-  const iconMap = ["💳","⚡","🤖","🏗️","🏥","🏋️","🏠","🧰","🌊","🧠","🔗"];
-
-
-
-  pages.forEach((file, i) => {
-
-    const card = document.createElement("div");
-
-    card.className = "card";
-
-
-
-    const icon = document.createElement("div");
-
-    icon.className = "icon";
-
-    icon.textContent = iconMap[i % iconMap.length];
-
-
-
-    const title = document.createElement("div");
-
-    title.className = "title";
-
-    title.textContent = file
-
-      .replace(/[-.]/g, " ")
-
-      .replace("html","")
-
-      .toUpperCase();
-
-
-
-    const path = document.createElement("div");
-
-    path.className = "path";
-
-    path.textContent = file;
-
-
-
-    const link = document.createElement("a");
-
-    link.className = "open";
-
-    link.href = file;
-
-    link.target = "_self";
-
-    link.textContent = "Open";
-
-
-
-    card.appendChild(icon);
-
-    card.appendChild(title);
-
-    card.appendChild(path);
-
-    card.appendChild(link);
-
-
-
-    grid.appendChild(card);
+    document.getElementById("stats").textContent = "page-list.json not found yet";
 
   });
-
-
 
 </script>
 
