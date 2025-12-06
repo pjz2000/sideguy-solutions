@@ -14,15 +14,37 @@
 
   <style>
 
+    :root {
+
+      --ocean1: #eaf7ff;
+
+      --ocean2: #cfeeff;
+
+      --card: rgba(255,255,255,.88);
+
+      --ink: #05324b;
+
+      --glow: #00ff9c;
+
+    }
+
+
+
+    * { box-sizing: border-box; }
+
+
+
     body {
 
       margin: 0;
 
-      font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif;
 
-      background: linear-gradient(180deg,#e6f7ff,#ccecff);
+      background: linear-gradient(180deg,var(--ocean1),var(--ocean2));
 
-      color: #05324b;
+      color: var(--ink);
+
+      min-height: 100vh;
 
     }
 
@@ -30,9 +52,9 @@
 
     header {
 
-      padding: 26px 20px 10px;
-
       text-align: center;
+
+      padding: 42px 20px 22px;
 
     }
 
@@ -42,19 +64,23 @@
 
       margin: 0;
 
-      font-size: 28px;
+      font-size: 36px;
+
+      letter-spacing: -0.5px;
 
     }
 
 
 
-    .meta {
+    .sub {
 
-      font-size: 12px;
+      margin-top: 8px;
 
-      opacity: .75;
+      font-size: 14px;
 
-      margin-top: 6px;
+      opacity: .8;
+
+      font-weight: 500;
 
     }
 
@@ -62,11 +88,13 @@
 
     #stats {
 
-      margin-top: 8px;
+      margin-top: 10px;
 
-      font-size: 14px;
+      font-size: 15px;
 
-      font-weight: 600;
+      font-weight: 700;
+
+      color: #007a52;
 
     }
 
@@ -76,11 +104,15 @@
 
       display: grid;
 
-      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
 
-      gap: 16px;
+      gap: 18px;
 
-      padding: 26px;
+      padding: 36px;
+
+      max-width: 1400px;
+
+      margin: 0 auto;
 
     }
 
@@ -88,15 +120,37 @@
 
     .card {
 
-      background: rgba(255,255,255,.75);
+      background: var(--card);
 
-      border-radius: 14px;
+      border-radius: 18px;
 
-      padding: 14px 12px;
+      padding: 18px 16px 20px;
 
-      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      box-shadow: 0 12px 28px rgba(0,0,0,.08);
 
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition: transform .18s ease, box-shadow .18s ease;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .card::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: radial-gradient(circle at 20% 20%, rgba(0,255,156,.12), transparent 60%);
+
+      opacity: 0;
+
+      transition: opacity .2s ease;
 
     }
 
@@ -104,9 +158,17 @@
 
     .card:hover {
 
-      transform: translateY(-4px);
+      transform: translateY(-6px) scale(1.01);
 
-      box-shadow: 0 10px 26px rgba(0,0,0,.14);
+      box-shadow: 0 18px 44px rgba(0,0,0,.14);
+
+    }
+
+
+
+    .card:hover::after {
+
+      opacity: 1;
 
     }
 
@@ -116,11 +178,13 @@
 
       text-decoration: none;
 
-      color: #003a55;
+      color: var(--ink);
 
-      font-weight: 600;
+      font-weight: 700;
 
-      font-size: 14px;
+      font-size: 15px;
+
+      line-height: 1.35;
 
       display: block;
 
@@ -132,21 +196,23 @@
 
       position: fixed;
 
-      right: 18px;
+      right: 20px;
 
-      bottom: 18px;
+      bottom: 20px;
 
-      background: radial-gradient(circle at 30% 30%,#2aff73,#00c853);
+      background: radial-gradient(circle at 28% 28%,#4dffb3,#00c853);
 
-      color: #003518;
+      color: #002b18;
 
-      width: 62px;
+      width: 66px;
 
-      height: 62px;
+      height: 66px;
 
       border-radius: 50%;
 
-      font-weight: 800;
+      font-weight: 900;
+
+      letter-spacing: .5px;
 
       display: flex;
 
@@ -154,7 +220,7 @@
 
       justify-content: center;
 
-      box-shadow: 0 0 22px rgba(0,255,120,.65);
+      box-shadow: 0 0 26px rgba(0,255,140,.75);
 
       animation: pulse 2.2s infinite;
 
@@ -162,17 +228,33 @@
 
       text-decoration: none;
 
+      z-index: 999;
+
     }
 
 
 
     @keyframes pulse {
 
-      0% { box-shadow: 0 0 18px rgba(0,255,120,.55); }
+      0% { box-shadow: 0 0 18px rgba(0,255,140,.55); }
 
-      50% { box-shadow: 0 0 32px rgba(0,255,160,.95); }
+      50% { box-shadow: 0 0 38px rgba(0,255,190,.95); }
 
-      100% { box-shadow: 0 0 18px rgba(0,255,120,.55); }
+      100% { box-shadow: 0 0 18px rgba(0,255,140,.55); }
+
+    }
+
+
+
+    footer {
+
+      text-align: center;
+
+      padding: 30px 20px 46px;
+
+      font-size: 12px;
+
+      opacity: .7;
 
     }
 
@@ -190,7 +272,7 @@
 
   <h1>SideGuy Solutions · Live Service Index</h1>
 
-  <div class="meta" id="timestamp"></div>
+  <div class="sub" id="timestamp"></div>
 
   <div id="stats">Loading pages…</div>
 
@@ -202,15 +284,23 @@
 
 
 
+<footer>
+
+  SideGuy Solutions · Real Humans · Real Systems · Real Revenue
+
+</footer>
+
+
+
 <a class="pj-orb" href="tel:17735441231">PJ</a>
 
 
 
 <script>
 
-  const timestamp = new Date().toLocaleString();
+  const ts = new Date().toLocaleString();
 
-  document.getElementById("timestamp").textContent = "Last Updated: " + timestamp;
+  document.getElementById("timestamp").textContent = "Last Updated: " + ts;
 
 </script>
 
@@ -232,7 +322,9 @@ fetch("/page-list.json")
 
     pages.forEach(file => {
 
-      if(file.includes("index")) return;
+      if (!file.endsWith(".html")) return;
+
+      if (file.toLowerCase().includes("index")) return;
 
 
 
@@ -272,13 +364,15 @@ fetch("/page-list.json")
 
 
 
-    stats.textContent = pages.length + " Live Pages Auto-Indexed";
+    stats.textContent = pages.length + " Live Pages Indexed";
 
   })
 
   .catch(() => {
 
-    document.getElementById("stats").textContent = "page-list.json not found yet";
+    document.getElementById("stats").textContent =
+
+      "Waiting for page-list.json (run terminal generator)";
 
   });
 
