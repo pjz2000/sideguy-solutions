@@ -1,386 +1,205 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-  <meta charset="UTF-8" />
-
-  <title>SideGuy Solutions · Live Service Index</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
-
-  <style>
-
-    :root {
-
-      --ocean1: #eaf7ff;
-
-      --ocean2: #cfeeff;
-
-      --card: rgba(255,255,255,.88);
-
-      --ink: #05324b;
-
-      --glow: #00ff9c;
-
-    }
-
-
-
-    * { box-sizing: border-box; }
-
-
-
-    body {
-
-      margin: 0;
-
-      font-family: -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif;
-
-      background: linear-gradient(180deg,var(--ocean1),var(--ocean2));
-
-      color: var(--ink);
-
-      min-height: 100vh;
-
-    }
-
-
-
-    header {
-
-      text-align: center;
-
-      padding: 42px 20px 22px;
-
-    }
-
-
-
-    h1 {
-
-      margin: 0;
-
-      font-size: 36px;
-
-      letter-spacing: -0.5px;
-
-    }
-
-
-
-    .sub {
-
-      margin-top: 8px;
-
-      font-size: 14px;
-
-      opacity: .8;
-
-      font-weight: 500;
-
-    }
-
-
-
-    #stats {
-
-      margin-top: 10px;
-
-      font-size: 15px;
-
-      font-weight: 700;
-
-      color: #007a52;
-
-    }
-
-
-
-    #grid {
-
-      display: grid;
-
-      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-
-      gap: 18px;
-
-      padding: 36px;
-
-      max-width: 1400px;
-
-      margin: 0 auto;
-
-    }
-
-
-
-    .card {
-
-      background: var(--card);
-
-      border-radius: 18px;
-
-      padding: 18px 16px 20px;
-
-      box-shadow: 0 12px 28px rgba(0,0,0,.08);
-
-      transition: transform .18s ease, box-shadow .18s ease;
-
-      position: relative;
-
-      overflow: hidden;
-
-    }
-
-
-
-    .card::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background: radial-gradient(circle at 20% 20%, rgba(0,255,156,.12), transparent 60%);
-
-      opacity: 0;
-
-      transition: opacity .2s ease;
-
-    }
-
-
-
-    .card:hover {
-
-      transform: translateY(-6px) scale(1.01);
-
-      box-shadow: 0 18px 44px rgba(0,0,0,.14);
-
-    }
-
-
-
-    .card:hover::after {
-
-      opacity: 1;
-
-    }
-
-
-
-    .card a {
-
-      text-decoration: none;
-
-      color: var(--ink);
-
-      font-weight: 700;
-
-      font-size: 15px;
-
-      line-height: 1.35;
-
-      display: block;
-
-    }
-
-
-
-    .pj-orb {
-
-      position: fixed;
-
-      right: 20px;
-
-      bottom: 20px;
-
-      background: radial-gradient(circle at 28% 28%,#4dffb3,#00c853);
-
-      color: #002b18;
-
-      width: 66px;
-
-      height: 66px;
-
-      border-radius: 50%;
-
-      font-weight: 900;
-
-      letter-spacing: .5px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      box-shadow: 0 0 26px rgba(0,255,140,.75);
-
-      animation: pulse 2.2s infinite;
-
-      cursor: pointer;
-
-      text-decoration: none;
-
-      z-index: 999;
-
-    }
-
-
-
-    @keyframes pulse {
-
-      0% { box-shadow: 0 0 18px rgba(0,255,140,.55); }
-
-      50% { box-shadow: 0 0 38px rgba(0,255,190,.95); }
-
-      100% { box-shadow: 0 0 18px rgba(0,255,140,.55); }
-
-    }
-
-
-
-    footer {
-
-      text-align: center;
-
-      padding: 30px 20px 46px;
-
-      font-size: 12px;
-
-      opacity: .7;
-
-    }
-
-  </style>
-
-</head>
-
-
-
-<body>
-
-
-
-<header>
-
-  <h1>SideGuy Solutions · Live Service Index</h1>
-
-  <div class="sub" id="timestamp"></div>
-
-  <div id="stats">Loading pages…</div>
-
-</header>
-
-
-
-<section id="grid"></section>
-
-
-
-<footer>
-
-  SideGuy Solutions · Real Humans · Real Systems · Real Revenue
-
-</footer>
-
-
-
-<a class="pj-orb" href="tel:17735441231">PJ</a>
-
-
-
-<script>
-
-  const ts = new Date().toLocaleString();
-
-  document.getElementById("timestamp").textContent = "Last Updated: " + ts;
-
-</script>
-
-
-
-<script>
-
-fetch("/page-list.json")
-
-  .then(res => res.json())
-
-  .then(pages => {
-
-    const grid = document.getElementById("grid");
-
-    const stats = document.getElementById("stats");
-
-
-
-    pages.forEach(file => {
-
-      if (!file.endsWith(".html")) return;
-
-      if (file.toLowerCase().includes("index")) return;
-
-
-
-      const card = document.createElement("div");
-
-      card.className = "card";
-
-
-
-      const link = document.createElement("a");
-
-      link.href = "/" + file;
-
-      link.target = "_self";
-
-
-
-      const label = file
-
-        .replace(".html","")
-
-        .replaceAll("-", " ")
-
-        .replace(/\b\w/g, l => l.toUpperCase());
-
-
-
-      link.textContent = label;
-
-
-
-      card.appendChild(link);
-
-      grid.appendChild(card);
-
-    });
-
-
-
-    stats.textContent = pages.length + " Live Pages Indexed";
-
-  })
-
-  .catch(() => {
-
-    document.getElementById("stats").textContent =
-
-      "Waiting for page-list.json (run terminal generator)";
-
-  });
-
-</script>
-
-
-
-</body>
-
-</html>
-
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ cp index.html index-backup.html
+ 
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ node generate-index.js
+node:internal/modules/cjs/loader:1386
+  throw err;
+  ^
+ 
+Error: Cannot find module '/workspaces/sideguy-solutions/generate-index.js'
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+    at Function._load (node:internal/modules/cjs/loader:1192:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+ 
+Node.js v22.21.1
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ pwd
+/workspaces/sideguy-solutions
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ pwd
+/workspaces/sideguy-solutions
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ ls
+404.html                                          encinitas-payment-processing.html                     problems.json
+'<!DOCTYPE html>.html'                             energy-utility-payments-san-diego.html                professional-services-payment-processing.html
+Best-Payment-Processing-San-Diego.html.html       finance-payment-processing.html                       professional-services-payments-san-diego.html
+CNAME                                             fitness-coach-payments-san-diego.html                 property-management-payments-san-diego.html
+Cardiff-Payment-Processing.html                   fitness-doctor-payment-processing-san-diego.html      restaurant-instant-payouts-san-diego.html
+Carlsbad-Contractor-Payments.html                 fitness-payment-processing-san-diego.html             restaurant-payment-processing-san-diego.html
+Carlsbad-Lower-Credit-Card-Fees.html              fleet-payment-processing.html                         restaurant-payments-san-diego.html
+Crypto-Payment-Processing.html                    foundation-repair-san-diego.html                      restaurant-processing-san-diego.html
+Del-Mar-Lower-Credit-Card-Fees.html               free-payment-processing-setup.html                    retail-payment-processing-san-diego.html
+Encinitas-Contractor-Payments.html                garage-door-repair-san-diego.html                     robots.txt
+Energy-Payments-San-Diego.html                    generate-index.js                                     roofing-contractor-payments-san-diego.html
+Free-Payment-Processing-Setup.html                get-paid-second-job-done.html                         roofing-repair-san-diego.html
+La-Jolla-Solana-Payments.html                     get-paid-today-san-diego.html                         router.js
+Mobile-Payment-Processing.html                    get-paid-today.html                                   salon-payment-processing-san-diego.html
+North-County-Instant-Settlements.html             gutter-cleaning-san-diego.html                        same-day-pay-san-diego.html
+North-County-Payment-Processing.html              gym-fitness-payment-processing-san-diego.html         san-diego-ai-development.html
+North-County-Solana-Payments.html                 gym-payment-processing-san-diego.html                 san-diego-business-automation.html
+Rancho-Santa-Fe-Payment-Processing.html           gym-payments-san-diego.html                           san-diego-business-tools.html
+Same-Day-Payment-Processing.html                  handyman-payment-processing-san-diego.html            san-diego-cryptopayments.html
+'San Diego Website Design.html'                    handyman-payment-solutions-san-diego.html             san-diego-energy-payments.html
+San-Diego-Contractor-Payments.html                handyman-payments-san-diego.html                      san-diego-mobile-business-payments.html
+San-Diego-Field-Service-Payments.html             home-cleaning-service-payments-san-diego.html         san-diego-operator-network.html
+San-Diego-Instant-Settlements.html                home-service-payment-processing-san-diego.html.html   san-diego-payment-gateway.html
+San-Diego-Lower-Credit-Card-Fees.html             horse-payments-san-diego.html                         san-diego-payment-optimization.html
+San-Diego-Payment-Processing.html                 hvac-contractor-payment-processing-san-diego.html     san-diego-payment-processing.html
+San-Diego-SaaS-Development.html                   hvac-installation-san-diego.html                      san-diego-savings-directory
+San-Diego-Same-Day-Pay.html                       hvac-payments-san-diego.html                          san-diego-solana-payments-near-me.html
+San-Diego-Service-Business-Payments.html          index-backup.html                                     san-diego-startup-development.html
+San-Diego-Solana-Payments.html                    index-test.html                                       save-on-paypay-fees-san-diego.html
+Solana-Beach-Crypto-Payments.html                 index.html                                            save-on-stripe-fees-san-diego.html
+Solana-Beach-Payment-Processing.html              instant-payment-processing.html                       seo
+Solana-Business-Tools-San-Diego.html              instant-payouts-contractors-san-diego.html            seo-engine.js
+Switch-From-Stripe.html                           instant-payouts-san-diego.html                        seo-manifest.json
+Web-Development-San-Diego.html                    instant-settlement-payments-san-diego.html            seo-master-template
+ac-repair-san-diego.html                          instant-settlement-payments.html                      seo-page-template.html
+accept-crypto-get-cash-san-diego.html             instant-settlement-san-diego.html                     seo-pages
+accountant-services-san-diego.html                insulation-installation-san-diego.html               'seo-pages-San Diego Dashboard Development.html'
+ai-automation-san-diego.html                      junk-removal-san-diego.html                           seo-pages-app-development-san-diego.html
+ai-business-tools-san-diego.html                  kitchen-remodel-san-diego.html                        seo-template
+ai-development-san-diego.html                     la-jolla-payment-processing.html                      seo-template.html
+ai-payment-automation-san-diego.html              landscape-design-san-diego.html                       seo.html
+ai-small-business-automation-san-diego.html       landscape-payment-processing.html                     sideguy-footer.html
+air-duct-cleaning-san-diego.html                  landscaper-payments-san-diego.html                    sideguy-header.html
+app-development-san-diego.html                    landscaping-business-payments-san-diego.html          sideguy-include.js
+appliance-repair-san-diego.html                   lawn-care-san-diego.html                              sideguy-orb.html
+artificial-grass-installation-san-diego.html      links.txt                                             sideguy-placeholder.html
+artificial-intelligence-san-diego.html            local-business-payments-san-diego.html                sideguy.css
+auto-builder.cjs                                  local-business-savings-san-diego.html                 sitemap-index.xml
+auto-repair-payment-processing-san-diego.html     local-operator-savings-san-diego.html                 sitemap.xml
+auto-seo.js                                       locksmith-san-diego.html                              software-development-san-diego.html
+barbershop-appointment-payments-san-diego.html    lower-credit-card-fees-san-diego.html                 solana-beach-ai-automation.html
+barbershop-payments-san-diego.html                medical-clinic-payment-solutions-san-diego.html       solana-business-tools-san-diego.html
+best-ai-tools-for-small-business-san-diego.html   medical-payment-processing-san-diego.html             solana-development-san-diego.html
+best-stripe-alternative-san-diego.html            merchant-services-san-diego.html                      solana-payment-processing.html
+blockchain-development-san-diego.html             mobile-app-development-san-diego.html                 solana-payments-north-county.html
+bookkeeping-help-san-diego.html                   mobile-detailing-payments-san-diego.html              solar-battery-installation-san-diego.html
+business-automation-san-diego.html                mobile-operator-payments-san-diego.html               solar-panel-installation-san-diego.html
+business-savings-san-diego.html                   mobile-operators-san-diego.html                      'stripe fees calculator'
+carbon-credit-automation.html                     mobile-payments-san-diego.html                        stripe-alternatives-san-diego.html
+carbon-credits-climate-software.html              mobile-payments-san-diego.html.html                   stripe-fees-calculator.html
+card-not-present-processing.html                  mold-remediation-san-diego.html                       stucco-repair-san-diego.html
+carlsbad-payment-processing.html                  move-out-cleaning-san-diego.html                      styles.css
+cheapest-payment-processing.html                  moving-company-payment-solutions-san-diego.html       subscription-billing-san-diego.html
+chiropractor-payment-processing-san-diego.html    north-county-operator-tools.html                      subscription-payments-san-diego.html
+cname                                             north-county-payment-processing.html                  subscription-services-payments-san-diego.html
+coastal-business-automation.html                  north-county-payments-san-diego.html                  switch-from-square.html
+command-center-v2.html                            north-county-same-day-pay.html                        temp-move.txt
+'contractor payment-processing-san-diego.html'     north-county-software-consulting.html                 test
+contractor-billing-tools-san-diego.html           north-county-verified-operator.html                   ticketing-event-software-san-diego.html
+contractor-payment-processing-san-diego.html      oceanside-payment-processing.html                     ticketing-software-san-diego.html
+contractor-payments-san-diego.html                oceanside-solana-payments.html                        tickets.html
+credit-card-processing-san-diego.html             page-list.json                                        tile-installation-san-diego.html
+crypto-help-desk-san-dego.html                    page-list.txt                                         tow-truck-service-san-diego.html
+crypto-payments-san-diego.html                    payment-processing-mobile-detailing-san-diego.html    towing-company-payment-processing-san-diego.html
+custom-ai-software-development-san-diego.html     payment-processing-near-me.html                       tree-trimming-san-diego.html
+custom-software-development-san-diego.html        payment-processing-san-diego.html                     update-sitemap.js
+del-mar-payment-processing-san-diego.html         payments.html                                         vinyl-fence-installation-san-diego.html
+deli-payment-processing.html                      personal-trainer-payments-san-diego.html              vinyl-plank-flooring-san-diego.html
+dental-office-payment-processing-san-diego.html   pest-control-payment-processing-san-diego.html        virus-removal-san-diego.html
+drain-cleaning-san-diego.html                     physical-therapy-clinic-payments-san-diego.html       wall-repair-san-diego.html
+ecommerce-payment-processing-san-diego.html       plumbing-services-payment-processing-san-diego.html   water-damage-restoration-san-diego.html
+ecommerce-payment-solutions-san-diego.html        pool-cleaning-san-diego.html                          water-heater-repair-san-diego.html
+ecommerce-payment-upgrades-san-diego.html         pool-service-payment-processing-san-diego.html        web-design-san-diego.html
+ecommerce-payments-san-diego.html                 pos-payment-systems-san-diego.html                    website-maintenance-san-diego.html
+electrician-payment-processing-san-diego.html     pressure-washing-san-diego.html                       wifi-installation-san-diego.html
+emergency-plumber-san-diego.html                  problem-template.html                                 window-cleaning-san-diego.html
+encinitas-instant-payments.html                   problems                                              window-installation-san-diego.html
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ ls
+404.html                                          encinitas-payment-processing.html                     problems.json
+'<!DOCTYPE html>.html'                             energy-utility-payments-san-diego.html                professional-services-payment-processing.html
+Best-Payment-Processing-San-Diego.html.html       finance-payment-processing.html                       professional-services-payments-san-diego.html
+CNAME                                             fitness-coach-payments-san-diego.html                 property-management-payments-san-diego.html
+Cardiff-Payment-Processing.html                   fitness-doctor-payment-processing-san-diego.html      restaurant-instant-payouts-san-diego.html
+Carlsbad-Contractor-Payments.html                 fitness-payment-processing-san-diego.html             restaurant-payment-processing-san-diego.html
+Carlsbad-Lower-Credit-Card-Fees.html              fleet-payment-processing.html                         restaurant-payments-san-diego.html
+Crypto-Payment-Processing.html                    foundation-repair-san-diego.html                      restaurant-processing-san-diego.html
+Del-Mar-Lower-Credit-Card-Fees.html               free-payment-processing-setup.html                    retail-payment-processing-san-diego.html
+Encinitas-Contractor-Payments.html                garage-door-repair-san-diego.html                     robots.txt
+Energy-Payments-San-Diego.html                    generate-index.js                                     roofing-contractor-payments-san-diego.html
+Free-Payment-Processing-Setup.html                get-paid-second-job-done.html                         roofing-repair-san-diego.html
+La-Jolla-Solana-Payments.html                     get-paid-today-san-diego.html                         router.js
+Mobile-Payment-Processing.html                    get-paid-today.html                                   salon-payment-processing-san-diego.html
+North-County-Instant-Settlements.html             gutter-cleaning-san-diego.html                        same-day-pay-san-diego.html
+North-County-Payment-Processing.html              gym-fitness-payment-processing-san-diego.html         san-diego-ai-development.html
+North-County-Solana-Payments.html                 gym-payment-processing-san-diego.html                 san-diego-business-automation.html
+Rancho-Santa-Fe-Payment-Processing.html           gym-payments-san-diego.html                           san-diego-business-tools.html
+Same-Day-Payment-Processing.html                  handyman-payment-processing-san-diego.html            san-diego-cryptopayments.html
+'San Diego Website Design.html'                    handyman-payment-solutions-san-diego.html             san-diego-energy-payments.html
+San-Diego-Contractor-Payments.html                handyman-payments-san-diego.html                      san-diego-mobile-business-payments.html
+San-Diego-Field-Service-Payments.html             home-cleaning-service-payments-san-diego.html         san-diego-operator-network.html
+San-Diego-Instant-Settlements.html                home-service-payment-processing-san-diego.html.html   san-diego-payment-gateway.html
+San-Diego-Lower-Credit-Card-Fees.html             horse-payments-san-diego.html                         san-diego-payment-optimization.html
+San-Diego-Payment-Processing.html                 hvac-contractor-payment-processing-san-diego.html     san-diego-payment-processing.html
+San-Diego-SaaS-Development.html                   hvac-installation-san-diego.html                      san-diego-savings-directory
+San-Diego-Same-Day-Pay.html                       hvac-payments-san-diego.html                          san-diego-solana-payments-near-me.html
+San-Diego-Service-Business-Payments.html          index-backup.html                                     san-diego-startup-development.html
+San-Diego-Solana-Payments.html                    index-test.html                                       save-on-paypay-fees-san-diego.html
+Solana-Beach-Crypto-Payments.html                 index.html                                            save-on-stripe-fees-san-diego.html
+Solana-Beach-Payment-Processing.html              instant-payment-processing.html                       seo
+Solana-Business-Tools-San-Diego.html              instant-payouts-contractors-san-diego.html            seo-engine.js
+Switch-From-Stripe.html                           instant-payouts-san-diego.html                        seo-manifest.json
+Web-Development-San-Diego.html                    instant-settlement-payments-san-diego.html            seo-master-template
+ac-repair-san-diego.html                          instant-settlement-payments.html                      seo-page-template.html
+accept-crypto-get-cash-san-diego.html             instant-settlement-san-diego.html                     seo-pages
+accountant-services-san-diego.html                insulation-installation-san-diego.html               'seo-pages-San Diego Dashboard Development.html'
+ai-automation-san-diego.html                      junk-removal-san-diego.html                           seo-pages-app-development-san-diego.html
+ai-business-tools-san-diego.html                  kitchen-remodel-san-diego.html                        seo-template
+ai-development-san-diego.html                     la-jolla-payment-processing.html                      seo-template.html
+ai-payment-automation-san-diego.html              landscape-design-san-diego.html                       seo.html
+ai-small-business-automation-san-diego.html       landscape-payment-processing.html                     sideguy-footer.html
+air-duct-cleaning-san-diego.html                  landscaper-payments-san-diego.html                    sideguy-header.html
+app-development-san-diego.html                    landscaping-business-payments-san-diego.html          sideguy-include.js
+appliance-repair-san-diego.html                   lawn-care-san-diego.html                              sideguy-orb.html
+artificial-grass-installation-san-diego.html      links.txt                                             sideguy-placeholder.html
+artificial-intelligence-san-diego.html            local-business-payments-san-diego.html                sideguy.css
+auto-builder.cjs                                  local-business-savings-san-diego.html                 sitemap-index.xml
+auto-repair-payment-processing-san-diego.html     local-operator-savings-san-diego.html                 sitemap.xml
+auto-seo.js                                       locksmith-san-diego.html                              software-development-san-diego.html
+barbershop-appointment-payments-san-diego.html    lower-credit-card-fees-san-diego.html                 solana-beach-ai-automation.html
+barbershop-payments-san-diego.html                medical-clinic-payment-solutions-san-diego.html       solana-business-tools-san-diego.html
+best-ai-tools-for-small-business-san-diego.html   medical-payment-processing-san-diego.html             solana-development-san-diego.html
+best-stripe-alternative-san-diego.html            merchant-services-san-diego.html                      solana-payment-processing.html
+blockchain-development-san-diego.html             mobile-app-development-san-diego.html                 solana-payments-north-county.html
+bookkeeping-help-san-diego.html                   mobile-detailing-payments-san-diego.html              solar-battery-installation-san-diego.html
+business-automation-san-diego.html                mobile-operator-payments-san-diego.html               solar-panel-installation-san-diego.html
+business-savings-san-diego.html                   mobile-operators-san-diego.html                      'stripe fees calculator'
+carbon-credit-automation.html                     mobile-payments-san-diego.html                        stripe-alternatives-san-diego.html
+carbon-credits-climate-software.html              mobile-payments-san-diego.html.html                   stripe-fees-calculator.html
+card-not-present-processing.html                  mold-remediation-san-diego.html                       stucco-repair-san-diego.html
+carlsbad-payment-processing.html                  move-out-cleaning-san-diego.html                      styles.css
+cheapest-payment-processing.html                  moving-company-payment-solutions-san-diego.html       subscription-billing-san-diego.html
+chiropractor-payment-processing-san-diego.html    north-county-operator-tools.html                      subscription-payments-san-diego.html
+cname                                             north-county-payment-processing.html                  subscription-services-payments-san-diego.html
+coastal-business-automation.html                  north-county-payments-san-diego.html                  switch-from-square.html
+command-center-v2.html                            north-county-same-day-pay.html                        temp-move.txt
+'contractor payment-processing-san-diego.html'     north-county-software-consulting.html                 test
+contractor-billing-tools-san-diego.html           north-county-verified-operator.html                   ticketing-event-software-san-diego.html
+contractor-payment-processing-san-diego.html      oceanside-payment-processing.html                     ticketing-software-san-diego.html
+contractor-payments-san-diego.html                oceanside-solana-payments.html                        tickets.html
+credit-card-processing-san-diego.html             page-list.json                                        tile-installation-san-diego.html
+crypto-help-desk-san-dego.html                    page-list.txt                                         tow-truck-service-san-diego.html
+crypto-payments-san-diego.html                    payment-processing-mobile-detailing-san-diego.html    towing-company-payment-processing-san-diego.html
+custom-ai-software-development-san-diego.html     payment-processing-near-me.html                       tree-trimming-san-diego.html
+custom-software-development-san-diego.html        payment-processing-san-diego.html                     update-sitemap.js
+del-mar-payment-processing-san-diego.html         payments.html                                         vinyl-fence-installation-san-diego.html
+deli-payment-processing.html                      personal-trainer-payments-san-diego.html              vinyl-plank-flooring-san-diego.html
+dental-office-payment-processing-san-diego.html   pest-control-payment-processing-san-diego.html        virus-removal-san-diego.html
+drain-cleaning-san-diego.html                     physical-therapy-clinic-payments-san-diego.html       wall-repair-san-diego.html
+ecommerce-payment-processing-san-diego.html       plumbing-services-payment-processing-san-diego.html   water-damage-restoration-san-diego.html
+ecommerce-payment-solutions-san-diego.html        pool-cleaning-san-diego.html                          water-heater-repair-san-diego.html
+ecommerce-payment-upgrades-san-diego.html         pool-service-payment-processing-san-diego.html        web-design-san-diego.html
+ecommerce-payments-san-diego.html                 pos-payment-systems-san-diego.html                    website-maintenance-san-diego.html
+electrician-payment-processing-san-diego.html     pressure-washing-san-diego.html                       wifi-installation-san-diego.html
+emergency-plumber-san-diego.html                  problem-template.html                                 window-cleaning-san-diego.html
+encinitas-instant-payments.html                   problems                                              window-installation-san-diego.html
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $ index.html
+bash: index.html: command not found
+@pjz2000 ➜ /workspaces/sideguy-solutions (main) $
+ 
