@@ -1,207 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SideGuy Solutions — Live Index</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SideGuy Solutions Live Index — Payments, SEO, Money Index, Automation, Operator Network">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>SideGuy Solutions — Live Money Index</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body {
-  margin:0;
-  font-family:Inter,system-ui;
-  background:radial-gradient(circle at top, #0ee3ff33, linear-gradient(180deg, #e9f8ff 0%, #bfe9ff 40%, #7dd3fc 100%);
-  color:#e5f7ff;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
+      background: linear-gradient(180deg, #e9f8ff 0%, #bfe9ff 40%, #7dd3fc 100%);
+      color: #0f172a;
+      min-height: 100vh;
+    }
 
-header {
-  padding:40px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#021024,#020617);
-  border-bottom:1px solid #0ee3ff33;
-}
+    .orbs::before,
+    .orbs::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.55;
+      z-index: 0;
+    }
 
-h1 {
-  font-size:48px;
-  margin:0;
-  background:linear-gradient(90deg,#00f0ff,#7cffd8);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+    .orbs::before {
+      top: -120px;
+      left: -120px;
+      background: radial-gradient(circle, #38bdf8, #0ea5e9);
+      animation: float1 16s infinite alternate;
+    }
 
-.tagline {
-  opacity:.75;
-  margin-top:10px;
-}
+    .orbs::after {
+      bottom: -120px;
+      right: -120px;
+      background: radial-gradient(circle, #67e8f9, #22d3ee);
+      animation: float2 18s infinite alternate;
+    }
 
-.glass {
-  background:rgba(255,255,255,.05);
-  backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:18px;
-  box-shadow:0 10px 40px rgba(0,0,0,.6);
-}
+    @keyframes float1 { from { transform: translate(0,0);} to {transform: translate(80px,40px);} }
+    @keyframes float2 { from { transform: translate(0,0);} to {transform: translate(-80px,-40px);} }
 
-.section {
-  max-width:1200px;
-  margin:40px auto;
-  padding:30px;
-}
+    .container {
+      position: relative;
+      z-index: 5;
+      max-width: 1100px;
+      margin: auto;
+      padding: 48px 20px 120px;
+    }
 
-.money-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
+    .header {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.card {
-  padding:20px;
-  border-radius:16px;
-  background:linear-gradient(145deg,#061c2a,#020617);
-  border:1px solid #0ee3ff22;
-  transition:.25s;
-  cursor:pointer;
-}
+    .subhead {
+      margin-top: 6px;
+      opacity: 0.85;
+      font-size: 15px;
+    }
 
-.card:hover {
-  transform:translateY(-6px);
-  box-shadow:0 0 30px #00f0ff55;
-}
+    .statusbar {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-.card h3 {
-  margin:0 0 6px 0;
-  font-size:18px;
-}
+    .pill {
+      background: rgba(255,255,255,0.9);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 8px 26px rgba(14,165,233,0.25);
+    }
 
-.card p {
-  opacity:.7;
-  font-size:14px;
-}
+    .grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
 
-.page-count {
-  text-align:center;
-  margin-top:10px;
-  opacity:.7;
-}
+    .card {
+      background: rgba(255,255,255,0.88);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 14px 40px rgba(14,165,233,0.25);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
 
-#pageGrid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:12px;
-  margin-top:20px;
-}
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 60px rgba(14,165,233,0.35);
+    }
 
-.page-link {
-  text-decoration:none;
-  color:#c2f4ff;
-  background:rgba(255,255,255,.04);
-  padding:12px 14px;
-  border-radius:12px;
-  border:1px solid #0ee3ff22;
-  font-size:14px;
-}
+    .card-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
 
-.page-link:hover {
-  background:#00f0ff22;
-}
+    .card-sub {
+      font-size: 13px;
+      opacity: 0.75;
+      margin-bottom: 12px;
+    }
 
-#pj-orb {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#7cffd8,#00aaff);
-  box-shadow:0 0 30px #00f0ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#001420;
-  font-weight:800;
-  cursor:pointer;
-}
+    .card a {
+      display: inline-block;
+      margin-top: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #0284c7;
+    }
 
-#pj-orb:after {
-  content:'';
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  box-shadow:0 0 20px #00f0ff;
-  animation:pulse 2s infinite;
-}
+    .footer {
+      margin-top: 80px;
+      opacity: 0.7;
+      font-size: 12px;
+    }
 
-@keyframes pulse {
-  0% {opacity:.3;}
-  50% {opacity:1;}
-  100% {opacity:.3;}
-}
+    .textpj {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: radial-gradient(circle at 25% 25%, #22d3ee, #0ea5e9);
+      color: white;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 14px 20px;
+      box-shadow: 0 0 0 0 rgba(14,165,233,0.7);
+      animation: pulse 2.5s infinite;
+      z-index: 999;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
-footer {
-  text-align:center;
-  opacity:.5;
-  margin:60px 0 40px;
-}
-</style>
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(14,165,233,0.7); }
+      70% { box-shadow: 0 0 0 22px rgba(14,165,233,0); }
+      100% { box-shadow: 0 0 0 0 rgba(14,165,233,0); }
+    }
 
+  </style>
 </head>
+
 <body>
+<div class="orbs"></div>
 
-<header>
-  <h1>SideGuy Solutions</h1>
-  <div class="tagline">Live Payment Systems • SEO • Money Intelligence</div>
-</header>
+<div class="container">
 
-<div class="section glass">
-  <h2>Money Index & Betting Lab</h2>
-  <div class="money-grid">
-    <div class="card"><h3>✅ Timestamped Betting Slips</h3><p>Live proof & logging</p></div>
-    <div class="card"><h3>✅ Hedge & Arbitrage Tracking</h3><p>Risk-neutral profit layer</p></div>
-    <div class="card"><h3>✅ SEO → Traffic → Capital Flywheel</h3><p>Traffic monetization loop</p></div>
-    <div class="card"><h3>✅ Promotional Money Optimization</h3><p>Underdog / DFS funnels</p></div>
+  <div class="header">SideGuy Solutions</div>
+  <div class="subhead">Live Payments · SEO · Money Intelligence</div>
+
+  <div class="statusbar">
+    <div class="pill">Live Build</div>
+    <div class="pill">Page Count: <span id="pageCount">Loading…</span></div>
+    <div class="pill">Updated: <span id="timestamp"></span></div>
+    <div class="pill"><a href="/sitemap.xml">Sitemap</a></div>
   </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-title">Money Index & Betting Lab</div>
+      <div class="card-sub">Timestamped performance & hedge tracking</div>
+      <a href="/money-index.html">Open</a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Promotional Money Optimization</div>
+      <div class="card-sub">Underdog / DFS funnels</div>
+      <a href="#">Explore</a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">SEO → Traffic → Capital</div>
+      <div class="card-sub">Flywheel monetization engine</div>
+      <a href="#">Explore</a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Hedge & Arbitrage Tracking</div>
+      <div class="card-sub">Risk-neutral profit layer</div>
+      <a href="#">Explore</a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Operator Network</div>
+      <div class="card-sub">Verified local operators</div>
+      <a href="#">Explore</a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Solana Instant Payments</div>
+      <div class="card-sub">0.4s settlement rails</div>
+      <a href="#">Explore</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    SideGuy Solutions · Live System Build
+  </div>
+
 </div>
 
-<div class="section glass">
-  <h2>Live Page Index</h2>
-  <div id="pageGrid"></div>
-  <div class="page-count" id="pageCount">Loading page count…</div>
-</div>
-
-<footer>
-  Live Build • Auto-synced with sitemap.xml
-</footer>
-
-<div id="pj-orb" onclick="window.location='sms:17735441231'">PJ</div>
+<a class="textpj" href="sms:17735441231">Text PJ</a>
 
 <script>
-async function loadPages() {
-  const res = await fetch('/sitemap-index.xml');
-  const txt = await res.text();
-  const parser = new DOMParser();
-  const xml = parser.parseFromString(txt,"text/xml");
-  const urls = [...xml.getElementsByTagName("loc")].map(x=>x.textContent);
-  const grid = document.getElementById("pageGrid");
+  document.getElementById("timestamp").innerText = new Date().toLocaleString();
 
-  urls.forEach(url=>{
-    if(!url.includes("index")) {
-      const a = document.createElement("a");
-      a.href = url;
-      a.target = "_blank";
-      a.className = "page-link";
-      a.textContent = url.replace("https://sideguysolutions.com/","").replace(".html","");
-      grid.appendChild(a);
-    }
-  });
-
-  document.getElementById("pageCount").innerText =
-    urls.length + " Live Pages Indexed";
-}
-
-loadPages();
+  fetch("/sitemap.xml")
+    .then(r => r.text())
+    .then(xml => {
+      const count = (xml.match(/<loc>/g) || []).length;
+      document.getElementById("pageCount").innerText = count;
+    })
+    .catch(() => {
+      document.getElementById("pageCount").innerText = "Auto";
+    });
 </script>
 
 </body>
