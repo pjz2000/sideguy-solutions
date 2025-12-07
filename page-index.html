@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <title>SideGuy Solutions · Live Service Index</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+  <style>
+
+    :root {
+
+      --ocean1: #eaf7ff;
+
+      --ocean2: #cfeeff;
+
+      --card: rgba(255,255,255,.88);
+
+      --ink: #05324b;
+
+      --glow: #00ff9c;
+
+    }
+
+
+
+    * { box-sizing: border-box; }
+
+
+
+    body {
+
+      margin: 0;
+
+      font-family: -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif;
+
+      background: linear-gradient(180deg,var(--ocean1),var(--ocean2));
+
+      color: var(--ink);
+
+      min-height: 100vh;
+
+    }
+
+
+
+    header {
+
+      text-align: center;
+
+      padding: 42px 20px 22px;
+
+    }
+
+
+
+    h1 {
+
+      margin: 0;
+
+      font-size: 36px;
+
+      letter-spacing: -0.5px;
+
+    }
+
+
+
+    .sub {
+
+      margin-top: 8px;
+
+      font-size: 14px;
+
+      opacity: .8;
+
+      font-weight: 500;
+
+    }
+
+
+
+    #stats {
+
+      margin-top: 10px;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      color: #007a52;
+
+    }
+
+
+
+    #grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+
+      gap: 18px;
+
+      padding: 36px;
+
+      max-width: 1400px;
+
+      margin: 0 auto;
+
+    }
+
+
+
+    .card {
+
+      background: var(--card);
+
+      border-radius: 18px;
+
+      padding: 18px 16px 20px;
+
+      box-shadow: 0 12px 28px rgba(0,0,0,.08);
+
+      transition: transform .18s ease, box-shadow .18s ease;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .card::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: radial-gradient(circle at 20% 20%, rgba(0,255,156,.12), transparent 60%);
+
+      opacity: 0;
+
+      transition: opacity .2s ease;
+
+    }
+
+
+
+    .card:hover {
+
+      transform: translateY(-6px) scale(1.01);
+
+      box-shadow: 0 18px 44px rgba(0,0,0,.14);
+
+    }
+
+
+
+    .card:hover::after {
+
+      opacity: 1;
+
+    }
+
+
+
+    .card a {
+
+      text-decoration: none;
+
+      color: var(--ink);
+
+      font-weight: 700;
+
+      font-size: 15px;
+
+      line-height: 1.35;
+
+      display: block;
+
+    }
+
+
+
+    .pj-orb {
+
+      position: fixed;
+
+      right: 20px;
+
+      bottom: 20px;
+
+      background: radial-gradient(circle at 28% 28%,#4dffb3,#00c853);
+
+      color: #002b18;
+
+      width: 66px;
+
+      height: 66px;
+
+      border-radius: 50%;
+
+      font-weight: 900;
+
+      letter-spacing: .5px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      box-shadow: 0 0 26px rgba(0,255,140,.75);
+
+      animation: pulse 2.2s infinite;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      z-index: 999;
+
+    }
+
+
+
+    @keyframes pulse {
+
+      0% { box-shadow: 0 0 18px rgba(0,255,140,.55); }
+
+      50% { box-shadow: 0 0 38px rgba(0,255,190,.95); }
+
+      100% { box-shadow: 0 0 18px rgba(0,255,140,.55); }
+
+    }
+
+
+
+    footer {
+
+      text-align: center;
+
+      padding: 30px 20px 46px;
+
+      font-size: 12px;
+
+      opacity: .7;
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+  <h1>SideGuy Solutions · Live Service Index</h1>
+
+  <div class="sub" id="timestamp"></div>
+
+  <div id="stats">Loading pages…</div>
+
+</header>
+
+
+
+<section id="grid"></section>
+
+
+
+<footer>
+
+  SideGuy Solutions · Real Humans · Real Systems · Real Revenue
+
+</footer>
+
+
+
+<a class="pj-orb" href="tel:17735441231">PJ</a>
+
+
+
+<script>
+
+  const ts = new Date().toLocaleString();
+
+  document.getElementById("timestamp").textContent = "Last Updated: " + ts;
+
+</script>
+
+
+
+<script>
+
+fetch("/page-list.json")
+
+  .then(res => res.json())
+
+  .then(pages => {
+
+    const grid = document.getElementById("grid");
+
+    const stats = document.getElementById("stats");
+
+
+
+    pages.forEach(file => {
+
+      if (!file.endsWith(".html")) return;
+
+      if (file.toLowerCase().includes("index")) return;
+
+
+
+      const card = document.createElement("div");
+
+      card.className = "card";
+
+
+
+      const link = document.createElement("a");
+
+      link.href = "/" + file;
+
+      link.target = "_self";
+
+
+
+      const label = file
+
+        .replace(".html","")
+
+        .replaceAll("-", " ")
+
+        .replace(/\b\w/g, l => l.toUpperCase());
+
+
+
+      link.textContent = label;
+
+
+
+      card.appendChild(link);
+
+      grid.appendChild(card);
+
+    });
+
+
+
+    stats.textContent = pages.length + " Live Pages Indexed";
+
+  })
+
+  .catch(() => {
+
+    document.getElementById("stats").textContent =
+
+      "Waiting for page-list.json (run terminal generator)";
+
+  });
+
+</script>
+
+
+
+</body>
+
+</html>
+
