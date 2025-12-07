@@ -1,233 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SideGuy Solutions — Live Money Index</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>SideGuy Solutions · Live Systems Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
-      background: linear-gradient(180deg, #e9f8ff 0%, #bfe9ff 40%, #7dd3fc 100%);
-      color: #0f172a;
-      min-height: 100vh;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+  background: linear-gradient(180deg, #dff6ff 0%, #9dd9ff 50%, #64bfff 100%);
+  color: #022c43;
+}
 
-    .orbs::before,
-    .orbs::after {
-      content: "";
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.55;
-      z-index: 0;
-    }
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 20px 120px;
+}
 
-    .orbs::before {
-      top: -120px;
-      left: -120px;
-      background: radial-gradient(circle, #38bdf8, #0ea5e9);
-      animation: float1 16s infinite alternate;
-    }
+.logo {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
 
-    .orbs::after {
-      bottom: -120px;
-      right: -120px;
-      background: radial-gradient(circle, #67e8f9, #22d3ee);
-      animation: float2 18s infinite alternate;
-    }
+.sub {
+  opacity: 0.8;
+  margin-top: 6px;
+}
 
-    @keyframes float1 { from { transform: translate(0,0);} to {transform: translate(80px,40px);} }
-    @keyframes float2 { from { transform: translate(0,0);} to {transform: translate(-80px,-40px);} }
+.stats {
+  margin-top: 14px;
+  font-size: 14px;
+  opacity: 0.7;
+}
 
-    .container {
-      position: relative;
-      z-index: 5;
-      max-width: 1100px;
-      margin: auto;
-      padding: 48px 20px 120px;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 50px;
+}
 
-    .header {
-      font-size: 44px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(90deg, #0ea5e9, #22d3ee);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.card {
+  background: linear-gradient(180deg, #ffffff 0%, #e9f6ff 100%);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-    .subhead {
-      margin-top: 6px;
-      opacity: 0.85;
-      font-size: 15px;
-    }
+.card h3 {
+  margin: 0 0 8px;
+}
 
-    .statusbar {
-      margin-top: 16px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+.card p {
+  font-size: 14px;
+  opacity: 0.8;
+}
 
-    .pill {
-      background: rgba(255,255,255,0.9);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 13px;
-      box-shadow: 0 8px 26px rgba(14,165,233,0.25);
-    }
+.card a {
+  margin-top: 12px;
+  text-decoration: none;
+  background: linear-gradient(90deg,#00ffa3,#00c6ff);
+  color: #023047;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+}
 
-    .grid {
-      margin-top: 48px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
+.footer {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 13px;
+  opacity: 0.6;
+}
 
-    .card {
-      background: rgba(255,255,255,0.88);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 14px 40px rgba(14,165,233,0.25);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
+.orb {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: radial-gradient(circle at top left,#00ffa3,#00c6ff);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #023047;
+  box-shadow: 0 0 24px rgba(0,198,255,0.9);
+  animation: pulse 2.6s infinite;
+  text-decoration: none;
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 22px 60px rgba(14,165,233,0.35);
-    }
-
-    .card-title {
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .card-sub {
-      font-size: 13px;
-      opacity: 0.75;
-      margin-bottom: 12px;
-    }
-
-    .card a {
-      display: inline-block;
-      margin-top: 6px;
-      font-weight: 700;
-      text-decoration: none;
-      color: #0284c7;
-    }
-
-    .footer {
-      margin-top: 80px;
-      opacity: 0.7;
-      font-size: 12px;
-    }
-
-    .textpj {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      background: radial-gradient(circle at 25% 25%, #22d3ee, #0ea5e9);
-      color: white;
-      font-weight: 800;
-      border-radius: 999px;
-      padding: 14px 20px;
-      box-shadow: 0 0 0 0 rgba(14,165,233,0.7);
-      animation: pulse 2.5s infinite;
-      z-index: 999;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(14,165,233,0.7); }
-      70% { box-shadow: 0 0 0 22px rgba(14,165,233,0); }
-      100% { box-shadow: 0 0 0 0 rgba(14,165,233,0); }
-    }
-
-  </style>
+@keyframes pulse {
+  0% { box-shadow: 0 0 12px rgba(0,198,255,.6); }
+  50% { box-shadow: 0 0 36px rgba(0,255,163,1); }
+  100% { box-shadow: 0 0 12px rgba(0,198,255,.6); }
+}
+</style>
 </head>
 
 <body>
-<div class="orbs"></div>
 
 <div class="container">
 
-  <div class="header">SideGuy Solutions</div>
-  <div class="subhead">Live Payments · SEO · Money Intelligence</div>
+<div class="logo">SideGuy Solutions</div>
+<div class="sub">Live Payment Systems · SEO Intelligence · Money Index</div>
+<div class="stats">
+  Updated: <span id="ts"></span> · 
+  Page Count: <span id="pageCount">Loading…</span>
+</div>
 
-  <div class="statusbar">
-    <div class="pill">Live Build</div>
-    <div class="pill">Page Count: <span id="pageCount">Loading…</span></div>
-    <div class="pill">Updated: <span id="timestamp"></span></div>
-    <div class="pill"><a href="/sitemap.xml">Sitemap</a></div>
+<div class="grid">
+
+  <div class="card">
+    <h3>Money Index & Betting Lab</h3>
+    <p>Timestamped betting slips, signal engine, performance logging.</p>
+    <a href="/money-index.html">Open</a>
   </div>
 
-  <div class="grid">
-
-    <div class="card">
-      <div class="card-title">Money Index & Betting Lab</div>
-      <div class="card-sub">Timestamped performance & hedge tracking</div>
-      <a href="/money-index.html">Open</a>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Promotional Money Optimization</div>
-      <div class="card-sub">Underdog / DFS funnels</div>
-      <a href="#">Explore</a>
-    </div>
-
-    <div class="card">
-      <div class="card-title">SEO → Traffic → Capital</div>
-      <div class="card-sub">Flywheel monetization engine</div>
-      <a href="#">Explore</a>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Hedge & Arbitrage Tracking</div>
-      <div class="card-sub">Risk-neutral profit layer</div>
-      <a href="#">Explore</a>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Operator Network</div>
-      <div class="card-sub">Verified local operators</div>
-      <a href="#">Explore</a>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Solana Instant Payments</div>
-      <div class="card-sub">0.4s settlement rails</div>
-      <a href="#">Explore</a>
-    </div>
-
+  <div class="card">
+    <h3>SEO → Traffic → Capital Flywheel</h3>
+    <p>Traffic monetization loop powering SideGuy.</p>
+    <a href="/seo.html">Explore</a>
   </div>
 
-  <div class="footer">
-    SideGuy Solutions · Live System Build
+  <div class="card">
+    <h3>Hedge & Arbitrage Tracking</h3>
+    <p>Risk-neutral profit layer.</p>
+    <a href="/hedge.html">Explore</a>
+  </div>
+
+  <div class="card">
+    <h3>Promotional Money Optimization</h3>
+    <p>Underdog + DFS funnel systems.</p>
+    <a href="/promos.html">Explore</a>
+  </div>
+
+  <div class="card">
+    <h3>Solana Instant Payments</h3>
+    <p>0.4 second settlement infrastructure.</p>
+    <a href="/payments.html">Explore</a>
+  </div>
+
+  <div class="card">
+    <h3>Operator Network</h3>
+    <p>Verified operators & service mesh.</p>
+    <a href="/operators.html">Explore</a>
+  </div>
+
+  <div class="card">
+    <h3>Live Page Index</h3>
+    <p>Auto-synced with sitemap.xml</p>
+    <a href="/sitemap.xml">Open Sitemap</a>
   </div>
 
 </div>
 
-<a class="textpj" href="sms:17735441231">Text PJ</a>
+<div class="footer">
+  SideGuy Solutions · Live Systems Build · SEO + Money Intelligence
+</div>
+
+</div>
+
+<a class="orb" href="sms:+17735441231">Text<br>PJ</a>
 
 <script>
-  document.getElementById("timestamp").innerText = new Date().toLocaleString();
+document.getElementById("ts").innerText =
+  new Date().toLocaleString();
 
-  fetch("/sitemap.xml")
-    .then(r => r.text())
-    .then(xml => {
-      const count = (xml.match(/<loc>/g) || []).length;
-      document.getElementById("pageCount").innerText = count;
-    })
-    .catch(() => {
-      document.getElementById("pageCount").innerText = "Auto";
-    });
+fetch("/sitemap.xml")
+.then(r => r.text())
+.then(t => {
+  const count = (t.match(/<loc>/g) || []).length;
+  document.getElementById("pageCount").innerText = count;
+})
+.catch(() => {
+  document.getElementById("pageCount").innerText = "Live";
+});
 </script>
 
 </body>
