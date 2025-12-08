@@ -1,300 +1,557 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-  <!-- SideGuy Solutions · Emergency Plumber San Diego · Hybrid AI v2.0 -->
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Emergency Plumber San Diego · 24/7 Rapid Dispatch | SideGuy Solutions</title>
-  <meta name="description"
-        content="Need an emergency plumber in San Diego? SideGuy Solutions routes your case through hybrid AI (ChatGPT, Claude, Gemini & Perplexity) to connect you with fast local help. Text PJ now." />
+  <title>Emergency Plumber San Diego · SideGuy Solutions</title>
+
+  <meta name="description" content="Emergency plumber San Diego. Fast help for burst pipes, leaks, and clogged drains. Text PJ at SideGuy Solutions to get a trusted local plumber on the way." />
 
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    :root{
-      --sky:#e6f7ff;
-      --sea:#bfe9ff;
-      --sea-deep:#8fd0ff;
-      --accent:#008cff;
-      --accent-soft:#35b7ff;
-      --text-main:#033045;
-      --text-soft:#38586b;
-      --card-bg:#ffffff;
-      --card-border:rgba(3,48,69,0.06);
-      --radius-lg:22px;
-      --radius-pill:999px;
-      --live-green:#22c55e;
-    }
-    body{
-      font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
-      background:radial-gradient(circle at 10% 0%,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
-      color:var(--text-main);
-      -webkit-font-smoothing:antialiased;
-    }
-    .page{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter:blur(14px);
-      background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
-      border-bottom:1px solid rgba(3,48,69,.05);
-    }
-    .nav{
-      max-width:1120px;
-      margin:0 auto;
-      padding:12px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .nav-left{display:flex;align-items:center;gap:10px;}
-    .nav-orb{
-      width:26px;height:26px;border-radius:50%;
-      background:radial-gradient(circle at 30% 0%,#ffffff,#9be7ff,#3fa9ff);
-      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.3);
-    }
-    .nav-title{
-      font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-    }
-    .nav-sub{
-      font-size:11px;color:var(--text-soft);
-    }
-    .nav-cta{
-      display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-soft);
-    }
-    .pill-link{
-      text-decoration:none;border-radius:var(--radius-pill);
-      font-size:12px;font-weight:600;padding:7px 14px;
-      background:linear-gradient(135deg,#00b894,#00c2ff);
-      color:#fff;box-shadow:0 10px 24px rgba(0,140,255,.3);
-      display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
-    }
-    main{
-      flex:1;max-width:1120px;margin:0 auto;padding:26px 20px 40px;
-    }
-    .eyebrow{
-      font-size:11px;text-transform:uppercase;letter-spacing:.16em;
-      color:rgba(3,48,69,.7);margin-bottom:8px;
-    }
-    h1{
-      font-size:30px;line-height:1.15;letter-spacing:-.02em;margin-bottom:10px;
-    }
-    .lead{
-      font-size:14px;line-height:1.6;color:var(--text-soft);
-      max-width:680px;margin-bottom:18px;
-    }
-    .pill-row{
-      display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;font-size:11px;
-    }
-    .pill{
-      padding:5px 10px;border-radius:var(--radius-pill);
-      background:rgba(255,255,255,.95);
-      border:1px solid rgba(3,48,69,.08);color:var(--text-soft);
-    }
-    .btn-row{
-      display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;
-    }
-    .btn-secondary{
-      text-decoration:none;padding:9px 14px;border-radius:var(--radius-pill);
-      border:1px solid rgba(3,48,69,.08);background:rgba(255,255,255,.9);
-      font-size:12px;color:var(--text-soft);display:inline-flex;align-items:center;gap:6px;
-    }
-    .grid{
-      display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.3fr);
-      gap:18px;margin-bottom:26px;
-    }
-    @media (max-width:860px){
-      .grid{grid-template-columns:minmax(0,1fr);}
-    }
-    .card{
-      background:rgba(255,255,255,.97);
-      border-radius:var(--radius-lg);
-      border:1px solid var(--card-border);
-      box-shadow:0 12px 30px rgba(3,48,69,.06);
-      padding:16px 18px 18px;
-      display:flex;flex-direction:column;gap:8px;
-    }
-    .card-label{
-      font-size:11px;text-transform:uppercase;
-      letter-spacing:.14em;color:rgba(3,48,69,.6);
-    }
-    .card-title{
-      font-size:16px;font-weight:600;
-    }
-    .card-body{
-      font-size:13px;line-height:1.5;color:var(--text-soft);
-    }
-    ul.list{
-      padding-left:16px;font-size:13px;color:var(--text-soft);
-    }
-    ul.list li{margin-bottom:6px;}
-    .subgrid{
-      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
-    }
-    @media (max-width:700px){
-      .subgrid{grid-template-columns:minmax(0,1fr);}
-      .btn-row{flex-direction:column;}
-    }
-    footer{
-      border-top:1px solid rgba(3,48,69,.06);
-      padding:18px 20px 26px;font-size:11px;
-      color:var(--text-soft);text-align:center;
-    }
-    .back-link{
-      text-decoration:none;color:var(--accent);font-weight:500;
+
+    :root {
+
+      --bg: #f4fbff;
+
+      --card: #ffffff;
+
+      --accent: #0ab2a6;
+
+      --accent-soft: rgba(10,178,166,0.18);
+
+      --text-main: #02233f;
+
+      --text-soft: #46586a;
+
+      --border-soft: #d4e4f0;
+
     }
 
-    /* ✅ LIVE GREEN TEXT PJ ORB */
-    #text-pj-orb{
-      position:fixed;
-      bottom:26px;right:26px;
-      width:78px;height:78px;border-radius:50%;
-      background:radial-gradient(circle at 30% 30%, #ecfff5, #34d399, #16a34a);
-      box-shadow:
-        0 0 0 0 rgba(34,197,94,0.7),
-        0 14px 34px rgba(0,0,0,0.28);
-      display:flex;align-items:center;justify-content:center;
-      z-index:9999;
-      animation:pjPulse 2.2s infinite, pjFloat 5s ease-in-out infinite;
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+      background: radial-gradient(circle at top left,#e4f4ff 0,#f4fbff 40%,#f8fcff 100%);
+
+      color: var(--text-main);
+
     }
-    #text-pj-orb a{
-      text-decoration:none;font-size:13px;font-weight:800;
-      color:#033045;text-align:center;line-height:1.05;
+
+    main {
+
+      max-width: 960px;
+
+      margin: 0 auto;
+
+      padding: 32px 16px 80px;
+
     }
-    @keyframes pjPulse{
-      0%{box-shadow:0 0 0 0 rgba(34,197,94,.55);}
-      70%{box-shadow:0 0 0 18px rgba(34,197,94,0);}
-      100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
+
+    .crumbs {
+
+      font-size: 13px;
+
+      color: var(--text-soft);
+
+      margin-bottom: 8px;
+
     }
-    @keyframes pjFloat{
-      0%{transform:translateY(0);}
-      50%{transform:translateY(-6px);}
-      100%{transform:translateY(0);}
+
+    .hero {
+
+      background: var(--card);
+
+      border-radius: 18px;
+
+      border: 1px solid var(--border-soft);
+
+      padding: 24px 22px 20px;
+
+      box-shadow: 0 14px 40px rgba(9,41,77,0.08);
+
+      margin-bottom: 20px;
+
+    }
+
+    .hero-tag {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 4px 10px;
+
+      border-radius: 999px;
+
+      background: var(--accent-soft);
+
+      color: var(--accent);
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      margin-bottom: 10px;
+
+    }
+
+    .hero h1 {
+
+      font-size: 26px;
+
+      margin: 0 0 6px;
+
+    }
+
+    .hero p {
+
+      margin: 0 0 10px;
+
+      color: var(--text-soft);
+
+      font-size: 15px;
+
+      line-height: 1.5;
+
+    }
+
+    .meta-row {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      font-size: 12px;
+
+      color: var(--text-soft);
+
+      margin-top: 4px;
+
+    }
+
+    .pill {
+
+      padding: 4px 10px;
+
+      border-radius: 999px;
+
+      background: #f1f7fc;
+
+      border: 1px solid #d9e6f4;
+
+    }
+
+    .cta-row {
+
+      margin-top: 10px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      align-items: center;
+
+    }
+
+    .cta-btn {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 10px 18px;
+
+      border-radius: 999px;
+
+      border: none;
+
+      background: linear-gradient(135deg,#0ab2a6,#19c68f);
+
+      color: #ffffff;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      box-shadow: 0 10px 30px rgba(5,130,112,0.45);
+
+    }
+
+    .cta-sub {
+
+      font-size: 13px;
+
+      color: var(--text-soft);
+
+    }
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns: minmax(0,2fr) minmax(0,1.3fr);
+
+      gap: 16px;
+
+      margin-top: 18px;
+
+    }
+
+    @media (max-width: 768px) {
+
+      .grid { grid-template-columns: minmax(0,1fr); }
+
+    }
+
+    .card {
+
+      background: var(--card);
+
+      border-radius: 16px;
+
+      border: 1px solid var(--border-soft);
+
+      padding: 18px 16px 16px;
+
+      box-shadow: 0 10px 28px rgba(8,36,69,0.06);
+
+      margin-bottom: 14px;
+
+    }
+
+    .card h2 {
+
+      font-size: 18px;
+
+      margin: 0 0 6px;
+
+    }
+
+    .card p {
+
+      margin: 0 0 8px;
+
+      font-size: 14px;
+
+      color: var(--text-soft);
+
+      line-height: 1.6;
+
+    }
+
+    ul {
+
+      margin: 0;
+
+      padding-left: 18px;
+
+      color: var(--text-soft);
+
+      font-size: 14px;
+
+    }
+
+    li { margin-bottom: 4px; }
+
+    .faq-item + .faq-item { margin-top: 10px; }
+
+    .faq-q {
+
+      font-weight: 600;
+
+      font-size: 14px;
+
+      margin-bottom: 3px;
+
+    }
+
+    .faq-a {
+
+      font-size: 14px;
+
+      color: var(--text-soft);
+
+      margin: 0;
+
+    }
+
+    .timestamp {
+
+      margin-top: 10px;
+
+      font-size: 12px;
+
+      color: var(--text-soft);
+
+    }
+
+    .text-pj-orb {
+
+      position: fixed;
+
+      bottom: 18px;
+
+      right: 18px;
+
+      width: 82px;
+
+      height: 82px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle at 30% 20%,#9dffb0 0,#00c46a 40%,#008f49 100%);
+
+      box-shadow: 0 0 0 0 rgba(0,196,106,0.7),0 18px 40px rgba(0,0,0,0.35);
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: #022013;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      z-index: 999;
+
+      animation: orbPulse 2.3s infinite;
+
+    }
+
+    .text-pj-orb span {
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+    }
+
+    .text-pj-orb a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+    @keyframes orbPulse {
+
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,196,106,0.6); }
+
+      70% { transform: scale(1.06); box-shadow: 0 0 0 18px rgba(0,196,106,0); }
+
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,196,106,0); }
+
     }
 
   </style>
+
 </head>
 
 <body>
-<div class="page">
 
-<header>
-  <div class="nav">
-    <div class="nav-left">
-      <div class="nav-orb"></div>
+  <main>
+
+    <div class="crumbs">Home · Local Services · Emergency Plumber San Diego</div>
+
+    <section class="hero">
+
+      <div class="hero-tag">24/7 Local Help · San Diego</div>
+
+      <h1>Emergency Plumber San Diego</h1>
+
+      <p>Pipe burst? Toilet overflowing? Water where it absolutely should not be? SideGuy Solutions connects you to a trusted emergency plumber in San Diego — fast. No call center maze, no nonsense. Just text PJ and get a real operator on your problem.</p>
+
+      <div class="cta-row">
+
+        <a class="cta-btn" href="sms:+17735441231?&body=Emergency%20plumber%20help%20in%20San%20Diego">
+
+          Text PJ for Fast Help
+
+        </a>
+
+        <div class="cta-sub">Send a quick text with your issue &amp; address. We’ll triage and match you with a vetted plumber.</div>
+
+      </div>
+
+      <div class="meta-row">
+
+        <div class="pill">Coverage: Greater San Diego</div>
+
+        <div class="pill">Typical response: under 10 minutes by text</div>
+
+        <div class="pill">Last updated: December 8, 2025</div>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="grid">
+
       <div>
-        <div class="nav-title">SideGuy Solutions</div>
-        <div class="nav-sub">Emergency Plumbing · Hybrid AI Dispatch</div>
+
+        <article class="card">
+
+          <h2>Problems we handle right away</h2>
+
+          <p>If it’s stressing you out and involves water, we want it off your plate:</p>
+
+          <ul>
+
+            <li>Burst or leaking pipes</li>
+
+            <li>Backed up toilets or main line clogs</li>
+
+            <li>Water heater leaks or no hot water</li>
+
+            <li>Overflowing tubs, showers, or sinks</li>
+
+            <li>Slab leak suspicions</li>
+
+          </ul>
+
+        </article>
+
+
+
+        <article class="card">
+
+          <h2>How the SideGuy flow works</h2>
+
+          <ul>
+
+            <li><strong>1 — Text PJ.</strong> Share a quick photo + your zip code.</li>
+
+            <li><strong>2 — Triage.</strong> We confirm if it’s true emergency vs urgent-but-scheduled.</li>
+
+            <li><strong>3 — Match.</strong> We tap our San Diego operator network for the right plumber.</li>
+
+            <li><strong>4 — Settle fast.</strong> You get clear pricing, clear ETA, and instant confirmation by text.</li>
+
+          </ul>
+
+        </article>
+
+
+
+        <article class="card">
+
+          <h2>Why use SideGuy instead of random Google results?</h2>
+
+          <ul>
+
+            <li>Real human accountability — you always have PJ as your point of contact.</li>
+
+            <li>Operators who actually show up when they say they will.</li>
+
+            <li>No endless quote forms or mystery “service fees.”</li>
+
+            <li>Transparent digital trail so you’re never guessing what’s next.</li>
+
+          </ul>
+
+        </article>
+
       </div>
-    </div>
-    <div class="nav-cta">
-      <span>Emergency?</span>
-      <a class="pill-link" href="sms:17735441231">Text PJ Now</a>
-    </div>
-  </div>
-</header>
 
-<main>
 
-  <div class="eyebrow">San Diego · Emergency Plumbing · AI Assisted</div>
-  <h1>Emergency Plumber in San Diego — Routed by Hybrid AI.</h1>
 
-  <p class="lead">
-    When pipes burst, water heaters fail, or flooding starts, seconds matter.
-    SideGuy Solutions uses a **hybrid AI routing system powered by ChatGPT, Claude,
-    Gemini, and Perplexity** to instantly classify your emergency and connect you
-    to a verified local plumber who can actually respond now — not tomorrow.
-  </p>
+      <div>
 
-  <div class="pill-row">
-    <div class="pill">24/7 Rapid Dispatch</div>
-    <div class="pill">Hybrid AI Triage</div>
-    <div class="pill">Local Operator Network</div>
-    <div class="pill">No Call Centers</div>
-  </div>
+        <article class="card">
 
-  <div class="btn-row">
-    <a class="pill-link" href="sms:17735441231">Text PJ · Emergency Now</a>
-    <a class="btn-secondary" href="index.html">← Back to SideGuy homepage</a>
-  </div>
+          <h2>What to include in your first text</h2>
 
-  <section class="grid">
-    <article class="card">
-      <div class="card-label">What makes this different</div>
-      <div class="card-title">Human + AI dispatch.</div>
-      <p class="card-body">
-        Your message is evaluated across multiple AI systems to determine severity,
-        equipment required, and location routing — then verified by a real human
-        before dispatch. This eliminates lead brokers, call centers, and wasted time.
-      </p>
-      <ul class="list">
-        <li>ChatGPT for rapid language interpretation</li>
-        <li>Claude for safety prioritization</li>
-        <li>Gemini for geographic matching</li>
-        <li>Perplexity for real-time service validation</li>
-      </ul>
-    </article>
+          <ul>
 
-    <article class="card">
-      <div class="card-label">Common emergencies</div>
-      <div class="card-title">What we route instantly.</div>
-      <ul class="list">
-        <li>Burst pipes & active flooding</li>
-        <li>Slab leaks</li>
-        <li>Sewer backups</li>
-        <li>No hot water / gas water heater failures</li>
-        <li>Main line clogs</li>
-      </ul>
-    </article>
-  </section>
+            <li>Your neighborhood or zip code</li>
 
-  <section class="grid">
-    <article class="card">
-      <div class="card-label">Who this is for</div>
-      <div class="card-title">Homes & businesses.</div>
-      <div class="subgrid">
-        <div><p class="card-body"><strong>Homes</strong><br>Burst lines, slab leaks, water damage control.</p></div>
-        <div><p class="card-body"><strong>Restaurants</strong><br>Grease line backups, hot water loss.</p></div>
-        <div><p class="card-body"><strong>Apartments</strong><br>Multi-unit flooding & emergency shutoffs.</p></div>
-        <div><p class="card-body"><strong>Commercial</strong><br>Main line failures & restroom shutdowns.</p></div>
+            <li>“What broke” in one sentence</li>
+
+            <li>How long it’s been happening</li>
+
+            <li>A quick photo or video if possible</li>
+
+          </ul>
+
+          <p>That’s enough for us to sort urgency, pricing range, and next steps without you ever sitting on hold.</p>
+
+        </article>
+
+
+
+        <article class="card">
+
+          <h2>FAQ</h2>
+
+          <div class="faq-item">
+
+            <div class="faq-q">Do you charge extra just to connect me?</div>
+
+            <p class="faq-a">No. SideGuy is the operator layer — we help you get to the right local pro, fast. You only pay for real work.</p>
+
+          </div>
+
+          <div class="faq-item">
+
+            <div class="faq-q">Can you help nights and weekends?</div>
+
+            <p class="faq-a">Yes. Emergency plumbing doesn’t wait for business hours. Text any time.</p>
+
+          </div>
+
+        </article>
+
       </div>
-    </article>
 
-    <article class="card">
-      <div class="card-label">Immediate action</div>
-      <div class="card-title">Water doesn’t wait.</div>
-      <p class="card-body">
-        If water is actively leaking, do not delay. Texting PJ immediately
-        activates live routing and direct contractor response.
-      </p>
-      <a class="pill-link" href="sms:17735441231">Text PJ for Emergency Plumbing Now</a>
-    </article>
-  </section>
+    </section>
 
-</main>
+  </main>
 
-<footer>
-  <div>
-    SideGuy Solutions · Emergency Plumber San Diego · Hybrid AI v2.0 ·
-    <a class="back-link" href="index.html">Back to homepage</a>
+
+
+  <div class="text-pj-orb">
+
+    <a href="sms:+17735441231?&body=Hey%20PJ%2C%20I%20need%20help%20with%20a%20plumbing%20emergency.">
+
+      Text<br>PJ<br><span>773-544-1231</span>
+
+    </a>
+
   </div>
-  <div style="margin-top:4px;">
-    Text PJ · 773-544-1231 for immediate emergency dispatch.
-  </div>
-</footer>
-
-</div>
-
-<!-- ✅ LIVE GREEN TEXT PJ ORB -->
-<div id="text-pj-orb">
-  <a href="sms:17735441231"><span>Text<br>PJ</span></a>
-</div>
 
 </body>
+
 </html>
