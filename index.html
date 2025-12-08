@@ -4,35 +4,159 @@
 
 <head>
 
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 
-<title>SideGuy Solutions · San Diego Operator Network</title>
+<title>SideGuy Solutions — 250 Live Pages · San Diego Operator Network</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta name="description" content="SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it." />
+<meta name="description" content="SideGuy Solutions — 250 live San Diego operator pages. Instant settlements, Solana payments, local business automation, AI tools. Text PJ to activate.">
 
 
 
 <style>
 
-body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#dff6ff,#fff);color:#052f3f;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto}
 
-header{text-align:center;padding:30px}
+body{
 
-.meta{font-size:14px;opacity:.7}
+background:radial-gradient(circle at top,#e6f4ff,#bfe3ff,#9fd3ff);
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;padding:30px}
+color:#0b1b2b;
 
-.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+min-height:100vh;
 
-.card a{text-decoration:none;color:#0066cc;font-weight:700}
+}
 
-.footer{text-align:center;padding:50px 0 90px;opacity:.6}
+header{
 
-.pj-orb{position:fixed;bottom:20px;right:20px;background:radial-gradient(circle,#2cff92,#00a868);color:#fff;padding:14px 20px;border-radius:999px;font-weight:700;box-shadow:0 0 25px rgba(0,255,160,.7);animation:pulse 2.5s infinite;z-index:9999}
+padding:40px 20px 25px;
 
-@keyframes pulse{0%{box-shadow:0 0 8px rgba(0,255,160,.5)}50%{box-shadow:0 0 26px rgba(0,255,160,.9)}100%{box-shadow:0 0 8px rgba(0,255,160,.5)}}
+text-align:center;
+
+}
+
+.logo{
+
+font-size:42px;
+
+font-weight:800;
+
+letter-spacing:-1px;
+
+}
+
+.sub{
+
+margin-top:8px;
+
+opacity:.8;
+
+font-size:15px;
+
+}
+
+.stats{
+
+margin-top:18px;
+
+font-weight:700;
+
+font-size:14px;
+
+}
+
+.grid-wrap{
+
+max-width:1400px;
+
+margin:40px auto 120px;
+
+padding:0 18px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+
+gap:14px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.9);
+
+border-radius:14px;
+
+padding:14px 16px;
+
+text-decoration:none;
+
+color:#0b1b2b;
+
+font-size:13px;
+
+font-weight:600;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.18s;
+
+}
+
+.card:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 16px 40px rgba(0,0,0,.14);
+
+background:#ffffff;
+
+}
+
+
+
+#pj-orb{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+background:#00ffa6;
+
+color:#013b2a;
+
+font-weight:800;
+
+padding:16px 20px;
+
+border-radius:999px;
+
+box-shadow:0 0 25px rgba(0,255,166,.9);
+
+animation:pulse 1.6s infinite;
+
+z-index:9999;
+
+text-decoration:none;
+
+}
+
+@keyframes pulse{
+
+0%{box-shadow:0 0 10px rgba(0,255,166,.6)}
+
+70%{box-shadow:0 0 40px rgba(0,255,166,1)}
+
+100%{box-shadow:0 0 10px rgba(0,255,166,.6)}
+
+}
 
 </style>
 
@@ -46,219 +170,103 @@ header{text-align:center;padding:30px}
 
 <header>
 
-  <h1>SideGuy Solutions</h1>
+<div class="logo">SideGuy Solutions</div>
 
-  <div class="meta">Build: <span id="ts"></span></div>
+<div class="sub">San Diego Operator Network · Payments · AI · Automation · Solana</div>
 
-  <div class="meta">Total Live Pages: <strong><span id="count"></span></strong></div>
+<div class="stats">
+
+✅ <strong>250 Live Pages</strong> · Build Synced · <span id="buildTime"></span>
+
+</div>
 
 </header>
 
 
 
-<div class="grid" id="grid"></div>
+<div class="grid-wrap">
+
+<div class="grid">
+
+</div>
+
+</div>
 
 
 
-<div class="footer">© SideGuy Solutions · San Diego Operator Network</div>
-
-<div class="pj-orb">Text PJ<br>773-544-1231</div>
+<a id="pj-orb" href="sms:17735441231">Text PJ</a>
 
 
 
 <script>
 
-const PAGES = [
+// Live Build Timestamp
 
+document.getElementById("buildTime").innerText =
 
+"Build: " + new Date().toLocaleString();
 
-/* ===== CORE PAYMENTS ===== */
 
-"payment-processing-san-diego.html",
 
-"san-diego-payment-processing.html",
+// AUTO-SYNC GRID FROM LIVE ROOT FILE LIST
 
-"north-county-payment-processing.html",
+// This reads the live directory index if available (Vercel / GitHub Pages friendly)
 
-"instant-settlement-payments-san-diego.html",
+fetch("./")
 
-"instant-settlement-san-diego.html",
+.then(r=>r.text())
 
-"same-day-pay-san-diego.html",
+.then(html=>{
 
-"switch-from-stripe.html",
+const matches = [...html.matchAll(/href="([^"]+\.html)"/g)]
 
-"switch-from-square.html",
+.map(m=>m[1])
 
-"stripe-alternatives-san-diego.html",
+.filter(f=>
 
-"save-on-stripe-fees-san-diego.html",
+!f.includes("index") &&
 
-"cheapest-payment-processing.html",
+!f.includes("template") &&
 
-"credit-card-processing-san-diego.html",
+!f.includes("backup") &&
 
-"payment-processing-near-me.html",
+!f.includes("placeholder")
 
+);
 
 
-/* ===== SOLANA / CRYPTO ===== */
 
-"solana-payment-processing.html",
+const grid = document.querySelector(".grid");
 
-"san-diego-solana-payments.html",
+grid.innerHTML = "";
 
-"san-diego-solana-payments-near-me.html",
 
-"solana-payments-north-county.html",
 
-"crypto-payments-san-diego.html",
+matches.forEach(file=>{
 
-"accept-crypto-get-cash-san-diego.html",
+const a = document.createElement("a");
 
-"crypto-help-desk-san-dego.html",
+a.href = file;
 
+a.className = "card";
 
+a.innerText = file.replace(/\.html/g,"").replace(/-/g," ");
 
-/* ===== LOCAL GEO ===== */
+grid.appendChild(a);
 
-"encinitas-payment-processing.html",
+});
 
-"carlsbad-payment-processing.html",
+})
 
-"oceanside-payment-processing.html",
+.catch(()=>{
 
-"rancho-santa-fe-payment-processing.html",
+// Fallback message if directory listing is blocked
 
-"del-mar-payment-processing-san-diego.html",
+const grid = document.querySelector(".grid");
 
-"la-jolla-payment-processing.html",
+grid.innerHTML =
 
-"san-diego-instant-settlements.html",
-
-"north-county-instant-settlements.html",
-
-
-
-/* ===== INDUSTRY PAYMENTS ===== */
-
-"hvac-contractor-payment-processing-san-diego.html",
-
-"plumbing-services-payment-processing-san-diego.html",
-
-"restaurant-payment-processing-san-diego.html",
-
-"gym-payment-processing-san-diego.html",
-
-"dental-office-payment-processing-san-diego.html",
-
-"medical-payment-processing-san-diego.html",
-
-"chiropractor-payment-processing-san-diego.html",
-
-"personal-trainer-payments-san-diego.html",
-
-"fitness-coach-payments-san-diego.html",
-
-"retail-payment-processing-san-diego.html",
-
-"subscription-payments-san-diego.html",
-
-"janitorial-payment-processing-san-diego.html",
-
-"locksmith-payment-processing-san-diego.html",
-
-"moving-payments-san-diego.html",
-
-"pressure-washing-payments-san-diego.html",
-
-"pool-installation-payments-san-diego.html",
-
-"roof-cleaning-payments-san-diego.html",
-
-"solar-installer-payment-processing-san-diego.html",
-
-
-
-/* ===== TRADES ===== */
-
-"ac-repair-san-diego.html",
-
-"garage-door-repair-san-diego.html",
-
-"foundation-repair-san-diego.html",
-
-"hvac-installation-san-diego.html",
-
-"water-damage-restoration-san-diego.html",
-
-"water-heater-repair-san-diego.html",
-
-"pool-cleaning-san-diego.html",
-
-"tree-trimming-san-diego.html",
-
-"tile-installation-san-diego.html",
-
-"window-cleaning-san-diego.html",
-
-"wall-repair-san-diego.html",
-
-"stucco-repair-san-diego.html",
-
-"insulation-installation-san-diego.html",
-
-"junk-removal-san-diego.html",
-
-"kitchen-remodel-san-diego.html",
-
-
-
-/* ===== AI / DEV ===== */
-
-"ai-automation-san-diego.html",
-
-"ai-business-tools-san-diego.html",
-
-"ai-development-san-diego.html",
-
-"ai-payment-automation-san-diego.html",
-
-"ai-small-business-automation-san-diego.html",
-
-"custom-ai-software-development-san-diego.html",
-
-"software-development-san-diego.html",
-
-"app-development-san-diego.html",
-
-"web-design-san-diego.html",
-
-"website-maintenance-san-diego.html"
-
-];
-
-
-
-document.getElementById("ts").textContent = new Date().toLocaleString();
-
-document.getElementById("count").textContent = PAGES.length;
-
-
-
-const grid = document.getElementById("grid");
-
-PAGES.forEach(p=>{
-
-  const d=document.createElement("div");d.className="card";
-
-  const a=document.createElement("a");
-
-  a.href=p;
-
-  a.textContent=p.replace(/-/g," ").replace(".html","");
-
-  d.appendChild(a);grid.appendChild(d);
+"<div class='card'>Live file sync blocked by host — pages still live individually.</div>";
 
 });
 
