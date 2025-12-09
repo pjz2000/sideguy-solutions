@@ -1,1043 +1,696 @@
-
- <!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <!-- SIDEGUY SOLUTIONS — OPERATOR COMMAND INDEX (NUMBERED PAGES) v1.0 -->
-
   <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-
-
-  <title>SideGuy Solutions · Operator Command Center</title>
-
-  <meta name="description" content="SideGuy Solutions — Smart, simple problem solving for real people. Jump into the main SideGuy templates and numbered problem pages, and text PJ when you need a real human.">
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SideGuy Solutions · GODWAVE 300 · Operator Command Center</title>
+  <meta name="description" content="SideGuy Solutions — San Diego’s Coastal Tech Concierge. Payments, AI Automation, SEO Engines, Operator Tools, Instant Settlements, and the real human Layer-2 Resolution Network.">
   <style>
-
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-
-
-
-    :root{
-
-      --sky:#e8f9ff;
-
-      --sea:#c7f1ff;
-
-      --accent:#00c98b;
-
-      --accent-blue:#00c2ff;
-
-      --text-main:#022d43;
-
-      --text-soft:#4d6a7c;
-
-      --card-bg:#ffffff;
-
-      --card-border:rgba(3,48,69,0.06);
-
-      --radius-lg:22px;
-
+    /* ----------------------------------------------
+       GODWAVE · LIGHT OCEAN THEME WITH GREEN GLOW
+       ----------------------------------------------*/
+    :root {
+      --ocean-bg: radial-gradient(circle at 30% 20%, #dff7ff, #b7e8ff, #8ddcff, #64caff, #33b5ff);
+      --deep-blue: #003b59;
+      --ink: #042b3f;
+      --orb-green: rgba(0, 255, 140, 0.95);
+      --orb-glow: 0 0 18px rgba(0, 255, 140, 0.85);
+      --card-bg: rgba(255, 255, 255, 0.78);
+      --card-text: #00293f;
+      --new-green: #00ff7b;
+      --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.18);
     }
-
-
-
-    body{
-
-      font-family:-apple-system,system-ui,BlinkMacSystemFont,"Inter",sans-serif;
-
-      background:radial-gradient(circle at 20% 0%,#ffffff 0%,var(--sky) 45%,var(--sea) 100%);
-
-      color:var(--text-main);
-
-      -webkit-font-smoothing:antialiased;
-
-      padding-bottom:150px;
-
+    * {
+      box-sizing: border-box;
     }
-
-
-
-    .page{
-
-      min-height:100vh;
-
-      display:flex;
-
-      flex-direction:column;
-
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: var(--ocean-bg);
+      color: var(--ink);
+      overflow-x: hidden;
     }
-
-
-
-    /* HEADER */
-
-    header{
-
-      position:sticky;
-
-      top:0;
-
-      backdrop-filter:blur(14px);
-
-      background:rgba(255,255,255,0.9);
-
-      border-bottom:1px solid rgba(3,48,69,0.05);
-
-      z-index:20;
-
+    a {
+      text-decoration: none;
+      color: inherit;
     }
-
-
-
-    .nav{
-
-      max-width:1120px;
-
-      margin:0 auto;
-
-      padding:16px 20px;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:space-between;
-
+    /* HEADER / HERO */
+    header {
+      padding: 28px 20px 10px;
+      text-align: center;
     }
-
-
-
-    .nav-left{
-
-      display:flex;
-
-      align-items:center;
-
-      gap:10px;
-
+    .logo-tagline {
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(0, 59, 89, 0.75);
     }
-
-
-
-    .nav-orb{
-
-      width:28px;
-
-      height:28px;
-
-      border-radius:50%;
-
-      background:radial-gradient(circle at 30% 20%,#ffffff,#a9eaff,#48baff);
-
-      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.3);
-
+    h1 {
+      margin: 12px auto 8px;
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--deep-blue);
+      text-shadow: 0 0 12px rgba(0, 255, 140, 0.35);
     }
-
-
-
-    .nav-title{
-
-      font-size:14px;
-
-      font-weight:700;
-
-      letter-spacing:.08em;
-
-      text-transform:uppercase;
-
+    .subtitle {
+      font-size: 17px;
+      margin-top: 4px;
+      opacity: 0.95;
     }
-
-
-
-    .pill-link{
-
-      text-decoration:none;
-
-      border-radius:999px;
-
-      padding:8px 16px;
-
-      font-size:12px;
-
-      font-weight:600;
-
-      background:linear-gradient(135deg,#00c98b,#00c2ff);
-
-      color:#fff;
-
-      box-shadow:0 10px 22px rgba(0,140,255,0.25);
-
-      white-space:nowrap;
-
+    .hero-wrap {
+      max-width: 1080px;
+      margin: 18px auto 10px;
+      padding: 14px 20px 6px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
     }
-
-
-
-    /* MAIN */
-
-    main{
-
-      flex:1;
-
-      max-width:1120px;
-
-      margin:0 auto;
-
-      padding:34px 20px;
-
-    }
-
-
-
-    .eyebrow{
-
-      font-size:11px;
-
-      text-transform:uppercase;
-
-      letter-spacing:.15em;
-
-      color:rgba(3,48,69,0.7);
-
-      margin-bottom:10px;
-
-    }
-
-
-
-    h1{
-
-      font-size:32px;
-
-      line-height:1.15;
-
-      letter-spacing:-0.02em;
-
-      margin-bottom:12px;
-
-    }
-
-
-
-    .lead{
-
-      font-size:15px;
-
-      color:var(--text-soft);
-
-      line-height:1.6;
-
-      max-width:720px;
-
-      margin-bottom:24px;
-
-    }
-
-
-
-    .pill-row{
-
-      display:flex;
-
-      flex-wrap:wrap;
-
-      gap:10px;
-
-      margin-bottom:30px;
-
-    }
-
-
-
-    .pill{
-
-      font-size:11px;
-
-      padding:7px 12px;
-
-      border-radius:20px;
-
-      background:#ffffffee;
-
-      border:1px solid rgba(3,48,69,0.08);
-
-      color:var(--text-soft);
-
-    }
-
-
-
-    .section{
-
-      margin-bottom:34px;
-
-    }
-
-
-
-    .section-header{
-
-      display:flex;
-
-      justify-content:space-between;
-
-      align-items:flex-end;
-
-      gap:10px;
-
-      margin-bottom:14px;
-
-    }
-
-
-
-    .section-title{
-
-      font-size:17px;
-
-      font-weight:600;
-
-      letter-spacing:-0.01em;
-
-    }
-
-
-
-    .section-note{
-
-      font-size:11px;
-
-      color:var(--text-soft);
-
-    }
-
-
-
-    /* GRID OF LINKS */
-
-    .grid{
-
-      display:grid;
-
-      grid-template-columns:repeat(3,minmax(0,1fr));
-
-      gap:12px;
-
-    }
-
-
-
-    @media(max-width:980px){
-
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-
-    }
-
-
-
-    @media(max-width:640px){
-
-      .grid{grid-template-columns:minmax(0,1fr);}
-
-    }
-
-
-
-    .card-link{
-
-      display:block;
-
-      background:#fff;
-
-      border-radius:16px;
-
-      border:1px solid var(--card-border);
-
-      padding:12px 14px;
-
-      text-decoration:none;
-
-      color:var(--text-main);
-
-      box-shadow:0 8px 20px rgba(3,48,69,0.06);
-
-      transition:transform .08s ease-out,box-shadow .08s ease-out, border-color .08s;
-
-      font-size:13px;
-
-    }
-
-
-
-    .card-link:hover{
-
-      transform:translateY(-2px);
-
-      box-shadow:0 12px 26px rgba(3,48,69,0.14);
-
-      border-color:rgba(0,201,139,0.7);
-
-    }
-
-
-
-    .card-label{
-
-      font-size:11px;
-
-      text-transform:uppercase;
-
-      letter-spacing:.12em;
-
-      color:rgba(3,48,69,.6);
-
-      margin-bottom:4px;
-
-    }
-
-
-
-    .card-title{
-
-      font-size:14px;
-
-      font-weight:600;
-
-      margin-bottom:4px;
-
-    }
-
-
-
-    .card-sub{
-
-      font-size:12px;
-
-      color:var(--text-soft);
-
-    }
-
-
-
-    footer{
-
-      padding:28px 20px;
-
-      font-size:11px;
-
-      color:var(--text-soft);
-
-      text-align:center;
-
-      border-top:1px solid rgba(3,48,69,0.05);
-
-    }
-
-
-
-    .back-link{
-
-      color:var(--accent-blue);
-
-      text-decoration:none;
-
-      font-weight:500;
-
-    }
-
-
-
-    /* SIGNATURE ORB v6 */
-
-    .pj-orb{
-
-      position:fixed;
-
-      right:24px;
-
-      bottom:24px;
-
-      text-decoration:none;
-
-      z-index:999999;
-
-    }
-
-
-
-    .pj-orb-inner{
-
-      width:105px;
-
-      height:105px;
-
-      border-radius:50%;
-
-      background:radial-gradient(circle at 35% 25%,#d9fff4 0%,#00e6a8 40%,#00b37d 80%);
-
-      box-shadow:
-
-        0 0 12px rgba(0,255,190,.5),
-
-        0 0 26px rgba(0,255,190,.35),
-
-        0 12px 30px rgba(0,0,0,.28),
-
-        inset 0 0 20px rgba(255,255,255,.55);
-
-      display:flex;
-
-      justify-content:center;
-
-      align-items:center;
-
-      flex-direction:column;
-
-      overflow:hidden;
-
-      animation:orbPulse 2.15s ease-in-out infinite;
-
-    }
-
-
-
-    .pj-orb-inner::before{
-
-      content:"";
-
-      position:absolute;
-
-      top:-35px;
-
-      left:-35px;
-
-      width:90px;
-
-      height:90px;
-
-      background:rgba(255,255,255,0.7);
-
-      border-radius:50%;
-
-      filter:blur(18px);
-
-      opacity:.9;
-
-    }
-
-
-
-    .pj-text{
-
-      text-align:center;
-
-      font-size:20px;
-
-      font-weight:900;
-
-      color:#002b1b;
-
-      line-height:1.1;
-
-    }
-
-
-
-    .pj-phone{
-
-      font-size:11px;
-
-      margin-top:3px;
-
-      opacity:.85;
-
-      font-weight:600;
-
-      color:#003b28;
-
-    }
-
-
-
-    @keyframes orbPulse{
-
-      0%{transform:scale(1);}
-
-      50%{transform:scale(1.085);}
-
-      100%{transform:scale(1);}
-
-    }
-
-
-
-    @media(max-width:600px){
-
-      .pj-orb-inner{
-
-        width:85px;
-
-        height:85px;
-
+    @media (max-width: 850px) {
+      .hero-wrap {
+        grid-template-columns: 1fr;
       }
-
-      .pj-text{font-size:16px;}
-
-      .pj-phone{font-size:10px;}
-
     }
-
+    .hero-card {
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      border-radius: 18px;
+      padding: 18px 20px 18px;
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+    .hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--deep-blue);
+    }
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 8px;
+    }
+    .hero-pill {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0, 255, 140, 0.12);
+      border: 1px solid rgba(0, 255, 140, 0.7);
+      color: #004727;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+    }
+    .hero-body {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      white-space: nowrap;
+    }
+    .hero-btn.primary {
+      background: var(--orb-green);
+      color: #00351f;
+    }
+    .hero-btn.secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--deep-blue);
+    }
+    .hero-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+    }
+    .hero-note {
+      font-size: 12px;
+      margin-top: 10px;
+      opacity: 0.85;
+    }
+    .hero-mini {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .hero-kpi {
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .hero-kpi span {
+      display: inline-block;
+      margin-right: 12px;
+    }
+    /* TIMESTAMP BAR */
+    .timestamp {
+      margin: 10px auto 18px;
+      max-width: 880px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+      text-align: center;
+      box-shadow: 0 0 22px rgba(0, 255, 140, 0.35);
+      border: 1px solid rgba(0, 255, 140, 0.5);
+    }
+    .timestamp strong {
+      font-weight: 700;
+      color: var(--deep-blue);
+    }
+    /* SECTIONS + TITLES */
+    main {
+      max-width: 1300px;
+      margin: 0 auto 80px;
+      padding: 0 18px 40px;
+    }
+    .section-block {
+      margin-top: 26px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--deep-blue);
+      text-shadow: 0 0 10px rgba(0, 255, 140, 0.35);
+    }
+    .section-sub {
+      font-size: 13px;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+    /* FEATURE TRIAD */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+    @media (max-width: 950px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .feature-card {
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 16px;
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .feature-card h3 {
+      margin: 0 0 6px;
+      font-size: 15px;
+      color: var(--deep-blue);
+    }
+    .feature-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    margin-top: 6px;
+    }
+    .feature-pill {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 255, 140, 0.12);
+      border: 1px solid rgba(0, 255, 140, 0.6);
+    }
+    /* SEO GRID */
+    .seo-grid-section {
+      margin-top: 32px;
+    }
+    .seo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .seo-card {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--card-bg);
+      color: var(--card-text);
+      font-size: 13px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+    }
+    .seo-card.existing::before,
+    .seo-card.new::before {
+      content: "●";
+      font-size: 10px;
+      margin-right: 7px;
+    }
+    .seo-card.existing::before {
+      color: rgba(0, 59, 89, 0.7);
+    }
+    .seo-card.new::before {
+      color: var(--new-green);
+      text-shadow: 0 0 8px var(--new-green);
+    }
+    .seo-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22), 0 0 16px rgba(0, 255, 140, 0.6);
+      background: rgba(255, 255, 255, 0.98);
+    }
+    .seo-card span.tag-new {
+      margin-left: 6px;
+      font-size: 11px;
+      color: var(--new-green);
+      font-weight: 700;
+      text-shadow: 0 0 8px var(--new-green);
+    }
+    /* TEXT PJ ORB */
+    .text-pj-orb {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 80px;
+      height: 80px;
+      background: var(--orb-green);
+      box-shadow: var(--orb-glow), 0 0 30px rgba(0, 255, 140, 0.9);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      color: #00351f;
+      cursor: pointer;
+      animation: pulse 2.6s infinite ease-in-out;
+      text-align: center;
+      z-index: 50;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: var(--orb-glow);
+      }
+      50% {
+        transform: scale(1.11);
+        box-shadow: 0 0 48px rgba(0, 255, 140, 1);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: var(--orb-glow);
+      }
+    }
+    /* FOOTER */
+    footer {
+      margin-top: 40px;
+      padding: 18px 10px 36px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(0, 43, 63, 0.86);
+      opacity: 0.95;
+    }
   </style>
-
 </head>
-
-
-
 <body>
-
-<div class="page">
-
-
-
-  <!-- HEADER -->
-
-  <header>
-
-    <div class="nav">
-
-      <div class="nav-left">
-
-        <div class="nav-orb"></div>
-
-        <div>
-
-          <div class="nav-title">SIDEGUY SOLUTIONS</div>
-
-        </div>
-
-      </div>
-
-      <a class="pill-link" href="sms:17735441231">Text PJ</a>
-
+<header>
+  <div class="logo-tagline">SAN DIEGO · COASTAL TECH CONCIERGE</div>
+  <h1>SIDEGUY SOLUTIONS · GODWAVE 300</h1>
+  <div class="subtitle">Payments · AI Automation · SEO Engines · Operator Network · Real Human Layer-2</div>
+</header>
+<div class="hero-wrap">
+  <div class="hero-card">
+    <div class="hero-title">Where Google Finds the Problem. SideGuy Fixes It.</div>
+    <div class="hero-body">
+      SideGuy is your San Diego Operator Command Center — instant-settlement payments, AI workflows, and a live human you can text when something breaks.
     </div>
-
-  </header>
-
-
-
-  <!-- MAIN -->
-
-  <main>
-
-
-
-    <div class="eyebrow">San Diego · Operator Command Center</div>
-
-    <h1>Smart, Simple Problem Solving for Real People.</h1>
-
-
-
-    <p class="lead">
-
-      This is the SideGuy Command Center.  
-
-      Jump into the main trademark pages or any numbered problem page.  
-
-      When in doubt, text PJ and we’ll pick the smartest move together.
-
-    </p>
-
-
-
-    <div class="pill-row">
-
-      <div class="pill">Trademark Problem Page</div>
-
-      <div class="pill">TechFix OS</div>
-
-      <div class="pill">Numbered Problem Pages</div>
-
-      <div class="pill">Real Human Layer-2 Help</div>
-
+    <div class="hero-pill-row">
+      <div class="hero-pill">💳 SideGuy Payments · sub-0.4s Solana rails</div>
+      <div class="hero-pill">🔍 300+ Local Problem Pages</div>
+      <div class="hero-pill">🤝 Real human · Text PJ anytime</div>
     </div>
-
-
-
-    <!-- FEATURED PAGES (1 & 2) -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <h2 class="section-title">Featured SideGuy Templates</h2>
-
-        <div class="section-note">Your two master pages — one for general problems, one for tech & software.</div>
-
-      </div>
-
-
-
-      <div class="grid">
-
-        <a class="card-link" href="1.html">
-
-          <div class="card-label">Page 1</div>
-
-          <div class="card-title">Trademark Problem-Solving Page</div>
-
-          <div class="card-sub">
-
-            The main SideGuy problem page — calm steps, urgency check, and direct Text PJ path.
-
-          </div>
-
-        </a>
-
-
-
-        <a class="card-link" href="2.html">
-
-          <div class="card-label">Page 2</div>
-
-          <div class="card-title">TechFix OS · Software & Payments</div>
-
-          <div class="card-sub">
-
-            For tech, software, wifi, apps, logins, and SideGuy Payments troubleshooting.
-
-          </div>
-
-        </a>
-
-
-
-        <a class="card-link" href="index.html">
-
-          <div class="card-label">Command</div>
-
-          <div class="card-title">This Command Center</div>
-
-          <div class="card-sub">
-
-            Use this page as your hub to reach any numbered problem page as you scale.
-
-          </div>
-
-        </a>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- NUMBERED PAGES GRID -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <h2 class="section-title">Numbered Problem Pages</h2>
-
-        <div class="section-note">Direct links into the pages you just added. Extend this grid as you add more.</div>
-
-      </div>
-
-
-
-      <div class="grid">
-
-        <!-- Adjust labels/hrefs if your numbering differs -->
-
-        <a class="card-link" href="1.html">
-
-          <div class="card-label">#1</div>
-
-          <div class="card-title">Problem Page 1</div>
-
-          <div class="card-sub">Trademark problem-solving template.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="2.html">
-
-          <div class="card-label">#2</div>
-
-          <div class="card-title">Problem Page 2 · TechFix OS</div>
-
-          <div class="card-sub">Tech, software, wifi, payments, devices.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="3.html">
-
-          <div class="card-label">#3</div>
-
-          <div class="card-title">Problem Page 3</div>
-
-          <div class="card-sub">Use this slot for any high-value problem.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="4.html">
-
-          <div class="card-label">#4</div>
-
-          <div class="card-title">Problem Page 4</div>
-
-          <div class="card-sub">Numbered template — ready to customize.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="5.html">
-
-          <div class="card-label">#5</div>
-
-          <div class="card-title">Problem Page 5</div>
-
-          <div class="card-sub">HomeFix, TechFix, or anything in between.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="6.html">
-
-          <div class="card-label">#6</div>
-
-          <div class="card-title">Problem Page 6</div>
-
-          <div class="card-sub">Another slot for a focused problem page.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="7.html">
-
-          <div class="card-label">#7</div>
-
-          <div class="card-title">Problem Page 7</div>
-
-          <div class="card-sub">Real estate, tech, or general issues.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="8.html">
-
-          <div class="card-label">#8</div>
-
-          <div class="card-title">Problem Page 8</div>
-
-          <div class="card-sub">Use this page for another common search.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="9.html">
-
-          <div class="card-label">#9</div>
-
-          <div class="card-title">Problem Page 9</div>
-
-          <div class="card-sub">Template slot — ready to configure.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="10.html">
-
-          <div class="card-label">#10</div>
-
-          <div class="card-title">Problem Page 10</div>
-
-          <div class="card-sub">Part of the numbered SideGuy grid.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="11.html">
-
-          <div class="card-label">#11</div>
-
-          <div class="card-title">Problem Page 11</div>
-
-          <div class="card-sub">Map any important issue here.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="12.html">
-
-          <div class="card-label">#12</div>
-
-          <div class="card-title">Problem Page 12</div>
-
-          <div class="card-sub">Keep stacking problem coverage.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="13.html">
-
-          <div class="card-label">#13</div>
-
-          <div class="card-title">Problem Page 13</div>
-
-          <div class="card-sub">Lucky slot for a high-value query.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="14.html">
-
-          <div class="card-label">#14</div>
-
-          <div class="card-title">Problem Page 14</div>
-
-          <div class="card-sub">Add any new SideGuy scenario here.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="15.html">
-
-          <div class="card-label">#15</div>
-
-          <div class="card-title">Problem Page 15</div>
-
-          <div class="card-sub">Home, tech, money, or other.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="16.html">
-
-          <div class="card-label">#16</div>
-
-          <div class="card-title">Problem Page 16</div>
-
-          <div class="card-sub">Use for a new recurring problem type.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="17.html">
-
-          <div class="card-label">#17</div>
-
-          <div class="card-title">Problem Page 17</div>
-
-          <div class="card-sub">Part of the numbered expansion grid.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="18.html">
-
-          <div class="card-label">#18</div>
-
-          <div class="card-title">Problem Page 18</div>
-
-          <div class="card-sub">Drop in another template here.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="19.html">
-
-          <div class="card-label">#19</div>
-
-          <div class="card-title">Problem Page 19</div>
-
-          <div class="card-sub">Future problem coverage slot.</div>
-
-        </a>
-
-
-
-        <a class="card-link" href="20.html">
-
-          <div class="card-label">#20</div>
-
-          <div class="card-title">Problem Page 20</div>
-
-          <div class="card-sub">Extend this pattern out as far as you like.</div>
-
-        </a>
-
-      </div>
-
-    </section>
-
-
-
-  </main>
-
-
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    SideGuy Solutions · Operator Command Center · Numbered Pages Index v1.0<br />
-
-    Text PJ · 773-544-1231 any time you want a smarter next move.
-
-  </footer>
-
-
-
-</div>
-
-
-
-<!-- SIGNATURE TEXT PJ ORB -->
-
-<a class="pj-orb" href="sms:+17735441231">
-
-  <div class="pj-orb-inner">
-
-    <div class="pj-text">TEXT<br>PJ</div>
-
-    <div class="pj-phone">773-544-1231</div>
-
+    <div class="hero-cta-row">
+      <a href="sms:7735441231" class="hero-btn primary">Text PJ · 773-544-1231</a>
+      <a href="#seo-grid" class="hero-btn secondary">Browse Operator Problem Index</a>
+    </div>
+    <div class="hero-note">
+      SideGuy is the layer-2 resolution layer over the web. Google finds the problem. AI explains it. A real operator fixes it.
+    </div>
   </div>
-
+  <div class="hero-card">
+    <div class="hero-title">Operator Snapshot · Today</div>
+    <div class="hero-mini">
+      • Sub-0.4 second Solana payments rails ready for San Diego operators. <br>
+      • SEO engine tuned for high-intent “fix it now” searches. <br>
+      • Money Index + Betting Lab online for signal & performance tracking.
+    </div>
+    <div class="hero-kpi">
+      <span>📈 Pages Indexed: <strong>≈300 target</strong></span>
+      <span>🌊 Theme: Light Ocean · Green Glow</span>
+    </div>
+    <div class="hero-note">
+      Want to plug in your business, tickets, or payments? Text PJ and we’ll wire you into the Operator Network.
+    </div>
+  </div>
+</div>
+<div class="timestamp">
+  Build Version: <strong>GODWAVE-300</strong> · Last Updated: <strong>Dec 9, 2025</strong> · Target Pages Live: <strong>300</strong>
+</div>
+<main>
+  <section class="section-block">
+    <div class="section-title">SideGuy Core Systems</div>
+    <div class="section-sub">Three pillars live today: Payments, Problem Index, and the Money Index (Betting Lab as a signal engine, not gambling).</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>💳 SideGuy Payments · Instant Settlement</h3>
+        <p>
+          Sub-0.4 second settlement on Solana rails. Own a piece of your processing — Stripe gives you nothing.
+          We wire your invoices, tickets, and subscriptions into faster, cheaper rails.
+        </p>
+        <div class="feature-pill-row">
+          <span class="feature-pill">Solana USDC rails</span>
+          <span class="feature-pill">0.4s settlement</span>
+          <span class="feature-pill">Lower fees vs Stripe</span>
+        </div>
+      </div>
+      <div class="feature-card">
+        <h3>📚 SideGuy Problem Index · Local Operators</h3>
+        <p>
+          300+ “fix it now” pages for San Diego — AC repair, emergency plumbers, foundation issues, payments, and more.
+          Google discovers the problem. We route it to a verified operator who can actually fix it.
+        </p>
+        <div class="feature-pill-row">
+          <span class="feature-pill">North County Verified Operators</span>
+          <span class="feature-pill">High-intent local SEO</span>
+          <span class="feature-pill">Real humans, not call centers</span>
+        </div>
+      </div>
+      <div class="feature-card">
+        <h3>💵 SideGuy Money Index · Betting Lab</h3>
+        <p>
+          A clean, logged signal engine that treats sports markets as data, not gambling.
+          Test fast, log clean, build slow, compound forever — and keep betting in its lane as a signal, not a distraction.
+        </p>
+        <div class="feature-pill-row">
+          <span class="feature-pill">Signal & EV tracking</span>
+          <span class="feature-pill">Daily variance control</span>
+          <span class="feature-pill">Weekly performance map</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- =========================================
+       SEO GRID · EXISTING + NEW PAGES
+       New pages are neon green labeled (NEW)
+       ========================================= -->
+  <section class="section-block seo-grid-section" id="seo-grid">
+    <div class="section-title">SideGuy Operator Network · 300 Local Problem Pages</div>
+    <div class="section-sub">
+      Existing pages stay fully live (blue bullets). Brand-new pages and planned builds are highlighted in
+      <span style="color: var(--new-green); font-weight: 700;">NEON GREEN</span>.
+    </div>
+    <div class="seo-grid">
+      <!-- EXISTING PAGES (SAMPLE SET – KEEPING REAL URLS) -->
+      <a href="index.html" class="seo-card existing">🏠 Command Center Home</a>
+      <a href="ac-repair-san-diego.html" class="seo-card existing">AC Repair San Diego</a>
+      <a href="mobile-payments-san-diego.html" class="seo-card existing">Mobile Payments San Diego</a>
+      <a href="ai-automation-san-diego.html" class="seo-card existing">AI Automation San Diego</a>
+      <a href="ai-business-tools-san-diego.html" class="seo-card existing">AI Business Tools San Diego</a>
+      <a href="ai-development-san-diego.html" class="seo-card existing">AI Development San Diego</a>
+      <a href="ai-payment-automation-san-diego.html" class="seo-card existing">AI Payment Automation San Diego</a>
+      <a href="ai-small-business-automation-san-diego.html" class="seo-card existing">AI Small Business Automation</a>
+      <a href="accept-crypto-get-cash-san-diego.html" class="seo-card existing">Accept Crypto · Get Cash SD</a>
+      <a href="san-diego-contractor-payments.html" class="seo-card existing">Contractor Payments San Diego</a>
+      <a href="professional-services-payment-processing.html" class="seo-card existing">Professional Services Payments</a>
+      <a href="accountant-services-san-diego.html" class="seo-card existing">Accountant Services San Diego</a>
+      <a href="water-heater-repair-san-diego.html" class="seo-card existing">Water Heater Repair San Diego</a>
+      <a href="tow-truck-service-san-diego.html" class="seo-card existing">Tow Truck Service San Diego</a>
+      <a href="energy-utility-payments-san-diego.html" class="seo-card existing">Energy & Utility Payments SD</a>
+      <a href="best-payment-processing-san-diego.html" class="seo-card existing">Best Payment Processing San Diego</a>
+      <a href="encinitas-payment-processing.html" class="seo-card existing">Encinitas Payment Processing</a>
+      <a href="carlsbad-payment-processing.html" class="seo-card existing">Carlsbad Payment Processing</a>
+      <a href="cardiff-payment-processing.html" class="seo-card existing">Cardiff-by-the-Sea Payment Processing</a>
+      <a href="del-mar-payment-processing.html" class="seo-card existing">Del Mar Payment Processing</a>
+      <a href="north-county-payment-processing.html" class="seo-card existing">North County Payment Processing</a>
+      <!-- More existing links can continue here... -->
+      <!-- EXISTING SERVICE / TRADES PAGES -->
+      <a href="emergency-plumber-san-diego.html" class="seo-card existing">Emergency Plumber San Diego</a>
+      <a href="hvac-installation-san-diego.html" class="seo-card existing">HVAC Installation San Diego</a>
+      <a href="hvac-repair-san-diego.html" class="seo-card existing">HVAC Repair San Diego</a>
+      <a href="foundation-repair-san-diego.html" class="seo-card existing">Foundation Repair San Diego</a>
+      <a href="water-damage-restoration-san-diego.html" class="seo-card existing">Water Damage Restoration SD</a>
+      <a href="web-design-san-diego.html" class="seo-card existing">Web Design San Diego</a>
+      <a href="website-maintenance-san-diego.html" class="seo-card existing">Website Maintenance San Diego</a>
+      <a href="wifi-installation-san-diego.html" class="seo-card existing">Wi-Fi Installation San Diego</a>
+      <a href="wifi-guest-network-setup-san-diego.html" class="seo-card existing">Wi-Fi Guest Network Setup SD</a>
+      <a href="window-installation-san-diego.html" class="seo-card existing">Window Installation San Diego</a>
+      <a href="window-repair-san-diego.html" class="seo-card existing">Window Repair San Diego</a>
+      <a href="vinyl-fence-installation-san-diego.html" class="seo-card existing">Vinyl Fence Installation SD</a>
+      <a href="wood-fence-repair-san-diego.html" class="seo-card existing">Wood Fence Repair San Diego</a>
+      <a href="wrought-iron-fence-san-diego.html" class="seo-card existing">Wrought Iron Fence San Diego</a>
+      <!-- ========================= -->
+      <!-- HIGH-VALUE NEW LOCAL PAGES -->
+      <!-- These are clearly NEW · color coded -->
+      <!-- ========================= -->
+      <a href="solar-installation-san-diego.html" class="seo-card new">
+        ☀️ Solar Installation San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="solar-panel-repair-san-diego.html" class="seo-card new">
+        ☀️ Solar Panel Repair San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="epoxy-flooring-san-diego.html" class="seo-card new">
+        🛠️ Epoxy Garage Flooring San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="garage-door-repair-san-diego.html" class="seo-card new">
+        🛠️ Garage Door Repair San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="roof-repair-san-diego.html" class="seo-card new">
+        🏠 Roof Repair San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="roof-replacement-san-diego.html" class="seo-card new">
+        🏠 Roof Replacement San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="mold-removal-san-diego.html" class="seo-card new">
+        🧼 Mold Removal San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="biohazard-cleanup-san-diego.html" class="seo-card new">
+        ☣️ Biohazard Cleanup San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sewer-line-repair-san-diego.html" class="seo-card new">
+        🚨 Sewer Line Repair San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="flood-damage-san-diego.html" class="seo-card new">
+        🌊 Flood Damage Cleanup San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- LOCAL SEO SERVICE CLUSTER (NEW) -->
+      <a href="encinitas-seo-services.html" class="seo-card new">
+        🔍 Encinitas SEO Services <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="carlsbad-seo-services.html" class="seo-card new">
+        🔍 Carlsbad SEO Services <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="del-mar-seo-services.html" class="seo-card new">
+        🔍 Del Mar SEO Services <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="north-county-seo-services.html" class="seo-card new">
+        🔍 North County SEO Services <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-local-seo.html" class="seo-card new">
+        🔍 San Diego Local SEO (Operators) <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- PAYMENTS CLUSTER (NEW) -->
+      <a href="contractor-credit-card-processing-san-diego.html" class="seo-card new">
+        💳 Contractor Credit Card Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="hvac-payment-processing-san-diego.html" class="seo-card new">
+        ❄️ HVAC Payment Processing San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="restaurant-payment-processing-san-diego.html" class="seo-card new">
+        🍽️ Restaurant Payment Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="gym-payment-processing-san-diego.html" class="seo-card new">
+        💪 Gym Payment Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="landscaper-payment-processing-san-diego.html" class="seo-card new">
+        🌿 Landscaper Payment Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="electrician-payment-processing-san-diego.html" class="seo-card new">
+        ⚡ Electrician Payment Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="mobile-service-payment-processing-san-diego.html" class="seo-card new">
+        🚚 Mobile Service Payment Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="beauty-salon-payment-processing-san-diego.html" class="seo-card new">
+        💅 Salon & Spa Payment Processing SD <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- SOLANA / PAYMENTS STORY (NEW LONGFORM) -->
+      <a href="solana-payments-san-diego.html" class="seo-card new">
+        🟩 Solana Payments San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="instant-settlements-san-diego.html" class="seo-card new">
+        ⚡ Instant Settlements San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="why-solana-payments.html" class="seo-card new">
+        🌐 Why Solana for Payments? <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-payments.html" class="seo-card new">
+        💳 SideGuy Payments · 0.4s Settlement <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- SIDEGUY META PAGES (NEW LONGFORM) -->
+      <a href="sideguy-mission.html" class="seo-card new">
+        🌊 SideGuy Mission · Human Layer-2 <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-vision-board.html" class="seo-card new">
+        ✨ SideGuy Vision Board · Operator Future <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-operator-tools.html" class="seo-card new">
+        🧰 SideGuy Operator Tools <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-operator-network.html" class="seo-card new">
+        🤝 SideGuy Operator Network Hub <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="north-county-verified-operators.html" class="seo-card new">
+        🏅 North County Verified Operators <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- PROBLEM / MONEY INDEX (NEW) -->
+      <a href="sideguy-problem-index.html" class="seo-card new">
+        📚 SideGuy Problem Index <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-money-index.html" class="seo-card new">
+        💵 SideGuy Money Index & Betting Lab <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-betting-lab.html" class="seo-card new">
+        📊 SideGuy Betting Lab · Signal Engine <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- TICKETS / EVENTS (NEW) -->
+      <a href="sideguy-tickets.html" class="seo-card new">
+        🎟️ SideGuy Tickets · Operator Inventory <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-event-payments.html" class="seo-card new">
+        🎟️ San Diego Event & Venue Payments <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="north-county-event-operators.html" class="seo-card new">
+        🎟️ North County Event Operators <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- CARBON / ENERGY (NEW) -->
+      <a href="sideguy-carbon-credits.html" class="seo-card new">
+        🌱 SideGuy Carbon Credits · Clean Operators <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-energy-payments.html" class="seo-card new">
+        ⚡ San Diego Energy & Utility Payments <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="clean-tech-payments-san-diego.html" class="seo-card new">
+        🌎 Clean-Tech Payments San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- OPERATOR HELP & CRYPTO HELP DESK (NEW) -->
+      <a href="sideguy-operator-help-desk.html" class="seo-card new">
+        🆘 SideGuy Operator Help Desk <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="crypto-help-desk.html" class="seo-card new">
+        🪙 Crypto Help Desk · Real Answers <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-command-center.html" class="seo-card new">
+        🧭 SideGuy Operator Command Center <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- NAPKIN / STORY PAGES (NEW) -->
+      <a href="sideguy-napkin-art.html" class="seo-card new">
+        📝 SideGuy Napkin Art & Origin Story <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-story.html" class="seo-card new">
+        📖 SideGuy Story · Tickets, Lockdown, Operators <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="sideguy-operator-playbook.html" class="seo-card new">
+        📘 SideGuy Operator Playbook <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- FUTURE CLUSTERS · PLACEHOLDER LINKS YOU CAN FILL OUT -->
+      <a href="san-diego-ai-automation-consulting.html" class="seo-card new">
+        🤖 San Diego AI Automation Consulting <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-contractor-ai-tools.html" class="seo-card new">
+        🧱 AI Tools for Contractors · San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-restaurant-ai-automation.html" class="seo-card new">
+        🍽️ Restaurant AI Automation · San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-gym-ai-automation.html" class="seo-card new">
+        💪 Gym & Fitness AI Automation · San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <a href="san-diego-professional-services-ai.html" class="seo-card new">
+        📂 Professional Services AI · San Diego <span class="tag-new">(NEW)</span>
+      </a>
+      <!-- You can keep appending new SEO cards below this line as we add more pages -->
+      <!-- TARGET: 300+ total links on this grid -->
+    </div>
+  </section>
+  <section class="section-block">
+    <div class="section-title">How to Plug In to SideGuy</div>
+    <div class="section-sub">
+      You don’t need a portal login or a ticketing dashboard. You need someone who will actually move the ball.
+      That’s the whole premise of SideGuy.
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>1 · Text PJ</h3>
+        <p>
+          Tell me the problem in one text: “We need better payments,” “Site’s down,” “I want more search traffic,”
+          “We have inventory to move.” No decks. No call scheduling friction.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>2 · Map the Operator Stack</h3>
+        <p>
+          We map your payments, search, and workflow stack. Where are the fees? Where does time leak?
+          What can be automated in the next 7 days without breaking your brain?
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>3 · Ship · Measure · Repeat</h3>
+        <p>
+          Push one meaningful upgrade: faster payments, a high-intent SEO cluster, or an automation that saves you hours.
+          Measure in real dollars or real hours — then compound.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- TEXT PJ ORB (GLOBAL) -->
+<a href="sms:7735441231" class="text-pj-orb">
+  Text<br>PJ
 </a>
-
-
-
+<footer>
+  <p>SideGuy Solutions · GODWAVE-300 · San Diego Coastal Tech Concierge</p>
+  <p>Build timestamp: <span id="sg-timestamp"></span> · 300-page Operator Problem Index (live + in progress)</p>
+</footer>
+<script>
+  // Simple local timestamp for build footer
+  (function () {
+    var el = document.getElementById("sg-timestamp");
+    if (!el) return;
+    try {
+      el.textContent = new Date().toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+        hour12: true
+      });
+    } catch (e) {
+      el.textContent = new Date().toLocaleString();
+    }
+  })();
+</script>
 </body>
-
 </html>
-
