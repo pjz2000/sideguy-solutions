@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -6,269 +7,229 @@
 
 <meta charset="UTF-8" />
 
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<title>SideGuy Solutions · Operator Command Center v3.0</title>
 
-
-<title>SideGuy Solutions · Operator OS · GODWAVE 300</title>
-
-<meta name="description" content="SideGuy Solutions — San Diego’s Coastal Tech Concierge. 472 pages of real operator fixes: payments, AI automation, SEO, plumbing, HVAC, wifi, and everything in between.">
+<meta name="description" content="SideGuy Solutions — where Google finds the problem, AI explains it, and a real human resolves it. 473 local operator pages for real issues, real payments, and real automation.">
 
 
 
 <style>
 
-/* RESET / BASE */
+  body {
 
-*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+    margin: 0;
 
-body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  font-family:-apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    background: linear-gradient(to bottom right, #dff7ff, #b7e8ff, #8ddcff);
 
-  background:radial-gradient(circle at 15% 10%, #e9faff, #c6eeff, #9ae0ff);
+    color: #0a2a33;
 
-  color:#033045;
+  }
 
-  -webkit-font-smoothing:antialiased;
 
-  line-height:1.45;
 
-}
+  h1, h2 {
 
+    font-weight: 700;
 
+    margin-bottom: 14px;
 
-/* GLOBAL LAYOUT */
+  }
 
-.page { max-width:1180px; margin:0 auto; padding:40px 20px 120px; }
 
 
+  .container {
 
-/* VERSION TAG */
+    max-width: 1150px;
 
-.version-tag {
+    margin: auto;
 
-  position:fixed;
+    padding: 40px 20px 100px;
 
-  top:18px;
+  }
 
-  left:18px;
 
-  background:rgba(255,255,255,0.86);
 
-  backdrop-filter:blur(6px);
+  .section {
 
-  padding:6px 12px;
+    margin-top: 50px;
 
-  border-radius:8px;
+  }
 
-  font-size:11px;
 
-  font-weight:600;
 
-  letter-spacing:.03em;
+  .grid {
 
-  color:#033045;
+    display: grid;
 
-  border:1px solid rgba(0,0,0,0.05);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
-  z-index:99999;
+    gap: 16px;
 
-  box-shadow:0 4px 14px rgba(0,0,0,0.08);
+  }
 
-}
 
 
+  .card {
 
-/* HEADLINE */
+    background: white;
 
-h1 {
+    border-radius: 18px;
 
-  font-size:42px;
+    padding: 20px;
 
-  font-weight:800;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 
-  line-height:1.12;
+    border: 1px solid rgba(0,0,0,0.06);
 
-  max-width:760px;
+  }
 
-  margin-bottom:14px;
 
-}
 
+  .card a {
 
+    color: #009f60;
 
-.subhead {
+    text-decoration: none;
 
-  font-size:17px;
+    font-weight: 600;
 
-  max-width:680px;
+  }
 
-  color:#3f6c82;
 
-  margin-bottom:26px;
 
-}
+  .button {
 
+    display: inline-block;
 
+    padding: 10px 22px;
 
-/* GREEN BUTTON */
+    background: #00d98e;
 
-.btn-green {
+    color: #00331f;
 
-  display:inline-flex;
+    border-radius: 40px;
 
-  align-items:center;
+    font-weight: 600;
 
-  padding:10px 20px;
+    text-decoration: none;
 
-  border-radius:999px;
+    box-shadow: 0 0 12px rgba(0,255,140,0.5);
 
-  background:linear-gradient(135deg,#00d480,#00b894);
+    margin-top: 14px;
 
-  color:#fff;
+  }
 
-  font-size:14px;
 
-  font-weight:700;
 
-  box-shadow:0 6px 18px rgba(0,200,120,0.35);
+  /* Green hover */
 
-  text-decoration:none;
+  .button:hover {
 
-  margin-bottom:30px;
+    background: #00ffae;
 
-}
+  }
 
 
 
-/* SECTION TITLES */
+  /* Text PJ Orb */
 
-.section-title {
+  #pj-orb {
 
-  font-size:22px;
+    position: fixed;
 
-  font-weight:700;
+    right: 25px;
 
-  margin:40px 0 18px;
+    bottom: 25px;
 
-}
+    width: 80px;
 
+    height: 80px;
 
+    border-radius: 50%;
 
-/* GRID CARDS */
+    background: radial-gradient(circle at 30% 30%, #00ff8c, #00c774);
 
-.grid {
+    display: flex;
 
-  display:grid;
+    align-items: center;
 
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    justify-content: center;
 
-  gap:14px;
+    color: #00331f;
 
-}
+    font-weight: 700;
 
+    font-size: 14px;
 
+    box-shadow: 0 0 22px rgba(0,255,140,0.8);
 
-.card {
+    cursor: pointer;
 
-  background:rgba(255,255,255,0.94);
+    animation: pulse 2.4s infinite ease-in-out;
 
-  padding:18px;
+    z-index: 1000;
 
-  border-radius:16px;
+  }
 
-  border:1px solid rgba(0,0,0,0.06);
 
-  box-shadow:0 8px 20px rgba(0,0,0,0.06);
 
-}
+  @keyframes pulse {
 
+    0% { transform: scale(1); box-shadow: 0 0 14px rgba(0,255,140,0.7); }
 
+    50% { transform: scale(1.13); box-shadow: 0 0 26px rgba(0,255,140,1); }
 
-.card h3 {
+    100% { transform: scale(1); box-shadow: 0 0 14px rgba(0,255,140,0.7); }
 
-  font-size:15px; margin-bottom:6px; font-weight:700;
+  }
 
-}
 
 
+  /* Number grid links */
 
-.card p {
+  .link-item {
 
-  font-size:13px; color:#3f6c82;
+    background: white;
 
-}
+    border-radius: 14px;
 
+    padding: 16px;
 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 
-.card a {
+    border: 1px solid rgba(0,0,0,0.05);
 
-  font-size:13px;
+  }
 
-  font-weight:600;
 
-  display:inline-block;
 
-  margin-top:8px;
+  .link-item a {
 
-  color:#00a871;
+    font-weight: 600;
 
-  text-decoration:none;
+    color: #009f60;
 
-}
+    text-decoration: none;
 
+  }
 
 
-/* TEXT PJ ORB */
 
-.text-pj-orb {
+  footer {
 
-  position:fixed;
+    margin-top: 60px;
 
-  bottom:22px;
+    text-align: center;
 
-  right:22px;
+    opacity: 0.6;
 
-  width:78px;
+    font-size: 13px;
 
-  height:78px;
-
-  background:radial-gradient(circle at 30% 20%, #ffffff, #8affb7);
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:13px;
-
-  font-weight:800;
-
-  color:#064c2f;
-
-  box-shadow:0 0 0 4px rgba(255,255,255,0.6), 0 12px 26px rgba(0,255,160,0.45);
-
-  animation:pulse 2.4s infinite ease-in-out;
-
-  text-decoration:none;
-
-}
-
-@keyframes pulse {
-
-  0% { transform:scale(1); opacity:1; }
-
-  50% { transform:scale(1.06); opacity:.92; }
-
-  100% { transform:scale(1); opacity:1; }
-
-}
-
-
+  }
 
 </style>
 
@@ -280,67 +241,47 @@ h1 {
 
 
 
-<!-- VERSION TAG -->
+<!-- TEXT PJ ORB -->
 
-<div class="version-tag">
+<div id="pj-orb" onclick="window.location='sms:7735441231'">
 
-  SideGuy OS · Build v1.1 · Updated Dec 9 · 472 Pages Live
+  TEXT<br>PJ
 
 </div>
 
 
 
-<div class="page">
+<div class="container">
 
 
 
-  <h1>SideGuy is where Google finds the problem, AI explains it, and a real human resolves it.</h1>
+<h1>SideGuy Solutions — Operator Command Center</h1>
+
+<p>Where Google finds the problem, AI explains it, and a real human resolves it.<br>
+
+Built on <strong>473 real pages</strong> of local operator intelligence.</p>
 
 
 
-  <p class="subhead">
-
-    You found SideGuy because you searched for a problem.  
-
-    This is the Operator OS — a 472-page command center for payments, AI automation, field issues, home fixes, business problems, and everything in between.
-
-  </p>
+<a class="button" href="sms:7735441231">Text PJ Now</a>
 
 
 
-  <a href="sms:17735441231" class="btn-green">Text PJ · 773-544-1231</a>
+<!-- ========================= -->
+
+<!-- SECTION: SIDEGUY OS -->
+
+<!-- ========================= -->
 
 
 
-  <hr style="margin:30px 0; border:0; border-top:1px solid rgba(0,0,0,0.08);" />
+<div class="section">
 
-  <!-- OPERATOR SNAPSHOT -->
+  <h2>SideGuy OS — What Actually Happens Here</h2>
 
-  <div class="section-title">Operator Snapshot · What SideGuy Actually Does</div>
+
 
   <div class="grid">
-
-    <div class="card">
-
-      <h3>Payments & Same-Day Payouts</h3>
-
-      <p>SideGuy helps San Diego operators move to faster, cheaper payment rails — often same-day or instant.</p>
-
-      <a href="San-Diego-Payment-Processing.html">Explore Payment Fixes →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>AI Automation & Custom Software</h3>
-
-      <p>Workflows, scripts, backend automations, business systems, and tools that run 24/7.</p>
-
-      <a href="ai-automation-san-diego.html">Explore Automation →</a>
-
-    </div>
 
 
 
@@ -348,45 +289,9 @@ h1 {
 
       <h3>Local Problem Solving</h3>
 
-      <p>472 pages covering the real issues operators deal with: HVAC, plumbing, leaks, wifi, energy, reviews, and more.</p>
+      <p>473 pages covering local issues operators face. Real solutions written by AI + refined by a human.</p>
 
-      <a href="page-index.html">See All Operator Fixes →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>The SideGuy OS</h3>
-
-      <p>A unified Operator Layer-2 over the web: search → understand → resolve → settle payments.</p>
-
-      <a href="money-index.html">See the Money Index →</a>
-
-    </div>
-
-  </div>
-
-
-
-
-
-  <!-- CORE SYSTEMS -->
-
-  <div class="section-title">Featured Systems · SideGuy OS</div>
-
-  <div class="grid">
-
-
-
-    <div class="card">
-
-      <h3>SideGuy Payments</h3>
-
-      <p>0.4-second settlements · Lower fees · Instant clarity.</p>
-
-      <a href="best-payment-processing-san-diego.html">Payments Overview →</a>
+      <a href="#problems">See All Operator Fixes →</a>
 
     </div>
 
@@ -394,11 +299,11 @@ h1 {
 
     <div class="card">
 
-      <h3>SideGuy AI Automation</h3>
+      <h3>SideGuy Payments (x402)</h3>
 
-      <p>Automation that actually works. No fluff, no chaos.</p>
+      <p>Instant-settled payments built for contractors, home services, creators, and local businesses.</p>
 
-      <a href="ai-small-business-automation-san-diego.html">Automation Page →</a>
+      <a href="San-Diego-Payment-Processing.html">Payments Overview →</a>
 
     </div>
 
@@ -408,9 +313,9 @@ h1 {
 
       <h3>SideGuy SEO Engine</h3>
 
-      <p>472 real pages written around live operator search intent.</p>
+      <p>Real pages built for search intent & indexing. Everything loads instantly.</p>
 
-      <a href="seo.html">SEO Overview →</a>
+      <a href="#sitemap">SEO Overview →</a>
 
     </div>
 
@@ -430,216 +335,135 @@ h1 {
 
   </div>
 
+</div>
 
 
 
+<!-- ========================= -->
 
-  <!-- SMART UNIVERSAL TEMPLATES -->
+<!-- NUMBERED CORE PAGE INDEX -->
 
-  <div class="section-title">Universal Fix Templates</div>
+<!-- ========================= -->
 
-  <div class="grid">
 
 
+<div class="section" id="problems">
 
-    <div class="card">
+  <h2>Numbered Core Pages — 1 to 473</h2>
 
-      <h3>HomeFix Template</h3>
 
-      <p>Plumbing, HVAC, leaks, electrical, windows.</p>
 
-      <a href="emergency-plumber-san-diego.html">View Example →</a>
+  <div id="problemGrid" class="grid"></div>
 
-    </div>
+</div>
 
 
 
-    <div class="card">
+<!-- ========================= -->
 
-      <h3>TechFix Template</h3>
+<!-- SITEMAP SECTION -->
 
-      <p>Wifi, apps, integrations, automation issues.</p>
+<!-- ========================= -->
 
-      <a href="wifi-keeps-dropping.html">View Example →</a>
 
-    </div>
 
+<div class="section" id="sitemap">
 
+  <h2>Full Sitemap (Live)</h2>
 
-    <div class="card">
+  <p>Every page your site serves — pulled live from <strong>page-list.json</strong>.</p>
 
-      <h3>PaymentFix Template</h3>
 
-      <p>Fees, slow settlements, Stripe / Square migration.</p>
 
-      <a href="why-is-my-processing-fee-so-high.html">View Example →</a>
+  <div id="sitemapGrid" class="grid"></div>
 
-    </div>
+</div>
 
 
 
-    <div class="card">
+<footer>
 
-      <h3>BusinessFix Template</h3>
+  SideGuy Solutions · Last Updated: <span id="timestamp"></span>
 
-      <p>Hiring, reviews, leadflow, operations, scaling.</p>
+</footer>
 
-      <a href="business-not-getting-leads.html">View Example →</a>
 
-    </div>
 
+</div>
 
 
-  </div>
 
+<script>
 
+/* Load page-list.json dynamically */
 
+async function loadPageList() {
 
+  try {
 
-  <!-- NUMBERED TOP PAGES -->
+    const res = await fetch("page-list.json");
 
-  <div class="section-title">Numbered Core Pages · 1–20 of 472</div>
+    const pages = await res.json();
 
-  <div class="grid">
 
 
+    const problemGrid = document.getElementById("problemGrid");
 
-    <div class="card"><h3>1. AC Not Cooling</h3><a href="why-is-my-ac-not-cooling.html">Open →</a></div>
+    const sitemapGrid  = document.getElementById("sitemapGrid");
 
-    <div class="card"><h3>2. Slow Drains</h3><a href="how-to-fix-slow-drains.html">Open →</a></div>
 
-    <div class="card"><h3>3. Wifi Keeps Dropping</h3><a href="wifi-keeps-dropping.html">Open →</a></div>
 
-    <div class="card"><h3>4. Water Leak Under Sink</h3><a href="water-leak-under-sink.html">Open →</a></div>
+    pages.forEach((file, i) => {
 
-    <div class="card"><h3>5. Heater Not Turning On</h3><a href="heater-not-turning-on.html">Open →</a></div>
+      const clean = file.replace(".html", "");
 
-    <div class="card"><h3>6. Outlet Not Working</h3><a href="outlet-not-working.html">Open →</a></div>
 
-    <div class="card"><h3>7. No Hot Water</h3><a href="no-hot-water-san-diego.html">Open →</a></div>
 
-    <div class="card"><h3>8. Thermostat Problem</h3><a href="thermostat-not-working.html">Open →</a></div>
+      const card = document.createElement("div");
 
-    <div class="card"><h3>9. AC Making Noise</h3><a href="ac-making-noise.html">Open →</a></div>
+      card.className = "link-item";
 
-    <div class="card"><h3>10. Circuit Breaker Tripping</h3><a href="circuit-breaker-tripping.html">Open →</a></div>
+      card.innerHTML = "<strong>" + (i+1) + ".</strong> <a href='" + file + "'>" + clean + "</a>";
 
+      problemGrid.appendChild(card);
 
 
-    <div class="card"><h3>11. Drain Cleaning</h3><a href="drain-cleaning-san-diego.html">Open →</a></div>
 
-    <div class="card"><h3>12. Water Heater Repair</h3><a href="water-heater-repair-san-diego.html">Open →</a></div>
+      const sm = document.createElement("div");
 
-    <div class="card"><h3>13. Mold On Walls</h3><a href="mold-on-walls-problem.html">Open →</a></div>
+      sm.className = "link-item";
 
-    <div class="card"><h3>14. Smart Home Not Connecting</h3><a href="smart-home-not-connecting.html">Open →</a></div>
+      sm.innerHTML = "<a href='" + file + "'>" + file + "</a>";
 
-    <div class="card"><h3>15. Roof Leak After Rain</h3><a href="roof-leak-after-rain.html">Open →</a></div>
+      sitemapGrid.appendChild(sm);
 
-    <div class="card"><h3>16. Tree About To Fall</h3><a href="tree-about-to-fall.html">Open →</a></div>
+    });
 
-    <div class="card"><h3>17. Strange Smell in House</h3><a href="strange-smell-in-house.html">Open →</a></div>
 
-    <div class="card"><h3>18. Window Won’t Close</h3><a href="window-wont-close.html">Open →</a></div>
 
-    <div class="card"><h3>19. Yard Flooding</h3><a href="yard-flooding-problem.html">Open →</a></div>
+  } catch (e) {
 
-    <div class="card"><h3>20. Broken Fence</h3><a href="broken-fence-san-diego.html">Open →</a></div>
+    console.log("Error loading page-list.json", e);
 
+  }
 
+}
 
-  </div>
 
 
+loadPageList();
 
 
 
-  <!-- PAYMENTS CLUSTER -->
+/* Timestamp */
 
-  <div class="section-title">Operator Payments & Settlements</div>
+document.getElementById("timestamp").innerText = new Date().toLocaleString();
 
-  <div class="grid">
-
-
-
-    <div class="card">
-
-      <h3>Best Payment Processing San Diego</h3>
-
-      <a href="best-payment-processing-san-diego.html">Open →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>Lower Credit Card Fees</h3>
-
-      <a href="lower-credit-card-fees-san-diego.html">Open →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>Switch From Stripe</h3>
-
-      <a href="Switch-From-Stripe.html">Open →</a>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <h3>Instant Settlements</h3>
-
-      <a href="instant-settlement-payments-san-diego.html">Open →</a>
-
-    </div>
-
-
-
-  </div>
-
-
-
-
-
-  <!-- FOOTER -->
-
-  <hr style="margin:50px 0; border:0; border-top:1px solid rgba(0,0,0,0.06);" />
-
-
-
-  <p style="font-size:12px; color:#4e768a; text-align:center;">
-
-    SideGuy Solutions · Operator OS · GODWAVE 300<br>
-
-    472 Pages Live · Updated December 9, 2025<br>
-
-    Text PJ any time: <strong>773-544-1231</strong>
-
-  </p>
-
-
-
-</div> <!-- END PAGE WRAPPER -->
-
-
-
-
-
-<!-- TEXT PJ ORB -->
-
-<a href="sms:17735441231" class="text-pj-orb">TEXT<br>PJ</a>
+</script>
 
 
 
 </body>
 
 </html>
-
 
