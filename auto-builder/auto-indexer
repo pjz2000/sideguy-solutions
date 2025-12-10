@@ -1,0 +1,98 @@
+/**
+ * ---------------------------------------------------------
+ *  SideGuy CMS GPT — Auto Indexer v1
+ * ---------------------------------------------------------
+ *  Scans /payments, /problems, /services, /ai, /tools, etc.
+ *  Builds a master index.json with:
+ *    - slug
+ *    - title
+ *    - category
+ *    - filepath
+ *    - url
+ *    - timestamp
+ *
+ *  This becomes the backbone of:
+ *    • Search engine
+ *    • Auto page linking
+ *    • Category navigation
+ *    • Sitemap generator
+ *    • Supervisor AI orchestration
+ *    • Auto-expander’s understanding of the repo
+ *
+ *  Run manually:
+ *      node auto-indexer.js
+ *
+ *  Future:
+ *      Supervisor will run this automatically after every build.
+ */
+
+import fs from "fs";
+import path from "path";
+
+const ROOT = process.cwd();
+
+const CATEGORIES = [
+  "payments",
+  "problems",
+  "services",
+  "ai",
+  "tools",
+  "automation",
+  "contractors",
+  "local",
+  "verticals"
+];
+
+const OUTPUT = path.join(ROOT, "auto-builder/index.json");
+
+function cleanSlug(name) {
+  return name.replace(/\.html$/, "").trim();
+}
+
+function titleFromSlug(slug) {
+  return slug
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function scanCategory(cat) {
+  const dir = path.join(ROOT, cat);
+  if (!fs.existsSync(dir)) return [];
+
+  const files = fs.readdirSync(dir).filter(f => f.endsWith(".html"));
+
+  return files.map(file => {
+    const slug = cleanSlug(file);
+    return {
+      slug,
+      title: titleFromSlug(slug),
+      category: cat,
+      filepath: `${cat}/${file}`,
+      url: `/${cat}/${file}`,
+      indexedAt: new Date().toISOString()
+    };
+  });
+}
+
+function runIndexer() {
+  let master = [];
+
+  console.log("\n🧠  SideGuy CMS GPT — Auto Indexer v1");
+  console.log("--------------------------------------------------");
+
+  for (const cat of CATEGORIES) {
+    const entries = scanCategory(cat);
+    if (entries.length > 0) {
+      console.log(`📂  ${cat}/  →  ${entries.length} pages indexed`);
+    }
+    master = master.concat(entries);
+  }
+
+  fs.writeFileSync(OUTPUT, JSON.stringify(master, null, 2));
+
+  console.log("\n✅  index.json created!");
+  console.log(`📄  Total pages indexed: ${master.length}`);
+  console.log(`📍  Output: auto-builder/index.json\n`);
+}
+
+runIndexer();
