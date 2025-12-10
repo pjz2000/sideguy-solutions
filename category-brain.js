@@ -1,96 +1,128 @@
 /**
- * SideGuy CMS GPT · Category Brain v1
- * ------------------------------------
- * This module decides what category a new page belongs to
- * based on URL, title, description, or keywords.
- *
- * Later versions can plug into GPT for “smart classification,”
- * but v1 is deterministic, fast, safe, and stable.
+
+ * SideGuy CMS GPT - Category Brain v1
+
+ * --------------------------------------------------------
+
+ * Decides what category a new page belongs to.
+
+ * Uses:
+
+ *   - URL slug
+
+ *   - Title
+
+ *   - Description
+
+ *   - Keywords
+
+ * This lets auto-builder plug into smart classification
+
+ * so thousands of pages stay organized, fast, and scalable.
+
  */
 
-const CategoryBrain = {
-  
-  classify(entry) {
-    const slug = (entry.slug || "").toLowerCase();
-    const title = (entry.title || "").toLowerCase();
-    const desc = (entry.metaDescription || "").toLowerCase();
 
-    // Combined content for scanning
-    const content = slug + " " + title + " " + desc;
 
-    // --- PAYMENT CATEGORY -----------------------------------
-    if (
-      content.includes("payment") ||
+function categoryBrain(entry) {
+
+  const slug = entry.slug.toLowerCase();
+
+  const title = entry.title.toLowerCase();
+
+  const desc = entry.metaDescription.toLowerCase();
+
+  const content = slug + " " + title + " " + desc;
+
+
+
+  // PAYMENTS
+
+  if (content.includes("payment") ||
+
       content.includes("processing") ||
+
       content.includes("merchant") ||
-      content.includes("settlement") ||
-      content.includes("solana") ||
-      content.includes("credit-card") ||
-      content.includes("pos")
-    ) {
-      return "payments";
-    }
 
-    // --- HOME SERVICES --------------------------------------
-    if (
-      content.includes("repair") ||
-      content.includes("plumber") ||
-      content.includes("leak") ||
-      content.includes("ac") ||
-      content.includes("hvac") ||
-      content.includes("heater") ||
-      content.includes("roof") ||
-      content.includes("electric") ||
-      content.includes("contractor") ||
-      content.includes("landscap") ||
-      content.includes("pest") ||
-      content.includes("foundation")
-    ) {
-      return "home-services";
-    }
+      content.includes("credit") ||
 
-    // --- AI / AUTOMATION ------------------------------------
-    if (
-      content.includes("ai") ||
-      content.includes("automation") ||
-      content.includes("software") ||
-      content.includes("app-development") ||
-      content.includes("integration") ||
-      content.includes("cloud") ||
-      content.includes("it")
-    ) {
-      return "automation";
-    }
+      content.includes("fees")) {
 
-    // --- SIDEGUY IDENTITY / PLATFORM --------------------------------
-    if (
-      content.includes("sideguy") ||
-      content.includes("operator") ||
-      content.includes("command") ||
-      content.includes("network") ||
-      content.includes("vision") ||
-      content.includes("mission") ||
-      content.includes("gallery")
-    ) {
-      return "platform";
-    }
+    return "payments";
 
-    // --- PROBLEM / TROUBLESHOOTING -----------------------------------
-    if (
-      content.includes("why") ||
-      content.includes("how") ||
-      content.includes("not working") ||
-      content.includes("won't") ||
-      content.includes("wont") ||
-      content.includes("fix") ||
-      content.includes("problem")
-    ) {
-      return "problems";
-    }
-
-    // --- DEFAULT CATEGORY ---------------------------------------------
-    return "misc";
   }
-};
 
-module.exports = CategoryBrain;
+
+
+  // PROBLEMS (home repair, HVAC, plumbing, electrical)
+
+  if (content.includes("repair") ||
+
+      content.includes("fix") ||
+
+      content.includes("not working") ||
+
+      content.includes("leak") ||
+
+      content.includes("ac") ||
+
+      content.includes("heater") ||
+
+      content.includes("water") ||
+
+      content.includes("plumb") ||
+
+      content.includes("elect")) {
+
+    return "problems";
+
+  }
+
+
+
+  // AUTOMATION / AI
+
+  if (content.includes("automation") ||
+
+      content.includes("ai") ||
+
+      content.includes("software") ||
+
+      content.includes("development")) {
+
+    return "automation";
+
+  }
+
+
+
+  // SERVICES / CONTRACTORS
+
+  if (content.includes("landscaping") ||
+
+      content.includes("roof") ||
+
+      content.includes("hvac") ||
+
+      content.includes("install") ||
+
+      content.includes("contractor") ||
+
+      content.includes("service")) {
+
+    return "services";
+
+  }
+
+
+
+  // DEFAULT
+
+  return "general";
+
+}
+
+
+
+module.exports = categoryBrain;
+
