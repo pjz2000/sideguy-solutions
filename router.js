@@ -1,58 +1,115 @@
 /**
- * SideGuy CMS GPT – Router v1
- * ---------------------------------------------------
- * Maps a page's category → the correct directory path.
- * Auto-builder uses this before writing files.
+
+ * SideGuy CMS GPT — Router V1
+
+ * ----------------------------
+
+ * Decides WHERE a page gets saved in the repo based on CATEGORY.
+
+ * Auto-builder calls this before writing files.
+
  *
+
  * Example:
- *   category: "payments" → /payments/page-slug.html
- *   category: "problems" → /problems/page-slug.html
- *   category: "services" → /services/page-slug.html
- *   category: "ai"       → /ai/page-slug.html
+
+ *   category = "payments" → /payments/pages/slug.html
+
+ *   category = "problems" → /problems/pages/slug.html
+
  *
- * This lets the website grow into thousands of pages
- * while staying clean, consistent, and organized.
- * ---------------------------------------------------
+
+ * This keeps the repo clean, scalable, and organized forever.
+
  */
 
-function routePath(category, slug) {
-  const cleanSlug = slug.replace(/[^a-z0-9\-]/gi, "").toLowerCase();
 
-  switch (category) {
-    case "payments":
-      return `payments/${cleanSlug}.html`;
 
-    case "processing":
-      return `payments/${cleanSlug}.html`;
+function cleanSlug(slug) {
 
-    case "problems":
-      return `problems/${cleanSlug}.html`;
+  return slug.replace(/[^a-z0-9\-]/gi, "").toLowerCase();
 
-    case "services":
-      return `services/${cleanSlug}.html`;
-
-    case "contractors":
-      return `services/${cleanSlug}.html`;
-
-    case "ai":
-      return `ai/${cleanSlug}.html`;
-
-    case "automation":
-      return `ai/${cleanSlug}.html`;
-
-    case "seo":
-      return `seo/${cleanSlug}.html`;
-
-    case "energy":
-      return `energy/${cleanSlug}.html`;
-
-    case "tickets":
-      return `tickets/${cleanSlug}.html`;
-
-    // fallback — catch all
-    default:
-      return `misc/${cleanSlug}.html`;
-  }
 }
 
-module.exports = { routePath };
+
+
+/**
+
+ * ROUTER: map CATEGORY → DIRECTORY PATH
+
+ */
+
+function route(category, slug) {
+
+  const safeSlug = cleanSlug(slug);
+
+
+
+  switch (category) {
+
+    case "payments":
+
+      return `payments/pages/${safeSlug}.html`;
+
+
+
+    case "processing":
+
+      return `processing/pages/${safeSlug}.html`;
+
+
+
+    case "problems":
+
+      return `problems/pages/${safeSlug}.html`;
+
+
+
+    case "contractors":
+
+      return `contractors/pages/${safeSlug}.html`;
+
+
+
+    case "ai":
+
+      return `ai/pages/${safeSlug}.html`;
+
+
+
+    case "services":
+
+      return `services/pages/${safeSlug}.html`;
+
+
+
+    case "tickets":
+
+      return `tickets/pages/${safeSlug}.html`;
+
+
+
+    case "energy":
+
+      return `energy/pages/${safeSlug}.html`;
+
+
+
+    case "seo":
+
+      return `seo/pages/${safeSlug}.html`;
+
+
+
+    default:
+
+      // Fallback: place unknown categories in /misc
+
+      return `misc/pages/${safeSlug}.html`;
+
+  }
+
+}
+
+
+
+module.exports = { route };
