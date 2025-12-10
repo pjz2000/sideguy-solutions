@@ -1,253 +1,304 @@
-import fs from "fs";
+const fs = require('fs');
 
+const path = require('path');
 
 
-const pages = [
 
- const pages = [
+// 100 simple problem titles to turn into pages
 
-  { slug: 'San-Diego-Payment-Processing.html', title: 'San Diego Payment Processing' },
+const titles = [
 
-  { slug: 'San-Diego-Instant-Settlements.html', title: 'San Diego Instant Settlements' },
+  'San Diego Faucet Leak Repair',
 
-  { slug: 'San-Diego-Lower-Credit-Card-Fees.html', title: 'San Diego Lower Credit Card Fees' },
+  'San Diego Garbage Disposal Stuck',
 
-  { slug: 'North-County-Payment-Processing.html', title: 'North County Payment Processing' },
+  'San Diego Dishwasher Not Draining',
 
-  { slug: 'North-County-Instant-Settlements.html', title: 'North County Instant Settlements' },
+  'San Diego Oven Not Heating Up',
 
-  { slug: 'North-County-Solana-Payments.html', title: 'North County Solana Payments' },
+  'San Diego Stove Igniter Not Working',
 
-  { slug: 'Carlsbad-Contractor-Payments.html', title: 'Carlsbad Contractor Payments' },
+  'San Diego Refrigerator Too Warm',
 
-  { slug: 'Carlsbad-Lower-Credit-Card-Fees.html', title: 'Carlsbad Lower Credit Card Fees' },
+  'San Diego Freezer Frost Buildup',
 
-  { slug: 'Cardiff-Payment-Processing.html', title: 'Cardiff Payment Processing' },
+  'San Diego Washing Machine Won\'t Spin',
 
-  { slug: 'Del-Mar-Lower-Credit-Card-Fees.html', title: 'Del Mar Lower Credit Card Fees' },
+  'San Diego Dryer Not Drying Clothes',
 
-  { slug: 'La-Jolla-Solana-Payments.html', title: 'La Jolla Solana Payments' },
+  'San Diego Water Heater Pilot Out',
 
-  { slug: 'Rancho-Santa-Fe-Payment-Processing.html', title: 'Rancho Santa Fe Payment Processing' },
+  'San Diego Low Water Pressure Fix',
 
-  { slug: 'Same-Day-Payment-Processing.html', title: 'Same Day Payment Processing' },
+  'San Diego Electrical Outlet Not Working',
 
-  { slug: 'Mobile-Payment-Processing.html', title: 'Mobile Payment Processing' },
+  'San Diego Light Switch Not Working',
 
-  { slug: 'Crypto-Payment-Processing.html', title: 'Crypto Payment Processing' },
+  'San Diego Flickering Lights Problem',
 
-  { slug: 'Free-Payment-Processing-Setup.html', title: 'Free Payment Processing Setup' },
+  'San Diego Ceiling Fan Wobbling',
 
-  { slug: 'Energy-Payments-San-Diego.html', title: 'Energy Payments San Diego' },
+  'San Diego Thermostat Not Responding',
 
-  { slug: 'San-Diego-Field-Service-Payments.html', title: 'San Diego Field Service Payments' },
+  'San Diego AC Not Blowing Cold Air',
 
-  { slug: 'hvac-payment-processing.html', title: 'Hvac Payment Processing' },
+  'San Diego Heater Not Turning On',
 
-  { slug: 'plumber-payment-processing.html', title: 'Plumber Payment Processing' },
+  'San Diego Mini Split Not Cooling',
 
-  { slug: 'electrician-payment-processing.html', title: 'Electrician Payment Processing' },
+  'San Diego Smart Thermostat Install',
 
-  { slug: 'landscaper-payment-processing.html', title: 'Landscaper Payment Processing' },
+  'San Diego WiFi Keeps Dropping',
 
-  { slug: 'restaurant-payment-processing.html', title: 'Restaurant Payment Processing' },
+  'San Diego Slow Internet Help',
 
-  { slug: 'restaurant-solana-payments.html', title: 'Restaurant Solana Payments' },
+  'San Diego Home Network Setup',
 
-  { slug: 'bar-nightclub-payment-processing.html', title: 'Bar Nightclub Payment Processing' },
+  'San Diego TV Mounting Near Me',
 
-  { slug: 'event-ticket-payments.html', title: 'Event Ticket Payments' },
+  'San Diego Home Theater Setup Help',
 
-  { slug: 'instant-settlement-api.html', title: 'Instant Settlement Api' },
+  'San Diego Smart Home Device Setup',
 
-  { slug: 'solana-pos-terminals.html', title: 'Solana Pos Terminals' },
+  'San Diego Security Camera Installation',
 
-  { slug: 'usdc-payments-san-diego.html', title: 'Usdc Payments San Diego' },
+  'San Diego Doorbell Camera Install',
 
-  { slug: 'subscription-payments-san-diego.html', title: 'Subscription Payments San Diego' },
+  'San Diego Garage Door Won\'t Close',
 
-  { slug: 'invoice-automation-san-diego.html', title: 'Invoice Automation San Diego' },
+  'San Diego Garage Door Opener Install',
 
-  { slug: 'payment-integration-services.html', title: 'Payment Integration Services' },
+  'San Diego Window Won\'t Close Right',
 
-  { slug: 'merchant-account-services.html', title: 'Merchant Account Services' },
+  'San Diego Sliding Door Off Track',
 
-  { slug: 'high-risk-payment-processing.html', title: 'High Risk Payment Processing' },
+  'San Diego Screen Door Replacement',
 
-  { slug: 'ac-repair-san-diego.html', title: 'Ac Repair San Diego' },
+  'San Diego Door Lock Not Working',
 
-  { slug: 'why-is-my-ac-not-cooling.html', title: 'Why Is My Ac Not Cooling' },
+  'San Diego Rekey House Locks',
 
-  { slug: 'ac-making-noise.html', title: 'Ac Making Noise' },
+  'San Diego Lost House Keys Help',
 
-  { slug: 'heater-not-turning-on.html', title: 'Heater Not Turning On' },
+  'San Diego Car Keys Locked Inside',
 
-  { slug: 'thermostat-not-working.html', title: 'Thermostat Not Working' },
+  'San Diego Car Battery Jump Start',
 
-  { slug: 'water-heater-not-working.html', title: 'Water Heater Not Working' },
+  'San Diego Flat Tire Help',
 
-  { slug: 'no-hot-water-san-diego.html', title: 'No Hot Water San Diego' },
+  'San Diego Mobile Mechanic Near Me',
 
-  { slug: 'how-to-fix-slow-drains.html', title: 'How To Fix Slow Drains' },
+  'San Diego Oil Change At Home',
 
-  { slug: 'why-is-my-toilet-running.html', title: 'Why Is My Toilet Running' },
+  'San Diego Mobile Detail Service',
 
-  { slug: 'water-leak-under-sink.html', title: 'Water Leak Under Sink' },
+  'San Diego Pet Stain Carpet Cleaning',
 
-  { slug: 'roof-leak-after-rain.html', title: 'Roof Leak After Rain' },
+  'San Diego Area Rug Cleaning Pickup',
 
-  { slug: 'window-wont-close.html', title: 'Window Wont Close' },
+  'San Diego Sofa Deep Cleaning',
 
-  { slug: 'door-wont-latch.html', title: 'Door Wont Latch' },
+  'San Diego Mattress Deep Cleaning',
 
-  { slug: 'garage-door-wont-open.html', title: 'Garage Door Wont Open' },
+  'San Diego Tile And Grout Cleaning',
 
-  { slug: 'power-outage-local-issues.html', title: 'Power Outage Local Issues' },
+  'San Diego Shower Glass Hard Water Removal',
 
-  { slug: 'circuit-breaker-tripping.html', title: 'Circuit Breaker Tripping' },
+  'San Diego Kitchen Deep Cleaning',
 
-  { slug: 'outlet-not-working.html', title: 'Outlet Not Working' },
+  'San Diego Restaurant Hood Cleaning',
 
-  { slug: 'flickering-lights-problem.html', title: 'Flickering Lights Problem' },
+  'San Diego Short Term Rental Turnover',
 
-  { slug: 'wifi-keeps-dropping.html', title: 'Wifi Keeps Dropping' },
+  'San Diego Moving Help By The Hour',
 
-  { slug: 'wifi-slow-san-diego.html', title: 'Wifi Slow San Diego' },
+  'San Diego Furniture Assembly Service',
 
-  { slug: 'home-network-issues.html', title: 'Home Network Issues' },
+  'San Diego TV And Media Wall Build',
 
-  { slug: 'smart-home-not-connecting.html', title: 'Smart Home Not Connecting' },
+  'San Diego Custom Closet Build Out',
 
-  { slug: 'tv-mounting-help-near-me.html', title: 'Tv Mounting Help Near Me' },
+  'San Diego Garage Storage System',
 
-  { slug: 'foundation-repair-san-diego.html', title: 'Foundation Repair San Diego' },
+  'San Diego Epoxy Garage Floor',
 
-  { slug: 'foundation-crack-repair.html', title: 'Foundation Crack Repair' },
+  'San Diego Backyard Drainage Problems',
 
-  { slug: 'retaining-wall-repair.html', title: 'Retaining Wall Repair' },
+  'San Diego Yard Flooding After Rain',
 
-  { slug: 'emergency-plumber-san-diego.html', title: 'Emergency Plumber San Diego' },
+  'San Diego French Drain Installation',
 
-  { slug: 'leak-detection-san-diego.html', title: 'Leak Detection San Diego' },
+  'San Diego Sump Pump Install',
 
-  { slug: 'sewer-line-repair-san-diego.html', title: 'Sewer Line Repair San Diego' },
+  'San Diego Retaining Wall Repair',
 
-  { slug: 'drain-cleaning-san-diego.html', title: 'Drain Cleaning San Diego' },
+  'San Diego Concrete Crack Repair',
 
-  { slug: 'water-pressure-low.html', title: 'Water Pressure Low' },
+  'San Diego Driveway Resurfacing',
 
-  { slug: 'shower-not-getting-hot.html', title: 'Shower Not Getting Hot' },
+  'San Diego Paver Patio Repair',
 
-  { slug: 'garbage-disposal-jammed.html', title: 'Garbage Disposal Jammed' },
+  'San Diego Sprinkler System Not Working',
 
-  { slug: 'dishwasher-not-draining.html', title: 'Dishwasher Not Draining' },
+  'San Diego Broken Sprinkler Head',
 
-  { slug: 'fridge-not-cooling.html', title: 'Fridge Not Cooling' },
+  'San Diego Drip Irrigation Install',
 
-  { slug: 'washer-not-spinning.html', title: 'Washer Not Spinning' },
+  'San Diego Brown Lawn Recovery',
 
-  { slug: 'dryer-not-heating.html', title: 'Dryer Not Heating' },
+  'San Diego Low Water Landscape Ideas',
 
-  { slug: 'landscaping-services-san-diego.html', title: 'Landscaping Services San Diego' },
+  'San Diego Artificial Turf Install',
 
-  { slug: 'tree-removal-san-diego.html', title: 'Tree Removal San Diego' },
+  'San Diego Tree Trimming Service',
 
-  { slug: 'yard-drainage-fix.html', title: 'Yard Drainage Fix' },
+  'San Diego Palm Tree Trimming',
 
-  { slug: 'irrigation-system-repair.html', title: 'Irrigation System Repair' },
+  'San Diego Emergency Tree Removal',
 
-  { slug: 'sprinklers-not-working.html', title: 'Sprinklers Not Working' },
+  'San Diego Gutter Cleaning Service',
 
-  { slug: 'gutter-cleaning-san-diego.html', title: 'Gutter Cleaning San Diego' },
+  'San Diego Roof Leak After Storm',
 
-  { slug: 'roof-repair-san-diego.html', title: 'Roof Repair San Diego' },
+  'San Diego Attic Insulation Upgrade',
 
-  { slug: 'attic-fan-installation.html', title: 'Attic Fan Installation' },
+  'San Diego Drafty Window Fix',
 
-  { slug: 'home-insulation-san-diego.html', title: 'Home Insulation San Diego' },
+  'San Diego Mold Smell In House',
 
-  { slug: 'new-window-installation.html', title: 'New Window Installation' },
+  'San Diego Bathroom Vent Fan Install',
 
-  { slug: 'garage-conversion-san-diego.html', title: 'Garage Conversion San Diego' },
+  'San Diego Shower Remodel Estimate',
 
-  { slug: 'furniture-assembly-san-diego.html', title: 'Furniture Assembly San Diego' },
+  'San Diego Kitchen Remodel Estimate',
 
-  { slug: 'pest-control-san-diego.html', title: 'Pest Control San Diego' },
+  'San Diego New Flooring Estimate',
 
-  { slug: 'termite-inspection-san-diego.html', title: 'Termite Inspection San Diego' },
+  'San Diego Whole House Paint Estimate',
 
-  { slug: 'rodent-removal-san-diego.html', title: 'Rodent Removal San Diego' },
+  'San Diego Interior Designer Consult',
 
-  { slug: 'bed-bug-treatment-san-diego.html', title: 'Bed Bug Treatment San Diego' },
+  'San Diego Home Office Setup Help',
 
-  { slug: 'pool-repair-san-diego.html', title: 'Pool Repair San Diego' },
+  'San Diego Gaming PC Setup Help',
 
-  { slug: 'spa-repair-san-diego.html', title: 'Spa Repair San Diego' },
+  'San Diego Crypto Wallet Setup Help',
 
-  { slug: 'water-damage-restoration.html', title: 'Water Damage Restoration' },
+  'San Diego Small Business Website Help',
 
-  { slug: 'mold-removal-san-diego.html', title: 'Mold Removal San Diego' },
+  'San Diego Google Business Profile Fix',
 
-  { slug: 'biohazard-cleanup.html', title: 'Biohazard Cleanup' },
+  'San Diego Online Reviews Help',
 
-  { slug: 'crime-scene-cleaning.html', title: 'Crime Scene Cleaning' },
+  'San Diego Booking System Setup',
 
-  { slug: 'hoarder-cleanup-san-diego.html', title: 'Hoarder Cleanup San Diego' },
+  'San Diego Payment Processing Fix',
 
-  { slug: 'carpet-cleaning-san-diego.html', title: 'Carpet Cleaning San Diego' },
+  'San Diego Instant Settlement Payments',
 
-  { slug: 'tile-grout-cleaning-san-diego.html', title: 'Tile Grout Cleaning San Diego' },
+  'San Diego Contractor Payments Help',
 
-  { slug: 'deep-cleaning-services.html', title: 'Deep Cleaning Services' },
+  'San Diego Mobile Invoice Setup',
 
-  { slug: 'office-cleaning-san-diego.html', title: 'Office Cleaning San Diego' },
+  'San Diego HVAC Payments Help',
 
-  { slug: 'kitchen-remodel-san-diego.html', title: 'Kitchen Remodel San Diego' },
+  'San Diego Plumber Payments Help',
 
-  { slug: 'bathroom-remodel-san-diego.html', title: 'Bathroom Remodel San Diego' }
+  'San Diego Electrician Payments Help',
+
+  'San Diego Landscaper Payments Help',
+
+  'San Diego Cleaning Service Payments',
+
+  'San Diego Handyman Payments Help',
+
+  'San Diego Solana Payments Near Me',
+
+  'San Diego Crypto Payments For Business',
+
+  'San Diego SideGuy Solutions Help'
 
 ];
 
-  // add more pages here
-
-];
 
 
+function slugify(title) {
 
-const template = (title) => `
+  return title
 
-<!DOCTYPE html>
+    .toLowerCase()
 
-<html>
+    .replace(/[^a-z0-9]+/g, '-')
+
+    .replace(/^-+|-+$/g, '');
+
+}
+
+
+
+function buildPage(title) {
+
+  const slug = slugify(title);
+
+  const filename = slug + '.html';
+
+  const filePath = path.join(process.cwd(), filename);
+
+
+
+  const html = `<!DOCTYPE html>
+
+<html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8" />
 
-<title>${title} · SideGuy Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>${title} · SideGuy Solutions</title>
+
+  <meta name="description" content="${title} — SideGuy Solutions problem-solver landing page generated by the simple builder.">
 
 </head>
 
 <body>
 
-<h1>${title}</h1>
+  <main>
 
-<p>Auto-generated SideGuy page.</p>
+    <h1>${title}</h1>
+
+    <p>This page was generated automatically by the SideGuy simple builder script.</p>
+
+    <p>When you\'re ready, you can upgrade this page with your premium template.</p>
+
+    <p><a href="https://sideguysolutions.com/">← Back to SideGuySolutions.com</a></p>
+
+  </main>
 
 </body>
 
-</html>
-
-`;
+</html>`;
 
 
 
-pages.forEach((filename) => {
+  fs.writeFileSync(filePath, html, 'utf8');
 
-  const title = filename.replace(".html", "").replace(/-/g, " ");
+  console.log('Generated:', filename);
 
-  fs.writeFileSync(filename, template(title));
+}
 
-  console.log("Generated:", filename);
 
-});
+
+// Generate all pages
+
+for (const title of titles) {
+
+  buildPage(title);
+
+}
+
+
+
+console.log('\\n✅ Done. 100 simple pages generated.');
+
