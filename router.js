@@ -1,39 +1,58 @@
-/* 
-  SideGuy Solutions · Smart Router v1
-  Compatibility Mode — fixes uppercase, spaces, dashes, .html issues
-  Author: PJ + ChatGPT
-*/
+/**
+ * SideGuy CMS GPT – Router v1
+ * ---------------------------------------------------
+ * Maps a page's category → the correct directory path.
+ * Auto-builder uses this before writing files.
+ *
+ * Example:
+ *   category: "payments" → /payments/page-slug.html
+ *   category: "problems" → /problems/page-slug.html
+ *   category: "services" → /services/page-slug.html
+ *   category: "ai"       → /ai/page-slug.html
+ *
+ * This lets the website grow into thousands of pages
+ * while staying clean, consistent, and organized.
+ * ---------------------------------------------------
+ */
 
-(function() {
-  // Get the requested path
-  const rawPath = window.location.pathname;
+function routePath(category, slug) {
+  const cleanSlug = slug.replace(/[^a-z0-9\-]/gi, "").toLowerCase();
 
-  // If visiting root, do nothing (homepage)
-  if (rawPath === "/" || rawPath === "/index.html") return;
+  switch (category) {
+    case "payments":
+      return `payments/${cleanSlug}.html`;
 
-  // Normalize the path to match SideGuy rules
-  let slug = rawPath
-    .toLowerCase()
-    .replace(/_/g, "-")        // underscores → hyphens
-    .replace(/\s+/g, "-")      // spaces → hyphens
-    .replace(/---+/g, "-")     // collapse triple hyphens
-    .replace(/[^a-z0-9\-\.]/g, "") // remove weird characters
-    .trim();
+    case "processing":
+      return `payments/${cleanSlug}.html`;
 
-  // Ensure .html extension exists
-  if (!slug.endsWith(".html")) {
-    slug = slug.replace(/\/$/, "") + ".html";
+    case "problems":
+      return `problems/${cleanSlug}.html`;
+
+    case "services":
+      return `services/${cleanSlug}.html`;
+
+    case "contractors":
+      return `services/${cleanSlug}.html`;
+
+    case "ai":
+      return `ai/${cleanSlug}.html`;
+
+    case "automation":
+      return `ai/${cleanSlug}.html`;
+
+    case "seo":
+      return `seo/${cleanSlug}.html`;
+
+    case "energy":
+      return `energy/${cleanSlug}.html`;
+
+    case "tickets":
+      return `tickets/${cleanSlug}.html`;
+
+    // fallback — catch all
+    default:
+      return `misc/${cleanSlug}.html`;
   }
+}
 
-  // Remove leading slash
-  slug = slug.replace(/^\//, "");
-
-  // Build final target
-  const finalUrl = "/" + slug;
-
-  // If it's already correct, stop
-  if (finalUrl === rawPath) return;
-
-  // Redirect to normalized file
-  window.location.replace(finalUrl);
-})();
+module.exports = { routePath };
