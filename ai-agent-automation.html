@@ -1,251 +1,184 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-  <!-- SideGuy Solutions · AI Operator Page · v2 FIRE -->
+<meta charset="UTF-8" />
 
-  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AI That Actually Helps · SideGuy Solutions</title>
 
-  <title>AI That Actually Helps Operators · SideGuy Solutions</title>
+<meta name="description" content="SideGuy AI helps San Diego operators save time and money by implementing AI the right way — with a real human in the loop." />
 
-  <meta name="description" content="SideGuy AI helps San Diego operators automate workflows, clean up systems, and actually get leverage from AI — with a real human in the loop." />
 
 
+<style>
 
-  <style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
 
+ --bg1:#e9f8ff;--bg2:#c7edff;
 
+ --text:#033045;--muted:#4a6b7c;
 
-    :root{
+ --accent:#00a8ff;--accent2:#00c2a8;
 
-      --sky:#e9f8ff;
+ --border:rgba(3,48,69,.08);
 
-      --sea:#c7edff;
+ --card:#fff;--radius:22px;--pill:999px;
 
-      --accent:#00a8ff;
+}
 
-      --accent2:#00c2a8;
+body{
 
-      --accent3:#7c7cff;
+ font-family:-apple-system,system-ui,"Inter",sans-serif;
 
-      --text:#033045;
+ background:radial-gradient(circle at 10% 0%,#fff 0%,var(--bg1) 45%,var(--bg2) 100%);
 
-      --muted:#456575;
+ color:var(--text);
 
-      --border:rgba(3,48,69,.08);
+}
 
-      --card:#ffffff;
+main{max-width:1120px;margin:0 auto;padding:40px 20px 90px}
 
-      --radius:22px;
+h1{font-size:32px;margin-bottom:10px}
 
-      --pill:999px;
+.lead{max-width:760px;font-size:15px;color:var(--muted);margin-bottom:28px}
 
-    }
 
 
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px}
 
-    body{
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
 
-      font-family:-apple-system,system-ui,"Inter",sans-serif;
 
-      background:radial-gradient(circle at 10% 0%,#fff 0%,var(--sky) 45%,var(--sea) 100%);
 
-      color:var(--text);
+.card{
 
-    }
+ background:var(--card);
 
+ border:1px solid var(--border);
 
+ border-radius:var(--radius);
 
-    .page{min-height:100vh;display:flex;flex-direction:column;}
+ padding:18px;
 
+ box-shadow:0 14px 34px rgba(3,48,69,.07)
 
+}
 
-    header{
+.label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(3,48,69,.55);margin-bottom:6px}
 
-      position:sticky;top:0;z-index:20;
+.card h3{font-size:16px;margin-bottom:8px}
 
-      backdrop-filter:blur(14px);
+.card p{font-size:13px;line-height:1.55;color:var(--muted)}
 
-      background:rgba(255,255,255,.92);
 
-      border-bottom:1px solid var(--border);
 
-    }
+.prompt{
 
+ border:1px dashed rgba(0,168,255,.35);
 
+ border-radius:16px;
 
-    .nav{
+ padding:14px;
 
-      max-width:1120px;margin:0 auto;
+ background:rgba(255,255,255,.9);
 
-      padding:12px 20px;
+ font-size:13px;color:var(--muted)
 
-      display:flex;justify-content:space-between;align-items:center;
+}
 
-    }
 
 
+/* TEXT ORBS */
 
-    .brand{display:flex;align-items:center;gap:12px;}
+.text-orb{
 
+ position:fixed;
 
+ right:18px;
 
-    .orbs{display:flex;gap:6px;}
+ padding:10px 16px;
 
-    .orb{
+ border-radius:var(--pill);
 
-      width:22px;height:22px;border-radius:50%;
+ background:linear-gradient(135deg,var(--accent2),var(--accent));
 
-      box-shadow:0 10px 24px rgba(0,140,255,.35);
+ color:#fff;
 
-    }
+ font-size:12px;
 
-    .orb.one{background:radial-gradient(circle at 30% 0%,#fff,#9be7ff,var(--accent));}
+ font-weight:600;
 
-    .orb.two{background:radial-gradient(circle at 30% 0%,#fff,#b9fff1,var(--accent2));}
+ text-decoration:none;
 
-    .orb.three{background:radial-gradient(circle at 30% 0%,#fff,#dedcff,var(--accent3));}
+ box-shadow:0 14px 34px rgba(0,140,255,.45);
 
+ display:flex;align-items:center;gap:6px;
 
+}
 
-    main{
+.text-orb span{font-size:14px}
 
-      max-width:1120px;
 
-      margin:0 auto;
 
-      padding:30px 20px 70px;
+.orb-1{top:90px}
 
-      flex:1;
+.orb-2{top:140px}
 
-    }
+.orb-3{top:190px}
 
 
 
-    h1{font-size:32px;line-height:1.15;margin-bottom:10px;}
+/* MASTER ORB */
 
-    .lead{max-width:720px;font-size:15px;color:var(--muted);margin-bottom:26px;}
+.text-pj{
 
+ position:fixed;
 
+ bottom:18px;
 
-    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+ right:18px;
 
-    .pill{
+ z-index:100;
 
-      padding:6px 12px;border-radius:var(--pill);
+ padding:14px 20px;
 
-      background:#fff;border:1px solid var(--border);
+ border-radius:var(--pill);
 
-      font-size:11px;color:var(--muted);
+ background:linear-gradient(135deg,#00d2a8,#00a8ff);
 
-      display:flex;gap:6px;align-items:center;
+ color:#fff;
 
-    }
+ font-weight:700;
 
+ text-decoration:none;
 
+ box-shadow:0 18px 46px rgba(0,140,255,.5)
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px;}
+}
 
-    @media(max-width:900px){.grid{grid-template-columns:1fr;}}
 
 
+footer{
 
-    .card{
+ border-top:1px solid var(--border);
 
-      background:var(--card);
+ padding:20px;
 
-      border:1px solid var(--border);
+ text-align:center;
 
-      border-radius:var(--radius);
+ font-size:11px;
 
-      padding:18px;
+ color:var(--muted)
 
-      box-shadow:0 14px 34px rgba(3,48,69,.07);
+}
 
-    }
-
-
-
-    .icon{font-size:20px;margin-bottom:6px;}
-
-    .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(3,48,69,.55);margin-bottom:6px;}
-
-    .card h3{font-size:16px;margin-bottom:8px;}
-
-    .card p{font-size:13px;color:var(--muted);line-height:1.55;}
-
-
-
-    .prompt{
-
-      border:1px dashed rgba(0,140,255,.35);
-
-      border-radius:16px;
-
-      padding:14px;
-
-      font-size:13px;
-
-      background:rgba(255,255,255,.8);
-
-      color:var(--muted);
-
-    }
-
-
-
-    footer{
-
-      border-top:1px solid var(--border);
-
-      padding:20px;
-
-      text-align:center;
-
-      font-size:11px;
-
-      color:var(--muted);
-
-    }
-
-
-
-    /* TEXT PJ */
-
-    .text-pj{
-
-      position:fixed;
-
-      bottom:18px;
-
-      right:18px;
-
-      z-index:100;
-
-      padding:12px 18px;
-
-      border-radius:var(--pill);
-
-      background:linear-gradient(135deg,var(--accent2),var(--accent));
-
-      color:#fff;
-
-      font-weight:600;
-
-      text-decoration:none;
-
-      box-shadow:0 16px 40px rgba(0,140,255,.45);
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -253,197 +186,137 @@
 
 <body>
 
-<div class="page">
 
 
+<a class="text-orb orb-1" href="sms:17735441231"><span>💬</span> Text PJ</a>
 
-<header>
+<a class="text-orb orb-2" href="sms:17735441231"><span>💬</span> Ask AI Setup</a>
 
-  <div class="nav">
-
-    <div class="brand">
-
-      <div class="orbs">
-
-        <div class="orb one"></div>
-
-        <div class="orb two"></div>
-
-        <div class="orb three"></div>
-
-      </div>
-
-      <div>
-
-        <strong>SideGuy Solutions</strong><br/>
-
-        <span style="font-size:11px;color:var(--muted)">AI for Real Operators</span>
-
-      </div>
-
-    </div>
-
-    <a href="index.html" style="font-size:11px;color:var(--accent);text-decoration:none">← Home</a>
-
-  </div>
-
-</header>
+<a class="text-orb orb-3" href="sms:17735441231"><span>💬</span> Fix My Systems</a>
 
 
 
 <main>
 
-  <h1>AI That Actually Helps San Diego Operators</h1>
+<h1>AI That Actually Helps San Diego Operators</h1>
 
-  <p class="lead">
+<p class="lead">
 
-    This is not “AI content.” This is AI used as leverage — quietly handling intake,
+This isn’t hype AI. This is AI used as leverage — quietly handling intake, routing,
 
-    routing, cleanup, follow-ups, and decisions so operators stop being the glue.
+cleanup, and follow-ups so operators stop being the glue holding everything together.
 
-  </p>
+</p>
 
 
 
-  <div class="pill-row">
+<section class="grid">
 
-    <div class="pill">⚙️ Workflow automation</div>
+  <div class="card">
 
-    <div class="pill">🧠 AI copilots</div>
+    <div class="label">The real problem</div>
 
-    <div class="pill">🧹 System cleanup</div>
+    <h3>Too many tools. No signal.</h3>
 
-    <div class="pill">👤 Human-in-the-loop</div>
+    <p>Most businesses already have software. AI should reduce noise, not add another dashboard.</p>
 
   </div>
 
 
 
-  <section class="grid">
+  <div class="card">
 
-    <div class="card">
+    <div class="label">What AI does here</div>
 
-      <div class="icon">🚨</div>
+    <h3>Handles the boring, messy work</h3>
 
-      <div class="label">The real problem</div>
+    <p>Intake, summaries, routing, alerts, follow-ups — done quietly in the background.</p>
 
-      <h3>Too many tools. No signal.</h3>
+  </div>
 
-      <p>
 
-        Operators don’t lack software — they lack clarity.
 
-        AI should reduce noise, not create another dashboard.
+  <div class="card">
 
-      </p>
+    <div class="label">SideGuy difference</div>
 
-    </div>
+    <h3>AI + a real human</h3>
 
+    <p>When AI hits an edge case, PJ steps in. No tickets. Just resolution.</p>
 
+  </div>
 
-    <div class="card">
+</section>
 
-      <div class="icon">🤖</div>
 
-      <div class="label">What AI does here</div>
 
-      <h3>Handles the boring, messy parts</h3>
+<section class="grid">
 
-      <p>
+  <div class="card">
 
-        Intake, routing, summaries, alerts, follow-ups,
+    <div class="label">Prompt #1</div>
 
-        and internal handoffs — quietly, consistently.
+    <h3>Operator intake</h3>
 
-      </p>
+    <div class="prompt">“Here’s what’s broken. What can be automated without disrupting staff?”</div>
 
-    </div>
+  </div>
 
 
 
-    <div class="card">
+  <div class="card">
 
-      <div class="icon">🧍‍♂️</div>
+    <div class="label">Prompt #2</div>
 
-      <div class="label">SideGuy difference</div>
+    <h3>System cleanup</h3>
 
-      <h3>AI + a real human</h3>
+    <div class="prompt">“Map tools and workflows. Remove duplication and bottlenecks.”</div>
 
-      <p>
+  </div>
 
-        When AI hits an edge case, PJ steps in.
 
-        No tickets. No guessing. Just resolution.
 
-      </p>
+  <div class="card">
 
-    </div>
+    <div class="label">Prompt #3</div>
 
-  </section>
+    <h3>Operator leverage</h3>
 
+    <div class="prompt">“If this ran 20% better, where would time and money be saved?”</div>
 
+  </div>
 
-  <section class="grid">
+</section>
 
-    <div class="card">
 
-      <div class="icon">💬</div>
 
-      <div class="label">Prompt #1</div>
+<section class="grid">
 
-      <h3>Operator intake</h3>
+  <div class="card" style="grid-column:1/-1">
 
-      <div class="prompt">
+    <div class="label">Important</div>
 
-        “Here’s what’s broken. Here’s how we currently do it.
+    <h3>Don’t be scared of AI — use it.</h3>
 
-        What can be automated without disrupting staff?”
+    <p>
 
-      </div>
+      AI isn’t here to replace you. It’s here to give you back time, reduce mistakes,
 
-    </div>
+      and lower costs. The operators who win are the ones who implement it early —
 
+      with guardrails, real humans, and clear goals.
 
+    </p>
 
-    <div class="card">
+    <p>
 
-      <div class="icon">🧩</div>
+      SideGuy makes AI practical, safe, and profitable — not overwhelming.
 
-      <div class="label">Prompt #2</div>
+    </p>
 
-      <h3>System cleanup</h3>
+  </div>
 
-      <div class="prompt">
-
-        “Map our tools, data flow, and handoffs.
-
-        Identify duplication, bottlenecks, and dead weight.”
-
-      </div>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <div class="icon">📈</div>
-
-      <div class="label">Prompt #3</div>
-
-      <h3>Operator leverage</h3>
-
-      <div class="prompt">
-
-        “If this ran itself 20% better,
-
-        where would time, money, and stress be saved?”
-
-      </div>
-
-    </div>
-
-  </section>
+</section>
 
 </main>
 
@@ -451,18 +324,17 @@
 
 <footer>
 
-  SideGuy Solutions · AI Operator Template · Built for clarity, not hype
+SideGuy Solutions · AI Operator Page · Built to save time & money
 
 </footer>
 
 
 
-<a class="text-pj" href="sms:17735441231">Text PJ · 773-544-1231</a>
+<a class="text-pj" href="sms:17735441231">💬 Text PJ · 773-544-1231</a>
 
 
-
-</div>
 
 </body>
 
 </html>
+
