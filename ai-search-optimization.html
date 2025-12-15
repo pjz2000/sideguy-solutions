@@ -1,199 +1,401 @@
 <!DOCTYPE html>
+ 
 <html lang="en">
+ 
 <head>
+ 
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+ 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+<title>AI That Actually Helps · SideGuy Solutions</title>
+ 
+<meta name="description" content="Practical AI for real San Diego operators. Less chaos, more leverage. Human-guided AI systems that save time and money." />
 
-<title>SideGuy Solutions · Real Problems Fixed Fast</title>
-<meta name="description" content="SideGuy Solutions is the real human resolution layer for payments, automation, and operator problems. Text PJ to fix it." />
+
 
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-
+ 
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+ 
 :root{
- --sky:#e6f7ff;
- --sea:#bfe9ff;
- --sea-deep:#8fd0ff;
- --accent:#00c98a;
- --accent-glow:0 0 22px rgba(0,201,138,.7);
- --text-main:#033045;
- --text-soft:#38586b;
- --card-bg:#ffffff;
- --card-border:rgba(3,48,69,0.08);
- --radius-lg:22px;
- --radius-pill:999px;
+ 
+--bg:#eaf7ff;
+ 
+--bg2:#cfeeff;
+ 
+--card:#ffffff;
+ 
+--ink:#0b2b3a;
+ 
+--ink-soft:#4b6b7a;
+ 
+--accent:#00a8ff;
+ 
+--accent2:#00d2a8;
+ 
+--radius:22px;
+ 
+--pill:999px;
+ 
 }
-
+ 
 body{
- font-family:-apple-system,system-ui,"Inter",sans-serif;
- background:radial-gradient(circle at 10% 0%,#ffffff 0%,var(--sky) 40%,var(--sea) 100%);
- color:var(--text-main);
- -webkit-font-smoothing:antialiased;
+ 
+font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;
+ 
+background:radial-gradient(circle at 20% 0%,#fff 0%,var(--bg) 40%,var(--bg2) 100%);
+ 
+color:var(--ink);
+ 
 }
-
-.page{min-height:100vh;display:flex;flex-direction:column;}
-
+ 
 header{
- position:sticky;top:0;z-index:20;
- backdrop-filter:blur(14px);
- background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.9));
- border-bottom:1px solid rgba(3,48,69,.06);
+ 
+position:sticky;top:0;z-index:50;
+ 
+background:rgba(255,255,255,.92);
+ 
+backdrop-filter:blur(14px);
+ 
+border-bottom:1px solid rgba(0,0,0,.05);
+ 
 }
-
+ 
 .nav{
- max-width:1120px;margin:0 auto;padding:12px 20px;
- display:flex;align-items:center;justify-content:space-between;
+ 
+max-width:1120px;margin:0 auto;
+ 
+padding:14px 20px;
+ 
+display:flex;align-items:center;justify-content:space-between;
+ 
 }
-
-.nav-left{display:flex;align-items:center;gap:10px;}
-.nav-orb{
- width:28px;height:28px;border-radius:50%;
- background:radial-gradient(circle at 30% 0%,#ffffff,#9be7ff,#3fa9ff);
- box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.3);
+ 
+.brand{
+ 
+display:flex;align-items:center;gap:10px;
+ 
 }
-
-.nav-title{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
-.nav-sub{font-size:11px;color:var(--text-soft);}
-
-.pill-link{
- text-decoration:none;border-radius:var(--radius-pill);
- font-size:12px;font-weight:700;padding:8px 16px;
- background:linear-gradient(135deg,#00b894,#00c2ff);
- color:#fff;box-shadow:var(--accent-glow);
+ 
+.orb{
+ 
+width:28px;height:28px;border-radius:50%;
+ 
+background:radial-gradient(circle at 30% 20%,#fff,#7dd3ff,#2aa9ff);
+ 
+box-shadow:0 0 0 3px #fff,0 10px 25px rgba(0,168,255,.35);
+ 
 }
-
-main{flex:1;max-width:1120px;margin:0 auto;padding:42px 20px;}
-
-.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:rgba(3,48,69,.6);margin-bottom:8px;}
-h1{font-size:34px;line-height:1.15;margin-bottom:12px;}
-.lead{font-size:15px;line-height:1.6;color:var(--text-soft);max-width:720px;margin-bottom:20px;}
-
-.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
-.pill{
- padding:6px 12px;border-radius:var(--radius-pill);
- background:#fff;border:1px solid var(--card-border);
- font-size:12px;color:var(--text-soft);
+ 
+.brand h1{
+ 
+font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+ 
 }
-
+ 
+.brand span{font-size:11px;color:var(--ink-soft)}
+ 
+.cta{
+ 
+display:flex;align-items:center;gap:10px;
+ 
+}
+ 
+.text-orb{
+ 
+padding:9px 16px;border-radius:var(--pill);
+ 
+background:linear-gradient(135deg,var(--accent2),var(--accent));
+ 
+color:#fff;font-size:13px;font-weight:600;
+ 
+text-decoration:none;
+ 
+box-shadow:0 12px 26px rgba(0,168,255,.35);
+ 
+display:flex;align-items:center;gap:8px;
+ 
+}
+ 
+main{
+ 
+max-width:1120px;margin:0 auto;
+ 
+padding:34px 20px 80px;
+ 
+}
+ 
+.eyebrow{
+ 
+font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+ 
+color:var(--ink-soft);margin-bottom:10px;
+ 
+}
+ 
+h2{
+ 
+font-size:34px;line-height:1.15;margin-bottom:14px;
+ 
+}
+ 
+.lead{
+ 
+max-width:680px;
+ 
+font-size:15px;line-height:1.6;color:var(--ink-soft);
+ 
+margin-bottom:26px;
+ 
+}
+ 
+.icon-row{
+ 
+display:flex;gap:14px;margin-bottom:28px;flex-wrap:wrap;
+ 
+}
+ 
+.icon-pill{
+ 
+background:#fff;border-radius:var(--pill);
+ 
+padding:6px 14px;font-size:12px;
+ 
+border:1px solid rgba(0,0,0,.06);
+ 
+display:flex;align-items:center;gap:6px;
+ 
+}
+ 
 .grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
- gap:18px;
- margin-bottom:34px;
+ 
+display:grid;grid-template-columns:repeat(3,1fr);
+ 
+gap:16px;margin-bottom:28px;
+ 
 }
-
+ 
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+ 
 .card{
- background:#fff;border-radius:var(--radius-lg);
- border:1px solid var(--card-border);
- box-shadow:0 14px 34px rgba(3,48,69,.08);
- padding:18px;
+ 
+background:var(--card);
+ 
+border-radius:var(--radius);
+ 
+border:1px solid rgba(0,0,0,.06);
+ 
+box-shadow:0 14px 34px rgba(0,0,0,.08);
+ 
+padding:18px;
+ 
 }
-
-.card-title{font-size:16px;font-weight:600;margin-bottom:6px;}
-.card-body{font-size:13px;color:var(--text-soft);line-height:1.55;}
-
-.seo{
- columns:2;column-gap:40px;
- font-size:12px;
+ 
+.card h3{
+ 
+font-size:16px;margin-bottom:6px;
+ 
+display:flex;align-items:center;gap:8px;
+ 
 }
-.seo a{display:block;margin-bottom:8px;color:var(--text-soft);}
-@media(max-width:720px){.seo{columns:1;}}
-
+ 
+.card p{
+ 
+font-size:14px;line-height:1.55;color:var(--ink-soft);
+ 
+}
+ 
+.section{
+ 
+margin-top:34px;
+ 
+}
+ 
+.section h3{font-size:22px;margin-bottom:10px}
+ 
+.section p{max-width:720px;color:var(--ink-soft);line-height:1.6}
+ 
+.orb-stack{
+ 
+position:fixed;right:18px;bottom:18px;
+ 
+display:flex;flex-direction:column;gap:10px;z-index:60;
+ 
+}
+ 
 footer{
- border-top:1px solid rgba(3,48,69,.06);
- padding:26px 20px;text-align:center;
- font-size:11px;color:var(--text-soft);
+ 
+text-align:center;font-size:11px;color:var(--ink-soft);
+ 
+padding:26px 20px;border-top:1px solid rgba(0,0,0,.06);
+ 
+margin-top:60px;
+ 
 }
-
-/* Text PJ Orb */
-#textPJ{
- position:fixed;right:20px;bottom:20px;z-index:999;
- display:flex;align-items:center;gap:8px;
- padding:14px 18px;border-radius:999px;
- background:var(--accent);color:#fff;
- font-weight:800;box-shadow:var(--accent-glow);
- animation:pulse 2.2s infinite;
-}
-@keyframes pulse{
- 0%{box-shadow:0 0 0 0 rgba(0,201,138,.7);}
- 70%{box-shadow:0 0 0 26px rgba(0,201,138,0);}
- 100%{box-shadow:0 0 0 0 rgba(0,201,138,0);}
-}
+ 
 </style>
+ 
 </head>
 
-<body>
-<a id="textPJ" href="sms:17735441231">💬 Text PJ</a>
 
-<div class="page">
+
+<body>
+
+
 
 <header>
- <div class="nav">
-  <div class="nav-left">
-   <div class="nav-orb"></div>
-   <div>
-    <div class="nav-title">SideGuy Solutions</div>
-    <div class="nav-sub">Real problems · Real humans</div>
-   </div>
+ 
+  <div class="nav">
+ 
+    <div class="brand">
+ 
+      <div class="orb"></div>
+ 
+      <div>
+ 
+        <h1>SideGuy Solutions</h1>
+ 
+        <span>AI that actually helps</span>
+ 
+      </div>
+ 
+    </div>
+ 
+    <div class="cta">
+ 
+      <a class="text-orb" href="sms:17604541860">💬 Text PJ</a>
+ 
+    </div>
+ 
   </div>
-  <a class="pill-link" href="sms:17735441231">Text PJ</a>
- </div>
+ 
 </header>
 
+
+
 <main>
- <div class="eyebrow">San Diego · Operator Network</div>
- <h1>Real problems.<br/>Fixed fast.</h1>
- <p class="lead">
- SideGuy is where Google finds the problem, AI explains it,
- and a real human actually fixes it.
- </p>
+ 
+  <div class="eyebrow">San Diego · Real Operators · AI</div>
+ 
+  <h2>AI That Actually Helps San Diego Operators.</h2>
+ 
+  <p class="lead">
+ 
+    This isn’t “AI content.” This is practical leverage.
+ 
+    SideGuy uses AI to quietly handle intake, cleanup, routing, and follow-ups —
+ 
+    so humans can focus on decisions that actually matter.
+ 
+  </p>
 
- <div class="pill-row">
-  <div class="pill">⚡ Fast response</div>
-  <div class="pill">🤝 Real human help</div>
-  <div class="pill">💳 Better payments</div>
-  <div class="pill">🧠 Smart automation</div>
- </div>
 
- <section class="grid">
-  <div class="card">
-   <div class="card-title">Payments & Settlements</div>
-   <p class="card-body">Lower fees, faster payouts, Solana rails where they make sense.</p>
-  </div>
-  <div class="card">
-   <div class="card-title">Automation & AI</div>
-   <p class="card-body">Reduce manual work without breaking real-world workflows.</p>
-  </div>
-  <div class="card">
-   <div class="card-title">Operator Support</div>
-   <p class="card-body">Bars, venues, services, ticketing — PJ speaks your language.</p>
-  </div>
- </section>
 
- <h2 class="eyebrow">Browse Solutions</h2>
- <div class="seo">
-  <a href="san-diego-payment-processing.html">San Diego Payment Processing</a>
-  <a href="san-diego-instant-settlements.html">Instant Settlements</a>
-  <a href="san-diego-lower-credit-card-fees.html">Lower Credit Card Fees</a>
-  <a href="solana-payments-san-diego.html">Solana Payments</a>
-  <a href="ai-automation-san-diego.html">AI Automation</a>
-  <a href="business-automation-san-diego.html">Business Automation</a>
-  <a href="ticketing-payments-san-diego.html">Ticketing Payments</a>
-  <a href="operator-support-san-diego.html">Operator Support</a>
- </div>
-<section class="seo-links">
-<h2>Browse SideGuy Solutions</h2>
-<div class="seo-grid">
-<!--#include file="homepage-links.html" -->
-</div>
-</section>
+  <div class="icon-row">
+ 
+    <div class="icon-pill">🤖 AI + Human</div>
+ 
+    <div class="icon-pill">⚡ Time savings</div>
+ 
+    <div class="icon-pill">💸 Cost reduction</div>
+ 
+    <div class="icon-pill">🧠 Less mental load</div>
+ 
+  </div>
+
+
+
+  <div class="grid">
+ 
+    <div class="card">
+ 
+      <h3>🧠 The Real Problem</h3>
+ 
+      <p>
+ 
+        Too many tools. Too many dashboards. No signal.
+ 
+        AI should remove noise — not add another login.
+ 
+      </p>
+ 
+    </div>
+ 
+    <div class="card">
+ 
+      <h3>🛠 What SideGuy Does</h3>
+ 
+      <p>
+ 
+        AI handles the boring, messy parts: intake, sorting, summaries,
+ 
+        and next-step clarity — with a human in the loop.
+ 
+      </p>
+ 
+    </div>
+ 
+    <div class="card">
+ 
+      <h3>🚀 Operator Leverage</h3>
+ 
+      <p>
+ 
+        Faster decisions. Fewer mistakes. More time back.
+ 
+        That’s what real AI adoption looks like.
+ 
+      </p>
+ 
+    </div>
+ 
+  </div>
+
+
+
+  <div class="section">
+ 
+    <h3>Don’t be scared of AI. Use it.</h3>
+ 
+    <p>
+ 
+      AI isn’t here to replace you. It’s here to give you your time back.
+ 
+      Implemented correctly, it quietly saves hours, reduces errors,
+ 
+      and lowers operating costs — without changing how you work.
+ 
+    </p>
+ 
+  </div>
+ 
 </main>
 
+
+
+<div class="orb-stack">
+ 
+  <a class="text-orb" href="sms:“17604541860">💬 Text PJ</a>
+ 
+  <a class="text-orb" href="sms:”17604541860">💬 Ask AI Qs</a>
+ 
+  <a class="text-orb" href="sms:“17604541860">💬 Start Simple</a>
+ 
+</div>
+
+
+
 <footer>
- SideGuy Solutions · Real problems fixed by real humans<br/>
- Text PJ · 773-544-1231
+ 
+  SideGuy Solutions · Human-Guided AI · Text PJ 17604541860
+ 
 </footer>
 
-</div>
+
+
 </body>
+ 
 </html>
+ 
+ 
