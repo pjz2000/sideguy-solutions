@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+
+  <title>San Diego Help & Problem Resolution | SideGuy Solutions</title>
+
+  <meta name="description" content="Something not working in San Diego? Calm, human-first guidance for real problems. Understand what’s happening before you spend money. Text PJ for help." />
+
+
+
+  <style>
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+
+
+    :root{
+
+      --sky:#e6f7ff;
+
+      --sea:#bfe9ff;
+
+      --accent:#00d084;
+
+      --accent-2:#00b3ff;
+
+      --text:#033045;
+
+      --text-soft:#3b5f73;
+
+      --card:#ffffff;
+
+      --border:rgba(3,48,69,.08);
+
+      --radius:22px;
+
+      --pill:999px;
+
+      --glow:0 0 18px rgba(0,208,132,.6);
+
+    }
+
+
+
+    body{
+
+      font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;
+
+      background:radial-gradient(circle at 20% 0%,#ffffff 0%,var(--sky) 45%,var(--sea) 100%);
+
+      color:var(--text);
+
+    }
+
+
+
+    header{
+
+      position:sticky;
+
+      top:0;
+
+      z-index:50;
+
+      backdrop-filter:blur(14px);
+
+      background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,255,255,.92));
+
+      border-bottom:1px solid var(--border);
+
+    }
+
+
+
+    .nav{
+
+      max-width:1120px;
+
+      margin:auto;
+
+      padding:14px 20px;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      gap:16px;
+
+    }
+
+
+
+    .brand{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:12px;
+
+    }
+
+
+
+    .orb{
+
+      width:30px;
+
+      height:30px;
+
+      border-radius:50%;
+
+      background:radial-gradient(circle at 30% 0%,#fff,#9be7ff,#3fa9ff);
+
+      box-shadow:0 0 0 3px rgba(255,255,255,.9),0 10px 22px rgba(0,140,255,.35);
+
+    }
+
+
+
+    .brand-text strong{
+
+      font-size:14px;
+
+      letter-spacing:.08em;
+
+      text-transform:uppercase;
+
+    }
+
+
+
+    .brand-text span{
+
+      display:block;
+
+      font-size:11px;
+
+      color:var(--text-soft);
+
+    }
+
+
+
+    .header-cta{
+
+      text-decoration:none;
+
+      padding:9px 16px;
+
+      border-radius:var(--pill);
+
+      font-size:12px;
+
+      font-weight:600;
+
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+
+      color:#fff;
+
+      box-shadow:0 10px 26px rgba(0,194,255,.35);
+
+      white-space:nowrap;
+
+    }
+
+
+
+    main{
+
+      max-width:1120px;
+
+      margin:auto;
+
+      padding:36px 20px 64px;
+
+    }
+
+
+
+    .timestamp{
+
+      font-size:11px;
+
+      color:rgba(3,48,69,.55);
+
+      margin-bottom:10px;
+
+    }
+
+
+
+    .eyebrow{
+
+      font-size:11px;
+
+      text-transform:uppercase;
+
+      letter-spacing:.16em;
+
+      color:rgba(3,48,69,.6);
+
+      margin-bottom:8px;
+
+    }
+
+
+
+    h1{
+
+      font-size:34px;
+
+      line-height:1.15;
+
+      margin-bottom:14px;
+
+    }
+
+
+
+    .lead{
+
+      max-width:720px;
+
+      font-size:16px;
+
+      line-height:1.65;
+
+      color:var(--text-soft);
+
+      margin-bottom:28px;
+
+    }
+
+
+
+    .mission{
+
+      background:#ffffff;
+
+      border:1px solid var(--border);
+
+      border-radius:var(--radius);
+
+      padding:18px 20px;
+
+      margin-bottom:28px;
+
+      box-shadow:0 14px 34px rgba(3,48,69,.06);
+
+      font-size:14px;
+
+      line-height:1.6;
+
+    }
+
+
+
+    .mission strong{
+
+      color:#008f6a;
+
+    }
+
+
+
+    .grid{
+
+      display:grid;
+
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+      gap:18px;
+
+      margin-bottom:30px;
+
+    }
+
+
+
+    .card{
+
+      background:var(--card);
+
+      border:1px solid var(--border);
+
+      border-radius:var(--radius);
+
+      padding:18px 18px 22px;
+
+      box-shadow:0 14px 34px rgba(3,48,69,.06);
+
+    }
+
+
+
+    .card small{
+
+      font-size:11px;
+
+      text-transform:uppercase;
+
+      letter-spacing:.14em;
+
+      color:rgba(3,48,69,.55);
+
+    }
+
+
+
+    .card h3{
+
+      margin:8px 0 10px;
+
+      font-size:18px;
+
+    }
+
+
+
+    .card p,
+
+    .card li{
+
+      font-size:14px;
+
+      line-height:1.55;
+
+      color:var(--text-soft);
+
+    }
+
+
+
+    .card ul{
+
+      padding-left:16px;
+
+      margin-top:8px;
+
+    }
+
+
+
+    .card ul li{
+
+      margin-bottom:6px;
+
+    }
+
+
+
+    .cta-block{
+
+      background:linear-gradient(135deg,#eafff7,#f2fbff);
+
+      border:1px solid var(--border);
+
+      border-radius:var(--radius);
+
+      padding:22px;
+
+      box-shadow:0 14px 34px rgba(3,48,69,.06);
+
+      text-align:center;
+
+    }
+
+
+
+    .cta-block h3{
+
+      font-size:20px;
+
+      margin-bottom:8px;
+
+    }
+
+
+
+    .cta-numbers{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:6px;
+
+      margin-top:10px;
+
+      font-weight:600;
+
+      font-size:15px;
+
+    }
+
+
+
+    .cta-numbers a{
+
+      color:#007f63;
+
+      text-decoration:none;
+
+    }
+
+
+
+    footer{
+
+      border-top:1px solid var(--border);
+
+      padding:22px;
+
+      text-align:center;
+
+      font-size:12px;
+
+      color:var(--text-soft);
+
+    }
+
+
+
+    .text-pj-orb{
+
+      position:fixed;
+
+      right:18px;
+
+      bottom:18px;
+
+      z-index:999;
+
+      text-decoration:none;
+
+    }
+
+
+
+    .orb-wrap{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+      padding:12px 16px;
+
+      border-radius:999px;
+
+      background:linear-gradient(135deg,#00d084,#00b3ff);
+
+      color:#fff;
+
+      font-size:13px;
+
+      font-weight:600;
+
+      box-shadow:var(--glow),0 14px 32px rgba(0,179,255,.45);
+
+      animation:pulse 2.6s infinite;
+
+    }
+
+
+
+    .orb-icon{
+
+      width:30px;
+
+      height:30px;
+
+      border-radius:50%;
+
+      background:rgba(255,255,255,.25);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      font-size:16px;
+
+    }
+
+
+
+    @keyframes pulse{
+
+      0%{box-shadow:0 0 0 0 rgba(0,208,132,.55),0 14px 32px rgba(0,179,255,.45);}
+
+      70%{box-shadow:0 0 0 18px rgba(0,208,132,0),0 14px 32px rgba(0,179,255,.45);}
+
+      100%{box-shadow:0 0 0 0 rgba(0,208,132,0),0 14px 32px rgba(0,179,255,.45);}
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+  <div class="nav">
+
+    <div class="brand">
+
+      <div class="orb"></div>
+
+      <div class="brand-text">
+
+        <strong>SideGuy Solutions</strong>
+
+        <span>San Diego Help · Human Resolution Layer</span>
+
+      </div>
+
+    </div>
+
+    <a class="header-cta" href="sms:17604511860">Text PJ · (760) 451-1860</a>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+
+  <div class="timestamp">
+
+    Updated live · San Diego · <span id="sd-time"></span>
+
+  </div>
+
+
+
+  <div class="eyebrow">San Diego Help · Problem Resolution</div>
+
+
+
+  <h1>Something Not Working in San Diego?</h1>
+
+
+
+  <p class="lead">
+
+    When something breaks, glitches, or feels off, most people just want to understand what’s happening
+
+    before they spend money or call the wrong company. This page exists to reduce panic, explain options,
+
+    and route you to the right next step — calmly.
+
+  </p>
+
+
+
+  <div class="mission">
+
+    <strong>SideGuy Mission:</strong> SideGuy is where Google discovers the problem, AI explains it,
+
+    and a real human resolves it. We are not a repair company or a marketplace — we’re a
+
+    <strong>human-first guidance layer</strong> focused on clarity before cost.
+
+  </div>
+
+
+
+  <section class="grid">
+
+
+
+    <div class="card">
+
+      <small>What’s usually happening</small>
+
+      <h3>Common causes</h3>
+
+      <ul>
+
+        <li>Simple issues that look worse than they are</li>
+
+        <li>Timing or environment-related problems</li>
+
+        <li>Miscommunication between systems or people</li>
+
+        <li>Something minor that needs awareness, not panic</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <small>Is this urgent?</small>
+
+      <h3>How to think about urgency</h3>
+
+      <p>
+
+        Some problems can wait. Others need attention soon.
+
+        Understanding which category you’re in helps you avoid overpaying
+
+        or delaying something important.
+
+      </p>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <small>Who this helps</small>
+
+      <h3>Homes & operators</h3>
+
+      <ul>
+
+        <li>Homeowners & renters</li>
+
+        <li>Small business operators</li>
+
+        <li>Remote workers</li>
+
+        <li>Anyone stuck deciding what to do next</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <small>Next step</small>
+
+      <h3>One text. Real guidance.</h3>
+
+      <p>
+
+        Text PJ what you’re seeing. You’ll get plain-English guidance on urgency,
+
+        options, and who (if anyone) you should contact next.
+
+      </p>
+
+    </div>
+
+
+
+  </section>
+
+
+
+  <div class="cta-block">
+
+    <h3>Get calm, human help</h3>
+
+    <div class="cta-numbers">
+
+      <a href="tel:17604511860">(760) 451-1860</a>
+
+      <a href="sms:17604511860">Text: (760) 451-1860</a>
+
+      <a href="tel:17604511860">Call if urgent</a>
+
+    </div>
+
+  </div>
+
+
+
+</main>
+
+
+
+<footer>
+
+  SideGuy Solutions · San Diego · Human-First Problem Resolution
+
+</footer>
+
+
+
+<a class="text-pj-orb" href="sms:17604511860">
+
+  <div class="orb-wrap">
+
+    <div class="orb-icon">💬</div>
+
+    <div>
+
+      Text PJ<br>
+
+      <span style="font-size:11px;font-weight:500;">(760) 451-1860</span>
+
+    </div>
+
+  </div>
+
+</a>
+
+
+
+<script>
+
+  function updateSDTime(){
+
+    const el = document.getElementById("sd-time");
+
+    const now = new Date().toLocaleString("en-US", {
+
+      timeZone: "America/Los_Angeles",
+
+      hour: "numeric",
+
+      minute: "2-digit",
+
+      hour12: true
+
+    });
+
+    el.textContent = now;
+
+  }
+
+  updateSDTime();
+
+  setInterval(updateSDTime, 60000);
+
+</script>
+
+
+
+</body>
+
+</html>
+
