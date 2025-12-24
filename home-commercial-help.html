@@ -42,6 +42,8 @@
 
     justify-content: space-between;
 
+    align-items: center;
+
     font-size: 13px;
 
     color: #64748b;
@@ -105,6 +107,8 @@
   }
 
 
+
+  /* CARD */
 
   .card {
 
@@ -224,6 +228,8 @@
 
 
 
+  /* MEDIA HINT */
+
   .media-hint {
 
     margin-top: 14px;
@@ -263,6 +269,8 @@
   }
 
 
+
+  /* CONFIRMATION */
 
   .confirmation {
 
@@ -352,19 +360,19 @@
 
 
 
-<!-- BACK LINK + TIMESTAMP -->
+<!-- UTILITY BAR -->
 
 <div class="utility">
 
   <a href="/">← Back to SideGuy home</a>
 
-  <span>Updated regularly • Real person reviewing messages</span>
+  <span id="liveTimestamp"></span>
 
 </div>
 
 
 
-<!-- PAGE HEADER -->
+<!-- HEADER -->
 
 <div class="page-header">
 
@@ -375,6 +383,8 @@
 </div>
 
 
+
+<!-- MAIN CARD -->
 
 <div class="card">
 
@@ -482,21 +492,47 @@
 
 
 
+<!-- SCRIPTS -->
+
 <script>
 
-function sendText() {
+  // Live timestamp (on page load)
 
-  const type = document.getElementById("type").value;
+  const ts = new Date();
 
-  const category = document.getElementById("category").value;
+  const options = {
 
-  const issue = document.getElementById("issue").value || "(no details provided)";
+    month: 'long',
 
-  const urgency = document.getElementById("urgency").value;
+    day: 'numeric',
+
+    year: 'numeric',
+
+    hour: 'numeric',
+
+    minute: '2-digit'
+
+  };
+
+  document.getElementById("liveTimestamp").innerText =
+
+    `Updated ${ts.toLocaleDateString(undefined, options)} • Real person reviewing messages`;
 
 
 
-  const message =
+  function sendText() {
+
+    const type = document.getElementById("type").value;
+
+    const category = document.getElementById("category").value;
+
+    const issue = document.getElementById("issue").value || "(no details provided)";
+
+    const urgency = document.getElementById("urgency").value;
+
+
+
+    const message =
 
 `New SideGuy Request
 
@@ -510,13 +546,13 @@ Urgency: ${urgency}`;
 
 
 
-  const encoded = encodeURIComponent(message);
+    const encoded = encodeURIComponent(message);
 
-  document.getElementById("confirm").style.display = "block";
+    document.getElementById("confirm").style.display = "block";
 
-  window.location.href = `sms:7604541860?&body=${encoded}`;
+    window.location.href = `sms:7604541860?&body=${encoded}`;
 
-}
+  }
 
 </script>
 
