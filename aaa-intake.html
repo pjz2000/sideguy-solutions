@@ -16,13 +16,13 @@
 
   body {
 
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: system-ui, -apple-system, BlinkSystemFont, sans-serif;
 
     background: #f6f9fb;
 
     margin: 0;
 
-    padding: 20px;
+    padding: 20px 20px 120px;
 
     color: #0f172a;
 
@@ -126,6 +126,72 @@
 
   }
 
+
+
+  /* TEXT PJ ORB */
+
+  .text-pj {
+
+    position: fixed;
+
+    bottom: 20px;
+
+    right: 20px;
+
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+
+    color: white;
+
+    padding: 14px 18px;
+
+    border-radius: 999px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow: 0 0 0 rgba(34,211,238,.7);
+
+    animation: pulse 2s infinite;
+
+    z-index: 9999;
+
+  }
+
+
+
+  @keyframes pulse {
+
+    0% { box-shadow: 0 0 0 0 rgba(34,211,238,.7); }
+
+    70% { box-shadow: 0 0 0 18px rgba(34,211,238,0); }
+
+    100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); }
+
+  }
+
+
+
+  .confirmation {
+
+    display: none;
+
+    margin-top: 16px;
+
+    padding: 12px;
+
+    background: #ecfeff;
+
+    border-radius: 10px;
+
+    color: #065f73;
+
+    font-size: 14px;
+
+    text-align: center;
+
+  }
+
 </style>
 
 </head>
@@ -196,17 +262,29 @@
 
 
 
+  <div id="confirm" class="confirmation">
+
+    ✅ Message ready. If your text app didn’t open, please text PJ directly at <strong>760-454-1860</strong>.
+
+  </div>
+
+
+
   <div class="note">
 
     This goes directly to a real person.<br />
 
-    If it’s urgent, you’ll hear back fast.<br />
-
-    Or text PJ directly: <strong>760-454-1860</strong>
+    If it’s urgent, you’ll hear back fast.
 
   </div>
 
 </div>
+
+
+
+<!-- TEXT PJ ORB -->
+
+<a class="text-pj" href="sms:7604541860">Text PJ</a>
 
 
 
@@ -218,7 +296,7 @@ function sendText() {
 
   const category = document.getElementById("category").value;
 
-  const issue = document.getElementById("issue").value;
+  const issue = document.getElementById("issue").value || "(no details provided)";
 
   const urgency = document.getElementById("urgency").value;
 
@@ -240,6 +318,16 @@ Urgency: ${urgency}`;
 
   const encoded = encodeURIComponent(message);
 
+
+
+  // Show confirmation no matter what
+
+  document.getElementById("confirm").style.display = "block";
+
+
+
+  // SMS works on mobile; desktop will safely fail
+
   window.location.href = `sms:7604541860?&body=${encoded}`;
 
 }
@@ -251,5 +339,4 @@ Urgency: ${urgency}`;
 </body>
 
 </html>
-
 
