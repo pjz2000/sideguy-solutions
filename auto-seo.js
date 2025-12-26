@@ -14,7 +14,7 @@ function filenameToTitle(filename) {
 }
 
 // ------ Auto-generate core content ------
-const filename = window.location.pathname.split("/").pop();
+const filename = 
 const pageTitle = filenameToTitle(filename);
 
 // SEO title
