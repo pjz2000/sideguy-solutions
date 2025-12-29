@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>SideGuy — Real help, not a sales call</title>
+
+
+
+<style>
+
+  body {
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+    background: linear-gradient(180deg, #eef9ff, #f8fafc);
+
+    margin: 0;
+
+    padding: 20px 16px 140px;
+
+    color: #0f172a;
+
+  }
+
+
+
+  /* UTILITY BAR */
+
+  .utility {
+
+    max-width: 520px;
+
+    margin: 0 auto 14px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+  }
+
+
+
+  .utility a {
+
+    color: #0ea5e9;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+  }
+
+
+
+  .utility a:hover {
+
+    text-decoration: underline;
+
+  }
+
+
+
+  /* HEADER */
+
+  .page-header {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+
+  }
+
+
+
+  .page-header h1 {
+
+    font-size: 26px;
+
+    margin: 0;
+
+    font-weight: 700;
+
+  }
+
+
+
+  .page-header p {
+
+    margin-top: 6px;
+
+    font-size: 14px;
+
+    color: #475569;
+
+  }
+
+
+
+  /* CARD */
+
+  .card {
+
+    max-width: 520px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 26px;
+
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+
+  }
+
+
+
+  h2 {
+
+    font-size: 22px;
+
+    margin-bottom: 6px;
+
+  }
+
+
+
+  .subhead {
+
+    font-size: 14px;
+
+    color: #475569;
+
+    margin-bottom: 18px;
+
+  }
+
+
+
+  label {
+
+    display: block;
+
+    margin-top: 16px;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+  }
+
+
+
+  select, textarea {
+
+    width: 100%;
+
+    margin-top: 6px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    border: 1px solid #cbd5e1;
+
+    font-size: 15px;
+
+    background: #f8fafc;
+
+  }
+
+
+
+  textarea {
+
+    min-height: 96px;
+
+    resize: vertical;
+
+  }
+
+
+
+  button {
+
+    margin-top: 22px;
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 999px;
+
+    border: none;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+
+    color: white;
+
+    cursor: pointer;
+
+  }
+
+
+
+  button:hover {
+
+    opacity: 0.95;
+
+  }
+
+
+
+  /* MEDIA HINT */
+
+  .media-hint {
+
+    margin-top: 14px;
+
+    padding: 14px;
+
+    background: #f8fafc;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    color: #334155;
+
+    text-align: center;
+
+    border: 1px dashed #cbd5e1;
+
+  }
+
+
+
+  .media-hint strong {
+
+    color: #0f172a;
+
+  }
+
+
+
+  .media-hint span {
+
+    color: #0ea5e9;
+
+    font-weight: 600;
+
+  }
+
+
+
+  /* CONFIRMATION */
+
+  .confirmation {
+
+    display: none;
+
+    margin-top: 16px;
+
+    padding: 14px;
+
+    background: #ecfeff;
+
+    border-radius: 12px;
+
+    color: #065f73;
+
+    font-size: 14px;
+
+    text-align: center;
+
+  }
+
+
+
+  .note {
+
+    font-size: 13px;
+
+    color: #475569;
+
+    margin-top: 14px;
+
+    text-align: center;
+
+  }
+
+
+
+  /* TEXT PJ ORB */
+
+  .text-pj {
+
+    position: fixed;
+
+    bottom: 22px;
+
+    right: 22px;
+
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+
+    color: white;
+
+    padding: 14px 18px;
+
+    border-radius: 999px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow: 0 0 0 rgba(34, 211, 238, 0.7);
+
+    animation: pulse 2.2s infinite;
+
+    z-index: 9999;
+
+  }
+
+
+
+  @keyframes pulse {
+
+    0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); }
+
+    70% { box-shadow: 0 0 0 18px rgba(34, 211, 238, 0); }
+
+    100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+
+  }
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- UTILITY BAR -->
+
+<div class="utility">
+
+  <a href="/">← Back to SideGuy home</a>
+
+  <span id="liveTimestamp"></span>
+
+</div>
+
+
+
+<!-- HEADER -->
+
+<div class="page-header">
+
+  <h1>SideGuy</h1>
+
+  <p>Real help, not a sales call. Clarity before cost.</p>
+
+</div>
+
+
+
+<!-- MAIN CARD -->
+
+<div class="card">
+
+  <h2>Show us what’s going on</h2>
+
+  <div class="subhead">
+
+    A real person reviews every message. No pressure, no obligation.
+
+  </div>
+
+
+
+  <label>Type</label>
+
+  <select id="type">
+
+    <option>Home</option>
+
+    <option>Commercial</option>
+
+  </select>
+
+
+
+  <label>Category</label>
+
+  <select id="category">
+
+    <option>HVAC</option>
+
+    <option>Foundation</option>
+
+    <option>Electrical</option>
+
+    <option>Plumbing</option>
+
+    <option>Other</option>
+
+  </select>
+
+
+
+  <label>What’s happening?</label>
+
+  <textarea id="issue" placeholder="Briefly explain the situation"></textarea>
+
+
+
+  <label>Urgency</label>
+
+  <select id="urgency">
+
+    <option>Just looking</option>
+
+    <option>This week</option>
+
+    <option>Urgent</option>
+
+  </select>
+
+
+
+  <button >Send to SideGuy</button>
+
+
+
+  <!-- PHOTO / VIDEO PATH -->
+
+  <div class="media-hint">
+
+    📸 <strong>Have photos or a video?</strong><br />
+
+    The fastest way is to <strong>text them directly</strong> like a normal message.<br />
+
+    <span>Tap “Text PJ” below anytime.</span>
+
+  </div>
+
+
+
+  <div id="confirm" class="confirmation">
+
+    ✅ Message ready. If your text app didn’t open, please text PJ directly at <strong>760-454-1860</strong>.
+
+  </div>
+
+
+
+  <div class="note">
+
+    This goes directly to a real person.<br />
+
+    If it’s urgent, texting is always fastest.
+
+  </div>
+
+</div>
+
+
+
+<!-- TEXT PJ ORB -->
+
+<a class="text-pj" href="sms:+17604541860">Text PJ</a>
+
+
+
+<!-- SCRIPTS -->
+
+<script>
+
+  // Live timestamp (on page load)
+
+  const ts = new Date();
+
+  const options = {
+
+    month: 'long',
+
+    day: 'numeric',
+
+    year: 'numeric',
+
+    hour: 'numeric',
+
+    minute: '2-digit'
+
+  };
+
+  document.getElementById("liveTimestamp").innerText =
+
+    `Updated ${ts.toLocaleDateString(undefined, options)} • Real person reviewing messages`;
+
+
+
+  function sendText() {
+
+    const type = document.getElementById("type").value;
+
+    const category = document.getElementById("category").value;
+
+    const issue = document.getElementById("issue").value || "(no details provided)";
+
+    const urgency = document.getElementById("urgency").value;
+
+
+
+    const message =
+
+`New SideGuy Request
+
+Type: ${type}
+
+Category: ${category}
+
+Issue: ${issue}
+
+Urgency: ${urgency}`;
+
+
+
+    const encoded = encodeURIComponent(message);
+
+    document.getElementById("confirm").style.display = "block";
+
+    
+
+  }
+
+</script>
+
+
+
+<script src="/phone-lock.js"></script></body>
+
+</html>
+

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <title>PJ Command Dashboard</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+
+  <!--
+
+  PJ / SIDEGUY PERSONAL DASHBOARD
+
+  Purpose: Vision • Todo • Accomplished • Sitemap
+
+  Mode: Calm • Operator-first • Zero SEO
+
+  -->
+
+
+
+  <style>
+
+    :root {
+
+      --bg: #0b1220;
+
+      --panel: #101a2e;
+
+      --soft: #162340;
+
+      --text: #e6ebff;
+
+      --muted: #9aa7d6;
+
+      --accent: #4ddcff;
+
+      --green: #42ffb0;
+
+      --yellow: #ffd66e;
+
+    }
+
+
+
+    * { box-sizing: border-box; }
+
+
+
+    body {
+
+      margin: 0;
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+
+      background: radial-gradient(1200px 600px at 20% 0%, #13214a 0%, var(--bg) 60%);
+
+      color: var(--text);
+
+      line-height: 1.6;
+
+    }
+
+
+
+    header {
+
+      padding: 24px 28px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      border-bottom: 1px solid #1c2a4d;
+
+    }
+
+
+
+    header h1 {
+
+      margin: 0;
+
+      font-size: 20px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.4px;
+
+    }
+
+
+
+    header .meta {
+
+      font-size: 12px;
+
+      color: var(--muted);
+
+    }
+
+
+
+    main {
+
+      max-width: 1100px;
+
+      margin: 0 auto;
+
+      padding: 28px;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 24px;
+
+    }
+
+
+
+    section {
+
+      background: linear-gradient(180deg, var(--panel), var(--soft));
+
+      border: 1px solid #1c2a4d;
+
+      border-radius: 14px;
+
+      padding: 20px 22px;
+
+    }
+
+
+
+    section h2 {
+
+      margin-top: 0;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.6px;
+
+      text-transform: uppercase;
+
+      color: var(--accent);
+
+    }
+
+
+
+    ul {
+
+      list-style: none;
+
+      padding-left: 0;
+
+      margin: 12px 0 0;
+
+    }
+
+
+
+    li {
+
+      margin: 8px 0;
+
+      font-size: 14px;
+
+    }
+
+
+
+    .muted { color: var(--muted); }
+
+
+
+    .todo li::before {
+
+      content: "⬜";
+
+      margin-right: 8px;
+
+    }
+
+
+
+    .done li::before {
+
+      content: "✅";
+
+      margin-right: 8px;
+
+    }
+
+
+
+    .status li span {
+
+      font-weight: 600;
+
+      margin-left: 6px;
+
+    }
+
+
+
+    .green { color: var(--green); }
+
+    .yellow { color: var(--yellow); }
+
+
+
+    .sitemap a {
+
+      color: var(--text);
+
+      text-decoration: none;
+
+      border-bottom: 1px dotted #2c3e73;
+
+    }
+
+
+
+    .sitemap a:hover {
+
+      color: var(--accent);
+
+      border-bottom-color: var(--accent);
+
+    }
+
+
+
+    .full {
+
+      grid-column: 1 / -1;
+
+    }
+
+
+
+    footer {
+
+      padding: 18px;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      color: var(--muted);
+
+    }
+
+
+
+    /* Text PJ Orb */
+
+    .orb {
+
+      position: fixed;
+
+      bottom: 22px;
+
+      right: 22px;
+
+      width: 70px;
+
+      height: 70px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle at 30% 30%, #6affc6, #1b8f6a);
+
+      box-shadow: 0 0 24px rgba(66,255,176,0.6);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-weight: 600;
+
+      color: #032017;
+
+      animation: pulse 3.2s ease-in-out infinite;
+
+      cursor: pointer;
+
+    }
+
+
+
+    @keyframes pulse {
+
+      0%,100% { transform: scale(1); box-shadow: 0 0 22px rgba(66,255,176,0.5); }
+
+      50% { transform: scale(1.06); box-shadow: 0 0 36px rgba(66,255,176,0.8); }
+
+    }
+
+
+
+    @media (max-width: 900px) {
+
+      main { grid-template-columns: 1fr; }
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+  <h1>PJ / SideGuy Command Dashboard</h1>
+
+  <div class="meta">
+
+    Mode: Calm Operator<br/>
+
+    Build: v1 • Updated: <span id="date"></span>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+
+  <!-- VISION -->
+
+  <section>
+
+    <h2>Vision</h2>
+
+    <ul class="muted">
+
+      <li>Clarity before cost</li>
+
+      <li>Humans before systems</li>
+
+      <li>Calm beats urgency</li>
+
+      <li>SEO compounds quietly</li>
+
+      <li>PPC as signal, not pressure</li>
+
+    </ul>
+
+  </section>
+
+
+
+  <!-- SYSTEM STATUS -->
+
+  <section>
+
+    <h2>System Status</h2>
+
+    <ul class="status">
+
+      <li>SEO: <span class="green">Compounding</span></li>
+
+      <li>PPC: <span class="yellow">Learning</span></li>
+
+      <li>Infrastructure: <span class="green">Stable</span></li>
+
+      <li>Human Layer: <span class="green">Available</span></li>
+
+    </ul>
+
+  </section>
+
+
+
+  <!-- TODO -->
+
+  <section>
+
+    <h2>Todo</h2>
+
+    <ul class="todo">
+
+      <li>Tighten PPC keyword cluster</li>
+
+      <li>Add 1–2 high-intent service pages</li>
+
+      <li>Review Search Console signals</li>
+
+      <li>Minor mobile spacing polish</li>
+
+      <li>Do nothing, observe</li>
+
+    </ul>
+
+  </section>
+
+
+
+  <!-- ACCOMPLISHED -->
+
+  <section>
+
+    <h2>Accomplished</h2>
+
+    <ul class="done">
+
+      <li>PPC live</li>
+
+      <li>Indexed core pages</li>
+
+      <li>10 click milestone</li>
+
+      <li>100 click milestone</li>
+
+      <li>Homepage stabilized</li>
+
+      <li>Text PJ wired</li>
+
+    </ul>
+
+  </section>
+
+
+
+  <!-- SITEMAP -->
+
+  <section class="full">
+
+    <h2>One-Pager Sitemap</h2>
+
+
+
+    <p class="muted"><strong>Core</strong></p>
+
+    <ul class="sitemap">
+
+      <li><a href="index.html">Homepage</a></li>
+
+      <li><a href="payments.html">Payments</a></li>
+
+      <li><a href="ppc.html">PPC Landing</a></li>
+
+      <li><a href="vision.html">Vision / Mission</a></li>
+
+    </ul>
+
+
+
+    <p class="muted"><strong>SEO Pages</strong></p>
+
+    <ul class="sitemap">
+
+      <li><a href="hvac-services-san-diego.html">HVAC – San Diego</a></li>
+
+      <li><a href="payment-processing-san-diego.html">Payment Processing – San Diego</a></li>
+
+      <li><a href="ai-business-solutions-san-diego.html">AI Business Solutions – San Diego</a></li>
+
+      <li><a href="foundation-repair-san-diego.html">Foundation Repair – San Diego</a></li>
+
+    </ul>
+
+
+
+    <p class="muted"><strong>Future / Parked</strong></p>
+
+    <ul class="sitemap">
+
+      <li>Senior Edition</li>
+
+      <li>Tickets</li>
+
+      <li>Energy</li>
+
+      <li>Crypto Help Desk</li>
+
+    </ul>
+
+  </section>
+
+
+
+</main>
+
+
+
+<footer>
+
+  Personal operator dashboard • Not for SEO • Built to last
+
+</footer>
+
+
+
+<!-- TEXT PJ ORB -->
+
+<a class="orb" href="sms:+17604541860">Text PJ</a>
+
+
+
+<script>
+
+  document.getElementById("date").textContent =
+
+    new Date().toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+
+</script>
+
+
+
+<script src="/phone-lock.js"></script></body>
+
+</html>
+
