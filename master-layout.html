@@ -1,389 +1,938 @@
 
+
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8" />
+  <!-- SideGuy Solutions — Who Do I Call? (Master Layout vNext) -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
 
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+  <title>Who Do I Call? · SideGuy Solutions (San Diego)</title>
 
-<title>SideGuy Solutions · Who Do I Call?</title>
+  <meta name="description" content="SideGuy is a human guidance layer for San Diego operators. One text. Clear options. Clarity before cost." />
 
-<meta name="description" content="SideGuy Solutions helps you figure out the right first call — calmly, clearly, with a real human." />
 
 
+  <style>
 
-<style>
+    :root{
 
-/* ============================
+      --bg0:#eefcff;
 
-   RESET + VARIABLES
+      --bg1:#d7f5ff;
 
-   ============================ */
+      --bg2:#bfeeff;
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+      --ink:#073044;
 
+      --muted:#3f6173;
 
+      --muted2:#5e7d8e;
 
-:root {
 
-  --bg-sky: #eef8fb;
 
-  --bg-sea: #dff3f8;
+      --card:#ffffffcc;
 
-  --text-main: #033045;
+      --card2:#ffffffb8;
 
-  --text-soft: #4a6b7a;
+      --stroke:rgba(7,48,68,.10);
 
-  --card-bg: rgba(255,255,255,0.9);
+      --stroke2:rgba(7,48,68,.07);
 
-  --radius: 18px;
+      --shadow: 0 18px 50px rgba(7,48,68,.10);
 
-  --green: #3bd9a6;
 
-  --blue: #7fc7ff;
 
-}
+      --mint:#21d3a1;
 
+      --mint2:#00c7ff;
 
+      --blue:#4aa9ff;
 
-body {
+      --blue2:#1f7cff;
 
-  font-family: -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif;
 
-  background: radial-gradient(circle at 20% 0%, #ffffff 0%, var(--bg-sky) 45%, var(--bg-sea) 100%);
 
-  color: var(--text-main);
+      --r:22px;
 
-  min-height: 100vh;
+      --pill:999px;
 
-}
 
 
+      --phone:"+17604541860";
 
-/* ============================
+      --phonePretty:"760-454-1860";
 
-   HEADER
+      --city:"San Diego";
 
-   ============================ */
+    }
 
-header {
 
-  max-width: 1100px;
 
-  margin: 36px auto 0;
+    *{box-sizing:border-box}
 
-  padding: 0 24px;
+    html,body{height:100%}
 
-}
+    body{
 
+      margin:0;
 
+      font-family:-apple-system, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
 
-.brand {
+      color:var(--ink);
 
-  display: flex;
+      background:
 
-  align-items: center;
+        radial-gradient(1200px 900px at 22% 10%, #ffffff 0%, var(--bg0) 25%, var(--bg1) 60%, var(--bg2) 100%);
 
-  gap: 14px;
+      -webkit-font-smoothing:antialiased;
 
-}
+      overflow-x:hidden;
 
+    }
 
 
-.brand-orb {
 
-  width: 18px;
+    /* soft ocean swirls */
 
-  height: 18px;
+    body:before{
 
-  border-radius: 50%;
+      content:"";
 
-  background: radial-gradient(circle at 30% 20%, #fff, #9ef0d2, #3bd9a6);
+      position:fixed;
 
-  box-shadow: 0 0 12px rgba(59,217,166,0.6);
+      inset:-20%;
 
-}
+      background:
 
+        radial-gradient(closest-side at 18% 20%, rgba(33,211,161,.18), transparent 55%),
 
+        radial-gradient(closest-side at 78% 28%, rgba(74,169,255,.16), transparent 52%),
 
-.brand-text {
+        radial-gradient(closest-side at 62% 82%, rgba(0,199,255,.12), transparent 55%),
 
-  font-weight: 700;
+        radial-gradient(closest-side at 25% 85%, rgba(33,211,161,.10), transparent 58%);
 
-  letter-spacing: 0.08em;
+      filter: blur(18px);
 
-  font-size: 13px;
+      pointer-events:none;
 
-  text-transform: uppercase;
+      z-index:-2;
 
-}
+    }
 
 
 
-.meta {
+    /* top home pill */
 
-  margin-top: 6px;
+    .topbar{
 
-  font-size: 12px;
+      position:sticky;
 
-  color: var(--text-soft);
+      top:0;
 
-}
+      z-index:50;
 
+      padding:14px 14px 10px;
 
+      display:flex;
 
-/* ============================
+      justify-content:center;
 
-   MAIN
+      pointer-events:none; /* so it feels “floating” */
 
-   ============================ */
+    }
 
-main {
+    .homePill{
 
-  max-width: 1100px;
+      pointer-events:auto;
 
-  margin: 60px auto;
+      text-decoration:none;
 
-  padding: 0 24px;
+      display:inline-flex;
 
-}
+      align-items:center;
 
+      gap:10px;
 
+      padding:10px 16px;
 
-h1 {
+      border-radius:var(--pill);
 
-  font-size: 34px;
+      background:linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.62));
 
-  margin-bottom: 12px;
+      border:1px solid var(--stroke2);
 
-}
+      box-shadow: 0 10px 28px rgba(7,48,68,.08);
 
+      color:var(--ink);
 
+      font-weight:700;
 
-.lead {
+      font-size:12px;
 
-  max-width: 620px;
+      letter-spacing:.02em;
 
-  font-size: 15px;
+      backdrop-filter: blur(14px);
 
-  line-height: 1.6;
+    }
 
-  color: var(--text-soft);
+    .homeDot{
 
-  margin-bottom: 36px;
+      width:10px;height:10px;border-radius:50%;
 
-}
+      background:linear-gradient(135deg, var(--mint), var(--mint2));
 
+      box-shadow: 0 0 0 3px rgba(255,255,255,.95), 0 10px 18px rgba(33,211,161,.18);
 
+    }
 
-/* ============================
 
-   CARDS
 
-   ============================ */
+    /* page */
 
-.grid {
+    .wrap{
 
-  display: grid;
+      max-width:1120px;
 
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin:0 auto;
 
-  gap: 18px;
+      padding: 26px 22px 92px;
 
-}
+    }
 
 
 
-.card {
+    .layout{
 
-  background: var(--card-bg);
+      display:grid;
 
-  border-radius: var(--radius);
+      grid-template-columns: 1.15fr .85fr;
 
-  padding: 20px;
+      gap:22px;
 
-  box-shadow: 0 14px 30px rgba(3,48,69,0.08);
+      align-items:start;
 
-}
+      min-height: calc(100vh - 120px);
 
+    }
 
+    @media (max-width: 980px){
 
-.card h3 {
+      .layout{grid-template-columns:1fr; gap:16px;}
 
-  font-size: 16px;
+    }
 
-  margin-bottom: 10px;
 
-}
 
+    /* left rail header */
 
+    .brandRow{
 
-.card ul {
+      display:flex;
 
-  padding-left: 18px;
+      align-items:flex-start;
 
-  color: var(--text-soft);
+      gap:14px;
 
-  font-size: 14px;
+      margin-bottom:14px;
 
-}
+    }
 
+    .brandOrb{
 
+      width:38px;height:38px;border-radius:50%;
 
-.card li {
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, rgba(255,255,255,.65) 18%, rgba(33,211,161,.85) 55%, rgba(0,199,255,.85) 100%);
 
-  margin-bottom: 6px;
+      box-shadow:
 
-}
+        0 0 0 4px rgba(255,255,255,.92),
 
+        0 18px 40px rgba(33,211,161,.22),
 
+        0 14px 26px rgba(0,199,255,.14);
 
-/* ============================
+      position:relative;
 
-   ORB RAIL
+      flex:0 0 auto;
 
-   ============================ */
+    }
 
-.orb-rail {
+    .brandOrb:after{
 
-  position: fixed;
+      content:"";
 
-  top: 110px;
+      position:absolute; inset:-18px;
 
-  right: 26px;
+      border-radius:50%;
 
-  display: flex;
+      background: radial-gradient(circle, rgba(33,211,161,.22), transparent 65%);
 
-  flex-direction: column;
+      filter: blur(6px);
 
-  gap: 14px;
+      z-index:-1;
 
-  z-index: 999;
+      animation:pulse 2.4s ease-in-out infinite;
 
-}
+    }
 
+    @keyframes pulse{
 
+      0%,100%{transform:scale(.96); opacity:.70}
 
-.orb {
+      50%{transform:scale(1.05); opacity:1}
 
-  width: 86px;
+    }
 
-  height: 86px;
 
-  border-radius: 50%;
 
-  display: flex;
+    .brandMeta{
 
-  align-items: center;
+      line-height:1.1;
 
-  justify-content: center;
+      padding-top:2px;
 
-  text-align: center;
+    }
 
-  font-size: 12px;
+    .brandName{
 
-  font-weight: 600;
+      font-weight:800;
 
-  color: #033045;
+      letter-spacing:.06em;
 
-  text-decoration: none;
+      text-transform:uppercase;
 
-  backdrop-filter: blur(10px);
+      font-size:12px;
 
-  transition: transform .25s ease;
+      color:rgba(7,48,68,.78);
 
-}
+    }
 
+    .brandSub{
 
+      margin-top:6px;
 
-.orb:hover { transform: translateY(-3px) scale(1.04); }
+      font-size:12px;
 
+      color:rgba(7,48,68,.62);
 
+    }
 
-.orb.primary {
+    .liveLine{
 
-  width: 108px;
+      margin-top:8px;
 
-  height: 108px;
+      font-size:12px;
 
-  background: radial-gradient(circle at 30% 20%, #fff, #9ef0d2, #3bd9a6);
+      color:rgba(7,48,68,.62);
 
-  box-shadow:
+      display:flex;
 
-    0 0 0 6px rgba(255,255,255,0.9),
+      flex-wrap:wrap;
 
-    0 0 42px rgba(59,217,166,0.6),
+      gap:10px;
 
-    0 24px 60px rgba(3,48,69,0.28);
+      align-items:center;
 
-  animation: pulse 3.6s ease-in-out infinite;
+    }
 
-}
+    .liveTag{
 
+      display:inline-flex;
 
+      align-items:center;
 
-.orb.secondary {
+      gap:8px;
 
-  background: radial-gradient(circle at 30% 20%, #fff, #cfeaff, #7fc7ff);
+      padding:7px 10px;
 
-}
+      border-radius:var(--pill);
 
+      background: rgba(255,255,255,.68);
 
+      border:1px solid var(--stroke2);
 
-.orb.tertiary {
+      backdrop-filter: blur(10px);
 
-  background: radial-gradient(circle at 30% 20%, #fff, #f3f7fb, #e1edf7);
+    }
 
-}
+    .spark{
 
+      width:8px;height:8px;border-radius:50%;
 
+      background: linear-gradient(135deg, var(--mint), var(--mint2));
 
-.orb.quaternary {
+      box-shadow: 0 0 0 3px rgba(255,255,255,.9);
 
-  background: radial-gradient(circle at 30% 20%, #fff, #f7f9fb, #edf2f6);
+    }
 
-}
 
 
+    /* hero copy */
 
-@keyframes pulse {
+    h1{
 
-  0% { box-shadow: 0 0 0 6px rgba(255,255,255,0.9), 0 0 34px rgba(59,217,166,0.45); }
+      margin:10px 0 8px;
 
-  50% { box-shadow: 0 0 0 6px rgba(255,255,255,0.95), 0 0 50px rgba(59,217,166,0.7); }
+      font-size:44px;
 
-  100% { box-shadow: 0 0 0 6px rgba(255,255,255,0.9), 0 0 34px rgba(59,217,166,0.45); }
+      letter-spacing:-.03em;
 
-}
+      line-height:1.02;
 
+    }
 
+    @media (max-width: 520px){
 
-/* ============================
+      h1{font-size:34px}
 
-   MOBILE
+    }
 
-   ============================ */
+    .lede{
 
-@media (max-width: 900px) {
+      margin:0 0 14px;
 
-  .orb-rail {
+      font-size:14px;
 
-    bottom: 100px;
+      line-height:1.6;
 
-    top: auto;
+      color:var(--muted);
 
-    right: 18px;
+      max-width: 720px;
 
-  }
+    }
 
-}
 
-</style>
+
+    /* cards area like the screenshot */
+
+    .cards{
+
+      display:grid;
+
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      gap:12px;
+
+      margin-top:14px;
+
+    }
+
+    @media (max-width: 980px){
+
+      .cards{grid-template-columns: repeat(2, minmax(0, 1fr));}
+
+    }
+
+    @media (max-width: 560px){
+
+      .cards{grid-template-columns: 1fr;}
+
+    }
+
+
+
+    .card{
+
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.70));
+
+      border:1px solid var(--stroke2);
+
+      border-radius:18px;
+
+      box-shadow: 0 12px 34px rgba(7,48,68,.08);
+
+      padding:14px 14px 12px;
+
+      backdrop-filter: blur(14px);
+
+      min-height: 132px;
+
+    }
+
+    .cardTitle{
+
+      font-weight:800;
+
+      font-size:13px;
+
+      margin:0 0 8px;
+
+      color: rgba(7,48,68,.82);
+
+    }
+
+    .bullets{
+
+      margin:0;
+
+      padding-left:16px;
+
+      font-size:12px;
+
+      line-height:1.5;
+
+      color: rgba(7,48,68,.64);
+
+    }
+
+    .bullets li{margin:0 0 6px}
+
+
+
+    .noteCard{
+
+      margin-top:12px;
+
+      background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.55));
+
+      border:1px dashed rgba(7,48,68,.12);
+
+      border-radius:18px;
+
+      padding:12px 14px;
+
+      color: rgba(7,48,68,.62);
+
+      font-size:12px;
+
+      line-height:1.55;
+
+      backdrop-filter: blur(14px);
+
+    }
+
+
+
+    .bigCta{
+
+      margin-top:14px;
+
+      background: linear-gradient(180deg, rgba(33,211,161,.15), rgba(0,199,255,.12));
+
+      border:1px solid rgba(7,48,68,.10);
+
+      border-radius:22px;
+
+      padding:18px 16px;
+
+      box-shadow: 0 20px 60px rgba(7,48,68,.10);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      gap:14px;
+
+      backdrop-filter: blur(14px);
+
+    }
+
+    @media (max-width: 560px){
+
+      .bigCta{flex-direction:column; align-items:flex-start;}
+
+    }
+
+    .bigCta h2{
+
+      margin:0;
+
+      font-size:14px;
+
+      letter-spacing:.02em;
+
+    }
+
+    .bigCta .small{
+
+      margin-top:6px;
+
+      font-size:12px;
+
+      color: rgba(7,48,68,.65);
+
+      line-height:1.45;
+
+    }
+
+
+
+    .btn{
+
+      text-decoration:none;
+
+      display:inline-flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      gap:10px;
+
+      padding:12px 14px;
+
+      border-radius: var(--pill);
+
+      border:1px solid rgba(255,255,255,.75);
+
+      color:#fff;
+
+      font-weight:800;
+
+      font-size:12px;
+
+      background: linear-gradient(135deg, var(--mint), var(--mint2));
+
+      box-shadow: 0 18px 40px rgba(0,199,255,.22);
+
+      white-space:nowrap;
+
+    }
+
+    .btn:active{transform: translateY(1px);}
+
+
+
+    /* RIGHT RAIL: four orb tiles (top-right) */
+
+    .rightRail{
+
+      position:sticky;
+
+      top:78px;
+
+      display:flex;
+
+      justify-content:flex-end;
+
+    }
+
+    @media (max-width: 980px){
+
+      .rightRail{position:relative; top:auto; justify-content:flex-start;}
+
+    }
+
+
+
+    .railStack{
+
+      display:flex;
+
+      align-items:flex-start;
+
+      gap:12px;
+
+    }
+
+
+
+    .railOrbs{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:12px;
+
+      align-items:flex-end;
+
+    }
+
+
+
+    .railOrb{
+
+      width:86px;
+
+      height:86px;
+
+      border-radius:999px;
+
+      position:relative;
+
+      border:1px solid rgba(255,255,255,.75);
+
+      box-shadow: 0 24px 55px rgba(7,48,68,.16);
+
+      backdrop-filter: blur(14px);
+
+      overflow:hidden;
+
+      cursor:pointer;
+
+      text-decoration:none;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      color:#fff;
+
+      font-weight:900;
+
+      letter-spacing:.02em;
+
+      font-size:12px;
+
+      text-align:center;
+
+      padding:10px;
+
+    }
+
+    .railOrb:before{
+
+      content:"";
+
+      position:absolute;
+
+      inset:-20%;
+
+      background:
+
+        radial-gradient(circle at 30% 22%, rgba(255,255,255,.90), rgba(255,255,255,.35) 28%, transparent 56%),
+
+        radial-gradient(circle at 65% 80%, rgba(0,0,0,.16), transparent 55%);
+
+      opacity:.60;
+
+      pointer-events:none;
+
+    }
+
+    .railOrb:after{
+
+      content:"";
+
+      position:absolute;
+
+      inset:-18px;
+
+      border-radius:999px;
+
+      background: radial-gradient(circle, rgba(33,211,161,.22), transparent 62%);
+
+      filter: blur(7px);
+
+      opacity:.9;
+
+      pointer-events:none;
+
+      animation:pulse 2.4s ease-in-out infinite;
+
+    }
+
+
+
+    .orbGreen{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(33,211,161,.95) 45%, rgba(0,199,255,.95) 100%); }
+
+    .orbBlue{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(74,169,255,.95) 45%, rgba(31,124,255,.98) 100%); }
+
+    .orbSoft{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(255,255,255,.82) 30%, rgba(255,255,255,.58) 100%); color:rgba(7,48,68,.82); border:1px solid rgba(7,48,68,.10); }
+
+    .orbSoft:after{ background: radial-gradient(circle, rgba(74,169,255,.18), transparent 65%); }
+
+
+
+    .railLabels{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:14px;
+
+      padding-top:2px;
+
+    }
+
+    .railLabel{
+
+      width:190px;
+
+      padding:11px 12px;
+
+      border-radius:16px;
+
+      background: rgba(255,255,255,.64);
+
+      border:1px solid var(--stroke2);
+
+      backdrop-filter: blur(14px);
+
+      box-shadow: 0 14px 34px rgba(7,48,68,.08);
+
+      color: rgba(7,48,68,.76);
+
+      font-size:12px;
+
+      line-height:1.35;
+
+    }
+
+    .railLabel b{color: rgba(7,48,68,.88);}
+
+
+
+    /* bottom-right Text PJ orb (always) */
+
+    .floating{
+
+      position:fixed;
+
+      right:18px;
+
+      bottom:16px;
+
+      z-index:999;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+    }
+
+    .floatPill{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:2px;
+
+      padding:10px 12px;
+
+      border-radius:16px;
+
+      background: rgba(255,255,255,.66);
+
+      border:1px solid var(--stroke2);
+
+      box-shadow: 0 18px 55px rgba(7,48,68,.14);
+
+      backdrop-filter: blur(14px);
+
+      min-width: 220px;
+
+    }
+
+    .floatPill .t1{
+
+      font-weight:900;
+
+      font-size:12px;
+
+      color: rgba(7,48,68,.88);
+
+      display:flex; align-items:center; gap:8px;
+
+    }
+
+    .chatDot{
+
+      width:10px;height:10px;border-radius:50%;
+
+      background: linear-gradient(135deg, var(--mint), var(--mint2));
+
+      box-shadow: 0 0 0 3px rgba(255,255,255,.9);
+
+    }
+
+    .floatPill .t2{
+
+      font-size:11px;
+
+      color: rgba(7,48,68,.62);
+
+    }
+
+    .floatBtn{
+
+      width:54px;height:54px;border-radius:999px;
+
+      background: radial-gradient(circle at 30% 20%, #ffffff, rgba(33,211,161,.95) 52%, rgba(0,199,255,.95) 100%);
+
+      border:1px solid rgba(255,255,255,.8);
+
+      box-shadow:
+
+        0 0 0 4px rgba(255,255,255,.92),
+
+        0 22px 60px rgba(0,199,255,.22),
+
+        0 18px 42px rgba(33,211,161,.18);
+
+      position:relative;
+
+      text-decoration:none;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      color:#fff;
+
+      font-weight:900;
+
+      letter-spacing:.02em;
+
+      font-size:11px;
+
+    }
+
+    .floatBtn:after{
+
+      content:"";
+
+      position:absolute;
+
+      inset:-16px;
+
+      border-radius:999px;
+
+      background: radial-gradient(circle, rgba(33,211,161,.28), transparent 62%);
+
+      filter: blur(7px);
+
+      animation:pulse 2.2s ease-in-out infinite;
+
+      z-index:-1;
+
+    }
+
+
+
+    /* tiny footer */
+
+    .microFooter{
+
+      margin-top:18px;
+
+      font-size:11px;
+
+      color: rgba(7,48,68,.55);
+
+    }
+
+    .microFooter a{color: rgba(31,124,255,.85); text-decoration:none; font-weight:700;}
+
+  </style>
 
 </head>
 
@@ -391,165 +940,375 @@ h1 {
 
 <body>
 
+  <div class="topbar">
 
+    <a class="homePill" href="index.html" aria-label="Back to home">
 
-<header>
+      <span class="homeDot"></span>
 
-  <div class="brand">
+      Back to home
 
-    <div class="brand-orb"></div>
-
-    <div class="brand-text">SideGuy Solutions</div>
-
-  </div>
-
-  <div class="meta">
-
-    San Diego · <span id="live-time">--</span> · <span id="weather">Loading weather…</span>
+    </a>
 
   </div>
 
-</header>
+
+
+  <div class="wrap">
+
+    <div class="layout">
+
+      <!-- LEFT / MAIN -->
+
+      <main>
+
+        <div class="brandRow">
+
+          <div class="brandOrb" aria-hidden="true"></div>
+
+          <div class="brandMeta">
+
+            <div class="brandName">SideGuy Solutions</div>
+
+            <div class="brandSub"><span id="cityLabel">San Diego</span> · Human Guidance Layer</div>
 
 
 
-<main>
+            <div class="liveLine">
 
-  <h1>Who Do I Call?</h1>
+              <span class="liveTag"><span class="spark"></span> Updated live · <span id="localTime">—</span></span>
 
-  <p class="lead">
+              <span class="liveTag">Weather · <span id="wx">—</span></span>
 
-    Something broke. Something stopped working. You know it’s a problem —
+              <span class="liveTag">Page · Who Do I Call</span>
 
-    but you don’t know who actually handles it.
+            </div>
 
-    SideGuy helps you slow down, understand your options,
+          </div>
 
-    and figure out the right first call before time or money gets wasted.
-
-  </p>
+        </div>
 
 
 
-  <section class="grid">
+        <h1>Who Do I Call?</h1>
 
-    <div class="card">
+        <p class="lede">
 
-      <h3>Most problems aren’t clearly labeled</h3>
+          Something breaks. Something stops working. You know it’s a problem — but you don’t know who actually handles it.
 
-      <ul>
+          SideGuy’s role: help you slow down, understand your options, and figure out the right first call — before time (or money) gets wasted.
 
-        <li>Issues overlap trades and vendors</li>
+        </p>
 
-        <li>Online advice pushes the wrong fix</li>
 
-        <li>The wrong first call costs days</li>
 
-      </ul>
+        <section class="cards">
+
+          <article class="card">
+
+            <p class="cardTitle">Most problems aren’t clearly labeled</p>
+
+            <ul class="bullets">
+
+              <li>Issue overlaps between trades and vendors</li>
+
+              <li>Companies rarely tell you if they’re not the right fit</li>
+
+              <li>The wrong first call creates delays and extra cost</li>
+
+            </ul>
+
+          </article>
+
+
+
+          <article class="card">
+
+            <p class="cardTitle">“Who do I call for…”</p>
+
+            <ul class="bullets">
+
+              <li>HVAC / A/C issues</li>
+
+              <li>Plumbing or leaks</li>
+
+              <li>Electrical issues</li>
+
+              <li>Website, POS, or payment failures</li>
+
+              <li>Business / tech confusion</li>
+
+            </ul>
+
+          </article>
+
+
+
+          <article class="card">
+
+            <p class="cardTitle">Clarity before cost</p>
+
+            <ul class="bullets">
+
+              <li>We start by understanding what broke</li>
+
+              <li>Then we map the likely causes + next steps</li>
+
+              <li>If you need a pro, we’ll tell you which one</li>
+
+            </ul>
+
+          </article>
+
+        </section>
+
+
+
+        <div class="noteCard">
+
+          <b>One text. Real guidance.</b><br/>
+
+          Describe what’s going on. We’ll give a calm, honest response — a reset, no pressure.
+
+        </div>
+
+
+
+        <section class="bigCta" aria-label="Talk to a real person">
+
+          <div>
+
+            <h2>Talk to a real person</h2>
+
+            <div class="small">
+
+              Text PJ directly and describe what’s going on.<br/>
+
+              <b>({{phonePretty}})</b> · <span id="cityFoot">San Diego</span>
+
+            </div>
+
+          </div>
+
+          <a class="btn" id="ctaBtn" href="sms:+17604541860">Text PJ · 760-454-1860</a>
+
+        </section>
+
+
+
+        <div class="microFooter">
+
+          SideGuy Solutions · <span id="dateStamp">—</span> ·
+
+          <a href="index.html">Homepage</a>
+
+        </div>
+
+      </main>
+
+
+
+      <!-- RIGHT RAIL -->
+
+      <aside class="rightRail" aria-label="Right rail actions">
+
+        <div class="railStack">
+
+          <div class="railOrbs">
+
+            <a class="railOrb orbGreen" id="railText" href="sms:+17604541860" aria-label="Text PJ">Text PJ</a>
+
+            <a class="railOrb orbBlue" id="railAsk" href="index.html#ask-ai" aria-label="Ask AI Questions">Ask AI</a>
+
+            <a class="railOrb orbSoft" id="railStart" href="index.html#start-simple" aria-label="Start Simple">Start<br/>Simple</a>
+
+            <a class="railOrb orbSoft" id="railNo" href="index.html#no-pressure" aria-label="No pressure">No<br/>pressure</a>
+
+          </div>
+
+
+
+          <div class="railLabels">
+
+            <div class="railLabel"><b>Text PJ</b><br/>Fast human response. No tickets. No weird portals.</div>
+
+            <div class="railLabel"><b>Ask AI Qs</b><br/>Use AI to explore options — then confirm with a human.</div>
+
+            <div class="railLabel"><b>Start Simple</b><br/>Quick checklist → next best step. Avoid overreacting.</div>
+
+            <div class="railLabel"><b>No pressure</b><br/>Clarity first. If we can’t help, we’ll say so.</div>
+
+          </div>
+
+        </div>
+
+      </aside>
 
     </div>
 
+  </div>
 
 
-    <div class="card">
 
-      <h3>Common “who do I call?” situations</h3>
+  <!-- Bottom-right “Text PJ” (best version) -->
 
-      <ul>
+  <div class="floating" aria-label="Text PJ floating orb">
 
-        <li>HVAC vs electrical vs plumbing</li>
+    <div class="floatPill">
 
-        <li>Website, POS, or payment failures</li>
+      <div class="t1"><span class="chatDot"></span> Text PJ</div>
 
-        <li>Business or tech confusion</li>
-
-      </ul>
+      <div class="t2">One text · calm answers · <b>760-454-1860</b></div>
 
     </div>
 
+    <a class="floatBtn" href="sms:+17604541860" aria-label="Text PJ now">Text<br/>PJ</a>
 
-
-    <div class="card">
-
-      <h3>One text. Real guidance.</h3>
-
-      <ul>
-
-        <li>No call centers</li>
-
-        <li>No pressure</li>
-
-        <li>A real human helping you think clearly</li>
-
-      </ul>
-
-    </div>
-
-  </section>
-
-</main>
+  </div>
 
 
 
-<!-- ORB RAIL -->
+  <script>
 
-<div class="orb-rail">
+    // ====== Canonical phone lock (display + links)
 
-  <a class="orb primary" href="sms:17604541860">💬<br>Text PJ</a>
+    (function(){
 
-  <a class="orb secondary" href="#ask-ai">🤖<br>Ask AI</a>
+      const pretty = "760-454-1860";
 
-  <a class="orb tertiary" href="#start-simple">✨<br>Start Simple</a>
+      const sms = "sms:+17604541860";
 
-  <div class="orb quaternary">🌊<br>No Pressure</div>
+      const nodes = document.querySelectorAll("#ctaBtn,#railText");
 
-</div>
-
-
-
-<!-- LIVE TIME + WEATHER -->
-
-<script>
-
-function updateTime() {
-
-  const now = new Date().toLocaleString("en-US", {
-
-    timeZone: "America/Los_Angeles",
-
-    hour: "numeric",
-
-    minute: "2-digit",
-
-    hour12: true
-
-  });
-
-  document.getElementById("live-time").textContent = now;
-
-}
-
-setInterval(updateTime, 60000);
-
-updateTime();
+      nodes.forEach(n => n.setAttribute("href", sms));
 
 
 
-fetch("https://api.open-meteo.com/v1/forecast?latitude=32.7157&longitude=-117.1611&current_weather=true")
+      // replace the placeholder token if present
 
-  .then(r => r.json())
+      document.body.innerHTML = document.body.innerHTML.replaceAll("{{phonePretty}}", pretty);
 
-  .then(d => {
-
-    document.getElementById("weather").textContent =
-
-      `${Math.round(d.current_weather.temperature)}°F · San Diego`;
-
-  });
-
-</script>
+    })();
 
 
+
+    // ====== Live timestamp (San Diego time)
+
+    function fmtTime(d){
+
+      return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+
+    }
+
+    function fmtDate(d){
+
+      return d.toLocaleDateString([], {year:'numeric', month:'short', day:'numeric'});
+
+    }
+
+    function updateTime(){
+
+      const now = new Date();
+
+      document.getElementById("localTime").textContent = fmtTime(now);
+
+      document.getElementById("dateStamp").textContent = "Updated " + fmtDate(now);
+
+    }
+
+    updateTime();
+
+    setInterval(updateTime, 15000);
+
+
+
+    // ====== Live weather (San Diego) via Open-Meteo (no key)
+
+    // Using downtown-ish coords; fast + stable.
+
+    const SD = { lat: 32.7157, lon: -117.1611 };
+
+
+
+    const wxCodes = {
+
+      0:"Clear", 1:"Mainly clear", 2:"Partly cloudy", 3:"Cloudy",
+
+      45:"Fog", 48:"Fog", 51:"Light drizzle", 53:"Drizzle", 55:"Heavy drizzle",
+
+      56:"Freezing drizzle", 57:"Freezing drizzle",
+
+      61:"Light rain", 63:"Rain", 65:"Heavy rain",
+
+      66:"Freezing rain", 67:"Freezing rain",
+
+      71:"Light snow", 73:"Snow", 75:"Heavy snow",
+
+      77:"Snow grains",
+
+      80:"Rain showers", 81:"Rain showers", 82:"Heavy showers",
+
+      85:"Snow showers", 86:"Snow showers",
+
+      95:"Thunderstorm", 96:"Thunderstorm", 99:"Thunderstorm"
+
+    };
+
+
+
+    async function loadWeather(){
+
+      try{
+
+        const url = "https://api.open-meteo.com/v1/forecast"
+
+          + "?latitude=" + encodeURIComponent(SD.lat)
+
+          + "&longitude=" + encodeURIComponent(SD.lon)
+
+          + "&current=temperature_2m,weather_code"
+
+          + "&temperature_unit=fahrenheit"
+
+          + "&timezone=auto";
+
+
+
+        const res = await fetch(url, {cache:"no-store"});
+
+        if(!res.ok) throw new Error("wx http " + res.status);
+
+        const data = await res.json();
+
+        const t = data?.current?.temperature_2m;
+
+        const code = data?.current?.weather_code;
+
+        const label = (wxCodes[String(code)] || "Weather");
+
+        if(typeof t === "number"){
+
+          document.getElementById("wx").textContent = Math.round(t) + "°F · " + label;
+
+        }else{
+
+          document.getElementById("wx").textContent = label;
+
+        }
+
+      }catch(e){
+
+        document.getElementById("wx").textContent = "San Diego (live)";
+
+      }
+
+    }
+
+    loadWeather();
+
+    setInterval(loadWeather, 10 * 60 * 1000);
+
+  </script>
 
 </body>
 
