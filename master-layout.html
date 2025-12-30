@@ -5,417 +5,385 @@
 
 <head>
 
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Who Do I Call? · SideGuy Solutions · San Diego</title>
 
 
+<title>SideGuy Solutions · Who Do I Call?</title>
 
-  <meta name="description" content="SideGuy Solutions helps you figure out who to call when something breaks — before time or money gets wasted. Real human guidance in San Diego." />
+<meta name="description" content="SideGuy Solutions helps you figure out the right first call — calmly, clearly, with a real human." />
 
 
 
-  <style>
+<style>
 
-    :root{
+/* ============================
 
-      --bg-sky:#eef9ff;
+   RESET + VARIABLES
 
-      --bg-sea:#d9f1ff;
+   ============================ */
 
-      --bg-card:rgba(255,255,255,0.95);
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-      --ink-main:#0b2b3a;
 
-      --ink-soft:#4a6a7a;
 
-      --accent:#35c6a3;
+:root {
 
-      --accent-dark:#1fa88a;
+  --bg-sky: #eef8fb;
 
-      --radius-lg:22px;
+  --bg-sea: #dff3f8;
 
-      --radius-pill:999px;
+  --text-main: #033045;
 
-    }
+  --text-soft: #4a6b7a;
 
+  --card-bg: rgba(255,255,255,0.9);
 
+  --radius: 18px;
 
-    *{box-sizing:border-box;margin:0;padding:0;}
+  --green: #3bd9a6;
 
+  --blue: #7fc7ff;
 
+}
 
-    body{
 
-      font-family:-apple-system,BlinkMacSystemFont,"Inter",system-ui,sans-serif;
 
-      background:radial-gradient(circle at top left,#ffffff 0%,var(--bg-sky) 45%,var(--bg-sea) 100%);
+body {
 
-      color:var(--ink-main);
+  font-family: -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif;
 
-      min-height:100vh;
+  background: radial-gradient(circle at 20% 0%, #ffffff 0%, var(--bg-sky) 45%, var(--bg-sea) 100%);
 
-    }
+  color: var(--text-main);
 
+  min-height: 100vh;
 
+}
 
-    /* ===== GLOBAL LAYOUT ===== */
 
 
+/* ============================
 
-    .page{
+   HEADER
 
-      max-width:1100px;
+   ============================ */
 
-      margin:0 auto;
+header {
 
-      padding:28px 22px 140px;
+  max-width: 1100px;
 
-    }
+  margin: 36px auto 0;
 
+  padding: 0 24px;
 
+}
 
-    /* ===== HEADER ===== */
 
 
+.brand {
 
-    header{
+  display: flex;
 
-      display:flex;
+  align-items: center;
 
-      align-items:center;
+  gap: 14px;
 
-      justify-content:space-between;
+}
 
-      margin-bottom:38px;
 
-    }
 
+.brand-orb {
 
+  width: 18px;
 
-    .brand{
+  height: 18px;
 
-      display:flex;
+  border-radius: 50%;
 
-      align-items:center;
+  background: radial-gradient(circle at 30% 20%, #fff, #9ef0d2, #3bd9a6);
 
-      gap:14px;
+  box-shadow: 0 0 12px rgba(59,217,166,0.6);
 
-    }
+}
 
 
 
-    .orb{
+.brand-text {
 
-      width:38px;height:38px;
+  font-weight: 700;
 
-      border-radius:50%;
+  letter-spacing: 0.08em;
 
-      background:radial-gradient(circle at 30% 20%,#ffffff,#7fe6c8,#32c3a1);
+  font-size: 13px;
 
-      box-shadow:0 10px 28px rgba(53,198,163,.45);
+  text-transform: uppercase;
 
-    }
+}
 
 
 
-    .brand-text{
+.meta {
 
-      display:flex;
+  margin-top: 6px;
 
-      flex-direction:column;
+  font-size: 12px;
 
-    }
+  color: var(--text-soft);
 
+}
 
 
-    .brand-text strong{
 
-      font-size:15px;
+/* ============================
 
-      letter-spacing:.04em;
+   MAIN
 
-    }
+   ============================ */
 
+main {
 
+  max-width: 1100px;
 
-    .brand-text span{
+  margin: 60px auto;
 
-      font-size:12px;
+  padding: 0 24px;
 
-      color:var(--ink-soft);
+}
 
-    }
 
 
+h1 {
 
-    .status{
+  font-size: 34px;
 
-      font-size:11px;
+  margin-bottom: 12px;
 
-      color:var(--ink-soft);
+}
 
-      text-align:right;
 
-    }
 
+.lead {
 
+  max-width: 620px;
 
-    /* ===== TOP RIGHT COMMAND RAIL ===== */
+  font-size: 15px;
 
+  line-height: 1.6;
 
+  color: var(--text-soft);
 
-    .command-rail{
+  margin-bottom: 36px;
 
-      position:fixed;
+}
 
-      top:26px;
 
-      right:26px;
 
-      display:flex;
+/* ============================
 
-      flex-direction:column;
+   CARDS
 
-      gap:10px;
+   ============================ */
 
-      z-index:20;
+.grid {
 
-    }
+  display: grid;
 
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
+  gap: 18px;
 
-    .command-card{
+}
 
-      background:var(--bg-card);
 
-      border-radius:14px;
 
-      padding:10px 14px;
+.card {
 
-      box-shadow:0 10px 26px rgba(0,0,0,.08);
+  background: var(--card-bg);
 
-      text-decoration:none;
+  border-radius: var(--radius);
 
-      color:var(--ink-main);
+  padding: 20px;
 
-      width:180px;
+  box-shadow: 0 14px 30px rgba(3,48,69,0.08);
 
-    }
+}
 
 
 
-    .command-card strong{
+.card h3 {
 
-      font-size:13px;
+  font-size: 16px;
 
-      display:block;
+  margin-bottom: 10px;
 
-      margin-bottom:2px;
+}
 
-    }
 
 
+.card ul {
 
-    .command-card span{
+  padding-left: 18px;
 
-      font-size:11px;
+  color: var(--text-soft);
 
-      color:var(--ink-soft);
+  font-size: 14px;
 
-    }
+}
 
 
 
-    .command-card.primary{
+.card li {
 
-      background:linear-gradient(135deg,var(--accent),#7fe6c8);
+  margin-bottom: 6px;
 
-      color:#fff;
+}
 
-    }
 
 
+/* ============================
 
-    .command-card.primary span{color:#eafff8;}
+   ORB RAIL
 
+   ============================ */
 
+.orb-rail {
 
-    /* ===== HERO ===== */
+  position: fixed;
 
+  top: 110px;
 
+  right: 26px;
 
-    .hero{
+  display: flex;
 
-      max-width:640px;
+  flex-direction: column;
 
-      margin-bottom:36px;
+  gap: 14px;
 
-    }
+  z-index: 999;
 
+}
 
 
-    .hero h1{
 
-      font-size:34px;
+.orb {
 
-      line-height:1.15;
+  width: 86px;
 
-      margin-bottom:12px;
+  height: 86px;
 
-    }
+  border-radius: 50%;
 
+  display: flex;
 
+  align-items: center;
 
-    .hero p{
+  justify-content: center;
 
-      font-size:15px;
+  text-align: center;
 
-      line-height:1.65;
+  font-size: 12px;
 
-      color:var(--ink-soft);
+  font-weight: 600;
 
-    }
+  color: #033045;
 
+  text-decoration: none;
 
+  backdrop-filter: blur(10px);
 
-    /* ===== CARDS ===== */
+  transition: transform .25s ease;
 
+}
 
 
-    .card-grid{
 
-      display:grid;
+.orb:hover { transform: translateY(-3px) scale(1.04); }
 
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 
-      gap:18px;
 
-      margin-top:36px;
+.orb.primary {
 
-    }
+  width: 108px;
 
+  height: 108px;
 
+  background: radial-gradient(circle at 30% 20%, #fff, #9ef0d2, #3bd9a6);
 
-    .card{
+  box-shadow:
 
-      background:var(--bg-card);
+    0 0 0 6px rgba(255,255,255,0.9),
 
-      border-radius:var(--radius-lg);
+    0 0 42px rgba(59,217,166,0.6),
 
-      padding:18px 20px 20px;
+    0 24px 60px rgba(3,48,69,0.28);
 
-      box-shadow:0 12px 30px rgba(0,0,0,.08);
+  animation: pulse 3.6s ease-in-out infinite;
 
-    }
+}
 
 
 
-    .card h3{
+.orb.secondary {
 
-      font-size:15px;
+  background: radial-gradient(circle at 30% 20%, #fff, #cfeaff, #7fc7ff);
 
-      margin-bottom:8px;
+}
 
-    }
 
 
+.orb.tertiary {
 
-    .card ul{
+  background: radial-gradient(circle at 30% 20%, #fff, #f3f7fb, #e1edf7);
 
-      padding-left:16px;
+}
 
-      font-size:13px;
 
-      color:var(--ink-soft);
 
-    }
+.orb.quaternary {
 
+  background: radial-gradient(circle at 30% 20%, #fff, #f7f9fb, #edf2f6);
 
+}
 
-    .card li{margin-bottom:6px;}
 
 
+@keyframes pulse {
 
-    /* ===== BOTTOM RIGHT TEXT PJ ===== */
+  0% { box-shadow: 0 0 0 6px rgba(255,255,255,0.9), 0 0 34px rgba(59,217,166,0.45); }
 
+  50% { box-shadow: 0 0 0 6px rgba(255,255,255,0.95), 0 0 50px rgba(59,217,166,0.7); }
 
+  100% { box-shadow: 0 0 0 6px rgba(255,255,255,0.9), 0 0 34px rgba(59,217,166,0.45); }
 
-    .text-pj{
+}
 
-      position:fixed;
 
-      right:26px;
 
-      bottom:26px;
+/* ============================
 
-      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+   MOBILE
 
-      color:#fff;
+   ============================ */
 
-      padding:14px 18px;
+@media (max-width: 900px) {
 
-      border-radius:18px;
+  .orb-rail {
 
-      box-shadow:0 18px 36px rgba(31,168,138,.5);
+    bottom: 100px;
 
-      text-decoration:none;
+    top: auto;
 
-      z-index:25;
+    right: 18px;
 
-    }
+  }
 
+}
 
-
-    .text-pj strong{
-
-      display:block;
-
-      font-size:14px;
-
-    }
-
-
-
-    .text-pj span{
-
-      font-size:11px;
-
-      opacity:.95;
-
-    }
-
-
-
-    /* ===== FOOTER ===== */
-
-
-
-    footer{
-
-      margin-top:60px;
-
-      font-size:11px;
-
-      color:var(--ink-soft);
-
-      text-align:center;
-
-    }
-
-
-
-    @media(max-width:720px){
-
-      .command-rail{display:none;}
-
-      .hero h1{font-size:30px;}
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -425,194 +393,165 @@
 
 
 
-  <!-- COMMAND RAIL -->
+<header>
 
-  <div class="command-rail">
+  <div class="brand">
 
-    <a class="command-card primary" href="sms:17604541860">
+    <div class="brand-orb"></div>
 
-      <strong>Text PJ</strong>
-
-      <span>Real human · No pressure</span>
-
-    </a>
-
-    <a class="command-card" href="#">
-
-      <strong>Ask AI Questions</strong>
-
-      <span>Think it through calmly</span>
-
-    </a>
-
-    <a class="command-card" href="#">
-
-      <strong>Start Simple</strong>
-
-      <span>No commitment step</span>
-
-    </a>
+    <div class="brand-text">SideGuy Solutions</div>
 
   </div>
 
+  <div class="meta">
 
-
-  <div class="page">
-
-
-
-    <!-- HEADER -->
-
-    <header>
-
-      <div class="brand">
-
-        <div class="orb"></div>
-
-        <div class="brand-text">
-
-          <strong>SideGuy Solutions</strong>
-
-          <span>San Diego · Human Guidance Layer</span>
-
-        </div>
-
-      </div>
-
-      <div class="status" id="statusLine">
-
-        Updated live · San Diego
-
-      </div>
-
-    </header>
-
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <h1>Who Do I Call?</h1>
-
-      <p>
-
-        Something’s broken. Something’s not working.  
-
-        You know it’s a problem — but you don’t yet know who actually handles it.
-
-        <br><br>
-
-        SideGuy helps you slow things down, understand your options, and figure out
-
-        the <em>right</em> first call — before time or money gets wasted.
-
-      </p>
-
-    </section>
-
-
-
-    <!-- CARDS -->
-
-    <section class="card-grid">
-
-      <div class="card">
-
-        <h3>Most problems aren’t clearly labeled</h3>
-
-        <ul>
-
-          <li>Issues overlap between vendors</li>
-
-          <li>Symptoms don’t match root cause</li>
-
-          <li>Wrong first call creates delays</li>
-
-        </ul>
-
-      </div>
-
-
-
-      <div class="card">
-
-        <h3>Common “Who do I call?” situations</h3>
-
-        <ul>
-
-          <li>HVAC vs electrical vs plumbing</li>
-
-          <li>Website, POS, or payment failures</li>
-
-          <li>Vendor blame loops</li>
-
-        </ul>
-
-      </div>
-
-
-
-      <div class="card">
-
-        <h3>One text. Real guidance.</h3>
-
-        <ul>
-
-          <li>No ticket numbers</li>
-
-          <li>No sales pressure</li>
-
-          <li>A real human helping you think clearly</li>
-
-        </ul>
-
-      </div>
-
-    </section>
-
-
-
-    <footer>
-
-      SideGuy Solutions · San Diego · Text PJ: (760) 454-1860
-
-    </footer>
-
-
+    San Diego · <span id="live-time">--</span> · <span id="weather">Loading weather…</span>
 
   </div>
 
-
-
-  <!-- TEXT PJ FLOAT -->
-
-  <a class="text-pj" href="sms:17604541860">
-
-    <strong>Text PJ</strong>
-
-    <span>Real human · San Diego</span>
-
-  </a>
+</header>
 
 
 
-  <!-- TIME + WEATHER -->
+<main>
 
-  <script>
+  <h1>Who Do I Call?</h1>
 
-    const status = document.getElementById("statusLine");
+  <p class="lead">
 
-    const now = new Date().toLocaleTimeString("en-US",{hour:'numeric',minute:'2-digit'});
+    Something broke. Something stopped working. You know it’s a problem —
 
-    status.innerHTML = `Updated live · San Diego · ${now}`;
+    but you don’t know who actually handles it.
 
-  </script>
+    SideGuy helps you slow down, understand your options,
+
+    and figure out the right first call before time or money gets wasted.
+
+  </p>
+
+
+
+  <section class="grid">
+
+    <div class="card">
+
+      <h3>Most problems aren’t clearly labeled</h3>
+
+      <ul>
+
+        <li>Issues overlap trades and vendors</li>
+
+        <li>Online advice pushes the wrong fix</li>
+
+        <li>The wrong first call costs days</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <h3>Common “who do I call?” situations</h3>
+
+      <ul>
+
+        <li>HVAC vs electrical vs plumbing</li>
+
+        <li>Website, POS, or payment failures</li>
+
+        <li>Business or tech confusion</li>
+
+      </ul>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <h3>One text. Real guidance.</h3>
+
+      <ul>
+
+        <li>No call centers</li>
+
+        <li>No pressure</li>
+
+        <li>A real human helping you think clearly</li>
+
+      </ul>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+<!-- ORB RAIL -->
+
+<div class="orb-rail">
+
+  <a class="orb primary" href="sms:17604541860">💬<br>Text PJ</a>
+
+  <a class="orb secondary" href="#ask-ai">🤖<br>Ask AI</a>
+
+  <a class="orb tertiary" href="#start-simple">✨<br>Start Simple</a>
+
+  <div class="orb quaternary">🌊<br>No Pressure</div>
+
+</div>
+
+
+
+<!-- LIVE TIME + WEATHER -->
+
+<script>
+
+function updateTime() {
+
+  const now = new Date().toLocaleString("en-US", {
+
+    timeZone: "America/Los_Angeles",
+
+    hour: "numeric",
+
+    minute: "2-digit",
+
+    hour12: true
+
+  });
+
+  document.getElementById("live-time").textContent = now;
+
+}
+
+setInterval(updateTime, 60000);
+
+updateTime();
+
+
+
+fetch("https://api.open-meteo.com/v1/forecast?latitude=32.7157&longitude=-117.1611&current_weather=true")
+
+  .then(r => r.json())
+
+  .then(d => {
+
+    document.getElementById("weather").textContent =
+
+      `${Math.round(d.current_weather.temperature)}°F · San Diego`;
+
+  });
+
+</script>
 
 
 
 </body>
 
 </html>
-
 
