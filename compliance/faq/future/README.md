@@ -1,12 +1,10 @@
-# FAQ Expansion (Deferred by Design)
+# FAQ Expansion — Future Only
 
 This directory exists intentionally.
 
-FAQs will only be created when:
-- the same question appears repeatedly
-- humans confirm the confusion is real
-- answers improve clarity (not rankings)
+FAQs are created only when:
+- The same question repeats
+- Humans confirm confusion is real
+- Clarity improves real outcomes
 
-No automation.
-No pressure.
-No fake coverage.
+Automation is disabled by design.
