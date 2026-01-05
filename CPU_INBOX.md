@@ -3,31 +3,25 @@
 
 
 
-Status: ACTIVE  
+Status: ACTIVE
 
-Purpose: Capture, preserve, and execute prior work  
-
-Rule: Nothing here is wasted. Everything here becomes code or pages.
+Rule: Nothing here is wasted. Everything becomes code, pages, or artifacts.
 
 
 
----
-
-
-
-## SOURCE
-
-The following items originated via:
+SOURCE:
 
 - Email
 
-- GPT sessions
+- Prior GPT sessions
 
 - Command Center notes
 
 
 
-This file exists so progress never resets again.
+INSTRUCTIONS:
+
+Paste raw email content below. Do not edit. Do not summarize.
 
 
 
@@ -35,9 +29,7 @@ This file exists so progress never resets again.
 
 
 
-## INTAKE — 2026-01-05 (Email)
-
-
+## INTAKE — EMAIL DUMP
 
 PASTE EMAIL CONTENT BELOW THIS LINE
 
