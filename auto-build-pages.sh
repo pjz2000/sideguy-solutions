@@ -1,8 +1,6 @@
 
 #!/usr/bin/env bash
 
-
-
 set -u
 
 
@@ -10,8 +8,6 @@ set -u
 INPUT="data/pages.txt"
 
 OUT="site/pages"
-
-
 
 mkdir -p "$OUT"
 
@@ -39,9 +35,9 @@ while read -r TITLE; do
 
   <meta charset="UTF-8">
 
-  <title>$TITLE | SideGuy</title>
+  <title>$TITLE | SideGuy Solutions</title>
 
-  <meta name="description" content="$TITLE — real help, real humans, SideGuy Solutions.">
+  <meta name="description" content="$TITLE — real answers, real humans, SideGuy Solutions.">
 
 </head>
 
@@ -49,33 +45,11 @@ while read -r TITLE; do
 
   <h1>$TITLE</h1>
 
+  <p>SideGuy Solutions exists for people searching for "$TITLE".</p>
 
+  <p>No sales pitch. No fluff. Just clarity, options, and real help.</p>
 
-  <p>
-
-    SideGuy Solutions helps people searching for "$TITLE"
-
-    get clarity, options, and real-world answers.
-
-  </p>
-
-
-
-  <p>
-
-    This page exists because Google users are asking real questions.
-
-    If you're here, you're in the right place.
-
-  </p>
-
-
-
-  <p>
-
-    Text PJ for help. No pressure. No sales pitch.
-
-  </p>
+  <p>Text PJ if you want to talk.</p>
 
 </body>
 
