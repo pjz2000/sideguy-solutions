@@ -1,0 +1,64 @@
+{
+  "system": "SideGuy Solutions",
+  "role": "conductor",
+  "mode": "governance",
+  "default_action": "do_not_build",
+  "max_generation_rate": "1_page_per_7_days",
+  "approved_build_signals": {
+    "human_signal": [
+      "Repeated Text PJ conversations",
+      "Explicit 'who do I call?' questions",
+      "Same explanation given multiple times in one week"
+    ],
+    "search_signal": [
+      "Search Console impressions with confusion-based phrasing",
+      "PPC queries showing misunderstanding",
+      "Anxious, non-transactional queries"
+    ],
+    "operator_signal": [
+      "Unresolved question noticed by operator",
+      "Vertical feels incomplete to operator",
+      "Page would reduce future explanation time"
+    ]
+  },
+  "hard_blockers": {
+    "ego_build": [
+      "Page exists to look impressive",
+      "Adds volume without clarity",
+      "Feels exciting but unnecessary"
+    ],
+    "keyword_temptation": [
+      "City stuffing",
+      "Synonym spinning",
+      "'Just in case' SEO pages"
+    ],
+    "emotional_rush": [
+      "Late night inspiration",
+      "Dopamine-driven expansion",
+      "'We should do all of them'"
+    ],
+    "manifest_violation": [
+      "No matching manifest entry",
+      "Exceeds allowed page types",
+      "Breaks internal linking rules"
+    ]
+  },
+  "decision_logic": {
+    "allow_only_if": "at_least_one_signal_present_and_no_blockers",
+    "action_if_allowed": "allow_single_page_only",
+    "action_if_not_allowed": "do_nothing"
+  },
+  "generation_rules": {
+    "one_question_per_page": true,
+    "clarity_before_cost": true,
+    "no_claims": true,
+    "no_urgency": true,
+    "human_escalation_required": true
+  },
+  "safety_controls": {
+    "override_phrase": "slow down",
+    "fallback_action": "route_to_text_pj",
+    "pause_is_success": true
+  },
+  "status": "active"
+}
