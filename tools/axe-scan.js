@@ -15,7 +15,33 @@ const files = [
   'longtail/payment-processing-for-marketplaces.html',
   'longtail/how-to-implement-instant-payouts.html',
   'longtail/ai-for-local-marketing-small-business.html',
-  'longtail/ai-cost-estimation-for-small-businesses.html'
+  'longtail/ai-cost-estimation-for-small-businesses.html',
+
+  // NEW — North County pilot pages
+  'longtail/encinitas-who-to-call-under-sink-leak.html',
+  'longtail/solana-beach-how-to-apply-for-sdgande-rebates.html',
+  'longtail/cardiff-how-to-lower-electric-bill-small-business.html',
+  'longtail/leucadia-ai-for-local-marketing.html',
+  'longtail/san-diego-how-to-switch-payment-providers-without-downtime.html',
+  'longtail/encinitas-what-to-do-if-your-processor-raises-fees.html',
+  'longtail/solana-beach-ac-freezing-up.html',
+  'longtail/cardiff-how-to-prepare-for-a-payment-audit.html',
+  'longtail/leucadia-how-to-find-a-local-licensed-contractor.html',
+
+  // Batch 1 (priorities 11-20)
+  'longtail/solana-beach-prepare-for-processor-fee-increase.html',
+  'longtail/cardiff-ac-freezing-up.html',
+  'longtail/encinitas-solar-rebates-financing.html',
+  'longtail/leucadia-handle-chargebacks.html',
+  'longtail/san-diego-instant-payouts-for-drivers.html',
+  'longtail/solana-beach-pos-best-practices.html',
+  'longtail/cardiff-same-day-plumber.html',
+  'longtail/encinitas-audit-your-processor-in-30-minutes.html',
+  'longtail/leucadia-ach-vs-card.html',
+  'longtail/san-diego-prevent-fraud-small-merchants.html',
+
+  // New pilot page
+  'longtail/san-diego-payment-processing-for-marketplaces.html'
 ];
 
 (async function(){

@@ -11,7 +11,22 @@ files = [
   'longtail/encinitas-what-to-do-if-your-processor-raises-fees.html',
   'longtail/solana-beach-ac-freezing-up.html',
   'longtail/cardiff-how-to-prepare-for-a-payment-audit.html',
-  'longtail/leucadia-how-to-find-a-local-licensed-contractor.html'
+  'longtail/leucadia-how-to-find-a-local-licensed-contractor.html',
+
+  # Batch 1 (11-20)
+  'longtail/solana-beach-prepare-for-processor-fee-increase.html',
+  'longtail/cardiff-ac-freezing-up.html',
+  'longtail/encinitas-solar-rebates-financing.html',
+  'longtail/leucadia-handle-chargebacks.html',
+  'longtail/san-diego-instant-payouts-for-drivers.html',
+  'longtail/solana-beach-pos-best-practices.html',
+  'longtail/cardiff-same-day-plumber.html',
+  'longtail/encinitas-audit-your-processor-in-30-minutes.html',
+  'longtail/leucadia-ach-vs-card.html',
+  'longtail/san-diego-prevent-fraud-small-merchants.html',
+
+  # New pilot page
+  'longtail/san-diego-payment-processing-for-marketplaces.html'
 ]
 
 ok = True
