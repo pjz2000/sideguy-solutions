@@ -41,7 +41,19 @@ const files = [
   'longtail/san-diego-prevent-fraud-small-merchants.html',
 
   // New pilot page
-  'longtail/san-diego-payment-processing-for-marketplaces.html'
+  'longtail/san-diego-payment-processing-for-marketplaces.html',
+
+  // Batch 2 (priorities 21-30)
+  'longtail/solana-beach-how-to-implement-subscription-billing.html',
+  'longtail/cardiff-how-to-estimate-ai-project-costs.html',
+  'longtail/encinitas-optimize-local-seo.html',
+  'longtail/leucadia-when-to-use-on-chain-settlements.html',
+  'longtail/san-diego-how-to-handle-chargebacks-for-subscriptions.html',
+  'longtail/solana-beach-choose-local-hvac-service.html',
+  'longtail/cardiff-audit-online-ordering-flow.html',
+  'longtail/encinitas-when-to-replace-your-roof.html',
+  'longtail/leucadia-how-to-use-utm-tracking.html',
+  'longtail/san-diego-key-questions-before-signing-payment-contract.html'
 ];
 
 (async function(){
