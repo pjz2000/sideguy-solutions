@@ -24,6 +24,12 @@ const EXCLUDED_DIRS = new Set([
   'site',
 ]);
 
+function isBackupDirName(dirName) {
+  const lower = dirName.toLowerCase();
+  // Catches: backups/, backup_pages/, backup_old_pages/, backups_2025..., etc.
+  return lower.startsWith('backup') || lower.startsWith('backups');
+}
+
 const EXCLUDED_FILE_BASENAMES = new Set([
   '404.html',
   '__tmp__-hub.html',
@@ -84,6 +90,9 @@ function shouldExcludeFile(relPathPosix) {
   if (lower.includes('/backups/') || lower.includes('/backup_pages/') || lower.includes('/.sideguy-backups/')) {
     return { exclude: true, reason: 'backup_dir' };
   }
+  if (lower.includes('/backups_') || lower.includes('/backup_') || lower.includes('/backup-') || lower.includes('/backups-')) {
+    return { exclude: true, reason: 'backup_dir' };
+  }
 
   // Exclude SEO reserve pages (often noindex or experiments).
   if (lower.startsWith('seo-reserve/') || lower.includes('/seo-reserve/')) {
@@ -107,6 +116,10 @@ async function walk(dirAbs, relDirPosix, collector) {
     if (entry.isDirectory()) {
       if (EXCLUDED_DIRS.has(entry.name)) {
         collector.excludedDirs[entry.name] = (collector.excludedDirs[entry.name] ?? 0) + 1;
+        continue;
+      }
+      if (isBackupDirName(entry.name)) {
+        collector.excludedDirs['backup_dir'] = (collector.excludedDirs['backup_dir'] ?? 0) + 1;
         continue;
       }
       if (entry.name.startsWith('.')) {
