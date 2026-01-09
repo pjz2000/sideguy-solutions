@@ -28,5 +28,23 @@
     "cityLabel": "SideGuy Core",
     "introHtml": "<p>The Money Index is where we log how systems perform over time: bets, flows, automations, and experiments.</p>",
     "bodyHtml": "<p>We’re not here to chase spikes. We use data, logs, and simple, repeatable rules to make better decisions over time. This page will grow as the system grows.</p>"
-  }
-]
+    }
+  ,
+    {
+      "type": "cursor-guardrails",
+      "description": "Operational rules and workflow for Cursor actions.",
+      "rules": [
+        "Cursor may ONLY create new files listed in the manifest.",
+        "Cursor may ONLY append (not rewrite) index/sitemap files.",
+        "Cursor must show the exact filenames created before stopping.",
+        "Every Cursor action must result in visible file changes (commits).",
+        "No commits = no progress."
+      ],
+      "workflow": [
+        "Lock Cursor guardrails",
+        "Generate 5–10 new URLs",
+        "Commit immediately",
+        "Only then scale batches"
+      ]
+    }
+  ]
