@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const TEMPLATE_PATH = path.join(__dirname, 'templates', 'template-v304.html');
+const TEMPLATE_PATH = path.join(__dirname, 'templates', 'sideguy-universal-template.html');
+const DOMAIN = 'https://sideguy.solutions';
 const EXCLUDE_FILES = new Set(['index.html', '404.html']);
 
 const templateRaw = fs.readFileSync(TEMPLATE_PATH, 'utf8');
@@ -19,6 +20,7 @@ function extractBetween(str, start, end) {
 function upgradeFile(filePath) {
   const fileName = path.basename(filePath);
   if (EXCLUDE_FILES.has(fileName)) return;
+  if (fileName.includes('.backup.') || fileName.endsWith('.tmp')) return;
 
   let html = fs.readFileSync(filePath, 'utf8');
 
@@ -52,9 +54,14 @@ function upgradeFile(filePath) {
   }
 
   // 4) Build new HTML from template
+  const relPathPosix = path.relative(__dirname, filePath).split(path.sep).join('/');
+  const canonicalUrl = `${DOMAIN}/${relPathPosix}`;
+
   let newHtml = templateRaw
     .replace(/{{PAGE_TITLE}}/g, pageTitle)
-    .replace(/{{META_DESCRIPTION}}/g, metaDescription)
+    .replace(/{{PAGE_HEADING}}/g, pageTitle)
+    .replace(/{{PAGE_DESCRIPTION}}/g, metaDescription)
+    .replace(/{{CANONICAL_URL}}/g, canonicalUrl)
     .replace('{{PAGE_CONTENT}}', content);
 
   fs.writeFileSync(filePath, newHtml, 'utf8');
@@ -67,7 +74,10 @@ function walk(dir) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       // Skip node_modules, .git, templates folders
-      if (['node_modules', '.git', 'templates'].includes(entry.name)) continue;
+      if (['node_modules', '.git', 'templates', 'tools', 'site'].includes(entry.name)) continue;
+      if (entry.name.startsWith('.')) continue;
+      if (entry.name.startsWith('_')) continue;
+      if (entry.name.toLowerCase().startsWith('backup') || entry.name.toLowerCase().startsWith('backups')) continue;
       walk(fullPath);
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       upgradeFile(fullPath);

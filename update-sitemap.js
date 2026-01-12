@@ -6,7 +6,28 @@ const path = require('path');
 
 const ROOT = '.';
 
-const DOMAIN = 'https://sideguysolutions.com';
+const DOMAIN = 'https://sideguy.solutions';
+
+const EXCLUDED_DIRS = new Set([
+  '.git',
+  'node_modules',
+  'tools',
+  'templates',
+  'stored-bashes',
+  'seo__DISABLED',
+  'auto-builder__DISABLED',
+  'test',
+  'site',
+]);
+
+const EXCLUDED_FILE_BASENAMES = new Set([
+  '404.html',
+  '__tmp__-hub.html',
+  '-hub.html',
+  '<!DOCTYPE html>.html',
+  '_template.html',
+  'template.html',
+]);
 
 
 
@@ -30,49 +51,129 @@ function escapeXML(str) {
 
 
 
-function walk(dir) {
+function isBackupDirName(dirName) {
+
+  const lower = dirName.toLowerCase();
+
+  return lower.startsWith('backup') || lower.startsWith('backups');
+
+}
+
+
+
+function shouldIncludeFile(relPathPosix) {
+
+  const base = path.posix.basename(relPathPosix);
+
+
+
+  if (!base.endsWith('.html')) return false;
+
+  if (EXCLUDED_FILE_BASENAMES.has(base)) return false;
+
+
+
+  if (base.startsWith('.')) return false;
+
+  if (base.includes(' ') || base.includes('?')) return false;
+
+
+
+  if (base.includes('.backup.')) return false;
+
+  if (base.endsWith('.tmp')) return false;
+
+
+
+  if (base.startsWith('template-') || base.startsWith('template_') || base === 'seo-template.html') {
+
+    return false;
+
+  }
+
+  if (base.includes('template') && base !== 'stripe-fees-calculator.html') {
+
+    return false;
+
+  }
+
+
+
+  const lower = relPathPosix.toLowerCase();
+
+  if (lower.includes('/_backups/') || lower.includes('/_layout_backups/') || lower.includes('/_quarantine_backups/')) {
+
+    return false;
+
+  }
+
+  if (lower.includes('/backups/') || lower.includes('/backup_pages/') || lower.includes('/.sideguy-backups/')) {
+
+    return false;
+
+  }
+
+  if (lower.includes('/backups_') || lower.includes('/backup_') || lower.includes('/backup-') || lower.includes('/backups-')) {
+
+    return false;
+
+  }
+
+  if (lower.startsWith('seo-reserve/') || lower.includes('/seo-reserve/')) {
+
+    return false;
+
+  }
+
+
+
+  return true;
+
+}
+
+
+
+function walk(dirAbs, relDirPosix) {
 
   let results = [];
 
-  const list = fs.readdirSync(dir);
+  const entries = fs.readdirSync(dirAbs, { withFileTypes: true });
+
+  for (const entry of entries) {
+
+    const entryAbs = path.join(dirAbs, entry.name);
+
+    const entryRelPosix = relDirPosix ? `${relDirPosix}/${entry.name}` : entry.name;
 
 
 
-  list.forEach(file => {
+    if (entry.isDirectory()) {
 
-    const full = path.join(dir, file);
+      if (EXCLUDED_DIRS.has(entry.name)) continue;
 
-    const stat = fs.statSync(full);
+      if (entry.name.startsWith('.')) continue;
 
+      if (entry.name.startsWith('_')) continue;
 
+      if (isBackupDirName(entry.name)) continue;
 
-    if (stat && stat.isDirectory()) {
+      results = results.concat(walk(entryAbs, entryRelPosix));
 
-      results = results.concat(walk(full));
-
-    } else {
-
-      if (
-
-        full.endsWith('.html') &&
-
-        !full.includes('404.html') &&
-
-        !file.startsWith('.') &&
-
-        !file.includes(' ') &&
-
-        !file.includes('?')
-
-      ) {
-
-        results.push(full.replace('./', ''));
-
-      }
+      continue;
 
     }
 
-  });
+
+
+    if (!entry.isFile()) continue;
+
+
+
+    const relPosix = entryRelPosix.split(path.sep).join('/');
+
+    if (shouldIncludeFile(relPosix)) results.push(relPosix);
+
+  }
 
 
 
@@ -82,7 +183,7 @@ function walk(dir) {
 
 
 
-const pages = walk(ROOT);
+const pages = walk(path.resolve(ROOT), '');
 
 
 
