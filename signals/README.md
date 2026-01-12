@@ -1,13 +1,22 @@
 
-# SideGuy Signal Doctrine
+# SideGuy PPC Signal Doctrine
 
-A page earns promotion ONLY when:
+Traffic is NOT signal.
+Clicks are NOT intent.
 
-1. Someone texts PJ referencing it
-2. A PPC visitor stays long enough to read
-3. The page reduces confusion
-4. The page does NOT push action
+Signal exists ONLY when:
+- A human pauses
+- A human reads
+- A human reacts
+- A human reaches out
 
-Traffic alone is NOT signal.
-Clarity reactions ARE signal.
+Promotion is earned by clarity, not CTR.
+
+Order of operations:
+1. Calm the click
+2. Confirm expectation
+3. Reduce pressure
+4. Invite human conversation
+5. Observe reactions
+6. Promote selectively
 
