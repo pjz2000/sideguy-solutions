@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.cwd();
-const DOMAIN = 'https://sideguysolutions.com';
+const DOMAIN = 'https://sideguy.solutions';
 
 const OUTPUT_INDEX = path.join(ROOT, 'sitemap-index.xml');
 const OUTPUT_SITEMAP_PREFIX = path.join(ROOT, 'sitemap-clean');
