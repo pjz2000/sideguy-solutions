@@ -6,7 +6,7 @@ const path = require('path');
 
 const ROOT = '.';
 
-const DOMAIN = 'https://sideguysolutions.com';
+const DOMAIN = 'https://sideguy.solutions';
 
 
 
