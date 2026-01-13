@@ -14,3 +14,10 @@ Format:
 - Outcome:
 - Notes:
 
+
+## Session — 2026-01-13
+- Category:
+- Problem:
+- Outcome:
+- Notes:
+
