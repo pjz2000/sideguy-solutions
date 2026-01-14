@@ -1,22 +1,18 @@
-# Repo Discipline Log — 2026-01-14 17:08
+Repo State @ 2026-01-14 17:17
 
-Clean branch state:
-⚠ Changes present
+Clean:
+No
 
-Modified but unstaged:
-public/snippets/search/search-trust.html
-signals/search-console/trust/search-trust.log
-trust/trust.log
+Untracked:
+.well-known/agents/sideguy-agent.json
+cases/candidates/case-candidate-1768411043.md
+interface/index/machine-index.json
+learning/signal-1768411043.json
+ledger/search-signal-1768411043.md
+reasoning/insights/insight-1768411043.md
+signals/trust/search-trust.log
+stability/checkpoints/stability-check-1768411043.md
+stability/history/stability-event-1768411043.json
 
-Untracked (intentional signal files):
-cases/candidates/case-candidate-1768410480.md
-learning/search-signals/signal-1768410480.json
-ledger/signals/search-signal-1768410480.md
-reasoning/audit/reasoning-audit.log
-reasoning/insights/insight-1768410480.md
-seo-reserve/build-queue/build-queue-2026-01-14.md
-
-Notes:
-- No auto-generation
-- No commits
-- Human-first workflow preserved
+Automation:
+None executed
