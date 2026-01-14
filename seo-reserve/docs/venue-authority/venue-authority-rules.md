@@ -1,27 +1,13 @@
-
-# Venue Authority Rules
-
-
+# Venue Authority Rules (LOCKED)
 
 Doctrine:
-
-- Venues are NOT hubs
-
-- Venues are decision spokes
-
-- Authority remains upstream (Who Do I Call / Tickets)
-
-
+- Venues are decision SPOKES
+- Venues are NEVER hubs
+- Authority remains upstream
 
 Rules:
-
-- No venue page outranks decision hubs
-
-- No venue creates new authority clusters
-
+- Venue pages cannot outrank decision hubs
+- Venue pages cannot spawn sub-hubs
 - All venue behavior feeds Decision OS
 
-
-
-Status: LOCKED
-
+Status: STRUCTURALLY LOCKED

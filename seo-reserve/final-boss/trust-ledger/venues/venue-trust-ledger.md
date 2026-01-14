@@ -1,39 +1,21 @@
-
 # Venue Trust Ledger
 
-
-
 Rules:
-
 - Append-only
-
 - Human-reviewed
+- No scoring
+- No automation
 
-- Context required
+Positive Trust Signals:
+- Clear pricing breakdown
+- Seating map clarity
+- Refund / transfer explanation
 
-- No scoring automation
-
-
-
-Trust Signals:
-
-- Transparent pricing
-
-- Clear seating explanation
-
-- Refund / transfer clarity
-
-
-
-Anti-Signals:
-
-- Countdown pressure
-
-- Artificial scarcity
-
+Negative Trust Signals:
+- Countdown timers
+- Scarcity language
 - Hidden fees
-
-
+- Conflicting seat descriptions
 
 Initialized: 2026-01-14
-
+Status: ACTIVE (human judgment only)
