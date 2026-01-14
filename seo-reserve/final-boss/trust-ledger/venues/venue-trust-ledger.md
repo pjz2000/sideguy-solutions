@@ -1,9 +1,39 @@
+
 # Venue Trust Ledger
 
-Trust is earned when SideGuy:
-- Prevents panic buying
-- Explains venue-specific behavior
-- Says \"wait\" when pressure is high
-- Refuses to sell tickets
 
-Date | Venue | Situation | Advice Given | Trust Earned
+
+Rules:
+
+- Append-only
+
+- Human-reviewed
+
+- Context required
+
+- No scoring automation
+
+
+
+Trust Signals:
+
+- Transparent pricing
+
+- Clear seating explanation
+
+- Refund / transfer clarity
+
+
+
+Anti-Signals:
+
+- Countdown pressure
+
+- Artificial scarcity
+
+- Hidden fees
+
+
+
+Initialized: 2026-01-14
+
