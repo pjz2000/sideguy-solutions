@@ -30,23 +30,36 @@ SideGuy is 1,725+ static HTML pages serving local businesses and residents in Sa
 open index.html
 ```
 
-### Run Health Check
+### Maintenance (Easy Mode)
 ```bash
+# Show all available commands
+bash maintain.sh
+
+# Run health check
+bash maintain.sh health
+
+# Run metadata audit
+bash maintain.sh audit
+
+# Regenerate sitemap
+bash maintain.sh sitemap
+
+# Run everything
+bash maintain.sh full
+```
+
+### Individual Tools
+```bash
+# Run health check
 python3 health-check.py
-```
 
-### Audit Metadata
-```bash
+# Audit metadata
 python3 metadata-audit.py
-```
 
-### Generate Sitemap
-```bash
+# Generate sitemap
 python3 generate-xml-sitemap.py
-```
 
-### Generate HTML Sitemap
-```bash
+# Generate HTML sitemap
 bash generate-sitemap-failsafe.sh
 ```
 
