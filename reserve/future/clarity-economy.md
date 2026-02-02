@@ -1,2 +1,1 @@
-Future: Clarity Economy
-Value: Understanding, not speed
+Value = understanding, not speed.
