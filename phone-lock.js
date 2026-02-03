@@ -1,6 +1,6 @@
 (function(){
-  const CANON = "760-454-1860";
-  const TEL = "+17604541860";
+  const CANON = "773-544-1231";
+  const TEL = "+17735441231";
 
   function enforce() {
     document.querySelectorAll('a[href]').forEach(a => {

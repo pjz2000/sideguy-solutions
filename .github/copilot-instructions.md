@@ -37,7 +37,7 @@ Offer the truth. Nothing more.
     --bg0:#eefcff;
     --ink:#073044;
     --mint:#21d3a1;
-    --phone:"+17604541860";
+    --phone:"+17735441231";
     --city:"San Diego";
   }
   body {
@@ -248,7 +248,7 @@ Generates ONE page only (hard stop enforced).
 - `/docs/` — Business logic & compliance
 
 ### Contact
-**Text PJ:** +1-760-454-1860  
+**Text PJ:** +1-773-544-1231  
 **Philosophy:** Clarity before cost. Human guidance layer.
 
 ---

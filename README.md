@@ -137,7 +137,7 @@ python3 metadata-audit.py
 
 ## Contact
 
-**Text PJ:** [+1-760-454-1860](tel:+17604541860)  
+**Text PJ:** [+1-773-544-1231](tel:+17735441231)  
 **Website:** [sideguy.solutions](https://sideguy.solutions)  
 **Philosophy:** Clarity before cost. Human guidance layer.
 
