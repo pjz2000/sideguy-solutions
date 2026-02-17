@@ -20,7 +20,7 @@ def generate_sitemap():
     # Create XML structure
     urlset = ET.Element('urlset', xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
     
-    base_url = 'https://sideguy.solutions'
+    base_url = 'https://sideguysolutions.com'
     lastmod = datetime.now().strftime('%Y-%m-%d')
     
     for filepath in html_files:
@@ -73,7 +73,7 @@ def generate_sitemap_index(root_dir):
     
     sitemap = ET.SubElement(sitemapindex, 'sitemap')
     loc = ET.SubElement(sitemap, 'loc')
-    loc.text = 'https://sideguy.solutions/sitemap.xml'
+    loc.text = 'https://sideguysolutions.com/sitemap.xml'
     
     lastmod = ET.SubElement(sitemap, 'lastmod')
     lastmod.text = datetime.now().strftime('%Y-%m-%d')

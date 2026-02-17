@@ -18,7 +18,7 @@ def add_analytics(filepath):
         return False
     
     # Add Plausible script before </head>
-    analytics_script = '  <script defer data-domain="sideguy.solutions" src="https://plausible.io/js/script.js"></script>\n</head>'
+    analytics_script = '  <script defer data-domain="sideguysolutions.com" src="https://plausible.io/js/script.js"></script>\n</head>'
     
     if '</head>' in content:
         content = content.replace('</head>', analytics_script, 1)
@@ -48,7 +48,7 @@ def main():
     print(f"✅ Added analytics: {added} pages")
     print(f"⏭️  Skipped (already has analytics): {skipped} pages")
     print(f"\n🎉 Analytics setup complete!")
-    print(f"\n📈 View stats at: https://plausible.io/sideguy.solutions")
+    print(f"\n📈 View stats at: https://plausible.io/sideguysolutions.com")
 
 if __name__ == '__main__':
     main()
