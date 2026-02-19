@@ -16,7 +16,11 @@ def extract_metadata(filepath):
         
         title_match = re.search(r'<title>(.*?)</title>', content, re.IGNORECASE)
         h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.IGNORECASE | re.DOTALL)
+        
+        # Try both possible attribute orders for meta description
         desc_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']', content, re.IGNORECASE)
+        if not desc_match:
+            desc_match = re.search(r'<meta\s+content=["\'](.*?)["\']\s+name=["\']description["\']', content, re.IGNORECASE)
         
         return {
             'title': title_match.group(1).strip() if title_match else None,
