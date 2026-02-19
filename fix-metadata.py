@@ -128,9 +128,21 @@ def fix_metadata_in_file(filepath):
         page_data = extract_page_data(content)
         filename = os.path.basename(filepath)
         
-        # Check if already has unique metadata
-        if page_data['title'] and 'Who Do I Call? · SideGuy Solutions (San Diego)' not in page_data['title']:
-            return None  # Already unique
+        # Check if needs fixing - look for generic descriptions
+        generic_phrases = [
+            'Something breaks. Something stops working',
+            'SideGuy is a human guidance layer for San Diego operators',
+            'Broken HTML index snapshot'
+        ]
+        
+        needs_fix = False
+        if not page_data['description'] or any(phrase in page_data['description'] for phrase in generic_phrases):
+            needs_fix = True
+        elif len(page_data['description']) < 30:  # Too short
+            needs_fix = True
+        
+        if not needs_fix:
+            return None  # Already has unique description
         
         # Generate new metadata
         new_title, new_description = generate_metadata(filename, page_data)
