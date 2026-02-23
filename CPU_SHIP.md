@@ -174,3 +174,58 @@ print(f"Pages missing real title: {len(missing_title)}")
 for f in missing_title[:10]: print(f" {f}")
 ```
 
+---
+
+## SHIP-003 — INVENTORY SHARPEN PASS ✅ (COMPLETED 2025-01)
+
+**Objective:** Create the 5 top Search Console impression pages that were missing from the repo.  
+All 5 pages created at exact slugs, with pricing tables, comparison, switch-trigger bullets, CTA, FAQ, JSON-LD.
+
+### Target Pages Created
+| Slug | Bytes | Hub Link |
+|------|-------|----------|
+| `mobile-payment-systems-san-diego.html` | 11,566 | payment-processing-hub |
+| `ai-business-solutions-san-diego.html` | 12,148 | ai-agent-automation |
+| `payment-processing-solutions-san-diego.html` | 11,759 | payment-processing-hub |
+| `electronic-payment-solutions-san-diego.html` | 12,004 | payment-processing-hub |
+| `battery-backup-installation-san-diego.html` | 12,959 | solar-battery-backup-install |
+
+### Each Page Includes
+- Title + unique meta description + H1 aligned to search intent
+- Side-by-side comparison table (providers / system options)
+- Pricing section (what you should realistically pay)
+- "When should you switch?" bullet list
+- Mid-page CTA (Text PJ — 773-544-1231, sms:+17735441231)
+- 6-question FAQ with `<details>` accordion
+- JSON-LD LocalBusiness + FAQPage schema
+- Floating Text PJ button
+- Hub backlink in breadcrumb area
+
+### Phone Number Canonical
+**Always use:** `sms:+17735441231` / `773-544-1231` (NOT +17604541860)
+
+### Sitemap After SHIP-003
+1,769 URLs in `sitemap.xml`
+
+### Commit Message Used
+`SHIP-003: Inventory Sharpen Pass — 5 top impression pages created`
+
+---
+
+## SHIP-004 CANDIDATES (NEXT)
+
+1. **Additional quote-review pages** — contractor, ADU, foundation, landscaping, painting  
+   Pattern: copy `hvac-project-quote-review-san-diego.html`, adapt checklist + red flags
+2. **Top-20 Search Console impressions** — pull next batch of pages with impressions but no clicks, create at exact slugs
+3. **Hub word-count pass** — check remaining hubs against 2,000w target (payment-processing-hub, ai-automation hub)
+4. **Internal linking pass #2** — newly created pages need incoming links from cluster pages
+```python
+import re
+from pathlib import Path
+BASE = Path("/workspaces/sideguy-solutions")
+missing_title = [f.name for f in BASE.glob("*.html")
+                 if not re.search(r'<title>[^<]{10,}</title>', f.read_text(errors="ignore"), re.I)]
+print(f"Pages missing real title: {len(missing_title)}")
+for f in missing_title[:10]: print(f" {f}")
+```
+
