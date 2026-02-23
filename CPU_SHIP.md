@@ -212,13 +212,40 @@ All 5 pages created at exact slugs, with pricing tables, comparison, switch-trig
 
 ---
 
-## SHIP-004 CANDIDATES (NEXT)
+---
+
+## SHIP-004 — CTR + AUTHORITY DOMINATION PASS ✅ (COMPLETED 2026-02-23)
+
+**Objective:** Upgrade titles for CTR + inject authority trust block on the 5 SHIP-003 pages.
+
+### What Changed on Each Page
+| Slug | New Title | Authority Block |
+|------|-----------|-----------------|
+| `mobile-payment-systems-san-diego.html` | "…Compare Rates & Cut Fees" | Real-rate comparison across processors |
+| `ai-business-solutions-san-diego.html` | "…What Saves Time in 2025 (& What Doesn't)" | Honest AI tool breakdown |
+| `payment-processing-solutions-san-diego.html` | "…Stop Overpaying on Fees" | Interchange-plus + hidden fees called out |
+| `electronic-payment-solutions-san-diego.html` | "…Tap, ACH & Invoicing Compared" | Tap/ACH/QR compared in plain language |
+| `battery-backup-installation-san-diego.html` | "…Real Costs, Best Systems & What to Ask" | Installed costs with 30% ITC applied |
+
+### Authority Block Format
+Injected after first `</h1>`. Teal left-border section with 4 bullets:
+- Page-specific data bullet (#1 — unique per page)
+- "Clear pricing breakdowns before you commit — not after"
+- "Local San Diego context: SDG&E rates, county permits, real incentives"
+- "Human guidance with no product to sell you"
+
+### Commit Message
+`SHIP-004: CTR + Authority Domination Pass`
+
+---
+
+## SHIP-005 CANDIDATES (NEXT)
 
 1. **Additional quote-review pages** — contractor, ADU, foundation, landscaping, painting  
    Pattern: copy `hvac-project-quote-review-san-diego.html`, adapt checklist + red flags
 2. **Top-20 Search Console impressions** — pull next batch of pages with impressions but no clicks, create at exact slugs
 3. **Hub word-count pass** — check remaining hubs against 2,000w target (payment-processing-hub, ai-automation hub)
-4. **Internal linking pass #2** — newly created pages need incoming links from cluster pages
+4. **Internal linking pass #2** — newly created SHIP-003 pages need incoming links from cluster pages
 ```python
 import re
 from pathlib import Path
