@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- SideGuy Solutions — Software Project Quote Review (San Diego) -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Software Project Quote Review in San Diego | SideGuy</title>
+  <link rel="canonical" href="https://sideguysolutions.com/software-project-quote-review-san-diego.html"/>
+  <meta name="description" content="Got a software development proposal in San Diego? SideGuy reviews developer quotes, scopes, and pricing so you don't overspend or sign into the wrong build." />
+  <script defer data-domain="sideguysolutions.com" src="https://plausible.io/js/script.js"></script>
+  <style>
+    :root{
+      --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
+      --ink:#073044;--muted:#3f6173;--muted2:#5e7d8e;
+      --card:#ffffffcc;--card2:#ffffffb8;
+      --stroke:rgba(7,48,68,.10);--stroke2:rgba(7,48,68,.07);
+      --shadow:0 18px 50px rgba(7,48,68,.10);
+      --mint:#21d3a1;--mint2:#00c7ff;--blue:#4aa9ff;--blue2:#1f7cff;
+      --r:22px;--pill:999px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 60%,var(--bg2) 100%);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+
+    /* ocean swirls */
+    body:before{
+      content:"";
+      position:fixed;inset:-20%;
+      background:
+        radial-gradient(closest-side at 18% 20%,rgba(33,211,161,.18),transparent 55%),
+        radial-gradient(closest-side at 78% 28%,rgba(74,169,255,.16),transparent 52%),
+        radial-gradient(closest-side at 62% 82%,rgba(0,199,255,.12),transparent 55%),
+        radial-gradient(closest-side at 25% 85%,rgba(33,211,161,.10),transparent 58%);
+      filter:blur(18px);
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    /* sticky topbar */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      padding:14px 14px 10px;
+      display:flex;justify-content:center;
+      pointer-events:none;
+    }
+    .homePill{
+      pointer-events:auto;
+      text-decoration:none;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 16px;border-radius:var(--pill);
+      background:linear-gradient(180deg,rgba(255,255,255,.84),rgba(255,255,255,.62));
+      border:1px solid var(--stroke2);
+      box-shadow:0 10px 28px rgba(7,48,68,.08);
+      color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.02em;
+      backdrop-filter:blur(14px);
+    }
+    .homeDot{
+      width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg,var(--mint),var(--mint2));
+      box-shadow:0 0 0 3px rgba(255,255,255,.95),0 10px 18px rgba(33,211,161,.18);
+    }
+
+    /* layout */
+    .wrap{max-width:1120px;margin:0 auto;padding:26px 22px 92px;}
+    .layout{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      align-items:start;
+      min-height:calc(100vh - 120px);
+    }
+    @media(max-width:980px){.layout{grid-template-columns:1fr;gap:16px;}}
+
+    /* brand row */
+    .brandRow{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
+    .brandOrb{
+      width:38px;height:38px;border-radius:50%;
+      background:radial-gradient(circle at 30% 20%,#ffffff 0%,rgba(255,255,255,.65) 18%,rgba(33,211,161,.85) 55%,rgba(0,199,255,.85) 100%);
+      box-shadow:0 0 0 4px rgba(255,255,255,.92),0 18px 40px rgba(33,211,161,.22),0 14px 26px rgba(0,199,255,.14);
+      position:relative;flex:0 0 auto;
+    }
+    .brandOrb:after{
+      content:"";position:absolute;inset:-18px;border-radius:50%;
+      background:radial-gradient(circle,rgba(33,211,161,.22),transparent 65%);
+      filter:blur(6px);z-index:-1;
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse{0%,100%{transform:scale(.96);opacity:.70}50%{transform:scale(1.05);opacity:1}}
+
+    .brandMeta{line-height:1.1;padding-top:2px;}
+    .brandName{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:rgba(7,48,68,.78);}
+    .brandSub{margin-top:6px;font-size:12px;color:rgba(7,48,68,.62);}
+    .liveLine{margin-top:8px;font-size:12px;color:rgba(7,48,68,.62);display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+    .liveTag{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 10px;border-radius:var(--pill);
+      background:rgba(255,255,255,.68);border:1px solid var(--stroke2);
+      backdrop-filter:blur(10px);
+    }
+    .spark{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--mint2));box-shadow:0 0 0 3px rgba(255,255,255,.9);}
+
+    /* hero */
+    h1{margin:10px 0 8px;font-size:40px;letter-spacing:-.03em;line-height:1.05;}
+    @media(max-width:520px){h1{font-size:30px}}
+    .lede{margin:0 0 16px;font-size:15px;line-height:1.65;color:var(--muted);max-width:700px;}
+    .intro{font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:20px;max-width:700px;}
+
+    /* section headings */
+    .sectionHead{font-size:18px;font-weight:800;color:var(--ink);margin:28px 0 14px;}
+
+    /* review cards */
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;}
+    @media(max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media(max-width:560px){.cards{grid-template-columns:1fr;}}
+
+    .card{
+      background:linear-gradient(180deg,var(--card),rgba(255,255,255,.70));
+      border:1px solid var(--stroke2);border-radius:18px;
+      box-shadow:0 12px 34px rgba(7,48,68,.08);
+      padding:16px 16px 14px;
+      backdrop-filter:blur(14px);
+    }
+    .cardTitle{font-weight:800;font-size:13px;margin:0 0 8px;color:rgba(7,48,68,.82);}
+    .bullets{margin:0;padding-left:16px;font-size:12px;line-height:1.6;color:rgba(7,48,68,.64);}
+    .bullets li{margin:0 0 5px;}
+
+    /* wide card */
+    .cardWide{
+      grid-column:1/-1;
+      background:linear-gradient(180deg,var(--card),rgba(255,255,255,.70));
+      border:1px solid var(--stroke2);border-radius:18px;
+      box-shadow:0 12px 34px rgba(7,48,68,.08);
+      padding:16px 16px 14px;
+      backdrop-filter:blur(14px);
+    }
+
+    /* note card */
+    .noteCard{
+      margin:16px 0;
+      background:linear-gradient(180deg,rgba(255,255,255,.70),rgba(255,255,255,.55));
+      border:1px dashed rgba(7,48,68,.12);border-radius:18px;
+      padding:13px 16px;
+      color:rgba(7,48,68,.62);font-size:12px;line-height:1.55;
+      backdrop-filter:blur(14px);
+    }
+
+    /* triggers */
+    .triggers{
+      background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+      padding:20px 24px;margin:24px 0;box-shadow:var(--shadow);
+    }
+    .triggers h3{margin:0 0 12px;font-size:17px;}
+    .triggers ul{margin:0;padding-left:20px;}
+    .triggers li{margin:8px 0;font-size:13px;color:var(--muted);line-height:1.6;}
+
+    /* hub link block */
+    .hubBlock{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      background:linear-gradient(135deg,rgba(74,169,255,.08),rgba(33,211,161,.06));
+      border:1px solid var(--stroke);border-radius:var(--r);
+      padding:18px 22px;margin:24px 0;
+      backdrop-filter:blur(12px);
+    }
+    @media(max-width:560px){.hubBlock{flex-direction:column;align-items:flex-start;}}
+    .hubBlock p{margin:0 0 4px;font-weight:700;font-size:14px;}
+    .hubBlock span{font-size:12px;color:var(--muted);}
+    .hubLink{
+      text-decoration:none;white-space:nowrap;
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 16px;border-radius:var(--pill);
+      background:rgba(255,255,255,.80);border:1px solid var(--stroke2);
+      color:var(--ink);font-weight:700;font-size:12px;
+      box-shadow:0 8px 20px rgba(7,48,68,.07);
+      backdrop-filter:blur(10px);
+    }
+    .hubLink:hover{background:rgba(255,255,255,.98);}
+
+    /* big CTA */
+    .bigCta{
+      margin:24px 0;
+      background:linear-gradient(180deg,rgba(33,211,161,.15),rgba(0,199,255,.12));
+      border:1px solid rgba(7,48,68,.10);border-radius:var(--r);
+      padding:20px 22px;box-shadow:0 20px 60px rgba(7,48,68,.10);
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+      backdrop-filter:blur(14px);
+    }
+    @media(max-width:560px){.bigCta{flex-direction:column;align-items:flex-start;}}
+    .bigCta h2{margin:0 0 6px;font-size:17px;}
+    .bigCta .small{font-size:12px;color:rgba(7,48,68,.62);line-height:1.5;}
+    .bigCta .tiny{font-size:11px;color:rgba(7,48,68,.45);margin-top:5px;}
+    .btn{
+      text-decoration:none;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:13px 18px;border-radius:var(--pill);
+      border:1px solid rgba(255,255,255,.75);
+      color:#fff;font-weight:800;font-size:12px;
+      background:linear-gradient(135deg,var(--mint),var(--mint2));
+      box-shadow:0 18px 40px rgba(0,199,255,.22);white-space:nowrap;
+    }
+    .btn:active{transform:translateY(1px);}
+
+    /* micro footer */
+    .microFooter{margin-top:18px;font-size:11px;color:rgba(7,48,68,.55);}
+    .microFooter a{color:rgba(31,124,255,.85);text-decoration:none;font-weight:700;}
+
+    /* right rail */
+    .rightRail{position:sticky;top:78px;display:flex;justify-content:flex-end;}
+    @media(max-width:980px){.rightRail{position:relative;top:auto;justify-content:flex-start;}}
+
+    .railStack{display:flex;align-items:flex-start;gap:12px;}
+    .railOrbs{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+    .railOrb{
+      width:86px;height:86px;border-radius:999px;
+      position:relative;border:1px solid rgba(255,255,255,.75);
+      box-shadow:0 24px 55px rgba(7,48,68,.16);backdrop-filter:blur(14px);
+      overflow:hidden;cursor:pointer;text-decoration:none;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:900;letter-spacing:.02em;font-size:12px;
+      text-align:center;padding:10px;
+    }
+    .railOrb:before{
+      content:"";position:absolute;inset:-20%;
+      background:
+        radial-gradient(circle at 30% 22%,rgba(255,255,255,.90),rgba(255,255,255,.35) 28%,transparent 56%),
+        radial-gradient(circle at 65% 80%,rgba(0,0,0,.16),transparent 55%);
+      opacity:.60;pointer-events:none;
+    }
+    .railOrb:after{
+      content:"";position:absolute;inset:-18px;border-radius:999px;
+      background:radial-gradient(circle,rgba(33,211,161,.22),transparent 62%);
+      filter:blur(7px);opacity:.9;pointer-events:none;
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+    .orbGreen{background:radial-gradient(circle at 30% 15%,#ffffff,rgba(33,211,161,.95) 45%,rgba(0,199,255,.95) 100%);}
+    .orbBlue{background:radial-gradient(circle at 30% 15%,#ffffff,rgba(74,169,255,.95) 45%,rgba(31,124,255,.98) 100%);}
+    .orbSoft{background:radial-gradient(circle at 30% 15%,#ffffff,rgba(255,255,255,.82) 30%,rgba(255,255,255,.58) 100%);color:rgba(7,48,68,.82);border:1px solid rgba(7,48,68,.10);}
+    .orbSoft:after{background:radial-gradient(circle,rgba(74,169,255,.18),transparent 65%);}
+
+    .railLabels{display:flex;flex-direction:column;gap:14px;padding-top:2px;}
+    .railLabel{
+      width:190px;padding:11px 12px;border-radius:16px;
+      background:rgba(255,255,255,.64);border:1px solid var(--stroke2);
+      backdrop-filter:blur(14px);box-shadow:0 14px 34px rgba(7,48,68,.08);
+      color:rgba(7,48,68,.76);font-size:12px;line-height:1.35;
+    }
+    .railLabel b{color:rgba(7,48,68,.88);}
+
+    /* floating orb */
+    .floating{position:fixed;right:18px;bottom:16px;z-index:999;display:flex;align-items:center;gap:10px;}
+    .floatPill{
+      display:flex;flex-direction:column;gap:2px;
+      padding:10px 12px;border-radius:16px;
+      background:rgba(255,255,255,.66);border:1px solid var(--stroke2);
+      box-shadow:0 18px 55px rgba(7,48,68,.14);backdrop-filter:blur(14px);
+      min-width:220px;
+    }
+    .floatPill .t1{font-weight:900;font-size:12px;color:rgba(7,48,68,.88);display:flex;align-items:center;gap:8px;}
+    .chatDot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--mint2));box-shadow:0 0 0 3px rgba(255,255,255,.9);}
+    .floatPill .t2{font-size:11px;color:rgba(7,48,68,.62);}
+    .floatBtn{
+      width:54px;height:54px;border-radius:999px;
+      background:radial-gradient(circle at 30% 20%,#ffffff,rgba(33,211,161,.95) 52%,rgba(0,199,255,.95) 100%);
+      border:1px solid rgba(255,255,255,.8);
+      box-shadow:0 0 0 4px rgba(255,255,255,.92),0 22px 60px rgba(0,199,255,.22),0 18px 42px rgba(33,211,161,.18);
+      position:relative;text-decoration:none;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:900;font-size:11px;
+    }
+    .floatBtn:after{
+      content:"";position:absolute;inset:-16px;border-radius:999px;
+      background:radial-gradient(circle,rgba(33,211,161,.28),transparent 62%);
+      filter:blur(7px);animation:pulse 2.2s ease-in-out infinite;z-index:-1;
+    }
+    @media(max-width:640px){.floating{display:none}}
+  </style>
+</head>
+
+<body>
+
+  <!-- Sticky breadcrumb -->
+  <div class="topbar">
+    <a class="homePill" href="../../index.html">
+      <span class="homeDot"></span>
+      Back to Home
+    </a>
+  </div>
+
+  <div class="wrap">
+    <div class="layout">
+
+      <!-- ── MAIN COLUMN ── -->
+      <main>
+
+        <div class="brandRow">
+          <div class="brandOrb" aria-hidden="true"></div>
+          <div class="brandMeta">
+            <div class="brandName">SideGuy Solutions</div>
+            <div class="brandSub">San Diego &middot; Software Guidance</div>
+            <div class="liveLine">
+              <span class="liveTag"><span class="spark"></span> Updated &middot; <span id="localTime">Feb 2026</span></span>
+              <span class="liveTag">Quote Review</span>
+              <span class="liveTag">No Dev Shop</span>
+            </div>
+          </div>
+        </div>
+
+        <h1>Before You Sign That Software Contract &mdash; Get a Second Opinion</h1>
+
+        <p class="lede">
+          You have a proposal in hand. The developer seems competent. The number is large. And you&#8217;re not quite sure what you&#8217;re actually signing.
+        </p>
+
+        <div class="intro">
+          <p>Software development proposals in San Diego range from $5,000 to $250,000 for roughly equivalent work. That spread exists because scope is almost always ambiguous, pricing models vary wildly, and most buyers don&#8217;t know what questions to ask before signing. The result: overpayment, scope creep, and builds that don&#8217;t solve the original problem.</p>
+          <p>SideGuy is not a dev shop. We don&#8217;t build software and we don&#8217;t take referral fees from developers. What we do is read proposals with you, flag what&#8217;s missing or overpriced, and help you understand exactly what you&#8217;re committing to before you sign. Clarity before cost &mdash; that&#8217;s the only agenda here.</p>
+        </div>
+
+        <!-- WHAT WE REVIEW -->
+        <div class="sectionHead">What We Review</div>
+
+        <div class="cards">
+
+          <div class="card">
+            <p class="cardTitle">&#128196; Scope Breakdown</p>
+            <ul class="bullets">
+              <li>What is actually being built vs. implied</li>
+              <li>Missing deliverables and assumptions</li>
+              <li>Out-of-scope ambiguities that cause change orders</li>
+              <li>Acceptance criteria &mdash; does the proposal define &#8220;done&#8221;?</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="cardTitle">&#128176; Pricing Structure</p>
+            <ul class="bullets">
+              <li>Hourly vs. fixed-bid &mdash; which protects you</li>
+              <li>Payment schedule and milestone alignment</li>
+              <li>Change order triggers and cost multipliers</li>
+              <li>Is the rate fair for San Diego market conditions?</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="cardTitle">&#9881; Technical Stack</p>
+            <ul class="bullets">
+              <li>Is the tech stack over-engineered for the use case?</li>
+              <li>Could no-code or low-code solve this at 10% of the cost?</li>
+              <li>Vendor lock-in risk &mdash; proprietary platforms, frameworks</li>
+              <li>Who owns the code and IP at project end?</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <p class="cardTitle">&#128197; Timeline &amp; Milestones</p>
+            <ul class="bullets">
+              <li>Are the timelines realistic for the scope?</li>
+              <li>Red flag deadlines &mdash; too fast or dangerously vague</li>
+              <li>What happens if milestones slip?</li>
+              <li>Buffer for feedback, revisions, and integration</li>
+            </ul>
+          </div>
+
+          <div class="cardWide">
+            <p class="cardTitle">&#128260; Ongoing Costs After Launch</p>
+            <ul class="bullets">
+              <li>Hosting and infrastructure &mdash; monthly burn after the build</li>
+              <li>Third-party API costs hidden in the architecture</li>
+              <li>License and subscription fees baked into the stack</li>
+              <li>Maintenance retainer expectations &mdash; is it implied or explicit?</li>
+              <li>Who do you call when something breaks six months after launch?</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="noteCard">
+          <strong>One text gets you a real review.</strong><br/>
+          Send PJ the proposal (or describe it). No portal. No intake form. Just a direct conversation.
+        </div>
+
+        <!-- WHEN TO CALL -->
+        <div class="triggers">
+          <h3>When to Call SideGuy</h3>
+          <ul>
+            <li>You received a $30k&ndash;$200k proposal and want clarity before committing</li>
+            <li>You don&#8217;t fully understand the scope or what you&#8217;re actually getting</li>
+            <li>You&#8217;ve been burned by a software project before and won&#8217;t make the same mistake</li>
+            <li>The developer is pressuring you for a quick signature or upfront payment</li>
+            <li>You&#8217;re comparing multiple quotes with wildly different price points</li>
+            <li>You&#8217;re not sure whether you actually need custom development at all</li>
+            <li>You need someone to explain what the technical sections of the quote mean</li>
+          </ul>
+        </div>
+
+        <!-- HUB LINK -->
+        <div class="hubBlock">
+          <div>
+            <p>Explore All Software Guidance</p>
+            <span>Part of the SideGuy Software &amp; Tech cluster &mdash; 132 pages indexed</span>
+          </div>
+          <a class="hubLink" href="../../software-development-hub-san-diego.html">
+            &#8592; Software Hub
+          </a>
+        </div>
+
+        <!-- STRONG CTA -->
+        <div class="bigCta" aria-label="Get clarity before you commit">
+          <div>
+            <h2>Get Clarity Before You Commit</h2>
+            <div class="small">
+              Send the proposal. We&#8217;ll tell you what to ask, what to push back on,<br/>
+              and whether the number makes sense before you sign anything.
+            </div>
+            <div class="tiny">No dev shop bias &middot; No referral fees &middot; No pressure</div>
+          </div>
+          <a class="btn" href="sms:+17735441231">Text PJ &middot; 773-544-1231</a>
+        </div>
+
+        <div class="microFooter">
+          <a href="../../index.html">SideGuy Solutions</a> &middot; San Diego &middot;
+          <span id="dateStamp">February 2026</span>
+        </div>
+
+      </main>
+
+      <!-- ── RIGHT RAIL ── -->
+      <aside class="rightRail" aria-label="Quick actions">
+        <div class="railStack">
+          <div class="railOrbs">
+            <a class="railOrb orbGreen" href="sms:+17735441231" aria-label="Text PJ">Text PJ</a>
+            <a class="railOrb orbBlue" href="../../software-development-hub-san-diego.html" aria-label="Software Hub">Software<br/>Hub</a>
+            <a class="railOrb orbSoft" href="../../do-i-really-need-a-software-developer-san-diego.html" aria-label="Do I need a developer?">Need a<br/>Dev?</a>
+            <a class="railOrb orbSoft" href="../../who-do-i-call-before-signing-a-contract.html" aria-label="Before signing">Contract<br/>Check</a>
+          </div>
+          <div class="railLabels">
+            <div class="railLabel"><b>Text PJ</b><br/>Fast human review. No tickets. Send the proposal directly.</div>
+            <div class="railLabel"><b>Software Hub</b><br/>132 pages covering every San Diego software situation.</div>
+            <div class="railLabel"><b>Do I Need a Dev?</b><br/>Many problems have no-code fixes at 90% less cost.</div>
+            <div class="railLabel"><b>Contract Check</b><br/>General guidance before signing any service contract.</div>
+          </div>
+        </div>
+      </aside>
+
+    </div><!-- /layout -->
+  </div><!-- /wrap -->
+
+  <!-- Floating Text PJ orb -->
+  <div class="floating" aria-label="Text PJ">
+    <div class="floatPill">
+      <div class="t1"><span class="chatDot"></span> Text PJ</div>
+      <div class="t2">One text &middot; calm answers &middot; <strong>773-544-1231</strong></div>
+    </div>
+    <a class="floatBtn" href="sms:+17735441231" aria-label="Text PJ now">Text<br/>PJ</a>
+  </div>
+
+  <script>
+    (function(){
+      var d = new Date();
+      var months = ["January","February","March","April","May","June","July",
+                    "August","September","October","November","December"];
+      var label = months[d.getMonth()] + " " + d.getFullYear();
+      var t = document.getElementById("localTime");
+      var ds = document.getElementById("dateStamp");
+      if(t) t.textContent = label;
+      if(ds) ds.textContent = label;
+    })();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I get a second opinion on a software development quote?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, especially for projects over $20,000. Software proposals vary enormously in scope, assumptions, and pricing models. A second opinion helps you identify missing deliverables, change-order traps, and whether the quoted approach is even the right solution for your problem."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are red flags in a software development proposal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Key red flags: no clear definition of 'done,' vague scope with lots of assumptions, 100% upfront payment required, no milestone or payment schedule, timeline that seems too fast given scope, proprietary frameworks that create vendor lock-in, and pressure to sign quickly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should a software project cost in San Diego?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "San Diego web app development runs $15,000–$80,000 for most small business projects. Mobile apps are $35,000–$150,000+. Many businesses discover they don't need custom software at all — off-the-shelf tools with integrations often solve the same problem at 10% of the cost. Always validate the build vs. buy decision before commissioning custom work."
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>
