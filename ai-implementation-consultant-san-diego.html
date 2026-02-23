@@ -1,42 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
 <!-- SHIP010_ROBOTS -->
 <meta name="robots" content="index, follow, max-image-preview:large" />
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>AI Implementation Consultant San Diego · SideGuy Solutions</title>
-<meta name="description" content="AI implementation consultant in San Diego. We bridge the gap between AI hype and real business results — practical, accountable, human-first.">
 <link rel="canonical" href="https://sideguysolutions.com/ai-implementation-consultant-san-diego.html" />
+<meta name="description" content="AI implementation consultant in San Diego. We bridge the gap between AI hype and real business results — practical, accountable, human-first."/>
 <style>
-  :root { --bg0:#eefcff; --ink:#073044; --mint:#21d3a1; }
-  body { font-family:-apple-system, system-ui, Segoe UI, Roboto, Inter, sans-serif; background:var(--bg0); color:var(--ink); max-width:860px; margin:0 auto; padding:40px 20px; line-height:1.7; }
-  h1 { font-size:2rem; margin-bottom:.5rem; }
-  h2 { font-size:1.4rem; margin-top:2rem; }
-  h3 { font-size:1.2rem; margin-top:2rem; }
-  a { color:#0a7ea4; }
-  ul { padding-left:1.4rem; }
-  footer { margin-top:60px; font-size:.85rem; opacity:.6; }
+    :root{
+      --bg0:#eefcff;
+      --bg1:#d7f5ff;
+      --bg2:#bfeeff;
+      --ink:#073044;
+      --muted:#3f6173;
+      --muted2:#5e7d8e;
+      --card:#ffffffcc;
+      --card2:#ffffffb8;
+      --stroke:rgba(7,48,68,.10);
+      --stroke2:rgba(7,48,68,.07);
+      --shadow: 0 18px 50px rgba(7,48,68,.10);
+      --mint:#21d3a1;
+      --mint2:#00c7ff;
+      --blue:#4aa9ff;
+      --blue2:#1f7cff;
+      --r:22px;
+      --pill:999px;
+      --phone:"+1773-544-1231";
+      --phonePretty:"773-544-1231";
+      --city:"San Diego";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:-apple-system, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 900px at 22% 10%, #ffffff 0%, var(--bg0) 25%, var(--bg1) 60%, var(--bg2) 100%);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(closest-side at 18% 20%, rgba(33,211,161,.18), transparent 55%),
+        radial-gradient(closest-side at 78% 28%, rgba(74,169,255,.16), transparent 52%),
+        radial-gradient(closest-side at 62% 82%, rgba(0,199,255,.12), transparent 55%),
+        radial-gradient(closest-side at 25% 85%, rgba(33,211,161,.10), transparent 58%);
+      filter: blur(18px);
+      pointer-events:none;
+      z-index:-2;
+    }
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      padding:14px 14px 10px;
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .homePill{
+      pointer-events:auto;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:var(--pill);
+      background:linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.62));
+      border:1px solid var(--stroke2);
+      box-shadow: 0 10px 28px rgba(7,48,68,.08);
+      color:var(--ink);
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:.02em;
+      backdrop-filter: blur(14px);
+    }
+    .homeDot{
+      width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg, var(--mint), var(--mint2));
+      box-shadow: 0 0 0 3px rgba(255,255,255,.95), 0 10px 18px rgba(33,211,161,.18);
+    }
+    .wrap{
+      max-width:1120px;
+      margin:0 auto;
+      padding: 26px 22px 92px;
+    }
+    .layout{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:start;
+      min-height: calc(100vh - 120px);
+    }
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr; gap:16px;}
+    }
+    .brandRow{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .brandOrb{
+      width:38px;height:38px;border-radius:50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0%, rgba(255,255,255,.65) 18%, rgba(33,211,161,.85) 55%, rgba(0,199,255,.85) 100%);
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,.92),
+        0 18px 40px rgba(33,211,161,.22),
+        0 14px 26px rgba(0,199,255,.14);
+      position:relative;
+      flex:0 0 auto;
+    }
+    .brandOrb:after{
+      content:"";
+      position:absolute; inset:-18px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(33,211,161,.22), transparent 65%);
+      filter: blur(6px);
+      z-index:-1;
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(.96); opacity:.70}
+      50%{transform:scale(1.05); opacity:1}
+    }
+    .brandMeta{ line-height:1.1; padding-top:2px; }
+    .brandName{ font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:12px; color:rgba(7,48,68,.78); }
+    .brandSub{ margin-top:6px; font-size:12px; color:rgba(7,48,68,.62); }
+    .liveLine{ margin-top:8px; font-size:12px; color:rgba(7,48,68,.62); display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .liveTag{ display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:var(--pill); background: rgba(255,255,255,.68); border:1px solid var(--stroke2); backdrop-filter: blur(10px); }
+    .spark{ width:8px;height:8px;border-radius:50%; background: linear-gradient(135deg, var(--mint), var(--mint2)); box-shadow: 0 0 0 3px rgba(255,255,255,.9); }
+    h1{ margin:10px 0 8px; font-size:44px; letter-spacing:-.03em; line-height:1.02; }
+    @media (max-width: 520px){ h1{font-size:34px} }
+    .lede{ margin:0 0 14px; font-size:14px; line-height:1.6; color:var(--muted); max-width: 720px; }
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    @media (max-width: 980px){ .cards{grid-template-columns: repeat(2, minmax(0, 1fr));} }
+    @media (max-width: 560px){ .cards{grid-template-columns: 1fr;} }
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.70));
+      border:1px solid var(--stroke2);
+      border-radius:18px;
+      box-shadow: 0 12px 34px rgba(7,48,68,.08);
+      padding:14px 14px 12px;
+      backdrop-filter: blur(14px);
+      min-height: 132px;
+    }
+    .cardTitle{ font-weight:800; font-size:13px; margin:0 0 8px; color: rgba(7,48,68,.82); }
+    .bullets{ margin:0; padding-left:16px; font-size:12px; line-height:1.5; color: rgba(7,48,68,.64); }
+    .bullets li{margin:0 0 6px}
+    .noteCard{
+      margin-top:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.55));
+      border:1px dashed rgba(7,48,68,.12);
+      border-radius:18px;
+      padding:12px 14px;
+      color: rgba(7,48,68,.62);
+      font-size:12px;
+      line-height:1.55;
+      backdrop-filter: blur(14px);
+    }
+    .bigCta{
+      margin-top:14px;
+      background: linear-gradient(180deg, rgba(33,211,161,.15), rgba(0,199,255,.12));
+      border:1px solid rgba(7,48,68,.10);
+      border-radius:22px;
+      padding:18px 16px;
+      box-shadow: 0 20px 60px rgba(7,48,68,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      backdrop-filter: blur(14px);
+    }
+    @media (max-width: 560px){ .bigCta{flex-direction:column; align-items:flex-start;} }
+    .bigCta h2{ margin:0; font-size:14px; letter-spacing:.02em; }
+    .bigCta .small{ margin-top:6px; font-size:12px; color: rgba(7,48,68,.65); line-height:1.45; }
+    .btn{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: var(--pill);
+      border:1px solid rgba(255,255,255,.75);
+      color:#fff;
+      font-weight:800;
+      font-size:12px;
+      background: linear-gradient(135deg, var(--mint), var(--mint2));
+      box-shadow: 0 18px 40px rgba(0,199,255,.22);
+      white-space:nowrap;
+    }
+    .btn:active{transform: translateY(1px);}
+    .rightRail{ position:sticky; top:78px; display:flex; justify-content:flex-end; }
+    @media (max-width: 980px){ .rightRail{position:relative; top:auto; justify-content:flex-start;} }
+    .railStack{ display:flex; align-items:flex-start; gap:12px; }
+    .railOrbs{ display:flex; flex-direction:column; gap:12px; align-items:flex-end; }
+    .railOrb{
+      width:86px; height:86px; border-radius:999px; position:relative;
+      border:1px solid rgba(255,255,255,.75); box-shadow: 0 24px 55px rgba(7,48,68,.16);
+      backdrop-filter: blur(14px); overflow:hidden; cursor:pointer;
+      text-decoration:none; display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:900; letter-spacing:.02em; font-size:12px; text-align:center; padding:10px;
+    }
+    .railOrb:before{
+      content:""; position:absolute; inset:-20%;
+      background: radial-gradient(circle at 30% 22%, rgba(255,255,255,.90), rgba(255,255,255,.35) 28%, transparent 56%),
+        radial-gradient(circle at 65% 80%, rgba(0,0,0,.16), transparent 55%);
+      opacity:.60; pointer-events:none;
+    }
+    .railOrb:after{
+      content:""; position:absolute; inset:-18px; border-radius:999px;
+      background: radial-gradient(circle, rgba(33,211,161,.22), transparent 62%);
+      filter: blur(7px); opacity:.9; pointer-events:none; animation:pulse 2.4s ease-in-out infinite;
+    }
+    .orbGreen{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(33,211,161,.95) 45%, rgba(0,199,255,.95) 100%); }
+    .orbBlue{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(74,169,255,.95) 45%, rgba(31,124,255,.98) 100%); }
+    .orbSoft{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(255,255,255,.82) 30%, rgba(255,255,255,.58) 100%); color:rgba(7,48,68,.82); border:1px solid rgba(7,48,68,.10); }
+    .railLabels{ display:flex; flex-direction:column; gap:14px; padding-top:2px; }
+    .railLabel{
+      width:190px; padding:11px 12px; border-radius:16px;
+      background: rgba(255,255,255,.64); border:1px solid var(--stroke2);
+      backdrop-filter: blur(14px); box-shadow: 0 14px 34px rgba(7,48,68,.08);
+      color: rgba(7,48,68,.76); font-size:12px; line-height:1.35;
+    }
+    .railLabel b{color: rgba(7,48,68,.88);}
+    .floating{ position:fixed; right:18px; bottom:16px; z-index:999; display:flex; align-items:center; gap:10px; }
+    .floatPill{
+      display:flex; flex-direction:column; gap:2px; padding:10px 12px; border-radius:16px;
+      background: rgba(255,255,255,.66); border:1px solid var(--stroke2);
+      box-shadow: 0 18px 55px rgba(7,48,68,.14); backdrop-filter: blur(14px); min-width: 220px;
+    }
+    .floatPill .t1{ font-weight:900; font-size:12px; color: rgba(7,48,68,.88); display:flex; align-items:center; gap:8px; }
+    .chatDot{ width:10px;height:10px;border-radius:50%; background: linear-gradient(135deg, var(--mint), var(--mint2)); box-shadow: 0 0 0 3px rgba(255,255,255,.9); }
+    .floatPill .t2{ font-size:11px; color: rgba(7,48,68,.62); }
+    .floatBtn{
+      width:54px;height:54px;border-radius:999px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, rgba(33,211,161,.95) 52%, rgba(0,199,255,.95) 100%);
+      border:1px solid rgba(255,255,255,.8);
+      box-shadow: 0 0 0 4px rgba(255,255,255,.92), 0 22px 60px rgba(0,199,255,.22), 0 18px 42px rgba(33,211,161,.18);
+      position:relative; text-decoration:none; display:flex; align-items:center;
+      justify-content:center; color:#fff; font-weight:900; letter-spacing:.02em; font-size:11px;
+    }
+    .floatBtn:after{
+      content:""; position:absolute; inset:-16px; border-radius:999px;
+      background: radial-gradient(circle, rgba(33,211,161,.28), transparent 62%);
+      filter: blur(7px); animation:pulse 2.2s ease-in-out infinite; z-index:-1;
+    }
+    .microFooter{ margin-top:18px; font-size:11px; color: rgba(7,48,68,.55); }
+    .microFooter a{color: rgba(31,124,255,.85); text-decoration:none; font-weight:700;}
+    .faqSection{ margin-top:32px; }
+    .faqSection h2{ font-size:1.3rem; margin-bottom:12px; }
+    .faqSection h3{ font-size:1rem; margin:18px 0 4px; font-weight:700; }
+    .faqSection p{ margin:0 0 8px; font-size:14px; color:var(--muted); line-height:1.6; }
+    .useCases{ margin-top:28px; background:rgba(255,255,255,.58); border:1px solid var(--stroke2); border-radius:18px; padding:18px 20px; }
+    .useCases h2{ font-size:1.1rem; margin:0 0 10px; }
+    .useCases li{ font-size:13px; color:var(--muted); line-height:1.7; }
+    .clusterLinks{ margin-top:28px; font-size:13px; }
+    .clusterLinks ul{ padding-left:18px; line-height:2; }
+    .clusterLinks a{ color:#0a7ea4; }
 </style>
+<script data-domain="sideguysolutions.com" defer src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
+<div class="topbar">
+  <a aria-label="Back to home" class="homePill" href="index.html">
+    <span class="homeDot"></span>
+    Back to home
+  </a>
+</div>
+<div class="wrap">
+<div class="layout">
+<main>
+  <div class="brandRow">
+    <div aria-hidden="true" class="brandOrb"></div>
+    <div class="brandMeta">
+      <div class="brandName">SideGuy Solutions</div>
+      <div class="brandSub"><span id="cityLabel">San Diego</span> · Human Guidance Layer</div>
+      <div class="liveLine">
+        <span class="liveTag"><span class="spark"></span> Updated live · <span id="localTime">—</span></span>
+        <span class="liveTag">Weather · <span id="wx">—</span></span>
+        <span class="liveTag">Page · AI Guidance</span>
+      </div>
+    </div>
+  </div>
 
-<h1>AI Implementation Consultant San Diego</h1>
+  <h1>AI Implementation Consultant in San Diego</h1>
+  <p class="lede">AI can actually help your business — but not with a generic tool, not without a plan, and not without someone accountable. We are San Diego's human-first AI implementation consultants: we assess, design, build, and hand off real working systems.</p>
+  <p style="margin:8px 0 24px;font-size:14px;color:var(--muted,#3f6173)">
+    &#x2190; <a href="ai-business-solutions-san-diego.html" style="color:inherit;text-decoration:underline">AI Business Solutions Hub</a> &mdash; more San Diego guidance
+  </p>
 
-<p>Heard a lot about AI but not sure where to actually start? We're San Diego's human-first AI implementation consultants — we assess your business, identify the highest-ROI opportunities, and build systems that work without the enterprise price tag.</p>
-
-<h2>How We Help</h2>
-<ul>
-<li>Workflow mapping</li>
-<li>Tool selection</li>
-<li>Custom automation setup</li>
-<li>Human-first implementation</li>
+  <section class="cards">
+  <article class="card">
+<p class="cardTitle">What you get with us</p>
+<ul class="bullets">
+<li>Honest assessment of AI fit for your business</li>
+<li>Custom implementation plan (no templates)</li>
+<li>Hands-on build, not just a recommendation</li>
+<li>Direct accountability to results</li>
 </ul>
+</article>
+<article class="card">
+<p class="cardTitle">What we won't do</p>
+<ul class="bullets">
+<li>Sell you a tool you don't need</li>
+<li>Promise outcomes we can't back up</li>
+<li>Disappear after the proposal</li>
+<li>Build something your team can't maintain</li>
+</ul>
+</article>
+<article class="card">
+<p class="cardTitle">Engagements we offer</p>
+<ul class="bullets">
+<li>AI readiness audit (where to start)</li>
+<li>Single-system build (defined scope)</li>
+<li>Multi-system roadmap + phased build</li>
+<li>Monthly optimization retainer</li>
+</ul>
+</article>
 
-<p>Every AI build starts with clarity before cost.</p>
+  </section>
 
-<h3>Related AI Guides</h3>
-<ul>
-<li><a href="/ai-business-solutions-san-diego.html">AI Business Solutions San Diego</a></li>
+  <div class="noteCard"><b>One point of contact.</b> Talk to PJ directly — not an account manager, not a sales rep. The person you talk to is the one who builds it.</div>
+
+  <!-- SHIP012_DEPTH -->
+  <section class="useCases">
+    <h2>Real AI Implementation Examples in San Diego</h2>
+    <ul>
+      <li>HVAC contractor automating intake + estimate routing</li>
+      <li>Local law firm auto-summarizing consultations</li>
+      <li>Construction company AI scheduling + vendor coordination</li>
+      <li>Ecommerce brand AI-powered customer support triage</li>
+    </ul>
+  </section>
+
+  <section class="faqSection">
+    <h2>Frequently Asked Questions</h2>
+    <h3>How do I know if AI is right for my business?</h3>
+<p>Text PJ and describe your biggest manual bottleneck. A 10-minute conversation usually gives you a clear answer.</p>
+<h3>What's the minimum engagement?</h3>
+<p>An AI readiness audit — typically 2-3 hours of our time, delivered as a written report. No long-term commitment required.</p>
+<h3>Do you work with businesses outside San Diego?</h3>
+<p>Primarily San Diego, but remote engagements are available for the right fit.</p>
+
+    <h3>How long does AI implementation take?</h3>
+    <p>Most small systems deploy in 2–4 weeks depending on workflow complexity.</p>
+    <h3>Do I need custom software?</h3>
+    <p>Not always. Many systems integrate with existing tools like CRM or Google Workspace.</p>
+    <h3>Is AI expensive?</h3>
+    <p>Implementation cost depends on scope, but clarity before cost is always step one.</p>
+  </section>
+
+  <section aria-label="Talk to a real person" class="bigCta">
+    <div>
+      <h2>Talk to a real person</h2>
+      <div class="small">Text PJ directly and describe what you're trying to build.<br/>
+      <b>773-544-1231</b> · San Diego</div>
+    </div>
+    <a class="btn" href="sms:+1773-544-1231" id="ctaBtn">Text PJ · 773-544-1231</a>
+  </section>
+
+  <div style="margin-top:40px;padding:25px;background:#f5fdfc;border-left:6px solid #19c2a0;">
+    <strong>Clarity before cost.</strong> Text PJ at 773-544-1231 and describe what you're trying to build.
+  </div>
+
+  <section class="clusterLinks">
+    <h3>Related AI Guides (San Diego)</h3>
+    <ul>
+      <li><a href="/ai-business-solutions-san-diego.html">AI Business Solutions San Diego</a></li>
 <li><a href="/ai-automation-for-small-business-san-diego.html">AI Automation for Small Business San Diego</a></li>
 <li><a href="/ai-lead-generation-systems-san-diego.html">AI Lead Generation Systems San Diego</a></li>
 <li><a href="/ai-customer-support-automation-san-diego.html">AI Customer Support Automation San Diego</a></li>
@@ -46,10 +389,144 @@
 <li><a href="/ai-sales-automation-systems-san-diego.html">AI Sales Automation Systems San Diego</a></li>
 <li><a href="/ai-process-optimization-consulting-san-diego.html">AI Process Optimization Consulting San Diego</a></li>
 <li><a href="/ai-automation-roi-calculator-san-diego.html">AI Automation ROI Calculator San Diego</a></li>
-</ul>
+    </ul>
+  </section>
 
-<p><strong>Text PJ: 773-544-1231</strong></p>
-
+  <div class="microFooter">
+    SideGuy Solutions · <span id="dateStamp">—</span> ·
+    <a href="index.html">Homepage</a>
+  </div>
+  <div style="margin-top:32px;padding:16px;text-align:center;font-size:13px;color:var(--muted2);">
+    <span id="lastUpdated">Updated 2026-02-23</span>
+  </div>
+</main>
+<aside aria-label="Right rail actions" class="rightRail">
+  <div class="railStack">
+    <div class="railOrbs">
+      <a aria-label="Text PJ" class="railOrb orbGreen" href="sms:+1773-544-1231" id="railText">Text PJ</a>
+      <a aria-label="Ask AI Questions" class="railOrb orbBlue" href="index.html#ask-ai" id="railAsk">Ask AI</a>
+      <a aria-label="Start Simple" class="railOrb orbSoft" href="index.html#start-simple" id="railStart">Start<br/>Simple</a>
+      <a aria-label="No pressure" class="railOrb orbSoft" href="index.html#no-pressure" id="railNo">No<br/>pressure</a>
+    </div>
+    <div class="railLabels">
+      <div class="railLabel"><b>Text PJ</b><br/>Fast human response. No tickets. No weird portals.</div>
+      <div class="railLabel"><b>Ask AI Qs</b><br/>Use AI to explore options — then confirm with a human.</div>
+      <div class="railLabel"><b>Start Simple</b><br/>Quick checklist → next best step. Avoid overreacting.</div>
+      <div class="railLabel"><b>No pressure</b><br/>Clarity first. If we can't help, we'll say so.</div>
+    </div>
+  </div>
+</aside>
+</div>
+</div>
+<div aria-label="Text PJ floating orb" class="floating">
+  <div class="floatPill">
+    <div class="t1"><span class="chatDot"></span> Text PJ</div>
+    <div class="t2">One text · calm answers · <b>773-544-1231</b></div>
+  </div>
+  <a aria-label="Text PJ now" class="floatBtn" href="sms:+1773-544-1231">Text<br/>PJ</a>
+</div>
+<script>
+  (function(){
+    const pretty = "773-544-1231";
+    const sms = "sms:+1773-544-1231";
+    const nodes = document.querySelectorAll("#ctaBtn,#railText");
+    nodes.forEach(n => n.setAttribute("href", sms));
+    document.body.innerHTML = document.body.innerHTML.replaceAll("{{phonePretty}}", pretty);
+  })();
+  function fmtTime(d){ return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); }
+  function fmtDate(d){ return d.toLocaleDateString([], {year:'numeric', month:'short', day:'numeric'}); }
+  function updateTime(){
+    const now = new Date();
+    document.getElementById("localTime").textContent = fmtTime(now);
+    document.getElementById("dateStamp").textContent = "Updated " + fmtDate(now);
+  }
+  updateTime();
+  setInterval(updateTime, 15000);
+  const SD = { lat: 32.7157, lon: -117.1611 };
+  const wxCodes = {
+    0:"Clear", 1:"Mainly clear", 2:"Partly cloudy", 3:"Cloudy",
+    45:"Fog", 48:"Fog", 51:"Light drizzle", 53:"Drizzle", 55:"Heavy drizzle",
+    61:"Light rain", 63:"Rain", 65:"Heavy rain",
+    80:"Rain showers", 81:"Rain showers", 82:"Heavy showers",
+    95:"Thunderstorm", 96:"Thunderstorm", 99:"Thunderstorm"
+  };
+  async function loadWeather(){
+    try{
+      const url = "https://api.open-meteo.com/v1/forecast"
+        + "?latitude=" + encodeURIComponent(SD.lat)
+        + "&longitude=" + encodeURIComponent(SD.lon)
+        + "&current=temperature_2m,weather_code"
+        + "&temperature_unit=fahrenheit"
+        + "&timezone=auto";
+      const res = await fetch(url, {cache:"no-store"});
+      if(!res.ok) throw new Error("wx http " + res.status);
+      const data = await res.json();
+      const t = data?.current?.temperature_2m;
+      const code = data?.current?.weather_code;
+      const label = (wxCodes[String(code)] || "Weather");
+      if(typeof t === "number"){
+        document.getElementById("wx").textContent = Math.round(t) + "°F · " + label;
+      } else {
+        document.getElementById("wx").textContent = label;
+      }
+    }catch(e){
+      document.getElementById("wx").textContent = "San Diego (live)";
+    }
+  }
+  loadWeather();
+  setInterval(loadWeather, 10 * 60 * 1000);
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "SideGuy Solutions",
+  "description": "Human-first guidance for San Diego home and business owners",
+  "url": "https://sideguy.solutions",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "San Diego",
+    "addressRegion": "CA",
+    "addressCountry": "US"
+  },
+  "telephone": "+1-773-544-1231",
+  "areaServed": {
+    "@type": "City",
+    "name": "San Diego"
+  },
+  "priceRange": "$$"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I know if AI is right for my business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Text PJ and describe your biggest manual bottleneck. A 10-minute conversation usually gives you a clear answer."
+      }
+    },    {
+      "@type": "Question",
+      "name": "What's the minimum engagement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An AI readiness audit — typically 2-3 hours of our time, delivered as a written report. No long-term commitment required."
+      }
+    },    {
+      "@type": "Question",
+      "name": "Do you work with businesses outside San Diego?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Primarily San Diego, but remote engagements are available for the right fit."
+      }
+    }
+  ]
+}
+</script>
 <!-- SIDEGUY_MESH_BLOCK -->
 <section style="margin-top:60px;padding:30px;background:#f4fdfb;border-left:6px solid #1fc7a6;">
 <h3>SideGuy Knowledge Hub</h3>
@@ -61,13 +538,7 @@
 <li><a href="/electronic-payment-solutions-san-diego.html">Electronic Payment Solutions</a></li>
 </ul>
 </section>
-
 <!-- SHIP010_FRESHNESS -->
 <div style="display:none">Updated: 2026-02-23</div>
-
-<footer>
-<p>Updated 2026-02-23</p>
-</footer>
-
 </body>
 </html>
