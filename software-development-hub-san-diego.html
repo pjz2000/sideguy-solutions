@@ -5,190 +5,336 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Software Development San Diego — Complete Guide · SideGuy</title>
   <link rel="canonical" href="https://sideguysolutions.com/software-development-hub-san-diego.html"/>
-  <meta name="description" content="San Diego software help — web development, app builds, API integrations, SaaS problems, website issues. Know who to call, what things cost, and when you actually need a developer." />
+  <meta name="description" content="San Diego software help — web development, app builds, API integrations, AI automation, SaaS problems, website issues. Know who to call, what things cost, and when you actually need a developer." />
   <script defer data-domain="sideguysolutions.com" src="https://plausible.io/js/script.js"></script>
   <style>
     :root{
       --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
       --ink:#073044;--muted:#3f6173;--muted2:#5e7d8e;
-      --card:#ffffffcc;--stroke:rgba(7,48,68,.10);
+      --card:#ffffffcc;--card2:#ffffffb8;--stroke:rgba(7,48,68,.10);--stroke2:rgba(7,48,68,.07);
       --shadow:0 18px 50px rgba(7,48,68,.10);
-      --mint:#21d3a1;--blue:#4aa9ff;--r:22px;--pill:999px;
+      --mint:#21d3a1;--mint2:#00c7ff;--blue:#4aa9ff;--blue2:#1f7cff;
+      --r:22px;--pill:999px;
     }
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
-    body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;color:var(--ink);background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 60%,var(--bg2) 100%);-webkit-font-smoothing:antialiased;}
-    .wrap{max-width:1000px;margin:0 auto;padding:40px 24px 80px}
-    .back{display:inline-block;margin-bottom:24px;color:var(--muted);text-decoration:none;font-size:14px}
-    .back:hover{color:var(--mint)}
-    h1{font-size:48px;letter-spacing:-.03em;line-height:1.1;margin:0 0 16px}
-    .lede{font-size:20px;line-height:1.5;color:var(--muted);margin-bottom:40px}
-    .section{margin:40px 0}
-    .section h2{font-size:28px;margin:0 0 24px;color:var(--ink)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-    .card{background:var(--card);padding:20px;border-radius:var(--r);border:1px solid var(--stroke);box-shadow:var(--shadow);backdrop-filter:blur(12px);}
-    .card a{color:var(--ink);text-decoration:none;font-weight:600;display:block;margin-bottom:8px;}
+    body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;color:var(--ink);background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 60%,var(--bg2) 100%);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    body:before{content:"";position:fixed;inset:-20%;background:radial-gradient(closest-side at 18% 20%,rgba(33,211,161,.18),transparent 55%),radial-gradient(closest-side at 78% 28%,rgba(74,169,255,.16),transparent 52%),radial-gradient(closest-side at 62% 82%,rgba(0,199,255,.12),transparent 55%),radial-gradient(closest-side at 25% 85%,rgba(33,211,161,.10),transparent 58%);filter:blur(18px);pointer-events:none;z-index:-2;}
+    .topbar{position:sticky;top:0;z-index:50;padding:14px 14px 10px;display:flex;justify-content:center;pointer-events:none;}
+    .homePill{pointer-events:auto;text-decoration:none;display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--pill);background:linear-gradient(180deg,rgba(255,255,255,.84),rgba(255,255,255,.62));border:1px solid var(--stroke2);box-shadow:0 10px 28px rgba(7,48,68,.08);color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.02em;backdrop-filter:blur(14px);}
+    .homeDot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--mint2));box-shadow:0 0 0 3px rgba(255,255,255,.95),0 10px 18px rgba(33,211,161,.18);}
+    .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 92px}
+    .brandRow{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px;}
+    .brandOrb{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 20%,#ffffff 0%,rgba(255,255,255,.65) 18%,rgba(33,211,161,.85) 55%,rgba(0,199,255,.85) 100%);box-shadow:0 0 0 4px rgba(255,255,255,.92),0 18px 40px rgba(33,211,161,.22),0 14px 26px rgba(0,199,255,.14);position:relative;flex:0 0 auto;}
+    .brandOrb:after{content:"";position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(33,211,161,.22),transparent 65%);filter:blur(6px);z-index:-1;animation:pulse 2.4s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{transform:scale(.96);opacity:.70}50%{transform:scale(1.05);opacity:1}}
+    .brandMeta{line-height:1.1;padding-top:2px;}
+    .brandName{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:rgba(7,48,68,.78);}
+    .brandSub{margin-top:6px;font-size:12px;color:rgba(7,48,68,.62);}
+    .liveLine{margin-top:8px;font-size:12px;color:rgba(7,48,68,.62);display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+    .liveTag{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--pill);background:rgba(255,255,255,.68);border:1px solid var(--stroke2);backdrop-filter:blur(10px);}
+    .spark{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--mint2));box-shadow:0 0 0 3px rgba(255,255,255,.9);}
+    h1{font-size:44px;letter-spacing:-.03em;line-height:1.05;margin:10px 0 10px;}
+    @media(max-width:520px){h1{font-size:32px}}
+    .lede{font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 20px;max-width:760px;}
+    .intro{font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:24px;max-width:760px;}
+    .indexBlock{background:linear-gradient(135deg,rgba(33,211,161,.09),rgba(74,169,255,.07));border:1px solid var(--stroke);border-radius:var(--r);padding:20px 24px;margin:0 0 40px;font-size:15px;line-height:1.7;color:var(--ink);}
+    .section{margin:40px 0;}
+    .section h2{font-size:26px;margin:0 0 20px;color:var(--ink);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;}
+    .card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,.70));padding:18px 18px 14px;border-radius:18px;border:1px solid var(--stroke2);box-shadow:0 12px 34px rgba(7,48,68,.08);backdrop-filter:blur(14px);}
+    .card a{color:var(--ink);text-decoration:none;font-weight:700;display:block;margin-bottom:7px;font-size:14px;}
     .card a:hover{color:var(--mint)}
-    .card p{margin:0;font-size:14px;color:var(--muted2);line-height:1.5}
-    .cta{background:linear-gradient(135deg,var(--mint),var(--blue));color:#fff;padding:32px;border-radius:var(--r);text-align:center;margin:48px 0;}
-    .cta h3{margin:0 0 12px;font-size:24px}
-    .cta p{margin:0 0 20px;font-size:16px;opacity:.95}
-    .cta a{display:inline-block;background:#fff;color:var(--ink);padding:14px 28px;border-radius:var(--pill);text-decoration:none;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.15);}
-    .intro{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:40px;max-width:720px}
-    .triggers{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:28px 32px;margin:40px 0;box-shadow:var(--shadow);}
-    .triggers h3{margin:0 0 16px;font-size:20px}
-    .triggers li{margin:10px 0;font-size:15px;color:var(--muted);line-height:1.6}
-    .eeat{background:linear-gradient(135deg,rgba(33,211,161,.08),rgba(74,169,255,.08));border:1px solid var(--stroke);border-radius:var(--r);padding:28px 32px;margin:40px 0;}
-    .eeat h3{margin:0 0 12px;font-size:20px}
-    .eeat p{margin:0;font-size:15px;color:var(--muted);line-height:1.8}
-    @media(max-width:640px){h1{font-size:36px}.grid{grid-template-columns:1fr}}
+    .card p{margin:0;font-size:13px;color:var(--muted2);line-height:1.5;}
+    .noteCard{margin:0 0 28px;background:linear-gradient(180deg,rgba(255,255,255,.70),rgba(255,255,255,.55));border:1px dashed rgba(7,48,68,.12);border-radius:18px;padding:14px 18px;color:rgba(7,48,68,.62);font-size:13px;line-height:1.55;backdrop-filter:blur(14px);}
+    .bigCta{margin:40px 0;background:linear-gradient(180deg,rgba(33,211,161,.15),rgba(0,199,255,.12));border:1px solid rgba(7,48,68,.10);border-radius:var(--r);padding:22px 24px;box-shadow:0 20px 60px rgba(7,48,68,.10);display:flex;align-items:center;justify-content:space-between;gap:18px;backdrop-filter:blur(14px);}
+    @media(max-width:560px){.bigCta{flex-direction:column;align-items:flex-start;}}
+    .bigCta h2{margin:0 0 6px;font-size:18px;}
+    .bigCta .small{font-size:13px;color:rgba(7,48,68,.65);line-height:1.5;}
+    .btn{text-decoration:none;display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:var(--pill);border:1px solid rgba(255,255,255,.75);color:#fff;font-weight:800;font-size:13px;background:linear-gradient(135deg,var(--mint),var(--mint2));box-shadow:0 18px 40px rgba(0,199,255,.22);white-space:nowrap;}
+    .btn:active{transform:translateY(1px);}
+    .triggers{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:24px 28px;margin:40px 0;box-shadow:var(--shadow);}
+    .triggers h3{margin:0 0 14px;font-size:19px;}
+    .triggers ul{margin:0;padding-left:20px;}
+    .triggers li{margin:9px 0;font-size:14px;color:var(--muted);line-height:1.6;}
+    .eeat{background:linear-gradient(135deg,rgba(33,211,161,.08),rgba(74,169,255,.08));border:1px solid var(--stroke);border-radius:var(--r);padding:24px 28px;margin:40px 0;}
+    .eeat h3{margin:0 0 10px;font-size:19px;}
+    .eeat p{margin:0;font-size:14px;color:var(--muted);line-height:1.8;}
+    .microFooter{margin-top:16px;font-size:11px;color:rgba(7,48,68,.55);}
+    .microFooter a{color:rgba(31,124,255,.85);text-decoration:none;font-weight:700;}
+    .floating{position:fixed;right:18px;bottom:16px;z-index:999;display:flex;align-items:center;gap:10px;}
+    .floatPill{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.66);border:1px solid var(--stroke2);box-shadow:0 18px 55px rgba(7,48,68,.14);backdrop-filter:blur(14px);min-width:210px;}
+    .floatPill .t1{font-weight:900;font-size:12px;color:rgba(7,48,68,.88);display:flex;align-items:center;gap:8px;}
+    .chatDot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--mint),var(--mint2));box-shadow:0 0 0 3px rgba(255,255,255,.9);}
+    .floatPill .t2{font-size:11px;color:rgba(7,48,68,.62);}
+    .floatBtn{width:54px;height:54px;border-radius:999px;background:radial-gradient(circle at 30% 20%,#ffffff,rgba(33,211,161,.95) 52%,rgba(0,199,255,.95) 100%);border:1px solid rgba(255,255,255,.8);box-shadow:0 0 0 4px rgba(255,255,255,.92),0 22px 60px rgba(0,199,255,.22),0 18px 42px rgba(33,211,161,.18);position:relative;text-decoration:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:11px;}
+    .floatBtn:after{content:"";position:absolute;inset:-16px;border-radius:999px;background:radial-gradient(circle,rgba(33,211,161,.28),transparent 62%);filter:blur(7px);animation:pulse 2.2s ease-in-out infinite;z-index:-1;}
+    @media(max-width:640px){.grid{grid-template-columns:1fr}.floating{display:none}}
   </style>
 </head>
 <body>
+
+  <div class="topbar">
+    <a class="homePill" href="index.html">
+      <span class="homeDot"></span>
+      Back to Home
+    </a>
+  </div>
+
   <div class="wrap">
-    <a class="back" href="/">← Back to SideGuy</a>
+
+    <div class="brandRow">
+      <div class="brandOrb" aria-hidden="true"></div>
+      <div class="brandMeta">
+        <div class="brandName">SideGuy Solutions</div>
+        <div class="brandSub">San Diego &middot; Software &amp; Tech Guidance</div>
+        <div class="liveLine">
+          <span class="liveTag"><span class="spark"></span> Updated &middot; <span id="localTime">Feb 2026</span></span>
+          <span class="liveTag">132 pages indexed</span>
+          <span class="liveTag">Hub &middot; Software</span>
+        </div>
+      </div>
+    </div>
+
     <h1>Software Help in San Diego</h1>
-    <div class="lede">Website down, app not working, need something built, drowning in subscriptions — every software and tech situation covered. Know who to call, what to spend, and when you actually need a developer.</div>
+    <p class="lede">Website down, app not working, need something built, drowning in subscriptions, or curious about AI &#8212; every software and tech situation covered. Know who to call, what to spend, and when you actually need a developer.</p>
+
     <div class="intro">
-      Most San Diego businesses burning money on software are doing it because nobody answered the first honest question: do you actually need a developer for this? Often the answer is no — and SideGuy will tell you that upfront, before you spend $20,000 on something a no-code tool solves for $49/month.
+      Most San Diego businesses burning money on software are doing it because nobody answered the first honest question: do you actually need a developer for this? Often the answer is no &#8212; and SideGuy will tell you that upfront, before you spend $20,000 on something a no-code tool solves for $49/month.
       <br><br>
-      When you do need a developer, we help you scope it correctly, understand what fair pricing looks like, and avoid the most common and expensive mistakes: over-building, wrong technology stack, and paying for features you'll never use. SideGuy is not a dev shop. We're the clarity layer before the spending starts.
+      When you do need a developer, we help you scope it correctly, understand what fair pricing looks like, and avoid the most common and expensive mistakes: over-building, wrong technology stack, and paying for features you&#8217;ll never use. SideGuy is not a dev shop. We&#8217;re the clarity layer before the spending starts.
+    </div>
+
+    <div class="indexBlock">
+      <strong>This is the central index for all SideGuy software and technical guidance in San Diego.</strong> If you&#8217;re dealing with a technical problem &#8212; website issues, a development project, a broken integration, AI curiosity, or a software buying decision &#8212; start here. Every linked page gives you clean diagnosis and honest next steps before you commit to any vendor or service.
     </div>
 
     <div class="section">
-      <h2>🌐 Website Problems</h2>
+      <h2>&#127760; Website &amp; Hosting Problems</h2>
       <div class="grid">
         <div class="card">
-          <a href="website-hacked-san-diego.html">Website Hacked</a>
-          <p>Immediate steps, how to recover, and how to prevent it happening again.</p>
+          <a href="do-i-really-need-a-new-website-san-diego.html">Do I Need a New Website?</a>
+          <p>When a redesign makes sense vs. when it&#8217;s just expensive distraction.</p>
         </div>
         <div class="card">
-          <a href="website-not-ranking.html">Website Not Ranking</a>
-          <p>Is it a content, technical, or authority problem? Diagnosis guide.</p>
+          <a href="web-design-san-diego.html">Web Design San Diego</a>
+          <p>What a real San Diego web project costs &#8212; from landing page to full build.</p>
+        </div>
+        <div class="card">
+          <a href="website-hacked-san-diego.html">Website Hacked</a>
+          <p>Immediate steps after a hack, how to recover, and how to prevent it happening again.</p>
+        </div>
+        <div class="card">
+          <a href="website-hacked-help.html">Website Hacked &#8212; Get Help</a>
+          <p>Emergency response guide &#8212; who to call and what to do in the first 24 hours.</p>
+        </div>
+        <div class="card">
+          <a href="website-maintenance-san-diego.html">Website Maintenance</a>
+          <p>What ongoing maintenance should cost, what it should include, and what to skip.</p>
         </div>
         <div class="card">
           <a href="website-not-indexing.html">Website Not Indexing</a>
-          <p>Why Google isn't crawling your site and how to fix it fast.</p>
+          <p>Why Google isn&#8217;t crawling your site &#8212; noindex tags, robots.txt, or trust issues.</p>
+        </div>
+        <div class="card">
+          <a href="website-not-ranking.html">Website Not Ranking</a>
+          <p>Is it content, technical, or authority? Diagnosis before you spend anything.</p>
         </div>
         <div class="card">
           <a href="website-speed-optimization.html">Website Too Slow</a>
-          <p>Core Web Vitals, hosting issues, image optimization — what actually moves the needle.</p>
+          <p>Core Web Vitals, hosting, image optimization &#8212; what actually moves the needle.</p>
         </div>
       </div>
     </div>
 
     <div class="section">
-      <h2>🛠️ Do I Need a Developer?</h2>
+      <h2>&#128187; App &amp; Custom Development</h2>
       <div class="grid">
+        <div class="card">
+          <a href="api-development-san-diego.html">API Development</a>
+          <p>Custom API builds, integrations, and when off-the-shelf tools are actually enough.</p>
+        </div>
+        <div class="card">
+          <a href="custom-software-development-san-diego.html">Custom Software Development</a>
+          <p>When custom software is justified vs. when it&#8217;s expensive overkill.</p>
+        </div>
         <div class="card">
           <a href="do-i-really-need-a-software-developer-san-diego.html">Do I Need a Developer?</a>
-          <p>Honest assessment — many problems have no-code solutions that cost 90% less.</p>
+          <p>Honest assessment &#8212; many problems have no-code solutions that cost 90% less.</p>
         </div>
         <div class="card">
-          <a href="do-i-really-need-a-new-website-san-diego.html">Do I Need a New Website?</a>
-          <p>When a redesign makes sense vs. when it's just expensive distraction.</p>
-        </div>
-        <div class="card">
-          <a href="when-should-i-call-a-software-consultant-san-diego.html">When to Call a Consultant</a>
-          <p>Signs your problem needs expert help vs. what you can figure out yourself.</p>
-        </div>
-        <div class="card">
-          <a href="software-too-expensive.html">Software Too Expensive?</a>
-          <p>Alternatives, negotiation tactics, and when to build vs. buy.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>💻 Development Services</h2>
-      <div class="grid">
-        <div class="card">
-          <a href="software-development-san-diego.html">Software Development</a>
-          <p>Custom software in San Diego — what it costs, how to scope it, who to trust.</p>
-        </div>
-        <div class="card">
-          <a href="web-design-san-diego.html">Web Design</a>
-          <p>What a real San Diego web project costs — from landing page to full build.</p>
+          <a href="do-i-really-need-a-tech-cofounder-san-diego.html">Do I Need a Tech Co-founder?</a>
+          <p>Contractor vs. co-founder &#8212; what the decision actually comes down to.</p>
         </div>
         <div class="card">
           <a href="mobile-app-development-san-diego.html">Mobile App Development</a>
-          <p>iOS, Android, or cross-platform — honest scoping and cost reality checks.</p>
-        </div>
-        <div class="card">
-          <a href="api-development-san-diego.html">API Development</a>
-          <p>Custom API builds, integrations, and when off-the-shelf tools are enough.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>🔗 Integrations & Broken Tools</h2>
-      <div class="grid">
-        <div class="card">
-          <a href="api-integration-help.html">API Integration Help</a>
-          <p>Two systems that won't talk — what it takes to connect them and what it costs.</p>
-        </div>
-        <div class="card">
-          <a href="zapier-automation-broken.html">Zapier Automation Broken</a>
-          <p>Common failure points and how to debug a broken automation workflow.</p>
-        </div>
-        <div class="card">
-          <a href="webhooks-not-firing.html">Webhooks Not Firing</a>
-          <p>Diagnosing webhook failures — what to check before calling a developer.</p>
-        </div>
-        <div class="card">
-          <a href="crm-not-working.html">CRM Not Working</a>
-          <p>Data sync issues, workflow failures, and when to reconfigure vs. replace.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta">
-      <h3>Not Sure What You Actually Need?</h3>
-      <p>Describe the problem — not the solution. We'll give you an honest take on whether you need a developer, a cheaper tool, or just a config change.</p>
-      <a href="sms:+17735441231">Text 773-544-1231</a>
-    </div>
-
-    <div class="section">
-      <h2>☁️ SaaS & Subscriptions</h2>
-      <div class="grid">
-        <div class="card">
-          <a href="too-many-software-subscriptions.html">Too Many Subscriptions</a>
-          <p>SaaS audit — find what you're actually using and what to cut.</p>
-        </div>
-        <div class="card">
-          <a href="who-do-i-call-for-saas-billing-problems-san-diego.html">SaaS Billing Problems</a>
-          <p>Overcharges, failed renewals, unexpected charges — how to resolve them.</p>
-        </div>
-        <div class="card">
-          <a href="pay-per-use-vs-saas.html">Pay-Per-Use vs. SaaS</a>
-          <p>When subscription pricing hurts you and when usage-based makes more sense.</p>
+          <p>iOS, Android, or cross-platform &#8212; honest scoping, costs, and realistic timelines.</p>
         </div>
         <div class="card">
           <a href="saas-development-san-diego.html">Build a SaaS Product</a>
-          <p>What it actually costs to build and launch a SaaS in San Diego in 2026.</p>
+          <p>What it actually takes to build and launch a SaaS in San Diego in 2026.</p>
+        </div>
+        <div class="card">
+          <a href="software-development-san-diego.html">Software Development San Diego</a>
+          <p>Custom software in San Diego &#8212; what it costs, how to scope it, who to trust.</p>
+        </div>
+        <div class="card">
+          <a href="software-too-expensive.html">Software Costs Too Much?</a>
+          <p>Alternatives, negotiation tactics, and when to build vs. buy.</p>
+        </div>
+        <div class="card">
+          <a href="when-should-i-call-a-software-consultant-san-diego.html">When to Call a Consultant</a>
+          <p>Signs your problem needs expert help vs. what you can solve yourself.</p>
+        </div>
+        <div class="card">
+          <a href="when-should-i-call-it-support-san-diego.html">When to Call IT Support</a>
+          <p>IT support vs. developer vs. consultant &#8212; who handles what and what each costs.</p>
         </div>
       </div>
     </div>
 
+    <div class="noteCard">
+      <strong>One text. Real guidance.</strong><br/>
+      Describe your problem &#8212; not what you think the solution is. That&#8217;s where clarity starts.
+    </div>
+
     <div class="section">
-      <h2>🔒 Security & DevOps</h2>
+      <h2>&#128279; Integrations, APIs &amp; Automation</h2>
       <div class="grid">
         <div class="card">
-          <a href="devsecops-consulting.html">DevSecOps Consulting</a>
-          <p>Security baked into development — when you need it and what it involves.</p>
+          <a href="api-integration-help.html">API Integration Help</a>
+          <p>Two systems that won&#8217;t talk &#8212; what it takes to connect them and what it costs.</p>
+        </div>
+        <div class="card">
+          <a href="cloud-migration-services.html">Cloud Migration</a>
+          <p>Moving infrastructure to the cloud &#8212; costs, risks, and a go/no-go checklist.</p>
+        </div>
+        <div class="card">
+          <a href="crm-not-working.html">CRM Not Working</a>
+          <p>Data sync issues, workflow failures, and when to reconfigure vs. replace your CRM.</p>
+        </div>
+        <div class="card">
+          <a href="devops-automation.html">DevOps Automation</a>
+          <p>Automate deployments, testing, and infrastructure &#8212; when it&#8217;s worth the setup cost.</p>
         </div>
         <div class="card">
           <a href="devops-consulting-services.html">DevOps Consulting</a>
           <p>CI/CD, infrastructure as code, and deployment automation for San Diego teams.</p>
         </div>
         <div class="card">
-          <a href="who-do-i-call-for-Security-software-san-diego.html">Software Security Help</a>
-          <p>Who handles what — security consultant vs. developer vs. managed service.</p>
+          <a href="devops-setup-and-tools.html">DevOps Setup &amp; Tools</a>
+          <p>Which tools actually matter for a San Diego team at your scale &#8212; without the bloat.</p>
         </div>
         <div class="card">
-          <a href="website-maintenance-san-diego.html">Website Maintenance</a>
-          <p>What ongoing maintenance should cost and what it should include.</p>
+          <a href="do-i-really-need-an-automation-system-san-diego.html">Do I Need Automation?</a>
+          <p>When manual processes beat automated ones &#8212; and when automation actually pays off.</p>
+        </div>
+        <div class="card">
+          <a href="pay-per-use-vs-saas.html">Pay-Per-Use vs. SaaS</a>
+          <p>When subscription pricing hurts you and when usage-based makes more sense.</p>
+        </div>
+        <div class="card">
+          <a href="webhooks-not-firing.html">Webhooks Not Firing</a>
+          <p>Diagnosing webhook failures &#8212; what to check before calling a developer.</p>
+        </div>
+        <div class="card">
+          <a href="zapier-automation-broken.html">Zapier Automation Broken</a>
+          <p>Common failure points and how to debug a broken Zapier workflow.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>&#129302; AI &amp; Workflow Systems</h2>
+      <div class="grid">
+        <div class="card">
+          <a href="agentic-ai-workflows.html">Agentic AI Workflows</a>
+          <p>What agentic AI actually means for your business &#8212; and what it genuinely can&#8217;t do yet.</p>
+        </div>
+        <div class="card">
+          <a href="ai-adoption-consultant-san-diego.html">AI Adoption Consultant</a>
+          <p>Practical AI adoption for San Diego businesses &#8212; where to start, what to skip.</p>
+        </div>
+        <div class="card">
+          <a href="ai-advice-gone-wrong-need-human-help.html">AI Advice Gone Wrong?</a>
+          <p>When an AI gave you bad guidance &#8212; how to recover and who to talk to.</p>
+        </div>
+        <div class="card">
+          <a href="ai-agent-automation.html">AI Agent Automation</a>
+          <p>AI agents that run tasks &#8212; what they&#8217;re actually good at and where they break.</p>
+        </div>
+        <div class="card">
+          <a href="ai-agent-workflows.html">AI Agent Workflows</a>
+          <p>How to build AI-powered workflows that don&#8217;t require constant babysitting.</p>
+        </div>
+        <div class="card">
+          <a href="ai-automation-consulting.html">AI Automation Consulting</a>
+          <p>San Diego AI consulting &#8212; realistic scoping, ROI models, and honest timelines.</p>
+        </div>
+        <div class="card">
+          <a href="ai-automation-for-local-businesses-san-diego.html">AI for Local Businesses</a>
+          <p>AI automation grounded in what actually works for San Diego service businesses.</p>
+        </div>
+        <div class="card">
+          <a href="ai-automation-for-small-business-san-diego.html">AI for Small Business</a>
+          <p>Which AI tools pay off at small-business scale &#8212; and which are just hype.</p>
+        </div>
+        <div class="card">
+          <a href="ai-automation-san-diego-hub.html">AI Automation Hub</a>
+          <p>Full index of AI automation guidance for San Diego businesses.</p>
+        </div>
+        <div class="card">
+          <a href="do-i-really-need-ai-for-my-business-san-diego.html">Do I Really Need AI?</a>
+          <p>Honest assessment &#8212; when AI genuinely helps and when it&#8217;s cost without payoff.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bigCta" aria-label="Talk to a real person about software">
+      <div>
+        <h2>Talk to a Real Person About Software</h2>
+        <div class="small">
+          Describe the problem &#8212; not the solution you think you need.<br/>
+          No dev shop bias &middot; Clarity before cost &middot; No pressure &middot; <strong>773-544-1231</strong>
+        </div>
+      </div>
+      <a class="btn" href="sms:+17735441231">Text PJ &middot; 773-544-1231</a>
+    </div>
+
+    <div class="section">
+      <h2>&#9729; SaaS, Security &amp; Maintenance</h2>
+      <div class="grid">
+        <div class="card">
+          <a href="devsecops-consulting.html">DevSecOps Consulting</a>
+          <p>Security baked into development &#8212; when you need it and what it actually involves.</p>
+        </div>
+        <div class="card">
+          <a href="devops-mlops-aiops.html">DevOps / MLOps / AIOps</a>
+          <p>Operations tooling for teams running ML or AI workloads &#8212; what&#8217;s actually needed.</p>
+        </div>
+        <div class="card">
+          <a href="do-i-really-need-a-crm-system-san-diego.html">Do I Need a CRM?</a>
+          <p>When a CRM pays off vs. when a spreadsheet is fine &#8212; honest breakdown by business type.</p>
+        </div>
+        <div class="card">
+          <a href="pay-per-use-agent-payments.html">Pay-Per-Use Agent Payments</a>
+          <p>Payment models for AI agents and automation workflows &#8212; what structures actually work.</p>
+        </div>
+        <div class="card">
+          <a href="too-many-software-subscriptions.html">Too Many Subscriptions</a>
+          <p>SaaS audit &#8212; find what you&#8217;re actually using and what you can cut without pain.</p>
+        </div>
+        <div class="card">
+          <a href="who-do-i-call-for-saas-billing-problems-san-diego.html">SaaS Billing Problems</a>
+          <p>Overcharges, failed renewals, unexpected charges &#8212; how to resolve them fast.</p>
+        </div>
+        <div class="card">
+          <a href="who-do-i-call-for-Security-software-san-diego.html">Software Security Help</a>
+          <p>Who handles what &#8212; security consultant vs. developer vs. managed service.</p>
+        </div>
+        <div class="card">
+          <a href="ai-agent-payments-for-small-business-san-diego.html">AI Agent Payment Help</a>
+          <p>Getting paid &#8212; or paying vendors &#8212; when AI agents are in the workflow loop.</p>
         </div>
       </div>
     </div>
@@ -196,25 +342,48 @@
     <div class="triggers">
       <h3>When to Call SideGuy About Software</h3>
       <ul>
-        <li>A developer quoted you $40K+ and you want to know if that's reasonable before signing</li>
-        <li>You've been burned before and want clarity before hiring another agency or freelancer</li>
-        <li>You're paying for 12+ SaaS tools and suspect half are redundant</li>
+        <li>A developer quoted you $40K+ and you want to know if that&#8217;s reasonable before signing</li>
+        <li>You&#8217;ve been burned before and want clarity before hiring another agency or freelancer</li>
+        <li>You&#8217;re paying for 12+ SaaS tools and suspect half are redundant</li>
         <li>Your website was hacked, is broken, or was handed off without documentation</li>
-        <li>You need an API integration and you've gotten quotes from $500 to $25,000</li>
-        <li>You're evaluating whether to build a custom tool vs. buy an existing product</li>
-        <li>Your automation workflow (Zapier, Make, n8n) broke and you don't know why</li>
+        <li>You need an API integration and you&#8217;ve gotten quotes from $500 to $25,000</li>
+        <li>You&#8217;re evaluating whether to build a custom tool vs. buy an existing product</li>
+        <li>Your automation workflow (Zapier, Make, n8n) broke and you don&#8217;t know why</li>
+        <li>You&#8217;re curious about AI for your business and don&#8217;t know where to start honestly</li>
       </ul>
     </div>
 
     <div class="eeat">
       <h3>Why Local Software Guidance Matters in San Diego</h3>
-      <p>San Diego has a dense concentration of defense contractors, biotech firms, hospitality operations, and early-stage startups — each with very different software needs and very different risk tolerances. National advice about tech stacks and dev shop rates doesn't account for San Diego's specific market: local developer rates ($120–$200/hr offshore to $175–$325/hr onshore), the startup ecosystem around Torrey Pines, and the compliance requirements that come with defense and healthcare adjacency. SideGuy helps you navigate this without an agenda — we're not a dev shop and don't take referral fees.</p>
+      <p>San Diego has a dense concentration of defense contractors, biotech firms, hospitality operations, and early-stage startups &#8212; each with very different software needs and very different risk tolerances. National advice about tech stacks and dev shop rates doesn&#8217;t account for San Diego&#8217;s specific market: local developer rates ($120&#8211;$200/hr offshore to $175&#8211;$325/hr onshore), the startup ecosystem around Torrey Pines, and the compliance requirements that come with defense and healthcare adjacency. SideGuy helps you navigate this without an agenda &#8212; we&#8217;re not a dev shop and don&#8217;t take referral fees.</p>
     </div>
 
-    <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--stroke);text-align:center;font-size:13px;color:var(--muted2);">
-      <a href="/" style="color:var(--muted2);text-decoration:none;">SideGuy Solutions</a> · San Diego · <a href="sms:+17735441231" style="color:var(--mint);">Text 773-544-1231</a>
+    <div class="microFooter">
+      <a href="index.html">SideGuy Solutions</a> &middot; San Diego &middot; Software &amp; Tech Hub &middot;
+      <span id="dateStamp">February 2026</span>
     </div>
+
   </div>
+
+  <div class="floating" aria-label="Text PJ">
+    <div class="floatPill">
+      <div class="t1"><span class="chatDot"></span> Text PJ</div>
+      <div class="t2">One text &middot; calm answers &middot; <strong>773-544-1231</strong></div>
+    </div>
+    <a class="floatBtn" href="sms:+17735441231" aria-label="Text PJ now">Text<br/>PJ</a>
+  </div>
+
+  <script>
+    (function(){
+      var d = new Date();
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      var label = months[d.getMonth()] + " " + d.getFullYear();
+      var t = document.getElementById("localTime");
+      var ds = document.getElementById("dateStamp");
+      if(t) t.textContent = label;
+      if(ds) ds.textContent = label;
+    })();
+  </script>
 
   <script type="application/ld+json">
   {
@@ -224,17 +393,22 @@
       {
         "@type": "Question",
         "name": "How much does custom software development cost in San Diego?",
-        "acceptedAnswer": {"@type": "Answer", "text": "A basic web app in San Diego runs $15,000–$60,000. A mobile app typically costs $30,000–$150,000 depending on complexity. Many businesses discover they don't need custom software — off-the-shelf tools with integrations solve the problem at 10% of the cost."}
+        "acceptedAnswer": {"@type": "Answer", "text": "A basic web app in San Diego runs $15,000\u2013$60,000. A mobile app typically costs $30,000\u2013$150,000 depending on complexity. Many businesses discover they don't need custom software \u2014 off-the-shelf tools with integrations solve the problem at 10% of the cost."}
       },
       {
         "@type": "Question",
-        "name": "My website is not showing up on Google — what do I do?",
+        "name": "My website is not showing up on Google \u2014 what do I do?",
         "acceptedAnswer": {"@type": "Answer", "text": "Check Google Search Console for coverage errors. Common causes: noindex tag accidentally set, sitemap not submitted, new domain not yet crawled (takes weeks), or manual penalty. Most issues are fixable without a developer."}
       },
       {
         "@type": "Question",
         "name": "When should I hire a software consultant vs. a developer?",
-        "acceptedAnswer": {"@type": "Answer", "text": "Hire a consultant when you're not sure what to build or buy — they prevent expensive mistakes. Hire a developer when you know exactly what you need built. Starting with a developer before you have clarity is one of the most common and costly mistakes small businesses make."}
+        "acceptedAnswer": {"@type": "Answer", "text": "Hire a consultant when you're not sure what to build or buy \u2014 they prevent expensive mistakes. Hire a developer when you know exactly what you need built. Starting with a developer before you have clarity is one of the most common and costly mistakes small businesses make."}
+      },
+      {
+        "@type": "Question",
+        "name": "Does my San Diego business actually need AI automation?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Sometimes \u2014 but AI is oversold. The honest test: is there a repetitive, rule-based task consuming 10+ hours/week? If yes, automation often pays off. If the answer is 'we want to seem innovative,' that's a cost without a return. Start with the specific task, not the technology."}
       }
     ]
   }
