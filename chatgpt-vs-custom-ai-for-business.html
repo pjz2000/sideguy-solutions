@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ChatGPT vs Custom AI for Business · SideGuy Solutions (San Diego)</title>
+  <link rel="canonical" href="https://sideguysolutions.com/chatgpt-vs-custom-ai-for-business.html" />
+  <meta name="description" content="Operator-level comparison: ChatGPT vs a custom AI build for your business. Tradeoffs in cost, control, compliance, and speed-to-value. 
+<hr>
+<h2>Still Deciding?</h2>
+<p>Text PJ with a short description of your setup and we'll break down tradeoffs specific to your situation.</p>
+<p><a href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session">Text PJ for clarity &rarr;</a></p>
+Clarity before cost." />
+
+  <style>
+    :root{
+      --bg0:#eefcff;
+      --bg1:#d7f5ff;
+      --bg2:#bfeeff;
+      --ink:#073044;
+      --muted:#3f6173;
+      --muted2:#5e7d8e;
+      --card:#ffffffcc;
+      --card2:#ffffffb8;
+      --stroke:rgba(7,48,68,.10);
+      --stroke2:rgba(7,48,68,.07);
+      --shadow: 0 18px 50px rgba(7,48,68,.10);
+      --mint:#21d3a1;
+      --mint2:#00c7ff;
+      --blue:#4aa9ff;
+      --blue2:#1f7cff;
+      --r:22px;
+      --pill:999px;
+      --phone:"+17735441231";
+      --phonePretty:"773-544-1231";
+      --city:"San Diego";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:-apple-system, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color:var(--ink);
+      background:radial-gradient(1200px 900px at 22% 10%, #ffffff 0%, var(--bg0) 25%, var(--bg1) 60%, var(--bg2) 100%);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(closest-side at 18% 20%, rgba(33,211,161,.18), transparent 55%),
+        radial-gradient(closest-side at 78% 28%, rgba(74,169,255,.16), transparent 52%),
+        radial-gradient(closest-side at 62% 82%, rgba(0,199,255,.12), transparent 55%),
+        radial-gradient(closest-side at 25% 85%, rgba(33,211,161,.10), transparent 58%);
+      filter:blur(18px);
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    /* topbar */
+    .topbar{
+      height:52px;
+      display:flex;
+      align-items:center;
+      padding:0 22px;
+      background:rgba(255,255,255,.72);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--stroke);
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .homePill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      font-weight:600;
+      color:var(--ink);
+      text-decoration:none;
+      background:rgba(255,255,255,.85);
+      border:1px solid var(--stroke);
+      border-radius:var(--pill);
+      padding:6px 14px 6px 8px;
+    }
+    .homePill:hover{background:#fff}
+    .homeDot{
+      width:10px; height:10px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--mint),var(--blue));
+    }
+
+    /* layout */
+    .wrap{max-width:1120px;margin:0 auto;padding:26px 22px 92px;}
+    .layout{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      align-items:start;
+    }
+    @media(max-width:980px){
+      .layout{grid-template-columns:1fr;}
+    }
+
+    /* brand row */
+    .brandRow{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;}
+    .brandOrb{
+      width:52px;height:52px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(135deg,var(--mint) 0%,var(--blue) 100%);
+      box-shadow:0 12px 32px rgba(33,211,161,.35);
+    }
+    .brandName{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:rgba(7,48,68,.78);}
+    .brandSub{font-size:13px;color:var(--muted);margin-top:2px;}
+    .liveLine{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+    .liveTag{
+      font-size:11px;
+      font-weight:600;
+      color:var(--muted);
+      background:rgba(255,255,255,.7);
+      border:1px solid var(--stroke);
+      border-radius:var(--pill);
+      padding:3px 10px;
+    }
+    .spark{
+      display:inline-block;
+      width:6px;height:6px;
+      border-radius:50%;
+      background:var(--mint);
+      margin-right:4px;
+      vertical-align:middle;
+    }
+
+    /* headings */
+    h1{font-size:clamp(1.55rem,3.5vw,2.2rem);font-weight:800;line-height:1.2;margin:0 0 16px;}
+    h2{font-size:1.15rem;font-weight:700;margin:32px 0 10px;color:var(--ink);}
+    h3{font-size:1rem;font-weight:700;margin:24px 0 8px;}
+    p{line-height:1.7;color:var(--muted);margin:0 0 14px;}
+    .lede{font-size:1.05rem;color:var(--ink);margin-bottom:28px;}
+
+    /* cards */
+    .cards{display:grid;gap:14px;margin:24px 0;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--r);
+      padding:22px 24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+    }
+    .cardTitle{font-weight:700;font-size:1rem;margin:0 0 10px;color:var(--ink);}
+
+    /* comparison table */
+    .compTable{width:100%;border-collapse:collapse;margin:24px 0;font-size:.93rem;}
+    .compTable th{
+      background:rgba(33,211,161,.12);
+      color:var(--ink);
+      font-weight:700;
+      padding:10px 14px;
+      text-align:left;
+      border-bottom:2px solid rgba(33,211,161,.3);
+    }
+    .compTable td{
+      padding:10px 14px;
+      border-bottom:1px solid var(--stroke2);
+      vertical-align:top;
+      color:var(--muted);
+    }
+    .compTable tr:last-child td{border-bottom:none;}
+    .compTable td:first-child{font-weight:600;color:var(--ink);width:30%;}
+    .win{color:#0b7a55;font-weight:600;}
+    .warn{color:#b06200;font-weight:600;}
+
+    /* bullets */
+    ul.bullets{margin:8px 0;padding-left:20px;color:var(--muted);}
+    ul.bullets li{margin-bottom:6px;line-height:1.6;}
+
+    /* verdict box */
+    .verdict{
+      background:rgba(33,211,161,.08);
+      border:1px solid rgba(33,211,161,.3);
+      border-radius:var(--r);
+      padding:20px 24px;
+      margin:28px 0;
+    }
+    .verdict strong{color:var(--ink);}
+
+    /* CTA */
+    .bigCta{
+      background:linear-gradient(135deg,rgba(33,211,161,.15),rgba(74,169,255,.12));
+      border:1px solid rgba(33,211,161,.25);
+      border-radius:var(--r);
+      padding:28px 30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-top:40px;
+    }
+    .bigCta h2{margin:0 0 6px;font-size:1.2rem;}
+    .small{font-size:.9rem;color:var(--muted);}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:linear-gradient(135deg,var(--mint),var(--blue));
+      color:#fff;
+      font-weight:700;
+      font-size:.95rem;
+      padding:13px 26px;
+      border-radius:var(--pill);
+      text-decoration:none;
+      box-shadow:0 8px 24px rgba(33,211,161,.40);
+      white-space:nowrap;
+    }
+    .btn:active{transform:translateY(1px);}
+
+    /* micro footer */
+    .microFooter{font-size:.82rem;color:var(--muted2);margin-top:32px;padding-top:16px;border-top:1px solid var(--stroke);}
+    .microFooter a{color:var(--muted2);}
+
+    /* right rail */
+    .rightRail{position:sticky;top:78px;display:flex;justify-content:flex-end;}
+    @media(max-width:980px){.rightRail{position:relative;top:auto;justify-content:flex-start;}}
+    .railStack{display:flex;align-items:flex-start;gap:12px;}
+    .railOrbs{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+    .railOrb{
+      width:86px;height:86px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:0 24px 55px rgba(7,48,68,.16);
+      backdrop-filter:blur(14px);
+      overflow:hidden;cursor:pointer;text-decoration:none;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:900;letter-spacing:.02em;font-size:12px;text-align:center;padding:10px;
+    }
+    .orbGreen{background:linear-gradient(135deg,#21d3a1,#00c7ff);}
+    .orbBlue{background:linear-gradient(135deg,#4aa9ff,#1f7cff);}
+    .orbSoft{background:rgba(7,48,68,.18);color:var(--ink);}
+    .railLabels{display:flex;flex-direction:column;gap:12px;}
+    .railLabel{font-size:11px;line-height:1.5;color:var(--muted);max-width:160px;padding-top:28px;}
+
+    /* floating */
+    .floating{
+      position:fixed;bottom:22px;right:22px;
+      display:flex;align-items:center;gap:12px;z-index:200;
+    }
+    .floatPill{
+      background:rgba(255,255,255,.90);border:1px solid var(--stroke);
+      border-radius:var(--pill);padding:9px 16px;
+      box-shadow:0 8px 28px rgba(7,48,68,.14);
+      backdrop-filter:blur(12px);
+    }
+    .t1{font-size:12px;font-weight:700;color:var(--ink);}
+    .t2{font-size:11px;color:var(--muted);}
+    .chatDot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:4px;vertical-align:middle;}
+    .floatBtn{
+      width:60px;height:60px;border-radius:50%;
+      background:linear-gradient(135deg,var(--mint),var(--blue));
+      color:#fff;font-weight:900;font-size:12px;text-align:center;
+      text-decoration:none;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 8px 24px rgba(33,211,161,.45);
+    }
+    @media(max-width:600px){.floatPill{display:none;}}
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <a class="homePill" href="index.html" aria-label="Back to home">
+      <span class="homeDot"></span>
+      Back to home
+    </a>
+  </div>
+
+  <div class="wrap">
+    <div class="layout">
+      <!-- MAIN -->
+      <main>
+        <div class="brandRow">
+          <div class="brandOrb" aria-hidden="true"></div>
+          <div class="brandMeta">
+            <div class="brandName">SideGuy Solutions</div>
+            <div class="brandSub">San Diego · Human Guidance Layer</div>
+            <div class="liveLine">
+              <span class="liveTag"><span class="spark"></span> Updated live · <span id="localTime">—</span></span>
+              <span class="liveTag">Weather · <span id="wx">—</span></span>
+              <span class="liveTag">Page · AI Decision Guide</span>
+            </div>
+          </div>
+        </div>
+
+        <h1>ChatGPT vs Custom AI for Business — Which One Actually Fits?</h1>
+        <p class="lede">
+          Most operators asking this question don't need the best AI — they need the right AI for where they are right now.
+          This is an operator-level breakdown, not a feature list.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <p class="cardTitle">The real question isn't technology — it's exposure</p>
+            <ul class="bullets">
+              <li>How much do you need the AI to know about your specific business?</li>
+              <li>What happens if the AI is wrong — and who's liable?</li>
+              <li>Do you want a subscription, or do you want ownership?</li>
+            </ul>
+          </article>
+        </div>
+
+        <h2>Side-by-Side: ChatGPT (or similar off-the-shelf) vs Custom Build</h2>
+        <table class="compTable" aria-label="ChatGPT vs Custom AI comparison">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>ChatGPT / Off-the-shelf</th>
+              <th>Custom AI Build</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Time to value</td>
+              <td class="win">Hours to days. Start immediately.</td>
+              <td class="warn">Weeks to months depending on scope.</td>
+            </tr>
+            <tr>
+              <td>Setup cost</td>
+              <td class="win">$20–$200/month per seat (subscription).</td>
+              <td class="warn">$5k–$80k+ depending on complexity.</td>
+            </tr>
+            <tr>
+              <td>Ongoing cost</td>
+              <td class="warn">Subscription compounds. No equity in the tool.</td>
+              <td class="win">Lower per-unit cost at scale. You own the logic.</td>
+            </tr>
+            <tr>
+              <td>Business-specific knowledge</td>
+              <td class="warn">Generic. Requires careful prompting every time.</td>
+              <td class="win">Trained or grounded on your data, processes, tone.</td>
+            </tr>
+            <tr>
+              <td>Data privacy / compliance</td>
+              <td class="warn">Your inputs may be logged. HIPAA/SOC2 needs enterprise tier.</td>
+              <td class="win">Your stack, your rules. Air-gap if needed.</td>
+            </tr>
+            <tr>
+              <td>Maintenance</td>
+              <td class="win">Vendor maintains the model. Zero infra work.</td>
+              <td class="warn">You own upkeep. Updates need engineering time.</td>
+            </tr>
+            <tr>
+              <td>Competitive moat</td>
+              <td class="warn">Competitor can use the same tool tomorrow.</td>
+              <td class="win">Differentiated capability specific to your operations.</td>
+            </tr>
+            <tr>
+              <td>Failure risk</td>
+              <td class="warn">Hallucinations without guardrails. Prompt injection risk.</td>
+              <td class="win">Guardrails and output constraints built to your spec.</td>
+            </tr>
+            <tr>
+              <td>Best if you're…</td>
+              <td>Exploring AI, small team, tight budget, fast experiments.</td>
+              <td>Scaling, regulated, handling sensitive data, building a product.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Where ChatGPT Wins</h2>
+        <ul class="bullets">
+          <li><strong>Drafting and writing:</strong> Emails, proposals, SOPs — fast generation with human review. Hard to beat for price.</li>
+          <li><strong>Early-stage teams:</strong> No engineering overhead. Plug in, start iterating.</li>
+          <li><strong>Non-sensitive workflows:</strong> Marketing copy, customer FAQ drafts, internal summaries.</li>
+          <li><strong>Proof-of-concept:</strong> Validate the use case before committing to a build.</li>
+        </ul>
+
+        <h2>Where Custom AI Wins</h2>
+        <ul class="bullets">
+          <li><strong>Regulated industries:</strong> Healthcare, legal, finance — you need auditable outputs and data isolation.</li>
+          <li><strong>High-volume automation:</strong> If AI is processing thousands of transactions, custom cost-per-call math wins.</li>
+          <li><strong>Proprietary knowledge:</strong> When your competitive advantage is in your data, process, or institutional knowledge.</li>
+          <li><strong>Customer-facing products:</strong> You can't brand or fully control a ChatGPT integration.</li>
+        </ul>
+
+        <h2>When to Avoid Both (For Now)</h2>
+        <p>
+          If your internal workflows are undocumented, your team can't consistently describe what "good output" looks like,
+          or you haven't identified a specific high-frequency task — stop. AI augments clarity; it doesn't create it.
+          Start with a workflow audit before any AI investment.
+        </p>
+
+        <div class="verdict">
+          <strong>Operator verdict:</strong> Most San Diego SMBs should start with ChatGPT (Teams or Enterprise tier) for 60–90 days.
+          Document your wins and frustrations. That log becomes the spec for a custom build if and when it makes financial sense.
+          A custom build without a tested use case is expensive technical debt.
+        </div>
+
+        <h2>Related Guidance</h2>
+        <ul class="bullets">
+          <li><a href="/ai-automation-consulting-san-diego.html">AI Automation Consulting · San Diego</a></li>
+          <li><a href="/ai-automation-for-small-business-san-diego.html">AI Automation for Small Business</a></li>
+          <li><a href="/ai-adoption-consultant-san-diego.html">AI Adoption Consulting</a></li>
+          <li><a href="/agentic-ai-workflows.html">Agentic AI Workflows Explained</a></li>
+        </ul>
+
+        <section class="bigCta" aria-label="Talk to a real person">
+          <div>
+            <h2>Not sure which path fits your operation?</h2>
+            <div class="small">
+              Text PJ directly. One message, clear options, no pitch.<br/>
+              <b>773-544-1231</b> · San Diego
+            </div>
+          </div>
+          <a class="btn" id="ctaBtn" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session">Text PJ · 773-544-1231</a>
+        </section>
+
+        <div class="microFooter">
+          SideGuy Solutions · <span id="dateStamp">—</span> ·
+          <a href="index.html">Homepage</a> ·
+          <a href="/ai-automation-san-diego-hub.html">AI Hub</a>
+        </div>
+      </main>
+
+      <!-- RIGHT RAIL -->
+      <aside class="rightRail" aria-label="Right rail actions">
+        <div class="railStack">
+          <div class="railOrbs">
+            <a class="railOrb orbGreen" id="railText" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session">Text PJ</a>
+            <a class="railOrb orbBlue" href="index.html#ask-ai" aria-label="Ask AI Questions">Ask AI</a>
+            <a class="railOrb orbSoft" href="/ai-automation-consulting-san-diego.html" aria-label="AI Consulting">AI<br/>Consult</a>
+            <a class="railOrb orbSoft" href="index.html#no-pressure" aria-label="No pressure">No<br/>pressure</a>
+          </div>
+          <div class="railLabels">
+            <div class="railLabel"><b>Text PJ</b><br/>Fast human response. No tickets.</div>
+            <div class="railLabel"><b>Ask AI Qs</b><br/>Explore options — then confirm with a human.</div>
+            <div class="railLabel"><b>AI Consult</b><br/>Full consulting scope for your business.</div>
+            <div class="railLabel"><b>No pressure</b><br/>Clarity first. If we can't help, we'll say so.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="floating" aria-label="Text PJ floating orb">
+    <div class="floatPill">
+      <div class="t1"><span class="chatDot"></span> Text PJ</div>
+      <div class="t2">One text · calm answers · <b>773-544-1231</b></div>
+    </div>
+    <a class="floatBtn" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session">Text<br/>PJ</a>
+  </div>
+
+  <script>
+    (function(){
+      const pretty = "773-544-1231";
+      const sms = "sms:+17735441231";
+      document.querySelectorAll("#ctaBtn,#railText").forEach(n => n.setAttribute("href", sms));
+      document.body.innerHTML = document.body.innerHTML.replaceAll("{{phonePretty}}", pretty);
+    })();
+
+    function fmtTime(d){ return d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}); }
+    function fmtDate(d){ return d.toLocaleDateString([],{year:'numeric',month:'short',day:'numeric'}); }
+    function updateTime(){
+      const now = new Date();
+      document.getElementById("localTime").textContent = fmtTime(now);
+      document.getElementById("dateStamp").textContent = "Updated " + fmtDate(now);
+    }
+    updateTime();
+    setInterval(updateTime, 15000);
+
+    const SD = {lat:32.7157, lon:-117.1611};
+    const wxCodes = {
+      0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Cloudy",
+      45:"Fog",48:"Fog",51:"Light drizzle",53:"Drizzle",55:"Heavy drizzle",
+      61:"Light rain",63:"Rain",65:"Heavy rain",
+      80:"Rain showers",81:"Rain showers",82:"Heavy showers",
+      95:"Thunderstorm",96:"Thunderstorm",99:"Thunderstorm"
+    };
+    async function loadWeather(){
+      try{
+        const url = "https://api.open-meteo.com/v1/forecast?latitude="+SD.lat+"&longitude="+SD.lon
+          +"&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=auto";
+        const res = await fetch(url,{cache:"no-store"});
+        if(!res.ok) throw new Error();
+        const data = await res.json();
+        const t = data?.current?.temperature_2m;
+        const code = data?.current?.weather_code;
+        const label = wxCodes[String(code)] || "Weather";
+        document.getElementById("wx").textContent = (typeof t==="number" ? Math.round(t)+"°F · " : "") + label;
+      }catch(e){
+        document.getElementById("wx").textContent = "San Diego (live)";
+      }
+    }
+    loadWeather();
+    setInterval(loadWeather, 600000);
+  </script>
+
+  <!-- SIDEGUY_MESH_BLOCK -->
+  <section style="margin-top:60px;padding:30px;background:#f4fdfb;border-left:6px solid #1fc7a6;">
+    <h3>SideGuy Knowledge Hub</h3>
+    <ul style="line-height:1.8;">
+      <li><a href="/ai-automation-consulting-san-diego.html">AI Automation Consulting San Diego</a></li>
+      <li><a href="/stripe-vs-stablecoin-payments.html">Stripe vs Stablecoin Payments</a></li>
+      <li><a href="/vanta-vs-drata-soc2-san-diego.html">Vanta vs Drata — SOC 2 San Diego</a></li>
+      <li><a href="/ai-automation-for-small-business-san-diego.html">AI Automation for Small Business</a></li>
+      <li><a href="/agentic-ai-workflows.html">Agentic AI Workflows</a></li>
+    </ul>
+  </section>
+  <div style="display:none">Updated: 2026-03-02</div>
+</body>
+</html>
