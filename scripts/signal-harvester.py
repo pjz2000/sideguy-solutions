@@ -4,6 +4,7 @@ import feedparser
 RSS_SOURCES = [
     "https://www.reddit.com/r/smallbusiness/top.rss",
     "https://www.reddit.com/r/Entrepreneur/top.rss",
+    "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US",
 ]
 
 # Fallback seeds used when RSS is unavailable (no network in CI, etc.)

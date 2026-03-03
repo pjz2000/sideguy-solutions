@@ -1,0 +1,54 @@
+name: SideGuy Weekly Hub Rebuild
+
+on:
+  schedule:
+    - cron: '0 4 * * 0'   # every Sunday at 4am UTC
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install feedparser -q
+
+      - name: Setup Directories
+        run: mkdir -p hubs pillars sitemaps signals
+
+      - name: Rebuild All Authority Hubs (refresh link grids)
+        run: python3 scripts/build-authority.py --rebuild
+
+      - name: Add Schema + OG Tags to Any New Pages
+        run: python3 scripts/add-schema.py
+
+      - name: Regenerate Sitemaps
+        run: python3 scripts/generate-sitemap.py
+
+      - name: Build Report
+        run: python3 scripts/build-report.py
+
+      - name: Commit & Push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "sideguy-autobuilder"
+          git config --global user.email "builder@sideguy.ai"
+          if [[ -n $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "🔄 Weekly hub rebuild [$(date -u +%Y-%m-%dT%H:%M:%SZ)]"
+            git push
+          else
+            echo "No changes after rebuild."
+          fi

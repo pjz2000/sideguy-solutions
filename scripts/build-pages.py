@@ -124,6 +124,14 @@ def build_page(topic, all_topics):
 <title>{title_case} San Diego · SideGuy</title>
 <link rel="canonical" href="{canonical}"/>
 <meta name="description" content="{title_case} in San Diego — plain-language guide and real help from SideGuy. Clarity before cost."/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="SideGuy Solutions"/>
+<meta property="og:title" content="{title_case} San Diego · SideGuy"/>
+<meta property="og:description" content="{title_case} in San Diego — plain-language guide and real help from SideGuy. Clarity before cost."/>
+<meta property="og:url" content="{canonical}"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="{title_case} San Diego · SideGuy"/>
+<meta name="twitter:description" content="{title_case} in San Diego — plain-language guide and real help from SideGuy."/>
 <style>
   :root{{
     --bg0:#eefcff;

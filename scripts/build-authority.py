@@ -23,6 +23,9 @@ PILLARS_DIR = "pillars"
 ROOT        = "."
 TODAY       = datetime.date.today().isoformat()
 
+# Set to True via --rebuild flag to refresh existing hub link grids
+REBUILD = False
+
 # ── Inline CSS shared across all authority pages ──────────────────────────────
 
 SHARED_CSS = """
@@ -206,7 +209,7 @@ def build_industry_hub(industry_slug, topic_pairs, all_cats_snippet):
     """Build hubs/industry-<slug>.html"""
     os.makedirs(HUBS_DIR, exist_ok=True)
     path = os.path.join(HUBS_DIR, f"industry-{industry_slug}.html")
-    if os.path.exists(path):
+    if os.path.exists(path) and not REBUILD:
         return None
 
     label  = industry_slug.replace('-', ' ').title()
@@ -255,7 +258,7 @@ def build_category_hub(cat_key, topic_pairs, related_hub_links):
     """Build hubs/category-<cat>.html"""
     os.makedirs(HUBS_DIR, exist_ok=True)
     path = os.path.join(HUBS_DIR, f"category-{cat_key}.html")
-    if os.path.exists(path):
+    if os.path.exists(path) and not REBUILD:
         return None
 
     label  = CATEGORY_HUB_LABELS[cat_key]
@@ -335,7 +338,7 @@ def build_city_hub(san_diego_pairs, all_hub_links):
     """Build hubs/city-san-diego.html"""
     os.makedirs(HUBS_DIR, exist_ok=True)
     path = os.path.join(HUBS_DIR, "city-san-diego.html")
-    if os.path.exists(path):
+    if os.path.exists(path) and not REBUILD:
         return None
 
     canon = f"{DOMAIN}/hubs/city-san-diego.html"
@@ -378,7 +381,7 @@ def build_pillar(cat_key, topic_pairs, related_pillar_links, industry_hub_links)
     os.makedirs(PILLARS_DIR, exist_ok=True)
     pillar_file = PILLAR_MAP[cat_key]
     path = pillar_file  # already relative path like pillars/ai-automation-master-guide.html
-    if os.path.exists(path):
+    if os.path.exists(path) and not REBUILD:
         return None
 
     label   = PILLAR_LABELS[cat_key]
@@ -502,6 +505,11 @@ def build_pillar(cat_key, topic_pairs, related_pillar_links, industry_hub_links)
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
+    global REBUILD
+    REBUILD = "--rebuild" in sys.argv
+    if REBUILD:
+        print("\u26a0️  REBUILD mode — refreshing all existing hub link grids")
+
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
     with open(MANIFEST) as f:

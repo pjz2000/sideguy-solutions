@@ -414,6 +414,15 @@ def generate_all_topics():
                 if t:
                     topics.add(t)
 
+    # Manual topics from PJ (signals/pj-topics.txt)
+    pj_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "signals", "pj-topics.txt")
+    if os.path.exists(pj_file):
+        with open(pj_file) as f:
+            for line in f:
+                t = line.strip()
+                if t and not t.startswith("#"):
+                    topics.add(t)
+
     return topics
 
 

@@ -1,13 +1,12 @@
 """
-SideGuy Schema Engine
-Injects JSON-LD LocalBusiness + WebPage schema into every HTML page
-that doesn't already have application/ld+json.
+SideGuy Schema + OG Engine
+Injects JSON-LD schema and Open Graph meta tags into every HTML page that lacks them.
+Safe to re-run: skips pages that already have both.
 """
 import os, re
 
 ROOT    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOMAIN  = "https://sideguysolutions.com"
-PHONE   = "+1-760-454-1860"
 
 LOCAL_BIZ = """{
   "@context": "https://schema.org",
@@ -26,8 +25,9 @@ LOCAL_BIZ = """{
 }"""
 
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.IGNORECASE | re.DOTALL)
+DESC_RE  = re.compile(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']', re.IGNORECASE | re.DOTALL)
 
-def make_schema(html, page_url, title):
+def make_schema(page_url, title):
     webpage = f"""{{
   "@context": "https://schema.org",
   "@type": "WebPage",
@@ -40,11 +40,25 @@ def make_schema(html, page_url, title):
         f'<script type="application/ld+json">\n{webpage}\n</script>\n'
     )
 
-added = 0
-skipped = 0
+def make_og(page_url, title, description):
+    t = title.replace('"', '&quot;')
+    d = description.replace('"', '&quot;')
+    return (
+        f'\n<meta property="og:type" content="article"/>\n'
+        f'<meta property="og:site_name" content="SideGuy Solutions"/>\n'
+        f'<meta property="og:title" content="{t}"/>\n'
+        f'<meta property="og:description" content="{d}"/>\n'
+        f'<meta property="og:url" content="{page_url}"/>\n'
+        f'<meta name="twitter:card" content="summary"/>\n'
+        f'<meta name="twitter:title" content="{t}"/>\n'
+        f'<meta name="twitter:description" content="{d}"/>\n'
+    )
+
+schema_added = 0
+og_added     = 0
+skipped      = 0
 
 for dirpath, _, files in os.walk(ROOT):
-    # skip hidden dirs, backups, quarantine
     rel = os.path.relpath(dirpath, ROOT)
     skip_dirs = {"_quarantine_backups", "node_modules", "seo-reserve"}
     parts = rel.split(os.sep)
@@ -55,25 +69,39 @@ for dirpath, _, files in os.walk(ROOT):
         if not fname.endswith(".html"):
             continue
 
-        fpath = os.path.join(dirpath, fname)
+        fpath    = os.path.join(dirpath, fname)
         rel_path = os.path.relpath(fpath, ROOT).replace("\\", "/")
+        page_url = f"{DOMAIN}/{rel_path}"
 
         with open(fpath, "r", encoding="utf-8", errors="ignore") as f:
             html = f.read()
 
-        if "application/ld+json" in html:
+        changed = False
+
+        # ── JSON-LD schema ────────────────────────────────────────────────────
+        if "application/ld+json" not in html:
+            m     = TITLE_RE.search(html)
+            title = m.group(1).strip() if m else fname.replace(".html", "").replace("-", " ").title()
+            html  = html.replace("</head>", make_schema(page_url, title) + "</head>", 1)
+            schema_added += 1
+            changed = True
+
+        # ── Open Graph tags ───────────────────────────────────────────────────
+        if 'property="og:title"' not in html and "property='og:title'" not in html:
+            m_title = TITLE_RE.search(html)
+            m_desc  = DESC_RE.search(html)
+            title   = m_title.group(1).strip() if m_title else fname.replace(".html", "").replace("-", " ").title()
+            desc    = m_desc.group(1).strip() if m_desc else f"{title} — SideGuy Solutions, San Diego."
+            html    = html.replace("</head>", make_og(page_url, title, desc) + "</head>", 1)
+            og_added += 1
+            changed = True
+
+        if not changed:
             skipped += 1
             continue
 
-        page_url = f"{DOMAIN}/{rel_path}"
-        m = TITLE_RE.search(html)
-        title = m.group(1).strip() if m else fname.replace(".html", "").replace("-", " ").title()
-
-        schema_block = make_schema(html, page_url, title)
-        html = html.replace("</head>", schema_block + "</head>", 1)
-
         with open(fpath, "w", encoding="utf-8") as f:
             f.write(html)
-        added += 1
 
-print(f"Schema added to {added} pages ({skipped} already had schema).")
+print(f"Schema added: {schema_added}  |  OG tags added: {og_added}  |  Already complete: {skipped}")
+
