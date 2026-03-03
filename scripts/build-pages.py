@@ -18,7 +18,9 @@ from sideguy_classify import (
     CATEGORY_HUB_PATH, CATEGORY_HUB_LABELS,
     PILLAR_MAP, PILLAR_LABELS,
     industry_hub_path, industry_hub_label,
+    DOMAIN,
 )
+from content_library import get_content, make_faq_schema_json, make_breadcrumb_schema_json
 
 MANIFEST   = "seo-reserve/manifest.json"
 OUTPUT_DIR = "."
@@ -109,11 +111,53 @@ def build_page(topic, all_topics):
         print(f"Skip (exists): {filename}")
         return None
 
-    today    = datetime.date.today().isoformat()
+    today     = datetime.date.today().isoformat()
     canonical = f"https://sideguysolutions.com/{filename}"
     related   = pick_related(topic, all_topics, n=5)
     related_html = build_related_links_html(related)
     uplinks_html = build_uplinks_html(topic)
+
+    # ── Content differentiation ────────────────────────────────────────────
+    info       = classify_topic(topic)
+    categories = info['categories']
+    content    = get_content(topic, categories)
+
+    # Paragraph-split the know_body for multi-<p> rendering
+    know_paras = [
+        f'    <p>{p.strip()}</p>'
+        for p in content['know'].split('\n\n') if p.strip()
+    ]
+    know_html = '\n'.join(know_paras)
+
+    mistakes_html = '\n'.join(
+        f'    <p>&#x2022; {m}</p>' for m in content['mistakes']
+    )
+
+    # ── FAQ section ────────────────────────────────────────────────────────
+    faq_cards = ''
+    for q, a in content['faqs']:
+        a_paras = '\n'.join(
+            f'        <p>{p.strip()}</p>' for p in a.split('\n\n') if p.strip()
+        )
+        faq_cards += f"""
+  <div class="card">
+    <h2 style="font-size:1rem;margin-bottom:8px;">{q}</h2>
+{a_paras}
+  </div>"""
+
+    # ── Schema: FAQ + Breadcrumb ───────────────────────────────────────────
+    faq_schema = make_faq_schema_json(content['faqs'], canonical)
+
+    # Build breadcrumb: Home → (category hub) → this page
+    crumbs = [("SideGuy Solutions", DOMAIN)]
+    if categories:
+        primary_cat = categories[0]
+        hub_path = CATEGORY_HUB_PATH.get(primary_cat, '')
+        hub_label = CATEGORY_HUB_LABELS.get(primary_cat, '')
+        if hub_path:
+            crumbs.append((hub_label, f"{DOMAIN}/{hub_path}"))
+    crumbs.append((title_case, canonical))
+    breadcrumb_schema = make_breadcrumb_schema_json(crumbs)
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -132,6 +176,8 @@ def build_page(topic, all_topics):
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="{title_case} San Diego · SideGuy"/>
 <meta name="twitter:description" content="{title_case} in San Diego — plain-language guide and real help from SideGuy."/>
+{faq_schema}
+{breadcrumb_schema}
 <style>
   :root{{
     --bg0:#eefcff;
@@ -216,33 +262,25 @@ def build_page(topic, all_topics):
 
   <div class="card">
     <h2>What this is</h2>
+    <p>{content['intro']}</p>
     <p>
-      {title_case} is something a lot of San Diego businesses and operators are figuring out right now.
-      The terminology is confusing, the vendors are pushy, and it's hard to know who to trust.
-    </p>
-    <p>
-      SideGuy is a human-first clarity layer. We explain options honestly before any transaction happens.
+      SideGuy is a human-first clarity layer. We explain options honestly before
+      any transaction happens.
     </p>
   </div>
 
   <div class="card">
     <h2>What you should know first</h2>
-    <p>
-      Before hiring anyone or buying anything related to {topic}, make sure you understand
-      what problem you're actually solving. Most pitches oversell complexity.
-    </p>
-    <p>
-      Ask: What does success look like in 90 days? What does it cost if nothing works?
-      Can I reverse this decision?
-    </p>
+{know_html}
   </div>
 
   <div class="card">
     <h2>Common mistakes</h2>
-    <p>Paying for a solution before defining the problem clearly.</p>
-    <p>Choosing a vendor because they ranked first on Google.</p>
-    <p>Signing long contracts for services you haven't tested yet.</p>
+{mistakes_html}
   </div>
+
+  <h2 style="font-size:1.15rem;font-weight:800;margin:40px 0 16px;">People also ask</h2>
+{faq_cards}
 {related_html}
   <div class="cta-block">
     <p>Want a real human to look at your situation — no pitch, no pressure?</p>
