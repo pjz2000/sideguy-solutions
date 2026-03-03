@@ -3,28 +3,117 @@
 SideGuy Page Builder
 Generates SEO pages from seo-reserve/manifest.json.
 Pages follow the site's inline-CSS, self-contained style.
+Features:
+  - Slug dedup: strips trailing -san-diego before appending it
+  - Internal linking: each page links to 3-5 related pages
+  - Up-links: each page links to its hub(s) and pillar(s)
+  - Sitemap regeneration after every build run
 """
 
-import json, os, re, datetime
+import json, os, re, datetime, subprocess, sys
 
-MANIFEST = "seo-reserve/manifest.json"
-OUTPUT_DIR = "."   # pages live at root, matching site convention
+sys.path.insert(0, os.path.dirname(__file__))
+from sideguy_classify import (
+    slugify, topic_to_filename, classify_topic,
+    CATEGORY_HUB_PATH, CATEGORY_HUB_LABELS,
+    PILLAR_MAP, PILLAR_LABELS,
+    industry_hub_path, industry_hub_label,
+)
 
-def slugify(text):
-    return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
+MANIFEST   = "seo-reserve/manifest.json"
+OUTPUT_DIR = "."
 
-def build_page(topic):
+
+def score_relatedness(a, b):
+    """Count shared meaningful words between two topic strings."""
+    stopwords = {'for', 'to', 'a', 'an', 'the', 'of', 'and', 'in', 'with',
+                 'how', 'best', 'what', 'is', 'are', 'do', 'san', 'diego'}
+    words_a = set(re.findall(r'[a-z]+', a.lower())) - stopwords
+    words_b = set(re.findall(r'[a-z]+', b.lower())) - stopwords
+    return len(words_a & words_b)
+
+
+def pick_related(topic, all_topics, n=5):
+    """Return up to n most-related topics (excluding self)."""
+    scored = [
+        (score_relatedness(topic, t), t)
+        for t in all_topics if t != topic
+    ]
+    scored.sort(key=lambda x: -x[0])
+    top = [t for score, t in scored[:n] if score > 0]
+    if len(top) < 3:
+        top = [t for _, t in scored[:n]]
+    return top[:n]
+
+
+def build_related_links_html(related_topics):
+    if not related_topics:
+        return ""
+    items = "".join(
+        f'    <li><a href="{topic_to_filename(t)}">{t.title()}</a></li>\n'
+        for t in related_topics
+    )
+    return f"""
+  <div class="card">
+    <h2>Related guides</h2>
+    <ul style="margin:0;padding-left:1.4rem;color:var(--muted);line-height:1.9;">
+{items}    </ul>
+  </div>
+"""
+
+
+def build_uplinks_html(topic):
+    """
+    Returns an uplinks breadcrumb-style nav bar linking to:
+    hub.html, category hub(s), industry hub (if any), pillar(s).
+    """
+    info  = classify_topic(topic)
+    links = [('<a href="/hub.html">Operator Hub</a>', None)]
+
+    for cat in info['categories']:
+        hub_path  = CATEGORY_HUB_PATH.get(cat, '')
+        hub_label = CATEGORY_HUB_LABELS.get(cat, '')
+        if hub_path:
+            links.append((f'<a href="/{hub_path}">{hub_label}</a>', None))
+
+    ind = info['industry']
+    if ind:
+        links.append((f'<a href="/{industry_hub_path(ind)}">{industry_hub_label(ind)}</a>', None))
+
+    for cat in info['categories']:
+        pillar = PILLAR_MAP.get(cat, '')
+        plabel = PILLAR_LABELS.get(cat, '')
+        if pillar:
+            links.append((f'<a href="/{pillar}">{plabel}</a>', None))
+
+    if len(links) <= 1:
+        return ""
+
+    sep = '<span style="opacity:.4;margin:0 4px;">/</span>'
+    chain = sep.join(a for a, _ in links)
+    return f"""
+<nav style="max-width:820px;margin:12px auto 0;padding:0 24px;
+     font-size:.82rem;color:#3f6173;display:flex;flex-wrap:wrap;
+     align-items:center;gap:4px;">
+  {chain}
+</nav>"""
+
+
+def build_page(topic, all_topics):
     title_case = topic.title()
     slug = slugify(topic)
-    filename = f"{slug}-san-diego.html"
+    filename = topic_to_filename(topic)
     path = os.path.join(OUTPUT_DIR, filename)
 
     if os.path.exists(path):
         print(f"Skip (exists): {filename}")
-        return
+        return None
 
-    today = datetime.date.today().isoformat()
+    today    = datetime.date.today().isoformat()
     canonical = f"https://sideguysolutions.com/{filename}"
+    related   = pick_related(topic, all_topics, n=5)
+    related_html = build_related_links_html(related)
+    uplinks_html = build_uplinks_html(topic)
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -84,6 +173,7 @@ def build_page(topic):
   .card h2{{font-size:1.2rem;font-weight:800;margin:0 0 12px;}}
   .card p{{margin:0 0 10px;line-height:1.7;color:var(--muted);}}
   .card p:last-child{{margin-bottom:0;}}
+  .card ul a{{color:var(--ink);font-weight:600;}}
   .cta-block{{
     background:linear-gradient(135deg,var(--mint),var(--mint2));
     border-radius:var(--r);padding:36px 32px;text-align:center;margin-top:40px;
@@ -108,6 +198,7 @@ def build_page(topic):
   <a class="logo" href="/">SideGuy</a>
   <a class="cta-pill" href="sms:+17604541860">Text PJ</a>
 </header>
+{uplinks_html}
 <main>
   <h1>{title_case} — Plain-Language Guide (San Diego)</h1>
   <p class="subtitle">
@@ -144,7 +235,7 @@ def build_page(topic):
     <p>Choosing a vendor because they ranked first on Google.</p>
     <p>Signing long contracts for services you haven't tested yet.</p>
   </div>
-
+{related_html}
   <div class="cta-block">
     <p>Want a real human to look at your situation — no pitch, no pressure?</p>
     <a href="sms:+17604541860">Text PJ · 760-454-1860</a>
@@ -164,16 +255,29 @@ def build_page(topic):
     with open(path, "w") as f:
         f.write(html)
     print(f"Created: {filename}")
+    return filename
 
 
 def main():
     with open(MANIFEST) as f:
         data = json.load(f)
 
-    for topic in data["topics"]:
-        build_page(topic)
+    all_topics = data["topics"]
+    created = []
+    for topic in all_topics:
+        result = build_page(topic, all_topics)
+        if result:
+            created.append(result)
 
-    print(f"Done. {len(data['topics'])} topics processed.")
+    print(f"Done. {len(all_topics)} topics processed, {len(created)} new pages created.")
+
+    # Always regenerate sitemap after a build run
+    scripts_dir = os.path.dirname(__file__)
+    sitemap_script = os.path.join(scripts_dir, "generate-sitemap.py")
+    if os.path.exists(sitemap_script):
+        subprocess.run(["python3", sitemap_script], check=True)
+
+    return created
 
 
 if __name__ == "__main__":
