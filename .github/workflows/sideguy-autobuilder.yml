@@ -21,17 +21,39 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Run Page Builder
+      - name: Install Dependencies
+        run: pip install feedparser -q
+
+      - name: Setup Directories
+        run: mkdir -p hubs pillars sitemaps signals
+
+      - name: Harvest Signals
+        run: python3 scripts/signal-harvester.py
+
+      - name: Convert Signals to Topics
+        run: python3 scripts/signal-connector.py
+
+      - name: Generate Topics + Build Pages
+        run: python3 scripts/generate-topics.py
+
+      - name: Build Authority Pages
+        run: python3 scripts/build-authority.py
+
+      - name: Refresh Stale Pages
+        run: python3 scripts/page-refresh.py
+
+      - name: Generate Sitemaps
+        run: python3 scripts/generate-sitemap.py
+
+      - name: Build Report
+        run: python3 scripts/build-report.py
+
+      - name: Commit & Push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "sideguy-autobuilder"
           git config --global user.email "builder@sideguy.ai"
-          mkdir -p hubs pillars sitemaps signals
-          python3 scripts/signal-harvester.py
-          python3 scripts/build-pages.py
-          python3 scripts/build-authority.py
-          python3 scripts/generate-sitemap.py
           if [[ -n $(git status --porcelain) ]]; then
             git add .
             git commit -m "🤖 Auto-built SideGuy pages [$(date -u +%Y-%m-%dT%H:%M:%SZ)]"

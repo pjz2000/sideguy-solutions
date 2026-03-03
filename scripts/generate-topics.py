@@ -396,6 +396,15 @@ def generate_all_topics():
            + FUTURE_TECH + OPERATOR_PAIN_POINTS:
         topics.add(t)
 
+    # Signal topics from harvester (refreshed each run)
+    signal_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "signals", "signal-topics.txt")
+    if os.path.exists(signal_file):
+        with open(signal_file) as f:
+            for line in f:
+                t = line.strip()
+                if t:
+                    topics.add(t)
+
     return topics
 
 
