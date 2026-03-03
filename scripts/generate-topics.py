@@ -405,6 +405,15 @@ def generate_all_topics():
                 if t:
                     topics.add(t)
 
+    # Expanded topics from topic-matrix (signal × industry × city cross-product)
+    expanded_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "signals", "expanded-topics.txt")
+    if os.path.exists(expanded_file):
+        with open(expanded_file) as f:
+            for line in f:
+                t = line.strip()
+                if t:
+                    topics.add(t)
+
     return topics
 
 
