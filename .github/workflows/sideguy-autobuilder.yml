@@ -1,0 +1,37 @@
+name: SideGuy Auto Builder
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:          # manual trigger via GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run Page Builder
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "sideguy-autobuilder"
+          git config --global user.email "builder@sideguy.ai"
+          python3 scripts/build-pages.py
+          if [[ -n $(git status --porcelain) ]]; then
+            git add .
+            git commit -m "🤖 Auto-built SideGuy pages [$(date -u +%Y-%m-%dT%H:%M:%SZ)]"
+            git push
+          else
+            echo "No new pages to commit."
+          fi
