@@ -13,7 +13,8 @@ import csv, os, datetime
 from pathlib import Path
 
 ROOT       = Path(__file__).parent.parent
-INPUT_CSV  = ROOT / "data" / "problem-ideas-new.csv"
+_input_env = os.getenv("INPUT", "")
+INPUT_CSV  = Path(_input_env) if _input_env else ROOT / "data" / "problem-ideas-new.csv"
 OUT_DIR    = ROOT / "problems"
 OUT_DIR.mkdir(exist_ok=True)
 
