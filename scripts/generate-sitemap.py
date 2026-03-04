@@ -1,111 +1,93 @@
 #!/usr/bin/env python3
 """
-SideGuy Sitemap Generator
-Produces:
-  sitemap.xml                  — all root .html pages (main sitemap)
-  sitemaps/sitemap-pages.xml   — same as above (named copy in /sitemaps/)
-  sitemaps/sitemap-hubs.xml    — /hubs/*.html pages
-  sitemaps/sitemap-pillars.xml — /pillars/*.html pages
-  sitemap_index.xml            — points to the four sitemaps above
+SIDEGUY Sitemap Generator  (v2 — full-scan, auto-chunked)
+Scans ALL *.html in root + subdirs (problems, concepts, clusters, etc.),
+splits into chunks of max CHUNK_SIZE URLs, writes sitemaps/auto-NNN.xml,
+and regenerates sitemap-index.xml referencing both sitemap.xml + all auto files.
+
+Usage:
+  python3 scripts/generate-sitemap.py
+
+Env:
+  CHUNK_SIZE=1000   URLs per chunk (default 1000)
 """
 
-import os, datetime
+import os, sys, datetime
+from pathlib import Path
 
-DOMAIN  = "https://sideguysolutions.com"
-ROOT    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TODAY   = datetime.date.today().isoformat()
+DOMAIN    = "https://sideguysolutions.com"
+ROOT      = Path(__file__).parent.parent
+TODAY     = datetime.date.today().isoformat()
+CHUNK     = int(os.getenv("CHUNK_SIZE", "1000"))
+SITEMAPS  = ROOT / "sitemaps"
 
-SKIP_PREFIXES = ("aaa-", "_")
-SKIP_FILES    = {"404.html", "hub-template.html"}
-
-os.makedirs(os.path.join(ROOT, "sitemaps"), exist_ok=True)
-
-# ── Helpers ───────────────────────────────────────────────────────────────────
-
-def write_urlset(filepath, urls):
-    with open(filepath, "w") as f:
-        f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        f.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-        for url in urls:
-            f.write(f"  <url>\n")
-            f.write(f"    <loc>{url}</loc>\n")
-            f.write(f"    <lastmod>{TODAY}</lastmod>\n")
-            f.write(f"  </url>\n")
-        f.write("</urlset>\n")
-    print(f"  {os.path.relpath(filepath, ROOT)} — {len(urls)} URLs")
-
-# ── Collect pages ─────────────────────────────────────────────────────────────
-
-root_pages = sorted(
-    f"{DOMAIN}/{f}"
-    for f in os.listdir(ROOT)
-    if f.endswith(".html")
-    and not any(f.startswith(p) for p in SKIP_PREFIXES)
-    and f not in SKIP_FILES
-)
-
-hubs_dir = os.path.join(ROOT, "hubs")
-hub_pages = []
-if os.path.isdir(hubs_dir):
-    hub_pages = sorted(
-        f"{DOMAIN}/hubs/{f}"
-        for f in os.listdir(hubs_dir)
-        if f.endswith(".html")
-    )
-
-pillars_dir = os.path.join(ROOT, "pillars")
-pillar_pages = []
-if os.path.isdir(pillars_dir):
-    pillar_pages = sorted(
-        f"{DOMAIN}/pillars/{f}"
-        for f in os.listdir(pillars_dir)
-        if f.endswith(".html")
-    )
-
-kg_hubs_dir = os.path.join(ROOT, "kg", "hubs")
-kg_pages = []
-if os.path.isdir(kg_hubs_dir):
-    kg_pages = sorted(
-        f"{DOMAIN}/kg/hubs/{f}"
-        for f in os.listdir(kg_hubs_dir)
-        if f.endswith(".html")
-    )
-
-# ── Write individual sitemaps ─────────────────────────────────────────────────
-
-print("Writing sitemaps...")
-write_urlset(os.path.join(ROOT, "sitemap.xml"), root_pages)
-write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-pages.xml"),   root_pages)
-write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-hubs.xml"),    hub_pages)
-write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-pillars.xml"), pillar_pages)
-os.makedirs(os.path.join(ROOT, "sitemaps"), exist_ok=True)
-if kg_pages:
-    write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-kg.xml"), kg_pages)
-
-# ── Write sitemap_index.xml ───────────────────────────────────────────────────
-
-index_path = os.path.join(ROOT, "sitemap_index.xml")
-sitemaps = [
-    f"{DOMAIN}/sitemaps/sitemap-pages.xml",
-    f"{DOMAIN}/sitemaps/sitemap-hubs.xml",
-    f"{DOMAIN}/sitemaps/sitemap-pillars.xml",
+INCLUDE_SUBDIRS = [
+    "problems", "concepts", "clusters", "generated",
+    "intelligence", "decisions", "pillars", "knowledge",
+    "longtail",
 ]
-if kg_pages:
-    sitemaps.append(f"{DOMAIN}/sitemaps/sitemap-kg.xml")
 
-with open(index_path, "w") as f:
-    f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-    f.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-    for sm in sitemaps:
-        f.write(f"  <sitemap>\n")
-        f.write(f"    <loc>{sm}</loc>\n")
-        f.write(f"    <lastmod>{TODAY}</lastmod>\n")
-        f.write(f"  </sitemap>\n")
-    f.write("</sitemapindex>\n")
+# ── Collect ───────────────────────────────────────────────────────────────────
 
-print(f"  sitemap_index.xml — {len(sitemaps)} sitemaps")
-print(f"\n✅ Sitemap generation complete.")
-print(f"   Root pages:    {len(root_pages)}")
-print(f"   Hub pages:     {len(hub_pages)}")
-print(f"   Pillar pages:  {len(pillar_pages)}")
-print(f"   Total indexed: {len(root_pages) + len(hub_pages) + len(pillar_pages)}")
+seen = set()
+urls = []
+
+def add(rel: str):
+    url = f"{DOMAIN}/{rel}"
+    if url not in seen:
+        seen.add(url)
+        urls.append(url)
+
+# root-level HTML
+for f in sorted(ROOT.glob("*.html")):
+    add(f.name)
+
+# subdirectories
+for sub in INCLUDE_SUBDIRS:
+    subdir = ROOT / sub
+    if subdir.is_dir():
+        for p in sorted(subdir.rglob("*.html")):
+            add(p.relative_to(ROOT).as_posix())
+
+print(f"  Collected {len(urls):,} HTML pages\n")
+
+# ── Write chunks ──────────────────────────────────────────────────────────────
+
+SITEMAPS.mkdir(exist_ok=True)
+
+# remove old auto chunks
+removed = 0
+for f in SITEMAPS.glob("auto-*.xml"):
+    f.unlink(); removed += 1
+if removed:
+    print(f"  Removed {removed} old auto-*.xml files")
+
+chunks    = [urls[i:i+CHUNK] for i in range(0, len(urls), CHUNK)]
+auto_files = []
+for idx, chunk in enumerate(chunks, 1):
+    out = SITEMAPS / f"auto-{idx:03d}.xml"
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for url in chunk:
+        lines.append(f"  <url>\n    <loc>{url}</loc>\n    <lastmod>{TODAY}</lastmod>\n  </url>")
+    lines.append("</urlset>")
+    out.write_text("\n".join(lines) + "\n")
+    auto_files.append(out)
+    print(f"  {out.name}  ({len(chunk)} URLs)")
+
+print(f"\n  {len(auto_files)} chunk files written")
+
+# ── Regenerate sitemap-index.xml ──────────────────────────────────────────────
+
+index_path = ROOT / "sitemap-index.xml"
+lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+         '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+# primary sitemap always first
+lines.append(f"  <sitemap>\n    <loc>{DOMAIN}/sitemap.xml</loc>\n    <lastmod>{TODAY}</lastmod>\n  </sitemap>")
+for f in sorted(auto_files):
+    rel = f.relative_to(ROOT).as_posix()
+    lines.append(f"  <sitemap>\n    <loc>{DOMAIN}/{rel}</loc>\n    <lastmod>{TODAY}</lastmod>\n  </sitemap>")
+lines.append("</sitemapindex>")
+index_path.write_text("\n".join(lines) + "\n")
+print(f"\n  sitemap-index.xml → {len(auto_files)+1} sitemaps listed")
+print(f"\n✅ Sitemap generation complete — {len(urls):,} total URLs")
