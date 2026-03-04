@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SideGuy Betting Lab — Kalshi + DFS Hedge System</title>
+  <meta name="description" content="SideGuy Betting Lab — structured prediction market trading using Kalshi event contracts and DFS insurance hedges. Analysis, triggers, and bet log."/>
+  <link rel="canonical" href="https://sideguysolutions.com/betting-lab/betting-lab.html"/>
+  <meta name="robots" content="noindex,follow"/>
+  <style>
+  :root{--bg0:#eefcff;--bg1:#d7f5ff;--ink:#073044;--muted:#3f6173;--mint:#21d3a1;--blue2:#1f7cff;--r:18px;--pill:999px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;background:radial-gradient(ellipse at 60% 0%,#c5f4ff 0%,#eefcff 55%,#fff 100%);color:var(--ink);min-height:100vh}
+  a{color:var(--blue2);text-decoration:none}a:hover{text-decoration:underline}
+  nav.bc{padding:11px 24px;font-size:.8rem;color:var(--muted);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(255,255,255,.6);backdrop-filter:blur(6px)}
+  nav.bc a{color:var(--muted)}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 24px 80px}
+  h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .badge{display:inline-block;background:var(--mint);color:#073044;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:var(--pill);margin-bottom:12px}
+  .card{background:rgba(255,255,255,.82);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);padding:22px 26px;margin-bottom:18px}
+  .card h2{font-size:1.1rem;font-weight:800;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--bg1)}
+  ul{list-style:disc;padding-left:20px}
+  li{line-height:1.8;font-size:.95rem}
+  .trigger-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:10px}
+  .trigger-chip{background:var(--bg1);border-radius:12px;padding:10px 14px;font-size:.87rem;font-weight:600;text-align:center}
+  .status-bar{display:flex;gap:14px;flex-wrap:wrap;margin:22px 0}
+  .stat{background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:14px 18px;text-align:center;flex:1;min-width:100px}
+  .stat .num{font-size:1.6rem;font-weight:800;color:var(--ink)}
+  .stat .lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
+  pre{background:var(--bg1);border-radius:10px;padding:12px 16px;font-size:.85rem;font-family:monospace;overflow-x:auto}
+  footer{text-align:center;padding:18px;font-size:.76rem;color:var(--muted);border-top:1px solid rgba(0,0,0,.06);margin-top:36px}
+  </style>
+</head>
+<body>
+<nav class="bc">
+  <a href="/">SideGuy</a> ›
+  <a href="/concepts/prediction-markets.html">Prediction Markets</a> ›
+  Betting Lab
+</nav>
+<main class="wrap">
+  <div class="badge">Private Research · Not Investment Advice</div>
+  <h1>📈 SideGuy Betting Lab</h1>
+  <p class="sub">Structured prediction market trading using Kalshi event contracts + DFS insurance hedges. Log, analyze, and refine a data-driven edge over time.</p>
+
+  <div class="status-bar">
+    <div class="stat"><div class="num" id="total">—</div><div class="lbl">Bets Logged</div></div>
+    <div class="stat"><div class="num" id="winrate">—</div><div class="lbl">Win Rate</div></div>
+    <div class="stat"><div class="num" id="pnl">—</div><div class="lbl">P&amp;L (units)</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Core Strategy</h2>
+    <ul>
+      <li><strong>Primary:</strong> Kalshi event contract — weighted position on outcome with positive expected value</li>
+      <li><strong>Insurance:</strong> DFS flex entry as cheap hedge against correlated outcome</li>
+      <li><strong>Trigger:</strong> In-game or live signal (pace, foul trouble, score gap, rotation) confirms or kills the hedge</li>
+      <li><strong>Exit rule:</strong> Defined before entry; no chasing</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Triggers Tested</h2>
+    <div class="trigger-grid">
+      <div class="trigger-chip">🏃 Pace spike</div>
+      <div class="trigger-chip">🚫 Foul trouble</div>
+      <div class="trigger-chip">🔄 Rotation surprise</div>
+      <div class="trigger-chip">📊 Score gap</div>
+      <div class="trigger-chip">🌡️ Line movement</div>
+      <div class="trigger-chip">📰 News drop</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Log File</h2>
+    <p style="margin-bottom:10px;font-size:.9rem;color:var(--muted)">All bets tracked in CSV. Run the analysis script for live summary:</p>
+    <pre>betting-lab/bet-log.csv
+python3 betting-lab/hedge-summary.py</pre>
+    <p style="margin-top:12px;font-size:.83rem;color:var(--muted)">Columns: date · market · position · platform · size · price · trigger · hedge · hedge_size · result · notes</p>
+  </div>
+
+  <div class="card">
+    <h2>Related Concepts</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px">
+      <a href="/concepts/prediction-markets.html" style="background:var(--bg1);border-radius:var(--pill);padding:7px 14px;font-size:.85rem;font-weight:500;color:var(--ink)">Prediction Markets</a>
+      <a href="/concepts/kalshi-trading.html" style="background:var(--bg1);border-radius:var(--pill);padding:7px 14px;font-size:.85rem;font-weight:500;color:var(--ink)">Kalshi Trading</a>
+      <a href="/concepts/polymarket-trading.html" style="background:var(--bg1);border-radius:var(--pill);padding:7px 14px;font-size:.85rem;font-weight:500;color:var(--ink)">Polymarket Trading</a>
+      <a href="/knowledge-hub.html" style="background:var(--bg1);border-radius:var(--pill);padding:7px 14px;font-size:.85rem;font-weight:500;color:var(--ink)">Knowledge Hub</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/">SideGuy Solutions</a> ·
+    <a href="/concepts/prediction-markets.html">Prediction Markets</a> ·
+    <a href="/concepts/kalshi-trading.html">Kalshi</a>
+    <br><small>Private research log · Not financial advice · Not publicly indexed</small>
+  </footer>
+</main>
+</body>
+</html>
