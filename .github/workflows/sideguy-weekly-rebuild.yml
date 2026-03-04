@@ -42,6 +42,14 @@ jobs:
       - name: Add FAQ + Breadcrumb Schema
         run: python3 scripts/add-faq-schema.py
 
+      - name: Build Knowledge Graph (weekly)
+        env:
+          KG_LIMIT: "6000"
+          KG_NEIGHBORS: "7"
+          KG_CANDIDATES: "120"
+          KG_TOKENS: "60"
+        run: python3 scripts/build-knowledge-graph.py
+
       - name: Regenerate Sitemaps
         run: python3 scripts/generate-sitemap.py
 

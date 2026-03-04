@@ -62,6 +62,15 @@ if os.path.isdir(pillars_dir):
         if f.endswith(".html")
     )
 
+kg_hubs_dir = os.path.join(ROOT, "kg", "hubs")
+kg_pages = []
+if os.path.isdir(kg_hubs_dir):
+    kg_pages = sorted(
+        f"{DOMAIN}/kg/hubs/{f}"
+        for f in os.listdir(kg_hubs_dir)
+        if f.endswith(".html")
+    )
+
 # ── Write individual sitemaps ─────────────────────────────────────────────────
 
 print("Writing sitemaps...")
@@ -69,6 +78,9 @@ write_urlset(os.path.join(ROOT, "sitemap.xml"), root_pages)
 write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-pages.xml"),   root_pages)
 write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-hubs.xml"),    hub_pages)
 write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-pillars.xml"), pillar_pages)
+os.makedirs(os.path.join(ROOT, "sitemaps"), exist_ok=True)
+if kg_pages:
+    write_urlset(os.path.join(ROOT, "sitemaps", "sitemap-kg.xml"), kg_pages)
 
 # ── Write sitemap_index.xml ───────────────────────────────────────────────────
 
@@ -78,6 +90,8 @@ sitemaps = [
     f"{DOMAIN}/sitemaps/sitemap-hubs.xml",
     f"{DOMAIN}/sitemaps/sitemap-pillars.xml",
 ]
+if kg_pages:
+    sitemaps.append(f"{DOMAIN}/sitemaps/sitemap-kg.xml")
 
 with open(index_path, "w") as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
