@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SideGuy Knowledge Graph — Site Intelligence Map</title>
+  <meta name="description" content="SideGuy Knowledge Graph: a site-wide intelligence map of pages and internal links, built automatically."/>
+  <link rel="canonical" href="https://sideguysolutions.com/knowledge/knowledge-graph.html"/>
+  <style>
+    :root{--bg:#07121a;--panel:#0b1b25;--card:#0e2230;--line:#163548;
+      --text:#eaf6ff;--muted:#9bc2d6;--mint:#6ef3c5;--aqua:#4ad7ff;}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 800px at 20% -10%,#123a4a 0%,var(--bg) 55%);
+      color:var(--text);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,Segoe UI,Inter,Roboto,Arial;}
+    a{color:var(--aqua);text-decoration:none}a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 120px}
+    .hero{padding:18px 18px 10px;border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--panel),transparent);border-radius:18px}
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    h1{margin:10px 0 8px;font-size:30px}h3{margin:0 0 10px}
+    .sub{color:var(--muted);line-height:1.45;margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:14px}
+    .card{grid-column:span 12;border:1px solid var(--line);
+      background:rgba(14,34,48,.75);border-radius:16px;padding:16px}
+    @media(min-width:900px){.half{grid-column:span 6}}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    td,th{border-bottom:1px solid rgba(255,255,255,.08);padding:10px 8px;text-align:left}
+    th{color:var(--muted);font-weight:600}
+    .muted{color:var(--muted)}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{border:1px solid rgba(255,255,255,.14);padding:7px 10px;border-radius:999px;
+      color:var(--text);background:rgba(0,0,0,.18);font-size:13px}
+    .ol{margin:8px 0 0 18px}
+    .ol li{margin:5px 0;font-size:14px}
+    .cta{position:fixed;right:16px;bottom:16px;z-index:9999}
+    .cta a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:999px;
+      background:linear-gradient(135deg,rgba(110,243,197,.22),rgba(74,215,255,.18));
+      border:1px solid rgba(110,243,197,.45);box-shadow:0 18px 40px rgba(0,0,0,.35);
+      color:var(--text);font-weight:700;text-decoration:none;}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--mint);
+      box-shadow:0 0 0 0 rgba(110,243,197,.55);animation:pulse 1.6s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(110,243,197,.55)}
+      70%{box-shadow:0 0 0 18px rgba(110,243,197,0)}
+      100%{box-shadow:0 0 0 0 rgba(110,243,197,0)}}
+    code{background:rgba(0,0,0,.25);padding:2px 6px;border-radius:8px;border:1px solid rgba(255,255,255,.08)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="kicker">SideGuy Intelligence Layer</div>
+      <h1>Knowledge Graph</h1>
+      <p class="sub">Wikipedia-style map of SideGuy: pages, buckets, and how everything links together. Built automatically on <b>2026-03-04T23:26:42Z</b>.</p>
+      <div class="pillrow">
+        <span class="pill">Nodes: <b>18199</b></span>
+        <span class="pill">Edges: <b>309337</b></span>
+        <span class="pill">Export: <a href="/reports/knowledge-graph.json">knowledge-graph.json</a></span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card half">
+        <h3>Bucket counts</h3>
+        <p class="muted">Pages in each directory bucket.</p>
+        <table><thead><tr><th>Bucket</th><th>Pages</th></tr></thead>
+        <tbody><tr><td>authority</td><td>23</td></tr>
+<tr><td>auto</td><td>20</td></tr>
+<tr><td>clusters</td><td>15</td></tr>
+<tr><td>concepts</td><td>35</td></tr>
+<tr><td>decisions</td><td>22</td></tr>
+<tr><td>fresh</td><td>4</td></tr>
+<tr><td>generated</td><td>52</td></tr>
+<tr><td>gravity</td><td>1</td></tr>
+<tr><td>katie</td><td>23</td></tr>
+<tr><td>knowledge</td><td>2</td></tr>
+<tr><td>longtail</td><td>12</td></tr>
+<tr><td>other</td><td>15673</td></tr>
+<tr><td>pillars</td><td>41</td></tr>
+<tr><td>prediction-markets</td><td>5</td></tr>
+<tr><td>problems</td><td>2270</td></tr>
+<tr><td>root</td><td>1</td></tr></tbody></table>
+      </div>
+
+      <div class="card half">
+        <h3>How to use this</h3>
+        <ul>
+          <li>Highest inbound pages are your internal "authorities".</li>
+          <li>If a bucket looks thin, build more pages + wire them.</li>
+          <li>After major builds: re-run engine + submit priority URLs in GSC.</li>
+        </ul>
+        <p class="muted">Run anytime:</p>
+        <p><code>python3 scripts/knowledge-graph-engine.py</code></p>
+        <p><a href="/">← SideGuy Home</a> &nbsp;·&nbsp; <a href="/knowledge/sideguy-knowledge-map.html">Knowledge Map</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Top pages per bucket (by inbound links)</h3>
+        <p class="muted">Sorted by inbound links (then outbound). These are your highest-gravity pages.</p>
+      </div>
+
+      
+      <div class="card">
+        <h3>root — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/index.html">SideGuy Solutions &#8212; Clarity Before Cost &middot; San Diego Help Guide</a> <span class="muted">(3895 in / 101 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>pillars — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/pillars/ai-automation-master-guide.html">AI Automation Master Guide · SideGuy San Diego</a> <span class="muted">(4118 in / 21 out)</span></li><li><a href="/pillars/ai-automation.html">AI Automation — SideGuy Concept Guide</a> <span class="muted">(1171 in / 61 out)</span></li><li><a href="/pillars/san-diego-operator-guide.html">San Diego Operator Guide · SideGuy San Diego</a> <span class="muted">(1129 in / 20 out)</span></li><li><a href="/pillars/payments.html">Payments & Processing — SideGuy Pillar Guide</a> <span class="muted">(1099 in / 33 out)</span></li><li><a href="/pillars/appliance-repair-companies.html">Appliance Repair Companies — SideGuy Concept Guide</a> <span class="muted">(244 in / 32 out)</span></li><li><a href="/pillars/crypto-payments-master-guide.html">Crypto Payments Master Guide · SideGuy San Diego</a> <span class="muted">(229 in / 17 out)</span></li><li><a href="/pillars/payments-master-guide.html">Payments Master Guide · SideGuy San Diego</a> <span class="muted">(224 in / 17 out)</span></li><li><a href="/pillars/small-business-systems.html">Small Business Systems — SideGuy Concept Guide</a> <span class="muted">(174 in / 22 out)</span></li><li><a href="/pillars/advertising-agencies.html">Advertising Agencies — SideGuy Concept Guide</a> <span class="muted">(113 in / 17 out)</span></li><li><a href="/pillars/index.html">SideGuy Pillars — Concept Index</a> <span class="muted">(110 in / 37 out)</span></li><li><a href="/pillars/appraisers.html">Appraisers — SideGuy Concept Guide</a> <span class="muted">(108 in / 18 out)</span></li><li><a href="/pillars/auto-body-shops.html">Auto Body Shops — SideGuy Concept Guide</a> <span class="muted">(105 in / 32 out)</span></li><li><a href="/pillars/bakeries-in-chula-vista.html">Bakeries In Chula Vista — SideGuy Concept Guide</a> <span class="muted">(102 in / 18 out)</span></li><li><a href="/pillars/accountants.html">Accountants — SideGuy Concept Guide</a> <span class="muted">(100 in / 24 out)</span></li><li><a href="/pillars/acupuncturists.html">Acupuncturists — SideGuy Concept Guide</a> <span class="muted">(98 in / 22 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>clusters — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/clusters/ai-workflow-automation.html">AI Workflow Automation — Connecting Your Business Tools | SideGuy Solutions</a> <span class="muted">(1094 in / 23 out)</span></li><li><a href="/clusters/payment-fees.html">Payment Processing Fees Explained | SideGuy</a> <span class="muted">(1047 in / 17 out)</span></li><li><a href="/clusters/customer-ops.html">Customer Operations for Small Business | SideGuy</a> <span class="muted">(71 in / 24 out)</span></li><li><a href="/clusters/sops-and-process.html">SOPs & Process for Small Business | SideGuy</a> <span class="muted">(61 in / 19 out)</span></li><li><a href="/clusters/ai-scheduling.html">AI Scheduling Automation for San Diego Businesses — Industry Guide | SideGuy</a> <span class="muted">(60 in / 144 out)</span></li><li><a href="/clusters/ai-marketing-automation.html">AI Marketing Automation for Small Business | SideGuy Solutions</a> <span class="muted">(55 in / 26 out)</span></li><li><a href="/clusters/instant-settlement.html">Instant Settlement for Business | SideGuy</a> <span class="muted">(48 in / 22 out)</span></li><li><a href="/clusters/payment-security.html">Payment Security for Small Business | SideGuy</a> <span class="muted">(44 in / 26 out)</span></li><li><a href="/clusters/chargebacks.html">Chargebacks Explained for Operators | SideGuy</a> <span class="muted">(43 in / 21 out)</span></li><li><a href="/clusters/ai-productivity-tools.html">AI Productivity Tools for Small Business Operators | SideGuy Solutions</a> <span class="muted">(39 in / 28 out)</span></li><li><a href="/clusters/software-selection.html">How to Choose Business Software | SideGuy</a> <span class="muted">(34 in / 18 out)</span></li><li><a href="/clusters/time-saving-systems.html">Time-Saving Systems for Operators | SideGuy</a> <span class="muted">(30 in / 19 out)</span></li><li><a href="/clusters/ai-customer-service.html">AI Customer Service for San Diego Businesses — Industry Guide | SideGuy</a> <span class="muted">(29 in / 142 out)</span></li><li><a href="/clusters/ai-email-automation.html">AI Email Automation — Sequences, Triggers, and Deliverability | SideGuy Solutions</a> <span class="muted">(24 in / 23 out)</span></li><li><a href="/clusters/ai-sales-automation.html">AI Sales Automation — Lead Follow-Up Without the Friction | SideGuy Solutions</a> <span class="muted">(19 in / 22 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>concepts — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/concepts/index.html">Concept Guides — SideGuy Solutions | Business, Payments, AI</a> <span class="muted">(3901 in / 40 out)</span></li><li><a href="/concepts/ai-automation.html">AI Automation Explained — What It Is, How It Works | SideGuy</a> <span class="muted">(3893 in / 25 out)</span></li><li><a href="/concepts/crypto-payments.html">Crypto Payments Explained — Blockchain Settlement for Business | SideGuy</a> <span class="muted">(3865 in / 21 out)</span></li><li><a href="/concepts/prediction-markets.html">Prediction Markets Explained — Kalshi, Polymarket, How They Work | SideGuy</a> <span class="muted">(3840 in / 18 out)</span></li><li><a href="/concepts/payment-processing.html">Payment Processing Explained — Fees, Flow, and What You Actually Control | SideGuy</a> <span class="muted">(1056 in / 23 out)</span></li><li><a href="/concepts/chargebacks.html">Chargebacks Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(87 in / 20 out)</span></li><li><a href="/concepts/ai-agents.html">AI Agents Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(85 in / 20 out)</span></li><li><a href="/concepts/ai-assistants.html">AI Assistants Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(83 in / 25 out)</span></li><li><a href="/concepts/ai-call-agents.html">AI Call Agents Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(83 in / 20 out)</span></li><li><a href="/concepts/ai-workflows.html">AI Workflows Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(82 in / 24 out)</span></li><li><a href="/concepts/stablecoins.html">Stablecoins Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(77 in / 19 out)</span></li><li><a href="/concepts/ai-decision-engines.html">AI Decision Engines Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(75 in / 24 out)</span></li><li><a href="/concepts/ai-scheduling-agents.html">AI Scheduling Agents Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(74 in / 20 out)</span></li><li><a href="/concepts/stablecoin-payments.html">Stablecoin Payments Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(65 in / 19 out)</span></li><li><a href="/concepts/automation-workflows.html">Automation Workflows Explained — Operator Guide | SideGuy Solutions</a> <span class="muted">(61 in / 21 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>problems — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/problems/index.html">Operator Problem Guides | SideGuy Solutions</a> <span class="muted">(4749 in / 2022 out)</span></li><li><a href="/problems/zapier-automation-integration-not-working.html">Zapier Automation Integration Not Working | SideGuy Solutions</a> <span class="muted">(132 in / 16 out)</span></li><li><a href="/problems/zapier-automation-slow-performance-fix.html">Zapier Automation Slow Performance Fix | SideGuy Solutions</a> <span class="muted">(132 in / 16 out)</span></li><li><a href="/problems/zapier-automation-duplicate-records-fix.html">Zapier Automation Duplicate Records Fix | SideGuy Solutions</a> <span class="muted">(130 in / 16 out)</span></li><li><a href="/problems/zapier-automation-webhook-failing.html">Zapier Automation Webhook Failing | SideGuy Solutions</a> <span class="muted">(122 in / 16 out)</span></li><li><a href="/problems/zapier-automation-api-key-invalid.html">Zapier Automation Api Key Invalid | SideGuy Solutions</a> <span class="muted">(118 in / 16 out)</span></li><li><a href="/problems/xero-accounting-slow-performance-fix.html">Xero Accounting Slow Performance Fix | SideGuy Solutions</a> <span class="muted">(116 in / 16 out)</span></li><li><a href="/problems/zapier-automation-refund-not-processed.html">Zapier Automation Refund Not Processed | SideGuy Solutions</a> <span class="muted">(110 in / 16 out)</span></li><li><a href="/problems/zapier-automation-configuration-issue.html">Zapier Automation Configuration Issue | SideGuy Solutions</a> <span class="muted">(109 in / 16 out)</span></li><li><a href="/problems/xero-accounting-webhook-failing.html">Xero Accounting Webhook Failing | SideGuy Solutions</a> <span class="muted">(108 in / 16 out)</span></li><li><a href="/problems/best-way-to-set-up-zapier-automation.html">Best Way To Set Up Zapier Automation | SideGuy Solutions</a> <span class="muted">(107 in / 16 out)</span></li><li><a href="/problems/zapier-automation-data-not-syncing.html">Zapier Automation Data Not Syncing | SideGuy Solutions</a> <span class="muted">(107 in / 16 out)</span></li><li><a href="/problems/zapier-automation-account-suspended.html">Zapier Automation Account Suspended | SideGuy Solutions</a> <span class="muted">(106 in / 16 out)</span></li><li><a href="/problems/zapier-automation-billing-issue.html">Zapier Automation Billing Issue | SideGuy Solutions</a> <span class="muted">(106 in / 16 out)</span></li><li><a href="/problems/zapier-automation-timeout-error.html">Zapier Automation Timeout Error | SideGuy Solutions</a> <span class="muted">(105 in / 16 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>generated — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/generated/ai-automation-for-plumbers.html">AI Automation for Plumbers | SideGuy</a> <span class="muted">(111 in / 21 out)</span></li><li><a href="/generated/ai-automation-for-landscapers.html">AI Automation for Landscapers | SideGuy</a> <span class="muted">(109 in / 21 out)</span></li><li><a href="/generated/reduce-chargebacks.html">How to Reduce Chargebacks | SideGuy Solutions</a> <span class="muted">(85 in / 20 out)</span></li><li><a href="/generated/ai-tools-for-restaurants.html">AI Tools for Restaurants | SideGuy Solutions</a> <span class="muted">(81 in / 18 out)</span></li><li><a href="/generated/ai-tools-for-contractors.html">AI Tools for Contractors | SideGuy Solutions</a> <span class="muted">(75 in / 17 out)</span></li><li><a href="/generated/ai-automation-for-hvac.html">AI Automation for HVAC Companies | SideGuy</a> <span class="muted">(70 in / 20 out)</span></li><li><a href="/generated/how-to-choose-crm.html">How to Choose a CRM | SideGuy Solutions</a> <span class="muted">(64 in / 17 out)</span></li><li><a href="/generated/payment-processing-fees-explained.html">Payment Processing Fees Explained | SideGuy Solutions</a> <span class="muted">(63 in / 17 out)</span></li><li><a href="/generated/ai-automation-workflows.html">AI Automation Workflows That Work | SideGuy Solutions</a> <span class="muted">(61 in / 21 out)</span></li><li><a href="/generated/ai-automation-for-law-firms.html">AI Automation for Law Firms | SideGuy</a> <span class="muted">(56 in / 21 out)</span></li><li><a href="/generated/ai-automation-examples.html">AI Automation Examples for Small Business | SideGuy Solutions</a> <span class="muted">(52 in / 22 out)</span></li><li><a href="/generated/ai-customer-intake-automation.html">AI Customer Intake Automation | SideGuy Solutions</a> <span class="muted">(49 in / 20 out)</span></li><li><a href="/generated/reduce-payment-processing-fees-restaurants.html">Reduce Payment Processing Fees for Restaurants | SideGuy</a> <span class="muted">(48 in / 16 out)</span></li><li><a href="/generated/reduce-payment-processing-fees-retail.html">Reduce Payment Processing Fees for Retail | SideGuy</a> <span class="muted">(45 in / 15 out)</span></li><li><a href="/generated/how-to-build-sops-for-small-business.html">How to Build SOPs for Small Business | SideGuy</a> <span class="muted">(44 in / 17 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>longtail — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/longtail/ai-automation-for-contractors.html">AI Automation for Contractors | SideGuy</a> <span class="muted">(64 in / 18 out)</span></li><li><a href="/longtail/ai-automation-for-restaurants.html">AI Automation for Restaurants | SideGuy</a> <span class="muted">(58 in / 18 out)</span></li><li><a href="/longtail/how-to-automate-invoices.html">How to Automate Invoices for Small Business | SideGuy</a> <span class="muted">(46 in / 19 out)</span></li><li><a href="/longtail/how-to-build-sops.html">How to Build SOPs for Small Business | SideGuy</a> <span class="muted">(42 in / 16 out)</span></li><li><a href="/longtail/how-to-reduce-payment-processing-fees.html">How to Reduce Payment Processing Fees | SideGuy</a> <span class="muted">(34 in / 15 out)</span></li><li><a href="/longtail/why-payment-fees-are-so-high.html">Why Are Payment Processing Fees So High? | SideGuy</a> <span class="muted">(30 in / 14 out)</span></li><li><a href="/longtail/how-to-handle-chargebacks.html">How to Handle Chargebacks | SideGuy</a> <span class="muted">(28 in / 17 out)</span></li><li><a href="/longtail/what-is-instant-settlement.html">What Is Instant Settlement? | SideGuy</a> <span class="muted">(26 in / 16 out)</span></li><li><a href="/longtail/best-crm-for-small-business.html">Best CRM for Small Business (How to Choose) | SideGuy</a> <span class="muted">(24 in / 16 out)</span></li><li><a href="/longtail/ai-automation-for-medical-offices.html">AI Automation for Medical Offices | SideGuy</a> <span class="muted">(22 in / 18 out)</span></li><li><a href="/longtail/how-to-stop-missed-calls.html">How to Stop Missed Calls Losing Business | SideGuy</a> <span class="muted">(20 in / 20 out)</span></li><li><a href="/longtail/ai-automation-for-real-estate.html">AI Automation for Real Estate | SideGuy</a> <span class="muted">(20 in / 17 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>decisions — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/decisions/index.html">Decision Hub — Tool &amp; Platform Comparisons · SideGuy Solutions</a> <span class="muted">(588 in / 20 out)</span></li><li><a href="/decisions/stripe-vs-square.html">Stripe vs Square · SideGuy Solutions</a> <span class="muted">(512 in / 7 out)</span></li><li><a href="/decisions/kalshi-vs-polymarket.html">Kalshi vs Polymarket · SideGuy Solutions</a> <span class="muted">(510 in / 11 out)</span></li><li><a href="/decisions/zapier-vs-make-automation.html">Zapier vs Make Automation · SideGuy Solutions</a> <span class="muted">(508 in / 11 out)</span></li><li><a href="/decisions/claude-vs-openai-gpt.html">Claude AI vs OpenAI GPT · SideGuy Solutions</a> <span class="muted">(506 in / 4 out)</span></li><li><a href="/decisions/switch-payment-processor.html">Should I Switch Payment Processors? | SideGuy</a> <span class="muted">(63 in / 13 out)</span></li><li><a href="/decisions/stripe-vs-solana-payments.html">Stripe vs Solana Payments · SideGuy Solutions</a> <span class="muted">(24 in / 11 out)</span></li><li><a href="/decisions/square-vs-stripe-payments.html">Square vs Stripe · SideGuy Solutions</a> <span class="muted">(20 in / 11 out)</span></li><li><a href="/decisions/paypal-vs-stripe.html">PayPal vs Stripe · SideGuy Solutions</a> <span class="muted">(12 in / 7 out)</span></li><li><a href="/decisions/kalshi-vs-predictit.html">Kalshi vs PredictIt · SideGuy Solutions</a> <span class="muted">(10 in / 10 out)</span></li><li><a href="/decisions/polymarket-vs-predictit.html">Polymarket vs PredictIt · SideGuy Solutions</a> <span class="muted">(10 in / 7 out)</span></li><li><a href="/decisions/make-vs-n8n.html">Make vs n8n · SideGuy Solutions</a> <span class="muted">(8 in / 5 out)</span></li><li><a href="/decisions/webflow-vs-shopify.html">Webflow vs Shopify · SideGuy Solutions</a> <span class="muted">(8 in / 5 out)</span></li><li><a href="/decisions/zapier-vs-n8n.html">Zapier vs n8n · SideGuy Solutions</a> <span class="muted">(8 in / 5 out)</span></li><li><a href="/decisions/solana-vs-ethereum.html">Solana vs Ethereum · SideGuy Solutions</a> <span class="muted">(6 in / 6 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>authority — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/authority/authority-hub.html">Authority Hub · SideGuy Solutions</a> <span class="muted">(97 in / 9 out)</span></li><li><a href="/authority/ai-automation.html">AI Automation Authority · SideGuy Solutions</a> <span class="muted">(86 in / 33 out)</span></li><li><a href="/authority/payments.html">Payments Authority · SideGuy Solutions</a> <span class="muted">(64 in / 33 out)</span></li><li><a href="/authority/small-business-tech.html">Small Business Tech · SideGuy Solutions</a> <span class="muted">(54 in / 18 out)</span></li><li><a href="/authority/infrastructure.html">Infrastructure Authority · SideGuy Solutions</a> <span class="muted">(48 in / 32 out)</span></li><li><a href="/authority/operator-tools.html">Operator Tools Authority · SideGuy Solutions</a> <span class="muted">(46 in / 33 out)</span></li><li><a href="/authority/prediction-markets.html">Prediction Markets Authority · SideGuy Solutions</a> <span class="muted">(46 in / 33 out)</span></li><li><a href="/authority/index.html">Authority Engine · SideGuy Solutions</a> <span class="muted">(38 in / 12 out)</span></li><li><a href="/authority/google-ads.html">Google Ads Authority · SideGuy Solutions</a> <span class="muted">(36 in / 31 out)</span></li><li><a href="/authority/ai-automation/call-agents.html">AI Call Agents · SideGuy Solutions</a> <span class="muted">(28 in / 72 out)</span></li><li><a href="/authority/ai-automation/workflows.html">AI Workflows & Automations · SideGuy Solutions</a> <span class="muted">(26 in / 73 out)</span></li><li><a href="/authority/prediction-markets/hedging.html">Hedging Systems · SideGuy Solutions</a> <span class="muted">(24 in / 70 out)</span></li><li><a href="/authority/small-business-tech/analytics.html">Analytics & Tracking · SideGuy Solutions</a> <span class="muted">(20 in / 73 out)</span></li><li><a href="/authority/payments/settlement.html">Instant Settlement · SideGuy Solutions</a> <span class="muted">(20 in / 72 out)</span></li><li><a href="/authority/payments/fees.html">Payment Fees · SideGuy Solutions</a> <span class="muted">(20 in / 71 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>auto — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/auto/ai-automation-contractors.html">AI automation for contractors | SideGuy Solutions</a> <span class="muted">(45 in / 16 out)</span></li><li><a href="/auto/ai-automation-accountants.html">AI automation for accountants | SideGuy Solutions</a> <span class="muted">(44 in / 16 out)</span></li><li><a href="/auto/ai-automation-landscapers.html">AI automation for landscapers | SideGuy Solutions</a> <span class="muted">(44 in / 16 out)</span></li><li><a href="/auto/ai-automation-dentists.html">AI automation for dentists | SideGuy Solutions</a> <span class="muted">(43 in / 16 out)</span></li><li><a href="/auto/ai-automation-plumbers.html">AI automation for plumbers | SideGuy Solutions</a> <span class="muted">(43 in / 16 out)</span></li><li><a href="/auto/ai-automation-restaurants.html">AI automation for restaurants | SideGuy Solutions</a> <span class="muted">(43 in / 16 out)</span></li><li><a href="/auto/ai-automation-chiropractors.html">AI automation for chiropractors | SideGuy Solutions</a> <span class="muted">(42 in / 16 out)</span></li><li><a href="/auto/ai-automation-electricians.html">AI automation for electricians | SideGuy Solutions</a> <span class="muted">(41 in / 16 out)</span></li><li><a href="/auto/ai-automation-gyms.html">AI automation for gyms | SideGuy Solutions</a> <span class="muted">(41 in / 16 out)</span></li><li><a href="/auto/ai-automation-roofers.html">AI automation for roofers | SideGuy Solutions</a> <span class="muted">(34 in / 15 out)</span></li><li><a href="/auto/ai-automation-salons.html">AI automation for salons | SideGuy Solutions</a> <span class="muted">(24 in / 16 out)</span></li><li><a href="/auto/ai-automation-hvac.html">AI automation for HVAC companies | SideGuy Solutions</a> <span class="muted">(7 in / 16 out)</span></li><li><a href="/auto/ai-automation-cleaning.html">AI automation for cleaning companies | SideGuy Solutions</a> <span class="muted">(6 in / 16 out)</span></li><li><a href="/auto/ai-automation-law-firms.html">AI automation for law firms | SideGuy Solutions</a> <span class="muted">(6 in / 16 out)</span></li><li><a href="/auto/ai-automation-real-estate.html">AI automation for real estate agents | SideGuy Solutions</a> <span class="muted">(6 in / 15 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>knowledge — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/knowledge/sideguy-knowledge-map.html">SideGuy Knowledge Map — Connected Clarity for Real Decisions | SideGuy Solutions</a> <span class="muted">(1098 in / 108 out)</span></li><li><a href="/knowledge/knowledge-graph.html">SideGuy Knowledge Graph — Site Intelligence Map</a> <span class="muted">(4 in / 174 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>prediction-markets — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/prediction-markets/sports-hedging-strategy.html">Sports Hedging Strategy — Kalshi + DFS System | SideGuy Solutions</a> <span class="muted">(22 in / 11 out)</span></li><li><a href="/prediction-markets/kalshi-guide.html">Kalshi Guide — How Event Contracts Work | SideGuy Solutions</a> <span class="muted">(20 in / 11 out)</span></li><li><a href="/prediction-markets/kalshi-vs-dfs.html">Kalshi vs DFS Platforms — Key Differences | SideGuy Solutions</a> <span class="muted">(18 in / 11 out)</span></li><li><a href="/prediction-markets/prediction-market-hedging.html">Prediction Market Hedging Strategy | SideGuy Solutions</a> <span class="muted">(15 in / 11 out)</span></li><li><a href="/prediction-markets/index.html">Prediction Markets Guide — Kalshi, Polymarket & Hedging | SideGuy Solutions</a> <span class="muted">(14 in / 13 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>fresh — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/fresh/gravity.html">Traffic Gravity · SideGuy Solutions</a> <span class="muted">(26 in / 4 out)</span></li><li><a href="/fresh/index.html">Freshness Hub · SideGuy Solutions</a> <span class="muted">(17 in / 129 out)</span></li><li><a href="/fresh/radar.html">SideGuy Fresh Radar · SideGuy Solutions</a> <span class="muted">(10 in / 2 out)</span></li><li><a href="/fresh/trending.html">Trending · SideGuy Solutions</a> <span class="muted">(6 in / 130 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>gravity — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/gravity/gravity-nanogpt-slowrun-language-modeling-with-limited-data-infinite-compute.html">NanoGPT Slowrun: Language Modeling with Limited Data, Infinite Compute · SideGuy Solutions</a> <span class="muted">(2 in / 11 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>katie — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/katie/contractors-apps.html">Custom Apps &amp; Software for General Contractors — Work with Katie · SideGuy</a> <span class="muted">(50 in / 14 out)</span></li><li><a href="/katie/hvac-apps.html">Custom Apps &amp; Software for HVAC Companies — Work with Katie · SideGuy</a> <span class="muted">(50 in / 14 out)</span></li><li><a href="/katie/law-firms-apps.html">Custom Apps &amp; Software for Law Firms — Work with Katie · SideGuy</a> <span class="muted">(50 in / 14 out)</span></li><li><a href="/katie/medical-offices-apps.html">Custom Apps &amp; Software for Medical Offices — Work with Katie · SideGuy</a> <span class="muted">(50 in / 14 out)</span></li><li><a href="/katie/custom-software.html">Custom Software Development — Work with Katie · SideGuy</a> <span class="muted">(48 in / 21 out)</span></li><li><a href="/katie/roofers-apps.html">Custom Apps &amp; Software for Roofing Contractors — Work with Katie · SideGuy</a> <span class="muted">(48 in / 14 out)</span></li><li><a href="/katie/saas-apps.html">Custom Apps &amp; Software for SaaS & Software Companies — Work with Katie · SideGuy</a> <span class="muted">(48 in / 14 out)</span></li><li><a href="/katie/index.html">Build Apps & Custom Software — Work with Katie · SideGuy</a> <span class="muted">(46 in / 26 out)</span></li><li><a href="/katie/ai-automation.html">AI Automation & Smart App Development — Work with Katie · SideGuy</a> <span class="muted">(46 in / 24 out)</span></li><li><a href="/katie/mobile-app.html">Mobile App Development — Work with Katie · SideGuy</a> <span class="muted">(46 in / 23 out)</span></li><li><a href="/katie/web-app.html">Web App & Full-Stack Development — Work with Katie · SideGuy</a> <span class="muted">(44 in / 23 out)</span></li><li><a href="/katie/restaurants-apps.html">Custom Apps &amp; Software for Restaurants & Food Service — Work with Katie · SideGuy</a> <span class="muted">(42 in / 14 out)</span></li><li><a href="/katie/realtors-apps.html">Custom Apps &amp; Software for Real Estate & Realtors — Work with Katie · SideGuy</a> <span class="muted">(32 in / 14 out)</span></li><li><a href="/katie/plumbers-apps.html">Custom Apps &amp; Software for Plumbing Companies — Work with Katie · SideGuy</a> <span class="muted">(26 in / 14 out)</span></li><li><a href="/katie/landscapers-apps.html">Custom Apps &amp; Software for Landscaping Companies — Work with Katie · SideGuy</a> <span class="muted">(20 in / 14 out)</span></li></ol>
+      </div>
+      <div class="card">
+        <h3>other — Top pages by internal links</h3>
+        <ol class="ol"><li><a href="/hub.html">SideGuy Operator Hub · San Diego</a> <span class="muted">(4717 in / 25 out)</span></li><li><a href="/knowledge-hub.html">SideGuy Knowledge Hub — Central Navigation</a> <span class="muted">(4495 in / 23 out)</span></li><li><a href="/operator-tools-hub.html">Operator Tools Hub | SideGuy</a> <span class="muted">(4495 in / 23 out)</span></li><li><a href="/ai-automation-hub.html">AI Automation Hub | SideGuy</a> <span class="muted">(4443 in / 32 out)</span></li><li><a href="/payments-infrastructure-hub.html">Payments Infrastructure Hub | SideGuy</a> <span class="muted">(4385 in / 12 out)</span></li><li><a href="/payments.html">Payments · San Diego · SideGuy</a> <span class="muted">(3961 in / 39 out)</span></li><li><a href="/hubs/category-ai-automation.html">AI Automation Hub · SideGuy San Diego</a> <span class="muted">(3468 in / 2 out)</span></li><li><a href="/business-automation-san-diego.html">Business Automation San Diego · SideGuy</a> <span class="muted">(2445 in / 23 out)</span></li><li><a href="/ac-blowing-warm-air.html">AC Blowing Warm Air · San Diego · SideGuy</a> <span class="muted">(2203 in / 26 out)</span></li><li><a href="/ac-repair-san-diego.html">AC Repair San Diego — What to Check First | SideGuy</a> <span class="muted">(2137 in / 27 out)</span></li><li><a href="/agent-payments-explained.html">Agent Payments Explained · San Diego · SideGuy</a> <span class="muted">(2134 in / 28 out)</span></li><li><a href="/ac-not-blowing-cold-air.html">AC Not Blowing Cold Air · San Diego · SideGuy</a> <span class="muted">(2129 in / 27 out)</span></li><li><a href="/AI-integration-accelerator.html">AI Integration Accelerator · San Diego · SideGuy</a> <span class="muted">(2129 in / 21 out)</span></li><li><a href="/local-business-payments.html">Local Business Payments · San Diego · SideGuy</a> <span class="muted">(1837 in / 26 out)</span></li><li><a href="/mobile-payment-systems-san-diego.html">Mobile Payment Systems San Diego — Lower Fees + Faster Settlement | SideGuy</a> <span class="muted">(1788 in / 14 out)</span></li></ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <a href="sms:+17735441231">
+      <span class="dot"></span>
+      <span>Text PJ</span>
+      <span class="muted">&nbsp;773-544-1231</span>
+    </a>
+  </div>
+</body>
+</html>
