@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kalshi Guide — How Event Contracts Work | SideGuy Solutions</title>
+  <meta name="description" content="How Kalshi works: regulated US prediction market exchange, binary event contracts, market pricing, and trading mechanics explained for operators."/>
+  <link rel="canonical" href="https://sideguysolutions.com/prediction-markets/kalshi-guide.html"/>
+  <meta name="robots" content="index,follow"/>
+  <style>
+  :root{--bg0:#eefcff;--bg1:#d7f5ff;--ink:#073044;--muted:#3f6173;--mint:#21d3a1;--blue2:#1f7cff;--r:18px;--pill:999px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;background:radial-gradient(ellipse at 60% 0%,#c5f4ff 0%,#eefcff 55%,#fff 100%);color:var(--ink);min-height:100vh}
+  a{color:var(--blue2);text-decoration:none}a:hover{text-decoration:underline}
+  nav.bc{padding:11px 24px;font-size:.8rem;color:var(--muted);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(255,255,255,.6);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}
+  nav.bc a{color:var(--muted)}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 24px 100px}
+  .badge{display:inline-block;background:var(--mint);color:#073044;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:var(--pill);margin-bottom:12px}
+  h1{font-size:clamp(1.6rem,5vw,2.5rem);font-weight:800;margin-bottom:10px}
+  .defbox{background:linear-gradient(135deg,rgba(33,211,161,.12),rgba(74,169,255,.10));border:1px solid rgba(33,211,161,.25);border-radius:var(--r);padding:20px 24px;margin-bottom:32px}
+  .defbox strong{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
+  .defbox p{font-size:.97rem;line-height:1.65}
+  .section{margin-bottom:32px}
+  .section h2{font-size:1.3rem;font-weight:800;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--bg1)}
+  .section p{line-height:1.75;margin-bottom:10px}
+  ul{padding-left:20px}li{line-height:1.85;font-size:.95rem}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .pill{background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--pill);padding:7px 14px;font-size:.84rem;font-weight:500;color:var(--ink)}
+  .pill:hover{background:var(--mint);color:#073044;text-decoration:none}
+  .cta-box{background:linear-gradient(135deg,#073044,#0e3d58);border-radius:var(--r);padding:26px 30px;color:#fff;display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:36px 0}
+  .cta-btn{flex-shrink:0;background:var(--mint);color:#073044;font-weight:700;padding:11px 20px;border-radius:var(--pill);text-decoration:none}
+  .floating{position:fixed;bottom:22px;right:22px;z-index:999}
+  .floatBtn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#0e3d58,#073044);color:#fff;padding:11px 18px;border-radius:var(--pill);font-size:.88rem;font-weight:600;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.2)}
+  footer{text-align:center;padding:18px;font-size:.76rem;color:var(--muted);border-top:1px solid rgba(0,0,0,.06);margin-top:36px}
+  </style>
+</head>
+<body>
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a> ›
+  <a href="/prediction-markets/">Prediction Markets</a> ›
+  Kalshi Guide
+</nav>
+<main class="wrap">
+  <div class="badge">Market Guide · Finance</div>
+  <h1>🏛️ Kalshi Guide</h1>
+
+  <div class="defbox">
+    <strong>What is Kalshi?</strong>
+    <p>Kalshi is a CFTC-regulated event contract exchange where traders buy YES/NO contracts on real-world outcomes. Prices reflect collective probability — not sportsbook lines with house margin built in.</p>
+  </div>
+
+  <div class="section">
+    <h2>Why Kalshi Is Different</h2>
+    <ul>
+      <li>No traditional sportsbook juice — you trade against other participants at market-clearing prices</li>
+      <li>Binary contracts resolve at $1 (correct) or $0 (incorrect) — clear, defined payoffs</li>
+      <li>You can buy or sell (short the outcome) and exit your position before resolution</li>
+      <li>CFTC-regulated — US legal, real money, real counterparties</li>
+      <li>Markets cover elections, economics (CPI, Fed rate decisions), sports, and more</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>How Pricing Works</h2>
+    <p>A Kalshi contract price is essentially an implied probability. A contract trading at $0.62 means the market collectively assigns ~62% probability to that outcome occurring.</p>
+    <p>If you buy YES at $0.62 and the event happens, you collect $1.00 — a $0.38 gain per contract. If it doesn't happen, you lose your $0.62. The math is clean and transparent.</p>
+  </div>
+
+  <div class="section">
+    <h2>Where Kalshi Fits in a Hedging System</h2>
+    <p>Kalshi is most useful as a <strong>primary position vehicle</strong> — you take a probability-based view, size your position appropriately, and use a correlated DFS or alternative market as insurance.</p>
+    <ul>
+      <li>Identify a market with positive expected value based on your analysis</li>
+      <li>Size the position based on your edge estimate and bankroll rules</li>
+      <li>Identify a correlated DFS or alternative market for the hedge leg</li>
+      <li>Define your trigger signal before entering (what will tell you to add/exit)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Related Guides</h2>
+    <div class="pill-row">
+      <a class="pill" href="/prediction-markets/prediction-market-hedging.html">Hedging Strategy</a>
+      <a class="pill" href="/prediction-markets/kalshi-vs-dfs.html">Kalshi vs DFS</a>
+      <a class="pill" href="/prediction-markets/sports-hedging-strategy.html">Sports Hedging</a>
+      <a class="pill" href="/concepts/kalshi-trading.html">Kalshi Concept</a>
+      <a class="pill" href="/concepts/prediction-markets.html">Prediction Markets Concept</a>
+      <a class="pill" href="/betting-lab/betting-lab.html">Betting Lab</a>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div>
+      <strong style="display:block;margin-bottom:4px">Questions about Kalshi strategy?</strong>
+      <span style="font-size:.9rem;opacity:.8">Text PJ — real human, no pitch.</span>
+    </div>
+    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+  </div>
+  <footer><a href="/">SideGuy Solutions</a> · <a href="/prediction-markets/">Prediction Markets</a> · <a href="tel:+17735441231">773-544-1231</a></footer>
+</main>
+<div class="floating"><a class="floatBtn" href="sms:+17735441231"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Text PJ · 773-544-1231</a></div>
+</body>
+</html>

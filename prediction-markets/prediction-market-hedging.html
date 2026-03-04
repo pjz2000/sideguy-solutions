@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Prediction Market Hedging Strategy | SideGuy Solutions</title>
+  <meta name="description" content="How to hedge prediction market positions using DFS platforms: primary Kalshi contract, DFS insurance leg, in-game trigger signals, and exit rules."/>
+  <link rel="canonical" href="https://sideguysolutions.com/prediction-markets/prediction-market-hedging.html"/>
+  <meta name="robots" content="index,follow"/>
+  <style>
+  :root{--bg0:#eefcff;--bg1:#d7f5ff;--ink:#073044;--muted:#3f6173;--mint:#21d3a1;--blue2:#1f7cff;--r:18px;--pill:999px}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;background:radial-gradient(ellipse at 60% 0%,#c5f4ff 0%,#eefcff 55%,#fff 100%);color:var(--ink);min-height:100vh}
+  a{color:var(--blue2);text-decoration:none}a:hover{text-decoration:underline}
+  nav.bc{padding:11px 24px;font-size:.8rem;color:var(--muted);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(255,255,255,.6);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}
+  nav.bc a{color:var(--muted)}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 24px 100px}
+  .badge{display:inline-block;background:var(--mint);color:#073044;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:var(--pill);margin-bottom:12px}
+  h1{font-size:clamp(1.6rem,5vw,2.5rem);font-weight:800;margin-bottom:10px}
+  .defbox{background:linear-gradient(135deg,rgba(33,211,161,.12),rgba(74,169,255,.10));border:1px solid rgba(33,211,161,.25);border-radius:var(--r);padding:20px 24px;margin-bottom:32px}
+  .defbox strong{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:8px}
+  .defbox p{font-size:.97rem;line-height:1.65}
+  .section{margin-bottom:32px}
+  .section h2{font-size:1.3rem;font-weight:800;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--bg1)}
+  .section p{line-height:1.75;margin-bottom:10px}
+  .step-list{list-style:none;padding:0}
+  .step-list li{background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:14px 18px;margin-bottom:10px;font-size:.95rem;line-height:1.6}
+  .step-list li strong{color:var(--mint);margin-right:6px}
+  ul{padding-left:20px}li{line-height:1.85;font-size:.95rem}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .pill{background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.08);border-radius:var(--pill);padding:7px 14px;font-size:.84rem;font-weight:500;color:var(--ink)}
+  .pill:hover{background:var(--mint);color:#073044;text-decoration:none}
+  .cta-box{background:linear-gradient(135deg,#073044,#0e3d58);border-radius:var(--r);padding:26px 30px;color:#fff;display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin:36px 0}
+  .cta-btn{flex-shrink:0;background:var(--mint);color:#073044;font-weight:700;padding:11px 20px;border-radius:var(--pill);text-decoration:none}
+  .floating{position:fixed;bottom:22px;right:22px;z-index:999}
+  .floatBtn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#0e3d58,#073044);color:#fff;padding:11px 18px;border-radius:var(--pill);font-size:.88rem;font-weight:600;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.2)}
+  footer{text-align:center;padding:18px;font-size:.76rem;color:var(--muted);border-top:1px solid rgba(0,0,0,.06);margin-top:36px}
+  </style>
+</head>
+<body>
+<nav class="bc">
+  <a href="/">SideGuy</a> ›
+  <a href="/prediction-markets/">Prediction Markets</a> ›
+  Hedging Strategy
+</nav>
+<main class="wrap">
+  <div class="badge">Strategy Guide · Finance</div>
+  <h1>🛡️ Prediction Market Hedging Strategy</h1>
+
+  <div class="defbox">
+    <strong>Core Idea</strong>
+    <p>Prediction markets allow you to hedge positions by adjusting your probability exposure in real time. Pairing a primary contract on Kalshi with a correlated DFS insurance leg creates defined-risk positions with two ways to profit.</p>
+  </div>
+
+  <div class="section">
+    <h2>The Three-Leg Structure</h2>
+    <ol class="step-list">
+      <li><strong>①</strong> <strong>Primary position:</strong> Kalshi event contract — probability-based, sized to your edge estimate. This is your main thesis.</li>
+      <li><strong>②</strong> <strong>Insurance leg:</strong> DFS flex entry with correlated outcome. If Leg 1 loses, Leg 2 partially recovers. Cost should be &lt; 20% of Leg 1 potential profit.</li>
+      <li><strong>③</strong> <strong>Optional in-game hedge:</strong> Triggered by a live signal (pace, foul trouble, score gap, rotation). You define the trigger before you enter — not when you're in the heat of watching.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>Pre-Entry Checklist</h2>
+    <ul>
+      <li>What is the market probability and what do I think it actually is? (Is there an edge?)</li>
+      <li>What's the correlated DFS outcome and cost?</li>
+      <li>What triggers will I act on mid-event, and what will I do?</li>
+      <li>What's my exit if the position goes wrong before resolution?</li>
+      <li>What's my max loss on this trade?</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Where People Get This Wrong</h2>
+    <ul>
+      <li>Defining the hedge trigger <em>after</em> entering — emotional decision-making under stress</li>
+      <li>Sizing the insurance leg so large it eats the upside on both outcomes</li>
+      <li>Choosing uncorrelated legs (a "hedge" that doesn't actually hedge)</li>
+      <li>Not logging the trade — can't improve a system you're not measuring</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Related Guides</h2>
+    <div class="pill-row">
+      <a class="pill" href="/prediction-markets/kalshi-guide.html">Kalshi Guide</a>
+      <a class="pill" href="/prediction-markets/kalshi-vs-dfs.html">Kalshi vs DFS</a>
+      <a class="pill" href="/prediction-markets/sports-hedging-strategy.html">Sports Hedging</a>
+      <a class="pill" href="/betting-lab/betting-lab.html">Betting Lab</a>
+      <a class="pill" href="/concepts/prediction-markets.html">Prediction Markets Concept</a>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div><strong style="display:block;margin-bottom:4px">Working through a hedging structure?</strong><span style="font-size:.9rem;opacity:.8">Text PJ — real human, no pitch.</span></div>
+    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+  </div>
+  <footer><a href="/">SideGuy Solutions</a> · <a href="/prediction-markets/">Prediction Markets</a> · <a href="tel:+17735441231">773-544-1231</a></footer>
+</main>
+<div class="floating"><a class="floatBtn" href="sms:+17735441231"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Text PJ · 773-544-1231</a></div>
+</body>
+</html>
