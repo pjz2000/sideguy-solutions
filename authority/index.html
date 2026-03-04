@@ -1,71 +1,350 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Authority Engine · SideGuy Solutions</title>
-<meta name="description" content="SideGuy topic authority hubs.">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-:root{--ink:#073044;--muted:#3f6173;--line:#cce8f0;--card:#fff;--accent:#1f7cff;--bg0:#eefcff;--mint:#21d3a1;}
-body{font-family:-apple-system,system-ui,sans-serif;max-width:1100px;margin:auto;padding:34px 20px;background:var(--bg0);color:var(--ink);line-height:1.6;}
-a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:14px 0 18px}
-.card{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:14px}
-.card h2{margin:0 0 8px;font-size:16px;color:var(--ink)}
-.small{font-size:13px;color:var(--muted)}
-.pills a{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:8px 12px;margin:6px 8px 0 0;font-size:13px;color:var(--ink);background:var(--card)}
-.floatBtn{position:fixed;right:16px;bottom:16px;z-index:9999;background:#073044;color:#fff;border-radius:999px;padding:14px 18px;font-weight:700;text-decoration:none;font-size:14px;box-shadow:0 8px 24px rgba(7,48,68,.25)}
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Authority Hubs | SideGuy</title>
+  <meta name="description" content="Auto-built topic hubs (Wikipedia-style) generated from SideGuy&#39;s live page inventory for faster crawling, tighter internal linking, and stronger authority."/>
+  <link rel="canonical" href="https://sideguysolutions.com/authority/index.html"/>
+  
+  <style>
+    :root {
+      --bg1:#071a2a; --bg2:#06101a; --card:#0b2236; --line:rgba(255,255,255,.10);
+      --txt:rgba(255,255,255,.92); --mut:rgba(255,255,255,.70);
+      --mint:#7fffd4; --aqua:#60a5fa; --glow:rgba(127,255,212,.35);
+    }
+    body {
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--txt);
+      background: radial-gradient(1000px 600px at 20% 10%, rgba(96,165,250,.18), transparent 60%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(127,255,212,.12), transparent 60%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    a{ color: var(--mint); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .wrap{ max-width:1100px; margin:0 auto; padding:34px 18px 70px; }
+    .topline{ display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .badge{ display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.04); }
+    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap:14px; margin-top:16px; }
+    .card{ grid-column: span 6; border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.04); padding:16px; }
+    .card h3{ margin:0 0 6px; font-size:16px; }
+    .meta{ color:var(--mut); font-size:13px; }
+    .pills{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .pill{ font-size:12px; padding:7px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); }
+    .links{ margin-top:12px; display:grid; grid-template-columns: 1fr; gap:6px; }
+    .links a{ display:block; padding:8px 10px; border:1px solid var(--line); border-radius:12px; background:rgba(0,0,0,.12); }
+    .links a:hover{ box-shadow: 0 0 0 3px rgba(127,255,212,.08); }
+    .kicker{ color:var(--mut); font-size:13px; margin-top:6px; }
+    .h1{ font-size:28px; line-height:1.15; margin:10px 0 0; }
+    .sub{ color:var(--mut); font-size:14px; max-width:72ch; margin-top:10px; }
+    .footer{ margin-top:28px; color:var(--mut); font-size:13px; }
+    .float {
+      position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+      display:flex; align-items:center; gap:10px;
+      padding: 12px 14px; border-radius: 999px;
+      border: 1px solid rgba(127,255,212,.30);
+      background: rgba(3, 12, 18, .72);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 0 2px rgba(127,255,212,.08), 0 18px 55px rgba(0,0,0,.45);
+      animation: pulse 1.9s ease-in-out infinite;
+    }
+    .dot {
+      width: 12px; height: 12px; border-radius: 99px;
+      background: var(--mint);
+      box-shadow: 0 0 0 6px rgba(127,255,212,.12), 0 0 24px rgba(127,255,212,.35);
+    }
+    @keyframes pulse {
+      0%,100% { transform: translateY(0); box-shadow: 0 0 0 2px rgba(127,255,212,.08), 0 18px 55px rgba(0,0,0,.45); }
+      50% { transform: translateY(-2px); box-shadow: 0 0 0 6px rgba(127,255,212,.10), 0 26px 65px rgba(0,0,0,.52); }
+    }
+    .float .t1{ font-weight:700; }
+    .float .t2{ font-size:12px; color:var(--mut); margin-top:2px; }
+    .float .txt{ display:flex; flex-direction:column; line-height:1.05; }
+    .float svg{ width:18px; height:18px; opacity:.92; }
+    .float:hover{ text-decoration:none; }
+    .table{ width:100%; border-collapse: collapse; margin-top:18px; }
+    .table th,.table td{ border-bottom:1px solid var(--line); padding:10px 8px; text-align:left; font-size:13px; }
+    .table th{ color:var(--mut); font-weight:600; }
+    @media(max-width:640px){ .card{ grid-column: span 12; } }
+  </style>
+  
 </head>
 <body>
-<a href="/">← SideGuy Home</a> &nbsp;•&nbsp; <a href="/sideguy-knowledge-map.html">Knowledge Map</a> &nbsp;•&nbsp; <a href="/problems/">Problem Library</a>
-<h1>SideGuy Authority Engine</h1>
-<p class="small">High-level topic hubs → cluster hubs → best guides. Built to help humans and help crawlers.</p>
-<div class="grid">
-<div class="card"><h2><a href="/authority/payments.html">Payments</a></h2><div class="small">Clusters: 4</div></div><div class="card"><h2><a href="/authority/ai-automation.html">AI Automation</a></h2><div class="small">Clusters: 4</div></div><div class="card"><h2><a href="/authority/small-business-tech.html">Small Business Tech</a></h2><div class="small">Clusters: 3</div></div><div class="card"><h2><a href="/authority/prediction-markets.html">Prediction Markets</a></h2><div class="small">Clusters: 3</div></div>
-</div>
-<div class="small" style="margin-top:18px;">Last updated: 2026-03-04</div>
-<a class="floatBtn" href="sms:+17735441231">Text PJ &nbsp;·&nbsp; 773-544-1231</a>
-<!-- SG:RELATED_GUIDES_START -->
-<section class="sgRelatedGuides" aria-label="Related Guides">
-  <div class="sgRelatedGuides__head">
-    <h2>Related Guides</h2>
-    <div class="sgRelatedGuides__sub">Internal links to help operators go deeper (AI explains it, humans resolve it).</div>
+  <div class="wrap">
+    <div class="topline">
+      <div class="badge">🌊 <strong>Authority Autopilot</strong> <span class="meta">Generated 2026-03-04 23:55:19</span></div>
+      <div class="badge"><a href="/">← Home</a></div>
+    </div>
+
+    <h1 class="h1">Authority Hubs</h1>
+    <div class="sub">
+      Wikipedia-style topic hubs built automatically from SideGuy's live inventory signals.
+      These are crawler-friendly entry points + internal link concentrators.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+      <h3><a href="/authority/ai-automation-hub.html">Ai Automation Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Ai Automation” — 1589 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 1589</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/authority/ai-automation.html">AI Automation Authority</a><a href="/auto/ai-automation-accountants.html">⚙️ AI automation for accountants</a><a href="/auto/ai-automation-chiropractors.html">⚙️ AI automation for chiropractors</a><a href="/auto/ai-automation-cleaning.html">⚙️ AI automation for cleaning companies</a><a href="/auto/ai-automation-contractors.html">🔨 AI automation for contractors</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/who-do-hub.html">Who Do Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Who Do” — 895 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 895</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/_quarantine_backups/who-do-i-call-san-diego.backup.20251230-1801.html">Who Do I Call in San Diego?</a><a href="/_quarantine_backups/who-do-i-call.backup.20251229-1839.html">Who Do I Call?</a><a href="/_quarantine_backups/who-do-i-call.backup.20251229-1841.html">Who Do I Call?</a><a href="/_quarantine_backups/who-do-i-call.backup.20251229-1843.html">Who Do I Call?</a><a href="/_quarantine_backups/who-do-i-call.backup.20251229-1844.html">Who Do I Call?</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/do-call-hub.html">Do Call Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Do Call” — 888 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 888</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/_quarantine_backups/who-do-i-call-san-diego.backup.20251230-1801.html">Who Do I Call in San Diego?</a><a href="/backup-who-do-i-call-20251229-1838/who-do-i-call-ai-help.html">Who Do I Call?</a><a href="/backup-who-do-i-call-20251229-1838/who-do-i-call-business-automation.html">Who Do I Call?</a><a href="/backup-who-do-i-call-20251229-1838/who-do-i-call-electrician-san-diego.html">Who Do I Call?</a><a href="/backup-who-do-i-call-20251229-1838/who-do-i-call-foundation-repair-san-diego.html">Who Do I Call?</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/payment-processing-hub.html">Payment Processing Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Payment Processing” — 695 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 695</span>
+        <span class="pill">top bucket: site</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup-who-do-i-call-20251229-1838/who-do-i-call-payment-processing.html">Who Do I Call?</a><a href="/backup_pages/accounting-firm-payment-processing-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/attorney-payment-processing-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/auto-detailing-payment-processing-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/auto-repair-payment-processing-san-diego.html">San Diego Local Services &amp; Instant Help</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/human-help-hub.html">Human Help Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Human Help” — 565 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 565</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backups_20251230_191613/ai-advice-gone-wrong-need-human-help.html">AI Advice Gone Wrong?</a><a href="/backups_20251230_191613/money-decisions-human-help.html">Not Sure What to Do Next?</a><a href="/backups_20251230_191613/real-human-help-for-business-operators.html">Not Sure What to Do Next?</a><a href="/docs/pages/ai-advice-gone-wrong-need-human-help.html">Who Do I Call?</a><a href="/docs/pages/money-decisions-human-help.html">Who Do I Call?</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/tech-help-hub.html">Tech Help Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Tech Help” — 514 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 514</span>
+        <span class="pill">top bucket: site</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backups/pre-blanket/ai-tech-help-cardiff.html">AI or Tech Feeling Confusing in North County?</a><a href="/backups/pre-blanket/ai-tech-help-solana-beach.html">You Don’t Need More Tools — You Need a SideGuy</a><a href="/backups_20251230_191613/ai-tech-help-cardiff.html">Not Sure What to Do Next?</a><a href="/backups_20251230_191613/ai-tech-help-north-county-san-diego.html">Not Sure What to Do Next?</a><a href="/backups_20251230_191613/ai-tech-help-solana-beach.html">Not Sure What to Do Next?</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/sideguy-human-hub.html">Sideguy Human Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Sideguy Human” — 505 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 505</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/nodes/sideguy-human-node.html">Not Sure What to Do Next?</a><a href="/pages/sideguy-human-help-san-diego-1.html">pages/sideguy-human-help-san-diego-1.html</a><a href="/pages/sideguy-human-help-san-diego-10.html">pages/sideguy-human-help-san-diego-10.html</a><a href="/pages/sideguy-human-help-san-diego-100.html">pages/sideguy-human-help-san-diego-100.html</a><a href="/pages/sideguy-human-help-san-diego-101.html">pages/sideguy-human-help-san-diego-101.html</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/companies-in-hub.html">Companies In Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Companies In” — 415 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 415</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/hubs/industry-catering-companies-in-carlsbad.html">AI Automation for Catering Companies In Carlsbad — San Diego Resource Hub</a><a href="/hubs/industry-catering-companies-in-encinitas.html">AI Automation for Catering Companies In Encinitas — San Diego Resource Hub</a><a href="/hubs/industry-catering-companies-in-escondido.html">AI Automation for Catering Companies In Escondido — San Diego Resource Hub</a><a href="/hubs/industry-catering-companies-in-oceanside.html">AI Automation for Catering Companies In Oceanside — San Diego Resource Hub</a><a href="/hubs/industry-catering-companies-in-poway.html">AI Automation for Catering Companies In Poway — San Diego Resource Hub</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/small-business-hub.html">Small Business Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Small Business” — 307 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 307</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/authority/small-business-tech.html">Small Business Tech</a><a href="/backup_old_pages/ai-small-business-automation-san-diego.html">Real problems.Fixed fast.</a><a href="/backup_pages/ai-small-business-automation-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/best-ai-tools-for-small-business-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/best-tools-for-small-business.html">San Diego Local Services &amp; Instant Help</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/crypto-payments-hub.html">Crypto Payments Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Crypto Payments” — 290 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 290</span>
+        <span class="pill">top bucket: site</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_pages/crypto-payments-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/how-to-accept-crypto-payments.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/san-diego-crypto-payments-for-business.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/crypto-payments-san-diego.html">Real problems.Fixed fast.</a><a href="/backups/pre-blanket/how-to-accept-crypto-payments.html">Real problems.Fixed fast.</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/ai-tools-hub.html">Ai Tools Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Ai Tools” — 258 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 258</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_old_pages/ai-tools-directory.html">Real problems.Fixed fast.</a><a href="/backup_old_pages/ai-tools-for-business.html">Real problems.Fixed fast.</a><a href="/backup_pages/ai-tools-directory.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/ai-tools-for-business.html">SideGuy Solutions — Tech That Actually Works</a><a href="/backup_pages/best-ai-tools-for-small-business-san-diego.html">San Diego Local Services &amp; Instant Help</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/solana-beach-hub.html">Solana Beach Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Solana Beach” — 245 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 245</span>
+        <span class="pill">top bucket: site</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_pages/solana-beach-ai-automation.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/ai-tech-help-solana-beach.html">You Don’t Need More Tools — You Need a SideGuy</a><a href="/backups/pre-blanket/solana-beach-ai-automation.html">Real problems.Fixed fast.</a><a href="/backups/pre-blanket/solana-beach-help.html">Something Not Working?</a><a href="/backups_20251230_191613/ai-tech-help-solana-beach.html">Not Sure What to Do Next?</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/del-mar-hub.html">Del Mar Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Del Mar” — 243 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 243</span>
+        <span class="pill">top bucket: site</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_pages/del-mar-payment-processing-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/del-mar-payment-processing.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/del-mar-payment-processing-san-diego.html">Real problems.Fixed fast.</a><a href="/backups/pre-blanket/del-mar-payment-processing.html">Real problems.Fixed fast.</a><a href="/backups_20251230_191613/del-mar-payment-processing-san-diego.html">Not Sure What to Do Next?</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/human-tech-hub.html">Human Tech Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Human Tech” — 225 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 225</span>
+        <span class="pill">top bucket: site</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/nodes/human-tech-help-san-diego.html">Talk to a real human before you decide</a><a href="/pages/auto/human-tech-help-san-diego-1.html">pages/auto/human-tech-help-san-diego-1.html</a><a href="/pages/auto/human-tech-help-san-diego-101.html">pages/auto/human-tech-help-san-diego-101.html</a><a href="/pages/auto/human-tech-help-san-diego-121.html">pages/auto/human-tech-help-san-diego-121.html</a><a href="/pages/auto/human-tech-help-san-diego-141.html">pages/auto/human-tech-help-san-diego-141.html</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/contractors-in-hub.html">Contractors In Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Contractors In” — 220 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 220</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/hubs/industry-concrete-contractors-in-carlsbad.html">AI Automation for Concrete Contractors In Carlsbad — San Diego Resource Hub</a><a href="/hubs/industry-concrete-contractors-in-encinitas.html">AI Automation for Concrete Contractors In Encinitas — San Diego Resource Hub</a><a href="/hubs/industry-concrete-contractors-in-escondido.html">AI Automation for Concrete Contractors In Escondido — San Diego Resource Hub</a><a href="/hubs/industry-concrete-contractors-in-oceanside.html">AI Automation for Concrete Contractors In Oceanside — San Diego Resource Hub</a><a href="/hubs/industry-concrete-contractors-in-poway.html">AI Automation for Concrete Contractors In Poway — San Diego Resource Hub</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/ai-booking-hub.html">Ai Booking Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Ai Booking” — 202 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 202</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/ai-booking-software-for-accounting-firms-san-diego.html">Ai Booking Software For Accounting Firms — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-acupuncturists-san-diego.html">Ai Booking Software For Acupuncturists — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-advertising-agencies-san-diego.html">Ai Booking Software For Advertising Agencies — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-after-school-programs-san-diego.html">Ai Booking Software For After School Programs — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-animation-studios-san-diego.html">Ai Booking Software For Animation Studios — Plain-Language Guide (San Diego)</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/booking-software-hub.html">Booking Software Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Booking Software” — 202 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 202</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/ai-booking-software-for-accounting-firms-san-diego.html">Ai Booking Software For Accounting Firms — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-acupuncturists-san-diego.html">Ai Booking Software For Acupuncturists — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-advertising-agencies-san-diego.html">Ai Booking Software For Advertising Agencies — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-after-school-programs-san-diego.html">Ai Booking Software For After School Programs — Plain-Language Guide (San Diego)</a><a href="/ai-booking-software-for-animation-studios-san-diego.html">Ai Booking Software For Animation Studios — Plain-Language Guide (San Diego)</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/solana-payments-hub.html">Solana Payments Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Solana Payments” — 187 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 187</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_pages/oceanside-solana-payments.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/san-diego-solana-payments-near-me.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/solana-payments-directory.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/solana-payments-north-county.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/solana-payments-not-working.html">San Diego Local Services &amp; Instant Help</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/ai-consulting-hub.html">Ai Consulting Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Ai Consulting” — 179 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 179</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_old_pages/ai-consulting-san-diego.html">Real problems.Fixed fast.</a><a href="/backup_pages/ai-consulting-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/ai-consulting-san-diego.html">SideGuy Solutions</a><a href="/backups_20251230_191613/ai-consulting-san-diego.html">Not Sure What to Do Next?</a><a href="/docs/pages/ai-consulting-san-diego-small-business.html">AI Consulting for Small Businesses</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/tech-support-hub.html">Tech Support Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Tech Support” — 172 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 172</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup-who-do-i-call-20251229-1838/who-do-i-call-tech-support.html">Who Do I Call?</a><a href="/backup_pages/small-business-tech-support.html">SideGuy Solutions — Tech That Actually Works</a><a href="/backup_pages/startup-tech-support-san-diego.html">SideGuy Solutions — Tech That Actually Works</a><a href="/backup_pages/tech-support-san-diego.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/small-business-tech-support.html">Real problems.Fixed fast.</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/ai-customer-hub.html">Ai Customer Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Ai Customer” — 170 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 170</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_old_pages/ai-customer-comms-suite.html">Real problems.Fixed fast.</a><a href="/backup_old_pages/ai-customer-service-tools.html">Real problems.Fixed fast.</a><a href="/backup_old_pages/ai-customer-support-san-diego.html">Real problems.Fixed fast.</a><a href="/backup_pages/ai-customer-comms-suite.html">San Diego Local Services &amp; Instant Help</a><a href="/backup_pages/ai-customer-service-tools.html">San Diego Local Services &amp; Instant Help</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/local-seo-hub.html">Local Seo Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Local Seo” — 167 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 167</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_pages/local-seo-optimization.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/local-seo-optimization.html">Real problems.Fixed fast.</a><a href="/backups_20251230_191613/local-seo-optimization.html">Not Sure What to Do Next?</a><a href="/docs/pages/local-seo-optimization.html">Who Do I Call?</a><a href="/hubs/industry-local-seo.html">AI Automation for Local Seo — San Diego Resource Hub</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/customer-service-hub.html">Customer Service Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Customer Service” — 159 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 159</span>
+        <span class="pill">top bucket: root</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/backup_old_pages/ai-customer-service-tools.html">Real problems.Fixed fast.</a><a href="/backup_pages/ai-customer-service-tools.html">San Diego Local Services &amp; Instant Help</a><a href="/backups/pre-blanket/ai-customer-service-tools.html">SideGuy Solutions</a><a href="/backups_20251230_191613/ai-customer-service-tools.html">Not Sure What to Do Next?</a><a href="/clusters/ai-customer-service.html">AI Customer Service for San Diego Businesses</a>
+      </div>
+    </div><div class="card">
+      <h3><a href="/authority/seo-help-hub.html">Seo Help Hub</a></h3>
+      <div class="meta">A SideGuy Authority Hub for “Seo Help” — 159 related guides, fixes, and operator pages detected across the site. Built automatically from real internal link + slug signals.</div>
+      <div class="pills" style="margin-top:10px">
+        <span class="pill">pages: 159</span>
+        <span class="pill">top bucket: pages</span>
+      </div>
+      <div class="links" style="margin-top:12px">
+        <a href="/pages/auto/seo-help-san-diego-109.html">pages/auto/seo-help-san-diego-109.html</a><a href="/pages/auto/seo-help-san-diego-129.html">pages/auto/seo-help-san-diego-129.html</a><a href="/pages/auto/seo-help-san-diego-149.html">pages/auto/seo-help-san-diego-149.html</a><a href="/pages/auto/seo-help-san-diego-169.html">pages/auto/seo-help-san-diego-169.html</a><a href="/pages/auto/seo-help-san-diego-189.html">pages/auto/seo-help-san-diego-189.html</a>
+      </div>
+    </div>
+    </div>
+
+    <div class="footer">
+      <div><strong>SideGuy</strong> is where Google discovers the problem, AI explains it, and a real human resolves it.</div>
+      <div class="kicker">Clarity before cost. Text PJ if you want the fastest path to a clean fix.</div>
+    </div>
   </div>
-  <div class="sgRelatedGuides__grid">
-    <a class="sgpill" href="/authority/ai-automation.html" title="AI Automation Authority"><span class="sgpill__k">authority</span><span class="sgpill__t">AI Automation Authority</span></a>
-    <a class="sgpill" href="/authority/authority-hub.html" title="Authority Hub"><span class="sgpill__k">authority</span><span class="sgpill__t">Authority Hub</span></a>
-    <a class="sgpill" href="/authority/infrastructure.html" title="Infrastructure Authority"><span class="sgpill__k">authority</span><span class="sgpill__t">Infrastructure Authority</span></a>
-    <a class="sgpill" href="/authority/payments.html" title="Payments Authority"><span class="sgpill__k">authority</span><span class="sgpill__t">Payments Authority</span></a>
-    <a class="sgpill" href="/authority/google-ads.html" title="Google Ads Authority"><span class="sgpill__k">authority</span><span class="sgpill__t">Google Ads Authority</span></a>
-    <a class="sgpill" href="/authority/operator-tools.html" title="Operator Tools Authority"><span class="sgpill__k">authority</span><span class="sgpill__t">Operator Tools Authority</span></a>
-    <a class="sgpill" href="/authority/prediction-markets.html" title="Prediction Markets Authority"><span class="sgpill__k">authority</span><span class="sgpill__t">Prediction Markets Authority</span></a>
-    <a class="sgpill" href="/pillars/index.html" title="SideGuy Pillars — Concept Index"><span class="sgpill__k">pillars</span><span class="sgpill__t">SideGuy Pillars — Concept Index</span></a>
-    <a class="sgpill" href="/authority/ai-automation/call-agents.html" title="AI Call Agents"><span class="sgpill__k">authority</span><span class="sgpill__t">AI Call Agents</span></a>
-    <a class="sgpill" href="/authority/ai-automation/workflows.html" title="AI Workflows &amp; Automations"><span class="sgpill__k">authority</span><span class="sgpill__t">AI Workflows &amp; Automations</span></a>
-  </div>
-  <div class="sgRelatedGuides__cta">
-    <a class="sgCtaBtn" href="sms:+17735441231">Text PJ</a>
-    <span class="sgmuted">Fast clarity · No pressure · 773-544-1231</span>
-  </div>
-</section>
-<style>
-  .sgRelatedGuides{margin:28px 0 8px;padding:18px;border-radius:16px;
-    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.10);}
-  .sgRelatedGuides__head h2{margin:0;font-size:18px;}
-  .sgRelatedGuides__sub{margin-top:6px;opacity:.85;font-size:13px;}
-  .sgRelatedGuides__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px;}
-  .sgpill{display:flex;gap:10px;align-items:flex-start;text-decoration:none;padding:12px;border-radius:14px;
-    border:1px solid rgba(0,0,0,.10);background:rgba(0,0,0,.05);transition:border-color .15s,transform .15s;}
-  .sgpill:hover{transform:translateY(-1px);border-color:rgba(0,180,140,.35);}
-  .sgpill__k{font-size:11px;opacity:.65;min-width:72px;text-transform:uppercase;letter-spacing:.6px;}
-  .sgpill__t{font-size:13px;line-height:1.25;opacity:.95;}
-  .sgRelatedGuides__cta{display:flex;gap:12px;align-items:center;margin-top:12px;}
-  .sgCtaBtn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;
-    background:#073044;color:#fff;text-decoration:none;font-weight:700;font-size:14px;}
-  .sgmuted{opacity:.7;font-size:12px;}
-</style>
-<!-- SG:RELATED_GUIDES_END -->
-</body></html>
+
+  
+  <a class="float" href="sms:+17735441231">
+    <span class="dot"></span>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 10h10M7 14h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M21 12c0 4.5-4 8-9 8-1.3 0-2.6-.2-3.7-.7L3 21l1.7-4.6C4.2 15.2 4 13.6 4 12c0-4.5 4-8 9-8s8 3.5 8 8Z"
+            stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <span class="txt">
+      <span class="t1">Text PJ</span>
+      <span class="t2">773-544-1231</span>
+    </span>
+  </a>
+  
+</body>
+</html>
