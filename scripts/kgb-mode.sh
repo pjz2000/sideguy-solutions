@@ -74,6 +74,17 @@ do
 done
 echo "  Radar file: ${RADAR_CSV:-NONE}"
 
+# SG_FUTURE_RADAR_STEP
+# ── 2b) Future Radar (SEO Time Travel) ───────────────────────────────────────
+echo ""
+echo "[2b] Future Radar (live signal fetch + score)"
+if [ -f "scripts/future-radar.py" ]; then
+  python3 scripts/future-radar.py
+else
+  echo "  scripts/future-radar.py not found (ok)."
+fi
+# SG_FUTURE_RADAR_STEP_END
+
 # ── 3) Traffic Gravity scoring ────────────────────────────────────────────────
 echo ""
 echo "[3/9] Run Traffic Gravity (scoring)"
