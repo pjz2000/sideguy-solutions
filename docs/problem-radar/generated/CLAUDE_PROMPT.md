@@ -1,6 +1,6 @@
 # Claude Prompt — SideGuy Problem Radar Expansion
 
-Generated: 2026-03-05 18:13:00
+Generated: 2026-03-05 20:12:44
 
 ---
 
@@ -50,6 +50,12 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 
 ### General Problems  (`problem-intelligence/general`)
 
+**Seed:** `https sideguysolutions com`
+- Https Sideguysolutions Com — What to Know First → `https-sideguysolutions-com-san-diego.html`
+- Https Sideguysolutions Com Cost in San Diego → `https-sideguysolutions-com-cost-san-diego.html`
+- Best Tools for Https Sideguysolutions Com → `best-https-sideguysolutions-com-san-diego.html`
+- Common Https Sideguysolutions Com Mistakes → `https-sideguysolutions-com-mistakes-san-diego.html`
+
 **Seed:** `lower credit card fees small business`
 - Lower Credit Card Fees Small Business — What to Know First → `lower-credit-card-fees-small-business-san-diego.html`
 - Lower Credit Card Fees Small Business Cost in San Diego → `lower-credit-card-fees-small-business-cost-san-diego.html`
@@ -74,12 +80,6 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 - Best Tools for Best Ev Home Charger San Diego → `best-best-ev-home-charger-san-diego-san-diego.html`
 - Common Best Ev Home Charger San Diego Mistakes → `best-ev-home-charger-san-diego-mistakes-san-diego.html`
 
-**Seed:** `quickbooks vs xero san diego`
-- Quickbooks Vs Xero San Diego — What to Know First → `quickbooks-vs-xero-san-diego-san-diego.html`
-- Quickbooks Vs Xero San Diego Cost in San Diego → `quickbooks-vs-xero-san-diego-cost-san-diego.html`
-- Best Tools for Quickbooks Vs Xero San Diego → `best-quickbooks-vs-xero-san-diego-san-diego.html`
-- Common Quickbooks Vs Xero San Diego Mistakes → `quickbooks-vs-xero-san-diego-mistakes-san-diego.html`
-
 ---
 
 ### Payment Processing (Overview)  (`payments/payments-overview`)
@@ -89,6 +89,12 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 - Usdc Payments For Service Businesses Cost in San Diego → `usdc-payments-for-service-businesses-cost-san-diego.html`
 - Best Tools for Usdc Payments For Service Businesses → `best-usdc-payments-for-service-businesses-san-diego.html`
 - Common Usdc Payments For Service Businesses Mistakes → `usdc-payments-for-service-businesses-mistakes-san-diego.html`
+
+**Seed:** `merchant processing hidden fees`
+- Merchant Processing Hidden Fees — What to Know First → `merchant-processing-hidden-fees-san-diego.html`
+- Merchant Processing Hidden Fees Cost in San Diego → `merchant-processing-hidden-fees-cost-san-diego.html`
+- Best Tools for Merchant Processing Hidden Fees → `best-merchant-processing-hidden-fees-san-diego.html`
+- Common Merchant Processing Hidden Fees Mistakes → `merchant-processing-hidden-fees-mistakes-san-diego.html`
 
 **Seed:** `payment processing savings calculator`
 - Payment Processing Savings Calculator — What to Know First → `payment-processing-savings-calculator-san-diego.html`
@@ -110,31 +116,37 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 
 ---
 
-### AI Scheduling & Booking  (`ai-automation/ai-scheduling`)
+### HVAC Troubleshooting  (`home-systems/hvac`)
 
-**Seed:** `best ai scheduling tools 2025`
-- Best Ai Scheduling Tools 2025 — What to Know First → `best-ai-scheduling-tools-2025-san-diego.html`
-- Best Ai Scheduling Tools 2025 Cost in San Diego → `best-ai-scheduling-tools-2025-cost-san-diego.html`
-- Best Tools for Best Ai Scheduling Tools 2025 → `best-best-ai-scheduling-tools-2025-san-diego.html`
-- Common Best Ai Scheduling Tools 2025 Mistakes → `best-ai-scheduling-tools-2025-mistakes-san-diego.html`
+**Seed:** `hvac repair vs replace calculator`
+- Hvac Repair Vs Replace Calculator — What to Know First → `hvac-repair-vs-replace-calculator-san-diego.html`
+- Hvac Repair Vs Replace Calculator Cost in San Diego → `hvac-repair-vs-replace-calculator-cost-san-diego.html`
+- Best Tools for Hvac Repair Vs Replace Calculator → `best-hvac-repair-vs-replace-calculator-san-diego.html`
+- Common Hvac Repair Vs Replace Calculator Mistakes → `hvac-repair-vs-replace-calculator-mistakes-san-diego.html`
 
-**Seed:** `ai scheduling for plumbers`
-- Ai Scheduling For Plumbers — What to Know First → `ai-scheduling-for-plumbers-san-diego.html`
-- Ai Scheduling For Plumbers Cost in San Diego → `ai-scheduling-for-plumbers-cost-san-diego.html`
-- Best Tools for Ai Scheduling For Plumbers → `best-ai-scheduling-for-plumbers-san-diego.html`
-- Common Ai Scheduling For Plumbers Mistakes → `ai-scheduling-for-plumbers-mistakes-san-diego.html`
+**Seed:** `heat pump freezing up at night san diego`
+- Heat Pump Freezing Up At Night San Diego — What to Know First → `heat-pump-freezing-up-at-night-san-diego-san-diego.html`
+- Heat Pump Freezing Up At Night San Diego Cost in San Diego → `heat-pump-freezing-up-at-night-san-diego-cost-san-diego.html`
+- Best Tools for Heat Pump Freezing Up At Night San Diego → `best-heat-pump-freezing-up-at-night-san-diego-san-diego.html`
+- Common Heat Pump Freezing Up At Night San Diego Mistakes → `heat-pump-freezing-up-at-night-san-diego-mistakes-san-diego.html`
 
-**Seed:** `ai scheduling for hvac companies`
-- Ai Scheduling For Hvac Companies — What to Know First → `ai-scheduling-for-hvac-companies-san-diego.html`
-- Ai Scheduling For Hvac Companies Cost in San Diego → `ai-scheduling-for-hvac-companies-cost-san-diego.html`
-- Best Tools for Ai Scheduling For Hvac Companies → `best-ai-scheduling-for-hvac-companies-san-diego.html`
-- Common Ai Scheduling For Hvac Companies Mistakes → `ai-scheduling-for-hvac-companies-mistakes-san-diego.html`
+**Seed:** `hvac not cooling san diego summer`
+- Hvac Not Cooling San Diego Summer — What to Know First → `hvac-not-cooling-san-diego-summer-san-diego.html`
+- Hvac Not Cooling San Diego Summer Cost in San Diego → `hvac-not-cooling-san-diego-summer-cost-san-diego.html`
+- Best Tools for Hvac Not Cooling San Diego Summer → `best-hvac-not-cooling-san-diego-summer-san-diego.html`
+- Common Hvac Not Cooling San Diego Summer Mistakes → `hvac-not-cooling-san-diego-summer-mistakes-san-diego.html`
 
-**Seed:** `ai scheduling for dental offices`
-- Ai Scheduling For Dental Offices — What to Know First → `ai-scheduling-for-dental-offices-san-diego.html`
-- Ai Scheduling For Dental Offices Cost in San Diego → `ai-scheduling-for-dental-offices-cost-san-diego.html`
-- Best Tools for Ai Scheduling For Dental Offices → `best-ai-scheduling-for-dental-offices-san-diego.html`
-- Common Ai Scheduling For Dental Offices Mistakes → `ai-scheduling-for-dental-offices-mistakes-san-diego.html`
+**Seed:** `hvac heat pump incentives`
+- Hvac Heat Pump Incentives — What to Know First → `hvac-heat-pump-incentives-san-diego.html`
+- Hvac Heat Pump Incentives Cost in San Diego → `hvac-heat-pump-incentives-cost-san-diego.html`
+- Best Tools for Hvac Heat Pump Incentives → `best-hvac-heat-pump-incentives-san-diego.html`
+- Common Hvac Heat Pump Incentives Mistakes → `hvac-heat-pump-incentives-mistakes-san-diego.html`
+
+**Seed:** `hvac troubleshooting decision tree`
+- Hvac Troubleshooting Decision Tree — What to Know First → `hvac-troubleshooting-decision-tree-san-diego.html`
+- Hvac Troubleshooting Decision Tree Cost in San Diego → `hvac-troubleshooting-decision-tree-cost-san-diego.html`
+- Best Tools for Hvac Troubleshooting Decision Tree → `best-hvac-troubleshooting-decision-tree-san-diego.html`
+- Common Hvac Troubleshooting Decision Tree Mistakes → `hvac-troubleshooting-decision-tree-mistakes-san-diego.html`
 
 ---
 
@@ -172,6 +184,78 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 
 ---
 
+### AI Scheduling & Booking  (`ai-automation/ai-scheduling`)
+
+**Seed:** `best ai scheduling tools 2025`
+- Best Ai Scheduling Tools 2025 — What to Know First → `best-ai-scheduling-tools-2025-san-diego.html`
+- Best Ai Scheduling Tools 2025 Cost in San Diego → `best-ai-scheduling-tools-2025-cost-san-diego.html`
+- Best Tools for Best Ai Scheduling Tools 2025 → `best-best-ai-scheduling-tools-2025-san-diego.html`
+- Common Best Ai Scheduling Tools 2025 Mistakes → `best-ai-scheduling-tools-2025-mistakes-san-diego.html`
+
+**Seed:** `ai scheduling for plumbers`
+- Ai Scheduling For Plumbers — What to Know First → `ai-scheduling-for-plumbers-san-diego.html`
+- Ai Scheduling For Plumbers Cost in San Diego → `ai-scheduling-for-plumbers-cost-san-diego.html`
+- Best Tools for Ai Scheduling For Plumbers → `best-ai-scheduling-for-plumbers-san-diego.html`
+- Common Ai Scheduling For Plumbers Mistakes → `ai-scheduling-for-plumbers-mistakes-san-diego.html`
+
+**Seed:** `ai scheduling for hvac companies`
+- Ai Scheduling For Hvac Companies — What to Know First → `ai-scheduling-for-hvac-companies-san-diego.html`
+- Ai Scheduling For Hvac Companies Cost in San Diego → `ai-scheduling-for-hvac-companies-cost-san-diego.html`
+- Best Tools for Ai Scheduling For Hvac Companies → `best-ai-scheduling-for-hvac-companies-san-diego.html`
+- Common Ai Scheduling For Hvac Companies Mistakes → `ai-scheduling-for-hvac-companies-mistakes-san-diego.html`
+
+**Seed:** `ai scheduling for dental offices`
+- Ai Scheduling For Dental Offices — What to Know First → `ai-scheduling-for-dental-offices-san-diego.html`
+- Ai Scheduling For Dental Offices Cost in San Diego → `ai-scheduling-for-dental-offices-cost-san-diego.html`
+- Best Tools for Ai Scheduling For Dental Offices → `best-ai-scheduling-for-dental-offices-san-diego.html`
+- Common Ai Scheduling For Dental Offices Mistakes → `ai-scheduling-for-dental-offices-mistakes-san-diego.html`
+
+---
+
+### Chargebacks & Disputes  (`payments/chargebacks`)
+
+**Seed:** `stripe chargeback increase 2025`
+- Stripe Chargeback Increase 2025 — What to Know First → `stripe-chargeback-increase-2025-san-diego.html`
+- Stripe Chargeback Increase 2025 Cost in San Diego → `stripe-chargeback-increase-2025-cost-san-diego.html`
+- Best Tools for Stripe Chargeback Increase 2025 → `best-stripe-chargeback-increase-2025-san-diego.html`
+- Common Stripe Chargeback Increase 2025 Mistakes → `stripe-chargeback-increase-2025-mistakes-san-diego.html`
+
+**Seed:** `chargeback prevention software`
+- Chargeback Prevention Software — What to Know First → `chargeback-prevention-software-san-diego.html`
+- Chargeback Prevention Software Cost in San Diego → `chargeback-prevention-software-cost-san-diego.html`
+- Best Tools for Chargeback Prevention Software → `best-chargeback-prevention-software-san-diego.html`
+- Common Chargeback Prevention Software Mistakes → `chargeback-prevention-software-mistakes-san-diego.html`
+
+**Seed:** `chargeback win rate guide for merchants`
+- Chargeback Win Rate Guide For Merchants — What to Know First → `chargeback-win-rate-guide-for-merchants-san-diego.html`
+- Chargeback Win Rate Guide For Merchants Cost in San Diego → `chargeback-win-rate-guide-for-merchants-cost-san-diego.html`
+- Best Tools for Chargeback Win Rate Guide For Merchants → `best-chargeback-win-rate-guide-for-merchants-san-diego.html`
+- Common Chargeback Win Rate Guide For Merchants Mistakes → `chargeback-win-rate-guide-for-merchants-mistakes-san-diego.html`
+
+---
+
+### EV Charging & Tesla Charging  (`energy-ev/ev-charging`)
+
+**Seed:** `ev charging installation cost san diego`
+- Ev Charging Installation Cost San Diego — What to Know First → `ev-charging-installation-cost-san-diego-san-diego.html`
+- Ev Charging Installation Cost San Diego Cost in San Diego → `ev-charging-installation-cost-san-diego-cost-san-diego.html`
+- Best Tools for Ev Charging Installation Cost San Diego → `best-ev-charging-installation-cost-san-diego-san-diego.html`
+- Common Ev Charging Installation Cost San Diego Mistakes → `ev-charging-installation-cost-san-diego-mistakes-san-diego.html`
+
+**Seed:** `tesla charging slow after software update`
+- Tesla Charging Slow After Software Update — What to Know First → `tesla-charging-slow-after-software-update-san-diego.html`
+- Tesla Charging Slow After Software Update Cost in San Diego → `tesla-charging-slow-after-software-update-cost-san-diego.html`
+- Best Tools for Tesla Charging Slow After Software Update → `best-tesla-charging-slow-after-software-update-san-diego.html`
+- Common Tesla Charging Slow After Software Update Mistakes → `tesla-charging-slow-after-software-update-mistakes-san-diego.html`
+
+**Seed:** `ev charger rebates california`
+- Ev Charger Rebates California — What to Know First → `ev-charger-rebates-california-san-diego.html`
+- Ev Charger Rebates California Cost in San Diego → `ev-charger-rebates-california-cost-san-diego.html`
+- Best Tools for Ev Charger Rebates California → `best-ev-charger-rebates-california-san-diego.html`
+- Common Ev Charger Rebates California Mistakes → `ev-charger-rebates-california-mistakes-san-diego.html`
+
+---
+
 ### Stripe Troubleshooting  (`payments/stripe`)
 
 **Seed:** `stripe vs square comparison`
@@ -194,44 +278,6 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 
 ---
 
-### HVAC Troubleshooting  (`home-systems/hvac`)
-
-**Seed:** `heat pump freezing up at night san diego`
-- Heat Pump Freezing Up At Night San Diego — What to Know First → `heat-pump-freezing-up-at-night-san-diego-san-diego.html`
-- Heat Pump Freezing Up At Night San Diego Cost in San Diego → `heat-pump-freezing-up-at-night-san-diego-cost-san-diego.html`
-- Best Tools for Heat Pump Freezing Up At Night San Diego → `best-heat-pump-freezing-up-at-night-san-diego-san-diego.html`
-- Common Heat Pump Freezing Up At Night San Diego Mistakes → `heat-pump-freezing-up-at-night-san-diego-mistakes-san-diego.html`
-
-**Seed:** `hvac not cooling san diego summer`
-- Hvac Not Cooling San Diego Summer — What to Know First → `hvac-not-cooling-san-diego-summer-san-diego.html`
-- Hvac Not Cooling San Diego Summer Cost in San Diego → `hvac-not-cooling-san-diego-summer-cost-san-diego.html`
-- Best Tools for Hvac Not Cooling San Diego Summer → `best-hvac-not-cooling-san-diego-summer-san-diego.html`
-- Common Hvac Not Cooling San Diego Summer Mistakes → `hvac-not-cooling-san-diego-summer-mistakes-san-diego.html`
-
-**Seed:** `hvac troubleshooting decision tree`
-- Hvac Troubleshooting Decision Tree — What to Know First → `hvac-troubleshooting-decision-tree-san-diego.html`
-- Hvac Troubleshooting Decision Tree Cost in San Diego → `hvac-troubleshooting-decision-tree-cost-san-diego.html`
-- Best Tools for Hvac Troubleshooting Decision Tree → `best-hvac-troubleshooting-decision-tree-san-diego.html`
-- Common Hvac Troubleshooting Decision Tree Mistakes → `hvac-troubleshooting-decision-tree-mistakes-san-diego.html`
-
----
-
-### Chargebacks & Disputes  (`payments/chargebacks`)
-
-**Seed:** `stripe chargeback increase 2025`
-- Stripe Chargeback Increase 2025 — What to Know First → `stripe-chargeback-increase-2025-san-diego.html`
-- Stripe Chargeback Increase 2025 Cost in San Diego → `stripe-chargeback-increase-2025-cost-san-diego.html`
-- Best Tools for Stripe Chargeback Increase 2025 → `best-stripe-chargeback-increase-2025-san-diego.html`
-- Common Stripe Chargeback Increase 2025 Mistakes → `stripe-chargeback-increase-2025-mistakes-san-diego.html`
-
-**Seed:** `chargeback win rate guide for merchants`
-- Chargeback Win Rate Guide For Merchants — What to Know First → `chargeback-win-rate-guide-for-merchants-san-diego.html`
-- Chargeback Win Rate Guide For Merchants Cost in San Diego → `chargeback-win-rate-guide-for-merchants-cost-san-diego.html`
-- Best Tools for Chargeback Win Rate Guide For Merchants → `best-chargeback-win-rate-guide-for-merchants-san-diego.html`
-- Common Chargeback Win Rate Guide For Merchants Mistakes → `chargeback-win-rate-guide-for-merchants-mistakes-san-diego.html`
-
----
-
 ### AI Automation Cost & ROI  (`ai-automation/ai-cost`)
 
 **Seed:** `ac repair cost san diego`
@@ -245,22 +291,6 @@ explained / cost / tools / mistakes / checklist / comparison / how-to / what-to-
 - Ai Receptionist Cost Comparison Cost in San Diego → `ai-receptionist-cost-comparison-cost-san-diego.html`
 - Best Tools for Ai Receptionist Cost Comparison → `best-ai-receptionist-cost-comparison-san-diego.html`
 - Common Ai Receptionist Cost Comparison Mistakes → `ai-receptionist-cost-comparison-mistakes-san-diego.html`
-
----
-
-### EV Charging & Tesla Charging  (`energy-ev/ev-charging`)
-
-**Seed:** `ev charging installation cost san diego`
-- Ev Charging Installation Cost San Diego — What to Know First → `ev-charging-installation-cost-san-diego-san-diego.html`
-- Ev Charging Installation Cost San Diego Cost in San Diego → `ev-charging-installation-cost-san-diego-cost-san-diego.html`
-- Best Tools for Ev Charging Installation Cost San Diego → `best-ev-charging-installation-cost-san-diego-san-diego.html`
-- Common Ev Charging Installation Cost San Diego Mistakes → `ev-charging-installation-cost-san-diego-mistakes-san-diego.html`
-
-**Seed:** `tesla charging slow after software update`
-- Tesla Charging Slow After Software Update — What to Know First → `tesla-charging-slow-after-software-update-san-diego.html`
-- Tesla Charging Slow After Software Update Cost in San Diego → `tesla-charging-slow-after-software-update-cost-san-diego.html`
-- Best Tools for Tesla Charging Slow After Software Update → `best-tesla-charging-slow-after-software-update-san-diego.html`
-- Common Tesla Charging Slow After Software Update Mistakes → `tesla-charging-slow-after-software-update-mistakes-san-diego.html`
 
 ---
 
