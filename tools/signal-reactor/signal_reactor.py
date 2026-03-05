@@ -17,15 +17,24 @@ signals = {}
 if INPUT.exists():
     with open(INPUT, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
+        # GSC exports vary: "Top pages"/"page", "Impressions"/"impressions"
         for row in reader:
+            page_key = next((k for k in row if k.lower() in ("top pages", "page")), None)
+            imp_key  = next((k for k in row if k.lower() == "impressions"), None)
+            click_key = next((k for k in row if k.lower() == "clicks"), None)
+            if not page_key:
+                continue
             try:
-                impressions = int(row.get("impressions", 0))
+                impressions = int(row.get(imp_key, 0)) if imp_key else 0
+                clicks      = int(row.get(click_key, 0)) if click_key else 0
             except (ValueError, TypeError):
                 continue
-            if impressions > 0:
-                page = row.get("page", "")
-                topic = Path(page).stem  # filename without .html
-                signals[topic] = signals.get(topic, 0) + impressions
+            page = row.get(page_key, "")
+            if not page or page.lower() == "top pages":
+                continue
+            topic = Path(page.rstrip("/")).stem or "(root)"
+            if impressions > 0 or clicks > 0:
+                signals[topic] = signals.get(topic, 0) + max(impressions, 1)
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
