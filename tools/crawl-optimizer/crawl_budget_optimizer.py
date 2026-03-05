@@ -21,13 +21,20 @@ from pathlib import Path
 
 ROOT     = Path(__file__).parent.parent.parent.resolve()
 BASE_URL = "https://sideguysolutions.com"
-OUT_DIR  = ROOT / "public" / "sitemaps"
+# sitemaps/ at repo root is what gets served (public/ is disallowed in robots.txt)
+OUT_DIR  = ROOT / "sitemaps"
 REPORT   = ROOT / "docs" / "crawl-reports" / "crawl_budget_report.md"
 
+# Dirs disallowed in robots.txt or not web-accessible content
 SKIP_DIRS = {
-    ".git", "_quarantine_backups", "node_modules", "backup_pages",
-    "backup_old_pages", "backups_20251230_191613", "backups",
-    "_BACKUPS", ".sideguy-backups", "reports",
+    ".git", "_quarantine_backups", "node_modules",
+    "backup_pages", "backup_old_pages", "backups_20251230_191613",
+    "backups", "_BACKUPS", ".sideguy-backups", "reports",
+    # robots.txt Disallow:
+    "public", "docs", "site", "seo-reserve", "signals", "data",
+    # internal tooling
+    "tools", "scripts", "intelligence", "expansion",
+    "templates", "components", "reasoning", "routing",
 }
 
 def skip(p: str) -> bool:
@@ -38,14 +45,13 @@ def page_url(rel_path: str) -> str:
     url_path = rel_path.replace(os.sep, "/").lstrip("./")
     return f"{BASE_URL}/{url_path}"
 
-# ── Collect and cluster public/ pages ────────────────────────────────────────
+# ── Collect web-accessible HTML pages (repo root + subdirs) ──────────────────
 clusters: dict[str, list[str]] = defaultdict(list)
-for p in sorted(glob.glob(str(ROOT / "public" / "**" / "*.html"), recursive=True)):
-    rel = os.path.relpath(p, ROOT)
+for p in sorted(glob.glob(str(ROOT / "**" / "*.html"), recursive=True)):
+    rel = os.path.relpath(p, ROOT).replace(os.sep, "/")
     if skip(rel):
         continue
-    rel_from_public = os.path.relpath(p, ROOT / "public")
-    parts = rel_from_public.replace(os.sep, "/").split("/")
+    parts = rel.split("/")
     cluster = parts[0] if len(parts) > 1 else "(root)"
     clusters[cluster].append(page_url(rel))
 
@@ -83,16 +89,7 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 write_sitemap(priority_urls, OUT_DIR / "priority-sitemap.xml", "daily")
 write_sitemap(deep_urls,     OUT_DIR / "deep-sitemap.xml",     "weekly")
 
-# ── Sitemap index ─────────────────────────────────────────────────────────────
-index_path = OUT_DIR / "sitemap-index.xml"
-index_lines = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    f'  <sitemap><loc>{BASE_URL}/sitemaps/priority-sitemap.xml</loc><lastmod>{today}</lastmod></sitemap>',
-    f'  <sitemap><loc>{BASE_URL}/sitemaps/deep-sitemap.xml</loc><lastmod>{today}</lastmod></sitemap>',
-    '</sitemapindex>',
-]
-index_path.write_text("\n".join(index_lines), encoding="utf-8")
+# ── No separate index needed — files go in /sitemaps/ which robots.txt already allows ──
 
 # ── Report ────────────────────────────────────────────────────────────────────
 REPORT.parent.mkdir(parents=True, exist_ok=True)

@@ -4,21 +4,21 @@ Generated: 2026-03-05
 
 | Sitemap | URLs | Priority |
 |---|---:|---|
-| `public/sitemaps/priority-sitemap.xml` | 450 | High (daily) |
-| `public/sitemaps/deep-sitemap.xml` | 244 | Normal (weekly) |
+| `public/sitemaps/priority-sitemap.xml` | 1,286 | High (daily) |
+| `public/sitemaps/deep-sitemap.xml` | 409 | Normal (weekly) |
 
 ## Top 10 priority clusters
 
-1. `(root)` — 89 pages (89 in priority sitemap)
-2. `auto-pages` — 52 pages (52 in priority sitemap)
-3. `after-hours` — 50 pages (50 in priority sitemap)
-4. `human-help` — 50 pages (50 in priority sitemap)
-5. `urgent-help` — 50 pages (50 in priority sitemap)
-6. `ai-clarity` — 40 pages (40 in priority sitemap)
-7. `money-clarity` — 39 pages (39 in priority sitemap)
-8. `connectors` — 30 pages (30 in priority sitemap)
-9. `signals` — 30 pages (30 in priority sitemap)
-10. `airport-help` — 20 pages (20 in priority sitemap)
+1. `(root)` — 3997 pages (200 in priority sitemap)
+2. `pages` — 2573 pages (200 in priority sitemap)
+3. `problems` — 2270 pages (200 in priority sitemap)
+4. `hubs` — 656 pages (200 in priority sitemap)
+5. `auto-intent-pages` — 256 pages (200 in priority sitemap)
+6. `autogen` — 64 pages (64 in priority sitemap)
+7. `nodes` — 60 pages (60 in priority sitemap)
+8. `auto-hubs` — 59 pages (59 in priority sitemap)
+9. `generated` — 52 pages (52 in priority sitemap)
+10. `future-build` — 51 pages (51 in priority sitemap)
 
 ## Next steps
 1. Submit `public/sitemaps/sitemap-index.xml` to GSC → Sitemaps
