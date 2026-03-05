@@ -1,4 +1,4 @@
-# Chargebacks: What They Are & How to Reduce Them (Cluster)
+# Payment Processing Fee Comparison (Cluster)
 Generated: 2026-03-05 17:02:01
 Pillar: payments
 
@@ -7,13 +7,13 @@ Pillar: payments
 ## Navigation
 - [Back to Pillar: Payments](pillar-payments.md)
 - Related clusters:
-- [Stripe Troubleshooting](cluster-payments-stripe-troubleshooting.md)
 - [Merchant Accounts](cluster-payments-merchant-accounts.md)
+- [Ach Payments](cluster-payments-ach-payments.md)
 
 ---
 
 ## What This Cluster Is About
-Why chargebacks happen, how much they cost, and concrete steps to reduce them.
+Real fee breakdowns for Stripe, Square, PayPal, and ACH — for San Diego operators.
 
 ---
 
@@ -39,8 +39,14 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [How Ai Prevents Chargebacks San Diego](../../../how-ai-prevents-chargebacks-san-diego.html)
-- [How To Avoid Chargebacks](../../../how-to-avoid-chargebacks.html)
+- [Best Payment Processing San Diego](../../../Best-Payment-Processing-San-Diego.html)
+- [Cardiff Payment Processing](../../../Cardiff-Payment-Processing.html)
+- [Carlsbad Contractor Payments](../../../Carlsbad-Contractor-Payments.html)
+- [Crypto Payment Processing](../../../Crypto-Payment-Processing.html)
+- [Encinitas Contractor Payments](../../../Encinitas-Contractor-Payments.html)
+- [Energy Payments San Diego](../../../Energy-Payments-San-Diego.html)
+- [Free Payment Processing Setup](../../../Free-Payment-Processing-Setup.html)
+- [La Jolla Solana Payments](../../../La-Jolla-Solana-Payments.html)
 
 ---
 

@@ -1,4 +1,4 @@
-# HVAC Troubleshooting (Cluster)
+# Circuit Breaker Issues (Cluster)
 Generated: 2026-03-05 17:02:01
 Pillar: home-systems
 
@@ -7,13 +7,12 @@ Pillar: home-systems
 ## Navigation
 - [Back to Pillar: Home Systems](pillar-home-systems.md)
 - Related clusters:
-- [Ac Problems](cluster-home-systems-ac-problems.md)
-- [Heating Problems](cluster-home-systems-heating-problems.md)
+- [Electrical Problems](cluster-home-systems-electrical-problems.md)
 
 ---
 
 ## What This Cluster Is About
-What's wrong with your HVAC, how to diagnose it yourself, and what a tech will find.
+Breaker keeps tripping, won't reset, or runs hot — what it means and what to do.
 
 ---
 
@@ -39,14 +38,14 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [Ai Customer Service For Hvac Companies San Diego](../../../ai-customer-service-for-hvac-companies-san-diego.html)
-- [Ai For Hvac Contractors San Diego](../../../ai-for-hvac-contractors-san-diego.html)
-- [Ai Scheduling For Hvac Companies San Diego](../../../ai-scheduling-for-hvac-companies-san-diego.html)
-- [Ai Tools For Hvac Companies San Diego](../../../ai-tools-for-hvac-companies-san-diego.html)
-- [Best Time To Replace Hvac San Diego](../../../best-time-to-replace-hvac-san-diego.html)
-- [Cluster Hvac](../../../cluster-hvac.html)
+- [Breaker Keeps Tripping San Diego](../../../breaker-keeps-tripping-san-diego.html)
+- [Breaker Keeps Tripping](../../../breaker-keeps-tripping.html)
+- [Circuit Breaker Tripping San Diego](../../../circuit-breaker-tripping-san-diego.html)
+- [Circuit Breaker Tripping](../../../circuit-breaker-tripping.html)
 - [Commercial Hvac Issues](../../../commercial-hvac-issues.html)
-- [Commercial Hvac San Diego](../../../commercial-hvac-san-diego.html)
+- [Hvac System Noise Issues San Diego](../../../hvac-system-noise-issues-san-diego.html)
+- [Who Do I Call For Electrical Issues San Diego](../../../who-do-i-call-for-electrical-issues-san-diego.html)
+- [Who Do I Call For Plumbing Issues San Diego](../../../who-do-i-call-for-plumbing-issues-san-diego.html)
 
 ---
 

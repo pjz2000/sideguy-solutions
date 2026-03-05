@@ -1,4 +1,4 @@
-# Chargebacks: What They Are & How to Reduce Them (Cluster)
+# ACH Payments vs Credit Cards (Cluster)
 Generated: 2026-03-05 17:02:01
 Pillar: payments
 
@@ -7,13 +7,13 @@ Pillar: payments
 ## Navigation
 - [Back to Pillar: Payments](pillar-payments.md)
 - Related clusters:
-- [Stripe Troubleshooting](cluster-payments-stripe-troubleshooting.md)
-- [Merchant Accounts](cluster-payments-merchant-accounts.md)
+- [Payment Processing Fee Comparison](cluster-payments-payment-processing-fee-comparison.md)
+- [Billing Errors](cluster-payments-billing-errors.md)
 
 ---
 
 ## What This Cluster Is About
-Why chargebacks happen, how much they cost, and concrete steps to reduce them.
+When ACH is better, when it's worse, and how to set it up for your business.
 
 ---
 
@@ -39,8 +39,14 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [How Ai Prevents Chargebacks San Diego](../../../how-ai-prevents-chargebacks-san-diego.html)
-- [How To Avoid Chargebacks](../../../how-to-avoid-chargebacks.html)
+- [Carlsbad Contractor Payments](../../../Carlsbad-Contractor-Payments.html)
+- [Encinitas Contractor Payments](../../../Encinitas-Contractor-Payments.html)
+- [Energy Payments San Diego](../../../Energy-Payments-San-Diego.html)
+- [La Jolla Solana Payments](../../../La-Jolla-Solana-Payments.html)
+- [North County Solana Payments](../../../North-County-Solana-Payments.html)
+- [San Diego Contractor Payments](../../../San-Diego-Contractor-Payments.html)
+- [San Diego Field Service Payments](../../../San-Diego-Field-Service-Payments.html)
+- [San Diego Service Business Payments](../../../San-Diego-Service-Business-Payments.html)
 
 ---
 

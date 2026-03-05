@@ -1,4 +1,4 @@
-# Chargebacks: What They Are & How to Reduce Them (Cluster)
+# Invoicing & Getting Paid Faster (Cluster)
 Generated: 2026-03-05 17:02:01
 Pillar: payments
 
@@ -7,13 +7,13 @@ Pillar: payments
 ## Navigation
 - [Back to Pillar: Payments](pillar-payments.md)
 - Related clusters:
-- [Stripe Troubleshooting](cluster-payments-stripe-troubleshooting.md)
-- [Merchant Accounts](cluster-payments-merchant-accounts.md)
+- [Billing Errors](cluster-payments-billing-errors.md)
+- [Mobile Payments](cluster-payments-mobile-payments.md)
 
 ---
 
 ## What This Cluster Is About
-Why chargebacks happen, how much they cost, and concrete steps to reduce them.
+Invoice tools, payment terms, auto-reminders, and how to stop chasing clients.
 
 ---
 
@@ -39,8 +39,8 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [How Ai Prevents Chargebacks San Diego](../../../how-ai-prevents-chargebacks-san-diego.html)
-- [How To Avoid Chargebacks](../../../how-to-avoid-chargebacks.html)
+- [Best Tools For Invoicing](../../../best-tools-for-invoicing.html)
+- [How To Automate Invoicing For Small Business San Diego](../../../how-to-automate-invoicing-for-small-business-san-diego.html)
 
 ---
 

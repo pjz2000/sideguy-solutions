@@ -1,4 +1,4 @@
-# HVAC Troubleshooting (Cluster)
+# Electrical Problems San Diego (Cluster)
 Generated: 2026-03-05 17:02:01
 Pillar: home-systems
 
@@ -7,13 +7,13 @@ Pillar: home-systems
 ## Navigation
 - [Back to Pillar: Home Systems](pillar-home-systems.md)
 - Related clusters:
-- [Ac Problems](cluster-home-systems-ac-problems.md)
-- [Heating Problems](cluster-home-systems-heating-problems.md)
+- [Breaker Issues](cluster-home-systems-breaker-issues.md)
+- [Hvac Troubleshooting](cluster-home-systems-hvac-troubleshooting.md)
 
 ---
 
 ## What This Cluster Is About
-What's wrong with your HVAC, how to diagnose it yourself, and what a tech will find.
+Breakers tripping, outlets not working, flickering lights — what's safe vs. what needs an electrician.
 
 ---
 
@@ -39,14 +39,14 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [Ai Customer Service For Hvac Companies San Diego](../../../ai-customer-service-for-hvac-companies-san-diego.html)
-- [Ai For Hvac Contractors San Diego](../../../ai-for-hvac-contractors-san-diego.html)
-- [Ai Scheduling For Hvac Companies San Diego](../../../ai-scheduling-for-hvac-companies-san-diego.html)
-- [Ai Tools For Hvac Companies San Diego](../../../ai-tools-for-hvac-companies-san-diego.html)
-- [Best Time To Replace Hvac San Diego](../../../best-time-to-replace-hvac-san-diego.html)
-- [Cluster Hvac](../../../cluster-hvac.html)
-- [Commercial Hvac Issues](../../../commercial-hvac-issues.html)
-- [Commercial Hvac San Diego](../../../commercial-hvac-san-diego.html)
+- [Commercial Electrical San Diego](../../../commercial-electrical-san-diego.html)
+- [Electrical Burning Smell San Diego](../../../electrical-burning-smell-san-diego.html)
+- [Electrical Directory San Diego](../../../electrical-directory-san-diego.html)
+- [Electrical Inspection San Diego](../../../electrical-inspection-san-diego.html)
+- [Electrical Panel Upgrade](../../../electrical-panel-upgrade.html)
+- [Electrical Problems Hub San Diego](../../../electrical-problems-hub-san-diego.html)
+- [Electrical Project Quote Review San Diego](../../../electrical-project-quote-review-san-diego.html)
+- [Electrical Troubleshooting](../../../electrical-troubleshooting.html)
 
 ---
 

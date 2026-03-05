@@ -1,4 +1,4 @@
-# HVAC Troubleshooting (Cluster)
+# Thermostat Not Working (Cluster)
 Generated: 2026-03-05 17:02:01
 Pillar: home-systems
 
@@ -7,13 +7,13 @@ Pillar: home-systems
 ## Navigation
 - [Back to Pillar: Home Systems](pillar-home-systems.md)
 - Related clusters:
+- [Hvac Troubleshooting](cluster-home-systems-hvac-troubleshooting.md)
 - [Ac Problems](cluster-home-systems-ac-problems.md)
-- [Heating Problems](cluster-home-systems-heating-problems.md)
 
 ---
 
 ## What This Cluster Is About
-What's wrong with your HVAC, how to diagnose it yourself, and what a tech will find.
+Thermostat blank, wrong temp, won't respond — calibration and replacement basics.
 
 ---
 
@@ -39,14 +39,14 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [Ai Customer Service For Hvac Companies San Diego](../../../ai-customer-service-for-hvac-companies-san-diego.html)
-- [Ai For Hvac Contractors San Diego](../../../ai-for-hvac-contractors-san-diego.html)
-- [Ai Scheduling For Hvac Companies San Diego](../../../ai-scheduling-for-hvac-companies-san-diego.html)
-- [Ai Tools For Hvac Companies San Diego](../../../ai-tools-for-hvac-companies-san-diego.html)
-- [Best Time To Replace Hvac San Diego](../../../best-time-to-replace-hvac-san-diego.html)
-- [Cluster Hvac](../../../cluster-hvac.html)
-- [Commercial Hvac Issues](../../../commercial-hvac-issues.html)
-- [Commercial Hvac San Diego](../../../commercial-hvac-san-diego.html)
+- [Electrical Problems Hub San Diego](../../../electrical-problems-hub-san-diego.html)
+- [Hvac Problems Hub San Diego](../../../hvac-problems-hub-san-diego.html)
+- [Plumbing Problems Hub San Diego](../../../plumbing-problems-hub-san-diego.html)
+- [San Diego Smart Thermostat Install](../../../san-diego-smart-thermostat-install.html)
+- [San Diego Thermostat Not Responding](../../../san-diego-thermostat-not-responding.html)
+- [Smart Thermostat Installation](../../../smart-thermostat-installation.html)
+- [Thermostat Not Working San Diego](../../../thermostat-not-working-san-diego.html)
+- [Thermostat Not Working](../../../thermostat-not-working.html)
 
 ---
 

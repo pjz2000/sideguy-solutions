@@ -1,19 +1,19 @@
-# Chargebacks: What They Are & How to Reduce Them (Cluster)
+# Bitcoin Basics for Business Owners (Cluster)
 Generated: 2026-03-05 17:02:01
-Pillar: payments
+Pillar: crypto-web3
 
 ---
 
 ## Navigation
-- [Back to Pillar: Payments](pillar-payments.md)
+- [Back to Pillar: Crypto Web3](pillar-crypto-web3.md)
 - Related clusters:
-- [Stripe Troubleshooting](cluster-payments-stripe-troubleshooting.md)
-- [Merchant Accounts](cluster-payments-merchant-accounts.md)
+- [Accepting Crypto Payments](cluster-crypto-web3-accepting-crypto-payments.md)
+- [Crypto Wallet Setup](cluster-crypto-web3-crypto-wallet-setup.md)
 
 ---
 
 ## What This Cluster Is About
-Why chargebacks happen, how much they cost, and concrete steps to reduce them.
+What Bitcoin actually is, why people use it, and whether your business should care.
 
 ---
 
@@ -39,14 +39,17 @@ _(Short, jargon-free explanation of root cause.)_
 
 ## Leaf Pages in This Cluster
 _(Auto-matched from data/pillar-leaf-map.json — verify these are correct)_
-- [How Ai Prevents Chargebacks San Diego](../../../how-ai-prevents-chargebacks-san-diego.html)
-- [How To Avoid Chargebacks](../../../how-to-avoid-chargebacks.html)
+- [Solana Business Tools San Diego](../../../Solana-Business-Tools-San-Diego.html)
+- [Accept Crypto Get Cash San Diego](../../../accept-crypto-get-cash-san-diego.html)
+- [Ai Crypto Wallet Setup Help](../../../ai-crypto-wallet-setup-help.html)
+- [Blockchain Consulting](../../../blockchain-consulting.html)
+- [Blockchain Data Indexing](../../../blockchain-data-indexing.html)
 
 ---
 
 ## Internal Linking Checklist
 - [ ] Each leaf links back to this cluster page
-- [ ] Each leaf links back to pillar: payments
+- [ ] Each leaf links back to pillar: crypto-web3
 - [ ] Sideways links between leaf pages in this cluster
 - [ ] Text PJ CTA on every page
 
