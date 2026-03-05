@@ -256,6 +256,16 @@ echo "[KGB] Self-Improving Pages (marker-based upgrades)..."
 IMPROVE_LIMIT="${IMPROVE_LIMIT:-120}" python3 scripts/self-improve-pages.py
 ## SG_SELF_IMPROVE_STEP_END
 
+# SG_FINAL_BOSS_STEP
+# ── Final Boss: Auto-Refresh Authority Loops ──────────────────────────────────
+echo ""
+echo "[KGB] Final Boss: Authority Loops (blackhole + bucket links + tight loops)..."
+LOOPS_GLOBAL="${LOOPS_GLOBAL:-20}" \
+LOOPS_BUCKET="${LOOPS_BUCKET:-8}" \
+LOOPS_TIGHT="${LOOPS_TIGHT:-5}" \
+bash scripts/final-boss-loops.sh
+# SG_FINAL_BOSS_STEP_END
+
 echo ""
 echo "=== KGB MODE COMPLETE ==="
 echo "GSC submits list: ${OUT}"
