@@ -149,7 +149,7 @@ def header_html(title, canonical, desc):
 def footer_html():
     return f"""
 <footer>
-  <p><a href="/">SideGuy Solutions</a> · San Diego · <a href="sms:+17604541860">760-454-1860</a></p>
+  <p><a href="/">SideGuy Solutions</a> · San Diego · <a href="sms:+17604541860">773-544-1231</a></p>
   <p>Clarity before cost. Updated {TODAY}.</p>
 </footer>
 </body>
@@ -159,7 +159,7 @@ def cta_block():
     return """
   <div class="cta-block">
     <p>Want a real human to look at your situation — no pitch, no pressure?</p>
-    <a href="sms:+17604541860">Text PJ · 760-454-1860</a>
+    <a href="sms:+17604541860">Text PJ · 773-544-1231</a>
   </div>"""
 
 def link_grid(items):

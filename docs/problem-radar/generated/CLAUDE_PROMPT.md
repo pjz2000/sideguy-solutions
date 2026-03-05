@@ -20,7 +20,7 @@ Goal: build the most friendly, intelligent SEO knowledge platform in San Diego.
   5. Text PJ CTA: [773-544-1231](sms:+17735441231)
 - **Voice:** calm smart friend, non-jargony
 - **Inline CSS only** — no external stylesheets
-- **Phone:** 773-544-1231 / sms:+17735441231  ← use this, NOT 760-454-1860
+- **Phone:** 773-544-1231 / sms:+17735441231  ← use this, NOT 773-544-1231
 
 ## Page template
 

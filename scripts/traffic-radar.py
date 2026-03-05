@@ -320,7 +320,7 @@ def write_claude_prompt():
         f"  5. Text PJ CTA: [{PHONE}]({PHONE_SMS})",
         "- **Voice:** calm smart friend, non-jargony",
         "- **Inline CSS only** — no external stylesheets",
-        f"- **Phone:** {PHONE} / {PHONE_SMS}  ← use this, NOT 760-454-1860",
+        f"- **Phone:** {PHONE} / {PHONE_SMS}  ← use this, NOT 773-544-1231",
         "",
         "## Page template",
         "",

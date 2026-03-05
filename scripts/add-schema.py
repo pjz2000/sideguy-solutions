@@ -13,7 +13,7 @@ LOCAL_BIZ = """{
   "@type": "LocalBusiness",
   "name": "SideGuy Solutions",
   "url": "https://sideguysolutions.com",
-  "telephone": "+1-760-454-1860",
+  "telephone": "+1-773-544-1231",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "San Diego",

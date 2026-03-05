@@ -13,7 +13,7 @@ TARGET_DIGIT   = "+17735441231"           # href format (sms: / tel:)
 
 # Any past phone numbers to auto-correct
 BAD_PHONES = [
-    "760-454-1860",
+    "773-544-1231",
     "7604541860",
     "760.454.1860",
     "760 454 1860",
