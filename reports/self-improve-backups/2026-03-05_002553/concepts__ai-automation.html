@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AI Automation Explained — What It Is, How It Works | SideGuy</title>
+  <meta name="description" content="What AI automation is, how businesses use it, and where real-world automation actually works vs. where human judgment still wins."/>
+  <link rel="canonical" href="https://sideguysolutions.com/concepts/ai-automation.html"/>
+  <meta property="og:title" content="AI Automation Explained — What It Is, How It Works | SideGuy"/>
+  <meta property="og:description" content="What AI automation is, how businesses use it, and where real-world automation actually works vs. where human judgment still wins."/>
+  <meta property="og:url" content="https://sideguysolutions.com/concepts/ai-automation.html"/>
+  <meta property="og:type" content="article"/>
+  <meta name="robots" content="index,follow"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type":"ListItem","position":1,"name":"SideGuy Solutions","item":"https://sideguysolutions.com/"},
+          {"@type":"ListItem","position":2,"name":"Concepts","item":"https://sideguysolutions.com/concepts/index.html"},
+          {"@type":"ListItem","position":3,"name":"AI Automation","item":"https://sideguysolutions.com/concepts/ai-automation.html"}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need technical skills to use AI automation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Tools like Zapier, Make (Integromat), and n8n offer no-code/low-code interfaces. Most operators start with a template and customize from there. SideGuy can help you figure out which setup makes sense for your situation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does AI automation cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic workflows are often free or under $50/month. Costs scale with volume and complexity. Most small operators spend $0–$200/month and save significantly more than that in labor hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is AI automation secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends entirely on which tools you use and what data flows through them. Avoid sending sensitive customer data (SSNs, payment details) through automation platforms not specifically certified for it. For HIPAA or PCI contexts, use compliant tools only."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pick one high-volume, low-stakes process — missed call follow-up, appointment reminders, or review responses. Automate just that. Measure before expanding. Text PJ if you want a second opinion before spending money on tools."
+      }
+    }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+
+  :root {
+    --bg0:#eefcff; --bg1:#d7f5ff; --ink:#073044; --muted:#3f6173;
+    --mint:#21d3a1; --mint2:#00c7ff; --blue2:#1f7cff;
+    --r:22px; --pill:999px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body {
+    font-family: -apple-system, system-ui, Segoe UI, Roboto, Inter, sans-serif;
+    background: radial-gradient(ellipse at 60% 0%, #c5f4ff 0%, #eefcff 55%, #fff 100%);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a{color:var(--blue2);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* nav */
+  nav.bc {
+    padding: 12px 24px;
+    font-size: .8rem;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    background: rgba(255,255,255,.55);
+    backdrop-filter: blur(6px);
+  }
+  nav.bc a { color: var(--muted); }
+
+  /* layout */
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* hero */
+  .concept-badge {
+    display: inline-block;
+    background: var(--mint);
+    color: #073044;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: var(--pill);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 680px;
+    line-height: 1.65;
+  }
+
+  /* table of contents */
+  .toc {
+    background: rgba(255,255,255,.7);
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: var(--r);
+    padding: 20px 28px;
+    margin-bottom: 44px;
+    max-width: 480px;
+  }
+  .toc h3 {
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .toc ol { padding-left: 18px; }
+  .toc li { margin-bottom: 6px; font-size: .95rem; }
+
+  /* sections */
+  .concept-section { margin-bottom: 52px; }
+  .concept-section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bg1);
+    color: var(--ink);
+  }
+  .concept-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #2a4555;
+    margin-bottom: 14px;
+  }
+  .concept-section ul {
+    padding-left: 22px;
+    margin-bottom: 14px;
+  }
+  .concept-section li {
+    margin-bottom: 6px;
+    font-size: .97rem;
+    line-height: 1.6;
+    color: #2a4555;
+  }
+
+  /* definition box */
+  .def-box {
+    background: rgba(33,211,161,.12);
+    border-left: 4px solid var(--mint);
+    border-radius: 0 var(--r) var(--r) 0;
+    padding: 18px 22px;
+    margin: 20px 0 28px;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  /* key facts grid */
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .fact {
+    background: rgba(255,255,255,.75);
+    border: 1px solid rgba(0,0,0,.07);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .fact-num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--blue2);
+    margin-bottom: 4px;
+  }
+  .fact-label {
+    font-size: .8rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, #073044 0%, #0e3d58 100%);
+    border-radius: var(--r);
+    padding: 32px 36px;
+    color: #fff;
+    margin: 52px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .cta-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+  .cta-box p  { font-size: .95rem; opacity: .8; margin: 0; }
+  .cta-btn {
+    flex-shrink: 0;
+    background: var(--mint);
+    color: #073044;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: var(--pill);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .cta-btn:hover { opacity: .9; text-decoration: none; }
+
+  /* related pills */
+  .related-wrap { margin: 0 0 52px; }
+  .related-wrap h3 {
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: rgba(255,255,255,.8);
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: var(--pill);
+    padding: 6px 16px;
+    font-size: .85rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .pill:hover { background: var(--mint); color: #073044; text-decoration: none; }
+
+  /* FAQ */
+  .faq { margin-bottom: 52px; }
+  .faq h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bg1);
+  }
+  .faq-q {
+    background: rgba(255,255,255,.7);
+    border: 1px solid rgba(0,0,0,.07);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+  .faq-q strong { display: block; margin-bottom: 6px; font-size: .97rem; }
+  .faq-q p { font-size: .93rem; color: var(--muted); line-height: 1.6; margin:0; }
+
+  /* floating */
+  .floating {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+  }
+  .floatBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0e3d58, #073044);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: var(--pill);
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  }
+  .floatBtn:hover { opacity: .92; text-decoration: none; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: .8rem;
+    color: var(--muted);
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+
+  @media(max-width:600px) {
+    .cta-box { flex-direction: column; gap: 18px; }
+    .floating { bottom: 16px; right: 16px; }
+  }
+
+  </style>
+</head>
+<body>
+
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a> › <a href="/concepts/index.html">Concepts</a> › AI Automation
+</nav>
+
+<main class="wrap">
+
+  <div class="concept-badge">Concept Guide</div>
+  <h1>AI Automation</h1>
+  <p class="lede">AI automation uses artificial intelligence to perform tasks traditionally done by humans — from scheduling reminders to analyzing documents. Understanding where it works well (and where it fails) is the difference between saving hours and making expensive mistakes.</p>
+
+  <div class="def-box">
+    <strong>Definition:</strong> AI automation is the use of machine learning, natural language processing, or rule-based AI systems to execute repeatable tasks without continuous human input. It's distinct from traditional automation in that it can handle variability — unstructured data, natural language, and context-dependent decisions.
+  </div>
+
+  <div class="facts-grid">
+      <div class="fact">
+        <div class="fact-num">~40%</div>
+        <div class="fact-label">of small business tasks are automatable with current AI</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">$0</div>
+        <div class="fact-label">in software cost for basic starter workflows (Zapier free tier, Make, n8n)</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">3–8 hrs/week</div>
+        <div class="fact-label">typical time saved by contractors using AI scheduling + follow-up</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">2026</div>
+        <div class="fact-label">year most SMBs will have at least one AI-assisted workflow</div>
+      </div>
+  </div>
+
+  <div class="toc">
+    <h3>On This Page</h3>
+    <ol>
+      <li><a href="#what">What AI Automation Is</a></li>
+      <li><a href="#types">Common Types</a></li>
+      <li><a href="#where">Where It Works (and Where It Doesn't)</a></li>
+      <li><a href="#operators">How Operators Use It</a></li>
+      <li><a href="#human">The Human Layer</a></li>
+      <li><a href="#faq">Frequently Asked Questions</a></li>
+    </ol>
+  </div>
+
+
+  <div class="concept-section" id="what">
+    <h2>What AI Automation Is</h2>
+    <p>AI automation refers to the use of AI systems — machine learning models, large language models, or structured logic engines — to perform tasks that previously required human time and judgment.</p>
+    <p>It is not the same as traditional automation (like a scheduled email blast). AI automation can handle variability: interpreting a customer message, deciding which category it belongs to, generating a draft reply, and routing it to the right team member.</p>
+    <p>The key distinction: traditional automation follows fixed rules. AI automation can handle exceptions.</p>
+  </div>
+
+  <div class="concept-section" id="types">
+    <h2>Common Types of AI Automation</h2>
+    <p>The following categories cover the majority of real-world operator use cases:</p>
+    <ul>
+      <li><strong>Customer intake automation</strong> — AI reads incoming messages, categorizes the request, and routes or replies</li>
+      <li><strong>Scheduling and reminders</strong> — AI holds calendar logic, sends reminders, reschedules based on replies</li>
+      <li><strong>Document summarization</strong> — AI reads long documents (contracts, intakes, call transcripts) and outputs key points</li>
+      <li><strong>Email and SMS follow-up</strong> — Automated sequences that feel personal because they're context-aware</li>
+      <li><strong>Workflow orchestration</strong> — Multi-step automations: trigger → enrich → route → notify → log</li>
+      <li><strong>Marketing content generation</strong> — Drafting posts, emails, and product descriptions at scale</li>
+      <li><strong>Review response systems</strong> — Monitoring and drafting replies to Google/Yelp reviews</li>
+    </ul>
+  </div>
+
+  <div class="concept-section" id="where">
+    <h2>Where It Works — and Where It Doesn't</h2>
+    <p>AI automation works best on tasks that are: high-volume, repetitive, text-based, and tolerant of occasional errors.</p>
+    <p>It struggles with: tasks requiring empathy, complex legal or ethical judgment, anything with high stakes and low error tolerance, and situations where context changes radically per case.</p>
+    <ul>
+      <li>✅ Works well: intake triage, appointment reminders, FAQ responses, invoice generation</li>
+      <li>✅ Works well: review monitoring, lead follow-up sequences, content first drafts</li>
+      <li>⚠️ Use with caution: customer complaint resolution, pricing decisions, hiring</li>
+      <li>❌ Not ready: medical diagnosis, legal advice, situations requiring deep empathy</li>
+    </ul>
+  </div>
+
+  <div class="concept-section" id="operators">
+    <h2>How Operators Are Using It</h2>
+    <p>Real-world adoption patterns from San Diego and similar markets:</p>
+    <p>Contractors are using AI to auto-respond to missed calls with a text, book a callback time, and log the lead in their CRM — without touching their phone until the appointment is confirmed.</p>
+    <p>Restaurants are using AI to respond to Google reviews within 4 hours, maintain consistent tone, and flag anything requiring a manager's attention.</p>
+    <p>Medical offices are using AI intake forms that summarize the patient's stated issue before the front desk ever reads it, cutting intake time significantly.</p>
+  </div>
+
+  <div class="concept-section" id="human">
+    <h2>The Human Layer</h2>
+    <p>The most common mistake operators make with AI automation is removing the human review step too early.</p>
+    <p>Effective automation includes a human checkpoint for anything that affects money, trust, or a relationship. The AI handles volume; the human handles exceptions and edge cases.</p>
+    <p>SideGuy's philosophy: automate the boring, protect the important. AI should reduce the number of decisions a human has to make — not eliminate the human from decisions that matter.</p>
+  </div>
+
+
+  <div class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-q">
+      <strong>Do I need technical skills to use AI automation?</strong>
+      <p>No. Tools like Zapier, Make (Integromat), and n8n offer no-code/low-code interfaces. Most operators start with a template and customize from there. SideGuy can help you figure out which setup makes sense for your situation.</p>
+    </div>
+    <div class="faq-q">
+      <strong>How much does AI automation cost?</strong>
+      <p>Basic workflows are often free or under $50/month. Costs scale with volume and complexity. Most small operators spend $0–$200/month and save significantly more than that in labor hours.</p>
+    </div>
+    <div class="faq-q">
+      <strong>Is AI automation secure?</strong>
+      <p>It depends entirely on which tools you use and what data flows through them. Avoid sending sensitive customer data (SSNs, payment details) through automation platforms not specifically certified for it. For HIPAA or PCI contexts, use compliant tools only.</p>
+    </div>
+    <div class="faq-q">
+      <strong>How do I start?</strong>
+      <p>Pick one high-volume, low-stakes process — missed call follow-up, appointment reminders, or review responses. Automate just that. Measure before expanding. Text PJ if you want a second opinion before spending money on tools.</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div>
+      <h3>Still have questions? Text PJ.</h3>
+      <p>Real human, San Diego. No pitch — just a straight answer on what makes sense for your situation.</p>
+    </div>
+    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+  </div>
+
+  <div class="related-wrap">
+    <h3>Related Knowledge</h3>
+    <div class="pills">
+      <a class="pill" href="/pillars/ai-automation.html">AI Automation Pillar</a>
+      <a class="pill" href="/clusters/ai-workflow-automation.html">Workflow Automation</a>
+      <a class="pill" href="/clusters/ai-customer-service.html">AI Customer Service</a>
+      <a class="pill" href="/clusters/ai-scheduling.html">Scheduling Automation</a>
+      <a class="pill" href="/generated/ai-automation-for-contractors.html">AI for Contractors</a>
+      <a class="pill" href="/generated/ai-automation-for-plumbers.html">AI for Plumbers</a>
+      <a class="pill" href="/concepts/prediction-markets.html">Prediction Markets</a>
+      <a class="pill" href="/concepts/crypto-payments.html">Crypto Payments</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/">SideGuy Solutions</a> · San Diego ·
+    <a href="/concepts/index.html">All Concepts</a> ·
+    <a href="tel:+17735441231">773-544-1231</a>
+    <br><small>Page updated 2026-03-04</small>
+  </footer>
+
+
+<section style="margin-top:26px;padding-top:14px;border-top:2px solid #d7f5ff">
+<h2 style="font-size:1.05rem;font-weight:800;margin-bottom:10px">Related Guides</h2>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<!-- KGB_LINKS -->
+  <a href="/pillars/ai-automation.html" style="display:inline-block;border:1px solid #d7f5ff;border-radius:999px;padding:7px 14px;text-decoration:none;color:#073044;font-size:.84rem;font-weight:500;background:rgba(255,255,255,.8)">Ai Automation</a>
+  <a href="/pillars/ai-automation-master-guide.html" style="display:inline-block;border:1px solid #d7f5ff;border-radius:999px;padding:7px 14px;text-decoration:none;color:#073044;font-size:.84rem;font-weight:500;background:rgba(255,255,255,.8)">Ai Automation Master Guide</a>
+  <a href="/generated/ai-email-followup-automation.html" style="display:inline-block;border:1px solid #d7f5ff;border-radius:999px;padding:7px 14px;text-decoration:none;color:#073044;font-size:.84rem;font-weight:500;background:rgba(255,255,255,.8)">Ai Email Followup Automation</a>
+  <a href="/generated/ai-customer-intake-automation.html" style="display:inline-block;border:1px solid #d7f5ff;border-radius:999px;padding:7px 14px;text-decoration:none;color:#073044;font-size:.84rem;font-weight:500;background:rgba(255,255,255,.8)">Ai Customer Intake Automation</a>
+  <a href="/generated/ai-automation-workflows.html" style="display:inline-block;border:1px solid #d7f5ff;border-radius:999px;padding:7px 14px;text-decoration:none;color:#073044;font-size:.84rem;font-weight:500;background:rgba(255,255,255,.8)">Ai Automation Workflows</a>
+  <a href="/generated/ai-automation-roi.html" style="display:inline-block;border:1px solid #d7f5ff;border-radius:999px;padding:7px 14px;text-decoration:none;color:#073044;font-size:.84rem;font-weight:500;background:rgba(255,255,255,.8)">Ai Automation Roi</a>
+</div>
+</section>
+<!-- SG:RELATED_GUIDES_START -->
+<section class="sgRelatedGuides" aria-label="Related Guides">
+  <div class="sgRelatedGuides__head">
+    <h2>Related Guides</h2>
+    <div class="sgRelatedGuides__sub">Internal links to help operators go deeper (AI explains it, humans resolve it).</div>
+  </div>
+  <div class="sgRelatedGuides__grid">
+    <a class="sgpill" href="/concepts/automation-workflows.html" title="Automation Workflows Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">Automation Workflows Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/crm-automation.html" title="CRM Automation Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">CRM Automation Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/invoice-automation.html" title="Invoice Automation Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">Invoice Automation Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/small-business-automation.html" title="Small Business Automation Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">Small Business Automation Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/ai-agents.html" title="AI Agents Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">AI Agents Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/ai-assistants.html" title="AI Assistants Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">AI Assistants Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/ai-workflows.html" title="AI Workflows Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">AI Workflows Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/chargebacks.html" title="Chargebacks Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">Chargebacks Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/stablecoins.html" title="Stablecoins Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">Stablecoins Explained — Operator Guide</span></a>
+    <a class="sgpill" href="/concepts/ai-call-agents.html" title="AI Call Agents Explained — Operator Guide"><span class="sgpill__k">concepts</span><span class="sgpill__t">AI Call Agents Explained — Operator Guide</span></a>
+  </div>
+  <div class="sgRelatedGuides__cta">
+    <a class="sgCtaBtn" href="sms:+17735441231">Text PJ</a>
+    <span class="sgmuted">Fast clarity · No pressure · 773-544-1231</span>
+  </div>
+</section>
+<style>
+  .sgRelatedGuides{margin:28px 0 8px;padding:18px;border-radius:16px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.10);}
+  .sgRelatedGuides__head h2{margin:0;font-size:18px;}
+  .sgRelatedGuides__sub{margin-top:6px;opacity:.85;font-size:13px;}
+  .sgRelatedGuides__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px;}
+  .sgpill{display:flex;gap:10px;align-items:flex-start;text-decoration:none;padding:12px;border-radius:14px;
+    border:1px solid rgba(0,0,0,.10);background:rgba(0,0,0,.05);transition:border-color .15s,transform .15s;}
+  .sgpill:hover{transform:translateY(-1px);border-color:rgba(0,180,140,.35);}
+  .sgpill__k{font-size:11px;opacity:.65;min-width:72px;text-transform:uppercase;letter-spacing:.6px;}
+  .sgpill__t{font-size:13px;line-height:1.25;opacity:.95;}
+  .sgRelatedGuides__cta{display:flex;gap:12px;align-items:center;margin-top:12px;}
+  .sgCtaBtn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;
+    background:#073044;color:#fff;text-decoration:none;font-weight:700;font-size:14px;}
+  .sgmuted{opacity:.7;font-size:12px;}
+</style>
+<!-- SG:RELATED_GUIDES_END -->
+</main>
+
+<div class="floating">
+  <a class="floatBtn" href="sms:+17735441231" aria-label="Text PJ">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    Text PJ · 773-544-1231
+  </a>
+</div>
+
+
+<!-- SG_TOPGUIDES_START -->
+<section class="sgtg-block" aria-label="Top Guides">
+  <style>
+  .sgtg-block{margin:28px 0 12px;padding:18px 20px;border-radius:16px;
+    border:1px solid rgba(7,48,68,.10);background:rgba(255,255,255,.55);}
+  .sgtg-block h3{margin:0 0 10px;font-size:16px;color:#073044;}
+  .sgtg-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .sgtg-pill{display:inline-block;border:1px solid rgba(7,48,68,.12);
+    border-radius:999px;padding:7px 14px;font-size:13px;color:#073044;
+    text-decoration:none;background:#fff;}
+  .sgtg-pill:hover{background:#eefcff;text-decoration:none;}
+  .sgtg-cta{margin-top:12px;font-size:13px;color:#3f6173;}
+  .sgtg-cta a{color:#1f7cff;}
+  </style>
+  <h3>Top Guides</h3>
+  <div class="sgtg-pills">
+    <a class="sgtg-pill" href="/concepts/invoice-automation.html">Invoice Automation Explained — Operator Guide | SideGuy Solutions</a>
+    <a class="sgtg-pill" href="/concepts/crm-automation.html">CRM Automation Explained — Operator Guide | SideGuy Solutions</a>
+    <a class="sgtg-pill" href="/concepts/automation-workflows.html">Automation Workflows Explained — Operator Guide | SideGuy Solutions</a>
+    <a class="sgtg-pill" href="/concepts/small-business-automation.html">Small Business Automation Explained — Operator Guide | SideGuy Solutions</a>
+    <a class="sgtg-pill" href="/pillars/ai-automation.html">AI Automation — SideGuy Concept Guide</a>
+    <a class="sgtg-pill" href="/pillars/ai-automation-master-guide.html">AI Automation Master Guide · SideGuy San Diego</a>
+    <a class="sgtg-pill" href="/longtail/ai-automation-for-restaurants.html">AI Automation for Restaurants | SideGuy</a>
+    <a class="sgtg-pill" href="/longtail/ai-automation-for-contractors.html">AI Automation for Contractors | SideGuy</a>
+  </div>
+  <p class="sgtg-cta">Not finding what you need? <a href="sms:+17735441231">Text PJ · 773-544-1231</a></p>
+  <!-- updated:2026-03-04T22:51:17Z -->
+</section>
+<!-- SG_TOPGUIDES_END -->
+<!-- SG_BLACKHOLE_START -->
+<div class="sg-blackhole">
+  <style scoped>
+    .sg-blackhole{margin:28px 0;padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(0,0,0,.18)}
+    .sg-blackhole h3{margin:0 0 10px;font-size:14px;color:rgba(255,255,255,.75);letter-spacing:.3px}
+    .sg-blackhole ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
+    .sg-blackhole li a{display:block;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.12);font-size:13px;color:rgba(0,255,200,.85);text-decoration:none}
+    .sg-blackhole li a:hover{background:rgba(0,255,200,.07);text-decoration:underline}
+    .bh-bkt{display:inline-block;margin-left:6px;font-size:11px;color:rgba(255,255,255,.38);vertical-align:middle}
+  </style>
+  <h3>🔥 Featured Guides</h3>
+  <ul>
+        <li><a href="/pillars/ai-automation-master-guide.html">AI Automation Master Guide · SideGuy San Diego</a><span class="bh-bkt">pillars</span></li>
+        <li><a href="/business-automation-san-diego.html">Business Automation San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/ac-blowing-warm-air.html">AC Blowing Warm Air · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/ac-repair-san-diego.html">AC Repair San Diego — What to Check First | SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/agent-payments-explained.html">Agent Payments Explained · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/AI-integration-accelerator.html">AI Integration Accelerator · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/ac-not-blowing-cold-air.html">AC Not Blowing Cold Air · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/concepts/index.html">Concept Guides — SideGuy Solutions | Business, Payments, AI</a><span class="bh-bkt">concepts</span></li>
+        <li><a href="/concepts/ai-automation.html">AI Automation Explained — What It Is, How It Works | SideGuy</a><span class="bh-bkt">concepts</span></li>
+        <li><a href="/concepts/crypto-payments.html">Crypto Payments Explained — Blockchain Settlement for Business | SideGuy</a><span class="bh-bkt">concepts</span></li>
+        <li><a href="/payments.html">Payments · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/concepts/prediction-markets.html">Prediction Markets Explained — Kalshi, Polymarket, How They Work | SideGuy</a><span class="bh-bkt">concepts</span></li>
+        <li><a href="/local-business-payments.html">Local Business Payments · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/ai-business-solutions-san-diego.html">AI Business Solutions San Diego — Automations That Actually Save Time | SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/mobile-payment-systems-san-diego.html">Mobile Payment Systems San Diego — Lower Fees + Faster Settlement | SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/how-credit-card-processing-fees-work.html">How Credit Card Processing Fees Work — San Diego Small Business Guide | SideGuy Solutions</a><span class="bh-bkt">root</span></li>
+        <li><a href="/electronic-payment-solutions-san-diego.html">Electronic Payment Solutions San Diego — Tap, ACH, Wallets Explained | SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/payment-processing-san-diego.html">Payment Processing San Diego — The Complete Local Guide · SideGuy Solutions</a><span class="bh-bkt">root</span></li>
+        <li><a href="/ai-crypto-wallet-setup-help.html">AI Crypto Wallet Setup Help · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+        <li><a href="/ai-advice-gone-wrong-need-human-help.html">AI Advice Gone Wrong Need Human Help · San Diego · SideGuy</a><span class="bh-bkt">root</span></li>
+  </ul>
+</div>
+<!-- SG_BLACKHOLE_END -->
+</body>
+</html>

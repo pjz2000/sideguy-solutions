@@ -85,6 +85,17 @@ else
 fi
 # SG_FUTURE_RADAR_STEP_END
 
+# SG_FUTURE_AUTO_BUILDER_STEP
+# ── 2c) Future Auto Builder ──────────────────────────────────────────────────
+echo ""
+echo "[2c] Future Auto Builder (build pages from radar topics)"
+if [ -f "scripts/future-auto-builder.py" ]; then
+  python3 scripts/future-auto-builder.py
+else
+  echo "  scripts/future-auto-builder.py not found (ok)."
+fi
+# SG_FUTURE_AUTO_BUILDER_STEP_END
+
 # ── 3) Traffic Gravity scoring ────────────────────────────────────────────────
 echo ""
 echo "[3/9] Run Traffic Gravity (scoring)"
@@ -237,6 +248,13 @@ final = hdrs + urls[:300]
 open(path, "w", encoding="utf-8").write("\n".join(final) + "\n")
 print(f"  Wrote {len(final)} lines to {path}")
 PY
+
+## SG_SELF_IMPROVE_STEP
+# ── Self-Improving Pages ─────────────────────────────────────────────────────
+echo ""
+echo "[KGB] Self-Improving Pages (marker-based upgrades)..."
+IMPROVE_LIMIT="${IMPROVE_LIMIT:-120}" python3 scripts/self-improve-pages.py
+## SG_SELF_IMPROVE_STEP_END
 
 echo ""
 echo "=== KGB MODE COMPLETE ==="
