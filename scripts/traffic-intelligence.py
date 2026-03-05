@@ -31,7 +31,7 @@ TIMESTAMP = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 INPUT_CSV = 'docs/traffic-intel/gsc_export_template.csv'
 
 # Thresholds (tunable)
-MIN_IMPRESSIONS = 50
+MIN_IMPRESSIONS = 5
 MAX_POSITION = 30
 
 os.makedirs('docs/traffic-intel/generated', exist_ok=True)
