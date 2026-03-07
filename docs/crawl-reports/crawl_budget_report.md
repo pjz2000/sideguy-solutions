@@ -1,6 +1,6 @@
 # Crawl Budget Optimization Report
 
-Generated: 2026-03-05
+Generated: 2026-03-07
 
 | Sitemap | URLs | Priority |
 |---|---:|---|
@@ -9,10 +9,10 @@ Generated: 2026-03-05
 
 ## Top 10 priority clusters
 
-1. `(root)` — 3997 pages (200 in priority sitemap)
+1. `(root)` — 13545 pages (200 in priority sitemap)
 2. `pages` — 2573 pages (200 in priority sitemap)
 3. `problems` — 2270 pages (200 in priority sitemap)
-4. `hubs` — 656 pages (200 in priority sitemap)
+4. `hubs` — 1748 pages (200 in priority sitemap)
 5. `auto-intent-pages` — 256 pages (200 in priority sitemap)
 6. `autogen` — 64 pages (64 in priority sitemap)
 7. `nodes` — 60 pages (60 in priority sitemap)
