@@ -4,12 +4,37 @@ Generated: March 07, 2026
 
 ## Payments
 
+- why is payment processor fees too high so expensive cost san diego | score 53 | intents: money, local, education
+- payment processor fees too high for medical offices cost san diego | score 49 | intents: money, local, operator
+- why is how to lower payment processing fees so expensive cost san diego | score 49 | intents: money, local, education
+- payment processor fees too high for contractors cost san diego | score 48 | intents: money, local, operator
+- why is payment processor fees too high so expensive for medical offices | score 48 | intents: money, operator, education
+- why is payment processor fees too high so expensive san diego | score 48 | intents: money, local, education
+- contractor leads too expensive vs square cost san diego | score 47 | intents: money, comparison, local
+- contractor leads too expensive vs stripe cost san diego | score 47 | intents: money, comparison, local
+- payment processor fees too high cheaper options cost san diego | score 47 | intents: money, local
+- payment processor fees too high cost chula vista | score 47 | intents: money, local
+- payment processor fees too high not working cost san diego | score 47 | intents: money, urgency, local
+- payment processor fees too high save money cost san diego | score 47 | intents: money, local
+- payment processor fees too high stopped working cost san diego | score 47 | intents: money, urgency, local
+- payment processor fees too high urgent help cost san diego | score 47 | intents: money, urgency, local
+- why is payment processor fees too high so expensive for contractors | score 47 | intents: money, operator, education
+- how to lower payment processing fees for medical offices cost san diego | score 46 | intents: money, local, operator
+- payment processor fees too high broken cost san diego | score 46 | intents: money, urgency, local
+- payment processor fees too high issue cost san diego | score 46 | intents: money, urgency, local
 - payment processor fees too high near me chula vista | score 46 | intents: money, local
-- payment processor fees too high cost chula vista | score 43 | intents: money, local
+- payment processor fees too high problem cost san diego | score 46 | intents: money, urgency, local
+- payment processor fees too high quote cost san diego | score 46 | intents: money, local
+- payment processor fees too high roi cost san diego | score 46 | intents: money, local
+- why is payment processor fees too high so expensive explained | score 46 | intents: money, education
+- how do i fix payment processor fees too high cost san diego | score 45 | intents: money, urgency, local, education
+- how to lower payment processing fees for contractors cost san diego | score 45 | intents: money, local, operator
+- payment processor fees too high for high ticket service business cost san diego | score 45 | intents: money, local
+- payment processor fees too high for small business chula cost san diego | score 45 | intents: money, local, operator
+- payment processor fees too high for small business chula vista | score 45 | intents: money, local, operator
+- why is how to lower payment processing fees so expensive san diego | score 45 | intents: money, local, education
+- why is payment processor fees too high so expensive cost | score 45 | intents: money, education
 - how to lower payment processing fees near me chula vista | score 42 | intents: money, local
-- payment processing fees too high cost san diego | score 41 | intents: money, local
-- payment processor fees too high cost san diego | score 41 | intents: money, local
-- payment processor fees too high for small business chula vista | score 41 | intents: money, local, operator
 - payment processor fees too high near me del mar | score 40 | intents: money, local
 - payment processor fees too high near me la jolla | score 40 | intents: money, local
 - payment processor fees too high near me san diego | score 40 | intents: money, local
@@ -19,34 +44,11 @@ Generated: March 07, 2026
 - payment processor fees too high near me coronado | score 39 | intents: money, local
 - payment processor fees too high near me encinitas | score 39 | intents: money, local
 - payment processor fees too high near me escondido | score 39 | intents: money, local
-- payment processor fees too high near me oceanside | score 39 | intents: money, local
-- payment processor fees too high near me vista | score 39 | intents: money, local
-- payment processor fees too high chula vista | score 38 | intents: money, local
-- square vs stripe fees near me chula vista | score 38 | intents: money, comparison, local
-- payment processor fees too high cost del mar | score 37 | intents: money, local
-- payment processor fees too high cost la jolla | score 37 | intents: money, local
-- payment processor fees too high cost san marcos | score 37 | intents: money, local
-- energy company payment systems near me chula vista | score 36 | intents: local
-- how to lower payment processing fees for small business chula vista | score 36 | intents: money, local, operator
-- how to lower payment processing fees near me del mar | score 36 | intents: money, local
-- how to lower payment processing fees near me la jolla | score 36 | intents: money, local
-- how to lower payment processing fees near me san diego | score 36 | intents: money, local
-- how to lower payment processing fees near me san marcos | score 36 | intents: money, local
-- payment processing fees too high for medical offices | score 36 | intents: money, operator
-- payment processing fees too high san diego | score 36 | intents: money, local
-- payment processor fees too high cost carlsbad | score 36 | intents: money, local
-- payment processor fees too high cost coronado | score 36 | intents: money, local
-- payment processor fees too high cost encinitas | score 36 | intents: money, local
-- payment processor fees too high cost escondido | score 36 | intents: money, local
-- payment processor fees too high cost oceanside | score 36 | intents: money, local
-- payment processor fees too high cost vista | score 36 | intents: money, local
-- payment processor fees too high for medical offices | score 36 | intents: money, operator
-- payment processor fees too high san diego | score 36 | intents: money, local
-- stripe fees for small business near me chula vista | score 36 | intents: money, local, operator
-- how to lower payment processing fees near me carlsbad | score 35 | intents: money, local
 
 ## Automation
 
+- contractor leads too expensive fees explained | score 48 | intents: money, education
+- contractor leads too expensive for medical offices explained | score 46 | intents: operator, education
 - medical device software support near me chula vista | score 41 | intents: local
 - compliance software explained near me chula vista | score 40 | intents: local, education
 - hvac repair cost near me chula vista | score 39 | intents: money, local
@@ -72,7 +74,6 @@ Generated: March 07, 2026
 - medical device software support near me escondido | score 34 | intents: local
 - medical device software support near me oceanside | score 34 | intents: local
 - medical device software support near me vista | score 34 | intents: local
-- ai scheduling software for contractors cost san diego | score 33 | intents: money, local, operator
 - compliance software explained near me carlsbad | score 33 | intents: local, education
 - compliance software explained near me coronado | score 33 | intents: local, education
 - compliance software explained near me encinitas | score 33 | intents: local, education
@@ -86,14 +87,20 @@ Generated: March 07, 2026
 - medical device software support chula vista | score 33 | intents: local
 - medical office software setup cost chula vista | score 33 | intents: money, local
 - ai automation for small business for small business chula vista | score 32 | intents: local, operator
-- ai chatbot for local business near me chula vista | score 32 | intents: local, operator
 
 ## Local Services
 
+- contractor leads too expensive cost chula vista | score 51 | intents: money, local
+- contractor leads too expensive for small business chula vista | score 49 | intents: local, operator
+- contractor leads too expensive near me chula vista | score 48 | intents: local
+- contractor leads too expensive chula vista | score 46 | intents: local
+- contractor leads too expensive cost del mar | score 45 | intents: money, local
+- contractor leads too expensive cost la jolla | score 45 | intents: money, local
+- contractor leads too expensive cost san diego | score 45 | intents: money, local
+- contractor leads too expensive cost san marcos | score 45 | intents: money, local
 - electrical contractor seo near me chula vista | score 35 | intents: local
 - solar install cost near me chula vista | score 34 | intents: money, local
 - electrical contractor seo cost chula vista | score 32 | intents: money, local
-- contractor leads too expensive near me chula vista | score 31 | intents: local
 - plumbing website not ranking near me chula vista | score 31 | intents: local
 - electrical contractor seo for small business chula vista | score 30 | intents: local, operator
 - electrical contractor seo near me del mar | score 29 | intents: local
@@ -101,8 +108,6 @@ Generated: March 07, 2026
 - electrical contractor seo near me san diego | score 29 | intents: local
 - electrical contractor seo near me san marcos | score 29 | intents: local
 - solar install cost for small business chula vista | score 29 | intents: money, local, operator
-- contractor leads too expensive cost chula vista | score 28 | intents: money, local
-- electric vehicle charger installation permit cost san diego | score 28 | intents: money, local
 - electrical contractor seo near me carlsbad | score 28 | intents: local
 - electrical contractor seo near me coronado | score 28 | intents: local
 - electrical contractor seo near me encinitas | score 28 | intents: local
@@ -122,59 +127,50 @@ Generated: March 07, 2026
 - solar install cost near me escondido | score 27 | intents: money, local
 - solar install cost near me oceanside | score 27 | intents: money, local
 - solar install cost near me vista | score 27 | intents: money, local
-- contractor leads too expensive for small business chula vista | score 26 | intents: local, operator
 - electrical contractor seo cost del mar | score 26 | intents: money, local
 - electrical contractor seo cost la jolla | score 26 | intents: money, local
 - electrical contractor seo cost san diego | score 26 | intents: money, local
-- electrical contractor seo cost san marcos | score 26 | intents: money, local
-- plumbing website not ranking for small business chula vista | score 26 | intents: local, operator
-- solar install cost chula vista | score 26 | intents: money, local
-- contractor leads too expensive near me del mar | score 25 | intents: local
 
 ## Marketing
 
-- google ads not converting near me chula vista | score 31 | intents: local
-- seo agency too expensive near me chula vista | score 31 | intents: local
-- website not getting leads near me chula vista | score 31 | intents: local
-- google ads not converting cost chula vista | score 28 | intents: money, local
-- seo agency too expensive cost chula vista | score 28 | intents: money, local
-- website not getting leads cost chula vista | score 28 | intents: money, local
-- local seo for contractors cost san diego | score 27 | intents: money, local, operator
-- google ads not converting for small business chula vista | score 26 | intents: local, operator
-- seo agency too expensive for small business chula vista | score 26 | intents: local, operator
-- website not getting leads for small business chula vista | score 26 | intents: local, operator
-- google ads not converting near me del mar | score 25 | intents: local
-- google ads not converting near me la jolla | score 25 | intents: local
-- google ads not converting near me san diego | score 25 | intents: local
-- google ads not converting near me san marcos | score 25 | intents: local
-- seo agency too expensive near me del mar | score 25 | intents: local
-- seo agency too expensive near me la jolla | score 25 | intents: local
-- seo agency too expensive near me san diego | score 25 | intents: local
-- seo agency too expensive near me san marcos | score 25 | intents: local
-- website not getting leads near me del mar | score 25 | intents: local
-- website not getting leads near me la jolla | score 25 | intents: local
-- website not getting leads near me san diego | score 25 | intents: local
-- website not getting leads near me san marcos | score 25 | intents: local
-- google ads not converting near me carlsbad | score 24 | intents: local
-- google ads not converting near me coronado | score 24 | intents: local
-- google ads not converting near me encinitas | score 24 | intents: local
-- google ads not converting near me escondido | score 24 | intents: local
-- google ads not converting near me oceanside | score 24 | intents: local
-- google ads not converting near me vista | score 24 | intents: local
-- seo agency too expensive near me carlsbad | score 24 | intents: local
-- seo agency too expensive near me coronado | score 24 | intents: local
-- seo agency too expensive near me encinitas | score 24 | intents: local
-- seo agency too expensive near me escondido | score 24 | intents: local
-- seo agency too expensive near me oceanside | score 24 | intents: local
-- seo agency too expensive near me vista | score 24 | intents: local
-- website not getting leads near me carlsbad | score 24 | intents: local
-- website not getting leads near me coronado | score 24 | intents: local
-- website not getting leads near me encinitas | score 24 | intents: local
-- website not getting leads near me escondido | score 24 | intents: local
-- website not getting leads near me oceanside | score 24 | intents: local
-- website not getting leads near me vista | score 24 | intents: local
-
-## General
-
-- ach vs credit card fees cost san diego | score 27 | intents: money, comparison, local
+- contractor leads too expensive fees cost san diego | score 55 | intents: money, local
+- contractor leads too expensive for medical offices cost san diego | score 53 | intents: money, local, operator
+- contractor leads too expensive cheaper options cost san diego | score 51 | intents: money, local
+- contractor leads too expensive not working cost san diego | score 51 | intents: money, urgency, local
+- contractor leads too expensive save money cost san diego | score 51 | intents: money, local
+- contractor leads too expensive stopped working cost san diego | score 51 | intents: money, urgency, local
+- contractor leads too expensive urgent help cost san diego | score 51 | intents: money, urgency, local
+- contractor leads too expensive broken cost san diego | score 50 | intents: money, urgency, local
+- contractor leads too expensive fees for medical offices | score 50 | intents: money, operator
+- contractor leads too expensive fees san diego | score 50 | intents: money, local
+- contractor leads too expensive for high ticket service business cost san diego | score 50 | intents: money, local
+- contractor leads too expensive issue cost san diego | score 50 | intents: money, urgency, local
+- contractor leads too expensive problem cost san diego | score 50 | intents: money, urgency, local
+- contractor leads too expensive quote cost san diego | score 50 | intents: money, local
+- contractor leads too expensive roi cost san diego | score 50 | intents: money, local
+- contractor leads too expensive for small business chula cost san diego | score 49 | intents: money, local, operator
+- how do i fix contractor leads too expensive cost san diego | score 49 | intents: money, urgency, local, education
+- why is contractor leads too expensive so expensive cost san diego | score 49 | intents: money, local, education
+- why is website not getting leads so expensive cost san diego | score 49 | intents: money, local, education
+- contractor leads too expensive for local business cost san diego | score 48 | intents: money, local, operator
+- contractor leads too expensive for medical offices san diego | score 48 | intents: local, operator
+- contractor leads too expensive for owner operators cost san diego | score 48 | intents: money, local
+- contractor leads too expensive for service business cost san diego | score 48 | intents: money, local, operator
+- contractor leads too expensive for small business cost san diego | score 48 | intents: money, local, operator
+- contractor leads too expensive how it works cost san diego | score 48 | intents: money, local, education
+- contractor leads too expensive vs manual process cost san diego | score 48 | intents: money, comparison, local
+- how does contractor leads too expensive work cost san diego | score 48 | intents: money, local
+- how much does contractor leads too expensive cost san diego | score 48 | intents: money, local
+- is contractor leads too expensive worth it cost san diego | score 48 | intents: money, local
+- who helps with contractor leads too expensive cost san diego | score 48 | intents: money, local
+- contractor leads too expensive fees cost | score 47 | intents: money
+- contractor leads too expensive for contractors cost san diego | score 47 | intents: money, local, operator
+- contractor leads too expensive for restaurants cost san diego | score 47 | intents: money, local, operator
+- contractor leads too expensive vs quickbooks cost san diego | score 47 | intents: money, comparison, local
+- contractor leads too expensive worth it cost san diego | score 47 | intents: money, local
+- website not getting leads fees cost san diego | score 47 | intents: money, local
+- what is contractor leads too expensive cost san diego | score 47 | intents: money, local, education
+- contractor leads too expensive alternative cost san diego | score 46 | intents: money, comparison, local
+- contractor leads too expensive alternatives cost san diego | score 46 | intents: money, comparison, local
+- contractor leads too expensive cheaper options for medical offices | score 46 | intents: money, operator
 

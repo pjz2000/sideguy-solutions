@@ -6,10 +6,10 @@ Total network pages found: **5**
 
 ## Featured Network Pages
 
-1. **Payments Network** — `payments` — 80 mapped topics
-2. **Marketing Network** — `marketing` — 79 mapped topics
-3. **Local Services Network** — `local-services` — 76 mapped topics
-4. **Automation Network** — `automation` — 72 mapped topics
+1. **Payments Network** — `payments` — 83 mapped topics
+2. **Local Services Network** — `local-services` — 77 mapped topics
+3. **Automation Network** — `automation` — 69 mapped topics
+4. **Marketing Network** — `marketing` — 60 mapped topics
 5. **General Network** — `general` — 1 mapped topics
 
 ## Files Written

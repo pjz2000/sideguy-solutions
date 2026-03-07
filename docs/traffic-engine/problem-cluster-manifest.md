@@ -1,263 +1,243 @@
 # SideGuy Problem Cluster Manifest
 
-Generated: 2026-03-07T16:08:29.739680
+Generated: 2026-03-07T16:18:37.091012
 
-## Payment Processing Fees Too High
+## Contractor Leads Too Expensive Fees
 
-- payment processing fees too high cost san diego | score 41
-- payment processing fees too high san diego | score 36
-- payment processing fees too high explained | score 34
-- payment processing fees too high cost | score 33
-- payment processing fees too high near me | score 30
-- payment processing fees too high best options | score 30
-- payment processing fees too high setup guide | score 30
-- payment processing fees too high pricing | score 29
-- payment processing fees too high troubleshooting | score 29
-- payment processing fees too high checklist | score 29
-- payment processing fees too high | score 28
+- contractor leads too expensive fees cost san diego | score 55
+- contractor leads too expensive fees san diego | score 50
+- contractor leads too expensive fees explained | score 48
+- contractor leads too expensive fees cost | score 47
+- contractor leads too expensive fees near me | score 44
+- contractor leads too expensive fees best options | score 44
+- contractor leads too expensive fees setup guide | score 44
+- contractor leads too expensive fees pricing | score 43
+- contractor leads too expensive fees troubleshooting | score 43
+- contractor leads too expensive fees checklist | score 43
 
-## Payment Processor Fees Too High
+## Why Is Payment Processor Fees Too High So Expensive
 
-- payment processor fees too high cost san diego | score 41
-- payment processor fees too high san diego | score 36
-- payment processor fees too high explained | score 34
-- payment processor fees too high cost | score 33
-- payment processor fees too high near me | score 30
-- payment processor fees too high best options | score 30
-- payment processor fees too high setup guide | score 30
-- payment processor fees too high pricing | score 29
-- payment processor fees too high troubleshooting | score 29
-- payment processor fees too high checklist | score 29
-- payment processor fees too high | score 28
+- why is payment processor fees too high so expensive cost san diego | score 53
+- why is payment processor fees too high so expensive san diego | score 48
+- why is payment processor fees too high so expensive explained | score 46
+- why is payment processor fees too high so expensive cost | score 45
+- why is payment processor fees too high so expensive near me | score 42
+- why is payment processor fees too high so expensive best options | score 42
+- why is payment processor fees too high so expensive setup guide | score 42
 
-## Payment Processing Fees Too High For Medical Offices
+## Contractor Leads Too Expensive For Medical Offices
 
-- payment processing fees too high for medical offices | score 36
+- contractor leads too expensive for medical offices cost san diego | score 53
+- contractor leads too expensive for medical offices san diego | score 48
+- contractor leads too expensive for medical offices explained | score 46
+- contractor leads too expensive for medical offices cost | score 45
+
+## Contractor Leads Too Expensive Chula
+
+- contractor leads too expensive cost chula vista | score 51
+- contractor leads too expensive near me chula vista | score 48
+- contractor leads too expensive chula cost san diego | score 46
+- contractor leads too expensive chula vista | score 46
+
+## Contractor Leads Too Expensive Not Working
+
+- contractor leads too expensive not working cost san diego | score 51
+- contractor leads too expensive not working san diego | score 46
+- contractor leads too expensive not working explained | score 44
+- contractor leads too expensive not working cost | score 43
+
+## Contractor Leads Too Expensive Save Money
+
+- contractor leads too expensive save money cost san diego | score 51
+- contractor leads too expensive save money san diego | score 46
+- contractor leads too expensive save money explained | score 44
+- contractor leads too expensive save money cost | score 43
+
+## Contractor Leads Too Expensive Stopped Working
+
+- contractor leads too expensive stopped working cost san diego | score 51
+- contractor leads too expensive stopped working san diego | score 46
+- contractor leads too expensive stopped working explained | score 44
+- contractor leads too expensive stopped working cost | score 43
+
+## Contractor Leads Too Expensive Urgent Help
+
+- contractor leads too expensive urgent help cost san diego | score 51
+- contractor leads too expensive urgent help san diego | score 46
+- contractor leads too expensive urgent help explained | score 44
+- contractor leads too expensive urgent help cost | score 43
+
+## Contractor Leads Too Expensive Cheaper Options
+
+- contractor leads too expensive cheaper options cost san diego | score 51
+- contractor leads too expensive cheaper options san diego | score 46
+- contractor leads too expensive cheaper options explained | score 44
+- contractor leads too expensive cheaper options cost | score 43
+
+## Contractor Leads Too Expensive Fees For Medical Offices
+
+- contractor leads too expensive fees for medical offices | score 50
+
+## Contractor Leads Too Expensive Broken
+
+- contractor leads too expensive broken cost san diego | score 50
+- contractor leads too expensive broken san diego | score 45
+- contractor leads too expensive broken explained | score 43
+
+## Contractor Leads Too Expensive For High Ticket Service Business
+
+- contractor leads too expensive for high ticket service business cost san diego | score 50
+- contractor leads too expensive for high ticket service business san diego | score 45
+- contractor leads too expensive for high ticket service business explained | score 43
+
+## Contractor Leads Too Expensive Issue
+
+- contractor leads too expensive issue cost san diego | score 50
+- contractor leads too expensive issue san diego | score 45
+- contractor leads too expensive issue explained | score 43
+
+## Contractor Leads Too Expensive Problem
+
+- contractor leads too expensive problem cost san diego | score 50
+- contractor leads too expensive problem san diego | score 45
+- contractor leads too expensive problem explained | score 43
+
+## Contractor Leads Too Expensive Quote
+
+- contractor leads too expensive quote cost san diego | score 50
+- contractor leads too expensive quote san diego | score 45
+- contractor leads too expensive quote explained | score 43
+
+## Contractor Leads Too Expensive Roi
+
+- contractor leads too expensive roi cost san diego | score 50
+- contractor leads too expensive roi san diego | score 45
+- contractor leads too expensive roi explained | score 43
 
 ## Payment Processor Fees Too High For Medical Offices
 
-- payment processor fees too high for medical offices | score 36
+- payment processor fees too high for medical offices cost san diego | score 49
+- payment processor fees too high for medical offices san diego | score 44
+- payment processor fees too high for medical offices explained | score 42
 
-## Payment Processing Fees Too High For Contractors
+## Contractor Leads Too Expensive For Small Business Chula
 
-- payment processing fees too high for contractors | score 35
+- contractor leads too expensive for small business chula vista | score 49
+- contractor leads too expensive for small business chula cost san diego | score 49
+- contractor leads too expensive for small business chula san diego | score 44
+- contractor leads too expensive for small business chula explained | score 42
+
+## Why Is How To Lower Payment Processing Fees So Expensive
+
+- why is how to lower payment processing fees so expensive cost san diego | score 49
+- why is how to lower payment processing fees so expensive san diego | score 45
+- why is how to lower payment processing fees so expensive explained | score 43
+
+## How Do I Fix Contractor Leads Too Expensive
+
+- how do i fix contractor leads too expensive cost san diego | score 49
+- how do i fix contractor leads too expensive san diego | score 44
+
+## Why Is Contractor Leads Too Expensive So Expensive
+
+- why is contractor leads too expensive so expensive cost san diego | score 49
+- why is contractor leads too expensive so expensive san diego | score 44
+
+## Why Is Website Not Getting Leads So Expensive
+
+- why is website not getting leads so expensive cost san diego | score 49
+- why is website not getting leads so expensive san diego | score 44
+
+## Why Is Payment Processor Fees Too High So Expensive For Medical Offices
+
+- why is payment processor fees too high so expensive for medical offices | score 48
 
 ## Payment Processor Fees Too High For Contractors
 
-- payment processor fees too high for contractors | score 35
-
-## How To Reduce Credit Card Processing Fees
+- payment processor fees too high for contractors cost san diego | score 48
+- payment processor fees too high for contractors san diego | score 43
 
-- how to reduce credit card processing fees cost san diego | score 34
-- how to reduce credit card processing fees san diego | score 29
-- how to reduce credit card processing fees explained | score 27
-- how to reduce credit card processing fees cost | score 26
-- how to reduce credit card processing fees near me | score 23
-- how to reduce credit card processing fees best options | score 23
-- how to reduce credit card processing fees setup guide | score 23
-- how to reduce credit card processing fees pricing | score 22
-- how to reduce credit card processing fees troubleshooting | score 22
-- how to reduce credit card processing fees checklist | score 22
-- how to reduce credit card processing fees | score 21
+## Contractor Leads Too Expensive For Small Business
 
-## Ai Scheduling Software For Contractors
+- contractor leads too expensive for small business cost san diego | score 48
+- contractor leads too expensive for small business san diego | score 43
+- contractor leads too expensive for small business del mar | score 43
+- contractor leads too expensive for small business la jolla | score 43
+- contractor leads too expensive for small business san marcos | score 43
 
-- ai scheduling software for contractors cost san diego | score 33
-- ai scheduling software for contractors san diego | score 28
-- ai scheduling software for contractors cost | score 25
-- ai scheduling software for contractors near me | score 22
-- ai scheduling software for contractors best options | score 22
-- ai scheduling software for contractors setup guide | score 22
-- ai scheduling software for contractors pricing | score 21
-- ai scheduling software for contractors explained | score 21
-- ai scheduling software for contractors troubleshooting | score 21
-- ai scheduling software for contractors checklist | score 21
-- ai scheduling software for contractors | score 20
+## How Much Does Contractor Leads Too Expensive
 
-## Hvac Repair Vs Replace
+- how much does contractor leads too expensive cost san diego | score 48
+- how much does contractor leads too expensive san diego | score 43
 
-- hvac repair vs replace cost san diego | score 32
-- hvac repair vs replace san diego | score 27
-- hvac repair vs replace cost | score 24
-- hvac repair vs replace near me | score 21
-- hvac repair vs replace best options | score 21
-- hvac repair vs replace setup guide | score 21
-- hvac repair vs replace pricing | score 20
-- hvac repair vs replace explained | score 20
-- hvac repair vs replace troubleshooting | score 20
-- hvac repair vs replace checklist | score 20
+## Is Contractor Leads Too Expensive Worth It
 
-## Reduce Payment Processing Chargebacks
+- is contractor leads too expensive worth it cost san diego | score 48
+- is contractor leads too expensive worth it san diego | score 43
 
-- reduce payment processing chargebacks cost san diego | score 32
-- reduce payment processing chargebacks san diego | score 27
-- reduce payment processing chargebacks explained | score 25
-- reduce payment processing chargebacks cost | score 24
-- reduce payment processing chargebacks near me | score 21
-- reduce payment processing chargebacks best options | score 21
-- reduce payment processing chargebacks setup guide | score 21
-- reduce payment processing chargebacks pricing | score 20
-- reduce payment processing chargebacks troubleshooting | score 20
-- reduce payment processing chargebacks checklist | score 20
-- reduce payment processing chargebacks | score 19
+## Contractor Leads Too Expensive Vs Manual Process
 
-## Solana Payments For Merchants
+- contractor leads too expensive vs manual process cost san diego | score 48
+- contractor leads too expensive vs manual process san diego | score 43
 
-- solana payments for merchants cost san diego | score 32
-- solana payments for merchants san diego | score 27
-- solana payments for merchants explained | score 25
-- solana payments for merchants cost | score 24
-- solana payments for merchants near me | score 21
-- solana payments for merchants best options | score 21
-- solana payments for merchants setup guide | score 21
-- solana payments for merchants pricing | score 20
-- solana payments for merchants troubleshooting | score 20
-- solana payments for merchants checklist | score 20
-- solana payments for merchants | score 19
+## Contractor Leads Too Expensive For Local Business
 
-## Payment Processing Fees Too High For Small Business
+- contractor leads too expensive for local business cost san diego | score 48
+- contractor leads too expensive for local business san diego | score 43
 
-- payment processing fees too high for small business | score 31
+## Contractor Leads Too Expensive For Owner Operators
 
-## Payment Processing Fees Too High How It Works
+- contractor leads too expensive for owner operators cost san diego | score 48
+- contractor leads too expensive for owner operators san diego | score 43
 
-- payment processing fees too high how it works | score 31
+## Contractor Leads Too Expensive For Service Business
 
-## Payment Processor Fees Too High For Small Business
+- contractor leads too expensive for service business cost san diego | score 48
+- contractor leads too expensive for service business san diego | score 43
 
-- payment processor fees too high for small business | score 31
+## Contractor Leads Too Expensive How It Works
 
-## Payment Processor Fees Too High How It Works
+- contractor leads too expensive how it works cost san diego | score 48
+- contractor leads too expensive how it works san diego | score 43
 
-- payment processor fees too high how it works | score 31
+## How Does Contractor Leads Too Expensive Work
 
-## Hvac Repair Vs Replace For Small Business
+- how does contractor leads too expensive work cost san diego | score 48
+- how does contractor leads too expensive work san diego | score 43
 
-- hvac repair vs replace for small business san diego | score 30
-- hvac repair vs replace for small business | score 22
+## Who Helps With Contractor Leads Too Expensive
 
-## Payment Processing Fees Too High For Restaurants
+- who helps with contractor leads too expensive cost san diego | score 48
+- who helps with contractor leads too expensive san diego | score 43
 
-- payment processing fees too high for restaurants | score 30
+## Payment Processor Fees Too High Chula
 
-## Payment Processing Fees Too High Vs Stripe
+- payment processor fees too high cost chula vista | score 47
+- payment processor fees too high near me chula vista | score 44
+- payment processor fees too high chula cost san diego | score 42
+- payment processor fees too high chula vista | score 42
 
-- payment processing fees too high vs stripe | score 30
+## Payment Processor Fees Too High Not Working
 
-## Payment Processing Fees Too High Vs Square
+- payment processor fees too high not working cost san diego | score 47
+- payment processor fees too high not working san diego | score 42
 
-- payment processing fees too high vs square | score 30
+## Payment Processor Fees Too High Save Money
 
-## Payment Processor Fees Too High For Restaurants
+- payment processor fees too high save money cost san diego | score 47
+- payment processor fees too high save money san diego | score 42
 
-- payment processor fees too high for restaurants | score 30
+## Payment Processor Fees Too High Stopped Working
 
-## Payment Processor Fees Too High Vs Stripe
+- payment processor fees too high stopped working cost san diego | score 47
+- payment processor fees too high stopped working san diego | score 42
 
-- payment processor fees too high vs stripe | score 30
+## Payment Processor Fees Too High Urgent Help
 
-## Payment Processor Fees Too High Vs Square
+- payment processor fees too high urgent help cost san diego | score 47
+- payment processor fees too high urgent help san diego | score 42
 
-- payment processor fees too high vs square | score 30
+## Why Is Payment Processor Fees Too High So Expensive For Contractors
 
-## How To Reduce Credit Card Processing Fees For Medical Offices
-
-- how to reduce credit card processing fees for medical offices | score 29
-
-## Ai Automation For Small Business
-
-- ai automation for small business cost san diego | score 28
-- ai automation for small business san diego | score 23
-- ai automation for small business cost | score 20
-- ai automation for small business near me | score 17
-- ai automation for small business best options | score 17
-- ai automation for small business setup guide | score 17
-
-## How To Reduce Credit Card Processing Fees For Contractors
-
-- how to reduce credit card processing fees for contractors | score 28
-
-## Ai Scheduling Software For Contractors For Medical Offices
-
-- ai scheduling software for contractors for medical offices | score 28
-
-## Electric Vehicle Charger Installation Permit
-
-- electric vehicle charger installation permit cost san diego | score 28
-- electric vehicle charger installation permit san diego | score 23
-- electric vehicle charger installation permit explained | score 21
-- electric vehicle charger installation permit cost | score 20
-
-## How To Accept Crypto Payments
-
-- how to accept crypto payments cost san diego | score 28
-- how to accept crypto payments san diego | score 23
-- how to accept crypto payments explained | score 21
-- how to accept crypto payments cost | score 20
-
-## Hvac Repair Vs Replace For Medical Offices
-
-- hvac repair vs replace for medical offices | score 27
-
-## Hvac Blowing Warm Air
-
-- hvac blowing warm air cost san diego | score 27
-- hvac blowing warm air san diego | score 22
-- hvac blowing warm air cost | score 19
-
-## Ach Vs Credit Card Fees
-
-- ach vs credit card fees cost san diego | score 27
-- ach vs credit card fees san diego | score 22
-- ach vs credit card fees explained | score 20
-- ach vs credit card fees cost | score 19
-
-## Restaurant Payment Processing Rates
-
-- restaurant payment processing rates cost san diego | score 27
-- restaurant payment processing rates san diego | score 22
-- restaurant payment processing rates explained | score 20
-- restaurant payment processing rates cost | score 19
-
-## Reduce Payment Processing Chargebacks For Medical Offices
-
-- reduce payment processing chargebacks for medical offices | score 27
-
-## Solana Payments For Merchants For Medical Offices
-
-- solana payments for merchants for medical offices | score 27
-
-## Local Seo For Contractors
-
-- local seo for contractors cost san diego | score 27
-- local seo for contractors san diego | score 22
-- local seo for contractors explained | score 20
-- local seo for contractors cost | score 19
-
-## Hvac Repair Vs Replace For Contractors
-
-- hvac repair vs replace for contractors | score 26
-
-## Ai Workflow Automation
-
-- ai workflow automation cost san diego | score 26
-- ai workflow automation san diego | score 21
-- ai workflow automation cost | score 18
-
-## Accept Bitcoin Payments
-
-- accept bitcoin payments cost san diego | score 26
-- accept bitcoin payments san diego | score 21
-- accept bitcoin payments explained | score 19
-- accept bitcoin payments cost | score 18
-
-## Reduce Payment Processing Chargebacks For Contractors
-
-- reduce payment processing chargebacks for contractors | score 26
-
-## Ai Automation Consulting
-
-- ai automation consulting cost san diego | score 26
-- ai automation consulting san diego | score 21
-- ai automation consulting cost | score 18
+- why is payment processor fees too high so expensive for contractors | score 47
 

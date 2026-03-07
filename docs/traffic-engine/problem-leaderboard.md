@@ -1,106 +1,106 @@
 # SideGuy Problem Leaderboard
 
-Generated: 2026-03-07T16:08:29.739425
+Generated: 2026-03-07T16:18:37.090690
 
 | Rank | Topic | Score | Cluster |
 |---|---|---:|---|
-| 1 | payment processing fees too high cost san diego | 41 | payment processing fees too high |
-| 2 | payment processor fees too high cost san diego | 41 | payment processor fees too high |
-| 3 | payment processing fees too high for medical offices | 36 | payment processing fees too high for medical offices |
-| 4 | payment processing fees too high san diego | 36 | payment processing fees too high |
-| 5 | payment processor fees too high for medical offices | 36 | payment processor fees too high for medical offices |
-| 6 | payment processor fees too high san diego | 36 | payment processor fees too high |
-| 7 | payment processing fees too high for contractors | 35 | payment processing fees too high for contractors |
-| 8 | payment processor fees too high for contractors | 35 | payment processor fees too high for contractors |
-| 9 | payment processing fees too high explained | 34 | payment processing fees too high |
-| 10 | payment processor fees too high explained | 34 | payment processor fees too high |
-| 11 | how to reduce credit card processing fees cost san diego | 34 | how to reduce credit card processing fees |
-| 12 | payment processing fees too high cost | 33 | payment processing fees too high |
-| 13 | payment processor fees too high cost | 33 | payment processor fees too high |
-| 14 | ai scheduling software for contractors cost san diego | 33 | ai scheduling software for contractors |
-| 15 | hvac repair vs replace cost san diego | 32 | hvac repair vs replace |
-| 16 | reduce payment processing chargebacks cost san diego | 32 | reduce payment processing chargebacks |
-| 17 | solana payments for merchants cost san diego | 32 | solana payments for merchants |
-| 18 | payment processing fees too high for small business | 31 | payment processing fees too high for small business |
-| 19 | payment processing fees too high how it works | 31 | payment processing fees too high how it works |
-| 20 | payment processor fees too high for small business | 31 | payment processor fees too high for small business |
-| 21 | payment processor fees too high how it works | 31 | payment processor fees too high how it works |
-| 22 | hvac repair vs replace for small business san diego | 30 | hvac repair vs replace for small business |
-| 23 | payment processing fees too high near me | 30 | payment processing fees too high |
-| 24 | payment processing fees too high for restaurants | 30 | payment processing fees too high for restaurants |
-| 25 | payment processing fees too high best options | 30 | payment processing fees too high |
-| 26 | payment processing fees too high setup guide | 30 | payment processing fees too high |
-| 27 | payment processing fees too high vs stripe | 30 | payment processing fees too high vs stripe |
-| 28 | payment processing fees too high vs square | 30 | payment processing fees too high vs square |
-| 29 | payment processor fees too high near me | 30 | payment processor fees too high |
-| 30 | payment processor fees too high for restaurants | 30 | payment processor fees too high for restaurants |
-| 31 | payment processor fees too high best options | 30 | payment processor fees too high |
-| 32 | payment processor fees too high setup guide | 30 | payment processor fees too high |
-| 33 | payment processor fees too high vs stripe | 30 | payment processor fees too high vs stripe |
-| 34 | payment processor fees too high vs square | 30 | payment processor fees too high vs square |
-| 35 | payment processing fees too high pricing | 29 | payment processing fees too high |
-| 36 | payment processing fees too high troubleshooting | 29 | payment processing fees too high |
-| 37 | payment processing fees too high checklist | 29 | payment processing fees too high |
-| 38 | payment processor fees too high pricing | 29 | payment processor fees too high |
-| 39 | payment processor fees too high troubleshooting | 29 | payment processor fees too high |
-| 40 | payment processor fees too high checklist | 29 | payment processor fees too high |
-| 41 | how to reduce credit card processing fees for medical offices | 29 | how to reduce credit card processing fees for medical offices |
-| 42 | how to reduce credit card processing fees san diego | 29 | how to reduce credit card processing fees |
-| 43 | payment processing fees too high | 28 | payment processing fees too high |
-| 44 | ai automation for small business cost san diego | 28 | ai automation for small business |
-| 45 | payment processor fees too high | 28 | payment processor fees too high |
-| 46 | how to reduce credit card processing fees for contractors | 28 | how to reduce credit card processing fees for contractors |
-| 47 | ai scheduling software for contractors for medical offices | 28 | ai scheduling software for contractors for medical offices |
-| 48 | ai scheduling software for contractors san diego | 28 | ai scheduling software for contractors |
-| 49 | electric vehicle charger installation permit cost san diego | 28 | electric vehicle charger installation permit |
-| 50 | how to accept crypto payments cost san diego | 28 | how to accept crypto payments |
-| 51 | hvac repair vs replace for medical offices | 27 | hvac repair vs replace for medical offices |
-| 52 | hvac repair vs replace san diego | 27 | hvac repair vs replace |
-| 53 | hvac blowing warm air cost san diego | 27 | hvac blowing warm air |
-| 54 | ach vs credit card fees cost san diego | 27 | ach vs credit card fees |
-| 55 | restaurant payment processing rates cost san diego | 27 | restaurant payment processing rates |
-| 56 | how to reduce credit card processing fees explained | 27 | how to reduce credit card processing fees |
-| 57 | reduce payment processing chargebacks for medical offices | 27 | reduce payment processing chargebacks for medical offices |
-| 58 | reduce payment processing chargebacks san diego | 27 | reduce payment processing chargebacks |
-| 59 | solana payments for merchants for medical offices | 27 | solana payments for merchants for medical offices |
-| 60 | solana payments for merchants san diego | 27 | solana payments for merchants |
-| 61 | local seo for contractors cost san diego | 27 | local seo for contractors |
-| 62 | hvac repair vs replace for contractors | 26 | hvac repair vs replace for contractors |
-| 63 | ai workflow automation cost san diego | 26 | ai workflow automation |
-| 64 | accept bitcoin payments cost san diego | 26 | accept bitcoin payments |
-| 65 | how to reduce credit card processing fees cost | 26 | how to reduce credit card processing fees |
-| 66 | reduce payment processing chargebacks for contractors | 26 | reduce payment processing chargebacks for contractors |
-| 67 | ai automation consulting cost san diego | 26 | ai automation consulting |
-| 68 | solana payments for merchants for contractors | 26 | solana payments for merchants for contractors |
-| 69 | payment gateway problems cost san diego | 25 | payment gateway problems |
-| 70 | reduce stripe fees cost san diego | 25 | reduce stripe fees |
-| 71 | reduce payment processing chargebacks explained | 25 | reduce payment processing chargebacks |
-| 72 | ai scheduling software for contractors cost | 25 | ai scheduling software for contractors |
-| 73 | solana payments for merchants explained | 25 | solana payments for merchants |
-| 74 | hvac repair vs replace cost | 24 | hvac repair vs replace |
-| 75 | how to reduce credit card processing fees for small business | 24 | how to reduce credit card processing fees for small business |
-| 76 | how to reduce credit card processing fees how it works | 24 | how to reduce credit card processing fees how it works |
-| 77 | reduce payment processing chargebacks cost | 24 | reduce payment processing chargebacks |
-| 78 | best ai tools for local business cost san diego | 24 | best ai tools for local business |
-| 79 | ai automation consulting for small business san diego | 24 | ai automation consulting for small business |
-| 80 | solana payments for merchants cost | 24 | solana payments for merchants |
-| 81 | ai automation for small business for medical offices | 23 | ai automation for small business for medical offices |
-| 82 | ai automation for small business san diego | 23 | ai automation for small business |
-| 83 | how to reduce credit card processing fees near me | 23 | how to reduce credit card processing fees |
-| 84 | how to reduce credit card processing fees for restaurants | 23 | how to reduce credit card processing fees for restaurants |
-| 85 | how to reduce credit card processing fees best options | 23 | how to reduce credit card processing fees |
-| 86 | how to reduce credit card processing fees setup guide | 23 | how to reduce credit card processing fees |
-| 87 | how to reduce credit card processing fees vs stripe | 23 | how to reduce credit card processing fees vs stripe |
-| 88 | how to reduce credit card processing fees vs square | 23 | how to reduce credit card processing fees vs square |
-| 89 | small business ai customer support cost san diego | 23 | small business ai customer support |
-| 90 | ai scheduling software for contractors for small business | 23 | ai scheduling software for contractors for small business |
-| 91 | ai scheduling software for contractors how it works | 23 | ai scheduling software for contractors how it works |
-| 92 | ai chatbots for customer service cost san diego | 23 | ai chatbots for customer service |
-| 93 | electric vehicle charger installation permit for medical offices | 23 | electric vehicle charger installation permit for medical offices |
-| 94 | electric vehicle charger installation permit san diego | 23 | electric vehicle charger installation permit |
-| 95 | how to accept crypto payments for medical offices | 23 | how to accept crypto payments for medical offices |
-| 96 | how to accept crypto payments san diego | 23 | how to accept crypto payments |
-| 97 | hvac compressor not starting cost san diego | 22 | hvac compressor not starting |
-| 98 | hvac repair vs replace for small business | 22 | hvac repair vs replace for small business |
-| 99 | hvac repair vs replace how it works | 22 | hvac repair vs replace how it works |
-| 100 | hvac blowing warm air for medical offices | 22 | hvac blowing warm air for medical offices |
+| 1 | contractor leads too expensive fees cost san diego | 55 | contractor leads too expensive fees |
+| 2 | why is payment processor fees too high so expensive cost san diego | 53 | why is payment processor fees too high so expensive |
+| 3 | contractor leads too expensive for medical offices cost san diego | 53 | contractor leads too expensive for medical offices |
+| 4 | contractor leads too expensive cost chula vista | 51 | contractor leads too expensive chula |
+| 5 | contractor leads too expensive not working cost san diego | 51 | contractor leads too expensive not working |
+| 6 | contractor leads too expensive save money cost san diego | 51 | contractor leads too expensive save money |
+| 7 | contractor leads too expensive stopped working cost san diego | 51 | contractor leads too expensive stopped working |
+| 8 | contractor leads too expensive urgent help cost san diego | 51 | contractor leads too expensive urgent help |
+| 9 | contractor leads too expensive cheaper options cost san diego | 51 | contractor leads too expensive cheaper options |
+| 10 | contractor leads too expensive fees for medical offices | 50 | contractor leads too expensive fees for medical offices |
+| 11 | contractor leads too expensive fees san diego | 50 | contractor leads too expensive fees |
+| 12 | contractor leads too expensive broken cost san diego | 50 | contractor leads too expensive broken |
+| 13 | contractor leads too expensive for high ticket service business cost san diego | 50 | contractor leads too expensive for high ticket service business |
+| 14 | contractor leads too expensive issue cost san diego | 50 | contractor leads too expensive issue |
+| 15 | contractor leads too expensive problem cost san diego | 50 | contractor leads too expensive problem |
+| 16 | contractor leads too expensive quote cost san diego | 50 | contractor leads too expensive quote |
+| 17 | contractor leads too expensive roi cost san diego | 50 | contractor leads too expensive roi |
+| 18 | payment processor fees too high for medical offices cost san diego | 49 | payment processor fees too high for medical offices |
+| 19 | contractor leads too expensive for small business chula vista | 49 | contractor leads too expensive for small business chula |
+| 20 | contractor leads too expensive for small business chula cost san diego | 49 | contractor leads too expensive for small business chula |
+| 21 | why is how to lower payment processing fees so expensive cost san diego | 49 | why is how to lower payment processing fees so expensive |
+| 22 | how do i fix contractor leads too expensive cost san diego | 49 | how do i fix contractor leads too expensive |
+| 23 | why is contractor leads too expensive so expensive cost san diego | 49 | why is contractor leads too expensive so expensive |
+| 24 | why is website not getting leads so expensive cost san diego | 49 | why is website not getting leads so expensive |
+| 25 | contractor leads too expensive near me chula vista | 48 | contractor leads too expensive chula |
+| 26 | why is payment processor fees too high so expensive for medical offices | 48 | why is payment processor fees too high so expensive for medical offices |
+| 27 | why is payment processor fees too high so expensive san diego | 48 | why is payment processor fees too high so expensive |
+| 28 | payment processor fees too high for contractors cost san diego | 48 | payment processor fees too high for contractors |
+| 29 | contractor leads too expensive for small business cost san diego | 48 | contractor leads too expensive for small business |
+| 30 | contractor leads too expensive fees explained | 48 | contractor leads too expensive fees |
+| 31 | contractor leads too expensive for medical offices san diego | 48 | contractor leads too expensive for medical offices |
+| 32 | how much does contractor leads too expensive cost san diego | 48 | how much does contractor leads too expensive |
+| 33 | is contractor leads too expensive worth it cost san diego | 48 | is contractor leads too expensive worth it |
+| 34 | contractor leads too expensive vs manual process cost san diego | 48 | contractor leads too expensive vs manual process |
+| 35 | contractor leads too expensive for local business cost san diego | 48 | contractor leads too expensive for local business |
+| 36 | contractor leads too expensive for owner operators cost san diego | 48 | contractor leads too expensive for owner operators |
+| 37 | contractor leads too expensive for service business cost san diego | 48 | contractor leads too expensive for service business |
+| 38 | contractor leads too expensive how it works cost san diego | 48 | contractor leads too expensive how it works |
+| 39 | how does contractor leads too expensive work cost san diego | 48 | how does contractor leads too expensive work |
+| 40 | who helps with contractor leads too expensive cost san diego | 48 | who helps with contractor leads too expensive |
+| 41 | payment processor fees too high cost chula vista | 47 | payment processor fees too high chula |
+| 42 | payment processor fees too high not working cost san diego | 47 | payment processor fees too high not working |
+| 43 | payment processor fees too high save money cost san diego | 47 | payment processor fees too high save money |
+| 44 | payment processor fees too high stopped working cost san diego | 47 | payment processor fees too high stopped working |
+| 45 | payment processor fees too high urgent help cost san diego | 47 | payment processor fees too high urgent help |
+| 46 | why is payment processor fees too high so expensive for contractors | 47 | why is payment processor fees too high so expensive for contractors |
+| 47 | payment processor fees too high cheaper options cost san diego | 47 | payment processor fees too high cheaper options |
+| 48 | contractor leads too expensive fees cost | 47 | contractor leads too expensive fees |
+| 49 | website not getting leads fees cost san diego | 47 | website not getting leads fees |
+| 50 | contractor leads too expensive worth it cost san diego | 47 | contractor leads too expensive worth it |
+| 51 | contractor leads too expensive vs quickbooks cost san diego | 47 | contractor leads too expensive vs quickbooks |
+| 52 | contractor leads too expensive vs square cost san diego | 47 | contractor leads too expensive vs square |
+| 53 | contractor leads too expensive vs stripe cost san diego | 47 | contractor leads too expensive vs stripe |
+| 54 | contractor leads too expensive for contractors cost san diego | 47 | contractor leads too expensive for contractors |
+| 55 | contractor leads too expensive for restaurants cost san diego | 47 | contractor leads too expensive for restaurants |
+| 56 | what is contractor leads too expensive cost san diego | 47 | what is contractor leads too expensive |
+| 57 | contractor leads too expensive chula cost san diego | 46 | contractor leads too expensive chula |
+| 58 | payment processor fees too high broken cost san diego | 46 | payment processor fees too high broken |
+| 59 | payment processor fees too high issue cost san diego | 46 | payment processor fees too high issue |
+| 60 | payment processor fees too high problem cost san diego | 46 | payment processor fees too high problem |
+| 61 | payment processor fees too high quote cost san diego | 46 | payment processor fees too high quote |
+| 62 | payment processor fees too high roi cost san diego | 46 | payment processor fees too high roi |
+| 63 | how to lower payment processing fees for medical offices cost san diego | 46 | how to lower payment processing fees for medical offices |
+| 64 | why is payment processor fees too high so expensive explained | 46 | why is payment processor fees too high so expensive |
+| 65 | contractor leads too expensive chula vista | 46 | contractor leads too expensive chula |
+| 66 | contractor leads too expensive for small business for small business san diego | 46 | contractor leads too expensive for small business for small business |
+| 67 | contractor leads too expensive for medical offices explained | 46 | contractor leads too expensive for medical offices |
+| 68 | how much does contractor leads too expensive for small business san diego | 46 | how much does contractor leads too expensive for small business |
+| 69 | contractor leads too expensive alternatives cost san diego | 46 | contractor leads too expensive alternatives |
+| 70 | contractor leads too expensive not working for medical offices | 46 | contractor leads too expensive not working for medical offices |
+| 71 | contractor leads too expensive not working san diego | 46 | contractor leads too expensive not working |
+| 72 | contractor leads too expensive save money for medical offices | 46 | contractor leads too expensive save money for medical offices |
+| 73 | contractor leads too expensive save money san diego | 46 | contractor leads too expensive save money |
+| 74 | contractor leads too expensive stopped working for medical offices | 46 | contractor leads too expensive stopped working for medical offices |
+| 75 | contractor leads too expensive stopped working san diego | 46 | contractor leads too expensive stopped working |
+| 76 | contractor leads too expensive urgent help for medical offices | 46 | contractor leads too expensive urgent help for medical offices |
+| 77 | contractor leads too expensive urgent help san diego | 46 | contractor leads too expensive urgent help |
+| 78 | contractor leads too expensive fix cost san diego | 46 | contractor leads too expensive fix |
+| 79 | contractor leads too expensive alternative cost san diego | 46 | contractor leads too expensive alternative |
+| 80 | contractor leads too expensive cheaper options for medical offices | 46 | contractor leads too expensive cheaper options for medical offices |
+| 81 | contractor leads too expensive cheaper options san diego | 46 | contractor leads too expensive cheaper options |
+| 82 | payment processor fees too high for small business chula vista | 45 | payment processor fees too high for small business chula |
+| 83 | payment processor fees too high for small business chula cost san diego | 45 | payment processor fees too high for small business chula |
+| 84 | how do i fix payment processor fees too high cost san diego | 45 | how do i fix payment processor fees too high |
+| 85 | payment processor fees too high for high ticket service business cost san diego | 45 | payment processor fees too high for high ticket service business |
+| 86 | why is payment processor fees too high so expensive cost | 45 | why is payment processor fees too high so expensive |
+| 87 | contractor leads too expensive cost san diego | 45 | contractor leads too expensive |
+| 88 | why is how to lower payment processing fees so expensive san diego | 45 | why is how to lower payment processing fees so expensive |
+| 89 | contractor leads too expensive cost del mar | 45 | contractor leads too expensive |
+| 90 | contractor leads too expensive cost la jolla | 45 | contractor leads too expensive |
+| 91 | contractor leads too expensive cost san marcos | 45 | contractor leads too expensive |
+| 92 | how to lower payment processing fees for contractors cost san diego | 45 | how to lower payment processing fees for contractors |
+| 93 | contractor leads too expensive fees for small business | 45 | contractor leads too expensive fees for small business |
+| 94 | contractor leads too expensive fees how it works | 45 | contractor leads too expensive fees how it works |
+| 95 | contractor leads too expensive for medical offices cost | 45 | contractor leads too expensive for medical offices |
+| 96 | website not getting leads for medical offices cost san diego | 45 | website not getting leads for medical offices |
+| 97 | contractor leads too expensive broken for medical offices | 45 | contractor leads too expensive broken for medical offices |
+| 98 | contractor leads too expensive broken san diego | 45 | contractor leads too expensive broken |
+| 99 | contractor leads too expensive for high ticket service business for medical offices | 45 | contractor leads too expensive for high ticket service business for medical offices |
+| 100 | contractor leads too expensive for high ticket service business san diego | 45 | contractor leads too expensive for high ticket service business |
