@@ -22,6 +22,7 @@ MODES = {
     "build":    ("tools/command-modes/build.py",          "Show next pages to build"),
     "map":      ("tools/command-modes/map.py",            "Update hub cluster cards"),
     "graph":    ("tools/command-modes/graph.py",          "Rebuild topic graph"),
+    "gravity":  ("tools/command-modes/gravity.py",        "Detect emerging problems"),
     "monitor":  ("tools/scale-monitor/scale_dashboard.py","Scale dashboard"),
 }
 
