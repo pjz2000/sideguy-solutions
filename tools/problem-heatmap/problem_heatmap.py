@@ -1,7 +1,6 @@
 import os
 import re
 import json
-import math
 import datetime
 from collections import Counter
 
@@ -101,7 +100,6 @@ def bucket(score):
 
 def classify(text):
     t = text.lower()
-
     money = contains_any(t, MONEY_WORDS)
     urgency = contains_any(t, URGENT_WORDS)
     local_fit = contains_any(t, LOCAL_WORDS)
@@ -172,7 +170,6 @@ def suggest_slug(topic):
 def suggest_hub(item):
     tags = set(item["tags"])
     topic = item["topic"].lower()
-
     if "payment" in topic or "merchant" in topic or "processor" in topic or "settlement" in topic:
         return "payments"
     if "ai" in topic or "automation" in topic or "agent" in topic or "llm" in topic:
@@ -183,7 +180,7 @@ def suggest_hub(item):
         return "crypto"
     if "compliance" in topic or "software" in topic:
         return "software"
-    if "san diego" in topic or "north county" in topic or "encinitas" in topic:
+    if "san diego" in topic or "north county" in topic or "encinitas" in topic or "california" in topic:
         return "san-diego"
     if "meme" in tags:
         return "meme-zone"
@@ -192,8 +189,8 @@ def suggest_hub(item):
     return "operator-index"
 
 topics = load_topics(INPUT_FILE)
-
 results = []
+
 for t in topics:
     item = classify(t)
     item["slug"] = suggest_slug(t)
@@ -211,10 +208,7 @@ summary = {
     "top_tags": dict(Counter(tag for r in results for tag in r["tags"]).most_common(12))
 }
 
-payload = {
-    "summary": summary,
-    "results": results
-}
+payload = {"summary": summary, "results": results}
 
 with open(OUT_JSON, "w", encoding="utf-8") as f:
     json.dump(payload, f, indent=2)
@@ -279,11 +273,12 @@ claude.append("- add each page to index.html after creation")
 claude.append("- cross-link to the most relevant hub")
 claude.append("- commit after each page")
 claude.append("- no rewrites of existing pages unless exact slug conflict forces alternate slug")
+claude.append("- every page must include the Text PJ orb with number 773-544-1231")
 claude.append("")
 claude.append("## Output expectations")
 claude.append("")
-claude.append("- Each page should have a strong title, H1, intro, problem framing, SideGuy-style clarity copy, and a calm CTA")
-claude.append("- Include Text PJ orb/footer pattern where applicable")
+claude.append("- Strong title, H1, intro, problem framing, SideGuy clarity copy, calm CTA")
+claude.append("- Include Text PJ orb/footer pattern")
 claude.append("- Use internal cross-links to hub pages and related pages")
 claude.append("- Keep metadata clean and local-intent aware when relevant")
 claude.append("")

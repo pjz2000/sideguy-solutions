@@ -1,184 +1,185 @@
 # SideGuy Problem Heatmap
 
-- Generated: 2026-03-07T14:09:20Z
+- Generated: 2026-03-07T14:40:58Z
 - Source: `docs/problem-page-ideas.txt`
-- Topics scanned: **480**
+- Topics scanned: **20**
 
 ## Summary
 
-- SHIP NOW: **1**
-- HIGH PRIORITY: **14**
-- GOOD BACKLOG: **67**
-- LOWER PRIORITY: **398**
+- SHIP NOW: **2**
+- HIGH PRIORITY: **4**
+- GOOD BACKLOG: **6**
+- LOWER PRIORITY: **8**
 
 ## Top Routes
 
-- local-money: **104**
-- future-money: **110**
-- general: **175**
-- urgent: **42**
-- local-urgent: **7**
-- future: **42**
+- local-money: **5**
+- general: **6**
+- future-money: **3**
+- future: **2**
+- urgent: **2**
+- meme: **1**
+- meme-future: **1**
 
 ## Top 20 Build Queue
 
-### 1. payment-processor-fees-auto-repair-california
-- Score: **19**
+### 1. payment processor fees auto repair california
+- Score: **20**
 - Bucket: **SHIP NOW**
 - Route: `local-money`
 - Hub: `payments`
 - Slug: `payment-processor-fees-auto-repair-california`
-- Signals: money=4 urgency=1 local=1 future=1 meme=0 buyer=0 bonus=0
+- Signals: money=4 urgency=1 local=1 future=1 meme=0 buyer=0 bonus=1
 
-### 2. payment-processor-fees-auto-repair-san-diego
-- Score: **17**
-- Bucket: **HIGH PRIORITY**
-- Route: `future-money`
+### 2. payment processor fees restaurants san diego
+- Score: **19**
+- Bucket: **SHIP NOW**
+- Route: `local-money`
 - Hub: `payments`
-- Slug: `payment-processor-fees-auto-repair-san-diego`
-- Signals: money=4 urgency=1 local=0 future=1 meme=0 buyer=0 bonus=0
+- Slug: `payment-processor-fees-restaurants-san-diego`
+- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=1 bonus=3
 
-### 3. payment-processor-fees-auto-repair-united-states
+### 3. seo problems auto repair california
 - Score: **17**
-- Bucket: **HIGH PRIORITY**
-- Route: `future-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-auto-repair-united-states`
-- Signals: money=4 urgency=1 local=0 future=1 meme=0 buyer=0 bonus=0
-
-### 4. SEO-problems-auto-repair-california
-- Score: **16**
 - Bucket: **HIGH PRIORITY**
 - Route: `local-money`
 - Hub: `ai`
 - Slug: `seo-problems-auto-repair-california`
-- Signals: money=1 urgency=3 local=1 future=1 meme=0 buyer=0 bonus=0
+- Signals: money=1 urgency=3 local=1 future=1 meme=0 buyer=0 bonus=1
 
-### 5. payment-processor-fees-construction-california
+### 4. payment processor fees hvac contractors california
+- Score: **15**
+- Bucket: **HIGH PRIORITY**
+- Route: `local-money`
+- Hub: `payments`
+- Slug: `payment-processor-fees-hvac-contractors-california`
+- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=1
+
+### 5. best payment processor for contractors california
 - Score: **14**
 - Bucket: **HIGH PRIORITY**
 - Route: `local-money`
 - Hub: `payments`
-- Slug: `payment-processor-fees-construction-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
+- Slug: `best-payment-processor-for-contractors-california`
+- Signals: money=2 urgency=0 local=1 future=0 meme=0 buyer=2 bonus=2
 
-### 6. payment-processor-fees-contractors-california
+### 6. how to reduce merchant processing fees small business
 - Score: **14**
 - Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-contractors-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
-
-### 7. payment-processor-fees-hvac-california
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-hvac-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
-
-### 8. payment-processor-fees-plumbing-california
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-plumbing-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
-
-### 9. payment-processor-fees-real-estate-california
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-real-estate-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
-
-### 10. payment-processor-fees-restaurants-california
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-restaurants-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
-
-### 11. payment-processor-fees-roofing-california
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `payments`
-- Slug: `payment-processor-fees-roofing-california`
-- Signals: money=4 urgency=0 local=1 future=0 meme=0 buyer=0 bonus=0
-
-### 12. SEO-problems-auto-repair-san-diego
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `future-money`
-- Hub: `ai`
-- Slug: `seo-problems-auto-repair-san-diego`
-- Signals: money=1 urgency=3 local=0 future=1 meme=0 buyer=0 bonus=0
-
-### 13. SEO-problems-auto-repair-united-states
-- Score: **14**
-- Bucket: **HIGH PRIORITY**
-- Route: `future-money`
-- Hub: `ai`
-- Slug: `seo-problems-auto-repair-united-states`
-- Signals: money=1 urgency=3 local=0 future=1 meme=0 buyer=0 bonus=0
-
-### 14. chargebacks-auto-repair-california
-- Score: **13**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `ai`
-- Slug: `chargebacks-auto-repair-california`
-- Signals: money=1 urgency=2 local=1 future=1 meme=0 buyer=0 bonus=0
-
-### 15. credit-card-fees-auto-repair-california
-- Score: **13**
-- Bucket: **HIGH PRIORITY**
-- Route: `local-money`
-- Hub: `ai`
-- Slug: `credit-card-fees-auto-repair-california`
-- Signals: money=2 urgency=1 local=1 future=1 meme=0 buyer=0 bonus=0
-
-### 16. AI-automation-auto-repair-california
-- Score: **12**
-- Bucket: **GOOD BACKLOG**
-- Route: `local-money`
-- Hub: `ai`
-- Slug: `ai-automation-auto-repair-california`
-- Signals: money=1 urgency=1 local=1 future=2 meme=0 buyer=0 bonus=0
-
-### 17. business-automation-auto-repair-california
-- Score: **12**
-- Bucket: **GOOD BACKLOG**
-- Route: `local-money`
-- Hub: `ai`
-- Slug: `business-automation-auto-repair-california`
-- Signals: money=1 urgency=1 local=1 future=2 meme=0 buyer=0 bonus=0
-
-### 18. business-automation-tools-auto-repair-california
-- Score: **12**
-- Bucket: **GOOD BACKLOG**
-- Route: `local-money`
-- Hub: `ai`
-- Slug: `business-automation-tools-auto-repair-california`
-- Signals: money=1 urgency=1 local=1 future=2 meme=0 buyer=0 bonus=0
-
-### 19. inventory-software-auto-repair-california
-- Score: **12**
-- Bucket: **GOOD BACKLOG**
-- Route: `local-money`
-- Hub: `ai`
-- Slug: `inventory-software-auto-repair-california`
-- Signals: money=1 urgency=1 local=1 future=2 meme=0 buyer=0 bonus=0
-
-### 20. payment-processor-fees-construction-san-diego
-- Score: **12**
-- Bucket: **GOOD BACKLOG**
 - Route: `general`
 - Hub: `payments`
-- Slug: `payment-processor-fees-construction-san-diego`
-- Signals: money=4 urgency=0 local=0 future=0 meme=0 buyer=0 bonus=0
+- Slug: `how-to-reduce-merchant-processing-fees-small-business`
+- Signals: money=4 urgency=0 local=0 future=0 meme=0 buyer=0 bonus=2
+
+### 7. solana payments for small business
+- Score: **12**
+- Bucket: **GOOD BACKLOG**
+- Route: `future-money`
+- Hub: `payments`
+- Slug: `solana-payments-for-small-business`
+- Signals: money=2 urgency=0 local=0 future=1 meme=0 buyer=1 bonus=2
+
+### 8. ai automation for small business operations
+- Score: **11**
+- Bucket: **GOOD BACKLOG**
+- Route: `future-money`
+- Hub: `ai`
+- Slug: `ai-automation-for-small-business-operations`
+- Signals: money=1 urgency=0 local=0 future=2 meme=0 buyer=1 bonus=2
+
+### 9. ai agents for customer service small business
+- Score: **10**
+- Bucket: **GOOD BACKLOG**
+- Route: `future`
+- Hub: `ai`
+- Slug: `ai-agents-for-customer-service-small-business`
+- Signals: money=0 urgency=0 local=0 future=3 meme=0 buyer=1 bonus=2
+
+### 10. how to fix slow wordpress website
+- Score: **9**
+- Bucket: **GOOD BACKLOG**
+- Route: `urgent`
+- Hub: `meme-zone`
+- Slug: `how-to-fix-slow-wordpress-website`
+- Signals: money=0 urgency=2 local=0 future=0 meme=1 buyer=0 bonus=2
+
+### 11. square vs stripe fees small business
+- Score: **9**
+- Bucket: **GOOD BACKLOG**
+- Route: `meme`
+- Hub: `meme-zone`
+- Slug: `square-vs-stripe-fees-small-business`
+- Signals: money=2 urgency=0 local=0 future=0 meme=1 buyer=0 bonus=2
+
+### 12. stablecoin settlement for merchants
+- Score: **9**
+- Bucket: **GOOD BACKLOG**
+- Route: `future-money`
+- Hub: `payments`
+- Slug: `stablecoin-settlement-for-merchants`
+- Signals: money=2 urgency=0 local=0 future=1 meme=0 buyer=0 bonus=1
+
+### 13. best crm for contractors
+- Score: **8**
+- Bucket: **LOWER PRIORITY**
+- Route: `general`
+- Hub: `operator-index`
+- Slug: `best-crm-for-contractors`
+- Signals: money=1 urgency=0 local=0 future=0 meme=0 buyer=2 bonus=1
+
+### 14. chargeback prevention tools small business
+- Score: **7**
+- Bucket: **LOWER PRIORITY**
+- Route: `urgent`
+- Hub: `operator-index`
+- Slug: `chargeback-prevention-tools-small-business`
+- Signals: money=1 urgency=1 local=0 future=0 meme=0 buyer=0 bonus=1
+
+### 15. why google rankings dropped small business website
+- Score: **7**
+- Bucket: **LOWER PRIORITY**
+- Route: `general`
+- Hub: `operator-index`
+- Slug: `why-google-rankings-dropped-small-business-website`
+- Signals: money=2 urgency=0 local=0 future=0 meme=0 buyer=0 bonus=1
+
+### 16. kalshi prediction markets explained
+- Score: **6**
+- Bucket: **LOWER PRIORITY**
+- Route: `future`
+- Hub: `ai`
+- Slug: `kalshi-prediction-markets-explained`
+- Signals: money=0 urgency=0 local=0 future=3 meme=0 buyer=0 bonus=0
+
+### 17. lead generation for hvac companies
+- Score: **5**
+- Bucket: **LOWER PRIORITY**
+- Route: `general`
+- Hub: `growth`
+- Slug: `lead-generation-for-hvac-companies`
+- Signals: money=1 urgency=0 local=0 future=0 meme=0 buyer=0 bonus=2
+
+### 18. prediction markets vs sports betting legality
+- Score: **5**
+- Bucket: **LOWER PRIORITY**
+- Route: `meme-future`
+- Hub: `meme-zone`
+- Slug: `prediction-markets-vs-sports-betting-legality`
+- Signals: money=0 urgency=0 local=0 future=1 meme=1 buyer=0 bonus=2
+
+### 19. google ads not converting small business
+- Score: **4**
+- Bucket: **LOWER PRIORITY**
+- Route: `general`
+- Hub: `growth`
+- Slug: `google-ads-not-converting-small-business`
+- Signals: money=1 urgency=0 local=0 future=0 meme=0 buyer=0 bonus=1
+
+### 20. stripe alternatives for small business
+- Score: **4**
+- Bucket: **LOWER PRIORITY**
+- Route: `general`
+- Hub: `operator-index`
+- Slug: `stripe-alternatives-for-small-business`
+- Signals: money=0 urgency=0 local=0 future=0 meme=0 buyer=1 bonus=2
 
