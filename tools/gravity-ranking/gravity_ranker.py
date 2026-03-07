@@ -11,12 +11,14 @@ lines=open(input_file).read().splitlines()
 
 scored=[]
 
-for line in lines[1:]:  # skip header row
+for line in lines[1:]:
 
     parts=line.split("\t")
-    if len(parts)<3:
+
+    if len(parts) < 3:
         continue
-    slug=parts[2]  # slug is column index 2
+
+    slug=parts[2]  # col 2 = slug
 
     score=0
 
@@ -43,4 +45,4 @@ with open(output_file,"w") as f:
     for score,slug in scored:
         f.write(str(score)+" | "+slug+"\n")
 
-print("Gravity ranking complete")
+print("Gravity ranking complete:",len(scored),"signals")

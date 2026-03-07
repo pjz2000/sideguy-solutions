@@ -12,4 +12,4 @@ with open(queue_file,"w") as f:
         slug=line.split("|")[1].strip()
         f.write(slug+"\n")
 
-print("Build queue created")
+print("Build queue created:",len(top),"pages queued")
