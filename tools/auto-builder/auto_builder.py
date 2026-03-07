@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 
 queue="docs/build-queue/build-queue.txt"
 template="seo-template.html"
@@ -33,3 +33,8 @@ for slug in slugs:
     built+=1
 
 print("Pages built:",built)
+
+# Run CTR optimizer on all pages whenever new ones are built
+if built > 0:
+    subprocess.run("python3 tools/auto-builder/ctr_optimizer.py", shell=True)
+

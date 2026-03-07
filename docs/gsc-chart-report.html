@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>GSC Coverage & Impressions — sideguysolutions.com</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+  :root{--ink:#073044;--mint:#21d3a1;--bg:#eefcff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:24px}
+  h1{font-size:1.5rem;font-weight:800;margin-bottom:4px}
+  .sub{color:#3f6173;font-size:.9rem;margin-bottom:28px}
+  .cards{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+  .card{background:#fff;border:1px solid rgba(7,48,68,.12);border-radius:12px;padding:16px 22px;min-width:160px}
+  .card .val{font-size:2rem;font-weight:800;color:var(--mint)}
+  .card .lbl{font-size:.78rem;color:#3f6173;margin-top:2px}
+  .chart-wrap{background:#fff;border:1px solid rgba(7,48,68,.10);border-radius:14px;padding:20px;margin-bottom:24px}
+  .chart-wrap h2{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--ink)}
+  .alert{background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;border-radius:8px;margin-bottom:24px;font-size:.9rem}
+  .good{background:#d4edda;border-left-color:#28a745}
+</style>
+</head>
+<body>
+
+<h1>GSC Coverage & Impressions — sideguysolutions.com</h1>
+<p class="sub">Dec 4, 2025 → Feb 22, 2026 &nbsp;·&nbsp; 82 days</p>
+
+<div class="cards">
+  <div class="card"><div class="val">259</div><div class="lbl">Total Impressions</div></div>
+  <div class="card"><div class="val">327</div><div class="lbl">Indexed Pages (latest)</div></div>
+  <div class="card"><div class="val">1,534</div><div class="lbl">Not Indexed (latest)</div></div>
+  <div class="card"><div class="val">+200</div><div class="lbl">Indexed Growth</div></div>
+  <div class="card"><div class="val">+1,397</div><div class="lbl">Not Indexed Growth</div></div>
+</div>
+
+<div class="alert good">
+  ✅ <strong>Feb 17 mass submission detected:</strong> 1,310 pages entered Google's crawl queue in a single day. Indexed pages jumped +241 simultaneously. This is normal after a bulk sitemap push — Google needs weeks to evaluate and index them.
+</div>
+
+<div class="alert">
+  ⚠️ <strong>Low impressions:</strong> Only 259 total impressions over 82 days — peak 30 on Jan 19. Pages are crawled but not yet ranking. Focus: page quality, unique content, internal linking.
+</div>
+
+<div class="chart-wrap">
+  <h2>📈 Daily Impressions</h2>
+  <canvas id="imprChart" height="90"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2>🗂 Indexed vs Not Indexed Pages</h2>
+  <canvas id="covChart" height="120"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2>📊 Total Pages Known to Google</h2>
+  <canvas id="totalChart" height="90"></canvas>
+</div>
+
+<script>
+const DATES = ["2025-12-04", "2025-12-05", "2025-12-06", "2025-12-07", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-11", "2025-12-12", "2025-12-13", "2025-12-14", "2025-12-15", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-19", "2025-12-20", "2025-12-21", "2025-12-22", "2025-12-23", "2025-12-24", "2025-12-25", "2025-12-26", "2025-12-27", "2025-12-28", "2025-12-29", "2025-12-30", "2025-12-31", "2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23"];
+const IMPR  = [5, 0, 0, 0, 1, 8, 15, 15, 4, 2, 4, 6, 2, 6, 28, 2, 4, 4, 0, 0, 9, 0, 1, 0, 2, 2, 1, 2, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 2, 1, 3, 3, 1, 1, 1, 30, 1, 1, 3, 2, 1, 2, 3, 3, 1, 2, 3, 5, 1, 2, 2, 2, 1, 1, 1, 4, 5, 1, 2, 1, 2, 1, 1, 1, 6, 4, 0, 20, 0, 0, 1];
+const IDX   = ["null", "null", "null", "null", "null", "null", "null", "null", "null", "null", 127, 124, 124, 124, 124, 124, 124, 124, 124, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 118, 116, 116, 116, 112, 112, 112, 112, 107, 107, 107, 106, 106, 106, 106, 103, 103, 103, 101, 101, 101, 101, 99, 99, 99, 96, 96, 96, 96, 95, 95, 95, 93, 93, 93, 93, 89, 89, 89, 84, 84, 84, 84, 80, 80, 80, 321, 321, 321, 321, 327, 327, 327];
+const NIDX  = ["null", "null", "null", "null", "null", "null", "null", "null", "null", "null", 137, 161, 161, 161, 161, 161, 161, 161, 161, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 180, 180, 180, 184, 184, 184, 184, 189, 189, 189, 191, 191, 191, 191, 194, 194, 194, 196, 196, 196, 196, 200, 200, 200, 205, 205, 205, 205, 206, 206, 206, 208, 208, 208, 208, 213, 213, 213, 218, 218, 218, 218, 222, 222, 222, 1532, 1532, 1532, 1532, 1534, 1534, 1534];
+const TOT   = ["null", "null", "null", "null", "null", "null", "null", "null", "null", "null", 264, 285, 285, 285, 285, 285, 285, 285, 285, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 295, 296, 296, 296, 296, 296, 296, 296, 296, 296, 296, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 297, 299, 299, 299, 301, 301, 301, 301, 301, 301, 301, 301, 301, 301, 301, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 1853, 1853, 1853, 1853, 1861, 1861, 1861];
+
+const font = { family: '-apple-system,system-ui,sans-serif', size: 11 };
+
+new Chart(document.getElementById('imprChart'), {
+  type: 'bar',
+  data: {
+    labels: DATES,
+    datasets: [{ label: 'Impressions', data: IMPR, backgroundColor: '#21d3a1', borderRadius: 3 }]
+  },
+  options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { font, maxTicksLimit: 12 } }, y: { ticks: { font } } } }
+});
+
+new Chart(document.getElementById('covChart'), {
+  type: 'line',
+  data: {
+    labels: DATES,
+    datasets: [
+      { label: 'Indexed', data: IDX, borderColor: '#21d3a1', backgroundColor: 'rgba(33,211,161,.1)', fill: true, tension: .3, pointRadius: 0 },
+      { label: 'Not Indexed', data: NIDX, borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,.08)', fill: true, tension: .3, pointRadius: 0 }
+    ]
+  },
+  options: { plugins: { legend: { labels: { font } } }, scales: { x: { ticks: { font, maxTicksLimit: 12 } }, y: { ticks: { font } } } }
+});
+
+new Chart(document.getElementById('totalChart'), {
+  type: 'line',
+  data: {
+    labels: DATES,
+    datasets: [{ label: 'Total pages in GSC', data: TOT, borderColor: '#00c7ff', backgroundColor: 'rgba(0,199,255,.1)', fill: true, tension: .3, pointRadius: 0 }]
+  },
+  options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { font, maxTicksLimit: 12 } }, y: { ticks: { font } } } }
+});
+</script>
+</body>
+</html>

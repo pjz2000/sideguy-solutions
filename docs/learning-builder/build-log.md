@@ -1,8 +1,5 @@
 # Learning Builder Log
 
-Run: 2026-03-07T16:32:14.250016+00:00
+Run: 2026-03-07T16:32:38.151178+00:00
 
-- built build-adjacent-longtail-pages-around-the-highestscoring-queries
-- built prefer-clusters-over-isolated-oneoff-pages
-- built where-impressions-are-high-and-clicks-are-low-improve-titlemeta-and-page-match
-- built where-a-bucket-repeats-create-stronger-hubs-and-internal-links
+_No pages built — manifest has no topics yet. Add GSC data to trigger learning loop._

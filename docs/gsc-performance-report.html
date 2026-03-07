@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>GSC Performance — sideguysolutions.com</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+  :root{--ink:#073044;--mint:#21d3a1;--bg:#eefcff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:24px 20px}
+  h1{font-size:1.5rem;font-weight:800;margin-bottom:4px}
+  .sub{color:#3f6173;font-size:.9rem;margin-bottom:28px}
+  .cards{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+  .card{background:#fff;border:1px solid rgba(7,48,68,.12);border-radius:12px;padding:16px 20px;min-width:140px}
+  .card .val{font-size:2rem;font-weight:800;color:var(--mint)}
+  .card .lbl{font-size:.78rem;color:#3f6173;margin-top:2px}
+  .chart-wrap{background:#fff;border:1px solid rgba(7,48,68,.10);border-radius:14px;padding:20px;margin-bottom:20px}
+  .chart-wrap h2{font-size:.95rem;font-weight:700;margin-bottom:14px;color:var(--ink)}
+  .alert{padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:.88rem;border-left:4px solid}
+  .green{background:#d4edda;border-color:#28a745}
+  .yellow{background:#fff3cd;border-color:#ffc107}
+  .blue{background:#d1ecf1;border-color:#17a2b8}
+</style>
+</head>
+<body>
+
+<h1>GSC Performance — sideguysolutions.com</h1>
+<p class="sub">Feb 5 → Mar 3, 2026 &nbsp;·&nbsp; 27 days &nbsp;·&nbsp; Clicks · Impressions · CTR · Position</p>
+
+<div class="cards">
+  <div class="card"><div class="val">8</div><div class="lbl">Total Clicks</div></div>
+  <div class="card"><div class="val">179</div><div class="lbl">Total Impressions</div></div>
+  <div class="card"><div class="val">4.47%</div><div class="lbl">Avg CTR</div></div>
+  <div class="card"><div class="val">124</div><div class="lbl">Impr. Last 7 Days</div></div>
+  <div class="card"><div class="val">15</div><div class="lbl">Impr. First 7 Days</div></div>
+</div>
+
+<div class="alert green">
+  ✅ <strong>Impressions trending ⬆️ UP:</strong> First 7 days = 15 impressions. Last 7 days = 124. That's a 727% increase — Google is discovering more content.
+</div>
+
+<div class="alert blue">
+  🔵 <strong>Feb 21 spike (20 impressions):</strong> Likely the Feb 17 mass sitemap crawl event rippling through — 4 days later Google started surfacing new pages. Mar 2–3 showing 19 and 17 impressions — strongest back-to-back days in the dataset.
+</div>
+
+<div class="alert yellow">
+  ⚠️ <strong>CTR is near zero:</strong> 8 clicks on 155 impressions = 4.47% avg CTR. Titles and meta descriptions need work — pages are showing up but not earning the click. Position averaging 20–50+ suggests ranking in the middle pages.
+</div>
+
+<div class="chart-wrap">
+  <h2>📈 Daily Impressions</h2>
+  <canvas id="imprChart" height="80"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2>🖱 Daily Clicks</h2>
+  <canvas id="clickChart" height="60"></canvas>
+</div>
+
+<div class="chart-wrap">
+  <h2>📍 Average Position (lower = better)</h2>
+  <canvas id="posChart" height="80"></canvas>
+</div>
+
+<script>
+const DATES=["2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04"];
+const IMPR=[2, 1, 1, 1, 4, 5, 1, 2, 1, 2, 1, 1, 1, 6, 4, 0, 20, 0, 0, 1, 1, 7, 10, 13, 8, 19, 17, 50];
+const CLICKS=[0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0];
+const POS=[27.0, 1.0, 54.0, 56.0, 45.0, 1.0, 3.0, 59.0, 1.0, 5.0, 7.0, 8.0, 1.0, 6.8, 1.5, "null", 31.2, "null", "null", 1.0, 12.0, 10.4, 22.2, 42.2, 52.6, 30.6, 41.4, 51.0];
+const font={family:'-apple-system,system-ui,sans-serif',size:11};
+
+new Chart(document.getElementById('imprChart'),{
+  type:'bar',
+  data:{labels:DATES,datasets:[{label:'Impressions',data:IMPR,backgroundColor:'#21d3a1',borderRadius:3}]},
+  options:{plugins:{legend:{display:false}},scales:{x:{ticks:{font,maxTicksLimit:10}},y:{ticks:{font}}}}
+});
+
+new Chart(document.getElementById('clickChart'),{
+  type:'bar',
+  data:{labels:DATES,datasets:[{label:'Clicks',data:CLICKS,backgroundColor:'#00c7ff',borderRadius:3}]},
+  options:{plugins:{legend:{display:false}},scales:{x:{ticks:{font,maxTicksLimit:10}},y:{ticks:{font,stepSize:1}}}}
+});
+
+new Chart(document.getElementById('posChart'),{
+  type:'line',
+  data:{labels:DATES,datasets:[{label:'Avg Position',data:POS,borderColor:'#ff6b6b',backgroundColor:'rgba(255,107,107,.08)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#ff6b6b',spanGaps:true}]},
+  options:{plugins:{legend:{display:false}},scales:{x:{ticks:{font,maxTicksLimit:10}},y:{reverse:true,ticks:{font}}}}
+});
+</script>
+</body>
+</html>
