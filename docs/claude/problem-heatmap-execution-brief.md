@@ -1,6 +1,6 @@
 # Claude Execution Brief — Problem Heatmap
 
-Generated: 2026-03-07T14:40:58Z
+Generated: 2026-03-07T16:03:00Z
 
 Use `docs/problem-heatmap/top-20-build-queue.txt` as the source queue.
 

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SideGuy Problem Graph · Keyword Co-occurrence</title>
+<style>
+  :root{--bg0:#eefcff;--ink:#073044;--mint:#21d3a1;--mint2:#00c7ff;--card:#fff}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,system-ui,"Segoe UI",Roboto,Inter,sans-serif;
+    background:radial-gradient(ellipse at 20% 40%,#b8f4f0 0%,#d6f5ff 35%,#eefcff 70%,#fff8f0 100%);
+    color:var(--ink);min-height:100vh;
+  }
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;background:rgba(255,255,255,.75);
+    backdrop-filter:blur(8px);border-bottom:1px solid rgba(33,211,161,.25);
+  }
+  .brand{font-weight:800;font-size:1.1rem;color:var(--ink);text-decoration:none}
+  .pill{
+    background:var(--mint);color:#fff;font-size:.8rem;font-weight:700;
+    padding:6px 16px;border-radius:99px;text-decoration:none;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+  h1{font-size:1.5rem;font-weight:900;margin-bottom:6px}
+  .sub{color:#567;font-size:.9rem;margin-bottom:20px}
+  #graph-container{
+    background:#fff;border-radius:16px;
+    box-shadow:0 6px 28px rgba(7,48,68,.10);
+    overflow:hidden;position:relative;
+  }
+  svg{width:100%;height:560px;display:block}
+  .tooltip{
+    position:absolute;background:var(--ink);color:#fff;
+    padding:6px 12px;border-radius:8px;font-size:.8rem;
+    pointer-events:none;opacity:0;transition:opacity .15s;
+    white-space:nowrap;
+  }
+  .legend{
+    display:flex;gap:20px;margin-top:16px;flex-wrap:wrap;
+    font-size:.8rem;color:#567;
+  }
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .floating{
+    position:fixed;bottom:24px;right:24px;z-index:999;
+    background:var(--mint);color:#fff;font-weight:800;font-size:.85rem;
+    padding:14px 20px;border-radius:99px;text-decoration:none;
+    box-shadow:0 4px 20px rgba(33,211,161,.45);
+    animation:pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(33,211,161,.45)}50%{box-shadow:0 4px 32px rgba(33,211,161,.75)}}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="/">SideGuy Solutions</a>
+  <a class="pill" href="sms:+17735441231">Text PJ</a>
+</header>
+<div class="wrap">
+  <h1>SideGuy Problem Graph</h1>
+  <p class="sub">Keyword co-occurrence across problem signals — node size = frequency, links = co-occurrence strength</p>
+  <div id="graph-container">
+    <svg id="graph"></svg>
+    <div class="tooltip" id="tip"></div>
+  </div>
+  <div class="legend">
+    <span><span class="dot" style="background:#21d3a1"></span> High frequency</span>
+    <span><span class="dot" style="background:#00c7ff"></span> Medium</span>
+    <span><span class="dot" style="background:#b8d4de"></span> Low</span>
+  </div>
+</div>
+<a class="floating" href="sms:+17735441231">Text PJ · 773-544-1231</a>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const tip = document.getElementById("tip");
+const container = document.getElementById("graph-container");
+
+fetch("problem-graph.json")
+  .then(r => r.json())
+  .then(data => {
+    const svg = d3.select("#graph");
+    const W = svg.node().getBoundingClientRect().width || 960;
+    const H = 560;
+
+    if (!data.nodes || !data.nodes.length) {
+      svg.append("text").attr("x", W/2).attr("y", H/2)
+        .attr("text-anchor","middle").attr("fill","#567")
+        .text("No graph data yet — run keyword_graph_builder.py first");
+      return;
+    }
+
+    const maxVal = d3.max(data.nodes, d => d.value);
+    const r = d3.scaleSqrt().domain([1, maxVal]).range([5, 26]);
+    const col = d3.scaleSequential(d3.interpolate("#b8d4de","#21d3a1"))
+                  .domain([1, maxVal]);
+
+    const simulation = d3.forceSimulation(data.nodes)
+      .force("link", d3.forceLink(data.links).id(d => d.id)
+        .distance(d => 100 / Math.sqrt(d.strength || 1))
+        .strength(d => Math.min(0.6, (d.strength || 1) / 10))
+      )
+      .force("charge", d3.forceManyBody().strength(-180))
+      .force("center", d3.forceCenter(W/2, H/2))
+      .force("collide", d3.forceCollide().radius(d => r(d.value) + 4));
+
+    const link = svg.append("g").selectAll("line")
+      .data(data.links).enter().append("line")
+      .style("stroke", "#cde8ef")
+      .style("stroke-width", d => Math.max(0.5, Math.sqrt(d.strength || 1)));
+
+    const node = svg.append("g").selectAll("circle")
+      .data(data.nodes).enter().append("circle")
+      .attr("r", d => r(d.value))
+      .style("fill", d => col(d.value))
+      .style("cursor","pointer")
+      .call(d3.drag()
+        .on("start", (e,d) => { if (!e.active) simulation.alphaTarget(.3).restart(); d.fx=d.x; d.fy=d.y; })
+        .on("drag",  (e,d) => { d.fx=e.x; d.fy=e.y; })
+        .on("end",   (e,d) => { if (!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
+      )
+      .on("mousemove", (e,d) => {
+        const rect = container.getBoundingClientRect();
+        tip.style.left  = (e.clientX - rect.left + 12) + "px";
+        tip.style.top   = (e.clientY - rect.top  - 30) + "px";
+        tip.style.opacity = 1;
+        tip.textContent  = `${d.id}  (${d.value})`;
+      })
+      .on("mouseleave", () => { tip.style.opacity = 0; });
+
+    const label = svg.append("g").selectAll("text")
+      .data(data.nodes).enter().append("text")
+      .text(d => d.id)
+      .attr("font-size", d => Math.max(9, Math.min(13, r(d.value) * .85)))
+      .attr("text-anchor","middle")
+      .attr("dy","0.35em")
+      .attr("fill", "#073044")
+      .attr("pointer-events","none");
+
+    simulation.on("tick", () => {
+      link
+        .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+      node.attr("cx", d => d.x).attr("cy", d => d.y);
+      label.attr("x", d => d.x).attr("y", d => d.y);
+    });
+  })
+  .catch(() => {
+    document.getElementById("graph-container").innerHTML =
+      "<p style='padding:40px;color:#567'>problem-graph.json not found — run keyword_graph_builder.py</p>";
+  });
+</script>
+</body>
+</html>
