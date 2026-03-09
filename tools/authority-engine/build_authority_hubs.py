@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+"""
+Authority Hub Generator — SideGuy Solutions
+Generates full SEO-ready hub pages for each industry in public/ai-automation-{industry}.html
+Skips files that already exist. Matches the SideGuy inline-CSS, canonical, schema pattern.
+"""
+from pathlib import Path
+from datetime import date
+
+ROOT   = Path("/workspaces/sideguy-solutions")
+OUT    = ROOT / "public"
+TODAY  = date.today().isoformat()
+BASE   = "https://sideguysolutions.com"
+
+INDUSTRIES = [
+    {
+        "slug":    "hvac",
+        "label":  "HVAC",
+        "lede":   "Practical automation guide for HVAC operators — missed call recovery, dispatch coordination, and seasonal outreach without adding headcount.",
+        "wins":   ["Missed call text-back", "Dispatch confirmation sequences", "Seasonal maintenance reminders", "After-hours lead capture"],
+        "pain":   "seasonal service demand and dispatch logistics",
+    },
+    {
+        "slug":    "plumber",
+        "label":  "Plumbing Companies",
+        "lede":   "Practical automation guide for plumbers — emergency dispatch, booking reminders, and review requests that run without a front-desk team.",
+        "wins":   ["Emergency call routing", "Appointment reminders", "Post-job review requests", "Invoice follow-up sequences"],
+        "pain":   "emergency call coordination and technician dispatch",
+    },
+    {
+        "slug":    "dentist",
+        "label":  "Dental Practices",
+        "lede":   "Practical automation guide for dental practices — reduce no-shows, reactivate lapsed patients, and handle after-hours intake automatically.",
+        "wins":   ["Appointment reminders (48hr + 2hr)", "Lapsed patient reactivation", "After-hours intake forms", "Review request sequences"],
+        "pain":   "appointment scheduling and no-show reduction",
+    },
+    {
+        "slug":    "contractor",
+        "label":  "General Contractors",
+        "lede":   "Practical automation guide for contractors — bid follow-ups, job scheduling, and subcontractor coordination without manual chasing.",
+        "wins":   ["Bid follow-up sequences", "Job milestone notifications", "Subcontractor coordination", "Client progress updates"],
+        "pain":   "job scheduling and quote follow-ups",
+    },
+    {
+        "slug":    "restaurant",
+        "label":  "Restaurants",
+        "lede":   "Practical automation guide for restaurants — reservation management, review generation, and customer inquiry handling after hours.",
+        "wins":   ["Reservation confirmation sequences", "Post-visit review requests", "After-hours inquiry handling", "Loyalty outreach"],
+        "pain":   "reservation handling and customer inquiry automation",
+    },
+    {
+        "slug":    "law-firm",
+        "label":  "Law Firms",
+        "lede":   "Practical automation guide for law firms — intake automation, consultation scheduling, and lead follow-up without a full admin team.",
+        "wins":   ["Client intake automation", "Consultation scheduling", "Lead follow-up sequences", "Deadline reminder sequences"],
+        "pain":   "lead intake and consultation scheduling",
+    },
+    {
+        "slug":    "real-estate",
+        "label":  "Real Estate Agents",
+        "lede":   "Practical automation guide for real estate agents — lead nurture, showing reminders, and follow-up sequences that keep buyers engaged.",
+        "wins":   ["Lead nurture sequences", "Showing reminder automation", "Offer follow-up sequences", "Client check-in automation"],
+        "pain":   "lead nurture and showing coordination",
+    },
+    {
+        "slug":    "salon",
+        "label":  "Salons",
+        "lede":   "Practical automation guide for salons — appointment reminders, rebooking prompts, and review requests that run between client visits.",
+        "wins":   ["Appointment reminders", "Rebooking prompt sequences", "Review request automation", "No-show recovery"],
+        "pain":   "appointment reminders and client rebooking",
+    },
+    {
+        "slug":    "auto-repair",
+        "label":  "Auto Repair Shops",
+        "lede":   "Practical automation guide for auto repair shops — repair status updates, service reminders, and review requests after every job.",
+        "wins":   ["Repair status SMS updates", "Service reminder sequences", "Post-repair review requests", "Missed call text-back"],
+        "pain":   "repair status updates and service reminder sequences",
+    },
+    {
+        "slug":    "medical",
+        "label":  "Medical Clinics",
+        "lede":   "Practical automation guide for medical clinics — patient intake, appointment reminders, and follow-up care sequences without admin overhead.",
+        "wins":   ["Patient intake automation", "Appointment reminders", "Follow-up care sequences", "After-visit check-ins"],
+        "pain":   "patient intake and appointment coordination",
+    },
+]
+
+
+def build_hub(ind: dict) -> str:
+    slug    = ind["slug"]
+    label   = ind["label"]
+    lede    = ind["lede"]
+    wins    = ind["wins"]
+    pain    = ind["pain"]
+    url     = f"{BASE}/public/ai-automation-{slug}.html"
+
+    win_items = "\n".join(f"      <li>{w}</li>" for w in wins)
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AI Automation for {label} · SideGuy Solutions</title>
+  <meta name="description" content="{lede[:150]}"/>
+  <link rel="canonical" href="{url}"/>
+  <meta property="og:title" content="AI Automation for {label} · SideGuy Solutions"/>
+  <meta property="og:description" content="{lede[:150]}"/>
+  <meta property="og:url" content="{url}"/>
+  <meta property="og:type" content="article"/>
+  <meta name="robots" content="index,follow"/>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {{
+        "@type": "Question",
+        "name": "What AI automations work best for {label.lower()}?",
+        "acceptedAnswer": {{
+          "@type": "Answer",
+          "text": "The highest-ROI automations for {label.lower()} are: {', '.join(wins[:3])}. Start with one before adding more."
+        }}
+      }},
+      {{
+        "@type": "Question",
+        "name": "How much does AI automation cost for a {label.lower()} business?",
+        "acceptedAnswer": {{
+          "@type": "Answer",
+          "text": "Most {label.lower()} operators start with $50-200/month for 1-2 automations. Setup ranges from free to $500-2,000 for managed implementations."
+        }}
+      }}
+    ]
+  }}
+  </script>
+  <style>
+    :root{{--bg0:#eefcff;--bg1:#d7f5ff;--ink:#073044;--muted:#3f6173;--mint:#21d3a1;--blue2:#1f7cff;--r:18px;--pill:999px}}
+    *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
+    body{{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;background:radial-gradient(ellipse at 60% 0%,#c5f4ff 0%,#eefcff 55%,#fff 100%);color:var(--ink);min-height:100vh}}
+    a{{color:var(--blue2);text-decoration:none}}a:hover{{text-decoration:underline}}
+    nav.bc{{padding:11px 24px;font-size:.8rem;color:var(--muted);border-bottom:1px solid rgba(0,0,0,.06);background:rgba(255,255,255,.6);backdrop-filter:blur(6px);position:sticky;top:0;z-index:10}}
+    nav.bc a{{color:var(--muted)}}
+    .wrap{{max-width:860px;margin:0 auto;padding:44px 24px 100px}}
+    .badge{{display:inline-block;background:var(--mint);color:#073044;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:var(--pill);margin-bottom:12px}}
+    h1{{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;line-height:1.15;margin-bottom:12px}}
+    .lede{{font-size:1rem;color:var(--muted);line-height:1.65;margin-bottom:36px;max-width:680px}}
+    .section{{margin-bottom:40px}}
+    .section h2{{font-size:1.05rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--bg1)}}
+    ul.wins{{list-style:none;display:flex;flex-direction:column;gap:10px}}
+    ul.wins li{{padding:12px 18px;background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.08);border-radius:var(--r);font-size:.95rem}}
+    ul.wins li::before{{content:"✓ ";color:var(--mint);font-weight:700}}
+    .cta-box{{background:linear-gradient(135deg,#073044 0%,#0e3d58 100%);border-radius:var(--r);padding:28px 32px;color:#fff;display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin:40px 0 32px}}
+    .cta-box h3{{font-size:1.1rem;font-weight:700;margin-bottom:4px}}
+    .cta-box p{{font-size:.9rem;opacity:.8;margin:0}}
+    .cta-btn{{flex-shrink:0;background:var(--mint);color:#073044;font-weight:700;padding:11px 22px;border-radius:var(--pill);white-space:nowrap}}
+    .cta-btn:hover{{opacity:.9;text-decoration:none}}
+    .floating{{position:fixed;bottom:22px;right:22px;z-index:999}}
+    .floatBtn{{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#0e3d58,#073044);color:#fff;padding:11px 18px;border-radius:var(--pill);font-size:.88rem;font-weight:600;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.2)}}
+    footer{{text-align:center;padding:20px;font-size:.77rem;color:var(--muted);border-top:1px solid rgba(0,0,0,.06);margin-top:40px}}
+    @media(max-width:600px){{.cta-box{{flex-direction:column;gap:16px}}.floating{{bottom:14px;right:14px}}}}
+  </style>
+</head>
+<body>
+
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a> ›
+  <a href="/ai-automation-hub.html">AI Automation</a> ›
+  {label}
+</nav>
+
+<main class="wrap">
+  <div class="badge">Operator Guide · {label}</div>
+  <h1>⚡ AI Automation for {label}</h1>
+  <p class="lede">{lede}</p>
+
+  <div class="section">
+    <h2>Quick Wins for {label} Operators</h2>
+    <ul class="wins">
+{win_items}
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>The Biggest Pain Point</h2>
+    <p style="font-size:.95rem;line-height:1.65;color:var(--muted)">
+      Most {label.lower()} operators lose the most time to <strong>{pain}</strong>.
+      The right automation for that specific pain saves 3–8 hours per week on average.
+      Start there — not with a full platform overhaul.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Related Guides</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a style="background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.1);border-radius:var(--pill);padding:6px 15px;font-size:.84rem;font-weight:500;color:var(--ink)" href="/ai-automation-hub.html">AI Automation Hub</a>
+      <a style="background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.1);border-radius:var(--pill);padding:6px 15px;font-size:.84rem;font-weight:500;color:var(--ink)" href="/knowledge-hub.html">Knowledge Hub</a>
+      <a style="background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.1);border-radius:var(--pill);padding:6px 15px;font-size:.84rem;font-weight:500;color:var(--ink)" href="/problems/index.html">Problem Library</a>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div>
+      <h3>Have a specific {label.lower()} automation question?</h3>
+      <p>Text PJ — real human, San Diego. Straight answer, no pitch.</p>
+    </div>
+    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+  </div>
+
+  <footer>
+    <a href="/">SideGuy Solutions</a> ·
+    <a href="/ai-automation-hub.html">AI Automation Hub</a> ·
+    <a href="tel:+17735441231">773-544-1231</a>
+    <br><small>Updated {TODAY}</small>
+  </footer>
+</main>
+
+<div class="floating">
+  <a class="floatBtn" href="sms:+17735441231">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Text PJ · 773-544-1231
+  </a>
+</div>
+
+</body>
+</html>
+"""
+
+
+created = 0
+skipped = 0
+
+for ind in INDUSTRIES:
+    dest = OUT / f"ai-automation-{ind['slug']}.html"
+    if dest.exists():
+        print(f"  SKIP (exists): {dest.name}")
+        skipped += 1
+        continue
+    dest.write_text(build_hub(ind))
+    print(f"  CREATED: {dest.name}")
+    created += 1
+
+print(f"\nDone — {created} created, {skipped} skipped.")
