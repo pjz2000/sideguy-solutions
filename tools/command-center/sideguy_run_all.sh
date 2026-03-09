@@ -107,6 +107,58 @@ echo "Step 24: Semantic Link Injector"
 python3 tools/topic-cluster-engine/semantic_link_injector.py || true
 
 echo ""
+echo "Step 25: Trending Topic Detector"
+python3 tools/trending-topic-engine/trending_topic_detector.py || true
+
+echo ""
+echo "Step 26: Freshness Upgrader"
+python3 tools/freshness-engine/freshness_upgrader.py || true
+
+echo ""
+echo "Step 27: Schema Expander"
+python3 tools/schema-expander/schema_expander.py || true
+
+echo ""
+echo "Step 28: Engagement Injector"
+python3 tools/engagement-engine/engagement_injector.py || true
+
+echo ""
+echo "Step 29: Trust Injector"
+python3 tools/trust-engine/trust_injector.py || true
+
+echo ""
+echo "Step 30: Auto-Builder for Trending Topics"
+python3 tools/trending-topic-engine/auto_builder.py || true
+
+echo ""
+echo "Step 31: Reddit Topic Scraper"
+python3 tools/trending-topic-engine/reddit_topic_scraper.py || true
+
+echo ""
+echo "Step 32: Google Trends Fetcher"
+python3 tools/trending-topic-engine/google_trends_fetcher.py || true
+
+echo ""
+echo "Step 33: Reddit API Fetcher"
+python3 tools/trending-topic-engine/reddit_api_fetcher.py || true
+
+echo ""
+echo "Step 34: Twitter API Fetcher"
+python3 tools/trending-topic-engine/twitter_api_fetcher.py || true
+
+echo ""
+echo "Step 35: News API Fetcher"
+python3 tools/trending-topic-engine/news_api_fetcher.py || true
+
+echo ""
+echo "Step 36: Stack Overflow API Fetcher"
+python3 tools/trending-topic-engine/stackoverflow_api_fetcher.py || true
+
+echo ""
+echo "Step 37: Quora API Fetcher"
+python3 tools/trending-topic-engine/quora_api_fetcher.py || true
+
+echo ""
 echo "====================================="
 echo "SIDEGUY RUN COMPLETE"
 echo "====================================="
