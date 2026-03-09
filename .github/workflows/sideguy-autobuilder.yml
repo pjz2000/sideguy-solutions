@@ -51,6 +51,15 @@ jobs:
       - name: Refresh Stale Pages
         run: python3 scripts/page-refresh.py
 
+      - name: Inject Memes (idempotent)
+        run: python3 tools/page-upgrader/meme_injector.py
+
+      - name: Trending Topic Fetchers
+        run: |
+          python3 tools/trending-topic-engine/google_trends_fetcher.py
+          python3 tools/trending-topic-engine/reddit_topic_scraper.py
+          python3 tools/trending-topic-engine/auto_builder.py
+
       - name: Generate Sitemaps
         run: python3 scripts/generate-sitemap.py
 
