@@ -1,45 +1,64 @@
 #!/usr/bin/env python3
 """
-Reddit Topic Scraper — SideGuy Solutions
+Reddit RSS Scraper — SideGuy Solutions
 =======================================
-Fetches trending topics from Reddit (e.g., r/sandiego, r/smallbusiness, r/hvac, r/plumbing, r/automation).
-Appends new topics to docs/trending-topic-engine/expansion_queue.txt for auto-builder.
-
-Note: For demo, uses static sample data. For production, integrate Reddit API or Pushshift.
+Fetches hot posts from relevant subreddits via their public RSS feeds.
+No API key or OAuth needed — Reddit's .rss endpoint is public.
+Appends new topics to docs/trending-topic-engine/expansion_queue.txt.
 """
 from pathlib import Path
 import re
+import feedparser
 
 ROOT = Path("/workspaces/sideguy-solutions")
 QUEUE = ROOT / "docs" / "trending-topic-engine" / "expansion_queue.txt"
 
-# Sample trending Reddit posts (replace with API fetch for production)
-reddit_posts = [
-    "Best HVAC troubleshooting tips for San Diego",
-    "How to automate payment processing for small businesses",
-    "San Diego plumbing emergency advice",
-    "AI tools for contractors",
-    "Home repair automation recommendations",
-    "Water pressure issues in San Diego homes",
-    "Marketing automation for local businesses",
-    "Mini split AC repair experiences",
-    "Battery backup installation questions",
-    "Ecommerce payment solutions discussion"
+# Public Reddit RSS feeds — no API key needed
+SUBREDDITS = [
+    "sandiego",
+    "smallbusiness",
+    "hvac",
+    "plumbing",
+    "electricians",
+    "automation",
+    "entrepreneur",
+    "homeowners",
+    "paymentprocessing",
+    "AItools",
 ]
 
+# Skip posts that are too generic or off-topic
+SKIP_WORDS = ["meme", "rant", "oc:", "[oc]", "tell me", "unpopular opinion"]
+
+def clean_topic(text):
+    text = re.sub(r'\[.*?\]', '', text)  # remove [tags]
+    text = re.sub(r'[^\w\s\-]', '', text).strip().lower()
+    return text
+
 new_topics = set()
-for post in reddit_posts:
-    topic = re.sub(r'[^\w\s\-]', '', post).strip().lower()
-    if topic and len(topic.split()) > 2:
-        new_topics.add(topic)
+for sub in SUBREDDITS:
+    url = f"https://www.reddit.com/r/{sub}/hot.rss?limit=15"
+    try:
+        feed = feedparser.parse(url)
+        for entry in feed.entries[:15]:
+            title = entry.get('title', '')
+            topic = clean_topic(title)
+            if len(topic.split()) < 3:
+                continue
+            if any(skip in topic for skip in SKIP_WORDS):
+                continue
+            new_topics.add(topic)
+    except Exception as e:
+        print(f"Reddit feed error (r/{sub}): {e}")
 
 if QUEUE.exists():
     existing = set(QUEUE.read_text().splitlines())
 else:
     existing = set()
+    QUEUE.parent.mkdir(parents=True, exist_ok=True)
 
+added = new_topics - existing
 with QUEUE.open("a") as f:
-    for topic in sorted(new_topics):
-        if topic not in existing:
-            f.write(topic + "\n")
-print(f"Reddit topics added: {len(new_topics - existing)}")
+    for topic in sorted(added):
+        f.write(topic + "\n")
+print(f"Reddit RSS topics added: {len(added)} (from {len(new_topics)} fetched)")
