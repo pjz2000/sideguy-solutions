@@ -99,6 +99,14 @@ if [ -f tools/page-upgrader/generate_sitemap_xml.py ]; then
 fi
 
 echo ""
+echo "Step 23: Topic Cluster Builder"
+python3 tools/topic-cluster-engine/topic_cluster_builder.py || true
+
+echo ""
+echo "Step 24: Semantic Link Injector"
+python3 tools/topic-cluster-engine/semantic_link_injector.py || true
+
+echo ""
 echo "====================================="
 echo "SIDEGUY RUN COMPLETE"
 echo "====================================="
