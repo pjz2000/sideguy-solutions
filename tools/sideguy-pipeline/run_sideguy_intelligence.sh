@@ -8,6 +8,15 @@ echo ""
 
 cd /workspaces/sideguy-solutions
 
+echo "0️⃣  Signal Scanner  ←— ingest curated queries first"
+echo "--------------------------------"
+if [ -f tools/signal-scanner/signal_scanner.py ]; then
+  python3 tools/signal-scanner/signal_scanner.py
+else
+  echo "Signal scanner not installed"
+fi
+
+echo ""
 echo "1️⃣  Market Radar Discovery"
 echo "--------------------------------"
 if [ -f tools/market-radar/market_radar.py ]; then
