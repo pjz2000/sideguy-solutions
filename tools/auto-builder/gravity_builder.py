@@ -19,7 +19,7 @@ template = open(template_file).read()
 
 built = 0
 
-for slug in signals[:50]:
+for slug in signals[:250]:
     slug = slug.strip()
     if not slug:
         continue
