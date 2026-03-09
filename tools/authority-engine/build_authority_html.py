@@ -1,0 +1,363 @@
+#!/usr/bin/env python3
+"""
+Authority HTML Generator — SideGuy Solutions
+Generates full SEO-ready HTML pages for AI automation industry pillars.
+Skips files that already exist in auto/.
+"""
+from pathlib import Path
+from datetime import date
+
+ROOT = Path("/workspaces/sideguy-solutions")
+OUT  = ROOT / "auto"
+TODAY = date.today().isoformat()
+
+INDUSTRIES = [
+    {
+        "slug":    "ai-automation-ecommerce",
+        "html_title": "AI Automation for Ecommerce Stores",
+        "title":   "AI automation for ecommerce stores",
+        "badge":   "Operator Guide · Ecommerce",
+        "emoji":   "🛒",
+        "lede":    "Practical guide for ecommerce operators — what AI automation actually saves time on, where it fits in your stack, and how to start without breaking fulfillment.",
+        "wins": [
+            ("Abandoned cart recovery",   "Automated sequences recapture 10–15% of abandoned carts without manual follow-up."),
+            ("Order status updates",      "Trigger shipping and delivery texts the moment status changes — zero support tickets."),
+            ("Return & refund automation","Initiate RMAs and refund flows automatically based on return reason."),
+            ("Post-purchase review asks", "Review request sent 3–7 days post-delivery when sentiment is highest."),
+        ],
+        "problems": [
+            ("/problems/zapier-task-failed-webhook-timeout.html", "Webhook triggers dropping orders"),
+            ("/problems/twilio-sms-not-delivering.html",          "SMS notifications not sending"),
+            ("/problems/calendar-booking-double-booked-fix.html", "Inventory sync getting out of sync"),
+            ("/problems/no-show-reduction-automation.html",       "Customers not completing checkout"),
+        ],
+        "cta_q":   "ecommerce automation question",
+    },
+    {
+        "slug":    "ai-automation-saas",
+        "html_title": "AI Automation for SaaS Companies",
+        "title":   "AI automation for SaaS companies",
+        "badge":   "Operator Guide · SaaS",
+        "emoji":   "💻",
+        "lede":    "Practical guide for SaaS operators — automate onboarding, churn signals, and support routing so your team focuses on product, not repetitive tickets.",
+        "wins": [
+            ("Trial onboarding sequences", "Day-1, day-3, and day-7 drip emails based on feature usage — automated."),
+            ("Churn risk alerts",          "Flag accounts with declining activity before they cancel."),
+            ("Support ticket routing",     "Auto-classify and assign tickets by intent — billing, bug, feature request."),
+            ("Billing reminder automation","Smart dunning sequences recover failed payments without sales team effort."),
+        ],
+        "problems": [
+            ("/problems/zapier-task-failed-webhook-timeout.html", "Automation workflow failing silently"),
+            ("/problems/twilio-sms-not-delivering.html",          "SMS notifications to users not delivering"),
+            ("/problems/calendar-booking-double-booked-fix.html", "Demo scheduling creating conflicts"),
+            ("/problems/no-show-reduction-automation.html",       "Trial users not activating key features"),
+        ],
+        "cta_q":   "SaaS automation question",
+    },
+    {
+        "slug":    "ai-automation-consultants",
+        "html_title": "AI Automation for Consultants",
+        "title":   "AI automation for consultants",
+        "badge":   "Operator Guide · Consultants",
+        "emoji":   "💼",
+        "lede":    "Practical guide for independent consultants and consulting firms — automate the admin so you can bill more hours on actual work.",
+        "wins": [
+            ("Lead follow-up sequences",  "Automated follow-up after discovery calls before prospects go cold."),
+            ("Proposal reminder cadence", "Timed nudges when proposals sit unsigned for 3, 7, and 14 days."),
+            ("Client onboarding packets", "Trigger contract, intake form, and calendar link the moment a deal closes."),
+            ("Invoice follow-up",         "Auto-reminders at 7, 14, and 30 days overdue — no awkward calls."),
+        ],
+        "problems": [
+            ("/problems/zapier-task-failed-webhook-timeout.html", "CRM automation breaking mid-sequence"),
+            ("/problems/twilio-sms-not-delivering.html",          "Client SMS reminders not going out"),
+            ("/problems/calendar-booking-double-booked-fix.html", "Discovery calls getting double-booked"),
+            ("/problems/no-show-reduction-automation.html",       "Prospects ghosting after proposals sent"),
+        ],
+        "cta_q":   "consulting automation question",
+    },
+]
+
+FAQ_SCHEMA = """  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does AI automation cost for a small business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Setup ranges from free (basic tools like Zapier) to $500–2,000 for managed implementations. Most small businesses start with 1–2 automations costing $50–200/month. Define the problem first, then find the tool — not the other way around."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does AI automation take to set up?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simple automations (appointment reminders, review requests) take 1–3 days. Complex workflows (lead scoring, multi-step CRM integration) take 2–6 weeks. If a vendor says they can set up a complex system in 48 hours, ask what corners they're cutting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will AI automation replace my employees?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For repetitive, well-defined tasks — it may reduce hours needed. For relationship-based or judgment-heavy work — no. Most real implementations augment staff rather than replace them."
+        }
+      }
+    ]
+  }"""
+
+CSS = """  :root{
+    --bg0:#eefcff;--bg1:#d7f5ff;--ink:#073044;--muted:#3f6173;
+    --mint:#21d3a1;--mint2:#00c7ff;--blue2:#1f7cff;
+    --r:18px;--pill:999px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;
+    background:radial-gradient(ellipse at 60% 0%,#c5f4ff 0%,#eefcff 55%,#fff 100%);
+    color:var(--ink);min-height:100vh;
+  }
+  a{color:var(--blue2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav.bc{
+    padding:11px 24px;font-size:.8rem;color:var(--muted);
+    border-bottom:1px solid rgba(0,0,0,.06);
+    background:rgba(255,255,255,.6);backdrop-filter:blur(6px);
+    position:sticky;top:0;z-index:10;
+  }
+  nav.bc a{color:var(--muted)}
+  .wrap{max-width:860px;margin:0 auto;padding:44px 24px 100px}
+  .badge{
+    display:inline-block;background:var(--mint);color:#073044;
+    font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 12px;border-radius:var(--pill);margin-bottom:12px;
+  }
+  h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;line-height:1.15;margin-bottom:12px}
+  .lede{font-size:1rem;color:var(--muted);line-height:1.65;margin-bottom:36px;max-width:680px}
+  .section{margin-bottom:40px}
+  .section h2{font-size:1.05rem;font-weight:800;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--muted);margin-bottom:14px;padding-bottom:8px;
+    border-bottom:2px solid var(--bg1);}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .card{
+    background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.08);
+    border-radius:var(--r);padding:18px 20px;color:var(--ink);display:block;
+    transition:box-shadow .15s,transform .1s;
+  }
+  .card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);transform:translateY(-1px);text-decoration:none}
+  .card-icon{font-size:1.5rem;margin-bottom:8px}
+  .card-title{font-size:.97rem;font-weight:700;margin-bottom:4px}
+  .card-desc{font-size:.82rem;color:var(--muted);line-height:1.5}
+  .steps{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:14px}
+  .steps li{
+    counter-increment:steps;padding:16px 20px;padding-left:56px;position:relative;
+    background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.07);border-radius:var(--r);
+  }
+  .steps li::before{
+    content:counter(steps);position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:28px;height:28px;border-radius:50%;background:var(--mint);color:#073044;
+    font-size:.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;
+  }
+  .steps li strong{display:block;font-size:.95rem;margin-bottom:4px}
+  .steps li span{font-size:.87rem;color:var(--muted)}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{
+    background:rgba(255,255,255,.8);border:1px solid rgba(0,0,0,.1);
+    border-radius:var(--pill);padding:6px 15px;font-size:.84rem;font-weight:500;color:var(--ink);
+  }
+  .pill:hover{background:var(--mint);color:#073044;text-decoration:none}
+  .pill.accent{background:var(--blue2);color:#fff;border-color:var(--blue2)}
+  .cta-box{
+    background:linear-gradient(135deg,#073044 0%,#0e3d58 100%);
+    border-radius:var(--r);padding:28px 32px;color:#fff;
+    display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin:40px 0 32px;
+  }
+  .cta-box h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+  .cta-box p{font-size:.9rem;opacity:.8;margin:0}
+  .cta-btn{
+    flex-shrink:0;background:var(--mint);color:#073044;font-weight:700;
+    padding:11px 22px;border-radius:var(--pill);white-space:nowrap;
+  }
+  .cta-btn:hover{opacity:.9;text-decoration:none}
+  .floating{position:fixed;bottom:22px;right:22px;z-index:999}
+  .floatBtn{
+    display:flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,#0e3d58,#073044);color:#fff;
+    padding:11px 18px;border-radius:var(--pill);font-size:.88rem;font-weight:600;
+    text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.2);
+  }
+  .floatBtn:hover{opacity:.92;text-decoration:none}
+  footer{
+    text-align:center;padding:20px;font-size:.77rem;color:var(--muted);
+    border-top:1px solid rgba(0,0,0,.06);margin-top:40px;
+  }
+  @media(max-width:600px){.cta-box{flex-direction:column;gap:16px}.floating{bottom:14px;right:14px}}"""
+
+
+def build_page(ind):
+    slug       = ind["slug"]
+    title      = ind["title"]
+    html_title = ind.get("html_title", title.title())
+    badge   = ind["badge"]
+    emoji   = ind["emoji"]
+    lede    = ind["lede"]
+    wins    = ind["wins"]
+    probs   = ind["problems"]
+    cta_q   = ind["cta_q"]
+    url     = f"https://sideguysolutions.com/auto/{slug}.html"
+    industry_short = badge.split("·")[1].strip().lower()
+
+    win_cards = "\n".join(
+        f'    <a class="card" href="/ai-automation-hub.html">\n'
+        f'      <div class="card-icon">{emoji}</div>\n'
+        f'      <div class="card-title">{w[0]}</div>\n'
+        f'      <div class="card-desc">{w[1]}</div>\n'
+        f'    </a>'
+        for w in wins
+    )
+
+    prob_pills = "\n".join(
+        f'    <a class="pill" href="{p[0]}">{p[1]}</a>'
+        for p in probs
+    )
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{html_title} | SideGuy Solutions</title>
+  <meta name="description" content="Practical guide to {title} — real workflows, quick wins, and what actually saves operators time."/>
+  <link rel="canonical" href="{url}"/>
+  <meta property="og:title" content="{html_title} | SideGuy Solutions"/>
+  <meta property="og:description" content="Practical guide to {title} — real workflows, quick wins, and what actually saves operators time."/>
+  <meta property="og:url" content="{url}"/>
+  <meta property="og:type" content="article"/>
+  <meta name="robots" content="index,follow"/>
+  <script type="application/ld+json">
+{FAQ_SCHEMA}
+  </script>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {{"@type":"ListItem","position":1,"name":"SideGuy Solutions","item":"https://sideguysolutions.com"}},
+      {{"@type":"ListItem","position":2,"name":"AI Automation Hub","item":"https://sideguysolutions.com/hubs/category-ai-automation.html"}},
+      {{"@type":"ListItem","position":3,"name":"{html_title} | SideGuy Solutions","item":"{url}"}}
+    ]
+  }}
+  </script>
+  <style>
+{CSS}
+  </style>
+</head>
+<body>
+
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a> ›
+  <a href="/ai-automation-hub.html">AI Automation</a> ›
+  {title}
+</nav>
+
+<main class="wrap">
+  <div class="badge">{badge}</div>
+  <h1>{emoji} {title}</h1>
+  <p class="lede">
+    {lede}
+  </p>
+
+  <!-- Quick Wins -->
+  <div class="section">
+    <h2>⚡ Quick Wins for {badge.split("·")[1].strip()} Operators</h2>
+    <div class="card-grid">
+{win_cards}
+    </div>
+  </div>
+
+  <!-- How to Start -->
+  <div class="section">
+    <h2>🚀 How to Start</h2>
+    <ol class="steps">
+    <li><strong>Map your highest-friction task</strong><span>Where do you lose the most time or leads right now?</span></li>
+    <li><strong>Pick one automation to start</strong><span>Missed call text-back is the easiest win for most operators.</span></li>
+    <li><strong>Connect your existing tools</strong><span>Most automations work with whatever you already use.</span></li>
+    <li><strong>Test with 10 real interactions</strong><span>Refine before scaling — small batches reveal edge cases fast.</span></li>
+    <li><strong>Measure and iterate</strong><span>Track response rate, bookings, and conversion before adding more.</span></li>
+    </ol>
+  </div>
+
+  <!-- Common Problems -->
+  <div class="section">
+    <h2>🔧 Common Problems</h2>
+    <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px;line-height:1.6">
+      Problems operators in {industry_short} run into when setting up automation — with plain-English fixes.
+    </p>
+    <div class="pill-row">
+{prob_pills}
+    </div>
+    <div style="margin-top:12px">
+      <a class="pill accent" href="/problems/index.html">Browse All 500 Problem Guides →</a>
+    </div>
+  </div>
+
+  <!-- Related -->
+  <div class="section">
+    <h2>📖 Related Guides</h2>
+    <div class="pill-row">
+      <a class="pill" href="/concepts/ai-automation.html">AI Automation (concept)</a>
+      <a class="pill" href="/clusters/ai-workflow-automation.html">Workflow Automation Cluster</a>
+      <a class="pill" href="/ai-automation-hub.html">AI Automation Hub</a>
+      <a class="pill" href="/knowledge-hub.html">Knowledge Hub</a>
+      <a class="pill" href="/problems/index.html">Problem Library</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div>
+      <h3>Have a specific {cta_q}?</h3>
+      <p>Text PJ — real human, San Diego. Straight answer, no pitch.</p>
+    </div>
+    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+  </div>
+
+  <footer>
+    <a href="/">SideGuy Solutions</a> ·
+    <a href="/ai-automation-hub.html">AI Automation Hub</a> ·
+    <a href="/knowledge-hub.html">Knowledge Hub</a> ·
+    <a href="tel:+17735441231">773-544-1231</a>
+    <br><small>Updated {TODAY}</small>
+  </footer>
+</main>
+
+<div class="floating">
+  <a class="floatBtn" href="sms:+17735441231">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    Text PJ · 773-544-1231
+  </a>
+</div>
+
+</body>
+</html>
+"""
+
+
+created = 0
+skipped = 0
+
+for ind in INDUSTRIES:
+    dest = OUT / f"{ind['slug']}.html"
+    if dest.exists():
+        print(f"  SKIP (exists): {dest.name}")
+        skipped += 1
+        continue
+    dest.write_text(build_page(ind))
+    print(f"  CREATED: {dest.name}")
+    created += 1
+
+print(f"\nDone — {created} created, {skipped} skipped.")
