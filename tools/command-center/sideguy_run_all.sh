@@ -159,6 +159,38 @@ echo "Step 37: Quora API Fetcher"
 python3 tools/trending-topic-engine/quora_api_fetcher.py || true
 
 echo ""
+echo "Step 38: Realtime Page Logger"
+python3 tools/trending-topic-engine/realtime_page_logger.py || true
+
+echo ""
+echo "Step 39: Live News API Connector"
+python3 tools/trending-topic-engine/live_news_api_connector.py || true
+
+echo ""
+echo "Step 40: Content Enricher"
+python3 tools/trending-topic-engine/content_enricher.py || true
+
+echo ""
+echo "Step 41: Auto Quality Loop"
+python3 tools/quality-loop/auto_quality_loop.py || true
+
+echo ""
+echo "Step 42: Auto Engagement Feedback"
+python3 tools/engagement-engine/auto_engagement_feedback.py || true
+
+echo ""
+echo "Step 43: Auto Commit"
+python3 tools/trending-topic-engine/auto_commit.py || true
+
+echo ""
+echo "Step 44: Email Notifier"
+python3 tools/trending-topic-engine/email_notifier.py || true
+
+echo ""
+echo "Step 45: Expert Authority Injector"
+python3 tools/trust-engine/expert_authority_injector.py || true
+
+echo ""
 echo "====================================="
 echo "SIDEGUY RUN COMPLETE"
 echo "====================================="
