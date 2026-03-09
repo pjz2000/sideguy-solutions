@@ -45,6 +45,53 @@ echo "Step 10: Hub Router"
 python3 tools/hub-router/hub_router.py || true
 
 echo ""
+echo "Step 11: Signal Scanner  ←— curated query ingestion"
+python3 tools/signal-scanner/signal_scanner.py || true
+
+echo ""
+echo "Step 12: Inventory Intelligence"
+if [ -f tools/inventory-intelligence/build_inventory_signals.py ]; then
+  python3 tools/inventory-intelligence/build_inventory_signals.py || true
+fi
+
+echo ""
+echo "Step 13: Gravity Page Builder"
+if [ -f tools/auto-builder/run_builder.py ]; then
+  python3 tools/auto-builder/run_builder.py || true
+fi
+
+echo ""
+echo "Step 14: Context Injector"
+python3 tools/context-engine/context_injector.py || true
+
+echo ""
+echo "Step 15: Uniqueness Engine"
+python3 tools/uniqueness-engine/unique_paragraphs.py || true
+
+echo ""
+echo "Step 16: Crawl Accelerator  ←— hub index + sitemap"
+python3 tools/crawl-accelerator/crawl_accelerator.py || true
+
+echo ""
+echo "Step 17: Signal Extractor  ←— seeds next run"
+python3 tools/expansion-engine/signal_extractor.py || true
+
+echo ""
+echo "Step 18: Quality Scorer  ←— flags weak pages"
+python3 tools/quality-loop/page_scorer.py || true
+
+echo ""
+echo "Step 19: Sitemap Refresh"
+if [ -f tools/page-upgrader/generate_sitemap_xml.py ]; then
+  python3 tools/page-upgrader/generate_sitemap_xml.py || true
+fi
+
+echo ""
 echo "====================================="
 echo "SIDEGUY RUN COMPLETE"
 echo "====================================="
+echo ""
+echo "Loop status:"
+grep -c "" docs/problem-gravity/gravity_pages.txt 2>/dev/null | xargs -I{} echo "  Gravity queue : {} slugs"
+cat docs/quality-loop/summary.txt 2>/dev/null | grep -E "Needs upgrade|Average score" | sed 's/^/  /'
+echo ""
