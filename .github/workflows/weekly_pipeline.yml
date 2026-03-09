@@ -1,0 +1,98 @@
+name: Weekly Intelligence Pipeline
+
+# Runs every Monday at 06:00 UTC (Sun night 10pm Pacific)
+# Can also be triggered manually from GitHub Actions tab
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (print plan, no commit)"
+        required: false
+        default: "false"
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to push the generated pages + sitemap back
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # ── Stage 2: Inventory Intelligence ──────────────────────────────────
+      - name: Inventory Intelligence
+        run: |
+          if [ -f tools/inventory-intelligence/build_inventory_signals.py ]; then
+            python3 tools/inventory-intelligence/build_inventory_signals.py
+          fi
+
+      # ── Stage 3: Gravity Page Builder ─────────────────────────────────────
+      - name: Gravity Builder
+        run: |
+          if [ -f tools/auto-builder/run_builder.py ]; then
+            python3 tools/auto-builder/run_builder.py
+          fi
+
+      # ── Stage 4: Context Differentiation ──────────────────────────────────
+      - name: Context Injector
+        run: |
+          if [ -f tools/context-engine/context_injector.py ]; then
+            python3 tools/context-engine/context_injector.py
+          fi
+
+      # ── Stage 5: Uniqueness Engine ────────────────────────────────────────
+      - name: Uniqueness Engine
+        run: |
+          if [ -f tools/uniqueness-engine/unique_paragraphs.py ]; then
+            python3 tools/uniqueness-engine/unique_paragraphs.py
+          fi
+
+      # ── Stage 6: Crawl Accelerator ────────────────────────────────────────
+      - name: Crawl Accelerator
+        run: |
+          python3 tools/crawl-accelerator/crawl_accelerator.py
+
+      # ── Stage 7: Signal Extractor (seeds next run) ────────────────────────
+      - name: Signal Extractor
+        run: |
+          python3 tools/expansion-engine/signal_extractor.py
+
+      # ── Stage 8: Quality Scorer ───────────────────────────────────────────
+      - name: Quality Scorer
+        run: |
+          python3 tools/quality-loop/page_scorer.py
+
+      # ── Stage 9: Sitemap Refresh ──────────────────────────────────────────
+      - name: Sitemap Refresh
+        run: |
+          if [ -f tools/page-upgrader/generate_sitemap_xml.py ]; then
+            python3 tools/page-upgrader/generate_sitemap_xml.py
+          fi
+
+      # ── Commit generated files back to main ──────────────────────────────
+      - name: Commit pipeline output
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "sideguy-pipeline[bot]"
+          git config user.email "pipeline@sideguysolutions.com"
+          git add public/ docs/quality-loop/ docs/expansion-engine/ sitemap.xml 2>/dev/null || true
+          # Only commit if there are actual changes
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          PAGES=$(git diff --cached --stat | tail -1)
+          git commit -m "Auto: weekly pipeline run $(date -u +%Y-%m-%d)
+
+$PAGES
+
+Stages: inventory → builder → context → uniqueness → crawl → signal-extract → quality-score → sitemap
+[skip ci]"
+          git push
