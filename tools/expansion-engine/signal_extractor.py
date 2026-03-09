@@ -22,7 +22,7 @@ GRAVITY = ROOT / "docs" / "problem-gravity" / "gravity_pages.txt"
 LOG_DIR = ROOT / "docs" / "expansion-engine"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-MAX_NEW_SIGNALS = 100   # controlled growth per run — raise when ready
+MAX_NEW_SIGNALS = 500   # maximum expansion per run — Arnold mode
 
 # ── Geography tiers ───────────────────────────────────────────────────────────
 CITIES = [
