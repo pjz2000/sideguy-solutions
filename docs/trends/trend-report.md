@@ -1,55 +1,45 @@
 # SideGuy Trend Report
 
-Generated: March 07, 2026
+Generated: March 09, 2026
 
-Mode: **baseline**
+Mode: **delta**
 
-## Top Scored Problems (single snapshot)
+## Rising Problems (Score Delta)
 
-- payment processor fees too high near me chula vista | score 46
-- payment processor fees too high cost chula vista | score 43
-- how to lower payment processing fees near me chula vista | score 42
-- medical device software support near me chula vista | score 41
-- payment processor fees too high for small business chula vista | score 41
-- compliance software explained near me chula vista | score 40
-- payment processor fees too high near me del mar | score 40
-- payment processor fees too high near me la jolla | score 40
-- payment processor fees too high near me san diego | score 40
-- payment processor fees too high near me san marcos | score 40
-- hvac repair cost near me chula vista | score 39
-- how to lower payment processing fees cost chula vista | score 39
-- payment processor fees too high near me carlsbad | score 39
-- payment processor fees too high near me coronado | score 39
-- payment processor fees too high near me encinitas | score 39
-- payment processor fees too high near me escondido | score 39
-- payment processor fees too high near me oceanside | score 39
-- payment processor fees too high near me vista | score 39
-- medical device software support cost chula vista | score 38
-- payment processor fees too high chula vista | score 38
-- square vs stripe fees near me chula vista | score 38
-- ai automation for small business near me chula vista | score 37
-- compliance software explained cost chula vista | score 37
-- payment processor fees too high cost del mar | score 37
-- payment processor fees too high cost la jolla | score 37
-- payment processor fees too high cost san diego | score 37
-- payment processor fees too high cost san marcos | score 37
-- medical device software support for small business chula vista | score 36
-- medical office software setup near me chula vista | score 36
-- energy company payment systems near me chula vista | score 36
-- how to lower payment processing fees for small business chula vista | score 36
-- how to lower payment processing fees near me del mar | score 36
-- how to lower payment processing fees near me la jolla | score 36
-- how to lower payment processing fees near me san diego | score 36
-- how to lower payment processing fees near me san marcos | score 36
-- payment processor fees too high cost carlsbad | score 36
-- payment processor fees too high cost coronado | score 36
-- payment processor fees too high cost encinitas | score 36
-- payment processor fees too high cost escondido | score 36
-- payment processor fees too high cost oceanside | score 36
+- payment processor fees too high near me chula vista (+0) | score 46
+- payment processor fees too high cost chula vista (+0) | score 43
+- how to lower payment processing fees near me chula vista (+0) | score 42
+- medical device software support near me chula vista (+0) | score 41
+- payment processor fees too high for small business chula vista (+0) | score 41
+- compliance software explained near me chula vista (+0) | score 40
+- payment processor fees too high near me del mar (+0) | score 40
+- payment processor fees too high near me la jolla (+0) | score 40
+- payment processor fees too high near me san diego (+0) | score 40
+- payment processor fees too high near me san marcos (+0) | score 40
+- hvac repair cost near me chula vista (+0) | score 39
+- how to lower payment processing fees cost chula vista (+0) | score 39
+- payment processor fees too high near me carlsbad (+0) | score 39
+- payment processor fees too high near me coronado (+0) | score 39
+- payment processor fees too high near me encinitas (+0) | score 39
+- payment processor fees too high near me escondido (+0) | score 39
+- payment processor fees too high near me oceanside (+0) | score 39
+- payment processor fees too high near me vista (+0) | score 39
+- medical device software support cost chula vista (+0) | score 38
+- payment processor fees too high chula vista (+0) | score 38
+- square vs stripe fees near me chula vista (+0) | score 38
+- ai automation for small business near me chula vista (+0) | score 37
+- compliance software explained cost chula vista (+0) | score 37
+- payment processor fees too high cost del mar (+0) | score 37
+- payment processor fees too high cost la jolla (+0) | score 37
+- payment processor fees too high cost san diego (+0) | score 37
+- payment processor fees too high cost san marcos (+0) | score 37
+- medical device software support for small business chula vista (+0) | score 36
+- medical office software setup near me chula vista (+0) | score 36
+- energy company payment systems near me chula vista (+0) | score 36
 
-## Cluster Sizes
+## Rising Clusters
 
-- payments: 835 topics
-- automation: 782 topics
-- local-services: 344 topics
-- marketing: 252 topics
+- payments (+0)
+- automation (+0)
+- local-services (+0)
+- marketing (+0)
