@@ -22,8 +22,7 @@ MEMES = [
     "Office meme: 'When the printer jams and the AI says it’s a feature, not a bug.'",
     "AI meme: 'When you automate your reminders and still forget your meeting.'",
     "Office meme: 'When the AI schedules a meeting for Friday at 4pm.'",
-    "AI meme: 'When you ask the AI to summarize your inbox and it replies: "Too much to summarize."'",
-    "Office meme: 'When the AI generates a meme about itself.'",
+        "Office meme: 'When the AI generates a meme about itself.'",
 ]
 
 pages = list(ROOT.rglob("*.html"))

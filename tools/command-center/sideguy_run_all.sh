@@ -81,7 +81,19 @@ echo "Step 18: Quality Scorer  ←— flags weak pages"
 python3 tools/quality-loop/page_scorer.py || true
 
 echo ""
-echo "Step 19: Sitemap Refresh"
+echo "Step 19: Meme Injector"
+python3 tools/page-upgrader/meme_injector.py || true
+
+echo ""
+echo "Step 20: FAQ/Schema Injector"
+python3 tools/page-upgrader/faq_schema_injector.py || true
+
+echo ""
+echo "Step 21: Lead Magnet Injector"
+python3 tools/page-upgrader/lead_magnet_injector.py || true
+
+echo ""
+echo "Step 22: Sitemap Refresh"
 if [ -f tools/page-upgrader/generate_sitemap_xml.py ]; then
   python3 tools/page-upgrader/generate_sitemap_xml.py || true
 fi
