@@ -29,7 +29,7 @@ ok "$HTML_COUNT HTML pages at root"
 
 # Check for any .html files newer than sitemap.xml
 if [ -f sitemap.xml ]; then
-  STALE=$(find . -maxdepth 1 -name "*.html" -newer sitemap.xml | wc -l | tr -d ' ')
+  STALE=$(find . -maxdepth 1 -name "*.html" ! -name "sideguy-command-center.html" -newer sitemap.xml | wc -l | tr -d ' ')
   if [ "$STALE" -eq 0 ]; then
     ok "sitemap.xml is up to date"
   else

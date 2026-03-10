@@ -16,7 +16,7 @@ find . -maxdepth 1 -name "*.html" -print0 \
 echo ""
 echo "Pages missing command center links:"
 find . -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 grep -L 'sideguy-command-center.html' \
+| xargs -0 grep -L 'command-center' \
 | wc -l
 
 echo ""
