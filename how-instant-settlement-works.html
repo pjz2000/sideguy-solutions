@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>How Instant Settlement Works | SideGuy Plain-English Guide</title>
+<link rel="canonical" href="https://sideguysolutions.com/how-instant-settlement-works.html" />
+<meta name="description" content="Instant settlement explained — what it means, how push-to-debit and RTP rails work, and why same-day payouts actually matter for your business." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:title" content="How Instant Settlement Works | SideGuy" />
+<meta property="og:description" content="Push-to-debit, RTP, same-day ACH — what instant settlement actually means and when it changes everything for operators and contractors." />
+<meta property="og:url" content="https://sideguysolutions.com/how-instant-settlement-works.html" />
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SideGuy Solutions" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://sideguysolutions.com/og-preview.png" />
+<style>
+:root{--bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;--ink:#073044;--muted:#3f6173;--muted2:#5e7d8e;--card:#ffffffcc;--stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);--mint:#21d3a1;--mint2:#00c7ff;--r:22px;--pill:999px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;color:var(--ink);background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 65%,var(--bg2) 100%);-webkit-font-smoothing:antialiased;line-height:1.6}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:var(--ink);padding:8px 16px;border-radius:8px;z-index:1000}.skip-link:focus{left:0}
+nav.bc{max-width:900px;margin:16px auto 0;padding:0 24px;font-size:.83rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px}
+nav.bc a{color:var(--muted);text-decoration:none}nav.bc a:hover{color:var(--mint)}nav.bc .sep{opacity:.4;margin:0 4px}
+.wrap{max-width:900px;margin:0 auto;padding:40px 24px 100px}
+.signal-badge{display:inline-block;background:rgba(33,211,161,.12);color:var(--mint);border:1px solid rgba(33,211,161,.3);padding:5px 14px;border-radius:var(--pill);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(28px,4.5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px}
+.lede{font-size:1.1rem;color:var(--muted);max-width:640px;line-height:1.75;margin-bottom:40px}
+h2{font-size:1.45rem;font-weight:700;margin:40px 0 16px}
+h3{font-size:1.05rem;font-weight:700;margin:24px 0 8px}
+p{color:var(--muted);line-height:1.8;margin-bottom:14px}
+.card{background:var(--card);padding:24px;border-radius:var(--r);border:1px solid var(--stroke);box-shadow:var(--shadow);backdrop-filter:blur(12px);margin-bottom:16px}
+.card h3{margin-top:0}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:16px 0}
+.rail-table{width:100%;border-collapse:collapse;margin:16px 0}
+.rail-table th{background:var(--mint);color:#fff;padding:10px 14px;text-align:left;font-size:.88rem}
+.rail-table td{padding:10px 14px;border-bottom:1px solid var(--stroke);font-size:.88rem;color:var(--muted)}
+.rail-table tr:last-child td{border-bottom:none}
+.callout{background:rgba(33,211,161,.08);border:1px solid rgba(33,211,161,.22);border-radius:var(--r);padding:24px;margin:28px 0}
+.callout p{margin:0;color:var(--ink)}
+.link-row{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.pill-link{display:inline-block;padding:9px 16px;border-radius:var(--pill);border:1px solid var(--stroke);text-decoration:none;color:var(--ink);font-size:.85rem;font-weight:600;background:var(--card);transition:border-color .15s,transform .15s}
+.pill-link:hover{border-color:rgba(33,211,161,.4);transform:translateY(-1px)}
+.cta-orb{display:flex;align-items:center;gap:28px;margin:52px 0 0;background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);flex-wrap:wrap}
+.orb{width:100px;height:100px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 35%,#9fffe3,var(--mint));box-shadow:0 0 0 8px rgba(33,211,161,.15),0 8px 40px rgba(33,211,161,.35);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cta-text h2{font-size:1.3rem;font-weight:700;margin:0 0 8px}
+.cta-text p{font-size:.95rem;max-width:480px;margin-bottom:16px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;padding:12px 24px;border-radius:var(--pill);text-decoration:none;font-weight:700;font-size:.95rem;box-shadow:0 8px 24px rgba(33,211,161,.35)}
+footer{max-width:900px;margin:0 auto;padding:24px 24px 40px;border-top:1px solid var(--stroke);display:flex;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--mint)}
+@media(max-width:600px){h1{font-size:1.8rem}.cta-orb{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a><span class="sep">/</span>
+  <a href="payments-knowledge-hub.html">Payments Hub</a><span class="sep">/</span>
+  <span>How Instant Settlement Works</span>
+</nav>
+<div class="wrap" id="main-content">
+
+  <div class="signal-badge">Signal Radar · Payments</div>
+  <h1>How Instant Settlement Works</h1>
+  <p class="lede">Standard card payments take 1–2 business days to reach your bank. Instant settlement moves money in seconds. Here's what's actually different — and when it matters.</p>
+
+  <h2>The Normal Settlement Timeline</h2>
+  <p>When a customer pays by card at your register, the money doesn't arrive immediately. Your processor batches transactions overnight, sends them through card networks, and funds hit your bank account 1–2 business days later. During that window, the money is in transit — not yours, not your customer's.</p>
+  <p>For most businesses this delay is invisible. For businesses with tight cash flow, payroll every Friday, or field crews expecting same-day pay, 48 hours is a real operational problem.</p>
+
+  <h2>What Instant Settlement Actually Means</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Push-to-Debit</h3>
+      <p>Money is "pushed" directly to a debit card number in minutes. Uses Visa Direct or Mastercard Send rails. Works even outside banking hours. Common for contractor payouts, on-demand worker pay, and insurance disbursements.</p>
+    </div>
+    <div class="card">
+      <h3>RTP (Real-Time Payments)</h3>
+      <p>Bank-to-bank transfers that settle in under 10 seconds, 24/7/365. Operated by The Clearing House. The receiving bank must be enrolled. Growing fast — now covers 90%+ of US bank accounts.</p>
+    </div>
+    <div class="card">
+      <h3>Same-Day ACH</h3>
+      <p>Not truly instant — processes in same-day batches (up to 3 per day on banking days). Faster than standard ACH but still batch-based. Lower cost than push-to-debit. Good for payroll and supplier payments.</p>
+    </div>
+    <div class="card">
+      <h3>FedNow</h3>
+      <p>The Federal Reserve's instant payment network launched in 2023. Bank-to-bank, settles in seconds. Competes with RTP. Adoption is growing but still limited compared to RTP's reach.</p>
+    </div>
+  </div>
+
+  <h2>Comparing the Rails</h2>
+  <table class="rail-table">
+    <thead><tr><th>Rail</th><th>Speed</th><th>Available</th><th>Typical Cost</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td>Standard ACH</td><td>1–3 business days</td><td>Banking hours</td><td>$0.20–$1.50</td><td>Recurring payroll, low urgency</td></tr>
+      <tr><td>Same-Day ACH</td><td>Same day</td><td>Banking hours</td><td>$0.50–$2.50</td><td>Faster payroll, vendor payments</td></tr>
+      <tr><td>RTP / FedNow</td><td>Under 10 seconds</td><td>24/7/365</td><td>$0.25–$1.00</td><td>Business B2B, contractor pay</td></tr>
+      <tr><td>Push-to-Debit</td><td>Under 30 minutes</td><td>24/7/365</td><td>$0.50–$1.50 + %</td><td>Field crews, on-demand workers</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>The real cost of waiting:</strong> If you pay a contractor $800 at 5pm on Friday, standard ACH won't land until Tuesday. Push-to-debit gets it there in 20 minutes. The extra $1.25 fee is usually worth it to the worker — and to your relationship with them.</p>
+  </div>
+
+  <h2>When Instant Settlement Changes the Math</h2>
+  <p>Instant settlement isn't always worth the premium. Here's the honest breakdown of when it matters:</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>High impact situations</h3>
+      <ul style="color:var(--muted);line-height:1.8;padding-left:18px;font-size:.9rem">
+        <li>Paying field workers or gig contractors</li>
+        <li>Insurance or claim disbursements</li>
+        <li>Emergency supplier payments</li>
+        <li>Businesses with Friday payroll cutoffs</li>
+        <li>Cash-tight operators managing daily expenses</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Low impact situations</h3>
+      <ul style="color:var(--muted);line-height:1.8;padding-left:18px;font-size:.9rem">
+        <li>Salaried employees (regular bi-weekly payroll)</li>
+        <li>Recurring vendor invoices with net-30 terms</li>
+        <li>Payments where timing doesn't affect operations</li>
+        <li>High-volume low-value transactions (adds up fast)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>What Your Processor May Not Tell You</h2>
+  <p>Most standard payment processors offer "instant settlement" as a paid add-on, often charging 1–1.5% extra per transaction. For a $500 job, that's $5–$7.50 on top of your normal processing fees.</p>
+  <p>Dedicated payout platforms (Stripe Connect, Branch, DailyPay, Gusto) often have better per-transaction pricing for this specific use case and are worth comparing if you're paying contractors regularly.</p>
+
+  <div class="link-row">
+    <a class="pill-link" href="payments-knowledge-hub.html">← Payments Hub</a>
+    <a class="pill-link" href="why-are-credit-card-fees-so-high.html">Credit Card Fees Explained</a>
+    <a class="pill-link" href="instant-payouts-contractors-san-diego.html">Instant Payouts for Contractors</a>
+    <a class="pill-link" href="payment-processing-hub-san-diego.html">Payment Processing San Diego</a>
+    <a class="pill-link" href="stablecoin-business-payments.html">Stablecoin Payments</a>
+  </div>
+
+  <div class="cta-orb">
+    <div class="orb" aria-hidden="true">💬</div>
+    <div class="cta-text">
+      <h2>Not sure which payout rail fits your operation?</h2>
+      <p>Describe your situation — how you pay workers, what's breaking down, what you're currently using. PJ will tell you what actually makes sense for your volume and your crew.</p>
+      <a class="cta-btn" href="sms:+17735441231">Text PJ: 773-544-1231</a>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <a href="/">SideGuy Solutions</a>
+  <a href="payments-knowledge-hub.html">Payments Hub</a>
+  <a href="command-center-v2.html">Command Center</a>
+  <a href="start-here.html">Start Here</a>
+</footer>
+</body>
+</html>
