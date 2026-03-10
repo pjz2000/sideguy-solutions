@@ -42,6 +42,17 @@ SEED_PROBLEMS = [
     "hvac service pricing confusion",
     # local-seo
     "local seo for contractors",
+    # new seeds
+    "ai receptionist for local businesses",
+    "how to accept stablecoin payments",
+    "restaurant ai ordering systems",
+    "ai appointment scheduling",
+    "prediction markets explained",
+    "kalshi trading strategy",
+    "hvac ai call answering",
+    "solar battery backup cost",
+    "heat pump vs furnace cost",
+    "ai agent for customer service",
 ]
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
