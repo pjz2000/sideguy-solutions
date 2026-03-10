@@ -3,8 +3,12 @@
 echo "Pages missing knowledge hub links:"
 echo "----------------------------------"
 
-grep -rL 'knowledge-hub' --include="*.html" . | sed 's|^\./||'
+find . -maxdepth 1 -name "*.html" -print0 \
+| xargs -0 grep -L 'knowledge-hub' \
+| sed 's|^\./||'
 
 echo ""
 echo "Count:"
-grep -rL 'knowledge-hub' --include="*.html" . | wc -l
+find . -maxdepth 1 -name "*.html" -print0 \
+| xargs -0 grep -L 'knowledge-hub' \
+| wc -l
