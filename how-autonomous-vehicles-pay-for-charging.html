@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>How Autonomous Vehicles Pay for Charging | SideGuy Plain-English Guide</title>
+<link rel="canonical" href="https://sideguysolutions.com/how-autonomous-vehicles-pay-for-charging.html" />
+<meta name="description" content="How self-driving and autonomous vehicles pay for EV charging automatically — the payment protocols, infrastructure, and business implications explained." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:title" content="How Autonomous Vehicles Pay for Charging | SideGuy" />
+<meta property="og:description" content="EV autonomous payment systems explained — ISO 15118, Plug & Charge, OCPP, and how vehicles will pay for energy without drivers in the loop." />
+<meta property="og:url" content="https://sideguysolutions.com/how-autonomous-vehicles-pay-for-charging.html" />
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SideGuy Solutions" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://sideguysolutions.com/og-preview.png" />
+<style>
+:root{--bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;--ink:#073044;--muted:#3f6173;--muted2:#5e7d8e;--card:#ffffffcc;--stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);--mint:#21d3a1;--mint2:#00c7ff;--r:22px;--pill:999px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;color:var(--ink);background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 65%,var(--bg2) 100%);-webkit-font-smoothing:antialiased;line-height:1.6}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:var(--ink);padding:8px 16px;border-radius:8px;z-index:1000}.skip-link:focus{left:0}
+nav.bc{max-width:900px;margin:16px auto 0;padding:0 24px;font-size:.83rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px}
+nav.bc a{color:var(--muted);text-decoration:none}nav.bc a:hover{color:var(--mint)}nav.bc .sep{opacity:.4;margin:0 4px}
+.wrap{max-width:900px;margin:0 auto;padding:40px 24px 100px}
+.signal-badge{display:inline-block;background:rgba(33,211,161,.12);color:var(--mint);border:1px solid rgba(33,211,161,.3);padding:5px 14px;border-radius:var(--pill);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(28px,4.5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px}
+.lede{font-size:1.1rem;color:var(--muted);max-width:640px;line-height:1.75;margin-bottom:40px}
+h2{font-size:1.45rem;font-weight:700;margin:40px 0 16px}
+h3{font-size:1.05rem;font-weight:700;margin:24px 0 8px}
+p{color:var(--muted);line-height:1.8;margin-bottom:14px}
+.card{background:var(--card);padding:24px;border-radius:var(--r);border:1px solid var(--stroke);box-shadow:var(--shadow);backdrop-filter:blur(12px);margin-bottom:16px}
+.card h3{margin-top:0}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:16px 0}
+.callout{background:rgba(33,211,161,.08);border:1px solid rgba(33,211,161,.22);border-radius:var(--r);padding:24px;margin:28px 0}
+.callout p{margin:0;color:var(--ink)}
+.link-row{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.pill-link{display:inline-block;padding:9px 16px;border-radius:var(--pill);border:1px solid var(--stroke);text-decoration:none;color:var(--ink);font-size:.85rem;font-weight:600;background:var(--card);transition:border-color .15s,transform .15s}
+.pill-link:hover{border-color:rgba(33,211,161,.4);transform:translateY(-1px)}
+.cta-orb{display:flex;align-items:center;gap:28px;margin:52px 0 0;background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);flex-wrap:wrap}
+.orb{width:100px;height:100px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 35%,#9fffe3,var(--mint));box-shadow:0 0 0 8px rgba(33,211,161,.15),0 8px 40px rgba(33,211,161,.35);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cta-text h2{font-size:1.3rem;font-weight:700;margin:0 0 8px}
+.cta-text p{font-size:.95rem;max-width:480px;margin-bottom:16px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;padding:12px 24px;border-radius:var(--pill);text-decoration:none;font-weight:700;font-size:.95rem;box-shadow:0 8px 24px rgba(33,211,161,.35)}
+footer{max-width:900px;margin:0 auto;padding:24px 24px 40px;border-top:1px solid var(--stroke);display:flex;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--mint)}
+@media(max-width:600px){h1{font-size:1.8rem}.cta-orb{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a><span class="sep">/</span>
+  <a href="future-infrastructure-knowledge-hub.html">Future Infrastructure Hub</a><span class="sep">/</span>
+  <span>Autonomous Vehicle Charging Payments</span>
+</nav>
+<div class="wrap" id="main-content">
+
+  <div class="signal-badge">Signal Radar · Future Infrastructure</div>
+  <h1>How Autonomous Vehicles Pay for Charging</h1>
+  <p class="lede">When a self-driving vehicle arrives at a charging station, no human reaches for a wallet. The vehicle itself negotiates, authorizes, and completes the payment. Here's how that works and what it signals about the future of autonomous payments.</p>
+
+  <h2>The Problem: Charging Without a Driver</h2>
+  <p>Today, most EV charging requires a human to swipe a card, tap an app, or plug in and let a connected account get billed. That model breaks down the moment the vehicle is operating autonomously — no driver is present to authorize a payment.</p>
+  <p>The solution is a payment system that lives inside the vehicle itself. The vehicle authenticates with the charger, negotiates a rate, and settles payment — all during the few seconds it takes to plug in. No app, no card, no human.</p>
+
+  <h2>The Standards That Make It Work</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>ISO 15118 — Plug & Charge</h3>
+      <p>The international standard for vehicle-to-grid communication. When a compliant EV plugs in, the charger and vehicle exchange digital certificates. The vehicle is identified, authorized, and billing starts automatically. No card, no app required.</p>
+    </div>
+    <div class="card">
+      <h3>OCPP (Open Charge Point Protocol)</h3>
+      <p>The communication protocol between charging stations and management systems. Allows chargers to authenticate vehicles, report usage, and trigger billing events. Version 2.0+ includes ISO 15118 support.</p>
+    </div>
+    <div class="card">
+      <h3>Smart contracts + stablecoins</h3>
+      <p>Some experimental deployments use blockchain-based payment rails — the vehicle wallet contains USDC, and energy delivery triggers an automatic transfer. Removes the need for a centralized billing intermediary.</p>
+    </div>
+    <div class="card">
+      <h3>Fleet management APIs</h3>
+      <p>Commercial fleet operators (delivery vans, robotaxis) use fleet management platforms that track charging events across all vehicles and handle billing centrally. Less autonomous but practical for today's mixed fleets.</p>
+    </div>
+  </div>
+
+  <h2>Where This Is Live Today</h2>
+  <p>Plug & Charge via ISO 15118 is already deployed by Tesla (its proprietary version) and is rolling out on more public CCS chargers in the US and Europe. A growing number of Electrify America and EVgo stations support it for compatible vehicles.</p>
+  <p>Commercial autonomous deployments (Waymo, Zoox, Amazon delivery robots) handle charging through fleet management systems rather than individual vehicle wallets — but the infrastructure for fully autonomous vehicle payments is being built now.</p>
+
+  <div class="callout">
+    <p><strong>For operators with EV fleets:</strong> If you operate a delivery fleet, vans, or service vehicles and are moving toward EVs, the payment infrastructure you choose now will need to support autonomous charging authorization within the next 5 years. Ask your charging vendor which OCPP version and ISO 15118 support is on their roadmap.</p>
+  </div>
+
+  <h2>Why This Matters Beyond Transportation</h2>
+  <p>The autonomous vehicle charging problem is really just a specific version of the general M2M payment problem: how does a machine pay for a resource it consumes, without a human initiating each transaction?</p>
+  <p>Solving it for EV charging builds the infrastructure — digital wallets for machines, automated billing auth, real-time settlement — that all other machine-to-machine payment use cases will use. When your autonomous delivery robot needs to pay for electricity, maintenance, or parts, the same stack will power it.</p>
+
+  <div class="link-row">
+    <a class="pill-link" href="future-infrastructure-knowledge-hub.html">← Future Infrastructure Hub</a>
+    <a class="pill-link" href="machine-to-machine-payments-explained.html">M2M Payments Overview</a>
+    <a class="pill-link" href="how-robots-pay-for-electricity.html">How Robots Pay for Electricity</a>
+    <a class="pill-link" href="how-stablecoin-payments-work.html">Stablecoin Payments</a>
+  </div>
+
+  <div class="cta-orb">
+    <div class="orb" aria-hidden="true">💬</div>
+    <div class="cta-text">
+      <h2>Thinking through EV fleet payments?</h2>
+      <p>Describe your fleet situation — vehicle types, charging setup, billing methods. PJ will tell you what infrastructure decisions matter now versus what can wait.</p>
+      <a class="cta-btn" href="sms:+17735441231">Text PJ: 773-544-1231</a>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <a href="/">SideGuy Solutions</a>
+  <a href="future-infrastructure-knowledge-hub.html">Future Infrastructure Hub</a>
+  <a href="command-center-v2.html">Command Center</a>
+  <a href="start-here.html">Start Here</a>
+</footer>
+</body>
+</html>

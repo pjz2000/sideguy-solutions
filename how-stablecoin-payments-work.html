@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>How Stablecoin Payments Work | SideGuy Plain-English Guide</title>
+<link rel="canonical" href="https://sideguysolutions.com/how-stablecoin-payments-work.html" />
+<meta name="description" content="Stablecoin payments explained in plain English — what makes them different from crypto, why businesses use them, and what the real risks look like." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:title" content="How Stablecoin Payments Work | SideGuy" />
+<meta property="og:description" content="USDC, USDT, and dollar-pegged stablecoins explained for operators — what they are, what problems they solve, and when they make sense for your business." />
+<meta property="og:url" content="https://sideguysolutions.com/how-stablecoin-payments-work.html" />
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SideGuy Solutions" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://sideguysolutions.com/og-preview.png" />
+<style>
+:root{--bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;--ink:#073044;--muted:#3f6173;--muted2:#5e7d8e;--card:#ffffffcc;--stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);--mint:#21d3a1;--mint2:#00c7ff;--r:22px;--pill:999px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;color:var(--ink);background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 65%,var(--bg2) 100%);-webkit-font-smoothing:antialiased;line-height:1.6}
+.skip-link{position:absolute;left:-999px;top:0;background:#fff;color:var(--ink);padding:8px 16px;border-radius:8px;z-index:1000}.skip-link:focus{left:0}
+nav.bc{max-width:900px;margin:16px auto 0;padding:0 24px;font-size:.83rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px}
+nav.bc a{color:var(--muted);text-decoration:none}nav.bc a:hover{color:var(--mint)}nav.bc .sep{opacity:.4;margin:0 4px}
+.wrap{max-width:900px;margin:0 auto;padding:40px 24px 100px}
+.signal-badge{display:inline-block;background:rgba(33,211,161,.12);color:var(--mint);border:1px solid rgba(33,211,161,.3);padding:5px 14px;border-radius:var(--pill);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(28px,4.5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px}
+.lede{font-size:1.1rem;color:var(--muted);max-width:640px;line-height:1.75;margin-bottom:40px}
+h2{font-size:1.45rem;font-weight:700;margin:40px 0 16px}
+h3{font-size:1.05rem;font-weight:700;margin:24px 0 8px}
+p{color:var(--muted);line-height:1.8;margin-bottom:14px}
+.card{background:var(--card);padding:24px;border-radius:var(--r);border:1px solid var(--stroke);box-shadow:var(--shadow);backdrop-filter:blur(12px);margin-bottom:16px}
+.card h3{margin-top:0}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:16px 0}
+.compare-table{width:100%;border-collapse:collapse;margin:16px 0}
+.compare-table th{background:var(--mint);color:#fff;padding:10px 14px;text-align:left;font-size:.88rem}
+.compare-table td{padding:10px 14px;border-bottom:1px solid var(--stroke);font-size:.88rem;color:var(--muted)}
+.compare-table tr:last-child td{border-bottom:none}
+.callout{background:rgba(33,211,161,.08);border:1px solid rgba(33,211,161,.22);border-radius:var(--r);padding:24px;margin:28px 0}
+.callout p{margin:0;color:var(--ink)}
+.link-row{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+.pill-link{display:inline-block;padding:9px 16px;border-radius:var(--pill);border:1px solid var(--stroke);text-decoration:none;color:var(--ink);font-size:.85rem;font-weight:600;background:var(--card);transition:border-color .15s,transform .15s}
+.pill-link:hover{border-color:rgba(33,211,161,.4);transform:translateY(-1px)}
+.cta-orb{display:flex;align-items:center;gap:28px;margin:52px 0 0;background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);flex-wrap:wrap}
+.orb{width:100px;height:100px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle at 35% 35%,#9fffe3,var(--mint));box-shadow:0 0 0 8px rgba(33,211,161,.15),0 8px 40px rgba(33,211,161,.35);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.cta-text h2{font-size:1.3rem;font-weight:700;margin:0 0 8px}
+.cta-text p{font-size:.95rem;max-width:480px;margin-bottom:16px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;padding:12px 24px;border-radius:var(--pill);text-decoration:none;font-weight:700;font-size:.95rem;box-shadow:0 8px 24px rgba(33,211,161,.35)}
+footer{max-width:900px;margin:0 auto;padding:24px 24px 40px;border-top:1px solid var(--stroke);display:flex;flex-wrap:wrap;gap:10px;font-size:.8rem;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--mint)}
+@media(max-width:600px){h1{font-size:1.8rem}.cta-orb{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="bc" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a><span class="sep">/</span>
+  <a href="payments-knowledge-hub.html">Payments Hub</a><span class="sep">/</span>
+  <span>How Stablecoin Payments Work</span>
+</nav>
+<div class="wrap" id="main-content">
+
+  <div class="signal-badge">Signal Radar · Payments</div>
+  <h1>How Stablecoin Payments Work</h1>
+  <p class="lede">Stablecoins are different from Bitcoin. They're designed to hold a fixed value — usually $1.00. That makes them useful for actual payments. Here's what they are and when they solve a real problem.</p>
+
+  <h2>The Key Difference: Price Stability</h2>
+  <p>Bitcoin and Ethereum fluctuate constantly. A payment of 0.01 BTC might be worth $600 today and $400 next week. You can't price services or pay contractors in an asset that changes value that fast.</p>
+  <p>Stablecoins are designed to solve exactly that. One USDC is designed to always equal $1.00. It holds that value because it's backed 1:1 by actual dollars held in reserve. It behaves like digital cash — but moves on a blockchain, which means it settles instantly, anywhere in the world, 24/7.</p>
+
+  <h2>The Main Stablecoins</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>USDC (USD Coin)</h3>
+      <p>Issued by Circle. Backed by US dollars and short-term treasuries. Audited regularly. Considered the most transparent and business-friendly. Used by most US companies exploring stablecoin payments.</p>
+    </div>
+    <div class="card">
+      <h3>USDT (Tether)</h3>
+      <p>The largest stablecoin by volume. Historically less transparent about reserves than USDC. Dominant in international trading but carries more institutional risk for domestic use.</p>
+    </div>
+    <div class="card">
+      <h3>PayPal USD (PYUSD)</h3>
+      <p>PayPal's own dollar-pegged stablecoin. Regulated, backed by US assets. Designed for integration into the PayPal/Venmo ecosystem. Early stage but backed by significant distribution.</p>
+    </div>
+    <div class="card">
+      <h3>DAI / USDS</h3>
+      <p>Decentralized stablecoins backed by crypto collateral rather than dollars. More complex, more volatile in stress scenarios. Generally not recommended for operator use cases.</p>
+    </div>
+  </div>
+
+  <h2>What Problems They Solve</h2>
+  <table class="compare-table">
+    <thead><tr><th>Problem</th><th>Traditional Rails</th><th>Stablecoin Rail</th></tr></thead>
+    <tbody>
+      <tr><td>International supplier payment</td><td>3–5 days, wire fees $25–$50</td><td>Minutes, fees under $1</td></tr>
+      <tr><td>Weekend/after-hours payout</td><td>ACH doesn't run</td><td>Settles any time</td></tr>
+      <tr><td>Cross-border contractor pay</td><td>SWIFT required, high FX costs</td><td>USDC to any wallet globally</td></tr>
+      <tr><td>Automated machine-to-machine payments</td><td>Not possible natively</td><td>Smart contracts enable it</td></tr>
+      <tr><td>High-volume micropayments</td><td>Per-transaction fees stack up</td><td>Negligible cost on modern chains</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>The practical reality:</strong> For domestic US payments between parties who both have bank accounts, stablecoins don't yet offer a decisive advantage over RTP or same-day ACH. They shine for international payments, payments outside banking hours, contractor payouts to global workers, and automated machine payments.</p>
+  </div>
+
+  <h2>What You Need to Accept or Send Stablecoin</h2>
+  <p>To accept USDC from a customer: you need a wallet address (a Circle account, Coinbase Commerce, or similar). To convert it back to dollars: you need an on-ramp/off-ramp service like Coinbase, Circle, or a payment processor that handles the conversion (e.g., Stripe's USDC settlement feature).</p>
+  <p>The friction is real. Your customer also needs to hold USDC. Most retail consumers don't. This limits stablecoin payments to B2B, contractor payouts, and international scenarios — for now.</p>
+
+  <h2>Tax and Accounting Implications</h2>
+  <p>The IRS treats stablecoins as property, like other cryptocurrency. Receiving USDC as payment is taxable income at the fair market value. Spending USDC (including converting back to dollars) may also be a taxable event. Talk to your accountant before deploying this at scale.</p>
+
+  <div class="link-row">
+    <a class="pill-link" href="payments-knowledge-hub.html">← Payments Hub</a>
+    <a class="pill-link" href="stablecoin-business-payments.html">Stablecoin Business Guide</a>
+    <a class="pill-link" href="machine-to-machine-payments-explained.html">Machine-to-Machine Payments</a>
+    <a class="pill-link" href="how-instant-settlement-works.html">Instant Settlement</a>
+    <a class="pill-link" href="future-infrastructure-knowledge-hub.html">Future Infrastructure Hub</a>
+  </div>
+
+  <div class="cta-orb">
+    <div class="orb" aria-hidden="true">💬</div>
+    <div class="cta-text">
+      <h2>Evaluating stablecoin payments for your business?</h2>
+      <p>Describe the specific payment problem you're trying to solve. PJ will tell you whether a stablecoin rail actually helps — or whether a simpler solution already exists.</p>
+      <a class="cta-btn" href="sms:+17735441231">Text PJ: 773-544-1231</a>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <a href="/">SideGuy Solutions</a>
+  <a href="payments-knowledge-hub.html">Payments Hub</a>
+  <a href="command-center-v2.html">Command Center</a>
+  <a href="start-here.html">Start Here</a>
+</footer>
+</body>
+</html>
