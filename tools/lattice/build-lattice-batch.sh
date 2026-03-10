@@ -16,14 +16,16 @@ if [ ! -f "$TEMPLATE" ]; then
 fi
 
 created=0
-skipped=0
 
-tail -n +2 "$MANIFEST" | head -n "$LIMIT" | while IFS=$'\t' read -r type parent child modifier slug
+tail -n +2 "$MANIFEST" | while IFS=$'\t' read -r type parent child modifier slug
 do
+  if [ "$created" -ge "$LIMIT" ]; then
+    break
+  fi
+
   file="$ROOT/$slug"
 
   if [ -f "$file" ]; then
-    echo "SKIP $slug"
     continue
   fi
 
@@ -37,4 +39,8 @@ do
   perl -0pi -e "s~https://sideguysolutions.com/seo-template.html~$canonical~g" "$file"
 
   echo "CREATE $slug"
+  created=$((created + 1))
 done
+
+echo ""
+echo "Batch complete. Created up to $LIMIT new pages."
