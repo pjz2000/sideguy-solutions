@@ -30,8 +30,10 @@ cp "$TEMPLATE" "$file"
 title=$(echo "$slug" | sed 's/.html//' | tr '-' ' ')
 heading=$(echo "$title" | sed 's/\b\(.\)/\u\1/g')
 
+canonical="https://sideguysolutions.com/$slug"
 perl -0pi -e "s|PAGE_TITLE|$heading | SideGuy|g" "$file"
 perl -0pi -e "s|PAGE_HEADING|$heading|g" "$file"
+perl -0pi -e "s|https://sideguysolutions.com/seo-template.html|$canonical|g" "$file"
 
 echo "CREATE $slug"
 

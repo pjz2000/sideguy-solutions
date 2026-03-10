@@ -43,16 +43,17 @@ grep '| core\|| cost' "$IDEAS" | awk -F'|' '{print $1}' | tr -d ' ' >> "$PROBLEM
 prob_added=$(grep -v '^#\|^$' "$PROBLEM_IDEAS" | wc -l)
 echo "  → problem-page-ideas.txt updated ($prob_added total entries)"
 
-# Feed lattice: extract unique child topic concepts from core slugs
+# Feed lattice: extract short human-readable topic names from signal buckets
+# Only adds clean 2-4 word topic names, NOT full slugs
 echo "" >> "$LATTICE_CHILDREN"
 echo "# Signal pipeline import $(date)" >> "$LATTICE_CHILDREN"
-grep '| core' "$IDEAS" \
-  | awk -F'|' '{print $1}' \
-  | sed 's/what-is-//; s/how-to-//; s/\.html//' \
+awk -F'|' 'NR>0 {print $2}' "$IDEAS" \
   | tr -d ' ' \
   | sort -u \
-  | head -20 >> "$LATTICE_CHILDREN"
+  | sed 's/-/ /g' \
+  | grep -v '^\s*$' \
+  >> "$LATTICE_CHILDREN"
 
-echo "  → lattice/child-topics.txt updated"
+echo "  → lattice/child-topics.txt updated (bucket names only)"
 echo ""
 echo "Stage 4: Downstream feeds complete."

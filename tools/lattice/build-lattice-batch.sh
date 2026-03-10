@@ -32,7 +32,9 @@ do
   title="${child} | SideGuy"
   heading="$child"
 
+  canonical="https://sideguysolutions.com/$slug"
   perl -0pi -e "s|PAGE_TITLE|$title|g; s|PAGE_HEADING|$heading|g" "$file"
+  perl -0pi -e "s|https://sideguysolutions.com/seo-template.html|$canonical|g" "$file"
 
   echo "CREATE $slug"
 done
