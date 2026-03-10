@@ -4,10 +4,10 @@ echo "SideGuy Hub Discovery"
 echo "---------------------"
 
 echo ""
-echo "Scanning HTML pages..."
+echo "Scanning root-level HTML pages..."
 
-grep -rohE '\b(payment|payments|automation|ai|software|stablecoin|robot|agent|infrastructure)\b' \
---include="*.html" . \
+find . -maxdepth 1 -name "*.html" -print0 \
+| xargs -0 grep -ohE '\b(payment|payments|automation|ai|software|stablecoin|robot|agent|infrastructure)\b' \
 | tr '[:upper:]' '[:lower:]' \
 | sort \
 | uniq -c \
