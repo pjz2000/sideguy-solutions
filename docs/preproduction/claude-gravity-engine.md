@@ -1,33 +1,28 @@
 Claude,
 
-SideGuy uses a Content Gravity Engine.
+Install and run the SideGuy Traffic Gravity Engine.
 
-Read:
+Steps:
 
-docs/gravity/content-gravity.md
+1. Run tools/gravity/gravity-analyzer.sh
+2. Review docs/gravity/gravity-report.txt
+3. Run tools/gravity/gravity-booster.sh
 
-Then run:
+Also available:
 
-tools/gravity/gravity-engine.sh
-
-Identify the newest pages.
-
-For each page:
-
-1. Add link to command center
-2. Add link to relevant knowledge hub
-3. Add backlinks from hubs to the page
+- tools/gravity/gravity-engine.sh — finds newest pages, recommends hub links
+- tools/gravity/run-gravity.sh — runs analyzer + booster in sequence
 
 Rules:
 
-append-only  
-do not remove existing content  
-preserve existing links  
+- append-only
+- no page rewrites
+- do not break existing HTML
+- inject links before </body>
 
-Follow:
+Goal:
 
-million-dollar-site-standard  
-clarity before cost tone  
+Allow the strongest pages to accumulate internal authority.
 
 Commit message:
 
