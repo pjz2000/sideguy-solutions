@@ -1,33 +1,29 @@
 #!/usr/bin/env bash
 
-# SideGuy Priority Engine
-# Purpose:
-# Identify high-opportunity pages that deserve upgrades.
+ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+cd "$ROOT"
 
-ROOT_DIR="."
+OUTPUT="docs/analysis/page-priority-report.txt"
+mkdir -p docs/analysis
+> "$OUTPUT"
 
-echo "Scanning HTML pages..."
-echo ""
-echo "PAGE | SCORE | LINKS | HUB | FAQ | LENGTH"
+echo "Running SideGuy Priority Engine..."
 
-find "$ROOT_DIR" -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 -P4 awk '
-  FNR==1 {
-    links=0; hub=0; faq=0; length=0; file=FILENAME
-  }
-  {
-    length++
-    links += gsub(/<a /,"<a ")
-    if (tolower($0) ~ /knowledge-hub/) hub++
-    if (tolower($0) ~ /faq|faqpage/) faq++
-  }
-  ENDFILE {
-    score = links + hub*5 + faq*3 + int(length/200)
-    print file " | " score " | " links " | " hub " | " faq " | " length
-  }
-' \
-| sort -t'|' -k2 -nr
+for f in *.html
+do
+  [ -f "$f" ] || continue
 
-echo ""
-echo "Priority Engine Complete."
-echo "Top pages listed first."
+  links=$(grep -o "<a " "$f" | wc -l)
+  faq=$(grep -i "faq" "$f" | wc -l)
+  hubs=$(grep -i "knowledge-hub" "$f" | wc -l)
+  words=$(wc -w < "$f")
+
+  score=$((links + faq*5 + hubs*4 + words/200))
+
+  echo "$score | $f | links:$links faq:$faq hubs:$hubs words:$words" >> "$OUTPUT"
+done
+
+sort -rn "$OUTPUT" -o "$OUTPUT"
+
+echo "Priority report created:"
+echo "$OUTPUT"

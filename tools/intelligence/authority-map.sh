@@ -1,45 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-echo "SideGuy Authority Map"
-echo "---------------------"
+ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+OUTPUT="$ROOT/docs/analysis/authority-map.txt"
 
-echo ""
-echo "Total root-level HTML pages:"
-find . -maxdepth 1 -name "*.html" | wc -l
+mkdir -p "$ROOT/docs/analysis"
+> "$OUTPUT"
 
-echo ""
-echo "Pages missing FAQ schema:"
-find . -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 grep -L 'FAQPage' \
-| wc -l
+echo "Building authority map..."
 
-echo ""
-echo "Pages missing command center links:"
-find . -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 grep -L 'command-center' \
-| wc -l
+for f in "$ROOT"/*.html
+do
+  [ -f "$f" ] || continue
 
-echo ""
-echo "Pages missing hub links:"
-find . -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 grep -L 'knowledge-hub' \
-| wc -l
+  links=$(grep -o "<a " "$f" | wc -l)
+  words=$(wc -w < "$f")
 
-echo ""
-echo "Potential thin pages (no <p> tag):"
-find . -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 grep -L '<p>' \
-| wc -l
+  echo "$links links | $words words | $(basename $f)" >> "$OUTPUT"
+done
 
-echo ""
-echo "Top keyword clusters:"
-find . -maxdepth 1 -name "*.html" -print0 \
-| xargs -0 grep -ohE '\b(payment|automation|software|ai|agent|stablecoin|infrastructure)\b' \
-| tr '[:upper:]' '[:lower:]' \
-| sort \
-| uniq -c \
-| sort -rn \
-| head -15
+sort -rn "$OUTPUT" -o "$OUTPUT"
 
-echo ""
-echo "Authority map complete."
+echo "Authority map saved:"
+echo "$OUTPUT"
