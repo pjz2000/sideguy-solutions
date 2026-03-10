@@ -1,1676 +1,311 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<!-- SHIP010_ROBOTS -->
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<!-- SideGuy Solutions — Who Do I Call? (Master Layout vNext) -->
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Solana Payments San Diego · SideGuy</title>
+<title>Solana Payments San Diego — USDC Setup &amp; Savings Guide · SideGuy</title>
 <link rel="canonical" href="https://sideguysolutions.com/solana-payments-san-diego.html"/>
-<meta content="Solana Payments San Diego for San Diego businesses. Accept crypto, settle to USD instantly. Setup help and ongoing support." name="description"/>
+<meta name="description" content="Accept Solana USDC payments in San Diego — real fee savings by industry, setup walkthrough, tax basics, and who should (and shouldn't) use stablecoin rails."/>
 <style>
-
-    :root{
-
-      --bg0:#eefcff;
-
-      --bg1:#d7f5ff;
-
-      --bg2:#bfeeff;
-
-      --ink:#073044;
-
-      --muted:#3f6173;
-
-      --muted2:#5e7d8e;
-
-
-
-      --card:#ffffffcc;
-
-      --card2:#ffffffb8;
-
-      --stroke:rgba(7,48,68,.10);
-
-      --stroke2:rgba(7,48,68,.07);
-
-      --shadow: 0 18px 50px rgba(7,48,68,.10);
-
-
-
-      --mint:#21d3a1;
-
-      --mint2:#00c7ff;
-
-      --blue:#4aa9ff;
-
-      --blue2:#1f7cff;
-
-
-
-      --r:22px;
-
-      --pill:999px;
-
-
-
-      --phone:"+1773-544-1231";
-
-      --phonePretty:"773-544-1231";
-
-      --city:"San Diego";
-
-    }
-
-
-
-    *{box-sizing:border-box}
-
-    html,body{height:100%}
-
-    body{
-
-      margin:0;
-
-      font-family:-apple-system, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
-
-      color:var(--ink);
-
-      background:
-
-        radial-gradient(1200px 900px at 22% 10%, #ffffff 0%, var(--bg0) 25%, var(--bg1) 60%, var(--bg2) 100%);
-
-      -webkit-font-smoothing:antialiased;
-
-      overflow-x:hidden;
-
-    }
-
-
-
-    /* soft ocean swirls */
-
-    body:before{
-
-      content:"";
-
-      position:fixed;
-
-      inset:-20%;
-
-      background:
-
-        radial-gradient(closest-side at 18% 20%, rgba(33,211,161,.18), transparent 55%),
-
-        radial-gradient(closest-side at 78% 28%, rgba(74,169,255,.16), transparent 52%),
-
-        radial-gradient(closest-side at 62% 82%, rgba(0,199,255,.12), transparent 55%),
-
-        radial-gradient(closest-side at 25% 85%, rgba(33,211,161,.10), transparent 58%);
-
-      filter: blur(18px);
-
-      pointer-events:none;
-
-      z-index:-2;
-
-    }
-
-
-
-    /* top home pill */
-
-    .topbar{
-
-      position:sticky;
-
-      top:0;
-
-      z-index:50;
-
-      padding:14px 14px 10px;
-
-      display:flex;
-
-      justify-content:center;
-
-      pointer-events:none; /* so it feels “floating” */
-
-    }
-
-    .homePill{
-
-      pointer-events:auto;
-
-      text-decoration:none;
-
-      display:inline-flex;
-
-      align-items:center;
-
-      gap:10px;
-
-      padding:10px 16px;
-
-      border-radius:var(--pill);
-
-      background:linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.62));
-
-      border:1px solid var(--stroke2);
-
-      box-shadow: 0 10px 28px rgba(7,48,68,.08);
-
-      color:var(--ink);
-
-      font-weight:700;
-
-      font-size:12px;
-
-      letter-spacing:.02em;
-
-      backdrop-filter: blur(14px);
-
-    }
-
-    .homeDot{
-
-      width:10px;height:10px;border-radius:50%;
-
-      background:linear-gradient(135deg, var(--mint), var(--mint2));
-
-      box-shadow: 0 0 0 3px rgba(255,255,255,.95), 0 10px 18px rgba(33,211,161,.18);
-
-    }
-
-
-
-    /* page */
-
-    .wrap{
-
-      max-width:1120px;
-
-      margin:0 auto;
-
-      padding: 26px 22px 92px;
-
-    }
-
-
-
-    .layout{
-
-      display:grid;
-
-      grid-template-columns: 1.15fr .85fr;
-
-      gap:22px;
-
-      align-items:start;
-
-      min-height: calc(100vh - 120px);
-
-    }
-
-    @media (max-width: 980px){
-
-      .layout{grid-template-columns:1fr; gap:16px;}
-
-    }
-
-
-
-    /* left rail header */
-
-    .brandRow{
-
-      display:flex;
-
-      align-items:flex-start;
-
-      gap:14px;
-
-      margin-bottom:14px;
-
-    }
-
-    .brandOrb{
-
-      width:38px;height:38px;border-radius:50%;
-
-      background: radial-gradient(circle at 30% 20%, #ffffff 0%, rgba(255,255,255,.65) 18%, rgba(33,211,161,.85) 55%, rgba(0,199,255,.85) 100%);
-
-      box-shadow:
-
-        0 0 0 4px rgba(255,255,255,.92),
-
-        0 18px 40px rgba(33,211,161,.22),
-
-        0 14px 26px rgba(0,199,255,.14);
-
-      position:relative;
-
-      flex:0 0 auto;
-
-    }
-
-    .brandOrb:after{
-
-      content:"";
-
-      position:absolute; inset:-18px;
-
-      border-radius:50%;
-
-      background: radial-gradient(circle, rgba(33,211,161,.22), transparent 65%);
-
-      filter: blur(6px);
-
-      z-index:-1;
-
-      animation:pulse 2.4s ease-in-out infinite;
-
-    }
-
-    @keyframes pulse{
-
-      0%,100%{transform:scale(.96); opacity:.70}
-
-      50%{transform:scale(1.05); opacity:1}
-
-    }
-
-
-
-    .brandMeta{
-
-      line-height:1.1;
-
-      padding-top:2px;
-
-    }
-
-    .brandName{
-
-      font-weight:800;
-
-      letter-spacing:.06em;
-
-      text-transform:uppercase;
-
-      font-size:12px;
-
-      color:rgba(7,48,68,.78);
-
-    }
-
-    .brandSub{
-
-      margin-top:6px;
-
-      font-size:12px;
-
-      color:rgba(7,48,68,.62);
-
-    }
-
-    .liveLine{
-
-      margin-top:8px;
-
-      font-size:12px;
-
-      color:rgba(7,48,68,.62);
-
-      display:flex;
-
-      flex-wrap:wrap;
-
-      gap:10px;
-
-      align-items:center;
-
-    }
-
-    .liveTag{
-
-      display:inline-flex;
-
-      align-items:center;
-
-      gap:8px;
-
-      padding:7px 10px;
-
-      border-radius:var(--pill);
-
-      background: rgba(255,255,255,.68);
-
-      border:1px solid var(--stroke2);
-
-      backdrop-filter: blur(10px);
-
-    }
-
-    .spark{
-
-      width:8px;height:8px;border-radius:50%;
-
-      background: linear-gradient(135deg, var(--mint), var(--mint2));
-
-      box-shadow: 0 0 0 3px rgba(255,255,255,.9);
-
-    }
-
-
-
-    /* hero copy */
-
-    h1{
-
-      margin:10px 0 8px;
-
-      font-size:44px;
-
-      letter-spacing:-.03em;
-
-      line-height:1.02;
-
-    }
-
-    @media (max-width: 520px){
-
-      h1{font-size:34px}
-
-    }
-
-    .lede{
-
-      margin:0 0 14px;
-
-      font-size:14px;
-
-      line-height:1.6;
-
-      color:var(--muted);
-
-      max-width: 720px;
-
-    }
-
-
-
-    /* cards area like the screenshot */
-
-    .cards{
-
-      display:grid;
-
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-
-      gap:12px;
-
-      margin-top:14px;
-
-    }
-
-    @media (max-width: 980px){
-
-      .cards{grid-template-columns: repeat(2, minmax(0, 1fr));}
-
-    }
-
-    @media (max-width: 560px){
-
-      .cards{grid-template-columns: 1fr;}
-
-    }
-
-
-
-    .card{
-
-      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.70));
-
-      border:1px solid var(--stroke2);
-
-      border-radius:18px;
-
-      box-shadow: 0 12px 34px rgba(7,48,68,.08);
-
-      padding:14px 14px 12px;
-
-      backdrop-filter: blur(14px);
-
-      min-height: 132px;
-
-    }
-
-    .cardTitle{
-
-      font-weight:800;
-
-      font-size:13px;
-
-      margin:0 0 8px;
-
-      color: rgba(7,48,68,.82);
-
-    }
-
-    .bullets{
-
-      margin:0;
-
-      padding-left:16px;
-
-      font-size:12px;
-
-      line-height:1.5;
-
-      color: rgba(7,48,68,.64);
-
-    }
-
-    .bullets li{margin:0 0 6px}
-
-
-
-    .noteCard{
-
-      margin-top:12px;
-
-      background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.55));
-
-      border:1px dashed rgba(7,48,68,.12);
-
-      border-radius:18px;
-
-      padding:12px 14px;
-
-      color: rgba(7,48,68,.62);
-
-      font-size:12px;
-
-      line-height:1.55;
-
-      backdrop-filter: blur(14px);
-
-    }
-
-
-
-    .bigCta{
-
-      margin-top:14px;
-
-      background: linear-gradient(180deg, rgba(33,211,161,.15), rgba(0,199,255,.12));
-
-      border:1px solid rgba(7,48,68,.10);
-
-      border-radius:22px;
-
-      padding:18px 16px;
-
-      box-shadow: 0 20px 60px rgba(7,48,68,.10);
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:space-between;
-
-      gap:14px;
-
-      backdrop-filter: blur(14px);
-
-    }
-
-    @media (max-width: 560px){
-
-      .bigCta{flex-direction:column; align-items:flex-start;}
-
-    }
-
-    .bigCta h2{
-
-      margin:0;
-
-      font-size:14px;
-
-      letter-spacing:.02em;
-
-    }
-
-    .bigCta .small{
-
-      margin-top:6px;
-
-      font-size:12px;
-
-      color: rgba(7,48,68,.65);
-
-      line-height:1.45;
-
-    }
-
-
-
-    .btn{
-
-      text-decoration:none;
-
-      display:inline-flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      gap:10px;
-
-      padding:12px 14px;
-
-      border-radius: var(--pill);
-
-      border:1px solid rgba(255,255,255,.75);
-
-      color:#fff;
-
-      font-weight:800;
-
-      font-size:12px;
-
-      background: linear-gradient(135deg, var(--mint), var(--mint2));
-
-      box-shadow: 0 18px 40px rgba(0,199,255,.22);
-
-      white-space:nowrap;
-
-    }
-
-    .btn:active{transform: translateY(1px);}
-
-
-
-    /* RIGHT RAIL: four orb tiles (top-right) */
-
-    .rightRail{
-
-      position:sticky;
-
-      top:78px;
-
-      display:flex;
-
-      justify-content:flex-end;
-
-    }
-
-    @media (max-width: 980px){
-
-      .rightRail{position:relative; top:auto; justify-content:flex-start;}
-
-    }
-
-
-
-    .railStack{
-
-      display:flex;
-
-      align-items:flex-start;
-
-      gap:12px;
-
-    }
-
-
-
-    .railOrbs{
-
-      display:flex;
-
-      flex-direction:column;
-
-      gap:12px;
-
-      align-items:flex-end;
-
-    }
-
-
-
-    .railOrb{
-
-      width:86px;
-
-      height:86px;
-
-      border-radius:999px;
-
-      position:relative;
-
-      border:1px solid rgba(255,255,255,.75);
-
-      box-shadow: 0 24px 55px rgba(7,48,68,.16);
-
-      backdrop-filter: blur(14px);
-
-      overflow:hidden;
-
-      cursor:pointer;
-
-      text-decoration:none;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      color:#fff;
-
-      font-weight:900;
-
-      letter-spacing:.02em;
-
-      font-size:12px;
-
-      text-align:center;
-
-      padding:10px;
-
-    }
-
-    .railOrb:before{
-
-      content:"";
-
-      position:absolute;
-
-      inset:-20%;
-
-      background:
-
-        radial-gradient(circle at 30% 22%, rgba(255,255,255,.90), rgba(255,255,255,.35) 28%, transparent 56%),
-
-        radial-gradient(circle at 65% 80%, rgba(0,0,0,.16), transparent 55%);
-
-      opacity:.60;
-
-      pointer-events:none;
-
-    }
-
-    .railOrb:after{
-
-      content:"";
-
-      position:absolute;
-
-      inset:-18px;
-
-      border-radius:999px;
-
-      background: radial-gradient(circle, rgba(33,211,161,.22), transparent 62%);
-
-      filter: blur(7px);
-
-      opacity:.9;
-
-      pointer-events:none;
-
-      animation:pulse 2.4s ease-in-out infinite;
-
-    }
-
-
-
-    .orbGreen{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(33,211,161,.95) 45%, rgba(0,199,255,.95) 100%); }
-
-    .orbBlue{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(74,169,255,.95) 45%, rgba(31,124,255,.98) 100%); }
-
-    .orbSoft{ background: radial-gradient(circle at 30% 15%, #ffffff, rgba(255,255,255,.82) 30%, rgba(255,255,255,.58) 100%); color:rgba(7,48,68,.82); border:1px solid rgba(7,48,68,.10); }
-
-    .orbSoft:after{ background: radial-gradient(circle, rgba(74,169,255,.18), transparent 65%); }
-
-
-
-    .railLabels{
-
-      display:flex;
-
-      flex-direction:column;
-
-      gap:14px;
-
-      padding-top:2px;
-
-    }
-
-    .railLabel{
-
-      width:190px;
-
-      padding:11px 12px;
-
-      border-radius:16px;
-
-      background: rgba(255,255,255,.64);
-
-      border:1px solid var(--stroke2);
-
-      backdrop-filter: blur(14px);
-
-      box-shadow: 0 14px 34px rgba(7,48,68,.08);
-
-      color: rgba(7,48,68,.76);
-
-      font-size:12px;
-
-      line-height:1.35;
-
-    }
-
-    .railLabel b{color: rgba(7,48,68,.88);}
-
-
-
-    /* bottom-right Text PJ orb (always) */
-
-    .floating{
-
-      position:fixed;
-
-      right:18px;
-
-      bottom:16px;
-
-      z-index:999;
-
-      display:flex;
-
-      align-items:center;
-
-      gap:10px;
-
-    }
-
-    .floatPill{
-
-      display:flex;
-
-      flex-direction:column;
-
-      gap:2px;
-
-      padding:10px 12px;
-
-      border-radius:16px;
-
-      background: rgba(255,255,255,.66);
-
-      border:1px solid var(--stroke2);
-
-      box-shadow: 0 18px 55px rgba(7,48,68,.14);
-
-      backdrop-filter: blur(14px);
-
-      min-width: 220px;
-
-    }
-
-    .floatPill .t1{
-
-      font-weight:900;
-
-      font-size:12px;
-
-      color: rgba(7,48,68,.88);
-
-      display:flex; align-items:center; gap:8px;
-
-    }
-
-    .chatDot{
-
-      width:10px;height:10px;border-radius:50%;
-
-      background: linear-gradient(135deg, var(--mint), var(--mint2));
-
-      box-shadow: 0 0 0 3px rgba(255,255,255,.9);
-
-    }
-
-    .floatPill .t2{
-
-      font-size:11px;
-
-      color: rgba(7,48,68,.62);
-
-    }
-
-    .floatBtn{
-
-      width:54px;height:54px;border-radius:999px;
-
-      background: radial-gradient(circle at 30% 20%, #ffffff, rgba(33,211,161,.95) 52%, rgba(0,199,255,.95) 100%);
-
-      border:1px solid rgba(255,255,255,.8);
-
-      box-shadow:
-
-        0 0 0 4px rgba(255,255,255,.92),
-
-        0 22px 60px rgba(0,199,255,.22),
-
-        0 18px 42px rgba(33,211,161,.18);
-
-      position:relative;
-
-      text-decoration:none;
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:center;
-
-      color:#fff;
-
-      font-weight:900;
-
-      letter-spacing:.02em;
-
-      font-size:11px;
-
-    }
-
-    .floatBtn:after{
-
-      content:"";
-
-      position:absolute;
-
-      inset:-16px;
-
-      border-radius:999px;
-
-      background: radial-gradient(circle, rgba(33,211,161,.28), transparent 62%);
-
-      filter: blur(7px);
-
-      animation:pulse 2.2s ease-in-out infinite;
-
-      z-index:-1;
-
-    }
-
-
-
-    /* tiny footer */
-
-    .microFooter{
-
-      margin-top:18px;
-
-      font-size:11px;
-
-      color: rgba(7,48,68,.55);
-
-    }
-
-    .microFooter a{color: rgba(31,124,255,.85); text-decoration:none; font-weight:700;}
-
-  </style>
-<script data-domain="sideguysolutions.com" defer="" src="https://plausible.io/js/script.js"></script>
-  <!-- SHIP-018: Open Graph — injected 2026-03-03 -->
-  <meta property="og:title" content="Solana Payments San Diego · SideGuy">
-  <meta name="twitter:title" content="Solana Payments San Diego · SideGuy">
-  <meta property="og:description" content="Solana Payments San Diego for San Diego businesses. Accept crypto, settle to USD instantly. Setup help and ongoing support.">
-  <meta name="twitter:description" content="Solana Payments San Diego for San Diego businesses. Accept crypto, settle to USD instantly. Setup help and ongoing support.">
-  <meta property="og:url" content="https://sideguysolutions.com/solana-payments-san-diego.html">
-<meta property="og:image" content="https://sideguysolutions.com/og-preview.png"/>
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="SideGuy Solutions">
-  <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sideguysolutions.com/og-preview.png"/>
-  <!-- /SHIP-018 -->
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is accepting crypto payments legal for a US business?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. You report received crypto as ordinary income at fair market value on the day received. USDC (a dollar-pegged stablecoin) is the lowest-risk option because its value doesn't fluctuate. Consult a crypto-literate CPA for your specific situation."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do customers actually pay me in crypto?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You share a wallet address, QR code, or payment link. They send USDC or SOL. You receive it in seconds. Tools like Helio, Sphere Pay, or Coinbase Commerce generate professional payment pages that look like normal checkout flows."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need technical knowledge to accept Solana payments?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Basic setup (getting a wallet, generating a payment link) takes about an hour with no technical background. Services like Coinbase Commerce abstract most of the complexity. You need a business wallet, a way to receive funds, and a process to convert to USD."
-      }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "SideGuy Solutions",
-      "item": "https://sideguysolutions.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Crypto & Solana Hub",
-      "item": "https://sideguysolutions.com/hubs/category-crypto-solana.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Solana Payments San Diego · SideGuy",
-      "item": "https://sideguysolutions.com/solana-payments-san-diego.html"
-    }
-  ]
-}
-</script>
-
-<style>
-/* SG_PILLAR_WIRING_V1 */
-.sg-concept-box {
-  margin: 18px auto 14px auto;
-  padding: 14px 14px 12px 14px;
-  border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(0,180,255,0.10), rgba(0,0,0,0.02));
-  max-width: 980px;
-}
-.sg-concept-top {
-  display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
-}
-.sg-concept-title {
-  font-size: 16px; font-weight: 800; letter-spacing: .2px;
-}
-.sg-concept-sub {
-  font-size: 13px; opacity:.9; margin-top:6px; line-height:1.35;
-}
-.sg-pill-link a {
-  display:inline-block;
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.14);
-  text-decoration:none;
-  font-weight:700;
-  font-size: 13px;
-}
-.sg-pill-link a:hover { transform: translateY(-1px); }
-.sg-mini {
-  margin-top: 10px;
-  display:flex; gap:10px; flex-wrap:wrap;
-}
-.sg-mini a {
-  font-size: 12px; text-decoration:none;
-  padding: 6px 8px;
-  border-radius: 10px;
-  border: 1px solid rgba(0,0,0,0.10);
-  background: rgba(255,255,255,0.55);
-}
-.sg-mini a:hover { background: rgba(255,255,255,0.85); }
-.sg-glossary {
-  margin: 14px auto 0 auto;
-  max-width: 980px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: 1px dashed rgba(0,0,0,0.14);
-  background: rgba(0,0,0,0.02);
-}
-.sg-glossary h3 { margin:0 0 8px 0; font-size: 14px; }
-.sg-glossary dl { margin:0; display:grid; grid-template-columns: 1fr; gap:8px; }
-.sg-glossary dt { font-weight:800; font-size: 13px; }
-.sg-glossary dd { margin:2px 0 0 0; font-size: 13px; opacity:.95; line-height:1.35; }
-.sg-toc {
-  margin: 10px auto 0 auto;
-  max-width: 980px;
-  padding: 10px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.10);
-  background: rgba(255,255,255,0.55);
-}
-.sg-toc b { display:block; margin-bottom:6px; }
-.sg-toc a { margin-right:10px; font-size: 12px; text-decoration:none; }
+  :root{
+    --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
+    --ink:#073044;--muted:#3f6173;--card:#ffffffcc;
+    --stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);
+    --mint:#21d3a1;--mint2:#00c7ff;--r:22px;--pill:999px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:radial-gradient(ellipse 120% 80% at 50% -10%,var(--bg2) 0%,var(--bg1) 40%,var(--bg0) 100%);min-height:100vh;}
+  header{max-width:860px;margin:0 auto;padding:40px 24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .logo{font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-.5px;}
+  .cta-pill{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;font-weight:700;font-size:.9rem;padding:10px 22px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 16px rgba(33,211,161,.35);}
+  main{max-width:860px;margin:0 auto;padding:48px 24px 80px;}
+  h1{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;line-height:1.2;margin:0 0 16px;}
+  .subtitle{font-size:1.05rem;color:var(--muted);margin:0 0 40px;line-height:1.6;}
+  .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow);}
+  .card h2{font-size:1.2rem;font-weight:800;margin:0 0 12px;}
+  .card p{margin:0 0 10px;line-height:1.7;color:var(--muted);}
+  .card p:last-child{margin-bottom:0;}
+  .card ul{margin:8px 0 0;padding-left:20px;color:var(--muted);line-height:1.9;}
+  .card ol{margin:8px 0 0;padding-left:20px;color:var(--muted);line-height:1.9;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem;}
+  th{background:rgba(33,211,161,.12);padding:10px 12px;text-align:left;font-weight:800;color:var(--ink);border-bottom:2px solid rgba(33,211,161,.3);}
+  td{padding:10px 12px;border-bottom:1px solid var(--stroke);color:var(--muted);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);}
+  .savings-row{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0;}
+  .savings-chip{flex:1;min-width:130px;background:rgba(255,255,255,.8);border:1px solid rgba(153,69,255,.2);border-radius:14px;padding:14px 16px;text-align:center;}
+  .savings-chip .amount{font-size:1.4rem;font-weight:900;color:#6d28d9;}
+  .savings-chip .desc{font-size:.8rem;color:var(--muted);margin-top:2px;}
+  .highlight-box{background:linear-gradient(135deg,rgba(153,69,255,.08),rgba(33,211,161,.08));border:1px solid rgba(153,69,255,.25);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;}
+  .highlight-box h2{font-size:1.2rem;font-weight:800;margin:0 0 12px;color:var(--ink);}
+  .highlight-box p{margin:0 0 10px;line-height:1.7;color:var(--muted);}
+  .warn-box{background:rgba(255,160,20,.10);border:1px solid rgba(200,130,10,.25);border-radius:var(--r);padding:20px 24px;margin:20px 0;}
+  .warn-box p{margin:0;color:var(--ink);font-size:.95rem;line-height:1.7;}
+  .not-for-box{background:rgba(255,80,50,.07);border:1px solid rgba(220,60,30,.2);border-radius:var(--r);padding:20px 24px;margin:20px 0;}
+  .not-for-box p{margin:0;color:var(--ink);font-size:.95rem;line-height:1.7;}
+  .step{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px;}
+  .step-num{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;font-weight:900;font-size:1rem;min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .step-body h3{font-size:1rem;font-weight:800;margin:0 0 4px;}
+  .step-body p{margin:0;font-size:.93rem;line-height:1.6;color:var(--muted);}
+  .industry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:16px 0;}
+  .industry-card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px 20px;box-shadow:0 4px 16px rgba(7,48,68,.06);}
+  .industry-card h3{font-size:.95rem;font-weight:800;margin:0 0 6px;}
+  .industry-card p{font-size:.85rem;color:var(--muted);margin:0;line-height:1.5;}
+  .industry-card .save{font-size:1.1rem;font-weight:900;color:#6d28d9;display:block;margin-top:6px;}
+  .cta-block{background:linear-gradient(135deg,var(--mint),var(--mint2));border-radius:var(--r);padding:36px 32px;text-align:center;margin-top:40px;box-shadow:0 12px 40px rgba(33,211,161,.3);}
+  .cta-block p{color:#fff;font-size:1.05rem;margin:0 0 20px;font-weight:500;}
+  .cta-block a{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:1rem;padding:14px 32px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.12);}
+  footer{max-width:860px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:.85rem;}
+  footer a{color:var(--muted);}
+  @media(max-width:600px){.card{padding:20px 18px;}.highlight-box{padding:20px 18px;}}
 </style>
-
-<meta name="description" content="Clarity-first guide for Solana Payments in San Diego. Fast explanation, common failure points, and the shortest path to a working fix. Text PJ if you want help."/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What is Solana USDC and why use it for payments?","acceptedAnswer":{"@type":"Answer","text":"USDC is a dollar-pegged stablecoin — 1 USDC always equals $1.00, with no cryptocurrency volatility. Sending USDC on the Solana blockchain costs approximately $0.00025 per transaction regardless of amount. Compared to 2.6–2.9% card processing fees, this represents $260–290 savings per $10,000 processed. It settles in under 1 second. There is no chargeback risk on USDC transactions."}},
+    {"@type":"Question","name":"Is accepting USDC payments legal for a US business?","acceptedAnswer":{"@type":"Answer","text":"Yes. USDC is treated as property for US tax purposes. Since USDC is dollar-pegged and doesn't fluctuate in value, the tax complexity is minimal — you receive $X worth of USDC valued at $X. Unlike volatile crypto (BTC, ETH), USDC doesn't create capital gains events when you convert to dollars. You report it as ordinary income at the time of receipt. Consult a crypto-literate CPA for your specific situation."}},
+    {"@type":"Question","name":"How do customers actually pay in USDC?","acceptedAnswer":{"@type":"Answer","text":"You share a wallet address, QR code, or a professional payment page link. Tools like Helio, Sphere Pay, or Coinbase Commerce generate checkout flows that look like normal invoice pages — the customer clicks 'pay', connects their wallet, and confirms. You receive USDC in your wallet within seconds. Most business owners set up automatic conversion to USD via Coinbase or Kraken if they don't want to hold stablecoins."}},
+    {"@type":"Question","name":"Who should consider Solana USDC payments?","acceptedAnswer":{"@type":"Answer","text":"Strongest fit: businesses with large tickets ($5,000+) where card fees are painful, B2B services billing other businesses, professionals with tech-forward client bases (solar, software, medical cash-pay), and businesses with international clients. Weakest fit: retail with walk-in customers who expect card/tap, very low ticket businesses where the fee savings are small, and any business whose customers are not at all tech-savvy."}},
+    {"@type":"Question","name":"What are the best tools to accept Solana payments as a business?","acceptedAnswer":{"@type":"Answer","text":"Helio (helio.co): easiest setup, generates shareable payment links, handles subscriptions, no monthly fee. Sphere Pay: more developer-friendly, good for custom integrations. Coinbase Commerce: integrates with e-commerce platforms, auto-converts to USD. For a simple setup: Phantom wallet (free) + Helio payment link is functional in under an hour. Add Coinbase auto-conversion to withdraw to your bank account."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"SideGuy Solutions","item":"https://sideguysolutions.com"},
+  {"@type":"ListItem","position":2,"name":"Payments Hub","item":"https://sideguysolutions.com/payments.html"},
+  {"@type":"ListItem","position":3,"name":"Solana Payments San Diego","item":"https://sideguysolutions.com/solana-payments-san-diego.html"}
+]}
+</script>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="SideGuy Solutions"/>
+<meta property="og:title" content="Solana Payments San Diego — USDC Setup &amp; Savings Guide · SideGuy"/>
+<meta property="og:description" content="Accept Solana USDC payments in San Diego — real fee savings by industry, 1-hour setup walkthrough, tax basics, and who should (and shouldn't) use stablecoin rails."/>
+<meta property="og:url" content="https://sideguysolutions.com/solana-payments-san-diego.html"/>
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Solana Payments San Diego · SideGuy"/>
+<meta name="twitter:description" content="Real fee savings by industry, setup walkthrough, and who should actually use Solana USDC for business payments."/>
+<meta name="twitter:image" content="https://sideguysolutions.com/og-preview.png"/>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:0;top:0;background:#fff;color:#073044;padding:8px 16px;border-radius:8px;z-index:1000;">Skip to content</a>
-<nav aria-label="Breadcrumb navigation" style="max-width:820px;margin:12px auto 0;padding:0 24px;font-size:.82rem;color:#3f6173;display:flex;flex-wrap:wrap;align-items:center;gap:4px;">
-  <a href="/hub.html">Operator Hub</a><span style="opacity:.4;margin:0 4px;">/</span><a href="/hubs/category-crypto-solana.html">Crypto & Solana Hub</a><span style="opacity:.4;margin:0 4px;">/</span><a href="/pillars/crypto-payments-master-guide.html">Crypto Payments Master Guide</a>
+<a href="#main-content" style="position:absolute;left:0;top:0;background:#fff;color:#073044;padding:8px 16px;border-radius:8px;z-index:1000;text-decoration:none;">Skip to content</a>
+<header>
+  <a class="logo" href="/">SideGuy</a>
+  <a class="cta-pill" href="sms:+17604541860">Text PJ</a>
+</header>
+<nav aria-label="Breadcrumb" style="max-width:860px;margin:12px auto 0;padding:0 24px;font-size:.82rem;color:#3f6173;display:flex;flex-wrap:wrap;align-items:center;gap:4px;">
+  <a href="/">SideGuy</a><span style="opacity:.4;margin:0 4px;">/</span><a href="payments.html">Payments</a><span style="opacity:.4;margin:0 4px;">/</span><span>Solana USDC Payments</span>
 </nav>
-<div class="topbar">
-<a aria-label="Back to home" class="homePill" href="index.html">
-<span class="homeDot"></span>
+<main id="main-content">
+  <h1>Solana Payments San Diego — USDC Setup &amp; Real Savings Guide</h1>
+  <p class="subtitle">Card processors take 2.6–2.9% of every transaction. On a $15,000 invoice, that's $435 gone. USDC on Solana settles the same transaction for $0.00025. This page covers who this makes sense for, how to set it up in under an hour, and what to watch out for.</p>
 
-      Back to home
-
-    </a>
-</div>
-<div class="wrap">
-<div class="layout">
-<!-- LEFT / MAIN -->
-<main aria-label="Main content" id="main-content">
-<div class="brandRow">
-<div aria-hidden="true" class="brandOrb"></div>
-<div class="brandMeta">
-<div class="brandName">SideGuy Solutions</div>
-<div class="brandSub"><span id="cityLabel">San Diego</span> · Human Guidance Layer</div>
-<div class="liveLine">
-<span class="liveTag"><span class="spark"></span> Updated live · <span id="localTime">—</span></span>
-<span class="liveTag">Weather · <span id="wx">—</span></span>
-<span class="liveTag">Page · Who Do I Call</span>
-</div>
-</div>
-</div>
-<h1>Solana Payments in San Diego</h1>
-
-<!-- SG_CONCEPT_BOX_V1 -->
-<div class="sg-concept-box" id="sg-concept">
-  <div class="sg-concept-top">
-    <div>
-      <div class="sg-concept-title">Concept: Crypto Payments Master Guide</div>
-      <div class="sg-concept-sub">Want the "big picture" first? This is the Wikipedia-style explainer for what this page is about — built for clarity before cost.</div>
+  <!-- THE CORE NUMBER -->
+  <div class="highlight-box">
+    <h2>The one number that matters</h2>
+    <p>Solana network fee per transaction: <strong style="color:#6d28d9;font-size:1.3rem;">$0.00025</strong> — regardless of whether you're sending $50 or $50,000.</p>
+    <div class="savings-row">
+      <div class="savings-chip"><div class="amount">$290</div><div class="desc">Card fee on $10k transaction (2.9%)</div></div>
+      <div class="savings-chip"><div class="amount">$5.00</div><div class="desc">ACH fee on same $10k (Stripe max)</div></div>
+      <div class="savings-chip"><div class="amount">$0.00025</div><div class="desc">Solana USDC fee on same $10k</div></div>
     </div>
-    <div class="sg-pill-link"><a href="/pillars/crypto-payments-master-guide.html">Read the Concept →</a></div>
+    <p style="margin-top:4px;">USDC = dollar-pegged stablecoin. No volatility. 1 USDC = $1.00. No chargebacks. Settles in under 1 second.</p>
   </div>
-  <div class="sg-mini">
-    <a href="#sg-toc">Jump links</a>
-    <a href="#sg-glossary">Mini glossary</a>
-    <a href="#faq">FAQ</a>
+
+  <!-- WHO IT'S FOR -->
+  <div class="card">
+    <h2 id="who">Who Solana USDC payments are actually right for</h2>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <h3>☀️ Solar Installers</h3>
+        <p>$15k–40k average ticket. Tech-forward buyers.</p>
+        <span class="save">Save $435–$1,015/job</span>
+      </div>
+      <div class="industry-card">
+        <h3>⚡ HVAC &amp; Electrical</h3>
+        <p>Large project payments, commercial clients.</p>
+        <span class="save">Save $145–$580/job</span>
+      </div>
+      <div class="industry-card">
+        <h3>💊 Medical Cash-Pay</h3>
+        <p>Functional medicine, cash-pay practices, concierge providers.</p>
+        <span class="save">Save $73–$290/visit</span>
+      </div>
+      <div class="industry-card">
+        <h3>⚖️ Law Firms / Consultants</h3>
+        <p>B2B invoicing, retainers, corporate clients.</p>
+        <span class="save">Save $290–$2,610/invoice</span>
+      </div>
+      <div class="industry-card">
+        <h3>🏗️ Contractors</h3>
+        <p>Progress billing, final payments, subcontractor payouts.</p>
+        <span class="save">Save $145–$1,015/txn</span>
+      </div>
+      <div class="industry-card">
+        <h3>💻 Software / Agencies</h3>
+        <p>Monthly retainers, project invoices, international clients.</p>
+        <span class="save">Save $145–$580/mo</span>
+      </div>
+    </div>
+    <div class="not-for-box" style="margin-top:16px;">
+      <p><strong>Not the right fit:</strong> In-person retail with walk-in customers, very low ticket transactions (under $200) where card fees are already small, businesses whose entire customer base is uncomfortable with technology, or any cash-only operation. Don't force it. Offer it as an option alongside card and ACH — let customers who want it use it.</p>
+    </div>
   </div>
-</div>
-<!-- /SG_CONCEPT_BOX_V1 -->
 
-<!-- SG_GLOSSARY_V1 -->
-<div class="sg-glossary" id="sg-glossary">
-  <h3>Mini glossary (operator-friendly)</h3>
-  <dl>
-    <div>
-      <dt>Concept Pillar</dt>
-      <dd>A Wikipedia-style explainer page that defines the topic and links out to related hubs and pages. You're reading: <b>Crypto Payments Master Guide</b>.</dd>
-    </div>
-    <div>
-      <dt>Hub</dt>
-      <dd>A directory page that groups many related pages (and points back up to the concept).</dd>
-    </div>
-    <div>
-      <dt>Leaf Page</dt>
-      <dd>A specific "problem + solution" page built to match a real query. It should always link back to the concept for trust.</dd>
-    </div>
-  </dl>
-</div>
-<!-- /SG_GLOSSARY_V1 -->
-
-
-
-<!-- SG_TOC_V1 -->
-<div class="sg-toc" id="sg-toc">
-  <b>Quick navigation</b>
-  <a href="#sg-concept">Concept</a>
-  <a href="#what">What this is</a>
-  <a href="#steps">Fast steps</a>
-  <a href="#cost">Cost + time</a>
-  <a href="#mistakes">Common mistakes</a>
-  <a href="#faq">FAQ</a>
-</div>
-<!-- /SG_TOC_V1 -->
-
-
-
-
-<p class="lede">
-          Solana Payments San Diego for San Diego businesses. Accept crypto, settle to USD instantly. Setup help and ongoing support.
-        </p>
-<section class="cards">
-<article class="card">
-<p class="cardTitle">Most problems aren’t clearly labeled</p>
-<ul class="bullets">
-<li>Issue overlaps between trades and vendors</li>
-<li>Companies rarely tell you if they’re not the right fit</li>
-<li>The wrong first call creates delays and extra cost</li>
-</ul>
-</article>
-<article class="card">
-<p class="cardTitle">“Who do I call for…”</p>
-<ul class="bullets">
-<li>HVAC / A/C issues</li>
-<li>Plumbing or leaks</li>
-<li>Electrical issues</li>
-<li>Website, POS, or payment failures</li>
-<li>Business / tech confusion</li>
-</ul>
-</article>
-<article class="card">
-<p class="cardTitle">Getting started with SideGuy</p>
-<ul class="bullets">
-<li>We start by understanding what broke</li>
-<li>Then we map the likely causes + next steps</li>
-<li>If you need a pro, we’ll tell you which one</li>
-</ul>
-</article>
-</section>
-<div class="noteCard">
-<b>One text. Real guidance.</b><br/>
-
-          Describe what’s going on. We’ll give a calm, honest response — a reset, no pressure.
-
-        </div>
-<section aria-label="Talk to a real person" class="bigCta">
-<div>
-<h2>Talk to a real person</h2>
-<div class="small">
-
-              Text PJ directly and describe what’s going on.<br/>
-<b>({{phonePretty}})</b> · <span id="cityFoot">San Diego</span>
-</div>
-</div>
-<a class="btn" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session" id="ctaBtn">Text PJ · 773-544-1231</a>
-</section>
-<div class="microFooter">
-
-          SideGuy Solutions · <span id="dateStamp">—</span> ·
-
-          <a href="index.html">Homepage</a>
-</div>
-<div style="margin-top:32px;padding:16px;text-align:center;font-size:13px;color:var(--muted2);">
-<span id="lastUpdated">Updated March 2026</span>
-</div>
-
-<!-- Related Problems -->
-<section style="margin:48px auto 24px;padding:32px;max-width:800px;background:var(--card);border-radius:var(--r);border:1px solid var(--stroke);box-shadow:var(--shadow);">
-  <h3 style="margin:0 0 16px;font-size:20px;color:var(--ink);">Related Problems</h3>
-  <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="payment-processing-hub-san-diego.html" style="color:var(--mint);text-decoration:none;font-weight:600;">→ See All PAYMENT Problems</a>
-    <a href="payment-processing-san-diego.html" style="color:var(--ink);text-decoration:none;">• <a href="/hubs/category-payments.html" data-sg-linked>payment processing</a></a>
-    <a href="instant-settlements-san-diego.html" style="color:var(--ink);text-decoration:none;">• Instant Settlements</a>
-    <a href="lower-credit-card-fees-san-diego.html" style="color:var(--ink);text-decoration:none;">• Lower Credit Card Fees</a>
-    <a href="contractor-payments-san-diego.html" style="color:var(--ink);text-decoration:none;">• Contractor Payments</a>
+  <!-- ANNUAL SAVINGS BY VOLUME -->
+  <div class="card">
+    <h2 id="math">Annual savings by processing volume</h2>
+    <table>
+      <tr><th>Monthly volume</th><th>Annual card fees (2.9%)</th><th>Annual ACH fees</th><th>Annual Solana USDC fees</th><th>Savings vs card</th></tr>
+      <tr><td>$10,000/mo</td><td>$3,480</td><td>$600</td><td><strong>~$0.03</strong></td><td><strong>$3,480/yr</strong></td></tr>
+      <tr><td>$25,000/mo</td><td>$8,700</td><td>$600</td><td><strong>~$0.08</strong></td><td><strong>$8,700/yr</strong></td></tr>
+      <tr><td>$50,000/mo</td><td>$17,400</td><td>$600</td><td><strong>~$0.15</strong></td><td><strong>$17,400/yr</strong></td></tr>
+      <tr><td>$100,000/mo</td><td>$34,800</td><td>$600</td><td><strong>~$0.30</strong></td><td><strong>$34,800/yr</strong></td></tr>
+    </table>
+    <p style="margin-top:8px;font-size:.88rem;">Note: ACH fees (Stripe, 0.8% max $5/txn) are already much better than card for large invoices. Solana USDC is essentially free regardless of transaction count or size. These are <em>if 100% of volume moved to USDC</em> — realistically, even moving 30–50% saves thousands.</p>
   </div>
-</section>
 
-<section class="internalBoost" style="margin-top:20px;padding:14px 18px;background:#f0fdf8;border-left:4px solid #21d3a1;border-radius:8px;font-size:14px;">
-<p style="margin:0;"><strong>Evaluating stablecoins or merchant rails?</strong> <a href="/crypto-payments-consulting-san-diego.html">Crypto Payments Consulting in San Diego</a>.</p>
-</section>
+  <!-- SETUP WALKTHROUGH -->
+  <div class="card">
+    <h2 id="setup">Setup walkthrough — under 1 hour</h2>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Get a business wallet</h3>
+        <p>Install <a href="https://phantom.app" target="_blank" rel="noopener">Phantom</a> (browser extension + mobile app). Create a new wallet. Write down your seed phrase and store it offline — this is the only recovery option. Phantom is the standard Solana wallet; no account required.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Create a payment link with Helio</h3>
+        <p><a href="https://helio.co" target="_blank" rel="noopener">Helio</a> generates a shareable payment page where customers can pay in USDC. Connect your Phantom wallet, set your price (or use a custom amount), and copy the link. Helio charges 0.5% platform fee — still 83% cheaper than card. For zero-fee payment links, use your wallet address directly via QR code.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Set up USD conversion (optional but recommended)</h3>
+        <p>Open a <a href="https://coinbase.com/business" target="_blank" rel="noopener">Coinbase Business</a> account. Transfer USDC from Phantom → Coinbase → sell for USD → bank transfer. Takes 1–2 business days to hit your bank. If you want to hold some USDC in your wallet, that's fine too — it doesn't fluctuate. Most businesses set up auto-convert so they're never sitting on crypto they didn't intend to hold.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Add it to your invoices</h3>
+        <p>Add a payment option line to your invoice template: "USDC stablecoin (save [X]% — instant settlement, no card fees)." Your Helio payment link or wallet QR code goes right on the invoice alongside your existing card/ACH option. Offer a 1% USDC discount — you save 1.9% vs card on every transaction that takes it.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>Track it for taxes</h3>
+        <p>Log each USDC payment received: date, amount in USD, customer name. Since USDC = $1.00 always, there's no gain/loss calculation. Treat it exactly like receiving a check. Export transaction history from Coinbase for your accountant. Do this monthly — it's trivial if you stay current, painful if you batch it annually.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL COMPARISON -->
+  <div class="card">
+    <h2 id="tools">Payment tools comparison</h2>
+    <table>
+      <tr><th>Tool</th><th>Best for</th><th>Fee</th><th>Setup time</th></tr>
+      <tr><td><strong>Helio</strong></td><td>Payment links, subscriptions, simple invoicing</td><td>0.5% platform fee</td><td>15 min</td></tr>
+      <tr><td><strong>Phantom wallet + QR</strong></td><td>In-person, direct transfers, zero fee</td><td>$0.00025 network only</td><td>10 min</td></tr>
+      <tr><td><strong>Sphere Pay</strong></td><td>Custom integrations, developer setup</td><td>0.5% platform fee</td><td>1–2 hrs</td></tr>
+      <tr><td><strong>Coinbase Commerce</strong></td><td>E-commerce checkout integration, Shopify</td><td>1% + network fee</td><td>30 min</td></tr>
+      <tr><td><strong>Solflare</strong></td><td>Alternative to Phantom, more staking options</td><td>$0.00025 network only</td><td>10 min</td></tr>
+    </table>
+  </div>
+
+  <!-- TAX / LEGAL -->
+  <div class="card">
+    <h2 id="tax">Tax and legal: the simple version</h2>
+    <p><strong>USDC is not volatile crypto.</strong> 1 USDC = $1.00. When you receive $5,000 USDC, you have $5,000 of income. When you convert it to dollars, nothing changes — no capital gain because the value didn't change. This is very different from receiving Bitcoin.</p>
+    <ul>
+      <li>Report USDC receipts as ordinary income at time of receipt — same as receiving a check</li>
+      <li>No capital gains events on USDC-to-USD conversion (value is always $1.00)</li>
+      <li>Keep records: date received, USD value (=$USDC amount), purpose of payment</li>
+      <li>If your processor (Coinbase, Kraken) sends you a 1099, it'll show your total conversions — reconcile with your bookkeeping records</li>
+      <li>Consult a crypto-literate CPA if you're also holding volatile crypto — that's where it gets complicated</li>
+    </ul>
+    <div class="warn-box">
+      <p><strong>The one thing that trips people up:</strong> Accidentally holding SOL (the native Solana token) instead of USDC stablecoin. SOL has price volatility. Stick to USDC for business payments. When your wallet receives SOL as a network fee refund or airdrop, convert it to USDC or USD immediately if you don't want price exposure.</p>
+    </div>
+  </div>
+
+  <!-- DISCOUNT STRATEGY -->
+  <div class="card">
+    <h2 id="discount">The 1% discount strategy</h2>
+    <p>The most practical way to encourage USDC adoption from existing clients:</p>
+    <p><strong>Offer a 1% discount for USDC payment.</strong> Here's why the math works:</p>
+    <table>
+      <tr><th>Invoice value</th><th>Card fee (2.9%)</th><th>Your 1% USDC discount</th><th>Your net saving</th></tr>
+      <tr><td>$5,000</td><td>$145</td><td>$50</td><td><strong>$95 ahead</strong></td></tr>
+      <tr><td>$15,000</td><td>$435</td><td>$150</td><td><strong>$285 ahead</strong></td></tr>
+      <tr><td>$30,000</td><td>$870</td><td>$300</td><td><strong>$570 ahead</strong></td></tr>
+    </table>
+    <p>You give away 1% and keep 1.9%. The customer gets a real discount. You net significantly ahead. Tech-forward customers — especially solar buyers, software companies, and medical cash-pay patients — will often take it.</p>
+  </div>
+
+  <!-- INDUSTRY DEEP LINKS -->
+  <div class="card">
+    <h2 id="by-industry">Industry-specific Solana savings guides</h2>
+    <ul>
+      <li><a href="/energy-company-payment-systems-san-diego.html">Solar &amp; HVAC payment systems — $50k+/yr savings math</a></li>
+      <li><a href="/medical-office-software-setup-san-diego.html">Medical office cash-pay savings — $14,600/yr on 200 patients</a></li>
+      <li><a href="/square-vs-stripe-fees-san-diego.html">Square vs Stripe fees — when Solana changes the math entirely</a></li>
+      <li><a href="/stripe-fees-for-small-business-san-diego.html">Stripe fees for small business — all the hidden charges + Solana alternative</a></li>
+      <li><a href="/merchant-services-pricing-san-diego.html">Merchant services pricing — tiered fees decoded + USDC comparison</a></li>
+    </ul>
+  </div>
+
+  <div class="cta-block">
+    <p>Want help setting up USDC payments for your business — wallet, payment links, conversion to USD?</p>
+    <a href="sms:+17604541860">Text PJ · 773-544-1231</a>
+  </div>
+
+  <section id="faq" style="margin-top:40px;">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#073044;margin-bottom:16px;">FAQ</h2>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">What is Solana USDC and why use it for payments?</h3>
+    <p style="color:#3f6173;line-height:1.7;">USDC is a dollar-pegged stablecoin — always $1.00, no volatility. Solana network fees are ~$0.00025/transaction regardless of amount. Card fees on that same transaction: 2.6–2.9%. For a $15,000 invoice: card costs $435, Solana USDC costs $0.00025.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">Is accepting USDC payments legal for a US business?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Yes. Report as ordinary income at receipt. Since USDC = $1.00 always, there's no capital gain calculation when converting to USD. Consult a crypto-literate CPA. Much simpler tax treatment than volatile crypto.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">How do customers actually pay in USDC?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Via a Helio payment link (looks like a normal checkout page), your wallet QR code, or a Coinbase Commerce checkout. Customer connects their wallet or Coinbase account, confirms payment. You receive USDC in seconds. No chargebacks possible.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">Who should consider Solana USDC payments?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Best fit: large ticket B2B and B2C ($5k+), solar, HVAC, contractors, medical cash-pay, consultants, software companies. Weakest fit: in-person retail, very low ticket transactions, non-tech-savvy customer bases. Offer it as an option alongside card/ACH — never replace entirely.</p>
+  </section>
 </main>
-<!-- RIGHT RAIL -->
-<aside aria-label="Right rail actions" class="rightRail">
-<div class="railStack">
-<div class="railOrbs">
-<a aria-label="Text PJ" class="railOrb orbGreen" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session" id="railText">Text PJ</a>
-<a aria-label="Ask AI Questions" class="railOrb orbBlue" href="index.html#ask-ai" id="railAsk">Ask AI</a>
-<a aria-label="Start Simple" class="railOrb orbSoft" href="index.html#start-simple" id="railStart">Start<br/>Simple</a>
-<a aria-label="No pressure" class="railOrb orbSoft" href="index.html#no-pressure" id="railNo">No<br/>pressure</a>
-</div>
-<div class="railLabels">
-<div class="railLabel"><b>Text PJ</b><br/>Fast human response. No tickets. No weird portals.</div>
-<div class="railLabel"><b>Ask AI Qs</b><br/>Use AI to explore options — then confirm with a human.</div>
-<div class="railLabel"><b>Start Simple</b><br/>Quick checklist → next best step. Avoid overreacting.</div>
-<div class="railLabel"><b>No pressure</b><br/>Clarity first. If we can’t help, we’ll say so.</div>
-</div>
-</div>
-</aside>
-</div>
-</div>
-<!-- Bottom-right “Text PJ” (best version) -->
-<div aria-label="Text PJ floating orb" class="floating">
-<div class="floatPill">
-<div class="t1"><span class="chatDot"></span> Text PJ</div>
-<div class="t2">One text · calm answers · <b>773-544-1231</b></div>
-</div>
-<a aria-label="Text PJ now" class="floatBtn" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity session">Text<br/>PJ</a>
-</div>
-<script>
-
-    // ====== Canonical phone lock (display + links)
-
-    (function(){
-
-      const pretty = "773-544-1231";
-
-      const sms = "sms:+17735441231";
-
-      const nodes = document.querySelectorAll("#ctaBtn,#railText");
-
-      nodes.forEach(n => n.setAttribute("href", sms));
-
-
-
-      // replace the placeholder token if present
-
-      document.body.innerHTML = document.body.innerHTML.replaceAll("{{phonePretty}}", pretty);
-
-    })();
-
-
-
-    // ====== Live timestamp (San Diego time)
-
-    function fmtTime(d){
-
-      return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
-
-    }
-
-    function fmtDate(d){
-
-      return d.toLocaleDateString([], {year:'numeric', month:'short', day:'numeric'});
-
-    }
-
-    function updateTime(){
-
-      const now = new Date();
-
-      document.getElementById("localTime").textContent = fmtTime(now);
-
-      document.getElementById("dateStamp").textContent = "Updated " + fmtDate(now);
-
-    }
-
-    updateTime();
-
-    setInterval(updateTime, 15000);
-
-
-
-    // ====== Live weather (San Diego) via Open-Meteo (no key)
-
-    // Using downtown-ish coords; fast + stable.
-
-    const SD = { lat: 32.7157, lon: -117.1611 };
-
-
-
-    const wxCodes = {
-
-      0:"Clear", 1:"Mainly clear", 2:"Partly cloudy", 3:"Cloudy",
-
-      45:"Fog", 48:"Fog", 51:"Light drizzle", 53:"Drizzle", 55:"Heavy drizzle",
-
-      56:"Freezing drizzle", 57:"Freezing drizzle",
-
-      61:"Light rain", 63:"Rain", 65:"Heavy rain",
-
-      66:"Freezing rain", 67:"Freezing rain",
-
-      71:"Light snow", 73:"Snow", 75:"Heavy snow",
-
-      77:"Snow grains",
-
-      80:"Rain showers", 81:"Rain showers", 82:"Heavy showers",
-
-      85:"Snow showers", 86:"Snow showers",
-
-      95:"Thunderstorm", 96:"Thunderstorm", 99:"Thunderstorm"
-
-    };
-
-
-
-    async function loadWeather(){
-
-      try{
-
-        const url = "https://api.open-meteo.com/v1/forecast"
-
-          + "?latitude=" + encodeURIComponent(SD.lat)
-
-          + "&longitude=" + encodeURIComponent(SD.lon)
-
-          + "&current=temperature_2m,weather_code"
-
-          + "&temperature_unit=fahrenheit"
-
-          + "&timezone=auto";
-
-
-
-        const res = await fetch(url, {cache:"no-store"});
-
-        if(!res.ok) throw new Error("wx http " + res.status);
-
-        const data = await res.json();
-
-        const t = data?.current?.temperature_2m;
-
-        const code = data?.current?.weather_code;
-
-        const label = (wxCodes[String(code)] || "Weather");
-
-        if(typeof t === "number"){
-
-          document.getElementById("wx").textContent = Math.round(t) + "°F · " + label;
-
-        }else{
-
-          document.getElementById("wx").textContent = label;
-
-        }
-
-      }catch(e){
-
-        document.getElementById("wx").textContent = "San Diego (live)";
-
-      }
-
-    }
-
-    loadWeather();
-
-    setInterval(loadWeather, 10 * 60 * 1000);
-
-  </script>
-
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "SideGuy Solutions",
-  "description": "Human-first guidance for San Diego home and business owners",
-  "url": "https://sideguysolutions.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "San Diego",
-    "addressRegion": "CA",
-    "addressCountry": "US"
-  },
-  "telephone": "+1-773-544-1231",
-  "areaServed": {
-    "@type": "City",
-    "name": "San Diego"
-  },
-  "priceRange": "$$"
-}
-  </script>
-  <script type="application/ld+json">
-  {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Solana Payments San Diego \u00b7 SideGuy",
-  "description": "Solana Payments San Diego for San Diego businesses. Accept crypto, settle to USD instantly. Setup help and ongoing support.",
-  "url": "https://sideguysolutions.com/solana-payments-san-diego.html",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "SideGuy Solutions",
-    "url": "https://sideguysolutions.com"
-  }
-}
-  </script>
-<!-- SIDEGUY_MESH_BLOCK -->
-<section style="margin-top:60px;padding:30px;background:#f4fdfb;border-left:6px solid #1fc7a6;">
-<h3>SideGuy <a href="/knowledge-hub.html" data-sg-linked>knowledge hub</a></h3>
-<ul style="line-height:1.8;">
-<li><a href="/mobile-payment-systems-san-diego.html">Mobile Payment Systems San Diego</a></li>
-<li><a href="/how-credit-card-processing-fees-work.html">How Credit Card Processing Fees Work</a></li>
-<li><a href="/local-business-payments.html">Local Business Payments Guide</a></li>
-<li><a href="/ai-business-solutions-san-diego.html">AI Business Solutions San Diego</a></li>
-<li><a href="/electronic-payment-solutions-san-diego.html">Electronic Payment Solutions</a></li>
-</ul>
-</section>
-
-<section style="margin-top:36px;padding:22px 26px;background:#eef5ff;border-left:5px solid #21d3a1;border-radius:10px;">
-<p style="margin:0;font-size:15px;">&#8592; <strong>Crypto Payments Hub:</strong> <a href="crypto-payments-san-diego.html" style="color:#073044;">Crypto Payments San Diego</a> &mdash; setup help, stablecoins, settlement rails, and calm guidance before you commit.</p>
-</section>
-<!-- SHIP010_FRESHNESS -->
-<div style="display:none">Updated: 2026-03-03</div>
-
-<section style="max-width:820px;margin:40px auto;padding:0 24px;">
-  <h2 id="what">What this is</h2>
-  <p style="color:#3f6173;line-height:1.7;">Accepting USDC on Solana isn't a political statement or a tech experiment anymore. For certain business types — especially those with tech-forward customers or international clients — it's a real cost reduction. Effective rate: essentially 0%. Compare that to your <a href="/hubs/category-payments.html" data-sg-linked>stripe</a> bill.</p>
-
-  <h3 style="font-size:1.1rem;font-weight:700;color:#073044;margin-top:24px;margin-bottom:8px;">Common Mistake</h3>
-  <p style="color:#3f6173;line-height:1.7;">['Accepting volatile assets (BTC, ETH) instead of USDC stablecoins.', 'Not setting up automatic conversion to USD, leading to price exposure.', 'Skipping the tax tracking setup — every transaction is a taxable event.']</p>
-</section>
-
-<section style='border:1px solid rgba(33,211,161,.35);padding:14px 18px;border-radius:12px;margin:22px 0;background:rgba(0,48,68,.04)'>
-<h3 style='font-size:1rem;font-weight:700;color:#073044;margin:0 0 6px'>SideGuy Knowledge Graph</h3>
-<p style='font-size:.85rem;color:#3f6173;margin:0 0 8px'>Related pages connected by topic similarity.</p>
-<ul style='margin:0;padding-left:18px;font-size:.9rem'>
-<li><a href='/who-do-i-call-for-crypto-payments-san-diego.html'>Who Do I Call For Crypto Payments San Diego · SideGuy</a></li>
-<li><a href='/solana-payments-north-county.html'>Solana Payments North County · San Diego · SideGuy</a></li>
-<li><a href='/how-to-accept-crypto-payments.html'>How To Accept Crypto Payments · San Diego · SideGuy</a></li>
-<li><a href='/oceanside-solana-payments.html'>Oceanside Solana Payments · San Diego · SideGuy</a></li>
-<li><a href='/La-Jolla-Solana-Payments.html'>La Jolla Solana Payments · San Diego · SideGuy</a></li>
-<li><a href='/North-County-Solana-Payments.html'>North County Solana Payments · San Diego · SideGuy</a></li>
-<li><a href='/san-diego-crypto-payments-for-business.html'>San Diego Crypto Payments For Business · SideGuy</a></li>
-</ul>
-</section>
-<!-- SG_SELF_IMPROVE_START -->
-<style>
-  .sg-improve{border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.18);border-radius:16px;padding:14px;margin:18px 0}
-  .sg-improve h2{margin:0 0 8px;font-size:18px}
-  .sg-improve p{margin:0 0 10px;opacity:.85;line-height:1.45}
-  .sg-improve .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-  .sg-improve a.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;border:1px solid rgba(127,255,212,.30);background:rgba(0,0,0,.22);text-decoration:none;font-weight:700}
-  .sg-improve .crumbs{font-size:13px;opacity:.75;margin-bottom:10px}
-  .sg-improve ul{margin:8px 0 0 18px;opacity:.9}
-  .sg-improve li{margin:6px 0}
-  .sg-pill{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.15);font-size:12px;opacity:.85}
-</style>
-<section class="sg-improve">
-  <div class="crumbs"><span class="sg-pill">SideGuy</span> &nbsp;›&nbsp; <a href="/">Home</a> &nbsp;›&nbsp; <span class="sg-pill">root</span></div>
-  <h2>Clarity before cost</h2>
-  <p>
-    SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it.
-    This page is auto-maintained to stay clean, crawlable, and helpful.
-  </p>
-  <div class="row">
-    <a class="btn" href="sms:+17735441231">💬 Text PJ</a>
-    <a class="btn" href="/map/index.html">🧭 Problem Map</a>
-    <a class="btn" href="/authority/index.html">🌊 Authority Hubs</a>
-  </div>
-  <h2>Related pages</h2><ul><li><a href="/">SideGuy Solutions &amp;#8212; Clarity Before Cost &amp;middot; San Diego Help Guide</a></li><li><a href="/hub.html">SideGuy Operator Hub · San Diego</a></li><li><a href="/business-automation-san-diego.html">Business Automation San Diego · SideGuy</a></li><li><a href="/operator-tools-hub.html">Operator Tools Hub | SideGuy</a></li><li><a href="/knowledge-hub.html">SideGuy Knowledge Hub — Central Navigation</a></li><li><a href="/ai-automation-hub.html"><a href="/ai-automation-hub.html" data-sg-linked>ai automation</a> Hub | SideGuy</a></li><li><a href="/ac-blowing-warm-air.html">AC Blowing Warm Air · San Diego · SideGuy</a></li><li><a href="/payments-infrastructure-hub.html">Payments Infrastructure Hub | SideGuy</a></li></ul>
-  <p style="opacity:.75;margin-top:12px;font-size:13px;">
-    Updated: 2026-03-05 &bull; Bucket: root
-  </p>
-</section>
-<!-- SG_SELF_IMPROVE_END -->
-<!-- SG_FAQ_START -->
-<section class="sg-improve">
-  <h2>FAQ</h2>
-  <ul><li><strong>What is Solana Payments in San Diego?</strong><br/><span style="opacity:.85">Solana Payments in San Diego is a common operator problem area. SideGuy pages explain what it is, what breaks, and what a practical fix path looks like.</span></li><li><strong>Why does Solana Payments in San Diego usually fail?</strong><br/><span style="opacity:.85">Most failures come from configuration mismatches, permissions/keys, environment differences, or upstream service changes. Start by isolating the first failing step.</span></li><li><strong>What&#x27;s the fastest way to troubleshoot Solana Payments in San Diego?</strong><br/><span style="opacity:.85">Reproduce the issue, check recent changes, verify credentials/config, and confirm the expected request/response or system state. Then test the smallest fix first.</span></li><li><strong>How do I prevent Solana Payments in San Diego issues from happening again?</strong><br/><span style="opacity:.85">Add basic monitoring/logging, pin versions where possible, document the working config, and set a quick rollback path.</span></li><li><strong>When should I get a human involved?</strong><br/><span style="opacity:.85">If the issue affects revenue, customer access, or you&#x27;re stuck after the first pass of checks, text PJ and we&#x27;ll get to the shortest path to resolution.</span></li></ul>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is Solana Payments in San Diego?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Solana Payments in San Diego is a common operator problem area. SideGuy pages explain what it is, what breaks, and what a practical fix path looks like."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why does Solana Payments in San Diego usually fail?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most failures come from configuration mismatches, permissions/keys, environment differences, or upstream service changes. Start by isolating the first failing step."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's the fastest way to troubleshoot Solana Payments in San Diego?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Reproduce the issue, check recent changes, verify credentials/config, and confirm the expected request/response or system state. Then test the smallest fix first."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I prevent Solana Payments in San Diego issues from happening again?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Add basic monitoring/logging, pin versions where possible, document the working config, and set a quick rollback path."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "When should I get a human involved?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If the issue affects revenue, customer access, or you're stuck after the first pass of checks, text PJ and we'll get to the shortest path to resolution."
-      }
-    }
-  ]
-}
-  </script>
-</section>
-<!-- SG_FAQ_END -->
-<!-- SG_BLACKHOLE_START -->
-<div class="sg-blackhole" style="border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;margin:18px 0;background:rgba(0,0,0,.18)">
-  <h3 style="margin:0 0 8px">&#x1F525; Featured Guides</h3>
-  <div style="opacity:.75;font-size:13px;margin-bottom:10px">Auto-refreshed from the live Problem Map. Strongest pages pull internal authority.</div>
-  <ul style="margin:0;padding-left:18px;line-height:1.45">
-    <li><a href='/'>SideGuy Solutions &amp;#8212; Clarity Before Cost &amp;middot; San Diego Help Guide</a></li>
-    <li><a href='/hub.html'>SideGuy Operator Hub · San Diego</a></li>
-    <li><a href='/pillars/ai-automation-master-guide.html'>AI Automation Master Guide · SideGuy San Diego</a></li>
-    <li><a href='/business-automation-san-diego.html'>Business Automation San Diego · SideGuy</a></li>
-    <li><a href='/operator-tools-hub.html'>Operator Tools Hub | SideGuy</a></li>
-    <li><a href='/knowledge-hub.html'>SideGuy Knowledge Hub — Central Navigation</a></li>
-    <li><a href='/ai-automation-hub.html'>AI Automation Hub | SideGuy</a></li>
-    <li><a href='/ac-blowing-warm-air.html'>AC Blowing Warm Air · San Diego · SideGuy</a></li>
-    <li><a href='/payments-infrastructure-hub.html'>Payments Infrastructure Hub | SideGuy</a></li>
-    <li><a href='/ac-repair-san-diego.html'>AC Repair San Diego — What to Check First | SideGuy</a></li>
-    <li><a href='/agent-payments-explained.html'>Agent Payments Explained · San Diego · SideGuy</a></li>
-    <li><a href='/AI-integration-accelerator.html'>AI Integration Accelerator · San Diego · SideGuy</a></li>
-    <li><a href='/ac-not-blowing-cold-air.html'>AC Not Blowing Cold Air · San Diego · SideGuy</a></li>
-    <li><a href='/concepts/index.html'>Concept Guides — SideGuy Solutions | Business, Payments, AI</a></li>
-    <li><a href='/concepts/ai-automation.html'>AI Automation Explained — What It Is, How It Works | SideGuy</a></li>
-    <li><a href='/concepts/crypto-payments.html'>Crypto Payments Explained — Blockchain Settlement for Business | SideGuy</a></li>
-    <li><a href='/payments.html'>Payments · San Diego · SideGuy</a></li>
-    <li><a href='/concepts/prediction-markets.html'>Prediction Markets Explained — Kalshi, Polymarket, How They Work | SideGuy</a></li>
-    <li><a href='/local-business-payments.html'>Local Business Payments · San Diego · SideGuy</a></li>
-    <li><a href='/ai-business-solutions-san-diego.html'>AI Business Solutions San Diego — Automations That Actually Save Time | SideGuy</a></li>
+<footer>
+  <p><a href="/">SideGuy Solutions</a> · San Diego · <a href="sms:+17604541860">773-544-1231</a></p>
+  <p>Clarity before cost. Updated 2026-03-10.</p>
+</footer>
+<section style="border:1px solid rgba(33,211,161,.35);padding:14px 18px;border-radius:12px;margin:22px 0;background:rgba(0,48,68,.04)">
+  <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:0 0 8px;">Related Guides</h3>
+  <ul style="margin:0;padding-left:18px;font-size:.9rem;line-height:1.9">
+    <li><a href="/energy-company-payment-systems-san-diego.html">Energy Company Payment Systems San Diego</a></li>
+    <li><a href="/square-vs-stripe-fees-san-diego.html">Square vs Stripe Fees San Diego</a></li>
+    <li><a href="/stripe-fees-for-small-business-san-diego.html">Stripe Fees for Small Business</a></li>
+    <li><a href="/merchant-services-pricing-san-diego.html">Merchant Services Pricing</a></li>
+    <li><a href="/medical-office-software-setup-san-diego.html">Medical Office Software Setup</a></li>
+    <li><a href="/payments.html">Payments Hub</a></li>
   </ul>
-  <div style="margin-top:12px">
-    <a href="sms:+17735441231" style="display:inline-block;padding:10px 12px;border-radius:14px;border:1px solid rgba(127,255,212,.30);background:rgba(0,0,0,.20);text-decoration:none;font-weight:700">&#x1F4AC; Text PJ</a>
-  </div>
-</div>
-<!-- SG_BLACKHOLE_END -->
-<!-- SG_GRAVITY_LINKS_START -->
-<div class="sg-top-links" style="border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;margin:18px 0;background:rgba(0,0,0,.18)">
-  <h3 style="margin:0 0 8px">Top Guides</h3>
-  <div style="opacity:.75;font-size:13px;margin-bottom:10px">Bucket-aware authority links (auto-refreshed).</div>
-  <ul style="margin:0;padding-left:18px;line-height:1.45">
-    <li><a href='/'>SideGuy Solutions &amp;#8212; Clarity Before Cost &amp;middot; San Diego Help Guide</a></li>
-    <li><a href='/hub.html'>SideGuy Operator Hub · San Diego</a></li>
-    <li><a href='/business-automation-san-diego.html'>Business Automation San Diego · SideGuy</a></li>
-    <li><a href='/operator-tools-hub.html'>Operator Tools Hub | SideGuy</a></li>
-    <li><a href='/knowledge-hub.html'>SideGuy Knowledge Hub — Central Navigation</a></li>
-    <li><a href='/ai-automation-hub.html'>AI Automation Hub | SideGuy</a></li>
-    <li><a href='/ac-blowing-warm-air.html'>AC Blowing Warm Air · San Diego · SideGuy</a></li>
-    <li><a href='/payments-infrastructure-hub.html'>Payments Infrastructure Hub | SideGuy</a></li>
-  </ul>
-</div>
-<!-- SG_GRAVITY_LINKS_END -->
-<!-- SG_AUTHORITY_LOOP_START -->
-<div class="sg-loop" style="border:1px solid rgba(127,255,212,.18);border-radius:16px;padding:12px;margin:14px 0;background:rgba(0,0,0,.14)">
-  <div style="opacity:.8;font-size:12px;margin-bottom:6px">Authority Loop (compounding links)</div>
-  <div style="line-height:1.6"><a href='/' style='margin-right:10px'>SideGuy Solutions &amp;#8212; Clarity Before Cost &amp;m</a> <a href='/hub.html' style='margin-right:10px'>SideGuy Operator Hub · San Diego</a> <a href='/business-automation-san-diego.html' style='margin-right:10px'>Business Automation San Diego · SideGuy</a> <a href='/operator-tools-hub.html' style='margin-right:10px'>Operator Tools Hub | SideGuy</a> <a href='/knowledge-hub.html' style='margin-right:10px'>SideGuy Knowledge Hub — Central Navigation</a> <a href='/pillars/ai-automation-master-guide.html' style='margin-right:10px'>AI Automation Master Guide · SideGuy San Diego</a> <a href='/ai-automation-hub.html' style='margin-right:10px'>AI Automation Hub | SideGuy</a> <a href='/ac-blowing-warm-air.html' style='margin-right:10px'>AC Blowing Warm Air · San Diego · SideGuy</a></div>
-</div>
-<!-- SG_AUTHORITY_LOOP_END -->
-
-<!-- PYRAMID NAV: auto-injected by authority-link-engine -->
-<nav class="pyramid-nav" aria-label="Site hierarchy" style="font-size:0.85rem;color:#aaa;padding:0.5rem 1rem;background:rgba(0,0,0,0.15);border-radius:6px;margin:0 0 1rem">
+</section>
+<nav aria-label="Site hierarchy" style="font-size:0.85rem;color:#aaa;padding:0.5rem 1rem;background:rgba(0,0,0,0.15);border-radius:6px;margin:0 0 1rem">
   <a href="/" style="color:#21d3a1;text-decoration:none">SideGuy</a> &rsaquo;
-  <a href="/hubs/category-payments.html" style="color:#21d3a1;text-decoration:none">Payments & Processing</a>
+  <a href="/payments.html" style="color:#21d3a1;text-decoration:none">Payments</a> &rsaquo; Solana USDC Payments
 </nav>
-<!-- END PYRAMID NAV -->
-
-<!-- SIDEGUY AUTHORITY LINKS: auto-injected -->
-<div class="sideguy-authority-links" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:3rem;padding-top:1.5rem;font-size:0.9rem">
-  <p style="margin:0 0 0.75rem;color:#aaa">SideGuy Intelligence:</p>
+<div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:3rem;padding-top:1.5rem;font-size:0.9rem">
   <ul style="list-style:none;padding:0;margin:0;display:flex;gap:1rem;flex-wrap:wrap">
-    <li><a href="/hubs/category-payments.html" style="color:#21d3a1;text-decoration:none">&uarr; Payments & Processing</a></li>
+    <li><a href="/payments.html" style="color:#21d3a1;text-decoration:none">&uarr; Payments</a></li>
     <li><a href="/" style="color:#21d3a1;text-decoration:none">&uarr; SideGuy Home</a></li>
     <li><a href="sms:+17735441231" style="color:#21d3a1;font-weight:700">Text PJ</a></li>
   </ul>
 </div>
-<!-- END AUTHORITY LINKS -->
-
-<!-- sideguy-related-problems -->
-<nav aria-label="Related Problems" style="
-  background:linear-gradient(135deg,rgba(238,252,255,.98) 0%,rgba(210,245,240,.98) 100%);
-  border-top:2px solid rgba(33,211,161,.30);
-  padding:20px 22px 18px;
-  font-family:-apple-system,system-ui,sans-serif;
-  color:#073044;
-  margin-top:28px;
-">
-  <p style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3f6173;margin:0 0 8px">
-    Related Problems — <a href="/auto-hubs/clusters/payments--stripe.html" style="color:#073044">Stripe Troubleshooting</a>
-  </p>
-  <ul style="margin:0;padding:0 0 0 18px;font-size:.9rem;line-height:1.7">
-      <li><a href="/auto-detailing-payment-processing-san-diego.html" style="color:#073044;text-decoration:underline;">Auto Detailing Payment Processing San Diego · SideGuy</a></li>
-      <li><a href="/plumbing-services-payment-processing-san-diego.html" style="color:#073044;text-decoration:underline;">Plumbing Services Payment Processing San Diego · SideGuy</a></li>
-      <li><a href="/stablecoin-payments-for-small-business-san-diego.html" style="color:#073044;text-decoration:underline;">Stablecoin Payments For Small Business San Diego · SideGuy</a></li>
-      <li><a href="/solana-payment-rails-explained-san-diego.html" style="color:#073044;text-decoration:underline;">Solana Payment Rails Explained San Diego · SideGuy</a></li>
-      <li><a href="/oceanside-payment-processing.html" style="color:#073044;text-decoration:underline;">Oceanside Payment Processing · San Diego · SideGuy</a></li>
-  </ul>
-  <p style="margin:10px 0 0;font-size:.82rem;color:#3f6173">
-    ↑ <a href="/hubs/category-payments.html" style="color:#073044">Payments</a> pillar ·
-    <a href="/auto-hubs/clusters/payments--stripe.html" style="color:#073044">All Stripe Troubleshooting pages</a>
-  </p>
-</nav>
-
-<!-- SideGuy Leaf See Also (auto) -->
-<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(33,211,161,.2);">
-  <p style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3f6173;margin:0 0 6px">See Also — Related Clusters</p>
-  <ul style="margin:0;padding:0 0 0 18px;font-size:.88rem;line-height:1.7">
-      <li><a href="/auto-hubs/clusters/ai-automation--ai-city-pages.html" style="color:#073044;text-decoration:underline;">AI Automation — City Pages</a></li>
-      <li><a href="/auto-hubs/clusters/ai-automation--ai-agent-workflows.html" style="color:#073044;text-decoration:underline;">AI Agent Workflows</a></li>
-      <li><a href="/auto-hubs/clusters/ai-automation--ai-scheduling.html" style="color:#073044;text-decoration:underline;">AI Scheduling & Booking</a></li>
-      <li><a href="/auto-hubs/clusters/ai-automation--ai-cost.html" style="color:#073044;text-decoration:underline;">AI Automation Cost & ROI</a></li>
-  </ul>
-</div>
-<!-- end SideGuy Leaf See Also (auto) -->
-<!-- end sideguy-related-problems --></body>
+</body>
 </html>
-<hr/>
-<section>
-<h3>Related SideGuy Help</h3>
-<ul>
-<li><a href="/Carlsbad-Contractor-Payments.html">Carlsbad-Contractor-Payments.html</a></li>
-<li><a href="/Encinitas-Contractor-Payments.html">Encinitas-Contractor-Payments.html</a></li>
-<li><a href="/Energy-Payments-San-Diego.html">Energy-Payments-San-Diego.html</a></li>
-<li><a href="/La-Jolla-Solana-Payments.html">La-Jolla-Solana-Payments.html</a></li>
-<li><a href="/North-County-Solana-Payments.html">North-County-Solana-Payments.html</a></li>
-</ul>
-</section>
