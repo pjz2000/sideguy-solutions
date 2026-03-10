@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>HIPAA Compliance Software — BAA Requirements, PHI &amp; Tools Guide · SideGuy</title>
+<link rel="canonical" href="https://sideguysolutions.com/hipaa-compliance-software.html"/>
+<meta name="description" content="What HIPAA compliance software does, BAA requirements explained, which tools handle PHI correctly, and who actually needs HIPAA compliance versus who thinks they do."/>
+<style>
+  :root{
+    --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
+    --ink:#073044;--muted:#3f6173;--card:#ffffffcc;
+    --stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);
+    --mint:#21d3a1;--mint2:#00c7ff;--r:22px;--pill:999px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:radial-gradient(ellipse 120% 80% at 50% -10%,var(--bg2) 0%,var(--bg1) 40%,var(--bg0) 100%);}
+  header{max-width:860px;margin:0 auto;padding:40px 24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .logo{font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-.5px;}
+  .cta-pill{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;font-weight:700;font-size:.9rem;padding:10px 22px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 16px rgba(33,211,161,.35);}
+  main{max-width:860px;margin:0 auto;padding:48px 24px 80px;}
+  h1{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;line-height:1.2;margin:0 0 16px;}
+  .subtitle{font-size:1.05rem;color:var(--muted);margin:0 0 32px;line-height:1.6;}
+  .toc{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:20px 28px;margin-bottom:32px;box-shadow:var(--shadow);}
+  .toc h2{font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;color:var(--muted);}
+  .toc ol{margin:0;padding-left:20px;color:var(--muted);}
+  .toc ol li{margin-bottom:4px;font-size:.93rem;}
+  .toc ol a{color:var(--ink);text-decoration:none;font-weight:600;}
+  .toc ol a:hover{text-decoration:underline;}
+  .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow);}
+  .card h2{font-size:1.2rem;font-weight:800;margin:0 0 12px;}
+  .card p{margin:0 0 10px;line-height:1.7;color:var(--muted);}
+  .card p:last-child{margin-bottom:0;}
+  .card ul{margin:8px 0 0;padding-left:20px;color:var(--muted);line-height:1.9;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem;}
+  th{background:rgba(33,211,161,.12);padding:10px 12px;text-align:left;font-weight:800;color:var(--ink);border-bottom:2px solid rgba(33,211,161,.3);}
+  td{padding:10px 12px;border-bottom:1px solid var(--stroke);color:var(--muted);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);}
+  .warn-box{background:rgba(255,160,0,.08);border:1px solid rgba(200,100,0,.2);border-radius:var(--r);padding:20px 24px;margin:16px 0;}
+  .warn-box p{margin:0;color:var(--ink);font-size:.95rem;line-height:1.7;}
+  .clarity-box{background:linear-gradient(135deg,rgba(33,211,161,.10),rgba(0,199,255,.10));border:2px solid rgba(33,211,161,.35);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;}
+  .clarity-box h2{font-size:1.2rem;font-weight:800;margin:0 0 12px;}
+  .clarity-box p{margin:0 0 10px;line-height:1.7;color:var(--muted);}
+  .clarity-box ul{margin:8px 0 0;padding-left:20px;color:var(--muted);line-height:1.9;}
+  .glossary{background:rgba(0,48,68,.03);border:1px dashed rgba(7,48,68,.15);border-radius:var(--r);padding:20px 28px;margin:24px 0;}
+  .glossary h2{font-size:1rem;font-weight:800;margin:0 0 12px;}
+  .glossary dl{margin:0;display:grid;gap:8px;}
+  .glossary dt{font-weight:800;font-size:.92rem;color:var(--ink);}
+  .glossary dd{margin:2px 0 0 0;font-size:.88rem;color:var(--muted);line-height:1.5;}
+  .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:16px 0;}
+  .related-link{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:14px 18px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(7,48,68,.06);transition:box-shadow .2s;}
+  .related-link:hover{box-shadow:0 6px 20px rgba(7,48,68,.12);}
+  .related-link strong{display:block;font-size:.95rem;font-weight:800;margin-bottom:3px;}
+  .related-link span{font-size:.82rem;color:var(--muted);}
+  .cta-block{background:linear-gradient(135deg,var(--mint),var(--mint2));border-radius:var(--r);padding:36px 32px;text-align:center;margin-top:40px;box-shadow:0 12px 40px rgba(33,211,161,.3);}
+  .cta-block p{color:#fff;font-size:1.05rem;margin:0 0 20px;font-weight:500;}
+  .cta-block a{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:1rem;padding:14px 32px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.12);}
+  footer{max-width:860px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:.85rem;}
+  footer a{color:var(--muted);}
+  @media(max-width:600px){.card,.clarity-box{padding:20px 18px;}.toc{padding:16px 18px;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What is a HIPAA Business Associate Agreement (BAA)?","acceptedAnswer":{"@type":"Answer","text":"A Business Associate Agreement (BAA) is a contract required by HIPAA between a Covered Entity (a healthcare provider, health plan, or healthcare clearinghouse) and any vendor (Business Associate) that creates, receives, maintains, or transmits Protected Health Information (PHI) on their behalf. Examples: your email provider (if you send PHI via email), your EHR software vendor, your cloud hosting provider (if PHI is stored there), your billing service, your business analytics platform. No BAA = HIPAA violation. Every vendor that touches PHI must sign one before going live."}},
+    {"@type":"Question","name":"Who needs HIPAA compliance software?","acceptedAnswer":{"@type":"Answer","text":"You need HIPAA compliance tools if you are: a Covered Entity (hospital, clinic, physician practice, health plan, pharmacy, clearinghouse), or a Business Associate (medical billing company, healthcare software vendor, EHR company, medical transcription service, cloud provider storing PHI, any IT vendor with access to PHI). You do NOT need HIPAA compliance if: your company sells to healthcare companies but does not access PHI; your wellness app does not collect clinical data; your fitness tracker does not integrate with provider systems. Many companies think they need HIPAA because they're in 'health adjacent' spaces — often they don't."}},
+    {"@type":"Question","name":"What does HIPAA compliance software do?","acceptedAnswer":{"@type":"Answer","text":"HIPAA compliance platforms automate: (1) Risk Assessment — the required periodic assessment of threats to PHI confidentiality, integrity, and availability; (2) Policy management — storing and distributing HIPAA policies to staff, tracking acknowledgment; (3) Training tracking — ensuring all workforce members complete required HIPAA training annually; (4) BAA management — tracking which vendors have signed BAAs; (5) Incident management — logging and tracking potential breaches through the notification decision process; (6) Audit control documentation — maintaining logs required for HIPAA audit controls. Without software, this is a spreadsheet and filing cabinet — fine for a 3-person practice, very risky at 50+ employees."}},
+    {"@type":"Question","name":"What does HIPAA compliance software cost?","acceptedAnswer":{"@type":"Answer","text":"Small practice tools (Compliancy Group, Accountable HQ, HIPAA One): $2,000–7,000/year. Mid-market platforms (Sprinto HIPAA module, Drata HIPAA, Vanta HIPAA): $10,000–25,000/year when bundled with SOC 2. Enterprise healthcare GRC (Clearwater, Meditology): $30,000–100,000+/year. Note: Tools cover readiness — an HHS enforcement action after a breach can cost $100–$1.9M per violation, making compliance software extremely cost-effective insurance."}},
+    {"@type":"Question","name":"What is the difference between a Covered Entity and a Business Associate under HIPAA?","acceptedAnswer":{"@type":"Answer","text":"Covered Entities are directly regulated: healthcare providers (doctors, hospitals, pharmacies), health plans (insurers, HMOs, employer group health plans), and healthcare clearinghouses. Business Associates are vendors who work for Covered Entities and handle PHI as part of their service. Business Associates are ALSO subject to HIPAA directly — the HITECH Act made Business Associate liability direct, not just contractual. If a vendor breaches PHI without a BAA in place, both the Covered Entity and the Business Associate can be held liable."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"SideGuy Solutions","item":"https://sideguysolutions.com"},
+  {"@type":"ListItem","position":2,"name":"Compliance Software Explained","item":"https://sideguysolutions.com/compliance-software-explained.html"},
+  {"@type":"ListItem","position":3,"name":"HIPAA Compliance Software","item":"https://sideguysolutions.com/hipaa-compliance-software.html"}
+]}
+</script>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="SideGuy Solutions"/>
+<meta property="og:title" content="HIPAA Compliance Software — BAA Requirements &amp; Tools · SideGuy"/>
+<meta property="og:description" content="What HIPAA compliance software does, who needs it, BAA requirements explained, tools compared, and what it costs."/>
+<meta property="og:url" content="https://sideguysolutions.com/hipaa-compliance-software.html"/>
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HIPAA Compliance Software Guide · SideGuy"/>
+<meta name="twitter:description" content="BAA requirements, PHI handling, covered entities vs business associates, and HIPAA tools compared."/>
+</head>
+<body>
+<a href="#main-content" style="position:absolute;left:0;top:0;background:#fff;color:#073044;padding:8px 16px;border-radius:8px;z-index:1000;text-decoration:none;">Skip to content</a>
+<header>
+  <a class="logo" href="/">SideGuy</a>
+  <a class="cta-pill" href="sms:+17604541860">Text PJ</a>
+</header>
+<nav aria-label="Breadcrumb" style="max-width:860px;margin:12px auto 0;padding:0 24px;font-size:.82rem;color:#3f6173;display:flex;flex-wrap:wrap;align-items:center;gap:4px;">
+  <a href="/">SideGuy</a><span style="opacity:.4;margin:0 4px;">/</span>
+  <a href="/compliance-software-explained.html" style="color:var(--ink);text-decoration:none;">Compliance</a><span style="opacity:.4;margin:0 4px;">/</span>
+  <span>HIPAA</span>
+</nav>
+<main id="main-content">
+  <h1>HIPAA Compliance Software — Complete Guide</h1>
+  <p class="subtitle">HIPAA is a federal law, not a voluntary certification. Get it wrong and you're looking at OCR enforcement, not just a failed audit. Here's who actually needs HIPAA compliance software, what it does, and what it costs — clearly.</p>
+
+  <div class="toc">
+    <h2>On This Page</h2>
+    <ol>
+      <li><a href="#who-needs">Who needs HIPAA compliance</a></li>
+      <li><a href="#baa">BAA requirements explained</a></li>
+      <li><a href="#what-software-does">What HIPAA compliance software does</a></li>
+      <li><a href="#tools">Tools compared</a></li>
+      <li><a href="#cost">Cost breakdown</a></li>
+      <li><a href="#clarity">Do you actually need HIPAA software?</a></li>
+    </ol>
+  </div>
+
+  <div class="card" id="who-needs">
+    <h2>Who HIPAA actually applies to</h2>
+    <table>
+      <tr><th>Entity type</th><th>Examples</th><th>HIPAA applies?</th></tr>
+      <tr><td><strong>Covered Entity</strong></td><td>Hospital, clinic, doctor, pharmacy, health insurer, health plan</td><td>✅ Yes — directly regulated</td></tr>
+      <tr><td><strong>Business Associate</strong></td><td>Medical billing company, EHR vendor, healthcare software company, cloud provider storing PHI, transcription service</td><td>✅ Yes — directly regulated since HITECH</td></tr>
+      <tr><td><strong>Business Associate's vendor</strong></td><td>A subcontractor who processes PHI on behalf of a Business Associate</td><td>✅ Yes — subcontractor BAA required</td></tr>
+      <tr><td><strong>Health-adjacent company (no PHI)</strong></td><td>Wellness app, fitness tracker, general HR software without health plan integration</td><td>❌ No — if no PHI is received or processed</td></tr>
+      <tr><td><strong>Consumer health app</strong></td><td>Calorie counter, period tracker, symptom journal (not connected to providers)</td><td>❌ No — explicitly excluded if not a CE or BA</td></tr>
+    </table>
+    <div class="warn-box">
+      <p><strong>Common mistake:</strong> Many software companies assume being in "healthcare" means they're subject to HIPAA. The trigger is receiving, creating, or transmitting PHI — not just selling into healthcare markets. An analytics company that only receives de-identified data may have no HIPAA obligations at all.</p>
+    </div>
+  </div>
+
+  <div class="card" id="baa">
+    <h2>Business Associate Agreements (BAA) explained</h2>
+    <p>A BAA is a contract. Under HIPAA, a Covered Entity cannot share PHI with any Business Associate without a signed BAA in place. Period. If your EHR sends patient data to your cloud storage and your cloud provider hasn't signed a BAA, that's a HIPAA violation — whether or not a breach occurs.</p>
+    <p><strong>Every vendor that touches PHI must sign a BAA before going live:</strong></p>
+    <ul>
+      <li>Cloud infrastructure (AWS, Google Cloud, Azure — all offer HIPAA BAAs)</li>
+      <li>Email provider (if PHI is in email — Google Workspace and Microsoft 365 offer BAAs)</li>
+      <li>EHR / practice management software</li>
+      <li>Billing and claims processing companies</li>
+      <li>Business analytics / BI tools (if PHI flows into them)</li>
+      <li>Backup and disaster recovery services</li>
+      <li>IT support and managed services companies</li>
+    </ul>
+    <p>HIPAA compliance platforms maintain a BAA registry — a tracked list of all vendors that have signed BAAs, expiration dates, and scope. Without a platform, this is typically a folder of PDFs that gets out of date.</p>
+    <p><strong>Some major vendors do NOT offer BAAs</strong> — most notably consumer-tier services. Google Workspace offers one; Gmail (personal) does not. Know the difference before you use a tool with PHI.</p>
+  </div>
+
+  <div class="card" id="what-software-does">
+    <h2>What HIPAA compliance software actually does</h2>
+    <ul>
+      <li><strong>Risk assessment automation:</strong> HIPAA requires a periodic risk assessment of threats to PHI confidentiality, integrity, and availability. Platforms guide you through the assessment and document results in the required format.</li>
+      <li><strong>Policy management:</strong> Stores HIPAA policies (Privacy Policy, Security Policy, Breach Notification procedures, sanctions policy), versions them, distributes to staff, and tracks acknowledgment signatures.</li>
+      <li><strong>Workforce training:</strong> Delivers required HIPAA training to all employees and contractors, tracks completion, and generates reports for audit readiness.</li>
+      <li><strong>BAA tracking:</strong> Maintains a central registry of all Business Associate Agreements — who signed, what scope, when it was signed, and when it needs renewal.</li>
+      <li><strong>Incident management:</strong> Manages the breach notification process — logging potential breaches, running through the four-factor risk assessment to determine if notification is required, documenting decisions.</li>
+      <li><strong>Audit log documentation:</strong> HIPAA requires audit controls — records of PHI access. Platforms help document that these technical controls are in place and logs are reviewed.</li>
+    </ul>
+  </div>
+
+  <div class="card" id="tools">
+    <h2>HIPAA compliance tools compared</h2>
+    <table>
+      <tr><th>Tool</th><th>Best for</th><th>Price est.</th><th>Key feature</th></tr>
+      <tr><td><strong>Compliancy Group</strong></td><td>Small–mid healthcare practices</td><td>$3,000–8,000/yr</td><td>Dedicated HIPAA Coach, built for non-technical users</td></tr>
+      <tr><td><strong>Accountable HQ</strong></td><td>Solo practitioners, small clinics</td><td>$2,000–5,000/yr</td><td>Simple interface, BAA library, fast onboarding</td></tr>
+      <tr><td><strong>HIPAA One (now Intraprise Health)</strong></td><td>Mid-market healthcare orgs</td><td>$5,000–15,000/yr</td><td>Risk analysis tools, comprehensive documentation</td></tr>
+      <tr><td><strong>Sprinto (HIPAA module)</strong></td><td>Healthcare SaaS companies doing SOC 2 + HIPAA</td><td>$10,000–20,000/yr</td><td>Multi-framework, integrations, good for tech companies</td></tr>
+      <tr><td><strong>Drata (HIPAA)</strong></td><td>B2B healthcare software, tech-first</td><td>$15,000–25,000/yr combined</td><td>Best automation, strong when paired with SOC 2</td></tr>
+      <tr><td><strong>Clearwater Compliance</strong></td><td>Larger health systems, hospitals</td><td>$30,000–100,000+/yr</td><td>Managed service, former ONC/OCR staff, enterprise-grade</td></tr>
+    </table>
+    <p><strong>For healthcare practices:</strong> Compliancy Group or Accountable HQ are purpose-built for your use case and priced accordingly. You don't need a $20k/yr startup compliance platform — it's overkill.</p>
+    <p><strong>For healthcare SaaS / health tech:</strong> Sprinto or Drata with the HIPAA module is the right choice if you're also pursuing SOC 2 — you get both frameworks in one platform.</p>
+  </div>
+
+  <div class="card" id="cost">
+    <h2>HIPAA compliance software cost</h2>
+    <table>
+      <tr><th>Scenario</th><th>Typical annual cost</th><th>Notes</th></tr>
+      <tr><td>Solo practice / small clinic</td><td>$2,000–5,000/yr</td><td>Accountable HQ or similar; covers policies, training, BAAs</td></tr>
+      <tr><td>Mid-size medical practice (10–50 staff)</td><td>$4,000–10,000/yr</td><td>Compliancy Group, HIPAA One; includes risk assessment support</td></tr>
+      <tr><td>Healthcare SaaS startup</td><td>$10,000–25,000/yr</td><td>Sprinto or Drata HIPAA module; often bundled with SOC 2</td></tr>
+      <tr><td>Mid-market health tech company</td><td>$20,000–50,000/yr</td><td>Full platform + managed service elements</td></tr>
+      <tr><td>Health system / hospital</td><td>$50,000–200,000+/yr</td><td>Enterprise GRC; Clearwater, Meditology, or internal CISO team</td></tr>
+    </table>
+    <p><strong>Contrast with enforcement fines:</strong> OCR has issued fines from $100 per violation to $1.9 million per violation category. Most breach settlements include a Corrective Action Plan that costs more than 3 years of compliance software. The ROI calculation is straightforward.</p>
+    <p>See: <a href="/compliance-software-cost.html">Full compliance software cost guide →</a></p>
+  </div>
+
+  <div class="clarity-box" id="clarity">
+    <h2>🧭 SideGuy: Do you actually need HIPAA software?</h2>
+    <ul>
+      <li>✅ <strong>Yes if:</strong> you store, receive, or transmit PHI as a Covered Entity or Business Associate. A doctor's office with any digital records. A healthcare SaaS platform that receives patient data from providers. A billing company processing claims.</li>
+      <li>🟡 <strong>Maybe if:</strong> you're building a consumer health app that may later integrate with provider systems; you're a vendor considering a healthcare market expansion; you have a HIPAA-covered client who is pressuring you to document compliance.</li>
+      <li>❌ <strong>Probably not if:</strong> you sell marketing software to doctors but never receive patient data; you make general wellness apps with no provider integration; your healthcare connection is purely administrative (facilities management, non-clinical HR).</li>
+    </ul>
+    <p><strong>Unsure?</strong> The correct first step is a HIPAA legal opinion from a healthcare attorney ($500–2,000) to confirm whether you're a Covered Entity or Business Associate before spending on software. A 30-minute call can save $10,000+/year in unnecessary compliance spend.</p>
+  </div>
+
+  <div class="glossary">
+    <h2>HIPAA Glossary</h2>
+    <dl>
+      <dt>PHI (Protected Health Information)</dt><dd>Individually identifiable health information created, received, or maintained by a Covered Entity or Business Associate. Includes name, address, dates, phone, SSN, medical records, billing info, and more — when linked to health data.</dd>
+      <dt>Covered Entity</dt><dd>Healthcare providers (doctors, hospitals, pharmacies), health plans (insurers, HMOs), and healthcare clearinghouses. Directly regulated by HIPAA.</dd>
+      <dt>Business Associate</dt><dd>A vendor or contractor that creates, receives, maintains, or transmits PHI on behalf of a Covered Entity. Also directly regulated by HIPAA since HITECH (2009).</dd>
+      <dt>BAA (Business Associate Agreement)</dt><dd>Required contract between a Covered Entity and any Business Associate. Defines permitted uses of PHI, safeguards required, and breach notification obligations.</dd>
+      <dt>OCR</dt><dd>Office for Civil Rights at HHS. Enforces HIPAA. Conducts audits and investigations. Issues fines and requires Corrective Action Plans (CAPs).</dd>
+      <dt>Risk Assessment</dt><dd>HIPAA Security Rule §164.308(a)(1) requires a periodic assessment of threats and vulnerabilities to PHI. Must be documented — not just performed.</dd>
+      <dt>Minimum Necessary</dt><dd>HIPAA principle requiring that PHI access and disclosure be limited to the minimum necessary to accomplish the purpose.</dd>
+      <dt>De-identified data</dt><dd>PHI with all 18 HIPAA identifiers removed. De-identified data is not PHI and not subject to HIPAA privacy restrictions — but de-identification must be done correctly.</dd>
+    </dl>
+  </div>
+
+  <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:16px;margin-top:32px;">More in the compliance cluster</h2>
+  <div class="related-grid">
+    <a class="related-link" href="/compliance-software-explained.html">
+      <strong>Compliance Software Hub</strong>
+      <span>Overview: all frameworks, pricing, who needs what</span>
+    </a>
+    <a class="related-link" href="/soc2-compliance-software.html">
+      <strong>SOC 2 Compliance Software</strong>
+      <span>Type I vs II, tools, timeline, cost</span>
+    </a>
+    <a class="related-link" href="/pci-compliance-software.html">
+      <strong>PCI DSS Compliance</strong>
+      <span>Card data, SAQ levels, QSA audits</span>
+    </a>
+    <a class="related-link" href="/compliance-automation-tools.html">
+      <strong>Compliance Automation Tools</strong>
+      <span>Vanta vs Drata vs Sprinto vs Secureframe</span>
+    </a>
+    <a class="related-link" href="/compliance-software-cost.html">
+      <strong>Compliance Software Cost</strong>
+      <span>Full breakdown by framework and company size</span>
+    </a>
+  </div>
+
+  <section id="faq" style="margin-top:40px;">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#073044;margin-bottom:16px;">FAQ</h2>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">What is a Business Associate Agreement (BAA)?</h3>
+    <p style="color:#3f6173;line-height:1.7;">A required HIPAA contract between a Covered Entity and any vendor that touches PHI. If a vendor hasn't signed a BAA before receiving PHI, that's a violation — whether or not a breach occurs.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">Do I need HIPAA software if I'm a healthcare software company?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Yes, if you receive, store, or transmit PHI as part of your service. Healthcare software vendors are Business Associates and are directly regulated by HIPAA since HITECH (2009).</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">How much does HIPAA compliance cost?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Small practices: $2,000–5,000/yr. Healthcare SaaS startups: $10,000–25,000/yr. Enterprise health systems: $50,000–200,000+/yr. There is no formal audit cost but OCR enforcement fines can reach $1.9M per violation category — making software cheap insurance.</p>
+  </section>
+
+  <div class="cta-block">
+    <p>Not sure if your company is a Business Associate or whether your vendor BAAs are in order?</p>
+    <a href="sms:+17604541860">Text PJ · 773-544-1231</a>
+  </div>
+</main>
+<footer>
+  <p><a href="/">SideGuy Solutions</a> · <a href="sms:+17604541860">773-544-1231</a></p>
+  <p>Clarity before cost. Updated 2026-03-10.</p>
+</footer>
+<nav aria-label="Site hierarchy" style="max-width:860px;margin:0 auto;font-size:0.85rem;color:#aaa;padding:0.5rem 1.5rem;background:rgba(0,0,0,0.10);border-radius:6px;margin-bottom:1rem">
+  <a href="/" style="color:#21d3a1;text-decoration:none">SideGuy</a> &rsaquo;
+  <a href="/compliance-software-explained.html" style="color:#21d3a1;text-decoration:none">Compliance</a> &rsaquo;
+  HIPAA
+</nav>
+<div style="max-width:860px;margin:0 auto;padding:0 24px 32px;font-size:0.9rem">
+  <ul style="list-style:none;padding:0;margin:0;display:flex;gap:1rem;flex-wrap:wrap">
+    <li><a href="/compliance-software-explained.html" style="color:#21d3a1;text-decoration:none">← Hub</a></li>
+    <li><a href="/soc2-compliance-software.html" style="color:#21d3a1;text-decoration:none">SOC 2 →</a></li>
+    <li><a href="/pci-compliance-software.html" style="color:#21d3a1;text-decoration:none">PCI DSS →</a></li>
+    <li><a href="/compliance-automation-tools.html" style="color:#21d3a1;text-decoration:none">Automation Tools →</a></li>
+    <li><a href="sms:+17735441231" style="color:#21d3a1;font-weight:700">Text PJ</a></li>
+  </ul>
+</div>
+</body>
+</html>

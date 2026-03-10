@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>PCI DSS Compliance Software — SAQ Levels, QSA Audits &amp; Tools · SideGuy</title>
+<link rel="canonical" href="https://sideguysolutions.com/pci-compliance-software.html"/>
+<meta name="description" content="PCI DSS explained: merchant levels, SAQ types, QSA audit requirements, scope reduction strategies, and which tools help you get and stay compliant with card data security."/>
+<style>
+  :root{
+    --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
+    --ink:#073044;--muted:#3f6173;--card:#ffffffcc;
+    --stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);
+    --mint:#21d3a1;--mint2:#00c7ff;--r:22px;--pill:999px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:radial-gradient(ellipse 120% 80% at 50% -10%,var(--bg2) 0%,var(--bg1) 40%,var(--bg0) 100%);}
+  header{max-width:860px;margin:0 auto;padding:40px 24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .logo{font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-.5px;}
+  .cta-pill{background:linear-gradient(135deg,var(--mint),var(--mint2));color:#fff;font-weight:700;font-size:.9rem;padding:10px 22px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 16px rgba(33,211,161,.35);}
+  main{max-width:860px;margin:0 auto;padding:48px 24px 80px;}
+  h1{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;line-height:1.2;margin:0 0 16px;}
+  .subtitle{font-size:1.05rem;color:var(--muted);margin:0 0 32px;line-height:1.6;}
+  .toc{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:20px 28px;margin-bottom:32px;box-shadow:var(--shadow);}
+  .toc h2{font-size:.9rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px;color:var(--muted);}
+  .toc ol{margin:0;padding-left:20px;color:var(--muted);}
+  .toc ol li{margin-bottom:4px;font-size:.93rem;}
+  .toc ol a{color:var(--ink);text-decoration:none;font-weight:600;}
+  .toc ol a:hover{text-decoration:underline;}
+  .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow);}
+  .card h2{font-size:1.2rem;font-weight:800;margin:0 0 12px;}
+  .card p{margin:0 0 10px;line-height:1.7;color:var(--muted);}
+  .card p:last-child{margin-bottom:0;}
+  .card ul{margin:8px 0 0;padding-left:20px;color:var(--muted);line-height:1.9;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem;}
+  th{background:rgba(33,211,161,.12);padding:10px 12px;text-align:left;font-weight:800;color:var(--ink);border-bottom:2px solid rgba(33,211,161,.3);}
+  td{padding:10px 12px;border-bottom:1px solid var(--stroke);color:var(--muted);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);}
+  .tip-box{background:rgba(0,199,255,.08);border:1px solid rgba(0,165,200,.2);border-radius:16px;padding:18px 22px;margin:16px 0;}
+  .tip-box p{margin:0;color:var(--ink);font-size:.93rem;line-height:1.7;}
+  .clarity-box{background:linear-gradient(135deg,rgba(33,211,161,.10),rgba(0,199,255,.10));border:2px solid rgba(33,211,161,.35);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;}
+  .clarity-box h2{font-size:1.2rem;font-weight:800;margin:0 0 12px;}
+  .clarity-box p{margin:0 0 10px;line-height:1.7;color:var(--muted);}
+  .clarity-box ul{margin:8px 0 0;padding-left:20px;color:var(--muted);line-height:1.9;}
+  .glossary{background:rgba(0,48,68,.03);border:1px dashed rgba(7,48,68,.15);border-radius:var(--r);padding:20px 28px;margin:24px 0;}
+  .glossary h2{font-size:1rem;font-weight:800;margin:0 0 12px;}
+  .glossary dl{margin:0;display:grid;gap:8px;}
+  .glossary dt{font-weight:800;font-size:.92rem;color:var(--ink);}
+  .glossary dd{margin:2px 0 0 0;font-size:.88rem;color:var(--muted);line-height:1.5;}
+  .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:16px 0;}
+  .related-link{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:14px 18px;text-decoration:none;color:var(--ink);box-shadow:0 2px 8px rgba(7,48,68,.06);transition:box-shadow .2s;}
+  .related-link:hover{box-shadow:0 6px 20px rgba(7,48,68,.12);}
+  .related-link strong{display:block;font-size:.95rem;font-weight:800;margin-bottom:3px;}
+  .related-link span{font-size:.82rem;color:var(--muted);}
+  .solana-note{background:rgba(33,211,161,.10);border:1px solid rgba(33,211,161,.3);border-radius:14px;padding:16px 20px;margin:16px 0;}
+  .solana-note p{margin:0;font-size:.9rem;color:var(--ink);line-height:1.7;}
+  .cta-block{background:linear-gradient(135deg,var(--mint),var(--mint2));border-radius:var(--r);padding:36px 32px;text-align:center;margin-top:40px;box-shadow:0 12px 40px rgba(33,211,161,.3);}
+  .cta-block p{color:#fff;font-size:1.05rem;margin:0 0 20px;font-weight:500;}
+  .cta-block a{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:1rem;padding:14px 32px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.12);}
+  footer{max-width:860px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:.85rem;}
+  footer a{color:var(--muted);}
+  @media(max-width:600px){.card,.clarity-box{padding:20px 18px;}.toc{padding:16px 18px;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What are PCI DSS merchant levels?","acceptedAnswer":{"@type":"Answer","text":"PCI DSS has four merchant levels based on annual Visa transaction volume: Level 1: 6 million+ transactions/year — requires annual QSA on-site audit plus quarterly network scans. Level 2: 1–6 million transactions/year — requires annual SAQ plus quarterly scans plus AOC. Level 3: 20,000–1 million e-commerce transactions/year — requires annual SAQ plus quarterly scans. Level 4: fewer than 20,000 e-commerce transactions or up to 1 million total — annual SAQ recommended, requirements set by your acquiring bank. Most small businesses are Level 4 and can self-certify via SAQ."}},
+    {"@type":"Question","name":"What is a PCI SAQ and which one do I need?","acceptedAnswer":{"@type":"Answer","text":"The Self-Assessment Questionnaire (SAQ) is a self-certification tool for merchants who don't require a formal QSA audit. There are multiple SAQ types depending on how you accept card payments: SAQ A — card data handled entirely by a third party (e.g., Stripe, PayPal hosted pages), you never touch raw card data. Simplest. SAQ A-EP — e-commerce, card data handled by third party but your website is involved in the payment flow. SAQ B — imprint-only or standalone dial-out terminals, no electronic storage. SAQ B-IP — IP-connected payment terminals. SAQ C — payment application systems connected to the internet. SAQ D — all other environments, most comprehensive. Most businesses using Stripe Checkout or PayPal checkout qualify for SAQ A — the simplest form."}},
+    {"@type":"Question","name":"What is the best way to reduce PCI scope?","acceptedAnswer":{"@type":"Answer","text":"Scope reduction is the most powerful PCI strategy: use a hosted payment page (Stripe Checkout, Braintree, PayPal) so card data never touches your servers. This typically reduces you from SAQ C or D to SAQ A — reducing the number of applicable controls from 300+ to fewer than 50. Tokenization: replace card numbers with tokens in your systems. Point-to-point encryption (P2PE): encrypts card data at the terminal before it can reach your network. Each of these moves your environment further from direct card data handling and reduces your PCI scope — and therefore your compliance burden."}},
+    {"@type":"Question","name":"Who does PCI DSS apply to?","acceptedAnswer":{"@type":"Answer","text":"PCI DSS applies to any organization that stores, processes, or transmits cardholder data (card number, expiration date, CVV, cardholder name). This includes: merchants who accept card payments, payment processors, acquiring banks, issuing banks, and service providers that store or process card data. If you use a payment processor like Stripe or Square and use their hosted checkout — and you never see or store raw card numbers — your PCI scope is very small (typically SAQ A)."}},
+    {"@type":"Question","name":"How much does PCI compliance cost?","acceptedAnswer":{"@type":"Answer","text":"Cost depends heavily on merchant level and architecture: Level 4 SAQ A (Stripe/hosted checkout): minimal — completing the SAQ is free; quarterly ASV scans from an approved vendor run $50–200/quarter. Level 3–4 more complex environments: SAQ completion plus quarterly ASV scans, $500–3,000/year total. Level 2 with AOC required: $2,000–8,000/year including consultant support. Level 1 QSA audit: $20,000–70,000 for the on-site audit. Plus remediation costs for any gaps found."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"SideGuy Solutions","item":"https://sideguysolutions.com"},
+  {"@type":"ListItem","position":2,"name":"Compliance Software Explained","item":"https://sideguysolutions.com/compliance-software-explained.html"},
+  {"@type":"ListItem","position":3,"name":"PCI DSS Compliance Software","item":"https://sideguysolutions.com/pci-compliance-software.html"}
+]}
+</script>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="SideGuy Solutions"/>
+<meta property="og:title" content="PCI DSS Compliance Software — Levels, SAQ Types &amp; Tools · SideGuy"/>
+<meta property="og:description" content="Merchant levels explained, SAQ types, QSA audit requirements, scope reduction strategies, and PCI compliance tool options."/>
+<meta property="og:url" content="https://sideguysolutions.com/pci-compliance-software.html"/>
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PCI DSS Compliance Guide · SideGuy"/>
+<meta name="twitter:description" content="Merchant levels, SAQ types, QSA audits, scope reduction, and PCI compliance tool costs explained."/>
+</head>
+<body>
+<a href="#main-content" style="position:absolute;left:0;top:0;background:#fff;color:#073044;padding:8px 16px;border-radius:8px;z-index:1000;text-decoration:none;">Skip to content</a>
+<header>
+  <a class="logo" href="/">SideGuy</a>
+  <a class="cta-pill" href="sms:+17604541860">Text PJ</a>
+</header>
+<nav aria-label="Breadcrumb" style="max-width:860px;margin:12px auto 0;padding:0 24px;font-size:.82rem;color:#3f6173;display:flex;flex-wrap:wrap;align-items:center;gap:4px;">
+  <a href="/">SideGuy</a><span style="opacity:.4;margin:0 4px;">/</span>
+  <a href="/compliance-software-explained.html" style="color:var(--ink);text-decoration:none;">Compliance</a><span style="opacity:.4;margin:0 4px;">/</span>
+  <span>PCI DSS</span>
+</nav>
+<main id="main-content">
+  <h1>PCI DSS Compliance Software — Complete Guide</h1>
+  <p class="subtitle">PCI DSS applies to anyone who touches cardholder data. But "how much compliance you need" varies enormously based on how you accept payments. Most small businesses can self-certify in a few hours. Here's how to know what you actually need.</p>
+
+  <div class="toc">
+    <h2>On This Page</h2>
+    <ol>
+      <li><a href="#who-needs">Who PCI DSS applies to</a></li>
+      <li><a href="#levels">Merchant levels explained</a></li>
+      <li><a href="#saq">SAQ types: which one is yours</a></li>
+      <li><a href="#scope-reduction">Scope reduction strategies</a></li>
+      <li><a href="#tools">PCI compliance tools</a></li>
+      <li><a href="#cost">Cost breakdown</a></li>
+      <li><a href="#solana">Alternative: avoid card data entirely</a></li>
+      <li><a href="#clarity">Do you actually need a PCI tool?</a></li>
+    </ol>
+  </div>
+
+  <div class="card" id="who-needs">
+    <h2>Who PCI DSS applies to</h2>
+    <p>PCI DSS applies to any entity that stores, processes, or transmits cardholder data — defined as the primary account number (PAN), plus expiration date, cardholder name, or service code when stored with the PAN.</p>
+    <table>
+      <tr><th>You are...</th><th>PCI DSS applies?</th><th>What you need</th></tr>
+      <tr><td>Merchant using Stripe / Square hosted checkout</td><td>Yes, but minimal scope</td><td>SAQ A — simplest form, ~20 questions</td></tr>
+      <tr><td>Merchant processing cards on your own servers</td><td>Yes, full scope</td><td>SAQ C, D, or QSA depending on volume</td></tr>
+      <tr><td>SaaS company storing card data for billing</td><td>Yes — card data in scope</td><td>SAQ D or QSA; consider tokenization to reduce scope</td></tr>
+      <tr><td>Payment processor</td><td>Yes, Level 1</td><td>Annual QSA audit required</td></tr>
+      <tr><td>Company that only uses third-party checkout (never touches card data)</td><td>Minimal</td><td>SAQ A; verify your implementation qualifies</td></tr>
+    </table>
+  </div>
+
+  <div class="card" id="levels">
+    <h2>PCI DSS merchant levels</h2>
+    <table>
+      <tr><th>Level</th><th>Annual transactions</th><th>What's required</th></tr>
+      <tr><td><strong>Level 1</strong></td><td>6M+ (Visa/MC) or any compromised merchant</td><td>Annual QSA on-site audit + quarterly network scans + AOC</td></tr>
+      <tr><td><strong>Level 2</strong></td><td>1M–6M transactions/year</td><td>Annual SAQ + quarterly scans + AOC; bank may require QSA</td></tr>
+      <tr><td><strong>Level 3</strong></td><td>20K–1M e-commerce transactions</td><td>Annual SAQ + quarterly scans + AOC</td></tr>
+      <tr><td><strong>Level 4</strong></td><td>Under 20K e-commerce or up to 1M other</td><td>Annual SAQ recommended; requirements set by your acquiring bank</td></tr>
+    </table>
+    <p>Note: Transaction counts are per card brand. Visa, Mastercard, Amex, and Discover each have their own counting. In practice, most acquirers (your bank or payment processor) enforce their own PCI requirements on top of the baseline — check with your acquiring bank for their specific requirements.</p>
+    <div class="tip-box">
+      <p><strong>Most small and mid-size businesses are Level 4.</strong> If you process under 1 million transactions/year and use a hosted payment page, your compliance burden is an SAQ A and quarterly scans — typically achievable in one afternoon.</p>
+    </div>
+  </div>
+
+  <div class="card" id="saq">
+    <h2>SAQ types — which one applies to you</h2>
+    <table>
+      <tr><th>SAQ type</th><th>Payment environment</th><th>Questions (approx)</th></tr>
+      <tr><td><strong>SAQ A</strong></td><td>All payment functions outsourced to PCI-compliant third party; no card data on your systems (Stripe Checkout, PayPal, etc.)</td><td>~20</td></tr>
+      <tr><td><strong>SAQ A-EP</strong></td><td>E-commerce, third party handles card data but your website scripts or redirects are involved</td><td>~190</td></tr>
+      <tr><td><strong>SAQ B</strong></td><td>Only imprint machines or standalone dial-out terminals; no electronic storage of card data</td><td>~40</td></tr>
+      <tr><td><strong>SAQ B-IP</strong></td><td>Standalone IP-connected payment terminals; no cardholder data on other systems</td><td>~80</td></tr>
+      <tr><td><strong>SAQ C</strong></td><td>Payment application on internet-connected systems; no electronic storage of card data</td><td>~160</td></tr>
+      <tr><td><strong>SAQ C-VT</strong></td><td>Web browser-based virtual terminals from a PCI-validated provider</td><td>~65</td></tr>
+      <tr><td><strong>SAQ D (Merchants)</strong></td><td>All other merchants not covered by A, B, B-IP, C</td><td>~340</td></tr>
+      <tr><td><strong>SAQ D (Service Providers)</strong></td><td>Service providers that store/process/transmit cardholder data</td><td>~340</td></tr>
+    </table>
+    <p><strong>The SAQ A is the goal.</strong> By using a hosted payment page (Stripe Checkout, Braintree Hosted Fields, PayPal Smart Buttons), you can ensure card data never touches your servers or JavaScript. This moves you to SAQ A — the simplest possible compliance path.</p>
+  </div>
+
+  <div class="card" id="scope-reduction">
+    <h2>Scope reduction — the most important PCI strategy</h2>
+    <p>Scope reduction means architecting your payment systems so that card data never enters your environment. Less scope = fewer controls = lower compliance cost.</p>
+    <ul>
+      <li><strong>Use hosted payment pages:</strong> Stripe Checkout, Braintree, PayPal Buttons. Card data goes directly to the processor. Your server only sees a payment confirmation, never card numbers. SAQ A.</li>
+      <li><strong>Tokenization:</strong> Your processor gives you a token (meaningless value) instead of the card number. Use Stripe Customer IDs or Braintree Payment Methods instead of storing PANs. Even if your database is compromised, there are no card numbers to steal.</li>
+      <li><strong>Point-to-point encryption (P2PE):</strong> Hardware terminals encrypt card data before it can reach your network. Eliminates your POS system from PCI scope.</li>
+      <li><strong>Network segmentation:</strong> Isolate your payment processing systems from the rest of your network to reduce the in-scope environment.</li>
+    </ul>
+    <p>Every architectural decision that keeps card data away from your systems reduces your PCI scope — and therefore reduces your compliance cost and breach risk simultaneously.</p>
+  </div>
+
+  <div class="card" id="tools">
+    <h2>PCI compliance tools and services</h2>
+    <table>
+      <tr><th>Tool / Service</th><th>What it does</th><th>Best for</th><th>Cost</th></tr>
+      <tr><td><strong>ControlScan</strong></td><td>SAQ wizard, ASV scans, PCI guidance</td><td>SMBs completing SAQ A–D</td><td>$200–1,500/yr</td></tr>
+      <tr><td><strong>SecurityMetrics</strong></td><td>SAQ, ASV scans, pen testing, QSA services</td><td>Mid-market merchants, Level 1–3</td><td>$300–5,000/yr + QSA fees</td></tr>
+      <tr><td><strong>Coalfire</strong></td><td>QSA firm, penetration testing, advisory</td><td>Level 1 merchants, processors</td><td>$20,000–70,000 (QSA audit)</td></tr>
+      <tr><td><strong>Trustwave</strong></td><td>QSA firm, ASV, managed security, SAQ</td><td>Larger merchants, banks</td><td>$500–50,000+ depending on scope</td></tr>
+      <tr><td><strong>Vanta / Drata</strong></td><td>GRC platform with PCI module</td><td>Tech companies doing SOC 2 + PCI combined</td><td>$15,000–30,000/yr combined</td></tr>
+      <tr><td><strong>Your acquirer's portal</strong></td><td>SAQ + compliance dashboard via payment processor</td><td>Small merchants; Stripe, Square, PayPal offer these</td><td>Often free or included</td></tr>
+    </table>
+    <p><strong>For most small businesses:</strong> Your payment processor (Stripe, Square) offers a built-in PCI compliance portal. Start there. It's designed for your use case and often free or included. You don't need a $1,500/yr third-party tool to complete an SAQ A.</p>
+  </div>
+
+  <div class="card" id="cost">
+    <h2>PCI compliance cost breakdown</h2>
+    <table>
+      <tr><th>Scenario</th><th>Annual cost</th><th>Notes</th></tr>
+      <tr><td>Level 4, SAQ A (Stripe hosted checkout)</td><td>$0–500</td><td>SAQ is free; ASV scans via your processor's portal or $50–200/quarter from an ASV</td></tr>
+      <tr><td>Level 3–4, SAQ C or D</td><td>$500–3,000</td><td>SAQ plus quarterly ASV scans plus gap remediation time</td></tr>
+      <tr><td>Level 2 with AOC requirement</td><td>$2,000–10,000</td><td>SAQ, scans, AOC, possibly consultant support</td></tr>
+      <tr><td>Level 1 QSA audit</td><td>$20,000–70,000</td><td>On-site assessment by a QSA firm; annual requirement</td></tr>
+      <tr><td>Penetration test (if required)</td><td>$5,000–20,000</td><td>Required for Level 1; depends on scope and firm</td></tr>
+    </table>
+    <p>Non-compliance fines if a breach occurs: $5,000–$100,000/month imposed by card brands, plus forensic investigation costs ($50,000–200,000+), plus card replacement and fraud liability reimbursements. Compliance is cheap insurance.</p>
+  </div>
+
+  <div class="solana-note" id="solana">
+    <p><strong>Want to reduce PCI scope to near-zero?</strong> Businesses that accept Solana USDC payments skip card processing entirely — no card numbers, no PAN storage, no PCI scope. One USDC = $1.00 (stablecoin, no volatility), transaction fees ~$0.00025. Not for every transaction, but for recurring B2B invoices and contractor payments it can eliminate a compliance layer entirely. See: <a href="/solana-payments-san-diego.html">Solana USDC payments guide →</a></p>
+  </div>
+
+  <div class="clarity-box" id="clarity">
+    <h2>🧭 SideGuy: Do you actually need a PCI compliance tool?</h2>
+    <ul>
+      <li>✅ <strong>Yes if:</strong> you're Level 1 (6M+ transactions) — you need a QSA firm; you're Level 2–3 with a formal AOC requirement; your acquiring bank has sent you a PCI compliance deadline notice; you've had a security incident involving card data.</li>
+      <li>🟡 <strong>Maybe if:</strong> your SAQ has 100+ questions and you're unsure how to answer them; you store card data (even tokens) and want documentation of your controls.</li>
+      <li>❌ <strong>Probably not if:</strong> you use Stripe Checkout or PayPal and never touch card numbers — complete the SAQ A through your processor's portal (it's free) and you're done. A $1,000/yr third-party tool adds no compliance value for a standard hosted checkout integration.</li>
+    </ul>
+    <p><strong>Quick check:</strong> Does your website or server ever receive raw card numbers? If the answer is no (Stripe Checkout, PayPal Smart Buttons), your compliance is an SAQ A form — solvable in an afternoon at no cost.</p>
+  </div>
+
+  <div class="glossary">
+    <h2>PCI DSS Glossary</h2>
+    <dl>
+      <dt>PAN (Primary Account Number)</dt><dd>The payment card number — the 16-digit sequence embossed on the card. The core of what PCI DSS is designed to protect.</dd>
+      <dt>Cardholder Data</dt><dd>The PAN plus expiration date, cardholder name, or service code when stored with the PAN.</dd>
+      <dt>SAQ (Self-Assessment Questionnaire)</dt><dd>Self-certification tool for merchants not required to undergo a formal QSA audit. Multiple types (A through D) based on how cardholder data is handled.</dd>
+      <dt>QSA (Qualified Security Assessor)</dt><dd>A PCI Security Standards Council-certified auditor qualified to perform on-site PCI assessments. Required for Level 1 merchants.</dd>
+      <dt>ASV (Approved Scanning Vendor)</dt><dd>A company approved by the PCI SSC to conduct quarterly external vulnerability scans of your internet-facing systems. Required at most merchant levels.</dd>
+      <dt>AOC (Attestation of Compliance)</dt><dd>A formal document certifying that PCI DSS requirements are met. Required for Level 1–3 merchants and service providers. Signed by the merchant and their QSA or ISA.</dd>
+      <dt>Tokenization</dt><dd>Replacing a card number with a surrogate value (token) that has no exploitable meaning. Stripe Customer IDs are tokens — your servers store the token, not the card number.</dd>
+      <dt>P2PE (Point-to-Point Encryption)</dt><dd>Encryption of card data from the point of interaction (card swipe/dip) to a secure decryption environment, preventing capture of card data in transit.</dd>
+      <dt>CDE (Cardholder Data Environment)</dt><dd>The systems and networks that store, process, or transmit cardholder data. PCI DSS requirements apply to your CDE. Smaller CDE = lighter compliance burden.</dd>
+    </dl>
+  </div>
+
+  <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:16px;margin-top:32px;">More in the compliance cluster</h2>
+  <div class="related-grid">
+    <a class="related-link" href="/compliance-software-explained.html">
+      <strong>Compliance Software Hub</strong>
+      <span>Overview: all frameworks, pricing, who needs what</span>
+    </a>
+    <a class="related-link" href="/soc2-compliance-software.html">
+      <strong>SOC 2 Compliance</strong>
+      <span>Type I vs II, tools, timeline, cost</span>
+    </a>
+    <a class="related-link" href="/hipaa-compliance-software.html">
+      <strong>HIPAA Compliance</strong>
+      <span>BAA requirements, PHI, healthcare tools</span>
+    </a>
+    <a class="related-link" href="/compliance-automation-tools.html">
+      <strong>Automation Tools</strong>
+      <span>Vanta vs Drata vs Sprinto compared</span>
+    </a>
+    <a class="related-link" href="/compliance-software-cost.html">
+      <strong>Cost Guide</strong>
+      <span>Full pricing by framework and company size</span>
+    </a>
+  </div>
+
+  <section id="faq" style="margin-top:40px;">
+    <h2 style="font-size:1.2rem;font-weight:800;color:#073044;margin-bottom:16px;">FAQ</h2>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">What are the PCI DSS merchant levels?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Level 1: 6M+ transactions — requires QSA on-site audit. Level 2: 1M–6M — SAQ + AOC. Level 3: 20K–1M e-commerce — SAQ. Level 4: under 20K e-commerce or 1M total — SAQ recommended. Most small businesses are Level 4.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">Do I need PCI compliance if I use Stripe?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Yes, but it's simple. Using Stripe Checkout or Stripe's hosted payment pages typically qualifies you for SAQ A — about 20 questions, free to complete via Stripe's dashboard. Card data never touches your servers so scope is minimal.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:24px 0 8px;">What is the easiest way to reduce PCI scope?</h3>
+    <p style="color:#3f6173;line-height:1.7;">Use a hosted payment page from a PCI-certified processor (Stripe Checkout, PayPal, Braintree). Card data goes directly to the processor — your systems never see raw card numbers. This typically qualifies you for SAQ A, the simplest form.</p>
+  </section>
+
+  <div class="cta-block">
+    <p>Want help figuring out your merchant level and which SAQ type applies to your payment setup?</p>
+    <a href="sms:+17604541860">Text PJ · 773-544-1231</a>
+  </div>
+</main>
+<footer>
+  <p><a href="/">SideGuy Solutions</a> · <a href="sms:+17604541860">773-544-1231</a></p>
+  <p>Clarity before cost. Updated 2026-03-10.</p>
+</footer>
+<nav aria-label="Site hierarchy" style="max-width:860px;margin:0 auto;font-size:0.85rem;color:#aaa;padding:0.5rem 1.5rem;background:rgba(0,0,0,0.10);border-radius:6px;margin-bottom:1rem">
+  <a href="/" style="color:#21d3a1;text-decoration:none">SideGuy</a> &rsaquo;
+  <a href="/compliance-software-explained.html" style="color:#21d3a1;text-decoration:none">Compliance</a> &rsaquo;
+  PCI DSS
+</nav>
+<div style="max-width:860px;margin:0 auto;padding:0 24px 32px;font-size:0.9rem">
+  <ul style="list-style:none;padding:0;margin:0;display:flex;gap:1rem;flex-wrap:wrap">
+    <li><a href="/compliance-software-explained.html" style="color:#21d3a1;text-decoration:none">← Hub</a></li>
+    <li><a href="/soc2-compliance-software.html" style="color:#21d3a1;text-decoration:none">SOC 2 →</a></li>
+    <li><a href="/hipaa-compliance-software.html" style="color:#21d3a1;text-decoration:none">HIPAA →</a></li>
+    <li><a href="/compliance-automation-tools.html" style="color:#21d3a1;text-decoration:none">Automation Tools →</a></li>
+    <li><a href="sms:+17735441231" style="color:#21d3a1;font-weight:700">Text PJ</a></li>
+  </ul>
+</div>
+</body>
+</html>
