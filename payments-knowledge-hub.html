@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Payments Knowledge Hub | SideGuy Infrastructure Guide</title>
+<link rel="canonical" href="https://sideguysolutions.com/payments-knowledge-hub.html" />
+<meta name="description" content="Modern payment infrastructure explained in plain English. Credit card fees, ACH, instant settlement, USDC, and contractor payments — clarity before cost." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:title" content="Payments Knowledge Hub | SideGuy Infrastructure Guide" />
+<meta property="og:description" content="Modern payment infrastructure explained in plain English. Credit card fees, ACH, instant settlement, USDC, and contractor payments." />
+<meta property="og:url" content="https://sideguysolutions.com/payments-knowledge-hub.html" />
+<meta property="og:image" content="https://sideguysolutions.com/og-preview.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SideGuy Solutions" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://sideguysolutions.com/og-preview.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Payments Knowledge Hub",
+  "description": "Modern payment infrastructure explained in plain English for operators.",
+  "url": "https://sideguysolutions.com/payments-knowledge-hub.html",
+  "publisher": { "@type": "Organization", "name": "SideGuy Solutions" }
+}
+</script>
+<style>
+:root{
+  --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
+  --ink:#073044;--muted:#3f6173;--muted2:#5e7d8e;
+  --card:#ffffffcc;--stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);
+  --mint:#21d3a1;--mint2:#00c7ff;--blue:#4aa9ff;
+  --r:22px;--pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,sans-serif;
+  color:var(--ink);
+  background:radial-gradient(1200px 900px at 22% 10%,#ffffff 0%,var(--bg0) 25%,var(--bg1) 65%,var(--bg2) 100%);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+.skip-link{
+  position:absolute;left:-999px;top:0;background:#fff;color:var(--ink);
+  padding:8px 16px;border-radius:8px;z-index:1000;
+}
+.skip-link:focus{left:0}
+nav.breadcrumb{
+  max-width:1000px;margin:16px auto 0;padding:0 24px;
+  font-size:.83rem;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px;
+}
+nav.breadcrumb a{color:var(--muted);text-decoration:none}
+nav.breadcrumb a:hover{color:var(--mint)}
+nav.breadcrumb .sep{opacity:.4;margin:0 4px}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 24px 100px}
+
+/* Hero */
+.hero{margin-bottom:48px}
+.hub-badge{
+  display:inline-block;background:rgba(33,211,161,.12);
+  color:var(--mint);border:1px solid rgba(33,211,161,.3);
+  padding:5px 14px;border-radius:var(--pill);font-size:.78rem;
+  font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;
+}
+h1{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:18px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:680px;line-height:1.7}
+
+/* Sections */
+.section{margin:52px 0}
+.section-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);margin-bottom:12px}
+.section h2{font-size:1.75rem;font-weight:700;margin-bottom:24px;color:var(--ink)}
+.prose{font-size:1rem;color:var(--muted);line-height:1.8;max-width:720px}
+.prose p+p{margin-top:14px}
+
+/* Concept cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{
+  background:var(--card);padding:24px 22px;border-radius:var(--r);
+  border:1px solid var(--stroke);box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);transition:transform .15s,box-shadow .15s;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 24px 60px rgba(7,48,68,.13)}
+.card-icon{font-size:1.6rem;margin-bottom:12px}
+.card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.card p{font-size:.9rem;color:var(--muted2);line-height:1.55;margin:0}
+
+/* Guide links */
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.guide-link{
+  background:var(--card);padding:18px 20px;border-radius:18px;
+  border:1px solid var(--stroke);box-shadow:0 4px 16px rgba(7,48,68,.06);
+  text-decoration:none;color:var(--ink);display:block;
+  transition:transform .15s,border-color .15s;
+}
+.guide-link:hover{transform:translateY(-2px);border-color:rgba(33,211,161,.4)}
+.guide-link .gl-title{font-weight:700;font-size:.95rem;margin-bottom:5px}
+.guide-link .gl-desc{font-size:.82rem;color:var(--muted2);line-height:1.45}
+
+/* Why matters callout */
+.callout{
+  background:linear-gradient(135deg,rgba(33,211,161,.08),rgba(0,199,255,.06));
+  border:1px solid rgba(33,211,161,.22);
+  border-radius:var(--r);padding:32px;margin:48px 0;
+}
+.callout h2{font-size:1.5rem;margin-bottom:16px}
+.callout ul{padding-left:20px;color:var(--muted);line-height:2}
+
+/* Hub nav */
+.hub-nav{
+  background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+  padding:28px;margin:52px 0;box-shadow:var(--shadow);
+}
+.hub-nav h3{font-size:1rem;font-weight:700;margin-bottom:18px;color:var(--muted)}
+.hub-nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.hub-nav-grid a{
+  display:block;padding:12px 16px;border-radius:14px;
+  border:1px solid var(--stroke);text-decoration:none;color:var(--ink);
+  font-size:.88rem;font-weight:600;background:rgba(255,255,255,.6);
+  transition:background .15s,border-color .15s;
+}
+.hub-nav-grid a:hover{background:rgba(255,255,255,.95);border-color:rgba(33,211,161,.3)}
+.hub-nav-grid a.active{background:rgba(33,211,161,.1);border-color:rgba(33,211,161,.4);color:var(--mint)}
+
+/* CTA orb */
+.cta-orb{
+  display:flex;align-items:center;gap:32px;margin:64px 0 0;
+  background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+  padding:36px;box-shadow:var(--shadow);flex-wrap:wrap;
+}
+.orb{
+  width:120px;height:120px;border-radius:50%;flex-shrink:0;
+  background:radial-gradient(circle at 35% 35%,#9fffe3,var(--mint));
+  box-shadow:0 0 0 8px rgba(33,211,161,.15),0 8px 40px rgba(33,211,161,.35);
+  display:flex;align-items:center;justify-content:center;
+}
+.orb-inner{font-size:2.2rem}
+.cta-text h2{font-size:1.5rem;font-weight:700;margin-bottom:8px}
+.cta-text p{font-size:1rem;color:var(--muted);max-width:500px;margin-bottom:18px}
+.cta-btn{
+  display:inline-block;background:linear-gradient(135deg,var(--mint),var(--mint2));
+  color:#fff;padding:14px 28px;border-radius:var(--pill);
+  text-decoration:none;font-weight:700;font-size:1rem;
+  box-shadow:0 8px 24px rgba(33,211,161,.35);transition:transform .15s;
+}
+.cta-btn:hover{transform:translateY(-2px)}
+
+footer{
+  max-width:1000px;margin:0 auto;padding:24px 24px 48px;
+  border-top:1px solid var(--stroke);display:flex;flex-wrap:wrap;gap:12px;
+  font-size:.82rem;color:var(--muted);
+}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--mint)}
+
+@media(max-width:640px){
+  h1{font-size:2rem}
+  .cta-orb{flex-direction:column;text-align:center}
+  .orb{width:90px;height:90px}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">SideGuy</a><span class="sep">/</span>
+  <span>Payments Knowledge Hub</span>
+</nav>
+
+<div class="wrap" id="main-content">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hub-badge">Knowledge Hub · Payments</div>
+    <h1>Payments Knowledge Hub</h1>
+    <p class="lede">Understanding modern payment infrastructure in plain English. Credit card fees, ACH, instant settlement, stablecoin rails — no sales pitch, just clarity.</p>
+  </div>
+
+  <!-- What This Means -->
+  <div class="section">
+    <div class="section-label">What This Topic Means</div>
+    <h2>Payments, Explained for Operators</h2>
+    <div class="prose">
+      <p>Every time a customer swipes, taps, or clicks "pay," money moves through a system of rails, processors, and intermediaries — each taking a small cut. Most business owners don't know exactly how much they're paying or why.</p>
+      <p>Modern payment infrastructure spans credit cards, ACH bank transfers, real-time payment networks like RTP and FedNow, and emerging stablecoin rails like USDC on Solana. Each rail has different fees, settlement times, and risk profiles.</p>
+      <p>This hub collects everything SideGuy has written about payments — so you can answer the questions that matter before you make decisions that cost money.</p>
+    </div>
+  </div>
+
+  <!-- Key Concepts -->
+  <div class="section">
+    <div class="section-label">Key Concepts</div>
+    <h2>Payment Infrastructure Fundamentals</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">💳</div>
+        <h3>Credit Card Processing</h3>
+        <p>Interchange fees, processor markups, flat-rate vs. interchange-plus pricing — and why most small businesses overpay by 0.5–1.5%.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏦</div>
+        <h3>ACH Payments</h3>
+        <p>Bank-to-bank transfers via the ACH network. Slower (1–3 days), but fees are typically pennies not percentages. Good for recurring billing and B2B invoices.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Instant Payment Rails</h3>
+        <p>RTP and FedNow enable true real-time bank transfers 24/7. Same-day settlement is now achievable for most U.S. businesses at low cost.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🪙</div>
+        <h3>Stablecoin Settlement</h3>
+        <p>USDC on Solana settles in under a second for fractions of a cent. For contractors, cross-border payments, and high-frequency payouts, this changes the math entirely.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Contractor Payments</h3>
+        <p>Sub-contractors, gig workers, and field crews need fast, reliable payouts. Delayed payments are the #1 reason good workers leave — the infrastructure to pay instantly now exists.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Effective Rate Analysis</h3>
+        <p>Total fees divided by total volume. Most business owners don't know this number. If you're above 2.9% on card-present volume, you're likely overpaying.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SideGuy Guides -->
+  <div class="section">
+    <div class="section-label">SideGuy Guides</div>
+    <h2>Payments Guides on This Site</h2>
+    <div class="guide-grid">
+      <a class="guide-link" href="payment-processing-hub-san-diego.html">
+        <div class="gl-title">Payment Processing — San Diego Guide</div>
+        <div class="gl-desc">Rates, processors, and what San Diego businesses should actually pay.</div>
+      </a>
+      <a class="guide-link" href="payment-processing-san-diego.html">
+        <div class="gl-title">Payment Processing in San Diego</div>
+        <div class="gl-desc">Local context on processors, fees, and switching costs.</div>
+      </a>
+      <a class="guide-link" href="credit-card-processing-san-diego.html">
+        <div class="gl-title">Credit Card Processing San Diego</div>
+        <div class="gl-desc">How credit card fees work and where the money goes.</div>
+      </a>
+      <a class="guide-link" href="credit-card-fee-reduction.html">
+        <div class="gl-title">Credit Card Fee Reduction</div>
+        <div class="gl-desc">Strategies to reduce processing fees without switching processors.</div>
+      </a>
+      <a class="guide-link" href="contractor-payments-san-diego.html">
+        <div class="gl-title">Contractor Payments San Diego</div>
+        <div class="gl-desc">How to pay subcontractors instantly and keep crews paid on time.</div>
+      </a>
+      <a class="guide-link" href="contractor-payment-processing-san-diego.html">
+        <div class="gl-title">Contractor Payment Processing</div>
+        <div class="gl-desc">Full guide to payment infrastructure for construction and field services.</div>
+      </a>
+      <a class="guide-link" href="instant-payment-processing.html">
+        <div class="gl-title">Instant Payment Processing</div>
+        <div class="gl-desc">Same-day and real-time settlement options for businesses.</div>
+      </a>
+      <a class="guide-link" href="instant-payouts-contractors-san-diego.html">
+        <div class="gl-title">Instant Payouts for Contractors</div>
+        <div class="gl-desc">Paying field crews and subs the same day the job is done.</div>
+      </a>
+      <a class="guide-link" href="ach-payments-vs-credit-cards-for-small-business-san-diego.html">
+        <div class="gl-title">ACH vs. Credit Cards for Small Business</div>
+        <div class="gl-desc">When to use bank transfers instead of card processing — and the fee difference.</div>
+      </a>
+      <a class="guide-link" href="solana-payments-for-small-business-san-diego.html">
+        <div class="gl-title">Solana Payments for Small Business</div>
+        <div class="gl-desc">How USDC on Solana works for local businesses and what it actually costs.</div>
+      </a>
+      <a class="guide-link" href="stablecoin-business-payments.html">
+        <div class="gl-title">Stablecoin Business Payments</div>
+        <div class="gl-desc">USDC, stablecoins, and what they mean for business cash flow.</div>
+      </a>
+      <a class="guide-link" href="payment-processor-fees-too-high.html">
+        <div class="gl-title">My Payment Processor Fees Are Too High</div>
+        <div class="gl-desc">Checklist: how to know you're overpaying and what to do about it.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Why This Matters -->
+  <div class="callout">
+    <div class="section-label">Why This Matters</div>
+    <h2>Practical Implications for Operators</h2>
+    <ul>
+      <li>Payment fees are a silent tax on every transaction — the average small business overpays by $3,000–$12,000/year</li>
+      <li>Instant settlement changes cash flow — waiting 2–3 days for funds is now optional, not mandatory</li>
+      <li>Stablecoin rails are live and functional — USDC on Solana settles in under a second for under a cent</li>
+      <li>Contractor payment delays are a retention problem, not just a finance problem — workers leave over this</li>
+      <li>The infrastructure exists today to pay anyone, anywhere, instantly, for almost nothing — most businesses just don't know it yet</li>
+    </ul>
+  </div>
+
+  <!-- Hub Navigation -->
+  <div class="hub-nav" aria-label="Knowledge Hub Navigation">
+    <h3>Knowledge Hub Network</h3>
+    <div class="hub-nav-grid">
+      <a href="payments-knowledge-hub.html" class="active">💳 Payments</a>
+      <a href="ai-automation-knowledge-hub.html">🤖 AI Automation</a>
+      <a href="software-development-knowledge-hub.html">🛠 Software Development</a>
+      <a href="future-infrastructure-knowledge-hub.html">🚀 Future Infrastructure</a>
+      <a href="operator-problem-library.html">📚 Operator Problem Library</a>
+    </div>
+  </div>
+
+  <!-- Text PJ CTA -->
+  <div class="cta-orb">
+    <div class="orb" aria-hidden="true"><div class="orb-inner">💬</div></div>
+    <div class="cta-text">
+      <h2>Text PJ — Free Payment Review</h2>
+      <p>Send a photo of your merchant statement. We'll calculate your effective rate, identify where you're overpaying, and give you honest options. No sales pressure — just clarity.</p>
+      <a class="cta-btn" href="sms:+17735441231">Text PJ: 773-544-1231</a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <a href="/">SideGuy Solutions</a>
+  <a href="command-center-v2.html">Command Center</a>
+  <a href="payment-processing-hub-san-diego.html">Payments Hub</a>
+  <a href="ai-automation-knowledge-hub.html">AI Automation Hub</a>
+  <a href="software-development-knowledge-hub.html">Software Dev Hub</a>
+  <a href="future-infrastructure-knowledge-hub.html">Future Infrastructure</a>
+  <a href="operator-problem-library.html">Operator Problem Library</a>
+  <span style="margin-left:auto;opacity:.5">© 2026 SideGuy Solutions · San Diego</span>
+</footer>
+</body>
+</html>
