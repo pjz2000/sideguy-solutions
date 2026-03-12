@@ -1,0 +1,36 @@
+# Crawl Authority Routes
+
+public/things-to-do-san-diego.html → /san-diego-mobile-business-payments.html
+public/what-home-upgrade-actually-lowered-your-utility-bills-san-diego.html → /software-development-hub-san-diego.html
+public/5-smart-moves-san-diego-small-businesses-should-make-in-2025-san-diego.html → /san-diego-mobile-business-payments.html
+public/signal-human-context-layer-20260119-220652.html → /software-development-hub-san-diego.html
+public/a-few-things-i-wish-more-electricians-knew-about-wifi-san-diego.html → /tech-help-hub-san-diego.html
+public/how-do-i-slightly-expand-opening-of-basement-floor-drain-san-diego.html → /san-diego-mobile-business-payments.html
+public/signal-why-casual-bettors-chase-20260119-220652.html → /mobile-operator-payments-san-diego.html
+public/pulled-credit-report-3-weeks-ago-customer-just-bounced-a-payment-san-diego.html → /tech-help-hub-san-diego.html
+public/oceanside-hvac-contractor-veterans-heating-air-conditioning-plumbing-and-electrical-announces-veterans-day-initiative-san-diego.html → /tech-help-hub-san-diego.html
+public/auto/google-ads-stopped-working-restaurants-california.html → /mobile-operator-payments-san-diego.html
+public/auto/ai-automation-replacing-staff-electricians-california.html → /tech-help-hub-san-diego.html
+public/auto/crm-migration-problems-salons-san-diego.html → /san-diego-mobile-business-payments.html
+public/auto/payment-processing-fees-too-high-dental-north-county.html → /mobile-operator-payments-san-diego.html
+public/auto/ai-automation-replacing-staff-hvac-north-county.html → /ai-lead-generation-systems-san-diego.html
+public/auto/stripe-fees-increasing-retail-san-diego.html → /tech-help-hub-san-diego.html
+public/auto/stripe-fees-increasing-salons-san-diego.html → /ai-lead-generation-systems-san-diego.html
+public/auto/lead-generation-dropping-agencies-north-county.html → /mobile-operator-payments-san-diego.html
+public/auto/san-diego-tech-help.html → /mobile-operator-payments-san-diego.html
+public/ai-clarity/ai-is-not-a-decision-maker.html → /mobile-operator-payments-san-diego.html
+public/compliance-faq/what-happens-if-compliance-fails.html → /tech-help-hub-san-diego.html
+public/regulatory-enforcement/how-compliance-is-enforced.html → /san-diego-mobile-business-payments.html
+public/after-hours/after-hours-41.html → /tech-help-hub-san-diego.html
+public/regulatory-investigations/can-compliance-software-prevent-investigations.html → /san-diego-mobile-business-payments.html
+public/failure-modes/irreversible-choices.html → /mobile-operator-payments-san-diego.html
+public/connectors/clarity-before-cost.html → /tech-help-hub-san-diego.html
+public/connectors/support-vs-sales-dynamics.html → /san-diego-mobile-business-payments.html
+public/connectors/risk-translation-layer.html → /software-development-hub-san-diego.html
+public/connectors/human-in-the-loop-systems.html → /software-development-hub-san-diego.html
+public/compliance-software/compliance-software-pricing-breakdown.html → /ai-lead-generation-systems-san-diego.html
+public/compliance-software/ai-compliance-software.html → /mobile-operator-payments-san-diego.html
+public/auto-pages/heat-pump-freezing-up-at-night-san-diego.html → /tech-help-hub-san-diego.html
+public/local/north-county-risk-translation.html → /software-development-hub-san-diego.html
+public/signals/instant-settlement-questions.html → /mobile-operator-payments-san-diego.html
+public/human-help/human-help-34.html → /tech-help-hub-san-diego.html
