@@ -1,0 +1,36 @@
+import json
+
+clusters = {
+
+"ai_receptionist":[
+"What is an AI receptionist",
+"AI receptionist cost",
+"Best AI receptionist tools",
+"AI receptionist vs human receptionist",
+"AI receptionist for salons",
+"AI receptionist for restaurants"
+],
+
+"payment_processing":[
+"Payment processing fees explained",
+"Stripe vs Square fees",
+"Mobile payment processing guide",
+"Payment processing for small businesses",
+"How to reduce payment processing fees",
+"Best payment processors for local businesses"
+],
+
+"automation_tools":[
+"Zapier vs Make comparison",
+"Best automation tools for small business",
+"How workflow automation works",
+"Manual process vs automation",
+"Automation cost for businesses"
+]
+
+}
+
+with open("docs/cluster-plans/cluster_outline.json","w") as f:
+    json.dump(clusters,f,indent=2)
+
+print("Cluster outline created.")
