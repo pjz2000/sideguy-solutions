@@ -1,30 +1,21 @@
 #!/bin/bash
 
-ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd /workspaces/sideguy-solutions
 
-SIGNALS="$ROOT/docs/trend-radar/trend-signals.txt"
+python3 tools/trend-radar/trend_radar.py
 
-if [ ! -f "$SIGNALS" ]; then
-  echo "Trend signals file not found."
-  exit 1
-fi
+echo
+echo "========================================"
+echo "DAILY UPGRADE BRIEF"
+echo "========================================"
+echo
 
-echo "SideGuy Trend Radar"
-echo "-------------------"
+sed -n '1,220p' docs/intelligence/daily-upgrade-brief.md
 
-echo ""
-echo "Active signals:"
-echo ""
-
-cat "$SIGNALS"
-
-echo ""
-echo "Suggested page topics:"
-echo ""
-
-cat "$SIGNALS" \
-| sed 's/$/ explained/' \
-| sed 's/^/what is /'
-
-echo ""
-echo "Trend radar scan complete."
+echo
+echo "========================================"
+echo "Files written:"
+echo " - docs/intelligence/daily-upgrade-brief.md"
+echo " - docs/intelligence/daily-upgrade-brief.json"
+echo " - data/signals/latest-signals.json"
+echo "========================================"
