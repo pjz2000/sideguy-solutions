@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Payment Processing Savings Calculator · SideGuy Solutions</title>
+
+<meta name="description" content="Estimate how much your business could save on payment processing fees. Free tool from SideGuy Solutions, San Diego.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg0: #eefcff;
+  --ink: #073044;
+  --mint: #21d3a1;
+  --mint2: #00c7ff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Inter, sans-serif;
+  background: radial-gradient(ellipse at top left, #cff6ff 0%, #eefcff 60%, #d4f5ec 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: var(--ink);
+}
+
+.container {
+  max-width: 680px;
+  margin: auto;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  padding: 36px 32px;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(7,48,68,.12);
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.sub {
+  color: #4a6a7a;
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 22px;
+  font-weight: 700;
+  font-size: .9rem;
+  letter-spacing: .02em;
+  color: var(--ink);
+}
+
+.hint {
+  font-weight: 400;
+  font-size: .82rem;
+  color: #6b8a9a;
+  display: block;
+  margin-top: 2px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1.5px solid #cde8f0;
+  font-size: 1rem;
+  background: #f6fcff;
+  color: var(--ink);
+  transition: border-color .2s;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--mint2);
+}
+
+button {
+  display: block;
+  margin-top: 28px;
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, var(--mint) 0%, var(--mint2) 100%);
+  border: none;
+  color: #073044;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  letter-spacing: .01em;
+  transition: opacity .2s;
+}
+
+button:hover { opacity: .9; }
+
+.result {
+  margin-top: 28px;
+  padding: 24px;
+  background: #f0fdf8;
+  border: 1.5px solid #a7f3d0;
+  border-radius: 14px;
+  display: none;
+}
+
+.result.visible { display: block; }
+
+.res-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid #d1fae5;
+  font-size: .95rem;
+}
+
+.res-row:last-child { border-bottom: none; }
+
+.res-label { color: #4a7a6a; font-weight: 600; }
+
+.res-val { font-weight: 800; font-size: 1.05rem; }
+
+.res-val.savings { color: #059669; font-size: 1.4rem; }
+
+.res-val.current { color: #dc2626; }
+
+.note {
+  margin-top: 14px;
+  font-size: .8rem;
+  color: #6b8a9a;
+  line-height: 1.5;
+}
+
+.cta {
+  margin-top: 32px;
+  padding: 22px;
+  background: var(--ink);
+  color: white;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.cta p { margin-bottom: 8px; font-size: .95rem; color: #a8d4e8; }
+
+.cta a {
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--mint) 0%, var(--mint2) 100%);
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-top: 6px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Payment Processing Savings Calculator</h1>
+  <p class="sub">Estimate how much your business could save by optimizing your payment stack.</p>
+
+  <label>Monthly Revenue ($)
+    <span class="hint">Total revenue processed through card/digital payments</span>
+  </label>
+  <input id="revenue" type="number" placeholder="e.g. 50000" min="0">
+
+  <label>Current Processing Rate (%)
+    <span class="hint">Your current effective rate — check your processor statement. Typical: 2.6%–3.5%</span>
+  </label>
+  <input id="fee" type="number" step="0.01" placeholder="e.g. 2.9" min="0" max="10">
+
+  <label>Target Rate (%)
+    <span class="hint">Realistic target: 2.2% (optimized Stripe/Square), 0.5–1% (USDC stablecoin for B2B)</span>
+  </label>
+  <input id="target" type="number" step="0.01" placeholder="e.g. 2.2" min="0" max="10">
+
+  <button onclick="calculate()">Calculate My Savings</button>
+
+  <div class="result" id="result">
+    <div class="res-row">
+      <span class="res-label">Current monthly fees</span>
+      <span class="res-val current" id="currentFee"></span>
+    </div>
+    <div class="res-row">
+      <span class="res-label">Fees at target rate</span>
+      <span class="res-val" id="targetFee"></span>
+    </div>
+    <div class="res-row">
+      <span class="res-label">Monthly savings</span>
+      <span class="res-val savings" id="monthlySavings"></span>
+    </div>
+    <div class="res-row">
+      <span class="res-label">Annual savings</span>
+      <span class="res-val savings" id="annualSavings"></span>
+    </div>
+    <p class="note">Estimate only. Actual savings depend on transaction mix, chargebacks, and processor plan. Text PJ for a real audit of your payment stack.</p>
+  </div>
+
+  <div class="cta">
+    <p>Want a real review of your payment stack?</p>
+    <a href="sms:+17735441231">Text PJ: 773-544-1231</a>
+  </div>
+
+</div>
+
+<script>
+function calculate() {
+  var revenue = parseFloat(document.getElementById("revenue").value) || 0;
+  var fee     = parseFloat(document.getElementById("fee").value)     || 0;
+  var target  = parseFloat(document.getElementById("target").value)  || 0;
+
+  if (revenue <= 0 || fee <= 0 || target <= 0) {
+    alert("Please fill in all three fields.");
+    return;
+  }
+
+  var current  = revenue * (fee / 100);
+  var targeted = revenue * (target / 100);
+  var monthly  = current - targeted;
+  var annual   = monthly * 12;
+
+  var fmt = function(n) {
+    return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
+  document.getElementById("currentFee").textContent    = fmt(current);
+  document.getElementById("targetFee").textContent     = fmt(targeted);
+  document.getElementById("monthlySavings").textContent = monthly >= 0 ? fmt(monthly) : "−" + fmt(Math.abs(monthly));
+  document.getElementById("annualSavings").textContent  = annual  >= 0 ? fmt(annual)  : "−" + fmt(Math.abs(annual));
+
+  var resultEl = document.getElementById("result");
+  resultEl.classList.add("visible");
+  resultEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+</script>
+
+</body>
+</html>
