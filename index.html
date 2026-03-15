@@ -1190,6 +1190,311 @@
   }
 
   /* ===== /WOW UPGRADE ===== */
+
+  /* ===== COMMAND CENTER UPGRADE ===== */
+  /* Status strip */
+  .cmdStrip{
+    background:rgba(3,14,22,.97);
+    border-bottom:1px solid rgba(33,211,161,.15);
+    padding:8px 20px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px 18px;
+    font-size:.65rem;
+    font-weight:800;
+    letter-spacing:.10em;
+    text-transform:uppercase;
+    color:rgba(33,211,161,.70);
+    position:relative;
+    z-index:60;
+  }
+  .cmdItem{display:inline-flex;align-items:center;gap:6px;}
+  .cmdSep{opacity:.25;}
+  .statusDot{
+    width:6px;height:6px;border-radius:50%;
+    display:inline-block;
+  }
+  .statusDot.online{background:#21d3a1;box-shadow:0 0 0 3px rgba(33,211,161,.20);animation:pulse 2s ease-in-out infinite;}
+  .statusDot.ai{background:#4aa9ff;box-shadow:0 0 0 3px rgba(74,169,255,.20);animation:pulse 2.4s ease-in-out infinite;}
+  .statusDot.human{background:#ffd66e;box-shadow:0 0 0 3px rgba(255,214,110,.20);animation:pulse 2.8s ease-in-out infinite;}
+
+  /* Command Center Hero */
+  .cmdHero{
+    background:linear-gradient(145deg, rgba(3,14,22,.98) 0%, rgba(5,28,44,.99) 100%);
+    border:1px solid rgba(33,211,161,.18);
+    border-radius:var(--r);
+    padding:40px 32px 36px;
+    margin-bottom:28px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cmdHeroGrid{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(33,211,161,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(33,211,161,.045) 1px, transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+  }
+  .cmdHeroGrid:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(closest-side at 14% 22%, rgba(33,211,161,.22), transparent 55%),
+      radial-gradient(closest-side at 82% 76%, rgba(0,199,255,.16), transparent 52%);
+    filter:blur(22px);
+  }
+  .cmdHero .cmdEye{
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:rgba(33,211,161,.80);
+    margin:0 0 14px;
+    position:relative;
+    z-index:1;
+  }
+  .cmdHero h1{
+    font-size:46px;
+    color:#fff;
+    margin:0 0 16px;
+    line-height:1.02;
+    letter-spacing:-.03em;
+    position:relative;
+    z-index:1;
+  }
+  @media(max-width:520px){ .cmdHero h1{font-size:30px;} }
+  .cmdHero .cmdSub{
+    font-size:16px;
+    color:rgba(255,255,255,.55);
+    line-height:1.7;
+    max-width:580px;
+    margin:0 0 28px;
+    position:relative;
+    z-index:1;
+  }
+  .cmdHeroCtas{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    position:relative;
+    z-index:1;
+  }
+  .cmdPjOrb{
+    width:76px;height:76px;border-radius:999px;
+    background:radial-gradient(circle at 30% 20%, #ffffff, rgba(33,211,161,.95) 52%, rgba(0,199,255,.95) 100%);
+    border:1px solid rgba(255,255,255,.75);
+    box-shadow:0 0 0 4px rgba(255,255,255,.10), 0 18px 50px rgba(33,211,161,.30);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:12px;color:#fff;letter-spacing:.02em;
+    text-decoration:none;flex:0 0 auto;
+    animation:pulse 2.2s ease-in-out infinite;
+    position:relative;
+  }
+  .cmdPjOrb:after{
+    content:"";position:absolute;inset:-14px;border-radius:999px;
+    background:radial-gradient(circle, rgba(33,211,161,.20), transparent 62%);
+    filter:blur(6px);z-index:-1;
+  }
+  .cmdIconGroup{display:flex;gap:14px;flex-wrap:wrap;}
+  .cmdIconBtn{
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    text-decoration:none;
+  }
+  .cmdIconOrb{
+    width:52px;height:52px;border-radius:999px;
+    border:1px solid rgba(255,255,255,.18);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    backdrop-filter:blur(10px);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .cmdIconBtn:hover .cmdIconOrb{
+    transform:translateY(-2px);
+    box-shadow:0 10px 28px rgba(33,211,161,.18);
+  }
+  .orbAI{background:rgba(74,169,255,.14);border-color:rgba(74,169,255,.32);}
+  .orbStart{background:rgba(33,211,161,.10);border-color:rgba(33,211,161,.28);}
+  .orbOp{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16);}
+  .cmdIconLabel{font-size:.65rem;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.45);text-transform:uppercase;}
+
+  /* Problem Resolution Grid */
+  .probGrid{margin:0 0 28px;}
+  .probCards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  .probCard{
+    background:linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.60));
+    border:1px solid rgba(7,48,68,.09);
+    border-radius:18px;
+    padding:18px;
+    text-decoration:none;
+    color:var(--ink);
+    display:block;
+    backdrop-filter:blur(12px);
+    transition:box-shadow .18s, transform .18s, border-color .18s;
+  }
+  .probCard:hover{
+    box-shadow:0 16px 40px rgba(33,211,161,.16), 0 4px 14px rgba(7,48,68,.08);
+    transform:translateY(-3px);
+    border-color:rgba(33,211,161,.32);
+  }
+  .probCardIcon{font-size:22px;margin-bottom:10px;}
+  .probCardTitle{font-weight:800;font-size:13px;color:var(--ink);margin-bottom:6px;}
+  .probCardDesc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+  /* Operator Network Panel */
+  .operatorPanel{
+    background:linear-gradient(145deg, rgba(3,14,22,.97) 0%, rgba(5,28,44,.97) 100%);
+    border:1px solid rgba(74,169,255,.18);
+    border-radius:var(--r);
+    padding:28px 26px;
+    margin:28px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .operatorPanel:before{
+    content:"";position:absolute;inset:-40%;
+    background:radial-gradient(closest-side at 80% 30%, rgba(74,169,255,.15), transparent 55%);
+    filter:blur(22px);pointer-events:none;
+  }
+  .operatorPanel .opLabel{
+    font-size:.68rem;font-weight:800;letter-spacing:.10em;text-transform:uppercase;
+    color:rgba(74,169,255,.80);margin:0 0 10px;position:relative;z-index:1;
+  }
+  .operatorPanel h2{color:#fff;font-size:20px;margin:0 0 10px;position:relative;z-index:1;}
+  .operatorPanel p{
+    color:rgba(255,255,255,.55);font-size:13px;line-height:1.65;
+    margin:0 0 20px;max-width:560px;position:relative;z-index:1;
+  }
+  .opRoles{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1;}
+  .opRole{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 14px;border-radius:12px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    color:rgba(255,255,255,.80);
+    font-size:12px;font-weight:700;
+    text-decoration:none;
+    transition:background .15s, border-color .15s;
+  }
+  .opRole:hover{background:rgba(255,255,255,.10);border-color:rgba(33,211,161,.30);}
+  .opRoleIcon{font-size:16px;}
+
+  /* Tech Radar */
+  .techRadar{margin:28px 0;}
+  .techRadarCards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+  .techCard{
+    background:linear-gradient(145deg, rgba(3,14,22,.96), rgba(5,28,44,.96));
+    border:1px solid rgba(74,169,255,.14);
+    border-radius:16px;
+    padding:18px 14px;
+    text-align:center;
+    text-decoration:none;
+    color:#fff;
+    display:block;
+    transition:border-color .18s, box-shadow .18s;
+  }
+  .techCard:hover{
+    border-color:rgba(33,211,161,.40);
+    box-shadow:0 0 28px rgba(33,211,161,.14);
+  }
+  .techCardIcon{font-size:26px;margin-bottom:8px;}
+  .techCardName{font-weight:800;font-size:13px;color:rgba(255,255,255,.88);}
+  .techCardGlow{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--mint);
+    margin:8px auto 0;
+    box-shadow:0 0 0 4px rgba(33,211,161,.16);
+    animation:pulse 2s ease-in-out infinite;
+  }
+
+  /* Human Help Section */
+  .humanSection{
+    background:linear-gradient(145deg, rgba(3,14,22,.97) 0%, rgba(5,28,44,.97) 100%);
+    border:1px solid rgba(33,211,161,.20);
+    border-radius:var(--r);
+    padding:32px 28px;
+    margin:28px 0;
+    display:flex;
+    align-items:center;
+    gap:28px;
+    flex-wrap:wrap;
+    position:relative;
+    overflow:hidden;
+  }
+  .humanSection:before{
+    content:"";position:absolute;inset:-40%;
+    background:radial-gradient(closest-side at 10% 50%, rgba(33,211,161,.18), transparent 55%);
+    filter:blur(20px);pointer-events:none;
+  }
+  .humanText{flex:1 1 260px;position:relative;z-index:1;}
+  .humanSection h2{font-size:22px;color:#fff;margin:0 0 10px;}
+  .humanSection p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;margin:0 0 16px;}
+  .humanPhone{
+    font-size:15px;font-weight:800;color:rgba(33,211,161,.90);
+    display:flex;align-items:center;gap:8px;
+    text-decoration:none;
+  }
+  .humanOrb{
+    width:84px;height:84px;border-radius:999px;flex:0 0 auto;
+    background:radial-gradient(circle at 30% 20%, #ffffff, rgba(33,211,161,.95) 52%, rgba(0,199,255,.95) 100%);
+    border:1px solid rgba(255,255,255,.80);
+    box-shadow:0 0 0 5px rgba(255,255,255,.10), 0 20px 50px rgba(33,211,161,.28);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:12px;color:#fff;
+    text-decoration:none;
+    animation:pulse 2.4s ease-in-out infinite;
+    position:relative;z-index:1;
+  }
+  .humanOrb:after{
+    content:"";position:absolute;inset:-16px;border-radius:999px;
+    background:radial-gradient(circle, rgba(33,211,161,.20), transparent 62%);
+    filter:blur(6px);z-index:-1;
+  }
+
+  /* Footer Command Line */
+  .cmdFooter{
+    background:rgba(3,14,22,.97);
+    border-top:1px solid rgba(33,211,161,.15);
+    padding:20px 28px;
+    text-align:center;
+    margin-top:48px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cmdFooter:after{
+    content:"";
+    position:absolute;
+    bottom:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg, transparent 0%, rgba(33,211,161,.55) 40%, rgba(0,199,255,.35) 60%, transparent 100%);
+    animation:scanLine 4s linear infinite;
+  }
+  @keyframes scanLine{
+    0%{transform:translateX(-100%);}
+    100%{transform:translateX(100%);}
+  }
+  .cmdFooterTitle{
+    font-size:.70rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(33,211,161,.75);margin-bottom:6px;
+  }
+  .cmdFooterSub{
+    font-size:.65rem;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+    color:rgba(255,255,255,.28);
+  }
+  /* ===== /COMMAND CENTER UPGRADE ===== */
   </style>
 
   <script defer data-domain="sideguysolutions.com" src="https://plausible.io/js/script.js"></script>
@@ -1275,6 +1580,17 @@
   <a href="/hub.html">Operator Hub</a><span style="opacity:.4;margin:0 4px;">/</span><a href="/hubs/category-ai-automation.html"><a href="/ai-automation-hub.html" data-sg-linked>ai automation</a> Hub</a><span style="opacity:.4;margin:0 4px;">/</span><a href="/pillars/ai-automation-master-guide.html">AI Automation Master Guide</a>
 </nav>
 
+  <!-- COMMAND CENTER STATUS STRIP -->
+  <div class="cmdStrip" role="status" aria-label="Command center status">
+    <span class="cmdItem">SIDEGUY COMMAND CENTER</span>
+    <span class="cmdSep">·</span>
+    <span class="cmdItem"><span class="statusDot online"></span> STATUS: ONLINE</span>
+    <span class="cmdSep">·</span>
+    <span class="cmdItem"><span class="statusDot ai"></span> AI SYSTEMS: READY</span>
+    <span class="cmdSep">·</span>
+    <span class="cmdItem"><span class="statusDot human"></span> HUMAN NODE: PJ AVAILABLE</span>
+  </div>
+
   <div class="topbar">
 
     <a class="homePill" href="index.html" aria-label="Back to home">
@@ -1300,14 +1616,75 @@
 <!-- FRESHNESS_ENGINE_CARD -->
 <a href="/fresh/index.html" style="text-decoration:none;"><div style="border:1px solid #cce8f0;border-radius:16px;padding:14px;background:#ffffff;"><div style="font-weight:800;">Freshness Hub</div><div style="opacity:.75;margin-top:4px;">Recently updated pages + trending internal guides →</div></div></a>
 
-<!-- WOW HERO -->
-<section class="heroGlow" aria-label="SideGuy hero">
-  <p class="eyebrow">&#x26A1; Human Resolution Layer · San Diego</p>
-  <h1>SideGuy &#8212; Clarity Before Cost</h1>
-  <p class="heroSub">SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it. Software, payments, AI tools, home services, and hard decisions &#8212; calm guidance before you spend a dollar.</p>
-  <div class="heroCtas">
-    <a class="heroPrimary" href="sms:+17735441231" rel="nofollow">&#128172; Text PJ · 773-544-1231</a>
-    <a class="heroSecondary" href="#browse">Browse Problems &#8595;</a>
+<!-- COMMAND CENTER HERO -->
+<section class="cmdHero" aria-label="SideGuy Command Center">
+  <div class="cmdHeroGrid" aria-hidden="true"></div>
+  <p class="cmdEye">&#x26A1; Operator Command Center &middot; San Diego</p>
+  <h1>SideGuy Command Center</h1>
+  <p class="cmdSub">Where Google discovers the problem,<br>AI explains it,<br>and a real human helps resolve it.</p>
+  <div class="cmdHeroCtas">
+    <a class="cmdPjOrb" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity">Text<br>PJ</a>
+    <div class="cmdIconGroup">
+      <a class="cmdIconBtn" href="#ask-ai">
+        <span class="cmdIconOrb orbAI">&#x1F916;</span>
+        <span class="cmdIconLabel">Ask AI</span>
+      </a>
+      <a class="cmdIconBtn" href="start-here.html">
+        <span class="cmdIconOrb orbStart">&#x25B8;</span>
+        <span class="cmdIconLabel">Start Simple</span>
+      </a>
+      <a class="cmdIconBtn" href="hub.html">
+        <span class="cmdIconOrb orbOp">&#x2699;</span>
+        <span class="cmdIconLabel">Operator Help</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM RESOLUTION GRID -->
+<section class="probGrid" id="problems" aria-label="Common problems we help solve">
+  <div class="radarLabel">Common Problems We Help Solve</div>
+  <div class="probCards">
+    <a class="probCard" href="/tech-help-hub-san-diego.html">
+      <div class="probCardIcon">&#x1F4BB;</div>
+      <div class="probCardTitle">Home Technology Confusion</div>
+      <div class="probCardDesc">Smart devices, wifi setup, app issues — calm guidance before you call anyone.</div>
+    </a>
+    <a class="probCard" href="/ai-automation-san-diego.html">
+      <div class="probCardIcon">&#x1F916;</div>
+      <div class="probCardTitle">AI Automation for Small Business</div>
+      <div class="probCardDesc">What AI can actually do for your operation today — no hype.</div>
+    </a>
+    <a class="probCard" href="/payment-processing-hub-san-diego.html">
+      <div class="probCardIcon">&#x1F4B3;</div>
+      <div class="probCardTitle">Payment Processing Decisions</div>
+      <div class="probCardDesc">Credit card fees, stablecoin rails, and what you're really paying.</div>
+    </a>
+    <a class="probCard" href="/solar-hub-san-diego.html">
+      <div class="probCardIcon">&#x2600;&#xFE0F;</div>
+      <div class="probCardTitle">Solar &amp; Battery Questions</div>
+      <div class="probCardDesc">ROI, installer red flags, grid tie-in — what to know first.</div>
+    </a>
+    <a class="probCard" href="/contractor-services-hub-san-diego.html">
+      <div class="probCardIcon">&#x1F528;</div>
+      <div class="probCardTitle">Contractor Quote Confusion</div>
+      <div class="probCardDesc">HVAC, plumbing, electrical — is the quote fair? Who do you actually call?</div>
+    </a>
+    <a class="probCard" href="/software-development-hub-san-diego.html">
+      <div class="probCardIcon">&#x2699;&#xFE0F;</div>
+      <div class="probCardTitle">Software Stack Decisions</div>
+      <div class="probCardDesc">Build vs buy, pricing reality, and avoiding rushed software purchases.</div>
+    </a>
+    <a class="probCard" href="/tech-help-hub-san-diego.html">
+      <div class="probCardIcon">&#x1F3E0;</div>
+      <div class="probCardTitle">Smart Home Setup</div>
+      <div class="probCardDesc">Which systems play well together, what to skip, and what to install first.</div>
+    </a>
+    <a class="probCard" href="/electrical-problems-hub-san-diego.html">
+      <div class="probCardIcon">&#x26A1;</div>
+      <div class="probCardTitle">EV Charger Installation</div>
+      <div class="probCardDesc">Panel capacity, permit requirements, and installer selection in San Diego.</div>
+    </a>
   </div>
 </section>
 
@@ -1410,6 +1787,70 @@
       <div style="font-size:.78rem;color:#5e7d8e;line-height:1.4">New to SideGuy? The full operator orientation guide.</div>
     </a>
   </div>
+</section>
+
+<!-- OPERATOR NETWORK PANEL -->
+<section class="operatorPanel" aria-label="SideGuy Operator Network">
+  <p class="opLabel">&#x1F310; Verified Network · San Diego &amp; Beyond</p>
+  <h2>The SideGuy Operator Network</h2>
+  <p>SideGuy connects people to trusted operators, contractors, and specialists — after they understand their options. No referral pressure. No hidden fees.</p>
+  <div class="opRoles">
+    <a class="opRole" href="/contractor-services-hub-san-diego.html"><span class="opRoleIcon">&#x1F528;</span> Contractors</a>
+    <a class="opRole" href="/hvac-problems-hub-san-diego.html"><span class="opRoleIcon">&#x2744;&#xFE0F;</span> HVAC Installers</a>
+    <a class="opRole" href="/electrical-problems-hub-san-diego.html"><span class="opRoleIcon">&#x26A1;</span> Electricians</a>
+    <a class="opRole" href="/ai-automation-consulting-san-diego.html"><span class="opRoleIcon">&#x1F916;</span> AI Automation</a>
+    <a class="opRole" href="/payment-processing-hub-san-diego.html"><span class="opRoleIcon">&#x1F4B3;</span> Payment Systems</a>
+    <a class="opRole" href="/solar-hub-san-diego.html"><span class="opRoleIcon">&#x2600;&#xFE0F;</span> Solar Installers</a>
+    <a class="opRole" href="/software-development-hub-san-diego.html"><span class="opRoleIcon">&#x1F4BB;</span> Tech Guidance</a>
+    <a class="opRole" href="hub.html"><span class="opRoleIcon">&#x1F3DB;</span> All Operators &rarr;</a>
+  </div>
+</section>
+
+<!-- FUTURE TECHNOLOGY RADAR -->
+<section class="techRadar" aria-label="Technologies changing the world">
+  <div class="radarLabel"><span class="radarDot"></span> Technologies Changing the World</div>
+  <div class="techRadarCards">
+    <a class="techCard" href="/ai-automation-san-diego.html">
+      <div class="techCardIcon">&#x1F916;</div>
+      <div class="techCardName">AI Systems</div>
+      <div class="techCardGlow"></div>
+    </a>
+    <a class="techCard" href="/ai-automation-san-diego.html">
+      <div class="techCardIcon">&#x1F9BE;</div>
+      <div class="techCardName">Robotics</div>
+      <div class="techCardGlow"></div>
+    </a>
+    <a class="techCard" href="/solar-hub-san-diego.html">
+      <div class="techCardIcon">&#x26A1;</div>
+      <div class="techCardName">Energy Systems</div>
+      <div class="techCardGlow"></div>
+    </a>
+    <a class="techCard" href="/agent-payments-explained.html">
+      <div class="techCardIcon">&#x269B;&#xFE0F;</div>
+      <div class="techCardName">Quantum Computing</div>
+      <div class="techCardGlow"></div>
+    </a>
+    <a class="techCard" href="/ai-workflow-automation-small-business-san-diego.html">
+      <div class="techCardIcon">&#x2699;&#xFE0F;</div>
+      <div class="techCardName">Automation</div>
+      <div class="techCardGlow"></div>
+    </a>
+    <a class="techCard" href="/agent-payments-explained.html">
+      <div class="techCardIcon">&#x1F4B8;</div>
+      <div class="techCardName">Digital Economy</div>
+      <div class="techCardGlow"></div>
+    </a>
+  </div>
+</section>
+
+<!-- HUMAN HELP SECTION -->
+<section class="humanSection" aria-label="Human help from PJ">
+  <div class="humanText">
+    <h2>Sometimes you just need a human.</h2>
+    <p>If technology, vendors, or contractors are confusing, SideGuy helps clarify your options and connect you to the right next step. No pressure. No sales pitch. Just a straight answer.</p>
+    <a class="humanPhone" href="sms:+17735441231" rel="nofollow">&#x1F4AC; Text PJ &middot; <strong>773-544-1231</strong></a>
+  </div>
+  <a class="humanOrb" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ">Text<br>PJ</a>
 </section>
 
 <!-- TRUST SECTION -->
@@ -1897,6 +2338,13 @@
   </div>
 
 
+
+
+  <- create cluttered FOOTER COMMAND LINE -->
+  <footer class="cmdFooter" aria-label="SideGuy footer">
+    <div class="cmdFooterTitle">SideGuy Command Center</div>
+    <div class="cmdFooterSub">Clarity Before Cost</div>
+  </footer>
 
   <!-- Bottom-right “Text PJ” (best version) -->
 
