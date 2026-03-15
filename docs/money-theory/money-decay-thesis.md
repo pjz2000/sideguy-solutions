@@ -1,39 +1,30 @@
 # SideGuy Money Decay Thesis
 
-Core idea:
-
 The problem is not only inflation.
-The deeper problem is passive monetary decay.
 
-Basic pattern:
+The deeper issue is passive monetary decay.
+
+Pattern:
 
 hold dollars
 ↓
 inflation reduces purchasing power
 ↓
-idle cash weakens over time
+idle cash weakens
 
 SideGuy response:
 
-Do not rely only on stored money.
-Build productive assets that can create cash flow,
-opportunities, and human connections.
+build productive assets.
 
-Productive assets include:
+Examples:
 
-- helpful knowledge pages
-- operator networks
-- trust-based service systems
-- better payment rails
-- future-facing infrastructure content
+helpful knowledge pages
+operator networks
+payment infrastructure understanding
+trust-based service systems
 
-This does not "solve" the Federal Reserve.
+Key philosophy:
 
-It does create a better personal and business response
-to money decay.
-
-SideGuy framing:
-
-assets before anxiety
-clarity before cost
-build infrastructure, not panic
+assets before anxiety  
+clarity before cost  
+build infrastructure instead of panic
