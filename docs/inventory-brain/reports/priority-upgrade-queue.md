@@ -1,0 +1,202 @@
+# Priority Upgrade Queue
+
+- **docs/cluster-injector/ai-automation-cards.html** (automation) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1432.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **_quarantine_backups/sitemap.backup.20251231-1434.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1439.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1448.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1752.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1758.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1804.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-1805.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **_quarantine_backups/sitemap.backup.20251231-181123.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **data/signal-log.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **docs/cluster-injector/business-operations-cards.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **docs/cluster-injector/lead-generation-cards.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **docs/cluster-injector/technology-decisions-cards.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **docs/million-page/selected/index-links-block.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **kg/hubs/cluster-16-guidance.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **public/includes/learning-loop-winners.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **public/includes/network-discovery-featured.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **public/includes/network-featured.html** (general) — priority 10 — expand-content, add-links, add-faq, add-text-pj, add-sections
+- **public/includes/trending-problems.html** (general) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **docs/cluster-injector/payments-cards.html** (payments) — priority 10 — expand-content, add-faq, add-text-pj, add-sections, already-has-gravity
+- **pages/operator-network.html** (automation) — priority 9 — expand-content, add-links, add-faq, already-has-gravity
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-austin-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-austin-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-chicago-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-chicago-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-los-angeles-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-los-angeles-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-miami-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-miami-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-new-york-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-new-york-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-san-diego-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-san-diego-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-san-francisco-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-san-francisco-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-seattle-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-healthcare-in-seattle-texas.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-austin-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-chicago-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-los-angeles-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-miami-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-new-york-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-san-diego-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-san-francisco-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-healthcare-in-seattle-california.html** (general) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-austin-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-chicago-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-los-angeles-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-los-angeles-texas.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-miami-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-new-york-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-san-diego-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-san-diego-texas.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-san-francisco-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-how-it-works-for-medical-device-software-in-seattle-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-medical-device-software-in-austin-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-medical-device-software-in-chicago-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-medical-device-software-in-los-angeles-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-medical-device-software-in-miami-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-medical-device-software-in-san-diego-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **docs/million-page/authority/blocks/ai-native-development-platforms-what-is-for-medical-device-software-in-san-francisco-california.html** (software) — priority 9 — expand-content, add-links, add-faq, add-text-pj
+- **pages/ai-automation-automation-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-automation-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-automation-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-automation-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-automation-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-automation-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-automation-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-cardiff-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-cardiff-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-cardiff-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-carlsbad-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-carlsbad-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-carlsbad-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-consulting-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-del-mar-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-del-mar-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-del-mar-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-encinitas-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-encinitas-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-encinitas-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-escondido-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-escondido-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-escondido-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-help-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-la-jolla-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-la-jolla-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-la-jolla-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-oceanside-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-oceanside-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-oceanside-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-pricing-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-services-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-setup-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-solutions-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-support-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-vista-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-vista-2.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-automation-vista-3.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-cardiff-by-the-sea.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-carlsbad.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-del-mar.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-encinitas.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-la-jolla.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-oceanside.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/ai-consulting-automation-san-diego.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-10.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-110.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-130.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-150.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-170.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-190.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-210.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-230.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-250.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-270.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-290.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-30.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-310.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-330.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-350.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-370.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-390.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-410.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-430.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-450.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-470.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-490.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-50.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-70.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/business-automation-san-diego-90.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-112.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-12.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-132.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-152.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-172.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-192.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-212.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-232.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-252.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-272.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-292.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-312.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-32.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-332.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-352.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-372.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-392.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-412.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-432.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-452.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-472.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-492.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-52.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-72.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/auto/local-operator-tech-san-diego-92.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
+- **pages/business-automation-cardiff-1.html** (automation) — priority 8 — expand-content, add-faq, add-sections, already-has-gravity
