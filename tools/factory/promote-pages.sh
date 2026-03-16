@@ -12,8 +12,8 @@ REPORT="reports/promotion/promote-$DATE.md"
 
 mkdir -p logs/promotion reports/promotion
 
-echo "" >> "$LOG"
-echo "=== SideGuy Promotion Run $STAMP ===" >> "$LOG"
+# Overwrite log each run so PROMOTED/SKIP counts are always accurate
+echo "=== SideGuy Promotion Run $STAMP ===" > "$LOG"
 echo "" >> "$LOG"
 
 promoted=0
