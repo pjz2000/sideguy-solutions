@@ -1,6 +1,25 @@
 import re
 from pathlib import Path
 
+
+def _replace_in_text_only(html: str, keyword: str, link_tag: str) -> tuple[str, int]:
+    """Replace keyword only in text nodes, skipping HTML tag attribute values."""
+    parts = re.split(r'(<[^>]+>)', html)
+    result = []
+    replaced = False
+    pattern = re.compile(re.escape(keyword), re.IGNORECASE)
+    for part in parts:
+        if part.startswith('<'):
+            result.append(part)          # inside a tag — never touch
+        elif not replaced:
+            new_part, n = pattern.subn(link_tag, part, count=1)
+            if n:
+                replaced = True
+            result.append(new_part)
+        else:
+            result.append(part)
+    return ''.join(result), 1 if replaced else 0
+
 # Scan both public/ and root-level pages
 ROOT_DIRS = [
     Path("/workspaces/sideguy-solutions/public"),
@@ -65,9 +84,9 @@ for page in pages:
         link_tag = f'<a href="{dest}" {MARKER}>{keyword}</a>'
         if MARKER + f'>{keyword}<' in body:
             continue  # already linked
-        # Case-insensitive single replacement in body only
-        pattern = re.compile(re.escape(keyword), re.IGNORECASE)
-        new_body, n = pattern.subn(link_tag, body, count=1)
+        # Case-insensitive single replacement in body text nodes only
+        # (never inside HTML attribute values — prevents nested-anchor corruption)
+        new_body, n = _replace_in_text_only(body, keyword, link_tag)
         if n:
             body = new_body
             changed = True
