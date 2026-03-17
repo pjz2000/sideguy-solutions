@@ -55,7 +55,16 @@ bash tools/authority/authority-engine.sh
 echo ""
 
 ########################################
-# 6. SNAPSHOT METRICS
+# 6. PRIORITY ENGINE (WHAT MATTERS NOW)
+########################################
+
+echo "== Priority Engine :: rank opportunities =="
+bash tools/intelligence/priority/priority-engine.sh
+
+echo ""
+
+########################################
+# 7. SNAPSHOT METRICS
 ########################################
 
 TOTAL_PAGES=$(find public -name '*.html' | wc -l | tr -d ' ')
