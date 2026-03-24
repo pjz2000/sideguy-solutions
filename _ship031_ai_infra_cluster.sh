@@ -30,7 +30,7 @@ create_page() {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TITLE_PLACEHOLDER | SideGuy Solutions</title>
 <meta name="description" content="META_DESC_PLACEHOLDER">
-<link rel="canonical" href="https://sideguy.solutions/SLUG_PLACEHOLDER.html">
+<link rel="canonical" href="https://www.sideguysolutions.com/SLUG_PLACEHOLDER.html">
 <style>
 :root {
   --bg0: #eefcff;
