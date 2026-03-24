@@ -1,11 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Data Center Cost Breakdown | SideGuy Solutions</title>
-<meta name="description" content="Understanding capex and opex for AI facilities: construction, power, cooling, hardware, and ongoing operational costs.">
-<link rel="canonical" href="https://www.sideguysolutions.com/ai-data-center-cost-breakdown.html">
+#!/usr/bin/env bash
+
+########################################
+# BATCH UPGRADE: AI PAGES TO 2026 DESIGN
+# Applies modern CSS to 30 AI infrastructure pages
+########################################
+
+PROJECT_ROOT="/workspaces/sideguy-solutions"
+cd "$PROJECT_ROOT" || exit 1
+
+# List of 30 AI infrastructure pages
+PAGES=(
+  "who-builds-ai-data-centers.html"
+  "ai-data-center-electrical-contractors.html"
+  "data-center-power-infrastructure-cost.html"
+  "how-to-build-ai-compute-facility.html"
+  "data-center-electrical-upgrade-guide.html"
+  "mission-critical-electrical-services-explained.html"
+  "ai-data-center-construction-companies.html"
+  "data-center-power-requirements-explained.html"
+  "ai-infrastructure-contractors-near-me.html"
+  "electrical-infrastructure-for-ai-facilities.html"
+  "ai-data-center-infrastructure-explained.html"
+  "electric-data-infrastructure-what-it-means.html"
+  "future-of-ai-data-centers-energy-demand.html"
+  "ai-data-center-power-consumption-explained.html"
+  "ai-data-center-energy-usage-breakdown.html"
+  "how-ai-is-impacting-the-power-grid.html"
+  "data-center-electricity-demand-future.html"
+  "why-ai-needs-more-energy-infrastructure.html"
+  "how-ai-data-centers-are-built.html"
+  "ai-infrastructure-companies-to-know.html"
+  "what-powers-modern-data-centers.html"
+  "cooling-systems-for-ai-data-centers.html"
+  "ai-data-center-cost-breakdown.html"
+  "how-businesses-can-prepare-for-ai-infrastructure.html"
+  "investing-in-ai-energy-infrastructure.html"
+  "ai-data-center-management-tools.html"
+  "will-ai-break-the-power-grid.html"
+  "next-generation-data-centers-explained.html"
+  "ai-infrastructure-boom-what-to-expect.html"
+  "electric-infrastructure-for-ai-future.html"
+)
+
+# Modern CSS - extracted from demo page
+read -r -d '' MODERN_CSS << 'EOF'
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -195,65 +233,54 @@ hr { border: none; border-top: 1px solid var(--border-subtle); margin: var(--spa
 
 *:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
 </style>
-</head>
+EOF
 
-<body>
+echo "🎨 Starting design upgrade for 30 AI pages..."
+echo ""
 
-<div class="container">
+upgrade_page() {
+  local file="$1"
+  
+  if [ ! -f "$file" ]; then
+    echo "⏭️  Skipped (not found): $file"
+    return
+  fi
+  
+  # Create backup
+  cp "$file" "${file}.backup-$(date +%Y%m%d)"
+  
+  # Replace old <style> block with new modern CSS
+  # Using awk to find and replace between <style> and </style>
+  awk -v newcss="$MODERN_CSS" '
+  BEGIN { in_style=0; style_replaced=0 }
+  /<style>/ { 
+    if (!style_replaced) {
+      print newcss
+      in_style=1
+      style_replaced=1
+      next
+    }
+  }
+  /<\/style>/ {
+    if (in_style) {
+      in_style=0
+      next
+    }
+  }
+  !in_style { print }
+  ' "$file" > "${file}.tmp"
+  
+  mv "${file}.tmp" "$file"
+  echo "✅ Upgraded: $file"
+}
 
-<header>
-<h1>AI Data Center Cost Breakdown</h1>
-</header>
+COUNT=0
+for page in "${PAGES[@]}"; do
+  upgrade_page "$page"
+  COUNT=$((COUNT+1))
+done
 
-<main>
-
-<p>This topic is coming up more often as AI deployment accelerates. Most people hear about it in passing but don't fully understand what's actually happening at the infrastructure level.</p>
-
-<h2>What this means</h2>
-<p>AI systems — especially large language models and training workloads — require massive amounts of computing power. That translates directly to physical infrastructure: electricity generation, distribution systems, cooling, and data center construction at unprecedented scale.</p>
-
-<div class="context-box">
-<p style="margin: 0;"><strong>Context:</strong> A single large AI training run can consume as much power as a small town for weeks. Multiply that across hundreds of companies racing to build and deploy AI systems, and the infrastructure demands become substantial.</p>
-</div>
-
-<h2>Why it matters</h2>
-<p>This isn't just a tech industry issue. It affects:</p>
-<ul>
-  <li><strong>Energy costs</strong> — increased demand impacts pricing and availability</li>
-  <li><strong>Business operations</strong> — companies planning AI deployments need infrastructure strategies</li>
-  <li><strong>Investment decisions</strong> — infrastructure buildout creates new opportunities and risks</li>
-  <li><strong>Grid stability</strong> — regional power systems need to adapt to concentrated demand</li>
-</ul>
-
-<h2>What to watch</h2>
-<p>The space is evolving rapidly. Key trends include:</p>
-<ul>
-  <li>Hyperscale data center construction accelerating</li>
-  <li>Energy companies partnering directly with AI/tech firms</li>
-  <li>New cooling technologies to handle dense compute loads</li>
-  <li>Regulatory discussions around energy allocation</li>
-  <li>On-site power generation (solar, natural gas) becoming more common</li>
-</ul>
-
-<h2>Reality check</h2>
-<p>Much of the conversation around AI infrastructure is either overhyped ("AI will crash the grid") or dismissive ("it's not a big deal"). The reality is somewhere in the middle — it's a significant challenge that requires planning and investment, but it's solvable with existing technology and reasonable capital allocation.</p>
-
-<hr>
-
-<section class="cta-box">
-<h3>Trying to figure this out for your business?</h3>
-<p>Whether you're planning AI infrastructure, evaluating costs, or just trying to understand what's real vs. hype — SideGuy can help you cut through the noise.</p>
-<a href="tel:+17735441231" class="phone-link">Text PJ: 773-544-1231</a>
-<p style="font-size: 0.9em; color: var(--ink-dim); margin-top: 12px;">Fast clarity, no sales pressure. We'll either help or tell you we can't.</p>
-</section>
-
-</main>
-
-<footer>
-<a href="/" class="back-link">← Back to SideGuy Solutions</a>
-</footer>
-
-</div>
-
-</body>
-</html>
+echo ""
+echo "✅ Design upgrade complete: $COUNT pages updated"
+echo "📋 Backups created with .backup-$(date +%Y%m%d) extension"
+echo ""
