@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Builds AI Data Centers — Modern Demo | SideGuy Solutions</title>
+<meta name="description" content="Real guidance on AI data center construction, electrical contractors, and what actually matters when planning hyperscale infrastructure.">
+<link rel="canonical" href="https://www.sideguysolutions.com/who-builds-ai-data-centers-modern.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Color System - Professional 2026 palette */
+  --bg-base: #f8fafb;
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.92);
+  
+  --text-primary: #0a1828;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  
+  --accent-primary: #0ea5e9;
+  --accent-hover: #0284c7;
+  --accent-light: #e0f2fe;
+  
+  --mint: #10b981;
+  --mint-hover: #059669;
+  --mint-light: #d1fae5;
+  
+  --border-subtle: rgba(148, 163, 184, 0.12);
+  --border-medium: rgba(148, 163, 184, 0.24);
+  
+  /* Shadows - Elevated depth */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  min-height: 100vh;
+}
+
+/* Modern gradient background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 600px;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08), transparent 50%),
+    linear-gradient(to bottom, rgba(248, 250, 251, 0.8), rgba(248, 250, 251, 1));
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Container */
+.container {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-xl) var(--space-md);
+  }
+}
+
+/* Typography */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  max-width: 70ch;
+}
+
+strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Lists */
+ul {
+  margin: var(--space-lg) 0;
+  padding-left: var(--space-xl);
+  color: var(--text-secondary);
+}
+
+li {
+  margin-bottom: var(--space-sm);
+  line-height: 1.7;
+}
+
+li::marker {
+  color: var(--accent-primary);
+}
+
+/* Links */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Context boxes */
+.context-box {
+  background: var(--mint-light);
+  border-left: 4px solid var(--mint);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.context-box p {
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* CTA Section - Hero style */
+.cta-section {
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--accent-light) 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  margin: var(--space-2xl) 0;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.cta-section p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Phone link */
+.phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--mint);
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+}
+
+.phone-link:hover {
+  background: var(--mint-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* Meta info */
+.meta {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-top: var(--space-sm);
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  margin-top: var(--space-2xl);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-primary);
+}
+
+/* Divider */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-2xl) 0;
+}
+
+/* Grid layout */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+/* Feature boxes */
+.feature-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: all 0.3s ease;
+}
+
+.feature-box:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.feature-box h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs);
+}
+
+.feature-box p {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-section {
+    padding: var(--space-xl);
+  }
+  
+  .phone-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<h1>Who Builds AI Data Centers</h1>
+<p class="meta">Real guidance on hyperscale infrastructure — no sales pressure, just clarity</p>
+</header>
+
+<main>
+
+<p>This is a real-world question that usually surfaces when someone is planning data center expansion, AI compute deployment, or critical power infrastructure — not just researching concepts.</p>
+
+<h2>What this usually means</h2>
+<p>Most of the time, this comes from a specific project need: hyperscale data center construction, AI training facility buildout, or mission-critical electrical upgrades. Someone has budget, timeline pressure, and needs to understand what's actually involved.</p>
+
+<div class="context-box">
+<p><strong>Reality check:</strong> Not every electrical contractor or construction firm can handle hyperscale AI infrastructure. The power densities, cooling requirements, and redundancy expectations are significantly different from standard commercial work.</p>
+</div>
+
+<h2>What actually matters</h2>
+<p>The biggest factors are power availability (MW-scale), redundancy architecture (N+1, 2N), cooling infrastructure, and execution quality. This is not something you want to learn by trial and error — the stakes are too high and the costs compound fast.</p>
+
+<div class="grid-3">
+  <div class="feature-box">
+    <h4>⚡ Power Systems</h4>
+    <p>MW-scale distribution, backup generation, monitoring</p>
+  </div>
+  <div class="feature-box">
+    <h4>❄️ Cooling Architecture</h4>
+    <p>Liquid cooling, immersion, hybrid thermal management</p>
+  </div>
+  <div class="feature-box">
+    <h4>🔒 Redundancy Design</h4>
+    <p>N+1, 2N configurations, failover systems</p>
+  </div>
+</div>
+
+<h2>Common decision points</h2>
+<ul>
+  <li><strong>Power capacity planning</strong> — how much, from where, what backup</li>
+  <li><strong>Electrical infrastructure design</strong> — distribution, redundancy, monitoring</li>
+  <li><strong>Contractor vetting</strong> — who can actually execute at this scale</li>
+  <li><strong>Timeline and phasing</strong> — what can be done in parallel</li>
+  <li><strong>Cost estimation</strong> — avoiding massive overruns</li>
+</ul>
+
+<h2>Who actually does this work</h2>
+<p>The companies building AI data centers typically fall into a few categories:</p>
+<ul>
+  <li>Specialized hyperscale contractors (experience with AWS, Google, Meta scale)</li>
+  <li>Mission-critical electrical firms (data center-focused, not general commercial)</li>
+  <li>Integrated design-build firms (handling power + mechanical + controls)</li>
+  <li>Regional utilities + engineering partners (for custom power solutions)</li>
+</ul>
+
+<h2>What to do next</h2>
+<p>If this is even remotely relevant to your situation, the fastest move is to talk to someone who has navigated this before. Not a sales rep, not a generic consultant — someone who understands the infrastructure side and can give you straight answers.</p>
+
+<hr>
+
+<section class="cta-section">
+<h3>Need real guidance?</h3>
+<p>This is where SideGuy helps you skip the confusion and get clarity fast. No sales pitch, no vendor steering — just honest guidance on what matters for your specific situation.</p>
+<a href="tel:+17735441231" class="phone-link">
+<span>📱</span>
+<span>Text PJ: 773-544-1231</span>
+</a>
+<p class="meta">Human response, usually within a few hours. We'll either point you in the right direction or tell you we can't help.</p>
+</section>
+
+</main>
+
+<footer>
+<a href="/" class="back-link">
+<span>←</span>
+<span>Back to SideGuy Solutions</span>
+</a>
+</footer>
+
+</div>
+
+</body>
+</html>
