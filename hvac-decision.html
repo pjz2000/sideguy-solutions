@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- SHIP010_ROBOTS -->
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HVAC Decision: Repair or Replace? · SideGuy Solutions</title>
+<link rel="canonical" href="https://sideguysolutions.com/hvac-decision.html"/>
+<meta name="description" content="HVAC repair or replace decision help. Clear guidance on when to fix vs upgrade your AC, furnace, or heat pump. No sales pressure, just honest answers."/>
+<style>
+:root{
+  --bg0:#eefcff; --bg1:#d7f5ff; --bg2:#bfeeff;
+  --ink:#073044; --muted:#3f6173; --muted2:#5e7d8e;
+  --card:#ffffffcc; --card2:#ffffffb8;
+  --stroke:rgba(7,48,68,.10); --stroke2:rgba(7,48,68,.07);
+  --shadow: 0 18px 50px rgba(7,48,68,.10);
+  --mint:#21d3a1; --mint2:#00c7ff; --blue:#4aa9ff; --blue2:#1f7cff;
+  --r:22px; --pill:999px;
+  --phone:"+17735441231"; --phonePretty:"773-544-1231";
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:-apple-system, system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color:var(--ink);
+  background:radial-gradient(1200px 900px at 22% 10%, #ffffff 0%, var(--bg0) 25%, var(--bg1) 60%, var(--bg2) 100%);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body:before{
+  content:""; position:fixed; inset:-20%;
+  background:
+    radial-gradient(closest-side at 18% 20%, rgba(33,211,161,.18), transparent 55%),
+    radial-gradient(closest-side at 78% 28%, rgba(74,169,255,.16), transparent 52%),
+    radial-gradient(closest-side at 62% 82%, rgba(0,199,255,.12), transparent 55%),
+    radial-gradient(closest-side at 25% 85%, rgba(33,211,161,.10), transparent 58%);
+  filter: blur(18px); pointer-events:none; z-index:-2;
+}
+.topbar{
+  position:sticky; top:0; z-index:50; padding:14px 14px 10px;
+  display:flex; justify-content:center; pointer-events:none;
+}
+.homePill{
+  pointer-events:auto; text-decoration:none; display:inline-flex;
+  align-items:center; gap:10px; padding:10px 16px; border-radius:var(--pill);
+  background:linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.62));
+  border:1px solid var(--stroke2); box-shadow: 0 10px 28px rgba(7,48,68,.08);
+  color:var(--ink); font-weight:700; font-size:12px; letter-spacing:.02em;
+  backdrop-filter: blur(14px);
+}
+.homeDot{
+  width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(135deg, var(--mint), var(--mint2));
+  box-shadow: 0 0 0 3px rgba(255,255,255,.95), 0 10px 18px rgba(33,211,161,.18);
+}
+.wrap{max-width:1120px; margin:0 auto; padding: 26px 22px 92px;}
+h1{
+  margin:0 0 18px; font-size:38px; font-weight:900; line-height:1.12;
+  letter-spacing:-.015em; color:var(--ink);
+}
+@media (max-width: 680px){h1{font-size:34px}}
+.lede{margin:0 0 18px; font-size:15px; line-height:1.72; color:var(--muted);}
+.cards{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+.card{
+  background:var(--card); border:1px solid var(--stroke);
+  border-radius:var(--r); padding:14px 16px; box-shadow:var(--shadow);
+}
+.cardTitle{font-weight:800; font-size:13px; margin:0 0 8px; color: rgba(7,48,68,.82);}
+.bullets{margin:0; padding-left:16px; font-size:12px; line-height:1.5; color: rgba(7,48,68,.64);}
+.bullets li{margin:0 0 6px}
+.decisionTool{
+  margin:32px 0; padding:28px; background:var(--card);
+  border:1px solid var(--stroke); border-radius:var(--r);
+  box-shadow:var(--shadow);
+}
+.decisionTool h2{margin:0 0 16px; font-size:20px;}
+.decisionGrid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px;}
+@media (max-width: 640px){.decisionGrid{grid-template-columns:1fr;}}
+.decisionCard{
+  padding:20px; background:rgba(255,255,255,.85); border:2px solid var(--stroke);
+  border-radius:16px; cursor:pointer; transition:all .2s;
+}
+.decisionCard:hover{border-color:var(--mint); transform:translateY(-2px);}
+.decisionCard.selected{border-color:var(--mint); background:rgba(33,211,161,.08);}
+.decisionCard h3{margin:0 0 10px; font-size:16px; color:var(--ink);}
+.decisionCard ul{margin:0; padding-left:18px; font-size:13px; line-height:1.6; color:var(--muted);}
+.result{
+  margin-top:24px; padding:20px; background:rgba(33,211,161,.12);
+  border:1px solid var(--mint); border-radius:16px; display:none;
+}
+.result.show{display:block;}
+.result h3{margin:0 0 12px; font-size:18px; color:var(--ink);}
+.result p{margin:0 0 10px; font-size:14px; line-height:1.65; color:var(--muted);}
+.bigCta{
+  margin-top:32px; background: linear-gradient(180deg, rgba(33,211,161,.15), rgba(0,199,255,.12));
+  border:1px solid rgba(7,48,68,.10); border-radius:22px; padding:18px 16px;
+  box-shadow: 0 20px 60px rgba(7,48,68,.10);
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  backdrop-filter: blur(14px);
+}
+@media (max-width: 560px){.bigCta{flex-direction:column; align-items:flex-start;}}
+.bigCta h2{margin:0; font-size:14px; letter-spacing:.02em;}
+.bigCta .small{
+  margin-top:6px; font-size:12px; color: rgba(7,48,68,.65); line-height:1.45;
+}
+.btn{
+  text-decoration:none; display:inline-flex; align-items:center;
+  justify-content:center; gap:10px; padding:12px 14px; border-radius: var(--pill);
+  border:1px solid rgba(255,255,255,.75); color:#fff; font-weight:800; font-size:12px;
+  background: linear-gradient(135deg, var(--mint), var(--mint2));
+  box-shadow: 0 18px 40px rgba(0,199,255,.22); white-space:nowrap;
+}
+.btn:active{transform: translateY(1px);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="homePill">
+    <span class="homeDot"></span>
+    <span>SideGuy Home</span>
+  </a>
+</div>
+<div class="wrap">
+  <main>
+    <h1>HVAC Decision: Repair or Replace Your System?</h1>
+    <p class="lede">
+      Not sure whether to repair or replace your AC, furnace, or heat pump? Use this decision tool to get clarity before calling anyone. No sales pressure.
+    </p>
+
+    <section class="cards">
+      <article class="card">
+        <p class="cardTitle">When to Repair</p>
+        <ul class="bullets">
+          <li>System is less than 10 years old</li>
+          <li>Repair cost is under $1,000</li>
+          <li>Single isolated component failure</li>
+          <li>Regular maintenance has been done</li>
+        </ul>
+      </article>
+      <article class="card">
+        <p class="cardTitle">When to Replace</p>
+        <ul class="bullets">
+          <li>System is 15+ years old</li>
+          <li>Frequent repairs stacking up</li>
+          <li>Energy bills climbing steadily</li>
+          <li>Repair cost exceeds 50% of replacement</li>
+        </ul>
+      </article>
+      <article class="card">
+        <p class="cardTitle">Gray Zone</p>
+        <ul class="bullets">
+          <li>10-15 years old</li>
+          <li>Major component failure (compressor, heat exchanger)</li>
+          <li>Efficiency significantly below modern standards</li>
+          <li>Need expert cost comparison</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="decisionTool">
+      <h2>⚡ Quick Decision Tool</h2>
+      <p>Answer a few questions to get guidance tailored to your situation.</p>
+      
+      <div class="decisionGrid">
+        <div class="decisionCard" onclick="selectAge('0-8')">
+          <h3>System Age: 0-8 Years</h3>
+          <p style="font-size:12px;color:var(--muted);">Relatively new system</p>
+        </div>
+        <div class="decisionCard" onclick="selectAge('9-15')">
+          <h3>System Age: 9-15 Years</h3>
+          <p style="font-size:12px;color:var(--muted);">Middle-aged system</p>
+        </div>
+        <div class="decisionCard" onclick="selectAge('15+')">
+          <h3>System Age: 15+ Years</h3>
+          <p style="font-size:12px;color:var(--muted);">Older system</p>
+        </div>
+        <div class="decisionCard" onclick="selectAge('unknown')">
+          <h3>Age: Unknown</h3>
+          <p style="font-size:12px;color:var(--muted);">Not sure how old it is</p>
+        </div>
+      </div>
+
+      <div id="repairResult" class="result">
+        <h3>✓ Likely Best Move: Repair</h3>
+        <p>Your system is relatively new. Most issues at this age are repairable at reasonable cost. Get 2-3 quotes and ask each contractor if they see signs of larger problems.</p>
+        <p><strong>Next step:</strong> Text 773-544-1231 with your situation for personalized guidance.</p>
+      </div>
+
+      <div id="grayResult" class="result">
+        <h3>⚠️ Gray Zone: Need More Info</h3>
+        <p>Your system is in the tricky middle years. The right choice depends on repair cost, energy efficiency, and whether you're seeing repeat failures. Generally: if repair is under $2,000 and no prior issues, repair. If over $3,000 or frequent problems, replace.</p>
+        <p><strong>Next step:</strong> Text 773-544-1231 — we'll help you compare the economics.</p>
+      </div>
+
+      <div id="replaceResult" class="result">
+        <h3>🔄 Likely Best Move: Replace</h3>
+        <p>At 15+ years, most systems are near end-of-life. Even a successful repair often leads to another failure within 12-24 months. Modern systems are also 30-50% more efficient, saving on energy bills.</p>
+        <p><strong>Next step:</strong> Text 773-544-1231 — we'll help you find the right contractor and avoid overselling.</p>
+      </div>
+
+      <div id="unknownResult" class="result">
+        <h3>🔍 Age Unknown: Check First</h3>
+        <p>Look for a metal nameplate on your outdoor unit. It usually lists the manufacture date or a serial number (first 4 digits often encode year/month). Or text us a photo at 773-544-1231 and we'll decode it.</p>
+      </div>
+    </div>
+
+    <section class="bigCta">
+      <div>
+        <h2>Still unsure? Text PJ</h2>
+        <div class="small">
+          Describe your HVAC situation. One text, calm honest response.<br/>
+          <b>773-544-1231</b>
+        </div>
+      </div>
+      <a class="btn" href="sms:+17735441231">Text Now</a>
+    </section>
+
+    <div style="margin-top:48px;padding:20px;font-size:13px;line-height:1.7;color:var(--muted);background:rgba(255,255,255,.6);border-radius:16px;">
+      <h3 style="font-size:16px;margin:0 0 12px;color:var(--ink);">Real Example from San Diego</h3>
+      <p style="margin:0 0 10px;">
+        <strong>Situation:</strong> 12-year-old AC, compressor failure, $2,800 repair quote.
+      </p>
+      <p style="margin:0 0 10px;">
+        <strong>Analysis:</strong> Compressor is the most expensive part. System is middle-aged. If no prior issues and regular maintenance, repair might be okay. But at $2,800, you're 40-50% of the way to a new system with warranty and better efficiency.
+      </p>
+      <p style="margin:0;">
+        <strong>Recommendation:</strong> Get a replacement quote. If new system is under $7,000, replace. If over $8,000, consider repair IF no other issues exist.
+      </p>
+    </div>
+
+    <div style="margin-top:32px;text-align:center;font-size:12px;color:var(--muted2);">
+      SideGuy Solutions · <a href="index.html" style="color:var(--mint);">Home</a> · Updated March 2026
+    </div>
+  </main>
+</div>
+
+<script>
+let selectedAge = null;
+
+function selectAge(age) {
+  // Remove all selections
+  document.querySelectorAll('.decisionCard').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.result').forEach(r => r.classList.remove('show'));
+  
+  // Add selection
+  event.currentTarget.classList.add('selected');
+  selectedAge = age;
+  
+  // Show appropriate result
+  if (age === '0-8') {
+    document.getElementById('repairResult').classList.add('show');
+  } else if (age === '9-15') {
+    document.getElementById('grayResult').classList.add('show');
+  } else if (age === '15+') {
+    document.getElementById('replaceResult').classList.add('show');
+  } else if (age === 'unknown') {
+    document.getElementById('unknownResult').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>

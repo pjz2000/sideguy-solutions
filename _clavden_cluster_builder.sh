@@ -36,7 +36,7 @@ create_page() {
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>TITLE_PLACEHOLDER · SideGuy</title>
-<link rel="canonical" href="https://sideguy.solutions/SLUG_PLACEHOLDER.html"/>
+<link rel="canonical" href="https://www.sideguysolutions.com/SLUG_PLACEHOLDER.html"/>
 <meta content="DESC_PLACEHOLDER" name="description"/>
 <style>
     :root{

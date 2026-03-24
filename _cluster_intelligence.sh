@@ -80,14 +80,31 @@ detect_intent() {
   local blob
   blob="$(echo "$q" | tr '[:upper:]' '[:lower:]')"
 
-  if echo "$blob" | grep -Eiq 'repair|replace|worth it|should i|fix|decision'; then
+  # Decision-making queries
+  if echo "$blob" | grep -Eiq 'repair|replace|worth it|should i|fix|decision|vs|versus|better|choose'; then
     echo "decision"
-  elif echo "$blob" | grep -Eiq 'cost|price|pricing|estimate|quote|how much'; then
+  
+  # Cost/pricing queries
+  elif echo "$blob" | grep -Eiq 'cost|price|pricing|estimate|quote|how much|budget|afford|cheap|expensive'; then
     echo "cost"
-  elif echo "$blob" | grep -Eiq 'vs|versus|compare|comparison|better'; then
+  
+  # Comparison queries
+  elif echo "$blob" | grep -Eiq 'compare|comparison|difference between|which is better|alternative'; then
     echo "compare"
-  elif echo "$blob" | grep -Eiq 'who do i call|who should i call|call for|service|help'; then
+  
+  # Service-seeking/call queries
+  elif echo "$blob" | grep -Eiq 'who do i call|who should i call|call for|service|help|hire|find|near me|contractor'; then
     echo "call"
+  
+  # How-to/DIY queries
+  elif echo "$blob" | grep -Eiq 'how to|how do i|diy|myself|tutorial|guide|step by step'; then
+    echo "how-to"
+  
+  # Problem/troubleshooting queries
+  elif echo "$blob" | grep -Eiq 'not working|broken|problem|issue|error|trouble|fail|wont|doesnt|stopped'; then
+    echo "troubleshoot"
+  
+  # Everything else (informational)
   else
     echo "general"
   fi
@@ -114,22 +131,55 @@ detect_cluster() {
   local blob
   blob="$(printf '%s %s' "$q" "$p" | tr '[:upper:]' '[:lower:]')"
 
-  if echo "$blob" | grep -Eiq 'hvac|air conditioning|mini split|furnace|heat pump'; then
+  # HVAC & Climate Control
+  if echo "$blob" | grep -Eiq 'hvac|air conditioning|mini split|furnace|heat pump|ac repair|ac not cooling'; then
     echo "hvac"
-  elif echo "$blob" | grep -Eiq 'tesla|ev charger|charger install|level 2'; then
-    echo "tesla-charging"
-  elif echo "$blob" | grep -Eiq 'stripe|square|payment|pos|merchant'; then
+  
+  # AI & Automation
+  elif echo "$blob" | grep -Eiq 'ai business|ai lead generation|ai automation|ai consulting|ai service|ai process|machine learning|ai system|artificial intelligence'; then
+    echo "ai-automation"
+  
+  # IT & Tech Support
+  elif echo "$blob" | grep -Eiq 'it help|it support|it service|tech support|network|business networking|website help|tech consulting'; then
+    echo "it-support"
+  
+  # Payment Processing
+  elif echo "$blob" | grep -Eiq 'payment processing|credit card processing|merchant service|pos system|stripe|square|debit card|mobile payment|ecommerce payment|payment solution'; then
     echo "payments"
-  elif echo "$blob" | grep -Eiq 'solar|battery|powerwall|energy'; then
+  
+  # Marketing & Digital Services
+  elif echo "$blob" | grep -Eiq 'marketing automation|seo|web design|google business|digital marketing|lead generation(?!.*ai)'; then
+    echo "digital-marketing"
+  
+  # EV & Charging
+  elif echo "$blob" | grep -Eiq 'tesla|ev charger|charger install|level 2|electric vehicle'; then
+    echo "ev-charging"
+  
+  # Solar & Energy Storage
+  elif echo "$blob" | grep -Eiq 'solar|battery backup|powerwall|energy storage|backup power'; then
     echo "energy"
-  elif echo "$blob" | grep -Eiq 'roof|leak|roofer'; then
+  
+  # Roofing
+  elif echo "$blob" | grep -Eiq 'roof|leak|roofer|roofing'; then
     echo "roofing"
-  elif echo "$blob" | grep -Eiq 'plumb|water heater|drain|pipe'; then
+  
+  # Plumbing
+  elif echo "$blob" | grep -Eiq 'plumb|water heater|drain|pipe|water pressure|leak(?!.*roof)'; then
     echo "plumbing"
-  elif echo "$blob" | grep -Eiq 'electric|panel|outlet|wiring'; then
+  
+  # Electrical
+  elif echo "$blob" | grep -Eiq 'electric|panel|outlet|wiring|electrician'; then
     echo "electrical"
-  elif echo "$blob" | grep -Eiq 'website|seo|web design|google business'; then
-    echo "digital"
+  
+  # Home Services (general)
+  elif echo "$blob" | grep -Eiq 'home repair|home service|handyman|home guy|home maintenance'; then
+    echo "home-services"
+  
+  # Lawn & Landscaping
+  elif echo "$blob" | grep -Eiq 'lawn care|landscaping|yard service|lawn service'; then
+    echo "landscaping"
+  
+  # Everything else
   else
     echo "misc"
   fi
