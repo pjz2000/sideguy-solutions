@@ -102,7 +102,7 @@ candidates = candidates[:MAX_PAGES]
 for slug, fn in candidates:
     html = TEMPLATE.format(
         title=slug.replace("-", " ").title(),
-        desc=f"Decision support for {{slug.replace('-', ' ')}} in San Diego.",
+        desc=f"Decision support for {slug.replace('-', ' ')} in San Diego.",
         slug=slug,
         body="Compare next best options, understand urgency, and escalate to a real human fast."
     )
@@ -111,4 +111,4 @@ for slug, fn in candidates:
         f.write(html)
     created += 1
 
-print(f"Created {{created}} exit ramp pages (20% sample)")
+print(f"Created {created} exit ramp pages (20% sample)")
