@@ -25,8 +25,8 @@ for row in "${PAGES[@]}"; do
 
   [ -f "$FILE" ] || continue
 
-  # safer title replace
-  perl -0pi -e "s|<title>.*?</title>|<title>${TITLE} | SideGuy Solutions</title>|s" "$FILE"
+  # safer title replace (use @ as delimiter to avoid pipe conflicts)
+  perl -0pi -e "s@<title>.*?</title>@<title>${TITLE} \\| SideGuy Solutions</title>@s" "$FILE"
 
   # add meta if missing
   if ! grep -q 'name="description"' "$FILE"; then
