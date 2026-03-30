@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Fee Leak Calculator | SideGuy Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Estimate your annual payment processor margin leak with SideGuy's fee leak calculator.">
+<link rel="canonical" href="https://www.sideguysolutions.com/payment-fee-leak-calculator.html">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(180deg,#eefcff 0%,#ffffff 100%);color:#0a2540}
+.wrap{max-width:980px;margin:0 auto;padding:40px 20px 90px}
+.card{background:#fff;border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 10px 30px rgba(16,24,40,.08)}
+input,button{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(10,37,64,.08);margin-top:6px}
+button{background:#0ea5e9;color:#fff;font-weight:700;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#pj-orb{position:fixed;right:18px;bottom:18px;background:#0ea5e9;color:#fff;padding:14px 18px;border-radius:999px;font-weight:700}
+@media (max-width: 760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Payment Fee Leak Calculator</h1>
+    <p>Use this to estimate how much margin your current setup may be quietly eating every year.</p>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <div>
+        <label>Monthly volume</label>
+        <input id="vol" type="number" placeholder="50000">
+      </div>
+      <div>
+        <label>Average ticket</label>
+        <input id="ticket" type="number" placeholder="120">
+      </div>
+      <div>
+        <label>Current fee rate (%)</label>
+        <input id="currentRate" type="number" step="0.01" placeholder="3.10">
+      </div>
+      <div>
+        <label>Alternative fee rate (%)</label>
+        <input id="newRate" type="number" step="0.01" placeholder="2.50">
+      </div>
+      <div>
+        <label>Monthly software stack fees</label>
+        <input id="stackFees" type="number" placeholder="250">
+      </div>
+      <div>
+        <label>Payout timing cost / month</label>
+        <input id="timingCost" type="number" placeholder="150">
+      </div>
+    </div>
+    <p><button onclick="calc()">Calculate annual leak</button></p>
+    <div id="out" class="card">Run the numbers to see your estimate.</div>
+  </div>
+
+  <div class="card">
+    <h2>Use this result correctly</h2>
+    <ul>
+      <li>Do not switch blindly just because another rate looks lower.</li>
+      <li>Compare annual leak against switching friction, integrations, and payout reality.</li>
+      <li>If the leak is meaningful, pressure-test the stack now instead of six months from now.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <p><a href="/payment-fee-leak-optimization.html">← Back to flagship page</a></p>
+  </div>
+</div>
+
+<a id="pj-orb" href="sms:+17735441231">💬 Text PJ</a>
+
+<script>
+function calc() {
+  const vol = parseFloat(document.getElementById('vol').value || 0);
+  const ticket = parseFloat(document.getElementById('ticket').value || 0);
+  const currentRate = parseFloat(document.getElementById('currentRate').value || 0) / 100;
+  const newRate = parseFloat(document.getElementById('newRate').value || 0) / 100;
+  const stackFees = parseFloat(document.getElementById('stackFees').value || 0);
+  const timingCost = parseFloat(document.getElementById('timingCost').value || 0);
+
+  const annualCurrent = (vol * currentRate * 12) + (stackFees * 12) + (timingCost * 12);
+  const annualNew = (vol * newRate * 12);
+  const annualLeak = annualCurrent - annualNew;
+  const monthlyLeak = annualLeak / 12;
+  const txPerMonth = ticket > 0 ? (vol / ticket) : 0;
+
+  document.getElementById('out').innerHTML =
+    "<strong>Estimated annual current cost:</strong> $" + annualCurrent.toFixed(2) + "<br>" +
+    "<strong>Estimated annual alternative cost:</strong> $" + annualNew.toFixed(2) + "<br>" +
+    "<strong>Estimated annual leak:</strong> $" + annualLeak.toFixed(2) + "<br>" +
+    "<strong>Estimated monthly leak:</strong> $" + monthlyLeak.toFixed(2) + "<br>" +
+    "<strong>Transactions per month:</strong> " + txPerMonth.toFixed(0) + "<br><br>" +
+    (annualLeak > 0
+      ? "If you are leaking this much, it is worth reviewing the processor and surrounding stack."
+      : "Your setup may be fine on fees alone. Still check hidden tooling and payout drag.");
+}
+</script>
+</body>
+</html>
