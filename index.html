@@ -144,6 +144,8 @@
 
       display:flex;
 
+      gap:10px;
+
       justify-content:center;
 
       pointer-events:none; /* so it feels “floating” */
@@ -2205,16 +2207,22 @@ a:hover { color: var(--mint); }
     <span class="cmdItem"><span class="statusDot ai"></span> AI SYSTEMS: READY</span>
     <span class="cmdSep">·</span>
     <span class="cmdItem"><span class="statusDot human"></span> HUMAN NODE: PJ AVAILABLE</span>
+    <span class="cmdSep">·</span>
+    <span class="cmdItem" id="sg-clock" style="font-variant-numeric:tabular-nums;"></span>
+    <span class="cmdSep">·</span>
+    <span class="cmdItem" style="color:rgba(0,255,200,.7)">UPDATED 2026-03-31 v2027</span>
   </div>
 
-  <div class="topbar">
+  <div class="topbar" style="gap:10px">
 
     <a class="homePill" href="index.html" aria-label="Back to home">
-
       <span class="homeDot"></span>
+      Home
+    </a>
 
-      Back to home
-
+    <a class="homePill" href="/memes/index.html" aria-label="Meme Factory" style="background:linear-gradient(135deg,rgba(0,255,200,.14),rgba(77,124,255,.12));border-color:rgba(0,255,200,.25);">
+      <span style="font-size:1rem">😂</span>
+      Meme Factory
     </a>
 
   </div>
@@ -3898,5 +3906,16 @@ a:hover { color: var(--mint); }
 </section>
 
 <script src="assets/sideguy/meme-wow.js"></script>
+<script>
+(function(){
+  var el=document.getElementById('sg-clock');
+  if(!el)return;
+  function tick(){
+    var d=new Date();
+    el.textContent=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'America/Los_Angeles'})+' PT';
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
 </body>
 </html>
