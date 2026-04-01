@@ -1835,8 +1835,9 @@
 
 <style id="sg-ocean">
 /* ═══════════════════════════════════════════════════════
-   SIDEGUY · OCEAN NORTH COUNTY SD · COASTAL CALIFORNIA
-   Carlsbad · Encinitas · Del Mar · Solana Beach vibes
+   SIDEGUY · COASTAL COMMAND OS · 2027 EDITION
+   Apple polish · Tesla OS motion · Arc browser softness
+   Carlsbad · Encinitas · Del Mar · Solana Beach · Ocean
    ═══════════════════════════════════════════════════════ */
 
 /* ── Coastal token override ──────────────────────────── */
@@ -1858,11 +1859,11 @@
   --blue2: #0ea5e9;
 }
 
-/* ── Sun-drenched coastal background ─────────────────── */
+/* ── Ocean gradient body ─────────────────────────────── */
 html { background: #f0f8ff; }
 body {
-  background:
-    radial-gradient(ellipse 160% 55% at 50% -5%, #b8e4f7 0%, #e8f6fd 45%, #f5fbff 100%) !important;
+  background: linear-gradient(160deg, #e8f7fd 0%, #f0faff 30%, #fff 60%, #f5fbff 100%) !important;
+  min-height: 100vh;
   color: var(--ink) !important;
 }
 
@@ -1881,6 +1882,48 @@ body:before {
 /* ── Subtle grain stays, barely visible on light ─────── */
 body:after { opacity: .018 !important; }
 
+/* ── Glass card system ───────────────────────────────── */
+.glass-card {
+  background: rgba(255,255,255,.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(8,145,178,.08), 0 2px 8px rgba(0,0,0,.04), inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* ── Scroll reveal ───────────────────────────────────── */
+.reveal { opacity:0; transform:translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── Premium hover lift ──────────────────────────────── */
+.lift { transition: transform .25s ease, box-shadow .25s ease; }
+.lift:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(8,145,178,.14); }
+
+/* ── Living freshness pulse ──────────────────────────── */
+@keyframes freshPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(8,145,178,.4); }
+  50% { box-shadow: 0 0 0 8px rgba(8,145,178,0); }
+}
+.fresh-dot {
+  width:8px; height:8px; border-radius:50%; background:#0891b2;
+  animation: freshPulse 2.5s ease infinite;
+  display:inline-block; margin-right:6px;
+  vertical-align:middle;
+}
+
+/* ── Section heading premium style ──────────────────── */
+.section-kicker {
+  font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #0891b2; margin-bottom: 6px;
+}
+.section-title {
+  font-size: clamp(1.4rem,3vw,2rem); font-weight: 900; letter-spacing: -.025em; color: #0c2d48; margin: 0 0 8px;
+}
+.section-sub {
+  font-size: .95rem; color: #2e6a8a; line-height: 1.6; max-width: 560px;
+}
+
 /* ── h1 — Pacific horizon gradient ───────────────────── */
 h1 {
   background: linear-gradient(
@@ -1897,6 +1940,14 @@ h1 {
 h2 { color: #0c2d48 !important; }
 h3 { color: #164e63 !important; }
 p  { color: #2e6a8a !important; }
+
+/* ── Topbar — frosted glass sticky ──────────────────── */
+.topbar {
+  background: transparent !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+}
 
 /* ── Command center HUD — ocean glass ────────────────── */
 .cmdStrip {
@@ -1920,29 +1971,33 @@ p  { color: #2e6a8a !important; }
 }
 
 /* ── Top nav pill — frosted sea glass ────────────────── */
-.topbar { background: transparent !important; }
 .homePill {
-  background: rgba(255,255,255,.78) !important;
+  background: rgba(255,255,255,.85) !important;
   border: 1px solid rgba(8,145,178,.22) !important;
   backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   color: #0c2d48 !important;
   box-shadow: 0 8px 28px rgba(12,45,72,.10), 0 0 0 1px rgba(6,182,212,.1) !important;
+  transition: transform .2s ease, box-shadow .2s ease !important;
 }
 .homePill:hover {
-  background: rgba(255,255,255,.92) !important;
+  background: rgba(255,255,255,.96) !important;
   border-color: rgba(8,145,178,.4) !important;
-  box-shadow: 0 10px 36px rgba(8,145,178,.18) !important;
+  box-shadow: 0 12px 36px rgba(8,145,178,.18) !important;
+  transform: translateY(-1px) !important;
 }
 .homeDot {
   background: linear-gradient(135deg, #0891b2, #06b6d4) !important;
   box-shadow: 0 0 0 3px rgba(6,182,212,.2), 0 0 10px rgba(8,145,178,.4) !important;
 }
 
-/* ── Hero section ─────────────────────────────────────── */
+/* ── Hero section — premium glass ────────────────────── */
 .cmdHero {
-  background: linear-gradient(160deg, rgba(186,227,247,.55) 0%, rgba(224,245,255,.45) 60%, rgba(255,255,255,.2) 100%) !important;
-  border: 1px solid rgba(6,182,212,.28) !important;
-  box-shadow: 0 4px 40px rgba(8,145,178,.1), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  background: linear-gradient(160deg, rgba(186,227,247,.60) 0%, rgba(224,245,255,.50) 60%, rgba(255,255,255,.25) 100%) !important;
+  border: 1px solid rgba(6,182,212,.30) !important;
+  box-shadow: 0 8px 48px rgba(8,145,178,.12), 0 2px 16px rgba(8,145,178,.06), inset 0 1px 0 rgba(255,255,255,.95) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
 }
 .cmdHero h1 { color: #0c2d48 !important; }
 .cmdHeroGrid { opacity: .12 !important; filter: none !important; }
@@ -1976,7 +2031,7 @@ p  { color: #2e6a8a !important; }
 
 /* Icon buttons */
 .cmdIconOrb {
-  background: rgba(255,255,255,.75) !important;
+  background: rgba(255,255,255,.80) !important;
   border: 1px solid rgba(8,145,178,.2) !important;
   box-shadow: 0 6px 20px rgba(12,45,72,.1) !important;
   color: #0c2d48 !important;
@@ -1987,7 +2042,7 @@ p  { color: #2e6a8a !important; }
 }
 .cmdIconLabel { color: #2e6a8a !important; }
 
-/* ── Bento cards — sea glass ──────────────────────────── */
+/* ── Bento cards — premium sea glass ─────────────────── */
 .card {
   background: linear-gradient(155deg, rgba(255,255,255,.88), rgba(240,248,255,.75)) !important;
   border: 1px solid rgba(6,182,212,.2) !important;
@@ -1996,6 +2051,7 @@ p  { color: #2e6a8a !important; }
     0 16px 44px rgba(12,45,72,.09),
     0 0 0 1px rgba(8,145,178,.06) !important;
   backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
 }
 .card:hover {
   border-color: rgba(8,145,178,.35) !important;
@@ -2030,6 +2086,7 @@ p  { color: #2e6a8a !important; }
   color: #fff !important;
   font-weight: 900 !important;
   box-shadow: 0 8px 28px rgba(8,145,178,.35), 0 0 0 1px rgba(8,145,178,.2) !important;
+  transition: transform .2s ease, box-shadow .2s ease !important;
 }
 .btn:hover {
   box-shadow: 0 12px 40px rgba(8,145,178,.5) !important;
@@ -2049,10 +2106,15 @@ p  { color: #2e6a8a !important; }
 
 /* ── Rail labels ──────────────────────────────────────── */
 .railLabel {
-  background: rgba(255,255,255,.72) !important;
+  background: rgba(255,255,255,.80) !important;
   border: 1px solid rgba(8,145,178,.15) !important;
   color: #2e6a8a !important;
   backdrop-filter: blur(16px) !important;
+  transition: transform .2s ease, box-shadow .2s ease !important;
+}
+.railLabel:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(8,145,178,.12) !important;
 }
 .railLabel b { color: #0c2d48 !important; }
 
@@ -2067,9 +2129,10 @@ p  { color: #2e6a8a !important; }
 
 /* ── Floating PJ pill ─────────────────────────────────── */
 .floatPill {
-  background: rgba(255,255,255,.85) !important;
+  background: rgba(255,255,255,.88) !important;
   border: 1px solid rgba(8,145,178,.2) !important;
   backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   box-shadow: 0 12px 40px rgba(12,45,72,.18) !important;
 }
 .floatName { color: #0c2d48 !important; }
@@ -2079,54 +2142,75 @@ p  { color: #2e6a8a !important; }
   box-shadow: 0 0 16px rgba(8,145,178,.4) !important;
 }
 
-/* ── Problem cards ────────────────────────────────────── */
-.radarLabel { color: #0369a1 !important; font-weight: 800 !important; }
+/* ── Problem cards — premium hover ───────────────────── */
 .probCard {
-  background: rgba(255,255,255,.75) !important;
+  background: rgba(255,255,255,.78) !important;
   border: 1px solid rgba(8,145,178,.14) !important;
   color: #0c2d48 !important;
 }
 .probCard:hover {
-  background: rgba(240,248,255,.9) !important;
-  border-color: rgba(8,145,178,.32) !important;
-  box-shadow: 0 8px 32px rgba(8,145,178,.15) !important;
+  background: rgba(240,248,255,.95) !important;
+  border-color: rgba(8,145,178,.35) !important;
+  box-shadow: 0 18px 44px rgba(8,145,178,.13) !important;
+  transform: translateY(-5px) !important;
+}
+.probCard, .pillarCard, .hubCard {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease !important;
+}
+.pillarCard:hover, .hubCard:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 18px 44px rgba(8,145,178,.13) !important;
+  border-color: rgba(8,145,178,.35) !important;
 }
 .probCardTitle { color: #0c2d48 !important; }
 .probCardDesc { color: #2e6a8a !important; }
 
-/* ── Pillar strip ─────────────────────────────────────── */
+/* ── Pillar strip — glass wrap ────────────────────────── */
 .pillarStrip {
   background: rgba(255,255,255,.65) !important;
   border: 1px solid rgba(8,145,178,.14) !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
 }
 .pTitle { color: #0c2d48 !important; }
 .pDesc { color: #2e6a8a !important; }
 
-/* ── Meme cards — coastal sand + sea ─────────────────── */
+/* ── Meme strip — premium container ─────────────────── */
 .sg-meme-strip {
-  background: linear-gradient(180deg, rgba(186,227,247,.25), rgba(255,255,255,.1)) !important;
-  border: 1px solid rgba(8,145,178,.18) !important;
+  background: linear-gradient(160deg, rgba(186,227,247,.30), rgba(255,255,255,.15)) !important;
+  border: 1px solid rgba(8,145,178,.20) !important;
   border-radius: 28px !important;
-  padding: 28px !important;
-  box-shadow: 0 4px 40px rgba(8,145,178,.08) !important;
+  padding: 32px !important;
+  box-shadow: 0 8px 48px rgba(8,145,178,.10), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
 }
 .sg-meme-strip h2 { color: #0c2d48 !important; }
 .sg-meme-strip p { color: #2e6a8a !important; }
 
+/* ── Meme cards — premium glass ──────────────────────── */
 .meme-card {
-  background: linear-gradient(155deg, rgba(255,255,255,.92), rgba(240,248,255,.82)) !important;
-  border: 1px solid rgba(8,145,178,.18) !important;
-  box-shadow: 0 10px 36px rgba(12,45,72,.10) !important;
+  background: rgba(255,255,255,.82) !important;
   backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(8,145,178,.14) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 28px rgba(8,145,178,.07), inset 0 1px 0 rgba(255,255,255,.95) !important;
+  transition: transform .3s ease, box-shadow .3s ease !important;
 }
 .meme-card:hover {
-  border-color: rgba(8,145,178,.38) !important;
-  box-shadow: 0 16px 50px rgba(8,145,178,.2) !important;
-  transform: translateY(-5px) scale(1.015) !important;
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 0 20px 50px rgba(8,145,178,.15), inset 0 1px 0 rgba(255,255,255,.95) !important;
+  border-color: rgba(8,145,178,.28) !important;
 }
 .meme-top { color: #0c2d48 !important; }
 .meme-bottom { color: #2e6a8a !important; }
 .meme-card a { color: #0369a1 !important; text-shadow: none !important; }
+
+/* ── Radar label / section kicker ────────────────────── */
+.radarLabel { color: #0369a1 !important; font-weight: 800 !important; }
+.kicker, [class*="kicker"] { color: #0369a1 !important; }
 
 /* ── Freshness hub card ───────────────────────────────── */
 a[href="/fresh/index.html"] > div {
@@ -2148,11 +2232,6 @@ nav[aria-label="Breadcrumb navigation"] a {
 /* ── General links ────────────────────────────────────── */
 a { color: #0369a1; }
 a:hover { color: #0891b2; }
-
-/* ── Section kickers ──────────────────────────────────── */
-.kicker, [class*="kicker"], .radarLabel {
-  color: #0369a1 !important;
-}
 
 /* ── HUD strip text ───────────────────────────────────── */
 .cmdFooterLabel { color: #0369a1 !important; }
@@ -2186,7 +2265,7 @@ a:hover { color: #0891b2; }
     <span class="cmdItem" style="color:#0369a1;font-weight:700">UPDATED 2026-03-31 v2027</span>
   </div>
 
-  <div class="topbar" style="gap:10px">
+  <div class="topbar" style="gap:10px;background:rgba(255,255,255,.85) !important;backdrop-filter:blur(20px) !important;-webkit-backdrop-filter:blur(20px) !important;border-bottom:1px solid rgba(8,145,178,.08) !important;">
 
     <a class="homePill" href="index.html" aria-label="Back to home">
       <span class="homeDot"></span>
@@ -2272,8 +2351,8 @@ a:hover { color: #0891b2; }
   </div>
   <p class="cmdEye">&#x26A1; Future Infrastructure &middot; San Diego &middot; 2027</p>
   <h1>The human resolution layer<br>for modern technology.</h1>
-  <p class="cmdSub">SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it. Clarity before cost — no pressure, no sales pitch, no weird portals.</p>
-  <div class="cmdHeroCtas">
+  <p class="cmdSub reveal">SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it. Clarity before cost — no pressure, no sales pitch, no weird portals.</p>
+  <div class="cmdHeroCtas reveal">
     <a class="cmdPjOrb" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity">Text<br>PJ</a>
     <div class="cmdIconGroup">
       <a class="cmdIconBtn" href="#problems">
@@ -2294,14 +2373,15 @@ a:hover { color: #0891b2; }
 
 <!-- MEME FACTORY STRIP -->
 <section class="sg-meme-strip" style="margin:32px 0">
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:20px">
     <div>
-      <div style="font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);margin-bottom:4px">Meme Factory · Latest Drops</div>
-      <h2 style="margin:0;font-size:1.2rem;font-weight:800">Real talk from the San Diego operator trenches</h2>
+      <div style="font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0891b2;margin-bottom:6px"><span class="fresh-dot"></span>Meme Factory · Latest Drops</div>
+      <h2 style="margin:0;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.025em;color:#0c2d48;line-height:1.1">Real talk from the San Diego operator trenches</h2>
+      <p style="margin:6px 0 0;font-size:.88rem;color:#2e6a8a;line-height:1.5;max-width:480px">24 memes. Zero vendor spin. Just what operators actually live through.</p>
     </div>
-    <a href="/memes/index.html" style="font-size:.85rem;font-weight:700;color:var(--blue);text-decoration:none;white-space:nowrap">See all 24 →</a>
+    <a href="/memes/index.html" style="font-size:.85rem;font-weight:800;color:#0369a1;text-decoration:none;white-space:nowrap;padding:8px 16px;background:rgba(255,255,255,.8);border:1px solid rgba(8,145,178,.2);border-radius:999px;backdrop-filter:blur(10px)">See all 24 →</a>
   </div>
-  <div class="sg-meme-grid">
+  <div class="sg-meme-grid reveal">
     <div class="meme-card">
       <div class="meme-top">Payment processor held $4,200 for "review."</div>
       <div class="meme-bottom">Review of what exactly? My credit score is fine. My dreams are not.</div>
@@ -2348,8 +2428,27 @@ a:hover { color: #0891b2; }
   </div>
 </section>
 
+<!-- NORTH COUNTY TRUST SIGNAL BAR -->
+<div class="reveal" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(8,145,178,.1);border-radius:14px;margin:0 0 28px;font-size:.82rem;color:#2e6a8a;">
+  <span style="font-weight:800;color:#0c2d48;white-space:nowrap;">📍 Serving North County SD</span>
+  <span style="opacity:.4">·</span>
+  <span>Solana Beach</span>
+  <span style="opacity:.4">·</span>
+  <span>Encinitas</span>
+  <span style="opacity:.4">·</span>
+  <span>Carlsbad</span>
+  <span style="opacity:.4">·</span>
+  <span>Del Mar</span>
+  <span style="opacity:.4">·</span>
+  <span>Oceanside</span>
+  <span style="opacity:.4">·</span>
+  <span>Vista</span>
+  <span style="opacity:.4">·</span>
+  <span style="margin-left:auto;font-weight:700;color:#0891b2;white-space:nowrap;"><span class="fresh-dot"></span>Available now</span>
+</div>
+
 <!-- PROBLEM RESOLUTION GRID -->
-<section class="probGrid" id="problems" aria-label="Common problems we help solve">
+<section class="probGrid reveal" id="problems" aria-label="Common problems we help solve" style="background:rgba(255,255,255,.45);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(8,145,178,.10);border-radius:24px;padding:24px;box-shadow:0 4px 32px rgba(8,145,178,.06),inset 0 1px 0 rgba(255,255,255,.8);">
   <div class="radarLabel">Common Problems We Help Solve</div>
   <div class="probCards">
     <a class="probCard" href="/tech-help-hub-san-diego.html">
@@ -2396,7 +2495,7 @@ a:hover { color: #0891b2; }
 </section>
 
 <!-- LIVE PROBLEM RADAR -->
-<section class="radarSection" aria-label="Live problem radar">
+<section class="radarSection reveal" aria-label="Live problem radar">
   <div class="radarLabel"><span class="radarDot"></span> Live Problem Radar · What operators are searching right now</div>
   <div class="radarGrid">
     <a class="radarCard" href="/how-credit-card-processing-fees-work.html">
@@ -2433,9 +2532,9 @@ a:hover { color: #0891b2; }
 </section>
 
 <!-- CORE PILLARS -->
-<section aria-label="Core pillars" id="browse">
+<section class="reveal" aria-label="Core pillars" id="browse">
   <div class="radarLabel">Core Pillars</div>
-  <div class="pillarStrip">
+  <div class="pillarStrip glass-card" style="padding:20px !important;">
     <a class="pillarCard" href="/payment-processing-hub-san-diego.html">
       <div class="pIcon">&#x1F4B3;</div>
       <div class="pName">SideGuy Payments</div>
@@ -2460,7 +2559,7 @@ a:hover { color: #0891b2; }
 </section>
 
 <!-- KNOWLEDGE HUBS -->
-<section aria-label="Knowledge Hubs" id="knowledge-hubs" style="margin-top:32px">
+<section class="reveal" aria-label="Knowledge Hubs" id="knowledge-hubs" style="margin-top:32px">
   <div class="radarLabel">Knowledge Hubs</div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:16px">
     <a href="/payments-knowledge-hub.html" style="display:block;background:#ffffffcc;border:1px solid rgba(7,48,68,.10);border-radius:16px;padding:16px 18px;text-decoration:none;color:#073044;transition:transform .15s,border-color .15s" onmouseover="this.style.transform='translateY(-2px)';this.style.borderColor='rgba(33,211,161,.4)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(7,48,68,.10)'">
@@ -3814,6 +3913,18 @@ a:hover { color: #0891b2; }
     el.textContent=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'America/Los_Angeles'})+' PT';
   }
   tick();setInterval(tick,1000);
+})();
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  },{threshold:.12});
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
