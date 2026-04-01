@@ -26,16 +26,29 @@
         "@type":"FAQPage",
         "mainEntity":[
           {
-            "@type":"Question","name":"What is — Twilio SMS Not Delivering in 2026?",
-            "acceptedAnswer":{"@type":"Answer","text":"Twilio SMS Not Delivering in 2026 is a common operator or business issue that surfaces when systems, tools, or settings drift out of alignment. This page explains it in plain English and gives you the fastest path to a resolution."}
+            "@type":"Question",
+            "name":"Why is Twilio SMS delivered but not received?",
+            "acceptedAnswer":{"@type":"Answer","text":"A 'delivered' status in Twilio's console means the carrier accepted the message, not that it reached the handset. Carrier-side filtering — especially for unregistered A2P 10DLC numbers — can silently drop messages after the handoff. Check your A2P registration status, review the message content for spam triggers, and cross-test with numbers on different carriers (AT&T, Verizon, T-Mobile)."}
           },
           {
-            "@type":"Question","name":"What usually causes Twilio SMS Not Delivering in 2026?",
-            "acceptedAnswer":{"@type":"Answer","text":"Most causes fall into a few buckets: a recent change (update, integration flip, or settings drift), permissions mismatch, vendor policy change, stale API credentials, or a hidden dependency that silently broke. The checklist below covers the most common triggers."}
+            "@type":"Question",
+            "name":"What is A2P 10DLC and do I need it?",
+            "acceptedAnswer":{"@type":"Answer","text":"A2P 10DLC (Application-to-Person 10-Digit Long Code) is the US carrier registration system for business SMS. If you send business messages from a standard 10-digit number, you must register your brand and campaign in Twilio Console. Without registration, carriers silently filter your messages. This has been required since 2023 and is strictly enforced in 2026."}
           },
           {
-            "@type":"Question","name":"What should I do first?",
-            "acceptedAnswer":{"@type":"Answer","text":"Start with the fastest checks: confirm the exact error message and timestamp, verify you&apos;re in the right account/workspace, reproduce with a minimal test, check vendor status pages, and isolate your last change. If it's still unclear after 15 minutes, a second set of eyes saves time."}
+            "@type":"Question",
+            "name":"How do I check Twilio SMS delivery status?",
+            "acceptedAnswer":{"@type":"Answer","text":"In the Twilio Console, go to Monitor > Logs > Messaging to see message status and error codes. Set up a StatusCallback URL in your API call so Twilio posts delivery receipts to your server in real time. Error codes 30003, 30004, 30005, 30006, and 30007 each pinpoint a specific failure type."}
+          },
+          {
+            "@type":"Question",
+            "name":"Why does Twilio SMS work for some carriers but not others?",
+            "acceptedAnswer":{"@type":"Answer","text":"Carrier filtering rules differ. T-Mobile, AT&T, and Verizon each maintain their own spam filters. If your A2P campaign is not registered or your message content triggers one carrier's filter, messages to that carrier's subscribers fail while others succeed. Test with SIMs from each major carrier to isolate the block."}
+          },
+          {
+            "@type":"Question",
+            "name":"What are Twilio SMS rate limits?",
+            "acceptedAnswer":{"@type":"Answer","text":"Standard 10-digit long codes are limited to 1 message per second. Twilio queues excess messages and may throttle or drop them during traffic spikes. Toll-free numbers support higher throughput, and short codes support up to 100 messages per second. If you need volume, upgrade your number type or use a messaging service pool."}
           }
         ]
       }
@@ -108,7 +121,17 @@
     text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.2);
   }
   .floatBtn:hover{opacity:.92;text-decoration:none}
-  @media(max-width:580px){.cta-box{flex-direction:column;gap:14px}}
+  /* Error code table */
+  .err-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:18px 0 0}
+  .err-table th{background:rgba(8,145,178,.1);color:var(--ink);font-weight:700;padding:9px 12px;text-align:left;border-bottom:2px solid rgba(8,145,178,.2)}
+  .err-table td{padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.06);vertical-align:top;color:#2a4555;line-height:1.5}
+  .err-table tr:last-child td{border-bottom:none}
+  .err-table td:first-child{font-weight:700;font-family:monospace;font-size:.92rem;white-space:nowrap;color:var(--blue2)}
+  /* FAQ section */
+  .faq-item{margin-bottom:14px}
+  .faq-item h3{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .faq-item p{font-size:.92rem;line-height:1.65;color:#2a4555}
+  @media(max-width:580px){.cta-box{flex-direction:column;gap:14px}.err-table{font-size:.8rem}.err-table td,.err-table th{padding:7px 8px}}
 
   </style>
 </head>
@@ -121,52 +144,124 @@
 <main class="wrap">
 
   <div class="prob-badge">Problem Guide</div>
-  <h1>Twilio SMS Not Delivering in 2026</h1>
-  <p class="lede">Operator-first breakdown: what causes this, the fastest checks, and what usually fixes it — in plain English.</p>
+  <h1>Twilio SMS Not Delivering in 2026: 6 Fixes That Actually Work</h1>
+  <p class="lede">Your Twilio messages are sending without errors but never arriving. Or they're showing "delivered" in the console but the recipient never got them. Both symptoms are maddening because the API returns 200 and you have no immediate clue where the message died. This guide walks through the real causes — in order of likelihood — and tells you exactly what to fix.</p>
 
+  <!-- DIAGNOSTIC CHECKLIST -->
+  <div style="background:rgba(8,145,178,.05);border:1px solid rgba(8,145,178,.15);border-radius:16px;padding:20px 24px;margin:24px 0">
+    <h3 style="margin:0 0 14px;font-size:1rem;font-weight:800">Quick Diagnostic — Check These First</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem">
+        <input type="checkbox" style="margin-top:3px;accent-color:#0891b2"> <span><strong>A2P 10DLC registration</strong> — Is your number registered for business messaging? Unregistered numbers face carrier filtering in 2026.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem">
+        <input type="checkbox" style="margin-top:3px;accent-color:#0891b2"> <span><strong>Message content flags</strong> — Does your message contain URLs, "free," "guaranteed," or other spam trigger words?</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem">
+        <input type="checkbox" style="margin-top:3px;accent-color:#0891b2"> <span><strong>Phone number format</strong> — Are you using E.164 format (+1XXXXXXXXXX)? Missing country code causes silent failures.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem">
+        <input type="checkbox" style="margin-top:3px;accent-color:#0891b2"> <span><strong>Webhook error logs</strong> — Check your Twilio console status callbacks for error codes 30003, 30005, 30006.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem">
+        <input type="checkbox" style="margin-top:3px;accent-color:#0891b2"> <span><strong>Carrier filtering</strong> — Test sending to numbers on different carriers (AT&amp;T, Verizon, T-Mobile). Carrier-specific blocks are common.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem">
+        <input type="checkbox" style="margin-top:3px;accent-color:#0891b2"> <span><strong>Rate limits</strong> — Sending more than 1 message/second from a long code? You'll get throttled silently.</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- ERROR CODE TABLE -->
   <div class="card">
-    <h2>What this is</h2>
-    <p>
-      Twilio SMS Not Delivering in 2026 is one of those issues that feels chaotic until you break it into
-      3–5 checks. Most operators hit it after a setting change, integration update,
-      or vendor policy shift they didn't notice at the time. This page gives you the
-      checks, the causes, and the "what to do next."
-    </p>
+    <h2>Common Twilio Error Codes and What They Mean</h2>
+    <div style="overflow-x:auto">
+      <table class="err-table">
+        <tr><th>Error Code</th><th>Meaning</th><th>Fix</th></tr>
+        <tr><td>30003</td><td>Unreachable destination handset</td><td>Number doesn't exist or is turned off. Verify with Lookup API before sending.</td></tr>
+        <tr><td>30004</td><td>Message blocked</td><td>Carrier or recipient is blocking. Check A2P registration status.</td></tr>
+        <tr><td>30005</td><td>Unknown destination handset</td><td>Number is valid but Twilio can't confirm delivery. Often a US carrier issue.</td></tr>
+        <tr><td>30006</td><td>Landline or unreachable carrier</td><td>Destination number is a landline. Use Lookup API to filter before send.</td></tr>
+        <tr><td>30007</td><td>Carrier violation</td><td>Content flagged by carrier. Remove URLs, promotional language, or unapproved opt-in.</td></tr>
+        <tr><td>30008</td><td>Unknown error</td><td>Transient carrier issue. Retry after 30 seconds. If persistent, open Twilio support ticket.</td></tr>
+        <tr><td>21610</td><td>Attempt to send to unsubscribed recipient</td><td>This number previously sent STOP. You cannot message them again without re-opt-in.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- A2P 10DLC SECTION -->
+  <div class="card">
+    <h2>A2P 10DLC: The #1 Cause of SMS Failures in 2026</h2>
+    <p style="margin-bottom:10px">If you're sending business SMS in the US without A2P 10DLC registration, carriers are silently filtering your messages — no error, no bounce, just missing delivery. This changed in 2023 and is now strictly enforced.</p>
+    <p style="margin-bottom:8px;font-size:.93rem;color:#2a4555"><strong>What you need:</strong></p>
+    <ul>
+      <li>Brand registration (your business entity) in Twilio Console</li>
+      <li>Campaign registration (use case: marketing, 2FA, notifications, etc.)</li>
+      <li>Number assignment to your registered campaign</li>
+      <li>Sample messages that match your actual message templates</li>
+    </ul>
+    <p style="margin-top:10px">Registration takes 2–5 business days. Until approved, your messages may deliver inconsistently or not at all to T-Mobile, AT&amp;T, and Verizon subscribers.</p>
   </div>
 
   <div class="card">
     <h2>Most likely causes</h2>
     <ul>
-      <li>Recent change — update, integration flip, or settings drift</li>
-      <li>Account or permissions mismatch</li>
-      <li>Vendor policy or rate-limit change (often undocumented)</li>
+      <li>A2P 10DLC not registered — the single largest cause in 2026</li>
+      <li>Message content triggers carrier spam filter (URLs, promo language, unapproved opt-in)</li>
+      <li>Phone number not in E.164 format (+1XXXXXXXXXX) — causes silent API failures</li>
       <li>Stale API key, webhook secret, or auth token</li>
-      <li>Hidden dependency — DNS, auth, environment variable, billing limit</li>
-      <li>Gap between documentation and current platform behavior</li>
+      <li>Rate limit exceeded — long codes are capped at 1 msg/sec</li>
+      <li>Recipient previously sent STOP (error 21610) — cannot re-message without new opt-in</li>
     </ul>
   </div>
 
   <div class="card">
     <h2>Fast checks (10–15 minutes)</h2>
     <ul>
-      <li>Capture the exact error message and timestamp</li>
-      <li>Reproduce with the smallest possible test case</li>
-      <li>Confirm you're in the right account/workspace/environment</li>
-      <li>Check vendor status pages and recent changelogs</li>
-      <li>Roll back your last change (if safe) to isolate the trigger</li>
-      <li>Test with a fresh credential or minimal config</li>
+      <li>Pull the exact error code from Twilio Console &rarr; Monitor &rarr; Logs &rarr; Messaging</li>
+      <li>Set a StatusCallback URL on your next test send to capture live delivery receipts</li>
+      <li>Reproduce with the smallest possible test case — one number, one message, minimal content</li>
+      <li>Confirm A2P 10DLC campaign status is "Approved" in Twilio Console</li>
+      <li>Check vendor status pages and recent changelogs for carrier policy changes</li>
+      <li>Test with a fresh credential or minimal config to rule out auth issues</li>
     </ul>
   </div>
 
   <div class="card">
     <h2>What usually fixes it</h2>
     <ul>
-      <li>Re-authenticate or regenerate credentials (keys, tokens, secrets)</li>
-      <li>Rebuild from the minimal config that worked most recently</li>
-      <li>Move one change at a time — avoid "big bang" configuration changes</li>
-      <li>Contact vendor support with timestamps and the exact error string</li>
-      <li>Document the fix so it never costs you the same time twice</li>
+      <li>Complete A2P 10DLC brand + campaign registration if not done</li>
+      <li>Strip promotional language, URLs, or trigger words from message body</li>
+      <li>Switch to E.164 format (+1XXXXXXXXXX) for all destination numbers</li>
+      <li>Use Twilio Lookup API to filter landlines and disconnected numbers before send</li>
+      <li>Implement a messaging service pool to manage throughput and avoid throttling</li>
+      <li>Document the fix — carrier rules change quarterly and this will surface again</li>
     </ul>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <div class="card">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Why is Twilio SMS showing "delivered" but the recipient never got it?</h3>
+      <p>A "delivered" status means the carrier accepted the handoff — not that the message hit the handset. Carriers can silently discard messages after acceptance, especially if the sending number fails their A2P registration check or the content matches a spam pattern. Cross-test with numbers on AT&amp;T, Verizon, and T-Mobile to isolate which carrier is dropping it.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is A2P 10DLC and do I need it?</h3>
+      <p>A2P 10DLC is the US carrier system for registering business SMS numbers. If you send any business messages (notifications, marketing, 2FA) from a standard 10-digit number, you must register your brand and campaign in Twilio Console. Without it, carriers silently filter messages. It's mandatory in 2026.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do I check Twilio SMS delivery status?</h3>
+      <p>Go to Twilio Console &rarr; Monitor &rarr; Logs &rarr; Messaging for per-message status and error codes. For real-time visibility, add a <code>StatusCallback</code> URL to your API call — Twilio will POST delivery receipts as status changes. Error codes 30003–30008 each map to a specific failure type (see the table above).</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why does Twilio SMS work for some carriers but not others?</h3>
+      <p>Each major carrier (T-Mobile, AT&amp;T, Verizon) runs its own spam filters. A2P registration gaps, content flags, or opt-in compliance failures can block messages on one carrier while others pass. Test with a SIM from each carrier to identify which network is rejecting your messages, then check your campaign registration for that carrier's specific requirements.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What are Twilio SMS rate limits?</h3>
+      <p>Standard 10-digit long codes: 1 message per second. Toll-free numbers: ~3 messages per second. Short codes: up to 100 messages per second. Exceeding the limit causes silent queuing and potential message drops. If you need volume, use a Twilio Messaging Service with a number pool, or upgrade to a short code for high-throughput campaigns.</p>
+    </div>
   </div>
 
   <div class="card">
@@ -183,12 +278,29 @@
     </div>
   </div>
 
+  <!-- INTERNAL LINKS -->
+  <div class="card">
+    <h2>Related Guides</h2>
+    <ul>
+      <li><a href="/problems/n8n-automation-api-key-invalid.html">n8n API Key Invalid</a> — if you're triggering Twilio via n8n workflows</li>
+      <li><a href="/problems/zapier-task-failed-webhook-timeout.html">Zapier Task Failed: Webhook Timeout</a> — if you're sending SMS through Zapier</li>
+      <li><a href="/ai-automation-consulting-san-diego.html">AI Automation Consulting San Diego</a> — for building reliable automated messaging workflows</li>
+    </ul>
+  </div>
+
+  <!-- DEVELOPER CTA -->
+  <div style="background:linear-gradient(135deg,#073044,#0a1e30);border-radius:16px;padding:28px;color:#fff;margin:32px 0">
+    <h3 style="color:#fff;margin:0 0 8px">Still not delivering after all of this?</h3>
+    <p style="color:rgba(255,255,255,.75);margin:0 0 16px;font-size:.9rem">If you've gone through every check and SMS is still failing, it's usually a carrier-specific block or A2P registration issue that needs a second set of eyes. Text PJ a description of your setup — what you're sending, what error codes you're seeing, what carriers are failing.</p>
+    <a href="sms:+17735441231" style="background:#21d3a1;color:#073044;padding:12px 22px;border-radius:999px;font-weight:900;text-decoration:none;font-size:.9rem">Text PJ · 773-544-1231</a>
+  </div>
+
   <div class="cta-box">
     <div>
       <h3>Still stuck? Text PJ.</h3>
       <p>Real human, San Diego. Straight answer on what actually makes sense for your situation — no pitch.</p>
     </div>
-    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+    <a class="cta-btn" href="sms:+17735441231">Text 773-544-1231</a>
   </div>
 
   <footer>
@@ -196,7 +308,7 @@
     <a href="/problems/index.html">Problems Index</a> ·
     <a href="/concepts/index.html">Concepts</a> ·
     <a href="tel:+17735441231">773-544-1231</a>
-    <br><small>Page updated 2026-03-04</small>
+    <br><small>Page updated 2026-04-01</small>
   </footer>
 
 
@@ -320,7 +432,7 @@
 <p>SideGuy exists to provide <strong>clarity before cost</strong>.
 If you're stuck or unsure what to do next, text PJ and get a real human answer.</p>
 
-<a href="sms:+17735441231" class="pj-button">📱 Text PJ</a>
+<a href="sms:+17735441231" class="pj-button">Text PJ</a>
 
 <p>No pressure. Just clarity.</p>
 </section>
