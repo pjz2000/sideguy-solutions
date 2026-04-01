@@ -45,6 +45,12 @@
   .cta-block a{display:inline-block;background:#fff;color:var(--ink);font-weight:800;font-size:1rem;padding:14px 32px;border-radius:var(--pill);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.12);}
   footer{max-width:820px;margin:0 auto;padding:0 24px 48px;color:var(--muted);font-size:.85rem;}
   footer a{color:var(--muted);}
+  .calc-card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow);}
+  .calc-card input:focus{outline:2px solid #0891b2;outline-offset:2px;}
+  @media(max-width:560px){
+    .calc-grid{grid-template-columns:1fr!important;}
+    .result-grid{grid-template-columns:1fr!important;}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -53,7 +59,12 @@
     {"@type":"Question","name":"What does Stripe charge per transaction in 2026?","acceptedAnswer":{"@type":"Answer","text":"Stripe standard rates: online card payments 2.9% + $0.30. In-person (Stripe Terminal) 2.7% + $0.05. Manually entered cards 3.4% + $0.30. ACH direct debit 0.8% (capped at $5). International cards add 1.5%. Currency conversion adds 1%. No monthly fee on the standard plan."}},
     {"@type":"Question","name":"What fees does Stripe charge that people miss?","acceptedAnswer":{"@type":"Answer","text":"The most-missed Stripe fees: (1) International card surcharge: +1.5% on non-US cards. (2) Currency conversion: +1% if you accept foreign currency. (3) Stripe Billing (subscriptions): +0.5–0.8% on top of transaction fees. (4) Stripe Radar fraud protection is free at standard, but Radar for Fraud Teams adds $0.02/transaction. (5) Chargeback fee: $15 per dispute (refunded if you win)."}},
     {"@type":"Question","name":"How can a small business reduce Stripe fees?","acceptedAnswer":{"@type":"Answer","text":"Five ways: (1) Negotiate custom pricing above $80k/year in annual volume. (2) Use ACH for B2B payments — 0.8% vs 2.9% + $0.30. (3) Offer Solana USDC payments as an alternative for willing customers — ~$0.00025/tx. (4) Reduce international transactions or price in USD to avoid FX conversion fees. (5) Bundle with Stripe annual plans to reduce billing add-on fees."}},
-    {"@type":"Question","name":"Is Stripe worth it for a small business under $5,000/month?","acceptedAnswer":{"@type":"Answer","text":"Yes if you need online payments, subscriptions, or a developer-friendly API. At $5,000/month, you're paying roughly $160/month in Stripe fees — that's the cost of the infrastructure. For simple in-person-only businesses, Square may be a better fit. If you have even a few B2B clients open to USDC, adding Solana payments alongside Stripe can meaningfully cut your effective rate."}}
+    {"@type":"Question","name":"Is Stripe worth it for a small business under $5,000/month?","acceptedAnswer":{"@type":"Answer","text":"Yes if you need online payments, subscriptions, or a developer-friendly API. At $5,000/month, you're paying roughly $160/month in Stripe fees — that's the cost of the infrastructure. For simple in-person-only businesses, Square may be a better fit. If you have even a few B2B clients open to USDC, adding Solana payments alongside Stripe can meaningfully cut your effective rate."}},
+    {"@type":"Question","name":"What is Stripe's effective rate for small business?","acceptedAnswer":{"@type":"Answer","text":"Stripe's advertised rate is 2.9% + $0.30 per transaction, but the effective rate depends heavily on your average ticket size. At $100/ticket it's ~3.2%. At $50/ticket it's ~3.5%. At $20/ticket it's ~4.4%. Add international cards (+1.5%), disputes, or subscription billing add-ons and many small businesses end up between 3.2% and 3.8% effective."}},
+    {"@type":"Question","name":"Does Stripe charge monthly fees?","acceptedAnswer":{"@type":"Answer","text":"No. Stripe's standard plan has zero monthly fee — you only pay per transaction. However, add-on products do cost extra: Stripe Billing adds 0.5–0.8% for subscription management, Stripe Radar for Fraud Teams adds $0.02/transaction, and Stripe Issuing has its own pricing. Most small businesses on the base plan only pay the per-transaction fee."}},
+    {"@type":"Question","name":"When does it make sense to leave Stripe?","acceptedAnswer":{"@type":"Answer","text":"Consider switching when: (1) You process $10,000+/month consistently and want to compare interchange-plus pricing. (2) Your effective rate is above 3.5% and you have a stable customer base. (3) You primarily take in-person payments where Square or a dedicated terminal solution may be cheaper. (4) You need volume-based pricing — Stripe typically negotiates at $80K+ per year."}},
+    {"@type":"Question","name":"What is interchange-plus pricing?","acceptedAnswer":{"@type":"Answer","text":"Interchange-plus (also called cost-plus) pricing passes through the actual interchange rate set by Visa/Mastercard and adds a fixed markup on top — typically 0.10%–0.30% + a small per-transaction fee. Unlike Stripe's flat rate that bundles everything together, interchange-plus is transparent. It's almost always cheaper above $8K–$10K/month in volume for businesses with a healthy card mix."}},
+    {"@type":"Question","name":"Are there Stripe alternatives in San Diego?","acceptedAnswer":{"@type":"Answer","text":"Yes. Local San Diego businesses have several options: Square (better for in-person, simple setup), interchange-plus merchant accounts through local ISOs (better pricing at scale), PayPal/Braintree (good for existing PayPal customers), and Helcim or Stax for subscription-volume pricing. SideGuy helps San Diego operators compare their actual statement against alternatives — text 773-544-1231 for a free 10-minute review."}}
   ]
 }
 </script>
@@ -80,260 +91,362 @@
 <a href="#main-content" style="position:absolute;left:0;top:0;background:#fff;color:#073044;padding:8px 16px;border-radius:8px;z-index:1000;text-decoration:none;">Skip to content</a>
 <header>
   <a class="logo" href="/">SideGuy</a>
-  <a class="cta-pill" href="sms:+17604541860">Text PJ</a>
+  <a class="cta-pill" href="sms:+17735441231">Text PJ</a>
 </header>
 <nav aria-label="Breadcrumb" style="max-width:820px;margin:12px auto 0;padding:0 24px;font-size:.82rem;color:#3f6173;display:flex;flex-wrap:wrap;align-items:center;gap:4px;">
-  <a href="hub.html">Operator Hub</a><span style="opacity:.4;margin:0 4px;">/</span><a href="payments.html">Payments</a><span style="opacity:.4;margin:0 4px;">/</span><span><a href="/hubs/category-payments.html" data-sg-linked>stripe</a> Fees for Small Business</span>
+  <a href="hub.html">Operator Hub</a><span style="opacity:.4;margin:0 4px;">/</span><a href="payments.html">Payments</a><span style="opacity:.4;margin:0 4px;">/</span><span>Stripe Fees for Small Business</span>
 </nav>
 <main id="main-content">
 
-<!-- ═══ SIDEGUY CLARITY LAYER v1 ═══ -->
-<section class="clarity-layer" style="max-width:900px;margin:0 auto;padding:32px 20px;line-height:1.6;">
+<!-- ═══ HERO ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:32px 20px 0;line-height:1.6;">
 
-  <!-- HERO / HOOK -->
-  <div style="background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:1px solid #bae6fd;border-radius:18px;padding:28px 22px;margin-bottom:28px;">
-    <p style="margin:0 0 10px 0;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0891b2;">
-      SideGuy Clarity Layer
-    </p>
-    <h1 style="margin:0 0 12px 0;font-size:36px;line-height:1.1;color:var(--ink,#0f172a);">
-      Stripe Fees for Small Business — What You're Actually Paying
+  <div style="background:linear-gradient(135deg,#ecfeff,#f0fdf4);border:1px solid #bae6fd;border-radius:18px;padding:32px 28px;margin-bottom:32px;">
+    <p style="margin:0 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0891b2;">SideGuy · San Diego Payment Clarity</p>
+    <h1 style="margin:0 0 14px;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.15;color:#073044;font-weight:900;">
+      What Stripe Actually Costs Your San Diego Business in 2026
     </h1>
-    <p style="margin:0 0 14px 0;font-size:18px;color:#334155;">
-      Stripe's pricing looks simple: 2.9% + 30¢. But the actual cost depends on your average transaction size, and most businesses don't realize how much that fixed 30¢ adds up.
+    <p style="margin:0 0 20px;font-size:1.05rem;color:#334155;line-height:1.65;">
+      Stripe's advertised rate is 2.9% + $0.30. But hidden fees — international card surcharges, dispute charges, subscription add-ons, and the brutal math of that fixed 30¢ on small tickets — can push your <em>real</em> effective rate to 3.4%, 3.8%, or higher. Most San Diego small businesses have never calculated what they're actually paying. This page does it for you.
     </p>
-    <a href="sms:+17735441231" style="display:inline-block;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--mint,#10b981);color:#ffffff;box-shadow:0 10px 30px rgba(16,185,129,.25);">
-      Text PJ
+    <a href="sms:+17735441231" style="display:inline-block;padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:800;background:linear-gradient(135deg,#21d3a1,#00c7ff);color:#fff;box-shadow:0 8px 24px rgba(33,211,161,.3);font-size:.95rem;">
+      Text PJ · Free Statement Review →
     </a>
-  </div>
-
-  <!-- WHAT THEY'RE REALLY ASKING -->
-  <div style="margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">What people are really trying to figure out</h2>
-    <p style="font-size:17px;color:#334155;">
-      Most people searching this are trying to avoid three things:
-    </p>
-    <ul style="padding-left:22px;color:#334155;font-size:17px;">
-      <li>overpaying</li>
-      <li>choosing the wrong option</li>
-      <li>getting sold something they do not actually need</li>
-    </ul>
-    <p style="font-size:17px;color:#334155;">
-      That is where SideGuy helps. We translate the issue into a clear next move.
-    </p>
   </div>
 
   <!-- QUICK ANSWER -->
-  <div style="background:rgba(255,255,255,0.7);border:1px solid var(--stroke,#e2e8f0);border-radius:16px;padding:22px;margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">Quick answer</h2>
-    <p style="font-size:17px;color:#334155;">
-      Stripe charges 2.9% + $0.30 per successful transaction. On a $100 sale, that's $3.20 (3.2% effective). On a $10 sale, it's $0.59 (5.9% effective). The smaller your average ticket, the more that 30¢ fixed fee hurts. Additional costs: international cards (+1.5%), currency conversion (+1%), disputes ($15 each), Stripe Radar fraud detection (included, but chargebacks aren't).
+  <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:24px 28px;margin-bottom:28px;box-shadow:0 18px 50px rgba(7,48,68,.08);">
+    <h2 style="font-size:1.2rem;font-weight:800;margin:0 0 12px;color:#073044;">Quick Answer</h2>
+    <p style="font-size:1rem;color:#334155;line-height:1.7;margin:0 0 10px;">
+      Stripe charges 2.9% + $0.30 per successful card transaction. On a $100 sale that's $3.20 (3.2% effective). On a $30 sale it's $1.17 (3.9% effective). On a $10 sale it's $0.59 (5.9% effective). The smaller your average ticket, the harder that fixed 30¢ hits.
     </p>
-  </div>
-
-  <!-- YOU MIGHT NEED THIS IF -->
-  <div style="margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">You might need this if&#8230;</h2>
-    <ul style="padding-left:22px;color:#334155;font-size:17px;">
-      <li>Most of your transactions are under $20 and you're losing 5–6% per sale to processing</li>
-      <li>You process international payments regularly and the extra 1.5% is adding up</li>
-      <li>You've never actually calculated your effective processing rate — just trusted the 2.9% headline</li>
-    </ul>
-  </div>
-
-  <!-- YOU PROBABLY DON'T -->
-  <div style="margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">You probably do not need this if&#8230;</h2>
-    <ul style="padding-left:22px;color:#334155;font-size:17px;">
-      <li>Your average transaction is $100+ and 3.2% effective feels reasonable for the convenience</li>
-      <li>You process under $3K/month and the total fee amount is small regardless of rate</li>
-      <li>You're comparing Stripe to processors with hidden monthly fees that wipe out the rate difference</li>
-    </ul>
-  </div>
-
-  <!-- SIDEGUY ANGLE -->
-  <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px;padding:22px;margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">Why people text SideGuy first</h2>
-    <p style="font-size:17px;color:#334155;">
-      Most sites either drown you in jargon or push you toward a purchase. SideGuy is built for clarity before cost.
-      You get a human-first read on the situation before making a bigger move.
+    <p style="font-size:1rem;color:#334155;line-height:1.7;margin:0;">
+      Additional charges most people miss: international cards (+1.5%), currency conversion (+1%), disputes ($15 each win or lose until reversed), and Stripe Billing add-ons (0.5–0.8%) if you run subscriptions.
     </p>
-  </div>
-
-  <!-- CONTEXTUAL CTA -->
-  <div style="margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">Best next step</h2>
-    <p style="font-size:17px;color:#334155;">
-      Text PJ your average transaction size and monthly volume. I'll calculate your actual effective Stripe rate and tell you if there's a cheaper option worth switching to.
-    </p>
-    <a href="sms:+17735441231" style="display:inline-block;margin-top:10px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--ink,#0f172a);color:#ffffff;">
-      Text PJ Now
-    </a>
-  </div>
-
-  <!-- FAQ -->
-  <div style="margin-bottom:28px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:var(--ink,#0f172a);">Common questions</h2>
-
-    <h3 style="font-size:20px;margin:0 0 8px;">What's Stripe's actual fee per transaction?</h3>
-    <p style="font-size:17px;color:#334155;">2.9% + $0.30 for US cards. Add 1.5% for international cards, 1% for currency conversion. Disputes cost $15 each. Stripe Connect, billing, and invoicing have additional fees depending on the product.</p>
-
-    <h3 style="font-size:20px;margin:18px 0 8px;">Is Stripe cheaper than Square?</h3>
-    <p style="font-size:17px;color:#334155;">For online sales: similar pricing. For in-person sales: Square charges 2.6% + $0.10, which beats Stripe's in-person rate of 2.7% + $0.05 on tickets under $30. Square also provides free hardware to start.</p>
-
-    <h3 style="font-size:20px;margin:18px 0 8px;">How do I reduce my Stripe fees?</h3>
-    <p style="font-size:17px;color:#334155;">Process more in-person (lower rates). Increase average ticket size. Negotiate volume pricing if you process $80K+/month. Or switch to interchange-plus pricing through a different processor.</p>
-
-  </div>
-
-  <!-- BOTTOM CLOSE -->
-  <div style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#ffffff;border-radius:18px;padding:24px;">
-    <h2 style="font-size:28px;margin-bottom:12px;color:#ffffff;">Clarity before cost</h2>
-    <p style="font-size:17px;color:#cbd5e1;margin-bottom:14px;">
-      If you are stuck between options, send PJ the details. A quick outside read can save you money, time, and a bad decision.
-    </p>
-    <a href="sms:+17735441231" style="display:inline-block;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:700;background:var(--mint,#10b981);color:#ffffff;">
-      Text PJ
-    </a>
   </div>
 
 </section>
-<!-- ═══ /SIDEGUY CLARITY LAYER v1 ═══ -->
+
+<!-- ═══ INTERACTIVE FEE CALCULATOR ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;" id="calculator">
+  <div class="calc-card">
+    <h2 style="font-size:1.3rem;font-weight:800;margin:0 0 8px;color:#073044;">Calculate Your Real Stripe Rate</h2>
+    <p style="font-size:.95rem;color:#3f6173;margin:0 0 16px;line-height:1.6;">Enter your monthly volume and average ticket size to see what you're actually paying — and how it compares to interchange-plus pricing.</p>
+    <div class="calc-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0">
+      <div>
+        <label style="font-size:.85rem;font-weight:700;color:#073044;display:block;margin-bottom:6px">Monthly Volume ($)</label>
+        <input id="calcVol" type="number" value="10000" min="100" style="width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);border-radius:10px;font-size:1rem;color:#073044;background:#fff;">
+      </div>
+      <div>
+        <label style="font-size:.85rem;font-weight:700;color:#073044;display:block;margin-bottom:6px">Avg Ticket Size ($)</label>
+        <input id="calcTicket" type="number" value="85" min="1" style="width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);border-radius:10px;font-size:1rem;color:#073044;background:#fff;">
+      </div>
+    </div>
+    <button onclick="calcStripe()" style="background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:800;cursor:pointer;font-size:.95rem;box-shadow:0 4px 14px rgba(8,145,178,.3);">Calculate →</button>
+    <div id="calcResult" style="margin-top:20px;display:none">
+      <!-- results injected by JS -->
+    </div>
+  </div>
+</section>
+
+<script>
+function calcStripe() {
+  var vol = parseFloat(document.getElementById('calcVol').value) || 0;
+  var ticket = parseFloat(document.getElementById('calcTicket').value) || 0;
+  if (!vol || !ticket) return;
+  var txns = vol / ticket;
+  var stripeCost = (vol * 0.029) + (txns * 0.30);
+  var stripeRate = (stripeCost / vol * 100).toFixed(2);
+  var ixpCost = (vol * 0.0015) + (txns * 0.10) + 15;
+  var savings = stripeCost - ixpCost;
+  var annualSavings = savings * 12;
+  var r = document.getElementById('calcResult');
+  r.style.display = 'block';
+  r.innerHTML = '<div class="result-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">'
+    + '<div style="padding:16px;background:rgba(8,145,178,.06);border-radius:14px;border:1px solid rgba(8,145,178,.15)">'
+    + '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">Stripe Monthly Cost</div>'
+    + '<div style="font-size:1.6rem;font-weight:900;color:#073044;margin-top:4px">$' + stripeCost.toFixed(0) + '</div>'
+    + '<div style="font-size:.8rem;color:#5e7d8e">Effective rate: ' + stripeRate + '%</div>'
+    + '</div>'
+    + '<div style="padding:16px;background:rgba(16,185,129,.06);border-radius:14px;border:1px solid rgba(16,185,129,.2)">'
+    + '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#065f46">Interchange-Plus Est.</div>'
+    + '<div style="font-size:1.6rem;font-weight:900;color:#073044;margin-top:4px">$' + ixpCost.toFixed(0) + '</div>'
+    + '<div style="font-size:.8rem;color:#5e7d8e">~0.15% + $0.10/txn + $15/mo</div>'
+    + '</div>'
+    + '<div style="padding:16px;background:' + (savings > 0 ? 'rgba(16,185,129,.08)' : 'rgba(239,68,68,.06)') + ';border-radius:14px;border:1px solid ' + (savings > 0 ? 'rgba(16,185,129,.25)' : 'rgba(239,68,68,.2)') + '">'
+    + '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">Your Annual ' + (savings > 0 ? 'Savings' : 'Extra Cost') + '</div>'
+    + '<div style="font-size:1.6rem;font-weight:900;color:' + (savings > 0 ? '#059669' : '#dc2626') + ';margin-top:4px">$' + Math.abs(annualSavings).toFixed(0) + '</div>'
+    + '<div style="font-size:.8rem;color:#5e7d8e">' + (savings > 0 ? 'by switching to IX+' : 'Stripe is better at this volume') + '</div>'
+    + '</div>'
+    + '</div>'
+    + (savings > 100 ? '<p style="margin:16px 0 0;font-size:.9rem;color:#073044;line-height:1.6;">At $' + vol.toLocaleString() + '/month, you\'re paying an estimated <strong>$' + savings.toFixed(0) + '/month more</strong> with Stripe flat-rate than interchange-plus. Text PJ to review your actual statement — takes 10 minutes. <a href="sms:+17735441231" style="color:#0891b2;font-weight:700">Text 773-544-1231 →</a></p>' : '<p style="margin:16px 0 0;font-size:.9rem;color:#073044;line-height:1.6;">At this volume, Stripe\'s simplicity may be worth the slight premium. Once you hit $10k+/month consistently, it\'s worth a review. <a href="sms:+17735441231" style="color:#0891b2;font-weight:700">Text PJ for a free check →</a></p>');
+}
+</script>
+
+<!-- ═══ WHAT YOU'RE REALLY ASKING ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:24px 28px;margin-bottom:24px;box-shadow:0 18px 50px rgba(7,48,68,.08);">
+    <h2 style="font-size:1.2rem;font-weight:800;margin:0 0 12px;color:#073044;">What People Are Really Trying to Figure Out</h2>
+    <p style="font-size:1rem;color:#334155;margin:0 0 10px;line-height:1.7;">Most people searching this are trying to avoid three things:</p>
+    <ul style="padding-left:22px;color:#334155;font-size:1rem;line-height:1.9;margin:0 0 10px;">
+      <li>Overpaying without knowing it</li>
+      <li>Choosing the wrong processor for their business type</li>
+      <li>Getting pitched something they don't actually need</li>
+    </ul>
+    <p style="font-size:1rem;color:#334155;margin:0;line-height:1.7;">That's where SideGuy helps — translating the numbers into a clear next move, not a sales call.</p>
+  </div>
+</section>
+
+<!-- ═══ COMPARISON TABLE ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:24px 28px;box-shadow:0 18px 50px rgba(7,48,68,.08);">
+    <h2 style="font-size:1.2rem;font-weight:800;margin:0 0 6px;color:#073044;">Stripe vs. Alternatives: Fee Comparison</h2>
+    <p style="font-size:.9rem;color:#3f6173;margin:0 0 14px;">Including effective rates at real-world volumes for San Diego small businesses.</p>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Processor</th>
+            <th>Base Rate</th>
+            <th>Monthly Fee</th>
+            <th style="background:rgba(8,145,178,.1);color:#073044;">Eff. Rate at $5k/mo</th>
+            <th style="background:rgba(16,185,129,.1);color:#073044;">Eff. Rate at $15k/mo</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Stripe (online)</strong></td>
+            <td>2.9% + $0.30</td>
+            <td>$0</td>
+            <td style="background:rgba(8,145,178,.04);"><strong>3.47%</strong> <span style="font-size:.78rem;color:#5e7d8e">(59 txns @ $85 avg)</span></td>
+            <td style="background:rgba(16,185,129,.04);"><strong>3.20%</strong></td>
+            <td>Online, SaaS, subscriptions</td>
+          </tr>
+          <tr>
+            <td><strong>Stripe (in-person)</strong></td>
+            <td>2.7% + $0.05</td>
+            <td>$0</td>
+            <td style="background:rgba(8,145,178,.04);"><strong>2.76%</strong></td>
+            <td style="background:rgba(16,185,129,.04);"><strong>2.73%</strong></td>
+            <td>Retail with Stripe Terminal</td>
+          </tr>
+          <tr>
+            <td><strong>Square (in-person)</strong></td>
+            <td>2.6% + $0.10</td>
+            <td>$0</td>
+            <td style="background:rgba(8,145,178,.04);"><strong>2.72%</strong></td>
+            <td style="background:rgba(16,185,129,.04);"><strong>2.67%</strong></td>
+            <td>Retail, food, simple in-person</td>
+          </tr>
+          <tr>
+            <td><strong>Interchange-Plus</strong></td>
+            <td>~0.15% + $0.10</td>
+            <td>$15–$25</td>
+            <td style="background:rgba(8,145,178,.04);"><strong>2.62%</strong> <span style="font-size:.78rem;color:#059669">✓ cheaper</span></td>
+            <td style="background:rgba(16,185,129,.04);"><strong>2.02%</strong> <span style="font-size:.78rem;color:#059669">✓ much cheaper</span></td>
+            <td>Established businesses $8k+/mo</td>
+          </tr>
+          <tr>
+            <td><strong>PayPal (online)</strong></td>
+            <td>3.49% + $0.49</td>
+            <td>$0</td>
+            <td style="background:rgba(8,145,178,.04);"><strong>4.07%</strong></td>
+            <td style="background:rgba(16,185,129,.04);"><strong>3.82%</strong></td>
+            <td>Existing PayPal customers only</td>
+          </tr>
+          <tr>
+            <td><strong>Solana USDC</strong></td>
+            <td>~$0.00025/tx</td>
+            <td>$0</td>
+            <td style="background:rgba(8,145,178,.04);"><strong>&lt;0.01%</strong></td>
+            <td style="background:rgba(16,185,129,.04);"><strong>&lt;0.01%</strong></td>
+            <td>B2B, crypto-friendly clients</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.82rem;color:#5e7d8e;margin:10px 0 0;line-height:1.5;">Effective rates estimated at ~59 transactions/month ($85 avg) for $5k volume, ~176 transactions for $15k. Interchange-plus includes $20/mo fee. Actual interchange rates vary by card type.</p>
+  </div>
+</section>
+
+<!-- ═══ WHEN STRIPE MAKES SENSE / WHEN IT DOESN'T ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex-wrap:wrap;" id="when-grid">
+    <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:22px 24px;box-shadow:0 18px 50px rgba(7,48,68,.07);">
+      <h2 style="font-size:1.05rem;font-weight:800;margin:0 0 10px;color:#073044;">Stripe makes sense when...</h2>
+      <ul style="padding-left:18px;color:#334155;font-size:.95rem;line-height:1.85;margin:0;">
+        <li>Average ticket is $100+</li>
+        <li>You need subscriptions or invoicing built in</li>
+        <li>You're early-stage and don't want a monthly fee</li>
+        <li>You need a developer-friendly API</li>
+        <li>You're under $5k/month</li>
+      </ul>
+    </div>
+    <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:22px 24px;box-shadow:0 18px 50px rgba(7,48,68,.07);">
+      <h2 style="font-size:1.05rem;font-weight:800;margin:0 0 10px;color:#073044;">Consider switching when...</h2>
+      <ul style="padding-left:18px;color:#334155;font-size:.95rem;line-height:1.85;margin:0;">
+        <li>You're consistently above $10k/month</li>
+        <li>Your effective rate is above 3.4%</li>
+        <li>You mainly take in-person payments</li>
+        <li>You have high international card volume</li>
+        <li>A statement review shows $200+/mo in savings</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<style>@media(max-width:560px){#when-grid{grid-template-columns:1fr!important;}}</style>
+
+<!-- ═══ HIDDEN FEES BREAKDOWN ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:24px 28px;box-shadow:0 18px 50px rgba(7,48,68,.08);">
+    <h2 style="font-size:1.2rem;font-weight:800;margin:0 0 12px;color:#073044;">The Stripe Fees Most People Miss</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fee</th>
+          <th>Amount</th>
+          <th>Who Gets Hit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>International card surcharge</strong></td>
+          <td>+1.5%</td>
+          <td>Anyone with tourists or international buyers</td>
+        </tr>
+        <tr>
+          <td><strong>Currency conversion</strong></td>
+          <td>+1.0%</td>
+          <td>Non-USD transactions</td>
+        </tr>
+        <tr>
+          <td><strong>Manually keyed card</strong></td>
+          <td>3.4% + $0.30</td>
+          <td>Phone orders, card-not-present</td>
+        </tr>
+        <tr>
+          <td><strong>Dispute / chargeback</strong></td>
+          <td>$15 each</td>
+          <td>Refunded if you win, but still a float hit</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe Billing add-on</strong></td>
+          <td>+0.5–0.8%</td>
+          <td>Subscription / recurring billing users</td>
+        </tr>
+        <tr>
+          <td><strong>Stripe Radar for Fraud Teams</strong></td>
+          <td>+$0.02/txn</td>
+          <td>Advanced fraud rules (standard is free)</td>
+        </tr>
+        <tr>
+          <td><strong>Instant payout</strong></td>
+          <td>+1.5% (min $0.50)</td>
+          <td>Anyone who needs same-day funds</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ SOLANA BOX ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div class="solana-box">
+    <h2>The Stripe Alternative Nobody Talks About: Solana USDC</h2>
+    <p>For B2B payments or clients willing to pay in USDC, Solana network fees run about $0.00025 per transaction — essentially free. No percentage. No fixed fee. No chargeback risk.</p>
+    <p>It doesn't replace Stripe for consumer payments, but if even 20% of your B2B volume moves to USDC, the math gets interesting fast.</p>
+    <div class="savings-row">
+      <div class="savings-chip"><div class="amount">$0</div><div class="desc">Monthly fee</div></div>
+      <div class="savings-chip"><div class="amount">&lt;0.01%</div><div class="desc">Effective rate</div></div>
+      <div class="savings-chip"><div class="amount">$0.00025</div><div class="desc">Per transaction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPANDED FAQ ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="background:rgba(255,255,255,0.75);border:1px solid rgba(7,48,68,.10);border-radius:18px;padding:24px 28px;box-shadow:0 18px 50px rgba(7,48,68,.08);">
+    <h2 style="font-size:1.2rem;font-weight:800;margin:0 0 20px;color:#073044;">Common Questions</h2>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">What is Stripe's effective rate for small business?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0 0 20px;">Stripe's advertised 2.9% + $0.30 becomes your effective rate only at certain ticket sizes. At $100/ticket: ~3.2%. At $50: ~3.5%. At $20: ~4.4%. Most small businesses end up between 3.2% and 3.8% once you factor in card mix, some international transactions, and occasional dispute fees.</p>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">Does Stripe charge monthly fees?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0 0 20px;">No monthly fee on the standard plan — you only pay per transaction. However, add-ons cost extra: Stripe Billing adds 0.5–0.8% for subscription management; Radar for Fraud Teams adds $0.02/txn. Most small businesses on the base plan only pay the per-transaction charge.</p>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">When does it make sense to leave Stripe?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0 0 20px;">When you're processing $10,000+/month consistently and your effective rate is above 3.4%. Or if you primarily take in-person payments where Square or a dedicated terminal solution prices better. Stripe typically negotiates volume pricing at $80K+ per year — below that, you're on flat rate.</p>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">What is interchange-plus pricing?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0 0 20px;">Interchange-plus passes through Visa/Mastercard's actual interchange rate and adds a fixed transparent markup (typically 0.10–0.30% + a small per-transaction fee). Unlike Stripe's bundled flat rate, interchange-plus is transparent — and almost always cheaper above $8k–$10k/month in volume for businesses with a healthy card mix.</p>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">Are there Stripe alternatives in San Diego?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0 0 20px;">Yes. Square (better for in-person, simple setup), interchange-plus merchant accounts through local ISOs, PayPal/Braintree for existing PayPal customer bases, and Helcim or Stax for subscription-model pricing. SideGuy helps San Diego operators compare their actual statement against alternatives — text 773-544-1231 for a free 10-minute review.</p>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">What's Stripe's actual fee per transaction?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0 0 20px;">2.9% + $0.30 for US cards online. In-person: 2.7% + $0.05. Manually keyed: 3.4% + $0.30. ACH: 0.8% capped at $5. Add 1.5% for international cards and 1% for currency conversion.</p>
+
+    <h3 style="font-size:1.05rem;font-weight:800;margin:0 0 8px;color:#073044;">How do I reduce my Stripe fees?</h3>
+    <p style="font-size:.95rem;color:#334155;line-height:1.7;margin:0;">Process more in-person (lower rates). Push B2B clients to ACH (0.8% vs 2.9%). Negotiate volume pricing if you process $80K+/year. Or switch to interchange-plus through a different processor — use the calculator above to see if it's worth it at your volume.</p>
+  </div>
+</section>
+
+<!-- ═══ NORTH COUNTY TRUST SIGNAL ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="padding:16px 20px;background:rgba(8,145,178,.05);border:1px solid rgba(8,145,178,.12);border-radius:14px;margin:0;font-size:.9rem;color:#2e6a8a;line-height:1.6;">
+    📍 <strong style="color:#0c2d48">Serving San Diego businesses</strong> in Solana Beach, Encinitas, Carlsbad, Del Mar, and North County. PJ has reviewed processing statements for local contractors, HVAC companies, restaurants, and retail operators. Text for a free 10-minute statement review.
+  </div>
+</section>
+
+<!-- ═══ MEME ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div class="meme-card" style="margin:0">
+    <div class="meme-top">Called Stripe support about my 3.4% effective rate. They explained all the fees clearly.</div>
+    <div class="meme-bottom">They were very helpful. The rate didn't change. The fees are just "how it works." Cool cool cool.</div>
+    <a href="/stripe-vs-square.html">See Stripe vs Square breakdown →</a>
+  </div>
+</section>
+
+<!-- ═══ RELATED GUIDES ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 28px;">
+  <div style="border:1px solid rgba(33,211,161,.35);padding:20px 24px;border-radius:16px;background:rgba(0,48,68,.04);">
+    <h3 style="font-size:1rem;font-weight:800;color:#073044;margin:0 0 12px;">Related Guides</h3>
+    <ul style="margin:0;padding-left:18px;font-size:.92rem;line-height:1.95;color:#3f6173;">
+      <li><a href="/stripe-vs-square.html" style="color:#0891b2;font-weight:600;">Stripe vs Square — Which Is Actually Cheaper?</a></li>
+      <li><a href="/how-credit-card-processing-fees-work.html" style="color:#0891b2;font-weight:600;">How Credit Card Processing Fees Work (Plain English)</a></li>
+      <li><a href="/merchant-services-pricing-san-diego.html" style="color:#0891b2;font-weight:600;">Merchant Services Pricing in San Diego</a></li>
+      <li><a href="/mobile-payment-systems-san-diego.html" style="color:#0891b2;font-weight:600;">Mobile Payment Systems in San Diego</a></li>
+      <li><a href="/square-vs-stripe-fees-san-diego.html" style="color:#0891b2;">Square vs Stripe Fees — San Diego · SideGuy</a></li>
+      <li><a href="/solana-payments-san-diego.html" style="color:#0891b2;">Solana Payments San Diego · SideGuy</a></li>
+      <li><a href="/how-to-reduce-credit-card-processing-fees-san-diego.html" style="color:#0891b2;">How to Reduce Credit Card Processing Fees San Diego · SideGuy</a></li>
+      <li><a href="/payments.html" style="color:#0891b2;">Payments Hub · SideGuy</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ CTA BLOCK ═══ -->
+<section style="max-width:900px;margin:0 auto;padding:0 20px 48px;">
+  <div class="cta-block">
+    <p>Stop guessing what you're paying. Get a free 10-minute processing statement review — PJ will tell you your actual effective rate and whether switching saves you money.</p>
+    <p style="margin:0 0 20px;font-size:.9rem;font-weight:500;opacity:.85;">Free 10-minute processing statement review for San Diego businesses.</p>
+    <a href="sms:+17735441231">Text PJ · 773-544-1231 →</a>
+  </div>
+</section>
 
 </main>
 <footer>
-  <p><a href="/">SideGuy Solutions</a> · San Diego · <a href="sms:+17604541860">773-544-1231</a></p>
-  <p>Clarity before cost. Updated 2026-03-10.</p>
+  <p><a href="/">SideGuy Solutions</a> · San Diego · <a href="sms:+17735441231">773-544-1231</a></p>
+  <p>Clarity before cost. Updated 2026-04-01.</p>
 </footer>
-<section style="border:1px solid rgba(33,211,161,.35);padding:14px 18px;border-radius:12px;margin:22px 0;background:rgba(0,48,68,.04)">
-  <h3 style="font-size:1rem;font-weight:700;color:#073044;margin:0 0 8px;">Related Guides</h3>
-  <ul style="margin:0;padding-left:18px;font-size:.9rem;line-height:1.9">
-    <li><a href="/square-vs-stripe-fees-san-diego.html">Square vs Stripe Fees San Diego · SideGuy</a></li>
-    <li><a href="/solana-payments-san-diego.html">Solana Payments San Diego · SideGuy</a></li>
-    <li><a href="/how-to-reduce-credit-card-processing-fees-san-diego.html">How to Reduce Credit Card Processing Fees San Diego · SideGuy</a></li>
-    <li><a href="/payments.html">Payments Hub · SideGuy</a></li>
-  </ul>
-</section>
-<nav aria-label="Site hierarchy" style="font-size:0.85rem;color:#aaa;padding:0.5rem 1rem;background:rgba(0,0,0,0.15);border-radius:6px;margin:0 0 1rem">
-  <a href="/" style="color:#21d3a1;text-decoration:none">SideGuy</a> &rsaquo;
-  <a href="/payments.html" style="color:#21d3a1;text-decoration:none">Payments</a> &rsaquo; Stripe Fees for Small Business
-</nav>
-<div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:3rem;padding-top:1.5rem;font-size:0.9rem">
-  <ul style="list-style:none;padding:0;margin:0;display:flex;gap:1rem;flex-wrap:wrap">
-    <li><a href="/payments.html" style="color:#21d3a1;text-decoration:none">&uarr; Payments</a></li>
-    <li><a href="/" style="color:#21d3a1;text-decoration:none">&uarr; SideGuy Home</a></li>
-    <li><a href="sms:+17735441231" style="color:#21d3a1;font-weight:700">Text PJ</a></li>
-  </ul>
-</div>
 
 <nav aria-label="SideGuy navigation" style="max-width:900px;margin:0 auto;padding:10px 24px 24px;display:flex;flex-wrap:wrap;gap:12px;font-size:.8rem;color:#3f6173">
   <a href="command-center-v2.html" style="color:#3f6173;text-decoration:none">Command Center</a>
   <a href="payments-knowledge-hub.html" style="color:#3f6173;text-decoration:none">Payments Hub</a>
-  <a href="ai-automation-knowledge-hub.html" style="color:#3f6173;text-decoration:none"><a href="/ai-automation-hub.html" data-sg-linked>ai automation</a> Hub</a>
+  <a href="ai-automation-knowledge-hub.html" style="color:#3f6173;text-decoration:none">AI Automation Hub</a>
   <a href="software-development-knowledge-hub.html" style="color:#3f6173;text-decoration:none">Software Hub</a>
   <a href="future-infrastructure-knowledge-hub.html" style="color:#3f6173;text-decoration:none">Future Infrastructure Hub</a>
 </nav>
-<section class="sideguy-how-it-works">
-<h2>How It Works</h2>
-<p>This guide explains the system, tools, and strategies businesses use to solve this problem.</p>
-</section>
-<section class="sideguy-cost">
-<h2>Cost Considerations</h2>
-<p>Understanding pricing and operational costs helps businesses make smarter decisions.</p>
-</section>
-<section class="sideguy-related">
-<h2>Related SideGuy Guides</h2>
-<ul>
-<li><a href="/ai-automation-knowledge-hub.html">AI Automation Hub</a></li>
-<li><a href="/payments-knowledge-hub.html">Payments Hub</a></li>
-<li><a href="/future-infrastructure-knowledge-hub.html">Future Infrastructure</a></li>
-</ul>
-</section>
-
-<section class="sideguy-related-pages">
-<h2>SideGuy Related Pages</h2>
-<ul>
-<li><a href="/anyone-using-premium-irish-hampers-for-corporate-or-employee-appreciation-gifts-to-ireland-for-interior-designers-in-seattle-san-diego.html">anyone using premium irish hampers for corporate or employee appreciation gifts to ireland for interior designers in seattle san diego</a></li>
-<li><a href="/do-virtual-phone-numbers-scale-with-a-growing-team-for-barbershops-in-phoenix-san-diego.html">do virtual phone numbers scale with a growing team for barbershops in phoenix san diego</a></li>
-<li><a href="/finance-keeps-blocking-orders-because-customers-hit-credit-limits-how-do-you-balance-credit-limits-without-handcuffing-sales-for-auto-body-shops-in-san-diego.html">finance keeps blocking orders because customers hit credit limits how do you balance credit limits without handcuffing sales for auto body shops in san diego</a></li>
-<li><a href="/ai-dispatch-software-for-child-care-centers-san-diego.html">ai dispatch software for child care centers san diego</a></li>
-<li><a href="/anyone-rely-on-newsletters-to-grow-their-business-for-dermatologists-in-austin-san-diego.html">anyone rely on newsletters to grow their business for dermatologists in austin san diego</a></li>
-</ul>
-</section>
-
-
-<section class="sideguy-help">
-<h2>Need Help Solving This?</h2>
-
-<p>SideGuy exists to provide <strong>clarity before cost</strong>.
-If you're stuck or unsure what to do next, text PJ and get a real human answer.</p>
-
-<a href="sms:+17735441231" class="pj-button">📱 Text PJ</a>
-
-<p>No pressure. Just clarity.</p>
-</section>
-
-<section class="sideguy-tools">
-<h2>Helpful Tools</h2>
-
-<ul>
-<li>Energy savings calculator</li>
-<li><a href="/hubs/category-payments.html" data-sg-linked>payment processing</a> comparison</li>
-<li>AI automation starter tools</li>
-<li>Home upgrade ROI calculators</li>
-</ul>
-
-<p>SideGuy research tools help operators make smarter decisions.</p>
-</section>
-
-<section class="sideguy-operators">
-<h2>Verified Operators</h2>
-
-<p>SideGuy connects people to trusted local operators.</p>
-
-<ul>
-<li>HVAC installers</li>
-<li>Electricians</li>
-<li>Solar installers</li>
-<li>Payment system installers</li>
-</ul>
-
-<p>Need a recommendation? <a href="sms:+17735441231">Text PJ</a></p>
-</section>
-
-<section class="sideguy-guides">
-<h2>SideGuy Guides</h2>
-
-<p>Some problems require deeper explanation.</p>
-
-<ul>
-<li>How to lower payment processing fees</li>
-<li>How to choose the right HVAC system</li>
-<li>AI automation for small businesses</li>
-</ul>
-
-<p>Premium SideGuy guides coming soon.</p>
-</section>
-
-
-
-
-
-
-<!-- sideguy-interlinks -->
-<div style="margin:24px 0;padding:16px 20px;border-radius:12px;background:#f1f5f9;border:1px solid #e2e8f0;">
-<h3 style="margin:0 0 12px;font-size:1.1rem;color:#073044;">Related Decisions — Payments</h3>
-<ul style="margin:0;padding:0 0 0 20px;line-height:1.8;">
-  <li><a href="/stripe-alternatives-for-small-business-san-diego.html">Stripe Alternatives — San Diego</a></li>
-  <li><a href="/stripe-fees-calculator.html">Stripe Fees Calculator</a></li>
-  <li><a href="/stripe-vs-square-san-diego.html">Stripe vs Square</a></li>
-  <li><a href="/payment-processing-california.html">Payment Processing — California</a></li>
-  <li><a href="/who-do-i-call-about-payments.html">Who Do I Call About Payments?</a></li>
-  <li style="list-style:none;margin-top:8px;font-size:0.9rem;color:#64748b;font-weight:600;">Also explore:</li>
-  <li><a href="/ai-automation-consulting-san-diego.html">AI Automation Tools</a></li>
-  <li><a href="/restaurant-payment-processing-san-diego.html">Restaurant Payments</a></li>
-</ul>
-</div>
-<!-- /sideguy-interlinks -->
 
 <script src="assets/sideguy/meme-wow.js"></script>
 </body>
