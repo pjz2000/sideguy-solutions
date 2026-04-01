@@ -1940,11 +1940,21 @@ p  { color: #2e6a8a !important; }
 
 /* ── Hero section ─────────────────────────────────────── */
 .cmdHero {
-  background: linear-gradient(180deg, rgba(186,227,247,.35) 0%, rgba(255,255,255,.1) 100%) !important;
-  border: 1px solid rgba(6,182,212,.22) !important;
-  box-shadow: 0 4px 40px rgba(8,145,178,.08), inset 0 1px 0 rgba(255,255,255,.8) !important;
+  background: linear-gradient(160deg, rgba(186,227,247,.55) 0%, rgba(224,245,255,.45) 60%, rgba(255,255,255,.2) 100%) !important;
+  border: 1px solid rgba(6,182,212,.28) !important;
+  box-shadow: 0 4px 40px rgba(8,145,178,.1), inset 0 1px 0 rgba(255,255,255,.9) !important;
 }
-.cmdHeroGrid { opacity: .06 !important; filter: none !important; }
+.cmdHero h1 { color: #0c2d48 !important; }
+.cmdHeroGrid { opacity: .12 !important; filter: none !important; }
+.cmdHeroViz {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 46%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cmdHeroViz svg { width: 100%; height: 100%; }
+@media(max-width:620px){ .cmdHeroViz { display:none; } }
 .cmdEye {
   color: #0369a1 !important;
   text-shadow: none !important;
@@ -2206,6 +2216,60 @@ a:hover { color: #0891b2; }
 <!-- WOW 2026 HERO -->
 <section class="cmdHero" aria-label="SideGuy — Human Resolution Layer">
   <div class="cmdHeroGrid" aria-hidden="true"></div>
+  <div class="cmdHeroViz" aria-hidden="true">
+    <svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Connection lines -->
+      <g stroke="#0891b2" stroke-width="1" fill="none">
+        <line x1="70" y1="70" x2="170" y2="110"><animate attributeName="opacity" values=".25;.6;.25" dur="3.2s" repeatCount="indefinite"/></line>
+        <line x1="170" y1="110" x2="265" y2="55"><animate attributeName="opacity" values=".4;.15;.4" dur="2.6s" repeatCount="indefinite"/></line>
+        <line x1="170" y1="110" x2="235" y2="168"><animate attributeName="opacity" values=".3;.65;.3" dur="4.1s" repeatCount="indefinite"/></line>
+        <line x1="70" y1="70" x2="120" y2="155"><animate attributeName="opacity" values=".2;.5;.2" dur="3.7s" repeatCount="indefinite"/></line>
+        <line x1="265" y1="55" x2="305" y2="140"><animate attributeName="opacity" values=".3;.55;.3" dur="2.9s" repeatCount="indefinite"/></line>
+        <line x1="120" y1="155" x2="235" y2="168"><animate attributeName="opacity" values=".15;.4;.15" dur="5s" repeatCount="indefinite"/></line>
+      </g>
+      <!-- Data pulses along lines -->
+      <circle r="2.8" fill="#21d3a1">
+        <animateMotion path="M70,70 L265,55" dur="2.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;.9;0" dur="2.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2.2" fill="#00c4ff">
+        <animateMotion path="M170,110 L235,168" dur="2.7s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;.8;0" dur="2.7s" repeatCount="indefinite"/>
+      </circle>
+      <circle r="2" fill="#0891b2">
+        <animateMotion path="M70,70 L120,155" dur="3.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;.7;0" dur="3.4s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Hub node (center) -->
+      <circle cx="170" cy="110" r="11" fill="rgba(8,145,178,.12)" stroke="#0891b2" stroke-width="1.5"/>
+      <circle cx="170" cy="110" r="5.5" fill="#0891b2"/>
+      <circle cx="170" cy="110" r="11" fill="none" stroke="#0891b2" stroke-width="1.2" opacity=".5">
+        <animate attributeName="r" values="11;22;11" dur="2.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".5;0;.5" dur="2.4s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Satellite nodes -->
+      <circle cx="70" cy="70" r="7.5" fill="rgba(33,211,161,.14)" stroke="#21d3a1" stroke-width="1.5"/><circle cx="70" cy="70" r="3.5" fill="#21d3a1"/>
+      <circle cx="265" cy="55" r="6.5" fill="rgba(0,196,255,.14)" stroke="#00c4ff" stroke-width="1.5"/><circle cx="265" cy="55" r="3" fill="#00c4ff"/>
+      <circle cx="235" cy="168" r="6.5" fill="rgba(8,145,178,.14)" stroke="#0891b2" stroke-width="1.5"/><circle cx="235" cy="168" r="3" fill="#0891b2"/>
+      <circle cx="120" cy="155" r="5.5" fill="rgba(33,211,161,.14)" stroke="#21d3a1" stroke-width="1.5"/><circle cx="120" cy="155" r="2.5" fill="#21d3a1"/>
+      <circle cx="305" cy="140" r="5" fill="rgba(0,196,255,.14)" stroke="#00c4ff" stroke-width="1.5"/><circle cx="305" cy="140" r="2.5" fill="#00c4ff"/>
+      <!-- Ocean wave bottom -->
+      <path fill="rgba(8,145,178,.07)">
+        <animate attributeName="d"
+          values="M0,185 Q55,170 110,183 Q165,196 220,178 Q275,161 340,177 L340,220 L0,220 Z;
+                  M0,178 Q55,192 110,175 Q165,158 220,185 Q275,198 340,170 L340,220 L0,220 Z;
+                  M0,185 Q55,170 110,183 Q165,196 220,178 Q275,161 340,177 L340,220 L0,220 Z"
+          dur="7s" repeatCount="indefinite"/>
+      </path>
+      <path fill="rgba(33,211,161,.05)">
+        <animate attributeName="d"
+          values="M0,195 Q70,182 140,194 Q210,206 280,190 Q310,183 340,192 L340,220 L0,220 Z;
+                  M0,190 Q70,202 140,188 Q210,174 280,198 Q310,208 340,185 L340,220 L0,220 Z;
+                  M0,195 Q70,182 140,194 Q210,206 280,190 Q310,183 340,192 L340,220 L0,220 Z"
+          dur="5s" repeatCount="indefinite"/>
+      </path>
+    </svg>
+  </div>
   <p class="cmdEye">&#x26A1; Future Infrastructure &middot; San Diego &middot; 2027</p>
   <h1>The human resolution layer<br>for modern technology.</h1>
   <p class="cmdSub">SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it. Clarity before cost — no pressure, no sales pitch, no weird portals.</p>
