@@ -76,26 +76,42 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How much does AI automation cost for a small business?",
+      "name": "Why does my n8n AI agent forget previous messages?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Setup ranges from free (basic tools like Zapier) to $500–2,000 for managed implementations. Most small businesses start with 1–2 automations costing $50–200/month. Define the problem first, then find the tool — not the other way around."
+        "text": "The most common cause is an unstable Session ID — if it changes between runs, the agent starts a new memory session each time. Second most common: using Simple Memory (which resets every execution) instead of Window Buffer, Postgres, or Redis Memory. Third: the memory node not connected to both input and output of the AI Agent node."
       }
     },
     {
       "@type": "Question",
-      "name": "How long does AI automation take to set up?",
+      "name": "How do I enable memory in n8n AI agent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Simple automations (appointment reminders, review requests) take 1–3 days. Complex workflows (lead scoring, multi-step CRM integration) take 2–6 weeks. If a vendor says they can set up a complex system in 48 hours, ask what corners they're cutting."
+        "text": "Add a memory node (Window Buffer Memory for basic use, Postgres for production) and connect it to both the input and output ports of your AI Agent node. Set a stable Session ID using a user ID, phone number, or conversation ID from your trigger. Verify 'Use Memory' is enabled in the AI Agent node's options panel."
       }
     },
     {
       "@type": "Question",
-      "name": "Will AI automation replace my employees?",
+      "name": "What is the best memory node for n8n production?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For repetitive, well-defined tasks — it may reduce hours needed. For relationship-based or judgment-heavy work — no. Most real implementations augment staff rather than replace them. The honest vendors will tell you exactly which tasks are and aren't automatable for your specific setup."
+        "text": "Postgres Memory or Redis Memory. Both persist across n8n restarts and server redeploys. Postgres is easier to set up if you already have a database. Redis is faster for high-frequency agents. Avoid in-memory options like Simple Memory in production — they clear on every restart."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is n8n Simple Memory not working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Simple Memory is working exactly as designed — it only persists memory within a single execution. It's intended for testing and single-turn workflows. For memory across multiple user messages or workflow runs, switch to Window Buffer Memory (for sessions) or Postgres/Redis Memory (for permanent persistence)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I set Session ID in n8n AI agent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the memory node settings, find the Session ID field. Set it to a stable expression from your trigger — for example {{ $json.userId }} or {{ $json.phone }}. Never use {{ $now }} or {{ $execution.id }} — both change on every run, causing memory to reset every time."
       }
     }
   ]
@@ -139,43 +155,140 @@
   <h1>n8n AI Agent Memory Not Working</h1>
 
   <div class="defbox">
-    <p>This guide explains the problem of <strong>n8n ai agent memory not working</strong> — what causes it, what to check, and when it's worth spending money to fix it.</p>
+    <p>Your n8n AI agent is losing context between runs — it doesn't remember what it said 2 messages ago, or it starts fresh every time even with memory nodes configured. Here's exactly why that happens and how to fix it.</p>
   </div>
 
-  <div class="card">
-    <h2>Why This Happens</h2>
-    <ul>
-      <li>Configuration gaps between tools or services</li>
-      <li>Missing integrations or manual workarounds that weren't designed to scale</li>
-      <li>Changes in vendor behavior, pricing, or API that weren't communicated clearly</li>
-    </ul>
+  <!-- Diagnostic Checklist -->
+  <div class="card" id="diagnostic">
+    <h2>Diagnostic Checklist — Run Through These First</h2>
+    <p style="font-size:.9rem;color:#3f6173;margin-bottom:14px;">Check each item. Most memory failures trace back to one of these six issues.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.93rem;line-height:1.6;">
+        <input type="checkbox" style="margin-top:3px;accent-color:#21d3a1;width:16px;height:16px;flex-shrink:0;" />
+        <span><strong>Is the memory node connected to both input AND output of the AI Agent node?</strong> Memory nodes must be wired to both sides — not just input. A one-sided connection is a silent failure.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.93rem;line-height:1.6;">
+        <input type="checkbox" style="margin-top:3px;accent-color:#21d3a1;width:16px;height:16px;flex-shrink:0;" />
+        <span><strong>Are you using "Window Buffer Memory" or "Simple Memory"?</strong> Simple Memory resets every single execution. It's for testing only — never use it in a live chatbot or agent workflow.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.93rem;line-height:1.6;">
+        <input type="checkbox" style="margin-top:3px;accent-color:#21d3a1;width:16px;height:16px;flex-shrink:0;" />
+        <span><strong>Is "Session ID" set to a consistent value — not empty or random?</strong> This is the #1 cause of lost memory. If Session ID changes between runs, your agent starts fresh every time. See the Session ID section below.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.93rem;line-height:1.6;">
+        <input type="checkbox" style="margin-top:3px;accent-color:#21d3a1;width:16px;height:16px;flex-shrink:0;" />
+        <span><strong>Are you running a version of n8n where memory broke?</strong> Memory functionality has regressed in specific n8n releases. Check your version against the n8n changelog — versions 1.19–1.21 had reported memory node issues.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.93rem;line-height:1.6;">
+        <input type="checkbox" style="margin-top:3px;accent-color:#21d3a1;width:16px;height:16px;flex-shrink:0;" />
+        <span><strong>Is memory stored in an external DB (Postgres/Redis) or in-memory?</strong> In-memory storage clears on every n8n restart. In a cloud or Docker setup, this can happen on every deploy. Use Postgres or Redis for anything production.</span>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.93rem;line-height:1.6;">
+        <input type="checkbox" style="margin-top:3px;accent-color:#21d3a1;width:16px;height:16px;flex-shrink:0;" />
+        <span><strong>Is your AI Agent node set to "Use Memory" in its options?</strong> Even with a memory node connected, the AI Agent node must have memory explicitly enabled in its node settings panel. It's off by default in some versions.</span>
+      </label>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>What To Check First</h2>
-    <ul>
-      <li>Verify your current setup matches the vendor's latest documentation</li>
-      <li>Look for recent changes — platform updates, new team members, configuration drift</li>
-      <li>Check if the problem is consistent or intermittent (different root causes, different fixes)</li>
-    </ul>
+  <!-- Memory Types Comparison -->
+  <div class="card" id="memory-types">
+    <h2>Memory Types Comparison</h2>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:.88rem;">
+        <thead>
+          <tr style="background:rgba(33,211,161,.12);">
+            <th style="padding:10px 12px;text-align:left;font-weight:800;color:#073044;border-bottom:2px solid rgba(33,211,161,.3);">Memory Type</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:800;color:#073044;border-bottom:2px solid rgba(33,211,161,.3);">Persistence</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:800;color:#073044;border-bottom:2px solid rgba(33,211,161,.3);">Use Case</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:800;color:#073044;border-bottom:2px solid rgba(33,211,161,.3);">Gotcha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(0,0,0,.07);">
+            <td style="padding:10px 12px;color:#073044;font-weight:700;">Simple Memory</td>
+            <td style="padding:10px 12px;color:#3f6173;">Current run only</td>
+            <td style="padding:10px 12px;color:#3f6173;">Testing</td>
+            <td style="padding:10px 12px;color:#c0392b;">Resets every execution</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,.07);">
+            <td style="padding:10px 12px;color:#073044;font-weight:700;">Window Buffer Memory</td>
+            <td style="padding:10px 12px;color:#3f6173;">Current session</td>
+            <td style="padding:10px 12px;color:#3f6173;">Chatbots</td>
+            <td style="padding:10px 12px;color:#c0392b;">Session ID must be stable</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,.07);">
+            <td style="padding:10px 12px;color:#073044;font-weight:700;">Postgres Memory</td>
+            <td style="padding:10px 12px;color:#3f6173;">Permanent</td>
+            <td style="padding:10px 12px;color:#3f6173;">Production</td>
+            <td style="padding:10px 12px;color:#c0392b;">Requires DB connection node</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,.07);">
+            <td style="padding:10px 12px;color:#073044;font-weight:700;">Redis Memory</td>
+            <td style="padding:10px 12px;color:#3f6173;">Permanent + fast</td>
+            <td style="padding:10px 12px;color:#3f6173;">High-frequency</td>
+            <td style="padding:10px 12px;color:#c0392b;">Requires Redis instance</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 12px;color:#073044;font-weight:700;">Zep Memory</td>
+            <td style="padding:10px 12px;color:#3f6173;">Vector + permanent</td>
+            <td style="padding:10px 12px;color:#3f6173;">Long-term context</td>
+            <td style="padding:10px 12px;color:#c0392b;">Requires Zep server</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>When To Escalate</h2>
-    <ul>
-      <li>The problem is costing you money or customers per week</li>
-      <li>You've spent more than 2 hours on it without progress</li>
-      <li>A vendor quoted you more than $500 and you're not sure if it's necessary</li>
+  <!-- Session ID Explainer -->
+  <div class="card" id="session-id">
+    <h2>The Session ID Problem (Most Common Bug)</h2>
+    <p style="color:#3f6173;line-height:1.7;margin-bottom:12px;"><strong style="color:#073044;">Session ID is the key to memory in n8n.</strong> If it changes between runs, your agent starts fresh — even if your memory node is perfectly configured. This is the single most common memory bug, and it's invisible: n8n won't throw an error, your agent just silently forgets everything.</p>
+    <p style="color:#073044;font-weight:700;margin-bottom:8px;">Common Session ID mistakes:</p>
+    <ul style="padding-left:20px;color:#3f6173;line-height:1.9;margin-bottom:16px;">
+      <li>Using <code style="background:rgba(0,0,0,.07);padding:2px 6px;border-radius:4px;font-size:.88rem;">{{ $now }}</code> as Session ID — different every run, memory resets every run</li>
+      <li>Leaving Session ID empty — n8n assigns a random ID each execution</li>
+      <li>Using user email but it changes format between calls (e.g., capitalization differs)</li>
+      <li>Using workflow execution ID — different every run by design</li>
     </ul>
+    <p style="color:#073044;font-weight:700;margin-bottom:8px;">Correct pattern — use a stable identifier from your trigger:</p>
+    <div style="background:rgba(7,48,68,.05);border:1px solid rgba(7,48,68,.12);border-radius:10px;padding:14px 16px;font-family:monospace;font-size:.88rem;color:#073044;line-height:1.8;">
+      <div style="color:#065f46;font-weight:700;margin-bottom:8px;">// Good — stable identifiers from your trigger:</div>
+      <div>Session ID: <span style="color:#0369a1;">{{ $json.userId }}</span>         &larr; stable user ID</div>
+      <div>Session ID: <span style="color:#0369a1;">{{ $json.conversationId }}</span>  &larr; stable conversation ID</div>
+      <div>Session ID: <span style="color:#0369a1;">{{ $json.phone }}</span>           &larr; phone number from webhook</div>
+      <div style="margin-top:12px;color:#c0392b;font-weight:700;">// Bad — these change every run:</div>
+      <div style="color:#c0392b;">Session ID: {{ $now }}            &larr; timestamp changes every run</div>
+      <div style="color:#c0392b;">Session ID: {{ $execution.id }}   &larr; new ID every execution</div>
+    </div>
   </div>
 
   <div class="cta-box">
     <div>
-      <h3>Dealing with this right now?</h3>
-      <p>Text PJ a quick description — real human, San Diego, straight answer.</p>
+      <h3>Building n8n AI workflows for your San Diego business?</h3>
+      <p>If you're running into memory or agent issues, text PJ. He helps operators set up working AI automation — not just tutorials.</p>
     </div>
-    <a class="cta-btn" href="sms:+17735441231">💬 Text 773-544-1231</a>
+    <a class="cta-btn" href="sms:+17735441231">Text PJ · 773-544-1231</a>
   </div>
+
+  <!-- FAQ -->
+  <section id="faq" style="margin-top:8px;">
+    <h2 style="font-size:1.1rem;font-weight:800;color:#073044;margin-bottom:16px;">FAQ — n8n AI Agent Memory</h2>
+
+    <h3 style="font-size:.97rem;font-weight:700;color:#073044;margin:20px 0 6px;">Why does my n8n AI agent forget previous messages?</h3>
+    <p style="color:#3f6173;line-height:1.7;font-size:.93rem;">The most common cause is an unstable Session ID — if it changes between runs, the agent starts a new memory session each time. Second most common: using Simple Memory (which resets every execution) instead of Window Buffer, Postgres, or Redis Memory. Third: the memory node not connected to both input and output of the AI Agent node.</p>
+
+    <h3 style="font-size:.97rem;font-weight:700;color:#073044;margin:20px 0 6px;">How do I enable memory in n8n AI agent?</h3>
+    <p style="color:#3f6173;line-height:1.7;font-size:.93rem;">Add a memory node (Window Buffer Memory for basic use, Postgres for production) and connect it to both the input and output ports of your AI Agent node. Then set a stable Session ID — use a user ID, phone number, or conversation ID from your trigger. Finally, verify "Use Memory" is enabled in the AI Agent node's options panel.</p>
+
+    <h3 style="font-size:.97rem;font-weight:700;color:#073044;margin:20px 0 6px;">What is the best memory node for n8n production?</h3>
+    <p style="color:#3f6173;line-height:1.7;font-size:.93rem;">Postgres Memory or Redis Memory. Both persist across n8n restarts and server redeploys. Postgres is easier to set up if you already have a database. Redis is faster for high-frequency agents (multiple messages per minute). Avoid in-memory options (Simple Memory, Window Buffer Memory without external storage) in production — they clear on every restart.</p>
+
+    <h3 style="font-size:.97rem;font-weight:700;color:#073044;margin:20px 0 6px;">Why is n8n Simple Memory not working?</h3>
+    <p style="color:#3f6173;line-height:1.7;font-size:.93rem;">Simple Memory is working exactly as designed — it only persists memory within a single execution. It's intended for testing and single-turn workflows. If you need memory across multiple user messages or across workflow runs, switch to Window Buffer Memory (for sessions) or Postgres/Redis Memory (for permanent persistence).</p>
+
+    <h3 style="font-size:.97rem;font-weight:700;color:#073044;margin:20px 0 6px;">How do I set Session ID in n8n AI agent?</h3>
+    <p style="color:#3f6173;line-height:1.7;font-size:.93rem;">In the memory node settings, find the "Session ID" field. Set it to a stable expression from your trigger — for example <code style="background:rgba(0,0,0,.07);padding:1px 5px;border-radius:4px;">{{ $json.userId }}</code> or <code style="background:rgba(0,0,0,.07);padding:1px 5px;border-radius:4px;">{{ $json.phone }}</code>. Never use <code style="background:rgba(0,0,0,.07);padding:1px 5px;border-radius:4px;">{{ $now }}</code> or <code style="background:rgba(0,0,0,.07);padding:1px 5px;border-radius:4px;">{{ $execution.id }}</code> — both change on every run.</p>
+  </section>
 
   <footer>
     <a href="/">SideGuy Solutions</a> ·
