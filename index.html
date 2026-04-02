@@ -2356,6 +2356,178 @@ a:hover { color: #0891b2; }
   box-shadow:none!important;background:none!important;overflow:hidden!important;
 }
 </style>
+<style>
+/* ════════════════════════════════════════════════════════════
+   PREMIUM 2026 SPLIT HERO  —  black-box bug permanently fixed
+   Key: backdrop-filter lives on .sgHeroLeft ONLY
+         overflow:hidden lives on .sgHeroVisual ONLY
+         They are sibling grid items, never parent/child
+   ════════════════════════════════════════════════════════════ */
+.sgHero {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  border-radius: 22px;
+  border: 1px solid rgba(6,182,212,.28);
+  box-shadow: 0 8px 48px rgba(8,145,178,.14), 0 2px 16px rgba(8,145,178,.06), inset 0 1px 0 rgba(255,255,255,.90);
+  margin-bottom: 28px;
+  position: relative;
+}
+/* Left panel — text + CTAs. Gets backdrop-filter, NOT overflow:hidden */
+.sgHeroLeft {
+  padding: 40px 32px 36px;
+  background: linear-gradient(160deg, rgba(186,227,247,.72) 0%, rgba(224,245,255,.60) 55%, rgba(255,255,255,.42) 100%);
+  border-radius: 22px 0 0 22px;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  position: relative;
+  z-index: 1;
+}
+/* Subtle node-grid overlay on left panel */
+.sgHeroLeft::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px 0 0 22px;
+  background-image:
+    linear-gradient(rgba(8,145,178,.06) 1px, rgba(8,145,178,0) 1px),
+    linear-gradient(90deg, rgba(8,145,178,.06) 1px, rgba(8,145,178,0) 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  opacity: .5;
+}
+.sgHeroLeft > * { position: relative; z-index: 1; }
+/* Right visual panel — gets overflow:hidden, NO backdrop-filter */
+.sgHeroVisual {
+  border-radius: 0 22px 22px 0;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(140deg, #0c4a6e 0%, #0e7490 40%, #0891b2 68%, #06b6d4 100%);
+  min-height: 240px;
+}
+/* Left-edge blend — uses same-color fade, avoids rgba(0,0,0,0) black interpolation */
+.sgHeroVisual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(224,242,251,.68) 0%, rgba(224,242,251,0) 34%);
+  z-index: 3;
+  pointer-events: none;
+}
+/* Ambient glow pools */
+.sg-glow-a {
+  position: absolute;
+  top: -22%; left: -14%;
+  width: 74%; height: 66%;
+  background: radial-gradient(ellipse, rgba(186,230,253,.55) 0%, rgba(14,116,144,0) 70%);
+  animation: sgGlowPulse 5.2s ease-in-out infinite;
+  z-index: 1;
+}
+.sg-glow-b {
+  position: absolute;
+  bottom: -12%; right: -12%;
+  width: 62%; height: 60%;
+  background: radial-gradient(ellipse, rgba(33,211,161,.30) 0%, rgba(14,116,144,0) 70%);
+  animation: sgGlowPulse 4.4s ease-in-out infinite reverse;
+  z-index: 1;
+}
+/* Animated ocean waves */
+.sg-wave-a {
+  position: absolute;
+  bottom: 0; left: -14%;
+  width: 128%; height: 44%;
+  background: rgba(125,211,252,.14);
+  border-radius: 52% 48% 0 0;
+  animation: sgWave 7s ease-in-out infinite;
+  z-index: 2;
+}
+.sg-wave-b {
+  position: absolute;
+  bottom: 0; left: -20%;
+  width: 140%; height: 32%;
+  background: rgba(33,211,161,.09);
+  border-radius: 58% 42% 0 0;
+  animation: sgWave 5s ease-in-out infinite reverse;
+  z-index: 2;
+}
+.sg-wave-c {
+  position: absolute;
+  bottom: 0; left: -6%;
+  width: 112%; height: 19%;
+  background: rgba(255,255,255,.06);
+  border-radius: 62% 38% 0 0;
+  animation: sgWave 3.6s ease-in-out infinite;
+  z-index: 2;
+}
+/* Label + badge */
+.sg-vis-label {
+  position: absolute;
+  bottom: 16px; left: 18px;
+  color: rgba(255,255,255,.82);
+  font-size: .67rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  z-index: 4;
+}
+.sg-vis-badge {
+  position: absolute;
+  top: 16px; right: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.90);
+  font-size: .70rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  border: 1px solid rgba(255,255,255,.22);
+  z-index: 4;
+}
+/* Hero eyebrow, heading, sub */
+.sgHeroEye {
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin: 0 0 14px;
+}
+.sgHeroH1 {
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 900;
+  color: #0c2d48;
+  margin: 0 0 16px;
+  line-height: 1.02;
+  letter-spacing: -.03em;
+}
+.sgHeroSub {
+  font-size: 15px;
+  color: #2e6a8a;
+  line-height: 1.7;
+  max-width: 540px;
+  margin: 0 0 28px;
+}
+/* Keyframes (safe to redefine) */
+@keyframes sgGlowPulse {
+  0%, 100% { opacity: .72; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.09); }
+}
+@keyframes sgWave {
+  0%, 100% { transform: translateX(0)  scaleY(1);    }
+  50%      { transform: translateX(6%) scaleY(1.12); }
+}
+/* Mobile */
+@media(max-width:700px) {
+  .sgHero { grid-template-columns: 1fr; }
+  .sgHeroLeft { border-radius: 22px 22px 0 0; padding: 28px 22px 24px; }
+  .sgHeroLeft::before { border-radius: 22px 22px 0 0; }
+  .sgHeroVisual { border-radius: 0 0 22px 22px; min-height: 180px; }
+}
+@media(max-width:480px) {
+  .sgHeroVisual { display: none; }
+  .sgHeroLeft { border-radius: 22px; }
+  .sgHeroLeft::before { border-radius: 22px; }
+}
+</style>
 </head>
 
 
@@ -2396,7 +2568,7 @@ a:hover { color: #0891b2; }
 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.75rem;color:#2e6a8a;background:rgba(224,242,251,.6);border:1px solid rgba(8,145,178,.14);border-radius:10px;padding:8px 16px;margin-bottom:12px;backdrop-filter:blur(12px);">
   <span style="font-weight:800;color:#0891b2;letter-spacing:.06em;text-transform:uppercase;font-size:.68rem;">Page Info</span>
   <span style="opacity:.35;">|</span>
-  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026 • hero fix v5</time></span>
+  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026 • hero v6</time></span>
   <span style="opacity:.35;">·</span>
   <span>Published: <time datetime="2024-01-01" style="font-weight:600;">Jan 2024</time></span>
   <span style="opacity:.35;">·</span>
@@ -2406,38 +2578,44 @@ a:hover { color: #0891b2; }
 <!-- FRESHNESS_ENGINE_CARD -->
 <a href="/fresh/index.html" style="text-decoration:none;"><div style="border:1px solid rgba(8,145,178,.18);border-radius:16px;padding:14px;background:rgba(255,255,255,.8);backdrop-filter:blur(16px);"><div style="font-weight:800;color:#0c2d48;">Freshness Hub</div><div style="color:#2e6a8a;margin-top:4px;">Recently updated pages + trending internal guides →</div></div></a>
 
-<!-- WOW 2026 HERO -->
-<section class="cmdHero" aria-label="SideGuy — Human Resolution Layer">
-  <div class="cmdHeroGrid" aria-hidden="true"></div>
-  <div class="cmdHeroViz" aria-hidden="true">
-    <div class="sg-ocean-panel">
-      <div class="sg-ocean-glow1"></div>
-      <div class="sg-ocean-glow2"></div>
-      <div class="sg-ocean-wave1"></div>
-      <div class="sg-ocean-wave2"></div>
-      <div class="sg-ocean-wave3"></div>
+<!-- PREMIUM 2026 SPLIT HERO -->
+<section class="sgHero" aria-label="SideGuy — Human Resolution Layer">
+
+  <!-- LEFT: text + CTAs. backdrop-filter here, overflow:hidden NEVER here -->
+  <div class="sgHeroLeft">
+    <p class="sgHeroEye">&#x26A1; Future Infrastructure &middot; San Diego &middot; 2027</p>
+    <h1 class="sgHeroH1">The human resolution layer<br>for modern technology.</h1>
+    <p class="sgHeroSub reveal">SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it. Clarity before cost &mdash; no pressure, no sales pitch, no weird portals.</p>
+    <div class="cmdHeroCtas reveal">
+      <a class="cmdPjOrb" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity">Text<br>PJ</a>
+      <div class="cmdIconGroup">
+        <a class="cmdIconBtn" href="#problems">
+          <span class="cmdIconOrb orbAI">&#x1F916;</span>
+          <span class="cmdIconLabel">Problems</span>
+        </a>
+        <a class="cmdIconBtn" href="start-here.html">
+          <span class="cmdIconOrb orbStart">&#x25B8;</span>
+          <span class="cmdIconLabel">Start Here</span>
+        </a>
+        <a class="cmdIconBtn" href="hub.html">
+          <span class="cmdIconOrb orbOp">&#x2699;</span>
+          <span class="cmdIconLabel">Operators</span>
+        </a>
+      </div>
     </div>
   </div>
-  <p class="cmdEye">&#x26A1; Future Infrastructure &middot; San Diego &middot; 2027</p>
-  <h1>The human resolution layer<br>for modern technology.</h1>
-  <p class="cmdSub reveal">SideGuy is where Google discovers the problem, AI explains it, and a real human resolves it. Clarity before cost — no pressure, no sales pitch, no weird portals.</p>
-  <div class="cmdHeroCtas reveal">
-    <a class="cmdPjOrb" href="sms:+17735441231" rel="nofollow" aria-label="Text PJ for clarity">Text<br>PJ</a>
-    <div class="cmdIconGroup">
-      <a class="cmdIconBtn" href="#problems">
-        <span class="cmdIconOrb orbAI">&#x1F916;</span>
-        <span class="cmdIconLabel">Problems</span>
-      </a>
-      <a class="cmdIconBtn" href="start-here.html">
-        <span class="cmdIconOrb orbStart">&#x25B8;</span>
-        <span class="cmdIconLabel">Start Here</span>
-      </a>
-      <a class="cmdIconBtn" href="hub.html">
-        <span class="cmdIconOrb orbOp">&#x2699;</span>
-        <span class="cmdIconLabel">Operators</span>
-      </a>
-    </div>
+
+  <!-- RIGHT: ocean visual panel. overflow:hidden here, backdrop-filter NEVER here -->
+  <div class="sgHeroVisual" aria-hidden="true">
+    <div class="sg-glow-a"></div>
+    <div class="sg-glow-b"></div>
+    <div class="sg-wave-a"></div>
+    <div class="sg-wave-b"></div>
+    <div class="sg-wave-c"></div>
+    <div class="sg-vis-label">San Diego &middot; Signal Coastline &middot; 2027</div>
+    <div class="sg-vis-badge">Live clarity layer</div>
   </div>
+
 </section>
 
 <!-- MEME FACTORY STRIP -->
