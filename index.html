@@ -2372,30 +2372,15 @@ a:hover { color: #0891b2; }
   margin-bottom: 28px;
   position: relative;
 }
-/* Left panel — text + CTAs. Gets backdrop-filter, NOT overflow:hidden */
+/* Left panel — solid opaque background, NO backdrop-filter
+   (backdrop-filter was blending body::before dark ambient gradients into a black strip) */
 .sgHeroLeft {
   padding: 40px 32px 36px;
-  background: linear-gradient(160deg, rgba(186,227,247,.72) 0%, rgba(224,245,255,.60) 55%, rgba(255,255,255,.42) 100%);
+  background: linear-gradient(160deg, #dbeafe 0%, #e0f2fe 45%, #f0f9ff 100%);
   border-radius: 22px 0 0 22px;
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
   position: relative;
-  z-index: 1;
 }
-/* Subtle node-grid overlay on left panel */
-.sgHeroLeft::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 22px 0 0 22px;
-  background-image:
-    linear-gradient(rgba(8,145,178,.06) 1px, rgba(8,145,178,0) 1px),
-    linear-gradient(90deg, rgba(8,145,178,.06) 1px, rgba(8,145,178,0) 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  opacity: .5;
-}
-.sgHeroLeft > * { position: relative; z-index: 1; }
+/* No ::before overlay — removed, was compounding the dark strip issue */
 /* Right visual panel — gets overflow:hidden, NO backdrop-filter */
 .sgHeroVisual {
   border-radius: 0 22px 22px 0;
@@ -2568,7 +2553,7 @@ a:hover { color: #0891b2; }
 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.75rem;color:#2e6a8a;background:rgba(224,242,251,.6);border:1px solid rgba(8,145,178,.14);border-radius:10px;padding:8px 16px;margin-bottom:12px;backdrop-filter:blur(12px);">
   <span style="font-weight:800;color:#0891b2;letter-spacing:.06em;text-transform:uppercase;font-size:.68rem;">Page Info</span>
   <span style="opacity:.35;">|</span>
-  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026 • hero v6</time></span>
+  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026 • hero v7</time></span>
   <span style="opacity:.35;">·</span>
   <span>Published: <time datetime="2024-01-01" style="font-weight:600;">Jan 2024</time></span>
   <span style="opacity:.35;">·</span>
