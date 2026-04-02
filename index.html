@@ -2512,17 +2512,146 @@ a:hover { color: #0891b2; }
   .sgHeroLeft { border-radius: 22px; }
 }
 
-/* ── Strip every backdrop-filter inside the hero — prevents dark-bleed rectangles ── */
+/* ── Strip every backdrop-filter inside the hero ── */
 .sgHeroLeft .cmdIconOrb,
-.sgHeroLeft .cmdPjOrb {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-/* Orb colours tuned for the light left-panel background */
+.sgHeroLeft .cmdPjOrb { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 .sgHeroLeft .orbAI    { background: rgba(8,145,178,.14);  border-color: rgba(8,145,178,.32);  color: #0c2d48; }
 .sgHeroLeft .orbStart { background: rgba(5,150,105,.13);  border-color: rgba(5,150,105,.30);  color: #0c2d48; }
 .sgHeroLeft .orbOp    { background: rgba(12,45,72,.10);   border-color: rgba(12,45,72,.22);   color: #0c2d48; }
 .sgHeroLeft .cmdIconLabel { color: #2e6a8a !important; }
+
+/* PJ orb — brighter Pacific teal glow */
+.sgHeroLeft .cmdPjOrb {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%) !important;
+  box-shadow: 0 0 0 4px rgba(8,145,178,.20), 0 16px 48px rgba(8,145,178,.42) !important;
+}
+.sgHeroLeft .cmdPjOrb:hover {
+  box-shadow: 0 0 0 6px rgba(8,145,178,.28), 0 22px 64px rgba(8,145,178,.55) !important;
+  transform: scale(1.06) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   TRENDING REAL PROBLEMS SECTION — zero backdrop-filter
+   ══════════════════════════════════════════════════════════ */
+.sg-trending {
+  margin: 0 0 32px;
+}
+.sg-trending-head {
+  margin-bottom: 20px;
+}
+.sg-trending-eye {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #0891b2;
+  margin-bottom: 10px;
+}
+.sg-live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8,145,178,.18);
+  animation: sgPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes sgPulse {
+  0%,100% { box-shadow: 0 0 0 3px rgba(8,145,178,.18); }
+  50%      { box-shadow: 0 0 0 7px rgba(8,145,178,.0); }
+}
+.sg-trending-title {
+  font-size: clamp(1.15rem, 2.8vw, 1.55rem);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  color: #0c2d48;
+  margin: 0 0 8px;
+  line-height: 1.15;
+}
+.sg-trending-sub {
+  font-size: .88rem;
+  color: #2e6a8a;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0;
+}
+.sg-trending-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.sg-tcard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px 14px;
+  background: linear-gradient(155deg, #f0f9ff, #e0f2fe);
+  border: 1px solid rgba(8,145,178,.18);
+  border-radius: 18px;
+  text-decoration: none;
+  box-shadow: 0 2px 12px rgba(8,145,178,.08);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  position: relative;
+}
+.sg-tcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(8,145,178,.16);
+  border-color: rgba(8,145,178,.35);
+}
+.sg-tcard-pulse {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8,145,178,.15);
+  animation: sgPulse 2.4s ease-in-out infinite;
+}
+.sg-tcard-query {
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #0891b2;
+}
+.sg-tcard-title {
+  font-size: .92rem;
+  font-weight: 800;
+  color: #0c2d48;
+  line-height: 1.3;
+}
+.sg-tcard-desc {
+  font-size: .80rem;
+  color: #2e6a8a;
+  line-height: 1.55;
+  flex: 1;
+}
+.sg-tcard-cta {
+  font-size: .75rem;
+  font-weight: 800;
+  color: #0369a1;
+  margin-top: 4px;
+}
+@media(max-width:560px) {
+  .sg-trending-grid { grid-template-columns: 1fr; }
+}
+
+/* Enhanced hero visual — signal particles */
+.sg-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.7);
+  animation: sgFloat linear infinite;
+  pointer-events: none;
+}
+@keyframes sgFloat {
+  0%   { transform: translateY(0)    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: .6; }
+  100% { transform: translateY(-180px); opacity: 0; }
+}
 </style>
 </head>
 
@@ -2564,7 +2693,7 @@ a:hover { color: #0891b2; }
 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.75rem;color:#2e6a8a;background:#e0f2fe;border:1px solid rgba(8,145,178,.18);border-radius:10px;padding:8px 16px;margin-bottom:12px;">
   <span style="font-weight:800;color:#0891b2;letter-spacing:.06em;text-transform:uppercase;font-size:.68rem;">Page Info</span>
   <span style="opacity:.35;">|</span>
-  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026 • hero v8</time></span>
+  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026 • GSC layer v9</time></span>
   <span style="opacity:.35;">·</span>
   <span>Published: <time datetime="2024-01-01" style="font-weight:600;">Jan 2024</time></span>
   <span style="opacity:.35;">·</span>
@@ -2601,17 +2730,108 @@ a:hover { color: #0891b2; }
     </div>
   </div>
 
-  <!-- RIGHT: ocean visual panel. overflow:hidden here, backdrop-filter NEVER here -->
+  <!-- RIGHT: ocean visual panel. overflow:hidden here, NO backdrop-filter -->
   <div class="sgHeroVisual" aria-hidden="true">
     <div class="sg-glow-a"></div>
     <div class="sg-glow-b"></div>
     <div class="sg-wave-a"></div>
     <div class="sg-wave-b"></div>
     <div class="sg-wave-c"></div>
+    <!-- Signal particles — small floating dots, CSS-only -->
+    <div class="sg-particle" style="width:4px;height:4px;left:18%;bottom:22%;animation-duration:4.2s;animation-delay:0s;"></div>
+    <div class="sg-particle" style="width:3px;height:3px;left:42%;bottom:15%;animation-duration:5.8s;animation-delay:1.1s;"></div>
+    <div class="sg-particle" style="width:5px;height:5px;left:68%;bottom:30%;animation-duration:3.9s;animation-delay:0.5s;"></div>
+    <div class="sg-particle" style="width:3px;height:3px;left:30%;bottom:40%;animation-duration:6.2s;animation-delay:2.3s;"></div>
+    <div class="sg-particle" style="width:4px;height:4px;left:55%;bottom:12%;animation-duration:4.8s;animation-delay:1.8s;"></div>
+    <div class="sg-particle" style="width:3px;height:3px;left:80%;bottom:25%;animation-duration:5.1s;animation-delay:0.9s;opacity:.5"></div>
     <div class="sg-vis-label">San Diego &middot; Signal Coastline &middot; 2027</div>
-    <div class="sg-vis-badge">Live clarity layer</div>
+    <div class="sg-vis-badge">&#x25CF; Live clarity layer</div>
   </div>
 
+</section>
+
+<!-- TRENDING REAL PROBLEMS — GSC REALITY LAYER -->
+<section class="sg-trending" aria-label="Trending problems SideGuy is solving">
+  <div class="sg-trending-head">
+    <div class="sg-trending-eye"><span class="sg-live-dot"></span> Live GSC Signals &middot; Last 24h</div>
+    <h2 class="sg-trending-title">Trending Real Problems SideGuy Is Solving</h2>
+    <p class="sg-trending-sub">These are real problems Google is already routing into SideGuy right now. Live search demand from real people in the last 24 hours.</p>
+  </div>
+  <div class="sg-trending-grid">
+
+    <a class="sg-tcard" href="/how-much-does-plumbing-cost-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">Plumbing inspection cost</div>
+      <div class="sg-tcard-desc">What inspectors actually check vs. what they charge — decoded before you book.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/ai-chatbot-for-drywall-contractors-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">AI chatbot for drywall contractors</div>
+      <div class="sg-tcard-desc">Which AI tools actually help drywall crews without breaking your workflow.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/stripe-vs-square.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">Square vs Stripe</div>
+      <div class="sg-tcard-desc">The real processing fee math operators don't see until it's too late.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/ai-business-solutions-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">AI business solutions tools San Diego</div>
+      <div class="sg-tcard-desc">What's actually worth deploying vs. what's just vendor noise in 2027.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/ai-chatbot-for-drywall-contractors-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">AI chatbot for homebuilding guidance</div>
+      <div class="sg-tcard-desc">How builders are using AI to match clients before the first site visit.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/ai-scheduling-for-animation-studios-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">AI scheduling tool for animation studios</div>
+      <div class="sg-tcard-desc">Crew scheduling, deadline stacking, and render queues — AI-assisted clarity.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/ai-chatbot-for-drywall-contractors-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">AI voice assistant for drywall contractors</div>
+      <div class="sg-tcard-desc">Voice-first job logging and client updates without stopping work on the wall.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/ai-consulting-carlsbad-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">AI consulting services San Diego</div>
+      <div class="sg-tcard-desc">What a real AI consult looks like vs. a sales pitch dressed as one.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+    <a class="sg-tcard" href="/1-year-into-my-business-and-my-brain-keeps-saying-quit-for-solar-installers-in-phoenix-san-diego.html">
+      <span class="sg-tcard-pulse"></span>
+      <div class="sg-tcard-query">live now</div>
+      <div class="sg-tcard-title">Solar panel inspection Phoenix</div>
+      <div class="sg-tcard-desc">What Phoenix solar operators need to know before booking an inspection crew.</div>
+      <div class="sg-tcard-cta">See how SideGuy solves this &rarr;</div>
+    </a>
+
+  </div>
 </section>
 
 <!-- MEME FACTORY STRIP -->
@@ -2622,7 +2842,7 @@ a:hover { color: #0891b2; }
       <h2 style="margin:0;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.025em;color:#0c2d48;line-height:1.1">Real talk from the San Diego operator trenches</h2>
       <p style="margin:6px 0 0;font-size:.88rem;color:#2e6a8a;line-height:1.5;max-width:480px">24 memes. Zero vendor spin. Just what operators actually live through.</p>
     </div>
-    <a href="/memes/index.html" style="font-size:.85rem;font-weight:800;color:#0369a1;text-decoration:none;white-space:nowrap;padding:8px 16px;background:rgba(255,255,255,.8);border:1px solid rgba(8,145,178,.2);border-radius:999px;backdrop-filter:blur(10px)">See all 24 →</a>
+    <a href="/memes/index.html" style="font-size:.85rem;font-weight:800;color:#0369a1;text-decoration:none;white-space:nowrap;padding:8px 16px;background:#e0f2fe;border:1px solid rgba(8,145,178,.2);border-radius:999px;">See all 24 →</a>
   </div>
   <div class="sg-meme-grid reveal">
     <div class="meme-card">
