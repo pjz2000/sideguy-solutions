@@ -2005,12 +2005,76 @@ p  { color: #2e6a8a !important; }
   position: absolute;
   right: 0; top: 0; bottom: 0;
   width: 46%;
-  border-radius: 0 var(--r) var(--r) 0;
-  /* overflow:hidden removed — was triggering black-box rendering with backdrop-filter */
   pointer-events: none;
-  isolation: isolate;
+  /* No overflow:hidden, no backdrop-filter — avoids black-box compositing bug */
 }
-.cmdHeroViz svg { width: 100%; height: 100%; display: block; border-radius: 0 var(--r) var(--r) 0; }
+/* Pure CSS ocean panel — replaces SVG to avoid backdrop-filter black-box rendering */
+.sg-ocean-panel {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, #0c4a6e 0%, #0e7490 42%, #0891b2 72%, #06b6d4 100%);
+  border-radius: 0 var(--r) var(--r) 0;
+  overflow: hidden;
+}
+.sg-ocean-panel::before {
+  /* Left-edge fade — blends panel into hero copy (no 'transparent' stop = no dark band) */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(224,242,251,.78) 0%, rgba(224,242,251,0) 38%);
+  z-index: 3;
+}
+.sg-ocean-glow1 {
+  position: absolute;
+  top: -25%; left: -15%;
+  width: 75%; height: 65%;
+  background: radial-gradient(ellipse, rgba(186,230,253,.55) 0%, rgba(14,116,144,0) 70%);
+  animation: sgGlowPulse 5.2s ease-in-out infinite;
+  z-index: 1;
+}
+.sg-ocean-glow2 {
+  position: absolute;
+  bottom: -15%; right: -15%;
+  width: 65%; height: 60%;
+  background: radial-gradient(ellipse, rgba(33,211,161,.32) 0%, rgba(14,116,144,0) 70%);
+  animation: sgGlowPulse 4.4s ease-in-out infinite reverse;
+  z-index: 1;
+}
+.sg-ocean-wave1 {
+  position: absolute;
+  bottom: 0; left: -12%;
+  width: 124%; height: 42%;
+  background: rgba(125,211,252,.13);
+  border-radius: 52% 48% 0 0;
+  animation: sgWave 7s ease-in-out infinite;
+  z-index: 2;
+}
+.sg-ocean-wave2 {
+  position: absolute;
+  bottom: 0; left: -18%;
+  width: 136%; height: 32%;
+  background: rgba(33,211,161,.09);
+  border-radius: 58% 42% 0 0;
+  animation: sgWave 5s ease-in-out infinite reverse;
+  z-index: 2;
+}
+.sg-ocean-wave3 {
+  position: absolute;
+  bottom: 0; left: -8%;
+  width: 116%; height: 20%;
+  background: rgba(255,255,255,.06);
+  border-radius: 60% 40% 0 0;
+  animation: sgWave 3.6s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes sgGlowPulse {
+  0%, 100% { opacity: .72; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.09); }
+}
+@keyframes sgWave {
+  0%, 100% { transform: translateX(0)   scaleY(1);   }
+  50%      { transform: translateX(7%)  scaleY(1.12); }
+}
 @media(max-width:620px){ .cmdHeroViz { display:none; } }
 .cmdEye {
   color: #0369a1 !important;
@@ -2349,107 +2413,13 @@ a:hover { color: #0891b2; }
 <section class="cmdHero" aria-label="SideGuy — Human Resolution Layer">
   <div class="cmdHeroGrid" aria-hidden="true"></div>
   <div class="cmdHeroViz" aria-hidden="true">
-    <svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <!-- Ocean gradient base — explicit solid fill prevents black-box rendering -->
-        <linearGradient id="sgOceanBg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%"   stop-color="#0c4a6e" stop-opacity=".92"/>
-          <stop offset="45%"  stop-color="#0e7490" stop-opacity=".85"/>
-          <stop offset="100%" stop-color="#06b6d4" stop-opacity=".78"/>
-        </linearGradient>
-        <!-- Ambient light glow top-left -->
-        <radialGradient id="sgGlow1" cx="25%" cy="18%" r="55%">
-          <stop offset="0%"   stop-color="#bae6fd" stop-opacity=".45"/>
-          <stop offset="100%" stop-color="#0c4a6e"  stop-opacity="0"/>
-        </radialGradient>
-        <!-- Ambient light glow bottom-right -->
-        <radialGradient id="sgGlow2" cx="78%" cy="78%" r="50%">
-          <stop offset="0%"   stop-color="#21d3a1" stop-opacity=".28"/>
-          <stop offset="100%" stop-color="#0e7490"  stop-opacity="0"/>
-        </radialGradient>
-        <!-- Left-edge fade so panel blends into hero copy -->
-        <linearGradient id="sgFadeLeft" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="#e0f2fe" stop-opacity=".72"/>
-          <stop offset="40%"  stop-color="#e0f2fe" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-
-      <!-- ① Solid ocean gradient base — kills the black-box bug -->
-      <rect width="340" height="220" fill="url(#sgOceanBg)" rx="0"/>
-
-      <!-- ② Ambient light pools -->
-      <ellipse cx="85"  cy="42"  rx="130" ry="85"  fill="url(#sgGlow1)"/>
-      <ellipse cx="255" cy="158" rx="110" ry="72"  fill="url(#sgGlow2)">
-        <animate attributeName="opacity" values=".7;1;.7" dur="4.8s" repeatCount="indefinite"/>
-      </ellipse>
-
-      <!-- ③ Cinematic light beam removed — was rendering as dark strip in some browsers -->
-
-      <!-- ④ Node-line network -->
-      <g stroke="rgba(125,211,252,.55)" stroke-width=".9" fill="none">
-        <line x1="70"  y1="70"  x2="170" y2="108"><animate attributeName="opacity" values=".35;.75;.35" dur="3.2s" repeatCount="indefinite"/></line>
-        <line x1="170" y1="108" x2="265" y2="55" ><animate attributeName="opacity" values=".5;.2;.5"   dur="2.6s" repeatCount="indefinite"/></line>
-        <line x1="170" y1="108" x2="235" y2="166"><animate attributeName="opacity" values=".3;.7;.3"   dur="4.1s" repeatCount="indefinite"/></line>
-        <line x1="70"  y1="70"  x2="120" y2="153"><animate attributeName="opacity" values=".25;.55;.25" dur="3.7s" repeatCount="indefinite"/></line>
-        <line x1="265" y1="55"  x2="305" y2="138"><animate attributeName="opacity" values=".3;.6;.3"   dur="2.9s" repeatCount="indefinite"/></line>
-        <line x1="120" y1="153" x2="235" y2="166"><animate attributeName="opacity" values=".18;.45;.18" dur="5s"   repeatCount="indefinite"/></line>
-      </g>
-
-      <!-- ⑤ Data pulse particles -->
-      <circle r="2.8" fill="#21d3a1">
-        <animateMotion path="M70,70 L265,55"   dur="2.2s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite"/>
-      </circle>
-      <circle r="2.2" fill="#7dd3fc">
-        <animateMotion path="M170,108 L235,166" dur="2.7s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;.9;0" dur="2.7s" repeatCount="indefinite"/>
-      </circle>
-      <circle r="2" fill="#0891b2">
-        <animateMotion path="M70,70 L120,153"  dur="3.4s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;.8;0" dur="3.4s" repeatCount="indefinite"/>
-      </circle>
-
-      <!-- ⑥ Hub node — center pulse -->
-      <circle cx="170" cy="108" r="11"  fill="rgba(125,211,252,.18)" stroke="#7dd3fc" stroke-width="1.4"/>
-      <circle cx="170" cy="108" r="5.5" fill="#7dd3fc"/>
-      <circle cx="170" cy="108" r="11"  fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.1">
-        <animate attributeName="r"       values="11;24;11" dur="2.4s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values=".6;0;.6"  dur="2.4s" repeatCount="indefinite"/>
-      </circle>
-
-      <!-- ⑦ Satellite nodes -->
-      <circle cx="70"  cy="70"  r="7"   fill="rgba(33,211,161,.22)" stroke="#21d3a1" stroke-width="1.4"/><circle cx="70"  cy="70"  r="3.5" fill="#21d3a1"/>
-      <circle cx="265" cy="55"  r="6.5" fill="rgba(125,211,252,.22)" stroke="#7dd3fc" stroke-width="1.4"/><circle cx="265" cy="55"  r="3"   fill="#7dd3fc"/>
-      <circle cx="235" cy="166" r="6"   fill="rgba(8,145,178,.22)"  stroke="#0891b2" stroke-width="1.4"/><circle cx="235" cy="166" r="3"   fill="#0891b2"/>
-      <circle cx="120" cy="153" r="5.5" fill="rgba(33,211,161,.22)" stroke="#21d3a1" stroke-width="1.4"/><circle cx="120" cy="153" r="2.5" fill="#21d3a1"/>
-      <circle cx="305" cy="138" r="5"   fill="rgba(125,211,252,.22)" stroke="#7dd3fc" stroke-width="1.4"/><circle cx="305" cy="138" r="2.5" fill="#7dd3fc"/>
-
-      <!-- ⑧ Ocean waves — two layered, staggered -->
-      <path fill="rgba(125,211,252,.14)">
-        <animate attributeName="d"
-          values="M0,178 Q55,163 110,176 Q165,189 220,171 Q275,154 340,170 L340,220 L0,220 Z;
-                  M0,171 Q55,185 110,168 Q165,151 220,178 Q275,191 340,163 L340,220 L0,220 Z;
-                  M0,178 Q55,163 110,176 Q165,189 220,171 Q275,154 340,170 L340,220 L0,220 Z"
-          dur="7s" repeatCount="indefinite"/>
-      </path>
-      <path fill="rgba(33,211,161,.09)">
-        <animate attributeName="d"
-          values="M0,191 Q70,178 140,190 Q210,202 280,186 Q310,179 340,188 L340,220 L0,220 Z;
-                  M0,186 Q70,198 140,184 Q210,170 280,194 Q310,204 340,181 L340,220 L0,220 Z;
-                  M0,191 Q70,178 140,190 Q210,202 280,186 Q310,179 340,188 L340,220 L0,220 Z"
-          dur="5s" repeatCount="indefinite"/>
-      </path>
-      <path fill="rgba(255,255,255,.05)">
-        <animate attributeName="d"
-          values="M0,200 Q85,192 170,201 Q255,210 340,198 L340,220 L0,220 Z;
-                  M0,196 Q85,206 170,196 Q255,186 340,204 L340,220 L0,220 Z;
-                  M0,200 Q85,192 170,201 Q255,210 340,198 L340,220 L0,220 Z"
-          dur="3.8s" repeatCount="indefinite"/>
-      </path>
-
-      <!-- ⑨ Left-edge blend fade (seamless with hero copy) -->
-      <rect width="340" height="220" fill="url(#sgFadeLeft)"/>
-    </svg>
+    <div class="sg-ocean-panel">
+      <div class="sg-ocean-glow1"></div>
+      <div class="sg-ocean-glow2"></div>
+      <div class="sg-ocean-wave1"></div>
+      <div class="sg-ocean-wave2"></div>
+      <div class="sg-ocean-wave3"></div>
+    </div>
   </div>
   <p class="cmdEye">&#x26A1; Future Infrastructure &middot; San Diego &middot; 2027</p>
   <h1>The human resolution layer<br>for modern technology.</h1>
