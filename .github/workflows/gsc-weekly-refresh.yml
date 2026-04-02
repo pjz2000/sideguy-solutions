@@ -1,0 +1,44 @@
+name: GSC Weekly Card Refresh
+
+# Every Monday at 08:00 UTC (midnight Pacific)
+# Can also be triggered manually
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+jobs:
+  refresh-cards:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install google-api-python-client google-auth
+
+      - name: Pull GSC winners
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+        run: python3 tools/gsc/gsc_query_puller.py
+
+      - name: Inject trending cards into index.html
+        run: python3 tools/homepage-builder/update_trending_cards.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "sideguy-gsc[bot]"
+          git config user.email "gsc-bot@sideguysolutions.com"
+          git add index.html data/gsc-winners.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Auto: GSC trending cards refresh $(date -u +%Y-%m-%d) [skip ci]"
+          git push
