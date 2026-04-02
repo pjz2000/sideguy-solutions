@@ -2005,10 +2005,12 @@ p  { color: #2e6a8a !important; }
   position: absolute;
   right: 0; top: 0; bottom: 0;
   width: 46%;
-  overflow: hidden;
+  border-radius: 0 var(--r) var(--r) 0;
+  /* overflow:hidden removed — was triggering black-box rendering with backdrop-filter */
   pointer-events: none;
+  isolation: isolate;
 }
-.cmdHeroViz svg { width: 100%; height: 100%; }
+.cmdHeroViz svg { width: 100%; height: 100%; display: block; border-radius: 0 var(--r) var(--r) 0; }
 @media(max-width:620px){ .cmdHeroViz { display:none; } }
 .cmdEye {
   color: #0369a1 !important;
@@ -2329,6 +2331,17 @@ a:hover { color: #0891b2; }
 
       <main aria-label="Main content" id="main-content">
 
+<!-- PAGE TIMESTAMP BAR -->
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.75rem;color:#2e6a8a;background:rgba(224,242,251,.6);border:1px solid rgba(8,145,178,.14);border-radius:10px;padding:8px 16px;margin-bottom:12px;backdrop-filter:blur(12px);">
+  <span style="font-weight:800;color:#0891b2;letter-spacing:.06em;text-transform:uppercase;font-size:.68rem;">Page Info</span>
+  <span style="opacity:.35;">|</span>
+  <span>Updated: <time datetime="2026-04-02" style="font-weight:700;color:#0c2d48;">April 2, 2026</time></span>
+  <span style="opacity:.35;">·</span>
+  <span>Published: <time datetime="2024-01-01" style="font-weight:600;">Jan 2024</time></span>
+  <span style="opacity:.35;">·</span>
+  <span style="color:#0369a1;font-weight:600;">SideGuy Solutions · San Diego</span>
+</div>
+
 <!-- FRESHNESS_ENGINE_CARD -->
 <a href="/fresh/index.html" style="text-decoration:none;"><div style="border:1px solid rgba(8,145,178,.18);border-radius:16px;padding:14px;background:rgba(255,255,255,.8);backdrop-filter:blur(16px);"><div style="font-weight:800;color:#0c2d48;">Freshness Hub</div><div style="color:#2e6a8a;margin-top:4px;">Recently updated pages + trending internal guides →</div></div></a>
 
@@ -2337,56 +2350,110 @@ a:hover { color: #0891b2; }
   <div class="cmdHeroGrid" aria-hidden="true"></div>
   <div class="cmdHeroViz" aria-hidden="true">
     <svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <!-- Connection lines -->
-      <g stroke="#0891b2" stroke-width="1" fill="none">
-        <line x1="70" y1="70" x2="170" y2="110"><animate attributeName="opacity" values=".25;.6;.25" dur="3.2s" repeatCount="indefinite"/></line>
-        <line x1="170" y1="110" x2="265" y2="55"><animate attributeName="opacity" values=".4;.15;.4" dur="2.6s" repeatCount="indefinite"/></line>
-        <line x1="170" y1="110" x2="235" y2="168"><animate attributeName="opacity" values=".3;.65;.3" dur="4.1s" repeatCount="indefinite"/></line>
-        <line x1="70" y1="70" x2="120" y2="155"><animate attributeName="opacity" values=".2;.5;.2" dur="3.7s" repeatCount="indefinite"/></line>
-        <line x1="265" y1="55" x2="305" y2="140"><animate attributeName="opacity" values=".3;.55;.3" dur="2.9s" repeatCount="indefinite"/></line>
-        <line x1="120" y1="155" x2="235" y2="168"><animate attributeName="opacity" values=".15;.4;.15" dur="5s" repeatCount="indefinite"/></line>
+      <defs>
+        <!-- Ocean gradient base — explicit solid fill prevents black-box rendering -->
+        <linearGradient id="sgOceanBg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#0c4a6e" stop-opacity=".92"/>
+          <stop offset="45%"  stop-color="#0e7490" stop-opacity=".85"/>
+          <stop offset="100%" stop-color="#06b6d4" stop-opacity=".78"/>
+        </linearGradient>
+        <!-- Ambient light glow top-left -->
+        <radialGradient id="sgGlow1" cx="25%" cy="18%" r="55%">
+          <stop offset="0%"   stop-color="#bae6fd" stop-opacity=".45"/>
+          <stop offset="100%" stop-color="#0c4a6e"  stop-opacity="0"/>
+        </radialGradient>
+        <!-- Ambient light glow bottom-right -->
+        <radialGradient id="sgGlow2" cx="78%" cy="78%" r="50%">
+          <stop offset="0%"   stop-color="#21d3a1" stop-opacity=".28"/>
+          <stop offset="100%" stop-color="#0e7490"  stop-opacity="0"/>
+        </radialGradient>
+        <!-- Left-edge fade so panel blends into hero copy -->
+        <linearGradient id="sgFadeLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#e0f2fe" stop-opacity=".72"/>
+          <stop offset="40%"  stop-color="#e0f2fe" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ① Solid ocean gradient base — kills the black-box bug -->
+      <rect width="340" height="220" fill="url(#sgOceanBg)" rx="0"/>
+
+      <!-- ② Ambient light pools -->
+      <ellipse cx="85"  cy="42"  rx="130" ry="85"  fill="url(#sgGlow1)"/>
+      <ellipse cx="255" cy="158" rx="110" ry="72"  fill="url(#sgGlow2)">
+        <animate attributeName="opacity" values=".7;1;.7" dur="4.8s" repeatCount="indefinite"/>
+      </ellipse>
+
+      <!-- ③ Cinematic light beam sweeping left→right -->
+      <rect x="-80" y="0" width="60" height="220" fill="rgba(255,255,255,.06)" transform="skewX(-18)">
+        <animateTransform attributeName="transform" type="translate"
+          from="-80 0" to="420 0" dur="6s" repeatCount="indefinite" additive="sum"/>
+        <animate attributeName="opacity" values="0;.55;0" dur="6s" repeatCount="indefinite"/>
+      </rect>
+
+      <!-- ④ Node-line network -->
+      <g stroke="rgba(125,211,252,.55)" stroke-width=".9" fill="none">
+        <line x1="70"  y1="70"  x2="170" y2="108"><animate attributeName="opacity" values=".35;.75;.35" dur="3.2s" repeatCount="indefinite"/></line>
+        <line x1="170" y1="108" x2="265" y2="55" ><animate attributeName="opacity" values=".5;.2;.5"   dur="2.6s" repeatCount="indefinite"/></line>
+        <line x1="170" y1="108" x2="235" y2="166"><animate attributeName="opacity" values=".3;.7;.3"   dur="4.1s" repeatCount="indefinite"/></line>
+        <line x1="70"  y1="70"  x2="120" y2="153"><animate attributeName="opacity" values=".25;.55;.25" dur="3.7s" repeatCount="indefinite"/></line>
+        <line x1="265" y1="55"  x2="305" y2="138"><animate attributeName="opacity" values=".3;.6;.3"   dur="2.9s" repeatCount="indefinite"/></line>
+        <line x1="120" y1="153" x2="235" y2="166"><animate attributeName="opacity" values=".18;.45;.18" dur="5s"   repeatCount="indefinite"/></line>
       </g>
-      <!-- Data pulses along lines -->
+
+      <!-- ⑤ Data pulse particles -->
       <circle r="2.8" fill="#21d3a1">
-        <animateMotion path="M70,70 L265,55" dur="2.2s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;.9;0" dur="2.2s" repeatCount="indefinite"/>
+        <animateMotion path="M70,70 L265,55"   dur="2.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite"/>
       </circle>
-      <circle r="2.2" fill="#00c4ff">
-        <animateMotion path="M170,110 L235,168" dur="2.7s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;.8;0" dur="2.7s" repeatCount="indefinite"/>
+      <circle r="2.2" fill="#7dd3fc">
+        <animateMotion path="M170,108 L235,166" dur="2.7s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;.9;0" dur="2.7s" repeatCount="indefinite"/>
       </circle>
       <circle r="2" fill="#0891b2">
-        <animateMotion path="M70,70 L120,155" dur="3.4s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;.7;0" dur="3.4s" repeatCount="indefinite"/>
+        <animateMotion path="M70,70 L120,153"  dur="3.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;.8;0" dur="3.4s" repeatCount="indefinite"/>
       </circle>
-      <!-- Hub node (center) -->
-      <circle cx="170" cy="110" r="11" fill="rgba(8,145,178,.12)" stroke="#0891b2" stroke-width="1.5"/>
-      <circle cx="170" cy="110" r="5.5" fill="#0891b2"/>
-      <circle cx="170" cy="110" r="11" fill="none" stroke="#0891b2" stroke-width="1.2" opacity=".5">
-        <animate attributeName="r" values="11;22;11" dur="2.4s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values=".5;0;.5" dur="2.4s" repeatCount="indefinite"/>
+
+      <!-- ⑥ Hub node — center pulse -->
+      <circle cx="170" cy="108" r="11"  fill="rgba(125,211,252,.18)" stroke="#7dd3fc" stroke-width="1.4"/>
+      <circle cx="170" cy="108" r="5.5" fill="#7dd3fc"/>
+      <circle cx="170" cy="108" r="11"  fill="none" stroke="rgba(125,211,252,.5)" stroke-width="1.1">
+        <animate attributeName="r"       values="11;24;11" dur="2.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".6;0;.6"  dur="2.4s" repeatCount="indefinite"/>
       </circle>
-      <!-- Satellite nodes -->
-      <circle cx="70" cy="70" r="7.5" fill="rgba(33,211,161,.14)" stroke="#21d3a1" stroke-width="1.5"/><circle cx="70" cy="70" r="3.5" fill="#21d3a1"/>
-      <circle cx="265" cy="55" r="6.5" fill="rgba(0,196,255,.14)" stroke="#00c4ff" stroke-width="1.5"/><circle cx="265" cy="55" r="3" fill="#00c4ff"/>
-      <circle cx="235" cy="168" r="6.5" fill="rgba(8,145,178,.14)" stroke="#0891b2" stroke-width="1.5"/><circle cx="235" cy="168" r="3" fill="#0891b2"/>
-      <circle cx="120" cy="155" r="5.5" fill="rgba(33,211,161,.14)" stroke="#21d3a1" stroke-width="1.5"/><circle cx="120" cy="155" r="2.5" fill="#21d3a1"/>
-      <circle cx="305" cy="140" r="5" fill="rgba(0,196,255,.14)" stroke="#00c4ff" stroke-width="1.5"/><circle cx="305" cy="140" r="2.5" fill="#00c4ff"/>
-      <!-- Ocean wave bottom -->
-      <path fill="rgba(8,145,178,.07)">
+
+      <!-- ⑦ Satellite nodes -->
+      <circle cx="70"  cy="70"  r="7"   fill="rgba(33,211,161,.22)" stroke="#21d3a1" stroke-width="1.4"/><circle cx="70"  cy="70"  r="3.5" fill="#21d3a1"/>
+      <circle cx="265" cy="55"  r="6.5" fill="rgba(125,211,252,.22)" stroke="#7dd3fc" stroke-width="1.4"/><circle cx="265" cy="55"  r="3"   fill="#7dd3fc"/>
+      <circle cx="235" cy="166" r="6"   fill="rgba(8,145,178,.22)"  stroke="#0891b2" stroke-width="1.4"/><circle cx="235" cy="166" r="3"   fill="#0891b2"/>
+      <circle cx="120" cy="153" r="5.5" fill="rgba(33,211,161,.22)" stroke="#21d3a1" stroke-width="1.4"/><circle cx="120" cy="153" r="2.5" fill="#21d3a1"/>
+      <circle cx="305" cy="138" r="5"   fill="rgba(125,211,252,.22)" stroke="#7dd3fc" stroke-width="1.4"/><circle cx="305" cy="138" r="2.5" fill="#7dd3fc"/>
+
+      <!-- ⑧ Ocean waves — two layered, staggered -->
+      <path fill="rgba(125,211,252,.14)">
         <animate attributeName="d"
-          values="M0,185 Q55,170 110,183 Q165,196 220,178 Q275,161 340,177 L340,220 L0,220 Z;
-                  M0,178 Q55,192 110,175 Q165,158 220,185 Q275,198 340,170 L340,220 L0,220 Z;
-                  M0,185 Q55,170 110,183 Q165,196 220,178 Q275,161 340,177 L340,220 L0,220 Z"
+          values="M0,178 Q55,163 110,176 Q165,189 220,171 Q275,154 340,170 L340,220 L0,220 Z;
+                  M0,171 Q55,185 110,168 Q165,151 220,178 Q275,191 340,163 L340,220 L0,220 Z;
+                  M0,178 Q55,163 110,176 Q165,189 220,171 Q275,154 340,170 L340,220 L0,220 Z"
           dur="7s" repeatCount="indefinite"/>
       </path>
-      <path fill="rgba(33,211,161,.05)">
+      <path fill="rgba(33,211,161,.09)">
         <animate attributeName="d"
-          values="M0,195 Q70,182 140,194 Q210,206 280,190 Q310,183 340,192 L340,220 L0,220 Z;
-                  M0,190 Q70,202 140,188 Q210,174 280,198 Q310,208 340,185 L340,220 L0,220 Z;
-                  M0,195 Q70,182 140,194 Q210,206 280,190 Q310,183 340,192 L340,220 L0,220 Z"
+          values="M0,191 Q70,178 140,190 Q210,202 280,186 Q310,179 340,188 L340,220 L0,220 Z;
+                  M0,186 Q70,198 140,184 Q210,170 280,194 Q310,204 340,181 L340,220 L0,220 Z;
+                  M0,191 Q70,178 140,190 Q210,202 280,186 Q310,179 340,188 L340,220 L0,220 Z"
           dur="5s" repeatCount="indefinite"/>
       </path>
+      <path fill="rgba(255,255,255,.05)">
+        <animate attributeName="d"
+          values="M0,200 Q85,192 170,201 Q255,210 340,198 L340,220 L0,220 Z;
+                  M0,196 Q85,206 170,196 Q255,186 340,204 L340,220 L0,220 Z;
+                  M0,200 Q85,192 170,201 Q255,210 340,198 L340,220 L0,220 Z"
+          dur="3.8s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- ⑨ Left-edge blend fade (seamless with hero copy) -->
+      <rect width="340" height="220" fill="url(#sgFadeLeft)"/>
     </svg>
   </div>
   <p class="cmdEye">&#x26A1; Future Infrastructure &middot; San Diego &middot; 2027</p>
