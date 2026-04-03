@@ -2737,10 +2737,278 @@ a:hover { color: #0891b2; }
   pointer-events: none;
 }
 @keyframes sgFloat {
-  0%   { transform: translateY(0)    opacity: 0; }
+  0%   { transform: translateY(0);    opacity: 0; }
   10%  { opacity: 1; }
   90%  { opacity: .6; }
   100% { transform: translateY(-180px); opacity: 0; }
+}
+</style>
+
+<style id="sg-fullbleed-trust">
+/* ══════════════════════════════════════════════════════════
+   FULL-BLEED HERO — removes visible card frame
+   ══════════════════════════════════════════════════════════ */
+.sgHero {
+  margin-left: -22px !important;
+  margin-right: -22px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+}
+.sgHeroLeft {
+  border-radius: 0 !important;
+}
+.sgHeroVisual {
+  border-radius: 0 !important;
+}
+@media(max-width:700px) {
+  .sgHeroLeft  { border-radius: 0 !important; }
+  .sgHeroVisual { border-radius: 0 !important; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   AI-ASSISTED CLARITY TRUST STRIP V1
+   Light ocean glass · zero backdrop-filter bugs
+   ══════════════════════════════════════════════════════════ */
+.sg-clarity-strip {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -22px 32px;
+  padding: 40px 40px 36px;
+  background: linear-gradient(118deg, #ddf4fb 0%, #f0faff 52%, #e8f7fd 100%);
+  border-top: 1px solid rgba(8,145,178,.18);
+  border-bottom: 1px solid rgba(8,145,178,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 4px 28px rgba(3,105,161,.07);
+}
+
+/* route track along top edge */
+.sg-rt-track {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 32px;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sg-rt-line {
+  position: absolute;
+  top: 50%; left: 40px; right: 40px;
+  height: 1.5px;
+  background: linear-gradient(90deg,
+    rgba(8,145,178,0) 0%,
+    rgba(8,145,178,.20) 15%,
+    rgba(14,165,233,.35) 50%,
+    rgba(8,145,178,.20) 85%,
+    rgba(8,145,178,0) 100%);
+  transform: translateY(-50%);
+}
+.sg-rt-nodes {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 40px; right: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sg-rt-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.sg-rt-node::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(8,145,178,.52);
+  box-shadow: 0 0 6px 2px rgba(8,145,178,.18);
+}
+.sg-rt-node::after {
+  content: attr(data-n);
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: rgba(3,105,161,.50);
+  white-space: nowrap;
+  line-height: 1;
+}
+/* travelling bead */
+.sg-rt-bead {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  box-shadow: 0 0 10px 4px rgba(14,165,233,.40);
+  transform: translateY(-50%);
+  animation: sgRtBead 3.8s cubic-bezier(.4,0,.6,1) infinite;
+}
+@keyframes sgRtBead {
+  0%   { left: 40px;                    opacity: 0; }
+  4%   { opacity: 1; }
+  96%  { opacity: 1; }
+  100% { left: calc(100% - 40px);       opacity: 0; }
+}
+
+/* floating signal dots */
+.sg-cs-dot {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(8,145,178,.32);
+  box-shadow: 0 0 8px 3px rgba(8,145,178,.15);
+  animation: sgCsDot 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.sg-cs-dot:nth-child(2) { animation-delay: 1.1s; }
+.sg-cs-dot:nth-child(3) { animation-delay: 2.3s; }
+.sg-cs-dot:nth-child(4) { animation-delay: 0.7s; }
+@keyframes sgCsDot {
+  0%,100% { transform: translateY(0) scale(1);    opacity: .40; }
+  50%     { transform: translateY(-7px) scale(1.3); opacity: .80; }
+}
+
+/* inner layout */
+.sg-cs-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  padding-top: 20px;
+}
+.sg-cs-text { flex: 1; min-width: 0; }
+
+.sg-cs-eyebrow {
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #0891b2;
+  margin: 0 0 10px;
+}
+.sg-cs-headline {
+  font-size: clamp(1.15rem, 2.4vw, 1.58rem);
+  font-weight: 900;
+  letter-spacing: -.022em;
+  line-height: 1.20;
+  color: #0c2d48;
+  margin: 0 0 14px;
+}
+.sg-cs-body {
+  font-size: .92rem;
+  line-height: 1.68;
+  color: #2e6a8a;
+  margin: 0 0 16px;
+  max-width: 62ch;
+}
+.sg-cs-micro {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: rgba(8,145,178,.72);
+  margin: 0;
+}
+
+/* chip pills */
+.sg-cs-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.sg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(8,145,178,.20);
+  background: rgba(255,255,255,.80);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 2px 8px rgba(3,105,161,.07);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: #0369a1;
+  white-space: nowrap;
+}
+.sg-chip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  box-shadow: 0 0 5px 2px rgba(14,165,233,.38);
+  animation: sgChipDot 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.sg-chip:nth-child(2) .sg-chip-dot { animation-delay: .66s; }
+.sg-chip:nth-child(3) .sg-chip-dot { animation-delay: 1.32s; }
+@keyframes sgChipDot {
+  0%,100% { opacity: .55; transform: scale(1); }
+  50%     { opacity: 1;   transform: scale(1.35); }
+}
+
+/* ── clarity strip responsive ─────────────────────────── */
+@media(max-width:980px) {
+  .sg-clarity-strip { padding: 32px 28px 28px; }
+  .sg-cs-inner { gap: 24px; }
+}
+@media(max-width:640px) {
+  .sg-clarity-strip { padding: 28px 20px 24px; margin: 0 -22px 28px; }
+  .sg-cs-inner { flex-direction: column; gap: 20px; }
+  .sg-cs-chips { flex-direction: row; flex-wrap: wrap; }
+  .sg-rt-track  { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   NORTH COUNTY TRUST BAR UPGRADE — Solana Beach premium
+   ══════════════════════════════════════════════════════════ */
+.sg-nc-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: linear-gradient(110deg, rgba(8,145,178,.09) 0%, rgba(255,255,255,.75) 50%, rgba(6,182,212,.07) 100%);
+  border: 1px solid rgba(8,145,178,.16);
+  border-radius: 14px;
+  margin: 28px 0;
+  font-size: .82rem;
+  color: #2e6a8a;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.88), 0 4px 18px rgba(8,145,178,.07);
+}
+.sg-nc-label {
+  font-weight: 800;
+  color: #0c2d48;
+  white-space: nowrap;
+  font-size: .80rem;
+  letter-spacing: .01em;
+}
+.sg-nc-sep { opacity: .30; }
+.sg-nc-city {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: #2e6a8a;
+  font-size: .80rem;
+}
+.sg-nc-city.sg-nc-primary {
+  font-weight: 800;
+  color: #0369a1;
+  background: rgba(8,145,178,.09);
+  border: 1px solid rgba(8,145,178,.15);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+.sg-nc-avail {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #0891b2;
+  white-space: nowrap;
+  font-size: .78rem;
 }
 </style>
 </head>
@@ -2958,6 +3226,44 @@ a:hover { color: #0891b2; }
 </section>
 <!-- GSC_TRENDING_END -->
 
+<!-- AI-ASSISTED CLARITY TRUST STRIP V1 -->
+<section class="sg-clarity-strip reveal" aria-label="How SideGuy works — AI-assisted, human-backed">
+
+  <!-- signal route track: Google → AI → Human → Resolution -->
+  <div class="sg-rt-track" aria-hidden="true">
+    <div class="sg-rt-line"></div>
+    <div class="sg-rt-nodes">
+      <div class="sg-rt-node" data-n="Google"></div>
+      <div class="sg-rt-node" data-n="AI"></div>
+      <div class="sg-rt-node" data-n="Human"></div>
+      <div class="sg-rt-node" data-n="Resolution"></div>
+    </div>
+    <div class="sg-rt-bead"></div>
+  </div>
+
+  <!-- floating signal dots -->
+  <span class="sg-cs-dot" style="top:22%;left:6%"   aria-hidden="true"></span>
+  <span class="sg-cs-dot" style="top:70%;left:13%"  aria-hidden="true"></span>
+  <span class="sg-cs-dot" style="top:28%;right:8%"  aria-hidden="true"></span>
+  <span class="sg-cs-dot" style="top:72%;right:16%" aria-hidden="true"></span>
+
+  <div class="sg-cs-inner">
+    <div class="sg-cs-text">
+      <p class="sg-cs-eyebrow">AI-Assisted &bull; Human-Backed</p>
+      <h2 class="sg-cs-headline">Built with AI systems.&nbsp;Refined by operator judgment.&nbsp;Resolved by real humans.</h2>
+      <p class="sg-cs-body">SideGuy uses live search telemetry, structured workflows, and human decision-making to turn real-world confusion into clarity. Google discovers the problem, AI explains the landscape, and a real human helps resolve the best next move.</p>
+      <p class="sg-cs-micro">Clarity before cost &nbsp;&bull;&nbsp; no weird portals &nbsp;&bull;&nbsp; no generic AI slop</p>
+    </div>
+    <div class="sg-cs-chips" aria-label="How the SideGuy model works">
+      <span class="sg-chip"><span class="sg-chip-dot"></span>Live search telemetry</span>
+      <span class="sg-chip"><span class="sg-chip-dot"></span>Human decision layer</span>
+      <span class="sg-chip"><span class="sg-chip-dot"></span>Real operator follow-through</span>
+    </div>
+  </div>
+
+</section>
+<!-- /AI-ASSISTED CLARITY TRUST STRIP V1 -->
+
 <!-- MEME FACTORY STRIP -->
 <section class="sg-meme-strip" style="margin:32px 0">
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:20px">
@@ -3016,22 +3322,21 @@ a:hover { color: #0891b2; }
 </section>
 
 <!-- NORTH COUNTY TRUST SIGNAL BAR -->
-<div class="reveal" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(8,145,178,.1);border-radius:14px;margin:0 0 28px;font-size:.82rem;color:#2e6a8a;">
-  <span style="font-weight:800;color:#0c2d48;white-space:nowrap;">📍 Serving North County SD</span>
-  <span style="opacity:.4">·</span>
-  <span>Solana Beach</span>
-  <span style="opacity:.4">·</span>
-  <span>Encinitas</span>
-  <span style="opacity:.4">·</span>
-  <span>Carlsbad</span>
-  <span style="opacity:.4">·</span>
-  <span>Del Mar</span>
-  <span style="opacity:.4">·</span>
-  <span>Oceanside</span>
-  <span style="opacity:.4">·</span>
-  <span>Vista</span>
-  <span style="opacity:.4">·</span>
-  <span style="margin-left:auto;font-weight:700;color:#0891b2;white-space:nowrap;"><span class="fresh-dot"></span>Available now</span>
+<div class="sg-nc-bar reveal" role="region" aria-label="Service area — North County San Diego">
+  <span class="sg-nc-label">&#x1F4CD; North County San Diego</span>
+  <span class="sg-nc-sep">&bull;</span>
+  <span class="sg-nc-city sg-nc-primary">Solana Beach</span>
+  <span class="sg-nc-sep">&bull;</span>
+  <span class="sg-nc-city sg-nc-primary">Encinitas</span>
+  <span class="sg-nc-sep">&bull;</span>
+  <span class="sg-nc-city">Del Mar</span>
+  <span class="sg-nc-sep">&bull;</span>
+  <span class="sg-nc-city">Carlsbad</span>
+  <span class="sg-nc-sep">&bull;</span>
+  <span class="sg-nc-city">Oceanside</span>
+  <span class="sg-nc-sep">&bull;</span>
+  <span class="sg-nc-city">Vista</span>
+  <span class="sg-nc-avail"><span class="fresh-dot"></span>Available now</span>
 </div>
 
 <!-- PROBLEM RESOLUTION GRID -->
