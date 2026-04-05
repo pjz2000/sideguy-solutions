@@ -161,8 +161,14 @@ footer a{color:#0891b2;text-decoration:none;font-weight:700;}
   <div class="card">
     <p class="card-label">Coastal Weather Risk</p>
     <h2>HVAC Stress by San Diego Climate Pattern</h2>
-    <p>Static reference — Weatherstack live data can replace these when API key is configured.</p>
-    <div id="severityBars" style="margin-top:16px;"></div>
+    <p>Live conditions via Open-Meteo (no key required). Stress bars show historical seasonal averages.</p>
+    <div id="liveBanner" style="display:none;font-size:.84rem;padding:10px 14px;
+      background:rgba(8,145,178,.06);border:1px solid rgba(8,145,178,.15);border-radius:10px;
+      margin-bottom:12px;line-height:1.5;"></div>
+    <div id="stressTip" style="display:none;font-size:.83rem;color:var(--muted);padding:10px 14px;
+      background:rgba(7,48,68,.03);border-left:3px solid #0891b2;border-radius:0 8px 8px 0;
+      margin-bottom:14px;line-height:1.55;"></div>
+    <div id="severityBars" style="margin-top:4px;"></div>
     <div style="margin-top:16px;padding:12px 14px;background:rgba(245,158,11,.06);
       border-radius:12px;border:1px solid rgba(245,158,11,.22);">
       <strong style="font-size:.84rem;color:#92400e;">Peak stress window:</strong>
@@ -177,8 +183,8 @@ footer a{color:#0891b2;text-decoration:none;font-weight:700;}
     <p>Your AC doesn't just cool air — it dehumidifies it. Every pound of moisture removed from the air costs energy. Coastal San Diego's sustained 75–90% relative humidity in summer forces your system to do twice the moisture-removal work before it can cool effectively.</p>
     <div style="margin:14px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
       <div style="padding:12px;background:rgba(8,145,178,.06);border-radius:12px;border:1px solid rgba(8,145,178,.14);text-align:center;">
-        <div style="font-size:1.4rem;font-weight:900;color:#0891b2;">75–90%</div>
-        <div style="font-size:.75rem;color:var(--muted);margin-top:2px;">Coastal RH · June–Aug</div>
+        <div id="liveHumChip" style="font-size:1.4rem;font-weight:900;color:#0891b2;">75–90%</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-top:2px;">Current RH · <span style="color:#0891b2;">live</span></div>
       </div>
       <div style="padding:12px;background:rgba(245,158,11,.06);border-radius:12px;border:1px solid rgba(245,158,11,.22);text-align:center;">
         <div style="font-size:1.4rem;font-weight:900;color:#d97706;">2× longer</div>
@@ -372,22 +378,22 @@ footer a{color:#0891b2;text-decoration:none;font-weight:700;}
 
 <footer>
   <p><a href="/">SideGuy Solutions</a> · North County San Diego · <a href="sms:+17735441231">Text PJ: 773-544-1231</a></p>
-  <p style="margin-top:4px;">Climate data: NOAA historical averages · Cost data: 2026 North County market · April 5, 2026 · GSC layer v33</p>
+  <p style="margin-top:4px;">Live weather: <a href="https://open-meteo.com" rel="nofollow">Open-Meteo</a> (no key · HTTPS · free) · Cost data: 2026 North County market · April 5, 2026 · GSC layer v33</p>
 </footer>
 
 <!-- ══════════════════════════════════════════════════════
-     WEATHERSTACK CONFIG STUB
-     Shell-first: all data below is static. Weatherstack live data
-     replaces static values when useLive = true + key is set.
-     Free tier: 250 req/mo at weatherstack.com (HTTP only)
-     Paid ($9.99/mo): HTTPS + hourly updates
+     OPEN-METEO CONFIG
+     No API key required. HTTPS. Free forever.
+     Docs: https://open-meteo.com/en/docs
+     Swap lat/lon to change target city.
      ══════════════════════════════════════════════════════ -->
 <script>
-/* ── WEATHERSTACK CONFIG STUB ─────────────────────────── */
-var WS_CONFIG = {
-  accessKey: 'YOUR_ACCESS_KEY',   // ← paste Weatherstack key here when ready
-  city:      'Encinitas,CA',
-  useLive:   false                // flip to true with paid key
+/* ── OPEN-METEO CONFIG ────────────────────────────────── */
+var OM_CONFIG = {
+  lat:     33.0369,   // Encinitas, CA (North County coastal center)
+  lon:    -117.2920,
+  city:   'Encinitas',
+  useLive: true       // no key needed — live by default
 };
 
 /* ── STATIC CLIMATE RISK DATA ─────────────────────────── */
@@ -439,32 +445,95 @@ function renderNCStrip() {
   el.innerHTML = html;
 }
 
-/* ── WEATHERSTACK LIVE HOOK (deferred) ────────────────── */
-function fetchLiveWeather() {
-  if (!WS_CONFIG.useLive || WS_CONFIG.accessKey === 'YOUR_ACCESS_KEY') return;
-  var url = 'http://api.weatherstack.com/current?access_key=' + WS_CONFIG.accessKey
-    + '&query=' + encodeURIComponent(WS_CONFIG.city) + '&units=f';
+/* ── OPEN-METEO WEATHER CODES ─────────────────────────── */
+var WMO_CODES = {
+  0:'Clear sky', 1:'Mainly clear', 2:'Partly cloudy', 3:'Overcast',
+  45:'Fog', 48:'Icy fog',
+  51:'Light drizzle', 53:'Drizzle', 55:'Heavy drizzle',
+  61:'Light rain', 63:'Rain', 65:'Heavy rain',
+  80:'Rain showers', 81:'Heavy showers', 82:'Violent showers',
+  95:'Thunderstorm', 96:'Thunderstorm w/ hail'
+};
+
+/* ── STRESS ASSESSMENT FROM LIVE DATA ─────────────────── */
+function assessStress(temp, hum, code) {
+  var isFog     = (code === 45 || code === 48);
+  var isHot     = temp >= 85;
+  var isHumid   = hum >= 72;
+  var isCoilRisk= temp < 68 && hum >= 70;
+
+  if (isCoilRisk) return { level:'Coil Freeze Risk', color:'#0891b2',
+    tip:'Do not run AC below 71°F right now. Switch to fan-only until temperature rises.' };
+  if (isFog && isHumid) return { level:'Marine Layer Active', color:'#06b6d4',
+    tip:'Fog + high humidity = peak compressor strain. System running longer than usual is normal.' };
+  if (isHot && isHumid) return { level:'High Stress', color:'#f59e0b',
+    tip:'Heat + humidity combined. Check your filter and ensure condenser is clear of debris.' };
+  if (isHot) return { level:'Heat Stress', color:'#f97316',
+    tip:'Dry heat spike. Your system should handle this — verify airflow and set temp 6–8°F above outdoor temp.' };
+  if (isHumid) return { level:'Humidity Elevated', color:'#d97706',
+    tip:'High moisture load. System is working harder than the temperature suggests.' };
+  return { level:'Normal Conditions', color:'#10b981',
+    tip:'Good conditions. Low HVAC stress right now.' };
+}
+
+/* ── FETCH OPEN-METEO ─────────────────────────────────── */
+function fetchOpenMeteo() {
+  if (!OM_CONFIG.useLive) return;
+  var url = 'https://api.open-meteo.com/v1/forecast'
+    + '?latitude='  + OM_CONFIG.lat
+    + '&longitude=' + OM_CONFIG.lon
+    + '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m'
+    + '&temperature_unit=fahrenheit&wind_speed_unit=mph'
+    + '&timezone=America%2FLos_Angeles';
+
   fetch(url)
     .then(function(r){ return r.json(); })
     .then(function(data){
       if (!data.current) return;
-      var temp = data.current.temperature;
-      var hum  = data.current.humidity;
-      var desc = data.current.weather_descriptions ? data.current.weather_descriptions[0] : '';
+      var c    = data.current;
+      var temp = Math.round(c.temperature_2m);
+      var feel = Math.round(c.apparent_temperature);
+      var hum  = c.relative_humidity_2m;
+      var code = c.weather_code;
+      var wind = Math.round(c.wind_speed_10m);
+      var desc = WMO_CODES[code] || 'Cloudy';
+      var stress = assessStress(temp, hum, code);
+
+      /* live banner */
       var banner = document.getElementById('liveBanner');
       if (banner) {
-        banner.textContent = 'Live: ' + temp + '°F · ' + hum + '% RH · ' + desc + ' in ' + WS_CONFIG.city;
+        banner.innerHTML =
+          '<span style="font-weight:800;color:' + stress.color + ';">' + stress.level + '</span>'
+          + ' &nbsp;·&nbsp; ' + temp + '°F (feels ' + feel + '°F)'
+          + ' &nbsp;·&nbsp; ' + hum + '% RH'
+          + ' &nbsp;·&nbsp; ' + desc
+          + ' &nbsp;·&nbsp; Wind ' + wind + ' mph'
+          + ' &nbsp;·&nbsp; <span style="color:var(--muted);">' + OM_CONFIG.city + '</span>';
         banner.style.display = 'block';
       }
+
+      /* stress tip */
+      var tip = document.getElementById('stressTip');
+      if (tip) {
+        tip.textContent = stress.tip;
+        tip.style.borderLeftColor = stress.color;
+        tip.style.display = 'block';
+      }
+
+      /* update humidity stat chip with live value */
+      var humChip = document.getElementById('liveHumChip');
+      if (humChip) humChip.textContent = hum + '%';
     })
-    .catch(function(){});
+    .catch(function(){
+      /* silent fail — static data already visible */
+    });
 }
 
 /* ── INIT ─────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
   renderSeverityBars();
   renderNCStrip();
-  fetchLiveWeather();
+  fetchOpenMeteo();
 });
 </script>
 
