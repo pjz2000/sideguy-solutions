@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🪛 SIDEGUY SEARCH → PAGE SOLDER RIG"
+echo "SIDEGUY SEARCH → PAGE SOLDER RIG"
 echo "==================================="
 
 STAMP=$(date +"%Y-%m-%d_%H-%M-%S")
@@ -9,7 +9,6 @@ LOG="logs/search-solder-$STAMP.log"
 
 echo -e "query\turl\tcluster\tconfidence\tnext_action" > "$MAP"
 
-# seed known strong routing examples
 echo -e "hvac repair vs replace\thvac-repair-vs-replace.html\thvac\t0.96\tspawn-cost-guide" >> "$MAP"
 echo -e "san diego payment processing fees\tsolana-payments-san-diego.html\tpayments\t0.94\tspawn-toast-vs-stripe" >> "$MAP"
 echo -e "who do i call airport terminal help\twho-do-i-call-airport-help.html\ttravel\t0.91\tspawn-airline-pages" >> "$MAP"
@@ -37,6 +36,6 @@ search signal
 DOC
 
 echo ""
-echo "✅ solder rig complete"
-echo "📍 map file: $MAP"
-echo "🧠 next step: auto route GSC winners into this map"
+echo "solder rig complete"
+echo "map file: $MAP"
+echo "next step: auto route GSC winners into this map"
