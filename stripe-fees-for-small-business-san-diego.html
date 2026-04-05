@@ -127,60 +127,115 @@
 
 </section>
 
-<!-- ═══ INTERACTIVE FEE CALCULATOR ═══ -->
+<!-- ═══ INTERACTIVE FEE CALCULATOR (v2 — card mix + disputes) ═══ -->
 <section style="max-width:900px;margin:0 auto;padding:0 20px 28px;" id="calculator">
   <div class="calc-card">
-    <h2 style="font-size:1.3rem;font-weight:800;margin:0 0 8px;color:#073044;">Calculate Your Real Stripe Rate</h2>
-    <p style="font-size:.95rem;color:#3f6173;margin:0 0 16px;line-height:1.6;">Enter your monthly volume and average ticket size to see what you're actually paying — and how it compares to interchange-plus pricing.</p>
-    <div class="calc-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0">
+    <h2 style="font-size:1.3rem;font-weight:800;margin:0 0 4px;color:#073044;">Calculate Your Real Stripe Rate</h2>
+    <p style="font-size:.88rem;color:#3f6173;margin:0 0 18px;line-height:1.6;">Includes international card surcharges, disputes, and subscription add-ons — the fees that push your rate above 2.9%.</p>
+
+    <!-- ROW 1: Volume + Ticket -->
+    <div class="calc-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
       <div>
-        <label style="font-size:.85rem;font-weight:700;color:#073044;display:block;margin-bottom:6px">Monthly Volume ($)</label>
-        <input id="calcVol" type="number" value="10000" min="100" style="width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);border-radius:10px;font-size:1rem;color:#073044;background:#fff;">
+        <label style="font-size:.82rem;font-weight:700;color:#073044;display:block;margin-bottom:5px;">Monthly Volume ($)</label>
+        <input id="calcVol" type="number" value="10000" min="100" oninput="calcStripe()" style="width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);border-radius:10px;font-size:1rem;color:#073044;background:#fff;">
       </div>
       <div>
-        <label style="font-size:.85rem;font-weight:700;color:#073044;display:block;margin-bottom:6px">Avg Ticket Size ($)</label>
-        <input id="calcTicket" type="number" value="85" min="1" style="width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);border-radius:10px;font-size:1rem;color:#073044;background:#fff;">
+        <label style="font-size:.82rem;font-weight:700;color:#073044;display:block;margin-bottom:5px;">Avg Ticket Size ($)</label>
+        <input id="calcTicket" type="number" value="85" min="1" oninput="calcStripe()" style="width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);border-radius:10px;font-size:1rem;color:#073044;background:#fff;">
       </div>
     </div>
-    <button onclick="calcStripe()" style="background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;padding:12px 24px;border:none;border-radius:999px;font-weight:800;cursor:pointer;font-size:.95rem;box-shadow:0 4px 14px rgba(8,145,178,.3);">Calculate →</button>
-    <div id="calcResult" style="margin-top:20px;display:none">
-      <!-- results injected by JS -->
+
+    <!-- ROW 2: Card mix sliders -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div>
+        <label style="font-size:.82rem;font-weight:700;color:#073044;display:block;margin-bottom:5px;">
+          International Cards: <span id="intlPct">5</span>%
+          <span style="font-weight:400;color:#5e7d8e;font-size:.76rem;">(+1.5% each)</span>
+        </label>
+        <input id="calcIntl" type="range" min="0" max="60" value="5" oninput="document.getElementById('intlPct').textContent=this.value;calcStripe();" style="width:100%;accent-color:#0891b2;cursor:pointer;">
+      </div>
+      <div>
+        <label style="font-size:.82rem;font-weight:700;color:#073044;display:block;margin-bottom:5px;">
+          Disputes / mo: <span id="disputeCount">0</span>
+          <span style="font-weight:400;color:#5e7d8e;font-size:.76rem;">($15 each)</span>
+        </label>
+        <input id="calcDisputes" type="range" min="0" max="10" value="0" oninput="document.getElementById('disputeCount').textContent=this.value;calcStripe();" style="width:100%;accent-color:#dc2626;cursor:pointer;">
+      </div>
+    </div>
+
+    <!-- ROW 3: Subscriptions toggle -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:12px 14px;background:rgba(8,145,178,.04);border-radius:10px;border:1px solid rgba(8,145,178,.12);">
+      <input id="calcSubs" type="checkbox" onchange="calcStripe()" style="width:18px;height:18px;accent-color:#0891b2;cursor:pointer;flex-shrink:0;">
+      <label for="calcSubs" style="font-size:.85rem;font-weight:700;color:#073044;cursor:pointer;">Running subscriptions / Stripe Billing <span style="font-weight:400;color:#5e7d8e;">(adds +0.5% on recurring revenue)</span></label>
+    </div>
+
+    <!-- Results -->
+    <div id="calcResult" style="margin-top:4px;">
+      <!-- populated on load -->
     </div>
   </div>
 </section>
 
 <script>
 function calcStripe() {
-  var vol = parseFloat(document.getElementById('calcVol').value) || 0;
-  var ticket = parseFloat(document.getElementById('calcTicket').value) || 0;
+  var vol     = parseFloat(document.getElementById('calcVol').value)      || 0;
+  var ticket  = parseFloat(document.getElementById('calcTicket').value)   || 0;
+  var intlPct = parseFloat(document.getElementById('calcIntl').value)     / 100;
+  var disputes= parseInt(document.getElementById('calcDisputes').value)   || 0;
+  var hasSubs = document.getElementById('calcSubs').checked;
+
   if (!vol || !ticket) return;
-  var txns = vol / ticket;
-  var stripeCost = (vol * 0.029) + (txns * 0.30);
-  var stripeRate = (stripeCost / vol * 100).toFixed(2);
-  var ixpCost = (vol * 0.0015) + (txns * 0.10) + 15;
-  var savings = stripeCost - ixpCost;
+
+  var txns        = vol / ticket;
+  var baseFees    = (vol * 0.029) + (txns * 0.30);
+  var intlFees    = vol * intlPct * 0.015;
+  var disputeFees = disputes * 15;
+  var subsFees    = hasSubs ? vol * 0.005 : 0;
+  var totalCost   = baseFees + intlFees + disputeFees + subsFees;
+  var effRate     = (totalCost / vol * 100).toFixed(2);
+
+  var ixpCost     = (vol * 0.0015) + (txns * 0.10) + 15;
+  var savings     = totalCost - ixpCost;
   var annualSavings = savings * 12;
+
+  var rateColor   = parseFloat(effRate) >= 3.5 ? '#dc2626' : parseFloat(effRate) >= 3.2 ? '#d97706' : '#059669';
+
+  var breakdown = '';
+  if (intlFees > 0)    breakdown += '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(7,48,68,.06);font-size:.82rem;color:#5e7d8e;"><span>International surcharge (' + (intlPct*100).toFixed(0) + '% of volume × 1.5%)</span><span style="font-weight:700;color:#073044;">+$' + intlFees.toFixed(0) + '/mo</span></div>';
+  if (disputeFees > 0) breakdown += '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(7,48,68,.06);font-size:.82rem;color:#5e7d8e;"><span>Dispute fees (' + disputes + ' × $15)</span><span style="font-weight:700;color:#dc2626;">+$' + disputeFees.toFixed(0) + '/mo</span></div>';
+  if (subsFees > 0)    breakdown += '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(7,48,68,.06);font-size:.82rem;color:#5e7d8e;"><span>Stripe Billing add-on (0.5%)</span><span style="font-weight:700;color:#073044;">+$' + subsFees.toFixed(0) + '/mo</span></div>';
+
   var r = document.getElementById('calcResult');
-  r.style.display = 'block';
-  r.innerHTML = '<div class="result-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">'
+  r.innerHTML =
+    '<div class="result-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:' + (breakdown ? '12px' : '16px') + '">'
     + '<div style="padding:16px;background:rgba(8,145,178,.06);border-radius:14px;border:1px solid rgba(8,145,178,.15)">'
-    + '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">Stripe Monthly Cost</div>'
-    + '<div style="font-size:1.6rem;font-weight:900;color:#073044;margin-top:4px">$' + stripeCost.toFixed(0) + '</div>'
-    + '<div style="font-size:.8rem;color:#5e7d8e">Effective rate: ' + stripeRate + '%</div>'
+    +   '<div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">Total Monthly Cost</div>'
+    +   '<div style="font-size:1.6rem;font-weight:900;color:#073044;margin-top:4px">$' + totalCost.toFixed(0) + '</div>'
+    +   '<div style="font-size:.8rem;color:#5e7d8e">Base: $' + baseFees.toFixed(0) + '</div>'
     + '</div>'
-    + '<div style="padding:16px;background:rgba(16,185,129,.06);border-radius:14px;border:1px solid rgba(16,185,129,.2)">'
-    + '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#065f46">Interchange-Plus Est.</div>'
-    + '<div style="font-size:1.6rem;font-weight:900;color:#073044;margin-top:4px">$' + ixpCost.toFixed(0) + '</div>'
-    + '<div style="font-size:.8rem;color:#5e7d8e">~0.15% + $0.10/txn + $15/mo</div>'
+    + '<div style="padding:16px;background:rgba(' + (parseFloat(effRate) >= 3.5 ? '239,68,68' : parseFloat(effRate) >= 3.2 ? '217,119,6' : '16,185,129') + ',.06);border-radius:14px;border:1px solid rgba(' + (parseFloat(effRate) >= 3.5 ? '239,68,68' : parseFloat(effRate) >= 3.2 ? '217,119,6' : '16,185,129') + ',.2)">'
+    +   '<div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">Your Effective Rate</div>'
+    +   '<div style="font-size:1.6rem;font-weight:900;color:' + rateColor + ';margin-top:4px">' + effRate + '%</div>'
+    +   '<div style="font-size:.8rem;color:#5e7d8e">Stripe advertises 2.9%</div>'
     + '</div>'
-    + '<div style="padding:16px;background:' + (savings > 0 ? 'rgba(16,185,129,.08)' : 'rgba(239,68,68,.06)') + ';border-radius:14px;border:1px solid ' + (savings > 0 ? 'rgba(16,185,129,.25)' : 'rgba(239,68,68,.2)') + '">'
-    + '<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">Your Annual ' + (savings > 0 ? 'Savings' : 'Extra Cost') + '</div>'
-    + '<div style="font-size:1.6rem;font-weight:900;color:' + (savings > 0 ? '#059669' : '#dc2626') + ';margin-top:4px">$' + Math.abs(annualSavings).toFixed(0) + '</div>'
-    + '<div style="font-size:.8rem;color:#5e7d8e">' + (savings > 0 ? 'by switching to IX+' : 'Stripe is better at this volume') + '</div>'
+    + '<div style="padding:16px;background:' + (savings > 0 ? 'rgba(16,185,129,.06)' : 'rgba(8,145,178,.04)') + ';border-radius:14px;border:1px solid ' + (savings > 0 ? 'rgba(16,185,129,.22)' : 'rgba(8,145,178,.15)') + '">'
+    +   '<div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#5e7d8e">vs Interchange-Plus</div>'
+    +   '<div style="font-size:1.6rem;font-weight:900;color:' + (savings > 0 ? '#059669' : '#0891b2') + ';margin-top:4px">' + (savings > 0 ? '-' : '') + '$' + Math.abs(annualSavings).toFixed(0) + '/yr</div>'
+    +   '<div style="font-size:.8rem;color:#5e7d8e">' + (savings > 0 ? 'potential annual savings' : 'Stripe is cheaper here') + '</div>'
     + '</div>'
     + '</div>'
-    + (savings > 100 ? '<p style="margin:16px 0 0;font-size:.9rem;color:#073044;line-height:1.6;">At $' + vol.toLocaleString() + '/month, you\'re paying an estimated <strong>$' + savings.toFixed(0) + '/month more</strong> with Stripe flat-rate than interchange-plus. Text PJ to review your actual statement — takes 10 minutes. <a href="sms:+17735441231" style="color:#0891b2;font-weight:700">Text 773-544-1231 →</a></p>' : '<p style="margin:16px 0 0;font-size:.9rem;color:#073044;line-height:1.6;">At this volume, Stripe\'s simplicity may be worth the slight premium. Once you hit $10k+/month consistently, it\'s worth a review. <a href="sms:+17735441231" style="color:#0891b2;font-weight:700">Text PJ for a free check →</a></p>');
+    + (breakdown ? '<div style="background:rgba(7,48,68,.03);border:1px solid rgba(7,48,68,.08);border-radius:12px;padding:10px 14px;margin-bottom:14px;">'
+    +   '<div style="font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#5e7d8e;margin-bottom:6px;">Fee Breakdown</div>'
+    +   '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(7,48,68,.06);font-size:.82rem;color:#5e7d8e;"><span>Base (2.9% + $0.30/txn)</span><span style="font-weight:700;color:#073044;">$' + baseFees.toFixed(0) + '/mo</span></div>'
+    +   breakdown
+    +   '<div style="display:flex;justify-content:space-between;padding:6px 0 0;font-size:.85rem;font-weight:800;color:#073044;"><span>Total</span><span>$' + totalCost.toFixed(0) + '/mo · ' + (totalCost * 12).toFixed(0) + '/yr</span></div>'
+    + '</div>' : '')
+    + (savings > 100
+      ? '<p style="margin:0;font-size:.88rem;color:#073044;line-height:1.6;padding:12px 14px;background:rgba(16,185,129,.06);border-radius:10px;border:1px solid rgba(16,185,129,.2);">At $' + vol.toLocaleString() + '/month, you could save an estimated <strong>$' + Math.abs(annualSavings).toFixed(0) + '/year</strong> with interchange-plus pricing. Text PJ to review your actual statement — takes 10 minutes. <a href="sms:+17735441231" style="color:#0891b2;font-weight:700">Text 773-544-1231 →</a></p>'
+      : '<p style="margin:0;font-size:.88rem;color:#073044;line-height:1.6;padding:12px 14px;background:rgba(8,145,178,.04);border-radius:10px;border:1px solid rgba(8,145,178,.12);">At this volume, Stripe\'s simplicity likely outweighs the slight cost difference. Once you consistently hit $8k–$10k/month, run this again. <a href="sms:+17735441231" style="color:#0891b2;font-weight:700">Text PJ for a free check →</a></p>');
 }
+// auto-run on load
+document.addEventListener('DOMContentLoaded', calcStripe);
 </script>
 
 <!-- ═══ WHAT YOU'RE REALLY ASKING ═══ -->
@@ -450,5 +505,5 @@ function calcStripe() {
 </nav>
 
 <script src="assets/sideguy/meme-wow.js"></script>
-<section id="meme-intelligence-strip" style="max-width:980px;margin:40px auto 20px;padding:24px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px);"><div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.65;margin-bottom:8px;">SideGuy Meme Intelligence</div><h3 style="margin:0 0 10px;">"I'm in business development. I develop the business. What don't you understand?"</h3><p style="margin:0;opacity:.85;">The humor is the point: behind every meme is real architecture — search signals routed to the right pages, human trust blocks, conversion pathways, and real-world problem resolution.</p></section><section style="padding:40px 20px;max-width:900px;margin:auto;"><h2>Why this page keeps getting stronger</h2><p>Every useful question visitors ask helps this page become clearer, more local, and more actionable over time.</p><p><strong>Winner Upgrade Stamp:</strong> machine-refined for crawl velocity, clarity, and trust.</p></section></body>
+<section id="meme-intelligence-strip" style="max-width:980px;margin:40px auto 20px;padding:24px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px);"><div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.65;margin-bottom:8px;">SideGuy Meme Intelligence</div><h3 style="margin:0 0 10px;">"I'm in business development. I develop the business. What don't you understand?"</h3><p style="margin:0;opacity:.85;">The humor is the point: behind every meme is real architecture — search signals routed to the right pages, human trust blocks, conversion pathways, and real-world problem resolution.</p></section><section style="padding:40px 20px;max-width:900px;margin:auto;"><h2>Why this page keeps getting stronger</h2><p>Every useful question visitors ask helps this page become clearer, more local, and more actionable over time.</p><p><strong>Winner Upgrade Stamp:</strong> April 5, 2026 · GSC layer v33 · Fee calculator v2 — card mix, international surcharge, disputes.</p></section></body>
 </html>
