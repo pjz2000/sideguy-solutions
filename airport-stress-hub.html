@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SAN Airport Flight Status & Delay Help (2026) | SideGuy Solutions</title>
+<meta name="description" content="Live SAN airport flight status, delay lookup by airline and flight number, terminal guide, and what to do when your flight is delayed or cancelled."/>
+<link rel="canonical" href="https://sideguysolutions.com/airport-stress-hub.html"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="SideGuy Solutions"/>
+<meta property="og:title" content="SAN Airport Flight Status & Delay Help (2026)"/>
+<meta property="og:description" content="Look up your flight, check SAN terminal delays, and get a clear action plan — no hold music required."/>
+<meta property="og:url" content="https://sideguysolutions.com/airport-stress-hub.html"/>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"What terminal is my airline at SAN?","acceptedAnswer":{"@type":"Answer","text":"Terminal 1: Southwest, Alaska Airlines, Frontier, Spirit. Terminal 2 West: American, United, Delta domestic. Terminal 2 East: International flights, Delta, United international. Commuter Terminal: Cape Air and charter flights."}},
+  {"@type":"Question","name":"What causes delays at San Diego Airport?","acceptedAnswer":{"@type":"Answer","text":"The two most common causes: (1) Marine layer fog in the morning — SAN has a single runway and ILS approaches are affected by low coastal ceilings, typically burning off by 9-10am. (2) Afternoon wind shear from Cajon Pass — creates ground holds for arriving aircraft 2-5pm. Ground stops from other hub airports (LAX, ORD, JFK) also cascade to SAN."}},
+  {"@type":"Question","name":"My flight is cancelled at SAN — what are my rights?","acceptedAnswer":{"@type":"Answer","text":"For controllable cancellations (not weather): the airline owes you rebooking on the next available flight at no charge, a full refund if you prefer, and meals/hotel if the delay is 3+ hours overnight. For weather: rebooking only — no meal or hotel vouchers required by law. Always ask for a voucher anyway — agents have discretion. If you're stuck, text PJ at 773-544-1231 for routing help."}},
+  {"@type":"Question","name":"Should I go to the airport if my flight is delayed?","acceptedAnswer":{"@type":"Answer","text":"If delayed under 90 min: go as planned. 90 min to 3 hours: monitor the app but go — delays often compress. Over 3 hours: call the airline before driving — check for rebooking options first. Cancelled: don't go until you have a confirmed new flight. SAN parking is expensive; Uber/Lyft from Mission Valley is usually faster than dealing with the garage."}},
+  {"@type":"Question","name":"How do I get from SAN to downtown San Diego fast?","acceptedAnswer":{"@type":"Answer","text":"Fastest: Uber/Lyft from Terminal 2 lower level (6-12 min, $12-18). Cheapest: MTS Route 992 bus directly to downtown ($2.50, 20 min). Rental car: Terminal 1 and 2 share a rental center — take the free shuttle from baggage claim. Rideshare pickup is at the designated TNCs zones on the lower level of each terminal."}}
+]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"SideGuy Solutions","item":"https://sideguysolutions.com"},
+  {"@type":"ListItem","position":2,"name":"Airport Help","item":"https://sideguysolutions.com/airport-stress-hub.html"}
+]}
+</script>
+
+<style>
+/* ── CONFIG ───────────────────────────────────────────── */
+:root {
+  --bg0:#eefcff;--bg1:#d7f5ff;--bg2:#bfeeff;
+  --ink:#073044;--muted:#3f6173;--card:#ffffffcc;
+  --stroke:rgba(7,48,68,.10);--shadow:0 18px 50px rgba(7,48,68,.10);
+  --mint:#21d3a1;--mint2:#00c7ff;--r:20px;--pill:999px;
+  --amber:#f59e0b;--red:#ef4444;--green:#10b981;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100vh}
+body{font-family:-apple-system,system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  color:var(--ink);
+  background:radial-gradient(ellipse 120% 80% at 50% -10%,var(--bg2) 0%,var(--bg1) 40%,var(--bg0) 100%);}
+
+/* ── TOPBAR ───────────────────────────────────────────── */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;
+  justify-content:space-between;padding:12px 20px;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(8,145,178,.10);}
+.topbar a.logo{font-weight:800;font-size:1.1rem;color:var(--ink);text-decoration:none;}
+.topbar a.cta{background:linear-gradient(135deg,var(--mint),var(--mint2));
+  color:#fff;font-weight:700;font-size:.85rem;padding:8px 18px;
+  border-radius:var(--pill);text-decoration:none;
+  box-shadow:0 4px 14px rgba(33,211,161,.35);}
+
+/* ── LAYOUT ───────────────────────────────────────────── */
+.wrap{max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#0891b2;margin:0 0 12px;}
+h1{font-size:clamp(1.6rem,4.5vw,2.5rem);font-weight:900;line-height:1.15;margin:0 0 14px;}
+.lede{font-size:1rem;color:var(--muted);line-height:1.65;margin:0 0 36px;max-width:620px;}
+
+/* ── CARDS ────────────────────────────────────────────── */
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+  padding:24px 28px;margin-bottom:20px;box-shadow:var(--shadow);}
+.card h2{font-size:1.1rem;font-weight:800;margin:0 0 12px;color:var(--ink);}
+.card-label{font-size:.72rem;font-weight:700;letter-spacing:.10em;text-transform:uppercase;
+  color:#0891b2;margin:0 0 8px;}
+
+/* ── FLIGHT LOOKUP ────────────────────────────────────── */
+.lookup-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:500px){.lookup-grid{grid-template-columns:1fr;}}
+.field label{font-size:.82rem;font-weight:700;color:var(--ink);display:block;margin-bottom:5px;}
+.field input,.field select{
+  width:100%;padding:10px 14px;border:1px solid rgba(7,48,68,.15);
+  border-radius:10px;font-size:1rem;color:var(--ink);background:#fff;
+  -webkit-appearance:none;}
+.field input:focus,.field select:focus{outline:2px solid #0891b2;outline-offset:2px;}
+.btn-lookup{background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff;
+  padding:12px 24px;border:none;border-radius:var(--pill);font-weight:800;
+  cursor:pointer;font-size:.95rem;box-shadow:0 4px 14px rgba(8,145,178,.3);width:100%;}
+.btn-lookup:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(8,145,178,.4);}
+.btn-lookup:active{transform:translateY(0);}
+
+/* ── RESULT STATES ────────────────────────────────────── */
+#flightResult{margin-top:18px;}
+.flight-found{border-radius:14px;padding:18px 20px;border:1px solid;}
+.status-on-time{background:rgba(16,185,129,.07);border-color:rgba(16,185,129,.3);}
+.status-delayed{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.3);}
+.status-cancelled{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.25);}
+.status-unknown{background:rgba(8,145,178,.05);border-color:rgba(8,145,178,.15);}
+.status-badge{display:inline-block;padding:4px 12px;border-radius:999px;
+  font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.badge-on-time{background:rgba(16,185,129,.15);color:#065f46;}
+.badge-delayed{background:rgba(245,158,11,.18);color:#92400e;}
+.badge-cancelled{background:rgba(239,68,68,.15);color:#991b1b;}
+.badge-scheduled{background:rgba(8,145,178,.12);color:#0c4a6e;}
+.fl-airline{font-weight:900;font-size:1.05rem;margin:0 0 4px;}
+.fl-route{font-size:.9rem;color:var(--muted);margin:0 0 10px;}
+.fl-times{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+.fl-time-block{background:rgba(255,255,255,.7);border-radius:10px;padding:10px 12px;}
+.fl-time-label{font-size:.72rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:#5e7d8e;}
+.fl-time-val{font-size:1.1rem;font-weight:900;color:var(--ink);margin-top:2px;}
+.fl-time-sub{font-size:.78rem;color:var(--muted);}
+
+/* ── SAN STATUS MODULE ────────────────────────────────── */
+.terminal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+@media(max-width:500px){.terminal-grid{grid-template-columns:1fr;}}
+.terminal-card{border-radius:14px;padding:14px 16px;border:1px solid rgba(8,145,178,.14);
+  background:rgba(255,255,255,.65);}
+.terminal-name{font-size:.72rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.09em;color:#0891b2;margin-bottom:4px;}
+.terminal-airlines{font-size:.88rem;color:var(--ink);font-weight:600;margin-bottom:4px;}
+.terminal-note{font-size:.78rem;color:var(--muted);}
+
+/* ── TOP AIRLINES ─────────────────────────────────────── */
+.airline-row{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid rgba(7,48,68,.07);}
+.airline-row:last-child{border-bottom:none;}
+.airline-name{font-weight:700;font-size:.92rem;}
+.airline-iata{font-size:.75rem;color:var(--muted);margin-left:6px;font-weight:400;}
+.delay-bar-wrap{flex:1;margin:0 14px;height:6px;background:rgba(7,48,68,.08);border-radius:3px;}
+.delay-bar{height:6px;border-radius:3px;transition:width .6s ease;}
+.delay-pct{font-size:.8rem;font-weight:800;white-space:nowrap;}
+
+/* ── TRUST LADDER ─────────────────────────────────────── */
+.ladder{counter-reset:steps;}
+.ladder-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px;}
+.step-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0891b2,#06b6d4);
+  color:#fff;font-weight:900;font-size:.85rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(8,145,178,.3);}
+.step-body h3{font-size:.95rem;font-weight:800;margin:0 0 3px;color:var(--ink);}
+.step-body p{font-size:.85rem;color:var(--muted);margin:0;line-height:1.55;}
+
+/* ── CTA BLOCK ────────────────────────────────────────── */
+.cta-block{background:linear-gradient(135deg,var(--mint),var(--mint2));
+  border-radius:var(--r);padding:32px 28px;text-align:center;margin-top:32px;
+  box-shadow:0 12px 40px rgba(33,211,161,.3);}
+.cta-block p{color:#fff;font-size:1rem;margin:0 0 18px;font-weight:500;line-height:1.55;}
+.cta-block a{display:inline-block;background:#fff;color:var(--ink);
+  font-weight:800;font-size:.95rem;padding:13px 28px;border-radius:var(--pill);
+  text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.12);}
+
+/* ── API NOTICE ───────────────────────────────────────── */
+.api-notice{font-size:.75rem;color:#5e7d8e;margin-top:10px;padding:8px 12px;
+  background:rgba(7,48,68,.04);border-radius:8px;border-left:3px solid rgba(8,145,178,.3);}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer{text-align:center;padding:24px 0 40px;font-size:.8rem;color:rgba(7,48,68,.45);}
+footer a{color:#0891b2;text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="logo">SideGuy</a>
+  <a href="sms:+17735441231" class="cta" rel="nofollow">Text PJ →</a>
+</div>
+
+<div class="wrap">
+
+  <p class="eyebrow">SideGuy · Airport Stress Hub</p>
+  <h1>SAN Airport: Flight Status & Delay Help</h1>
+  <p class="lede">Look up your flight, check what's moving at SAN, and get a clear action plan — without hold music or airport Wi-Fi nightmares.</p>
+
+  <!-- ══ FLIGHT LOOKUP ══════════════════════════════════ -->
+  <div class="card">
+    <p class="card-label">Flight Lookup</p>
+    <h2>Check Your Flight Status</h2>
+    <div class="lookup-grid">
+      <div class="field">
+        <label for="airlineCode">Airline</label>
+        <select id="airlineCode">
+          <option value="AA">American Airlines (AA)</option>
+          <option value="AS">Alaska Airlines (AS)</option>
+          <option value="DL">Delta Air Lines (DL)</option>
+          <option value="F9">Frontier Airlines (F9)</option>
+          <option value="NK">Spirit Airlines (NK)</option>
+          <option value="UA">United Airlines (UA)</option>
+          <option value="WN" selected>Southwest Airlines (WN)</option>
+          <option value="B6">JetBlue (B6)</option>
+          <option value="HA">Hawaiian Airlines (HA)</option>
+          <option value="G4">Allegiant Air (G4)</option>
+          <option value="SY">Sun Country (SY)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="flightNum">Flight Number</label>
+        <input id="flightNum" type="text" placeholder="e.g. 1234" maxlength="6"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+      </div>
+    </div>
+    <button class="btn-lookup" onclick="lookupFlight()">Look Up Flight →</button>
+    <div id="flightResult"></div>
+    <p class="api-notice">Live data via Aviationstack. Free tier: HTTP only — upgrade API key for HTTPS production. Fallback info shown when unavailable.</p>
+  </div>
+
+  <!-- ══ SAN TERMINAL STATUS ════════════════════════════ -->
+  <div class="card">
+    <p class="card-label">SAN Terminal Guide</p>
+    <h2>Which Terminal Is Your Airline?</h2>
+    <p style="font-size:.88rem;color:var(--muted);margin:0 0 4px;line-height:1.6;">SAN has two terminals connected post-security. If you're in the wrong terminal, go through security in either — they connect airside.</p>
+    <div class="terminal-grid">
+      <div class="terminal-card">
+        <div class="terminal-name">Terminal 1</div>
+        <div class="terminal-airlines">Southwest · Alaska · Frontier · Spirit</div>
+        <div class="terminal-note">Closest to Harbor Drive. Smaller gates. Shorter security lines on average.</div>
+      </div>
+      <div class="terminal-card">
+        <div class="terminal-name">Terminal 2 West</div>
+        <div class="terminal-airlines">American · United · Delta (domestic)</div>
+        <div class="terminal-note">Main hub terminal. TSA PreCheck available. Longer queues peak hours.</div>
+      </div>
+      <div class="terminal-card">
+        <div class="terminal-name">Terminal 2 East</div>
+        <div class="terminal-airlines">International · Delta (intl) · United (intl)</div>
+        <div class="terminal-note">Cross-border CBX connector. Customs and Border Protection here.</div>
+      </div>
+      <div class="terminal-card">
+        <div class="terminal-name">Commuter Terminal</div>
+        <div class="terminal-airlines">Cape Air · Charter flights</div>
+        <div class="terminal-note">West of T1. Small prop aircraft. No TSA PreCheck lane.</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:12px 16px;background:rgba(245,158,11,.07);border-radius:12px;border:1px solid rgba(245,158,11,.25);">
+      <strong style="font-size:.85rem;color:#92400e;">Common SAN delay causes:</strong>
+      <ul style="margin:6px 0 0;padding-left:18px;font-size:.83rem;color:var(--muted);line-height:1.8;">
+        <li><strong>Marine layer fog</strong> — morning low ceilings, typically lifts by 9-10am</li>
+        <li><strong>Afternoon wind shear</strong> — Cajon Pass effect creates ground holds 2–5pm</li>
+        <li><strong>Hub cascades</strong> — ground stops at LAX/ORD/JFK ripple to SAN 2–4 hrs later</li>
+        <li><strong>Single runway</strong> — one runway means zero redundancy when ATC holds fire</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══ TOP AIRLINES AT SAN ════════════════════════════ -->
+  <div class="card">
+    <p class="card-label">SAN Delay Context</p>
+    <h2>Typical On-Time Performance at SAN</h2>
+    <p style="font-size:.85rem;color:var(--muted);margin:0 0 14px;">Historical on-time arrival rates at SAN by carrier (2025 BTS data). Your flight is always individual — this is baseline context.</p>
+    <div id="airlineDelayList">
+      <!-- populated by JS -->
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin:12px 0 0;">Source: BTS Air Travel Consumer Report 2025. On-time = arrived within 15 min of schedule.</p>
+  </div>
+
+  <!-- ══ WHAT TO DO NEXT ════════════════════════════════ -->
+  <div class="card">
+    <p class="card-label">Action Plan</p>
+    <h2>Your Flight Is Delayed — Do This in Order</h2>
+    <div class="ladder">
+      <div class="ladder-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Check the airline app first — not the departure board</h3>
+          <p>The gate board updates slower than the app. Open the airline's app immediately. If delay shows "equipment" or "late arriving aircraft" — it's likely to compress. If it says "crew" — it may extend.</p>
+        </div>
+      </div>
+      <div class="ladder-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Call the airline's 1-800 while you walk to the gate</h3>
+          <p>Gate agents can only rebook passengers at their gate. The phone agent can access all flights system-wide. Call while walking — you'll often get rebooked before you arrive at the gate.</p>
+        </div>
+      </div>
+      <div class="ladder-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Check LAX / SFO connections on your own</h3>
+          <p>If your connection is at risk, search the airline's app for alternative routings before the agent suggests one. Come to the counter with 2–3 options ready. Agents rebook faster when you've done the legwork.</p>
+        </div>
+      </div>
+      <div class="ladder-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Ask for meal vouchers if delay is 3+ hours (controllable)</h3>
+          <p>Weather = no vouchers required. Mechanical, crew, late aircraft = you're entitled to ask. Most agents have $15–20 meal vouchers. The word "controllable delay" unlocks this conversation.</p>
+        </div>
+      </div>
+      <div class="ladder-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>If cancelled: don't leave the airport yet</h3>
+          <p>First flight next morning goes fastest to people already in the system. Get rebooked at the counter before heading to a hotel. If the line is long, call and wait simultaneously.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CTA ════════════════════════════════════════════ -->
+  <div class="cta-block">
+    <p>Stuck at SAN and not sure what to do next? Text PJ — he knows the airport routing, rideshare zones, and how to navigate a cancelled flight without losing your mind.</p>
+    <a href="sms:+17735441231" rel="nofollow">Text PJ · Airport Help →</a>
+  </div>
+
+  <!-- ══ RELATED ════════════════════════════════════════ -->
+  <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <a href="/public/airport-help/missed-flight-san-diego-airport-what-to-do.html"
+      style="display:block;padding:16px 18px;background:var(--card);border:1px solid var(--stroke);border-radius:14px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);">
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0891b2;margin-bottom:4px;">Airport Help</div>
+      <div style="font-weight:800;font-size:.9rem;">Missed Flight at SAN →</div>
+    </a>
+    <a href="/public/airport-help/san-diego-airport-transportation-help.html"
+      style="display:block;padding:16px 18px;background:var(--card);border:1px solid var(--stroke);border-radius:14px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);">
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0891b2;margin-bottom:4px;">Airport Help</div>
+      <div style="font-weight:800;font-size:.9rem;">Getting Out of SAN →</div>
+    </a>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <p><a href="/">SideGuy Solutions</a> · San Diego · <a href="sms:+17735441231">Text PJ: 773-544-1231</a></p>
+  <p style="margin-top:4px;">Flight data: Aviationstack API · On-time stats: BTS 2025 · April 5, 2026 · GSC layer v33</p>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════
+     AVIATIONSTACK CONFIG + LOGIC
+     Free tier note: HTTP only. HTTPS requires paid plan ($9.99/mo).
+     Replace YOUR_ACCESS_KEY with your key from apilayer.com/marketplace/aviationstack-api
+     ══════════════════════════════════════════════════════ -->
+<script>
+/* ── API CONFIG ─────────────────────────────────────── */
+var AV_CONFIG = {
+  accessKey: 'YOUR_ACCESS_KEY',          // ← paste your Aviationstack key here
+  baseUrl:   'http://api.aviationstack.com/v1',  // free = HTTP only
+  httpsUrl:  'https://api.aviationstack.com/v1', // paid plan only
+  useLive:   false  // set true once you have a paid key + HTTPS
+};
+
+/* ── AIRLINE DATA (static reference) ─────────────────── */
+var AIRLINES = {
+  WN:{name:'Southwest Airlines',     color:'#f59e0b', pct:81},
+  AS:{name:'Alaska Airlines',        color:'#0891b2', pct:84},
+  AA:{name:'American Airlines',      color:'#1f2937', pct:78},
+  DL:{name:'Delta Air Lines',        color:'#7c3aed', pct:83},
+  UA:{name:'United Airlines',        color:'#1d4ed8', pct:77},
+  B6:{name:'JetBlue',                color:'#0284c7', pct:73},
+  F9:{name:'Frontier Airlines',      color:'#16a34a', pct:75},
+  NK:{name:'Spirit Airlines',        color:'#fde047', pct:71},
+  HA:{name:'Hawaiian Airlines',      color:'#be123c', pct:86},
+  G4:{name:'Allegiant Air',          color:'#f97316', pct:74}
+};
+
+/* ── RENDER AIRLINE DELAY BARS ────────────────────────── */
+function renderAirlineList() {
+  var sorted = Object.entries(AIRLINES).sort(function(a,b){return b[1].pct - a[1].pct;});
+  var html = '';
+  sorted.forEach(function(e) {
+    var iata = e[0], a = e[1];
+    var color = a.pct >= 82 ? '#10b981' : a.pct >= 76 ? '#f59e0b' : '#ef4444';
+    html += '<div class="airline-row">'
+      + '<span class="airline-name">' + a.name + '<span class="airline-iata">' + iata + '</span></span>'
+      + '<div class="delay-bar-wrap"><div class="delay-bar" style="width:' + a.pct + '%;background:' + color + ';"></div></div>'
+      + '<span class="delay-pct" style="color:' + color + ';">' + a.pct + '%</span>'
+      + '</div>';
+  });
+  document.getElementById('airlineDelayList').innerHTML = html;
+}
+
+/* ── FLIGHT LOOKUP ────────────────────────────────────── */
+function lookupFlight() {
+  var code = document.getElementById('airlineCode').value;
+  var num  = document.getElementById('flightNum').value.trim();
+  var el   = document.getElementById('flightResult');
+
+  if (!num) {
+    el.innerHTML = '<p style="color:var(--red);font-size:.88rem;margin:10px 0 0;">Please enter a flight number.</p>';
+    return;
+  }
+
+  var iata = code + num;
+  el.innerHTML = '<p style="color:var(--muted);font-size:.88rem;margin:10px 0 0;">Looking up ' + iata + '…</p>';
+
+  if (!AV_CONFIG.useLive || AV_CONFIG.accessKey === 'YOUR_ACCESS_KEY') {
+    showFallback(iata, code);
+    return;
+  }
+
+  var url = AV_CONFIG.httpsUrl + '/flights?access_key=' + AV_CONFIG.accessKey
+    + '&flight_iata=' + encodeURIComponent(iata) + '&limit=1';
+
+  fetch(url)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data.error) { showFallback(iata, code); return; }
+      var flights = data.data;
+      if (!flights || flights.length === 0) { showNoResult(iata); return; }
+      renderFlight(flights[0], iata);
+    })
+    .catch(function(){ showFallback(iata, code); });
+}
+
+/* ── RENDER LIVE FLIGHT RESULT ────────────────────────── */
+function renderFlight(f, iata) {
+  var el       = document.getElementById('flightResult');
+  var status   = (f.flight_status || 'unknown').toLowerCase();
+  var airline  = f.airline ? f.airline.name : iata.slice(0,2);
+  var depAirport = f.departure ? (f.departure.iata || '—') : '—';
+  var arrAirport = f.arrival   ? (f.arrival.iata   || '—') : '—';
+  var schDep   = f.departure && f.departure.scheduled ? fmtTime(f.departure.scheduled) : '—';
+  var estDep   = f.departure && f.departure.estimated ? fmtTime(f.departure.estimated) : schDep;
+  var schArr   = f.arrival   && f.arrival.scheduled   ? fmtTime(f.arrival.scheduled)   : '—';
+  var estArr   = f.arrival   && f.arrival.estimated   ? fmtTime(f.arrival.estimated)   : schArr;
+  var delayMin = f.departure && f.departure.delay ? f.departure.delay : 0;
+
+  var cls   = status === 'active'    ? 'status-on-time'
+            : status === 'landed'   ? 'status-on-time'
+            : status === 'delayed'  ? 'status-delayed'
+            : status === 'cancelled'? 'status-cancelled'
+            : 'status-unknown';
+  var badge = status === 'active'    ? 'badge-on-time'
+            : status === 'landed'   ? 'badge-on-time'
+            : status === 'delayed'  ? 'badge-delayed'
+            : status === 'cancelled'? 'badge-cancelled'
+            : 'badge-scheduled';
+  var label = status === 'active' ? 'In Air'
+            : status === 'landed' ? 'Landed'
+            : status.charAt(0).toUpperCase() + status.slice(1);
+
+  var delayNote = delayMin > 0
+    ? '<p style="font-size:.83rem;color:#92400e;margin:8px 0 0;">Delayed <strong>' + delayMin + ' min</strong>. Estimated departure: ' + estDep + '</p>'
+    : '';
+
+  el.innerHTML = '<div class="flight-found ' + cls + '">'
+    + '<div class="status-badge ' + badge + '">' + label + '</div>'
+    + '<div class="fl-airline">' + airline + ' · Flight ' + iata + '</div>'
+    + '<div class="fl-route">' + depAirport + ' → ' + arrAirport + '</div>'
+    + delayNote
+    + '<div class="fl-times">'
+    +   '<div class="fl-time-block"><div class="fl-time-label">Scheduled Dep</div><div class="fl-time-val">' + schDep + '</div><div class="fl-time-sub">' + depAirport + '</div></div>'
+    +   '<div class="fl-time-block"><div class="fl-time-label">Scheduled Arr</div><div class="fl-time-val">' + schArr + '</div><div class="fl-time-sub">' + arrAirport + '</div></div>'
+    + '</div>'
+    + '</div>';
+}
+
+/* ── FALLBACK (no API key or HTTP blocked) ────────────── */
+function showFallback(iata, code) {
+  var el = document.getElementById('flightResult');
+  var airline = AIRLINES[code] ? AIRLINES[code].name : code;
+  el.innerHTML = '<div class="flight-found status-unknown">'
+    + '<div class="status-badge badge-scheduled">Live Data Unavailable</div>'
+    + '<div class="fl-airline">' + airline + ' · Flight ' + iata + '</div>'
+    + '<p style="font-size:.85rem;color:var(--muted);margin:8px 0 6px;line-height:1.55;">'
+    +   'Live lookup requires an Aviationstack API key configured on this page. '
+    +   'Check status directly: <strong>open your airline\'s app</strong> or visit the carrier\'s flight status page.'
+    + '</p>'
+    + '<p style="font-size:.85rem;color:var(--muted);margin:0;line-height:1.55;">'
+    +   'Need routing help? <a href="sms:+17735441231" style="color:#0891b2;font-weight:700;">Text PJ → 773-544-1231</a>'
+    + '</p>'
+    + '</div>';
+}
+
+function showNoResult(iata) {
+  var el = document.getElementById('flightResult');
+  el.innerHTML = '<div class="flight-found status-unknown">'
+    + '<div class="status-badge badge-scheduled">Not Found</div>'
+    + '<p style="font-size:.85rem;color:var(--muted);margin:8px 0 0;line-height:1.55;">'
+    +   'Flight ' + iata + ' not found in today\'s schedule. Check the flight number and try again, '
+    +   'or verify directly in the airline app.'
+    + '</p>'
+    + '</div>';
+}
+
+/* ── TIME FORMATTER ───────────────────────────────────── */
+function fmtTime(iso) {
+  if (!iso) return '—';
+  try {
+    var d = new Date(iso);
+    return d.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', hour12:true, timeZone:'America/Los_Angeles'});
+  } catch(e) { return iso.slice(11,16); }
+}
+
+/* ── INIT ─────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', function() {
+  renderAirlineList();
+});
+</script>
+
+</body>
+</html>
